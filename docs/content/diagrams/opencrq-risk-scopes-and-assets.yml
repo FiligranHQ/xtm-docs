@@ -1,0 +1,27 @@
+title: Supporting assets serve primary assets, which a risk scope holds and its risk scenarios target
+lanes:
+  - label: Tenant estate
+    tone: store
+    nodes:
+      - {id: web, label: Booking web application, icon: Network, note: Internet-facing}
+      - {id: db, label: Booking database server, icon: Server, note: Internal}
+      - {id: account, label: night.audit account, icon: KeyRound, note: Front-desk identity}
+  - label: Primary assets
+    tone: product
+    nodes:
+      - {id: guests, label: Guest records, icon: FileText, note: Personal data}
+      - {id: booking, label: Online booking platform, icon: Workflow, note: Operations and services}
+  - label: Risk scope
+    tone: core
+    nodes:
+      - {id: scenario, label: Risk scenario, icon: TriangleAlert, note: An outcome on primary assets}
+      - {id: scope, label: Grand Meridian France, icon: Layers, note: Sector, country, estate, profile}
+edges:
+  - {from: db, to: web, label: supports, style: dashed}
+  - {from: db, to: guests, label: stores}
+  - {from: web, to: guests, label: processes}
+  - {from: web, to: booking, label: performs}
+  - {from: account, to: guests, label: reads}
+  - {from: guests, to: scenario, label: targeted by}
+  - {from: guests, to: scope, label: belongs to}
+  - {from: booking, to: scope, label: belongs to}

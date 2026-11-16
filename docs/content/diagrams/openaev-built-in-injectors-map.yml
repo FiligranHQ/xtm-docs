@@ -1,0 +1,26 @@
+title: The built-in injectors reach players by email and on the player interface, and endpoints through an executor; OpenCTI and SMS come from the catalog
+lanes:
+  - label: Always present
+    tone: product
+    nodes:
+      - {id: email, label: Email and Phishing, icon: MessageSquare, note: Through the mail server}
+      - {id: player, label: Media pressure and Challenges, icon: FileText, note: On the player interface}
+      - {id: manual, label: Manual, icon: ClipboardCheck, note: A reminder for the animators}
+      - {id: implant, label: OpenAEV Implant, icon: Cpu, note: Threat Arsenal actions}
+  - label: From the catalog
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Cases and reports}
+      - {id: sms, label: OVHCloud SMS, icon: MessageSquare, note: Texts to players}
+  - label: Targets
+    tone: external
+    nodes:
+      - {id: players, label: Players, icon: Users, note: Of the target teams}
+      - {id: endpoints, label: Endpoints, icon: Laptop, note: Through an executor}
+      - {id: cti, label: OpenCTI platform, icon: LogoOpenCTI, note: The CERT's tool}
+edges:
+  - {from: email, to: players, label: emails}
+  - {from: player, to: players, label: publishes}
+  - {from: sms, to: players, label: texts}
+  - {from: implant, to: endpoints, label: runs actions}
+  - {from: opencti, to: cti, label: creates}

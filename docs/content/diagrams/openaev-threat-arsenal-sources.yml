@@ -1,0 +1,25 @@
+title: Actions reach the Threat Arsenal from you, from injectors and from collectors, and every action can become a step of a test
+lanes:
+  - label: Sources
+    tone: external
+    nodes:
+      - {id: you, label: You, icon: Users, note: Create or import}
+      - {id: injectors, label: Injectors, icon: Crosshair, note: Their own actions}
+      - {id: collectors, label: Collectors, icon: ShieldCheck, note: Such as Atomic Red Team}
+  - label: Threat Arsenal
+    tone: product
+    nodes:
+      - {id: actions, label: Actions, icon: Boxes, note: "Verified, unverified, deprecated"}
+  - label: Tests
+    tone: product
+    nodes:
+      - {id: atomic, label: Atomic tests, icon: PlayCircle, note: One action, now}
+      - {id: scenarios, label: Scenarios, icon: Workflow, note: Actions as injects}
+      - {id: chained, label: Chained scenarios, icon: GitBranch, note: Actions as steps}
+edges:
+  - {from: you, to: actions, label: every field}
+  - {from: injectors, to: actions, label: "tags, domains editable"}
+  - {from: collectors, to: actions, label: read-only}
+  - {from: actions, to: atomic, label: Run atomic test}
+  - {from: actions, to: scenarios, label: Run a test}
+  - {from: actions, to: chained, label: Add component}

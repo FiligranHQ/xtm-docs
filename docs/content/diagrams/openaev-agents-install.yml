@@ -1,0 +1,22 @@
+title: You copy an install command from OpenAEV, run it on the endpoint, and the agent it installs enrolls the endpoint and fetches the jobs of each inject
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: page, label: Install simulation agents, icon: LogoOpenAEV, note: "Platform, mode, command"}
+  - label: Endpoint
+    tone: external
+    nodes:
+      - {id: installer, label: Installer, icon: Terminal, note: Checks the signature}
+      - {id: agent, label: OpenAEV agent, icon: Laptop, note: "Session, user or system"}
+      - {id: implant, label: Implant, icon: Cpu, note: "One per job, under runtimes"}
+  - label: Assets
+    tone: product
+    nodes:
+      - {id: assets, label: Endpoints, icon: Server, note: "Assets, with their agents"}
+edges:
+  - {from: page, to: installer, label: copy and run}
+  - {from: installer, to: agent, label: installs}
+  - {from: agent, to: assets, label: registers}
+  - {from: agent, to: implant, label: starts}
+  - {from: implant, to: assets, label: results, style: dashed}

@@ -1,0 +1,106 @@
+{
+  "name": "attack-outcomes",
+  "version": "ab702fd",
+  "source": "OpenCRQ-Platform/opencrq@ab702fd (module/src/modules/attack-outcomes/data/attack-outcomes-data.ts)",
+  "intro": "The attack outcomes a risk scenario names: what the attacker is after, how the attack ends (the ATT&CK tactic whose success realizes the outcome), how long an attacker usually stays before it (the median of the dwell time OpenCRQ draws), which security criteria of the primary asset the outcome breaches, and the techniques that mark it. Every tenant gets this catalog at boot.",
+  "sections": [
+    {
+      "title": "Attack outcomes",
+      "columns": [
+        "Outcome",
+        "What it is",
+        "Ends on",
+        "Reference dwell",
+        "Breaches",
+        "Signature techniques",
+        "Related techniques"
+      ],
+      "rows": [
+        {
+          "key": "a22b9a0c-4c77-45c1-a1b6-f8ec5531bc27",
+          "cells": [
+            "**Ransomware**",
+            "Encryption-led extortion monetized by ransom, with exfiltration usually riding along.",
+            "`TA0040` Impact",
+            "3 days",
+            "Availability, Integrity (in part), Confidentiality",
+            "`T1486` Data Encrypted for Impact, `T1490` Inhibit System Recovery, `T1489` Service Stop, `T1657` Financial Theft",
+            "`T1048` Exfiltration Over Alternative Protocol, `T1567` Exfiltration Over Web Service"
+          ]
+        },
+        {
+          "key": "d98a602a-cdd7-40ab-85bd-44fd8c834021",
+          "cells": [
+            "**Data Theft Extortion**",
+            "Data copied and monetized through publication or suppression pressure, without encryption.",
+            "`TA0010` Exfiltration",
+            "5 days",
+            "Confidentiality",
+            "`T1657` Financial Theft, `T1567` Exfiltration Over Web Service, `T1048` Exfiltration Over Alternative Protocol, `T1530` Data from Cloud Storage, `T1020` Automated Exfiltration",
+            "`T1560` Archive Collected Data, `T1074` Data Staged, `T1029` Scheduled Transfer, `T1030` Data Transfer Size Limits"
+          ]
+        },
+        {
+          "key": "9fc07642-7648-4178-a469-951c7f6bba9e",
+          "cells": [
+            "**Data Breach & Resale**",
+            "Data copied and monetized away from the victim, learned through disclosure or downstream fraud.",
+            "`TA0010` Exfiltration",
+            "21 days",
+            "Confidentiality",
+            "`T1041` Exfiltration Over C2 Channel, `T1048` Exfiltration Over Alternative Protocol, `T1567` Exfiltration Over Web Service, `T1005` Data from Local System, `T1213` Data from Information Repositories, `T1530` Data from Cloud Storage",
+            "`T1560` Archive Collected Data, `T1074` Data Staged, `T1029` Scheduled Transfer, `T1030` Data Transfer Size Limits, `T1040` Network Sniffing"
+          ]
+        },
+        {
+          "key": "f00427ea-1d38-4918-a7ff-03fee32f6374",
+          "cells": [
+            "**Financial Fraud & Funds Theft**",
+            "Money obtained directly through business email compromise, payment diversion, payroll fraud and payment-infrastructure raids.",
+            "`TA0040` Impact",
+            "5 days",
+            "Integrity, Traceability (in part)",
+            "`T1657` Financial Theft, `T1534` Internal Spearphishing, `T1114.003` Email Forwarding Rule, `T1565` Data Manipulation",
+            "`T1566` Phishing, `T1078` Valid Accounts, `T1114` Email Collection"
+          ]
+        },
+        {
+          "key": "4756f512-edab-4393-98ee-c442619e3c99",
+          "cells": [
+            "**Espionage**",
+            "Sustained covert collection of strategic information.",
+            "`TA0010` Exfiltration",
+            "122 days",
+            "Confidentiality",
+            "`T1114` Email Collection, `T1213` Data from Information Repositories, `T1039` Data from Network Shared Drive, `T1005` Data from Local System, `T1040` Network Sniffing, `T1020` Automated Exfiltration",
+            "`T1014` Rootkit, `T1070` Indicator Removal, `T1542` Pre-OS Boot, `T1133` External Remote Services, `T1685` Disable or Modify Tools, `T1113` Screen Capture, `T1056` Input Capture"
+          ]
+        },
+        {
+          "key": "b56965c3-5a76-4215-83af-cfcd69e33686",
+          "cells": [
+            "**Service Disruption**",
+            "Interruption of a service as the end state itself.",
+            "`TA0040` Impact",
+            "1 day",
+            "Availability",
+            "`T1498` Network Denial of Service, `T1499` Endpoint Denial of Service, `T1489` Service Stop, `T1529` System Shutdown/Reboot, `T1565` Data Manipulation",
+            "`T1490` Inhibit System Recovery, `T1531` Account Access Removal"
+          ]
+        },
+        {
+          "key": "e87138d3-a68b-4428-85df-b7387b308ecf",
+          "cells": [
+            "**Destructive Attack**",
+            "Irreversible damage with no monetization channel.",
+            "`TA0040` Impact",
+            "30 days",
+            "Availability, Integrity",
+            "`T1485` Data Destruction, `T1561` Disk Wipe, `T1495` Firmware Corruption, `T1490` Inhibit System Recovery, `T1529` System Shutdown/Reboot",
+            "`T1542` Pre-OS Boot"
+          ]
+        }
+      ]
+    }
+  ]
+}

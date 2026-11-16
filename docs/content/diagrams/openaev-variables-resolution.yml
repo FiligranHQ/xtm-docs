@@ -1,0 +1,21 @@
+title: When an inject runs, OpenAEV fills the variables of its email with each player's own values and the scenario's values, and sends one email per player
+lanes:
+  - label: Scenario
+    tone: product
+    nodes:
+      - {id: custom, label: Your variables, icon: Wrench, note: "crisis_bridge_url"}
+      - {id: inject, label: Email inject, icon: MessageSquare, note: "Hello ${user.firstname}"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: builtin, label: Built-in variables, icon: LogoOpenAEV, note: "Player, simulation, links"}
+      - {id: render, label: At the inject's time, icon: Clock, note: One text per player}
+  - label: Players
+    tone: external
+    nodes:
+      - {id: player, label: Each player, icon: Users, note: Their own email}
+edges:
+  - {from: custom, to: render, label: values}
+  - {from: inject, to: render, label: text}
+  - {from: builtin, to: render, label: values}
+  - {from: render, to: player, label: sends}

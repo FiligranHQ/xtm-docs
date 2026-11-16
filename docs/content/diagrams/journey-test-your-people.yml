@@ -1,0 +1,24 @@
+title: The lure known in OpenCTI becomes an OpenAEV phishing exercise, XTM One can draft its email and page, and each person's open, click and submission is scored
+lanes:
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: lure, label: Lure known, icon: LogoOpenCTI, note: "European Hospitality Summit 2026", href: /opencti/use/explore/entities/}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: email, label: Lure email written, icon: MessageSquare, note: "Fake group booking", href: /openaev/use/phishing/email-templates/}
+      - {id: page, label: Landing page built, icon: KeyRound, note: "Fake booking portal", href: /openaev/use/phishing/landing-pages/}
+      - {id: send, label: Lure sent, icon: LogoOpenAEV, note: "Front desk France and Spain", href: /openaev/use/phishing/run/}
+      - {id: results, label: Who fell for it, icon: Users, note: "Opened, clicked, submitted", href: /openaev/use/phishing/results/}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: draft, label: Drafts generated, icon: LogoXTMOne, note: "Generate with AI", href: /xtm-one/use/in-openaev/}
+edges:
+  - {from: lure, to: email, label: what it said}
+  - {from: draft, to: email, label: draft, style: dashed}
+  - {from: draft, to: page, label: draft, style: dashed}
+  - {from: email, to: send, label: email template}
+  - {from: page, to: send, label: phishing action}
+  - {from: send, to: results, label: each person's steps}

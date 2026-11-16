@@ -1,0 +1,27 @@
+title: One command starts the whole XTM stack, XTM One, OpenCTI, OpenAEV and XTM Composer, on the shared services they use
+lanes:
+  - label: You
+    tone: external
+    nodes:
+      - {id: up, label: docker compose up, icon: Terminal, note: From xtm-docker}
+  - label: The stack
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: At the center, href: /xtm-one/}
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Threat intelligence, href: /opencti/}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: Exposure validation, href: /openaev/}
+      - {id: composer, label: XTM Composer, icon: Boxes, note: Runs the integrations, href: /deploy/integrations/composer/}
+  - label: Shared services
+    tone: store
+    nodes:
+      - {id: search, label: Elasticsearch and Redis, icon: Server, note: Knowledge and cache}
+      - {id: pg, label: PostgreSQL, icon: Server, note: OpenAEV and XTM One}
+      - {id: mq, label: RabbitMQ and S3 storage, icon: ArrowLeftRight, note: Queues and files}
+edges:
+  - {from: up, to: xtmone, label: starts}
+  - {from: up, to: opencti}
+  - {from: up, to: openaev}
+  - {from: up, to: composer}
+  - {from: opencti, to: search}
+  - {from: xtmone, to: pg}
+  - {from: openaev, to: mq}

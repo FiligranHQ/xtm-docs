@@ -1,0 +1,262 @@
+# The readers of the XTM documentation. A persona is a person, not a product role: the same SOC
+# analyst looks up context in OpenCTI and checks detection expectations in OpenAEV. Every page
+# names its personas in frontmatter (`personas:`, the main one first); writers and agents write
+# for the main one (factory/STYLE.md, "Write for a persona"); the site shows them on the page and
+# filters the cards of a space by them.
+#
+# Sources: the OpenCTI user personas of the product team (Notion, "OpenCTI Users Persona":
+# Barbara, Erwan, Jamila, John, Anaïs, Sylvain, Lionel, Samantha) and the job titles customer
+# success and sales meet. A persona of another product without a named person yet keeps its role.
+#
+# Fields:
+#   label        what the site shows ("For CTI analysts")
+#   people       the named personas of the product team it stands for
+#   titles       job titles a reader would recognize themselves in
+#   who          one paragraph: their job, their goal, their background
+#   knows        what a page assumes they know: never explain it
+#   explain      what a page must explain to them
+#   wants        what they look for in a page (the shape of a good page for them)
+#   examples     situations to build :::example blocks from (with the demo story: the intrusion
+#                set Velvet Harbor targeting the hospitality sector, the CERT "Example CERT" that
+#                serves hotel chains, reports published in January 2026; values that the demo data
+#                has, capture/seed/opencti/demo.yml: 203.0.113.10 is Velvet Harbor's C2)
+#   products     per product: what they do with it, and the spaces (path prefixes) written for them
+
+personas:
+  - id: cti-analyst
+    label: CTI analysts
+    people:
+      - "Jamila, strategic CTI analyst at a government agency"
+      - "Anaïs, disinformation analyst"
+      - "John, cyber agent in law enforcement"
+    titles: [CTI analyst, threat intelligence analyst, strategic analyst, MSSP analyst]
+    who: >-
+      Produces intelligence: collects, structures and links what is known about threats, writes
+      reports, follows actors and campaigns over years, and shares with peers under strict
+      dissemination rules. Deep knowledge of threats and of analysis; often no technical
+      background (Jamila has none), sometimes a new field where the model is still being found
+      (Anaïs).
+    knows: [threat intelligence practice, STIX concepts (indicator, intrusion set, campaign, report), MITRE ATT&CK, TLP and PAP, confidence and reliability of sources, the kill chain]
+    explain: [how OpenCTI represents what they know (which entity, which relationship, which container), why the platform behaves as it does (inferences, deduplication, confidence), how to keep the knowledge precise and its sharing controlled]
+    wants: >-
+      The analytical task first (model a campaign, attribute an attack, follow a trend), the
+      clicks second. Plain words for anything technical, no command line. Examples drawn from
+      real intelligence work.
+    examples: [model the Velvet Harbor campaign against hotel booking systems in a report, attribute phishing infrastructure to an intrusion set, follow how an actor's techniques changed over a year, share a report with a partner CERT under TLP:AMBER, map a disinformation campaign that spreads fake hotel-breach stories through the narratives it pushes and the channels that carry it]
+    products:
+      opencti: {does: 'Creates and links knowledge, writes reports, explores threats and trends, shares under markings.', spaces: [/opencti/use/analyze/, /opencti/use/explore/, /opencti/use/ingest/manual, /opencti/use/ingest/files, /opencti/use/ingest/workbench, /opencti/use/share/, /opencti/concepts/]}
+      xtm-one: {does: 'Asks AI agents to summarize, translate or draft intelligence, and checks what they produce.'}
+      openaev: {does: 'Provides the threat context a simulation reproduces.'}
+
+  - id: soc-analyst
+    label: SOC analysts
+    people:
+      - "Erwan, cybersecurity analyst in a private CERT"
+    titles: [SOC analyst, L1/L2 analyst, incident responder, DFIR analyst, detection engineer]
+    who: >-
+      Consumes intelligence under time pressure: gets context on the suspicious material the
+      detection team sends (an IP address, a domain, a hash, a phishing email), decides fast,
+      opens and works incident cases, feeds detection rules. Technical background, many tools
+      open at once.
+    knows: [observables and indicators, detection rules (Sigma, YARA, Snort), SIEM and EDR, incident response]
+    explain: [the fastest path from an observable to its context, what a score or a decay means for an indicator, how to push indicators to detection tools, how to run a case]
+    wants: >-
+      Short, scannable steps; the answer in the first lines; keyboard and API paths when they
+      are faster; what the result looks like.
+    examples: [check whether 203.0.113.10 belongs to Velvet Harbor, enrich a suspicious domain from a phishing alert, open an incident response case for a compromised hotel front desk, export Velvet Harbor indicators to the SIEM]
+    products:
+      opencti: {does: 'Searches and pivots on observables and indicators, enriches them, works incident response cases, exports indicators to detection tools.', spaces: [/opencti/use/explore/observations, /opencti/use/explore/search, /opencti/use/analyze/cases, /opencti/use/analyze/pivot, /opencti/use/analyze/indicators-lifecycle, /opencti/use/enrich/]}
+      openaev: {does: 'Checks whether simulated attacks were detected and prevented, and answers the expectations of an inject.'}
+      xtm-one: {does: 'Asks AI agents for the context of an alert.'}
+
+  - id: cti-lead
+    label: CTI team leads
+    people:
+      - "Barbara, team leader of an MSSP CERT"
+    titles: [CTI team lead, threat intelligence manager, head of CERT]
+    who: >-
+      Organizes how the team anticipates and responds: sets priorities (priority intelligence
+      requirements), assigns work, follows it on dashboards, designs workflows and automations,
+      decides what is shared with whom; in an MSSP, serves several customers from one platform.
+      Long experience, not necessarily technical.
+    knows: [how a CTI team works, intelligence requirements, the customers or the business the team serves]
+    explain: [what the platform can organize for them (workflows, assignments, playbooks, notifications, dashboards), what each choice changes for the team, how to segregate customers]
+    wants: >-
+      The outcome for the team, then how to set it up; screens over configuration files; what
+      to decide and its consequences.
+    examples: [track every new report on the hospitality sector until it is reviewed, notify the duty analyst when Velvet Harbor gets a new indicator, give each hotel chain its own dashboard, automate the triage of a feed with a playbook]
+    products:
+      opencti: {does: 'Defines priorities, workflows, playbooks, notifications and dashboards, organizes the team and the sharing.', spaces: [/opencti/use/automate/, /opencti/use/dashboards/, /opencti/use/analyze/pir, /opencti/use/share/, /opencti/use/ingest/]}
+
+  - id: soc-manager
+    label: SOC managers
+    people:
+      - "Lionel, SOC manager"
+    titles: [SOC manager, head of SOC, detection lead]
+    who: >-
+      Runs detection on a large and diverse information system: wants intelligence to
+      prioritize the hundreds of alerts a day and to reach every detection system, and wants to
+      measure what the defenses really catch. Technical background, thinks in volumes and
+      integrations.
+    knows: [SIEM, EDR and SOAR, detection engineering, alert triage, the volumes their tools handle]
+    explain: [how intelligence reaches the detection stack (streams, feeds, TAXII, connectors), how indicators are scored and expire, how to measure detection coverage]
+    wants: >-
+      Architecture and integration first, volumes and limits, what to connect and how it stays
+      in sync.
+    examples: [stream Velvet Harbor indicators to the SIEM in real time, keep only indicators scored above 60 in the EDR feed, measure which ATT&CK techniques of Velvet Harbor the SOC detects]
+    products:
+      opencti: {does: 'Connects OpenCTI to the detection stack (streams, feeds, TAXII), sets indicator scoring and decay.', spaces: [/opencti/use/share/feeds, /opencti/use/share/, /opencti/configure/decay/, /opencti/use/analyze/security-coverage]}
+      openaev: {does: 'Measures detection and prevention coverage with simulations, follows the results over time.'}
+      xtm-one: {does: 'Gives the SOC agents for triage and recurring work, and follows what they do.'}
+
+  - id: validation-engineer
+    label: security validation engineers
+    titles: [purple team engineer, red team operator, security validation engineer, breach and attack simulation engineer]
+    who: >-
+      Tests the defenses against real threats: builds scenarios from what the threat
+      intelligence knows, deploys agents, runs simulations, reads which attacks were detected or
+      prevented, and works with the SOC to close the gaps.
+    knows: [MITRE ATT&CK, offensive techniques, endpoints and their security tools, how detection works]
+    explain: [how OpenAEV turns a threat into injects, how agents, injectors and collectors fit, how expectations are scored]
+    wants: >-
+      From the threat to the result: the scenario, the payloads, the agents, then what the
+      results mean.
+    examples: [simulate Velvet Harbor's phishing and credential theft on the hotel front-desk workstations, check that the EDR blocks the credential dumping payload]
+    products:
+      openaev: {does: 'Builds scenarios and payloads, deploys agents, runs simulations, reads expectations and results.', spaces: [/openaev/]}
+
+  - id: exercise-planner
+    label: crisis exercise planners
+    titles: [crisis manager, business continuity manager, exercise planner, security awareness manager]
+    who: >-
+      Prepares people, not machines: designs tabletop and crisis exercises, plays the
+      scenario's emails and media pressure to the teams, and reviews how the organization
+      responded. Rarely technical.
+    knows: [crisis management, the organization's teams and procedures]
+    explain: [how to build an exercise timeline, what players see, how to evaluate their answers]
+    wants: Ready-to-run scenarios, what the players receive, how to debrief.
+    examples: [run a ransomware tabletop exercise for the board of a hotel chain, send a fake journalist's email during the crisis]
+    products:
+      openaev: {does: 'Designs and runs tabletop and crisis exercises, evaluates the players.', spaces: [/openaev/]}
+
+  - id: risk-manager
+    label: risk managers
+    titles: [cyber risk manager, risk analyst, GRC lead]
+    who: >-
+      Translates cyber threats into business risk: scopes what the business could lose, prices
+      each risk in money, and argues which controls to fund. Speaks the language of the board
+      more than the language of the SOC.
+    knows: [risk management frameworks (FAIR, ISO 27005), the business and its assets, budgets]
+    explain: [how the platform quantifies a risk, where its numbers come from (threats from OpenCTI, control results from OpenAEV), how to present them]
+    wants: The method and its assumptions, then the steps; numbers explained.
+    examples: [price the loss of the booking platform to Velvet Harbor, compare the risk before and after deploying multi-factor authentication]
+    products:
+      opencrq: {does: 'Scopes risks and assets, quantifies them, follows the treatment.', spaces: [/opencrq/]}
+      opencti: {does: 'Reads priority intelligence requirements and security coverage.'}
+
+  - id: executive
+    label: CISOs and executives
+    people:
+      - "Sylvain, CISO"
+      - "Samantha, board member"
+    titles: [CISO, head of cybersecurity, board member, CIO]
+    who: >-
+      Decides and funds: wants to know what matters for the risk of the company and what the
+      teams achieve, without details. Very little time.
+    knows: [the business, its risks, budgets]
+    explain: [what each product brings to the risk and to the teams, what the dashboards and reports say]
+    wants: The answer in the first paragraph, an overview, no procedure.
+    examples: [see on one dashboard the threats targeting the hospitality sector this quarter, decide which control to fund from the quantified risks]
+    products:
+      opencti: {does: 'Reads dashboards and summaries.'}
+      opencrq: {does: 'Reads quantified risks and treatment plans.'}
+      openaev: {does: 'Reads the security posture and its trend.'}
+      xtm-one: {does: 'Sees what AI does for the teams, what it costs and how it is governed.'}
+
+  - id: auditor
+    label: auditors
+    titles: [security auditor, compliance officer, data protection officer, internal control]
+    who: >-
+      Checks that the platforms are used as the policy says: who signed in, who read or changed
+      what, who exported or shared which data, and keeps the evidence. Reads logs and reports,
+      rarely changes a setting; answers to regulators and to the board.
+    knows: [audit and compliance requirements (ISO 27001, SOC 2, GDPR), what evidence an auditor needs]
+    explain: [what the platform records and what it does not, where to read it, how long it is kept, how to export it]
+    wants: The scope of what is recorded first, then where to find it and how to keep it.
+    examples: [list who exported Velvet Harbor reports last month, prove that only the CTI analysts group read TLP:RED knowledge, keep a year of login events in the SIEM]
+    products:
+      opencti: {does: 'Reads the activity log and the history, exports evidence.', spaces: [/opencti/configure/activity/]}
+      xtm-one: {does: 'Reviews what AI agents did and with which data.'}
+
+  - id: admin
+    label: administrators
+    titles: [platform administrator, connector owner, security architect]
+    who: >-
+      Runs a product for the others: who signs in and how, who sees what, which data comes in,
+      how the platform is customized and kept healthy. Technical, responsible for security and
+      compliance; often the owner of the connectors too.
+    knows: [identity providers (SAML, OpenID Connect, LDAP), access control models, the company's security policy]
+    explain: [the access model of the product and its consequences, every option and its default, what to check after a change, how to secure it]
+    wants: >-
+      The model, then exact steps; every setting with its effect; secure choices first; what
+      breaks if it is wrong.
+    examples: [let Grand Meridian Hotels' CTI team see only their organization's knowledge, log in with Microsoft Entra ID through OpenID Connect, give analysts the right to create but not to delete]
+    products:
+      opencti: {does: 'Manages users, groups, roles, organizations, markings, authentication and policies; customizes the platform and its data (Configure).', spaces: [/opencti/administer/, /opencti/configure/]}
+      openaev: {does: 'Manages users, teams, tenants and the platform settings.'}
+      opencrq: {does: 'Manages users and the platform settings.'}
+      xtm-one: {does: 'Governs AI: which agents run, on which model, with which data.'}
+
+  - id: ai-builder
+    label: AI agent builders
+    titles: [AI engineer, automation engineer, CTI engineer]
+    who: >-
+      Designs the AI agents of XTM One: their instructions, their tools, the data they reach,
+      and how they plug into the products' automations. Technical, careful about what an agent
+      may do.
+    knows: [large language models and their limits, prompts, the automations of the products]
+    explain: [how an agent is built and governed in XTM One, what it can reach in each product, how to test it]
+    wants: The building blocks, then a complete agent, then how to watch it.
+    examples: [build an agent that drafts a summary of every new Velvet Harbor report, give an agent read-only access to OpenCTI]
+    products:
+      xtm-one: {does: 'Builds, tests and governs AI agents.', spaces: [/xtm-one/]}
+      opencti: {does: 'Uses AI playbook components.'}
+
+  - id: platform-engineer
+    label: platform engineers
+    titles: [DevOps engineer, site reliability engineer, system administrator]
+    who: >-
+      Deploys and operates the platforms: containers, databases, queues, storage, upgrades,
+      scaling, monitoring and backups. Reads configuration files and logs all day.
+    knows: [Docker and Kubernetes, Elasticsearch or OpenSearch, Redis, RabbitMQ, S3, reverse proxies, observability]
+    explain: [the architecture and what each component needs, every setting with its environment variable, sizing, upgrade paths, how to diagnose]
+    wants: Copy-paste-ready configuration, exact versions and defaults, commands, what to monitor.
+    examples: [deploy OpenCTI with Docker Compose behind a reverse proxy at https://cti.example.com, scale the workers for a feed of 10 million indicators, expose health probes to Kubernetes]
+    products:
+      suite: {does: 'Deploys, configures, scales and upgrades every product.', spaces: [/deploy/]}
+
+  - id: developer
+    label: developers
+    titles: [integration developer, connector developer, software engineer]
+    who: >-
+      Extends the products: writes connectors and integrations, scripts the APIs, builds on the
+      data model. Wants precision more than prose.
+    knows: [programming (Python, TypeScript), APIs (GraphQL, REST), STIX bundles]
+    explain: [the APIs and the data model with real requests and responses, the integration frameworks, how to test and publish an integration]
+    wants: Runnable code, exact types and fields, the reference one click away.
+    examples: [write a connector that imports a hotel-sector feed, query the reports on Velvet Harbor with the GraphQL API]
+    products:
+      suite: {does: 'Writes integrations and uses the APIs of every product.', spaces: [/develop/, /reference/]}
+
+  - id: evaluator
+    label: evaluators
+    titles: [solution architect evaluating the suite, CTI team assessing a platform, buyer]
+    who: >-
+      Discovers the suite: what each product does, how they fit, whether it answers their
+      needs, how fast they can try it. Some technical background; no time for detail yet.
+    knows: [their own needs and current tools]
+    explain: [what each product is for and how the products work together, how to try them]
+    wants: Short overviews, diagrams, a quick start.
+    examples: [try OpenCTI with the demo data in ten minutes, see how a threat known in OpenCTI becomes an OpenAEV simulation]
+    products:
+      suite: {does: 'Discovers and tries the suite.', spaces: [/start/, /workflows/]}

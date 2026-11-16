@@ -1,0 +1,21 @@
+title: A crisis exercise is prepared and played in OpenAEV, OpenCRQ gives the cost of the breach, and an XTM One agent briefs the crisis cell with it
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: timeline, label: Night written, icon: LogoOpenAEV, note: "Alert, challenge, article", href: /openaev/use/components/media-pressure/}
+      - {id: run, label: Night played, icon: PlayCircle, note: "The crisis cell answers", href: /openaev/use/simulations/}
+      - {id: lessons, label: Lessons collected, icon: ClipboardCheck, note: "Debrief and objectives", href: /openaev/use/components/lessons/}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: cost, label: Breach priced, icon: LogoOpenCRQ, note: "Data Breach on Guest Records", href: /opencrq/use/decide/dashboards/}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: briefer, label: Cell briefed, icon: LogoXTMOne, note: "Crisis briefer agent", href: /xtm-one/build/agents/}
+edges:
+  - {from: timeline, to: run, label: launch}
+  - {from: cost, to: briefer, label: loss in money}
+  - {from: briefer, to: run, label: situation report, style: dashed}
+  - {from: run, to: lessons, label: answers and scores}

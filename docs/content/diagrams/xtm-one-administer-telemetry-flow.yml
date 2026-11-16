@@ -1,0 +1,16 @@
+title: Every six hours, XTM One sends anonymous counts to Filigran's collector, unless telemetry is off
+lanes:
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: db, label: Database, icon: Server, note: "Counts read before each export"}
+      - {id: exporter, label: Telemetry, icon: Activity, note: "TELEMETRY_ENABLED"}
+  - label: Collector
+    tone: external
+    nodes:
+      - {id: filigran, label: Filigran, icon: Gauge, note: "telemetry.one.filigran.io"}
+      - {id: yours, label: Your collector, icon: Network, note: "TELEMETRY_ENDPOINT"}
+edges:
+  - {from: db, to: exporter, label: counts and flags}
+  - {from: exporter, to: filigran, label: OTLP over HTTPS}
+  - {from: exporter, to: yours, label: when set, style: dashed}

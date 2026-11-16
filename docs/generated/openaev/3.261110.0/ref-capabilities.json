@@ -1,0 +1,919 @@
+{
+  "name": "capabilities",
+  "version": "3.261110.0",
+  "source": "OpenAEV-Platform/openaev@cde7bee (openaev-model/src/main/java/io/openaev/database/model/Capability.java)",
+  "intro": "The capabilities a role grants in OpenAEV, as the role editor names them, group by group. A capability includes the one it is under: **Manage assessment** also gives **Access assessment**. **Scope** says where a role grants it: a role of the platform, or a role of a tenant. **Allows** lists the actions it opens on each kind of object.",
+  "filter": "Filter capabilities, objects, actions",
+  "sections": [
+    {
+      "title": "Superuser",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "BYPASS",
+          "cells": [
+            "**Bypass (user has all rights)**",
+            "",
+            "Platform, Tenant",
+            "Every action on every object",
+            "`BYPASS`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboards",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_DASHBOARDS",
+          "cells": [
+            "**Access dashboards**",
+            "",
+            "Tenant",
+            "read: dashboard; search: dashboard",
+            "`ACCESS_DASHBOARDS`"
+          ]
+        },
+        {
+          "key": "MANAGE_DASHBOARDS",
+          "cells": [
+            "**Manage dashboards**",
+            "Access dashboards",
+            "Tenant",
+            "write: dashboard; create: dashboard",
+            "`MANAGE_DASHBOARDS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_DASHBOARDS",
+          "cells": [
+            "**Delete dashboards**",
+            "Manage dashboards",
+            "Tenant",
+            "delete: dashboard",
+            "`DELETE_DASHBOARDS`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Reportings",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_REPORTINGS",
+          "cells": [
+            "**Access reportings**",
+            "",
+            "Tenant",
+            "read: report; search: report",
+            "`ACCESS_REPORTINGS`"
+          ]
+        },
+        {
+          "key": "MANAGE_REPORTINGS",
+          "cells": [
+            "**Manage reportings**",
+            "Access reportings",
+            "Tenant",
+            "write: report; create: report; duplicate: report",
+            "`MANAGE_REPORTINGS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_REPORTINGS",
+          "cells": [
+            "**Delete reportings**",
+            "Manage reportings",
+            "Tenant",
+            "delete: report",
+            "`DELETE_REPORTINGS`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Findings",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_FINDINGS",
+          "cells": [
+            "**Access findings**",
+            "",
+            "Tenant",
+            "read: finding; search: finding",
+            "`ACCESS_FINDINGS`"
+          ]
+        },
+        {
+          "key": "ACCESS_SNAPSHOT_OBSERVATION",
+          "cells": [
+            "**Access observation snapshots**",
+            "",
+            "Tenant",
+            "search: snapshot observation",
+            "`ACCESS_SNAPSHOT_OBSERVATION`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Assessments : Scenarios, simulations and atomic testings",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_ASSESSMENT",
+          "cells": [
+            "**Access assessment**",
+            "",
+            "Tenant",
+            "read: scenario, simulation, autonomous run, atomic testing, workflow, step, condition; search: scenario, simulation, autonomous run, atomic testing, workflow, step, condition",
+            "`ACCESS_ASSESSMENT`"
+          ]
+        },
+        {
+          "key": "MANAGE_ASSESSMENT",
+          "cells": [
+            "**Manage assessment**",
+            "Access assessment",
+            "Tenant",
+            "write: scenario, simulation, autonomous run, atomic testing, step, workflow, condition; duplicate: scenario, simulation, autonomous run, atomic testing, step, workflow, condition; create: scenario, simulation, atomic testing, step, workflow, condition",
+            "`MANAGE_ASSESSMENT`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_ASSESSMENT",
+          "cells": [
+            "**Delete assessment**",
+            "Manage assessment",
+            "Tenant",
+            "delete: scenario, simulation, autonomous run, atomic testing, step, workflow, condition",
+            "`DELETE_ASSESSMENT`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "LAUNCH_ASSESSMENT",
+          "cells": [
+            "**Launch assessment**",
+            "Access assessment",
+            "Tenant",
+            "launch: scenario, simulation, autonomous run, atomic testing",
+            "`LAUNCH_ASSESSMENT`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Threat Arsenal",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_THREAT_ARSENALS",
+          "cells": [
+            "**Access threat arsenal**",
+            "",
+            "Tenant",
+            "read: threat arsenal; search: threat arsenal",
+            "`ACCESS_THREAT_ARSENALS`"
+          ]
+        },
+        {
+          "key": "MANAGE_THREAT_ARSENALS",
+          "cells": [
+            "**Manage threat arsenal**",
+            "Access threat arsenal",
+            "Tenant",
+            "write: threat arsenal; create: threat arsenal; duplicate: threat arsenal",
+            "`MANAGE_THREAT_ARSENALS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_THREAT_ARSENALS",
+          "cells": [
+            "**Delete threat arsenal**",
+            "Manage threat arsenal",
+            "Tenant",
+            "delete: threat arsenal",
+            "`DELETE_THREAT_ARSENALS`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Credentials",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_CREDENTIALS",
+          "cells": [
+            "**Access credentials**",
+            "",
+            "Tenant",
+            "read: credential; search: credential",
+            "`ACCESS_CREDENTIALS`"
+          ]
+        },
+        {
+          "key": "MANAGE_CREDENTIALS",
+          "cells": [
+            "**Manage credentials**",
+            "Access credentials",
+            "Tenant",
+            "write: credential; create: credential; duplicate: credential",
+            "`MANAGE_CREDENTIALS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_CREDENTIALS",
+          "cells": [
+            "**Delete credentials**",
+            "Manage credentials",
+            "Tenant",
+            "delete: credential",
+            "`DELETE_CREDENTIALS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "RESOLVE_INJECT_SECRET",
+          "cells": [
+            "**Resolve inject secret**",
+            "",
+            "Tenant",
+            "resolve: inject secret",
+            "`RESOLVE_INJECT_SECRET`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Targets",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_TEAMS_AND_PLAYERS",
+          "cells": [
+            "**Access teams & persons**",
+            "",
+            "Tenant",
+            "read: team, player; search: team, player",
+            "`ACCESS_TEAMS_AND_PLAYERS`"
+          ]
+        },
+        {
+          "key": "MANAGE_TEAMS_AND_PLAYERS",
+          "cells": [
+            "**Manage teams & persons**",
+            "Access teams & persons",
+            "Tenant",
+            "write: team, player; create: team, player",
+            "`MANAGE_TEAMS_AND_PLAYERS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_TEAMS_AND_PLAYERS",
+          "cells": [
+            "**Delete teams & persons**",
+            "Manage teams & persons",
+            "Tenant",
+            "delete: team, player",
+            "`DELETE_TEAMS_AND_PLAYERS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "ACCESS_ASSETS",
+          "cells": [
+            "**Access assets**",
+            "",
+            "Tenant",
+            "read: asset, asset group; search: asset, asset group",
+            "`ACCESS_ASSETS`"
+          ]
+        },
+        {
+          "key": "MANAGE_ASSETS",
+          "cells": [
+            "**Manage assets**",
+            "Access assets",
+            "Tenant",
+            "write: asset, asset group; create: asset, asset group",
+            "`MANAGE_ASSETS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_ASSETS",
+          "cells": [
+            "**Delete assets**",
+            "Manage assets",
+            "Tenant",
+            "delete: asset, asset group",
+            "`DELETE_ASSETS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "ACCESS_SECURITY_PLATFORMS",
+          "cells": [
+            "**Access security platforms**",
+            "",
+            "Tenant",
+            "read: security platform; search: security platform",
+            "`ACCESS_SECURITY_PLATFORMS`"
+          ]
+        },
+        {
+          "key": "MANAGE_SECURITY_PLATFORMS",
+          "cells": [
+            "**Manage security platforms**",
+            "Access security platforms",
+            "Tenant",
+            "write: security platform; create: security platform",
+            "`MANAGE_SECURITY_PLATFORMS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_SECURITY_PLATFORMS",
+          "cells": [
+            "**Delete security platforms**",
+            "Manage security platforms",
+            "Tenant",
+            "delete: security platform",
+            "`DELETE_SECURITY_PLATFORMS`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Content",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_DOCUMENTS",
+          "cells": [
+            "**Access documents**",
+            "",
+            "Tenant",
+            "read: document; search: document",
+            "`ACCESS_DOCUMENTS`"
+          ]
+        },
+        {
+          "key": "MANAGE_DOCUMENTS",
+          "cells": [
+            "**Manage documents**",
+            "Access documents",
+            "Tenant",
+            "write: document; create: document",
+            "`MANAGE_DOCUMENTS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_DOCUMENTS",
+          "cells": [
+            "**Delete documents**",
+            "Manage documents",
+            "Tenant",
+            "delete: document",
+            "`DELETE_DOCUMENTS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "ACCESS_CHANNELS",
+          "cells": [
+            "**Access channels**",
+            "",
+            "Tenant",
+            "read: channel; search: channel",
+            "`ACCESS_CHANNELS`"
+          ]
+        },
+        {
+          "key": "MANAGE_CHANNELS",
+          "cells": [
+            "**Manage channels**",
+            "Access channels",
+            "Tenant",
+            "write: channel; create: channel",
+            "`MANAGE_CHANNELS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_CHANNELS",
+          "cells": [
+            "**Delete channels**",
+            "Manage channels",
+            "Tenant",
+            "delete: channel",
+            "`DELETE_CHANNELS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "ACCESS_PHISHING",
+          "cells": [
+            "**Access phishing**",
+            "",
+            "Tenant",
+            "read: phishing landing page, phishing email template; search: phishing landing page, phishing email template",
+            "`ACCESS_PHISHING`"
+          ]
+        },
+        {
+          "key": "MANAGE_PHISHING",
+          "cells": [
+            "**Manage phishing**",
+            "Access phishing",
+            "Tenant",
+            "write: phishing landing page, phishing email template; create: phishing landing page, phishing email template; duplicate: phishing landing page, phishing email template",
+            "`MANAGE_PHISHING`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_PHISHING",
+          "cells": [
+            "**Delete phishing**",
+            "Manage phishing",
+            "Tenant",
+            "delete: phishing landing page, phishing email template",
+            "`DELETE_PHISHING`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "ACCESS_CHALLENGES",
+          "cells": [
+            "**Access challenges**",
+            "",
+            "Tenant",
+            "read: challenge; search: challenge",
+            "`ACCESS_CHALLENGES`"
+          ]
+        },
+        {
+          "key": "MANAGE_CHALLENGES",
+          "cells": [
+            "**Manage challenges**",
+            "Access challenges",
+            "Tenant",
+            "write: challenge; create: challenge",
+            "`MANAGE_CHALLENGES`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_CHALLENGES",
+          "cells": [
+            "**Delete challenges**",
+            "Manage challenges",
+            "Tenant",
+            "delete: challenge",
+            "`DELETE_CHALLENGES`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "ACCESS_LESSONS_LEARNED",
+          "cells": [
+            "**Access lessons learned**",
+            "",
+            "Tenant",
+            "read: lesson learned; search: lesson learned",
+            "`ACCESS_LESSONS_LEARNED`"
+          ]
+        },
+        {
+          "key": "MANAGE_LESSONS_LEARNED",
+          "cells": [
+            "**Manage lessons learned**",
+            "Access lessons learned",
+            "Tenant",
+            "write: lesson learned; create: lesson learned",
+            "`MANAGE_LESSONS_LEARNED`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_LESSONS_LEARNED",
+          "cells": [
+            "**Delete lessons learned**",
+            "Manage lessons learned",
+            "Tenant",
+            "delete: lesson learned",
+            "`DELETE_LESSONS_LEARNED`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Platform settings",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_PLATFORM_SETTINGS",
+          "cells": [
+            "**Access platform settings**",
+            "",
+            "Platform",
+            "read: platform setting; search: platform setting",
+            "`ACCESS_PLATFORM_SETTINGS`"
+          ]
+        },
+        {
+          "key": "MANAGE_PLATFORM_SETTINGS",
+          "cells": [
+            "**Manage platform settings**",
+            "Access platform settings",
+            "Platform",
+            "write: platform setting; delete: platform setting",
+            "`MANAGE_PLATFORM_SETTINGS`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Tenant settings",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_TENANT_SETTINGS",
+          "cells": [
+            "**Access tenant settings**",
+            "",
+            "Tenant",
+            "read: tenant setting, tag rule, attack pattern, kill chain phase, vulnerability, organization, collector, injector, secret provider, catalog, xtm hub registration, notifier; search: tenant setting, tag rule, attack pattern, kill chain phase, vulnerability, organization, collector, injector, secret provider, catalog, xtm hub registration, notifier",
+            "`ACCESS_TENANT_SETTINGS`"
+          ]
+        },
+        {
+          "key": "MANAGE_TENANT_SETTINGS",
+          "cells": [
+            "**Manage tenant settings**",
+            "Access tenant settings",
+            "Tenant",
+            "write: tenant setting, tag rule, attack pattern, kill chain phase, vulnerability, organization, mapper, collector, injector, secret provider, injector contract, catalog, xtm hub registration, notifier; create: tenant setting, tag rule, attack pattern, kill chain phase, vulnerability, organization, mapper, collector, injector, secret provider, injector contract, catalog, xtm hub registration, notifier; duplicate: mapper; delete: xtm hub registration",
+            "`MANAGE_TENANT_SETTINGS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_TENANT_SETTINGS",
+          "cells": [
+            "**Delete tenant settings**",
+            "Manage tenant settings",
+            "Tenant",
+            "delete: tenant setting, tag rule, attack pattern, kill chain phase, vulnerability, organization, mapper, collector, injector, secret provider, injector contract, notifier",
+            "`DELETE_TENANT_SETTINGS`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Security",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_TENANT_USERS_GROUPS_AND_ROLES",
+          "cells": [
+            "**Access tenant users, groups and roles**",
+            "",
+            "Tenant",
+            "read: user group, group role, user; search: user group, group role, user",
+            "`ACCESS_TENANT_USERS_GROUPS_AND_ROLES`"
+          ]
+        },
+        {
+          "key": "MANAGE_TENANT_USERS_GROUPS_AND_ROLES",
+          "cells": [
+            "**Manage tenant users, groups and roles**",
+            "Access tenant users, groups and roles",
+            "Tenant",
+            "write: user group, group role, user; create: user group, group role, user",
+            "`MANAGE_TENANT_USERS_GROUPS_AND_ROLES`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_TENANT_USERS_GROUPS_AND_ROLES",
+          "cells": [
+            "**Delete tenant users, groups and roles**",
+            "Manage tenant users, groups and roles",
+            "Tenant",
+            "delete: user group, group role, user",
+            "`DELETE_TENANT_USERS_GROUPS_AND_ROLES`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "MANAGE_SESSIONS",
+          "cells": [
+            "**Manage tenant sessions**",
+            "",
+            "Tenant",
+            "read: session; write: session",
+            "`MANAGE_SESSIONS`"
+          ]
+        },
+        {
+          "key": "ACCESS_MARKING_DEFINITION",
+          "cells": [
+            "**Access marking definition**",
+            "",
+            "Tenant",
+            "read: marking definition; search: marking definition",
+            "`ACCESS_MARKING_DEFINITION`"
+          ]
+        },
+        {
+          "key": "MANAGE_MARKING_DEFINITION",
+          "cells": [
+            "**Manage marking definition**",
+            "Access marking definition",
+            "Tenant",
+            "write: marking definition; create: marking definition",
+            "`MANAGE_MARKING_DEFINITION`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_MARKING_DEFINITION",
+          "cells": [
+            "**Delete marking definition**",
+            "Manage marking definition",
+            "Tenant",
+            "delete: marking definition",
+            "`DELETE_MARKING_DEFINITION`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "MANAGE_MARKING_ASSIGNMENT",
+          "cells": [
+            "**Manage marking assignment**",
+            "",
+            "Tenant",
+            "write: marking assignment; delete: marking assignment",
+            "`MANAGE_MARKING_ASSIGNMENT`"
+          ]
+        },
+        {
+          "key": "ACCESS_PLATFORM_USERS_GROUPS_AND_ROLES",
+          "cells": [
+            "**Access platform users, groups and roles**",
+            "",
+            "Platform",
+            "read: platform group, platform role, platform user; search: platform group, platform role, platform user",
+            "`ACCESS_PLATFORM_USERS_GROUPS_AND_ROLES`"
+          ]
+        },
+        {
+          "key": "MANAGE_PLATFORM_USERS_GROUPS_AND_ROLES",
+          "cells": [
+            "**Manage platform users, groups and roles**",
+            "Access platform users, groups and roles",
+            "Platform",
+            "write: platform group, platform role, platform user; create: platform group, platform role, platform user",
+            "`MANAGE_PLATFORM_USERS_GROUPS_AND_ROLES`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_PLATFORM_USERS_GROUPS_AND_ROLES",
+          "cells": [
+            "**Delete platform users, groups and roles**",
+            "Manage platform users, groups and roles",
+            "Platform",
+            "delete: platform group, platform role, platform user",
+            "`DELETE_PLATFORM_USERS_GROUPS_AND_ROLES`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "MANAGE_PLATFORM_SESSIONS",
+          "cells": [
+            "**Manage platform sessions**",
+            "",
+            "Platform",
+            "read: platform session; write: platform session",
+            "`MANAGE_PLATFORM_SESSIONS`"
+          ]
+        },
+        {
+          "key": "INSTALL_AGENT",
+          "cells": [
+            "**Install agent**",
+            "",
+            "Tenant",
+            "read: agent installer",
+            "`INSTALL_AGENT`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Taxonomy",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_TAGS",
+          "cells": [
+            "**Access tags**",
+            "",
+            "Tenant",
+            "read: tag; search: tag",
+            "`ACCESS_TAGS`"
+          ]
+        },
+        {
+          "key": "MANAGE_TAGS",
+          "cells": [
+            "**Manage tags**",
+            "Access tags",
+            "Tenant",
+            "write: tag; create: tag",
+            "`MANAGE_TAGS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_TAGS",
+          "cells": [
+            "**Delete tags**",
+            "Manage tags",
+            "Tenant",
+            "delete: tag",
+            "`DELETE_TAGS`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Tenants",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_TENANTS",
+          "cells": [
+            "**Access tenants**",
+            "",
+            "Platform",
+            "read: tenant; search: tenant",
+            "`ACCESS_TENANTS`"
+          ]
+        },
+        {
+          "key": "MANAGE_TENANTS",
+          "cells": [
+            "**Manage tenants**",
+            "Access tenants",
+            "Platform",
+            "write: tenant; create: tenant",
+            "`MANAGE_TENANTS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "DELETE_TENANTS",
+          "cells": [
+            "**Delete tenants**",
+            "Manage tenants",
+            "Platform",
+            "delete: tenant",
+            "`DELETE_TENANTS`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "SERVICE",
+      "columns": [
+        "Capability",
+        "Includes",
+        "Scope",
+        "Allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "SYNC_CATALOG",
+          "cells": [
+            "**SYNC_CATALOG**",
+            "",
+            "Tenant",
+            "create: catalog sync",
+            "`SYNC_CATALOG`"
+          ]
+        }
+      ]
+    }
+  ]
+}

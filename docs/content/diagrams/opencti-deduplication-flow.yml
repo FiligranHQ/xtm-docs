@@ -1,0 +1,24 @@
+title: OpenCTI computes the identifiers of each incoming object, looks for existing objects with them, then creates, updates or merges
+lanes:
+  - label: Incoming
+    tone: external
+    nodes:
+      - {id: input, label: New object, icon: FileText, note: "From a user, connector or feed"}
+  - label: Platform
+    tone: product
+    nodes:
+      - {id: ids, label: Compute identifiers, icon: KeyRound, note: "Standard ID, aliases, hashes"}
+      - {id: lookup, label: Look up, icon: Search, note: Same identifiers in the base}
+  - label: Result
+    tone: store
+    nodes:
+      - {id: create, label: Create, icon: Sparkles, note: Nothing found}
+      - {id: upsert, label: Update, icon: History, note: One match, within confidence}
+      - {id: merge, label: Merge, icon: GitBranch, note: Several matches}
+edges:
+  - {from: input, to: ids, label: properties}
+  - {from: ids, to: lookup, label: identifiers}
+  - {from: lookup, to: create, label: no match}
+  - {from: lookup, to: upsert, label: one match}
+  - {from: lookup, to: merge, label: several matches}
+  - {from: merge, to: upsert, label: then update, style: dashed}

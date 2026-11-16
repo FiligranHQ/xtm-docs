@@ -1,0 +1,25 @@
+title: Elasticsearch takes the largest share of memory, so set its Java heap, ELASTIC_MEMORY_SIZE, from the RAM of the host
+lanes:
+  - label: RAM of the host
+    tone: external
+    nodes:
+      - {id: ram16, label: 16 GB, icon: Cpu, note: The minimum}
+      - {id: ram32, label: 32 GB, icon: Cpu, note: Recommended for production}
+      - {id: ram64, label: 64 GB or more, icon: Cpu}
+  - label: .env
+    tone: product
+    nodes:
+      - {id: heap2, label: ELASTIC_MEMORY_SIZE=2G, icon: FileText}
+      - {id: heap4, label: ELASTIC_MEMORY_SIZE=4G, icon: FileText, note: The value of .env.sample}
+      - {id: heap8, label: ELASTIC_MEMORY_SIZE=8G, icon: FileText}
+  - label: Elasticsearch
+    tone: store
+    nodes:
+      - {id: es, label: Java heap, icon: Gauge, note: "ES_JAVA_OPTS: -Xms and -Xmx"}
+edges:
+  - {from: ram16, to: heap2}
+  - {from: ram32, to: heap4}
+  - {from: ram64, to: heap8}
+  - {from: heap2, to: es, label: sets}
+  - {from: heap4, to: es, label: sets}
+  - {from: heap8, to: es, label: sets}

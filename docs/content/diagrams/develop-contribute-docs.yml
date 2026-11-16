@@ -1,0 +1,23 @@
+title: A page is Markdown in docs/, checked against the product code by the factory, illustrated by screens xtm-capture takes, and built by the engine for every version
+lanes:
+  - label: You write
+    tone: external
+    nodes:
+      - {id: page, label: Page, icon: FileText, note: "docs/, Markdown"}
+      - {id: spec, label: Screen spec, icon: Camera, note: capture/shots.yml}
+  - label: From the product code
+    tone: product
+    nodes:
+      - {id: atlas, label: xtm-atlas, icon: Search, note: "Labels, keys, routes"}
+      - {id: capture, label: xtm-capture, icon: Boxes, note: "Stacks, seed, screens"}
+  - label: Checked and built
+    tone: core
+    nodes:
+      - {id: check, label: factory:check and Vale, icon: ClipboardCheck, note: "Style, labels, links"}
+      - {id: engine, label: Engine, icon: Rocket, note: "Every documented version"}
+edges:
+  - {from: page, to: check, label: checked}
+  - {from: atlas, to: check, label: reference data}
+  - {from: spec, to: capture, label: captured}
+  - {from: capture, to: engine, label: screenshots}
+  - {from: check, to: engine, label: pull request}

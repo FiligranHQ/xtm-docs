@@ -1,0 +1,28 @@
+title: The images are pulled and saved on a connected machine, carried to the target host as one archive and started from there, while a few features still need a source of their own
+lanes:
+  - label: Connected machine
+    tone: external
+    nodes:
+      - {id: connected, label: xtm-docker configured, icon: Wrench, note: ".env, pinned versions"}
+  - label: Carried over
+    tone: store
+    nodes:
+      - {id: tar, label: xtm-images.tar, icon: Boxes, note: "With .env, override, infra and modules"}
+  - label: Target host, no internet
+    tone: product
+    nodes:
+      - {id: host, label: The stack, icon: Server, note: "docker load, then up -d without pull"}
+  - label: Still needs a source
+    tone: external
+    nodes:
+      - {id: registry, label: Private registry, icon: Boxes, note: Integrations of XTM Composer, href: /deploy/integrations/private-registry/}
+      - {id: proxy, label: Proxy, icon: Network, note: Integrations that read public sources, href: /deploy/integrations/proxy/}
+      - {id: ai, label: On-premise AI extraction, icon: Sparkles, note: Import Document AI connector, href: /deploy/configure/ai-extraction/}
+      - {id: ca, label: Internal certificate authority, icon: KeyRound, note: Certificates of internal services, href: /deploy/configure/certificates/}
+edges:
+  - {from: connected, to: tar, label: pull and save}
+  - {from: tar, to: host, label: copy and load}
+  - {from: host, to: registry, label: integration images, style: dashed}
+  - {from: host, to: proxy, label: public sources, style: dashed}
+  - {from: host, to: ai, label: document extraction, style: dashed}
+  - {from: host, to: ca, label: trusted certificates, style: dashed}

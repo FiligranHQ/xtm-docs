@@ -1,0 +1,23 @@
+title: An action asked for later is stored as a scheduled work item, checked again at its time, then run once as you
+lanes:
+  - label: In the chat
+    tone: external
+    nodes:
+      - {id: ask, label: Your request, icon: MessageSquare, note: "\"Post this Monday 08:00\""}
+      - {id: card, label: Schedule card, icon: Clock, note: "Cancel, Reschedule"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: item, label: Scheduled work item, icon: ListChecks, note: Exact or instruction}
+      - {id: checks, label: Checks at its time, icon: ShieldCheck, note: "Agent, rights, tool"}
+  - label: Outcome
+    tone: product
+    nodes:
+      - {id: done, label: Done, icon: Check, note: With its proof}
+      - {id: blocked, label: Blocked or missed, icon: TriangleAlert, note: Notified, never resent}
+edges:
+  - {from: ask, to: item, label: agent schedules}
+  - {from: item, to: card, label: shows}
+  - {from: item, to: checks, label: due}
+  - {from: checks, to: done, label: runs once}
+  - {from: checks, to: blocked, label: refused or late, style: dashed}

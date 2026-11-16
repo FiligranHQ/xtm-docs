@@ -1,0 +1,28 @@
+title: In development, the platform runs from source on your machine and its services run in containers
+lanes:
+  - label: Your machine
+    tone: external
+    nodes:
+      - {id: browser, label: Browser, icon: Laptop, note: "localhost:3000"}
+  - label: From source
+    tone: product
+    nodes:
+      - {id: front, label: Front end, icon: Code2, note: "Vite dev server, port 3000"}
+      - {id: back, label: Back end, icon: LogoOpenCTI, note: "GraphQL API, port 4000"}
+      - {id: worker, label: Worker, icon: Cpu, note: Python, imports bundles}
+  - label: opencti-dev containers
+    tone: store
+    nodes:
+      - {id: elastic, label: Elasticsearch, icon: Search, note: "Port 9200"}
+      - {id: redis, label: Redis, icon: Layers, note: "Port 6379"}
+      - {id: rabbitmq, label: RabbitMQ, icon: ArrowLeftRight, note: "Port 5672"}
+      - {id: silo, label: Silo, icon: Boxes, note: "S3 storage, port 9000"}
+edges:
+  - {from: browser, to: front, label: opens}
+  - {from: front, to: back, label: proxies API calls}
+  - {from: worker, to: back, label: API calls}
+  - {from: back, to: elastic, label: indexes}
+  - {from: back, to: redis, label: streams and cache}
+  - {from: back, to: rabbitmq, label: queues bundles}
+  - {from: worker, to: rabbitmq, label: consumes, style: dashed}
+  - {from: back, to: silo, label: stores files}

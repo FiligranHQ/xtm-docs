@@ -1,0 +1,18 @@
+title: XTM One opens its own connection to Discord when it starts, so a Discord bot needs a token and a restart, not a webhook
+lanes:
+  - label: Discord
+    tone: external
+    nodes:
+      - {id: app, label: Discord application, icon: Puzzle, note: "Bot token, Message Content Intent"}
+      - {id: server, label: Server, icon: Users, note: Bot invited}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: card, label: Discord card, icon: KeyRound, note: Bot token}
+      - {id: gateway, label: Gateway connection, icon: Rocket, note: Opened at startup}
+      - {id: agent, label: Agent, icon: Bot, note: Receive on}
+edges:
+  - {from: app, to: card, label: token}
+  - {from: card, to: gateway, label: after restart}
+  - {from: server, to: gateway, label: messages, both: true}
+  - {from: gateway, to: agent, label: routed}

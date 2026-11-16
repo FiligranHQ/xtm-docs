@@ -1,0 +1,22 @@
+title: Regular users sign in through single sign-on, and the bootstrap admin keeps the local form for the day single sign-on fails
+lanes:
+  - label: Who signs in
+    tone: external
+    nodes:
+      - {id: users, label: Regular users, icon: Users, note: Every day}
+      - {id: admin, label: Bootstrap admin, icon: KeyRound, note: "Break-glass account, password in .env"}
+  - label: Sign-in page
+    tone: product
+    nodes:
+      - {id: sso, label: SSO buttons, icon: LogIn, note: One per provider}
+      - {id: form, label: Email and password form, icon: FileText, note: Local authentication left on}
+  - label: Checked by
+    tone: external
+    nodes:
+      - {id: idp, label: Identity provider, icon: ShieldCheck, note: "Can be down or misconfigured"}
+      - {id: local, label: Local accounts, icon: Users, note: Bootstrap admin from .env}
+edges:
+  - {from: users, to: sso, label: sign in}
+  - {from: admin, to: form, label: when SSO fails}
+  - {from: sso, to: idp, label: checks}
+  - {from: form, to: local, label: checks}

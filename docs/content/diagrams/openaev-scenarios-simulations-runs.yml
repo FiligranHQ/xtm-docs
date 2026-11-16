@@ -1,0 +1,27 @@
+title: Each launch of a scenario copies it into a new simulation, and the scenario's statistics compare the runs
+lanes:
+  - label: What you test
+    tone: product
+    nodes:
+      - {id: scenario, label: Scenario, icon: Workflow, note: "Injects, targets, expectations"}
+  - label: How it starts
+    tone: external
+    nodes:
+      - {id: launch, label: Launch, icon: PlayCircle, note: Now, after a confirmation}
+      - {id: schedule, label: Scheduling, icon: Clock, note: "Once, hourly to monthly"}
+  - label: Each run
+    tone: product
+    nodes:
+      - {id: run1, label: Simulation, icon: Activity, note: "Copy at launch, 12 January"}
+      - {id: run2, label: Simulation, icon: Activity, note: "Copy at launch, 19 January"}
+  - label: Over time
+    tone: product
+    nodes:
+      - {id: statistics, label: Statistics tab, icon: Gauge, note: Trend of every run}
+edges:
+  - {from: scenario, to: launch, label: by hand}
+  - {from: scenario, to: schedule, label: recurring}
+  - {from: launch, to: run1, label: creates}
+  - {from: schedule, to: run2, label: creates}
+  - {from: run1, to: statistics, label: results}
+  - {from: run2, to: statistics, label: results}

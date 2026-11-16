@@ -1,0 +1,20 @@
+title: A draft moves from status to status and reaches the knowledge base only through Validate draft
+lanes:
+  - label: Draft statuses
+    nodes:
+      - {id: start, label: Starting status, icon: FileText, note: Every new draft}
+      - {id: review, label: In review, icon: Search, note: Reviewers get access}
+      - {id: declined, label: Declined, icon: TriangleAlert, note: Comment required}
+  - label: Final transition
+    tone: product
+    nodes:
+      - {id: approve, label: Approve, icon: ClipboardCheck, note: Senior analysts only}
+  - label: Knowledge base
+    tone: store
+    nodes:
+      - {id: ingest, label: Ingestion, icon: Server, note: Validate draft action}
+edges:
+  - {from: start, to: review, label: submit}
+  - {from: review, to: declined, label: reject, style: dashed}
+  - {from: review, to: approve}
+  - {from: approve, to: ingest, label: validates}

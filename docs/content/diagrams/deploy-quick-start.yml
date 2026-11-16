@@ -1,0 +1,33 @@
+title: You clone xtm-docker, generate .env and start the whole stack, then sign in to each platform on localhost
+lanes:
+  - label: Get
+    tone: external
+    nodes:
+      - {id: clone, label: git clone, icon: GitBranch, note: FiligranHQ/xtm-docker}
+  - label: Configure
+    tone: external
+    nodes:
+      - {id: env, label: .env, icon: FileText, note: "Fresh secrets, ELASTIC_MEMORY_SIZE, free ports"}
+  - label: Start
+    tone: product
+    nodes:
+      - {id: up, label: docker compose up -d, icon: Terminal, note: After docker compose pull}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "localhost:8090"}
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "localhost:8080"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "localhost:8081"}
+  - label: You
+    tone: external
+    nodes:
+      - {id: signin, label: Sign in, icon: LogIn, note: Admin email and password of .env}
+edges:
+  - {from: clone, to: env, label: secrets script}
+  - {from: env, to: up}
+  - {from: up, to: xtmone, label: starts}
+  - {from: up, to: opencti, label: starts}
+  - {from: up, to: openaev, label: starts}
+  - {from: xtmone, to: signin, label: healthy}
+  - {from: opencti, to: signin, label: healthy}
+  - {from: openaev, to: signin, label: healthy}

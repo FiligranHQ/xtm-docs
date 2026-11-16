@@ -1,0 +1,27 @@
+title: At the inject's time, OpenAEV creates each person's expectations and link, sends one email each through its mail server, and the link opens the landing page on the platform or your custom domain
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: inject, label: Phishing inject, icon: Clock, note: Scheduled in the simulation}
+      - {id: platform, label: Platform, icon: LogoOpenAEV, note: "Expectations, one token each"}
+  - label: Delivery
+    tone: external
+    nodes:
+      - {id: smtp, label: Mail server, icon: Server, note: spring.mail}
+      - {id: gateway, label: Email gateway, icon: ShieldCheck, note: Inspects links and images}
+  - label: Targeted teams
+    tone: external
+    nodes:
+      - {id: people, label: Each person, icon: Users, note: Their own email}
+  - label: Landing page
+    tone: product
+    nodes:
+      - {id: page, label: Landing page, icon: Laptop, note: "Platform address or custom domain"}
+edges:
+  - {from: inject, to: platform, label: starts}
+  - {from: platform, to: smtp, label: one email per person}
+  - {from: smtp, to: gateway, label: sends}
+  - {from: gateway, to: people, label: delivers}
+  - {from: people, to: page, label: clicks the link}
+  - {from: page, to: platform, label: "click, submit", style: dashed}

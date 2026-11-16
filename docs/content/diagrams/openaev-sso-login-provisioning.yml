@@ -1,0 +1,18 @@
+title: A single sign-on login creates or updates the account, attaches it to a tenant and syncs its mapped groups
+lanes:
+  - label: Identity provider
+    tone: external
+    nodes:
+      - {id: idp, label: Identity provider, icon: KeyRound, note: "OpenID Connect or SAML 2.0"}
+  - label: OpenAEV login
+    tone: product
+    nodes:
+      - {id: account, label: Account, icon: Users, note: Found or created by email}
+      - {id: tenant, label: Tenant, icon: Boxes, note: "tenant_id, else the default tenant"}
+      - {id: groups, label: Mapped groups, icon: ListChecks, note: Added or removed at each login}
+      - {id: admin, label: Admin group, icon: ShieldCheck, note: "Of the provider's tenant, with roles_admin or all_admin"}
+edges:
+  - {from: idp, to: account, label: "email, names"}
+  - {from: account, to: tenant, label: attached}
+  - {from: idp, to: groups, label: group claim}
+  - {from: idp, to: admin, label: role claim}

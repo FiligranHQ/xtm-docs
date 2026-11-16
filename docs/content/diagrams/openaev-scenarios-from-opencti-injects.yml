@@ -1,0 +1,24 @@
+title: OpenAEV turns each technique, domain name and file of an OpenCTI security coverage into an inject on the asset groups of its platforms, and a placeholder when it has nothing to run
+lanes:
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: coverage, label: Security coverage, icon: LogoOpenCTI, note: "Techniques, platforms, recurrence"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: scenario, label: Scenario, icon: LogoOpenAEV, note: "Named after the coverage"}
+      - {id: rules, label: Default asset rules, icon: Users, note: "security coverage: windows"}
+      - {id: arsenal, label: Threat Arsenal, icon: Crosshair, note: "Payloads by technique and platform"}
+  - label: Injects
+    tone: external
+    nodes:
+      - {id: inject, label: Inject, icon: PlayCircle, note: "On the asset groups"}
+      - {id: placeholder, label: Placeholder, icon: TriangleAlert, note: "Disabled, nothing to run"}
+edges:
+  - {from: coverage, to: scenario, label: STIX bundle}
+  - {from: scenario, to: rules, label: platform tags}
+  - {from: scenario, to: arsenal, label: each technique}
+  - {from: arsenal, to: inject, label: payload found}
+  - {from: arsenal, to: placeholder, label: none found, style: dashed}
+  - {from: rules, to: inject, label: targets}

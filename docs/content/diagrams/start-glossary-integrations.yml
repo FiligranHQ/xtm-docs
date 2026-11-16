@@ -1,0 +1,31 @@
+title: Every kind of integration connects one product of the suite to other systems
+lanes:
+  - label: Deploys them
+    tone: product
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Boxes, note: From the catalogs}
+  - label: Integrations
+    tone: external
+    nodes:
+      - {id: connectors, label: Connectors, icon: Puzzle, note: Import, enrich, stream, export}
+      - {id: collectors, label: Collectors, icon: Search, note: Read security tool results}
+      - {id: injectors, label: Injectors, icon: Crosshair, note: Run injects}
+      - {id: executors, label: Executors, icon: Laptop, note: Act on endpoints}
+  - label: Products
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Cyber threat intelligence}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: Adversarial exposure validation}
+  - label: AI
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: AI agents}
+edges:
+  - {from: composer, to: connectors, label: deploys, style: dashed}
+  - {from: composer, to: injectors, label: deploys, style: dashed}
+  - {from: connectors, to: opencti, label: send bundles}
+  - {from: collectors, to: openaev, label: detection results}
+  - {from: injectors, to: openaev, label: inject results}
+  - {from: executors, to: openaev, label: agents report}
+  - {from: xtmone, to: opencti, label: agents act, both: true}
+  - {from: xtmone, to: openaev, label: agents act, both: true}

@@ -1,0 +1,33 @@
+title: "The XTM stack always starts whole: XTM One, OpenCTI, OpenAEV and OpenCRQ, the default integrations, XTM Composer and the shared services they use"
+lanes:
+  - label: Integrations
+    tone: external
+    nodes:
+      - {id: connectors, label: Default OpenCTI connectors, icon: Puzzle, note: "10 connectors"}
+      - {id: integrations, label: Default OpenAEV integrations, icon: Puzzle, note: "4 collectors, 2 injectors"}
+      - {id: composer, label: XTM Composer, icon: Boxes, note: "Manages both platforms", href: /deploy/integrations/composer/}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Platform and 3 workers"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "Platform"}
+      - {id: opencrq, label: OpenCRQ, icon: LogoOpenCRQ, note: "Platform", href: /deploy/install/opencrq/}
+  - label: At the center
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "xtm-one and its worker"}
+  - label: Shared services
+    tone: store
+    nodes:
+      - {id: esmq, label: Elasticsearch and RabbitMQ, icon: Layers, note: Used by OpenCTI and OpenAEV}
+      - {id: base, label: "Redis, S3 storage, PostgreSQL", icon: Server, note: Used by XTM One and the platforms}
+edges:
+  - {from: connectors, to: opencti, label: work for}
+  - {from: integrations, to: openaev, label: work for}
+  - {from: composer, to: opencti, label: manages integrations}
+  - {from: composer, to: openaev, label: manages integrations}
+  - {from: opencti, to: esmq, label: uses}
+  - {from: openaev, to: esmq, label: uses}
+  - {from: openaev, to: base, label: openaev database, style: dashed}
+  - {from: opencrq, to: base, label: opencrq database, style: dashed}
+  - {from: xtmone, to: base, label: uses}

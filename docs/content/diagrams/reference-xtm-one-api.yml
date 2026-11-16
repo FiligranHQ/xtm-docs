@@ -1,0 +1,23 @@
+title: A script calls the routes the interface calls, with an API key, and gets the rights of the key's user
+lanes:
+  - label: Client
+    tone: external
+    nodes:
+      - {id: script, label: Script or app, icon: Code2, note: "API key fcp-..."}
+      - {id: ui, label: XTM One interface, icon: LogoXTMOne, note: Calls the same routes}
+  - label: XTM One API
+    tone: product
+    nodes:
+      - {id: reads, label: Reads, icon: Search, note: "GET /api/v1/..."}
+      - {id: changes, label: Changes, icon: Wrench, note: "POST, PUT, PATCH, DELETE"}
+  - label: Access
+    tone: store
+    nodes:
+      - {id: user, label: The key's user, icon: Users, note: Their rights apply}
+edges:
+  - {from: script, to: reads, label: Bearer key}
+  - {from: script, to: changes, label: unless read-only, style: dashed}
+  - {from: ui, to: reads}
+  - {from: ui, to: changes}
+  - {from: reads, to: user, label: runs as}
+  - {from: changes, to: user, label: runs as}

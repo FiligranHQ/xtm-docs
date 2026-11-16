@@ -1,0 +1,26 @@
+title: The implant runs the attack, the EDR alerts on it, and the collector matches the alert to the inject by host and parent process to fill the expectation
+lanes:
+  - label: Endpoint
+    tone: external
+    nodes:
+      - {id: implant, label: Implant, icon: Cpu, note: "oaev-implant-<inject>-agent-<agent>"}
+  - label: Security tools
+    tone: external
+    nodes:
+      - {id: edr, label: EDR, icon: ShieldCheck, note: "Detects, blocks"}
+      - {id: siem, label: SIEM, icon: Search, note: Gathers the EDR logs}
+  - label: Collectors
+    tone: external
+    nodes:
+      - {id: collector, label: Collector, icon: Puzzle, note: "Host, parent process, time"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: expectations, label: Expectations, icon: ClipboardCheck, note: "Detection, prevention"}
+edges:
+  - {from: implant, to: edr, label: seen by}
+  - {from: edr, to: siem, label: logs}
+  - {from: expectations, to: collector, label: pending, style: dashed}
+  - {from: edr, to: collector, label: alerts}
+  - {from: siem, to: collector, label: confirms}
+  - {from: collector, to: expectations, label: fills}

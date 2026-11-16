@@ -1,0 +1,26 @@
+title: An agent hands work to another in one of four ways, and the Live Map draws each handover as a typed arrow
+lanes:
+  - label: Agent that has the work
+    tone: core
+    nodes:
+      - {id: source, label: Night shift triage, icon: Bot, note: Talks to the analyst}
+  - label: Handover type
+    tone: external
+    nodes:
+      - {id: delegate, label: Delegate, icon: Layers, note: Background task}
+      - {id: consult, label: Consult, icon: MessageSquare, note: Asks, then resumes}
+      - {id: transfer, label: Transfer, icon: ArrowRight, note: Hands the conversation}
+      - {id: mandatory, label: Mandatory Transfer, icon: ArrowUpRight, note: After its answer}
+  - label: Agent that takes it
+    tone: core
+    nodes:
+      - {id: target, label: Velvet Harbor watcher, icon: Bot, note: Knows the CTI}
+edges:
+  - {from: source, to: delegate}
+  - {from: source, to: consult}
+  - {from: source, to: transfer}
+  - {from: source, to: mandatory}
+  - {from: delegate, to: target, label: works alone}
+  - {from: consult, to: target, label: answers back, both: true}
+  - {from: transfer, to: target, label: continues}
+  - {from: mandatory, to: target, label: always continues}

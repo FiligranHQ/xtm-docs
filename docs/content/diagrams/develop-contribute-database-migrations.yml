@@ -1,0 +1,24 @@
+title: A migration is a Java class that Flyway runs once, at the next start of the platform, in the order of its version
+lanes:
+  - label: Your branch
+    nodes:
+      - {id: plugin, label: mvn openaev:migration, icon: Terminal, note: Names the class}
+      - {id: class, label: Migration class, icon: Code2, note: "V6_<timestamp>__<name>"}
+  - label: Checks
+    nodes:
+      - {id: test, label: Migration test, icon: ClipboardCheck, note: Seeds rows, runs it twice}
+      - {id: guard, label: Migrations guard, icon: GitPullRequest, note: New ones sort last}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: flyway, label: Flyway at start, icon: LogoOpenAEV, note: Runs what is new}
+  - label: PostgreSQL
+    tone: store
+    nodes:
+      - {id: db, label: Schema and data, icon: Server, note: History in migrations}
+edges:
+  - {from: plugin, to: class, label: creates}
+  - {from: class, to: test, label: tested}
+  - {from: class, to: guard, label: pull request}
+  - {from: guard, to: flyway, label: release}
+  - {from: flyway, to: db, label: migrate and record}

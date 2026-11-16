@@ -1,0 +1,122 @@
+---
+title: Connect agents to your tools with integrations
+description: Connect a service such as Jira, Slack or Microsoft 365 once, bind it to an agent with only the tools it needs, and share it without lending more than you intend.
+doc_type: how-to
+products: [xtm-one]
+personas: [ai-builder, admin]
+owner: docs-xtm-one
+last_reviewed: 2026-11-12
+edition: ee
+migrated_from:
+  - xtm-one:/usage/resources/integrations/
+---
+
+An integration connects XTM One to a service your team works in, such as Jira, Slack, Microsoft 365, GitHub or a threat intelligence feed, with its credentials. An AI agent bound to it gets the service's tools: it reads tickets, posts in a channel, searches mail. This page connects a service, shows what it gives an agent, binds it with only the tools the agent needs, and shares it safely. The OpenCTI, OpenAEV and OpenCRQ registered with XTM One are integrations too, created for you.
+
+::diagram{id=xtm-one-build-integrations-binding}
+
+## Before you start
+
+- Creating an integration requires the Enterprise Edition. Integrations keep working when an administrator switches AI off, for the flows and syncs that use no model. See [What each edition of XTM One brings](/xtm-one/administer/editions/).
+- Any user can create an integration for themselves. Only an administrator creates a company-managed one, which every user can use and only administrators edit.
+- For an OAuth service, an administrator may already have registered the OAuth app of your organization in :menu[Administration > Settings > Integrations > OAuth Defaults]: you then only sign in. Otherwise, you need the client ID and secret of your own OAuth app, or an API key.
+- Talking to an agent from Slack or Microsoft Teams is a different connection, a channel bot set up by an administrator: see [Talk to agents from your messaging apps](/xtm-one/administer/channels/). An integration gives an agent the tools of the service.
+
+## The integrations of the registered products
+
+When an administrator registers OpenCTI, OpenAEV or OpenCRQ with XTM One, the registration creates a company-managed integration named after the platform, for example **Grand Meridian OpenCTI**. Its **Authentication Mode** is **Managed by the platform**: it stores no credential, and every call carries a short-lived token signed for the person the agent works for. An agent bound to it reads and writes in OpenCTI with that person's rights, never more.
+
+Its configuration is kept up to date by the registration and cannot be edited, with one exception: on a multi-tenant OpenAEV, an administrator sets its **Tenant ID** so that every OpenAEV tool works in that tenant. What XTM One does in each product is in [XTM One in OpenCTI](/xtm-one/use/in-opencti/), [XTM One in OpenAEV](/xtm-one/use/in-openaev/) and [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
+
+## Connect a service
+
+:::steps
+1. Open :menu[Tools & Integrations > Integrations] and click **New Integration**.
+2. Search the catalog and pick the service. **Certified** marks the integrations Filigran qualifies and supports (OpenCTI, OpenAEV, OpenCRQ and the XTM Hub); **Preview** marks the others. A provider an administrator switched off shows **Disabled by your administrator**.
+3. Enter a **Name** your colleagues will recognize, and a **Description** of what the connection reaches. Agents read the description as context for its tools, so say which workspace, site or projects it covers.
+4. Fill in the credentials the **Authentication mode** asks for:
+   - **OAuth**: keep **Use admin pre-configured credentials** when your administrator set up the app, or enter your own **Client ID** and **Client Secret**. Register your platform's address followed by `/api/oauth/callback` as the redirect URI of your own app.
+   - **API key** or **Bot token**: paste the key the service issued for XTM One.
+5. For a service inside your network, choose its relay group in **Route through**. A service reached only through a relay, such as an LM Studio model server, offers no **Direct (from the platform)** choice: **Create integration** stays unavailable until you pick a group. See [Reach on-premise tools through a relay](/xtm-one/build/relays/).
+6. Click **Create integration**, then, for OAuth, click **Authorize** and sign in at the service with the account the agents will act as. Accept every permission the consent screen asks for.
+7. Click **Test connection**. A **Connection successful** answer means the credentials work.
+:::
+
+The status badge of each card on the list page tells you at a glance whether a connection is **Connected**, **Pre-configured** but not authorized yet, **Not connected**, or in **Error**. **Re-authorization required** means its permissions changed, the service refused its token, or the account that signed in declined a permission on the consent screen. In that last case, the **Overview** tab lists the missing ones under **Requested scopes not granted**: the calls that need them fail until someone clicks **Re-authorize** and accepts all of them. An OAuth integration that holds no token reads **Not connected**, whatever was stored before.
+
+::screenshot{id=xtm-one-build-integrations-list alt="The Installed section of the Integrations page: Filigran AI marked Preview, and OpenAEV, OpenCRQ and OpenCTI marked Certified, all four Connected, OpenCTI with its Events badge."}
+
+## See what it gives an agent
+
+Open the integration's **Configuration** tab. The **Available Tools** card splits its tools into **Read Tools**, which retrieve information, and **Write Tools**, which change something in the service. That split is how you judge the risk of binding it. Hover a tool and click **Test** to try it with the real credentials before any agent does.
+
+Some write tools reach far. The Microsoft Intune integration creates and updates configuration policies and remediation scripts, runs a remediation on a device, and assigns a policy, script or app to groups, to every device or to every user. The Microsoft integration posts in Teams chats as the signed-in account, and adds or removes an emoji reaction on any message of a chat that account belongs to. Keep such tools for the agents whose task needs them.
+
+::screenshot{id=xtm-one-build-integrations-tools alt="The Available Tools card of the OpenCTI integration: 63 tools, the Read Tools group first with get_opencti_draft_info, list_opencti_drafts, validate_nlq_filter and search_opencti, each with its description and its Read badge."}
+
+On the same tab:
+
+- **Ask for approval before running its tools** makes an agent that asks before running tools stop for a person's decision on every tool of this integration. See [Govern how AI is used](/xtm-one/administer/ai-governance/).
+- For a service that sends events, a card says which changes an agent can react to and how they arrive. New Slack messages, and new Microsoft 365 emails and Teams messages, are read every 5 minutes with no setup. For Slack messages in real time, set the URL the card shows as the Request URL of your Slack app, and store the app's Signing Secret in the integration's **Signing secret** field (or in the Slack OAuth default, when your administrator provides the app). Store the secret before you enter the URL.
+- A Jira integration wakes the assignments that react to Jira: new issues, changes, transitions, reassignments and comments are read every minute. For a Jira integration connected with OAuth, XTM One also registers a Jira webhook, so that a change arrives the moment it is made, when the platform's address is a public `https` URL Jira can call. [Create an agent](/xtm-one/build/agents/) sets up these assignments.
+
+The **Overview** tab says why a connection works or does not (authentication, authorized and missing scopes). Its **Who can use it** card lists everyone who reaches the integration: look there before you change a shared integration. See [Share it](#share-it).
+
+## Bind it to an agent
+
+:::steps
+1. Open the agent, its **Configuration** tab, then **Tooling**.
+2. Under **Integrations**, click **Edit**, then click the integration to bind it.
+3. Click the tool scope button next to it (**All tools** by default), keep only the tools the agent needs, then click **Apply** and **Save**.
+:::
+
+A company-managed agent can bind only company-managed integrations. To make each person who talks to a shared agent use their own account of a service, rather than one connection for everyone, use **Advanced: Dynamic integrations (per-user)** in the same card.
+
+Two more settings narrow what the agent does with an integration:
+
+- **Read-only**: an integration can be made read-only for one agent, which then keeps only the tools that read and is refused any write, whatever its prompt says. [Create an agent](/xtm-one/build/agents/) shows how.
+- **Scope(s)**: select the repositories, channels or object types the agent works on. By default a selection is **Guidance only**: the agent is told to focus on them, but its tools can still reach other elements. For GitHub repositories, Slack channels, Microsoft Teams channels and HubSpot object types, turn on **Enforce as a boundary**: the card then reads **Enforced**, and the tools cannot reach anything else, in chats and in assignments. Other selections, such as Jira projects, cannot be enforced: restrict the integration's own credentials instead.
+
+## Share it
+
+A shared integration lends its credentials. Everyone it is shared with, and every agent, assignment, knowledge base source or skill that carries it, acts with the account that authorized it: in Jira or Slack, their actions appear as that account. Before a change lets new people act with your credentials, XTM One names the credential and who will use it, and asks you to confirm.
+
+For an OAuth integration, the owner (or an administrator) can turn on **Don't share my connected account**. The integration stays shared, but everyone it is shared with connects their own account in the **Your account** card of its page (**Connect your account**), and each chat or run acts with the account of the person it works for. Someone who has not connected theirs gets no tools from it, and a note under the agent's answer says so.
+
+The **Who can use it** card of the integration's **Overview** lists every way its credential reaches people, in one list. Its first line names whose account the integration acts with and who can use it. Then come:
+
+- **Direct shares**: the integration shared with the company, a group or people, and who can use it that way.
+- **Agents bound to it**: each agent once, with its owner, who it reaches, and what runs with the integration (chats, assignments, its public link, messaging channels). Click a row to open the agent.
+- **Through other entities**: the assignments, knowledge base sources, skills and other resources that carry it.
+
+::screenshot{id=xtm-one-build-integrations-who-can-use-it alt="The Who can use it card of the OpenCTI integration: the Direct shares section, then the Agents bound to it section with Crisis briefer, Night shift triage and Velvet Harbor watcher, each with its owner."}
+
+An agent's binding works only while its owner can see the integration. When the owner loses access, because a share was revoked or they left a group, the agent stays bound, but every run refuses the integration's tools: chats, assignments, its public link and channels. The card marks it **Owner no longer has access**, and someone who manages the agent clicks **Unbind** to remove the binding. A company-managed agent is never cut off this way. Before you save a change of sharing that would cut an owner off, the confirmation lists their agents under **These agents would lose this integration**: check **Unbind them too** to remove those bindings in the same step.
+
+How sharing works for every resource is in [Share agents and resources](/xtm-one/build/sharing/).
+
+## Connect an API from its OpenAPI document
+
+Any REST API that publishes a Swagger 2.0 or OpenAPI 3 document can become an integration, without code. Choose **OpenAPI / Swagger** in the catalog, paste the URL of the raw document or upload it, and click **Load spec**. Then check the base URL, choose the authentication among those the document declares, and select the operations to expose: each one becomes one tool, and **Read only** keeps only the operations that read. The integration's **API Spec** tab changes that selection later, and **Refresh from URL** reloads the document.
+
+An OpenAPI integration is bound as that specific integration, never per user: for the members of a shared agent to use it, share it with their groups.
+
+:::example[Let the triage agent read the SOC's Jira tickets]
+The SOC of Grand Meridian Hotels tracks its incidents in Jira. Paul Garnier wants **Night shift triage** to find the ticket already open for an alert before it suggests a new one. Hélène Marchetti registered the organization's Atlassian app in the OAuth defaults, and Julien Bernard owns the SOC's service account in Jira.
+
+Julien opens :menu[Tools & Integrations > Integrations], **New Integration**, **Atlassian Jira**:
+
+- **Name**: `Jira SOC`
+- **Description**: `Grand Meridian Jira site: the SOC incident project and its service desk queue.`
+- **Authentication Mode**: **OAuth**, with **Use admin pre-configured credentials**
+
+He clicks **Create Integration**, **Authorize** with the SOC service account, then **Test Connection**: **Connection successful**. He shares **Jira SOC** with the group **SOC**, and confirms that its members will act with the service account.
+
+Sophie Laurent binds **Jira SOC** to **Night shift triage** in **Tooling**, keeps only its search and read tools in the tool scope, and selects the incident project under **Scope(s)**, as guidance. The agent now quotes the open ticket in its triage notes, and cannot create, comment on or close one.
+:::
+
+## What's next
+
+- [Create an agent](/xtm-one/build/agents/)
+- [Reach on-premise tools through a relay](/xtm-one/build/relays/), for a service inside your network.
+- [Give agents recurring work](/xtm-one/use/work-items/), with assignments that react to an integration's events.

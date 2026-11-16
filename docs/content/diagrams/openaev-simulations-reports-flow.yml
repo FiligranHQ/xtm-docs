@@ -1,0 +1,24 @@
+title: A report picks a subject and its modules, takes your branding, and each generation, on demand or on a schedule, is a PDF or HTML snapshot that can be emailed
+lanes:
+  - label: Define
+    tone: product
+    nodes:
+      - {id: subject, label: Report subject, icon: ListChecks, note: "Platform, scenario, simulation..."}
+      - {id: modules, label: Modules and branding, icon: Layers, note: "Cover, summary, trends, logo"}
+  - label: Generate
+    tone: product
+    nodes:
+      - {id: now, label: Generate now, icon: PlayCircle, note: "PDF or HTML"}
+      - {id: schedule, label: Schedules, icon: Clock, note: "Hour, day, week, month"}
+  - label: Share
+    tone: external
+    nodes:
+      - {id: file, label: Generations, icon: FileText, note: "Kept, downloadable"}
+      - {id: recipients, label: Recipients, icon: Users, note: "Users and email addresses"}
+edges:
+  - {from: subject, to: modules, label: content}
+  - {from: modules, to: now, label: on demand}
+  - {from: modules, to: schedule, label: recurring}
+  - {from: now, to: file, label: snapshot}
+  - {from: schedule, to: file, label: snapshot}
+  - {from: schedule, to: recipients, label: email with file}

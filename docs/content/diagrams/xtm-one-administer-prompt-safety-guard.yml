@@ -1,0 +1,26 @@
+title: The Nova guard screens what reaches the agents against the rules, and logs or blocks what they match
+lanes:
+  - label: Rule source
+    tone: external
+    nodes:
+      - {id: community, label: NOVA rules, icon: GitBranch, note: "Community repository"}
+      - {id: own, label: Your rules, icon: FileText, note: "Written in .nov"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: guard, label: Nova guard, icon: ShieldCheck, note: "Keywords, semantics, llm"}
+  - label: Screened
+    tone: product
+    nodes:
+      - {id: messages, label: Messages, icon: MessageSquare, note: "Before the model"}
+      - {id: more, label: Opt-in surfaces, icon: Layers, note: "Tool results, answers"}
+  - label: Record
+    tone: store
+    nodes:
+      - {id: logs, label: Logs, icon: History, note: "Security alert"}
+edges:
+  - {from: community, to: guard, label: synced}
+  - {from: own, to: guard, label: added}
+  - {from: messages, to: guard, label: evaluated}
+  - {from: more, to: guard, label: evaluated, style: dashed}
+  - {from: guard, to: logs, label: every match}

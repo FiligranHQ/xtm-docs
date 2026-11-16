@@ -1,0 +1,275 @@
+{
+  "name": "loss-drivers",
+  "version": "ab702fd",
+  "source": "OpenCRQ-Platform/opencrq@ab702fd (module/src/modules/loss-drivers/data/loss-drivers-data.ts)",
+  "intro": "The loss drivers a risk scenario prices, by loss category, the reporting level above them. Each driver says how much the attacker's dwell time changes its size (**Dwell sensitivity**) and the business quantity its amount scales with (**Scales with**), as the interface shows them. Every tenant gets this catalog at boot.",
+  "sections": [
+    {
+      "title": "Response & Investigation",
+      "text": "Investigating, managing and communicating the incident while it is being handled.",
+      "columns": [
+        "Loss driver",
+        "What it covers",
+        "Dwell sensitivity",
+        "Scales with"
+      ],
+      "rows": [
+        {
+          "key": "daefedbd-15a9-4bf8-bcaf-14b92d25e2bd",
+          "cells": [
+            "**Forensics & incident management**",
+            "External DFIR fees: scoping, containment, eradication, reconstruction and negotiation support.",
+            "Strong",
+            "Systems in scope"
+          ]
+        },
+        {
+          "key": "f0eea3dd-d091-4928-89b1-4f48fa1c9b3b",
+          "cells": [
+            "**Incident legal counsel**",
+            "Outside counsel under privilege, up to the point where claims are asserted.",
+            "Weak",
+            "Counsel hours"
+          ]
+        },
+        {
+          "key": "51539040-ff7a-430e-90a7-99007e67a16b",
+          "cells": [
+            "**Crisis communications & PR**",
+            "External communications support; the cost tracks the public-visibility tier of the incident.",
+            "None",
+            "Public severity tier"
+          ]
+        },
+        {
+          "key": "156f8fb6-f0ac-4c15-a858-3d9f7e2d8945",
+          "cells": [
+            "**Internal response surge labor**",
+            "Incremental internal response cost: overtime, backfill and diverted staff, never counted again as lost productivity.",
+            "Strong",
+            "Response headcount-days"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Restoration & Rebuild",
+      "text": "Restoring systems and data, and replacing equipment that cannot be trusted again.",
+      "columns": [
+        "Loss driver",
+        "What it covers",
+        "Dwell sensitivity",
+        "Scales with"
+      ],
+      "rows": [
+        {
+          "key": "d77f5cd9-317d-408d-b5b2-5c74478763cf",
+          "cells": [
+            "**System & data restoration**",
+            "Rebuild, reimage, restore, recreate data and revalidate, including the espionage-eviction rebuild.",
+            "Strong",
+            "Systems in scope"
+          ]
+        },
+        {
+          "key": "46544e6b-ffd1-4459-8bd2-18d9d00c9149",
+          "cells": [
+            "**Hardware & equipment replacement**",
+            "Capital cost of physically destroyed or untrustable equipment; absorbs all replacement capex whenever it is active.",
+            "Strong",
+            "Destroyed device count"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Business Interruption (own operations)",
+      "text": "Margin and extra operating cost incurred while the organization runs degraded or not at all.",
+      "columns": [
+        "Loss driver",
+        "What it covers",
+        "Dwell sensitivity",
+        "Scales with"
+      ],
+      "rows": [
+        {
+          "key": "f17f91a3-8883-4e37-8bbe-12728736083a",
+          "cells": [
+            "**Lost margin from downtime**",
+            "Contribution margin on revenue lost during the outage, net of recapture, stopping at restoration.",
+            "None",
+            "Outage days"
+          ]
+        },
+        {
+          "key": "da735a05-ea99-4997-b10a-3da054389b61",
+          "cells": [
+            "**Incremental operating cost during disruption**",
+            "Extra expense to operate degraded: manual processing, temporary staffing and expediting.",
+            "None",
+            "Outage days"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Extortion",
+      "text": "Amounts actually paid to the attacker to end the extortion.",
+      "columns": [
+        "Loss driver",
+        "What it covers",
+        "Dwell sensitivity",
+        "Scales with"
+      ],
+      "rows": [
+        {
+          "key": "b107453a-ac09-45ea-acd0-e7e1537182ec",
+          "cells": [
+            "**Extortion payment**",
+            "Amount actually paid for decryption, suppression or cessation, including transaction costs; never substituted with restoration.",
+            "None",
+            "Revenue band"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Direct Financial Theft",
+      "text": "Funds taken by the attacker and never recovered.",
+      "columns": [
+        "Loss driver",
+        "What it covers",
+        "Dwell sensitivity",
+        "Scales with"
+      ],
+      "rows": [
+        {
+          "key": "177c8ea7-0644-49dd-87cf-cf57a511e746",
+          "cells": [
+            "**Stolen funds, net of recovery**",
+            "Funds fraudulently transferred and not recovered; carries the principal the organization is out of pocket, absorbed or restituted.",
+            "Strong",
+            "Payment flow value"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Affected-Party Notification & Protection",
+      "text": "Informing the individuals affected and protecting them afterwards.",
+      "columns": [
+        "Loss driver",
+        "What it covers",
+        "Dwell sensitivity",
+        "Scales with"
+      ],
+      "rows": [
+        {
+          "key": "20e5556a-27b3-4858-bcf3-1954164ecbcc",
+          "cells": [
+            "**Notification & call handling**",
+            "Determining and executing the notification of affected individuals, plus the call-centre surge.",
+            "None",
+            "Affected record count"
+          ]
+        },
+        {
+          "key": "8455e652-65af-4a2f-bbdc-62d55794ccd2",
+          "cells": [
+            "**Identity & credit protection**",
+            "Monitoring and restoration offered to affected individuals, where the exposed data reaches adversary hands.",
+            "None",
+            "Affected record count"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Legal, Regulatory & Contractual Consequences",
+      "text": "Defense, settlements, fines, card-brand assessments and contractual penalties following the incident.",
+      "columns": [
+        "Loss driver",
+        "What it covers",
+        "Dwell sensitivity",
+        "Scales with"
+      ],
+      "rows": [
+        {
+          "key": "68384439-54b2-479f-aecd-de85ac9d088e",
+          "cells": [
+            "**Litigation & proceedings defense**",
+            "Defense-side fees once claims are asserted.",
+            "None",
+            "Claim and jurisdiction count"
+          ]
+        },
+        {
+          "key": "1f469e55-5de0-4fbc-ae03-a040bb5f0077",
+          "cells": [
+            "**Settlements & damages**",
+            "Amounts paid to claimants, beyond-principal only on funds categories, including litigated business damages.",
+            "None",
+            "Affected record count"
+          ]
+        },
+        {
+          "key": "c629f017-cebd-46e3-8d94-6246824fb829",
+          "cells": [
+            "**Regulatory fines**",
+            "Statutory penalties imposed by regulators, bounded by the applicable statutory caps.",
+            "None",
+            "Regulated revenue"
+          ]
+        },
+        {
+          "key": "bf2ac013-1a4d-4d6f-a3b5-f76794636898",
+          "cells": [
+            "**Payment-card ecosystem assessments**",
+            "Card-brand program assessments through acquirers: reissuance, fraud recovery, forensic investigation and non-compliance. All card economics flow here.",
+            "None",
+            "Affected record count"
+          ]
+        },
+        {
+          "key": "aa2dbc8c-e507-473b-b5e8-c16d14afa561",
+          "cells": [
+            "**Contractual penalties & service credits**",
+            "Service credits, delivery-failure penalties and unlitigated liquidated damages under security-breach clauses; litigated damages sit in settlements.",
+            "None",
+            "Contracted revenue"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Future Revenue Loss",
+      "text": "Revenue and margin lost after restoration, through customer attrition or eroded competitive advantage.",
+      "columns": [
+        "Loss driver",
+        "What it covers",
+        "Dwell sensitivity",
+        "Scales with"
+      ],
+      "rows": [
+        {
+          "key": "9c5d6fe6-8c6e-466a-971c-e3104072a900",
+          "cells": [
+            "**Customer attrition & win-back**",
+            "Margin on customers lost after restoration, plus win-back spend. All reputation cash lives here, starting where lost downtime margin stops.",
+            "None",
+            "Recurring revenue margin"
+          ]
+        },
+        {
+          "key": "540d7435-0b3b-49c7-90bb-d3ca5bbfd357",
+          "cells": [
+            "**Competitive-advantage erosion**",
+            "Future margin lost because strategic assets are in adversary hands; a stolen-IP mechanism, distinct from eroded trust.",
+            "Strong",
+            "R&D investment"
+          ]
+        }
+      ]
+    }
+  ]
+}

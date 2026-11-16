@@ -1,0 +1,32 @@
+title: Requests reach the platform, the worker runs background work, both keep their state in the same stores and call out to models and tools
+lanes:
+  - label: What starts work
+    tone: external
+    nodes:
+      - {id: people, label: People, icon: MessageSquare, note: "Chat, Slack, Teams"}
+      - {id: triggers, label: Triggers, icon: Clock, note: "Schedules, webhooks, events"}
+      - {id: suite, label: The suite, icon: LogoOpenCTI, note: "OpenCTI, OpenAEV, OpenCRQ"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: platform, label: Platform, icon: LogoXTMOne, note: "API, interface, chat, scheduler"}
+      - {id: worker, label: Worker, icon: Cpu, note: "Runs, indexing, background tasks"}
+  - label: Stores
+    tone: store
+    nodes:
+      - {id: stores, label: Stores, icon: Layers, note: "PostgreSQL, Redis, S3"}
+  - label: Outside
+    tone: external
+    nodes:
+      - {id: models, label: AI providers, icon: Sparkles, note: Language and embedding models}
+      - {id: tools, label: Tools, icon: Puzzle, note: "Integrations, MCP servers, the suite"}
+edges:
+  - {from: people, to: platform, label: ask}
+  - {from: triggers, to: platform, label: start}
+  - {from: suite, to: platform, label: register and ask}
+  - {from: platform, to: worker, label: hands over runs}
+  - {from: platform, to: stores, label: state, both: true}
+  - {from: worker, to: stores, label: state, both: true}
+  - {from: platform, to: models, label: prompts}
+  - {from: worker, to: models, label: prompts}
+  - {from: platform, to: tools, label: tool calls}

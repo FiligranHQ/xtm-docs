@@ -1,0 +1,22 @@
+title: A question asked in a Slack channel reaches an XTM One agent through the bot, the agent reads OpenCTI and OpenAEV as the person who asked, and answers in the thread, with tools that change something held back
+lanes:
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: slack, label: "Question in #soc-night", icon: MessageSquare, note: "Slack, @mention", href: /xtm-one/administer/channels/slack/}
+      - {id: agent, label: Night shift triage, icon: Bot, note: "Receive on, one channel", href: /xtm-one/administer/channels/}
+      - {id: gate, label: Tool approvals, icon: ShieldCheck, note: "Reads run, changes stop the turn", href: /xtm-one/administer/ai-governance/}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: Velvet Harbor indicator, icon: LogoOpenCTI, note: "203.0.113.10, read as Paul", href: /xtm-one/use/in-opencti/}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: openaev, label: Last simulation, icon: LogoOpenAEV, note: "Front desks, read as Paul", href: /xtm-one/use/in-openaev/}
+edges:
+  - {from: slack, to: agent, label: "message, sender's email"}
+  - {from: agent, to: opencti, label: search as Paul}
+  - {from: agent, to: openaev, label: read as Paul}
+  - {from: agent, to: gate, label: a write tool, style: dashed}
+  - {from: agent, to: slack, label: answer in the thread}

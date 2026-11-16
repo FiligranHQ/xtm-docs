@@ -1,0 +1,21 @@
+title: An upgrade backs up the stack, gets the new files and pulls and starts the new images, which migrate their data as they start, and ends with the actions the breaking changes ask for
+lanes:
+  - label: Before
+    tone: external
+    nodes:
+      - {id: backup, label: "1. Stop and back up", icon: History, note: "docker compose stop, then the volumes"}
+  - label: Upgrade
+    tone: product
+    nodes:
+      - {id: files, label: "2. Get the new files", icon: GitBranch, note: "git pull, then clean .env"}
+      - {id: start, label: "3. Pull and start", icon: Rocket, note: "The platforms migrate their data"}
+  - label: After
+    tone: product
+    nodes:
+      - {id: healthy, label: "4. Wait until healthy", icon: Activity, note: "docker compose ps"}
+      - {id: actions, label: "5. Apply breaking changes", icon: ClipboardCheck, note: Actions after the upgrade, href: /deploy/upgrade/breaking-changes/}
+edges:
+  - {from: backup, to: files}
+  - {from: files, to: start}
+  - {from: start, to: healthy}
+  - {from: healthy, to: actions}

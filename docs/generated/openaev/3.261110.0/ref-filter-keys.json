@@ -1,0 +1,4817 @@
+{
+  "name": "filter-keys",
+  "version": "3.261110.0",
+  "source": "OpenAEV-Platform/openaev@cde7bee (openaev-model/src/main/java/io/openaev/database/model, openaev-model/src/main/java/io/openaev/engine/model, @Queryable)",
+  "intro": "The 408 filter keys OpenAEV 3.261110.0 accepts: in the filter menus of its lists and in the `filterGroup` of its search endpoints (one section per object), and in the filters of the dashboard widgets (one section per kind of document). A filter is `{\"key\", \"operator\", \"mode\", \"values\"}`; the 12 operators are `eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`, `gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`. **Operators** lists those the interface offers for the key; **Also** says whether the key sorts a list (`sorts`) and whether `textSearch` searches it. [Filters](/develop/apis/filters/#openaev-filters) explains the format.",
+  "filter": "Filter keys, objects, values",
+  "sections": [
+    {
+      "title": "Agent",
+      "text": "Schema: `POST /api/schemas/Agent?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Agent:agent_asset",
+          "cells": [
+            "`agent_asset`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Agent:agent_executed_by_user",
+          "cells": [
+            "`agent_executed_by_user`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Agent:agent_version",
+          "cells": [
+            "`agent_version`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agent target",
+      "text": "Schema: `POST /api/schemas/AgentTarget?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:AgentTarget:target_asset_groups",
+          "cells": [
+            "`target_asset_groups`",
+            "Asset Groups",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "text search"
+          ]
+        },
+        {
+          "key": "jpa:AgentTarget:target_endpoint",
+          "cells": [
+            "`target_endpoint`",
+            "Endpoint",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "text search"
+          ]
+        },
+        {
+          "key": "jpa:AgentTarget:target_name",
+          "cells": [
+            "`target_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:AgentTarget:target_tags",
+          "cells": [
+            "`target_tags`",
+            "Tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "AI target target",
+      "text": "Schema: `POST /api/schemas/AiTargetTarget?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:AiTargetTarget:target_name",
+          "cells": [
+            "`target_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:AiTargetTarget:target_tags",
+          "cells": [
+            "`target_tags`",
+            "Tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Asset",
+      "text": "Schema: `POST /api/schemas/Asset?filterableOnly=true`. The keys of its kinds are included, and their schemas give the part each one has: `Endpoint`, `SecurityPlatform`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Asset:ai_target_endpoint",
+          "cells": [
+            "`ai_target_endpoint`",
+            "AI endpoint",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:ai_target_modality",
+          "cells": [
+            "`ai_target_modality`",
+            "AI target modality",
+            "One of `TEXT`, `VISION`, `AUDIO`, `MULTIMODAL`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:ai_target_model",
+          "cells": [
+            "`ai_target_model`",
+            "AI model",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:ai_target_provider",
+          "cells": [
+            "`ai_target_provider`",
+            "AI provider",
+            "One of `OPENAI_COMPATIBLE`, `ANTHROPIC`, `AZURE_OPENAI`, `AWS_BEDROCK`, `GOOGLE_VERTEX`, `HUGGINGFACE`, `OLLAMA`, `CUSTOM_HTTP`, `MCP_SERVER`, `AGENT_HTTP`, `XTM_ONE`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_category",
+          "cells": [
+            "`asset_category`",
+            "Category",
+            "One of `HOST`, `CONTAINER_WORKLOAD`, `CLOUD_RESOURCE`, `WEB_APPLICATION`, `NETWORK_DEVICE`, `MOBILE_DEVICE`, `IOT_OT_DEVICE`, `IDENTITY`, `SAAS_APPLICATION`, `AI_TARGET`, `SECURITY_PLATFORM`, `GENERIC_ASSET`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_cloud_native_type",
+          "cells": [
+            "`asset_cloud_native_type`",
+            "Cloud native type",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_cloud_provider",
+          "cells": [
+            "`asset_cloud_provider`",
+            "Cloud provider",
+            "One of `AWS`, `AZURE`, `GCP`, `OCI`, `ALIBABA`, `KUBERNETES`, `OTHER`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_cloud_region",
+          "cells": [
+            "`asset_cloud_region`",
+            "Cloud region",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_criticality",
+          "cells": [
+            "`asset_criticality`",
+            "Criticality",
+            "One of `VERY_HIGH`, `HIGH`, `MEDIUM`, `LOW`, `UNKNOWN`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_external_reference",
+          "cells": [
+            "`asset_external_reference`",
+            "External reference",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_hostname",
+          "cells": [
+            "`asset_hostname`",
+            "Hostname",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_id",
+          "cells": [
+            "`asset_id`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_internet_facing",
+          "cells": [
+            "`asset_internet_facing`",
+            "Internet-facing",
+            "Boolean: `true`, `false`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_ips",
+          "cells": [
+            "`asset_ips`",
+            "IP addresses",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_linked_person",
+          "cells": [
+            "`asset_linked_person`",
+            "Person",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_markings",
+          "cells": [
+            "`asset_markings`",
+            "Markings",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_name",
+          "cells": [
+            "`asset_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_seen_ip",
+          "cells": [
+            "`asset_seen_ip`",
+            "Seen IP Address",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_status",
+          "cells": [
+            "`asset_status`",
+            "Status",
+            "One of `ACTIVE`, `INACTIVE`, `AGENTLESS`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_subcategory",
+          "cells": [
+            "`asset_subcategory`",
+            "Subcategory",
+            "One of `SERVER`, `WORKSTATION`, `LAPTOP`, `VIRTUAL_MACHINE`, `HYPERVISOR`, `MAINFRAME`, `THIN_CLIENT`, `CONTAINER`, `CONTAINER_IMAGE`, `KUBERNETES_POD`, `KUBERNETES_CLUSTER`, `KUBERNETES_NODE`, `SERVERLESS_FUNCTION`, `COMPUTE`, `STORAGE`, `DATABASE`, `NETWORKING`, `SERVERLESS`, `CONTAINER_REGISTRY`, `KUBERNETES`, `IAM_PRINCIPAL`, `SECRETS_KEY_MGMT`, `MESSAGING_QUEUE`, `ANALYTICS_DATA`, `AI_ML_SERVICE`, `IAC_TEMPLATE`, `CLOUD_OTHER`, `WEBSITE`, `WEB_API`, `SINGLE_PAGE_APP`, `GRAPHQL_API`, `WEB_SERVICE`, `MICROSERVICE`, `ROUTER`, `SWITCH`, `FIREWALL`, `LOAD_BALANCER`, `VPN_GATEWAY`, `WIRELESS_AP`, `PROXY`, `DNS_SERVER`, `DHCP_SERVER`, `SAN_NAS`, `NETWORK_OTHER`, `SMARTPHONE`, `TABLET`, `IOT_SENSOR`, `IP_CAMERA`, `GATEWAY`, `POINT_OF_SALE`, `MEDIA_DEVICE`, `PLC`, `RTU`, `HMI`, `SCADA_HISTORIAN`, `MEDICAL_DEVICE`, `PRINTER_PERIPHERAL`, `BUILDING_MGMT`, `USER_ACCOUNT`, `SERVICE_ACCOUNT`, `GROUP`, `ROLE`, `SHARED_MAILBOX`, `NON_HUMAN_IDENTITY`, `SAAS_APP`, `SAAS_TENANT`, `LLM_MODEL`, `AI_AGENT`, `MCP_SERVER`, `RAG_PIPELINE`, `EDR`, `XDR`, `SIEM`, `SOAR`, `NDR`, `ISPM`, `EMAIL_SECURITY`, `LLM_FIREWALL`, `AI_GATEWAY`, `VULNERABILITY_SCANNER`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_tags",
+          "cells": [
+            "`asset_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_url",
+          "cells": [
+            "`asset_url`",
+            "URL",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:assetGroups",
+          "cells": [
+            "`assetGroups`",
+            "",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Asset:endpoint_arch",
+          "cells": [
+            "`endpoint_arch`",
+            "Architecture",
+            "One of `x86_64`, `arm64`, `Unknown`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:endpoint_platform",
+          "cells": [
+            "`endpoint_platform`",
+            "Platform",
+            "One of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:security_platform_type",
+          "cells": [
+            "`security_platform_type`",
+            "Type",
+            "One of `EDR`, `XDR`, `SIEM`, `SOAR`, `NDR`, `ISPM`, `EMAIL_SECURITY`, `LLM_FIREWALL`, `AI_GATEWAY`, `VULNERABILITY_SCANNER`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Asset group",
+      "text": "Schema: `POST /api/schemas/AssetGroup?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:AssetGroup:asset_group_description",
+          "cells": [
+            "`asset_group_description`",
+            "Description",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:AssetGroup:asset_group_injects",
+          "cells": [
+            "`asset_group_injects`",
+            "",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:AssetGroup:asset_group_name",
+          "cells": [
+            "`asset_group_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:AssetGroup:asset_group_tags",
+          "cells": [
+            "`asset_group_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Asset group target",
+      "text": "Schema: `POST /api/schemas/AssetGroupTarget?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:AssetGroupTarget:target_name",
+          "cells": [
+            "`target_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:AssetGroupTarget:target_tags",
+          "cells": [
+            "`target_tags`",
+            "Tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Challenge",
+      "text": "Schema: `POST /api/schemas/Challenge?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Challenge:challenge_category",
+          "cells": [
+            "`challenge_category`",
+            "Category",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Challenge:challenge_name",
+          "cells": [
+            "`challenge_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Challenge:challenge_tags",
+          "cells": [
+            "`challenge_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Credential",
+      "text": "Schema: `POST /api/schemas/Credential?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Credential:secret_reference_created_at",
+          "cells": [
+            "`secret_reference_created_at`",
+            "",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Credential:secret_reference_created_by",
+          "cells": [
+            "`secret_reference_created_by`",
+            "Created by",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Credential:secret_reference_credential_auth_method",
+          "cells": [
+            "`secret_reference_credential_auth_method`",
+            "Auth method",
+            "One of `USERNAME_PASSWORD`, `HASH`, `AWS_ACCESS_KEY`, `AWS_ASSUME_ROLE`, `AZURE_SERVICE_PRINCIPAL`, `AZURE_MANAGED_IDENTITY`, `GCP_SERVICE_ACCOUNT`, `GCP_OAUTH2`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Credential:secret_reference_credential_type",
+          "cells": [
+            "`secret_reference_credential_type`",
+            "Type",
+            "One of `IDENTITY`, `CLOUD_AWS`, `CLOUD_AZURE`, `CLOUD_GCP`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Credential:secret_reference_last_verified_at",
+          "cells": [
+            "`secret_reference_last_verified_at`",
+            "",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Credential:secret_reference_name",
+          "cells": [
+            "`secret_reference_name`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Credential:secret_reference_status",
+          "cells": [
+            "`secret_reference_status`",
+            "Status",
+            "One of `ACTIVE`, `AUTH_FAILED`, `PERMISSION_DENIED`, `TIMEOUT`, `NETWORK_ERROR`, `UNSUPPORTED`, `FORMAT_ERROR`, `UNKNOWN`, `UNSET`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Credential:secret_reference_tags",
+          "cells": [
+            "`secret_reference_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Custom dashboard",
+      "text": "Schema: `POST /api/schemas/CustomDashboard?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:CustomDashboard:custom_dashboard_name",
+          "cells": [
+            "`custom_dashboard_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Custom domain",
+      "text": "Schema: `POST /api/schemas/CustomDomain?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:CustomDomain:custom_domain_created_at",
+          "cells": [
+            "`custom_domain_created_at`",
+            "",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:CustomDomain:custom_domain_hostname",
+          "cells": [
+            "`custom_domain_hostname`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:CustomDomain:custom_domain_status",
+          "cells": [
+            "`custom_domain_status`",
+            "",
+            "One of `PENDING`, `VERIFIED`, `FAILED`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:CustomDomain:custom_domain_updated_at",
+          "cells": [
+            "`custom_domain_updated_at`",
+            "",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "CWE",
+      "text": "Schema: `POST /api/schemas/Cwe?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Cwe:cwe_created_at",
+          "cells": [
+            "`cwe_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Cwe:cwe_external_id",
+          "cells": [
+            "`cwe_external_id`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Cwe:cwe_updated_at",
+          "cells": [
+            "`cwe_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Detection remediation",
+      "text": "Schema: `POST /api/schemas/DetectionRemediation?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:DetectionRemediation:detection_remediation_created_at",
+          "cells": [
+            "`detection_remediation_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:DetectionRemediation:detection_remediation_updated_at",
+          "cells": [
+            "`detection_remediation_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Document",
+      "text": "Schema: `POST /api/schemas/Document?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Document:document_name",
+          "cells": [
+            "`document_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Document:document_tags",
+          "cells": [
+            "`document_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Document:document_type",
+          "cells": [
+            "`document_type`",
+            "Type",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Domain",
+      "text": "Schema: `POST /api/schemas/Domain?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Domain:domain_created_at",
+          "cells": [
+            "`domain_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Domain:domain_updated_at",
+          "cells": [
+            "`domain_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Endpoint target",
+      "text": "Schema: `POST /api/schemas/EndpointTarget?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:EndpointTarget:target_asset_groups",
+          "cells": [
+            "`target_asset_groups`",
+            "Asset Groups",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "text search"
+          ]
+        },
+        {
+          "key": "jpa:EndpointTarget:target_name",
+          "cells": [
+            "`target_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:EndpointTarget:target_tags",
+          "cells": [
+            "`target_tags`",
+            "Tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Exercise",
+      "text": "Schema: `POST /api/schemas/Exercise?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Exercise:exercise_autonomous",
+          "cells": [
+            "`exercise_autonomous`",
+            "",
+            "Boolean: `true`, `false`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Exercise:exercise_end_date",
+          "cells": [
+            "`exercise_end_date`",
+            "End date",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Exercise:exercise_kill_chain_phases",
+          "cells": [
+            "`exercise_kill_chain_phases`",
+            "Kill chain phase",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Exercise:exercise_name",
+          "cells": [
+            "`exercise_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Exercise:exercise_scenario",
+          "cells": [
+            "`exercise_scenario`",
+            "Scenario",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Exercise:exercise_severity",
+          "cells": [
+            "`exercise_severity`",
+            "Severity",
+            "One of `low`, `medium`, `high`, `critical`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Exercise:exercise_start_date",
+          "cells": [
+            "`exercise_start_date`",
+            "Start date",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Exercise:exercise_status",
+          "cells": [
+            "`exercise_status`",
+            "Status",
+            "One of `SCHEDULED`, `CANCELED`, `RUNNING`, `PAUSED`, `FINISHED`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Exercise:exercise_tags",
+          "cells": [
+            "`exercise_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Exercise:exercise_updated_at",
+          "cells": [
+            "`exercise_updated_at`",
+            "Updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Finding",
+      "text": "Schema: `POST /api/schemas/Finding?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Finding:finding_asset_groups",
+          "cells": [
+            "`finding_asset_groups`",
+            "Asset groups",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_assets",
+          "cells": [
+            "`finding_assets`",
+            "Assets",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_created_at",
+          "cells": [
+            "`finding_created_at`",
+            "Created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_field",
+          "cells": [
+            "`finding_field`",
+            "Field",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_inject_id",
+          "cells": [
+            "`finding_inject_id`",
+            "Inject",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_name",
+          "cells": [
+            "`finding_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_scenario",
+          "cells": [
+            "`finding_scenario`",
+            "Scenario",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_simulation",
+          "cells": [
+            "`finding_simulation`",
+            "Simulation",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_tags",
+          "cells": [
+            "`finding_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_teams",
+          "cells": [
+            "`finding_teams`",
+            "Teams",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_type",
+          "cells": [
+            "`finding_type`",
+            "Type",
+            "One of `Text`, `ActionOutput`, `Number`, `Port`, `PortsScan`, `IPv4`, `IPv6`, `Credentials`, `CVE`, `Username`, `Email`, `Share`, `File`, `AdminUsername`, `Group`, `Computer`, `PasswordPolicy`, `Delegation`, `Sid`, `Vulnerability`, `AccountWithPasswordNotRequired`, `AsreproastableAccount`, `KerberoastableAccount`, `ExpectationSignature`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_updated_at",
+          "cells": [
+            "`finding_updated_at`",
+            "Updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_users",
+          "cells": [
+            "`finding_users`",
+            "Users",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Finding:finding_value",
+          "cells": [
+            "`finding_value`",
+            "Value",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Inject",
+      "text": "Schema: `POST /api/schemas/Inject?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Inject:inject_asset_groups",
+          "cells": [
+            "`inject_asset_groups`",
+            "Asset groups",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_assets",
+          "cells": [
+            "`inject_assets`",
+            "Assets",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_attack_patterns",
+          "cells": [
+            "`inject_attack_patterns`",
+            "Attack pattern",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_contract_domains",
+          "cells": [
+            "`inject_contract_domains`",
+            "Domains",
+            "Identifiers, listed by the platform",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_injector_contract",
+          "cells": [
+            "`inject_injector_contract`",
+            "Injector",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_kill_chain_phases",
+          "cells": [
+            "`inject_kill_chain_phases`",
+            "Kill chain phase",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_platforms",
+          "cells": [
+            "`inject_platforms`",
+            "Platforms",
+            "Any of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_secret_references",
+          "cells": [
+            "`inject_secret_references`",
+            "",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_status",
+          "cells": [
+            "`inject_status`",
+            "Status",
+            "One of `EXECUTED`, `PARTIAL`, `ERROR`, `DRAFT`, `QUEUING`, `EXECUTING`, `PENDING`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_tags",
+          "cells": [
+            "`inject_tags`",
+            "Tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_teams",
+          "cells": [
+            "`inject_teams`",
+            "Teams",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_title",
+          "cells": [
+            "`inject_title`",
+            "Inject title",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_type",
+          "cells": [
+            "`inject_type`",
+            "Type",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Inject:inject_updated_at",
+          "cells": [
+            "`inject_updated_at`",
+            "Updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Inject expectation",
+      "text": "Schema: `POST /api/schemas/InjectExpectation?filterableOnly=true`. The keys of its kinds are included, and their schemas give the part each one has: `ArticleInjectExpectation`, `ChallengeInjectExpectation`, `DetectionInjectExpectation`, `LoggingInjectExpectation`, `ManualInjectExpectation`, `PreventionInjectExpectation`, `TableTopInjectExpectation`, `TechnicalInjectExpectation`, `VulnerabilityInjectExpectation`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:InjectExpectation:inject_expectation_created_at",
+          "cells": [
+            "`inject_expectation_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectExpectation:inject_expectation_type",
+          "cells": [
+            "`inject_expectation_type`",
+            "Inject expectation type",
+            "One of `ARTICLE`, `CHALLENGE`, `MANUAL`, `PREVENTION`, `DETECTION`, `LOGGING`, `VULNERABILITY`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectExpectation:inject_expectation_updated_at",
+          "cells": [
+            "`inject_expectation_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Injector",
+      "text": "Schema: `POST /api/schemas/Injector?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Injector:injector_dependencies",
+          "cells": [
+            "`injector_dependencies`",
+            "",
+            "Any of `SMTP`, `IMAP`, `NUCLEI`, `NMAP`, `NETEXEC`, `OPENAEV_EMAIL`, `OPENAEV_IMPLANT`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Injector contract",
+      "text": "Schema: `POST /api/schemas/InjectorContract?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:InjectorContract:injector_contract_arch",
+          "cells": [
+            "`injector_contract_arch`",
+            "Architecture",
+            "One of `x86_64`, `arm64`, `ALL_ARCHITECTURES`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_atomic_testing",
+          "cells": [
+            "`injector_contract_atomic_testing`",
+            "",
+            "Boolean: `true`, `false`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_attack_patterns",
+          "cells": [
+            "`injector_contract_attack_patterns`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "text search"
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_domains",
+          "cells": [
+            "`injector_contract_domains`",
+            "Domains",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_import_available",
+          "cells": [
+            "`injector_contract_import_available`",
+            "",
+            "Boolean: `true`, `false`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_injectors",
+          "cells": [
+            "`injector_contract_injectors`",
+            "Injector",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_kill_chain_phases",
+          "cells": [
+            "`injector_contract_kill_chain_phases`",
+            "Kill chain phase",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_labels",
+          "cells": [
+            "`injector_contract_labels`",
+            "Label",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_payload",
+          "cells": [
+            "`injector_contract_payload`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_payload_author",
+          "cells": [
+            "`injector_contract_payload_author`",
+            "Author",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_payload_status",
+          "cells": [
+            "`injector_contract_payload_status`",
+            "Status",
+            "One of `UNVERIFIED`, `VERIFIED`, `DEPRECATED`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_platforms",
+          "cells": [
+            "`injector_contract_platforms`",
+            "Platforms",
+            "Any of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_providing",
+          "cells": [
+            "`injector_contract_providing`",
+            "",
+            "One of `Text`, `ActionOutput`, `Number`, `Port`, `PortsScan`, `IPv4`, `IPv6`, `Credentials`, `CVE`, `Username`, `Email`, `Share`, `File`, `AdminUsername`, `Group`, `Computer`, `PasswordPolicy`, `Delegation`, `Sid`, `Vulnerability`, `AccountWithPasswordNotRequired`, `AsreproastableAccount`, `KerberoastableAccount`, `ExpectationSignature`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_tags",
+          "cells": [
+            "`injector_contract_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_updated_at",
+          "cells": [
+            "`injector_contract_updated_at`",
+            "Updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:InjectorContract:injector_contract_vulnerabilities",
+          "cells": [
+            "`injector_contract_vulnerabilities`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Kill chain phase",
+      "text": "Schema: `POST /api/schemas/KillChainPhase?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:KillChainPhase:phase_name",
+          "cells": [
+            "`phase_name`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Manual target",
+      "text": "Schema: `POST /api/schemas/ManualTarget?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:ManualTarget:target_name",
+          "cells": [
+            "`target_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:ManualTarget:target_tags",
+          "cells": [
+            "`target_tags`",
+            "Tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Marking definition",
+      "text": "Schema: `POST /api/schemas/MarkingDefinition?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:MarkingDefinition:marking_definition_color",
+          "cells": [
+            "`marking_definition_color`",
+            "Color",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:MarkingDefinition:marking_definition_created_at",
+          "cells": [
+            "`marking_definition_created_at`",
+            "Creation date",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:MarkingDefinition:marking_definition_definition",
+          "cells": [
+            "`marking_definition_definition`",
+            "Definition",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:MarkingDefinition:marking_definition_order",
+          "cells": [
+            "`marking_definition_order`",
+            "Order",
+            "Number",
+            "`gte`, `lte`, `gt`, `lt`, `eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:MarkingDefinition:marking_definition_type",
+          "cells": [
+            "`marking_definition_type`",
+            "Type",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Notification",
+      "text": "Schema: `POST /api/schemas/Notification?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Notification:notification_is_read",
+          "cells": [
+            "`notification_is_read`",
+            "Is read",
+            "Boolean: `true`, `false`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Notification:notification_name",
+          "cells": [
+            "`notification_name`",
+            "Trigger name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Notification:notification_type",
+          "cells": [
+            "`notification_type`",
+            "Notification type",
+            "One of `LIVE`, `DIGEST`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Notification:notification_user",
+          "cells": [
+            "`notification_user`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Notification trigger",
+      "text": "Schema: `POST /api/schemas/NotificationTrigger?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:NotificationTrigger:notification_trigger_instance_id",
+          "cells": [
+            "`notification_trigger_instance_id`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:NotificationTrigger:notification_trigger_name",
+          "cells": [
+            "`notification_trigger_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:NotificationTrigger:notification_trigger_owner",
+          "cells": [
+            "`notification_trigger_owner`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:NotificationTrigger:notification_trigger_resource_type",
+          "cells": [
+            "`notification_trigger_resource_type`",
+            "Resource type",
+            "One of `ASSET`, `AGENT`, `AGENT_INSTALLER`, `SCENARIO`, `SIMULATION`, `PLAYER`, `USER`, `TEAM`, `ATOMIC_TESTING`, `NOTIFICATION_TRIGGER`, `NOTIFIER`, `NOTIFICATION`, `PAYLOAD`, `THREAT_ARSENAL`, `RESOURCE_TYPE`, `SECURITY_PLATFORM`, `CREDENTIAL`, `MARKING_DEFINITION`, `MARKING_ASSIGNMENT`, `DOCUMENT`, `CHANNEL`, `PHISHING_LANDING_PAGE`, `PHISHING_EMAIL_TEMPLATE`, `FINDING`, `DASHBOARD`, `REPORT`, `PLATFORM_SETTING`, `LESSON_LEARNED`, `CHALLENGE`, `INJECT`, `JOB`, `TAG`, `TAG_RULE`, `KILL_CHAIN_PHASE`, `ATTACK_PATTERN`, `ASSET_GROUP`, `VULNERABILITY`, `USER_GROUP`, `INJECTOR`, `INJECT_SECRET`, `INJECTOR_CONTRACT`, `MAPPER`, `GROUP_ROLE`, `ORGANIZATION`, `COLLECTOR`, `STIX_BUNDLE`, `DOMAIN`, `OBJECTIVE`, `EVALUATION`, `CATALOG`, `CATALOG_SYNC`, `CONNECTOR_INSTANCE_LOG`, `SECRET_PROVIDER`, `TENANT`, `TENANT_SETTING`, `PLATFORM_ROLE`, `PLATFORM_GROUP`, `PLATFORM_USER`, `XTM_HUB_REGISTRATION`, `NEWS_FEED`, `SNAPSHOT_OBSERVATION`, `UNKNOWN`, `SIMULATION_OR_SCENARIO`, `WORKFLOW`, `STEP`, `CONDITION`, `SESSION`, `TOKEN`, `PLATFORM_SESSION`, `AUTONOMOUS_RUN`, `SKIP_RBAC`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:NotificationTrigger:notification_trigger_type",
+          "cells": [
+            "`notification_trigger_type`",
+            "Type",
+            "One of `LIVE`, `DIGEST`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Notifier",
+      "text": "Schema: `POST /api/schemas/Notifier?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Notifier:notifier_name",
+          "cells": [
+            "`notifier_name`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Notifier:notifier_type",
+          "cells": [
+            "`notifier_type`",
+            "",
+            "One of `UI`, `EMAIL`, `WEBHOOK`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Organization",
+      "text": "Schema: `POST /api/schemas/Organization?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Organization:organization_name",
+          "cells": [
+            "`organization_name`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Organization:organization_tags",
+          "cells": [
+            "`organization_tags`",
+            "",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Payload",
+      "text": "Schema: `POST /api/schemas/Payload?filterableOnly=true`. The keys of its kinds are included, and their schemas give the part each one has: `AiAttack`, `Command`, `DnsResolution`, `Executable`, `FileDrop`, `NetworkTraffic`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Payload:ai_attack_category",
+          "cells": [
+            "`ai_attack_category`",
+            "AI attack category",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Payload:ai_attack_engine",
+          "cells": [
+            "`ai_attack_engine`",
+            "AI attack engine",
+            "One of `NATIVE`, `GARAK`, `PYRIT`, `PROMPTFOO`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Payload:command_content",
+          "cells": [
+            "`command_content`",
+            "Command content",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Payload:command_executor",
+          "cells": [
+            "`command_executor`",
+            "Command executor",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Payload:dns_resolution_hostname",
+          "cells": [
+            "`dns_resolution_hostname`",
+            "DNS hostname",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Payload:network_traffic_ip_dst",
+          "cells": [
+            "`network_traffic_ip_dst`",
+            "Destination IP",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Payload:network_traffic_ip_src",
+          "cells": [
+            "`network_traffic_ip_src`",
+            "Source IP",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Payload:network_traffic_port_dst",
+          "cells": [
+            "`network_traffic_port_dst`",
+            "Destination port",
+            "Number",
+            "`gte`, `lte`, `gt`, `lt`, `eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Payload:network_traffic_port_src",
+          "cells": [
+            "`network_traffic_port_src`",
+            "Source port",
+            "Number",
+            "`gte`, `lte`, `gt`, `lt`, `eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Payload:network_traffic_protocol",
+          "cells": [
+            "`network_traffic_protocol`",
+            "Network protocol",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Payload:payload_author_organization",
+          "cells": [
+            "`payload_author_organization`",
+            "Author (organization)",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Payload:payload_author_user",
+          "cells": [
+            "`payload_author_user`",
+            "Author (user)",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Payload:payload_description",
+          "cells": [
+            "`payload_description`",
+            "Description",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Payload:payload_execution_arch",
+          "cells": [
+            "`payload_execution_arch`",
+            "Architecture",
+            "One of `x86_64`, `arm64`, `ALL_ARCHITECTURES`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "text search"
+          ]
+        },
+        {
+          "key": "jpa:Payload:payload_expectations",
+          "cells": [
+            "`payload_expectations`",
+            "Expectations",
+            "Any of `ARTICLE`, `CHALLENGE`, `MANUAL`, `PREVENTION`, `DETECTION`, `LOGGING`, `VULNERABILITY`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "text search"
+          ]
+        },
+        {
+          "key": "jpa:Payload:payload_name",
+          "cells": [
+            "`payload_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Payload:payload_platforms",
+          "cells": [
+            "`payload_platforms`",
+            "Platforms",
+            "Any of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "text search"
+          ]
+        },
+        {
+          "key": "jpa:Payload:payload_source",
+          "cells": [
+            "`payload_source`",
+            "Source",
+            "One of `COMMUNITY`, `FILIGRAN`, `MANUAL`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Payload:payload_status",
+          "cells": [
+            "`payload_status`",
+            "Status",
+            "One of `UNVERIFIED`, `VERIFIED`, `DEPRECATED`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Payload:payload_updated_at",
+          "cells": [
+            "`payload_updated_at`",
+            "Updated",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Phishing email template",
+      "text": "Schema: `POST /api/schemas/PhishingEmailTemplate?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:PhishingEmailTemplate:phishing_email_template_created_at",
+          "cells": [
+            "`phishing_email_template_created_at`",
+            "",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:PhishingEmailTemplate:phishing_email_template_description",
+          "cells": [
+            "`phishing_email_template_description`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:PhishingEmailTemplate:phishing_email_template_from_email",
+          "cells": [
+            "`phishing_email_template_from_email`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:PhishingEmailTemplate:phishing_email_template_from_name",
+          "cells": [
+            "`phishing_email_template_from_name`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:PhishingEmailTemplate:phishing_email_template_name",
+          "cells": [
+            "`phishing_email_template_name`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:PhishingEmailTemplate:phishing_email_template_subject",
+          "cells": [
+            "`phishing_email_template_subject`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:PhishingEmailTemplate:phishing_email_template_updated_at",
+          "cells": [
+            "`phishing_email_template_updated_at`",
+            "",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Phishing landing page",
+      "text": "Schema: `POST /api/schemas/PhishingLandingPage?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:PhishingLandingPage:phishing_landing_page_created_at",
+          "cells": [
+            "`phishing_landing_page_created_at`",
+            "",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:PhishingLandingPage:phishing_landing_page_description",
+          "cells": [
+            "`phishing_landing_page_description`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:PhishingLandingPage:phishing_landing_page_name",
+          "cells": [
+            "`phishing_landing_page_name`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:PhishingLandingPage:phishing_landing_page_updated_at",
+          "cells": [
+            "`phishing_landing_page_updated_at`",
+            "",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Player target",
+      "text": "Schema: `POST /api/schemas/PlayerTarget?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:PlayerTarget:target_tags",
+          "cells": [
+            "`target_tags`",
+            "Tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:PlayerTarget:target_teams",
+          "cells": [
+            "`target_teams`",
+            "Teams",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Reporting",
+      "text": "Schema: `POST /api/schemas/Reporting?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Reporting:reporting_context_id",
+          "cells": [
+            "`reporting_context_id`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Reporting:reporting_context_type",
+          "cells": [
+            "`reporting_context_type`",
+            "Subject",
+            "One of `PLATFORM`, `SIMULATION`, `SCENARIO`, `ATOMIC_TESTING`, `ENDPOINT`, `ASSET_GROUP`, `PLAYER`, `TEAM`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Reporting:reporting_name",
+          "cells": [
+            "`reporting_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Scenario",
+      "text": "Schema: `POST /api/schemas/Scenario?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Scenario:scenario_category",
+          "cells": [
+            "`scenario_category`",
+            "Category",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Scenario:scenario_dependencies",
+          "cells": [
+            "`scenario_dependencies`",
+            "Dependencies",
+            "Any of `STARTERPACK`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Scenario:scenario_kill_chain_phases",
+          "cells": [
+            "`scenario_kill_chain_phases`",
+            "Kill chain phase",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Scenario:scenario_name",
+          "cells": [
+            "`scenario_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Scenario:scenario_platforms",
+          "cells": [
+            "`scenario_platforms`",
+            "Platforms",
+            "Any of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Scenario:scenario_recurrence",
+          "cells": [
+            "`scenario_recurrence`",
+            "Recurrence",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Scenario:scenario_severity",
+          "cells": [
+            "`scenario_severity`",
+            "Severity",
+            "One of `low`, `medium`, `high`, `critical`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Scenario:scenario_tags",
+          "cells": [
+            "`scenario_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Scenario:scenario_type",
+          "cells": [
+            "`scenario_type`",
+            "Type",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Scenario:scenario_updated_at",
+          "cells": [
+            "`scenario_updated_at`",
+            "Updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Secret reference",
+      "text": "Schema: `POST /api/schemas/SecretReference?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:SecretReference:secret_reference_created_at",
+          "cells": [
+            "`secret_reference_created_at`",
+            "",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:SecretReference:secret_reference_created_by",
+          "cells": [
+            "`secret_reference_created_by`",
+            "Created by",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:SecretReference:secret_reference_credential_auth_method",
+          "cells": [
+            "`secret_reference_credential_auth_method`",
+            "Auth method",
+            "One of `USERNAME_PASSWORD`, `HASH`, `AWS_ACCESS_KEY`, `AWS_ASSUME_ROLE`, `AZURE_SERVICE_PRINCIPAL`, `AZURE_MANAGED_IDENTITY`, `GCP_SERVICE_ACCOUNT`, `GCP_OAUTH2`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:SecretReference:secret_reference_credential_type",
+          "cells": [
+            "`secret_reference_credential_type`",
+            "Type",
+            "One of `IDENTITY`, `CLOUD_AWS`, `CLOUD_AZURE`, `CLOUD_GCP`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:SecretReference:secret_reference_last_verified_at",
+          "cells": [
+            "`secret_reference_last_verified_at`",
+            "",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:SecretReference:secret_reference_name",
+          "cells": [
+            "`secret_reference_name`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:SecretReference:secret_reference_status",
+          "cells": [
+            "`secret_reference_status`",
+            "Status",
+            "One of `ACTIVE`, `AUTH_FAILED`, `PERMISSION_DENIED`, `TIMEOUT`, `NETWORK_ERROR`, `UNSUPPORTED`, `FORMAT_ERROR`, `UNKNOWN`, `UNSET`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:SecretReference:secret_reference_tags",
+          "cells": [
+            "`secret_reference_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Tag rule",
+      "text": "Schema: `POST /api/schemas/TagRule?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:TagRule:tag_rule_asset_groups",
+          "cells": [
+            "`tag_rule_asset_groups`",
+            "Asset group",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:TagRule:tag_rule_tag",
+          "cells": [
+            "`tag_rule_tag`",
+            "Tag",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Team",
+      "text": "Schema: `POST /api/schemas/Team?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Team:team_injects",
+          "cells": [
+            "`team_injects`",
+            "",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Team:team_name",
+          "cells": [
+            "`team_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Team:team_tags",
+          "cells": [
+            "`team_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Team target",
+      "text": "Schema: `POST /api/schemas/TeamTarget?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:TeamTarget:target_name",
+          "cells": [
+            "`target_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:TeamTarget:target_tags",
+          "cells": [
+            "`target_tags`",
+            "Tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Tenant",
+      "text": "Schema: `POST /api/schemas/Tenant?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Tenant:tenant_name",
+          "cells": [
+            "`tenant_name`",
+            "Name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "User",
+      "text": "Schema: `POST /api/schemas/User?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:User:user_admin",
+          "cells": [
+            "`user_admin`",
+            "Administrator",
+            "Boolean: `true`, `false`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:User:user_email",
+          "cells": [
+            "`user_email`",
+            "Email",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:User:user_firstname",
+          "cells": [
+            "`user_firstname`",
+            "Firstname",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:User:user_lastname",
+          "cells": [
+            "`user_lastname`",
+            "Lastname",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:User:user_organization",
+          "cells": [
+            "`user_organization`",
+            "Organization",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:User:user_tags",
+          "cells": [
+            "`user_tags`",
+            "Tags",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:User:user_teams",
+          "cells": [
+            "`user_teams`",
+            "Teams",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Vulnerability",
+      "text": "Schema: `POST /api/schemas/Vulnerability?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:Vulnerability:vulnerability_created_at",
+          "cells": [
+            "`vulnerability_created_at`",
+            "Created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Vulnerability:vulnerability_cvss_v31",
+          "cells": [
+            "`vulnerability_cvss_v31`",
+            "CVSS 3.1",
+            "Number",
+            "`gte`, `lte`, `gt`, `lt`, `eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Vulnerability:vulnerability_external_id",
+          "cells": [
+            "`vulnerability_external_id`",
+            "VULNERABILITY ID",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Vulnerability:vulnerability_updated_at",
+          "cells": [
+            "`vulnerability_updated_at`",
+            "Updated",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Vulnerability:vulnerability_vuln_status",
+          "cells": [
+            "`vulnerability_vuln_status`",
+            "Status",
+            "One of `ANALYZED`, `DEFERRED`, `MODIFIED`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Asset",
+      "text": "Documents `asset` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:asset:asset_category",
+          "cells": [
+            "`asset_category`",
+            "asset category",
+            "One of `HOST`, `CONTAINER_WORKLOAD`, `CLOUD_RESOURCE`, `WEB_APPLICATION`, `NETWORK_DEVICE`, `MOBILE_DEVICE`, `IOT_OT_DEVICE`, `IDENTITY`, `SAAS_APPLICATION`, `AI_TARGET`, `SECURITY_PLATFORM`, `GENERIC_ASSET`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:asset_description",
+          "cells": [
+            "`asset_description`",
+            "asset description",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:asset_hostname",
+          "cells": [
+            "`asset_hostname`",
+            "asset hostname",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:asset_ips",
+          "cells": [
+            "`asset_ips`",
+            "asset ips",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:asset_mac_addresses",
+          "cells": [
+            "`asset_mac_addresses`",
+            "asset mac addresses",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:asset_name",
+          "cells": [
+            "`asset_name`",
+            "asset name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:asset_seen_ip",
+          "cells": [
+            "`asset_seen_ip`",
+            "asset seen ip",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:asset:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:asset:base_findings_side",
+          "cells": [
+            "`base_findings_side`",
+            "findings",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:asset:base_scenario_side",
+          "cells": [
+            "`base_scenario_side`",
+            "scenario",
+            "Values the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:base_simulation_side",
+          "cells": [
+            "`base_simulation_side`",
+            "simulation",
+            "Values the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:base_tags_side",
+          "cells": [
+            "`base_tags_side`",
+            "tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:asset:endpoint_arch",
+          "cells": [
+            "`endpoint_arch`",
+            "endpoint arch",
+            "One of `x86_64`, `arm64`, `Unknown`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:endpoint_is_eol",
+          "cells": [
+            "`endpoint_is_eol`",
+            "endpoint is end of life",
+            "Boolean: `true`, `false`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:endpoint_platform",
+          "cells": [
+            "`endpoint_platform`",
+            "endpoint platform",
+            "One of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Asset group",
+      "text": "Documents `asset-group` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:asset-group:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:asset-group:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:asset-group:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:asset-group:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset-group:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Attack observation",
+      "text": "Documents `snapshot-attack-observation` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:snapshot-attack-observation:asset_hostname",
+          "cells": [
+            "`asset_hostname`",
+            "asset hostname",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:asset_name",
+          "cells": [
+            "`asset_name`",
+            "asset name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_attack_pattern_external_id",
+          "cells": [
+            "`attack_observation_attack_pattern_external_id`",
+            "attack pattern external id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_attack_pattern_name",
+          "cells": [
+            "`attack_observation_attack_pattern_name`",
+            "attack pattern name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_attempts_success",
+          "cells": [
+            "`attack_observation_attempts_success`",
+            "attack observation attempts success",
+            "Number",
+            "`gte`, `lte`, `gt`, `lt`, `eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_attempts_total",
+          "cells": [
+            "`attack_observation_attempts_total`",
+            "attack observation attempts total",
+            "Number",
+            "`gte`, `lte`, `gt`, `lt`, `eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_coverage_ratio",
+          "cells": [
+            "`attack_observation_coverage_ratio`",
+            "attack observation coverage ratio",
+            "Number",
+            "`gte`, `lte`, `gt`, `lt`, `eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_expectation_type",
+          "cells": [
+            "`attack_observation_expectation_type`",
+            "attack observation expectation type",
+            "One of `ARTICLE`, `CHALLENGE`, `MANUAL`, `PREVENTION`, `DETECTION`, `LOGGING`, `VULNERABILITY`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_last_verified_at",
+          "cells": [
+            "`attack_observation_last_verified_at`",
+            "attack observation last verified at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_platform_types_reporting",
+          "cells": [
+            "`attack_observation_platform_types_reporting`",
+            "attack observation platform types reporting",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_platform_types_succeeded",
+          "cells": [
+            "`attack_observation_platform_types_succeeded`",
+            "attack observation platform types succeeded",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_platforms_succeeded",
+          "cells": [
+            "`attack_observation_platforms_succeeded`",
+            "attack observation platforms succeeded",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_scenario_name",
+          "cells": [
+            "`attack_observation_scenario_name`",
+            "scenario name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_simulation_name",
+          "cells": [
+            "`attack_observation_simulation_name`",
+            "simulation name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_simulation_start_date",
+          "cells": [
+            "`attack_observation_simulation_start_date`",
+            "simulation start date",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_simulation_status",
+          "cells": [
+            "`attack_observation_simulation_status`",
+            "simulation status",
+            "One of `SCHEDULED`, `CANCELED`, `RUNNING`, `PAUSED`, `FINISHED`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_status",
+          "cells": [
+            "`attack_observation_status`",
+            "attack observation status",
+            "One of `FAILED`, `PENDING`, `PARTIAL`, `UNKNOWN`, `SUCCESS`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:attack_observation_tenant_name",
+          "cells": [
+            "`attack_observation_tenant_name`",
+            "tenant name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:base_asset_side",
+          "cells": [
+            "`base_asset_side`",
+            "asset",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:base_attack_patterns_side",
+          "cells": [
+            "`base_attack_patterns_side`",
+            "attack patterns",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:base_inject_side",
+          "cells": [
+            "`base_inject_side`",
+            "inject",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:base_scenario_side",
+          "cells": [
+            "`base_scenario_side`",
+            "scenario",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:base_security_platforms_side",
+          "cells": [
+            "`base_security_platforms_side`",
+            "security platforms",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:base_simulation_side",
+          "cells": [
+            "`base_simulation_side`",
+            "simulation",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-attack-observation:endpoint_platform",
+          "cells": [
+            "`endpoint_platform`",
+            "endpoint platform",
+            "One of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Attack pattern",
+      "text": "Documents `attack-pattern` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:attack-pattern:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:attack-pattern:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:attack-pattern:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:attack-pattern:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:attack-pattern:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Domain",
+      "text": "Documents `domain` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:domain:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:domain:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:domain:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:domain:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:domain:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:domain:domain_color",
+          "cells": [
+            "`domain_color`",
+            "domain color",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Finding",
+      "text": "Documents `finding` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:finding:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:finding:base_endpoint_side",
+          "cells": [
+            "`base_endpoint_side`",
+            "endpoint",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:finding:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:finding:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:finding:base_inject_side",
+          "cells": [
+            "`base_inject_side`",
+            "inject",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:finding:base_scenario_side",
+          "cells": [
+            "`base_scenario_side`",
+            "scenario",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:finding:base_simulation_side",
+          "cells": [
+            "`base_simulation_side`",
+            "simulation",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:finding:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:finding:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:finding:finding_type",
+          "cells": [
+            "`finding_type`",
+            "finding type",
+            "One of `Text`, `ActionOutput`, `Number`, `Port`, `PortsScan`, `IPv4`, `IPv6`, `Credentials`, `CVE`, `Username`, `Email`, `Share`, `File`, `AdminUsername`, `Group`, `Computer`, `PasswordPolicy`, `Delegation`, `Sid`, `Vulnerability`, `AccountWithPasswordNotRequired`, `AsreproastableAccount`, `KerberoastableAccount`, `ExpectationSignature`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:finding:finding_value",
+          "cells": [
+            "`finding_value`",
+            "finding value",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Inject",
+      "text": "Documents `inject` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:inject:base_asset_groups_side",
+          "cells": [
+            "`base_asset_groups_side`",
+            "asset groups",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:inject:base_assets_side",
+          "cells": [
+            "`base_assets_side`",
+            "assets",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:inject:base_attack_patterns_side",
+          "cells": [
+            "`base_attack_patterns_side`",
+            "attack patterns",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:inject:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:inject:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:inject:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:inject:base_platforms_side_denormalized",
+          "cells": [
+            "`base_platforms_side_denormalized`",
+            "platforms",
+            "Any of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:inject:base_scenario_side",
+          "cells": [
+            "`base_scenario_side`",
+            "scenario",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:inject:base_simulation_side",
+          "cells": [
+            "`base_simulation_side`",
+            "simulation",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:inject:base_tags_side",
+          "cells": [
+            "`base_tags_side`",
+            "tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:inject:base_teams_side",
+          "cells": [
+            "`base_teams_side`",
+            "teams",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:inject:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:inject:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:inject:execution_date",
+          "cells": [
+            "`execution_date`",
+            "execution date",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:inject:inject_status",
+          "cells": [
+            "`inject_status`",
+            "inject status",
+            "One of `EXECUTED`, `PARTIAL`, `ERROR`, `DRAFT`, `QUEUING`, `EXECUTING`, `PENDING`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Inject expectation",
+      "text": "Documents `expectation-inject` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:expectation-inject:base_asset_group_side",
+          "cells": [
+            "`base_asset_group_side`",
+            "asset group",
+            "Text",
+            "`empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_asset_side",
+          "cells": [
+            "`base_asset_side`",
+            "asset",
+            "Text",
+            "`empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_attack_patterns_side",
+          "cells": [
+            "`base_attack_patterns_side`",
+            "attack patterns",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_scenario_side",
+          "cells": [
+            "`base_scenario_side`",
+            "scenario",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_security_domains_side",
+          "cells": [
+            "`base_security_domains_side`",
+            "security domains",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_security_platforms_side",
+          "cells": [
+            "`base_security_platforms_side`",
+            "security platform",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_simulation_side",
+          "cells": [
+            "`base_simulation_side`",
+            "simulation",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_team_side",
+          "cells": [
+            "`base_team_side`",
+            "team",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:expectation-inject:execution_date",
+          "cells": [
+            "`execution_date`",
+            "execution date",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:expectation-inject:inject_expectation_expected_score",
+          "cells": [
+            "`inject_expectation_expected_score`",
+            "inject expectation expected score",
+            "Number",
+            "`gte`, `lte`, `gt`, `lt`, `eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:inject_expectation_score",
+          "cells": [
+            "`inject_expectation_score`",
+            "inject expectation score",
+            "Number",
+            "`gte`, `lte`, `gt`, `lt`, `eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:inject_expectation_status",
+          "cells": [
+            "`inject_expectation_status`",
+            "inject expectation status",
+            "One of `FAILED`, `PENDING`, `PARTIAL`, `UNKNOWN`, `SUCCESS`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:expectation-inject:inject_expectation_type",
+          "cells": [
+            "`inject_expectation_type`",
+            "inject expectation type",
+            "One of `ARTICLE`, `CHALLENGE`, `MANUAL`, `PREVENTION`, `DETECTION`, `LOGGING`, `VULNERABILITY`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Scenario",
+      "text": "Documents `scenario` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:scenario:base_asset_groups_side",
+          "cells": [
+            "`base_asset_groups_side`",
+            "asset groups",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:scenario:base_assets_side",
+          "cells": [
+            "`base_assets_side`",
+            "assets",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:scenario:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:scenario:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:scenario:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:scenario:base_platforms_side_denormalized",
+          "cells": [
+            "`base_platforms_side_denormalized`",
+            "platforms",
+            "Any of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:scenario:base_tags_side",
+          "cells": [
+            "`base_tags_side`",
+            "tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:scenario:base_teams_side",
+          "cells": [
+            "`base_teams_side`",
+            "teams",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:scenario:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:scenario:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:scenario:name",
+          "cells": [
+            "`name`",
+            "scenario name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:scenario:status",
+          "cells": [
+            "`status`",
+            "scenario status",
+            "One of `SCHEDULED`, `NOT_PLANNED`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Security Platform",
+      "text": "Documents `security-platform` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:security-platform:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:security-platform:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:security-platform:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:security-platform:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:security-platform:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Simulation",
+      "text": "Documents `simulation` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:simulation:base_asset_groups_side",
+          "cells": [
+            "`base_asset_groups_side`",
+            "asset groups",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:simulation:base_assets_side",
+          "cells": [
+            "`base_assets_side`",
+            "assets",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:simulation:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:simulation:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:simulation:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:simulation:base_platforms_side_denormalized",
+          "cells": [
+            "`base_platforms_side_denormalized`",
+            "platforms",
+            "Any of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:simulation:base_scenario_side",
+          "cells": [
+            "`base_scenario_side`",
+            "scenario",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:simulation:base_tags_side",
+          "cells": [
+            "`base_tags_side`",
+            "tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:simulation:base_teams_side",
+          "cells": [
+            "`base_teams_side`",
+            "teams",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:simulation:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:simulation:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:simulation:execution_date",
+          "cells": [
+            "`execution_date`",
+            "execution date",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:simulation:name",
+          "cells": [
+            "`name`",
+            "simulation name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:simulation:status",
+          "cells": [
+            "`status`",
+            "simulation status",
+            "One of `SCHEDULED`, `CANCELED`, `RUNNING`, `PAUSED`, `FINISHED`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Tag",
+      "text": "Documents `tag` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:tag:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:tag:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:tag:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:tag:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:tag:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:tag:tag_color",
+          "cells": [
+            "`tag_color`",
+            "tag color",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Team",
+      "text": "Documents `team` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:team:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:team:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:team:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:team:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:team:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Vulnerability observation",
+      "text": "Documents `snapshot-vulnerability-observation` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:snapshot-vulnerability-observation:asset_hostname",
+          "cells": [
+            "`asset_hostname`",
+            "asset hostname",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:asset_name",
+          "cells": [
+            "`asset_name`",
+            "asset name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:base_asset_side",
+          "cells": [
+            "`base_asset_side`",
+            "asset",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:base_findings_side",
+          "cells": [
+            "`base_findings_side`",
+            "findings",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:base_scenario_side",
+          "cells": [
+            "`base_scenario_side`",
+            "scenario",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:base_simulation_side",
+          "cells": [
+            "`base_simulation_side`",
+            "simulation",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:endpoint_platform",
+          "cells": [
+            "`endpoint_platform`",
+            "endpoint platform",
+            "One of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:finding_type",
+          "cells": [
+            "`finding_type`",
+            "finding type",
+            "One of `Text`, `ActionOutput`, `Number`, `Port`, `PortsScan`, `IPv4`, `IPv6`, `Credentials`, `CVE`, `Username`, `Email`, `Share`, `File`, `AdminUsername`, `Group`, `Computer`, `PasswordPolicy`, `Delegation`, `Sid`, `Vulnerability`, `AccountWithPasswordNotRequired`, `AsreproastableAccount`, `KerberoastableAccount`, `ExpectationSignature`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:finding_value",
+          "cells": [
+            "`finding_value`",
+            "finding value",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:vulnerability_observation_external_id",
+          "cells": [
+            "`vulnerability_observation_external_id`",
+            "vulnerability external id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:vulnerability_observation_last_verified_at",
+          "cells": [
+            "`vulnerability_observation_last_verified_at`",
+            "vulnerability observation last verified at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:vulnerability_observation_scenario_name",
+          "cells": [
+            "`vulnerability_observation_scenario_name`",
+            "scenario name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:vulnerability_observation_simulation_name",
+          "cells": [
+            "`vulnerability_observation_simulation_name`",
+            "simulation name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:snapshot-vulnerability-observation:vulnerability_observation_tenant_name",
+          "cells": [
+            "`vulnerability_observation_tenant_name`",
+            "tenant name",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Dashboard widgets: Vulnerable Endpoint",
+      "text": "Documents `vulnerable-endpoint` of the search engine, which the widgets of the custom dashboards read.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "es:vulnerable-endpoint:base_created_at",
+          "cells": [
+            "`base_created_at`",
+            "created at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:base_entity",
+          "cells": [
+            "`base_entity`",
+            "entity",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:base_id",
+          "cells": [
+            "`base_id`",
+            "id",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:base_scenario_side",
+          "cells": [
+            "`base_scenario_side`",
+            "scenario",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:base_simulation_side",
+          "cells": [
+            "`base_simulation_side`",
+            "simulation",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:base_tags_side",
+          "cells": [
+            "`base_tags_side`",
+            "tags",
+            "Values the platform lists",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:base_tenant_side",
+          "cells": [
+            "`base_tenant_side`",
+            "tenant",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:base_updated_at",
+          "cells": [
+            "`base_updated_at`",
+            "updated at",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:vulnerable_endpoint_action",
+          "cells": [
+            "`vulnerable_endpoint_action`",
+            "vulnerable endpoint action",
+            "One of `OK`, `UPDATE`, `REPLACE`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:vulnerable_endpoint_agents_active_status",
+          "cells": [
+            "`vulnerable_endpoint_agents_active_status`",
+            "vulnerable endpoint agents active status",
+            "Any of `ACTIVE`, `INACTIVE`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:vulnerable_endpoint_agents_privileges",
+          "cells": [
+            "`vulnerable_endpoint_agents_privileges`",
+            "vulnerable endpoint agents privileges",
+            "Any of `ADMIN`, `USER`",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:vulnerable_endpoint_architecture",
+          "cells": [
+            "`vulnerable_endpoint_architecture`",
+            "vulnerable endpoint architecture",
+            "One of `x86_64`, `arm64`, `Unknown`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:vulnerable_endpoint_findings_summary",
+          "cells": [
+            "`vulnerable_endpoint_findings_summary`",
+            "vulnerable endpoint findings summary",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:vulnerable_endpoint_hostname",
+          "cells": [
+            "`vulnerable_endpoint_hostname`",
+            "vulnerable endpoint hostname",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:vulnerable-endpoint:vulnerable_endpoint_platform",
+          "cells": [
+            "`vulnerable_endpoint_platform`",
+            "vulnerable endpoint platform",
+            "One of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    }
+  ]
+}

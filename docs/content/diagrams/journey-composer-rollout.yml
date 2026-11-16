@@ -1,0 +1,22 @@
+title: XTM Composer runs next to the platforms, the teams deploy integrations from the catalogs of OpenCTI and OpenAEV, and every integration is followed from its platform
+lanes:
+  - label: XTM Composer
+    tone: core
+    nodes:
+      - {id: composer, label: XTM Composer registered, icon: Boxes, note: "One per OpenAEV"}
+      - {id: containers, label: Integrations running, icon: Server, note: "Docker, Podman, Kubernetes"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: connectors, label: Connectors deployed, icon: LogoOpenCTI, note: "MITRE ATT&CK, feeds"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: collectors, label: Collectors and injectors, icon: LogoOpenAEV, note: "CrowdStrike, Nmap"}
+edges:
+  - {from: composer, to: connectors, label: catalog unlocked}
+  - {from: composer, to: collectors, label: catalog unlocked}
+  - {from: connectors, to: containers, label: instances to run}
+  - {from: collectors, to: containers, label: instances to run}
+  - {from: containers, to: connectors, label: status and logs, style: dashed}
+  - {from: containers, to: collectors, label: status and logs, style: dashed}

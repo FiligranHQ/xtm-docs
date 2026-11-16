@@ -1,0 +1,19 @@
+title: From OpenCTI 6.8, connectors expose their Prometheus metrics under new names, with an optional prefix, so the dashboards and alerts that read them need the new names
+lanes:
+  - label: Connector
+    tone: product
+    nodes:
+      - {id: settings, label: Namespace and subsystem, icon: FileText, note: "CONNECTOR_METRICS_NAMESPACE and CONNECTOR_METRICS_SUBSYSTEM, empty by default"}
+      - {id: connector, label: client-python, icon: Puzzle, note: For OpenCTI 6.8}
+  - label: Prometheus
+    tone: store
+    nodes:
+      - {id: metrics, label: Renamed metrics, icon: Activity, note: "bundle_send becomes bundles_sent_total, run_count becomes runs_total"}
+  - label: Your monitoring
+    tone: external
+    nodes:
+      - {id: dashboards, label: Dashboards and alerts, icon: Gauge, note: "Grafana, recording rules"}
+edges:
+  - {from: settings, to: connector, label: optional prefix}
+  - {from: connector, to: metrics, label: exposes}
+  - {from: metrics, to: dashboards, label: update the names}

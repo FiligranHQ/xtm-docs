@@ -1,0 +1,25 @@
+title: Operations records what agents did, from the run a trigger started to the tasks, work items and state it left behind
+lanes:
+  - label: What starts work
+    tone: external
+    nodes:
+      - {id: triggers, label: Triggers, icon: Clock, note: "Schedule, webhook, event"}
+      - {id: chat, label: Chats, icon: MessageSquare, note: Delegated work}
+  - label: Work > Operations
+    tone: core
+    nodes:
+      - {id: executions, label: Executions, icon: History, note: One run each}
+      - {id: background, label: Background Tasks, icon: Layers, note: Delegations}
+      - {id: items, label: Work Items, icon: ListChecks, note: Queued for agents}
+  - label: What you do
+    tone: product
+    nodes:
+      - {id: answer, label: Answer or rate, icon: ThumbsUp, note: Awaiting Input, feedback}
+      - {id: follow, label: Follow and fix, icon: Search, note: Run detail, child runs}
+edges:
+  - {from: triggers, to: executions, label: start}
+  - {from: chat, to: background, label: delegate}
+  - {from: executions, to: background, label: hand off, style: dashed}
+  - {from: executions, to: items, label: create, style: dashed}
+  - {from: executions, to: answer}
+  - {from: executions, to: follow}

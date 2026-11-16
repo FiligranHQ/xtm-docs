@@ -1,0 +1,35 @@
+title: A first setup goes through the tabs of Settings in this order
+lanes:
+  - label: The platform
+    tone: core
+    nodes:
+      - {id: parameters, label: Platform, icon: Wrench, note: "Identity, license, AI switch", href: /xtm-one/administer/editions/}
+  - label: The models
+    tone: core
+    nodes:
+      - {id: models, label: AI and models, icon: Cpu, note: "Providers and defaults"}
+      - {id: assistant, label: General Assistant, icon: Sparkles, note: "Shared assistant"}
+  - label: Protection
+    tone: core
+    nodes:
+      - {id: security, label: Access and security, icon: ShieldCheck, note: "Sign-in, audit, approvals", href: /xtm-one/administer/sso/}
+      - {id: quotas, label: Usage and quotas, icon: Gauge, note: "Agentic limits"}
+  - label: Reach
+    tone: product
+    nodes:
+      - {id: channels, label: Channels & Bots, icon: MessageSquare, note: "Slack, Teams...", href: /xtm-one/administer/channels/}
+      - {id: mcp, label: MCP Endpoint, icon: Server, note: "External MCP clients"}
+  - label: Follow-up and context
+    tone: store
+    nodes:
+      - {id: observability, label: Observability, icon: Activity, note: "Traces and audit log"}
+      - {id: quality, label: Organization profile, icon: FileText, note: "What agents read"}
+edges:
+  - {from: parameters, to: models, label: then}
+  - {from: models, to: assistant, label: default model}
+  - {from: models, to: security, label: then}
+  - {from: security, to: quotas, label: then}
+  - {from: quotas, to: channels, label: open to people}
+  - {from: quotas, to: mcp, label: open to clients}
+  - {from: channels, to: observability, label: watch, style: dashed}
+  - {from: observability, to: quality, label: then, style: dashed}

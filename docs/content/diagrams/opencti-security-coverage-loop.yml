@@ -1,0 +1,21 @@
+title: An automated security coverage asks OpenAEV to test the techniques of a threat and shows the results in OpenCTI
+lanes:
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: coverage, label: Security coverage, icon: LogoOpenCTI, note: "Covers a report, intrusion set, campaign..."}
+      - {id: results, label: Coverage results, icon: Gauge, note: "Prevention, detection, vulnerability"}
+  - label: Integration
+    tone: external
+    nodes:
+      - {id: connector, label: OpenAEV connector, icon: Puzzle, note: "Enrichment connector"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: scenario, label: Scenario, icon: LogoOpenAEV, note: "One inject per technique"}
+      - {id: simulation, label: Simulations, icon: PlayCircle, note: "Run on your assets, on a schedule"}
+edges:
+  - {from: coverage, to: connector, label: STIX bundle}
+  - {from: connector, to: scenario, label: builds}
+  - {from: scenario, to: simulation, label: recurrence}
+  - {from: simulation, to: results, label: last results}

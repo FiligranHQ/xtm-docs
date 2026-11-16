@@ -1,0 +1,23 @@
+title: For each person, OpenAEV puts their own link in place of the placeholder, adds the tracking pixel and picks the sender before sending
+lanes:
+  - label: Template
+    tone: product
+    nodes:
+      - {id: body, label: HTML body, icon: FileText, note: "With {{phishing_url}}"}
+      - {id: sender, label: Sender overrides, icon: Users, note: "Inject, then template"}
+  - label: At sending
+    tone: product
+    nodes:
+      - {id: link, label: Personal link, icon: KeyRound, note: One token per person}
+      - {id: pixel, label: Tracking pixel, icon: Activity, note: If turned on}
+  - label: Delivery
+    tone: external
+    nodes:
+      - {id: smtp, label: Mail server, icon: Server, note: Platform configuration}
+      - {id: inbox, label: Person's mailbox, icon: MessageSquare, note: Their own email}
+edges:
+  - {from: body, to: link, label: placeholder replaced}
+  - {from: link, to: pixel, label: then appended}
+  - {from: sender, to: smtp, label: "from, name, reply-to"}
+  - {from: pixel, to: smtp, label: HTML email}
+  - {from: smtp, to: inbox, label: delivers}

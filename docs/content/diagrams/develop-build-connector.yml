@@ -1,0 +1,23 @@
+title: The hospitality threat feed connector
+lanes:
+  - label: Source
+    tone: external
+    nodes:
+      - {id: feed, label: Hospitality feed, icon: Network, note: JSON over HTTPS}
+  - label: Connector
+    nodes:
+      - {id: client, label: client.py, icon: Code2, note: Fetches new items}
+      - {id: converter, label: converter.py, icon: Code2, note: Items to STIX 2.1}
+      - {id: main, label: main.py, icon: Puzzle, note: Schedule, work, state}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: queue, label: RabbitMQ, icon: Server, note: push_ queue}
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Workers write the bundle}
+edges:
+  - {from: feed, to: client, label: items}
+  - {from: client, to: converter, label: new items}
+  - {from: converter, to: main, label: bundle}
+  - {from: main, to: queue, label: send bundle}
+  - {from: queue, to: opencti, label: import}
+  - {from: main, to: opencti, label: work and state, style: dashed}

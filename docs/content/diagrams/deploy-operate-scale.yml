@@ -1,0 +1,29 @@
+title: An OpenCTI cluster splits the nodes for users from the nodes for ingestion, on shared clustered services
+lanes:
+  - label: Clients
+    tone: external
+    nodes:
+      - {id: users, label: Users, icon: Laptop, note: Browser and API clients}
+      - {id: connectors, label: Connectors, icon: Puzzle, note: Register and send data}
+      - {id: workers, label: Workers, icon: Cpu, note: 3 to 4 per ingestion node}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: lb, label: Load balancer, icon: Network, note: In front of the user nodes}
+      - {id: front, label: User nodes, icon: LogoOpenCTI, note: Interface, API, connector registration}
+      - {id: ingest, label: Ingestion nodes, icon: LogoOpenCTI, note: Never reached by users}
+  - label: Shared services
+    tone: store
+    nodes:
+      - {id: es, label: Elasticsearch, icon: Server, note: Cluster, every node declared}
+      - {id: redis, label: Redis, icon: Activity, note: Cluster mode}
+      - {id: mq, label: RabbitMQ, icon: ArrowLeftRight, note: Behind a TCP load balancer}
+      - {id: s3, label: S3 storage, icon: Boxes, note: Any S3-compatible service}
+edges:
+  - {from: users, to: lb}
+  - {from: connectors, to: lb, label: register}
+  - {from: lb, to: front}
+  - {from: workers, to: ingest, label: write bundles}
+  - {from: front, to: es, label: shared stores}
+  - {from: ingest, to: es, label: shared stores}
+  - {from: workers, to: mq, label: read queues, style: dashed}

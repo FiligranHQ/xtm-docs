@@ -1,0 +1,59 @@
+{
+  "name": "feature-flags",
+  "version": "ab702fd",
+  "source": "OpenCRQ-Platform/opencrq@ab702fd (utils/src/feature-flags.ts)",
+  "intro": "The feature flags of this version: features still in development, off by default and reserved to development and testing. A guide never names a flag: it describes the platform without them. A flag disappears from the registry when its feature ships to everyone.",
+  "sections": [
+    {
+      "title": "Feature flags",
+      "columns": [
+        "Flag",
+        "Hides",
+        "Checked in"
+      ],
+      "rows": [
+        {
+          "key": "enterprise-edition-status",
+          "cells": [
+            "`enterprise-edition-status`",
+            "The Settings card reporting which edition the platform runs and what its XTM One contract covers.",
+            "Front end (2 files), back end (0 files)"
+          ]
+        },
+        {
+          "key": "technique-coverage-changes",
+          "cells": [
+            "`technique-coverage-changes`",
+            "The technique and asset family pairs entering or leaving the reach gaps, listed among a scenario's changes between two runs.",
+            "Front end (0 files), back end (1 file)"
+          ]
+        },
+        {
+          "key": "xtm-sign-in",
+          "cells": [
+            "`xtm-sign-in`",
+            "Sign in with XTM One (OpenID Connect): the login page button and the routes behind it. Needs an XTM One that creates sign-in clients at registration.",
+            "Front end (1 file), back end (3 files)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Turn a flag on",
+      "text": "Set `FEATURE_FLAGS` to the flags to turn on, separated by commas (`FEATURE_FLAGS=enterprise-edition-status`), or to `*` for every flag. A name the registry does not hold stops the platform at boot.",
+      "columns": [
+        "Variable",
+        "Accepts"
+      ],
+      "rows": [
+        {
+          "key": "FEATURE_FLAGS",
+          "cells": [
+            "`FEATURE_FLAGS`",
+            "`enterprise-edition-status`, `technique-coverage-changes`, `xtm-sign-in`, `*`"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "name": "connectors",
+  "version": "ab702fd",
+  "source": "OpenCRQ-Platform/opencrq@ab702fd (module/src/modules/connectors/inventory.ts)",
+  "intro": "The connectors of OpenCRQ, as **Administration > Integrations** lists them: what each brings, how it reads (a pull on a schedule, or a live stream), what it writes, the schedule it runs on until someone sets another, the shortest interval it accepts, and the settings that turn it on for a tenant. A connector reads for one tenant at a time: its credentials are set per tenant, in the environment (the [configuration](/reference/opencrq/configuration/#connectors)); its schedule, and for OpenCTI the Live Stream, are set on its page.",
+  "sections": [
+    {
+      "title": "Connectors",
+      "columns": [
+        "Connector",
+        "What it brings",
+        "Kind",
+        "Writes",
+        "Default schedule",
+        "Shortest interval",
+        "Settings"
+      ],
+      "rows": [
+        {
+          "key": "first",
+          "cells": [
+            "**FIRST EPSS**",
+            "Exploit prediction scores: the likelihood that a vulnerability is exploited in the wild, to rank remediation by real risk.",
+            "Vulnerability, scheduled pull",
+            "CVEs",
+            "Every day at 06:00 UTC",
+            "12 hours",
+            "None"
+          ]
+        },
+        {
+          "key": "nist",
+          "cells": [
+            "**NIST NVD CVE**",
+            "Comprehensive vulnerability databases with severity, references and affected versions for every published CVE.",
+            "Vulnerability, scheduled pull",
+            "CVEs",
+            "Every day at 06:00 UTC",
+            "6 hours",
+            "`CONNECTORS__NIST__<tenant-uuid>__API_KEY` (optional)"
+          ]
+        },
+        {
+          "key": "cisa",
+          "cells": [
+            "**CISA Known Exploited Vulnerabilities (KEV)**",
+            "Vulnerabilities confirmed as actively exploited, the authoritative list for prioritising what to fix first.",
+            "Vulnerability, scheduled pull",
+            "CVEs",
+            "Every day at 06:00 UTC",
+            "6 hours",
+            "None"
+          ]
+        },
+        {
+          "key": "microsoft_graph",
+          "cells": [
+            "**Microsoft Defender**",
+            "Devices, identities and software vulnerabilities from your managed estate, to track CVEs and privileged accounts.",
+            "Vulnerability, scheduled pull",
+            "Supporting assets, Findings",
+            "Every 6 hours",
+            "1 hour",
+            "`CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__AZURE_TENANT_ID`, `CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_ID`, `CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_SECRET`"
+          ]
+        },
+        {
+          "key": "openaev",
+          "cells": [
+            "**OpenAEV**",
+            "Simulation results: detection and prevention outcomes per MITRE technique and security platform, landed as findings on your assets.",
+            "Simulation, scheduled pull",
+            "Findings",
+            "Every hour",
+            "1 hour",
+            "`CONNECTORS__OPENAEV__<tenant-uuid>__URL`, `CONNECTORS__OPENAEV__<tenant-uuid>__TOKEN`"
+          ]
+        },
+        {
+          "key": "drata",
+          "cells": [
+            "**Drata**",
+            "Your compliance posture: security frameworks with their requirements and control readiness, as evidence for capability assessments.",
+            "Compliance, scheduled pull",
+            "Capability assessments",
+            "Every day at 06:00 UTC",
+            "6 hours",
+            "`CONNECTORS__DRATA__<tenant-uuid>__URL` (optional), `CONNECTORS__DRATA__<tenant-uuid>__API_KEY`, `CONNECTORS__DRATA__<tenant-uuid>__WORKSPACE_ID` (optional)"
+          ]
+        },
+        {
+          "key": "opencti",
+          "cells": [
+            "**OpenCTI**",
+            "Threat intelligence kept current by subscribing to a Live Stream, instead of uploading STIX bundles by hand.",
+            "Threat intelligence, live stream",
+            "Threat intelligence",
+            "Continuous",
+            "",
+            "`CONNECTORS__OPENCTI__<tenant-uuid>__URL`, `CONNECTORS__OPENCTI__<tenant-uuid>__TOKEN`"
+          ]
+        },
+        {
+          "key": "default_threats",
+          "cells": [
+            "**OpenCRQ Default Threats**",
+            "Default threats for a tenant without a threat feed of its own: threat groups and campaigns derived from MITRE ATT&CK, following its releases.",
+            "Threat intelligence, scheduled pull",
+            "Threat intelligence",
+            "Every day at 06:00 UTC",
+            "1 hour",
+            "`CONNECTORS__DEFAULT_THREATS__DATASET_URL` (optional)"
+          ]
+        }
+      ]
+    }
+  ]
+}

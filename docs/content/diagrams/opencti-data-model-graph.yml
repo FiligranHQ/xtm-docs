@@ -1,0 +1,26 @@
+title: OpenCTI knowledge is a graph of containers, entities and observables, linked by relationships that are objects of their own
+lanes:
+  - label: Containers
+    tone: product
+    nodes:
+      - {id: report, label: Report, icon: FileText, note: Velvet Harbor targets hotel booking systems, href: /opencti/concepts/containers/}
+  - label: Entities
+    tone: product
+    nodes:
+      - {id: intrusionset, label: Intrusion Set, icon: Crosshair, note: Velvet Harbor}
+      - {id: malware, label: Malware, icon: Bug, note: Velvet Loader}
+      - {id: sector, label: Sector, icon: Boxes, note: Hospitality}
+      - {id: indicator, label: Indicator, icon: ShieldCheck, note: Pattern on 203.0.113.10}
+  - label: Observables
+    tone: external
+    nodes:
+      - {id: ipv4, label: IPv4 address, icon: Server, note: 203.0.113.10}
+      - {id: domain, label: Domain name, icon: Network, note: booking-velvetharbor.example}
+edges:
+  - {from: report, to: intrusionset, label: contains}
+  - {from: report, to: malware, label: contains}
+  - {from: intrusionset, to: malware, label: uses}
+  - {from: intrusionset, to: sector, label: targets}
+  - {from: indicator, to: intrusionset, label: indicates}
+  - {from: indicator, to: ipv4, label: based on}
+  - {from: domain, to: ipv4, label: resolves to}

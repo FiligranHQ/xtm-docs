@@ -1,0 +1,22 @@
+title: Two ways pycti writes to OpenCTI
+lanes:
+  - label: Your code
+    tone: external
+    nodes:
+      - {id: script, label: Script or service, icon: Code2, note: OpenCTIApiClient}
+      - {id: connector, label: Connector, icon: Puzzle, note: OpenCTIConnectorHelper}
+  - label: Queues
+    tone: store
+    nodes:
+      - {id: rabbitmq, label: RabbitMQ, icon: Server, note: The connector's push_ queue}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: api, label: GraphQL API, icon: LogoOpenCTI, note: Reads and writes at once}
+      - {id: worker, label: Workers, icon: Cpu, note: Write bundles in the background}
+edges:
+  - {from: script, to: api, label: query and mutate, both: true}
+  - {from: connector, to: rabbitmq, label: send_stix2_bundle}
+  - {from: rabbitmq, to: worker, label: consume}
+  - {from: worker, to: api, label: write}
+  - {from: connector, to: api, label: register, read, state, style: dashed}

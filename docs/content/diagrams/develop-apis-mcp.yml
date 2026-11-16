@@ -1,0 +1,23 @@
+title: An MCP client calls the MCP servers of XTM One, which call OpenCTI, OpenAEV and OpenCRQ as the signed-in user
+lanes:
+  - label: MCP clients
+    tone: external
+    nodes:
+      - {id: client, label: MCP client, icon: Laptop, note: "Claude, Cursor, VS Code"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: platform, label: Platform servers, icon: LogoXTMOne, note: "/mcp/opencti, /mcp/openaev, /mcp/opencrq"}
+      - {id: own, label: XTM One servers, icon: Bot, note: "/mcp/xtm, /mcp/user"}
+  - label: The products
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: GraphQL API}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: REST API}
+      - {id: opencrq, label: OpenCRQ, icon: LogoOpenCRQ, note: API}
+edges:
+  - {from: client, to: platform, label: JSON-RPC over HTTP}
+  - {from: client, to: own, label: JSON-RPC over HTTP}
+  - {from: platform, to: opencti, label: as the user}
+  - {from: platform, to: openaev, label: as the user}
+  - {from: platform, to: opencrq, label: as the user}

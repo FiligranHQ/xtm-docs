@@ -1,0 +1,24 @@
+title: Every user action goes to the activity listener, which writes the audit log and feeds the events screen and the triggers
+lanes:
+  - label: User actions
+    nodes:
+      - {id: admin, label: Administration actions, icon: ShieldCheck, note: Always recorded}
+      - {id: extended, label: "Reads, files, commands", icon: FileText, note: Listened users only}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: listener, label: Activity listener, icon: Activity, note: Enterprise Edition}
+      - {id: manager, label: Activity manager, icon: Workflow, note: Indexes and alerts}
+  - label: Results
+    tone: store
+    nodes:
+      - {id: logs, label: Audit log, icon: Terminal, note: File and console}
+      - {id: events, label: Events screen, icon: History, note: History index}
+      - {id: triggers, label: Activity triggers, icon: MessageSquare, note: Notify recipients}
+edges:
+  - {from: admin, to: listener, label: event}
+  - {from: extended, to: listener, label: event}
+  - {from: listener, to: logs, label: administration only}
+  - {from: listener, to: manager, label: activity stream}
+  - {from: manager, to: events, label: index}
+  - {from: manager, to: triggers, label: match filters}

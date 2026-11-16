@@ -1,0 +1,30 @@
+title: A STIX bundle is split into one message per object, each written by a worker through the platform checks, then consolidated by background processes
+lanes:
+  - label: Sources
+    tone: external
+    nodes:
+      - {id: source, label: Source, icon: Puzzle, note: "Connector, feed, file, platform"}
+  - label: Queue
+    tone: store
+    nodes:
+      - {id: split, label: Split bundle, icon: Layers, note: One object per message}
+  - label: Writing
+    tone: product
+    nodes:
+      - {id: worker, label: Worker, icon: Cpu, note: Sends objects to the API}
+      - {id: platform, label: Platform, icon: LogoOpenCTI, note: "References, markings, duplicates, confidence"}
+  - label: Knowledge
+    tone: store
+    nodes:
+      - {id: base, label: Knowledge base, icon: Search, note: Created or updated}
+  - label: After writing
+    tone: product
+    nodes:
+      - {id: after, label: Background processes, icon: Workflow, note: "Rules, decay, playbooks"}
+edges:
+  - {from: source, to: split, label: STIX bundle}
+  - {from: split, to: worker, label: fewest references first}
+  - {from: worker, to: platform, label: API call}
+  - {from: platform, to: base, label: write}
+  - {from: base, to: after, label: live stream}
+  - {from: after, to: platform, label: new knowledge, style: dashed}

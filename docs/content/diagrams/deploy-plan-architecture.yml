@@ -1,0 +1,26 @@
+title: XTM One is at the center of the stack, OpenCTI, OpenAEV and OpenCRQ connect to it, and the integrations go through the platforms
+lanes:
+  - label: Integrations
+    tone: external
+    nodes:
+      - {id: integrations, label: Default integrations, icon: Puzzle, note: "Connectors, collectors, injectors", href: /deploy/integrations/how-they-run/}
+      - {id: composer, label: XTM Composer, icon: Workflow, note: Runs integrations as containers, href: /deploy/integrations/composer/}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Platform and its worker, href: /opencti/concepts/architecture/}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: Platform, href: /openaev/concepts/architecture/}
+      - {id: opencrq, label: OpenCRQ, icon: LogoOpenCRQ, note: Reads OpenCTI and OpenAEV, href: /deploy/install/opencrq/}
+  - label: At the center
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: Web application and its worker, href: /xtm-one/}
+edges:
+  - {from: integrations, to: opencti, label: platform API}
+  - {from: integrations, to: openaev, label: platform API}
+  - {from: composer, to: opencti, label: manages integrations}
+  - {from: composer, to: openaev, label: manages integrations}
+  - {from: opencti, to: openaev, label: API calls, both: true}
+  - {from: opencti, to: xtmone, label: registers, both: true}
+  - {from: openaev, to: xtmone, label: registers, both: true}
+  - {from: opencrq, to: xtmone, label: registers, both: true}

@@ -1,0 +1,23 @@
+title: The administrator's choice wins over the deployment default; with AI off, AI work is refused or held and everything else keeps working
+lanes:
+  - label: Who sets it
+    tone: external
+    nodes:
+      - {id: mode, label: PLATFORM_MODE, icon: Terminal, note: "Deployment default, at startup", href: /reference/xtm-one/configuration/#platform-mode}
+      - {id: admin, label: Settings > Platform, icon: Wrench, note: "Enabled, Disabled, Deployment default"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: switch, label: AI switch, icon: Gauge, note: Read by every request and run}
+  - label: With AI off
+    tone: product
+    nodes:
+      - {id: refused, label: AI work, icon: X, note: "Refused, or held if scheduled"}
+      - {id: running, label: Runs in progress, icon: Clock, note: Finish under their time limit}
+      - {id: rest, label: Everything else, icon: Check, note: "Sign-in, settings, data, connections"}
+edges:
+  - {from: mode, to: switch, label: default}
+  - {from: admin, to: switch, label: overrides}
+  - {from: switch, to: refused, label: off}
+  - {from: switch, to: running, label: off}
+  - {from: switch, to: rest, label: unaffected, style: dashed}
