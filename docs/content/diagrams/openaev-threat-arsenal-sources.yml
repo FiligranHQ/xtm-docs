@@ -13,7 +13,7 @@ lanes:
   - label: Tests
     tone: product
     nodes:
-      - {id: atomic, label: Atomic tests, icon: PlayCircle, note: One action, now}
+      - {id: atomic, label: Atomic tests, icon: PlayCircle, note: 'One action, now'}
       - {id: scenarios, label: Scenarios, icon: Workflow, note: Actions as injects}
       - {id: chained, label: Chained scenarios, icon: GitBranch, note: Actions as steps}
 edges:

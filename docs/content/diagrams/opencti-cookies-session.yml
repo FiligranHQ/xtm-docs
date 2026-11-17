@@ -4,7 +4,7 @@ lanes:
     tone: external
     nodes:
       - {id: browser, label: Browser, icon: Laptop, note: Sends opencti_session on every request}
-      - {id: api, label: API clients, icon: Code2, note: Send a token, get no cookie}
+      - {id: api, label: API clients, icon: Code2, note: 'Send a token, get no cookie'}
   - label: OpenCTI
     tone: product
     nodes:

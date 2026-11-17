@@ -9,7 +9,7 @@ lanes:
     nodes:
       - {id: markings, label: Markings, icon: ShieldCheck, note: Clearance of the groups}
       - {id: organizations, label: Organization sharing, icon: Network, note: Enterprise Edition}
-      - {id: members, label: Authorized members, icon: KeyRound, note: Per object, replaces sharing}
+      - {id: members, label: Authorized members, icon: KeyRound, note: 'Per object, replaces sharing'}
   - label: Knowledge
     tone: store
     nodes:

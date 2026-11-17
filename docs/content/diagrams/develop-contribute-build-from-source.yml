@@ -9,7 +9,7 @@ lanes:
     nodes:
       - {id: front, label: Front end, icon: Code2, note: "Vite dev server, port 3000"}
       - {id: back, label: Back end, icon: LogoOpenCTI, note: "GraphQL API, port 4000"}
-      - {id: worker, label: Worker, icon: Cpu, note: Python, imports bundles}
+      - {id: worker, label: Worker, icon: Cpu, note: 'Python, imports bundles'}
   - label: opencti-dev containers
     tone: store
     nodes:

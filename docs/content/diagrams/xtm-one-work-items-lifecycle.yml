@@ -14,7 +14,7 @@ lanes:
     tone: product
     nodes:
       - {id: done, label: Done, icon: Check, note: With its proof}
-      - {id: blocked, label: Blocked or missed, icon: TriangleAlert, note: Notified, never resent}
+      - {id: blocked, label: Blocked or missed, icon: TriangleAlert, note: 'Notified, never resent'}
 edges:
   - {from: ask, to: item, label: agent schedules}
   - {from: item, to: card, label: shows}

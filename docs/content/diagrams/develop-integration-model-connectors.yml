@@ -4,7 +4,7 @@ lanes:
     tone: external
     nodes:
       - {id: external, label: External import, icon: Puzzle, note: Runs on its own schedule}
-      - {id: triggered, label: Enrichment, file import, export, icon: Puzzle, note: Runs on a request}
+      - {id: triggered, label: 'Enrichment, file import, export', icon: Puzzle, note: Runs on a request}
       - {id: stream, label: Stream, icon: Puzzle, note: Follows a live stream}
   - label: Queues
     tone: store

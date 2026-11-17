@@ -19,4 +19,4 @@ edges:
   - {from: connector, to: rabbitmq, label: send_stix2_bundle}
   - {from: rabbitmq, to: worker, label: consume}
   - {from: worker, to: api, label: write}
-  - {from: connector, to: api, label: register, read, state, style: dashed}
+  - {from: connector, to: api, label: 'register, read, state', style: dashed}

@@ -3,7 +3,7 @@ lanes:
   - label: The attack
     tone: external
     nodes:
-      - {id: access, label: Initial access, icon: LogIn, note: Phishing, an exposed service}
+      - {id: access, label: Initial access, icon: LogIn, note: 'Phishing, an exposed service'}
       - {id: path, label: Attack path, icon: GitBranch, note: Toward the primary assets}
   - label: Ends on
     tone: product
@@ -13,7 +13,7 @@ lanes:
   - label: The business
     tone: store
     nodes:
-      - {id: asset, label: Primary asset, icon: Layers, note: Availability, integrity, confidentiality, traceability}
+      - {id: asset, label: Primary asset, icon: Layers, note: 'Availability, integrity, confidentiality, traceability'}
 edges:
   - {from: access, to: path}
   - {from: path, to: exfil, label: data outcomes}

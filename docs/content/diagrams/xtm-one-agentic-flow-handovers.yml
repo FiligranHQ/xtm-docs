@@ -8,7 +8,7 @@ lanes:
     tone: external
     nodes:
       - {id: delegate, label: Delegate, icon: Layers, note: Background task}
-      - {id: consult, label: Consult, icon: MessageSquare, note: Asks, then resumes}
+      - {id: consult, label: Consult, icon: MessageSquare, note: 'Asks, then resumes'}
       - {id: transfer, label: Transfer, icon: ArrowRight, note: Hands the conversation}
       - {id: mandatory, label: Mandatory Transfer, icon: ArrowUpRight, note: After its answer}
   - label: Agent that takes it

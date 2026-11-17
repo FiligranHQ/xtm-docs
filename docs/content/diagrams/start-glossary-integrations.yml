@@ -7,7 +7,7 @@ lanes:
   - label: Integrations
     tone: external
     nodes:
-      - {id: connectors, label: Connectors, icon: Puzzle, note: Import, enrich, stream, export}
+      - {id: connectors, label: Connectors, icon: Puzzle, note: 'Import, enrich, stream, export'}
       - {id: collectors, label: Collectors, icon: Search, note: Read security tool results}
       - {id: injectors, label: Injectors, icon: Crosshair, note: Run injects}
       - {id: executors, label: Executors, icon: Laptop, note: Act on endpoints}

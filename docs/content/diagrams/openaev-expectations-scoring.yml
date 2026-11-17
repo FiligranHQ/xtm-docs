@@ -14,7 +14,7 @@ lanes:
     tone: product
     nodes:
       - {id: asset, label: Asset, icon: Server, note: From its agents}
-      - {id: group, label: Asset group or team, icon: Network, note: All must validate, or one}
+      - {id: group, label: Asset group or team, icon: Network, note: 'All must validate, or one'}
   - label: Inject
     tone: core
     nodes:

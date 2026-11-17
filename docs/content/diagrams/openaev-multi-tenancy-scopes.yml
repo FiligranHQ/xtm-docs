@@ -7,7 +7,7 @@ lanes:
   - label: Tenants
     tone: product
     nodes:
-      - {id: cert, label: Example CERT, icon: Boxes, note: The default tenant, renamed}
+      - {id: cert, label: Example CERT, icon: Boxes, note: 'The default tenant, renamed'}
       - {id: gm, label: Grand Meridian Hotels, icon: Boxes, note: "Scenarios, assets, teams, findings"}
       - {id: other, label: Another member chain, icon: Boxes, note: Sees nothing of the others}
   - label: In each tenant

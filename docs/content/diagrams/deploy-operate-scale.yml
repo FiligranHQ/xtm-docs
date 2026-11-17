@@ -10,12 +10,12 @@ lanes:
     tone: product
     nodes:
       - {id: lb, label: Load balancer, icon: Network, note: In front of the user nodes}
-      - {id: front, label: User nodes, icon: LogoOpenCTI, note: Interface, API, connector registration}
+      - {id: front, label: User nodes, icon: LogoOpenCTI, note: 'Interface, API, connector registration'}
       - {id: ingest, label: Ingestion nodes, icon: LogoOpenCTI, note: Never reached by users}
   - label: Shared services
     tone: store
     nodes:
-      - {id: es, label: Elasticsearch, icon: Server, note: Cluster, every node declared}
+      - {id: es, label: Elasticsearch, icon: Server, note: 'Cluster, every node declared'}
       - {id: redis, label: Redis, icon: Activity, note: Cluster mode}
       - {id: mq, label: RabbitMQ, icon: ArrowLeftRight, note: Behind a TCP load balancer}
       - {id: s3, label: S3 storage, icon: Boxes, note: Any S3-compatible service}

@@ -19,7 +19,7 @@ lanes:
   - label: Its result
     tone: external
     nodes:
-      - {id: result, label: Brief, rule or answer, icon: FileText, note: "Where your team reads it"}
+      - {id: result, label: 'Brief, rule or answer', icon: FileText, note: "Where your team reads it"}
 edges:
   - {from: schedule, to: agent, label: runs}
   - {from: event, to: agent, label: triggers}

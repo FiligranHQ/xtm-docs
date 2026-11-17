@@ -22,4 +22,4 @@ edges:
   - {from: user, to: markings, label: clearance}
   - {from: capabilities, to: members, label: allowed}
   - {from: markings, to: members, label: cleared}
-  - {from: members, to: report, label: view, edit or manage}
+  - {from: members, to: report, label: 'view, edit or manage'}

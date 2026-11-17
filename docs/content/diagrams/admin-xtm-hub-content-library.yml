@@ -3,7 +3,7 @@ lanes:
   - label: XTM Hub
     tone: external
     nodes:
-      - {id: library, label: Content library, icon: BookOpen, note: Dashboards, playbooks, feeds}
+      - {id: library, label: Content library, icon: BookOpen, note: 'Dashboards, playbooks, feeds'}
   - label: OpenCTI
     tone: product
     nodes:

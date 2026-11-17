@@ -7,7 +7,7 @@ lanes:
   - label: How it starts
     tone: external
     nodes:
-      - {id: launch, label: Launch, icon: PlayCircle, note: Now, after a confirmation}
+      - {id: launch, label: Launch, icon: PlayCircle, note: 'Now, after a confirmation'}
       - {id: schedule, label: Scheduling, icon: Clock, note: "Once, hourly to monthly"}
   - label: Each run
     tone: product

@@ -6,7 +6,7 @@ lanes:
   - label: Grouped by
     tone: product
     nodes:
-      - {id: group, label: Group, icon: Layers, note: Membership, defaults, confidence}
+      - {id: group, label: Group, icon: Layers, note: 'Membership, defaults, confidence'}
       - {id: org, label: Organization, icon: Boxes, note: Data segregation}
   - label: Grants
     tone: store

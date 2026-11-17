@@ -3,12 +3,12 @@ lanes:
   - label: Your tools
     tone: external
     nodes:
-      - {id: feeds, label: Feeds and tools, icon: Network, note: Vendors, SIEM, EDR, sandboxes}
+      - {id: feeds, label: Feeds and tools, icon: Network, note: 'Vendors, SIEM, EDR, sandboxes'}
       - {id: endpoints, label: Endpoints, icon: Laptop, note: Where OpenAEV agents run}
   - label: Integrations
     nodes:
-      - {id: connector, label: Connectors, icon: Puzzle, note: Import, enrich, stream, export}
-      - {id: aev, label: Collectors, injectors, icon: Puzzle, note: Results in, actions out}
+      - {id: connector, label: Connectors, icon: Puzzle, note: 'Import, enrich, stream, export'}
+      - {id: aev, label: 'Collectors, injectors', icon: Puzzle, note: 'Results in, actions out'}
       - {id: executor, label: Executors, icon: Puzzle, note: Deploy OpenAEV agents}
   - label: Platforms
     tone: product

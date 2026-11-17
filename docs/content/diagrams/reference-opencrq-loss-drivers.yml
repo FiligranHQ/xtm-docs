@@ -3,7 +3,7 @@ lanes:
   - label: You give
     tone: external
     nodes:
-      - {id: range, label: A range per driver, icon: Scale, note: Minimum, most likely, maximum}
+      - {id: range, label: A range per driver, icon: Scale, note: 'Minimum, most likely, maximum'}
   - label: Loss drivers
     tone: product
     nodes:

@@ -14,8 +14,8 @@ lanes:
   - label: What you do
     tone: product
     nodes:
-      - {id: answer, label: Answer or rate, icon: ThumbsUp, note: Awaiting Input, feedback}
-      - {id: follow, label: Follow and fix, icon: Search, note: Run detail, child runs}
+      - {id: answer, label: Answer or rate, icon: ThumbsUp, note: 'Awaiting Input, feedback'}
+      - {id: follow, label: Follow and fix, icon: Search, note: 'Run detail, child runs'}
 edges:
   - {from: triggers, to: executions, label: start}
   - {from: chat, to: background, label: delegate}

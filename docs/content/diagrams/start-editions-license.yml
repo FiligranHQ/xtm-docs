@@ -3,7 +3,7 @@ lanes:
   - label: Filigran
     tone: external
     nodes:
-      - {id: license, label: License certificate, icon: KeyRound, note: Trial, standard or LTS}
+      - {id: license, label: License certificate, icon: KeyRound, note: 'Trial, standard or LTS'}
   - label: Where you set it
     tone: product
     nodes:
@@ -13,7 +13,7 @@ lanes:
   - label: OpenCTI
     tone: product
     nodes:
-      - {id: check, label: License check, icon: ShieldCheck, note: Signature, scope, dates}
+      - {id: check, label: License check, icon: ShieldCheck, note: 'Signature, scope, dates'}
   - label: Edition
     tone: core
     nodes:

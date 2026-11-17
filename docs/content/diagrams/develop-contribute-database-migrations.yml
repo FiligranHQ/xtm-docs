@@ -6,7 +6,7 @@ lanes:
       - {id: class, label: Migration class, icon: Code2, note: "V6_<timestamp>__<name>"}
   - label: Checks
     nodes:
-      - {id: test, label: Migration test, icon: ClipboardCheck, note: Seeds rows, runs it twice}
+      - {id: test, label: Migration test, icon: ClipboardCheck, note: 'Seeds rows, runs it twice'}
       - {id: guard, label: Migrations guard, icon: GitPullRequest, note: New ones sort last}
   - label: OpenAEV
     tone: product

@@ -9,7 +9,7 @@ lanes:
     nodes:
       - {id: routing, label: Channels & Bots, icon: MessageSquare, note: Default chat agent}
       - {id: memory, label: Memory, icon: BookOpen, note: What agents remember}
-      - {id: keys, label: API Keys, icon: KeyRound, note: Scoped, expiring}
+      - {id: keys, label: API Keys, icon: KeyRound, note: 'Scoped, expiring'}
       - {id: mcp, label: MCP Endpoint, icon: Server, note: Agents as MCP tools}
   - label: Your own tools
     tone: product

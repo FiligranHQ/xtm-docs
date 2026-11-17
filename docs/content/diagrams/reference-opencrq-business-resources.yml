@@ -3,7 +3,7 @@ lanes:
   - label: The scenario
     tone: product
     nodes:
-      - {id: outcome, label: Attack outcome, icon: Crosshair, note: Ransomware, data breach...}
+      - {id: outcome, label: Attack outcome, icon: Crosshair, note: 'Ransomware, data breach...'}
   - label: The primary asset
     tone: store
     nodes:

@@ -15,7 +15,7 @@ lanes:
     tone: core
     nodes:
       - {id: scenario, label: Risk scenario, icon: TriangleAlert, note: An outcome on primary assets}
-      - {id: scope, label: Grand Meridian France, icon: Layers, note: Sector, country, estate, profile}
+      - {id: scope, label: Grand Meridian France, icon: Layers, note: 'Sector, country, estate, profile'}
 edges:
   - {from: db, to: web, label: supports, style: dashed}
   - {from: db, to: guests, label: stores}

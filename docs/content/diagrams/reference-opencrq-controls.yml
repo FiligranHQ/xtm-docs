@@ -3,7 +3,7 @@ lanes:
   - label: You declare
     tone: external
     nodes:
-      - {id: strength, label: Strength, icon: Gauge, note: Not deployed, basic, intermediate, master}
+      - {id: strength, label: Strength, icon: Gauge, note: 'Not deployed, basic, intermediate, master'}
       - {id: coverage, label: Coverage, icon: ShieldCheck, note: Share of the estate it protects}
   - label: The catalogue
     tone: product

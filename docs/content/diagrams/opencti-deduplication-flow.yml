@@ -13,7 +13,7 @@ lanes:
     tone: store
     nodes:
       - {id: create, label: Create, icon: Sparkles, note: Nothing found}
-      - {id: upsert, label: Update, icon: History, note: One match, within confidence}
+      - {id: upsert, label: Update, icon: History, note: 'One match, within confidence'}
       - {id: merge, label: Merge, icon: GitBranch, note: Several matches}
 edges:
   - {from: input, to: ids, label: properties}
