@@ -45,7 +45,7 @@ Under it, one tile per expectation type sums up every target: **Prevention**, **
 
 :::steps
 
-1. In **Targets**, choose a tab: **Asset groups**, **Teams**, **Assets**, **Persons**, **Agents** or **Manual targets**, the addresses typed by hand for a network scan such as Nmap or Nuclei. Only the kinds of target the inject reached show; an inject without any reads **No target configured.** The page remembers the last tab you opened for this inject.
+1. In **Targets**, choose a tab: **Asset groups**, **Teams**, **Assets**, **Persons**, **Agents** or **Manual targets**, the addresses typed by hand for a network scan such as Nmap or Nuclei. Only the kinds of target the inject reached show. An inject without any target, such as an HTTP request, shows no tab: **Targets** reads "This inject has no target. Its results are in the Execution details tab." The page remembers the last tab you opened for this inject.
 2. Click a target. **Results by target** shows its results; the arrows at its top move to the previous or next target.
 3. Read a section per expectation type first. Each card gives the name of the expectation, its **Score**, and, on a group, its **Validation rule**. For prevention and detection, each security platform that answers has a line, with its **Status**, its **Detection time** and its **Alerts**. Click the number of alerts to see the alerts the collector matched; an alert that carries a link opens in its security platform, in a new tab. A platform's line fills in only after its collector's next run, so allow a few minutes after the inject before you read a missing alert as a miss.
 4. Read **Execution**: the traces of the target, one line per step, with the status of each agent. On an asset group, open one of its assets to see them.

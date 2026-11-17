@@ -32,6 +32,8 @@ The platform decides when each inject runs. Then:
 - A **built-in** injector runs the inject in the platform: it sends the email through the platform's mail server, or publishes the article on the player interface.
 - An **external** injector registers with the platform when it starts, with its URL, token and identifier. The platform answers with the connection details of RabbitMQ, and puts each inject in the injector's own queue. So the injector must reach RabbitMQ under the host name and port the platform gives it. Deployed from the catalog with XTM Composer, it registers with the token of the tenant's **Catalog connectors** service account, which every integration of the catalog shares: see [Run a collector](/openaev/use/collectors/#run-a-collector). How an external integration reaches its platform, with XTM Composer or without it, is in [How integrations run](/deploy/integrations/how-they-run/).
 
+The inject picker of scenarios, simulations and atomic tests offers only the contracts of an injector registered in the tenant. A contract whose injector has not registered would fail at launch, so it stays hidden until its injector registers.
+
 ## Injectors that act on endpoints
 
 Some contracts run on endpoints: the attack actions of the Threat Arsenal, run by the **OpenAEV Implant** injector, and the contracts of external injectors built for endpoints. An injector of this kind does not reach the endpoint itself. When it registers, it tells the executors how to start it on Windows, Linux and macOS, and an executor starts it on each target: the OpenAEV agent or your EDR. So these injects need an executor on their targets. See [Choose between the OpenAEV agent and your EDR](/openaev/use/executors/).
@@ -52,7 +54,7 @@ The scenario that replays Velvet Harbor against Grand Meridian Hotels uses four 
 | A scan of the booking database server's exposed services | Nmap | External, run by XTM Composer |
 | The incident case for the CERT, in OpenCTI | OpenCTI | From the catalog |
 
-Only Nmap needs a container: the platform engineer deploys it from the **Available** tab, and it shows as started in the **Deployed** tab before the simulation starts.
+Only Nmap needs a container: the platform engineer deploys it from the **Available** tab, and it shows as started in the **Deployed** tab. Once it has registered, its scan contracts appear in the inject picker of the scenario.
 :::
 
 ::screenshot{id=openaev-integrations-injectors-deployed alt="The Deployed tab of Integrations filtered on injectors: the built-in Challenges, Email, Manual, Media pressure, OpenAEV Implant and Phishing injectors, all started."}

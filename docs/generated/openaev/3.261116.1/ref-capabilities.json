@@ -1,7 +1,7 @@
 {
   "name": "capabilities",
-  "version": "3.261110.0",
-  "source": "OpenAEV-Platform/openaev@cde7bee (openaev-model/src/main/java/io/openaev/database/model/Capability.java)",
+  "version": "3.261116.1",
+  "source": "OpenAEV-Platform/openaev@6d8572a (openaev-model/src/main/java/io/openaev/database/model/Capability.java)",
   "intro": "The capabilities a role grants in OpenAEV, as the role editor names them, group by group. A capability includes the one it is under: **Manage assessment** also gives **Access assessment**. **Scope** says where a role grants it: a role of the platform, or a role of a tenant. **Allows** lists the actions it opens on each kind of object.",
   "filter": "Filter capabilities, objects, actions",
   "sections": [
@@ -241,6 +241,17 @@
             "Tenant",
             "delete: threat arsenal",
             "`DELETE_THREAT_ARSENALS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "REVOKE_THREAT_ARSENALS",
+          "cells": [
+            "**Revoke threat arsenal**",
+            "Manage threat arsenal",
+            "Tenant",
+            "revoke: threat arsenal",
+            "`REVOKE_THREAT_ARSENALS`"
           ],
           "depth": 1
         }

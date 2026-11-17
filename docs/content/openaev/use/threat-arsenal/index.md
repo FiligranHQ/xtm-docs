@@ -31,7 +31,7 @@ The list, under :menu[Threat Arsenal], shows each action's **Type**, **Name**, *
 - **Unverified**: OpenAEV has not tested it; it may or may not work.
 - **Deprecated**: its source marked it deprecated; it stays for reference, with no guarantee.
 
-Filter the list by **Action type**, **Platform**, **Domains**, **Status** and **Author**, in the sidebar. The author of an action is a person or an organization, never a team: the person who created or duplicated it, or the organization behind the injector or collector that provides it. **No author** isolates the actions without one, such as those the platform creates on its own. Reading **Threat Arsenal** takes **Access threat arsenal**.
+Filter the list by **Action type**, **Platform**, **Domains**, **Status** and **Author**, in the sidebar. The author of an action is a person or an organization, never a team: the person who created or duplicated it, or the organization behind the injector or collector that provides it. **No author** isolates the actions without one, such as those the platform creates on its own. Reading **Threat Arsenal** takes **Access threat arsenal**. A user without it still sees :menu[Threat Arsenal] when one of their groups has a grant on a single action, **Access** or **Manage+Delete**, in its **Threat Arsenal** grants: the list then shows only the actions granted to them.
 
 ::screenshot{id=openaev-threat-arsenal-list alt="The Threat Arsenal list with the three Velvet Harbor actions, booking attachment loader, local guest records collection and HTTPS beacon, Verified, next to the actions the platform ships."}
 

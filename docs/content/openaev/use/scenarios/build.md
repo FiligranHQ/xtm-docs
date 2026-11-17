@@ -117,7 +117,7 @@ The **Statistics** tab shows a custom dashboard of the scenario: **Select a dash
 The menu of the header offers **Update**, **Duplicate**, **Export** and **Delete**.
 
 - **Export** downloads a `.zip`: the scenario and its injects with their files, and, if you tick them, the **Teams**, the **Persons** and the **Variable values**. Variable values can hold the addresses and other values your injects use: tick them only for a file you trust.
-- To import it, click **Import a scenario**, the upload icon at the top of :menu[Scenarios], and choose the `.zip`.
+- To import it, click **Import a scenario**, the upload icon at the top of :menu[Scenarios], and choose the `.zip`. It can be an export you unzipped, edited and zipped again with any archive tool: OpenAEV recognizes the scenario, its payloads and its files by their names and content. A `.zip` that holds no scenario, simulation or payload is refused.
 - **Import from Hub**, at the top of the list, opens the scenario library of XTM Hub when the platform is registered with it: deploy a scenario from XTM Hub and it appears in your list. See [Connect to XTM Hub](/openaev/administer/xtm-hub/).
 
 :::example[Replay Velvet Harbor on the front desks every week]

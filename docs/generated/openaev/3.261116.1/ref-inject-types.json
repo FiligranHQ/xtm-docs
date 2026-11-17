@@ -1,8 +1,8 @@
 {
   "name": "inject-types",
-  "version": "3.261110.0",
-  "source": "OpenAEV-Platform/openaev@cde7bee (openaev-api/src/main/java/io/openaev/injectors, openaev-framework/src/main/java/io/openaev/injector_contract/fields, openaev-framework/src/main/java/io/openaev/expectation/ExpectationBuilderService.java)",
-  "intro": "The 8 injectors OpenAEV 3.261110.0 ships with, the 8 inject types (contracts) their code declares, and the contracts the platform writes for each payload and each phishing landing page. For each contract: the fields of its form, their key in the API, whether they are required, and the expectations it predefines. In the API, the teams of an inject go in `inject_teams` and its documents in `inject_documents`; every other field goes in `inject_content`, under its key.",
+  "version": "3.261116.1",
+  "source": "OpenAEV-Platform/openaev@6d8572a (openaev-api/src/main/java/io/openaev/injectors, openaev-framework/src/main/java/io/openaev/injector_contract/fields, openaev-api/src/main/java/io/openaev/expectation/ExpectationBuilderService.java)",
+  "intro": "The 8 injectors OpenAEV 3.261116.1 ships with, the 8 inject types (contracts) their code declares, and the contracts the platform writes for each payload and each phishing landing page. For each contract: the fields of its form, their key in the API, whether they are required, and the expectations it predefines. In the API, the teams of an inject go in `inject_teams` and its documents in `inject_documents`; every other field goes in `inject_content`, under its key.",
   "filter": "Filter injectors, contracts, fields, keys",
   "sections": [
     {
@@ -502,7 +502,7 @@
             "`expectations`",
             "Expectations",
             "No",
-            "Offers Detection (`DETECTION`); Prevention (`PREVENTION`); Vulnerability (`VULNERABILITY`)"
+            "Offers none of its own: add them by hand"
           ]
         }
       ]
@@ -745,7 +745,7 @@
           "cells": [
             "**Prevention**",
             "`PREVENTION`",
-            "the actions of the Threat Arsenal, the phishing actions",
+            "the phishing actions",
             "6 hours",
             "`openaev.expectation.prevention.expiration-time`, then `openaev.expectation.technical.expiration-time`"
           ]
@@ -755,17 +755,27 @@
           "cells": [
             "**Detection**",
             "`DETECTION`",
-            "the actions of the Threat Arsenal, the phishing actions",
+            "the phishing actions",
             "6 hours",
             "`openaev.expectation.detection.expiration-time`, then `openaev.expectation.technical.expiration-time`"
           ]
         },
         {
+          "key": "expectation:LOGGING",
+          "cells": [
+            "**Logging**",
+            "`LOGGING`",
+            "Added by hand",
+            "6 hours",
+            "`openaev.expectation.logging.expiration-time`, then `openaev.expectation.technical.expiration-time`"
+          ]
+        },
+        {
           "key": "expectation:VULNERABILITY",
           "cells": [
-            "**Vulnerability**",
+            "**VULNERABILITY_NAME**",
             "`VULNERABILITY`",
-            "the actions of the Threat Arsenal",
+            "Added by hand",
             "6 hours",
             "`openaev.expectation.vulnerability.expiration-time`, then `openaev.expectation.technical.expiration-time`"
           ]

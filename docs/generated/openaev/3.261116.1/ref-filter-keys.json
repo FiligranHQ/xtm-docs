@@ -1,8 +1,8 @@
 {
   "name": "filter-keys",
-  "version": "3.261110.0",
-  "source": "OpenAEV-Platform/openaev@cde7bee (openaev-model/src/main/java/io/openaev/database/model, openaev-model/src/main/java/io/openaev/engine/model, @Queryable)",
-  "intro": "The 408 filter keys OpenAEV 3.261110.0 accepts: in the filter menus of its lists and in the `filterGroup` of its search endpoints (one section per object), and in the filters of the dashboard widgets (one section per kind of document). A filter is `{\"key\", \"operator\", \"mode\", \"values\"}`; the 12 operators are `eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`, `gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`. **Operators** lists those the interface offers for the key; **Also** says whether the key sorts a list (`sorts`) and whether `textSearch` searches it. [Filters](/develop/apis/filters/#openaev-filters) explains the format.",
+  "version": "3.261116.1",
+  "source": "OpenAEV-Platform/openaev@6d8572a (openaev-model/src/main/java/io/openaev/database/model, openaev-model/src/main/java/io/openaev/engine/model, @Queryable)",
+  "intro": "The 408 filter keys OpenAEV 3.261116.1 accepts: in the filter menus of its lists and in the `filterGroup` of its search endpoints (one section per object), and in the filters of the dashboard widgets (one section per kind of document). A filter is `{\"key\", \"operator\", \"mode\", \"values\"}`; the 12 operators are `eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`, `gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`. **Operators** lists those the interface offers for the key; **Also** says whether the key sorts a list (`sorts`) and whether `textSearch` searches it. [Filters](/develop/apis/filters/#openaev-filters) explains the format.",
   "filter": "Filter keys, objects, values",
   "sections": [
     {
@@ -1061,7 +1061,7 @@
             "Field",
             "Text",
             "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
-            "sort, text search"
+            "text search"
           ]
         },
         {
@@ -1071,7 +1071,7 @@
             "Inject",
             "An identifier, listed by the platform",
             "`eq`, `not_eq`, `empty`, `not_empty`",
-            "sort"
+            ""
           ]
         },
         {

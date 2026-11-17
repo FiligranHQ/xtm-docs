@@ -68,6 +68,8 @@ A template holds categories and questions you reuse in every exercise. It is opt
 
 :::
 
+A category you create in the exercise takes a **Name** and an **Order**; a question, its **Content** and an **Order**. The order is a whole number, 0 or more: otherwise the form shows **Must be a whole number** or **Must be greater than or equal to 0**, and **Create** stays disabled.
+
 **Clear out**, next to **Categories and questions**, deletes every category and question of the exercise, to start again.
 
 ## Send the questionnaire
@@ -77,7 +79,7 @@ When the simulation is over:
 :::steps
 
 1. On the **Lessons learned** tab of the simulation, under **Control**, click **Send** next to **Questionnaire**. It stays disabled until a category targets a team with players.
-2. Check the **Subject** and the **Message**. The message holds `${lessons_uri}`, which becomes each player's own link: keep it.
+2. Check the **Subject** and the **Message**. The message holds `${lessons_uri}`, which becomes each player's own link: keep it. A message with no visible text shows **This field is required.**
 3. Click **Send**.
 
 :::
@@ -89,7 +91,7 @@ Each player of the targeted teams receives one email, with a link that opens the
 The **Lessons learned** tab of the simulation brings together:
 
 - At the top, the **Overall objectives score**, the number of **Simulation logs**, the **Poll replies** received and the **Messages** exchanged.
-- **Objectives**: the goals your control team sets for the exercise, each with a **Title**, a **Description** and a **Priority**. Each evaluator scores an objective from 10 to 100. An objective's score is the average of its evaluations, and **Overall objectives score** is the average of the objectives.
+- **Objectives**: the goals your control team sets for the exercise, each with a **Title**, a **Description** and a **Priority**, a whole number, 0 or more. Objectives are listed by priority, the lowest number first. Each evaluator scores an objective from 10 to 100. An objective's score is the average of its evaluations, and **Overall objectives score** is the average of the objectives.
 - **Crisis intensity (injects by hour)**: the number of injects the players received, hour by hour, to compare the answers with the pressure they were under.
 - **Categories and questions**: under **Results**, each question shows its number of answers, how many of them contain comments, and the average evaluation. Click a question to read every answer with its comments, under the player's name or **Anonymized**.
 

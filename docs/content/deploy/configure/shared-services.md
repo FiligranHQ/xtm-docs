@@ -237,7 +237,7 @@ All settings: [Redis](/reference/opencti/configuration/#redis).
 
 ## RabbitMQ
 
-OpenCTI and OpenAEV pass work to their workers and integrations through RabbitMQ. In xtm-docker both use the same broker and the same user, `RABBITMQ_DEFAULT_USER` and `RABBITMQ_DEFAULT_PASS` from `.env`. OpenCTI also calls the management API, on port 15672: a broker of your own needs the management plugin.
+OpenCTI and OpenAEV pass work to their workers and integrations through RabbitMQ. In xtm-docker both use the same broker and the same user, `RABBITMQ_DEFAULT_USER` and `RABBITMQ_DEFAULT_PASS` from `.env`. OpenCTI also calls the management API, on port 15672, and so does OpenAEV when it migrates its queues: a broker of your own needs the management plugin.
 
 ::::tabs
 :::tab[OpenCTI]
@@ -263,8 +263,28 @@ OpenCTI and OpenAEV pass work to their workers and integrations through RabbitMQ
 | `OPENAEV_RABBITMQ_VHOST` | `/` | The virtual host of OpenAEV |
 | `OPENAEV_RABBITMQ_QUEUE-TYPE` | `classic` | `quorum` on a cluster of brokers |
 | `OPENAEV_RABBITMQ_PREFIX` | `openaev` | The prefix of the OpenAEV queues |
-| `OPENAEV_RABBITMQ_SSL` | `false` | `true` for a broker that only accepts TLS |
-| `OPENAEV_RABBITMQ_TRUST-STORE`, `OPENAEV_RABBITMQ_TRUST-STORE-PASSWORD` | | Over TLS, a PKCS12 trust store that holds the CA of the broker's certificate, such as `file:/opt/openaev/rabbitmq-truststore.p12`, and its password. Empty, OpenAEV checks the certificate against the default trust store of Java |
+| `OPENAEV_RABBITMQ_SSL` | `false` | `true` for a broker that only accepts TLS. OpenAEV then also calls the management API over HTTPS, on the host of the broker |
+| `OPENAEV_RABBITMQ_TRUST-STORE`, `OPENAEV_RABBITMQ_TRUST-STORE-PASSWORD` | | Over TLS, a PKCS12 trust store that holds the CA of the broker's certificate, such as `file:/opt/openaev/rabbitmq-truststore.p12`, and its password. OpenAEV then checks the broker against this trust store only, in TLS 1.3, and the management API against this trust store or the platform's. Without it, or when the file does not exist, as with the placeholder of the shipped `application.properties`, OpenAEV checks both against the platform trust store: the CAs of Java and the certificates of `OPENAEV_EXTRA-TRUSTED-CERTS-DIR` |
+
+Over TLS, OpenAEV always checks the certificate of the broker and of its management API: `OPENAEV_RABBITMQ_MANAGEMENT-INSECURE` no longer has any effect. When your internal CA signed the certificate of the broker, the simplest is to put that CA in the folder of `OPENAEV_EXTRA-TRUSTED-CERTS-DIR`, as [Trust your certificate authority and proxy](/deploy/configure/certificates/) shows, and to set no RabbitMQ trust store: the broker and the management API then trust the same CAs as the other connections of OpenAEV. For a broker that asks for a client certificate, OpenAEV presents the one of the key store that the standard Java properties `javax.net.ssl.keyStore`, `javax.net.ssl.keyStoreType` and `javax.net.ssl.keyStorePassword` name.
+
+For example, for a broker whose certificate the internal CA of `./certs/internal-ca.pem` signed, in `docker-compose.override.yml`:
+
+```yaml
+services:
+  openaev:
+    volumes:
+      - ./certs:/opt/openaev/additional_certs:ro
+    environment:
+      - OPENAEV_RABBITMQ_HOSTNAME=rabbitmq.example.com
+      - OPENAEV_RABBITMQ_PORT=5671
+      - OPENAEV_RABBITMQ_MANAGEMENT-PORT=15671
+      - OPENAEV_RABBITMQ_USER=openaev
+      - OPENAEV_RABBITMQ_PASS=${OPENAEV_RABBITMQ_PASSWORD}
+      - OPENAEV_RABBITMQ_SSL=true
+    depends_on:
+      rabbitmq: !reset null
+```
 :::
 ::::
 

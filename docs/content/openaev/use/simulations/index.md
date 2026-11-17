@@ -16,7 +16,7 @@ A simulation is one run of an attack or an exercise on your environment: its inj
 ## Before you start
 
 - Your role has **Launch assessment** to start, pause, stop or reset a simulation, and **Manage assessment** to create or change one. **Access assessment** is enough to read the results.
-- Collectors read your security tools, so that detection and prevention can be scored: see [Collectors](/openaev/use/collectors/). Without them, the technical expectations stay pending until they expire.
+- Collectors read your security tools, so that detection and prevention can be scored: see [Collectors](/openaev/use/collectors/). When no collector answers that type of expectation for the security platforms an inject expects, its detection or prevention expectation fails at once, and reads **No automated security platform detected**. A collector you **Stop** in :menu[Integrations] no longer counts for the injects that run afterwards.
 
 ## Start a simulation
 

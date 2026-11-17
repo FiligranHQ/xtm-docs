@@ -25,7 +25,7 @@ An atomic test runs one action, such as a PowerShell payload or a phishing email
 
 :::steps
 
-1. Open :menu[Atomic testings] and click **Create**. The **Create a new atomic test** page lists the actions an atomic test can run.
+1. Open :menu[Atomic testings] and click **Create**. The **Create a new atomic test** page lists the actions an atomic test can run. An action whose injector is not registered in your tenant is not listed, since it would fail at launch.
 2. Find the action: filter on the left by **Domains**, **Platform**, kill chain phase or author, or search by name or MITRE ATT&CK ID. **Grid view** and **List view** switch the display.
 3. Click the action. A panel opens with its **Title**, filled with the action's name.
 4. Fill in the targets and the content: the endpoints or asset groups for an action on endpoints, the **Targeted teams** for an email, and the **Inject data** the action needs, such as a command argument.
@@ -45,7 +45,7 @@ The **Overview** tab scores the test like a simulation: a gauge per axis, and ea
 
 ::screenshot{id=openaev-atomic-testing-booking-db alt="The atomic test Booking database export on booking-db-01: Prevented and Detected by Meridian EDR, its status Error because the EDR killed the payload as it ran, with its start and end dates and its duration."}
 
-The **Targets** pane lists what the action aimed at, one tab per kind: **Asset groups**, **Teams**, **Assets**, **Persons**, **Agents**, and **Manual targets**. Click a target to read its expectations in **Results by target**. A test without any target shows **No target configured.**
+The **Targets** pane lists what the action aimed at, one tab per kind: **Asset groups**, **Teams**, **Assets**, **Persons**, **Agents**, and **Manual targets**. Click a target to read its expectations in **Results by target**. An action that aims at no target, such as an HTTP request, has nothing to list per target: the **Targets** pane reads **This inject has no target. Its results are in the Execution details tab.** Read its expectations and traces there.
 
 A network scan such as Nmap or Nuclei can aim at addresses typed by hand instead of assets: **Type of targets** set to **Manual**, and the IP addresses, subnets or hostnames in **Manual targets (comma-separated)**. The **Manual targets** tab lists each of them once, in the order typed. A manual target carries no expectation and no execution trace of its own, since the scan reports for all of them at once: read what it found in the **Findings** tab.
 

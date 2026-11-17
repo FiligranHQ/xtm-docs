@@ -27,13 +27,13 @@ A scenario is the plan, and each simulation launched from it takes a copy of its
 
 :::steps
 
-1. Open the scenario or the simulation, then its **Injects** tab, and click **Create**. The **Create a new inject** picker opens on the actions of the Threat Arsenal.
+1. Open the scenario or the simulation, then its **Injects** tab, and click **Create**. The **Create a new inject** picker opens on the actions of the Threat Arsenal. It lists only the actions whose injector is registered in your tenant: an action without one would fail at launch, so it does not show.
 2. Find the action: type part of its name or a technique in the search bar, or filter by **Domains**, **Platform**, **Status** or **Author**. Switch between **Grid view** and **List view** to compare **Attack patterns** and **Kill chain phase**.
 3. Click the action's card. Its configuration form opens.
 4. Under **General**, give the inject a **Title**, and optionally a **Description** and **Tags**.
 5. Under **Scheduling**, set the **Days**, **Hours** and **Minutes** after the start of the simulation when the inject runs.
 6. Choose the targets. For an action on people, under **Targeted teams**, click **Modify target teams** and pick the teams, or turn on **All teams**. For an action on endpoints, pick the **Assets** or **Asset groups** under **Inject data**. A field marked as required must be filled.
-7. Under **Inject data**, fill in what the action needs: the subject and body of an email, the arguments of a command. Click **Available variables** to insert a variable, such as the first name of each person. The reset button puts back the action's defaults. For a command that runs in `cmd`, an argument value cannot hold a double quote (`"`): see [When a command is refused](#when-a-command-is-refused).
+7. Under **Inject data**, fill in what the action needs: the subject and body of an email, the arguments of a command. Click **Available variables** to insert a variable, such as the first name of each person. An argument that takes a file is a list of the platform's [documents](/openaev/use/components/documents/): pick the file there. The reset button puts back the action's defaults. For a command that runs in `cmd`, an argument value cannot hold a double quote (`"`): see [When a command is refused](#when-a-command-is-refused).
 8. Under **Inject expectations**, check the expectations the action proposes, and change or add some. See [Set the expectations of an inject](/openaev/use/expectations/management/).
 9. Under **Inject documents**, attach files when the action sends them.
 10. Click **Create**.

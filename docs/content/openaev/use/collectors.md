@@ -55,6 +55,8 @@ In the catalog, the settings of Elastic Security show how it matches alerts. The
 
 A collector only opens outbound connections, to the OpenAEV URL and to the tool it reads: OpenAEV never connects to it. So it can run next to the tool, for example beside an on-premises SIEM while OpenAEV runs as a service. In :menu[Integrations], **Deployed** tab, each collector shows whether it runs and when the platform last heard from it.
 
+A collector you **Stop** in :menu[Integrations] no longer counts for the injects that run afterwards, from the moment it is stopping. Their detection and prevention expectations wait only for the other collectors of the tenant. When no other collector answers that type of expectation for the security platforms the inject expects, the expectation fails at once, without waiting 6 hours to expire. It reads **No automated security platform detected**. Before you launch, the **Security System Collector** health check of the scenario or inject warns about such an expectation. A collector you run yourself, without a deployment in :menu[Integrations], always counts.
+
 :::example[Score the Velvet Harbor simulation with Meridian EDR]
 Meridian EDR, the endpoint detection of Grand Meridian Hotels, is CrowdStrike Falcon. The platform engineer deploys the **CrowdStrike** collector from the catalog, with a Falcon API client that reads detections, and it shows as started in the **Deployed** tab.
 

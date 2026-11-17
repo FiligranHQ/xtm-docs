@@ -44,11 +44,13 @@ A document is a file you upload to OpenAEV once and reuse wherever the exercise 
 
 The document appears in the list with its file name as **Name**, and its file type, such as `application/pdf` or `image/png`, as **Type**. Click its line to download the file.
 
+The **Simulations** and **Scenarios** columns show, on one line, the first simulation or scenario the document is linked to: click its chip to open it. A chip such as `+2` counts the other links, and hovering over it lists their names. Only the simulations and scenarios you have access to are shown and counted.
+
 From inside an inject, an article or a challenge, **Add documents** offers the same upload with **Create a new document**. The document is then linked to the scenario or simulation you work in.
 
 OpenAEV recognizes a file by its content. Uploading a file whose content is already in the list does not create a second document. OpenAEV adds your tags to the existing one and keeps its name and description.
 
-::screenshot{id=openaev-documents-list alt="The Documents list with the three files of the Velvet Harbor crisis night exercise: the crisis communication playbook, the EDR alert export and the forum listing image, each with its description, type and the tag velvet-harbor."}
+::screenshot{id=openaev-documents-list alt="The Documents list with the three files of the Velvet Harbor crisis night exercise, each with its description, type and the tag velvet-harbor. The crisis communication playbook serves two scenarios: one scenario chip and a +1 chip."}
 
 ## Attach a document to an inject
 
@@ -79,7 +81,7 @@ Example CERT prepares the crisis exercise it runs for Grand Meridian Hotels on t
 | `forum-listing-grand-meridian.png` | Fake screenshot of the guest records offered for sale | Shown in the press article of 23:30 |
 | `edr-alert-front-desk.pdf` | Meridian EDR alert exported from the front-desk workstation | Downloaded from the challenge **Find the account that was used** |
 
-Each document is uploaded once. When the planner duplicates the scenario for the Spanish hotels, the copied injects and articles point to the same files, and the challenge is shared.
+Each document is uploaded once. When the planner duplicates the scenario for the Spanish hotels, the copied injects and articles point to the same files, and the challenge is shared. The copy is linked to the same documents: in :menu[Components > Documents], the **Scenarios** column of the playbook shows one of the two scenarios and a `+1` chip that names the other.
 :::
 
 ## What's next

@@ -53,7 +53,7 @@ Use tags for what the other taxonomies do not hold: an organization, a site, a c
 
 ::screenshot{id=openaev-taxonomies-attack-patterns alt="The Attack patterns of the tenant sorted by External ID, PowerShell T1059.001 under the [mitre-attack] Execution phase and Valid Accounts T1078 under Persistence, with the Create button at the top right."}
 
-A kill chain phase, under :menu[Settings > Taxonomies > Kill chain phases], has a **Phase name**, a **Phase short name**, the **Kill chain name** it belongs to, such as `mitre-attack`, an **External Id** and an **Order**, its position in the chain.
+A kill chain phase, under :menu[Settings > Taxonomies > Kill chain phases], has a **Phase name**, a **Phase short name**, the **Kill chain name** it belongs to, such as `mitre-attack`, an **External Id** and an **Order**, its position in the chain. The **Order** is required, and is a whole number, 0 or more: the form refuses another value with **Must be a whole number** or **Must be greater than or equal to 0**.
 
 The MITRE ATT&CK collector creates or updates the attack patterns of its tenant by their **External ID** at each run: a change you make to one of its techniques lasts until the next run. Give the techniques you add yourself identifiers MITRE ATT&CK does not use.
 

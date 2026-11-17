@@ -1,7 +1,7 @@
 {
   "name": "configuration",
-  "version": "3.261110.0",
-  "source": "OpenAEV-Platform/openaev@cde7bee (openaev-api/src/main/resources/application.properties, the @Value and @ConfigurationProperties of the Java code)",
+  "version": "3.261116.1",
+  "source": "OpenAEV-Platform/openaev@6d8572a (openaev-api/src/main/resources/application.properties, the @Value and @ConfigurationProperties of the Java code)",
   "intro": "Every key OpenAEV reads at startup, from `application.properties` and from its code, grouped by block, with its environment variable: the key in upper case with each dot replaced by an underscore (`openaev.base-url` is `OPENAEV_BASE-URL`). **Shipped** says whether `application.properties` sets the key, shows it commented out, or leaves it to the code. A key also read under the former name `openbas.*` keeps that name working.",
   "filter": "Filter keys, variables, descriptions",
   "sections": [
@@ -588,7 +588,7 @@
             "`EXECUTOR_MDE_API-BATCH-EXECUTION-ACTION-PAGINATION`",
             "`10`",
             "Code only",
-            "Number of machines sent per 5 seconds to MDE Live Response API to execute a payload (MDE rate limit is stricter than CrowdStrike)"
+            "Number of machines sent per minute to MDE Live Response API to execute a payload (MDE allows 10 calls per minute)"
           ]
         },
         {
@@ -3244,7 +3244,7 @@
             "`OPENAEV_RABBITMQ_MANAGEMENT-INSECURE`",
             "`true`",
             "Set",
-            "Whether or not the calls to the management plugin of rabbitmq can be insecure"
+            "No effect, kept for compatibility (deprecated). The calls to the management plugin are always verified (see `openaev.rabbitmq.trust-store`)."
           ]
         },
         {
@@ -3307,16 +3307,16 @@
             "`OPENAEV_RABBITMQ_SSL`",
             "`false`",
             "Set",
-            "Use SSL"
+            "Connects to RabbitMQ over TLS: the AMQP connection, and the calls to the management plugin over `https`. The broker certificate is checked against `openaev.rabbitmq.trust-store` when it points to a file, otherwise against the platform trust store (the Java default CAs plus the certificates of `openaev.extra-trusted-certs-dir`). A client certificate set with the standard `javax.net.ssl.keyStore` Java properties is presented. Default `false`."
           ]
         },
         {
           "key": "openaev.rabbitmq.trust-store",
           "cells": [
             "`OPENAEV_RABBITMQ_TRUST-STORE`",
-            "",
-            "Code only",
-            "Path to the p12 trust store (for example `file:/path/to/truststore.p12`) with the CA of the RabbitMQ server certificate. Used when SSL is on. When empty, the JVM default trust store applies."
+            "`<file:/path/to/client-store.p12>`",
+            "Set",
+            "Path to a PKCS#12 trust store (for example `file:/opt/openaev/rabbitmq-ca.p12`) holding the CA of the RabbitMQ server certificate, used when `openaev.rabbitmq.ssl` is `true`. When it points to a file, the AMQP connection trusts only this store, over TLS 1.3, and the management calls trust it or the platform trust store. The shipped value `<file:/path/to/client-store.p12>` is a placeholder that points to no file: until you set it, the platform trust store applies (the Java default CAs plus the certificates of `openaev.extra-trusted-certs-dir`). Set it only when the broker's CA is in neither."
           ]
         },
         {
@@ -3325,16 +3325,7 @@
             "`OPENAEV_RABBITMQ_TRUST-STORE-PASSWORD`",
             "`<trust-store-password>`",
             "Set",
-            "Password of the keystore"
-          ]
-        },
-        {
-          "key": "openaev.rabbitmq.trust.store",
-          "cells": [
-            "`OPENAEV_RABBITMQ_TRUST_STORE`",
-            "`<file:/path/to/client-store.p12>`",
-            "Set",
-            "Spelling of the shipped file for the trust store used for TLS to RabbitMQ (`openaev.rabbitmq.ssl`); the code reads `openaev.rabbitmq.trust-store`, so this spelling is ignored and the JVM default trust store applies."
+            "Password of the trust store set in `openaev.rabbitmq.trust-store`. The shipped value `<trust-store-password>` is a placeholder, unused while the trust store points to no file."
           ]
         },
         {
@@ -3544,7 +3535,7 @@
           "key": "openaev.tenant.active-tables",
           "cells": [
             "`OPENAEV_TENANT_ACTIVE-TABLES`",
-            "`import_mappers,lessons_templates,mitigations,cwes,collectors,executors,injectors,tags,tag_rules,attackpath_execution,attackpath_finding,secret_references,secrets,connector_instances,autonomous_runs,autonomous_events,autonomous_directives,kill_chain_phases,security_coverages,domains,challenges,asset_groups,channels,notifications,assets,findings,tenant_xtmhub_registrations,notifiers,notification_triggers,notification_events,custom_dashboards,widgets,marking_definitions,documents,custom_domains,collector_types,phishing_email_templates,phishing_landing_pages,attackpath_execution_collector,attackpath_execution_remediation,asset_agent_jobs,payloads,vulnerabilities,phishing_results,reporting_schedules,reportings,reporting_generations,datapacks,teams,attack_patterns,organizations,agents,autonomous_objective_templates,catalog_items,catalog_releases,parameters,payload_identities`",
+            "`import_mappers,lessons_templates,mitigations,cwes,collectors,executors,injectors,tags,tag_rules,attackpath_execution,attackpath_finding,secret_references,secrets,connector_instances,autonomous_runs,autonomous_events,autonomous_directives,kill_chain_phases,security_coverages,domains,challenges,asset_groups,channels,notifications,assets,findings,tenant_xtmhub_registrations,notifiers,notification_triggers,notification_events,custom_dashboards,widgets,marking_definitions,documents,custom_domains,collector_types,phishing_email_templates,phishing_landing_pages,attackpath_execution_collector,attackpath_execution_remediation,asset_agent_jobs,payloads,vulnerabilities,phishing_results,reporting_schedules,reportings,reporting_generations,datapacks,teams,attack_patterns,organizations,agents,autonomous_objective_templates,catalog_items,catalog_releases,parameters,payload_identities,workflows,steps,conditions,scope_variables,steps_delay_queue,workflow_scope_rules,workflow_states,injectors_contracts,injector_contract_tags,injectors_contracts_attack_patterns,injectors_contracts_domains,injectors_contracts_vulnerabilities,injectors_injector_contracts,catalog_history,scenario_identities,payload_revocations`",
             "Set",
             "Database tables whose tenant isolation the database itself enforces, on every statement. Each release ships the list its code needs: leave it as shipped and do not override it. A table left out can lose its tenant isolation, and naming a table that isolates itself stops the platform at startup."
           ]
