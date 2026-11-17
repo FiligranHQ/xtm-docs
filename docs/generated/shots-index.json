@@ -1401,9 +1401,9 @@
         "captured_at": "2026-11-10"
       },
       "7.261109.0": {
-        "light": "/shots/663d5941917c398a8b6c9d579d559ccd33ace52a2fa265bb38c63573e27d4b06.webp",
-        "dark": "/shots/b5e8f25166e8033165cb1badc622d7728288d1ebc80290a17a4f38db38dcc150.webp",
-        "captured_at": "2026-11-11"
+        "light": "/shots/1e81d6f56b6cfde121d138ffcea68c34bd5d3bdb9b78fef3742d058cd282d349.webp",
+        "dark": "/shots/8053a727a9753cc452013cfb319ec0d0b016d9ab771bb32f54e436c510f0c74c.webp",
+        "captured_at": "2026-11-17"
       }
     }
   },
@@ -1417,9 +1417,9 @@
         "captured_at": "2026-11-10"
       },
       "7.261109.0": {
-        "light": "/shots/65fd3b855629698888886bd6be06342435e199af7355eef6e4240cb6be3b432e.webp",
-        "dark": "/shots/be56ca7cb88fe324efa03e0c25ebe8875f59f682e21b936fc4cff23ada2aa956.webp",
-        "captured_at": "2026-11-11"
+        "light": "/shots/833fade00317288d9f98beeb5d74d89df00b2bd40dcbff975f2c1ab55935580d.webp",
+        "dark": "/shots/b29ae57c6b1f9f9ab6bb19dcce748da7f6b224be294ec5dd48b4128f1340990c.webp",
+        "captured_at": "2026-11-17"
       }
     }
   },
@@ -2480,9 +2480,9 @@
         "captured_at": "2026-11-10"
       },
       "7.261109.0": {
-        "light": "/shots/34557fa0accb7e3b8b10bb9e12e44cd4bc36fe1323febfab068a45c1a3069b10.webp",
-        "dark": "/shots/16953cbf00c5a2f43e80f7c1cb22989aa32cf432d0392106d0cef48043d52b76.webp",
-        "captured_at": "2026-11-11"
+        "light": "/shots/e48ff65328b77bb0bdfce3f7e6b51c7334653eea96ef56267a4620302ec40e34.webp",
+        "dark": "/shots/1a48b665d7a03b5024eedbeb92725603034f9d32f5dba79496640e01871bf7a4.webp",
+        "captured_at": "2026-11-17"
       }
     }
   },
@@ -2896,7 +2896,7 @@
       "ab702fd": {
         "light": "/shots/f0ab414a37dd7e22c56416de75e76ff6c686afa84a98e7f3b6d327f3459fb0b4.webp",
         "dark": "/shots/f9bdb3d5cd2f12ced046bf4a38956c3a9b32bc3d6e25cb89033e62afe2dc2d5a.webp",
-        "captured_at": "2026-11-10"
+        "captured_at": "2026-11-17"
       }
     }
   },
@@ -3186,7 +3186,7 @@
       "3.261116.1": {
         "light": "/shots/2a338fbb00cfcab62e4544c702ad3a9fde552364deded118a8bce51dc28ab77a.webp",
         "dark": "/shots/e54bc88499232787713b5d7aafba86b4750b225fbfdd54dad80a0ec818cbd3cd.webp",
-        "captured_at": "2026-11-10"
+        "captured_at": "2026-11-17"
       },
       "3.261110.0": {
         "light": "/shots/2a338fbb00cfcab62e4544c702ad3a9fde552364deded118a8bce51dc28ab77a.webp",
@@ -3389,8 +3389,8 @@
     "product": "openaev",
     "versions": {
       "3.261116.1": {
-        "light": "/shots/467ba85b7e31723aa004472ceb1cf065f3548766b36c389f140cff778ec33812.webp",
-        "dark": "/shots/cfbdd3efdced6ebd13150e147e510b56af7d16c287d98634235dcb800499d01f.webp",
+        "light": "/shots/949b1b1205c463fbd39a97aaa0ff1901b57b79ed401bc69dc132b0adfdd6a7fe.webp",
+        "dark": "/shots/57258aaef9bbaee87973951e3d66006bbb6120e4060172f553cd4b4c09361eb2.webp",
         "captured_at": "2026-11-17"
       }
     }
@@ -3449,9 +3449,9 @@
     "product": "openaev",
     "versions": {
       "3.261116.1": {
-        "light": "/shots/ed0229986599df244176c6d9d55a62028f2636db675d5ebc82b17a269d3c6dad.webp",
-        "dark": "/shots/0794f8f23b143b7a1f789a75c56d8dcf4b259f39f5775adaaa83306438d68661.webp",
-        "captured_at": "2026-11-10"
+        "light": "/shots/6f49a503a86c6630051f7208206e3b84fa068a8b95d81169653b76eedfc18ba6.webp",
+        "dark": "/shots/321f3cb0462cc605c8e42fad7b902cfa7682e75be6612727b1051ed5a8cc1e82.webp",
+        "captured_at": "2026-11-17"
       }
     }
   },
@@ -5018,9 +5018,9 @@
     "product": "openaev",
     "versions": {
       "3.261116.1": {
-        "light": "/shots/59af07b68875b731c685cab085b404b7a761190471a5a74fb5ceed413a251c68.webp",
-        "dark": "/shots/897a2497d63422f9395fe6e9d33e10afb2bde54bed5410b30d9505c95b928c43.webp",
-        "captured_at": "2026-11-10"
+        "light": "/shots/143494653f0edfbef71093c607643d87dbe48be4040d72a12ea72601956df7f1.webp",
+        "dark": "/shots/d314b2237d311ff0c720ebdf1cf74c46cd3917da165fb7995d39a64349812050.webp",
+        "captured_at": "2026-11-17"
       }
     }
   },
@@ -5048,9 +5048,9 @@
     "product": "openaev",
     "versions": {
       "3.261116.1": {
-        "light": "/shots/f74fd4817236d9362628a0a80cdab54c0135f98f992323cb8d14cecda8b24e5b.webp",
-        "dark": "/shots/2f25b96efd3caf0f5832d35526227558e6e877db50f4d7ca53fb51fa3931f9cd.webp",
-        "captured_at": "2026-11-10"
+        "light": "/shots/0d75573d511e54e1f9a5d0bbd1939334159d5ec6f06e8d905a9a4368b8c79def.webp",
+        "dark": "/shots/fb6b7e9f8ed5c2cebaf5e611de86fe1416bc53018e1613f30de0494fab9fc270.webp",
+        "captured_at": "2026-11-17"
       }
     }
   },
