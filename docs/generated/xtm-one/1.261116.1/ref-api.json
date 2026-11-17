@@ -1,8 +1,8 @@
 {
   "name": "api",
-  "version": "1.261112.0",
-  "source": "XTM-One-Platform/xtm-one@6bea237: backend/app/main.py, backend/app/api",
-  "intro": "Every route of the XTM One REST API: 991 in 66 areas. The interface calls the same routes, so a script does what a person does on screen, with the rights of the user whose API key it sends: see [Script OpenAEV and XTM One with their REST APIs](/develop/apis/rest/). Your platform serves the same list with the fields of each route at `/api/reference`, and as an OpenAPI document at `/api/openapi.json`.",
+  "version": "1.261116.1",
+  "source": "XTM-One-Platform/xtm-one@ee30e87: backend/app/main.py, backend/app/api",
+  "intro": "Every route of the XTM One REST API: 1032 in 68 areas. The interface calls the same routes, so a script does what a person does on screen, with the rights of the user whose API key it sends: see [Script OpenAEV and XTM One with their REST APIs](/develop/apis/rest/). Your platform serves the same list with the fields of each route at `/api/reference`, and as an OpenAPI document at `/api/openapi.json`.",
   "filter": "Filter by path or by what a route does",
   "sections": [
     {
@@ -333,6 +333,14 @@
             "`DELETE`",
             "`/api/v1/agents/{agent_id}`",
             ""
+          ]
+        },
+        {
+          "key": "POST /api/v1/agents/{agent_id}/builtin-tools/notice",
+          "cells": [
+            "`POST`",
+            "`/api/v1/agents/{agent_id}/builtin-tools/notice`",
+            "Dismiss built-in functions a release shipped that the agent's allowlist leaves out."
           ]
         },
         {
@@ -1300,6 +1308,14 @@
           ]
         },
         {
+          "key": "GET /api/v1/assignments/runs/status-counts",
+          "cells": [
+            "`GET`",
+            "`/api/v1/assignments/runs/status-counts`",
+            "How many runs each status holds under the feed's other filters."
+          ]
+        },
+        {
           "key": "GET /api/v1/assignments/schedule",
           "cells": [
             "`GET`",
@@ -2200,6 +2216,14 @@
           ]
         },
         {
+          "key": "GET /api/v1/chat/sub-agent-tasks/status-counts",
+          "cells": [
+            "`GET`",
+            "`/api/v1/chat/sub-agent-tasks/status-counts`",
+            "How many background tasks each status holds under the list's other filters."
+          ]
+        },
+        {
           "key": "GET /api/v1/chat/suggestions",
           "cells": [
             "`GET`",
@@ -2213,6 +2237,72 @@
             "`POST`",
             "`/api/v1/chat/tts`",
             "Speak text with the platform's speech model."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "CTEM cases",
+      "columns": [
+        "Method",
+        "Path",
+        "What it does"
+      ],
+      "rows": [
+        {
+          "key": "GET /api/v1/ctem-cases",
+          "cells": [
+            "`GET`",
+            "`/api/v1/ctem-cases`",
+            "One page of the cases the caller sees and their counts by state (the board and the list)."
+          ]
+        },
+        {
+          "key": "GET /api/v1/ctem-cases/{case_id}",
+          "cells": [
+            "`GET`",
+            "`/api/v1/ctem-cases/{case_id}`",
+            "One case as the caller sees it: its fix, their visible issues, Restricted rows, its history."
+          ]
+        },
+        {
+          "key": "PATCH /api/v1/ctem-cases/{case_id}",
+          "cells": [
+            "`PATCH`",
+            "`/api/v1/ctem-cases/{case_id}`",
+            "Change the owner, due date, a note or the state; 422 with the rule when it is refused."
+          ]
+        },
+        {
+          "key": "POST /api/v1/ctem-cases/bulk",
+          "cells": [
+            "`POST`",
+            "`/api/v1/ctem-cases/bulk`",
+            "Apply one change to several cases (the list's bulk actions)."
+          ]
+        },
+        {
+          "key": "POST /api/v1/ctem-cases/merge",
+          "cells": [
+            "`POST`",
+            "`/api/v1/ctem-cases/merge`",
+            "Merge cases the caller sees into the surviving one; answers the survivor."
+          ]
+        },
+        {
+          "key": "POST /api/v1/ctem-cases/recompute",
+          "cells": [
+            "`POST`",
+            "`/api/v1/ctem-cases/recompute`",
+            "Merge the open issues the caller sees into the shared cases now (one per minute per user)."
+          ]
+        },
+        {
+          "key": "POST /api/v1/ctem-cases/split",
+          "cells": [
+            "`POST`",
+            "`/api/v1/ctem-cases/split`",
+            "Split open issues the caller sees out of their cases into a new manual case; answers it."
           ]
         }
       ]
@@ -2274,6 +2364,14 @@
           ]
         },
         {
+          "key": "GET /api/v1/ctem-metrics/posture/movers",
+          "cells": [
+            "`GET`",
+            "`/api/v1/ctem-metrics/posture/movers`",
+            "The briefing's risk movers for the current user + vertical."
+          ]
+        },
+        {
           "key": "GET /api/v1/ctem-metrics/stage-agents",
           "cells": [
             "`GET`",
@@ -2319,6 +2417,64 @@
             "`POST`",
             "`/api/v1/ctem-metrics/sync`",
             "Force a live rebuild of the user's posture for the ACTIVE vertical."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Custom tool sources",
+      "columns": [
+        "Method",
+        "Path",
+        "What it does"
+      ],
+      "rows": [
+        {
+          "key": "GET /api/v1/custom-tool-sources",
+          "cells": [
+            "`GET`",
+            "`/api/v1/custom-tool-sources`",
+            "The sources the caller sees: their own (admins: all)."
+          ]
+        },
+        {
+          "key": "POST /api/v1/custom-tool-sources",
+          "cells": [
+            "`POST`",
+            "`/api/v1/custom-tool-sources`",
+            "Create a source."
+          ]
+        },
+        {
+          "key": "GET /api/v1/custom-tool-sources/{source_id}",
+          "cells": [
+            "`GET`",
+            "`/api/v1/custom-tool-sources/{source_id}`",
+            ""
+          ]
+        },
+        {
+          "key": "PUT /api/v1/custom-tool-sources/{source_id}",
+          "cells": [
+            "`PUT`",
+            "`/api/v1/custom-tool-sources/{source_id}`",
+            "Update a source."
+          ]
+        },
+        {
+          "key": "DELETE /api/v1/custom-tool-sources/{source_id}",
+          "cells": [
+            "`DELETE`",
+            "`/api/v1/custom-tool-sources/{source_id}`",
+            "Delete a source."
+          ]
+        },
+        {
+          "key": "POST /api/v1/custom-tool-sources/{source_id}/sync",
+          "cells": [
+            "`POST`",
+            "`/api/v1/custom-tool-sources/{source_id}/sync`",
+            "Sync the source now: read the repository, run the tests of every new or changed tool, and activate the versions that pass."
           ]
         }
       ]
@@ -2372,11 +2528,27 @@
           ]
         },
         {
+          "key": "POST /api/v1/custom-tools/{tool_id}/detach",
+          "cells": [
+            "`POST`",
+            "`/api/v1/custom-tools/{tool_id}/detach`",
+            "Detach a synced tool from its repository source: it becomes an ordinary, editable tool, and the source no longer creates or updates it."
+          ]
+        },
+        {
           "key": "GET /api/v1/custom-tools/{tool_id}/export",
           "cells": [
             "`GET`",
             "`/api/v1/custom-tools/{tool_id}/export`",
             "Export a custom tool as a portable JSON bundle."
+          ]
+        },
+        {
+          "key": "POST /api/v1/custom-tools/{tool_id}/run-tests",
+          "cells": [
+            "`POST`",
+            "`/api/v1/custom-tools/{tool_id}/run-tests`",
+            "Run the tool's declared tests (data cases and test code) and keep the report."
           ]
         },
         {
@@ -2639,6 +2811,14 @@
             "`GET`",
             "`/api/v1/fleets/{fleet_id}/documentation/datasheet.pdf`",
             "The fleet's one-page A4 datasheet: the stored documentation and live state (automations, prerequisites, members) rendered server-side."
+          ]
+        },
+        {
+          "key": "POST /api/v1/fleets/{fleet_id}/documentation/findings/{finding_id}/apply",
+          "cells": [
+            "`POST`",
+            "`/api/v1/fleets/{fleet_id}/documentation/findings/{finding_id}/apply`",
+            "Apply a good-practice suggestion a person clicked; no model call."
           ]
         },
         {
@@ -2920,7 +3100,7 @@
           "cells": [
             "`GET`",
             "`/api/v1/groups`",
-            "List all groups with member counts (any authenticated user)."
+            "List groups with member counts (any authenticated user)."
           ]
         },
         {
@@ -2984,7 +3164,7 @@
           "cells": [
             "`GET`",
             "`/api/v1/groups/{group_id}/members`",
-            "List group members with search, role filter, and pagination (admin-only)."
+            "List group members with search, filters, sort and pagination (admin-only)."
           ]
         },
         {
@@ -3001,6 +3181,14 @@
             "`DELETE`",
             "`/api/v1/groups/{group_id}/members/{user_id}`",
             "Remove a user from a group (admin-only)."
+          ]
+        },
+        {
+          "key": "GET /api/v1/groups/count",
+          "cells": [
+            "`GET`",
+            "`/api/v1/groups/count`",
+            "How many groups match the filters of `GET /groups`: the table's total."
           ]
         },
         {
@@ -3545,6 +3733,14 @@
             "`GET`",
             "`/api/v1/integrations/{integration_id}/openrouter/overview`",
             "The key's limit and spend, the account's credits, and the providers this integration feeds."
+          ]
+        },
+        {
+          "key": "POST /api/v1/integrations/{integration_id}/supabase/probe",
+          "cells": [
+            "`POST`",
+            "`/api/v1/integrations/{integration_id}/supabase/probe`",
+            "The projects, roles, connections, databases and functions a database role is set from."
           ]
         },
         {
@@ -4510,11 +4706,83 @@
           ]
         },
         {
+          "key": "POST /api/v1/organization-context/assets/import",
+          "cells": [
+            "`POST`",
+            "`/api/v1/organization-context/assets/import`",
+            "Assets and exposure from a CSV (administrators, #11543): a preview, then `apply=true` saves."
+          ]
+        },
+        {
           "key": "POST /api/v1/organization-context/draft",
           "cells": [
             "`POST`",
             "`/api/v1/organization-context/draft`",
             "Propose a profile from what OpenCTI, OpenAEV and OpenCRQ hold (administrators)."
+          ]
+        },
+        {
+          "key": "GET /api/v1/organization-context/enterprise-knowledge",
+          "cells": [
+            "`GET`",
+            "`/api/v1/organization-context/enterprise-knowledge`",
+            "The knowledge bases the profile links as enterprise knowledge, each readable or not for the caller."
+          ]
+        },
+        {
+          "key": "POST /api/v1/organization-context/fill-agent",
+          "cells": [
+            "`POST`",
+            "`/api/v1/organization-context/fill-agent`",
+            "An agent that fills the assets from one connected integration, and its optional sync."
+          ]
+        },
+        {
+          "key": "POST /api/v1/organization-context/import/apply",
+          "cells": [
+            "`POST`",
+            "`/api/v1/organization-context/import/apply`",
+            "Import one section from one platform and save the next profile version."
+          ]
+        },
+        {
+          "key": "GET /api/v1/organization-context/import/options",
+          "cells": [
+            "`GET`",
+            "`/api/v1/organization-context/import/options`",
+            "The values each import filter offers in that platform, so the dialog picks instead of typing."
+          ]
+        },
+        {
+          "key": "POST /api/v1/organization-context/import/preview",
+          "cells": [
+            "`POST`",
+            "`/api/v1/organization-context/import/preview`",
+            "What importing one section from one platform would do, before anything is written."
+          ]
+        },
+        {
+          "key": "GET /api/v1/organization-context/import/sources",
+          "cells": [
+            "`GET`",
+            "`/api/v1/organization-context/import/sources`",
+            "Which platform can feed each profile section for this administrator, and why not."
+          ]
+        },
+        {
+          "key": "GET /api/v1/organization-context/injection",
+          "cells": [
+            "`GET`",
+            "`/api/v1/organization-context/injection`",
+            "The platform default of the cascade assignment > agent > platform."
+          ]
+        },
+        {
+          "key": "PUT /api/v1/organization-context/injection",
+          "cells": [
+            "`PUT`",
+            "`/api/v1/organization-context/injection`",
+            "Turn the organization summary on or off for every agent that inherits (administrators, audited)."
           ]
         },
         {
@@ -4571,6 +4839,46 @@
             "`POST`",
             "`/api/v1/organization-context/setup-prompt`",
             "Record the instance's answer to the setup proposal, once (administrators, audited)."
+          ]
+        },
+        {
+          "key": "GET /api/v1/organization-context/syncs",
+          "cells": [
+            "`GET`",
+            "`/api/v1/organization-context/syncs`",
+            "The scheduled syncs of the profile sections, global first."
+          ]
+        },
+        {
+          "key": "POST /api/v1/organization-context/syncs",
+          "cells": [
+            "`POST`",
+            "`/api/v1/organization-context/syncs`",
+            "Keep one section in sync with one platform on a schedule, or schedule them all."
+          ]
+        },
+        {
+          "key": "PUT /api/v1/organization-context/syncs/{sync_id}",
+          "cells": [
+            "`PUT`",
+            "`/api/v1/organization-context/syncs/{sync_id}`",
+            "Change a sync; saving it again also resumes a paused one with this administrator's token."
+          ]
+        },
+        {
+          "key": "DELETE /api/v1/organization-context/syncs/{sync_id}",
+          "cells": [
+            "`DELETE`",
+            "`/api/v1/organization-context/syncs/{sync_id}`",
+            "Stop and remove a sync; the profile rows it wrote stay."
+          ]
+        },
+        {
+          "key": "POST /api/v1/organization-context/syncs/{sync_id}/run",
+          "cells": [
+            "`POST`",
+            "`/api/v1/organization-context/syncs/{sync_id}/run`",
+            "Run a sync now, outside its schedule; its next scheduled run is unchanged."
           ]
         },
         {
@@ -5964,7 +6272,7 @@
           "cells": [
             "`GET`",
             "`/api/v1/roi/export`",
-            "The report (every record, or one fleet's) as CSV, or as the one-page PDF value report."
+            "The ledger's figures of a scope as CSV, or as the PDF value report."
           ]
         },
         {
@@ -6028,7 +6336,7 @@
           "cells": [
             "`PUT`",
             "`/api/v1/roi/settings`",
-            "Set whether every user also reads the organization-wide totals (administrators, audited)."
+            "Set the ROI settings (administrators): the organization totals for every user, the k of the anonymity rule and the \"By person\" breakdown."
           ]
         },
         {
@@ -6535,6 +6843,30 @@
             "`GET`",
             "`/api/v1/settings/available-video-models`",
             "Return available video generation models across all configured providers."
+          ]
+        },
+        {
+          "key": "GET /api/v1/settings/brand-asset-source",
+          "cells": [
+            "`GET`",
+            "`/api/v1/settings/brand-asset-source`",
+            "The brand asset source (admin only): the GitHub folder of more brand packs."
+          ]
+        },
+        {
+          "key": "PUT /api/v1/settings/brand-asset-source",
+          "cells": [
+            "`PUT`",
+            "`/api/v1/settings/brand-asset-source`",
+            "Set or clear the brand asset source (admin only), then download it and seed."
+          ]
+        },
+        {
+          "key": "POST /api/v1/settings/brand-asset-source/sync",
+          "cells": [
+            "`POST`",
+            "`/api/v1/settings/brand-asset-source/sync`",
+            "Download the brand asset source again and run the asset seed (admin only)."
           ]
         },
         {
@@ -7872,7 +8204,7 @@
           "cells": [
             "`GET`",
             "`/api/v1/users`",
-            "List all users with resource counts (admin-only)."
+            "List users with resource counts (admin-only)."
           ]
         },
         {
@@ -8073,6 +8405,14 @@
             "`GET`",
             "`/api/v1/users/{user_id}/stats`",
             "Get aggregated statistics for a specific user (admin-only)."
+          ]
+        },
+        {
+          "key": "GET /api/v1/users/count",
+          "cells": [
+            "`GET`",
+            "`/api/v1/users/count`",
+            "How many users match the filters of `GET /users` (admin-only): the table's total."
           ]
         },
         {
@@ -8335,6 +8675,14 @@
             "`GET`",
             "`/api/v1/work-items/stale-count`",
             ""
+          ]
+        },
+        {
+          "key": "GET /api/v1/work-items/status-counts",
+          "cells": [
+            "`GET`",
+            "`/api/v1/work-items/status-counts`",
+            "`{status: count}` under the list's filters minus the status: the numbers of the Operations table's Status filter, one grouped query."
           ]
         },
         {

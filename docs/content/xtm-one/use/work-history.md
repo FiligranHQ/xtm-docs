@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, soc-manager, auditor]
 owner: docs-xtm-one
-last_reviewed: 2026-11-08
+last_reviewed: 2026-11-16
 migrated_from:
   - xtm-one:/usage/work-history/
 ---
@@ -23,13 +23,13 @@ You see the runs of the agents you can see: your own agents, the agents shared w
 :::steps
 1. Open :menu[Work > Operations]. The page opens on the **Executions** tab.
 2. Choose whose runs you see: **Mine**, **Company**, **Shared** or **All**. Each segment shows how many runs it holds, and the tab opens on the first one that holds a run. When **Mine** is empty while others are not, **Show all** moves to every run you can see.
-3. Type in **Search runs...**, or open **Filters** to narrow the list by run type (**All** or **Assignments**), status, fleet or agent. The badge on **Filters** counts the filters in use.
-4. Read the rows. Each row gives the run's title, usually its assignment, its status, one line with its result, its question or its error, its agent, and when it last changed. Hover the title for the whole record: the assignment, the agent that delegated the run, the tokens it used, and when it was created, started and ended.
+3. Narrow the list. **Running**, first on the toolbar, keeps the runs under way in one click. **Status** next to it takes one or more of **Running**, **Awaiting input**, **Completed**, **Failed** and **Cancelled**, each with how many runs it holds under your other filters; **Clear** empties it. Type in **Search runs...**, or open **Filters** for the run type (**All** or **Assignments**), the view, the fleet and the agent. The badge on **Filters** counts the filters in use.
+4. Read the runs. In **Grid view**, where the tab opens, each row gives the run's title, usually its assignment, its status, one line with its result, its question or its error, its agent, and when it last changed. Hover the title for the whole record: the assignment, the agent that delegated the run, the tokens it used, and when it was created, started and ended. **List view** shows a table of **Run**, **Status**, **Agent**, **Started** and **Duration**, newest first: click a column header to sort, and choose the columns shown under **Columns**. In grid view, **Sort by** sorts the rows.
 
-::screenshot{id=xtm-one-work-history-executions alt="The Executions tab: the Search runs field, the Mine, Company, Shared and All segments with their counts, and the Filters button. Below, the row of Weekly Velvet Harbor brief, Completed, with the start of its summary and its agent, Velvet Harbor watcher."}
+::screenshot{id=xtm-one-work-history-executions alt="The Executions tab: the Running chip and the Status filter, the Search runs field, the Mine, Company, Shared and All segments with their counts, and the Filters button. Below, the row of Weekly Velvet Harbor brief, Completed, with the start of its summary and its agent, Velvet Harbor watcher."}
 :::
 
-The status filter offers **All**, **Notifications**, **Digests**, **Running**, **Awaiting input**, **Completed**, **Failed** and **Cancelled**. **Notifications** and **Digests** keep the runs that sent updates or digests apart from the other tasks. A run cut by the [emergency stop](/xtm-one/administer/emergency-stop/) says **Stopped by an emergency stop**.
+**Rows per page** shows 10, 25, 50 or 100 runs at a time, 25 by default, and keeps your choice. Click a run to open it. The view under **Filters** offers **All**, **Notifications** and **Digests**: **Notifications** and **Digests** keep the runs that sent updates or digests apart from the other tasks, and hide **Status** while chosen. A run cut by the [emergency stop](/xtm-one/administer/emergency-stop/) says **Stopped by an emergency stop**.
 
 The fleet filter shows when you can open a fleet. With a fleet chosen, the list holds the assignment runs of the fleet's own members, and **ROI review** set to **Unreviewed** keeps the runs whose outcome nobody reviewed yet. The fleet and the agent you choose stay selected when you move to another tab of **Operations**. Fleets are described in [Run agents as a team with fleets](/xtm-one/build/fleets/).
 
@@ -43,9 +43,15 @@ The other tabs of **Operations** hold what agents coordinate through:
 | **Worksets** | The corpora agents build to reason over more material than fits in one answer |
 | **Workspaces** | The places that group conversations by topic: see [Share a workspace with your team](/xtm-one/use/workspaces/) |
 
-On **Shared State**, each entry shows its status, its owner agent and its key. Hover its title for its **Contents**, its **Size** in characters with the length of its longest list, its latest note and its dates. **Stale** marks an entry that nobody wrote within its staleness window. **Oversized** marks an entry over the size limit, 65,536 characters by default: the agent that writes it is warned at each write, and a write that would take it over 524,288 characters is refused unless it makes the value smaller. Ask its owner agent to bound its longest list or archive its old items.
+**Background Tasks** has the same toolbar as **Executions**: **Running**, then **Status** with **Pending**, **Running**, **Completed**, **Incomplete**, **Failed** and **Cancelled**, then **Search tasks...**. **Filters** holds the fleet and the execution: **No live execution** keeps the tasks still marked in flight that no execution runs. **List view** shows **Task**, **Status**, **Delegated by**, **Delegated to**, **Created** and **Updated**. Click a task to open the run it belongs to; a task delegated from a chat has no page. On its row, **Kill task** stops a pending or running task and **Delete** removes it; once your own chat task is finished, rate it with a thumbs up or down. Select tasks to delete several at once.
 
-**Worksets** is a table you read as a list or as cards (**List view**, **Grid view**). Search it with **Search worksets...**, filter it under **Filters** by **Status** (**Active**, **Resolved**), by **Scope** (**This run**, **This flow**, **Global**) and by fleet, and sort it by name, items, size or last update. In the list view, **Columns** picks the columns shown. **Export CSV** downloads the rows as filtered and sorted. Click a workset to unfold its coverage and its items.
+**Shared State** opens on its **Active** entries. **Status** on the toolbar switches to **Stale**, **Resolved** or **All**, each with its count. Search with **Search key or label...**, and filter under **Filters** by **Owner**, the agents that wrote the entries, and by fleet. **List view** shows **Key**, **Label**, **Status**, **Owner**, **Size** in characters and **Updated**, newest first. Click an entry to unfold its value and its **Notes**. Hover its title in the grid view for its **Contents**, its **Size** with the length of its longest list, its latest note and its dates. On its row, **Resolve** closes an active entry and **Delete** removes it; only administrators manage the company-managed ones. **Export CSV** downloads the rows as filtered and sorted.
+
+An entry is **Stale** when its value has not changed for 14 days, notes aside, or its end date has passed; a banner counts the active ones, and **Show stale** lists them. **Oversized** marks an entry over 32,768 characters: the agent that writes it is warned at each write. A write is refused when it takes the value over 65,536 characters, or a list in it over 500 items and longer than it was, unless it makes the value smaller. Ask its owner agent to bound its longest list or archive its old items: an archive that would go past these limits drops the oldest items instead of failing, and archived items are kept 14 days.
+
+Every hour, XTM One tidies shared state without calling a model. It resolves the active entries whose work item is done, cancelled or deleted, and those past their end date. It shortens an entry over 65,536 characters or 500 list items by dropping its oldest list items. Each of these leaves a note on the entry. For each fleet whose entries are oversized or stale, it files one low-priority work item for the fleet's orchestrator, titled "Shared-state hygiene" with the counts; no other is filed while that one stays open.
+
+**Worksets** is a table you read as a list or as cards (**List view**, **Grid view**). Search it with **Search worksets...**, filter it under **Filters** by **Status** (**Active**, **Resolved**), by **Scope** (**This run**, **This flow**, **Global**) and by fleet, and sort it by name, items, size or last update. In the list view, **Columns** picks the columns shown. **Export CSV** downloads the rows as filtered and sorted. Click a workset to unfold its coverage and its items. An active workset says how its collection stands: **Still collecting** while more items may come, **Rolling** for the corpus XTM One keeps open for an agent's chat or assignment, and **Sealed** once closed.
 
 ## Answer a run that waits for you
 
@@ -76,11 +82,14 @@ One run can start others when its agent hands work to another agent. In the list
 
 ## Read a work item
 
-Open the **Work Items** tab; **About work items**, the "i" next to its search, says what a work item is. Like **Executions**, the tab filters by **Mine**, **Company**, **Shared** or **All**, and searches with **Search title or key...**. **Filters** holds:
+Open the **Work Items** tab; **About work items**, the "i" on its toolbar, says what a work item is. Like **Executions**, the tab filters by **Mine**, **Company**, **Shared** or **All**, and searches with **Search title or key...**.
 
-- the status: **Open**, **Claimed**, **In progress**, **Blocked**, **Done**, **Cancelled** or **All**;
+**Status**, on the toolbar, opens on the open work: **Open**, **Claimed**, **In progress** and **Blocked**. Pick any of these and **Done** or **Cancelled**, each with its count; **Open work** goes back to the open ones and **All** shows every status. Hover **Blocked** for how many items wait on other items and how many need an action. **Filters** holds:
+
 - the view: **All items**, **Waiting for me**, **Stale** or **Scheduled**;
 - the fleet, and the owner agent (**Any owner agent**).
+
+**List view** shows **Title**, **Status**, **Priority**, **Owner**, **Due**, **Created** and **Updated**, newest first. With only **Done** or **Cancelled** chosen, the items sort by when they ended, until you sort a column. **Export CSV** downloads the rows as filtered and sorted.
 
 **Waiting for me** gathers the decisions agents ask of you, and your own items that no agent owns and are past due. **Stale** lists the items that need a look, each badge saying why: **Past due**, **Never released** (it waits for a deployment the platform does not watch), **Reference quiet** (its pull request, issue or deployment has seen no activity for days) or **Quiet for a day** (taken or blocked, then quiet for over a day). **Scheduled** lists the actions people scheduled for later.
 
@@ -96,9 +105,9 @@ Each row gives the item's title, its status, its priority, its owner agent (the 
 | **Waiting for CI** | The CI of its pull request is running: when it completes, the platform hands the item to its owner agent at once |
 | **Being worked on**, **Blocked: not picked up** | An agent holds the item, or it was blocked, for example after repeated failed attempts. Nothing picks up a blocked item until someone puts it back in the queue |
 
-A blocked item reads **Waiting** while items it waits for are unfinished: it reopens by itself. It reads **Blocked** when someone has to act: an item it waited for was cancelled, a restart cut the run that held it, or someone blocked it by hand. Hover the chip for the items, or the reason. A blocked item that does not say what it waits for carries **No reason**; a red count next to the search says how many, and lists them when you click it.
+A blocked item reads **Waiting** while items it waits for are unfinished: it reopens by itself. It reads **Blocked** when someone has to act: an item it waited for was cancelled, a restart cut the run that held it, or someone blocked it by hand. Hover the chip for the items, or the reason. A blocked item that does not say what it waits for carries **No reason**; a red count on the toolbar says how many, and lists them when you click it.
 
-Click a row, or **View details** in its menu, for the whole item: its **Details**, its **Result**, its payload and its timeline, who created it and where, and its dates. **Who acts on it** says what acts on it next, the agents its completion reaches, what holds it, its pull requests and what it waits for. When the item counts a unit of work, its **Result** carries the same **ROI outcome** row as a run.
+Click a row, or **View details** in its menu, for the whole item: its **Details**, its **Result**, its payload and its timeline, who created it and where, and its dates. **Files** lists the files its creator attached to it and those an agent added while working on it or completing it, each with its type, its size and **Download**; a line counts the files no longer stored. **Who acts on it** says what acts on it next, the agents its completion reaches, what holds it, its pull requests and what it waits for. When the item counts a unit of work, its **Result** carries the same **ROI outcome** row as a run.
 
 When an agent waits for your decision, the item opens on **Waiting for your decision**: the question, one button per option with what it does, the option the agent suggests marked **Recommended**, and the deadline, if any. Click an option, or write in **Or answer in your own words** and click **Send answer**: the item goes back to its agent with your answer. Only an administrator answers a company-managed item.
 
@@ -126,15 +135,15 @@ Work items and shared state written by a company-managed agent are company-manag
 
 ## Clean up
 
-Select runs to delete them, or select every run matching the current filters, to clear test runs or old records. Administrators have two more buttons, icons whose name shows on hover:
+**Delete this run**, on a run's row, deletes that run. To clear test runs or old records, select runs and click **Delete**, or select every run matching the current filters; flow runs cannot be selected. When the selection holds runs awaiting approval, you can keep only those and approve or reject them together. Administrators have two more buttons, icons whose name shows on hover:
 
 - **Cleanup Stale Runs**, at the end of the filter row, marks as failed the runs a restart or a timeout left showing as running, so the history is accurate again.
-- **Cancel runs not started**, next to the agent picker in **Filters**, cancels every pending, delayed or queued run of the agent chosen there; it stays greyed out until you choose one. XTM One counts the runs and asks to confirm with **Cancel runs**, or **Keep them**. Running runs are not touched; the cancelled ones stay in the history, and the list switches to **Cancelled** to show them.
+- **Cancel runs not started**, next to the agent picker in **Filters**, cancels every pending, delayed or queued run of the agent chosen there; it stays greyed out until you choose one. XTM One counts the runs and asks to confirm with **Cancel runs**, or **Keep them**. Running runs are not touched; the cancelled ones stay in the history, and **Status** switches to **Cancelled** to show them.
 
 With a fleet chosen, neither button shows, and you cannot select every run matching the filters.
 
 :::example[Check the Monday brief, and answer the agent that waits]
-On Monday 13 April 2026 at 08:20, Camille Roux, CTI analyst at Grand Meridian Hotels, checks the morning run of the **Weekly Velvet Harbor brief**, an assignment of **Velvet Harbor watcher**. She opens :menu[Work > Operations], keeps **Executions**, chooses **Completed**, and picks **Velvet Harbor watcher** in the agent filter. The run of 08:00 shows the trigger **Scheduled**, the summary of two new reports on Velvet Harbor, and the message it posted to the CTI team. She rates it with a thumbs up.
+On Monday 13 April 2026 at 08:20, Camille Roux, CTI analyst at Grand Meridian Hotels, checks the morning run of the **Weekly Velvet Harbor brief**, an assignment of **Velvet Harbor watcher**. She opens :menu[Work > Operations], keeps **Executions**, chooses **Completed** under **Status**, and picks **Velvet Harbor watcher** in the agent filter. The run of 08:00 shows the trigger **Scheduled**, the summary of two new reports on Velvet Harbor, and the message it posted to the CTI team. She rates it with a thumbs up.
 
 Under **Awaiting input**, a second run of the same agent waits: it asks whether to add the indicators of the new report to the watch list. Camille opens it, approves, and the run goes on. On the **Work Items** tab, the item **Check the Madrid booking platform** that **Night shift triage** created for **Velvet Harbor watcher** shows **No automatic pickup**: Camille asks the agent in the chat to process its work items.
 :::

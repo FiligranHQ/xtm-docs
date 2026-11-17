@@ -9,7 +9,7 @@ products:
   - xtm-one
 personas: [platform-engineer, developer]
 owner: docs-platform
-last_reviewed: 2026-11-12
+last_reviewed: 2026-11-16
 migrated_from:
   - opencti:/deployment/breaking-changes/
   - openaev:/deployment/breaking-changes/
@@ -90,6 +90,9 @@ A change is **deprecated** in the version that announces it, while the old behav
 
 | Change | Deprecated in | Changed in |
 | --- | --- | --- |
+| [Built-in web search on Brave Search](#xtm-one-1-261116-0) | 1.261116.0 | |
+| [Shared state limits lowered](#xtm-one-1-261114-0) | | 1.261114.0 |
+| [OpenSandbox images 0.6](#xtm-one-1-261114-0) | | 1.261114.0 |
 | [Chat over HTTP: HTTP/2 at the reverse proxy](#xtm-one-1-261112-0) | | 1.261112.0 |
 | [Chat WebSocket removed from the API](#xtm-one-1-261112-0) | | 1.261112.0 |
 | [GitHub Copilot and Cursor removed from AI adoption](#xtm-one-1-261112-0) | | 1.261112.0 |
@@ -98,6 +101,25 @@ A change is **deprecated** in the version that announces it, while the old behav
 | [New OpenSandbox images](#xtm-one-1-261110-2) | | 1.261110.2 |
 | [Sign-in through platform registration only](#xtm-one-1-261110-2) | | 1.261110.2 |
 | [Slack senders identified by their own member ID](#xtm-one-1-261110-2) | | 1.261110.2 |
+
+### XTM One 1.261116.0
+
+**Built-in web search on Brave Search.** Google Custom Search, the built-in web search that `BUILTIN_GOOGLE_SEARCH_API_KEY` turns on, is closed to new customers and stops on 1 January 2027. Before that date, create a key in the Brave Search API dashboard, and set it as `BUILTIN_BRAVE_SEARCH_API_KEY` on the platform and the worker. XTM One sets up one built-in web search: Brave Search when this key is set, otherwise Google. With both keys set, it removes the built-in Google Search integration at the next start. The web and image tools of Brave Search also answer to the names of the Google tools, `search_google_web` and `search_google_images`, so the instructions that name them keep working.
+
+### XTM One 1.261114.0
+
+**Shared state limits lowered.** No migration, but the platform trims the entries already past the new limits. The size of a shared state value counts the characters of its JSON. Agents now get a warning when they read back a value past 32,768 characters (was 65,536). A write that leaves a value past 65,536 characters (was 524,288) is refused, unless it makes the value smaller. A write that makes a top-level list longer than 500 items is refused too, while there was no cap before. A write to an archive entry drops its oldest items instead of being refused. The scheduler compacts the entries already past either limit: it drops the oldest items of their lists, and adds a note to the entry with the count. The items an archive write moved are deleted after 14 days (was 30). To keep the previous limits, set these variables on the platform and the worker before you upgrade, `0` turning the list cap off:
+
+```bash
+SHARED_STATE_VALUE_SOFT_LIMIT_CHARS=65536
+SHARED_STATE_VALUE_HARD_LIMIT_CHARS=524288
+SHARED_STATE_LIST_MAX_ITEMS=0
+SHARED_STATE_ARCHIVE_RETENTION_DAYS=30
+```
+
+See [Review what agents did](/xtm-one/use/work-history/) for what shared state holds.
+
+**OpenSandbox images 0.6.** By default, XTM One now asks the OpenSandbox server for `sandbox-python:0.6` and `sandbox-nodejs:0.6`, instead of `sandbox-python:0.5` and `sandbox-nodejs:0.4`. `sandbox-python:0.6` adds PyAV, which decodes the frames of a video in the code interpreter. Before you upgrade, check that the server can pull or find them: they are published as `xtmone/sandbox-python` and `xtmone/sandbox-nodejs`, or built with `backend/sandbox/build-image.sh`. Otherwise, sandbox creation fails. To keep the previous images, set `OPENSANDBOX_IMAGES=python:sandbox-python:0.5,nodejs:sandbox-nodejs:0.4` on the platform and the worker: both stay published. On Kubernetes, a pool's image is set on the pool, not by `OPENSANDBOX_IMAGES`: move it to the new image with the default.
 
 ### XTM One 1.261112.0
 

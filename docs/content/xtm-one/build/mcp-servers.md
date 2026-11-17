@@ -95,6 +95,8 @@ Only enabled servers you can see are offered. A company-managed agent can use on
 
 If two attached sources publish a tool with the same name, only one of them is offered: narrow the tool scope, or do not attach both.
 
+To see what agents do with the server, open its **Activity** tab. It lists the runs of the agents the server is attached to, with their **Status**, **Type**, **Agent**, **Started** and **Duration**. Pick statuses in the toolbar's status filter (**Running**, **Awaiting input**, **Completed**, **Failed**, **Cancelled**) to find the runs that failed, and click a run to open it.
+
 ## Share a server
 
 A server you own can be shared with groups or people, as **Read only** (they attach it to their agents) or **Can configure** (they also edit and test it). Sharing a server lends its credentials: whoever uses it calls the external system with your headers, variables or OAuth token, and XTM One asks you to confirm before it lends them. See [Share agents and resources](/xtm-one/build/sharing/).

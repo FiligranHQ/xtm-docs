@@ -2633,8 +2633,8 @@
     ]
   },
   "xtm-one": {
-    "done": 68,
-    "total": 68,
+    "done": 71,
+    "total": 71,
     "groups": [
       {
         "id": "concepts",
@@ -3025,6 +3025,33 @@
             "more": 0,
             "more_done": 0,
             "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/ctem-cases/",
+            "title": "Track the fixes that close your exposures",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/governance/",
+            "title": "Follow your exposure posture against its target",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one",
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
           }
         ]
       },
@@ -3389,6 +3416,18 @@
           {
             "target": "/xtm-one/administer/tracked-organizations/",
             "title": "Track the organizations your company depends on",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/organization-profile/",
+            "title": "Set up the organization profile agents read",
             "doc_type": "how-to",
             "products": [
               "xtm-one"

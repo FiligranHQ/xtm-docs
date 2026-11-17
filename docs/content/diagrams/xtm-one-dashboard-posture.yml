@@ -13,8 +13,8 @@ lanes:
   - label: Home dashboard
     tone: product
     nodes:
-      - {id: posture, label: Exposure posture, icon: Gauge, note: Weighted average out of 100}
-      - {id: briefing, label: Exposure briefing, icon: FileText, note: Monthly, per person}
+      - {id: posture, label: Exposure posture, icon: Gauge, note: "Measured and in your context, out of 100"}
+      - {id: briefing, label: Exposure briefing, icon: FileText, note: "Daily, per person"}
 edges:
   - {from: opencti, to: stages, label: daily sync}
   - {from: openaev, to: stages, label: daily sync}

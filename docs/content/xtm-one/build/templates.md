@@ -11,7 +11,7 @@ migrated_from:
   - xtm-one:/usage/resources/templates/
 ---
 
-A template is the design the presentations and reports of your agents wear: a palette for each theme, the heading and body typefaces, the logos drawn on every slide, the assets a deck may place (diagrams, screenshots, partner logos), the layouts it may use, and a few sentences of guidance on how to compose in that brand. Agents find templates by name, kind, aspect ratio, tags and supported themes, so the same request gives everyone on-brand output. This page creates a template, gives it its assets, and explains how decks use it; generating decks is in [Presentations](/xtm-one/use/presentations/).
+A template is the design the presentations and reports of your agents wear: a palette for each theme, the heading and body typefaces, the logos drawn on every slide, the assets a deck may place (diagrams, screenshots, partner logos), the layouts it may use, and a few sentences of guidance on how to compose in that brand. Agents find templates by name, kind, aspect ratio, tags and supported themes, so the same request gives everyone on-brand output. This page creates a template, gives it its assets, adds brand packs to the built-in templates, and explains how decks use it; generating decks is in [Presentations](/xtm-one/use/presentations/).
 
 ::diagram{id=xtm-one-build-templates-linked}
 
@@ -91,6 +91,25 @@ On **Assets**, she uploads the Grand Meridian logo as `logo_light` and the hotel
 :::xtm-one[Let an agent design the template]
 The built-in **Template Designer** agent creates and refines a template from a conversation: describe the brand, answer its questions, and it writes the palette, the layouts and the guidance, attaches the logos you uploaded to the chat, and renders a preview deck to judge. It cannot read colors out of an image: for that, use **Generate with AI** with **Sample colours from a logo**, then refine with the agent.
 :::
+
+## Add brand packs to the built-in templates
+
+A built-in template is read-only: its assets come from brand packs, read when the platform starts. The platform ships its own packs. As an administrator, you can add packs from a GitHub folder, so a built-in template such as the **XTM One Brand Deck** also offers files of your own, kept under version control.
+
+A pack is a folder holding a `manifest.json` next to its files. The manifest names the built-in template it feeds in `container` (`xtm-one-brand` for the **XTM One Brand Deck**), and lists each file with its `role` and its `description`, the same role and description as an upload on **Assets**. A file over 2 MB is skipped.
+
+:::steps
+1. In :menu[Tools & Integrations > Integrations], connect a GitHub integration that can read the repository (Contents: Read) and shares its account. An integration where each person uses their own GitHub account is not offered: the folder is read without anyone signed in.
+2. Open :menu[Administration > Settings > Platform] and find the **Brand asset source** card.
+3. In **GitHub folder**, paste the address of the folder that holds the packs, for example `https://github.com/owner/repository/tree/main/brand-assets`. Each sub-folder holding a `manifest.json` is a pack. Without `/tree/`, the root of the repository's default branch is read.
+4. Choose the **GitHub integration**, and click **Save**.
+:::
+
+Saving downloads the folder and seeds its packs at once; a message counts the packs read and the new or changed files. The folder is read again at every restart, and when you click **Sync now** after a change is merged. A pack whose folder name the platform already ships is not used: the message names it, and the platform keeps its own.
+
+When the folder cannot be read (GitHub unreachable, a token revoked, a path gone), the message gives the reason, and every template keeps the assets it already has. **Clear** stops reading the folder: at the next restart or sync, a picture that only this folder gave a template is removed from it, and from the slides that place it.
+
+A platform engineer can also mount pack folders in the container and name them in `BRAND_ASSETS_EXTRA_DIRS`: see the [Platform mode section of the configuration reference](/reference/xtm-one/configuration/#platform-mode).
 
 ## Check that it works
 

@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-08
+last_reviewed: 2026-11-16
 edition: ee
 migrated_from:
   - xtm-one:/usage/resources/variables/
@@ -90,6 +90,6 @@ In a chat with the agent, ask the question that uses the value: the answer uses 
 
 ## What's next
 
-- [Write reusable prompts](/xtm-one/build/prompts/) and [Write custom tools](/xtm-one/build/tools/), which reference variables.
+- [Write reusable prompts](/xtm-one/build/prompts/) and [Give agents built-in and custom tools](/xtm-one/build/tools/), which reference variables.
 - [Secret vaults](/xtm-one/administer/secret-vaults/), to read credentials from 1Password, HashiCorp Vault or a cloud secret manager.
 - The [configuration reference](/reference/xtm-one/configuration/).

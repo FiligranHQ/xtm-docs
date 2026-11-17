@@ -1,7 +1,7 @@
 {
   "name": "configuration",
-  "version": "1.261112.0",
-  "source": "XTM-One-Platform/xtm-one@6bea237: backend/app/core/config.py, docs/docs/deployment/configuration.md",
+  "version": "1.261116.1",
+  "source": "XTM-One-Platform/xtm-one@ee30e87: backend/app/core/config.py, docs/docs/deployment/configuration.md",
   "intro": "Every environment variable XTM One reads at startup, on the platform and on the worker. Authentication, integrations and most security options are set from the **Settings** screens instead, and stored in the database.",
   "filter": "Filter by variable or description",
   "sections": [
@@ -313,6 +313,15 @@
             "",
             "`Mode default`",
             "Logo override (data URI). DB value takes precedence."
+          ]
+        },
+        {
+          "key": "BRAND_ASSETS_EXTRA_DIRS",
+          "cells": [
+            "`BRAND_ASSETS_EXTRA_DIRS`",
+            "",
+            "",
+            "A comma-separated list of folders, inside the container, holding more brand asset packs for the built-in templates (one folder per pack, with its `manifest.json` next to its files), read after the packs the image ships. Set it when your deployment mounts packs of its own. A template whose pack no folder holds any more keeps the assets it was seeded with until the pack is back. Empty by default."
           ]
         }
       ]
@@ -1525,12 +1534,21 @@
           ]
         },
         {
+          "key": "MODEL_ANNOUNCEMENT_EMAILS_DISABLED",
+          "cells": [
+            "`MODEL_ANNOUNCEMENT_EMAILS_DISABLED`",
+            "",
+            "`false`",
+            "Set it to `true` to turn off every model announcement email on the platform: those sent when a deployment changes the models of the environment (`MODEL_CATALOG_EMAILS_ENABLED`) and those an administrator sends from the User announcements panel of Settings alike. `false` by default. While it is on, announcements still queued are closed without being sent, Settings no longer offers to email the users (the test email included) and says why, and model changes are still recorded: once it is off again, the next startup with `MODEL_CATALOG_EMAILS_ENABLED` and SMTP sends the latest change skipped meanwhile."
+          ]
+        },
+        {
           "key": "MODEL_CATALOG_EMAILS_ENABLED",
           "cells": [
             "`MODEL_CATALOG_EMAILS_ENABLED`",
             "",
             "`false`",
-            "Email the platform's users when a boot (or switching AI on) finds the env-managed model catalog changed: `DEFAULT_MODEL` moved, an `LLM_PROVIDER_<P>_MODELS` list gained or lost a model, or a capability the environment pins (`DEFAULT_IMAGE_*`, `DEFAULT_VIDEO_*`, `DEFAULT_SPEECH_*`, `DEFAULT_MUSIC_*`, `DEFAULT_DECISION_*`) became available or moved to another model. One email per change names the new default model, the models now available, the ones retired, and each capability with what it does and its model (\"Video generation is now available\", \"New AI capabilities in your <platform> platform\" when several arrive at once). A capability the environment stops pinning is not announced, and on the first boot of a release that tracks capabilities, those the platform already had are not announced as new. The video and music models are announced only while the Video Studio is on (`ENABLED_FEATURES=VIDEO_STUDIO`), the one feature that uses them; turning it on announces them. While it is off, the speech model is announced for reading answers aloud only, with no word of the Video Studio. Needs SMTP. Whether a change goes out is decided by the boot that records it, from its own configuration, so a pod still running the previous environment during a rolling deploy cannot drop it: a change recorded while this is off (or without SMTP) is sent by a later boot that has both, within 7 days, as long as nobody was emailed about it and it still describes the live catalog. What became of each change (queued, skipped and why, sent to how many) is logged at `WARNING`. A change waits until the env catalog has stayed unchanged for `MODEL_CATALOG_EMAILS_SETTLE_MINUTES`, so the changes of successive deploys reach the users as one email. Emails go out in English from the scheduler, a batch per minute, oldest change first, never twice to the same person: an email whose delivery could not be confirmed (the connection dropped mid-send, a worker stopped) is not retried. Announcements an administrator sends from `Settings > AI Models` do not depend on this switch (see Emailing users about model changes)."
+            "Email the platform's users when a boot (or switching AI on) finds the env-managed model catalog changed: `DEFAULT_MODEL` moved, an `LLM_PROVIDER_<P>_MODELS` list gained or lost a model, or a capability the environment pins (`DEFAULT_IMAGE_*`, `DEFAULT_VIDEO_*`, `DEFAULT_SPEECH_*`, `DEFAULT_MUSIC_*`, `DEFAULT_DECISION_*`) became available or moved to another model. One email per change names the new default model, the models now available, the ones retired, and each capability with what it does and its model (\"Video generation is now available\", \"New AI capabilities in your <platform> platform\" when several arrive at once). A capability the environment stops pinning is not announced, and on the first boot of a release that tracks capabilities, those the platform already had are not announced as new. The video and music models are announced only while the Video Studio is on (`ENABLED_FEATURES=VIDEO_STUDIO`), the one feature that uses them; turning it on announces them. While it is off, the speech model is announced for reading answers aloud only, with no word of the Video Studio. Needs SMTP. Whether a change goes out is decided by the boot that records it, from its own configuration, so a pod still running the previous environment during a rolling deploy cannot drop it: a change recorded while this is off (or without SMTP) is sent by a later boot that has both, within 7 days, as long as nobody was emailed about it and it still describes the live catalog. What became of each change (queued, skipped and why, sent to how many) is logged at `WARNING`. A change waits until the env catalog has stayed unchanged for `MODEL_CATALOG_EMAILS_SETTLE_MINUTES`, so the changes of successive deploys reach the users as one email. Emails go out in English from the scheduler, a batch per minute, oldest change first, never twice to the same person: an email whose delivery could not be confirmed (the connection dropped mid-send, a worker stopped) is not retried. Announcements an administrator sends from `Settings > AI Models` do not depend on this switch, only on `MODEL_ANNOUNCEMENT_EMAILS_DISABLED` (see Emailing users about model changes)."
           ]
         },
         {
@@ -2417,6 +2435,35 @@
             "",
             "`false`",
             "On Slack, Teams, WhatsApp, Telegram, Discord and Google Chat, let an identified user's `@agent-key` (an agent's slug, else its hyphenated name) make that agent answer after the routed one, in the same reply - only an agent whose own channel settings let it answer that message (enabled, set to **Receive** and **Publish** on that channel, past the bot's receive whitelist, private-conversation and only-mention rules). Each agent that answers counts as one agentic action. `false`: a channel message is answered by its routed agent alone, whatever it mentions. The web chat's mentions are not affected by this setting."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Built-in web search",
+      "columns": [
+        "Variable",
+        "Required",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "BUILTIN_BRAVE_SEARCH_API_KEY",
+          "cells": [
+            "`BUILTIN_BRAVE_SEARCH_API_KEY`",
+            "",
+            "`empty`",
+            "The Brave Search API subscription token, created in the Brave Search API dashboard. Set, it seeds the built-in **Brave Search** integration, the web, news, image and video search of every agent, and the Google one is no longer seeded (it is removed at the next startup). Its web and image tools also answer to the Google tool names (`search_google_web`, `search_google_images`), so instructions that name them keep working. Empty by default; with neither key set, the platform has no built-in web search."
+          ]
+        },
+        {
+          "key": "BUILTIN_GOOGLE_SEARCH_API_KEY",
+          "cells": [
+            "`BUILTIN_GOOGLE_SEARCH_API_KEY`",
+            "",
+            "`empty`",
+            "The Google Custom Search credentials of the built-in **Google Search** integration, as `search_engine_id\\|\\|api_key`. Read only when `BUILTIN_BRAVE_SEARCH_API_KEY` is empty. Google's Custom Search JSON API is closed to new customers and stops on 1 January 2027: set `BUILTIN_BRAVE_SEARCH_API_KEY` instead before then. Empty by default."
           ]
         }
       ]
@@ -3411,6 +3458,24 @@
           ]
         },
         {
+          "key": "HANDED_BACK_RESUME_SECONDS",
+          "cells": [
+            "`HANDED_BACK_RESUME_SECONDS`",
+            "",
+            "`180`",
+            "How long, in seconds, an assignment run handed back by a stopping worker (a rollout, a restart, a node drain) waits for another worker to resume it before the platform makes it due again (180, 3 minutes, by default). Values under 60 are raised to 60."
+          ]
+        },
+        {
+          "key": "HANDED_BACK_ORPHAN_SECONDS",
+          "cells": [
+            "`HANDED_BACK_ORPHAN_SECONDS`",
+            "",
+            "`300`",
+            "How long, in seconds, a handed-back assignment run may stay without a worker before the platform fails it and releases the work items it held (300, 5 minutes, by default). A run whose execution ended or disappeared is failed as soon as `HANDED_BACK_RESUME_SECONDS` has passed. A value under `HANDED_BACK_RESUME_SECONDS` is raised to it."
+          ]
+        },
+        {
           "key": "INTEGRATION_EVENT_JIRA_WEBHOOKS_ENABLED",
           "cells": [
             "`INTEGRATION_EVENT_JIRA_WEBHOOKS_ENABLED`",
@@ -3798,6 +3863,15 @@
           ]
         },
         {
+          "key": "TERMS_OF_USE_EXEMPT_EMAILS",
+          "cells": [
+            "`TERMS_OF_USE_EXEMPT_EMAILS`",
+            "",
+            "",
+            "A comma-separated list of email addresses the Terms of Use screen never gates, such as `ops@example.com,support@example.com`: the operator accounts that run a hosted platform, so they can sign in from the first day without accepting the terms on the customer's behalf. Matched exactly, ignoring case, against the signed-in user's email; every other user still accepts the terms. Empty by default."
+          ]
+        },
+        {
           "key": "PRESENTATION_PUBLIC_LINKS_ENABLED",
           "cells": [
             "`PRESENTATION_PUBLIC_LINKS_ENABLED`",
@@ -4171,8 +4245,8 @@
           "cells": [
             "`SHARED_STATE_ARCHIVE_RETENTION_DAYS`",
             "",
-            "`30`",
-            "How long, in days, the items an agent moves into an archive entry of shared state are kept before the platform's cleanup sweep deletes them (30 by default). An archive entry stays active, so `SHARED_STATE_RESOLVED_RETENTION_DAYS` never purges it; `0` keeps archived items until an agent drops them."
+            "`14`",
+            "How long, in days, the items an agent moves into an archive entry of shared state are kept before the platform's cleanup sweep deletes them (14 by default). An archive entry stays active, so `SHARED_STATE_RESOLVED_RETENTION_DAYS` never purges it; `0` keeps archived items until an agent drops them."
           ]
         },
         {
@@ -4180,8 +4254,8 @@
           "cells": [
             "`SHARED_STATE_VALUE_SOFT_LIMIT_CHARS`",
             "",
-            "`65536`",
-            "The size, in characters of its JSON, past which a shared state value is flagged (65536 by default). The write still lands, and the agent that reads the value back gets a warning naming its largest keys. `0` turns the warning off."
+            "`32768`",
+            "The size, in characters of its JSON, past which a shared state value is flagged (32768 by default). The write still lands, and the agent that reads the value back gets a warning naming its largest keys. `0` turns the warning off."
           ]
         },
         {
@@ -4189,8 +4263,17 @@
           "cells": [
             "`SHARED_STATE_VALUE_HARD_LIMIT_CHARS`",
             "",
-            "`524288`",
-            "The size, in characters of its JSON, past which a write to a shared state value is refused, unless the write makes the value smaller (524288 by default). A write to an archive entry drops its oldest archived items instead. `0` turns the limit off."
+            "`65536`",
+            "The size, in characters of its JSON, past which a write to a shared state value is refused, unless the write makes the value smaller (65536 by default). A write to an archive entry drops its oldest archived items instead, and the cleanup sweep compacts an archive already over it. `0` turns the limit off."
+          ]
+        },
+        {
+          "key": "SHARED_STATE_LIST_MAX_ITEMS",
+          "cells": [
+            "`SHARED_STATE_LIST_MAX_ITEMS`",
+            "",
+            "`500`",
+            "The number of items a top-level list of a shared state value may hold (500 by default). A write that leaves a list longer than this, and longer than it was, is refused; a write to an archive entry drops its oldest items instead. `0` turns the cap off."
           ]
         },
         {
@@ -4236,6 +4319,24 @@
             "",
             "`200`",
             "- A workset carrying an explicit `expires_at` (the builder node's \"keep for\" field) is purged once past it, whether or not anybody resolved it."
+          ]
+        },
+        {
+          "key": "WORKSET_IMPLICIT_IDLE_DAYS",
+          "cells": [
+            "`WORKSET_IMPLICIT_IDLE_DAYS`",
+            "",
+            "`30`",
+            "How long, in days, a workset the platform builds on its own for an agent's chat or an assignment (an implicit workset, never one a flow names) is kept after its last use (30 by default). Each use pushes the date back; past it, the cleanup sweep deletes the workset with its documents. `0` keeps implicit worksets until they are resolved."
+          ]
+        },
+        {
+          "key": "WORKSET_IMPLICIT_BUDGET_WINDOW_HOURS",
+          "cells": [
+            "`WORKSET_IMPLICIT_BUDGET_WINDOW_HOURS`",
+            "",
+            "`24`",
+            "The window, in hours, over which the automatic summarization budget of an implicit workset is counted (24 by default): the budget starts again every window, so a long-lived agent never ends up with a workset it can no longer summarize. `0` makes the budget a ceiling for the workset's whole life, as for a workset a flow names."
           ]
         },
         {

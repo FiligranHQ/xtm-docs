@@ -6,7 +6,7 @@ products:
   - xtm-one
 personas: [admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-08
+last_reviewed: 2026-11-16
 migrated_from:
   - xtm-one:/administration/introduction/
 ---
@@ -36,7 +36,7 @@ The bootstrap account keeps working when the identity provider is down, as long 
 
 ## Users
 
-:menu[Administration > Users and groups] opens on the **Users** tab, a table of every account with its email, its role (**Admin** or **User**, and **Platform Admin** for the bootstrap account) and its creation date. **Columns** brings in the others: **Status** (**Active** or **Disabled**), **Sign-in method**, and how many integrations, MCP servers, agents and knowledge bases the person owns. Search by name or email, filter by **Role**, **Created** (the last 24 hours, 7, 30 or 90 days) and **Groups**, and download the list with **Export CSV**.
+:menu[Administration > Users and groups] opens on the **Users** tab, a table of every account with its email, its role (**Admin** or **User**, and **Platform Admin** for the bootstrap account) and its creation date. **Columns** brings in the others: **Status** (**Active** or **Disabled**), **Sign-in method**, and how many integrations, MCP servers, agents and knowledge bases the person owns. Search by name or email, filter by **Role**, **Status**, **Created** (the last 24 hours, 7, 30 or 90 days) and **Groups**, and download the list with **Export CSV**. With a filter on, the total shows how many accounts match out of all of them. Clicking a row opens the person's page.
 
 ::screenshot{id=xtm-one-administer-users alt="The Users tab of Users and groups: the accounts in a table with their email, role and creation date, Hélène Marchetti with the admin shield and the Admin badge."}
 
@@ -59,7 +59,7 @@ A local password has at least 8 characters by default (`MIN_PASSWORD_LENGTH`), w
 | **Objects** | What the person owns: integrations, MCP servers, agents, knowledge bases, custom tools |
 | **API Keys** | Their personal API keys, with **Revoke** |
 | **Quotas** | Their own agentic limit, which wins over their groups' and the platform default. Requires the Enterprise Edition |
-| **Activity** | Their entries of the audit log |
+| **Activity** | Their entries of the audit log, in the table of [Audit logs](/xtm-one/administer/audit-logs/): search them and filter them by **Action**, **Entity** and **Time range** |
 
 The secret of an authenticator app and its recovery codes are never readable, not even by an administrator. When a person loses their device, **Reset two-factor** clears the enrollment: they sign in with their password alone until they enroll a new one.
 
@@ -73,12 +73,12 @@ You cannot disable or delete your own account.
 
 ## Groups
 
-A group gathers people to share resources with them at once, to give them a quota, to let a manager follow their AI usage, or to switch AI off for them. The **Groups** tab of :menu[Administration > Users and groups] lists the groups with their description, number of members and creation date. Search by name or description, filter by **Members** (**Has members** or **Empty**), and download the list with **Export CSV**. **New Group** asks for a **Name** and a **Description**.
+A group gathers people to share resources with them at once, to give them a quota, to let a manager follow their AI usage, or to switch AI off for them. The **Groups** tab of :menu[Administration > Users and groups] lists the groups with their description, number of members and creation date, and their **Kind** on a wide screen. Search by name or description, filter by **Kind** and **Members** (**Has members** or **Empty**), and download the list with **Export CSV**. **New Group** asks for a **Name** and a **Description**.
 
 A group's page has four tabs:
 
-- **Overview**: its name, description, **Kind** and AI access. **Kind** sorts the group in **Model usage** only: **Org unit**, **Access list**, **Distribution list** or **Not classified**.
-- **Members**: **Add Member** and **Remove from group**. Before you add or remove someone, XTM One lists what the group's shares lend them or take from them.
+- **Overview**: its name, description, **Kind** and AI access. **Kind** gives no access: it sorts the group in **Model usage** and in the **Kind** filter of the **Groups** tab. It is **Org unit**, **Access list**, **Distribution list** or **Not classified**.
+- **Members**: a table of the members with their email, role, a **Manager** badge for the group's managers, and the date they were **Added**. Search it and filter it by **Role** and **Manager** (**Managers** or **Other members**); a row opens the person's page. **Add a member...**, above the table, picks a person who is not in the group yet. **Remove from group**, on a row, takes one out. Before you add or remove someone, XTM One lists what the group's shares lend them or take from them.
 - **Managers**: the people who follow the group's AI usage.
 - **Quotas**: an agentic limit for each member, which a member's own limit overrides. Requires the Enterprise Edition.
 
@@ -110,7 +110,7 @@ Every agent, knowledge base, prompt, skill, integration, MCP server, custom tool
 
 Sharing a resource can lend what it carries, such as an integration's credential. XTM One says so before the change: see [Share agents and resources](/xtm-one/build/sharing/).
 
-Administrators find any item, whoever owns it, fleets included, in :menu[Administration > Objects]. Opening another person's agent shows it whole, with what it is bound to. Reading the delegations of another user's agent, or the command history of another person's machine, is recorded in **Audit logs** as a `break_glass` entry.
+Administrators find any item, whoever owns it, fleets included, in :menu[Administration > Objects]. Search its table and filter it by **Type**, **Owner**, **Status** and **Scope** (**Company-managed** or **Personal**); a row opens the item. Opening another person's agent shows it whole, with what it is bound to. Reading the delegations of another user's agent, or the command history of another person's machine, is recorded in **Audit logs** as a `break_glass` entry.
 
 ## Check after a change
 

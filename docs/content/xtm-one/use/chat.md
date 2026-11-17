@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [cti-analyst, soc-analyst]
 owner: docs-xtm-one
-last_reviewed: 2026-11-12
+last_reviewed: 2026-11-16
 edition: ee
 migrated_from:
   - xtm-one:/usage/chat/
@@ -111,6 +111,8 @@ The menu has one entry per kind of tool, **Built-in**, **Custom Tools**, **Integ
 - **Show or hide integrations**, at the bottom of **Integrations**, opens the list of your integrations: a hidden one stays out of the menu until you show it again.
 - **Reset default**, **Enable all** and **Disable all**, at the bottom of the menu, act on the whole selection.
 
+Your selection is saved with the conversation when you send a message, for the agent that answers it. Open the conversation again and the menu shows it as you left it. A tool you switched off stays off; a tool added to the agent since then is on. Its turns in Slack or Teams, and the replies the agent writes when background work ends, use the same selection. Once you [hand the conversation over](#hand-the-conversation-to-another-agent), the new agent starts from its own tools. What you pick before the first message of a new conversation stays with that conversation only.
+
 You can only add what you could connect to an agent of your own: a tool, MCP server, knowledge base or integration you cannot see is refused, with the kind named, and nothing is sent. An integration whose owner's account is not shared with you is never used for you: a note under the answer names it and says why, so connect your own. Your profile keeps your own defaults for the General Assistant: see [Set up your profile and API keys](/xtm-one/use/profile/).
 
 ## Organize your conversations
@@ -119,7 +121,7 @@ The list shows your conversations by date, each with the icon of its agent. Drag
 
 Archive a conversation from its row, or every one with **Clear all conversations**: an archived conversation leaves the active list.
 
-To keep the conversations of one investigation together, file them in a workspace: drag a conversation onto a workspace in the list, or open **Conversation options** > **File in a workspace**. Filing into a workspace other people can see asks first, in **File into a shared workspace?**: its members can then search what was written in the conversation. Click **File it** to go on. The agents of a workspace's conversations share its work items, its shared state and its knowledge. See [Share a workspace with your team](/xtm-one/use/workspaces/).
+To keep the conversations of one investigation together, file them in a workspace: drag a conversation onto a workspace in the list, or open **Conversation options** > **File in a workspace**. Filing into a workspace other people can see asks first, in **File into a shared workspace?**: its members can then search what was written in the conversation. Click **File it** to go on. Once a conversation has moved, a notice names the workspace it went to and lets you undo the move. The agents of a workspace's conversations share its work items, its shared state and its knowledge. See [Share a workspace with your team](/xtm-one/use/workspaces/).
 
 ## Hand the conversation to another agent
 
@@ -154,7 +156,7 @@ The option appears only when the conversation's agent answers on that app and th
 
 ## When an answer takes long or stops
 
-- **Background work**: when an agent delegates part of the request, a banner shows while the background tasks run, then a completion banner with the number that failed, if any. The files they produce arrive on the agent's next message. Their runs are in [Review what agents did](/xtm-one/use/work-history/).
+- **Background work**: when an agent delegates part of the request, a banner shows while the background tasks run, then a completion banner with the number that failed, if any. When a task ends, the agent takes the conversation up by itself and reports on it, with the files the task produced. That reply answers no new message of yours, and a line above it names the work it reports on: "Background task of Velvet Harbor watcher finished", or "Velvet Harbor watcher answered" when the work went to an agent-to-agent (A2A) partner. Their runs are in [Review what agents did](/xtm-one/use/work-history/).
 - **An answer cut by a restart**: when XTM One restarts, is updated or recycles a worker during an answer, the answer resumes by itself as soon as XTM One is back, from the tool calls it had completed. In the transcript, one card stands for each cut: what interrupted the answer, the number of tool calls completed before the cut, and whether it is resuming by itself, resumed by itself, resumed by you or not resumed. Click the number of tool calls to list them by tool. While the answer resumes, the card shows it as the agent writes it, even after you reload the page.
 - **An answer that could not resume by itself**: when the process stopped for another reason, such as a crash, or the same answer was cut again and again (3 times in a row without progress, 12 hours after its first cut, or 100 times in all), its card turns into a warning with **Resume** and **Dismiss**. **Resume** sends `Continue where you left off.`: the tool calls already completed are kept, so the agent goes on from their results. **Dismiss** hides the warning. An answer you stopped yourself, or one that ended more than 24 hours ago, starts again from scratch.
 - **An answer cut before any of it was saved**: a notice at the end of the conversation takes the card's place. It says **It is resuming by itself: no need to click anything.**, or **This response stopped before it finished** with the same **Resume** and **Dismiss**.

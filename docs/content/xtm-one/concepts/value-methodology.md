@@ -5,7 +5,7 @@ doc_type: explanation
 products: [xtm-one]
 personas: [executive, soc-manager, admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-10
+last_reviewed: 2026-11-16
 ---
 
 Before you quote the value of your AI agents to a committee, you need to know where each number comes from. XTM One computes every figure of the **Value** page from the runs it recorded and from a catalog of minutes and hourly rates. No figure comes from a language model, and reading one never starts a run. This page explains the model, the label each input carries, what is counted and what is not, and how to replace the catalog's defaults with your own numbers. In the product, the same explanation is the **How value is computed** page.
@@ -41,7 +41,7 @@ Each formula reads these inputs:
 | **Manual minutes** | The time a person needs without the agent, as a low, likely and high range. The range shown under every figure comes from the low and the high minutes. |
 | **Review minutes** | The time a person spends checking the output: measured where the run records it, the catalog's value otherwise. |
 | **Hourly rate** | The loaded hourly rate of the role that would do the work. |
-| **AI cost** | The measured model usage of the counted runs in the period. |
+| **AI cost** | What was spent: the measured cost of each model call in the period. A call counts once, for the person it is attributed to, its agent and that agent's fleet, and is never shared out over other work. Calls of automations, of chat and every other call count. |
 | **Setup cost** | Zero unless declared. **Payback** reads "Under a month" when one month of net value covers it. |
 
 ## Where each input comes from
@@ -60,16 +60,42 @@ Before you present a figure, read the labels of its inputs. A figure built on **
 
 ## What is counted
 
+Three sources make the total, and every breakdown adds up to it:
+
+| Source | What it counts |
+| --- | --- |
+| **Automations** | The runs and the work items, valued with the formulas above. |
+| **Chat (estimated)** | The decks, reports, videos and documents an agent finished in a conversation, counted on the low side: the low manual time, minus the time spent in the chat plus 25%. The **From chat, estimated** card of the Value page shows the same figure, line by line. |
+| **Other AI usage** | The cost of every other model call. It adds cost and no value. |
+
+**How this is computed** then reads "Value = the sum of its sources, chat included", followed by each source and its amount. When showing one source would single out a small group, only the total shows, so a hidden source is never found by subtraction.
+
+- Each piece of work and each model call counts for one person: the person a run acted for, the person a work item works for, the person of the conversation. Work with no person counts for the organization, its agent and its fleet, and in nobody's own figures.
 - A rejected outcome counts no unit.
 - A run nobody reviewed is counted, and shown apart. The review rate says how much of the figure a person confirmed.
 - A unit without manual minutes counts its AI cost and no time saved.
 - The period is 7, 30 or 90 days, this quarter or all time. The trend is weekly.
+- Older history that can't be tied to a person isn't presented as complete. The figures then read "since" a date: the first day from which every piece of work carries its person.
 
-What an agent finishes in a conversation (a deck, a report) is counted on its own card of the Value page and never added to these figures: see [Count what agents finished in a chat](/xtm-one/use/value/#count-what-agents-finished-in-a-chat).
+Each deliverable made in a conversation is listed only to the person who made it and to administrators: see [Measure what your agents' work is worth](/xtm-one/use/value/).
 
 ## Who sees what
 
-You see the figures of the agents and fleets you can open. An administrator sees the whole organization, and decides whether every user also sees the organization totals. They do by default. The interface has no switch for it: an administrator sets it through the API, with `PUT /api/v1/roi/settings` and the body `{"roi_org_totals_visible": false}`, and the change is audited.
+- **Mine** is what you did: your own runs, chats and AI cost, on any agent you use and in the general chat. It never includes a colleague's work on an agent you can see.
+- An agent or a fleet shows the work of everyone who used it, in aggregate, to whoever can open it.
+- The organization total is the same figure for an administrator and for every user, as long as **Organization totals for every user** is on. Agents and fleets you can't open are summed in **Other agents and fleets**.
+- Nobody is identifiable. A user never sees another person's name, email or deliverable titles. For a user, a fleet, agent, unit of work or week backed by fewer people than the threshold is summed into an **Other** row. The threshold is 5 people by default. Your own figures and the organization total are never folded, and an administrator sees every row. The exports and the agents' tools apply the same rule.
+- The breakdown by person is for administrators only. It is off by default, and every read of it is written to the audit log.
+
+An administrator sets the three rules in :menu[Settings > Organization > Rates by role], on the **Value visibility and privacy** card, with **Edit**:
+
+| Setting | Default | Effect |
+| --- | --- | --- |
+| **Organization totals for every user** | On | On, every user may switch the Value page to the organization's totals. Off, only administrators see them, and every user still sees their own. |
+| **Smallest group shown apart** | 5 people | A whole number from 2 to 50. Smaller groups are folded into **Other** for users who aren't administrators. |
+| **By person breakdown for administrators** | Off | On, administrators see the organization's value per person. |
+
+Every change to these settings is audited.
 
 When the deployment hides cost data, **AI cost**, **Net value**, **ROI** and **Payback** read **Hidden**, on screen and in the exports, never 0. See [When costs are hidden](/xtm-one/use/value/#when-costs-are-hidden).
 

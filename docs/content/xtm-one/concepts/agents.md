@@ -5,7 +5,7 @@ doc_type: explanation
 products: [xtm-one]
 personas: [ai-builder, admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-08
+last_reviewed: 2026-11-16
 migrated_from:
   - xtm-one:/usage/resources/index/
 ---
@@ -27,7 +27,7 @@ An XTM One AI agent is a persona and a model, given what it needs to know and wh
 | [Skill](/xtm-one/build/skills/) | A procedure the agent loads only when a task calls for it, such as writing a Sigma rule. | :menu[Agent Studio > Skills] |
 | [Integration](/xtm-one/build/integrations/) | A connection to a service with its credentials: the agent gets the service's tools. The OpenCTI, OpenAEV and OpenCRQ registered with XTM One are integrations created for you. | :menu[Tools & Integrations > Integrations] |
 | [MCP server](/xtm-one/build/mcp-servers/) | A whole server of tools speaking the Model Context Protocol (MCP), such as your internal booking tools. | :menu[Tools & Integrations > MCP Servers] |
-| [Tool](/xtm-one/build/tools/) | A built-in capability (web fetch, browser, code interpreter) or a function of your own run in a sandbox. | :menu[Tools & Integrations > Tools] |
+| [Tool](/xtm-one/build/tools/) | A built-in capability (web fetch, browser, code interpreter) or a function of your own run in a sandbox, written in XTM One or synced from a GitHub or GitLab repository. | :menu[Tools & Integrations > Tools], tab **Repositories** for the synced ones |
 | [Browser profile](/xtm-one/build/browser-profiles/) | A saved sign-in the agent's browser uses, without the agent seeing the credentials. | :menu[Tools & Integrations > Connections], tab **Browser profiles** |
 | [Variable](/xtm-one/build/variables/) | A named value, secret or not, resolved at runtime in prompts, personas, skills and tools, and, a secret one, in an integration's credential. | :menu[Tools & Integrations > Connections], tab **Variables** |
 | [Relay](/xtm-one/build/relays/) | A path to the services inside your network, opened from inside, with no inbound flow. | :menu[Tools & Integrations > Connections], tab **Relays** |

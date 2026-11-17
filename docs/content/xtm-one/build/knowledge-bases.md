@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, cti-analyst]
 owner: docs-xtm-one
-last_reviewed: 2026-11-12
+last_reviewed: 2026-11-16
 edition: ee
 migrated_from:
   - xtm-one:/usage/resources/knowledge-bases/
@@ -34,7 +34,7 @@ A knowledge base is a collection of your documents that XTM One splits into pass
 
 ::screenshot{id=xtm-one-build-knowledge-bases-documents alt="The knowledge base Grand Meridian security policies open on its Documents tab, with Upload Files and Paste Text, and Export, Test Search and Re-embed at the top."}
 
-To follow the documents of every knowledge base you can see at once, click **View Documents** on the list of knowledge bases. Each row gives the document, its knowledge base, its status and when it was added: search by file or knowledge base name, filter with **Status**, and sort by any of these columns. Hover an **Error** badge to read why the document failed, and click **Retry embedding** to send it again. **View Docs** on a warning under the list of knowledge bases opens this view on the knowledge bases concerned.
+To follow the documents of every knowledge base you can see at once, click **View Documents** on the list of knowledge bases. Each row gives the document, its knowledge base, its status and when it was added, and opens the documents of its knowledge base. Search by file or knowledge base name, filter with **Status**, and sort by any of these columns: the total then says how many of all your documents match. Hover an **Error** badge to read why the document failed, and click **Retry embedding** to send it again. **View Docs** on a warning under the list of knowledge bases opens this view on the knowledge bases concerned.
 
 XTM One keeps each document whole, not only its passages: downloading it returns the file you added, and an agent that needs the full text reads the original. Keep very large documents out of a knowledge base agents should read whole. Above about 200,000 characters, a document is never loaded whole into an agent's context: the agent is steered to search it for passages instead. Splitting it into meaningful documents works better.
 
@@ -54,6 +54,8 @@ On **Import Sources**, click **Configure Source**, pick the source type, fill it
 | **Drata Policies** | Your compliance policies, in the **Policy statuses** you list (`ACTIVE` when you list none). | A connected Drata integration |
 
 A source that needs an integration stays visible but disabled until one is connected. You can only choose an integration you can see; the source then syncs with it on every run, whoever starts it. When a sync fails, the people who can manage the knowledge base see the full error, which may name internal hosts; everyone else sees a short description.
+
+A source that keeps failing is quarantined: XTM One stops syncing it after several consecutive errors or hangs, or when the folder or page it reads is no longer found. The owner of the knowledge base gets a notification that names it, and so does every administrator when the knowledge base is company-managed. **Activity** records the event as **Sync quarantined**. Fix the source's settings, then click **Force Re-sync**.
 
 ## Check what agents will find
 
@@ -100,7 +102,9 @@ An agent with write access to a knowledge base stores documents in it and revise
 | **Documents** | The files themselves: add, download, delete, reprocess, and whether the figures of a PDF were described. |
 | **Import Sources** | The sources kept in sync, their schedule and last status. Not shown for a system-managed knowledge base. |
 | **Configuration** | Name, description, tags, the read-only and indexing switches, sharing, owner. |
-| **Activity** | What changed, which syncs ran, who edited the configuration. Check it when answers change. |
+| **Activity** | Every sync, document and embedding event, with its source and how many documents it concerned. Check it when answers change. |
+
+**Activity** shows one event per row: **When**, **Event**, **Details**, **Source** and **Documents**. Search it, filter it by **Event type** (**Syncs**, **Documents**, **Embeddings**, several at once), sort it by time, and export it. When a search or a filter narrows the list, its total says how many of all the events it keeps.
 
 The badges explain missing actions: **System managed** means the platform fills it, from an assignment's runs; **Content locked** (**Locked** on the list) means **Read-only content** is on; **Company-managed** with **Read-only** means you may read it but not administer it.
 

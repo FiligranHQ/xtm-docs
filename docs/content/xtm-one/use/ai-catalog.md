@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, cti-analyst]
 owner: docs-xtm-one
-last_reviewed: 2026-11-10
+last_reviewed: 2026-11-16
 migrated_from:
   - xtm-one:/usage/ai-catalog/
 ---
@@ -66,6 +66,7 @@ Company-managed resources you can use are bound as they are, not copied. A resou
 Nothing is left out silently: the end of the installation names each part, and the agent's page shows a notice until its variables have values.
 
 - The publisher's own integrations, channel bots, sharing, run-as identity and handovers. Connect your own integrations; set handovers on your copy.
+- The publisher's **Writes** choice on each OpenCTI binding: your copy follows the **Live writes** setting of the OpenCTI integration it uses. That setting is off by default: writes then go to a draft for review. See [Connect agents to your tools with integrations](/xtm-one/build/integrations/).
 - Knowledge bases not shared with you, recreated empty: add their documents.
 - The values of secret variables: the variables are created in your account, and you fill them.
 - A run budget above what applies to you: it is lowered to your limits. See [Set what one agent run may spend](/xtm-one/use/run-budgets/).

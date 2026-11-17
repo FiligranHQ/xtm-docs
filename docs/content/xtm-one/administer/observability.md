@@ -50,7 +50,7 @@ Each figure carries a badge with its change against the previous window of the s
 - **Top agents**, **Top models** and **Top users** rank by **Cost**, **Traces**, **Tokens**, **Cost / trace** or **Avg latency**, over the **Top 5**, **Top 10** or **Top 25**. A group manager reads **Top team members**. Click an agent to open its page, when you may open it. A deleted agent carries a **Deleted** chip, a disabled one **Disabled**. To read the whole tab for one agent, pick it in **All agents**.
 - **Traces by source**: where the work came from. **Agent Chat** is a conversation with an agent, **General Chat** with the General Assistant, **Assignment** a scheduled or triggered run; the other sources gather the platform's own model calls. Click a source to filter the page on it.
 - **Latency**: **Percentiles** (P50 to P99 over the window), **Daily median**, or **By model** (the median and P95 of the ten busiest models). The headline reads "Median 4.2s, 95% under 12s": the second number is what the slowest answers cost your users.
-- **Cost breakdown**: one table, **By agent**, **By user**, **By group** or **By model**.
+- **Cost breakdown**: one table, **By agent**, **By user**, **By group** or **By model**. Click a row to open the agent, or, for an administrator, the person or the group.
   - **By agent** shows each agent's owner, or a **Company** badge for a company-managed agent. Its **Status** filter keeps the **Active**, **Disabled** or **Deleted** agents.
   - **By user** shows each person's groups and how many agents they used, with a **Groups** filter.
   - **By group** shows the active users out of the members, and the average cost per active user.
@@ -73,17 +73,22 @@ Open :menu[Administration > Observability], tab **Outcomes**. It says what the a
 
 | Card | What it measures |
 | --- | --- |
-| **Hours saved** | The time people did not spend producing the units, review time deducted. Under it, the runs counted, and the work items when a fleet counts them. A range from a low to a high estimate shows when the units carry one |
+| **Hours saved** | The time people did not spend producing the units, review time deducted. Under it, the runs counted, the work items when a fleet counts them, and the chat deliverables when agents finished decks, reports or documents in conversations. A range from a low to a high estimate shows when the units carry one |
 | **Net value** | What those hours are worth at the hourly rate of the role that would do the work, minus the model cost. Under it, the cost, or "no priced model or no run cost recorded" when the runs cost nothing |
 | **Review rate** | The share of records a person reviewed, such as "Reviewed 3 of 12 records (optional)". Review is optional: a run nobody reviewed still counts |
 
 When the deployment hides costs, every cost and net value reads **Hidden**.
 
-The table lists the fleets and agents, the largest net value first: **Name**, **Type** (**Fleet** or **Agent**, with a **Type** filter), **Runs**, **Units**, **Hours saved**, **Cost**, **Net value** and **Reviewed**. A fleet's name opens the fleet's page, an agent's name the agent's **Value** tab, with its return on investment (ROI) and its run budget. Search it with **Search fleets or agents...**, and hide the columns you do not need with **Columns**.
+The table lists the fleets and agents, the largest net value first: **Name**, **Type** (**Fleet** or **Agent**, with a **Type** filter), **Runs**, **Units**, **Hours saved**, **Cost**, **Net value** and **Reviewed**. Click a fleet's row to open the fleet's page, an agent's row to open the agent's **Value** tab, with its return on investment (ROI) and its run budget. Search it with **Search fleets or agents...**, and hide the columns you do not need with **Columns**.
+
+The table ends with summed rows, so that it adds up to the cards; hover the icon next to each name for its meaning:
+
+- **No agent (general chat)**: the value and cost no agent carries, such as the General Assistant's chats.
+- **Other agents and fleets**: the agents and fleets you cannot open, or used by too few people to be shown apart.
 
 Under the table, two lists say where each figure comes from, with this window's numbers:
 
-- **How this is computed**: per unit, the units times the manual minutes minus the review minutes, at the rate per hour, gives the value. The total turns the minutes into hours, and the value minus the model cost into the net value. A rejected run counts no time saved, only its cost.
+- **How this is computed**: one line per source, such as "Automations: 12 h = $1,065", with **Automations**, **Chat (estimated)**, **Other AI usage** and **Other sources**. The lines add up to the total, which turns the minutes into hours, and the value minus the model cost into the net value. Then come the records reviewed, and the rejected runs, which count no time saved, only their cost.
 - **Assumptions**: the manual and review minutes of each unit and the rate of each role, each marked as an assumption, a published estimate or your organization's own figure. "No baseline for" names the units without minutes: their cost counts, but no time saved.
 
 With nothing to show, the tab says why:
@@ -97,9 +102,9 @@ For example, the Velvet Harbor watcher counts one **Threat report triaged for re
 
 Open :menu[Administration > Observability], tab **Traces**. The newest traces come first, 50 a page.
 
-::screenshot{id=xtm-one-observability-traces alt="The Traces list: the search, status, date and failure cause filters, and the traces of Night shift triage, Crisis briefer, Velvet Harbor watcher and the CTEM agents, each with its timestamp, name, agent, user, model, duration and tokens."}
+::screenshot{id=xtm-one-observability-traces alt="The Traces list: the search and the Filters pill in the toolbar with the total at its end, and the traces of Night shift triage, Crisis briefer, Velvet Harbor watcher and the CTEM agents, each with its timestamp, name, agent, user, model, duration and tokens."}
 
-- **Filters**: above the table, **Search trace name...** and **Status** (**OK** or **Error**). In the card above it, **From** and **To**, a switch per provider type under **Source:** (`openai`, `anthropic`, `azure_openai`, `ollama`...), **Groups**, **Agents**, **Models**, and **Failure cause**. **Clear all filters** resets them and keeps the sort.
+- **Filters**: in the table's toolbar, **Search trace name...**, then the **Filters** pill, which opens **Status** (**OK** or **Error**), **Time range** (**From** and **To**), a switch per provider type under **Sources** (`openai`, `anthropic`, `azure_openai`, `ollama`...), **Groups**, **Agents**, **Models** and **Failure cause**. The pill shows how many filters are in use, and **Clear all filters** resets them and keeps the sort. The total at the end of the toolbar then reads "n of N": the traces that match out of every trace you may read.
 - **Columns**: **Timestamp**, **Name**, **Agent**, **User**, **Model** (**Platform default** when the agent uses the platform's default model), **Duration**, **Tokens (in/out)**, **Cost**, **Status** and **Score**, a check when someone rated the answer. Every column but **Agent**, **User** and **Score** sorts. **User**, **Tokens (in/out)** and **Score** step aside in a narrow window, and **Columns** hides the ones you do not need. The list shows 10, 25, 50 or 100 traces a page.
 - **A failed trace** names its cause in a tooltip on its status.
 - **View Traces**, on an assignment or one of its runs, opens this list scoped to it: the scope shows as a chip after **Scoped to:**, which you remove to see every trace again.
@@ -132,7 +137,7 @@ A trace's page, `/traces/` followed by its identifier, shows the trace whole.
 
 ## Read a whole conversation in Sessions
 
-Open :menu[Administration > Observability], tab **Sessions**, to start from a conversation rather than a trace. Each row is a conversation, named by its title in the **Conversation** column ("Untitled conversation" without one), with its **User**, **Last Activity**, **Traces**, **Agents**, **Models**, **Tokens**, **Cost** and **Errors**. It filters like **Traces**: **Search conversation, model, agent...** and **Status** above the table, then dates, source, groups, agents and models, and **Clear all filters**. Click a row to open its first trace with **Session focus** on, and **Back to Sessions** to return.
+Open :menu[Administration > Observability], tab **Sessions**, to start from a conversation rather than a trace. Each row is a conversation, named by its title in the **Conversation** column ("Untitled conversation" without one), with its **User**, **Last Activity**, **Traces**, **Agents**, **Models**, **Tokens**, **Cost** and **Errors**. It filters like **Traces**: **Search conversation, model, agent...**, then the **Filters** pill with **Status**, **Time range**, **Sources**, **Groups**, **Agents** and **Models**, and **Clear all filters**. Click a row to open its first trace with **Session focus** on, and **Back to Sessions** to return.
 
 ::screenshot{id=xtm-one-observability-sessions alt="The Sessions tab of Observability: one row per conversation, with its user, last activity, traces, agents, models, tokens, cost and errors."}
 
@@ -143,7 +148,7 @@ On Monday 13 April 2026, Hélène Marchetti, CISO of Grand Meridian Hotels, sees
 
 1. In **Top agents**, she switches the metric to **Cost / trace**: **Crisis briefer** comes first at $1.90 a trace, ahead of **Night shift triage** at $0.31.
 2. She picks **Crisis briefer** in **All agents**: every card now reads that agent alone. **Usage over time**, **By model**, shows the jump on 2 April. That day, Sophie Laurent moved the agent from the platform default to a larger model for the crisis cell's decks.
-3. **Top errors** lists 14 failures of **Night shift triage**, all "Provider rate limited", last seen at 02:04. She opens the **Traces** tab and sets:
+3. **Top errors** lists 14 failures of **Night shift triage**, all "Provider rate limited", last seen at 02:04. She opens the **Traces** tab and sets, in **Filters**:
 
    | Filter | Value |
    | --- | --- |

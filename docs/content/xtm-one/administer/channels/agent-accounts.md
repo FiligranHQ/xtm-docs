@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-08
+last_reviewed: 2026-11-16
 edition: ee
 no_screenshot: "An agent account needs a Microsoft integration signed in as a work account, which the capture stack does not have: the diagram shows how an account decides, and the screenshots this page needs are proposed for capture."
 migrated_from:
@@ -123,6 +123,8 @@ The account leaves alone its own emails, drafts, meeting invitations, emails fro
 | **Instructions** | Added to the agent's persona for every reply of this account |
 | **Reactions as feedback** | On by default: a reaction on an answer rates it in the agent's **Feedback** tab (thumbs up positive, thumbs down negative), for 14 days after the answer. Only a keyed fingerprint of who reacted is kept |
 | **Notify me when a reply is sent** | On by default: each reply the account posts on its own reaches your notification bell, with where and what was said |
+
+Teams and Outlook show none of the cards of the XTM One chat. When a reply includes a deck, a report, a video or a dashboard, the account posts instead a link to its page in XTM One, named after its title; a link to a deck opens on the slide the agent pointed to. A file goes out as an attachment. Something that is not yours is left out of the reply, never linked.
 
 In a Teams chat or channel thread, the agent answers one turn at a time. It waits a few seconds before it starts (6 by default, `CHAT_EVENT_COALESCE_WINDOW_SECONDS` in the [configuration reference](/reference/xtm-one/configuration/)), and messages written meanwhile are **Queued**. It then answers them in one reply, on the latest one: the others show **Answered together**. A burst of five lines from Paul gets one answer, not five.
 

@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, soc-manager]
 owner: docs-xtm-one
-last_reviewed: 2026-11-10
+last_reviewed: 2026-11-16
 migrated_from:
   - xtm-one:/usage/agentic-flow/
 ---
@@ -48,16 +48,18 @@ Click an agent to open its panel: whether it is enabled, its assignments, the ag
 
 ### Choose what the map draws
 
-The toolbar above the graph narrows and arranges the map. The map keeps your choices for your next visit, and writes them in the page's address: a link to it opens the same view.
+The toolbar above the graph narrows and arranges the map. The map keeps your layout, forces and filters for your next visit, and writes your choices in the page's address: a link to it opens the same view.
 
 | Control | What it does |
 | --- | --- |
-| **Mine**, **Company**, **Shared**, **All** | Keeps the agents you own, those published to the whole company, those shared with you directly or through a group, or every agent you can see. Each shows how many agents it holds; the map first opens on the first one that holds an agent. The General Assistant is always drawn |
-| **Filters** | Keeps an **Agent type** (**Built-in**, **Company-managed**, **Personal**), the **Enabled** or **Disabled** agents, and the agents **With open work items** or **With runs in flight**. Its badge counts the filters on; **Clear filters** removes them |
+| **Mine**, **Company**, **Shared**, **All** | Keeps the agents you own, those published to the whole company, those shared with you directly or through a group, or every agent you can see. Each shows how many agents it holds. The General Assistant is always drawn. The segment is not kept from one visit to the next: unless its address names one, the map opens on **Mine** when you own an agent, otherwise on the first of **Company**, **Shared** and **All** that holds one |
+| **Filters** | Keeps an **Agent type** (**Built-in**, **Company-managed**, **Personal**), the **Enabled** or **Disabled** agents, and the agents **With open work items** or **With runs in flight**. Its badge counts the filters on; **Clear filters** removes them. **Show the built-in catalogue under Company** decides whether **Company** draws the built-in agents XTM One provides beside your organization's own: see below |
 | **Layout** | Arranges the agents: **Force** (the default), **Top down**, **Left to right**, **Radial** or **Org chart** |
 | **Forces** | Sets how the agents spread: **Repulsion**, **Link distance** and **Node spacing** |
 | **Fleets** | Shows when an agent belongs to a fleet you can open, and is on: the agents of a fleet are drawn as one node, which opens the fleet when you click it. Turn it off to draw every agent |
 | **Legend** | Explains the shapes, colours and arrows of the map |
+
+**Company** holds both the company-managed agents your organization made and the built-in agents XTM One provides. When your organization has company-managed agents of its own, the map folds the built-in ones away: **Company** draws and counts your organization's agents only, and hovering it tells how many are hidden ("3 built-in hidden"). Turn on **Show the built-in catalogue under Company**, in **Filters**, to draw them again. On a platform with no company-managed agent of its own, the built-in ones show by default. The map remembers your choice, and the General Assistant stays drawn either way.
 
 ### Focus on a few agents
 

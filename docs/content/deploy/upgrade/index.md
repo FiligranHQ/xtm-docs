@@ -8,7 +8,7 @@ products:
   - openaev
 personas: [platform-engineer]
 owner: docs-platform
-last_reviewed: 2026-10-31
+last_reviewed: 2026-11-16
 migrated_from:
   - opencti:/deployment/upgrade/
   - openaev:/deployment/upgrade/
@@ -35,7 +35,7 @@ This page upgrades an XTM stack deployed with the official Docker deployment, [F
 | XTM One database schema and data | When the new XTM One starts, as [Upgrade XTM One](/deploy/upgrade/xtm-one/) describes |
 | Changes that need you | Listed per version in [Breaking changes](/deploy/upgrade/breaking-changes/), with a guide for each |
 
-To go back to the version you had, restore the backup you take in step 1.
+To go back to the version you had, restore the backup you take in step 1: the older images alone are not enough. XTM One refuses to start on a database that a newer version migrated: its log says `The database is ahead of this image`, and names the revision it does not know. Do not re-stamp the database to get past it: restore the backup, or deploy an XTM One image that contains that revision.
 
 ## Upgrade the stack
 
@@ -106,8 +106,10 @@ To go back to the version you had, restore the backup you take in step 1.
    set -a; . ./.env; set +a
    curl -fsS "http://localhost:$OPENCTI_PORT/health?health_access_key=$OPENCTI_HEALTHCHECK_ACCESS_KEY" >/dev/null && echo "OpenCTI OK"
    curl -fsS "http://localhost:8081/api/health?health_access_key=$OPENAEV_HEALTHCHECK_KEY" >/dev/null && echo "OpenAEV OK"
-   curl -fsS "http://localhost:$XTM_ONE_PORT/api/health" >/dev/null && echo "XTM One OK"
+   curl -fsS "http://localhost:$XTM_ONE_PORT/api/health/ready" >/dev/null && echo "XTM One OK"
    ```
+
+   The container of XTM One stays `healthy` even when its start fails, so its line checks readiness instead, which succeeds only once the migrations and the start are complete. Until then, `curl -sS "http://localhost:$XTM_ONE_PORT/api/health/ready"` answers `"status":"starting"`, with a `startup_error` that gives the reason when the start failed, such as `The database is ahead of this image` after a rollback without the backup.
    :::
 
 5. Apply the actions the [breaking changes](/deploy/upgrade/breaking-changes/) of your new version ask for after the upgrade.

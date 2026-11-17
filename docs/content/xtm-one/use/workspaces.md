@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [cti-analyst, soc-analyst]
 owner: docs-xtm-one
-last_reviewed: 2026-11-09
+last_reviewed: 2026-11-16
 edition: ee
 migrated_from:
   - xtm-one:/usage/workspaces/
@@ -59,11 +59,11 @@ To add a file attached in a conversation to the sources, open **Conversation fil
 
 The quickest way is the chat's sidebar, which lists your conversations under **Workspaces**, one group per workspace, then **Not in a workspace**. A workspace's group stays closed until you open it, unless it holds the conversation on screen or you are searching:
 
-- Drag a conversation onto a workspace, or use **Move to workspace** on its row; **Remove from workspace** takes it out.
+- Drag a conversation onto a workspace, or use **Move to workspace** on its row, where a search field finds the workspace in a long list; **Remove from workspace** takes it out. Several selected conversations move together, by the same menu or by dragging them.
 - Start a conversation already filed with the **+** of a workspace (**New conversation in this workspace**).
 - In an open conversation, **Conversation options** > **File in a workspace**, then pick a workspace, or **No workspace**.
 
-The change applies from the next message: from then on, the agents of that conversation create and read their work items and shared state in the workspace. Filing into a workspace other people can see asks first, since their agents will be able to search what was written in the conversation.
+After a move, a message names the workspace the conversations went to, with **Undo** to put them back. The change applies from the next message: from then on, the agents of that conversation create and read their work items and shared state in the workspace. Filing into a workspace other people can see asks first, since their agents will be able to search what was written in the conversation.
 
 An agent can file the conversation for you when you ask ("file this conversation in Velvet Harbor investigation"). Into a workspace other people can see, the move waits for your approval on an approval card, every time.
 
@@ -77,7 +77,7 @@ The other tabs of the workspace's page show what it holds:
 | **Conversations** | **Your conversations**: your own conversations filed in the workspace; click one to open it in the chat. The conversations other people filed are not listed, but the agents can search them |
 | **Team** | Only when the workspace hosts a [fleet](/xtm-one/build/fleets/): the fleet's members, and **Open the fleet graph** |
 
-A fleet, a team of AI agents, works in one workspace, which keeps everything its agents produce. Whoever creates the fleet picks a workspace they manage, or leaves the default: a new workspace named after the fleet. Under the workspace's name, **Hosts fleet** and the fleet's name link to the fleet. Its **Operations** tab also lists what the fleet's agents create, even when they file it nowhere. See [Run agents as a team with fleets](/xtm-one/build/fleets/).
+A fleet, a team of AI agents, works in one workspace, which keeps everything its agents produce. Whoever creates the fleet picks a workspace they manage, or leaves the default: a new workspace named after the fleet. Under the workspace's name, **Hosts fleet** and the fleet's name link to the fleet. Its **Operations** tab also lists what the fleet's agents create, even when they file it nowhere. When an administrator switches on **Hide activity from non-admins** in the fleet's settings, the work items and shared state filed in its workspace are shown only to administrators and to the fleet's owner; what you created yourself stays visible to you. See [Run agents as a team with fleets](/xtm-one/build/fleets/).
 
 ## Share it with your team
 

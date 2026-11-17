@@ -1,7 +1,7 @@
 {
   "name": "mcp-tools",
-  "version": "1.261112.0",
-  "source": "XTM-One-Platform/xtm-one@6bea237: backend/app/api/v1/mcp_platform.py, backend/app/integrations/providers",
+  "version": "1.261116.1",
+  "source": "XTM-One-Platform/xtm-one@ee30e87: backend/app/api/v1/mcp_platform.py, backend/app/integrations/providers",
   "intro": "Every tool of the Model Context Protocol (MCP) servers XTM One exposes for OpenCTI, OpenAEV and OpenCRQ: 163 tools. An assistant or an agent of your own calls them with an API key of a user, and works with that user's rights in each product: see [MCP servers](/develop/apis/mcp/) for the endpoints, the protocol and the authentication. A tool marked Write changes data; a read-only key cannot call it.",
   "filter": "Filter by tool or by what it does",
   "sections": [
@@ -1152,7 +1152,7 @@
             "`create_opencrq_supporting_asset`",
             "Assets & vulnerabilities",
             "Write",
-            "Create a supporting (technical) asset in OpenCRQ with a category, exposure, and optional criticality, subcategory, url, linked person, hand-set tags and a property block (hostname, IPs, ... per family). organization_id maps the asset into…"
+            "Create a supporting (technical) asset in OpenCRQ with a category, exposure, and optional criticality, subcategory, url, linked person, owner name, groups, hand-set tags and a property block (hostname, IPs, ... per family). organization_id…"
           ]
         },
         {
@@ -1161,7 +1161,7 @@
             "`update_opencrq_supporting_asset`",
             "Assets & vulnerabilities",
             "Write",
-            "Update a supporting (technical) asset in OpenCRQ (name, category, exposure, criticality, description, owner, subcategory, url, linked person, tags, property block)."
+            "Update a supporting (technical) asset in OpenCRQ (name, category, exposure, criticality, description, owner, subcategory, url, linked person, tags, groups, property block)."
           ]
         },
         {

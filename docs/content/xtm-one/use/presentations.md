@@ -32,7 +32,26 @@ An AI assistant of XTM One builds a slide deck for you from a request in plain w
 
 You can also start from :menu[Work > Presentations]: **New presentation** asks for the template (one you can see, **No template - plain look**, or **Let my assistant ask me in the chat**), the theme, and the assistant that writes it (**Written by**), then opens the chat with the start of the request typed for you. Automations, and chats where the assistant cannot ask, use the platform's default template, set by an administrator.
 
-A deck can hold text, lists, key figures, tables, timelines, process flows, quotes, images from the template's assets, native charts, org charts, world maps by country, diagrams drawn from a description, formulas ("A + B = the offer"), configuration cards and [live polls](#ask-the-room-with-a-live-poll). Ask for a **one-pager**, a **product brief** or a **datasheet** and the assistant lays it out on a portrait A4 or US Letter page, read rather than projected. For a deck you make every month, ask the assistant to copy the last edition ("copy *Velvet Harbor review, March 2026* as *Velvet Harbor review, April 2026*, then update the numbers"): the copy keeps the template, the theme and every slide with its notes.
+A deck can hold text, lists, key figures, tables, timelines, process flows, quotes, images from the template's assets, videos, native charts, org charts, world maps by country, positioning maps, diagrams drawn from a description, formulas ("A + B = the offer"), configuration cards and [live polls](#ask-the-room-with-a-live-poll). Ask for a **one-pager**, a **product brief** or a **datasheet** and the assistant lays it out on a portrait A4 or US Letter page, read rather than projected. For a deck you make every month, ask the assistant to copy the last edition ("copy *Velvet Harbor review, March 2026* as *Velvet Harbor review, April 2026*, then update the numbers"): the copy keeps the template, the theme and every slide with its notes.
+
+### Place options on a positioning map
+
+A **Positioning map** places up to 30 items on two axes, such as the hotels of a chain by their exposure and their readiness. Each axis says what it measures and what its two ends mean, and the four quadrants carry a name over a faint tint. The item the slide is about stands out, larger and in the template's accent; the others can be dimmed as context. Up to four callouts, drawn with the map, say why that item stands where it does, and each item can carry a one-sentence note that shows when you point at it. XTM One puts each name on a free side of its mark, so that names do not cover one another; on a crowded map, **Layout check** reports **Map labels overlap**.
+
+Ask the assistant for one, naming the axes, the items and where each stands ("a positioning map of our three hotels by exposure and readiness, Madrid highlighted"). In **Edit slides**, **Selection** changes its **Axes** (**Crossing at the centre**, a two-by-two, or **Along the edges**) and puts its **Callouts** **Under the map** or **Beside the map**.
+
+::screenshot{id=xtm-one-presentations-positioning-map alt="A slide of the Grand Meridian briefing template with a positioning map of the Paris, Madrid and Barcelona hotels by exposure and readiness: four named quadrants, Madrid highlighted in the Act now quadrant, and a callout under the map saying why."}
+
+### Play a video on a slide
+
+A **Video** plays inside the slide. Give the assistant the video's link:
+
+- **A YouTube or Vimeo link** plays in that site's own player, which loads only while its slide is on screen.
+- **A link to an MP4 or WebM file** on a public `https://` address: XTM One downloads it once, when the deck saves, and keeps it as a file of yours, so the slide still plays when the link stops working. A file over 100 MB, or a link that serves no MP4 or WebM video, is refused and the deck is not saved.
+
+A video loads only when its slide comes on screen, and stops when the slide leaves, so a deck of several videos opens as fast as any other. In **Edit slides**, **Selection** sets how it plays: **Autoplay** (it starts when its slide shows, muted unless you turn **Muted** off), **Loop**, **Controls** (the play button, the volume and the timeline, on by default), and **Start at** and **End at**, in seconds, to play one passage only (a Vimeo video takes the start only). **Frame** draws a browser window or a device around it, as for an image.
+
+Positioning maps and videos are not in **Add a block**: ask the assistant to place them, then adjust them by hand.
 
 ## Present it
 
@@ -117,6 +136,8 @@ Anyone who has a public link can open the deck and pass the link on. Turn it off
 | **PowerPoint (editable shapes)** | Text boxes, tables and native PowerPoint charts placed as on screen | Someone keeps working on it in PowerPoint |
 | **JSON package (import elsewhere)** | The deck itself, with its images, in one file | You move the deck to another XTM One platform: **Import** on the Presentations page reads it back |
 
+A video cannot play on paper: the PDF shows a still with a play badge, linked to the video's page for a YouTube or Vimeo video, and **PowerPoint (editable shapes)** turns a video file of up to 100 MB into a movie that plays in PowerPoint.
+
 **Print to PDF (browser)**, in **More actions**, prints from your browser when the platform's export is not available; pick **Save as PDF** as the destination.
 
 ## Read and export a report
@@ -147,7 +168,7 @@ The decks show as cards or, with **List view** at the right end of the toolbar, 
 - **Name**: the title, and who made the deck when it is not you.
 - **Size**: the number of slides, or of pages for a portrait page.
 - **Template**: the template, the theme and, for a page, its paper size.
-- **Comments**: the open review notes; the number opens the deck on its comments.
+- **Comments**: the number of open review notes. On a card, the number opens the deck on its comments; in the table, click the row to open the deck.
 - **Sharing**: whether the deck is shared, published to the company, view-only for you or open through a public link.
 - **Updated**, and **Created**, which **Columns** brings in.
 
@@ -165,6 +186,8 @@ On 12 April 2026, Hélène Marchetti, CISO of Grand Meridian Hotels, needs a dec
 The assistant asks which template to use; she answers `Grand Meridian`. The deck appears in the conversation. She asks "on slide 5, replace *Spain* with *Madrid and Barcelona*", then opens **Share** and gives the group `Crisis cell` **Can view**. She also asks for a live poll on the decisions slide: "which decision comes first?", a **Choice** question with the three decisions as options.
 
 The next morning, the Madrid managers join over Teams. She picks **Present to a meeting**, shares the window named *Velvet Harbor crisis briefing* and talks from the **Speaker view** on her laptop. On the poll slide, the cell votes from their phones; she locks voting and reads the result aloud. She then sends the **PDF (vector)** export to the executive committee.
+
+For the committee's next meeting, she asks for "a positioning map of our three hotels by exposure to Velvet Harbor and readiness, Madrid highlighted, and say why it stands there". The slide *Madrid is the hotel to act on* places Paris in the quadrant *Hardened*, Barcelona and Madrid in *Act now*, Madrid larger, with the callout *No detection in Spain yet* under the map.
 :::
 
 ## What's next

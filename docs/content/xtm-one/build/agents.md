@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one, opencti]
 personas: [ai-builder]
 owner: docs-xtm-one
-last_reviewed: 2026-11-10
+last_reviewed: 2026-11-16
 edition: ee
 migrated_from:
   - xtm-one:/usage/agents/
@@ -72,7 +72,28 @@ The registered OpenCTI integration is managed by the platform: every call carrie
 
 To make the integration read-only for this agent instead, ask the General Assistant in the chat, for example "Make the OpenCTI - Cyber Threat Intelligence Platform integration read-only on the Velvet Harbor watcher agent". A read-only integration keeps its tools that list, get, search and download, and loses every other one, including tools added to it later. XTM One enforces it when the agent runs: a write tool is not offered to the agent, and a call that names one is refused, whatever the prompt says. The same integration can stay writable on another agent. Removing the integration from the agent removes the mark.
 
+By default, an agent that may write to OpenCTI does not change the knowledge directly: its changes wait in an OpenCTI [draft](/opencti/use/ingest/drafts/) that a person reviews and approves. The integration decides it with its own Live writes setting, off by default (see [Connect agents to your tools with integrations](/xtm-one/build/integrations/)), and each agent can override it. In the **Integrations** card, click **Edit**, then choose **Writes** under each bound OpenCTI integration:
+
+- **Inherit**: the agent follows the integration, as the line under the field says, or each person's own integration when the agent uses everyone's.
+- **Live**: the agent's changes go straight to the knowledge, without review, and the agent also gets `apply_opencti_draft` and `create_opencti_label`. Only an administrator or the person who manages the integration can choose it; for an agent that uses each person's own integration, only an administrator.
+- **Draft only**: the agent's changes always wait in a draft for review.
+
+Out of edit mode, the card reads **Writes: Live** or **Writes: Draft only** under the integration when the agent does not inherit. A read-only integration never writes, whatever **Writes** says.
+
 Knowledge bases follow the same rule: under **Configuration** > **Knowledge**, each bound knowledge base reads **Read-only (search only)** until you turn on writing for it.
+
+## Choose what it knows about your organization
+
+An agent can start each chat and run with a short summary of your organization profile: its name, sector, regions, size and risk appetite, then one line per category of the profile, with the `get_organization_context` tool to read the rest. Your administrator sets the default for every agent, on unless changed, in **Organization context in agents**, under :menu[Administration > Settings > Organization] (see [Choose what every agent receives](/xtm-one/administer/organization-profile/#choose-what-every-agent-receives)). Each agent can override it, and each assignment can override its agent.
+
+:::steps
+1. On the agent's page, open **Configuration** > **General**, and click **Edit**.
+2. In **Organization context**, choose **Inherit** to follow the platform, **Always** to give the agent the summary whatever the platform says, or **Off** to remove the summary and the `get_organization_context` tool. The line under the field says what is in effect and where it comes from, such as "On, from the platform".
+3. Unless you chose **Off**, choose in **Preloaded organization categories** the categories loaded in full into the prompt after the summary: **Inherit** follows the platform's list, and **Choose** sets the agent's own among **Crown jewels**, **Tech stack**, **AI systems inventory**, **Priority intelligence requirements (PIRs)** and **Tracked organizations**. An empty list preloads nothing: every category stays one `get_organization_context` call away.
+4. Click **Save**.
+:::
+
+Give the summary to an agent that ranks, scopes or estimates for your company, and turn it off for one whose job does not depend on it, to keep its prompt short. The **Advanced** form of **Create New Agent** asks it as one switch, **Organization context**, on by default: turned off, the agent is created with **Off**. On an assignment's page, the **Parameters** card of **Overview** has the same two fields; set to **Inherit**, the assignment follows the agent, then the platform.
 
 ## Share it with a team
 
@@ -86,6 +107,8 @@ A new agent is private. To let a group use it:
 :::
 
 The members find the agent in their **Agents** list and can chat with it at once. Sharing lends what the agent carries: they run it with its integrations, MCP servers and custom tools. With a platform-managed integration such as the registered OpenCTI, each member still reads only what their own OpenCTI rights allow. Personal integrations on a shared agent, levels, company-managed agents and the confirmation are explained in [Share agents and resources](/xtm-one/build/sharing/).
+
+On a company-managed agent, an administrator can also turn on **Hide activity from non-admins** in **Configuration** > **General**: the agent's runs, traces, work items and shared state are then visible only to administrators and to its owner. The other users still use the agent and see the runs made as them.
 
 When the agent's owner loses access to a bound integration, for example because its share was revoked, the sharing card warns that the owner no longer has access to it. The agent's runs then refuse that integration's tools until the owner gets access back. Whoever can edit the agent clicks **Remove binding** to unbind it, or opens the integration from its name.
 
@@ -145,15 +168,17 @@ On the agent's **Value** tab, the **ROI** section comes first, above the run bud
 
 | Card | What it says |
 | --- | --- |
-| **Hours saved** | The time the counted runs spared people, with the number of runs. |
-| **Net value** | What that time is worth minus the model cost of the runs, with the cost under it. |
+| **Hours saved** | The time the counted runs and chat deliverables spared people, with how many of each. |
+| **Net value** | What that time is worth minus what the agent's model calls cost over the window, chat included, with the cost under it. |
 | **Review rate** | The share of the counted runs a person reviewed. Click it to list the ones nobody reviewed yet under the agent's **Activity**, and review them as in [Review what agents did](/xtm-one/use/work-history/). |
 
-Under the cards, **How this is computed** gives the formula with the agent's own numbers, and **Assumptions** the minutes and rates behind them. While some of them are still the catalog's defaults, a note says the figures are estimated, with a link to **Units and rates**. When the window counted nothing, **Widen the window** moves to a longer one. An agent without a unit shows **Pick a unit**, which opens **Outcomes**, to the people who can manage it; the others are told to ask its owner. What the agent finished in a chat, such as a deck, is counted apart on a card of its own: see [Count what agents finished in a chat](/xtm-one/use/value/#count-what-agents-finished-in-a-chat).
+Under the cards, **How this is computed** gives the formula with the agent's own numbers, and **Assumptions** the minutes and rates behind them. While some of them are still the catalog's defaults, a note says the figures are estimated, with a link to **Units and rates**. When the window counted nothing, **Widen the window** moves to a longer one. An agent without a unit shows **Pick a unit**, which opens **Outcomes**, to the people who can manage it; the others are told to ask its owner. What the agent finished in a chat, such as a deck, counts in the same figures: **How this is computed** shows it as the **Chat (estimated)** line, and the **From chat, estimated** card under the section details it. See [Count what agents finished in a chat](/xtm-one/use/value/#count-what-agents-finished-in-a-chat).
+
+An administrator always reads the agent's totals. Anyone else reads them once enough people used the agent over the window: as many as **Smallest group shown apart**, five by default, which an administrator sets in [Settings](/xtm-one/administer/settings/#organization) under **Rates by role**. Below that, the section shows only your own use, under **Your use of this agent**, without the review link and the assumptions; if you did not use the agent, it says that the totals are hidden.
 
 ::screenshot{id=xtm-one-build-agents-roi alt="The ROI section of the Velvet Harbor watcher's Value tab over the last 30 days: the hours its weekly brief saved, its net value after the model cost, its review rate, the note that some minutes and rates are catalog defaults, and how the figures are computed."}
 
-In the list view of :menu[Orchestration > Agents], the **Net value (30d)** column gives each agent's figure over the last 30 days, or **Value (30d)** when the deployment hides costs. An agent without a unit reads "-", with **Declare a unit** for the people who can edit it.
+In the list view of :menu[Orchestration > Agents], the **Net value (30d)** column gives each agent's figure over the last 30 days, or **Value (30d)** when the deployment hides costs. An agent without a unit reads "-", with **Declare a unit** for the people who can edit it. An agent whose totals are hidden from you also reads "-": its tip gives your own use, and the row sorts after the figures.
 
 :::example[Sophie Laurent builds the Velvet Harbor watcher]
 At Grand Meridian Hotels, Camille Roux and the CTI team want a summary of every new OpenCTI report on Velvet Harbor, the intrusion set behind the fake summit booking of 9 January 2026. Sophie Laurent, the AI engineer, builds the agent on 12 April 2026. In the wizard she picks **From Scratch**, then:
@@ -182,16 +207,20 @@ The General Assistant builds agents too. Describe the agent in the chat: it crea
 
 ## The agent's page
 
+:menu[Orchestration > Agents] opens on **Mine** when you have agents of your own, otherwise on the first of **Company**, **Shared** and **All** that lists agents. **Company** holds the company-managed agents and the built-in agents of the platform. Once your organization has company-managed agents of its own, **Company** hides the built-in ones: its count leaves them out, and its tooltip says how many are hidden. To list them, check **Built-in** in the **Properties** filter; XTM One keeps your choice for your next visits. A search that matches only built-in agents lists them anyway. Click an agent to open its page:
+
 | Tab | What it is for |
 | --- | --- |
 | **Overview** | What the agent does and what is bound to it, at a glance, and its assignments. Its **Fleet** card names the [fleet](/xtm-one/build/fleets/) the agent belongs to, the agent it reports to and the fleets that connect it, with **Open the fleet** and how many of its automations are on; an agent in no fleet says **In no fleet: this agent is in the playground.** |
-| **Configuration** | **General** (persona, guardrails, model, sharing), **Tooling** (built-in tools, integrations, MCP servers, custom tools), **Knowledge** (knowledge bases, memory, prompts, skills), **Channels & Bots**, which lets the agent answer in Slack, Microsoft Teams and other messaging apps ([Talk to agents from your messaging apps](/xtm-one/administer/channels/)), and **Outcomes**, the unit of work its runs count in ROI. A built-in tool this deployment switched off shows **Unavailable**. |
+| **Configuration** | **General** (persona, guardrails, model, organization context, sharing), **Tooling** (built-in tools, integrations, MCP servers, custom tools), **Knowledge** (knowledge bases, memory, prompts, skills), **Channels & Bots**, which lets the agent answer in Slack, Microsoft Teams and other messaging apps ([Talk to agents from your messaging apps](/xtm-one/administer/channels/)), and **Outcomes**, the unit of work its runs count in ROI. A built-in tool this deployment switched off shows **Unavailable**. |
 | **Value** | What the agent returns, then what one run may spend. Its **ROI** comes first ([Count what an agent produces](#count-what-an-agent-produces)), then the caps on a run's spend. Lowering a limit is open to whoever edits the agent; raising one above the platform's own is an administrator's. See [Limit what an agent run may spend](/xtm-one/use/run-budgets/). A link to the former **Budget** tab, or to the ROI of the **Overview**, opens **Value**. |
 | **Versioning** | Every version of the persona and the tracked settings, to compare and roll back. |
 | **Memory** | What the agent learned, for the people who can manage it. |
 | **Chats**, **Delegations** | Its conversations, and the work it sent to or received from other agents. A conversation opens read-only, drawn as in the chat, with **Back to Chats** above it. |
 | **Feedback** | Every rating and comment given on its answers and runs, for the people who can manage it. |
 | **Activity** | Its run history, to spot failures. |
+
+Another agent can call this one, to consult it or hand it a background task, and ask for the answer in a format of its own. By default such a call is refused before the agent runs, so the agent always answers in its configured format. To accept it, turn on **Accept a format requested by the caller** in the **Pipeline** card of **Configuration** > **General**: the caller's format then replaces the agent's for that call. Only the people who can manage the agent change it.
 
 A disabled agent stays listed, dimmed: its chat is limited and its assignments do not run. **Disable agent** and **Enable agent** are in the page header.
 

@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [cti-analyst, soc-analyst]
 owner: docs-xtm-one
-last_reviewed: 2026-11-10
+last_reviewed: 2026-11-16
 migrated_from:
   - xtm-one:/usage/files/
 ---
@@ -21,6 +21,8 @@ You see exactly the files you may download, and nothing else:
 - the files you attached, and those generated for you, in your own conversations;
 - the files of conversations shared with you;
 - the outputs of assignment runs you can open: your own agents' runs, and those of company-managed agents.
+
+An administrator can turn on **Hide activity from non-admins** for a company-managed agent or fleet. The outputs of its runs then leave **Company** for everyone but administrators and its owner, and the runs made as you stay in **Mine**. See [Create an agent](/xtm-one/build/agents/).
 
 Administrators get no wider view here: they reach another person's conversation files only through the audited access on the conversation itself.
 

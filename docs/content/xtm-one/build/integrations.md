@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-12
+last_reviewed: 2026-11-16
 edition: ee
 migrated_from:
   - xtm-one:/usage/resources/integrations/
@@ -26,23 +26,38 @@ An integration connects XTM One to a service your team works in, such as Jira, S
 
 When an administrator registers OpenCTI, OpenAEV or OpenCRQ with XTM One, the registration creates a company-managed integration named after the platform, for example **Grand Meridian OpenCTI**. Its **Authentication Mode** is **Managed by the platform**: it stores no credential, and every call carries a short-lived token signed for the person the agent works for. An agent bound to it reads and writes in OpenCTI with that person's rights, never more.
 
-Its configuration is kept up to date by the registration and cannot be edited, with one exception: on a multi-tenant OpenAEV, an administrator sets its **Tenant ID** so that every OpenAEV tool works in that tenant. What XTM One does in each product is in [XTM One in OpenCTI](/xtm-one/use/in-opencti/), [XTM One in OpenAEV](/xtm-one/use/in-openaev/) and [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
+Its configuration is kept up to date by the registration and cannot be edited, with a few exceptions. An administrator changes them with **Edit** on the **Configuration** card, then **Save changes**, and the next registration keeps them:
+
+- On a multi-tenant OpenAEV, the **Tenant ID** makes every OpenAEV tool work in that tenant.
+- On OpenCTI, the **Webhook secret**, and the Live writes field, which decides where the knowledge changes of agents go. Off, the default, agents stage their changes in a draft that a person reviews in OpenCTI. On, their changes go to the live graph with no review.
+
+With Live writes on, agents also get the tools that validate a draft and that create, update or delete labels, and they can delete any draft, not only those of their run. The setting is the default of the bound agents: each agent can override it on its **Tooling** tab, as [Create an agent](/xtm-one/build/agents/) shows.
+
+In a run no person is watching, such as an assignment or the background build of a CTEM cycle, XTM One does not send OpenCTI a request the person's role cannot pass. The tool answers that the request was not sent, and the run goes on, so the OpenCTI audit log records no refused access in that person's name. In a chat, the request goes to OpenCTI, since the person asked for it.
+
+What XTM One does in each product is in [XTM One in OpenCTI](/xtm-one/use/in-opencti/), [XTM One in OpenAEV](/xtm-one/use/in-openaev/) and [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
+
+## The built-in web search
+
+When the deployment sets a Brave Search or a Google Search API key, XTM One creates one company-managed integration that searches the web, named Brave Search or Google Search. It is read-only, and the built-in assistants, such as the OpenCTI, OpenAEV and OpenCRQ assistants, are bound to it. With both keys set, Brave Search wins. Google stops its Custom Search on 1 January 2027: see [Built-in web search on Brave Search](/deploy/upgrade/breaking-changes/#xtm-one-1-261116-0), and the keys in the [configuration reference](/reference/xtm-one/configuration/).
 
 ## Connect a service
 
 :::steps
 1. Open :menu[Tools & Integrations > Integrations] and click **New Integration**.
-2. Search the catalog and pick the service. **Certified** marks the integrations Filigran qualifies and supports (OpenCTI, OpenAEV, OpenCRQ and the XTM Hub); **Preview** marks the others. A provider an administrator switched off shows **Disabled by your administrator**.
+2. Search the catalog and pick the service. **Certified** marks the integrations Filigran qualifies and supports: the Filigran products, and the services its own agent fleets run on every day in production. Among them are Jira, GitHub, Slack, Microsoft 365, Google, Notion, HubSpot, Microsoft Defender and HackerOne. **Preview** marks the others. A provider an administrator switched off shows **Disabled by your administrator**.
 3. Enter a **Name** your colleagues will recognize, and a **Description** of what the connection reaches. Agents read the description as context for its tools, so say which workspace, site or projects it covers.
 4. Fill in the credentials the **Authentication mode** asks for:
    - **OAuth**: keep **Use admin pre-configured credentials** when your administrator set up the app, or enter your own **Client ID** and **Client Secret**. Register your platform's address followed by `/api/oauth/callback` as the redirect URI of your own app.
    - **API key** or **Bot token**: paste the key the service issued for XTM One.
+
+   The line under each credential field says where your account of the service shows it, and refers to the **Setup guide** when the provider has one.
 5. For a service inside your network, choose its relay group in **Route through**. A service reached only through a relay, such as an LM Studio model server, offers no **Direct (from the platform)** choice: **Create integration** stays unavailable until you pick a group. See [Reach on-premise tools through a relay](/xtm-one/build/relays/).
 6. Click **Create integration**, then, for OAuth, click **Authorize** and sign in at the service with the account the agents will act as. Accept every permission the consent screen asks for.
 7. Click **Test connection**. A **Connection successful** answer means the credentials work.
 :::
 
-The status badge of each card on the list page tells you at a glance whether a connection is **Connected**, **Pre-configured** but not authorized yet, **Not connected**, or in **Error**. **Re-authorization required** means its permissions changed, the service refused its token, or the account that signed in declined a permission on the consent screen. In that last case, the **Overview** tab lists the missing ones under **Requested scopes not granted**: the calls that need them fail until someone clicks **Re-authorize** and accepts all of them. An OAuth integration that holds no token reads **Not connected**, whatever was stored before.
+The status badge of each card on the list page tells you at a glance whether a connection is **Connected**, **Not tested**, **Pre-configured** but not authorized yet, **Not connected**, or in **Error**. An API key or a bot token entered at creation, or replaced later, reads **Not tested** until someone clicks **Test connection**. A successful test turns it **Connected**, a failed one **Error**. Testing your own account of an integration whose members each connect theirs leaves the badge as it is. A provider's card shows the worst status of its integrations. **Re-authorization required** means its permissions changed, the service refused its token, or the account that signed in declined a permission on the consent screen. In that last case, the **Overview** tab lists the missing ones under **Requested scopes not granted**: the calls that need them fail until someone clicks **Re-authorize** and accepts all of them. An OAuth integration that holds no token reads **Not connected**, whatever was stored before.
 
 ::screenshot{id=xtm-one-build-integrations-list alt="The Installed section of the Integrations page: Filigran AI marked Preview, and OpenAEV, OpenCRQ and OpenCTI marked Certified, all four Connected, OpenCTI with its Events badge."}
 
@@ -50,9 +65,9 @@ The status badge of each card on the list page tells you at a glance whether a c
 
 Open the integration's **Configuration** tab. The **Available Tools** card splits its tools into **Read Tools**, which retrieve information, and **Write Tools**, which change something in the service. That split is how you judge the risk of binding it. Hover a tool and click **Test** to try it with the real credentials before any agent does.
 
-Some write tools reach far. The Microsoft Intune integration creates and updates configuration policies and remediation scripts, runs a remediation on a device, and assigns a policy, script or app to groups, to every device or to every user. The Microsoft integration posts in Teams chats as the signed-in account, and adds or removes an emoji reaction on any message of a chat that account belongs to. Keep such tools for the agents whose task needs them.
+Some write tools reach far. The Microsoft Intune integration creates and updates configuration policies and remediation scripts, runs a remediation on a device, and assigns a policy, script or app to groups, to every device or to every user. The Microsoft integration posts in Teams chats as the signed-in account, and adds or removes an emoji reaction on any message of a chat that account belongs to. The OVHcloud integration reboots, starts and stops bare metal servers, Public Cloud instances, VPS and Hosted Private Cloud virtual machines. Keep such tools for the agents whose task needs them.
 
-::screenshot{id=xtm-one-build-integrations-tools alt="The Available Tools card of the OpenCTI integration: 63 tools, the Read Tools group first with get_opencti_draft_info, list_opencti_drafts, validate_nlq_filter and search_opencti, each with its description and its Read badge."}
+::screenshot{id=xtm-one-build-integrations-tools alt="The Available Tools card of the OpenCTI integration: the Read Tools group first, each tool with its description and its Read badge."}
 
 On the same tab:
 
@@ -100,6 +115,21 @@ How sharing works for every resource is in [Share agents and resources](/xtm-one
 Any REST API that publishes a Swagger 2.0 or OpenAPI 3 document can become an integration, without code. Choose **OpenAPI / Swagger** in the catalog, paste the URL of the raw document or upload it, and click **Load spec**. Then check the base URL, choose the authentication among those the document declares, and select the operations to expose: each one becomes one tool, and **Read only** keeps only the operations that read. The integration's **API Spec** tab changes that selection later, and **Refresh from URL** reloads the document.
 
 An OpenAPI integration is bound as that specific integration, never per user: for the members of a shared agent to use it, share it with their groups.
+
+## Keep agents under the row level security of a Supabase project
+
+A Supabase integration connected with a Management API personal access token reaches the project's data with roles that bypass row level security, and gives agents free SQL tools. To hold agents to what your row level security allows, give them a Postgres login role of their own. The **Database access** tab of the integration shows to the people who manage it.
+
+:::steps
+1. Open the Supabase integration, then its **Database access** tab.
+2. Under **Database role**, choose the **Project** and the **Connection host**. The **Session pooler** works on every network; **Direct connection (IPv6)** works only over IPv6.
+3. Choose the **Role**, type its **Password** and the **Database**, and click **Probe**. XTM One lists what it finds in the project, and the functions the role may execute. A role that bypasses row level security cannot be chosen.
+4. Under **Functions agents may call**, allow the functions the agents need, then click **Save**.
+:::
+
+Agents then reach the data as that role, under its grants and row level security. The free SQL tools and the log query tool are withheld: agents list and call only the allowed functions. **Tables the role can still read directly** lists the tables the role can still select from: revoke that grant in Supabase so that the data goes through the functions only. To change the role, the host or the project, type the password again.
+
+The database connection never goes through a relay: a Supabase integration routed through a relay refuses database calls. **Remove the role** brings back the Management API roles and the free SQL tools.
 
 :::example[Let the triage agent read the SOC's Jira tickets]
 The SOC of Grand Meridian Hotels tracks its incidents in Jira. Paul Garnier wants **Night shift triage** to find the ticket already open for an alert before it suggests a new one. Hélène Marchetti registered the organization's Atlassian app in the OAuth defaults, and Julien Bernard owns the SOC's service account in Jira.

@@ -109,7 +109,7 @@ docker run -d --name xtm-one-relay --restart unless-stopped \
   -e XTM_RELAY_ENROLLMENT_KEY="$RELAY_ENROLLMENT_KEY" \
   -e XTM_RELAY_ALLOWED_DESTINATIONS='booking-tools.grand-meridian.example:443' \
   -e XTM_RELAY_NAME='paris-relay-1' \
-  xtmone/relay:1.261112.0
+  xtmone/relay:1.261116.1
 ```
 
 Marc enrolls a second relay on another host, `paris-relay-2`, for redundancy. The group shows **2 of 2 relays online**, and Sophie Laurent routes the **Hotel booking platform** MCP server through **Paris datacenter**: its tools now answer from inside the datacenter.

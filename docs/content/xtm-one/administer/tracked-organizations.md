@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-12
+last_reviewed: 2026-11-16
 ---
 
 Your organization's profile tells agents who you are. Tracked organizations tell them who you depend on and who you serve: the providers whose breach can reach you, the customers whose breach is your exposure, your partners and your subsidiaries. This page adds them one by one or drafts a whole list with AI, links each one to its organization in OpenCTI, and says where agents read them.
@@ -67,7 +67,7 @@ Only the accepted rows are created, each one with **Monitoring off**, and you ar
 
 The review page has its own address, `/settings/organization/tracked/ai-draft/` followed by the draft's id: keep it to come back to a draft you have not decided yet, or to send it to another administrator. A decided draft still opens, read-only, with each row marked **Accepted** or **Rejected** and the line "This draft was already decided; nothing more can be created from it."
 
-Some rows may show **Already tracked**, with a link to the organization in the list, or **Not drafted**. Neither can be selected. When the model failed on some names, a line says how many, **Details** says why, and **Retry** opens the dialog again with those names, for a new run. When OpenCTI could not be searched, every row shows **No match**: check the OpenCTI integration and your token, then draft again.
+Some rows may show **Already tracked**, with the line "See it in Tracked organizations", or **Not drafted**. Neither can be selected. Click an **Already tracked** row to go back to :menu[Administration > Settings > Organization], where the organization is listed. When the model failed on some names, a line says how many, **Details** says why, and **Retry** opens the dialog again with those names, for a new run. When OpenCTI could not be searched, every row shows **No match**: check the OpenCTI integration and your token, then draft again.
 
 ## Change or archive an organization
 

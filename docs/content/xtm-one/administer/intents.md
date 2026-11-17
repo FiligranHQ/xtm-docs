@@ -55,6 +55,10 @@ The agent now answers the feature in every product of that vertical. The same bi
 
 Some lists of the connected products, which let the person choose an agent, only show the agents tagged with the product's name, `opencti` or `openaev`. Tag your agent to appear there.
 
+:::xtm-one[Bind an agent from the chat]
+The General Assistant, and any agent with the agent builder built-in tool, manages bindings too. Ask it "which intents is Velvet Harbor watcher bound to?" or "bind Velvet Harbor watcher to `cti.container_summary` for `cti`": it lists the agent's bindings with their vertical and priority, binds it, or removes a binding. It also says when no connected product can be offered the agent, because the agent is disabled or private. It acts as you, with the checks of this page: an administrator's binding applies to everyone, anyone else's is their own personal binding; a private agent is never bound for everyone, a locked binding is not overridden, and a **builtin** binding is neither changed nor removed. Each change is recorded in the audit logs.
+:::
+
 ## Verticals and priorities
 
 A vertical is the business context of a connected platform: `cti` for OpenCTI, `aev` for OpenAEV, `grc` for OpenCRQ, and others a platform may declare, such as `fimi`. It lets the same intent reach a different agent depending on where the request comes from.

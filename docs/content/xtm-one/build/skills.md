@@ -71,7 +71,7 @@ A skill's page has five tabs:
 | **Instructions** | The `SKILL.md`, rendered, and **Edit** to change it. |
 | **Resources** | The custom tools the package created. |
 | **Versioning** | Every saved version of the content. Select two and click **Compare** to see what changed, **Side by side** or **Unified**. |
-| **Activity** | Who changed the skill, and when. |
+| **Activity** | The runs of the agents the skill is attached to, in a table (**Run**, **Status**, **Type**, **Agent**, **Started**, **Duration**), newest first. Filter them by status on the toolbar (**Running**, **Awaiting input**, **Completed**, **Failed**, **Cancelled**) or search them; click a row to open the run. |
 
 A skill made from a URL is fetched again when its copy is more than a day old (the check runs every hour). **Refresh** in the header fetches it now, for example right after a change is merged. When the GitHub credential of a private repository stops working, the skill shows **Credential rejected**: agents keep using the last content fetched, and the next refresh after you re-authorize the integration in :menu[Tools & Integrations > Integrations] clears the badge.
 

@@ -56,7 +56,7 @@ A prompt's page has four tabs:
 | **Overview** | The **Agents Using** count, the description, the tags and a **Content Preview**. Read the count before an edit: it is the number of agents whose behavior changes with it. |
 | **Configuration** | Edit the name, description, tags and content, **Hide from chat**, and the sharing. **Commit message for content change (optional)** records why the wording changed. |
 | **Versioning** | Every saved content as a numbered version. Select two to **Compare** them, **Side by side** or **Unified** in one column, **Rollback** to an earlier one (the current content is kept as a version), or **Lock version** to protect a version from deletion. |
-| **Activity** | Who changed the prompt, and when. |
+| **Activity** | The runs of the agents that carry the prompt, with their **Status**, **Agent**, **Started** and **Duration**. Filter them by status in the toolbar, and click a run to open it: after an edit, check that the next runs completed. |
 
 Sharing a prompt with a group or with people, transferring its ownership and the read-only states are the same for every resource: see [Share agents and resources](/xtm-one/build/sharing/).
 

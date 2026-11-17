@@ -34,7 +34,7 @@ Each tab and each of its sections has its own address, such as `/settings/usage/
 5. In **Usage and quotas** > **Quotas**, set the agentic limit per user, then the exceptions per group or per user.
 6. In **Integrations** > **Channels & Bots**, connect the messaging apps your teams use. See [Talk to agents from your messaging apps](/xtm-one/administer/channels/).
 7. In **Usage and quotas** > **Observability**, choose how long traces and audit log entries are kept, and whether traces keep the prompts and answers.
-8. In **Organization** > **Profile**, fill in the profile of your organization that agents read: sector, regions, crown jewels, tech stack, risk appetite.
+8. In **Organization** > **Profile**, fill in the profile of your organization that agents read: sector, regions, crown jewels, tech stack, assets, risk appetite. See [Set up the organization profile agents read](/xtm-one/administer/organization-profile/).
 
 :::
 
@@ -48,9 +48,13 @@ Every change made in Settings is recorded in :menu[Administration > Audit logs].
 
 What agents know about your organization, and what the Value page counts their work with:
 
-- **Profile**: the **Organization profile** every agent and fleet reads before it ranks, scopes or estimates: **Identity** (size, regions of operation), **Risk appetite and costs**, **Ticketing and intelligence** (the ticketing integration and project, the OpenCTI PIRs agents follow), **Crown jewels and business services**, **Tech stack** and **AI systems inventory**. Agents cite the fields they used and name the ones not filled, never guess them; each save is a new version. Outside edit mode, the crown jewels, tech stack and AI systems read as tables you search, filter and export to CSV. While fields are not filled, **Continue onboarding in chat** opens a new chat with your default assistant, which asks for the missing fields one at a time, proposes a value when it can infer one, and saves each answer you confirm as a new version. You can skip a field for now, and a chat started later resumes at the next field. The same interview starts after an AI draft saved outside edit mode. It requires the Enterprise Edition and AI switched on. **Tracked organizations**, at the bottom, lists your providers, customers, partners and subsidiaries: see [Track the organizations your company depends on](/xtm-one/administer/tracked-organizations/). The first administrator to sign in while the profile was never saved gets the **Set up your organization profile** dialog: **Set up now** opens this profile in edit mode, with the **Draft** menu to start **From the platforms** or **With AI**, and nothing is saved before **Save**. The dialog shows once for the whole platform, whatever the answer.
+- **Profile**: the **Organization profile** every agent and fleet reads before it ranks, scopes or estimates. It is shared context: every user and every agent of the platform sees it. It holds **Identity** (size, regions of operation), **Risk appetite and costs**, **Ticketing and intelligence** (the ticketing integration and project, the OpenCTI PIRs agents follow), **Crown jewels and business services**, **Tech stack**, **AI systems inventory**, **Assets and exposure**, **Asset groups**, the **Prioritization policy** of the CTEM funnel and **Enterprise knowledge**. Agents cite the fields they used and name the ones not filled, never guess them; each save is a new version. Outside edit mode, the lists read as tables you search, filter and export to CSV; each list card has its own **Edit**. **Draft** fills the profile **From the platforms**, **With AI** or **From a connected integration**, and the **Syncs** card runs the platform imports again on a schedule. **Organization context in agents** chooses whether every agent starts with a summary of the profile. See [Set up the organization profile agents read](/xtm-one/administer/organization-profile/). While fields are not filled, **Continue onboarding in chat** opens a new chat with your default assistant, which asks for the missing fields one at a time, proposes a value when it can infer one, and saves each answer you confirm as a new version. You can skip a field for now, and a chat started later resumes at the next field. The same interview starts after an AI draft saved outside edit mode. It requires the Enterprise Edition and AI switched on. **Tracked organizations**, at the bottom, lists your providers, customers, partners and subsidiaries: see [Track the organizations your company depends on](/xtm-one/administer/tracked-organizations/). The first administrator to sign in while the profile was never saved gets the **Set up your organization profile** dialog: **Set up now** opens this profile in edit mode, with the **Draft** menu to start **From the platforms** or **With AI**, and nothing is saved before **Save**. The dialog shows once for the whole platform, whatever the answer.
 - **Departments**: the org units usage is rolled up by in **Model usage**, and who belongs to which, from group rules, the department your identity provider sends at sign-in, or an import.
 - **Units of work** and **Rates by role**: the minutes each kind of work takes by hand and the hourly rate of each role, which the Value page computes hours saved and value with. See [How XTM One computes the value of agents' work](/xtm-one/concepts/value-methodology/).
+- **Value visibility and privacy**, under **Rates by role**, chooses who sees the value figures:
+  - **Organization totals for every user**, on by default: every user may read the organization's figures. Off, only administrators see them, and every user still sees their own.
+  - **Smallest group shown apart**: 5 people by default, from 2 to 50. For users who are not administrators, a fleet, agent, unit of work or week backed by fewer people is folded into "Other". Exports and agent tools apply the same rule.
+  - **By person breakdown for administrators**, off by default, adds a breakdown of the value by person. Every read of it is written to the audit log.
 
 ### Agents and automations
 
@@ -79,7 +83,9 @@ Three choices on a provider card matter for governance:
 - **Never use for people and groups**, in **Access**, keeps some people off a provider whatever else grants it, for example where a regulation forbids a vendor for one jurisdiction. The card shows **Exclusions**. Embeddings and image generation are platform-wide: an excluded person's knowledge base searches and image requests are refused rather than sent to that provider.
 - **Delete** first shows what moves to another provider: the default models, the agents and users that picked a model on it. The embedding model is never switched automatically: it is cleared, because content indexed with one model cannot be found with another.
 
-With an SMTP server (`SMTP_HOSTNAME`), changing the default model or the model list offers to email the users about it. See [Protect your data and approve what agents do](/xtm-one/administer/ai-governance/) for what is sent to a provider.
+With an SMTP server (`SMTP_HOSTNAME`), changing the default model or the model list offers to email the users about it. Set `MODEL_ANNOUNCEMENT_EMAILS_DISABLED` to `true` to turn these emails off: XTM One then says that the users cannot be emailed. See the [XTM One configuration reference](/reference/xtm-one/configuration/).
+
+See [Protect your data and approve what agents do](/xtm-one/administer/ai-governance/) for what is sent to a provider.
 
 **Media** chooses the models of image generation and speech.
 
@@ -130,7 +136,14 @@ A change to the two switches applies within seconds, to the traces written from 
 
 ### Platform
 
-The platform's identity and license: the **Instance ID** that a license is generated for, the registration on the XTM Hub, the license itself (**Install License**, or `ENTERPRISE_LICENSE`, which then wins), the **Default language** of the interface for the users who have not chosen one (**Platform Language**), the **Default Presentation Template** applied to the decks agents generate, and **Platform Branding**: **Identity** (platform name, login message), **In-App Colors**, **Browser & PWA** and **Media Assets** (logo and favicon).
+The platform's identity and license: the **Instance ID** that a license is generated for, the registration on the XTM Hub, the license itself (**Install License**, or `ENTERPRISE_LICENSE`, which then wins), the **Default language** of the interface for the users who have not chosen one (**Platform Language**), the **Default Presentation Template** applied to the decks agents generate, the **Brand asset source**, and **Platform Branding**: **Identity** (platform name, login message), **In-App Colors**, **Browser & PWA** and **Media Assets** (logo and favicon).
+
+**Brand asset source** reads your company's brand packs from a GitHub folder. See [Brand the decks and reports agents produce](/xtm-one/build/templates/).
+
+- **GitHub folder**: a folder address, such as `https://github.com/owner/repository/tree/main/brand-assets`. Each sub-folder that holds a `manifest.json` is a pack. An address without `/tree/` reads the root of the default branch.
+- **GitHub integration**: a connected GitHub integration that may read the repository's contents. Connect one in **Integrations** first.
+
+The packs are read when you save, and at every restart. **Sync now** reads them again, and **Clear** removes the source. A pack the platform also ships keeps the platform's own files.
 
 **Artificial Intelligence** is the switch that turns AI on and off for the whole platform. See [Run XTM One with AI switched off](/xtm-one/administer/running-without-ai/).
 
@@ -143,7 +156,7 @@ Hélène Marchetti sets up `https://xtm-one.grand-meridian.example`, which Marc 
 - **Access and security** > **Security audit**: **Re-run** reports sessions that last 7 days; she sets **Absolute session lifetime (minutes)** to `1440` in **Security options**, so that everyone signs in again every day.
 - **Usage and quotas** > **Quotas**: 50 agentic executions a day per user, and **Unlimited** on the group **SOC**, whose night shift runs "Night shift triage" all night.
 - **Usage and quotas** > **Observability**: **Trace retention (days)** at `30`, **Store full payloads** off, **Audit log retention (days)** at `365`.
-- **Organization** > **Profile**: hospitality, Europe, the payment platform and the booking engine as crown jewels.
+- **Organization** > **Profile**: hospitality, Europe, the payment platform and the booking engine as crown jewels. She imports the hotels' assets from OpenAEV with **Draft** > **From the platforms**, kept in sync every day.
 
 The next morning, the audit shows no `Critical` finding, and Julien Bernard sees the SOC's usage in **Model usage**.
 :::
