@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: A security vulnerability
+    url: https://github.com/FiligranHQ/xtm-docs/blob/main/SECURITY.md
+    about: Never in a public issue. Report it privately, as SECURITY.md says.
+  - name: A bug or a feature of a product
+    url: https://github.com/FiligranHQ/xtm-docs/blob/main/CONTRIBUTING.md
+    about: In the product's own repository (OpenCTI, OpenAEV, XTM One).
+  - name: A question about using a product
+    url: https://community.filigran.io
+    about: The Filigran community.
