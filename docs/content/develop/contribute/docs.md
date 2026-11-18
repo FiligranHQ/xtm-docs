@@ -56,7 +56,7 @@ The files a writer touches most:
    npm run atlas:versions
    ```
 
-   `atlas:sources` takes a sparse checkout of each product into `.factory-cache/`, at the refs `atlas/sources.yml` names. `atlas:versions` generates the reference data of every version of `docs/content/versions.yml` into `factory/generated/`.
+   `atlas:sources` takes a sparse checkout of each product into `.factory-cache/`, at the refs `atlas/sources.yml` names. `atlas:versions` generates the reference data of every version of `docs/content/versions.yml` into `docs/generated/`.
 
 2. Serve the site while you write:
 
