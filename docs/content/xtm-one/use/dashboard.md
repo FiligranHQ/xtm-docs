@@ -10,7 +10,7 @@ migrated_from:
   - xtm-one:/usage/home-dashboard/
 ---
 
-The home dashboard of XTM One, the **CTEM Command Center**, opens from :menu[Home] at the top of the left navigation. It says at a glance how exposed the organization is across the XTM suite. It also says what to act on first, and what the AI agents already did about it. It scores each stage of continuous threat exposure management (CTEM), from the attack surface in scope to the fixes, from what OpenCTI and OpenAEV hold. It averages them into one exposure posture out of 100, read twice: as measured from the data, and in your organization context. This page reads each part, top to bottom, and arranges the dashboard your way. How OpenCRQ opens the same command center is in [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
+The home dashboard of XTM One, the **CTEM Command Center**, opens from :menu[Home] at the top of the left navigation. It says at a glance how exposed the organization is across the XTM platform. It also says what to act on first, and what the AI agents already did about it. It scores each stage of continuous threat exposure management (CTEM), from the attack surface in scope to the fixes, from what OpenCTI and OpenAEV hold. It averages them into one exposure posture out of 100, read twice: as measured from the data, and in your organization context. This page reads each part, top to bottom, and arranges the dashboard your way. How OpenCRQ opens the same command center is in [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
 
 ::diagram{id=xtm-one-dashboard-posture}
 

@@ -1,6 +1,6 @@
 ---
 title: Choose which agent answers each AI feature
-description: Bind your agents to the intents OpenCTI, OpenAEV and OpenCRQ declare, per vertical and by priority, so that each AI feature of the suite reaches the agent you chose.
+description: Bind your agents to the intents OpenCTI, OpenAEV and OpenCRQ declare, per vertical and by priority, so that each AI feature of the XTM platform reaches the agent you chose.
 doc_type: how-to
 products:
   - xtm-one
@@ -70,7 +70,7 @@ A vertical is the business context of a connected platform: `cti` for OpenCTI, `
 
 ## The built-in bindings
 
-XTM One binds its built-in agents to the intents the suite products declare. These bindings are marked **builtin**, cannot be changed or deleted, and are restored at every start. To take over a feature, bind your own agent to the same intent and vertical, with a higher priority. The main ones:
+XTM One binds its built-in agents to the intents the modules declare. These bindings are marked **builtin**, cannot be changed or deleted, and are restored at every start. To take over a feature, bind your own agent to the same intent and vertical, with a higher priority. The main ones:
 
 | Intent | What the product asks | Built-in agent | Vertical |
 | --- | --- | --- | --- |

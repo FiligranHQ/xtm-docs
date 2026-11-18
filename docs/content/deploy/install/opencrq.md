@@ -9,11 +9,7 @@ owner: docs-opencrq
 last_reviewed: 2026-11-16
 ---
 
-This page starts OpenCRQ, the cyber risk quantification platform of the suite, in an XTM stack installed with [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker). xtm-docker ships OpenCRQ with the rest of the stack: its database in the shared PostgreSQL, its bucket in the shared S3 storage, its registration with XTM One and its connectors to OpenCTI and OpenAEV are set up for you. You give it access to its image and its public URL. At the end, OpenCRQ answers at that URL and you have created its first administrator.
-
-:::info[Not released yet]
-OpenCRQ is not released yet. These pages follow its development and will be versioned from its first release, like OpenCTI. Its image, `filigran/opengrc-platform`, is not public: Filigran gives you access to it. Until you have that access, `docker compose pull` and `docker compose up -d` stop at that image, and the stack does not start.
-:::
+This page starts OpenCRQ, the cyber risk quantification module of the XTM platform, in an XTM stack installed with [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker). xtm-docker ships OpenCRQ with the rest of the stack: its database in the shared PostgreSQL, its bucket in the shared S3 storage, its registration with XTM One and its connectors to OpenCTI and OpenAEV are set up for you. You give it its public URL. At the end, OpenCRQ answers at that URL and you have created its first administrator.
 
 ::diagram{id=deploy-install-opencrq}
 
@@ -25,13 +21,12 @@ OpenCRQ is not released yet. These pages follow its development and will be vers
 | --- | --- | --- |
 | `opencrq-db-init` | Creates the `opencrq` database in the shared `pgsql` instance. OpenCRQ connects to it as `POSTGRES_USER`, like OpenAEV | At each start; it changes nothing once the database exists |
 | `opencrq-bucket-init` | Creates the OpenCRQ bucket in the shared S3 storage, with the AWS command line interface: in production, OpenCRQ never creates it | At each start; it changes nothing once the bucket exists |
-| `opencrq` | OpenCRQ itself, the image `filigran/opengrc-platform`. It listens on port 3002, published on port 8082 of the host, and answers its health check on port 8444 inside the container | Once both jobs succeeded and XTM One is healthy |
+| `opencrq` | OpenCRQ itself, the image `filigran/opencrq`, public on Docker Hub. It listens on port 3002, published on port 8082 of the host, and answers its health check on port 8444 inside the container | Once both jobs succeeded and XTM One is healthy |
 
 The stack also gives the shared PostgreSQL 1 GB of shared memory, which the large queries of OpenCRQ need, and lets XTM One reach OpenCRQ inside the stack (`OPENCRQ_API_URL=http://opencrq:3002`).
 
 | `.env` setting | Default | What it sets |
 | --- | --- | --- |
-| `OPENCRQ_VERSION` | `main` | The tag of the image: `main` follows the main branch of OpenCRQ, `sha-<commit>` pins one build, and a version number replaces it from the first release |
 | `OPENCRQ_EXTERNAL_SCHEME`, `OPENCRQ_HOST`, `OPENCRQ_PORT` | `http`, `localhost`, `8082` | The public URL of OpenCRQ. It is also its identity towards XTM One: the tokens OpenCRQ signs name it, and the tokens XTM One sends must be addressed to it |
 | `OPENCRQ_S3_BUCKET` | `opencrq` | The bucket of OpenCRQ in the shared S3 storage |
 
@@ -42,30 +37,22 @@ OpenCRQ adds two processes to the host: the HTTP server, with a heap of 512 MB, 
 ## Before you start
 
 - The stack installed as [Install with Docker Compose](/deploy/install/docker-compose/) describes, with `PLATFORM_REGISTRATION_TOKEN` set to a value of your own: see [Connect the modules to each other](/deploy/configure/connect-modules/#register-the-platforms-with-xtm-one). Run the commands of this page from its folder.
-- A Docker Hub account with access to `filigran/opengrc-platform`.
 - The host name users will type, such as `opencrq.example.com`, served over HTTPS by your reverse proxy: see [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/). The session cookie of OpenCRQ is `Secure`: over plain HTTP, browsers keep it on `localhost` only.
 
 ## Start OpenCRQ
 
 :::steps
-1. Sign in to Docker Hub on the host, with the account that has access to the image.
-
-   ```bash
-   docker login
-   ```
-
-2. Set the public URL of OpenCRQ in `.env`, and the image of the version these pages describe.
+1. Set the public URL of OpenCRQ in `.env`.
 
    ```bash
    OPENCRQ_EXTERNAL_SCHEME=https
    OPENCRQ_HOST=opencrq.example.com
    OPENCRQ_PORT=443
-   OPENCRQ_VERSION=sha-ab702fd
    ```
 
-   `OPENCRQ_PORT` is the port of the public URL, 443 behind the reverse proxy: the host still publishes OpenCRQ on port 8082. Without `OPENCRQ_VERSION`, the stack runs `main`, the latest build of OpenCRQ.
+   `OPENCRQ_PORT` is the port of the public URL, 443 behind the reverse proxy: the host still publishes OpenCRQ on port 8082. The stack runs `filigran/opencrq:latest`, the latest release of OpenCRQ, like the other modules.
 
-3. Download the images and start the stack. The first start of OpenCRQ creates its tables and loads the reference catalogues: allow a minute or two.
+2. Download the images and start the stack. The first start of OpenCRQ creates its tables and loads the reference catalogues: allow a minute or two.
 
    ```bash
    docker compose pull
@@ -80,7 +67,7 @@ OpenCRQ adds two processes to the host: the HTTP server, with a heap of 512 MB, 
    Both jobs show `exited`, and `opencrq` shows `running healthy`. Then `{"healthy":true,...}`, with the state of each process: each line `childrenHealthStates` lists says `RUNNING`.
    :::
 
-4. Check that OpenCRQ registered with XTM One.
+3. Check that OpenCRQ registered with XTM One.
 
    ```bash
    docker compose logs opencrq | grep "Registered with XTM One"
@@ -88,7 +75,7 @@ OpenCRQ adds two processes to the host: the HTTP server, with a heap of 512 MB, 
 
    The line names the version of XTM One, and `eeEnabled` says whether the XTM license covers OpenCRQ. OpenCRQ registers when it starts, then every 5 minutes. A `XTM One registration failed` line with HTTP 401 or 403 means that the registration token was changed in `.env` without recreating `opencrq` and the XTM One containers: run `docker compose up -d` again.
 
-5. Put the reverse proxy in front of port 8082 of the host, for `opencrq.example.com`, once you have created the first administrator below.
+4. Put the reverse proxy in front of port 8082 of the host, for `opencrq.example.com`, once you have created the first administrator below.
 :::
 
 ## Create the first administrator
@@ -104,15 +91,13 @@ The first person to open OpenCRQ creates its owner account. Until that account e
 You are signed in, with every platform capability, in a tenant named **Default**. Its identifier, `01a043da-ff47-72c2-aaa4-7da56d85c83e`, is the same on every installation: it is the tenant the OpenCTI and OpenAEV connectors of xtm-docker are set for. Each connector still waits for a service account in **Integrations**: see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/). For OpenCTI, pick a live stream whose filter lets through the threats and their relationships (`targets`, `uses`, `attributed-to`): a stream filtered on threats alone delivers bare threats. Other administrators sign in with an invitation: see [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
 
 :::example[Start OpenCRQ in Example CERT's stack]
-Example CERT runs the XTM stack for its member hotel chains, with OpenCTI at `https://opencti.example.com` and XTM One at `https://xtm-one.example.com`. Its platform engineer starts OpenCRQ at `https://opencrq.example.com` for Grand Meridian Hotels and the other members, with the build these pages describe:
+Example CERT runs the XTM stack for its member hotel chains, with OpenCTI at `https://opencti.example.com` and XTM One at `https://xtm-one.example.com`. Its platform engineer starts OpenCRQ at `https://opencrq.example.com` for Grand Meridian Hotels and the other members:
 
 ```bash
-docker login
 cat >> .env <<EOF
 OPENCRQ_EXTERNAL_SCHEME=https
 OPENCRQ_HOST=opencrq.example.com
 OPENCRQ_PORT=443
-OPENCRQ_VERSION=sha-ab702fd
 EOF
 cp .env "$SECRETS_DIR/xtm-stack.env"
 docker compose pull && docker compose up -d

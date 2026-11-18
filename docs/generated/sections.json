@@ -95,7 +95,7 @@
         "pages": [
           {
             "target": "/deploy/quick-start/",
-            "title": "Run the XTM suite locally",
+            "title": "Run the XTM platform locally",
             "doc_type": "tutorial",
             "products": [
               "suite"
@@ -2642,7 +2642,7 @@
         "pages": [
           {
             "target": "/xtm-one/concepts/architecture/",
-            "title": "How XTM One works: the platform, the worker and the suite",
+            "title": "How XTM One works: the platform, the worker and the modules",
             "doc_type": "explanation",
             "products": [
               "xtm-one"
@@ -3451,7 +3451,7 @@
         "pages": [
           {
             "target": "/workflows/ctem-cycle/",
-            "title": "Run a CTEM cycle across the suite",
+            "title": "Run a CTEM cycle across the platform",
             "doc_type": "journey",
             "products": [
               "xtm-one",
@@ -3530,7 +3530,7 @@
         "pages": [
           {
             "target": "/workflows/composer-rollout/",
-            "title": "Deploy integrations across the suite with XTM Composer",
+            "title": "Deploy integrations across the platform with XTM Composer",
             "doc_type": "journey",
             "products": [
               "composer",
@@ -3687,7 +3687,7 @@
         "pages": [
           {
             "target": "/workflows/govern-ai/",
-            "title": "Govern how AI is used across the suite",
+            "title": "Govern how AI is used across the platform",
             "doc_type": "journey",
             "products": [
               "xtm-one",
@@ -3704,11 +3704,11 @@
       },
       {
         "id": "deploy-the-suite",
-        "label": "Deploy the suite",
+        "label": "Deploy the platform",
         "pages": [
           {
             "target": "/workflows/deploy-the-suite/",
-            "title": "Deploy the XTM suite",
+            "title": "Deploy the XTM platform",
             "doc_type": "journey",
             "products": [
               "opencti",

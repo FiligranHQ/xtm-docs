@@ -79,7 +79,7 @@ Each step opens its page; the first one starts the journey, and every page of it
 
 ## Where to go next
 
-- [Govern how AI is used across the suite](/workflows/govern-ai/): make the agent ask before a tool changes something, screen what it reads for prompt injection, and keep one switch to stop it.
+- [Govern how AI is used across the platform](/workflows/govern-ai/): make the agent ask before a tool changes something, screen what it reads for prompt injection, and keep one switch to stop it.
 - [Let the night shift ask agents from Slack](/workflows/answer-from-slack/): bring an agent to the channel the SOC already works in.
 - [Choose which agent answers each AI feature](/xtm-one/administer/intents/): let the watcher write the **Summarize** of OpenCTI's reports.
 - [How access works in XTM One](/xtm-one/concepts/access/): the two roles, groups and sharing behind who reaches the agent.

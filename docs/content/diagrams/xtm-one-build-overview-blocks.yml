@@ -13,7 +13,7 @@ lanes:
   - label: What it acts through
     tone: core
     nodes:
-      - {id: integrations, label: Integrations, icon: KeyRound, note: Services and the suite, href: /xtm-one/build/integrations/}
+      - {id: integrations, label: Integrations, icon: KeyRound, note: Services and the platform, href: /xtm-one/build/integrations/}
       - {id: mcp, label: MCP servers and tools, icon: Wrench, note: Extra capabilities, href: /xtm-one/build/mcp-servers/}
       - {id: browser, label: Browser profiles, icon: LogIn, note: Saved sign-ins, href: /xtm-one/build/browser-profiles/}
   - label: What it reaches

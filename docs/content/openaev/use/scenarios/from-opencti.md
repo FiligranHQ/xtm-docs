@@ -117,5 +117,5 @@ With XTM One connected and the Enterprise Edition, **Ask Ariane** in OpenAEV rea
 
 - [Run a simulation and read its results](/openaev/use/simulations/), to follow the runs of the scenario.
 - [Measure your defenses against a threat](/opencti/use/analyze/security-coverage/), to read the scores in OpenCTI.
-- [Check your defenses against the threats you track](/workflows/threat-informed-validation/), the whole loop across the suite.
+- [Check your defenses against the threats you track](/workflows/threat-informed-validation/), the whole loop across the XTM platform.
 - [Default asset rules](/openaev/configure/asset-rules/), for the rules of every platform tag.

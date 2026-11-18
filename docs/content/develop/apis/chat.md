@@ -295,5 +295,5 @@ The read timeout of 60 seconds is well above the 15 seconds between keepalives. 
 ## What's next
 
 - [Ask an agent in the chat](/xtm-one/use/chat/), the same conversation in the interface.
-- [MCP servers](/develop/apis/mcp/), to give your AI client the tools of the suite.
+- [MCP servers](/develop/apis/mcp/), to give your AI client the tools of the platform.
 - [XTM One emergency stop API](/develop/apis/emergency-stop/), to stop every agent at once.

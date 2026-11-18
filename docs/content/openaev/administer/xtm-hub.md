@@ -12,7 +12,7 @@ migrated_from:
   - openaev:/administration/hub/
 ---
 
-XTM Hub is Filigran's place for ready-made content, trials and resources of the XTM suite. Once a tenant of OpenAEV is connected to your organization in XTM Hub, you deploy its scenarios and threat arsenal actions into that tenant in one click. This page connects a tenant, checks the connection and disconnects it. Each tenant connects on its own, to the XTM Hub organization you choose.
+XTM Hub is Filigran's place for ready-made content, trials and resources of the XTM platform. Once a tenant of OpenAEV is connected to your organization in XTM Hub, you deploy its scenarios and threat arsenal actions into that tenant in one click. This page connects a tenant, checks the connection and disconnects it. Each tenant connects on its own, to the XTM Hub organization you choose.
 
 ## Before you start
 

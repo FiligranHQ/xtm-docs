@@ -23,7 +23,7 @@ It uses [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker), where
 
 ## What you need
 
-- The XTM stack running from xtm-docker. If you do not have it yet, follow [Run the XTM suite locally](/deploy/quick-start/): it starts XTM Composer with the rest of the stack.
+- The XTM stack running from xtm-docker. If you do not have it yet, follow [Run the XTM platform locally](/deploy/quick-start/): it starts XTM Composer with the rest of the stack.
 - An Enterprise Edition license for each platform you deploy integrations on.
 - A terminal in the `xtm-docker` folder.
 

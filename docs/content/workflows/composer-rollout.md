@@ -1,5 +1,5 @@
 ---
-title: Deploy integrations across the suite with XTM Composer
+title: Deploy integrations across the platform with XTM Composer
 sidebar_label: Composer rollout
 description: Run XTM Composer next to OpenCTI and OpenAEV, let each team deploy its connectors, collectors and injectors from the catalog, move the ones you run by hand, and follow them all.
 doc_type: journey
@@ -67,6 +67,6 @@ Each step opens its page; the first one starts the journey, and every page of it
 
 ## Where to go next
 
-- [Deploy the XTM suite](/workflows/deploy-the-suite/), for the platforms XTM Composer serves.
+- [Deploy the XTM platform](/workflows/deploy-the-suite/), for the platforms XTM Composer serves.
 - [Check your defenses against the threats you track](/workflows/threat-informed-validation/), which relies on the collector of your EDR.
 - [Reuse ready-made content from XTM Hub](/workflows/reuse-from-hub/), to deploy connectors from the XTM Hub library.

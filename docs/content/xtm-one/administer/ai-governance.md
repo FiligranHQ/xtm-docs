@@ -46,7 +46,7 @@ An agent only sends what it can reach. Keep each one to what its task needs:
 - per assignment, a narrower set of tools and knowledge bases than the agent's;
 - its **Guardrails**, the rules it always follows ("never send external email"), kept apart from its persona so that an edit to its tone cannot erase them.
 
-XTM One adds its own protections to every run: it records attempts to make an agent ignore its rules (prompt injection, jailbreak) as security events without blocking them, wraps what agents fetch from outside (web pages, webhook payloads) so that it reads as data and not as instructions, adds fixed security instructions to every agent, and corrects the links to suite products an answer gives. To block such attempts, connect Nova: see [Protect agents from prompt injection with Nova](/xtm-one/administer/prompt-safety/).
+XTM One adds its own protections to every run: it records attempts to make an agent ignore its rules (prompt injection, jailbreak) as security events without blocking them, wraps what agents fetch from outside (web pages, webhook payloads) so that it reads as data and not as instructions, adds fixed security instructions to every agent, and corrects the links to modules an answer gives. To block such attempts, connect Nova: see [Protect agents from prompt injection with Nova](/xtm-one/administer/prompt-safety/).
 
 ## Approve what agents do
 
@@ -74,7 +74,7 @@ Every tool call is recorded with why it ran: allowed by a rule, covered by a sav
 
 ### Which tools ask first
 
-On an agent that asks, a tool asks first unless a rule lets it run. XTM One ships rules that let the tools that only read (search, list, fetch) run without asking, including the read tools of your integrations, of the company-managed MCP servers and of the connected suite platforms. A tool nobody considered yet, a new integration or a custom tool, asks.
+On an agent that asks, a tool asks first unless a rule lets it run. XTM One ships rules that let the tools that only read (search, list, fetch) run without asking, including the read tools of your integrations, of the company-managed MCP servers and of the connected modules. A tool nobody considered yet, a new integration or a custom tool, asks.
 
 **Tool rules** lists every tool and whether it asks first:
 
@@ -82,7 +82,7 @@ On an agent that asks, a tool asks first unless a rule lets it run. XTM One ship
 - **Make it ask first** gates a read tool XTM One ships as trusted. The choice survives upgrades. **Back to the default** undoes it.
 - **Make all its reads ask first** gates every read tool of a connected platform at once.
 
-Some tools ask on purpose even though they only read: those that download a file into the agent's context (an attachment, a shared file), and the `manage_…` tools of the suite platforms, which can list or delete depending on the call. `code_interpreter` runs without asking by default: make it ask first if a person must see generated code before it runs.
+Some tools ask on purpose even though they only read: those that download a file into the agent's context (an attachment, a shared file), and the `manage_…` tools of the modules, which can list or delete depending on the call. `code_interpreter` runs without asking by default: make it ask first if a person must see generated code before it runs.
 
 The tools of a Slack, Teams or Discord bot are never trusted automatically, since reading a channel reads people's conversations. A bot cannot show an approval prompt: a gated tool asked for there stops, and the bot says so. Each bot has its own **Ask before running tools** switch in :menu[Administration > Settings > Integrations > Channels & Bots] to let it run its tools. See [Collect tool approvals in your own chat client](/xtm-one/administer/chat-approvals/).
 

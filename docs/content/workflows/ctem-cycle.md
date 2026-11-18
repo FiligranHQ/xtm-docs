@@ -1,5 +1,5 @@
 ---
-title: Run a CTEM cycle across the suite
+title: Run a CTEM cycle across the platform
 description: Scope what the business could lose in OpenCRQ, bring in the threats from OpenCTI, price each risk, test the controls with OpenAEV, fund what removes the most loss, and follow it in XTM One.
 doc_type: journey
 journey: ctem-cycle

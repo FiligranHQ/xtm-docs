@@ -250,13 +250,13 @@ personas:
 
   - id: evaluator
     label: evaluators
-    titles: [solution architect evaluating the suite, CTI team assessing a platform, buyer]
+    titles: [solution architect evaluating the platform, CTI team assessing a platform, buyer]
     who: >-
-      Discovers the suite: what each product does, how they fit, whether it answers their
+      Discovers the platform: what each product does, how they fit, whether it answers their
       needs, how fast they can try it. Some technical background; no time for detail yet.
     knows: [their own needs and current tools]
     explain: [what each product is for and how the products work together, how to try them]
     wants: Short overviews, diagrams, a quick start.
     examples: [try OpenCTI with the demo data in ten minutes, see how a threat known in OpenCTI becomes an OpenAEV simulation]
     products:
-      suite: {does: 'Discovers and tries the suite.', spaces: [/start/, /workflows/]}
+      suite: {does: 'Discovers and tries the platform.', spaces: [/start/, /workflows/]}

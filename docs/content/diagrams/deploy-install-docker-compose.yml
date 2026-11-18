@@ -12,7 +12,7 @@ lanes:
   - label: Start
     tone: product
     nodes:
-      - {id: stack, label: The whole XTM stack, icon: Boxes, note: "docker compose pull, then up -d"}
+      - {id: stack, label: The whole XTM platform, icon: Boxes, note: "docker compose pull, then up -d"}
   - label: Data
     tone: store
     nodes:

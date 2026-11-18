@@ -11,7 +11,7 @@ migrated_from:
 no_screenshot: "The tour ends on a first conversation with an agent, which needs a recorded chat; its screens are captured in a next version."
 ---
 
-XTM One is the AI layer of the XTM suite: AI agents that read what OpenCTI knows and what OpenAEV measures, answer your questions, write summaries and drafts, and run work on their own when something happens. You do not need to be an AI specialist to use them. In about fifteen minutes, this page signs you in, walks you through the navigation, has an agent answer a first question, and shows where its work is recorded. How the platform is built is in [How XTM One works: the platform, the worker and the suite](/xtm-one/concepts/architecture/).
+XTM One is the AI layer of the XTM platform: AI agents that read what OpenCTI knows and what OpenAEV measures, answer your questions, write summaries and drafts, and run work on their own when something happens. You do not need to be an AI specialist to use them. In about fifteen minutes, this page signs you in, walks you through the navigation, has an agent answer a first question, and shows where its work is recorded. How the platform is built is in [How XTM One works: the platform, the worker and the XTM platform](/xtm-one/concepts/architecture/).
 
 ::diagram{id=xtm-one-getting-started-navigation}
 
@@ -39,7 +39,7 @@ The left navigation reads from top to bottom like a sentence: the agents you tal
 
 | Entry | What you do there | Read |
 | --- | --- | --- |
-| :menu[Home] | See the exposure posture of the suite and what agents did lately | [Read the home dashboard](/xtm-one/use/dashboard/) |
+| :menu[Home] | See the exposure posture of the XTM platform and what agents did lately | [Read the home dashboard](/xtm-one/use/dashboard/) |
 | :menu[Chat] | Ask an agent in plain language | [Get answers from an agent in the chat](/xtm-one/use/chat/) |
 | :menu[Orchestration] | **Agents** (open an agent: its instructions, tools, assignments and activity), **Fleets** (agents that run as a team), **Agentic Flow** (how agents hand work to each other, and what runs when) and, for administrators, **Intents** (which agent answers each AI feature) | [Create an agent](/xtm-one/build/agents/), [Run agents as a team with fleets](/xtm-one/build/fleets/), [Follow how agents hand work to each other](/xtm-one/use/agentic-flow/) |
 | :menu[Work] | **Operations** (the runs), **Value** (what the agents' work is worth), **Presentations** (the decks) and **Files** (everything agents produced or received) | [Review what agents did](/xtm-one/use/work-history/), [Measure what your agents' work is worth](/xtm-one/use/value/) |

@@ -8,7 +8,7 @@
 # orchestrated by agentic AI.
 
 products:
-  xtm-one: {label: XTM One, icon: LogoXTMOne, role: Agentic AI orchestration layer, href: /xtm-one/}
+  xtm-one: {label: XTM One, icon: LogoXTMOne, role: Agentic Threat Management, href: /xtm-one/}
   opencti: {label: OpenCTI, icon: LogoOpenCTI, role: Cyber threat intelligence, href: /opencti/}
   openaev: {label: OpenAEV, icon: LogoOpenAEV, role: Adversarial exposure validation, href: /openaev/}
   opencrq: {label: OpenCRQ, icon: LogoOpenCRQ, role: Cyber risk quantification, href: /opencrq/}

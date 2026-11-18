@@ -13,7 +13,7 @@ migrated_from:
   - openaev:/deployment/platform/overview/
 ---
 
-The XTM suite runs as one stack. XTM One is at its center. OpenCTI, OpenAEV, OpenCRQ, their default integrations and XTM Composer always start with it, and all of them share one set of backing services: Elasticsearch, RabbitMQ, Redis, S3 storage and PostgreSQL. This page explains what each part is, which shared service each module uses and how the modules talk to each other, as the official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker), defines them. How each product works inside is on its own architecture page.
+The XTM platform runs as one stack. XTM One is at its center. OpenCTI, OpenAEV, OpenCRQ, their default integrations and XTM Composer always start with it, and all of them share one set of backing services: Elasticsearch, RabbitMQ, Redis, S3 storage and PostgreSQL. This page explains what each part is, which shared service each module uses and how the modules talk to each other, as the official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker), defines them. How each product works inside is on its own architecture page.
 
 ## What the stack is made of
 
@@ -27,7 +27,7 @@ The XTM suite runs as one stack. XTM One is at its center. OpenCTI, OpenAEV, Ope
 
 ### XTM One
 
-The AI layer at the center of the suite. It runs as two services: `xtm-one`, the web application and its API, and `xtm-one-worker`, which runs the background work. Before XTM One starts, the `xtm-one-db-init` job creates its PostgreSQL role, its `xtm_one` database and the pgvector extension. XTM One images are published for `linux/amd64` only. See [XTM One](/xtm-one/).
+The AI layer at the center of the platform. It runs as two services: `xtm-one`, the web application and its API, and `xtm-one-worker`, which runs the background work. Before XTM One starts, the `xtm-one-db-init` job creates its PostgreSQL role, its `xtm_one` database and the pgvector extension. XTM One images are published for `linux/amd64` only. See [XTM One](/xtm-one/).
 
 ### OpenCTI
 
@@ -39,7 +39,7 @@ The exposure validation platform, as the `openaev` service. Its default collecto
 
 ### OpenCRQ
 
-The cyber risk quantification platform, as the `opencrq` service. It is not released yet, and its image is not public: see [Install OpenCRQ](/deploy/install/opencrq/). Before it starts, the `opencrq-db-init` job creates its `opencrq` database, which it uses as the PostgreSQL superuser, and the `opencrq-bucket-init` job creates its bucket. It reads threats from OpenCTI and validation results from OpenAEV, and registers with XTM One, without which it does not start.
+The cyber risk quantification platform, as the `opencrq` service. Its image is `filigran/opencrq`: see [Install OpenCRQ](/deploy/install/opencrq/). Before it starts, the `opencrq-db-init` job creates its `opencrq` database, which it uses as the PostgreSQL superuser, and the `opencrq-bucket-init` job creates its bucket. It reads threats from OpenCTI and validation results from OpenAEV, and registers with XTM One, without which it does not start.
 
 ### XTM Composer
 

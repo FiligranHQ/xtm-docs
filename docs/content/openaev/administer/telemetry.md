@@ -38,7 +38,7 @@ Counts and flags, by area:
 
 - **The platform**: its version, unique identifier and creation date, the IP address of the host it runs on, and the deployment tags of `telemetry.tags`, when set.
 - **Use**: whether the Enterprise Edition is on, the numbers of users, logins, active tenants, assets, deployed integrations, scenarios, simulations and injects played.
-- **AI and the suite**: how often the AI features are used, never what they wrote; whether AI and XTM One are configured; whether a tenant is connected to XTM Hub; which login strategies are on.
+- **AI and the XTM platform**: how often the AI features are used, never what they wrote; whether AI and XTM One are configured; whether a tenant is connected to XTM Hub; which login strategies are on.
 - **Content**: the numbers of payloads, teams, assets, findings, vulnerabilities, dashboards and other objects.
 - **Results and automation**: expectation traces, security coverage processing, workflow runs, payloads created and emails sent.
 

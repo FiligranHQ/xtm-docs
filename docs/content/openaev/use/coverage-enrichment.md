@@ -88,4 +88,4 @@ To stop the link for a tenant, set its `enable` key to `false` and restart OpenA
 
 - [Turn an OpenCTI security coverage into a scenario](/openaev/use/scenarios/from-opencti/), to aim the scenarios at the right assets.
 - [Connect the modules to each other](/deploy/configure/connect-modules/), for the links between OpenAEV, OpenCTI and XTM One in xtm-docker.
-- [Check your defenses against the threats you track](/workflows/threat-informed-validation/), the whole loop across the suite.
+- [Check your defenses against the threats you track](/workflows/threat-informed-validation/), the whole loop across the XTM platform.

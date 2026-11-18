@@ -17,7 +17,7 @@ lanes:
   - label: Your machine
     tone: product
     nodes:
-      - {id: suite, label: XTM suite in Docker, icon: Server, note: XTM One and the modules you chose}
+      - {id: suite, label: XTM platform in Docker, icon: Server, note: XTM One and the modules you chose}
 edges:
   - {from: you, to: agent, label: prompt}
   - {from: agent, to: quickstart, label: follows step by step}

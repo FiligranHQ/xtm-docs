@@ -1,5 +1,5 @@
 ---
-title: Journeys across the suite
+title: Journeys across the platform
 description: Every outcome the documentation walks you through step by step, across
   OpenCTI, OpenAEV, OpenCRQ and XTM One, each explained on its own page before you start it.
 doc_type: landing

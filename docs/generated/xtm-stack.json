@@ -1,5 +1,5 @@
 {
-  "source": "FiligranHQ/xtm-docker@99bdf2e",
+  "source": "FiligranHQ/xtm-docker@b9c11dc",
   "modules": [
     {
       "id": "xtm-one",
@@ -427,7 +427,7 @@
       ]
     },
     "opencrq": {
-      "image": "filigran/opengrc-platform:${OPENCRQ_VERSION:-main}",
+      "image": "filigran/opencrq:latest",
       "ports": [
         "8082:3002"
       ],

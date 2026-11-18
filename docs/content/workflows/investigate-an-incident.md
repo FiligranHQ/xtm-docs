@@ -88,6 +88,6 @@ Each step opens its page; the first one starts the journey, and every page of it
 ## Where to go next
 
 - [Check your defenses against the threats you track](/workflows/threat-informed-validation/), to keep testing the threat every week once the case is closed.
-- [Run a CTEM cycle across the suite](/workflows/ctem-cycle/), to choose what to fund from the price of the breach.
+- [Run a CTEM cycle across the platform](/workflows/ctem-cycle/), to choose what to fund from the price of the breach.
 - [Automate threat intelligence](/workflows/automate-intelligence/): a playbook can open a case with its tasks for every new incident.
 - [How OpenCTI infers new relationships](/opencti/use/enrich/inferences/), to see how a sighting of a valid indicator raises an incident on its own.

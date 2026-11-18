@@ -76,6 +76,6 @@ Each step opens its page; the first one starts the journey, and every page of it
 
 ## Where to go next
 
-- [Run a CTEM cycle across the suite](/workflows/ctem-cycle/), which uses these results to choose what to fund.
+- [Run a CTEM cycle across the platform](/workflows/ctem-cycle/), which uses these results to choose what to fund.
 - [Keep your detections tested every week](/workflows/validate-detections/), to follow the detection score of your EDR over time.
 - [Follow your priority threats with PIRs](/opencti/use/analyze/pir/), to choose which threats to cover first.

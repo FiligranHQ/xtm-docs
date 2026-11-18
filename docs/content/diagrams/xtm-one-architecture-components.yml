@@ -5,7 +5,7 @@ lanes:
     nodes:
       - {id: people, label: People, icon: MessageSquare, note: "Chat, Slack, Teams"}
       - {id: triggers, label: Triggers, icon: Clock, note: "Schedules, webhooks, events"}
-      - {id: suite, label: The suite, icon: LogoOpenCTI, note: "OpenCTI, OpenAEV, OpenCRQ"}
+      - {id: suite, label: The platform, icon: LogoOpenCTI, note: "OpenCTI, OpenAEV, OpenCRQ"}
   - label: XTM One
     tone: core
     nodes:
@@ -19,7 +19,7 @@ lanes:
     tone: external
     nodes:
       - {id: models, label: AI providers, icon: Sparkles, note: Language and embedding models}
-      - {id: tools, label: Tools, icon: Puzzle, note: "Integrations, MCP servers, the suite"}
+      - {id: tools, label: Tools, icon: Puzzle, note: "Integrations, MCP servers, the platform"}
 edges:
   - {from: people, to: platform, label: ask}
   - {from: triggers, to: platform, label: start}

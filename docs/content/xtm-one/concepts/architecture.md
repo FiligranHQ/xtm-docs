@@ -1,5 +1,5 @@
 ---
-title: "How XTM One works: the platform, the worker and the suite"
+title: "How XTM One works: the platform, the worker and the modules"
 description: The two services of XTM One, the stores they keep their data in, what happens when an agent answers, and how OpenCTI, OpenAEV and OpenCRQ connect to it.
 doc_type: explanation
 products: [xtm-one]
@@ -11,7 +11,7 @@ migrated_from:
   - xtm-one:/deployment/data-flow/
 ---
 
-XTM One is two services you run, the **platform** and the **worker**, on three stores: PostgreSQL, Redis and an S3-compatible object storage. People, schedules, webhooks and the other products of the suite send it work. To do that work, it calls the AI providers you configure and the tools its AI agents act through. This page explains what each part does, where your data lives, what leaves the deployment when an agent answers, and how OpenCTI, OpenAEV and OpenCRQ connect. It is the model to keep in mind before you [install XTM One](/deploy/install/xtm-one/) or decide what an agent may reach.
+XTM One is two services you run, the **platform** and the **worker**, on three stores: PostgreSQL, Redis and an S3-compatible object storage. People, schedules, webhooks and the other products of the XTM platform send it work. To do that work, it calls the AI providers you configure and the tools its AI agents act through. This page explains what each part does, where your data lives, what leaves the deployment when an agent answers, and how OpenCTI, OpenAEV and OpenCRQ connect. It is the model to keep in mind before you [install XTM One](/deploy/install/xtm-one/) or decide what an agent may reach.
 
 ::diagram{id=xtm-one-architecture-components}
 
@@ -49,7 +49,7 @@ A chat message and an assignment run follow the same path:
 
 So the model sees the prompt, the tool descriptions and the tool results, never your credentials nor a whole data source. What is sent to a provider, and how to restrict it, is in [Govern how AI is used](/xtm-one/administer/ai-governance/). Before a tool runs, an agent can be set to ask a person for approval: see [How XTM One marks what to trust and what to review](/xtm-one/concepts/trust/).
 
-## How the suite connects
+## How the XTM platform connects
 
 OpenCTI, OpenAEV and OpenCRQ **register** with XTM One. Each presents the registration token set in `PLATFORM_REGISTRATION_TOKEN` on both sides, and registers again regularly: that registration is also its heartbeat. Once a platform is registered:
 

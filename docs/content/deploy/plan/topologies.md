@@ -18,7 +18,7 @@ The modules and shared services of the XTM stack can all run on one host, or be 
 
 | Topology | What runs where | Good for | Covered by |
 | --- | --- | --- | --- |
-| One host | Every module and shared service in Docker Compose, on one machine | Trying the suite, development, small deployments | [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker) |
+| One host | Every module and shared service in Docker Compose, on one machine | Trying the platform, development, small deployments | [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker) |
 | Separate shared services | The modules in containers; the shared services in their own clusters or as managed cloud services | Production, when the data must outlive one machine | [Configure the shared services](/deploy/configure/shared-services/) |
 | Cluster | Several platform instances and workers behind a load balancer, on clustered shared services | High availability and higher throughput | [Scale: workers, platforms and clusters](/deploy/operate/scale/) |
 | Kubernetes | The containers of the stack on a Kubernetes cluster | Teams that run their services on Kubernetes | Not supported yet: [Install on Kubernetes](/deploy/install/kubernetes/) is coming soon |
@@ -53,7 +53,7 @@ Clustering of OpenAEV and XTM One is not documented yet.
 
 ## Kubernetes
 
-Installing the suite on Kubernetes is not supported yet: xtm-docker targets Docker Compose only, and [Install on Kubernetes](/deploy/install/kubernetes/) is coming soon.
+Installing the platform on Kubernetes is not supported yet: xtm-docker targets Docker Compose only, and [Install on Kubernetes](/deploy/install/kubernetes/) is coming soon.
 
 XTM Composer can start integrations on Kubernetes as well as on Docker: its daemon selector accepts `kubernetes`, `docker`, `podman`, `swarm` or `portainer`. xtm-docker sets `docker`. See [Configure XTM Composer](/deploy/integrations/configure-composer/).
 

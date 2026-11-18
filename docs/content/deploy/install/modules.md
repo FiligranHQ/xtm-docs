@@ -9,14 +9,14 @@ owner: docs-platform
 last_reviewed: 2026-11-13
 ---
 
-The official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker), has no optional module: `docker compose up -d` starts the whole XTM stack, 32 services. XTM One, OpenCTI, OpenAEV, OpenCRQ, XTM Composer, their default integrations and the shared services always run together. This page brings a deployment that ran only some of them, with a `COMPOSE_PROFILES` line in `.env`, to the whole stack: what to clean in `.env`, what to check on the host, and what happens to the data.
+The official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker), has no optional module: `docker compose up -d` starts the whole XTM platform, 32 services. XTM One, OpenCTI, OpenAEV, OpenCRQ, XTM Composer, their default integrations and the shared services always run together. This page brings a deployment that ran only some of them, with a `COMPOSE_PROFILES` line in `.env`, to the whole stack: what to clean in `.env`, what to check on the host, and what happens to the data.
 
 ::diagram{id=deploy-install-modules}
 
 ## Before you start
 
 - A stack installed from xtm-docker, as [Install with Docker Compose](/deploy/install/docker-compose/) describes. Run the commands of this page from its folder.
-- A Docker Hub account with access to `filigran/opengrc-platform`, the image of OpenCRQ, signed in with `docker login`: OpenCRQ is not released yet and its image is not public. Then create its owner account as [Install OpenCRQ](/deploy/install/opencrq/#create-the-first-administrator) describes.
+- For OpenCRQ, the admin of XTM One, who signs in to it with XTM One and creates its first tenant: see [Install OpenCRQ](/deploy/install/opencrq/).
 - A host sized for the whole stack: 16 GB of RAM at least, 32 GB recommended for production, and 50 GB of free disk. [Sizing](/deploy/plan/sizing/) says how much each module needs.
 - A backup of the volumes and of `.env`: see [Back up and restore](/deploy/operate/backup/).
 

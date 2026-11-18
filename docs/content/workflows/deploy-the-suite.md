@@ -1,5 +1,5 @@
 ---
-title: Deploy the XTM suite
+title: Deploy the XTM platform
 description: Run OpenCTI, OpenAEV, OpenCRQ and XTM One side by side behind your reverse proxy, registered with each other around XTM One, sharing one license, and watched.
 doc_type: journey
 journey: deploy-the-suite
@@ -14,7 +14,7 @@ last_reviewed: 2026-11-09
 sidebar_position: 63
 ---
 
-At the end of this journey, OpenCTI, OpenAEV, OpenCRQ and XTM One run on one host with the official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker), behind your reverse proxy over HTTPS. Each platform has registered with XTM One with the same secret, XTM One works with their data as the person who asks, one Filigran license gives the suite its Enterprise Edition, and you know which endpoints and logs tell you it is healthy. A platform engineer drives it; an administrator takes over each platform once it answers. The steps below are the pages to follow, in order.
+At the end of this journey, OpenCTI, OpenAEV, OpenCRQ and XTM One run on one host with the official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker), behind your reverse proxy over HTTPS. Each platform has registered with XTM One with the same secret, XTM One works with their data as the person who asks, one Filigran license gives the platform its Enterprise Edition, and you know which endpoints and logs tell you it is healthy. A platform engineer drives it; an administrator takes over each platform once it answers. The steps below are the pages to follow, in order.
 
 ::diagram{id=journey-deploy-the-suite}
 
@@ -39,14 +39,13 @@ Installed apart, each product needs its own services and its own license, OpenCR
 
 - A Linux host, `linux/amd64`, with Docker Engine 20.10 or later and Docker Compose 2.24.4 or later, 16 GB of RAM and 50 GB of free disk at least, 32 GB of RAM for production, and about 5 GB more for OpenCRQ. See [Requirements](/deploy/plan/requirements/) and [Sizing](/deploy/plan/sizing/).
 - A host name per platform, and a reverse proxy that serves them over HTTPS: see [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/).
-- Access to the OpenCRQ image on Docker Hub: OpenCRQ is not released yet, and Filigran gives you access to the image.
 - A Filigran license certificate for the Enterprise Edition, and the API key of a language model provider or the address of a model on your network.
 - A mail relay for OpenCTI, OpenAEV and XTM One.
 - On the host, a shell account that runs `sudo` and Docker. In the products, the admin accounts that `.env` creates are the first administrators: no role is needed before them.
 
 ## How it unfolds
 
-The story: Example CERT runs the XTM suite for the hotel chains it serves. Its platform engineer installs the stack on one host, behind Nginx on the same host, with OpenCTI at `https://opencti.example.com`, OpenAEV at `https://openaev.example.com`, XTM One at `https://xtm-one.example.com` and OpenCRQ at `https://opencrq.example.com`. The CERT's administrator, `admin@example.com`, takes over each platform.
+The story: Example CERT runs the XTM platform for the hotel chains it serves. Its platform engineer installs the stack on one host, behind Nginx on the same host, with OpenCTI at `https://opencti.example.com`, OpenAEV at `https://openaev.example.com`, XTM One at `https://xtm-one.example.com` and OpenCRQ at `https://opencrq.example.com`. The CERT's administrator, `admin@example.com`, takes over each platform.
 
 ### Plan the stack
 
@@ -95,4 +94,4 @@ Each step opens its page; the first one starts the journey, and every page of it
 - [Sign in the first time and keep an emergency account](/deploy/configure/first-access/), before you turn on single sign-on.
 - [Configure OpenCRQ](/deploy/configure/opencrq/), to connect each tenant to OpenCTI and OpenAEV.
 - [Back up and restore](/deploy/operate/backup/), to keep the volumes and `.env` together.
-- [Deploy integrations across the suite with XTM Composer](/workflows/composer-rollout/), to run the integrations of OpenCTI and OpenAEV from their interface.
+- [Deploy integrations across the platform with XTM Composer](/workflows/composer-rollout/), to run the integrations of OpenCTI and OpenAEV from their interface.

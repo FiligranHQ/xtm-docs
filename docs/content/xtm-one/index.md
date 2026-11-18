@@ -1,6 +1,6 @@
 ---
 title: XTM One
-description: The AI layer at the center of the XTM suite. Build agents that read what OpenCTI knows,
+description: The AI layer at the center of the XTM platform. Build agents that read what OpenCTI knows,
   what OpenAEV measures and what OpenCRQ prices, put them to work, and govern how AI is used.
 doc_type: landing
 hide_table_of_contents: true
@@ -10,8 +10,8 @@ products:
 sidebar_position: 0
 ---
 
-:::product-hero{eyebrow="AI for the XTM suite" title="Put AI agents to work on your security, under your rules" primary-label="Start here" primary-to="#start-here" secondary-label="Install XTM One" secondary-to="/deploy/install/xtm-one/" shot=xtm-one-agent-overview alt="The Overview of the agent Velvet Harbor watcher, built by Sophie Laurent: two active assignments, three runs, two chat queries, one connected integration and its last activity on 12 April, then what it does next under Coming up, with the Weekly Velvet Harbor brief of Monday morning."}
-XTM One is where the AI of the suite lives. Its agents read what OpenCTI knows, what OpenAEV measures and what OpenCRQ prices, and they act: they summarize a week of reports, triage an alert with the night shift, draft a crisis briefing, write the detection rule a simulation showed missing. You talk to them in the chat or from Slack and Teams, give them recurring work, or call them from inside the other products. Each agent reaches only the data and tools you give it, and every run leaves a trace.
+:::product-hero{eyebrow="AI for the XTM platform" title="Put AI agents to work on your security, under your rules" primary-label="Start here" primary-to="#start-here" secondary-label="Install XTM One" secondary-to="/deploy/install/xtm-one/" shot=xtm-one-agent-overview alt="The Overview of the agent Velvet Harbor watcher, built by Sophie Laurent: two active assignments, three runs, two chat queries, one connected integration and its last activity on 12 April, then what it does next under Coming up, with the Weekly Velvet Harbor brief of Monday morning."}
+XTM One is where the AI of the XTM platform lives. Its agents read what OpenCTI knows, what OpenAEV measures and what OpenCRQ prices, and they act: they summarize a week of reports, triage an alert with the night shift, draft a crisis briefing, write the detection rule a simulation showed missing. You talk to them in the chat or from Slack and Teams, give them recurring work, or call them from inside the other products. Each agent reaches only the data and tools you give it, and every run leaves a trace.
 :::
 
 ## Start here
@@ -46,7 +46,7 @@ You decide who uses AI, on which models, with which data, and how to stop it.
 5. [Stop every agent at once](/xtm-one/administer/emergency-stop/): the switch for the day something goes wrong.
 :::
 :::tab[Platform engineers]
-You deploy XTM One beside the products of the suite and keep it running.
+You deploy XTM One beside the products of the XTM platform and keep it running.
 
 1. [How XTM One works](/xtm-one/concepts/architecture/): the platform, the worker, the database and what the other products send it.
 2. [Install XTM One](/deploy/install/xtm-one/): its services, its database and storage, and the first administrator.
@@ -56,8 +56,8 @@ You deploy XTM One beside the products of the suite and keep it running.
 :::tab[CISOs and executives]
 You see what AI does for the teams and keep it within bounds.
 
-1. [What each edition of XTM One brings](/xtm-one/administer/editions/): what the Enterprise Edition adds to the suite.
-2. [Read the home dashboard](/xtm-one/use/dashboard/): the CTEM Command Center, the exposure of the organization across the suite and what its agents do about it.
+1. [What each edition of XTM One brings](/xtm-one/administer/editions/): what the Enterprise Edition adds to the XTM platform.
+2. [Read the home dashboard](/xtm-one/use/dashboard/): the CTEM Command Center, the exposure of the organization across the XTM platform and what its agents do about it.
 3. [Get answers about the platform's own activity](/xtm-one/use/platform-insights/): who uses AI, for what, at which cost.
 :::
 ::::

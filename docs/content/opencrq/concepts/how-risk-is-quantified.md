@@ -39,7 +39,7 @@ OpenCRQ evaluates this over many simulated years, each drawn from the ranges you
 With XTM One connected, agents read your risk scopes and scenarios from the chat panel and explain what drives a loss. Any change they propose waits for a person to approve it. XTM One also unlocks the Enterprise Edition of OpenCRQ.
 :::
 
-## Where the rest of the suite comes in
+## Where the rest of the XTM platform comes in
 
 - **OpenCTI** keeps the threats current: an OpenCTI Live Stream brings the threat actors, the sectors and countries they target, their techniques and the CVEs they exploit.
 - **OpenAEV** shows how your controls held: its detection and prevention results, per ATT&CK technique and security platform, become findings on your assets, and audit each control's declaration technique by technique. A test can lower what you declared, never raise it.
@@ -51,5 +51,5 @@ A **treatment plan** is the set of controls you would fund, each aimed at a post
 
 ## What's next
 
-- [OpenCRQ overview](/opencrq/), and how it connects to the suite.
-- [Journeys across the suite](/workflows/), including a full CTEM cycle.
+- [OpenCRQ overview](/opencrq/), and how it connects to the XTM platform.
+- [Journeys across the platform](/workflows/), including a full CTEM cycle.

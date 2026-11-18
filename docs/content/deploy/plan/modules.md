@@ -39,7 +39,7 @@ It lists the 32 services of the stack, among them `xtm-one`, `opencti`, `openaev
 
 ## XTM One
 
-XTM One is the AI layer at the center of the suite. Its AI agents work across the platforms connected to it. It needs these values in `.env`:
+XTM One is the AI layer at the center of the platform. Its AI agents work across the platforms connected to it. It needs these values in `.env`:
 
 | Variable | What to put |
 | --- | --- |
@@ -123,12 +123,11 @@ XTM Composer mounts the Docker socket of the host (`/var/run/docker.sock`) to st
 
 ## OpenCRQ
 
-OpenCRQ quantifies cyber risk in money, from the threats of OpenCTI and the validation results of OpenAEV, and registers with XTM One, without which it does not start. It is not released yet: its image, `filigran/opengrc-platform`, is not public, and `docker compose pull` stops at it without an account that has access. It connects to the shared PostgreSQL as `POSTGRES_USER`, like OpenAEV, and needs these values in `.env`:
+OpenCRQ quantifies cyber risk in money, from the threats of OpenCTI and the validation results of OpenAEV, and registers with XTM One, without which it does not start. It connects to the shared PostgreSQL as `POSTGRES_USER`, like OpenAEV, and needs these values in `.env`:
 
 | Variable | What to put |
 | --- | --- |
 | `OPENCRQ_EXTERNAL_SCHEME`, `OPENCRQ_HOST`, `OPENCRQ_PORT` | The public URL of OpenCRQ, also its identity towards XTM One. The host publishes it on port 8082 whatever `OPENCRQ_PORT` says |
-| `OPENCRQ_VERSION` | The tag of its image: `main` by default, the latest build of OpenCRQ |
 
 See [Install OpenCRQ](/deploy/install/opencrq/) for the first start and its first administrator.
 
@@ -136,5 +135,5 @@ See [Install OpenCRQ](/deploy/install/opencrq/) for the first start and its firs
 
 - [The XTM stack](/deploy/plan/architecture/): how the modules and shared services fit together.
 - [Requirements](/deploy/plan/requirements/) and [Sizing](/deploy/plan/sizing/) for the whole stack.
-- [Install with Docker Compose](/deploy/install/docker-compose/), or [run the suite locally](/deploy/quick-start/) to try it first.
+- [Install with Docker Compose](/deploy/install/docker-compose/), or [run the platform locally](/deploy/quick-start/) to try it first.
 - [Editions and licensing](/start/editions/).

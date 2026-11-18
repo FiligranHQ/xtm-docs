@@ -75,6 +75,6 @@ Each step opens its page; the first one starts the journey, and every page of it
 ## Where to go next
 
 - [Build an AI agent your team can trust](/workflows/build-an-agent/): the agent that answers, with only the tools it needs.
-- [Govern how AI is used across the suite](/workflows/govern-ai/): approvals, the prompt guard and the emergency stop that also apply to what the bot runs.
+- [Govern how AI is used across the platform](/workflows/govern-ai/): approvals, the prompt guard and the emergency stop that also apply to what the bot runs.
 - [Check your defenses against the threats you track](/workflows/threat-informed-validation/): the simulation whose results the agent reads.
 - [Get answers from an agent in the chat](/xtm-one/use/chat/#continue-in-slack-or-teams): carry a web conversation on in a Slack direct message.

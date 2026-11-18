@@ -1,5 +1,5 @@
 ---
-title: Govern how AI is used across the suite
+title: Govern how AI is used across the platform
 description: From XTM One, decide who signs in, what each agent reaches in OpenCTI, OpenAEV and OpenCRQ, which tools wait for a person, and keep one switch that stops every agent.
 doc_type: journey
 journey: govern-ai
@@ -10,7 +10,7 @@ last_reviewed: 2026-11-09
 sidebar_position: 71
 ---
 
-At the end of this journey, AI in your suite is under control: only your people sign in, each team reaches only the agents and secrets meant for it, prompts are screened for injection, a tool that changes something waits for a person, each AI feature of OpenCTI, OpenAEV and OpenCRQ is answered by the agent you chose, one switch stops every agent, and you can show what AI costs and who did what. An XTM One administrator drives it; the CISO and the auditors read the result. Every setting lives in XTM One, and applies to the AI of every registered product. The steps below are the pages to follow, in order.
+At the end of this journey, AI in your platform is under control: only your people sign in, each team reaches only the agents and secrets meant for it, prompts are screened for injection, a tool that changes something waits for a person, each AI feature of OpenCTI, OpenAEV and OpenCRQ is answered by the agent you chose, one switch stops every agent, and you can show what AI costs and who did what. An XTM One administrator drives it; the CISO and the auditors read the result. Every setting lives in XTM One, and applies to the AI of every registered product. The steps below are the pages to follow, in order.
 
 ::diagram{id=journey-govern-ai}
 

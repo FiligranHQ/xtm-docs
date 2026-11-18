@@ -14,7 +14,7 @@ migrated_from:
   - openaev:/reference/apis/rest-api/
 ---
 
-Two products of the XTM suite have a REST API: OpenAEV, under `/api`, and XTM One, under `/api/v1`. Their interfaces call the same endpoints, so a script can do what a person does on screen, with the rights of the user whose token it sends. This page gets a token for each, sends a first request, and covers what both APIs share: the API reference, pagination, tenants and errors. OpenCTI has a GraphQL API instead: see [Query OpenCTI with GraphQL](/develop/apis/graphql/). OpenCRQ exposes its procedures through its own API: see the [OpenCRQ API reference](/reference/opencrq/api/).
+Two products of the XTM platform have a REST API: OpenAEV, under `/api`, and XTM One, under `/api/v1`. Their interfaces call the same endpoints, so a script can do what a person does on screen, with the rights of the user whose token it sends. This page gets a token for each, sends a first request, and covers what both APIs share: the API reference, pagination, tenants and errors. OpenCTI has a GraphQL API instead: see [Query OpenCTI with GraphQL](/develop/apis/graphql/). OpenCRQ exposes its procedures through its own API: see the [OpenCRQ API reference](/reference/opencrq/api/).
 
 ::diagram{id=develop-apis-rest}
 

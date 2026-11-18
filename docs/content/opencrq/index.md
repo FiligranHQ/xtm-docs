@@ -55,7 +55,7 @@ You give people access and connect OpenCRQ to the sources that feed it.
 4. [Follow the background jobs and run one again](/opencrq/administer/background-jobs/): what OpenCRQ computes on its own, and how to see it is done.
 :::
 :::tab[Platform engineers]
-You deploy OpenCRQ beside the suite and keep it running.
+You deploy OpenCRQ beside the XTM platform and keep it running.
 
 1. [Install OpenCRQ](/deploy/install/opencrq/): its service, its database and file storage, and the first administrator.
 2. [Configure OpenCRQ](/deploy/configure/opencrq/): the settings a deployment sets, and the connectors of each tenant.
@@ -65,7 +65,7 @@ You deploy OpenCRQ beside the suite and keep it running.
 
 ## How OpenCRQ prices a risk
 
-You describe what you protect and what a loss would cost; the rest of the suite measures who attacks and how well your defenses hold. OpenCRQ plays the attacks over thousands of simulated years, against your assets and your controls, and counts what lands. The result is a price that moves for a reason you can trace: a threat becomes active, a control is rolled out, a test shows a defense failing.
+You describe what you protect and what a loss would cost; the rest of the XTM platform measures who attacks and how well your defenses hold. OpenCRQ plays the attacks over thousands of simulated years, against your assets and your controls, and counts what lands. The result is a price that moves for a reason you can trace: a threat becomes active, a control is rolled out, a test shows a defense failing.
 
 ::diagram{id=opencrq-overview}
 

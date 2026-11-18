@@ -24,7 +24,7 @@ The bots of Slack, Microsoft Teams and the other messaging apps are such clients
 
 ## Before you start
 
-- Your client talks to the platform chat API, `/api/v1/platform/chat/`, directly or through the backend of a suite platform. See [XTM One chat API](/develop/apis/chat/).
+- Your client talks to the platform chat API, `/api/v1/platform/chat/`, directly or through the backend of a module. See [XTM One chat API](/develop/apis/chat/).
 - It can show a prompt in the middle of a streamed answer, and send a request while the stream stays open.
 
 ## Opt a client in
@@ -53,7 +53,7 @@ An empty list is the usual answer. Otherwise show the same prompt and send the s
 
 ## What a proxy must do
 
-The assistant embedded in a suite platform rarely reaches XTM One directly: the platform's backend authenticates the browser, signs a platform token and forwards the call. A proxy of your own does the same. Four things decide whether approvals work through it:
+The assistant embedded in a module rarely reaches XTM One directly: the platform's backend authenticates the browser, signs a platform token and forwards the call. A proxy of your own does the same. Four things decide whether approvals work through it:
 
 - **Forward the whole body.** A proxy that rebuilds the body from a fixed list of fields drops `supports_tool_approval`: XTM One then never pauses, and the client gets the plain answer.
 - **Route the decision back.** Forward `messages/approve` next to `messages/steer`, while the stream stays open.
@@ -64,7 +64,7 @@ Accept decisions only from a real user session, with the same check as your chat
 
 ## Connected platforms that cannot ask
 
-A suite platform that registers with XTM One brings its own tools. Their reads run without asking; the tools that change the platform ask. A platform whose assistant can show prompts says so when it registers, with `supports_approval_prompts: true`. For one that cannot yet, an administrator decides in :menu[Administration > Settings > Access and security > Tool approvals], **Approval for connected platforms**: **Require approval**, or let its tools run. `TOOL_APPROVALS_PLATFORM_DEFAULT=skip` sets that choice for the platforms registering for the first time; it never overwrites an administrator's choice.
+A module that registers with XTM One brings its own tools. Their reads run without asking; the tools that change the platform ask. A platform whose assistant can show prompts says so when it registers, with `supports_approval_prompts: true`. For one that cannot yet, an administrator decides in :menu[Administration > Settings > Access and security > Tool approvals], **Approval for connected platforms**: **Require approval**, or let its tools run. `TOOL_APPROVALS_PLATFORM_DEFAULT=skip` sets that choice for the platforms registering for the first time; it never overwrites an administrator's choice.
 
 That choice covers the platform's own tools, not XTM One's. For those, an administrator sets **Ask before running tools** to **Don't ask** on the agents the assistant drives (the built-in ones included), or lets the tool run without asking for everyone.
 

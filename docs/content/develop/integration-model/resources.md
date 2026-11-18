@@ -1,6 +1,6 @@
 ---
 title: Community resources
-description: Where the integrations of the XTM suite live - catalogs, XTM Composer, connector repositories, libraries and images - and where to learn and ask questions.
+description: Where the integrations of the XTM platform live - catalogs, XTM Composer, connector repositories, libraries and images - and where to learn and ask questions.
 doc_type: reference
 products:
   - opencti
@@ -37,7 +37,7 @@ Filigran and the community publish hundreds of integrations for OpenCTI and Open
 | [OpenCTI-Platform/opencti](https://github.com/OpenCTI-Platform/opencti) | The platform, the worker (`opencti-worker/`) and, since version 7, the Python library (`client-python/`) with its `examples/` |
 | [OpenAEV-Platform/collectors](https://github.com/OpenAEV-Platform/collectors) | The collectors of OpenAEV |
 | [OpenAEV-Platform/injectors](https://github.com/OpenAEV-Platform/injectors) | The injectors of OpenAEV |
-| [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker) | The Docker Compose deployment of the suite, with its default integrations |
+| [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker) | The Docker Compose deployment of the platform, with its default integrations |
 
 Each connector folder has the same layout: `src/` for the code, `__metadata__/` for the manifest and the configuration schema, a `Dockerfile`, a `docker-compose.yml`, and a `README.md` that lists its settings.
 
@@ -62,7 +62,7 @@ The integrations built by Filigran are published on Docker Hub, one image per in
 | [YouTube channel](https://www.youtube.com/@Filigran) | Demonstrations, use cases, webinars |
 | [Filigran blog](https://blog.filigran.io) | Articles by Filigran and the community on features and use cases |
 | [Content library](https://filigran.io/content-library/) | Briefs, reports, white papers and recorded webinars |
-| [Customer stories](https://filigran.io/customer-story-library/) | How organizations use the suite |
+| [Customer stories](https://filigran.io/customer-story-library/) | How organizations use the platform |
 
 ## What's next
 

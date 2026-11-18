@@ -43,7 +43,7 @@
     - {url: /xtm-one/use/work-history/, label: Review the weekly brief}
 
 - id: ctem-cycle
-  title: Run a CTEM cycle across the suite
+  title: Run a CTEM cycle across the platform
   outcome: Scope what the business could lose, bring in the threats that target it, price each risk in money, check the controls against real attacks, and fund what removes the most loss.
   products: [opencrq, opencti, openaev, xtm-one]
   shot: opencrq-treatment-plan
@@ -150,7 +150,7 @@
     - {url: /xtm-one/use/work-history/, label: Review what it did}
 
 - id: govern-ai
-  title: Govern how AI is used across the suite
+  title: Govern how AI is used across the platform
   outcome: Only your people sign in, each agent reaches only what it must, prompts are screened for injection, risky tools wait for an approval, and one switch stops every agent.
   products: [xtm-one, opencti, openaev, opencrq]
   shot: xtm-one-administer-tool-approvals
@@ -166,7 +166,7 @@
     - {url: /xtm-one/use/platform-insights/, label: Watch how AI is used}
 
 - id: deploy-the-suite
-  title: Deploy the XTM suite
+  title: Deploy the XTM platform
   outcome: OpenCTI, OpenAEV, OpenCRQ and XTM One run side by side behind your proxy, know each other, share one license, and are watched.
   products: [opencti, openaev, opencrq, xtm-one]
   diagram: deploy-plan-topologies
@@ -210,7 +210,7 @@
     - {url: /xtm-one/build/integrations/, label: Let an agent find the next item}
 
 - id: composer-rollout
-  title: Deploy integrations across the suite with XTM Composer
+  title: Deploy integrations across the platform with XTM Composer
   outcome: The teams deploy their connectors, collectors and injectors from the catalog of their platform, XTM Composer runs each one as a container, and every integration is followed from its platform.
   products: [composer, opencti, openaev]
   shot: openaev-integrations-collectors-deployed

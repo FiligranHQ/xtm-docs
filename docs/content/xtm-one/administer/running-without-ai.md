@@ -10,7 +10,7 @@ migrated_from:
   - xtm-one:/administration/running-without-ai/
 ---
 
-You can run XTM One with AI switched off. No language or embedding model is contacted, no AI work starts, and nothing leaves the deployment for an AI provider, while everything that needs no model keeps working: sign-in, users, settings, the connections to the suite, and every agent, run and trace already there, readable. Use it for a platform installed before AI is approved, for a deployment whose policy forbids sending data to a model, or for an air-gapped install with no provider to reach. This page switches AI off and on from the interface, sets the default at deployment time, and explains what happens to the work in progress. AI off needs no license; the editions are explained in [What each edition of XTM One brings](/xtm-one/administer/editions/).
+You can run XTM One with AI switched off. No language or embedding model is contacted, no AI work starts, and nothing leaves the deployment for an AI provider, while everything that needs no model keeps working: sign-in, users, settings, the connections to the XTM platform, and every agent, run and trace already there, readable. Use it for a platform installed before AI is approved, for a deployment whose policy forbids sending data to a model, or for an air-gapped install with no provider to reach. This page switches AI off and on from the interface, sets the default at deployment time, and explains what happens to the work in progress. AI off needs no license; the editions are explained in [What each edition of XTM One brings](/xtm-one/administer/editions/).
 
 ::diagram{id=xtm-one-running-without-ai-switch}
 

@@ -13,7 +13,7 @@ owner: docs-platform
 last_reviewed: 2026-11-09
 ---
 
-At the end of this journey, your teams start from what Filigran and the community already built instead of from a blank page: a dashboard of the threats to your sector and a triage playbook in OpenCTI, a phishing scenario in OpenAEV, each deployed in one click from XTM Hub, adapted to your own data and checked before it goes live. XTM Hub is Filigran's library of ready-made content for the XTM suite, and an XTM One agent can search it for you. The CTI team lead drives it, with the validation engineer for OpenAEV and the administrator who connects the platforms. The steps below are the pages to follow, in order.
+At the end of this journey, your teams start from what Filigran and the community already built instead of from a blank page: a dashboard of the threats to your sector and a triage playbook in OpenCTI, a phishing scenario in OpenAEV, each deployed in one click from XTM Hub, adapted to your own data and checked before it goes live. XTM Hub is Filigran's library of ready-made content for the XTM platform, and an XTM One agent can search it for you. The CTI team lead drives it, with the validation engineer for OpenAEV and the administrator who connects the platforms. The steps below are the pages to follow, in order.
 
 ::diagram{id=journey-reuse-from-hub}
 
@@ -72,4 +72,4 @@ Each step opens its page; the first one starts the journey, and every page of it
 
 - [Automate threat intelligence](/workflows/automate-intelligence/), to build on the playbook you deployed.
 - [Test whether your staff fall for the lure](/workflows/test-your-people/), to run the phishing scenario as a full exercise.
-- [Deploy integrations across the suite with XTM Composer](/workflows/composer-rollout/), to deploy the connectors of XTM Hub from the catalog.
+- [Deploy integrations across the platform with XTM Composer](/workflows/composer-rollout/), to deploy the connectors of XTM Hub from the catalog.

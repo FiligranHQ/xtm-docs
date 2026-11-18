@@ -11,7 +11,7 @@ migrated_from:
   - xtm-one:/deployment/installation/
 ---
 
-XTM One is the AI layer at the center of the XTM suite, and every XTM stack runs it: [Install with Docker Compose](/deploy/install/docker-compose/) starts it with OpenCTI, OpenAEV, XTM Composer and the shared services. This page takes that XTM One from running to usable: what it needs, what xtm-docker sets for it, the reverse proxy it must trust, the first sign-in, a language model and its edition. Its last part runs XTM One on its own host, with the Docker Compose file of the product. At the end, people sign in at `https://xtm-one.example.com` and AI agents answer.
+XTM One is the AI layer at the center of the XTM platform, and every XTM stack runs it: [Install with Docker Compose](/deploy/install/docker-compose/) starts it with OpenCTI, OpenAEV, XTM Composer and the shared services. This page takes that XTM One from running to usable: what it needs, what xtm-docker sets for it, the reverse proxy it must trust, the first sign-in, a language model and its edition. Its last part runs XTM One on its own host, with the Docker Compose file of the product. At the end, people sign in at `https://xtm-one.example.com` and AI agents answer.
 
 ::diagram{id=xtm-one-deploy-install-components}
 

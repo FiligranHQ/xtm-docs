@@ -1,6 +1,6 @@
 ---
 title: XTM One in OpenCTI
-description: What the AI of the XTM suite does in OpenCTI, how OpenCTI hands each request to an XTM One agent, which data an agent reaches with whose rights, and who governs it.
+description: What the AI of the XTM platform does in OpenCTI, how OpenCTI hands each request to an XTM One agent, which data an agent reaches with whose rights, and who governs it.
 doc_type: explanation
 products:
   - xtm-one
@@ -17,7 +17,7 @@ migrated_from:
   - xtm-one:/usage/xtm-suite/indicator-decay/
 ---
 
-XTM One is the AI of the XTM suite. In OpenCTI, it answers your questions about the knowledge in the **Ask Ariane** assistant, writes the AI insights of a threat, rewrites your texts, turns a question into search filters, extracts knowledge from documents and takes on playbook steps. Each time, an XTM One AI agent works with OpenCTI as you: it sees what you can see and changes only what you could change. This page explains how the pieces connect, what an agent can reach, who decides which agents answer, and what works without XTM One.
+XTM One is the AI of the XTM platform. In OpenCTI, it answers your questions about the knowledge in the **Ask Ariane** assistant, writes the AI insights of a threat, rewrites your texts, turns a question into search filters, extracts knowledge from documents and takes on playbook steps. Each time, an XTM One AI agent works with OpenCTI as you: it sees what you can see and changes only what you could change. This page explains how the pieces connect, what an agent can reach, who decides which agents answer, and what works without XTM One.
 
 ::diagram{id=xtm-one-in-opencti}
 
@@ -67,7 +67,7 @@ The panel also carries what the XTM One chat offers around a conversation:
 - **Reports and decks.** When an answer produces a report or a slide deck, its card opens it in XTM One and downloads it through OpenCTI: a deck as PDF or PowerPoint, a report as PDF.
 :::
 
-Next to **Ask Ariane**, **CTEM Command Center** opens XTM One in a new tab, on the exposure posture of the whole suite.
+Next to **Ask Ariane**, **CTEM Command Center** opens XTM One in a new tab, on the exposure posture of the whole XTM platform.
 
 :::example[Check an IP address from an alert in seconds]
 The SIEM flags outbound traffic from a hotel front-desk workstation to 203.0.113.10. Open the observable in **Observations** > **Observables**, click **Ask Ariane** and ask: "Is this IP linked to a known intrusion set, and since when?"

@@ -71,7 +71,7 @@ An **Open** item nobody picked up is backlog, never stale for its age alone. The
 
 ## Health of a connected platform
 
-OpenCTI, OpenAEV and OpenCRQ register with XTM One again and again: each registration is a heartbeat. In the suite switcher of the side menu, a platform whose last heartbeat is less than 15 minutes old shows **Connected**; otherwise it shows **No recent heartbeat**. A platform with no recent heartbeat is still registered: check that it runs and reaches XTM One. See [Connect the modules to each other](/deploy/configure/connect-modules/).
+OpenCTI, OpenAEV and OpenCRQ register with XTM One again and again: each registration is a heartbeat. In the XTM platform switcher of the side menu, a platform whose last heartbeat is less than 15 minutes old shows **Connected**; otherwise it shows **No recent heartbeat**. A platform with no recent heartbeat is still registered: check that it runs and reaches XTM One. See [Connect the modules to each other](/deploy/configure/connect-modules/).
 
 :::example[Monday morning in Operations]
 On Monday 13 April 2026 at 09:30, Julien Bernard, SOC manager at Grand Meridian Hotels, opens :menu[Work > Operations]:

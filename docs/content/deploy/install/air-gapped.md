@@ -19,7 +19,6 @@ This page installs the XTM stack on a host that cannot reach the internet, by ca
 ## Before you start
 
 - A connected machine with Docker Compose v2 and Git, and a way to copy files from it to the target host.
-- On the connected machine, a Docker Hub account with access to `filigran/opengrc-platform`, the image of OpenCRQ, signed in with `docker login`: OpenCRQ is not released yet and its image is not public.
 - The same processor architecture on both machines: Intel or AMD (amd64). XTM One is published for amd64 only, and so are the FIPS images of OpenCTI.
 - On the target host, Docker Engine 20.10 or later with Docker Compose v2, and the space for the images: about as much as `docker image ls` shows on the connected machine after the download.
 

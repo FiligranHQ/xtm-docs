@@ -1,6 +1,6 @@
 ---
 title: Deploy and operate
-description: Deploy the whole XTM suite as one stack, then run, scale and upgrade
+description: Deploy the whole XTM platform as one stack, then run, scale and upgrade
   it.
 doc_type: landing
 hide_table_of_contents: true
@@ -10,7 +10,7 @@ products:
 sidebar_position: 0
 ---
 
-:::product-hero{eyebrow="One deployment for the whole suite" title="Deploy the whole XTM stack" primary-label="Run it locally" primary-to="/deploy/quick-start/" secondary-label="Deploy with an AI agent" secondary-to="/deploy/quick-start/with-an-ai-agent/" diagram=deploy-overview}
+:::product-hero{eyebrow="One deployment for the whole platform" title="Deploy the whole XTM platform" primary-label="Run it locally" primary-to="/deploy/quick-start/" secondary-label="Deploy with an AI agent" secondary-to="/deploy/quick-start/with-an-ai-agent/" diagram=deploy-overview}
 XTM is deployed as one stack around XTM One: OpenCTI, OpenAEV and XTM Composer always run with it and share Elasticsearch, Redis, RabbitMQ, S3 storage and PostgreSQL. No module is optional. These pages follow the life of a deployment, from a first try on your machine to production, operations and upgrades.
 :::
 
@@ -20,9 +20,9 @@ Pick where you are: each tab gives your goal and the pages to read first, in ord
 
 ::::tabs
 :::tab[Try it]
-You want the suite running on one machine today, to see what it does.
+You want the platform running on one machine today, to see what it does.
 
-1. [Run the XTM suite locally](/deploy/quick-start/): XTM One, OpenCTI, OpenAEV and XTM Composer on one machine with Docker Compose.
+1. [Run the XTM platform locally](/deploy/quick-start/): XTM One, OpenCTI, OpenAEV and XTM Composer on one machine with Docker Compose.
 2. [Deploy with an AI agent](/deploy/quick-start/with-an-ai-agent/): let a coding agent do it, from a prompt and steps it can check.
 3. [What each XTM module brings](/deploy/plan/modules/): the services each module runs and the settings it needs.
 :::

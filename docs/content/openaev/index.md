@@ -55,7 +55,7 @@ You give people access, connect the security tools and set the platform up for y
 4. [Give each organization its own tenant](/openaev/administer/multi-tenancy/): separate subsidiaries or customers on one platform.
 :::
 :::tab[Platform engineers]
-You deploy OpenAEV beside the suite and keep it running.
+You deploy OpenAEV beside the XTM platform and keep it running.
 
 1. [How OpenAEV works](/openaev/concepts/architecture/): the platform, the agents, the collectors and the injectors, and what each one needs.
 2. [Install with Docker Compose](/deploy/install/docker-compose/): a running platform behind your reverse proxy.

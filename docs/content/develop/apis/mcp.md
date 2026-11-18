@@ -13,7 +13,7 @@ last_reviewed: 2026-11-09
 sidebar_position: 6
 ---
 
-The platforms of the XTM suite reach Model Context Protocol (MCP) clients through XTM One. XTM One serves one MCP server per registered product, OpenCTI, OpenAEV and OpenCRQ, and its own servers for its agents and its configuration. A client such as Claude, Cursor, VS Code or an agent you write calls their tools with the identity of a user, and each product applies that user's rights. This page is the reference of these servers in XTM One 1.261110: endpoints, protocol, authentication, answers and tools. To connect a client step by step, see [Use XTM One's own MCP servers from other clients](/xtm-one/build/platform-mcp-servers/).
+The modules of the XTM platform reach Model Context Protocol (MCP) clients through XTM One. XTM One serves one MCP server per registered product, OpenCTI, OpenAEV and OpenCRQ, and its own servers for its agents and its configuration. A client such as Claude, Cursor, VS Code or an agent you write calls their tools with the identity of a user, and each product applies that user's rights. This page is the reference of these servers in XTM One 1.261110: endpoints, protocol, authentication, answers and tools. To connect a client step by step, see [Use XTM One's own MCP servers from other clients](/xtm-one/build/platform-mcp-servers/).
 
 ::diagram{id=develop-apis-mcp}
 

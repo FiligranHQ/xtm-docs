@@ -10,7 +10,7 @@ owner: docs-opencrq
 last_reviewed: 2026-11-04
 ---
 
-XTM One is the AI of the XTM suite, and OpenCRQ cannot run without it: OpenCRQ registers with XTM One when it starts, and the XTM license XTM One returns decides its edition. In OpenCRQ, XTM One answers your questions about risk in the **Ask Ariane** assistant, asks your approval before an agent changes something when a tool requires it, opens the **CTEM Command Center** of the suite, and lets your own AI client work with OpenCRQ through its MCP server. Each time, an XTM One AI agent works with OpenCRQ as you. This page explains how the pieces connect, what each edition brings, and what an agent can reach.
+XTM One is the AI of the XTM platform, and OpenCRQ cannot run without it: OpenCRQ registers with XTM One when it starts, and the XTM license XTM One returns decides its edition. In OpenCRQ, XTM One answers your questions about risk in the **Ask Ariane** assistant, asks your approval before an agent changes something when a tool requires it, opens the **CTEM Command Center** of the XTM platform, and lets your own AI client work with OpenCRQ through its MCP server. Each time, an XTM One AI agent works with OpenCRQ as you. This page explains how the pieces connect, what each edition brings, and what an agent can reach.
 
 ::diagram{id=xtm-one-in-opencrq}
 
@@ -20,7 +20,7 @@ XTM One is the AI of the XTM suite, and OpenCRQ cannot run without it: OpenCRQ r
 | --- | --- | --- |
 | Ask why a scenario costs what it costs, or draft a new one | **Ask Ariane**, in the top bar | Enterprise |
 | Let an agent change OpenCRQ, after your approval | The approval prompt of **Ask Ariane** | Enterprise |
-| See the exposure of the whole suite, beyond risk in money | **CTEM Command Center**, in the top bar | Community |
+| See the exposure of the whole XTM platform, beyond risk in money | **CTEM Command Center**, in the top bar | Community |
 | Query or update OpenCRQ from Cursor, Claude Desktop or your own agent | The **XTM One MCP server** card of your profile | Community |
 
 Every answer is written by a language model and can be wrong. Check a figure an agent gives against the scenario's own page before you put it in front of a board.
@@ -73,7 +73,7 @@ The consequences:
 
 ## CTEM Command Center
 
-**CTEM Command Center**, the radar icon of the top bar, opens XTM One in a new tab, on the exposure posture across the products of the suite. It works in the Community Edition, as soon as OpenCRQ is configured with XTM One.
+**CTEM Command Center**, the radar icon of the top bar, opens XTM One in a new tab, on the exposure posture across the products of the XTM platform. It works in the Community Edition, as soon as OpenCRQ is configured with XTM One.
 
 ## Use OpenCRQ from your own AI client
 

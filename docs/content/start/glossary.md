@@ -1,6 +1,6 @@
 ---
 title: Glossary
-description: The terms of the XTM suite and of its products, each in one sentence with a link to the page that explains it, from integration and AI agent to container, draft and decay.
+description: The terms of the XTM platform and of its products, each in one sentence with a link to the page that explains it, from integration and AI agent to container, draft and decay.
 doc_type: reference
 products:
   - suite
@@ -8,28 +8,28 @@ personas: [evaluator, cti-analyst, admin]
 owner: docs-platform
 last_reviewed: 2026-11-01
 sidebar_position: 3
-no_screenshot: A glossary defines the words of the suite and describes no screen of its own.
+no_screenshot: A glossary defines the words of the platform and describes no screen of its own.
 ---
 
-This glossary gives the words you meet across the XTM suite and its products, each in one sentence, with a link to the page that explains it. Some words mean different things in different products, such as an organization in OpenCTI and a tenant in OpenAEV: the glossary says which product a word belongs to. The terms are grouped by subject, then listed alphabetically.
+This glossary gives the words you meet across the XTM platform and its modules, each in one sentence, with a link to the page that explains it. Some words mean different things in different products, such as an organization in OpenCTI and a tenant in OpenAEV: the glossary says which product a word belongs to. The terms are grouped by subject, then listed alphabetically.
 
 ::diagram{id=start-glossary-integrations}
 
-## The suite
+## The platform
 
 | Term | Meaning |
 | --- | --- |
 | AI agent | An agent of XTM One: it reads what the products know, decides what matters and acts, such as summarizing or drafting, under the governance you define. You talk to it, run it in a flow, or call it from OpenCTI and OpenAEV. See [XTM One](/xtm-one/). Not to be confused with an OpenAEV agent |
 | Community Edition | The free, open source edition of a product, under the Apache License 2.0. See [Editions and licensing](/start/editions/) |
-| CTEM | Continuous threat exposure management: the cycle of knowing your threats, testing your exposure to them and fixing what matters most, which the products run together. See [Run a CTEM cycle across the suite](/workflows/ctem-cycle/) |
+| CTEM | Continuous threat exposure management: the cycle of knowing your threats, testing your exposure to them and fixing what matters most, which the products run together. See [Run a CTEM cycle across the platform](/workflows/ctem-cycle/) |
 | Enterprise Edition | The edition that adds features such as playbooks, segregation, single sign-on and audit, turned on by a license from Filigran. See [Editions and licensing](/start/editions/) |
 | LTS | Long-term support: a release line that receives only critical and security fixes for one year, for organizations that cannot upgrade often. It needs an LTS license. See [Release lifecycle](/deploy/upgrade/lifecycle/) |
 | OpenAEV | The exposure validation product: it runs realistic attack scenarios against your environment and measures how your defenses respond. See [OpenAEV](/openaev/) |
 | OpenCRQ | The cyber risk quantification product: it prices each cyber risk in money, as the loss it can be expected to cause over a year. See [OpenCRQ](/opencrq/) |
 | OpenCTI | The threat intelligence product: it stores what you know about threats as a knowledge graph, and shares it with your teams and tools. See [OpenCTI](/opencti/) |
 | XTM Hub | Filigran's portal for ready-made content, such as dashboards, playbooks and feeds, with free trials, the roadmap and the Academy. See [Connect to XTM Hub](/opencti/configure/xtm-hub/) |
-| XTM One | The AI product at the center of the suite, whose AI agents work across OpenCTI, OpenAEV and OpenCRQ. Name its features by what they do, not "Copilot". See [XTM One](/xtm-one/) |
-| xtm-docker | The official Docker Compose deployment of the suite, which starts the whole stack: XTM One, OpenCTI, OpenAEV, XTM Composer and the shared services. See [Run the XTM suite locally](/deploy/quick-start/) |
+| XTM One | The AI product at the center of the platform, whose AI agents work across OpenCTI, OpenAEV and OpenCRQ. Name its features by what they do, not "Copilot". See [XTM One](/xtm-one/) |
+| xtm-docker | The official Docker Compose deployment of the platform, which starts the whole stack: XTM One, OpenCTI, OpenAEV, XTM Composer and the shared services. See [Run the XTM platform locally](/deploy/quick-start/) |
 
 ## Integrations
 

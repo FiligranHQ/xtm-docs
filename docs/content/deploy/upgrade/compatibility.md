@@ -13,7 +13,7 @@ owner: docs-platform
 last_reviewed: 2026-11-12
 ---
 
-This page ties the versions of the XTM modules together: the releases the documentation describes as one suite, the constraints that the [breaking changes](/deploy/upgrade/breaking-changes/) set between modules, and the versions of the shared services each platform needs. It lists only what has been checked: a pair of versions that is not here is not known to be incompatible, only not documented.
+This page ties the versions of the XTM modules together: the releases the documentation describes as one platform, the constraints that the [breaking changes](/deploy/upgrade/breaking-changes/) set between modules, and the versions of the shared services each platform needs. It lists only what has been checked: a pair of versions that is not here is not known to be incompatible, only not documented.
 
 ## Versions documented together
 

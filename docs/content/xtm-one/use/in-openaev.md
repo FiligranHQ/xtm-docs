@@ -13,7 +13,7 @@ migrated_from:
   - xtm-one:/usage/xtm-suite/openaev/
 ---
 
-XTM One is the AI of the XTM suite. In OpenAEV, it answers your questions about scenarios and results in the **Ask Ariane** assistant, finds the techniques of a threat report for the scenario assistant, writes detection rules, emails and landing pages, plans autonomous attacks, and lets your own AI client work with OpenAEV through its MCP server. Each time, an XTM One AI agent works with OpenAEV as you: it sees what you can see and changes only what you could change. This page explains what each feature does, how the pieces connect, who decides which agents answer, and what works without XTM One.
+XTM One is the AI of the XTM platform. In OpenAEV, it answers your questions about scenarios and results in the **Ask Ariane** assistant, finds the techniques of a threat report for the scenario assistant, writes detection rules, emails and landing pages, plans autonomous attacks, and lets your own AI client work with OpenAEV through its MCP server. Each time, an XTM One AI agent works with OpenAEV as you: it sees what you can see and changes only what you could change. This page explains what each feature does, how the pieces connect, who decides which agents answer, and what works without XTM One.
 
 ::diagram{id=xtm-one-in-openaev}
 
@@ -27,7 +27,7 @@ XTM One is the AI of the XTM suite. In OpenAEV, it answers your questions about 
 | Get a detection rule for an action your tools missed | **Generate with AI**, on the **Remediations** tab of a payload action | Enterprise |
 | Write the email or the landing page of a phishing exercise | **Generate with AI**, in the email and landing page editors. See [Run a phishing exercise](/openaev/use/phishing/) | Enterprise |
 | Let an agent design and drive a chained attack on your scope | **AI builder** and the **Autonomous** launch of a chained scenario. See [Let AI run a penetration test](/openaev/use/attack-chaining/autonomous/) | Enterprise |
-| See the exposure of the whole suite | **CTEM Command Center**, in the top bar | Community |
+| See the exposure of the whole XTM platform | **CTEM Command Center**, in the top bar | Community |
 | Work with OpenAEV from Cursor, Claude Desktop or your own agent | The **XTM One MCP server** card of your profile | Community |
 
 Every answer is written by a language model and can be wrong. Check the techniques, rules and texts an agent proposes before you run them on your environment.
@@ -49,7 +49,7 @@ The panel also carries what the XTM One chat offers around a conversation:
 - **Your quota.** The count and the limit of your XTM One agent runs for the current period, as the XTM One chat shows them.
 - **Rating an answer.** A thumbs up or down, with a comment of up to 2,000 characters. It is the same rating as in XTM One: rating again replaces it, and the managers of the agent read it.
 
-Next to **Ask Ariane**, **CTEM Command Center** opens XTM One in a new tab, on the exposure posture across the products of the suite.
+Next to **Ask Ariane**, **CTEM Command Center** opens XTM One in a new tab, on the exposure posture across the products of the XTM platform.
 
 ### Approve what the assistant does
 

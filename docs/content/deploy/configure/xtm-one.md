@@ -1,6 +1,6 @@
 ---
 title: Configure XTM One
-description: Pass environment variables to XTM One in the XTM stack, and set its secrets, public URL and proxy trust, language models, edition, links to the suite, mail, security headers and sizing.
+description: Pass environment variables to XTM One in the XTM stack, and set its secrets, public URL and proxy trust, language models, edition, links to the platform, mail, security headers and sizing.
 doc_type: how-to
 products:
   - xtm-one

@@ -1,4 +1,4 @@
-title: You clone xtm-docker, generate .env and start the whole stack, then sign in to each platform on localhost
+title: You clone xtm-docker, create .env with one command and start the whole stack with another, then sign in to each platform on localhost
 lanes:
   - label: Get
     tone: external
@@ -7,11 +7,11 @@ lanes:
   - label: Configure
     tone: external
     nodes:
-      - {id: env, label: .env, icon: FileText, note: "Fresh secrets, ELASTIC_MEMORY_SIZE, free ports"}
+      - {id: env, label: .env, icon: FileText, note: "docker compose -f init.yml run --rm init"}
   - label: Start
     tone: product
     nodes:
-      - {id: up, label: docker compose up -d, icon: Terminal, note: After docker compose pull}
+      - {id: up, label: docker compose up -d, icon: Terminal, note: "--pull always"}
   - label: Platforms
     tone: product
     nodes:
@@ -23,7 +23,7 @@ lanes:
     nodes:
       - {id: signin, label: Sign in, icon: LogIn, note: Admin email and password of .env}
 edges:
-  - {from: clone, to: env, label: secrets script}
+  - {from: clone, to: env, label: every secret drawn at random}
   - {from: env, to: up}
   - {from: up, to: xtmone, label: starts}
   - {from: up, to: opencti, label: starts}

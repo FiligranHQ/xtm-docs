@@ -14,7 +14,7 @@ The **Governance & Risk** page of XTM One answers two questions a CISO gets from
 
 ## Before you start
 
-- XTM One runs as the XTM suite's command center, with OpenCTI or OpenAEV connected: the posture comes from them. See [Read the home dashboard](/xtm-one/use/dashboard/#what-you-see-depends-on-the-platform).
+- XTM One runs as the XTM platform's command center, with OpenCTI or OpenAEV connected: the posture comes from them. See [Read the home dashboard](/xtm-one/use/dashboard/#what-you-see-depends-on-the-platform).
 - Every user opens the page. Only an administrator sets the posture target and edits the accepted risks.
 - The page reads the vertical you chose on the dashboard: **Cyber**, **FIMI** or **Fraud**.
 

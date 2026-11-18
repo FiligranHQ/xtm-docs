@@ -24,7 +24,6 @@ This page upgrades an XTM stack deployed with the official Docker deployment, [F
 - Check the [compatibility matrix](/deploy/upgrade/compatibility/) when you upgrade one module and not the others.
 - Plan a maintenance window: the platforms are stopped during the backup and while they migrate their data. The first start after an upgrade can take longer than usual.
 - Run the commands from the `xtm-docker` folder that holds your `.env`.
-- Until OpenCRQ is released, access to its image, `filigran/opengrc-platform`, signed in with `docker login`: `docker compose pull` stops at it otherwise.
 
 ## What migrates on its own
 
