@@ -9,7 +9,7 @@ security advisories, to the repository of the product it affects:
 | OpenAEV | [OpenAEV-Platform/openaev](https://github.com/OpenAEV-Platform/openaev/security/advisories/new) |
 | XTM One | [XTM-One-Platform/xtm-one](https://github.com/XTM-One-Platform/xtm-one/security/advisories/new) |
 | XTM Composer | [FiligranHQ/xtm-composer](https://github.com/FiligranHQ/xtm-composer/security/advisories/new) |
-| OpenCRQ, docs.filigran.io, or when in doubt | [This repository](https://github.com/FiligranHQ/xtm-docs/security/advisories/new) |
+| OpenCRQ, filigran.io/docs, or when in doubt | [This repository](https://github.com/FiligranHQ/xtm-docs/security/advisories/new) |
 
 Each product's repository says what a report needs and how it is handled (its `SECURITY.md`).
 

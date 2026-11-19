@@ -6,7 +6,7 @@ Thank you for helping us improve the XTM documentation.
 merged, and are closed automatically. An issue reaches the documentation team, who writes the change, has it reviewed
 and publishes it.
 
-- **From a page** of [docs.filigran.io](https://docs.filigran.io): **Give us feedback**, or select the passage that is
+- **From a page** of [filigran.io/docs](https://filigran.io/docs/): **Give us feedback**, or select the passage that is
   wrong and click **Report an issue**. The issue comes filled with the page, the version it describes and the passage.
 - **From here**: [a new issue](https://github.com/FiligranHQ/xtm-docs/issues/new/choose), with the page's address.
 

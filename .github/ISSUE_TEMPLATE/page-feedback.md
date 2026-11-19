@@ -1,6 +1,6 @@
 ---
 name: Feedback on a page
-about: Something wrong, unclear or missing in a page of docs.filigran.io.
+about: Something wrong, unclear or missing in a page of filigran.io/docs.
 title: "Feedback: "
 labels: [feedback]
 ---
@@ -8,7 +8,7 @@ labels: [feedback]
 <!-- The pages' "Give us feedback" and "Report an issue" fill this in: the passage as a quote, the page, its version
 and its section. From here, add them yourself. -->
 
-**Page:** https://docs.filigran.io/...
+**Page:** https://filigran.io/docs/...
 **Version:**
 
 ### What should change?

@@ -25,7 +25,7 @@ The deployment starts the whole stack: XTM One, OpenCTI, OpenAEV, XTM Composer a
 
 ```text
 Deploy the XTM platform on this machine with Docker, following
-https://docs.filigran.io/deploy/quick-start/index.md step by step.
+https://filigran.io/docs/deploy/quick-start/index.md step by step.
 It starts the whole stack: do not try to leave a module out.
 
 Before you start, check Docker Compose 2.20.2 or later, the free RAM and the ports the page lists,

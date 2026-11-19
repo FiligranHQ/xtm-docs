@@ -1,6 +1,6 @@
 # XTM documentation
 
-The content of the XTM documentation, published at **[docs.filigran.io](https://docs.filigran.io)**: XTM One,
+The content of the XTM documentation, published at **[filigran.io/docs](https://filigran.io/docs/)**: XTM One,
 OpenCTI, OpenAEV, OpenCRQ, XTM Hub and XTM Composer.
 
 | Folder | What it holds |
@@ -17,7 +17,7 @@ written here directly reaches the site, so **pull requests here cannot be merged
 
 ## Tell us what to fix
 
-- **On any page** of [docs.filigran.io](https://docs.filigran.io): **Give us feedback**, or select a passage and
+- **On any page** of [filigran.io/docs](https://filigran.io/docs/): **Give us feedback**, or select a passage and
   click **Report an issue**. Either opens an issue here, filled with the page, its version and the passage.
 - **Here**: [open an issue](https://github.com/FiligranHQ/xtm-docs/issues/new/choose).
 
