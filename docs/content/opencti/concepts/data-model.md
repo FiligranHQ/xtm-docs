@@ -98,6 +98,10 @@ These types and attributes are exported as STIX custom objects and custom proper
 
 Each type adds its own attributes to the common ones: author, markings, labels, confidence and dates.
 
+:::only{opencti=">=7.261117"}
+A System, such as a hotel chain's booking platform, also describes the asset it is: **System category** and **System subcategory**, **Internet facing**, **Criticality**, **Environment**, **Platform** and **Asset owner**. All but **Asset owner**, a free text, take their values from vocabularies, and the values of **Criticality** and **Internet facing** are fixed. These fields follow the asset taxonomy of OpenAEV, so a System maps to an OpenAEV or XTM One asset. You can filter on each of them.
+:::
+
 - The [data model reference](/reference/opencti/data-model/) gives, for each type of your version, the attributes it adds, which ones are required and the inherited attributes of each family.
 - :menu[Settings > Customization > Entity types] lets administrators make attributes mandatory or give them default values. See [Entity types](/opencti/configure/entities/).
 - The [GraphQL schema reference](/reference/opencti/graphql-schema/) documents every type and attribute of the API, for scripts and integrations.

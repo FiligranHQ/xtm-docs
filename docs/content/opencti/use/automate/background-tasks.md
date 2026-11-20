@@ -61,6 +61,10 @@ Notifications have their own bulk actions: marking many alerts as read, unread o
 
 :::
 
+:::only{opencti=">=7.261117"}
+**Enrichment** skips the summary: in **Entity enrichment**, turn on the connectors under **Selected connectors** and click **Enrich**, and the task starts at once. **Launch a background task** opens only when more than 1,000 elements are selected, so that you confirm before enriching that many.
+:::
+
 :::only{opencti=">=7.261109"}
 The **Field** list of **Update** also offers the [custom fields](/opencti/configure/taxonomies/#custom-fields) of the selected type, by their label: **Replace** and **Remove** work on every custom field, **Add** only on a multiple selection list.
 :::

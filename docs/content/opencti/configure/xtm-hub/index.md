@@ -83,6 +83,14 @@ The **Connection status** of the **XTM Hub** card shows one of three states:
 To repair a lost connection, click **Connect to XTM Hub** in the card and go through the connection steps again.
 ::::
 
+:::only{opencti=">=7.261117"}
+### See the metrics of a platform in the Filigran cloud
+
+At each connection check, the XTM Hub also tells the platform under which commercial model it is registered. When the platform runs in the Filigran cloud (SaaS) and the card reads **Connected**, the **XTM Hub** card adds the **Your OpenCTI, by the numbers** panel. It names what the XTM Hub shows about your subscription: **Your plan**, the **Contract countdown** before renewal, and **Storage & uptime**, the database space used and the guaranteed uptime.
+
+Click **See my OpenCTI metrics**: the XTM Hub opens in a new tab, on the page of this platform's registration, or on its home page when it cannot find the platform. The panel goes away while the card reads **Connectivity lost**, and when you disconnect the platform. A platform registered under another commercial model never shows it.
+:::
+
 ::::only{opencti="<7.260811"}
 The **XTM Hub** card gives the **Registration status**: **Registered**, with the **Registration date** and who registered the platform (**Registered by**), or **Connectivity lost**, with the **Last successful check**. An unregistered platform shows what the XTM Hub offers and a **Discover the Hub** button.
 

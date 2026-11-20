@@ -36,6 +36,10 @@ Check the widgets before you share, because a few of them do not work on the pub
 - a **Bookmark** widget, or any widget of the **Activity & history** perspective, shows a message saying it is not supported;
 - a **Horizontal Bar** of the **Entities** perspective broken down by a second data set shows **Not implemented yet**. The same chart on the **Knowledge graph** perspective works.
 
+:::only{opencti=">=7.261117"}
+A bar, line, area or heatmap widget split with **Break down by** keeps one series per value on the public page, with the **Maximum number of series**, the order and **Include Other** you chose. Over a long period, the public page may count it in weeks or months instead of days so that the chart stays drawable.
+:::
+
 Give each widget a **Title** and each data set a **Label** as well. Without them, the public page shows generic names, such as **Distribution of entities** or **Relationships distribution** as a title and **Number of entities** in a legend.
 
 :::only{opencti=">=7.260811"}

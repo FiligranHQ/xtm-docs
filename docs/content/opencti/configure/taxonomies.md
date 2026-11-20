@@ -102,13 +102,18 @@ OpenCTI does not impose a model: the **Kill chain name** of a phase decides whic
 
 Vocabularies are the values offered in drop-down fields: report types, malware types, case priorities and the other open vocabularies of the STIX standard and of OpenCTI. **Vocabularies** lists the categories, such as `report_types_ov`, with the entity types that use each one. Open a category to see its values, their aliases and how many objects use each.
 
-:::steps
+::::steps
 
 1. Open the category, then click **Create Vocabulary**.
 2. Fill the **Name**, then optionally the **Description**, the **Aliases** and the **Order** in the drop-down.
+
+   :::only{opencti=">=7.261117"}
+   Optionally, pick a **Color**, a hexadecimal value such as `#e53935`, for the tag of the value. See [Color the values](#color-the-values).
+   :::
+
 3. Click **Create**.
 
-:::
+::::
 
 ::screenshot{id=opencti-taxonomies-report-types alt="The values of the report_types_ov vocabulary: the built-in internal-report and threat-report next to member-advisory, with its aliases, its description and the number of reports that use it."}
 
@@ -118,6 +123,31 @@ Rules to know:
 - **Hidden**, in the **Update an attribute** panel that the menu (⋮) of a value opens, removes it from the choices of forms without touching the objects that already use it.
 - Built-in values cannot be deleted: in their menu, **Delete** gives way to **This item is built-in**. Their names cannot change, nor can the names of the values of a closed category.
 - A value used by objects cannot be deleted when a field that uses the category is mandatory: **Delete** gives way to **Some fields in usage are mandatory**.
+
+::::only{opencti=">=7.261117"}
+### Color the values
+
+A value can carry a color, so that analysts read a scale at a glance: a very high criticality in red, a low one in green. Set it in the **Color** field of the creation form, or of the **Update an attribute** panel for an existing value, built-in values included. It takes a hexadecimal color, such as `#e53935`; an empty field gives the neutral tag.
+
+The color shows where the platform draws the value as a tag of its own: the **Reliability** of an entity in its overview, the severity of an incident, the asset fields of a system in its **Details** card and in the **Criticality** and **Environment** columns of the systems list, and the dashboard widgets that show the attributes of an entity. Hovering the tag shows the description of the value. The priority and the severity of cases keep their fixed colors, and a few fields, such as the **Report types** of a report, show their values without color.
+
+The values of the system criticality, internet exposure, environment and category come with a color, on a new platform and on an upgraded one, where a value that already has a color keeps it. Change it, or empty it, like the color of any other value.
+
+::screenshot{id=opencti-taxonomies-vocabulary-colors alt="The Details card of the system Online booking platform, with Criticality Very high in red, Internet facing Yes in orange, Environment Production in red and the type Web application in purple, each tag in the color of its vocabulary value."}
+
+:::example[Show the reliability of sources at a glance]
+Example CERT weighs every report by the reliability of its author. Its CTI team lead wants analysts to spot an unreliable source before they read the content, on the overview of each organization and individual.
+
+In **Vocabularies**, open `reliability_ov`, then, for each value, open its menu (⋮), choose **Update**, fill the **Color** and click **Update**:
+
+- **A - Completely reliable** and **B - Usually reliable**: `#43a047`, a green
+- **C - Fairly reliable**: `#f9a825`, a yellow
+- **D - Not usually reliable** and **E - Unreliable**: `#e53935`, a red
+- **F - Reliability cannot be judged**: empty, the neutral tag
+
+The overview of Example CERT now shows **B - Usually reliable** in green, and the overview of Example Scanner Feed shows **E - Unreliable** in red. The values, filters and exports do not change: only the tags do.
+:::
+::::
 
 The [vocabularies reference](/reference/opencti/vocabularies/) lists every category of your version, the entity types and fields that take its values, and the values a new platform starts with.
 
@@ -142,14 +172,14 @@ On the page of a template, the menu (⋮) of a task offers **Update**, **Unlink*
 
 When analysts create an incident response, a request for information or a request for takedown, they pick templates in **Default case templates** and the case gets their tasks. On an existing case, **Apply a new case template** adds the tasks of more templates. See [Cases](/opencti/use/analyze/cases/).
 
-::::only{opencti=">=7.261109"}
+:::::only{opencti=">=7.261109"}
 ## Custom fields
 
 Custom fields require the Enterprise Edition. A custom field adds to the data model a field your team needs and OpenCTI lacks, such as the impact of a threat on your members or the booking platform an attack targets. You define it once here, then add it to entity types in [Customize entity types](/opencti/configure/entities/#add-custom-fields-to-an-entity-type). Analysts then fill it in the creation and edition forms of those types, read it in the **Entity details** card, and filter, chart and update on it like a built-in field.
 
 Custom fields go on entities, relationships and sightings. Observables cannot hold them.
 
-:::steps
+::::steps
 
 1. In **Custom fields**, click **Create Custom Field**.
 2. Choose the **Field type**. It decides the values the field takes, and cannot change later:
@@ -164,18 +194,22 @@ Custom fields go on entities, relationships and sightings. Observables cannot ho
    | **Selection list** | One value of the **Select options** you list |
    | **Multiple selection list** | Several values of the **Select options** you list |
 
+   :::only{opencti=">=7.261117"}
+   **Decimal** takes a number with decimals, such as `0.85` or `7.5`, for a score or a rate. It has no **Min value** or **Max value**: any finite number is accepted.
+   :::
+
 3. Fill the **Label**, the name analysts see, unique among custom fields. OpenCTI derives the **Technical name** from it: lowercase letters, numbers and underscores, starting with a letter, prefixed with `x_opencti_cf_`. The technical name names the field in the API, in filters and in STIX exports, and cannot change later.
 4. Optionally, add **Aliases**: names of a STIX property, starting with `x_`, that fill the field when an imported object carries them, such as `x_member_impact` from a partner platform.
 5. For an **Integer**, set the **Min value** and **Max value** if the values have bounds. For a selection list, type each of the **Select options** and press Enter.
 6. Fill the **Description**, which tells analysts what to enter, then click **Create**.
 
-:::
+::::
 
 ::screenshot{id=opencti-taxonomies-custom-fields alt="The Custom fields list of the Taxonomies settings, with the Member impact selection list and the Affected booking platform text field, their aliases, the Report entity type that uses them, and their technical names."}
 
 The list gives, for each field, its **Aliases**, the entity types it is **Used in**, its **Type** and its **Technical name**. The menu (⋮) of a line offers **Update** and **Delete**:
 
-- **Update** changes the label, the aliases, the description, the bounds and the options. You cannot tighten the bounds of an integer past a value already stored, nor remove an option that an object still uses.
+- **Update** changes the label, the aliases, the description, the bounds of an integer and the options. You cannot tighten the bounds of an integer past a value already stored, nor remove an option that an object still uses.
 - **Delete** removes the field and, in a background task, its value from every object: OpenCTI asks you to confirm, as the values cannot come back.
 
 Exports carry the values in the OpenCTI extension of each STIX object, as `x_opencti_cf_<name>` properties, and an import fills the field from that property or from one of its aliases. Without the Enterprise Edition, the **Custom fields** screen shows the Enterprise Edition panel instead of the list; the values already stored stay on the objects.
@@ -192,7 +226,7 @@ Every new report now offers **Member impact** in its form, prefilled with `limit
 
 Analysts filter the reports with `Member impact` = `severe`, and a report from the partner CERT arrives with its impact already set.
 :::
-::::
+:::::
 
 ## What's next
 

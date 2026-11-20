@@ -1,8 +1,8 @@
 {
   "name": "vocabularies",
-  "version": "7.261109.0",
-  "source": "OpenCTI-Platform/opencti@0c08259 (opencti-platform/opencti-graphql/src/modules/vocabulary/vocabulary-types.ts, opencti-platform/opencti-graphql/src/modules/vocabulary/vocabulary-utils.ts)",
-  "intro": "The 48 vocabulary categories of OpenCTI 7.261109.0, as **Settings > Taxonomies > Vocabularies** lists them, with the entity types and fields that take their values and the 355 values a new platform is created with. Add, rename or merge values as [Taxonomies](/opencti/configure/taxonomies/#vocabularies) explains.",
+  "version": "7.261117.0",
+  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/src/modules/vocabulary/vocabulary-types.ts, opencti-platform/opencti-graphql/src/modules/vocabulary/vocabulary-utils.ts)",
+  "intro": "The 54 vocabulary categories of OpenCTI 7.261117.0, as **Settings > Taxonomies > Vocabularies** lists them, with the entity types and fields that take their values and the 470 values a new platform is created with. Add, rename or merge values as [Taxonomies](/opencti/configure/taxonomies/#vocabularies) explains.",
   "filter": "Filter categories and values",
   "sections": [
     {
@@ -2421,6 +2421,900 @@
           "cells": [
             "`SERVICE_SYSTEM_ALERT`",
             "A device driver started by the IoInitSystem function. This value is valid only for driver services."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "system_category_ov",
+      "text": "The category of an asset (level 1 of the OpenAEV asset taxonomy). Used in System, field `x_opencti_system_category` (one value).",
+      "columns": [
+        "Value",
+        "Description",
+        "Order"
+      ],
+      "rows": [
+        {
+          "key": "system_category_ov:HOST",
+          "cells": [
+            "`HOST`",
+            "Physical or virtual machine, server or workstation.",
+            "1"
+          ]
+        },
+        {
+          "key": "system_category_ov:CONTAINER_WORKLOAD",
+          "cells": [
+            "`CONTAINER_WORKLOAD`",
+            "Container, image, Kubernetes object or serverless function.",
+            "2"
+          ]
+        },
+        {
+          "key": "system_category_ov:CLOUD_RESOURCE",
+          "cells": [
+            "`CLOUD_RESOURCE`",
+            "Compute, storage, database, network or serverless cloud resource.",
+            "3"
+          ]
+        },
+        {
+          "key": "system_category_ov:WEB_APPLICATION",
+          "cells": [
+            "`WEB_APPLICATION`",
+            "Website, web API or web service reachable over HTTP(S).",
+            "4"
+          ]
+        },
+        {
+          "key": "system_category_ov:NETWORK_DEVICE",
+          "cells": [
+            "`NETWORK_DEVICE`",
+            "Router, switch, firewall, load balancer or other network gear.",
+            "5"
+          ]
+        },
+        {
+          "key": "system_category_ov:MOBILE_DEVICE",
+          "cells": [
+            "`MOBILE_DEVICE`",
+            "Smartphone or tablet (iOS / Android).",
+            "6"
+          ]
+        },
+        {
+          "key": "system_category_ov:IOT_OT_DEVICE",
+          "cells": [
+            "`IOT_OT_DEVICE`",
+            "IoT sensor, camera, PLC, SCADA or other operational technology.",
+            "7"
+          ]
+        },
+        {
+          "key": "system_category_ov:IDENTITY",
+          "cells": [
+            "`IDENTITY`",
+            "User, service account, group or role.",
+            "8"
+          ]
+        },
+        {
+          "key": "system_category_ov:SAAS_APPLICATION",
+          "cells": [
+            "`SAAS_APPLICATION`",
+            "Software-as-a-Service application or tenant.",
+            "9"
+          ]
+        },
+        {
+          "key": "system_category_ov:AI_TARGET",
+          "cells": [
+            "`AI_TARGET`",
+            "LLM endpoint, AI agent, MCP server or RAG pipeline.",
+            "10"
+          ]
+        },
+        {
+          "key": "system_category_ov:SECURITY_PLATFORM",
+          "cells": [
+            "`SECURITY_PLATFORM`",
+            "Defensive security platform: EDR, XDR, SIEM, SOAR, NDR or similar.",
+            "11"
+          ]
+        },
+        {
+          "key": "system_category_ov:GENERIC_ASSET",
+          "cells": [
+            "`GENERIC_ASSET`",
+            "Anything that does not fit another category yet.",
+            "12"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "system_criticality_ov",
+      "text": "The business criticality of an asset, on the OpenAEV scale. Used in System, field `x_opencti_criticality` (one value). **Closed**: only the values below are accepted.",
+      "columns": [
+        "Value",
+        "Description",
+        "Order"
+      ],
+      "rows": [
+        {
+          "key": "system_criticality_ov:VERY_HIGH",
+          "cells": [
+            "`VERY_HIGH`",
+            "Very high business criticality",
+            "1"
+          ]
+        },
+        {
+          "key": "system_criticality_ov:HIGH",
+          "cells": [
+            "`HIGH`",
+            "High business criticality",
+            "2"
+          ]
+        },
+        {
+          "key": "system_criticality_ov:MEDIUM",
+          "cells": [
+            "`MEDIUM`",
+            "Medium business criticality",
+            "3"
+          ]
+        },
+        {
+          "key": "system_criticality_ov:LOW",
+          "cells": [
+            "`LOW`",
+            "Low business criticality",
+            "4"
+          ]
+        },
+        {
+          "key": "system_criticality_ov:UNKNOWN",
+          "cells": [
+            "`UNKNOWN`",
+            "Business criticality not assessed",
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "system_environment_ov",
+      "text": "The environment an asset runs in. Used in System, field `x_opencti_environment` (one value).",
+      "columns": [
+        "Value",
+        "Description",
+        "Order"
+      ],
+      "rows": [
+        {
+          "key": "system_environment_ov:production",
+          "cells": [
+            "`production`",
+            "Live environment serving real users and data",
+            "1"
+          ]
+        },
+        {
+          "key": "system_environment_ov:staging",
+          "cells": [
+            "`staging`",
+            "Pre-production copy of production, used to validate releases",
+            "2"
+          ]
+        },
+        {
+          "key": "system_environment_ov:development",
+          "cells": [
+            "`development`",
+            "Environment where the system is built and changed",
+            "3"
+          ]
+        },
+        {
+          "key": "system_environment_ov:test",
+          "cells": [
+            "`test`",
+            "Environment dedicated to testing, with test data",
+            "4"
+          ]
+        },
+        {
+          "key": "system_environment_ov:other",
+          "cells": [
+            "`other`",
+            "Any other environment (lab, training, disaster recovery)",
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "system_internet_facing_ov",
+      "text": "Whether an asset is reachable from the internet. Used in System, field `x_opencti_internet_facing` (one value). **Closed**: only the values below are accepted.",
+      "columns": [
+        "Value",
+        "Description",
+        "Order"
+      ],
+      "rows": [
+        {
+          "key": "system_internet_facing_ov:yes",
+          "cells": [
+            "`yes`",
+            "Reachable from the internet",
+            "1"
+          ]
+        },
+        {
+          "key": "system_internet_facing_ov:no",
+          "cells": [
+            "`no`",
+            "Not reachable from the internet",
+            "2"
+          ]
+        },
+        {
+          "key": "system_internet_facing_ov:unknown",
+          "cells": [
+            "`unknown`",
+            "Exposure not assessed",
+            "3"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "system_platform_ov",
+      "text": "The operating system or platform of an asset (OpenAEV endpoint platforms). Used in System, field `x_opencti_platform` (one value).",
+      "columns": [
+        "Value",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "system_platform_ov:Android",
+          "cells": [
+            "`Android`",
+            "Android mobile operating system"
+          ]
+        },
+        {
+          "key": "system_platform_ov:Container",
+          "cells": [
+            "`Container`",
+            "Container runtime, no host operating system of its own"
+          ]
+        },
+        {
+          "key": "system_platform_ov:Generic",
+          "cells": [
+            "`Generic`",
+            "Platform not tied to one operating system"
+          ]
+        },
+        {
+          "key": "system_platform_ov:Internal",
+          "cells": [
+            "`Internal`",
+            "Internal platform of the security tooling itself"
+          ]
+        },
+        {
+          "key": "system_platform_ov:iOS",
+          "cells": [
+            "`iOS`",
+            "Apple iOS or iPadOS mobile operating system"
+          ]
+        },
+        {
+          "key": "system_platform_ov:Linux",
+          "cells": [
+            "`Linux`",
+            "Linux operating system"
+          ]
+        },
+        {
+          "key": "system_platform_ov:MacOS",
+          "cells": [
+            "`MacOS`",
+            "Apple macOS operating system"
+          ]
+        },
+        {
+          "key": "system_platform_ov:Service",
+          "cells": [
+            "`Service`",
+            "Agentless service endpoint, reached over the network only"
+          ]
+        },
+        {
+          "key": "system_platform_ov:Unknown",
+          "cells": [
+            "`Unknown`",
+            "Platform not identified"
+          ]
+        },
+        {
+          "key": "system_platform_ov:Windows",
+          "cells": [
+            "`Windows`",
+            "Microsoft Windows operating system"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "system_subcategory_ov",
+      "text": "The subcategory of an asset (level 2 of the OpenAEV asset taxonomy); the description of each value names its category. Used in System, field `x_opencti_system_subcategory` (one value).",
+      "columns": [
+        "Value",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "system_subcategory_ov:AI_AGENT",
+          "cells": [
+            "`AI_AGENT`",
+            "AI agent that acts with tools (category: AI\\_TARGET)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:AI_GATEWAY",
+          "cells": [
+            "`AI_GATEWAY`",
+            "Gateway that controls access to AI models (category: SECURITY\\_PLATFORM)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:AI_ML_SERVICE",
+          "cells": [
+            "`AI_ML_SERVICE`",
+            "Cloud AI or machine learning service (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:ANALYTICS_DATA",
+          "cells": [
+            "`ANALYTICS_DATA`",
+            "Cloud data warehouse, data lake or analytics service (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:BUILDING_MGMT",
+          "cells": [
+            "`BUILDING_MGMT`",
+            "Building management system: access control, HVAC or lighting (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:CLOUD_OTHER",
+          "cells": [
+            "`CLOUD_OTHER`",
+            "Any other cloud resource (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:COMPUTE",
+          "cells": [
+            "`COMPUTE`",
+            "Cloud compute instance or scale set (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:CONTAINER",
+          "cells": [
+            "`CONTAINER`",
+            "Running container instance (category: CONTAINER\\_WORKLOAD)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:CONTAINER_IMAGE",
+          "cells": [
+            "`CONTAINER_IMAGE`",
+            "Container image stored in a registry (category: CONTAINER\\_WORKLOAD)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:CONTAINER_REGISTRY",
+          "cells": [
+            "`CONTAINER_REGISTRY`",
+            "Cloud registry that stores container images (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:DATABASE",
+          "cells": [
+            "`DATABASE`",
+            "Managed cloud database (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:DHCP_SERVER",
+          "cells": [
+            "`DHCP_SERVER`",
+            "Server that hands out network addresses (category: NETWORK\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:DNS_SERVER",
+          "cells": [
+            "`DNS_SERVER`",
+            "Server that resolves domain names (category: NETWORK\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:EDR",
+          "cells": [
+            "`EDR`",
+            "Endpoint detection and response (category: SECURITY\\_PLATFORM)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:EMAIL_SECURITY",
+          "cells": [
+            "`EMAIL_SECURITY`",
+            "Email security gateway or filter (category: SECURITY\\_PLATFORM)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:FIREWALL",
+          "cells": [
+            "`FIREWALL`",
+            "Device that filters network traffic (category: NETWORK\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:GATEWAY",
+          "cells": [
+            "`GATEWAY`",
+            "Gateway that links IoT or OT devices to the network (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:GRAPHQL_API",
+          "cells": [
+            "`GRAPHQL_API`",
+            "GraphQL API endpoint (category: WEB\\_APPLICATION)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:GROUP",
+          "cells": [
+            "`GROUP`",
+            "Group of accounts sharing permissions (category: IDENTITY)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:HMI",
+          "cells": [
+            "`HMI`",
+            "Human machine interface of an industrial process (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:HYPERVISOR",
+          "cells": [
+            "`HYPERVISOR`",
+            "Host that runs virtual machines (category: HOST)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:IAC_TEMPLATE",
+          "cells": [
+            "`IAC_TEMPLATE`",
+            "Infrastructure as code template or stack (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:IAM_PRINCIPAL",
+          "cells": [
+            "`IAM_PRINCIPAL`",
+            "Cloud identity: user, role or service principal (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:IOT_SENSOR",
+          "cells": [
+            "`IOT_SENSOR`",
+            "Connected sensor that reports measurements (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:IP_CAMERA",
+          "cells": [
+            "`IP_CAMERA`",
+            "Network-connected video camera (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:ISPM",
+          "cells": [
+            "`ISPM`",
+            "Identity security posture management (category: SECURITY\\_PLATFORM)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:KUBERNETES",
+          "cells": [
+            "`KUBERNETES`",
+            "Managed cloud Kubernetes service (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:KUBERNETES_CLUSTER",
+          "cells": [
+            "`KUBERNETES_CLUSTER`",
+            "Kubernetes cluster as a whole (category: CONTAINER\\_WORKLOAD)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:KUBERNETES_NODE",
+          "cells": [
+            "`KUBERNETES_NODE`",
+            "Machine that runs pods in a Kubernetes cluster (category: CONTAINER\\_WORKLOAD)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:KUBERNETES_POD",
+          "cells": [
+            "`KUBERNETES_POD`",
+            "Kubernetes pod, one or more containers scheduled together (category: CONTAINER\\_WORKLOAD)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:LAPTOP",
+          "cells": [
+            "`LAPTOP`",
+            "Portable computer used by a person (category: HOST)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:LLM_FIREWALL",
+          "cells": [
+            "`LLM_FIREWALL`",
+            "Firewall that filters prompts and answers of language models (category: SECURITY\\_PLATFORM)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:LLM_MODEL",
+          "cells": [
+            "`LLM_MODEL`",
+            "Large language model endpoint (category: AI\\_TARGET)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:LOAD_BALANCER",
+          "cells": [
+            "`LOAD_BALANCER`",
+            "Device that spreads traffic across servers (category: NETWORK\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:MAINFRAME",
+          "cells": [
+            "`MAINFRAME`",
+            "Large central computer for critical batch and transaction work (category: HOST)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:MCP_SERVER",
+          "cells": [
+            "`MCP_SERVER`",
+            "Model Context Protocol server exposing tools to AI agents (category: AI\\_TARGET)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:MEDIA_DEVICE",
+          "cells": [
+            "`MEDIA_DEVICE`",
+            "Connected TV, display or conference device (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:MEDICAL_DEVICE",
+          "cells": [
+            "`MEDICAL_DEVICE`",
+            "Connected medical equipment (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:MESSAGING_QUEUE",
+          "cells": [
+            "`MESSAGING_QUEUE`",
+            "Cloud queue, topic or event bus (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:MICROSERVICE",
+          "cells": [
+            "`MICROSERVICE`",
+            "Small service that exposes one capability over HTTP (category: WEB\\_APPLICATION)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:NDR",
+          "cells": [
+            "`NDR`",
+            "Network detection and response (category: SECURITY\\_PLATFORM)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:NETWORK_OTHER",
+          "cells": [
+            "`NETWORK_OTHER`",
+            "Any other network device (category: NETWORK\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:NETWORKING",
+          "cells": [
+            "`NETWORKING`",
+            "Cloud network resource: VPC, subnet, gateway or security group (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:NON_HUMAN_IDENTITY",
+          "cells": [
+            "`NON_HUMAN_IDENTITY`",
+            "Machine identity: API key, token, certificate or workload identity (category: IDENTITY)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:PLC",
+          "cells": [
+            "`PLC`",
+            "Programmable logic controller driving an industrial process (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:POINT_OF_SALE",
+          "cells": [
+            "`POINT_OF_SALE`",
+            "Payment terminal or cash register (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:PRINTER_PERIPHERAL",
+          "cells": [
+            "`PRINTER_PERIPHERAL`",
+            "Printer, scanner or other network peripheral (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:PROXY",
+          "cells": [
+            "`PROXY`",
+            "Forward or reverse proxy (category: NETWORK\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:RAG_PIPELINE",
+          "cells": [
+            "`RAG_PIPELINE`",
+            "Retrieval augmented generation pipeline (category: AI\\_TARGET)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:ROLE",
+          "cells": [
+            "`ROLE`",
+            "Set of permissions assigned to accounts (category: IDENTITY)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:ROUTER",
+          "cells": [
+            "`ROUTER`",
+            "Device that routes traffic between networks (category: NETWORK\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:RTU",
+          "cells": [
+            "`RTU`",
+            "Remote terminal unit collecting field data (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SAAS_APP",
+          "cells": [
+            "`SAAS_APP`",
+            "Software-as-a-Service application (category: SAAS\\_APPLICATION)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SAAS_TENANT",
+          "cells": [
+            "`SAAS_TENANT`",
+            "Tenant of a SaaS application owned by the organization (category: SAAS\\_APPLICATION)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SAN_NAS",
+          "cells": [
+            "`SAN_NAS`",
+            "Network storage array or NAS (category: NETWORK\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SCADA_HISTORIAN",
+          "cells": [
+            "`SCADA_HISTORIAN`",
+            "SCADA server or historian storing process data (category: IOT\\_OT\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SECRETS_KEY_MGMT",
+          "cells": [
+            "`SECRETS_KEY_MGMT`",
+            "Cloud vault for secrets, keys or certificates (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SERVER",
+          "cells": [
+            "`SERVER`",
+            "Physical or virtual server running services (category: HOST)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SERVERLESS",
+          "cells": [
+            "`SERVERLESS`",
+            "Cloud serverless service or function app (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SERVERLESS_FUNCTION",
+          "cells": [
+            "`SERVERLESS_FUNCTION`",
+            "Function run on demand without a managed server (category: CONTAINER\\_WORKLOAD)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SERVICE_ACCOUNT",
+          "cells": [
+            "`SERVICE_ACCOUNT`",
+            "Account used by an application or a script (category: IDENTITY)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SHARED_MAILBOX",
+          "cells": [
+            "`SHARED_MAILBOX`",
+            "Mailbox used by several people (category: IDENTITY)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SIEM",
+          "cells": [
+            "`SIEM`",
+            "Security information and event management (category: SECURITY\\_PLATFORM)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SINGLE_PAGE_APP",
+          "cells": [
+            "`SINGLE_PAGE_APP`",
+            "Browser application rendered on the client side (category: WEB\\_APPLICATION)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SMARTPHONE",
+          "cells": [
+            "`SMARTPHONE`",
+            "Mobile phone (category: MOBILE\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SOAR",
+          "cells": [
+            "`SOAR`",
+            "Security orchestration, automation and response (category: SECURITY\\_PLATFORM)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:STORAGE",
+          "cells": [
+            "`STORAGE`",
+            "Cloud object, block or file storage (category: CLOUD\\_RESOURCE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:SWITCH",
+          "cells": [
+            "`SWITCH`",
+            "Device that connects hosts on a local network (category: NETWORK\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:TABLET",
+          "cells": [
+            "`TABLET`",
+            "Tablet computer (category: MOBILE\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:THIN_CLIENT",
+          "cells": [
+            "`THIN_CLIENT`",
+            "Light terminal that runs its sessions on a remote server (category: HOST)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:USER_ACCOUNT",
+          "cells": [
+            "`USER_ACCOUNT`",
+            "Account of a person (category: IDENTITY)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:VIRTUAL_MACHINE",
+          "cells": [
+            "`VIRTUAL_MACHINE`",
+            "Guest machine running on a hypervisor (category: HOST)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:VPN_GATEWAY",
+          "cells": [
+            "`VPN_GATEWAY`",
+            "Gateway that terminates VPN connections (category: NETWORK\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:VULNERABILITY_SCANNER",
+          "cells": [
+            "`VULNERABILITY_SCANNER`",
+            "Scanner that finds vulnerabilities (category: SECURITY\\_PLATFORM)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:WEB_API",
+          "cells": [
+            "`WEB_API`",
+            "HTTP API, REST or similar (category: WEB\\_APPLICATION)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:WEB_SERVICE",
+          "cells": [
+            "`WEB_SERVICE`",
+            "Web service, SOAP or similar (category: WEB\\_APPLICATION)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:WEBSITE",
+          "cells": [
+            "`WEBSITE`",
+            "Website served to browsers (category: WEB\\_APPLICATION)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:WIRELESS_AP",
+          "cells": [
+            "`WIRELESS_AP`",
+            "Wireless access point (category: NETWORK\\_DEVICE)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:WORKSTATION",
+          "cells": [
+            "`WORKSTATION`",
+            "Desktop computer used by a person (category: HOST)"
+          ]
+        },
+        {
+          "key": "system_subcategory_ov:XDR",
+          "cells": [
+            "`XDR`",
+            "Extended detection and response (category: SECURITY\\_PLATFORM)"
           ]
         }
       ]

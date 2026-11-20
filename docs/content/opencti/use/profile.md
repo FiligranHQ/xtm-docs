@@ -97,6 +97,12 @@ The news of the XTM Hub library has its own page: see [Follow what XTM Hub publi
 3. Enter it again in **Confirmation**, then click **Update**. The message **The password has been updated** confirms the change.
 :::
 
+:::only{opencti=">=7.261117"}
+Your administrator may keep you from reusing your recent passwords. The rules above the field then include **Must be different from your current password**, or **Must be different from your last {count} passwords** with the number they chose. A password you used recently is refused with **This password has already been used recently. Please choose a different one.** under **New password**: the new password and its confirmation are cleared, your current password stays, and you type another one.
+
+While this rule is on, you have a few attempts in a short time, the successful ones included: after that, OpenCTI says **Too many password change attempts. Please try again in a few minutes.** Wait, then try again. [Stop users from reusing a password](/opencti/administer/authentications/#stop-users-from-reusing-a-password) explains the rule and its limits.
+:::
+
 Accounts that log in through single sign-on have no password section: change your password with your identity provider.
 
 ## Turn on two-factor authentication

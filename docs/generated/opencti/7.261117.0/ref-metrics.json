@@ -1,8 +1,8 @@
 {
   "name": "metrics",
-  "version": "7.261109.0",
-  "source": "OpenCTI-Platform/opencti@0c08259 (opencti-platform/opencti-graphql/src/config/tracing.ts, opencti-platform/opencti-graphql/src/telemetry/TelemetryMeterManager.ts, opencti-platform/opencti-graphql/src/telemetry/platformHealthMetrics.ts)",
-  "intro": "The 14 OpenTelemetry metrics OpenCTI 7.261109.0 exposes to monitor a deployment, with the attributes each data point carries. Turn them on and collect them as [Metrics](/deploy/operate/metrics/) explains.",
+  "version": "7.261117.0",
+  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/src/config/tracing.ts, opencti-platform/opencti-graphql/src/telemetry/TelemetryMeterManager.ts, opencti-platform/opencti-graphql/src/telemetry/platformHealthMetrics.ts)",
+  "intro": "The 14 OpenTelemetry metrics OpenCTI 7.261117.0 exposes to monitor a deployment, with the attributes each data point carries. Turn them on and collect them as [Metrics](/deploy/operate/metrics/) explains.",
   "filter": "Filter metrics and attributes",
   "sections": [
     {
@@ -830,12 +830,32 @@
           ]
         },
         {
+          "key": "usage:opencti_request_access_approved_count",
+          "cells": [
+            "`opencti_request_access_approved_count`",
+            "Gauge",
+            "`count`",
+            "Number of access requests approved",
+            "None"
+          ]
+        },
+        {
           "key": "usage:opencti_request_access_creation_count",
           "cells": [
             "`opencti_request_access_creation_count`",
             "Gauge",
             "`count`",
             "Number of RFI of request access type that are created",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_request_access_declined_count",
+          "cells": [
+            "`opencti_request_access_declined_count`",
+            "Gauge",
+            "`count`",
+            "Number of access requests declined",
             "None"
           ]
         },
@@ -1046,6 +1066,26 @@
             "Gauge",
             "`count`",
             "Number of workflow definitions published",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_workflow_request_access_migration_count",
+          "cells": [
+            "`opencti_workflow_request_access_migration_count`",
+            "Gauge",
+            "`count`",
+            "Number of request-access workflow migrations",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_workflow_request_access_publish_count",
+          "cells": [
+            "`opencti_workflow_request_access_publish_count`",
+            "Gauge",
+            "`count`",
+            "Number of request-access workflow definitions published",
             "None"
           ]
         },

@@ -38,6 +38,10 @@ Triggers only alert: they never change data. To act on events, use a [playbook](
 - To create triggers for other users, groups or organizations, your role needs the **Manage credentials** capability, or you must be an administrator of the organization.
 - To deliver by email or webhook, a notifier must exist. Two are built in: **User interface** and **Default mailer**. Administrators add others in :menu[Settings > Customization > Notifiers]; see [Notifiers](/opencti/configure/notifiers/).
 
+:::only{opencti=">=7.261117"}
+The **Notifiers** field also lists a third built-in notifier, **Ingestion health default mailer**. Its email reports the health of ingestion sources, for the alerts administrators receive through [activity triggers](/opencti/configure/activity/triggers/): for a trigger on knowledge, choose **Default mailer**.
+:::
+
 ## Open your triggers and alerts
 
 :::only{opencti=">=7.261030"}

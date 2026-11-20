@@ -28,6 +28,10 @@ Write down what the reader must learn in ten seconds, then give each answer its 
 
 Five to eight widgets stay readable on a laptop and on a wall screen. Put the most important answer at the top left, where the eye starts.
 
+:::only{opencti=">=7.261117"}
+When the question is about each value of a field, such as "how many reports of each type do we publish every month?", one chart answers it: break it down by that field, as in [Follow each value of a field over time](/opencti/use/dashboards/widgets/#follow-each-value-of-a-field-over-time). A new value gets its own series without any change to the dashboard.
+:::
+
 ## Before you start
 
 - Your role has **Access dashboards** to open dashboards, **Create / Update dashboards** to create and change them, and **Delete dashboards** to delete them. **Manage public dashboards** lets you publish one to people without an account.

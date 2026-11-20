@@ -53,6 +53,12 @@ Managers are background components inside the platform. Each one does one job: a
 
 Each manager has an `enabled` key in the configuration, and almost all are on by default. For example, `rule_engine:enabled`, or the environment variable `RULE_ENGINE__ENABLED`, turns the rules engine off on the platform that reads it. Intervals are configuration keys too, such as `expiration_scheduler:interval`, in milliseconds. The [manager reference](/reference/opencti/managers/) lists every manager of your version with how it runs, its default and its keys. The keys are also in the [Engines, Schedules and Managers](/reference/opencti/configuration/#engines-schedules-and-managers) section of the configuration reference. To see which managers a running platform has turned on, open the [managers list](/opencti/configure/parameters/#check-dependencies-and-managers) of the platform parameters.
 
+:::only{opencti=">=7.261117"}
+### The ingestion health manager
+
+The ingestion health manager checks, every minute, the connectors, feeds and synchronizers that are running. It looks at the user each one runs as (missing, inactive, not a service account, lacking a capability), at the heartbeat and the errors of connectors, and at the runs of feeds and synchronizers that fail or that their source refuses. Their health shows on their screens. When a health turns degraded, critical or recovered, the manager records an `ingestion_health` event in the activity log. It runs by default: `ingestion_health_manager:enabled` (`INGESTION_HEALTH_MANAGER__ENABLED`) turns it off, and `ingestion_health_manager:interval` sets its period, in milliseconds (60000 by default).
+:::
+
 :::note[Turn a manager off on every platform]
 In a cluster, a manager keeps running as long as one platform has it on. To stop a manager, turn it off in the configuration of every platform.
 :::
@@ -111,6 +117,10 @@ When data arrives slower than expected, follow the path:
 | Workers are busy but writes are slow | The throughput of Elasticsearch | Check the search engine's own monitoring and [Sizing](/deploy/plan/sizing/) |
 | A stream connector or a remote platform misses events | It fell further behind than the trimmed live stream | Raise `redis:trimming`, or find why the consumer is slow |
 | A connector has not run for a while | The connector stopped, or its user lost a right | Its status in [Connectors](/opencti/use/ingest/connectors/#follow-what-connectors-import), then its logs |
+
+:::only{opencti=">=7.261117"}
+Before reading logs, look at the health the [ingestion health manager](#the-ingestion-health-manager) gives each connector, feed and synchronizer: it names what fails, such as a user that is no longer active or a missing heartbeat.
+:::
 
 The messages waiting in each connector's queue show in [Connectors](/opencti/use/ingest/connectors/#follow-what-connectors-import). The [observability metrics](/deploy/operate/metrics/) of the platform show each step, and the [metrics reference](/reference/opencti/metrics/) lists them.
 

@@ -1,6 +1,6 @@
 {
-  "version": "7.261109.0",
-  "source": "OpenCTI-Platform/opencti@0c08259",
+  "version": "7.261117.0",
+  "source": "OpenCTI-Platform/opencti@1b89a14",
   "themes": [
     "Basic parameters",
     "Network and security",
@@ -1508,6 +1508,32 @@
       "description": "Identifier of this node in a cluster, used to register the node and to synchronize caches; a random UUID is generated at each start when empty. Set it to keep the same identity across restarts."
     },
     {
+      "key": "app:password_change:max_attempts",
+      "env": "APP__PASSWORD_CHANGE__MAX_ATTEMPTS",
+      "type": "number",
+      "declared": true,
+      "read": true,
+      "files": [
+        "database/redis.ts"
+      ],
+      "default": 5,
+      "theme": "Network and security",
+      "description": "Number of password changes one submitter may attempt on one local account within `app:password_change:window_seconds` (default 5). Counted only while **Number of recent passwords that cannot be reused** is above 0, for changes made from the profile, by an administrator, at a forced change and through a forgotten password; a success counts too. Further attempts get \"Too many password change attempts. Please try again in a few minutes.\" A positive integer; any other value falls back to the default."
+    },
+    {
+      "key": "app:password_change:window_seconds",
+      "env": "APP__PASSWORD_CHANGE__WINDOW_SECONDS",
+      "type": "number",
+      "declared": true,
+      "read": true,
+      "files": [
+        "database/redis.ts"
+      ],
+      "default": 900,
+      "theme": "Network and security",
+      "description": "Length of the password change limit window, in seconds (default 900, 15 minutes). The window starts with the first attempt and a successful change does not reset it. A positive integer; any other value falls back to the default."
+    },
+    {
       "key": "app:performance_logger",
       "env": "APP__PERFORMANCE_LOGGER",
       "type": "boolean",
@@ -1725,6 +1751,19 @@
       "default": "shared",
       "theme": "Basic parameters",
       "description": "Where user sessions are stored: `shared` stores them in Redis, shared by all the nodes; any other value keeps them in the memory of each node, so a user stays connected only to the node that opened the session."
+    },
+    {
+      "key": "app:session_presence:grace_period",
+      "env": "APP__SESSION_PRESENCE__GRACE_PERIOD",
+      "type": "number",
+      "declared": true,
+      "read": true,
+      "files": [
+        "modules/session/session-presence-domain.ts"
+      ],
+      "default": 30000,
+      "theme": "Network and security",
+      "description": "Time, in milliseconds, before a session is logged out once its last browser tab is closed (default 30000), when the platform logs out such sessions."
     },
     {
       "key": "app:session_timeout",
@@ -3104,7 +3143,7 @@
       ],
       "default": true,
       "theme": "Engines, Schedules and Managers",
-      "description": "Enable/disable the ingestion health manager, which evaluates the health of connectors, feeds (RSS, CSV, JSON, TAXII) and synchronizers and records an activity event when it changes. Read only when the `INGESTION_HEALTH` feature flag is enabled."
+      "description": "Enable/disable the ingestion health manager, which evaluates the health of connectors, feeds (RSS, CSV, JSON, TAXII) and synchronizers and records an activity event when it changes. Until 7.261109, read only when the `INGESTION_HEALTH` feature flag is enabled; from 7.261117 the manager runs by default."
     },
     {
       "key": "ingestion_health_manager:interval",
@@ -3789,7 +3828,7 @@
         "manager/playbookManager/playbookManagerUtils.ts"
       ],
       "theme": "Engines, Schedules and Managers",
-      "description": "List of playbook ids for which the playbook manager logs, at info level, each event it processes and each step it runs. Set it to troubleshoot a playbook, then remove it."
+      "description": "List of playbook ids for which the playbook manager logs, at info level, each event it processes and each step it runs. From 7.261117, the entry `*` logs every playbook. Set it to troubleshoot a playbook, then remove it."
     },
     {
       "key": "playbook_manager:enabled",

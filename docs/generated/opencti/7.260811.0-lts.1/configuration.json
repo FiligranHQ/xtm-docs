@@ -3410,7 +3410,7 @@
         "manager/playbookManager/playbookManagerUtils.ts"
       ],
       "theme": "Engines, Schedules and Managers",
-      "description": "List of playbook ids for which the playbook manager logs, at info level, each event it processes and each step it runs. Set it to troubleshoot a playbook, then remove it."
+      "description": "List of playbook ids for which the playbook manager logs, at info level, each event it processes and each step it runs. From 7.261117, the entry `*` logs every playbook. Set it to troubleshoot a playbook, then remove it."
     },
     {
       "key": "playbook_manager:enabled",

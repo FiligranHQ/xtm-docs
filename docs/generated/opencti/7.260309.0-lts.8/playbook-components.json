@@ -425,7 +425,8 @@
       "notes": [
         "Add appends values, replace overwrites the whole set, remove deletes only the listed values.",
         "When an enrichment connector follows this step, its changes and yours are both kept in the final write.",
-        "From 7.261109, the Field list also offers the custom fields of the platform, by their label. Replace and remove work on every custom field; add only on a multiple selection list, option by option."
+        "From 7.261109, the Field list also offers the custom fields of the platform, by their label. Replace and remove work on every custom field; add only on a multiple selection list, option by option.",
+        "From 7.261117, the Field list also offers Report types, with add, replace and remove. Its values come from the report types vocabulary, and only reports in scope are changed."
       ],
       "requires": [],
       "see_also": [],

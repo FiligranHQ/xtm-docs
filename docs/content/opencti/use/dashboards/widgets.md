@@ -74,6 +74,10 @@ As a rule of thumb:
 - to compare up to five data sets, use **Line**, **Area**, **Vertical Bar** or **Heatmap**. Every data set must count the same thing: in **Knowledge graph**, add relationship data sets, not entity data sets;
 - to split one data set into parts, use **Horizontal Bar** with a second data set, as in [Break down a chart](#break-down-a-chart).
 
+:::only{opencti=">=7.261117"}
+To follow each value of a field over time, such as the reports of each type month by month, break a single data set down by that field instead of adding one data set per value, as in [Follow each value of a field over time](#follow-each-value-of-a-field-over-time).
+:::
+
 ## Filter the knowledge graph
 
 A **Knowledge graph** widget counts relationships, and runs its filters in two stages:
@@ -134,6 +138,56 @@ This example ranks the countries most targeted by malware, and splits each count
 :::
 
 To rank malware instead, with their top targets in each bar, add a relationship data set with the **Relationships** button in step 3, keep the same relationship filters, and turn on **Display the source** for the first data set.
+
+::::only{opencti=">=7.261117"}
+## Follow each value of a field over time
+
+A **Vertical Bar**, **Line**, **Area** or **Heatmap** widget can draw one series per value of a field instead of one series per data set: the reports of each type month by month, the reports of each analyst week by week. The widget keeps the field, not its values, so a new label or a new analyst shows up on the chart without any change to the widget. A breakdown works in the three perspectives, in dashboards and in [custom views](/opencti/use/dashboards/custom-views/), and a [public dashboard](/opencti/use/dashboards/share/) keeps it.
+
+:::steps
+
+1. Create the widget with one of these visualizations and give it a single data set. In **Filters**, a message says the data set can be broken down in the **Parameters** step. A breakdown uses one data set: once it is set, the buttons that add a data set are disabled, and a widget with several data sets has **Break down by** disabled. In **Activity & history**, a **Line** or an **Area** that counts **Distinct** values cannot be broken down either.
+2. In **Parameters**, choose the field in **Break down by**; **None** keeps one series per data set. The fields depend on the perspective and on the types the filters select:
+
+   | Perspective | Fields |
+   | --- | --- |
+   | **Entities** | **Author**, **Creators**, **Label** and **Markings**; **Assignees**, **Participants** and vocabulary fields, such as **Report types**, on the types that have them; **Entity type** when the filters select several types, an abstract type or none |
+   | **Knowledge graph** | **Source type**, **Target type**, the fields of the relationships, such as **Author** or **Label**, and **Relationship type** when the filters select several relationship types or none |
+   | **Activity & history** | **Event type**, **Event scope**, **User**, **Group**, **Organization**, **Type** and **Type of related entity** |
+
+   Free text, dates, numbers, the fields that point to other entities, such as the objects of a report, and [custom fields](/opencti/configure/taxonomies/#custom-fields) are not offered.
+3. Choose the **Maximum number of series**, 5, 10, 20 or 50, and the **Order**: **Highest values**, the default, keeps the values that count the most over the whole period, **Lowest values** those that count the least.
+4. Turn on **Include Other** to add an **Other** series, which counts the objects that have none of the displayed values, including those without a value.
+
+   ::screenshot{id=opencti-dashboards-widgets-breakdown-parameters alt="The Parameters step of a widget on reports, with Break down by set to Report types, Maximum number of series set to 5, Order set to Highest values and Include Other turned on."}
+5. Click **Create**, or **Update** for a widget you edit.
+
+:::
+
+Read a broken-down chart with these rules in mind:
+
+- The values are ranked over the whole period, so the series stay the same from the first point of the chart to the last.
+- An object counts in the series of each of its values: a report with two labels counts twice, so the series do not add up to a number of reports.
+- The breakdown uses the current value of the field, at the date of the **Date attribute**: a report reassigned to another analyst moves to the series of that analyst for the whole period.
+- A filter on the same field selects the objects, not the series: with **Label** = `ransomware`, the other labels of these reports show too.
+- A value you are not allowed to see shows as **Restricted**.
+
+When more values exist than the series shown, a warning icon next to the title says so, for example **Only the 5 highest values are displayed.** When the period holds more points than the width of the widget can draw, the chart counts by a coarser interval and the warning names it. A breakdown with far too many points, such as 50 series day by day over three years, shows **This breakdown has too many points for the selected period.** instead of the chart: shorten the period, choose a coarser interval or show fewer series. Without a start date on the dashboard, a breakdown by **Day** covers the last 30 days, and the other intervals the last 12 months.
+
+:::example[Reports per month by report type]
+The head of Example CERT wants to see what the team publishes each month: threat reports, malware analyses, advisories for the member hotel chains, incident reports. Instead of one data set per report type, one chart does it. Create a dashboard named `Reports by type`, set **Relative time** to **Last 6 months**, click **Create Widget** and enter:
+
+- **Visualization**: **Vertical Bar**
+- **Perspective**: **Entities**
+- **Filters**: **Entity type** = Report
+- **Parameters**: **Title** `Reports per month by type`, **Interval** **Month**, **Date attribute** `created (Functional date)`, **Break down by** **Report types**, **Maximum number of series** 5, **Order** **Highest values**, **Include Other** on, **Stacked** and **Display legend** on
+
+Each month shows one bar split by report type. `threat-report` is the largest series over the six months, the `malware` analyses of Velvet Loader, Harbor Stealer and HarborGate come in October and November, and January holds the incident reports on Grand Meridian Hotels. When the team writes its first report of a new type, the type gets its own series without any change to the widget.
+:::
+
+::screenshot{id=opencti-dashboards-widgets-breakdown alt="The Reports by type dashboard over the last six months: one stacked bar per month, split by report type, with threat-report the largest series over the period, malware standing out in October and November, and the legend naming each report type."}
+
+::::
 
 ## What's next
 

@@ -17,6 +17,10 @@ A notifier is the channel a notification goes through: the notification center o
 
 Two notifiers are built in and cannot be changed: **User interface**, which writes to the notification center, and **Default mailer**, which sends the standard OpenCTI email. Everything else is a custom notifier.
 
+:::only{opencti=">=7.261117"}
+A third built-in notifier, **Ingestion health default mailer**, sends ingestion health activity events to the recipient's email address. It cannot be changed either.
+:::
+
 ## Before you start
 
 - Your role has the **Manage customization** capability.
@@ -91,7 +95,15 @@ Templates use [EJS](https://ejs.co/), HTML or JSON with tags that insert data:
 
 Anything else is removed before rendering: a template cannot read other fields of the trigger, the user or the settings.
 
-The `message` of an update says who made it, for example ``[report] Velvet Harbor infrastructure moves to new hosting - `jdoe` adds `hotel-sector` in `Label` ``. A test sends samples: `instance` then holds only an `id`, and `notification` only `created`, so guard optional fields with `|| ''`.
+The `message` of an update says who made it, for example ``[report] Velvet Harbor infrastructure moves to new hosting - `jdoe` adds `hotel-sector` in `Label` ``.
+
+:::only{opencti="<7.261117"}
+A test sends samples: `instance` then holds only an `id`, and `notification` only `created`, so guard optional fields with `|| ''`.
+:::
+
+:::only{opencti=">=7.261117"}
+A test sends samples that exist nowhere in the platform. Each `instance` holds only `id`, `type`, `entity_type` and `name`: the report `[TEST] Sample report`, plus the malware `[TEST] Sample malware` in **Sample Digest**, or the synchronizer `[TEST] Sample synchronizer` in **Sample Activity Alert**. `notification` holds `created`, `trigger_type` and a `name`, such as `[TEST] Sample live trigger` or `[TEST] Sample digest trigger`. Guard the other fields with `|| ''`.
+:::
 
 :::only{opencti=">=7.261030"}
 Each `instance` of `data` also carries `objectMarking`: its markings, each with `definition_type`, `definition`, `x_opencti_color` and `x_opencti_order`, limited to the markings the recipient can see. Use it to print the TLP in the message: `<%= (data[0].instance.objectMarking || []).map(function(m) { return m.definition; }).join(', ') %>`.
@@ -111,6 +123,32 @@ Each `instance` of `data` also carries `objectMarking`: its markings, each with 
 ```
 
 In the Platform mailer and the title of the Simple mailer, `octi.markdownToHtml()` turns a Markdown text into HTML, for example a description: `<%- octi.markdownToHtml(data[0].instance.description) %>`.
+
+::::only{opencti=">=7.261117"}
+### Title variables
+
+The `title` of a Platform mailer, the subject of its email, also takes variables, shorter to write than EJS tags. When you pick **Platform mailer**, the form says so above the `title` field, with a **See the available variables** link, suggests `e.g. New alert: $notification.name` in the empty field, and reminds you under it that a missing value is left empty.
+
+- A variable starts with `$` and one of the variables of [the data a template receives](#the-data-a-template-receives): `notification`, `notification_content`, `content`, `data`, `user` or `platform_uri`. `.field` and `[index]` go further down: `$notification.name`, `$notification_content[0].title`, `$data[0].instance.name`.
+- A text, a number or a true or false value is inserted as it is. A list of such values is joined with commas, for example `$data[0].instance.labels`. `.length` gives the size of a list, for example `$data.length`, the number of events.
+- A path that leads nowhere, or to an object, gives an empty text: the email is sent anyway.
+- Any other `$`, such as `$settings` or a price, stays as written. Variables are read outside EJS tags only, and a title can mix both.
+- The subject is plain text: neither variables nor `<%= %>` escape HTML characters, so `&` stays `&`. Line breaks and runs of spaces become a single space.
+
+The Simple mailer's title takes EJS only.
+
+:::example[Name the trigger and the report in the email subject]
+The CTI lead of Example CERT receives the alerts of the trigger "New hotel-sector reports" by email, and wants to sort them in the mailbox without opening them. The administrator creates a Platform mailer with this `title`:
+
+```text
+[OpenCTI] $notification.name: $notification_content[0].title
+```
+
+When the report "Velvet Harbor infrastructure moves to new hosting" matches the trigger, the subject reads `[OpenCTI] New hotel-sector reports: Velvet Harbor infrastructure moves to new hosting`. **Test** with **Sample Notification** sends `[OpenCTI] [TEST] Sample live trigger: [TEST] Sample report`. For a daily digest, where the first entity says little, `[OpenCTI] $notification.name: $data.length events` counts the events instead.
+:::
+
+::screenshot{id=opencti-notifier-title-variables alt="The Create a notifier panel with the Platform mailer connector, its title field holding two variables, the See the available variables link above it and the EJS hint under the template."}
+::::
 
 ### A webhook body
 
@@ -153,7 +191,7 @@ The SOC of Example CERT works in a chat tool whose incoming webhook takes a JSON
 }
 ```
 
-The template loops over `data`, so it works for a live trigger, with one event, and for a digest, with many; the comma goes between events only, which keeps the JSON valid. Each `|| ''` covers a field that some events lack: the test samples carry only an identifier, so **Test** with **Sample Notification** or **Sample Digest** returns **OK** too. When an analyst labels the report "Velvet Harbor infrastructure moves to new hosting" with hotel-sector, the report starts to match the trigger, so the event reads as a creation, and the channel receives:
+The template loops over `data`, so it works for a live trigger, with one event, and for a digest, with many; the comma goes between events only, which keeps the JSON valid. Each `|| ''` covers a field that some events lack: the test samples carry no labels, so **Test** with **Sample Notification** or **Sample Digest** returns **OK** too. When an analyst labels the report "Velvet Harbor infrastructure moves to new hosting" with hotel-sector, the report starts to match the trigger, so the event reads as a creation, and the channel receives:
 
 ```json
 {

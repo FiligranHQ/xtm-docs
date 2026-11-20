@@ -1,8 +1,8 @@
 {
   "name": "feature-flags",
-  "version": "7.261109.0",
-  "source": "OpenCTI-Platform/opencti@0c08259 (opencti-platform/opencti-graphql/src/config/conf.js, opencti-platform/opencti-graphql/src/**/*.{ts,js,graphql}, opencti-platform/opencti-front/src/**/*.{ts,tsx,js,jsx})",
-  "intro": "The 11 feature flags of OpenCTI 7.261109.0: features still in development, hidden until the platform lists them in `app:enabled_dev_features` (see the [configuration reference](/reference/opencti/configuration/)). Reserved to development and not supported: a flagged feature can change or disappear in any release, so leave flags off in production; the guides describe the platform without them, and a feature is documented when a release removes its flag.",
+  "version": "7.261117.0",
+  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/src/config/conf.js, opencti-platform/opencti-graphql/src/**/*.{ts,js,graphql}, opencti-platform/opencti-front/src/**/*.{ts,tsx,js,jsx})",
+  "intro": "The 11 feature flags of OpenCTI 7.261117.0: features still in development, hidden until the platform lists them in `app:enabled_dev_features` (see the [configuration reference](/reference/opencti/configuration/)). Reserved to development and not supported: a flagged feature can change or disappear in any release, so leave flags off in production; the guides describe the platform without them, and a feature is documented when a release removes its flag.",
   "filter": "Filter flags, API fields and screens",
   "sections": [
     {
@@ -28,8 +28,8 @@
           "cells": [
             "`CONFIG_PRESET`",
             "Configuration presets, to export and import bundles of platform configuration, and the bootstrap wizard that offers one to the first administrator of a new platform.",
-            "Back end (6 files), front (3 files)",
-            "Queries `configPresetExportableItems`, `configPresetExportableTypes`, `configPresetImportPreview`, `configPresetImportRunning`, `configPresetImportSession`<br>Mutations `configPresetExport`, `configPresetImport`, `configPresetImportSessionBackToSelection`, `configPresetImportSessionClear`, `configPresetImportSessionSave`, `configPresetImportUpload`<br>API fields `bootstrap_wizard_skipped` of `MeUser`<br>Attributes `bootstrap_wizard_skipped`, `platform_bootstrap_status`<br>Configuration `app:bootstrap_wizard:enabled`<br>Parts of `ConfigPresetBootstrapWizard`, `Experience`, `useConfigPresetExportAccess`"
+            "Back end (6 files), front (5 files)",
+            "Queries `configPresetExportableItems`, `configPresetExportableTypes`, `configPresetImportPreview`, `configPresetImportRunning`, `configPresetImportSession`<br>Mutations `configPresetExport`, `configPresetImport`, `configPresetImportSessionBackToSelection`, `configPresetImportSessionClear`, `configPresetImportSessionSave`, `configPresetImportUpload`, `configPresetPartialImport`, `configPresetPartialImportPreview`<br>API fields `bootstrap_wizard_skipped` of `MeUser`<br>Attributes `bootstrap_wizard_skipped`, `platform_bootstrap_status`<br>Configuration `app:bootstrap_wizard:enabled`<br>Parts of `ConfigPresetBootstrapWizard`, `Experience`, `ThemeImporter`, `useConfigPresetExportAccess`, `useConfigPresetPartialImportAccess`"
           ]
         },
         {
@@ -37,8 +37,8 @@
           "cells": [
             "`DASHBOARD_VARIABLES`",
             "Variables in custom dashboards, whose values (from the URL, the viewer's last choice or their default) feed the filters of the widgets.",
-            "Back end (1 file), front (2 files)",
-            "Mutations `workspaceVariableDelete`, `workspaceVariableUpsert`<br>API fields `variables` of `Workspace`<br>Parts of `CustomDashboard`, `useDashboardVariables`"
+            "Back end (9 files), front (5 files)",
+            "Mutations `workspacePresetDelete`, `workspacePresetUpsert`, `workspaceVariableDelete`, `workspaceVariableUpsert`<br>API fields `default_dashboard_preset` (2 types), `currentUserDefaultPresetId` of `Workspace`, `presets` of `Workspace`, `variables` of `Workspace`<br>Attributes `default_dashboard_preset`<br>Parts of `CustomDashboard`, `DashboardPresetField`, `PublicDashboardCreationForm`, `useDashboardTimeRange`, `useDashboardVariables`"
           ]
         },
         {
@@ -73,8 +73,8 @@
           "cells": [
             "`ENTITIES_WORKFLOW`",
             "The extended workflow engine for every entity type (transitions, bypass, status cleanup); without it, only drafts use it and other types keep the classic status workflow.",
-            "Back end (7 files), front (8 files)",
-            "Queries `workflowMassTransitions`, `workflowStatuses`<br>Attributes `x_opencti_closing_reason`<br>Manager `workflowStatusCleanupManager` (`workflow_status_cleanup_manager:enabled`, `workflow_status_cleanup_manager:interval`, `workflow_status_cleanup_manager:lock_key`)<br>Parts of `StatusField`, `StixDomainObjectOverview`, `TransitionForm`, `WorkflowBypassStatus`, `WorkflowStatus`, `WorkflowTransitions`, `sub_types/Root`, `workflowFeatureFlag`"
+            "Back end (9 files), front (9 files)",
+            "Queries `workflowMassTransitions`, `workflowStatuses`<br>Attributes `x_opencti_closing_reason`<br>Manager `workflowStatusCleanupManager` (`workflow_status_cleanup_manager:enabled`, `workflow_status_cleanup_manager:interval`, `workflow_status_cleanup_manager:lock_key`)<br>Parts of `ProcessingStatusOverview`, `StatusField`, `StixDomainObjectOverview`, `TransitionForm`, `WorkflowBypassStatus`, `WorkflowStatus`, `WorkflowTransitions`, `sub_types/Root`, `workflowFeatureFlag`"
           ]
         },
         {
@@ -91,8 +91,8 @@
           "cells": [
             "`INGESTION_HEALTH`",
             "The ingestion health of connectors and feeds, computed by the ingestion health manager, with health alerts on deployed connectors in **Integrations** and a health email notifier.",
-            "Back end (13 files), front (8 files)",
-            "Queries `ingestionHealthSettings`<br>Mutations `ingestionHealthSettingsEdit`<br>API fields `ingestionHealth` (6 types)<br>Attributes `ingestion_health`, `ingestion_health_changes`, `ingestion_health_settings`<br>Manager `ingestionHealthManager` (`ingestion_health_manager:enabled`, `ingestion_health_manager:interval`, `ingestion_health_manager:lock_key`)<br>Parts of `Connector`, `ConnectorHealthAlerts`, `DeployedIntegrationCard`, `DeployedIntegrationLine`, `IngestionHealthChip`, `IntegrationsDeployed`, `IntegrationsHealthAlerts`, `Settings`"
+            "Back end (1 file), front (1 file)",
+            "Parts of `Settings`"
           ]
         },
         {
@@ -100,17 +100,17 @@
           "cells": [
             "`LOCAL_AUTH_LOCKOUT`",
             "Local authentication lockout policy feature flag",
-            "Back end (3 files), front (1 file)",
-            "Attributes `local_auth_lockout_admin_max_attempts`, `local_auth_lockout_duration`, `local_auth_lockout_enabled`, `local_auth_lockout_final_action`, `local_auth_lockout_max_attempts`, `local_auth_lockout_window`<br>Parts of `LocalStrategyForm`"
+            "Back end (5 files), front (1 file)",
+            "Attributes `local_auth_lockout_admin_max_attempts`, `local_auth_lockout_duration`, `local_auth_lockout_enabled`, `local_auth_lockout_final_action`, `local_auth_lockout_max_attempts`, `local_auth_lockout_window`, `lock_duration`, `lock_source`, `lock_type`, `max_attempts`<br>Parts of `LocalStrategyForm`"
           ]
         },
         {
-          "key": "TIME_SERIES_BREAKDOWN",
+          "key": "SESSION_PRESENCE",
           "cells": [
-            "`TIME_SERIES_BREAKDOWN`",
-            "Time series breakdown of the dashboard widgets, one series per value of a field",
-            "Back end (5 files), front (4 files)",
-            "Queries `publicStixCoreObjectsTimeSeriesBreakdown`, `publicStixRelationshipsTimeSeriesBreakdown`<br>Parts of `DashboardAuditsViz`, `DashboardEntitiesViz`, `DashboardRelationshipsViz`, `WidgetConfigContext`"
+            "`SESSION_PRESENCE`",
+            "Logout a session once its last browser tab is closed, until its Phase 2 (shared presence) and Phase 3 (hardening)",
+            "Back end (3 files), front (1 file)",
+            "Attributes `platform_session_presence_enabled`, `reason`<br>Parts of `AuthenticationGlobalSettings`"
           ]
         }
       ]

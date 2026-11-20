@@ -31,6 +31,11 @@ Once an indicator falls under an exclusion rule, it stays there: deleting the ru
 2. Click **Create Decay Exclusion Rule**. The **Create a decay exclusion rule** panel opens.
 3. Give the rule a **Name** and a **Description** that says why these indicators are excluded.
 4. Add at least one filter. The keys are **Creator**, **Author**, **Marking**, **Label**, **Main observable type**, **Indicator type** and **Pattern type**.
+
+   :::only{opencti=">=7.261117"}
+   The keys also offer the [custom fields](/opencti/configure/taxonomies/#custom-fields) added to the **Indicator** type, by their label.
+   :::
+
 5. Leave **Active** off for now and click **Create**. A rule is created inactive unless you turn on **Active**.
 6. Check the filters once more, then open the menu of the rule in the list and choose **Enable**.
 

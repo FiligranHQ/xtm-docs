@@ -115,6 +115,47 @@ Events also have a **Score**, from 0 to 100, set by your team or the source.
 
 An organization here is a piece of knowledge, such as a victim or a source. The organizations that segregate users and data on the platform are managed in the settings: see [Separate data between organizations](/opencti/administer/organizations/).
 
+::::only{opencti=">=7.261117"}
+## Rank systems by criticality and exposure
+
+A system can describe one of your own assets, such as the booking platform of a hotel chain: how much the business depends on it, whether it is reachable from the internet, and who owns it. When a threat targets several systems, these asset fields tell you which one to defend first. They use the asset categories and the criticality scale of OpenAEV assets.
+
+| Field | Values | What it tells you |
+| --- | --- | --- |
+| **Criticality** | **Very high**, **High**, **Medium**, **Low** or **Unknown** | How much the business depends on the system |
+| **Internet facing** | **Yes**, **No** or **Unknown** | Whether an attacker can reach it from the internet |
+| **Environment** | **Production**, **Staging**, **Development**, **Test** or **Other** | Whether it serves real users and data |
+| **System category**, **System subcategory** | A category, such as **Host** or **Web application**, then a kind of that category, such as **Server** or **Website** | What kind of asset it is |
+| **Platform** | An operating system, such as **Linux** or **Windows**, or a kind of platform, such as **Container** | What it runs on |
+| **Asset owner** | Free text | Who to contact about it |
+
+The values of **Criticality** and **Internet facing** are fixed; the other lists are vocabularies an administrator can extend in [Taxonomies](/opencti/configure/taxonomies/). Every field is optional.
+
+To fill them in:
+
+:::steps
+1. Open :menu[Entities > Systems], then the system, and click **Update**.
+2. Choose the **System category**, then the **System subcategory**: the list keeps the subcategories of the category you chose. Without a category, it lists them all, grouped by category.
+3. Set **Internet facing**, **Criticality**, **Environment** and **Platform**, and type the **Asset owner**. Each field is saved when you change it.
+:::
+
+The same fields are in **Create a system**.
+
+**Details**, on the system's **Overview**, shows **Criticality**, **Internet facing** and **Environment** first, each in the color of its value, then the **Type** (category and subcategory), the **Platform** and the **Asset owner**. A last line counts the asset fields not set and names them, so you know what to ask the system's owner.
+
+::screenshot{id=opencti-entities-system-details alt="The Details card of the Booking database server: Criticality Very high, Internet facing No and Environment Production, then its type Host, Server, its platform Linux and its asset owner Grand Meridian Hotels IT operations."}
+
+The systems list shows **Criticality** and **Environment** as columns. They cannot be sorted: filter the list on **Criticality** instead. Every asset field can be used as a filter. A filter lists the stored values, such as `VERY_HIGH` for **Very high** or `production` for **Production**.
+
+::screenshot{id=opencti-entities-systems-list alt="The systems list of Grand Meridian Hotels, with the Criticality and Environment columns: the booking database server and the online booking platform Very high, the payment terminals High, the workstations Medium, all in Production."}
+
+:::example[Decide which system of a hotel chain to protect first]
+After the intrusion of January 9, 2026, Grand Meridian Hotels asks which of its systems to protect first. Open :menu[Entities > Systems] and add the filter **Criticality**, operator **Equals**, value `VERY_HIGH`. Two systems remain: the **Online booking platform**, **Internet facing** **Yes**, and the **Booking database server**, **Internet facing** **No**, a Linux **Host** of the **Server** kind owned by Grand Meridian Hotels IT operations.
+
+Open the **Booking database server**, then **Knowledge**: Velvet Harbor, Harbor Syndicate and Operation Night Desk target it, and the incident of January 9, 2026 reached it. The booking platform is reachable from the internet, and the database behind it holds the guest records and is already targeted: brief their owners first.
+:::
+::::
+
 ## Judge an organization or a person as a source
 
 Organizations, individuals and systems also author knowledge: a CERT publishes reports, a sensor creates sightings. **Display as**, at the top of their page, switches from **Knowledge entity** to **Author**:

@@ -1,8 +1,8 @@
 {
   "name": "graphql-schema",
-  "version": "7.261109.0",
-  "source": "OpenCTI-Platform/opencti@0c08259 (opencti-platform/opencti-graphql/config/schema/opencti.graphql and 78 module schemas in opencti-platform/opencti-graphql/src)",
-  "intro": "The public GraphQL API of OpenCTI 7.261109.0: its 451 queries, 508 mutations (and the 292 mutations of the objects they return), 28 subscriptions and the input types the mutations take, each with the capability it requires. How to call the API, authenticate and explore the schema is in [GraphQL API](/develop/apis/graphql/); the capabilities are explained in [Roles and capabilities](/opencti/administer/roles/).",
+  "version": "7.261117.0",
+  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/config/schema/opencti.graphql and 78 module schemas in opencti-platform/opencti-graphql/src)",
+  "intro": "The public GraphQL API of OpenCTI 7.261117.0: its 453 queries, 514 mutations (and the 292 mutations of the objects they return), 28 subscriptions and the input types the mutations take, each with the capability it requires. How to call the API, authenticate and explore the schema is in [GraphQL API](/develop/apis/graphql/); the capabilities are explained in [Roles and capabilities](/opencti/administer/roles/).",
   "filter": "Filter queries, mutations, types and capabilities",
   "sections": [
     {
@@ -156,7 +156,7 @@
             "`auditsTimeSeriesBreakdown`",
             "`field: String!`, `dateAttribute: String`, `startDate: DateTime!`, `endDate: DateTime`, `interval: String!`, `limit: Int = 10`, `orderMode: OrderingMode`, `includeOther: Boolean = false`, `types: [String]`, `filters: FilterGroup`, `search: String`",
             "`TimeSeriesBreakdown`",
-            "Requires one of `SETTINGS_SETACCESSES`, `SETTINGS_SECURITYACTIVITY`, `VIRTUAL_ORGANIZATION_ADMIN`. Behind the feature flag `TIME_SERIES_BREAKDOWN`."
+            "Requires one of `SETTINGS_SETACCESSES`, `SETTINGS_SECURITYACTIVITY`, `VIRTUAL_ORGANIZATION_ADMIN`."
           ]
         },
         {
@@ -1677,7 +1677,7 @@
             "`ingestionHealthSettings`",
             "",
             "`IngestionHealthSettings`",
-            "Requires `SETTINGS_SETPARAMETERS`. Behind the feature flag `INGESTION_HEALTH` (returns an empty value while it is off)."
+            "Requires `SETTINGS_SETPARAMETERS`."
           ]
         },
         {
@@ -2568,7 +2568,7 @@
             "`publicStixCoreObjectsTimeSeriesBreakdown`",
             "`uriKey: String!`, `widgetId: String!`, `startDate: DateTime`, `endDate: DateTime`",
             "`TimeSeriesBreakdown`",
-            "Public: no authentication needed. Behind the feature flag `TIME_SERIES_BREAKDOWN`."
+            "Public: no authentication needed."
           ]
         },
         {
@@ -2613,7 +2613,7 @@
             "`publicStixRelationshipsTimeSeriesBreakdown`",
             "`uriKey: String!`, `widgetId: String!`, `startDate: DateTime`, `endDate: DateTime`",
             "`TimeSeriesBreakdown`",
-            "Public: no authentication needed. Behind the feature flag `TIME_SERIES_BREAKDOWN`."
+            "Public: no authentication needed."
           ]
         },
         {
@@ -3153,7 +3153,7 @@
             "`stixCoreObjectsTimeSeriesBreakdown`",
             "`field: String!`, `dateAttribute: String`, `startDate: DateTime!`, `endDate: DateTime`, `interval: String!`, `limit: Int = 10`, `orderMode: OrderingMode`, `includeOther: Boolean = false`, `onlyInferred: Boolean`, `types: [String]`, `filters: FilterGroup`, `search: String`",
             "`TimeSeriesBreakdown`",
-            "Requires one of `KNOWLEDGE`, `EXPLORE`. Behind the feature flag `TIME_SERIES_BREAKDOWN`."
+            "Requires one of `KNOWLEDGE`, `EXPLORE`."
           ]
         },
         {
@@ -3468,7 +3468,7 @@
             "`stixRelationshipsTimeSeriesBreakdown`",
             "`field: String!`, `dateAttribute: String`, `startDate: DateTime!`, `endDate: DateTime`, `interval: String!`, `limit: Int = 10`, `orderMode: OrderingMode`, `includeOther: Boolean = false`, `onlyInferred: Boolean`, `relationship_type: [String!]`, `filters: FilterGroup`, `dynamicFrom: FilterGroup`, `dynamicTo: FilterGroup`, `search: String`",
             "`TimeSeriesBreakdown`",
-            "Requires one of `KNOWLEDGE`, `EXPLORE`. Behind the feature flag `TIME_SERIES_BREAKDOWN`."
+            "Requires one of `KNOWLEDGE`, `EXPLORE`."
           ]
         },
         {
@@ -3805,6 +3805,15 @@
           ]
         },
         {
+          "key": "Query.timeSeriesBreakdownFields",
+          "cells": [
+            "`timeSeriesBreakdownFields`",
+            "`perspective: WidgetPerspective!`, `types: [String!]`",
+            "`[String!]!`",
+            "Keys of the fields a time series widget of the perspective can be broken down by, for the types its dataset is restricted to (at most 1,000, duplicates ignored), as the widget editor lists them. Without types, the ones the breakdown queries default to: Stix-Core-Object, stix-relationship. Each field listed is accepted by the breakdown query of the perspective for these types. The type itself (entity_type, relationship_type), which these queries accept whatever the types, is only listed when it makes several series: several types, an abstract type, or none. The relationships perspective lists no field when a type is not a relationship, as its breakdown refuses such a dataset. The audits perspective lists the fields of the logs whatever the types. Any authenticated user."
+          ]
+        },
+        {
           "key": "Query.tool",
           "cells": [
             "`tool`",
@@ -4006,7 +4015,7 @@
           "key": "Query.workflowDefinition",
           "cells": [
             "`workflowDefinition`",
-            "`entityType: String!`, `allowDraft: Boolean`",
+            "`entityType: String!`, `allowDraft: Boolean`, `scope: StatusScope`",
             "`WorkflowSchema`",
             "Requires `SETTINGS_SETCUSTOMIZATION`."
           ]
@@ -4036,6 +4045,15 @@
             "`entityType: String!`, `entityIds: [String!]`, `filters: String`, `search: String`, `excludedIds: [String!]`",
             "`[WorkflowTransition!]!`",
             "Requires `KNOWLEDGE_KNUPDATE`. Behind the feature flag `ENTITIES_WORKFLOW` (returns an empty value while it is off)."
+          ]
+        },
+        {
+          "key": "Query.workflowMigrationPreview",
+          "cells": [
+            "`workflowMigrationPreview`",
+            "`entityType: String!`",
+            "`WorkflowMigrationPreview`",
+            "Requires `SETTINGS_SETCUSTOMIZATION`."
           ]
         },
         {
@@ -4801,7 +4819,7 @@
           "key": "Mutation.configPresetImport",
           "cells": [
             "`configPresetImport`",
-            "`file_id: ID!`, `selections: [ConfigPresetSelectionInput!]!`, `dry_run: Boolean`",
+            "`file_id: ID!`, `selections: [ConfigPresetSelectionInput!]!`, `dry_run: Boolean`, `credentials: [ConfigPresetItemCredentialsInput!]`, `service_accounts: [ConfigPresetItemServiceAccountInput!]`",
             "`ConfigPresetImportOutput!`",
             "Requires `BYPASS`. Behind the feature flag `CONFIG_PRESET`."
           ]
@@ -4839,6 +4857,24 @@
             "`configPresetImportUpload`",
             "`file: Upload!`",
             "`File!`",
+            "Requires `BYPASS`. Behind the feature flag `CONFIG_PRESET`."
+          ]
+        },
+        {
+          "key": "Mutation.configPresetPartialImport",
+          "cells": [
+            "`configPresetPartialImport`",
+            "`file: Upload!`, `type: ID!`, `items: [ID!]!`, `item_modes: [ConfigPresetItemModeInput!]`",
+            "`ConfigPresetPartialImportOutput!`",
+            "Requires `BYPASS`. Behind the feature flag `CONFIG_PRESET`."
+          ]
+        },
+        {
+          "key": "Mutation.configPresetPartialImportPreview",
+          "cells": [
+            "`configPresetPartialImportPreview`",
+            "`file: Upload!`, `type: ID!`",
+            "`ConfigPresetPartialImportPreview!`",
             "Requires `BYPASS`. Behind the feature flag `CONFIG_PRESET`."
           ]
         },
@@ -6057,6 +6093,15 @@
             "`frontendErrorLog`",
             "`message: String!`, `codeStack: String`, `componentStack: String`",
             "`Boolean`",
+            "Any authenticated user. **Deprecated**: Replaced by frontendLogsAdd (#17400)."
+          ]
+        },
+        {
+          "key": "Mutation.frontendLogsAdd",
+          "cells": [
+            "`frontendLogsAdd`",
+            "`logs: [FrontendLogInput!]!`",
+            "`Boolean`",
             "Any authenticated user."
           ]
         },
@@ -6673,7 +6718,7 @@
             "`ingestionHealthSettingsEdit`",
             "`input: IngestionHealthSettingsInput!`",
             "`IngestionHealthSettings`",
-            "Requires `SETTINGS_SETPARAMETERS`. Behind the feature flag `INGESTION_HEALTH`."
+            "Requires `SETTINGS_SETPARAMETERS`."
           ]
         },
         {
@@ -11447,7 +11492,7 @@
           "key": "Mutation.workflowDefinitionDelete",
           "cells": [
             "`workflowDefinitionDelete`",
-            "`entityType: String!`",
+            "`entityType: String!`, `scope: StatusScope`",
             "`EntitySetting`",
             "Requires `SETTINGS_SETCUSTOMIZATION`."
           ]
@@ -11456,7 +11501,7 @@
           "key": "Mutation.workflowDefinitionPublish",
           "cells": [
             "`workflowDefinitionPublish`",
-            "`entityType: String!`",
+            "`entityType: String!`, `scope: StatusScope`",
             "`WorkflowDefinitionMutationResult`",
             "Requires `SETTINGS_SETCUSTOMIZATION`."
           ]
@@ -11465,7 +11510,7 @@
           "key": "Mutation.workflowDefinitionRestorePublished",
           "cells": [
             "`workflowDefinitionRestorePublished`",
-            "`entityType: String!`",
+            "`entityType: String!`, `scope: StatusScope`",
             "`WorkflowDefinitionMutationResult`",
             "Requires `SETTINGS_SETCUSTOMIZATION`."
           ]
@@ -11474,7 +11519,16 @@
           "key": "Mutation.workflowDefinitionSet",
           "cells": [
             "`workflowDefinitionSet`",
-            "`entityType: String!`, `definition: String!`",
+            "`entityType: String!`, `definition: String!`, `scope: StatusScope`",
+            "`WorkflowDefinitionMutationResult`",
+            "Requires `SETTINGS_SETCUSTOMIZATION`."
+          ]
+        },
+        {
+          "key": "Mutation.workflowMigrate",
+          "cells": [
+            "`workflowMigrate`",
+            "`entityType: String!`, `publish: Boolean = false`, `overwrite: Boolean = false`, `scope: StatusScope`",
             "`WorkflowDefinitionMutationResult`",
             "Requires `SETTINGS_SETCUSTOMIZATION`."
           ]
@@ -11549,6 +11603,24 @@
             "`id: ID!`, `input: [EditInput!]!`",
             "`Workspace`",
             "Requires one of `EXPLORE_EXUPDATE`, `INVESTIGATION_INUPDATE`."
+          ]
+        },
+        {
+          "key": "Mutation.workspacePresetDelete",
+          "cells": [
+            "`workspacePresetDelete`",
+            "`id: ID!`, `presetId: ID!`",
+            "`Workspace`",
+            "Requires `EXPLORE_EXUPDATE`. Behind the feature flag `DASHBOARD_VARIABLES`."
+          ]
+        },
+        {
+          "key": "Mutation.workspacePresetUpsert",
+          "cells": [
+            "`workspacePresetUpsert`",
+            "`id: ID!`, `input: DashboardPresetInput!`",
+            "`Workspace`",
+            "Requires `EXPLORE_EXUPDATE`. Behind the feature flag `DASHBOARD_VARIABLES`."
           ]
         },
         {
@@ -11998,6 +12070,30 @@
           ]
         },
         {
+          "key": "input.ConfigPresetItemCredentialsInput",
+          "cells": [
+            "`ConfigPresetItemCredentialsInput`",
+            "`type: ID!`, `key: ID!`, `values: [ConfigPresetCredentialInput!]!`",
+            "`configPresetImport`"
+          ]
+        },
+        {
+          "key": "input.ConfigPresetItemModeInput",
+          "cells": [
+            "`ConfigPresetItemModeInput`",
+            "`key: ID!`, `mode: ConfigImportMode!`",
+            "`configPresetPartialImport`"
+          ]
+        },
+        {
+          "key": "input.ConfigPresetItemServiceAccountInput",
+          "cells": [
+            "`ConfigPresetItemServiceAccountInput`",
+            "`type: ID!`, `key: ID!`, `user_id: ID!`",
+            "`configPresetImport`"
+          ]
+        },
+        {
           "key": "input.ConfigPresetSelectionInput",
           "cells": [
             "`ConfigPresetSelectionInput`",
@@ -12107,6 +12203,14 @@
             "`CustomViewImportWidgetInput`",
             "`file: Upload!`, `manifest: String`",
             "`customViewWidgetConfigurationImport`"
+          ]
+        },
+        {
+          "key": "input.DashboardPresetInput",
+          "cells": [
+            "`DashboardPresetInput`",
+            "`id: ID`, `name: String!`, `values: [DashboardPresetValueInput!]`, `config: DashboardPresetConfigInput`",
+            "`workspacePresetUpsert`"
           ]
         },
         {
@@ -12347,6 +12451,14 @@
             "`FormSubmissionInput`",
             "`formId: String!`, `values: String!`, `files: [Upload!]`",
             "`formSubmit`"
+          ]
+        },
+        {
+          "key": "input.FrontendLogInput",
+          "cells": [
+            "`FrontendLogInput`",
+            "`timestamp: DateTime!`, `level: FrontendLogLevel!`, `message: String!`, `eventName: String!`, `data: JSON`, `exception: FrontendLogExceptionInput`",
+            "`frontendLogsAdd`"
           ]
         },
         {
@@ -12641,7 +12753,7 @@
           "key": "input.LocalAuthConfigInput",
           "cells": [
             "`LocalAuthConfigInput`",
-            "`enabled: Boolean!`, `password_policy_min_length: Int`, `password_policy_max_length: Int`, `password_policy_min_symbols: Int`, `password_policy_min_numbers: Int`, `password_policy_min_words: Int`, `password_policy_min_lowercase: Int`, `password_policy_min_uppercase: Int`, `password_policy_validity_days: Int`, `local_auth_lockout_enabled: Boolean`, `local_auth_lockout_max_attempts: Int`, `local_auth_lockout_admin_max_attempts: Int`, `local_auth_lockout_final_action: LocalAuthLockoutFinalAction`, `local_auth_lockout_window: Int`, `local_auth_lockout_duration: Int`",
+            "`enabled: Boolean!`, `password_policy_min_length: Int`, `password_policy_max_length: Int`, `password_policy_min_symbols: Int`, `password_policy_min_numbers: Int`, `password_policy_min_words: Int`, `password_policy_min_lowercase: Int`, `password_policy_min_uppercase: Int`, `password_policy_validity_days: Int`, `password_policy_history_count: Int`, `local_auth_lockout_enabled: Boolean`, `local_auth_lockout_max_attempts: Int`, `local_auth_lockout_admin_max_attempts: Int`, `local_auth_lockout_final_action: LocalAuthLockoutFinalAction`, `local_auth_lockout_window: Int`, `local_auth_lockout_duration: Int`",
             "`settingsEdit.updateLocalAuth`"
           ]
         },
@@ -12905,7 +13017,7 @@
           "key": "input.PublicDashboardAddInput",
           "cells": [
             "`PublicDashboardAddInput`",
-            "`name: String!`, `uri_key: String!`, `description: String`, `dashboard_id: String!`, `allowed_markings_ids: [String!]`, `enabled: Boolean!`",
+            "`name: String!`, `uri_key: String!`, `description: String`, `dashboard_id: String!`, `allowed_markings_ids: [String!]`, `enabled: Boolean!`, `variable_values: [PublicDashboardVariableValueInput!]`, `time_range: PublicDashboardTimeRangeInput`, `time_zone: String`",
             "`publicDashboardAdd`"
           ]
         },
@@ -13225,7 +13337,7 @@
           "key": "input.SystemAddInput",
           "cells": [
             "`SystemAddInput`",
-            "`stix_id: StixId`, `x_opencti_stix_ids: [StixId]`, `name: String!`, `description: String`, `contact_information: String`, `roles: [String]`, `x_opencti_aliases: [String]`, `x_opencti_firstname: String`, `x_opencti_lastname: String`, `x_opencti_reliability: String`, `confidence: Int`, `revoked: Boolean`, `lang: String`, `createdBy: String`, `objectOrganization: [String]`, `objectMarking: [String]`, `objectLabel: [String]`, `externalReferences: [String]`, `created: DateTime`, `modified: DateTime`, `x_opencti_modified_at: DateTime`, `x_opencti_workflow_id: String`, `clientMutationId: String`, `update: Boolean`, `file: Upload`, `fileMarkings: [String]`, `files: [Upload]`, `filesMarkings: [[String]]`, `noTriggerImport: [Boolean]`, `embedded: [Boolean]`, `upsertOperations: [EditInput!]`, `customFieldValues: [CustomFieldValueAddInput!]`",
+            "`stix_id: StixId`, `x_opencti_stix_ids: [StixId]`, `name: String!`, `description: String`, `contact_information: String`, `roles: [String]`, `x_opencti_aliases: [String]`, `x_opencti_firstname: String`, `x_opencti_lastname: String`, `x_opencti_reliability: String`, `x_opencti_system_category: String`, `x_opencti_system_subcategory: String`, `x_opencti_internet_facing: String`, `x_opencti_criticality: String`, `x_opencti_environment: String`, `x_opencti_owner: String`, `x_opencti_platform: String`, `confidence: Int`, `revoked: Boolean`, `lang: String`, `createdBy: String`, `objectOrganization: [String]`, `objectMarking: [String]`, `objectLabel: [String]`, `externalReferences: [String]`, `created: DateTime`, `modified: DateTime`, `x_opencti_modified_at: DateTime`, `x_opencti_workflow_id: String`, `clientMutationId: String`, `update: Boolean`, `file: Upload`, `fileMarkings: [String]`, `files: [Upload]`, `filesMarkings: [[String]]`, `noTriggerImport: [Boolean]`, `embedded: [Boolean]`, `upsertOperations: [EditInput!]`, `customFieldValues: [CustomFieldValueAddInput!]`",
             "`systemAdd`"
           ]
         },
@@ -13433,7 +13545,7 @@
           "key": "input.VocabularyAddInput",
           "cells": [
             "`VocabularyAddInput`",
-            "`stix_id: StixId`, `x_opencti_stix_ids: [StixId]`, `name: String!`, `description: String`, `category: VocabularyCategory!`, `order: Int`, `created: DateTime`, `modified: DateTime`, `aliases: [String!]`, `update: Boolean`",
+            "`stix_id: StixId`, `x_opencti_stix_ids: [StixId]`, `name: String!`, `description: String`, `category: VocabularyCategory!`, `order: Int`, `color: String`, `created: DateTime`, `modified: DateTime`, `aliases: [String!]`, `update: Boolean`",
             "`vocabularyAdd`"
           ]
         },

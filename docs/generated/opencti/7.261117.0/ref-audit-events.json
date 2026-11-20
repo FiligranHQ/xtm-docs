@@ -1,8 +1,8 @@
 {
   "name": "audit-events",
-  "version": "7.261109.0",
-  "source": "OpenCTI-Platform/opencti@0c08259 (opencti-platform/opencti-graphql/src: calls to publishUserAction, manager/activityListener.ts)",
-  "intro": "The 235 events OpenCTI 7.261109.0 publishes to its activity, with the message each one writes and the function that publishes it; {braces} mark a value of the event. The activity module records them only when Enterprise Edition is on: administration events for every user, extended events only for the users you listen to, as [Activity](/opencti/configure/activity/) explains; read them on the [Activity events](/opencti/configure/activity/events/) screen.",
+  "version": "7.261117.0",
+  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/src: calls to publishUserAction, manager/activityListener.ts)",
+  "intro": "The 241 events OpenCTI 7.261117.0 publishes to its activity, with the message each one writes and the function that publishes it; {braces} mark a value of the event. The activity module records them only when Enterprise Edition is on: administration events for every user, extended events only for the users you listen to, as [Activity](/opencti/configure/activity/) explains; read them on the [Activity events](/opencti/configure/activity/events/) screen.",
   "filter": "Filter events, messages and functions",
   "sections": [
     {
@@ -15,10 +15,19 @@
       ],
       "rows": [
         {
-          "key": "createApp:authentication.logout:1527deeb",
+          "key": "publishLocalAuthLock:authentication.lock!:00b3daed",
+          "cells": [
+            "`authentication` · `lock`, status `error`",
+            "detects `account lock` for `{username}`: locked until an administrator unlocks it *or* locked for `{lock duration} minutes` after `{max attempts}` failed authentication attempts",
+            "`publishLocalAuthLock` in `local-auth-lockout.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "createApp:authentication.logout:1f135954",
           "cells": [
             "`authentication` · `logout`",
-            "logout",
+            "logout (last tab closed) *or* logout",
             "`createApp` in `httpPlatform.js`",
             "Administration (always)"
           ]
@@ -87,11 +96,29 @@
           ]
         },
         {
+          "key": "changePassword:authentication.forgot:eaebb257",
+          "cells": [
+            "`authentication` · `forgot`",
+            "Password reset code is expired or not found for {transaction id}",
+            "`changePassword` in `auth-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
           "key": "changePassword:authentication.forgot:e5c1f932",
           "cells": [
             "`authentication` · `forgot`",
             "Password reset code is invalid for {email}",
             "`changePassword` in `auth-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "logoutAbandonedSession:authentication.logout:1f135954",
+          "cells": [
+            "`authentication` · `logout`",
+            "logout (last tab closed) *or* logout",
+            "`logoutAbandonedSession` in `session-presence-domain.ts`",
             "Administration (always)"
           ]
         },
@@ -139,6 +166,15 @@
             "`read` · `unauthorized`, status `error`",
             "tries an `unauthorized read`",
             "`willSendResponse` in `loggerPlugin.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "checkPasswordNotReused:mutation.unauthorized!:b607583a",
+          "cells": [
+            "`mutation` · `unauthorized`, status `error`",
+            "tries an `unauthorized mutation`",
+            "`checkPasswordNotReused` in `user-password-history.ts`",
             "Administration (always)"
           ]
         }
@@ -347,11 +383,11 @@
           ]
         },
         {
-          "key": "realImport:command.import:b5d8b581",
+          "key": "publishConfigPresetImportAction:command.import:f09fdd38",
           "cells": [
             "`command` · `import`",
-            "imports a configuration preset (created: {created}, overwritten: {overwritten}, skipped: {skipped}, failed: {failed}), report `{file name}` *or* the report could not be written",
-            "`realImport` in `configPreset-import-engine.ts`",
+            "asks for `{file mime}` import of `{file name}` in `{entity name}`",
+            "`publishConfigPresetImportAction` in `configPreset-import-utils.ts`",
             "Administration (always)"
           ]
         },
@@ -1210,10 +1246,10 @@
           ]
         },
         {
-          "key": "fieldPatchExclusionList:mutation.update:cab15a5e",
+          "key": "fieldPatchExclusionList:mutation.update:cf75ecfd",
           "cells": [
             "`mutation` · `update`",
-            "updates `{fields}` for exclusion list `{name}`",
+            "updates `{…}` for exclusion list `{name}`",
             "`fieldPatchExclusionList` in `exclusionList-domain.ts`",
             "Administration (always)"
           ]
@@ -1422,6 +1458,15 @@
             "`mutation` · `update`",
             "updates `workflow` for entity setting `{entity type}`",
             "`ensureFullStatusMapping` in `workflow-domain.ts`, through `createStatus`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "applyRequestAccessOutcome:mutation.update:2bea0178",
+          "cells": [
+            "`mutation` · `update`",
+            "approved *or* declined demand of request access for entity {main representative}",
+            "`applyRequestAccessOutcome` in `workflow-request-access.ts`",
             "Administration (always)"
           ]
         },
@@ -2167,6 +2212,15 @@
             "import widget (id : {imported widget id}) in workspace (id : {workspace id})",
             "`workspaceImportWidgetConfiguration` in `workspace-domain.ts`",
             "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "saveDashboardPresets>editInternalObject:mutation.update:5da28593",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for Workspace `{name}`",
+            "`saveDashboardPresets` in `workspace-presets-domain.ts`, through `editInternalObject`",
+            "Administration (always)"
           ]
         },
         {

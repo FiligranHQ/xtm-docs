@@ -144,6 +144,14 @@ A custom field, created in [Manage labels, vocabularies and templates](/opencti/
 
 A mandatory custom field and a default value work like those of a built-in attribute: they apply to every creation, in forms, imports and the API, and users whose role has **Bypass mandatory fields** skip the mandatory check.
 
+:::only{opencti=">=7.261117"}
+OpenCTI checks a default value when you save it, so that every new object gets it. The default of an **Integer** field must be a whole number within the bounds of the field; the dialog shows **The value must be an integer** or **The value must be between min and max value** and keeps **Update** greyed out until you fix it. The default of a **Decimal** field can be any number, such as `0.75`. The platform refuses a value outside the options of a selection list, or a date it cannot read, in the API too.
+:::
+
+:::only{opencti="<7.261117"}
+OpenCTI does not check a default value when you save it. Enter one the field accepts, such as a whole number within the bounds of an **Integer** field: otherwise new objects of the type do not get it, or their creation fails.
+:::
+
 **Remove**, in the menu of the field, takes it off this type: OpenCTI warns that **The values stored for this custom field will be permanently removed from all existing entities of this type.** Without the Enterprise Edition, the card stays, but a mandatory custom field can only be made optional.
 ::::
 

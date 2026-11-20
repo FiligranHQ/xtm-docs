@@ -92,6 +92,24 @@ Click **Convert** on the user page to turn a user into a service account, or bac
 To make a user choose a new password at their next request, click **Force password change** in the **Password** tab. The user page then shows the date under **Password valid until**. Passwords can also expire on their own: see the password policy in [Manage login providers in the UI](/opencti/administer/authentications/#configure-the-built-in-strategies).
 :::
 
+::::only{opencti=">=7.261117"}
+### Set a password the user has not used before
+
+When the local strategy sets **Number of recent passwords that cannot be reused (0 equals disabled)**, the password you set in the **Password** tab must differ from the user's current password and their recent ones. See [Stop users from reusing a password](/opencti/administer/authentications/#stop-users-from-reusing-a-password) for the rule itself. The **Password security policies** box above the field says how many: **Must be different from the last 5 passwords** for a value of 5, **Must be different from the current password** for 1.
+
+::screenshot{id=opencti-users-password-history alt="The Password tab of the Update User panel for Leo Martin: the Password security policies box reads Must be different from the last 5 passwords, above the Password and Confirmation fields and the Force password change and Update buttons."}
+
+Only the platform knows the previous passwords, so this line gets no check mark while you type. A password the user already had is refused when you click **Update**, with **This password has already been used recently. Please choose a different one.**, and the account keeps its password.
+
+- **Create User** does not show the rule: a new account has no previous password.
+- While the rule is on, you get 5 password changes per user in 15 minutes by default, successful ones included, then **Too many password change attempts. Please try again in a few minutes.** Your attempts never block another administrator, nor the user, on the same account.
+- Through the API, send the password alone in its `fieldPatch`: while the rule is on, a password sent with other fields is refused with `The password must be changed on its own`.
+
+:::example[Reset the password of a compromised account]
+Grand Meridian Hotels keeps the last 5 passwords: **Number of recent passwords that cannot be reused (0 equals disabled)** is `5`. Leo Martin reports that he typed his password on a fake booking page. You open his user page, click **Update**, then the **Password** tab, and the box reads **Must be different from the last 5 passwords**. The temporary password you gave Leo when he joined is refused: he used it before. You enter a new one in **Password** and **Confirmation** and click **Update**, then click **Force password change** so that Leo picks his own at his next request.
+:::
+::::
+
 ## Disable a user
 
 Disable an account rather than delete it: the user can no longer log in, and everything they created, shared or own stays in place.

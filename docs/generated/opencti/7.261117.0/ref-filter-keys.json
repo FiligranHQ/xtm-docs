@@ -1,8 +1,8 @@
 {
   "name": "filter-keys",
-  "version": "7.261109.0",
-  "source": "OpenCTI-Platform/opencti@0c08259 (95 files, including opencti-platform/opencti-graphql/src/domain/filterKeysSchema.ts and opencti-platform/opencti-graphql/src/utils/filtering/filtering-constants.ts)",
-  "intro": "The 23 operators and 550 filter keys a filter group accepts in OpenCTI 7.261109.0, in the API and in the filter menu of the interface. [Filters](/develop/apis/filters/) explains how to write a filter group.",
+  "version": "7.261117.0",
+  "source": "OpenCTI-Platform/opencti@1b89a14 (95 files, including opencti-platform/opencti-graphql/src/domain/filterKeysSchema.ts and opencti-platform/opencti-graphql/src/utils/filtering/filtering-constants.ts)",
+  "intro": "The 23 operators and 557 filter keys a filter group accepts in OpenCTI 7.261117.0, in the API and in the filter menu of the interface. [Filters](/develop/apis/filters/) explains how to write a filter group.",
   "filter": "Filter keys, types and operators",
   "sections": [
     {
@@ -2037,7 +2037,7 @@
             "`event_scope`",
             "`Activity`, `History`, `PirHistory`",
             "`eq`, `not_eq`, `nil`, `not_nil`",
-            "**Event scope**. Value: value from a fixed list: `create`, `update`, `delete`, `merge`, `read`, `search`, `enrich`, `download`, `import`, `export`, `send`, `login`, `logout`, `unauthorized`, `disseminate`, `forgot`."
+            "**Event scope**. Value: value from a fixed list: `create`, `update`, `delete`, `merge`, `read`, `search`, `enrich`, `download`, `import`, `export`, `send`, `login`, `logout`, `unauthorized`, `disseminate`, `forgot`, `critical`, `degraded`, `recovered`."
           ]
         },
         {
@@ -2046,7 +2046,7 @@
             "`event_type`",
             "`Activity`, `History`, `PirHistory`, `work`",
             "`eq`, `not_eq`, `nil`, `not_nil`",
-            "**Event type**. Value: value from a fixed list: `authentication`, `read`, `mutation`, `file`, `command`."
+            "**Event type**. Value: value from a fixed list: `authentication`, `read`, `mutation`, `file`, `command`, `ingestion_health`."
           ]
         },
         {
@@ -4678,6 +4678,15 @@
           ]
         },
         {
+          "key": "attr:x_opencti_criticality",
+          "cells": [
+            "`x_opencti_criticality`",
+            "`System`",
+            "`eq`, `not_eq`, `nil`, `not_nil`",
+            "**Criticality**. Value: vocabulary value of the vocabulary `system_criticality_ov`."
+          ]
+        },
+        {
           "key": "attr:x_opencti_cvss_attack_complexity",
           "cells": [
             "`x_opencti_cvss_attack_complexity`",
@@ -5083,6 +5092,15 @@
           ]
         },
         {
+          "key": "attr:x_opencti_environment",
+          "cells": [
+            "`x_opencti_environment`",
+            "`System`",
+            "`eq`, `not_eq`, `nil`, `not_nil`",
+            "**Environment**. Value: vocabulary value of the vocabulary `system_environment_ov`."
+          ]
+        },
+        {
           "key": "attr:x_opencti_epss_percentile",
           "cells": [
             "`x_opencti_epss_percentile`",
@@ -5107,6 +5125,15 @@
             "`Vulnerability`",
             "`gt`, `gte`, `lt`, `lte`, `nil`, `not_nil`, `within`",
             "**First seen active**. Value: date."
+          ]
+        },
+        {
+          "key": "attr:x_opencti_internet_facing",
+          "cells": [
+            "`x_opencti_internet_facing`",
+            "`System`",
+            "`eq`, `not_eq`, `nil`, `not_nil`",
+            "**Internet facing**. Value: vocabulary value of the vocabulary `system_internet_facing_ov`."
           ]
         },
         {
@@ -5155,6 +5182,24 @@
           ]
         },
         {
+          "key": "attr:x_opencti_owner",
+          "cells": [
+            "`x_opencti_owner`",
+            "`System`",
+            "`eq`, `not_eq`, `nil`, `not_nil`, `contains`, `not_contains`, `starts_with`, `not_starts_with`, `ends_with`, `not_ends_with`, `search`",
+            "**Asset owner**. Value: short text."
+          ]
+        },
+        {
+          "key": "attr:x_opencti_platform",
+          "cells": [
+            "`x_opencti_platform`",
+            "`System`",
+            "`eq`, `not_eq`, `nil`, `not_nil`",
+            "**Platform**. Value: vocabulary value of the vocabulary `system_platform_ov`."
+          ]
+        },
+        {
           "key": "attr:x_opencti_product",
           "cells": [
             "`x_opencti_product`",
@@ -5197,6 +5242,24 @@
             "`Vulnerability`",
             "`eq`, `not_eq`, `nil`, `not_nil`",
             "**SSVC Technical Impact**. Value: value from a fixed list: `partial`, `total`."
+          ]
+        },
+        {
+          "key": "attr:x_opencti_system_category",
+          "cells": [
+            "`x_opencti_system_category`",
+            "`System`",
+            "`eq`, `not_eq`, `nil`, `not_nil`",
+            "**System category**. Value: vocabulary value of the vocabulary `system_category_ov`."
+          ]
+        },
+        {
+          "key": "attr:x_opencti_system_subcategory",
+          "cells": [
+            "`x_opencti_system_subcategory`",
+            "`System`",
+            "`eq`, `not_eq`, `nil`, `not_nil`",
+            "**System subcategory**. Value: vocabulary value of the vocabulary `system_subcategory_ov`."
           ]
         },
         {

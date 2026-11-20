@@ -65,6 +65,10 @@ Add more filters to narrow each widget, or replace the filter with another one o
 
 To check the result while you edit, choose an entity in the selector at the top of the editor. Widgets then render with that entity's data, and those that depend on the current entity show **Preview data**.
 
+:::only{opencti=">=7.261117"}
+A **Vertical Bar**, **Line**, **Area** or **Heatmap** widget of a custom view can also draw one series per value of a field, as in [Follow each value of a field over time](/opencti/use/dashboards/widgets/#follow-each-value-of-a-field-over-time). With the filter on the current entity, the series count only that entity's data: on an intrusion set, the reports about it, one series per label.
+:::
+
 :::example[Show the targets and tools of each intrusion set]
 Analysts want, on the page of every intrusion set, where it strikes and what it uses. In :menu[Settings > Customization > Entity types], choose **Intrusion Set**, then **Custom Views**, and create a view with the **Name** `Targeting`, the **Description** `Countries, malware and indicators of the intrusion set.` and **Set as default custom view** off. Add three widgets, each keeping the filter on the current entity that OpenCTI adds:
 

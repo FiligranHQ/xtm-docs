@@ -59,6 +59,10 @@ The scope is a check box of each component, such as **Manipulate all elements in
 Playbooks work with [custom fields](/opencti/configure/taxonomies/#custom-fields) too: filter on them in entry points and in **Match knowledge**, and set them with **Manipulate knowledge**, whose **Field** list offers them by their label. **Replace** and **Remove** work on every custom field, **Add** only on a multiple selection list.
 :::
 
+:::only{opencti=">=7.261117"}
+**Manipulate knowledge** also sets the **Report types** of reports: **Add** a type, **Replace** them all, or **Remove** one. A playbook can type every report a partner feed brings as `threat-report`, so that analysts filter on it. The action leaves the other entities of the bundle untouched.
+:::
+
 ## What to decide before you build
 
 A playbook changes data without asking anyone. Settle these points with your team, then [create the playbook](/opencti/use/automate/playbooks/create/).
@@ -84,16 +88,24 @@ A playbook changes data without asking anyone. Settle these points with your tea
 
 A playbook can call a connector, apply one rule or send a notification as a step, so the tools combine rather than compete.
 
-::::only{opencti=">=7.260811"}
-:::xtm-one[Playbooks with XTM One]
+:::::only{opencti=">=7.260811"}
+::::xtm-one[Playbooks with XTM One]
 A playbook can hand its bundle to an XTM One AI agent, for work that is easier to describe in words than to build from components.
 
 - **Transform with AI agent** gives the bundle and your **Additional instructions (optional, prepended to the STIX bundle)** to an agent, then passes the STIX 2.1 bundle the agent returns to the next step. It offers the agents of your XTM One catalog that transform STIX bundles. When the agent could not run or did not return a STIX bundle, the original bundle leaves through `unmodified`; a bundle the agent returns, even unchanged, leaves through `out`.
 - **Send to AI agent** ends a branch: the agent receives the bundle with your **Instructions (optional, prepended to the STIX bundle)** and carries on alone, for example to summarize, alert or dispatch. Nothing comes back to the playbook. It offers the agents of your catalog that consume STIX bundles.
 
 Both have a **Run as** setting: the account the agent acts as, in XTM One and when it writes back to OpenCTI. You can pick yourself or a service account, nobody else; left empty, the agent acts as the platform's initial administrator, so set it. Each run uses your XTM One quota, and the step is skipped when XTM One is not connected to the platform. [Create a playbook](/opencti/use/automate/playbooks/create/) gives a complete example.
+
+:::only{opencti=">=7.261117"}
+OpenCTI waits up to 10 minutes for the agent's answer, enough for an agent that builds a large bundle or calls several tools. Past that, the step counts as one where the agent could not run.
+:::
+
+:::only{opencti="<7.261117"}
+OpenCTI waits up to 5 minutes for the agent's answer. Past that, the step counts as one where the agent could not run.
 :::
 ::::
+:::::
 
 ## For administrators: the playbook manager
 

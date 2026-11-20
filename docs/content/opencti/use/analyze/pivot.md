@@ -27,6 +27,12 @@ Start from the domain or the IP address of an alert and see, in a few double-cli
 1. Open :menu[Investigations] and click **Create Investigation**. Give it a name and, optionally, a description.
 2. Click **Add an entity to this investigation** and pick the entities to start from, such as a suspicious domain name and the intrusion set it was reported with.
 
+   :::only{opencti=">=7.261117"}
+   A new investigation opens on an empty graph that says **Nothing to draw yet**. Its **Add entities** button opens the same **Add entities** panel as **Add an entity to this investigation** in the toolbar.
+
+   ::screenshot{id=opencti-pivot-empty alt="A new investigation with nothing drawn yet: the card in the middle of the graph says to add entities and expand them, with the Read the documentation and Add entities buttons."}
+   :::
+
    ::screenshot{id=opencti-pivot-workspace alt="An investigation graph with a domain name and an intrusion set, each with a counter of relationships not drawn yet, and the side panel showing the details of the selected entity."}
 
 :::
@@ -66,7 +72,7 @@ Launching an enrichment needs edit access to the investigation, **Create / Updat
 :::steps
 
 1. Select the entities to enrich, all of the same type, then click **Enrichment** in the toolbar, or right-click the selection and choose **Enrichment**. Only the connectors that accept that type are listed. A selection mixing types, or a type no connector accepts, shows **No connector available for the selected entities.**
-2. In **Start an enrichment**, pick one or more connectors and click **Enrich**, then confirm the background task.
+2. In **Start an enrichment**, pick one or more connectors and click **Enrich**. The enrichment starts at once, as a background task. Picking a connector in the **Enrichment** entry of the right-click menu starts it the same way. A selection of more than 1,000 entities first opens **Launch a background task**: click **Launch** to confirm.
 3. Follow the runs in the **Enrichment** drawer: **In progress**, then **To review** when the results are ready, then **Done**. The **Enrichment** button of the toolbar shows how many enrichments are in progress or have results waiting.
 4. In **To review**, choose for each run:
    - **Review results**: the **Enrichment Results** dialog lists only the data the enrichment created or updated. Pick what to bring in and click **Expand**.
@@ -82,7 +88,7 @@ Launching an enrichment needs edit access to the investigation, **Create / Updat
 :::example[Enrich the look-alike booking domain with VirusTotal]
 Your investigation `Velvet Harbor pivot` holds the domain `booking-velvetharbor.example` and the intrusion set **Velvet Harbor**. Before you search the proxy logs, you want what VirusTotal knows of the domain, without opening every result one by one.
 
-1. Click the domain in the graph, then **Enrichment** in the toolbar. In **Start an enrichment**, pick **VirusTotal**, the only connector that accepts a domain here, click **Enrich** and confirm.
+1. Click the domain in the graph, then **Enrichment** in the toolbar. In **Start an enrichment**, pick **VirusTotal**, the only connector that accepts a domain here, click **Enrich**.
 2. Once the run is in **To review**, the toolbar button says **1 enrichment has results waiting**. Click **Add all to graph** beside VirusTotal's run, then **Add**.
 
 The graph gains a second address the domain resolves to, `203.0.113.82`, beside `203.0.113.10`. It also gains the domain's indicator, now scored from Google Threat Intelligence's verdict, and the malware Harbor Stealer, the campaign Operation Night Desk and a report that VirusTotal ties to the domain. VirusTotal's two notes on the domain, its external references and VirusTotal itself, their author, join too. The run moves to **Done**, and the new address goes into your log search with the old one.

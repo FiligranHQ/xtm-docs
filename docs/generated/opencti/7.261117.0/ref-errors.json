@@ -1,8 +1,8 @@
 {
   "name": "errors",
-  "version": "7.261109.0",
-  "source": "OpenCTI-Platform/opencti@0c08259 (opencti-platform/opencti-graphql/src/config/errors.ts and every call of its constructors)",
-  "intro": "The 875 error messages OpenCTI 7.261109.0 can answer to a user or an API client, by the area of the code that raises them. The GraphQL answer carries the message, the error type in `extensions.code` and the data attached in `extensions.data`; `{name}` marks a part computed at run time. Listed: the 19 error types `ACCESS_REQUIRED`, `ALREADY_DELETED_ERROR`, `AUTH_FAILURE`, `AUTH_REQUIRED`, `BAD_USER_INPUT_ERROR`, `DATABASE_ERROR`, `DRAFT_LOCKED`, `FORBIDDEN_ACCESS`, `FUNCTIONAL_ERROR`, `LOCK_ERROR`, `LTS_REQUIRED_ACTIVATION`, `MISSING_REFERENCE_ERROR`, `OTP_REQUIRED`, `OTP_REQUIRED_ACTIVATION`, `PASSWORD_CHANGE_REQUIRED`, `RESOURCE_NOT_FOUND`, `UNSUPPORTED_ERROR`, `VALIDATION_ERROR`, `WORK_NOT_ALIVE`. Left out: the errors the code classes as technical (`ComplexSearchError`, `ConfigurationError`, `DatabaseError`, `FilesystemError`, `UnknownError`), the code that runs at startup or in background managers, messages held entirely in a variable and developer guards (*unexpected*, *not implemented*, schema registration). Read the platform logs as [Troubleshooting](/deploy/operate/troubleshoot/) explains.",
+  "version": "7.261117.0",
+  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/src/config/errors.ts and every call of its constructors)",
+  "intro": "The 943 error messages OpenCTI 7.261117.0 can answer to a user or an API client, by the area of the code that raises them. The GraphQL answer carries the message, the error type in `extensions.code` and the data attached in `extensions.data`; `{name}` marks a part computed at run time. Listed: the 22 error types `ACCESS_REQUIRED`, `ALREADY_DELETED_ERROR`, `AUTH_FAILURE`, `AUTH_REQUIRED`, `BAD_USER_INPUT_ERROR`, `DATABASE_ERROR`, `DRAFT_LOCKED`, `FORBIDDEN_ACCESS`, `FUNCTIONAL_ERROR`, `LOCK_ERROR`, `LTS_REQUIRED_ACTIVATION`, `MISSING_REFERENCE_ERROR`, `OTP_REQUIRED`, `OTP_REQUIRED_ACTIVATION`, `PASSWORD_CHANGE_REQUIRED`, `PASSWORD_CHANGE_THROTTLED`, `PASSWORD_RESET_EXPIRED`, `PASSWORD_REUSED`, `RESOURCE_NOT_FOUND`, `UNSUPPORTED_ERROR`, `VALIDATION_ERROR`, `WORK_NOT_ALIVE`. Left out: the errors the code classes as technical (`ComplexSearchError`, `ConfigurationError`, `DatabaseError`, `FilesystemError`, `UnknownError`), the code that runs at startup or in background managers, messages held entirely in a variable and developer guards (*unexpected*, *not implemented*, schema registration). Read the platform logs as [Troubleshooting](/deploy/operate/troubleshoot/) explains.",
   "filter": "Filter messages, error types and functions",
   "sections": [
     {
@@ -135,7 +135,7 @@
           "cells": [
             "Bad login or password",
             "`AUTH_FAILURE`",
-            "`verifyMfa` (modules/auth/auth-domain), `login` (modules/user/user-domain), `otpUserActivation` (modules/user/user-domain) and 2 more",
+            "`reject` (domain/local-auth-lockout), `verifyMfa` (modules/auth/auth-domain), `login` (modules/user/user-domain) and 3 more",
             ""
           ]
         },
@@ -182,6 +182,15 @@
             "`FUNCTIONAL_ERROR`",
             "`consumeQueueCallback` (connector/importCsv/importCsv-connector), `csvMapperTest` (modules/internal/csvMapper/csvMapper-domain), `csvMapperTest` (modules/internal/csvMapper/deprecated/csvMapper-domain) and 1 more",
             "`error`"
+          ]
+        },
+        {
+          "key": "UNSUPPORTED_ERROR|Element is not sharable at the moment (restricted)",
+          "cells": [
+            "Element is not sharable at the moment (restricted)",
+            "`UNSUPPORTED_ERROR`",
+            "`approveRequestAccess` (modules/requestAccess/requestAccess-domain), `shareRequestedEntities` (modules/workflow/registry/workflow-actions)",
+            "`targetId`, `targetInstanceToShare`"
           ]
         },
         {
@@ -293,6 +302,24 @@
           ]
         },
         {
+          "key": "UNSUPPORTED_ERROR|This RFI is not compatible",
+          "cells": [
+            "This RFI is not compatible",
+            "`UNSUPPORTED_ERROR`",
+            "`checkRequestActionAndGetWorkflow` (modules/requestAccess/requestAccess-domain), `shareRequestedEntities` (modules/workflow/registry/workflow-actions)",
+            "`id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Unknown dashboard variable",
+          "cells": [
+            "Unknown dashboard variable",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPublicationVariableValues` (modules/publicDashboard/publicDashboard-publication), `buildPresetValues` (modules/workspace/workspace-presets-validation)",
+            "`variableId`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Unsupported markdown embedded image mime type",
           "cells": [
             "Unsupported markdown embedded image mime type",
@@ -320,6 +347,15 @@
           ]
         },
         {
+          "key": "UNSUPPORTED_ERROR|You cant share the requested element (restrictions or markings)",
+          "cells": [
+            "You cant share the requested element (restrictions or markings)",
+            "`UNSUPPORTED_ERROR`",
+            "`approveRequestAccess` (modules/requestAccess/requestAccess-domain), `shareRequestedEntities` (modules/workflow/registry/workflow-actions)",
+            "`targetId`, `targetInstanceToShare`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|You have not chosen a user responsible for data creation",
           "cells": [
             "You have not chosen a user responsible for data creation",
@@ -335,6 +371,15 @@
             "`AUTH_REQUIRED`",
             "`authDirectiveTransformer` (graphql/authDirective), `checkIntrospection` (graphql/graphql), `checkAuthenticationFromRequest` (http/httpTaxii) and 1 more",
             ""
+          ]
+        },
+        {
+          "key": "UNSUPPORTED_ERROR|You need to be able to edit the RFI and share knowledge",
+          "cells": [
+            "You need to be able to edit the RFI and share knowledge",
+            "`UNSUPPORTED_ERROR`",
+            "`approveRequestAccess` (modules/requestAccess/requestAccess-domain), `assertCanEnterRequestAccessOutcome` (modules/workflow/domain/workflow-request-access)",
+            "`id`"
           ]
         }
       ]
@@ -1366,20 +1411,11 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Time series breakdown does not support this field for these entity types",
+          "key": "FUNCTIONAL_ERROR|Time series breakdown does not support this field for these {elements} types",
           "cells": [
-            "Time series breakdown does not support this field for these entity types",
+            "Time series breakdown does not support this field for these {elements} types",
             "`FUNCTIONAL_ERROR`",
-            "`resolveBreakdownField` (database/middleware)",
-            "`field`, `reason`, `types`"
-          ]
-        },
-        {
-          "key": "FUNCTIONAL_ERROR|Time series breakdown does not support this field for these relationship types",
-          "cells": [
-            "Time series breakdown does not support this field for these relationship types",
-            "`FUNCTIONAL_ERROR`",
-            "`resolveRelationshipBreakdownField` (database/middleware)",
+            "`resolveElementsBreakdownField` (database/middleware)",
             "`field`, `reason`, `types`"
           ]
         },
@@ -1399,6 +1435,15 @@
             "`FUNCTIONAL_ERROR`",
             "`checkTimeSeriesBreakdownLimit` (database/middleware)",
             "`limit`, `max`, `reason`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Too many types to list the time series breakdown fields of",
+          "cells": [
+            "Too many types to list the time series breakdown fields of",
+            "`FUNCTIONAL_ERROR`",
+            "`timeSeriesBreakdownFields` (database/middleware)",
+            "`max`, `typesCount`"
           ]
         },
         {
@@ -2520,6 +2565,15 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Password history count must be an integer between 0 and {PASSWORD_HISTORY_MAX_COUNT}",
+          "cells": [
+            "Password history count must be an integer between 0 and {PASSWORD_HISTORY_MAX_COUNT}",
+            "`FUNCTIONAL_ERROR`",
+            "`resolvePasswordHistoryCount` (domain/setting-auth)",
+            "`value`"
+          ]
+        },
+        {
           "key": "UNSUPPORTED_ERROR|Report creation required name and published",
           "cells": [
             "Report creation required name and published",
@@ -2543,6 +2597,24 @@
             "Stream URL format is not correct",
             "`FUNCTIONAL_ERROR`",
             "`computeStreamRemoteUrl` (domain/connector)",
+            ""
+          ]
+        },
+        {
+          "key": "FORBIDDEN_ACCESS|The default dashboard of an organization is reserved to the administrators",
+          "cells": [
+            "The default dashboard of an organization is reserved to the administrators",
+            "`FORBIDDEN_ACCESS`",
+            "`verifyOrganizationAccessSettingsInput` (domain/stixDomainObject)",
+            ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The password history count can only be changed with the local authentication settings",
+          "cells": [
+            "The password history count can only be changed with the local authentication settings",
+            "`FUNCTIONAL_ERROR`",
+            "`settingsEditField` (domain/settings)",
             ""
           ]
         },
@@ -2706,6 +2778,15 @@
             "`UNSUPPORTED_ERROR`",
             "`addStixDomainObject` (domain/stixDomainObject)",
             ""
+          ]
+        },
+        {
+          "key": "AUTH_FAILURE|Your account has been locked for security reasons. Please try again later.",
+          "cells": [
+            "Your account has been locked for security reasons. Please try again later.",
+            "`AUTH_FAILURE`",
+            "`LocalAuthLocked` (domain/local-auth-lockout)",
+            "`lock`, `remaining_minutes`, `remaining_seconds`"
           ]
         }
       ]
@@ -2948,6 +3029,15 @@
           "cells": [
             "Password change failed, please try again.",
             "`UNSUPPORTED_ERROR`",
+            "`changePassword` (modules/auth/auth-domain)",
+            ""
+          ]
+        },
+        {
+          "key": "PASSWORD_RESET_EXPIRED|Password reset code expired or not found. Please request a new one.",
+          "cells": [
+            "Password reset code expired or not found. Please request a new one.",
+            "`PASSWORD_RESET_EXPIRED`",
             "`changePassword` (modules/auth/auth-domain)",
             ""
           ]
@@ -3303,12 +3393,30 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Duplicate configuration preset item mode",
+          "cells": [
+            "Duplicate configuration preset item mode",
+            "`FUNCTIONAL_ERROR`",
+            "`checkConfigPresetItemModes` (modules/configPreset/import/configPreset-import-utils)",
+            "`item`, `type`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Excluded items require a selection of every item of the type",
           "cells": [
             "Excluded items require a selection of every item of the type",
             "`FUNCTIONAL_ERROR`",
             "`resolveConfigPresetSelections` (modules/configPreset/export/configPreset-export-domain)",
             "`type`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Import stopped: lock lost",
+          "cells": [
+            "Import stopped: lock lost",
+            "`FUNCTIONAL_ERROR`",
+            "`configPresetPartialImport` (modules/configPreset/import/configPreset-partial-import)",
+            ""
           ]
         },
         {
@@ -3325,7 +3433,7 @@
           "cells": [
             "Select at least one configuration item to import",
             "`FUNCTIONAL_ERROR`",
-            "`resolveImportItems` (modules/configPreset/import/configPreset-import-engine)",
+            "`resolveImportItems` (modules/configPreset/import/configPreset-import-engine), `configPresetPartialImport` (modules/configPreset/import/configPreset-partial-import)",
             ""
           ]
         },
@@ -3336,6 +3444,24 @@
             "`FUNCTIONAL_ERROR`",
             "`loadConfigPresetImportZip` (modules/configPreset/import/configPreset-import-domain)",
             "`reason`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The export is too large to be imported back, select fewer items",
+          "cells": [
+            "The export is too large to be imported back, select fewer items",
+            "`FUNCTIONAL_ERROR`",
+            "`append` (modules/configPreset/export/configPreset-export-domain), `appendJson` (modules/configPreset/export/configPreset-export-domain), `writeConfigPresetZip` (modules/configPreset/export/configPreset-export-domain)",
+            "`limit`, `name`, `size`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The file of the values of an exclusion list is missing from the storage or is not its own",
+          "cells": [
+            "The file of the values of an exclusion list is missing from the storage or is not its own",
+            "`FUNCTIONAL_ERROR`",
+            "`read` (modules/configPreset/registry/exclusionLists-configPreset-registry)",
+            "`id`, `name`"
           ]
         },
         {
@@ -3370,7 +3496,7 @@
           "cells": [
             "The user who started the import no longer exists",
             "`FUNCTIONAL_ERROR`",
-            "`realImport` (modules/configPreset/import/configPreset-import-engine)",
+            "`reloadConfigPresetImportUser` (modules/configPreset/import/configPreset-import-utils)",
             ""
           ]
         },
@@ -3379,7 +3505,7 @@
           "cells": [
             "The user who started the import no longer has the right to import",
             "`FUNCTIONAL_ERROR`",
-            "`realImport` (modules/configPreset/import/configPreset-import-engine)",
+            "`reloadConfigPresetImportUser` (modules/configPreset/import/configPreset-import-utils)",
             ""
           ]
         },
@@ -3393,11 +3519,20 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|This configuration type cannot be imported",
+          "cells": [
+            "This configuration type cannot be imported",
+            "`FUNCTIONAL_ERROR`",
+            "`findImportableFamily` (modules/configPreset/import/configPreset-partial-import)",
+            "`type`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Unknown configuration preset item",
           "cells": [
             "Unknown configuration preset item",
             "`FUNCTIONAL_ERROR`",
-            "`resolveConfigPresetSelections` (modules/configPreset/export/configPreset-export-domain), `resolveImportItems` (modules/configPreset/import/configPreset-import-engine)",
+            "`resolveConfigPresetSelections` (modules/configPreset/export/configPreset-export-domain), `pickConfigPresetTypeItems` (modules/configPreset/import/configPreset-import-utils)",
             "`item`, `type`"
           ]
         },
@@ -3406,7 +3541,7 @@
           "cells": [
             "Unknown configuration preset type",
             "`FUNCTIONAL_ERROR`",
-            "`findConfigPresetFamily` (modules/configPreset/export/configPreset-export-domain), `resolveImportItems` (modules/configPreset/import/configPreset-import-engine)",
+            "`findConfigPresetFamily` (modules/configPreset/export/configPreset-export-domain), `findConfigPresetFamily` (modules/configPreset/import/configPreset-import-utils)",
             "`type`"
           ]
         },
@@ -3415,7 +3550,7 @@
           "cells": [
             "Unsupported import mode for this configuration preset type",
             "`FUNCTIONAL_ERROR`",
-            "`resolveImportItems` (modules/configPreset/import/configPreset-import-engine)",
+            "`checkConfigPresetItemModes` (modules/configPreset/import/configPreset-import-utils)",
             "`item`, `mode`, `type`"
           ]
         }
@@ -3847,6 +3982,24 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|float_value is required for decimal type custom field",
+          "cells": [
+            "float_value is required for decimal type custom field",
+            "`FUNCTIONAL_ERROR`",
+            "`validateDecimalField` (modules/customField/custom-field-validator)",
+            "`field_name`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|float_value must be a finite number",
+          "cells": [
+            "float_value must be a finite number",
+            "`FUNCTIONAL_ERROR`",
+            "`validateDecimalField` (modules/customField/custom-field-validator)",
+            "`field_name`, `value`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|int_value is above maximum",
           "cells": [
             "int_value is above maximum",
@@ -3889,6 +4042,15 @@
             "`FUNCTIONAL_ERROR`",
             "`validateIntegerField` (modules/customField/custom-field-validator)",
             "`field_name`, `value`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Invalid default value for the custom field",
+          "cells": [
+            "Invalid default value for the custom field",
+            "`FUNCTIONAL_ERROR`",
+            "`validateCustomFieldDefaultValue` (modules/customField/custom-field-validator)",
+            "`default_value`, `field_name`, `field_type`"
           ]
         },
         {
@@ -4022,7 +4184,7 @@
           "cells": [
             "Unknown custom field type",
             "`FUNCTIONAL_ERROR`",
-            "`getCustomFieldValueField` (modules/customField/custom-field-cache), `getCustomFieldDefaultValueFromEntitySettings` (modules/customField/custom-field-validator), `validateSingleCustomFieldValue` (modules/customField/custom-field-validator) and 1 more",
+            "`getCustomFieldValueField` (modules/customField/custom-field-cache), `parseCustomFieldDefaultValue` (modules/customField/custom-field-validator), `validateSingleCustomFieldValue` (modules/customField/custom-field-validator) and 1 more",
             "`fieldType`, `field_name`, `field_type`"
           ]
         },
@@ -4046,6 +4208,15 @@
         "Data attached"
       ],
       "rows": [
+        {
+          "key": "FUNCTIONAL_ERROR|A widget using dashboard variables cannot be imported into a custom view",
+          "cells": [
+            "A widget using dashboard variables cannot be imported into a custom view",
+            "`FUNCTIONAL_ERROR`",
+            "`validateWidget` (modules/customView/customView-domain)",
+            ""
+          ]
+        },
         {
           "key": "FUNCTIONAL_ERROR|Custom views cannot be created for given entity type",
           "cells": [
@@ -4791,8 +4962,8 @@
           "cells": [
             "Exclusion list file too large",
             "`FUNCTIONAL_ERROR`",
-            "`checkFileSize` (modules/exclusionList/exclusionList-domain)",
-            "`maxFileSize`"
+            "`checkFileSize` (modules/exclusionList/exclusionList-domain), `readExclusionListFile` (modules/exclusionList/exclusionList-file)",
+            "`id`, `maxFileSize`"
           ]
         }
       ]
@@ -6149,6 +6320,33 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Duplicated dashboard variable value",
+          "cells": [
+            "Duplicated dashboard variable value",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPublicationVariableValues` (modules/publicDashboard/publicDashboard-publication)",
+            "`variableId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Invalid dashboard variable value",
+          "cells": [
+            "Invalid dashboard variable value",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPublicationVariableValues` (modules/publicDashboard/publicDashboard-publication)",
+            "`variableId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Invalid public dashboard time zone",
+          "cells": [
+            "Invalid public dashboard time zone",
+            "`FUNCTIONAL_ERROR`",
+            "`toPublicationTimeZone` (modules/publicDashboard/publicDashboard-publication)",
+            "`timeZone`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|No public dashboard found",
           "cells": [
             "No public dashboard found",
@@ -6214,12 +6412,12 @@
       ],
       "rows": [
         {
-          "key": "UNSUPPORTED_ERROR|Element is not sharable at the moment (restricted)",
+          "key": "FUNCTIONAL_ERROR|A request access is limited to {REQUEST_ACCESS_ENTITIES_MAX_COUNT} requested entities",
           "cells": [
-            "Element is not sharable at the moment (restricted)",
-            "`UNSUPPORTED_ERROR`",
-            "`approveRequestAccess` (modules/requestAccess/requestAccess-domain)",
-            "`targetInstanceToShare`"
+            "A request access is limited to {REQUEST_ACCESS_ENTITIES_MAX_COUNT} requested entities",
+            "`FUNCTIONAL_ERROR`",
+            "`assertRequestAccessInputSize` (modules/requestAccess/requestAccess-domain)",
+            "`entitiesCount`"
           ]
         },
         {
@@ -6268,6 +6466,33 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|The initial state of the request access workflow has no status",
+          "cells": [
+            "The initial state of the request access workflow has no status",
+            "`FUNCTIONAL_ERROR`",
+            "`findInitialWorkflowStatusId` (modules/requestAccess/requestAccess-domain)",
+            "`initialStateId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The reason and the requested entities of this request access are too long, shorten the reason or request fewer entities",
+          "cells": [
+            "The reason and the requested entities of this request access are too long, shorten the reason or request fewer entities",
+            "`FUNCTIONAL_ERROR`",
+            "`addRequestAccess` (modules/requestAccess/requestAccess-domain)",
+            "`length`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The reason of a request access is limited to {REQUEST_ACCESS_REASON_MAX_LENGTH} characters",
+          "cells": [
+            "The reason of a request access is limited to {REQUEST_ACCESS_REASON_MAX_LENGTH} characters",
+            "`FUNCTIONAL_ERROR`",
+            "`assertRequestAccessInputSize` (modules/requestAccess/requestAccess-domain)",
+            "`reasonLength`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|This entity is restricted with authorized member and cannot be requested for sharing.",
           "cells": [
             "This entity is restricted with authorized member and cannot be requested for sharing.",
@@ -6277,38 +6502,11 @@
           ]
         },
         {
-          "key": "UNSUPPORTED_ERROR|This RFI is not compatible",
-          "cells": [
-            "This RFI is not compatible",
-            "`UNSUPPORTED_ERROR`",
-            "`checkRequestActionAndGetWorkflow` (modules/requestAccess/requestAccess-domain)",
-            "`id`"
-          ]
-        },
-        {
           "key": "UNSUPPORTED_ERROR|This RFI is not correctly configured",
           "cells": [
             "This RFI is not correctly configured",
             "`UNSUPPORTED_ERROR`",
             "`checkRequestActionAndGetWorkflow` (modules/requestAccess/requestAccess-domain)",
-            "`id`"
-          ]
-        },
-        {
-          "key": "UNSUPPORTED_ERROR|You cant share the requested element (restrictions or markings)",
-          "cells": [
-            "You cant share the requested element (restrictions or markings)",
-            "`UNSUPPORTED_ERROR`",
-            "`approveRequestAccess` (modules/requestAccess/requestAccess-domain)",
-            "`targetInstanceToShare`"
-          ]
-        },
-        {
-          "key": "UNSUPPORTED_ERROR|You need to be able to edit the RFI and share knowledge",
-          "cells": [
-            "You need to be able to edit the RFI and share knowledge",
-            "`UNSUPPORTED_ERROR`",
-            "`approveRequestAccess` (modules/requestAccess/requestAccess-domain)",
             "`id`"
           ]
         }
@@ -6705,6 +6903,15 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Cannot update password for non-local user",
+          "cells": [
+            "Cannot update password for non-local user",
+            "`FUNCTIONAL_ERROR`",
+            "`userEditField` (modules/user/user-domain)",
+            "`userId`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Cannot update password for Service account",
           "cells": [
             "Cannot update password for Service account",
@@ -6849,6 +7056,24 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|The password must be changed on its own",
+          "cells": [
+            "The password must be changed on its own",
+            "`FUNCTIONAL_ERROR`",
+            "`userEditField` (modules/user/user-domain)",
+            "`userId`"
+          ]
+        },
+        {
+          "key": "PASSWORD_REUSED|This password has already been used recently. Please choose a different one.",
+          "cells": [
+            "This password has already been used recently. Please choose a different one.",
+            "`PASSWORD_REUSED`",
+            "`checkPasswordNotReused` (modules/user/user-password-history)",
+            ""
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|This service account already exists. Change the instance name to change the automatically created service account name",
           "cells": [
             "This service account already exists. Change the instance name to change the automatically created service account name",
@@ -6891,6 +7116,15 @@
             "`FUNCTIONAL_ERROR`",
             "`revokeToken` (modules/user/user-domain)",
             "`tokenId`"
+          ]
+        },
+        {
+          "key": "PASSWORD_CHANGE_THROTTLED|Too many password change attempts. Please try again in a few minutes.",
+          "cells": [
+            "Too many password change attempts. Please try again in a few minutes.",
+            "`PASSWORD_CHANGE_THROTTLED`",
+            "`consumePasswordChangeAttempt` (modules/user/user-password-history)",
+            ""
           ]
         },
         {
@@ -7052,7 +7286,7 @@
             "Your IP address is not allowed to access this platform",
             "`AUTH_FAILURE`",
             "`checkIpWhitelistOnLogin` (modules/user/user-domain)",
-            ""
+            "`ip_not_allowed`"
           ]
         }
       ]
@@ -7233,6 +7467,15 @@
       ],
       "rows": [
         {
+          "key": "FUNCTIONAL_ERROR|A request access can only be created through the request access form",
+          "cells": [
+            "A request access can only be created through the request access form",
+            "`FUNCTIONAL_ERROR`",
+            "`assertExternalRequestAccessCreateAllowed` (modules/workflow/domain/workflow-domain), `assertExternalStatusWriteAllowed` (modules/workflow/domain/workflow-domain)",
+            "`id`"
+          ]
+        },
+        {
           "key": "VALIDATION_ERROR|Action type '{type}' is not allowed in asyncActions (must support 'async' mode) in transition {event}",
           "cells": [
             "Action type '{type}' is not allowed in asyncActions (must support 'async' mode) in transition {event}",
@@ -7260,6 +7503,15 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Approved and Declined can only be reached or left through the workflow",
+          "cells": [
+            "Approved and Declined can only be reached or left through the workflow",
+            "`FUNCTIONAL_ERROR`",
+            "`assertExternalStatusCreateAllowed` (modules/workflow/domain/workflow-domain), `assertExternalStatusWriteAllowed` (modules/workflow/domain/workflow-domain)",
+            "`id`, `statusId`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|BYPASS permission is required",
           "cells": [
             "BYPASS permission is required",
@@ -7269,12 +7521,57 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Cannot migrate request access: {problem}",
+          "cells": [
+            "Cannot migrate request access: {problem}",
+            "`FUNCTIONAL_ERROR`",
+            "`convertRequestAccessGroup` (modules/workflow/migration/status-to-definition-converter)",
+            "`approvedTemplateId`, `declinedTemplateId`, `initialState`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Cannot migrate: some statuses reference a status template that no longer exists",
+          "cells": [
+            "Cannot migrate: some statuses reference a status template that no longer exists",
+            "`FUNCTIONAL_ERROR`",
+            "`migrateWorkflowFromStatuses` (modules/workflow/domain/workflow-domain)",
+            "`diagnostics`, `entityType`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Cannot publish a migrated workflow while the ENTITIES_WORKFLOW feature is disabled; migrate without publishing",
+          "cells": [
+            "Cannot publish a migrated workflow while the ENTITIES_WORKFLOW feature is disabled; migrate without publishing",
+            "`FUNCTIONAL_ERROR`",
+            "`migrateWorkflowFromStatuses` (modules/workflow/domain/workflow-domain)",
+            "`entityType`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Cannot publish migrated workflow: resolve the blocking diagnostics first, or migrate without publishing",
+          "cells": [
+            "Cannot publish migrated workflow: resolve the blocking diagnostics first, or migrate without publishing",
+            "`FUNCTIONAL_ERROR`",
+            "`migrateWorkflowFromStatuses` (modules/workflow/domain/workflow-domain)",
+            "`diagnostics`, `entityType`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Cannot publish migrated workflow: the migrated definition is invalid",
+          "cells": [
+            "Cannot publish migrated workflow: the migrated definition is invalid",
+            "`FUNCTIONAL_ERROR`",
+            "`migrateWorkflowFromStatuses` (modules/workflow/domain/workflow-domain)",
+            "`entityType`, `errors`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Cannot publish workflow with validation errors",
           "cells": [
             "Cannot publish workflow with validation errors",
             "`FUNCTIONAL_ERROR`",
             "`publishWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
-            "`entityType`, `errorCount`"
+            "`entityType`, `errorCount`, `errors`"
           ]
         },
         {
@@ -7323,6 +7620,15 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|DraftWorkspace statuses cannot be migrated: its workflow must contain a validateDraft action",
+          "cells": [
+            "DraftWorkspace statuses cannot be migrated: its workflow must contain a validateDraft action",
+            "`FUNCTIONAL_ERROR`",
+            "`assertMigratableEntityType` (modules/workflow/domain/workflow-domain)",
+            "`entityType`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Entity not found",
           "cells": [
             "Entity not found",
@@ -7336,8 +7642,26 @@
           "cells": [
             "Entity setting not found for type",
             "`FUNCTIONAL_ERROR`",
-            "`publishWorkflowDefinition` (modules/workflow/domain/workflow-domain), `restorePublishedWorkflowDefinition` (modules/workflow/domain/workflow-domain), `setWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`migrateWorkflowFromStatuses` (modules/workflow/domain/workflow-domain), `publishWorkflowDefinition` (modules/workflow/domain/workflow-domain), `restorePublishedWorkflowDefinition` (modules/workflow/domain/workflow-domain) and 1 more",
             "`entityType`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Entity type already has a published workflow; migration only replaces a workflow that was never published",
+          "cells": [
+            "Entity type already has a published workflow; migration only replaces a workflow that was never published",
+            "`FUNCTIONAL_ERROR`",
+            "`migrateWorkflowFromStatuses` (modules/workflow/domain/workflow-domain)",
+            "`entityType`, `scope`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Entity type already has a workflow, migration would overwrite it (pass overwrite: true to replace it)",
+          "cells": [
+            "Entity type already has a workflow, migration would overwrite it (pass overwrite: true to replace it)",
+            "`FUNCTIONAL_ERROR`",
+            "`migrateWorkflowFromStatuses` (modules/workflow/domain/workflow-domain)",
+            "`entityType`, `scope`"
           ]
         },
         {
@@ -7377,12 +7701,30 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|No legacy statuses to migrate",
+          "cells": [
+            "No legacy statuses to migrate",
+            "`FUNCTIONAL_ERROR`",
+            "`pickMigrationScope` (modules/workflow/migration/status-to-definition-converter)",
+            "`entityType`, `scope`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|No published version to restore",
           "cells": [
             "No published version to restore",
             "`FUNCTIONAL_ERROR`",
             "`restorePublishedWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
             "`entityType`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|No transition to {outcome} is allowed from the current state",
+          "cells": [
+            "No transition to {outcome} is allowed from the current state",
+            "`FUNCTIONAL_ERROR`",
+            "`fireRequestAccessOutcomeTransition` (modules/workflow/domain/workflow-request-access)",
+            "`id`"
           ]
         },
         {
@@ -7413,12 +7755,75 @@
           ]
         },
         {
+          "key": "UNSUPPORTED_ERROR|Nothing to share: no requested entity or no organization resolved",
+          "cells": [
+            "Nothing to share: no requested entity or no organization resolved",
+            "`UNSUPPORTED_ERROR`",
+            "`shareRequestedEntities` (modules/workflow/registry/workflow-actions)",
+            "`id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Request access can only be changed through the workflow",
+          "cells": [
+            "Request access can only be changed through the workflow",
+            "`FUNCTIONAL_ERROR`",
+            "`assertExternalRequestAccessWriteAllowed` (modules/workflow/domain/workflow-domain)",
+            "`id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Request access must be a JSON object of at most {REQUEST_ACCESS_MAX_LENGTH} characters",
+          "cells": [
+            "Request access must be a JSON object of at most {REQUEST_ACCESS_MAX_LENGTH} characters",
+            "`FUNCTIONAL_ERROR`",
+            "`assertExternalRequestAccessCreateAllowed` (modules/workflow/domain/workflow-domain), `assertExternalRequestAccessWriteAllowed` (modules/workflow/domain/workflow-domain)",
+            "`id`"
+          ]
+        },
+        {
+          "key": "UNSUPPORTED_ERROR|Request access RFI not found",
+          "cells": [
+            "Request access RFI not found",
+            "`UNSUPPORTED_ERROR`",
+            "`applyRequestAccessOutcome` (modules/workflow/domain/workflow-request-access), `mirrorRequestAccessStatus` (modules/workflow/domain/workflow-request-access)",
+            "`id`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|RequestAccess workflow bypass is not supported",
           "cells": [
             "RequestAccess workflow bypass is not supported",
             "`FUNCTIONAL_ERROR`",
             "`loadWorkflowBypass` (modules/workflow/domain/workflow-domain)",
             ""
+          ]
+        },
+        {
+          "key": "UNSUPPORTED_ERROR|Requested entity not found",
+          "cells": [
+            "Requested entity not found",
+            "`UNSUPPORTED_ERROR`",
+            "`applyRequestAccessOutcome` (modules/workflow/domain/workflow-request-access)",
+            "`requestedEntityId`"
+          ]
+        },
+        {
+          "key": "UNSUPPORTED_ERROR|shareRequestedEntities is only available on request access RFIs",
+          "cells": [
+            "shareRequestedEntities is only available on request access RFIs",
+            "`UNSUPPORTED_ERROR`",
+            "`shareRequestedEntities` (modules/workflow/registry/workflow-actions)",
+            "`id`"
+          ]
+        },
+        {
+          "key": "UNSUPPORTED_ERROR|shareRequestedEntities requires the user who decided the request",
+          "cells": [
+            "shareRequestedEntities requires the user who decided the request",
+            "`UNSUPPORTED_ERROR`",
+            "`shareRequestedEntities` (modules/workflow/registry/workflow-actions)",
+            "`id`"
           ]
         },
         {
@@ -7431,12 +7836,84 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|The background share of the requested entities failed: retry it before deciding the request",
+          "cells": [
+            "The background share of the requested entities failed: retry it before deciding the request",
+            "`FUNCTIONAL_ERROR`",
+            "`assertNoFailedRequestAccessShare` (modules/workflow/domain/workflow-domain)",
+            "`event`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The container share tasks of the request access could not all be deleted: the pending state is kept",
+          "cells": [
+            "The container share tasks of the request access could not all be deleted: the pending state is kept",
+            "`FUNCTIONAL_ERROR`",
+            "`clearWorkflowPendingState` (modules/workflow/domain/workflow-domain)",
+            "`taskIds`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The Global and Request access workflows must have different names",
+          "cells": [
+            "The Global and Request access workflows must have different names",
+            "`FUNCTIONAL_ERROR`",
+            "`setWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`entityType`, `name`, `scope`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The organizations shared directly by the request access could not all be revoked: the pending state is kept",
+          "cells": [
+            "The organizations shared directly by the request access could not all be revoked: the pending state is kept",
+            "`FUNCTIONAL_ERROR`",
+            "`clearWorkflowPendingState` (modules/workflow/domain/workflow-domain)",
+            "`entityIds`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|This request access is not decided on a request access workflow",
+          "cells": [
+            "This request access is not decided on a request access workflow",
+            "`FUNCTIONAL_ERROR`",
+            "`fireRequestAccessOutcomeTransition` (modules/workflow/domain/workflow-request-access)",
+            "`id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|This transition requires a comment",
+          "cells": [
+            "This transition requires a comment",
+            "`FUNCTIONAL_ERROR`",
+            "`fireRequestAccessOutcomeTransition` (modules/workflow/domain/workflow-request-access)",
+            "`id`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Workflow definition not found",
           "cells": [
             "Workflow definition not found",
             "`FUNCTIONAL_ERROR`",
             "`publishWorkflowDefinition` (modules/workflow/domain/workflow-domain), `restorePublishedWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
             "`workflowId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Workflow scope is not available for this entity type",
+          "cells": [
+            "Workflow scope is not available for this entity type",
+            "`FUNCTIONAL_ERROR`",
+            "`assertScopeAllowed` (modules/workflow/domain/workflow-domain)",
+            "`entityType`, `scope`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Workflow scope is not available while the ENTITIES_WORKFLOW feature is disabled",
+          "cells": [
+            "Workflow scope is not available while the ENTITIES_WORKFLOW feature is disabled",
+            "`FUNCTIONAL_ERROR`",
+            "`assertScopeAllowed` (modules/workflow/domain/workflow-domain)",
+            "`entityType`, `scope`"
           ]
         }
       ]
@@ -7460,12 +7937,30 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|A dashboard cannot hold more than {DASHBOARD_PRESETS_MAX_COUNT} presets",
+          "cells": [
+            "A dashboard cannot hold more than {DASHBOARD_PRESETS_MAX_COUNT} presets",
+            "`FUNCTIONAL_ERROR`",
+            "`buildDashboardPreset` (modules/workspace/workspace-presets-validation)",
+            ""
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|A dashboard cannot hold more than {DASHBOARD_VARIABLES_MAX_COUNT} variables",
           "cells": [
             "A dashboard cannot hold more than {DASHBOARD_VARIABLES_MAX_COUNT} variables",
             "`FUNCTIONAL_ERROR`",
             "`buildDashboardVariable` (modules/workspace/workspace-variables-validation)",
             ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|A dashboard preset with this name already exists",
+          "cells": [
+            "A dashboard preset with this name already exists",
+            "`FUNCTIONAL_ERROR`",
+            "`buildDashboardPreset` (modules/workspace/workspace-presets-validation)",
+            "`name`"
           ]
         },
         {
@@ -7577,12 +8072,48 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|A widget using dashboard variables cannot be used in a custom view: {refusedWidgets}",
+          "cells": [
+            "A widget using dashboard variables cannot be used in a custom view: {refusedWidgets}",
+            "`FUNCTIONAL_ERROR`",
+            "`sanitizeCustomViewManifest` (modules/workspace/workspace-variables-utils)",
+            "`widgets`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|An entity variable requires at least one entity type",
           "cells": [
             "An entity variable requires at least one entity type",
             "`FUNCTIONAL_ERROR`",
             "`buildTypeSpecificFields` (modules/workspace/workspace-variables-validation)",
             ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Dashboard preset name is required",
+          "cells": [
+            "Dashboard preset name is required",
+            "`FUNCTIONAL_ERROR`",
+            "`buildDashboardPreset` (modules/workspace/workspace-presets-validation)",
+            ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Dashboard preset name is too long",
+          "cells": [
+            "Dashboard preset name is too long",
+            "`FUNCTIONAL_ERROR`",
+            "`buildDashboardPreset` (modules/workspace/workspace-presets-validation)",
+            ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Dashboard preset not found",
+          "cells": [
+            "Dashboard preset not found",
+            "`FUNCTIONAL_ERROR`",
+            "`workspacePresetDelete` (modules/workspace/workspace-presets-domain)",
+            "`presetId`"
           ]
         },
         {
@@ -7622,6 +8153,24 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Duplicated dashboard preset id",
+          "cells": [
+            "Duplicated dashboard preset id",
+            "`FUNCTIONAL_ERROR`",
+            "`validateManifestVariables` (modules/workspace/workspace-variables-utils)",
+            "`presetId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Duplicated dashboard preset value",
+          "cells": [
+            "Duplicated dashboard preset value",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPresetValues` (modules/workspace/workspace-presets-validation)",
+            "`variableId`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Duplicated dashboard variable id",
           "cells": [
             "Duplicated dashboard variable id",
@@ -7645,6 +8194,60 @@
             "Invalid dashboard manifest",
             "`FUNCTIONAL_ERROR`",
             "`preserveServerOwnedManifestKeys` (modules/workspace/workspace-variables-utils)",
+            ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Invalid dashboard preset",
+          "cells": [
+            "Invalid dashboard preset",
+            "`FUNCTIONAL_ERROR`",
+            "`toPresetInput` (modules/workspace/workspace-variables-utils)",
+            "`presetId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Invalid dashboard preset id",
+          "cells": [
+            "Invalid dashboard preset id",
+            "`FUNCTIONAL_ERROR`",
+            "`buildDashboardPreset` (modules/workspace/workspace-presets-validation)",
+            "`presetId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Invalid dashboard preset time range",
+          "cells": [
+            "Invalid dashboard preset time range",
+            "`FUNCTIONAL_ERROR`",
+            "`toPresetInput` (modules/workspace/workspace-variables-utils)",
+            "`presetId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Invalid dashboard preset value",
+          "cells": [
+            "Invalid dashboard preset value",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPresetValues` (modules/workspace/workspace-presets-validation)",
+            "`variableId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Invalid dashboard preset values",
+          "cells": [
+            "Invalid dashboard preset values",
+            "`FUNCTIONAL_ERROR`",
+            "`toPresetInput` (modules/workspace/workspace-variables-utils)",
+            "`presetId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Invalid dashboard presets",
+          "cells": [
+            "Invalid dashboard presets",
+            "`FUNCTIONAL_ERROR`",
+            "`validateManifestVariables` (modules/workspace/workspace-variables-utils)",
             ""
           ]
         },
@@ -7736,6 +8339,15 @@
             "`FUNCTIONAL_ERROR`",
             "`buildDefaultValue` (modules/workspace/workspace-variables-validation)",
             ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The preset value must belong to the selection of the variable",
+          "cells": [
+            "The preset value must belong to the selection of the variable",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPresetValues` (modules/workspace/workspace-presets-validation)",
+            "`variableId`"
           ]
         },
         {

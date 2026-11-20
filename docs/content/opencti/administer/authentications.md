@@ -260,6 +260,32 @@ Before you turn local login off, log in through another provider and check the g
 
 **Client Certificate** logs users in with a certificate chosen in the browser. Turn on **Enable client certificate authentication**. By default it reads the email from `subject.emailAddress`, the name from `subject.CN`, the groups from `subject.OU` and the organizations from `subject.O`. Leave the first and last name expressions empty when your certificates have no such fields. It needs OpenCTI to serve HTTPS itself (`app:https_cert:*`, see [Network and security](/reference/opencti/configuration/#network-and-security)). Otherwise its status stays **Disabled**, with the warning **Client certificate requires the platform to be configured with HTTPS**.
 
+::::only{opencti=">=7.261117"}
+## Stop users from reusing a password
+
+**Number of recent passwords that cannot be reused (0 equals disabled)**, in the **Update Local Authentication** panel, refuses a new password that matches one of the last passwords of the account. The count includes the current password: `1` refuses only the current one, `5` the current one and the four before it. It accepts `0` to `24`; `0`, the default, turns the rule off.
+
+::screenshot{id=opencti-authentications-password-history alt="The Update Local Authentication panel with Number of recent passwords that cannot be reused set to 5, under Password validity duration in days."}
+
+The rule applies to every local account, whoever sets the password: the user in their profile, at a forced change or after a forgotten password, or an administrator in the user's **Password** tab. It leaves out the users of a single sign-on provider and the service accounts, which have no password of their own. Each password form lists the rule in its **Password security policies** box: **Must be different from your last {count} passwords** for the user, **Must be different from the last {count} passwords** for an administrator, with your count in place of `{count}`. A reused password gets **This password has already been used recently. Please choose a different one.**, and the password stays as it was.
+
+OpenCTI stores one-way hashes of the old passwords, never the passwords themselves. It starts remembering when you turn the rule on: until then, it knows only the current password of each account. Lowering the count deletes the hashes no longer needed at once. `0` deletes every stored history, so turning the rule back on starts from scratch. An account that moves to single sign-on loses its history too.
+
+While the rule is on, password changes are also limited per account and per person submitting them: 5 attempts in 15 minutes by default, successful ones included. Beyond that, the form shows **Too many password change attempts. Please try again in a few minutes.** One person's attempts never block another's: an administrator can still reset the password of an account someone is guessing on. Change the limit with `app:password_change:max_attempts` (`APP__PASSWORD_CHANGE__MAX_ATTEMPTS`) and `app:password_change:window_seconds` (`APP__PASSWORD_CHANGE__WINDOW_SECONDS`), see [Network and security](/reference/opencti/configuration/#network-and-security).
+
+A refused reuse goes to the platform logs as `Password reuse refused`, and, with the Enterprise Edition, to the activity log with the `password_reuse` operation. Scripts that change passwords through the API must send the password on its own while the rule is on: an update that also changes another field fails with `The password must be changed on its own`.
+
+:::example[Keep hotel staff from cycling back to an old password]
+Grand Meridian Hotels makes local passwords expire every 90 days, and its auditors ask that a password not come back within a year and a half.
+
+- **Password validity duration in days**: `90`.
+- **Number of recent passwords that cannot be reused (0 equals disabled)**: `6`, the current password and the five before it, about 18 months of changes.
+- The default limit of 5 attempts in 15 minutes stays: no setting to add to the platform configuration.
+
+When Ana Duval's password expires, OpenCTI refuses the one she used last spring, and accepts a new one.
+:::
+::::
+
 ## Set platform-wide login policies
 
 - **Enforce two-factor authentication** makes every user set up a one-time code application before they can use the platform.

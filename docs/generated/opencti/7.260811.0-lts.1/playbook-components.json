@@ -445,7 +445,8 @@
       "notes": [
         "Add appends values, replace overwrites the whole set, remove deletes only the listed values.",
         "When an enrichment connector follows this step, its changes and yours are both kept in the final write.",
-        "From 7.261109, the Field list also offers the custom fields of the platform, by their label. Replace and remove work on every custom field; add only on a multiple selection list, option by option."
+        "From 7.261109, the Field list also offers the custom fields of the platform, by their label. Replace and remove work on every custom field; add only on a multiple selection list, option by option.",
+        "From 7.261117, the Field list also offers Report types, with add, replace and remove. Its values come from the report types vocabulary, and only reports in scope are changed."
       ],
       "requires": [],
       "see_also": [],
@@ -1202,7 +1203,8 @@
       "summary": "Sends the bundle to an XTM One AI agent and continues with the STIX bundle it returns. The default agent, CTI STIX transformer, only produces valid STIX 2.1.",
       "use_when": "a transformation is easier to describe in words than to build from components.",
       "notes": [
-        "For security, the agent can only run as you or as a service account."
+        "For security, the agent can only run as you or as a service account.",
+        "The step waits up to 10 minutes for the agent's answer (5 minutes before 7.261117). When the call fails, times out or returns no valid STIX bundle, the bundle continues unchanged on the unmodified output."
       ],
       "requires": [
         "XTM One (each run uses your XTM One quota)"
@@ -1254,7 +1256,8 @@
       "summary": "Hands the bundle to an XTM One AI agent and ends the branch. The agent carries on with your instructions and writes what it creates to a draft for an analyst to review.",
       "use_when": "you delegate follow-up work, such as a weekly grouping, to an AI agent.",
       "notes": [
-        "For security, the agent can only run as you or as a service account."
+        "For security, the agent can only run as you or as a service account.",
+        "The step waits up to 10 minutes for the agent's answer (5 minutes before 7.261117). A call that fails or times out is written to the platform logs; the branch ends either way."
       ],
       "requires": [
         "XTM One (each run uses your XTM One quota)"

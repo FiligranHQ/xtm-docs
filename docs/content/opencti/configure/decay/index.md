@@ -62,6 +62,10 @@ So place a reaction point on every score threshold your integrations filter on. 
    Add filters on any of these keys: **Author**, **Creator**, **Marking**, **Label**, **Main observable type**, **Indicator type** and **Pattern type**. A rule without filters applies to every indicator.
    :::
 
+   :::only{opencti=">=7.261117"}
+   The keys also offer the [custom fields](/opencti/configure/taxonomies/#custom-fields) added to the **Indicator** type, by their label: a rule can then select the indicators that hold a given value in that field, set by an analyst or sent by a source.
+   :::
+
    :::only{opencti="<7.260811"}
    Pick the main observable types in **Apply on indicator observable types (none = ALL)**. A rule without types applies to every indicator.
    :::

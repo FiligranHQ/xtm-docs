@@ -117,8 +117,10 @@ Open :menu[Integrations] and stay on the **Deployed** tab. The strip at the top 
 
 :::only{opencti=">=7.261030"}
 The lines view adds **Throughput**, the bundles processed per second, and **Last activity**.
+:::
 
-A connector is **Started** when it runs. A connector deployed with XTM Composer is **Stopped** when someone stopped it; any other connector shows **Stopped** when it has not reported for 5 minutes. **Processing** means that a start or a stop is under way.
+:::only{opencti=">=7.261117"}
+A connector is **Started** unless someone stopped it: only a connector deployed with XTM Composer can show **Stopped**. A connector that stops reporting stays **Started**, and its health says that it no longer answers: see [Spot an integration that stops working](#spot-an-integration-that-stops-working). **Processing** means that a start or a stop is under way.
 :::
 
 :::only{opencti="<7.261030"}
@@ -131,6 +133,49 @@ Open :menu[Data > Ingestion > Connectors]. Each connector shows its status, when
 ::::
 
 A large number of queued messages means the workers cannot keep up. The connector itself is fine: the data will arrive.
+
+::::only{opencti=">=7.261117"}
+## Spot an integration that stops working
+
+Every minute, the platform checks the health of each connector, feed and synchronizer that runs: the account it writes as, the heartbeat and the errors of a connector, and the last run of a feed or a synchronizer. You see at a glance which sources stopped delivering, and why, without opening each one. A stopped integration is not checked.
+
+A problem makes the integration **Critical** when it no longer imports, or **Degraded** when something needs fixing.
+
+| Message | Health | What it means |
+| --- | --- | --- |
+| "No heartbeat received" | **Critical** | A connector that runs continuously has not reported for 5 minutes: its process is down. A connector that only runs on a schedule and exits is not checked |
+| "Connector reported a critical error" | **Critical** | The connector reported an error that blocks it, followed by the error's code and message |
+| "Connector reported an error" | **Degraded** | The connector reported a lesser error: it may still import |
+| "Feed execution failed" or "Sync execution failed" | **Critical** | The last run of a feed or a synchronizer failed, for example because the source was unreachable. The message adds the HTTP status or the error. Nothing is imported until a run succeeds |
+| "Feed or sync source denied access" | **Critical** | The source refused the credentials of the feed or the synchronizer, with HTTP 401, 402 or 403: update them |
+| "User is missing" | **Degraded** | The account the integration writes as no longer exists |
+| "User lacks required capability" | **Degraded** | The account of a connector lacks **Connectors API usage: register, ping, export push ...** |
+| "User account is not active" | **Degraded** | The account is expired, locked or disabled |
+| "User is not a service account" | **Degraded** | The integration writes as a person's account. A service account is recommended: it does not leave with a person |
+
+The account problems show as **Degraded** even when they stop the integration: a connector whose account is missing, inactive or lacks the capability cannot register with the platform. Fix them first.
+
+The health shows in three places:
+
+- At the top of the **Deployed** tab, one alert for the integrations that are not working and one for those that are degraded, such as "1 integration is not working", with the names of up to three of them. **Review** opens the integration when there is only one; **See all** narrows the list to them.
+- On each integration: a strip at the top of its card gives the first problem and leads to **Review**. In the lines view, the **Health status** column shows **Critical** or **Degraded**; hover over it to see since when, and every problem. The **Health status** filter on the left keeps the integrations in either state.
+- On the page of the connector, the feed or the synchronizer: a banner, such as "This connector is not working since" and the date, lists its problems. When there are several, the first one shows and a button unfolds the others.
+
+::screenshot{id=opencti-ingest-connectors-health alt="On the page of the Hospitality threat feed connector, a red banner says the connector is not working, with No heartbeat received, and an orange one says it is degraded, with User is not a service account."}
+
+When a health stays critical, degraded or back to normal for 5 minutes, the platform records an `ingestion_health` event in the activity log. An administrator can receive these events by email through an [activity trigger](/opencti/configure/activity/triggers/) that uses the **Ingestion health default mailer** notifier. The [ingestion health manager](/opencti/concepts/architecture/#the-ingestion-health-manager) explains how the checks run.
+
+:::example[Find why the hospitality feed went quiet]
+On Monday morning, your analysts notice that no new report on the hospitality sector arrived over the weekend.
+
+1. In :menu[Integrations], tab **Deployed**, an alert reads "1 integration is not working": **Hospitality threat feed**, with "No heartbeat received".
+2. Click **Review**. The connector page shows "This connector is not working since" Saturday's date, and a second banner says that it is degraded: "User is not a service account".
+3. The connector's process is down: ask the administrator who runs it to restart it. Ask them also to give the connector a service account. See [Create accounts for integrations](/opencti/administer/service-accounts/).
+4. Once the connector reports again, the red banner disappears at the next check, within a minute. Open **Works**: the next run starts from the connector's state, the date of its last import.
+
+The team knows that the feed works again, and the next outage shows on the **Deployed** tab within minutes, not after a quiet weekend.
+:::
+::::
 
 ## Read a connector's page
 
@@ -226,7 +271,13 @@ The team now finds every ATT&CK technique to link to Velvet Harbor, and the matr
 
 ## Check that it works
 
-A connector that runs shows a recent **Last seen** and new lines in its works, with few errors. The objects it imports carry its account as **Creator**: filter any list by **Creator** to see them.
+A connector that runs shows a recent **Last seen** and new lines in its works, with few errors.
+
+:::only{opencti=">=7.261117"}
+Its card shows no health strip, and its page no health banner.
+:::
+
+The objects it imports carry its account as **Creator**: filter any list by **Creator** to see them.
 
 ## Settings an administrator controls
 

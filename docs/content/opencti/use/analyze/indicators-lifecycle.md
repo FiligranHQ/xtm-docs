@@ -57,6 +57,10 @@ The score changes only at the reaction points of the rule, 80 and 50 for most of
 3. Sets **Valid from** to the date the source gives, or the creation date of the indicator, or now.
 4. Sets **Valid until** to the moment the score will reach the revoke score, replacing any date the source gave. An indicator created already revoked, because its validity is over, keeps its dates and gets no decay.
 
+:::only{opencti=">=7.261117"}
+A decay rule, or a decay exclusion rule, can also select indicators by a [custom field](/opencti/configure/taxonomies/#custom-fields) of the Indicator type. The value the source or the analyst gives when creating the indicator decides the rule: filling or changing the field afterwards does not change it.
+:::
+
 **Over time**, the decay manager checks every minute for indicators that reach a reaction point and lowers their score. When the score reaches the revoke score, the indicator is revoked: **Detection** becomes **No**, and every feed and stream that selects valid indicators drops it. A live stream sends the change as an update, so a connected SIEM can remove the indicator; a CSV feed or a TAXII collection leaves it out of the next download.
 
 The **Sightings** tab lists where your tools saw the indicator, with **First seen**, **Last seen** and **Count**. Click **Create a sighting** to record a hit by hand, and set **False positive** on a sighting your investigation shows benign. A sighting, true or false positive, does not change the score: lower it or revoke the indicator yourself. Your tools can keep sighting a revoked indicator, but the rule **Raise incident based on sighting** only raises incidents for valid indicators.
