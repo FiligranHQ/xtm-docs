@@ -1,0 +1,26 @@
+title: An action of a chained scenario reaches a target only when the allow list holds it and the deny list does not
+lanes:
+  - label: What you add
+    tone: external
+    nodes:
+      - {id: assets, label: Assets and asset groups, icon: Laptop, note: Endpoints of the platform}
+      - {id: manual, label: "IPs, subnets, domains", icon: Network, note: Typed or imported from CSV}
+      - {id: people, label: Teams and persons, icon: Users, note: For emails and SMS}
+  - label: Scope
+    tone: product
+    nodes:
+      - {id: allow, label: Allow list, icon: ListChecks, note: At least one entry}
+      - {id: deny, label: Deny list, icon: X, note: Always wins}
+  - label: Actions
+    tone: product
+    nodes:
+      - {id: technical, label: Technical actions, icon: Terminal, note: Run on endpoints and hosts}
+      - {id: tabletop, label: Tabletop actions, icon: MessageSquare, note: Reach people}
+edges:
+  - {from: assets, to: allow, label: add}
+  - {from: manual, to: allow, label: add}
+  - {from: people, to: allow, label: add}
+  - {from: allow, to: technical, label: "assets, IPs, domains"}
+  - {from: allow, to: tabletop, label: teams and persons}
+  - {from: deny, to: technical, label: never reached, style: dashed}
+  - {from: deny, to: tabletop, label: never reached, style: dashed}

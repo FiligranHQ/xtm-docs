@@ -1,0 +1,17 @@
+title: A Meta app sends WhatsApp messages to XTM One once both sides share the same verify token
+lanes:
+  - label: Meta
+    tone: external
+    nodes:
+      - {id: app, label: Meta app, icon: Puzzle, note: "WhatsApp product, access token"}
+      - {id: webhook, label: Webhook, icon: Network, note: "messages field"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: card, label: WhatsApp card, icon: KeyRound, note: "Token, phone ID, verify token"}
+      - {id: agent, label: Agent, icon: Bot, note: Receive on}
+edges:
+  - {from: app, to: card, label: credentials}
+  - {from: card, to: webhook, label: callback URL, style: dashed}
+  - {from: webhook, to: card, label: messages}
+  - {from: card, to: agent, label: routed}

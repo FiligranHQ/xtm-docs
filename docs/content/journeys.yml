@@ -1,0 +1,224 @@
+# Journeys: an outcome reached through several pages, possibly across products. A page of a
+# journey shows its steps to the reader who chose it; /workflows/ lists every journey, and the home
+# the last three of this list (write a new one at the end). `shot` is the screen of the outcome the
+# card shows (or `diagram`, drawn small). A step not published yet shows as coming soon.
+- id: automate-intelligence
+  title: Automate threat intelligence
+  outcome: New intelligence is filtered, enriched, saved and shared without anyone touching it, and AI agents take over the follow-up.
+  products: [opencti, xtm-one]
+  shot: opencti-playbook-canvas
+  steps:
+    - {url: /opencti/use/automate/playbooks/, label: Understand playbooks}
+    - {url: /opencti/use/automate/playbooks/choose-a-component/, label: Choose components}
+    - {url: /opencti/use/automate/playbooks/create/, label: Build and start}
+    - {url: /opencti/use/automate/playbooks/monitor/, label: Monitor runs}
+- id: threat-informed-validation
+  title: Check your defenses against the threats you track
+  outcome: Threats known in OpenCTI become OpenAEV scenarios on your own endpoints, your security tools' alerts score each step, the results come back as security coverage, OpenCRQ prices the gaps they leave, and XTM One summarizes it.
+  products: [opencti, openaev, opencrq, xtm-one]
+  shot: openaev-simulations-execution
+  steps:
+    - {url: /openaev/use/agents/, label: Install agents on the endpoints}
+    - {url: /openaev/use/collectors/, label: Let your security tools score it}
+    - {url: /openaev/configure/asset-rules/, label: Aim the tests at the right endpoints}
+    - {url: /opencti/use/analyze/security-coverage/, label: Ask for a security coverage}
+    - {url: /openaev/use/scenarios/from-opencti/, label: Fill the gaps of the scenario}
+    - {url: /openaev/use/simulations/, label: Run the simulation}
+    - {url: /openaev/use/expectations/, label: Read what was prevented and detected}
+    - {url: /opencrq/use/sources/openaev/, label: Price the gaps in OpenCRQ}
+    - {url: /xtm-one/use/in-openaev/, label: Summarize with XTM One}
+
+- id: ai-assisted-intelligence
+  title: Put XTM One agents to work on your intelligence
+  outcome: An agent built for the CTI team reads what OpenCTI receives, summarizes it every week through an assignment, and transforms intelligence inside your playbooks, under your governance.
+  products: [xtm-one, opencti]
+  shot: opencti-xtm-one-ask-ariane-panel
+  steps:
+    - {url: /xtm-one/use/in-opencti/, label: Connect XTM One to OpenCTI}
+    - {url: /xtm-one/build/agents/, label: Build the agent and its weekly assignment}
+    - {url: /xtm-one/build/sharing/, label: Share it with the CTI team}
+    - {url: /xtm-one/administer/intents/, label: Let playbooks call it}
+    - {url: /opencti/use/automate/playbooks/create/, label: Hand the triage to the agents}
+    - {url: /opencti/use/automate/playbooks/monitor/, label: Check each run of the playbook}
+    - {url: /xtm-one/use/work-history/, label: Review the weekly brief}
+
+- id: ctem-cycle
+  title: Run a CTEM cycle across the platform
+  outcome: Scope what the business could lose, bring in the threats that target it, price each risk in money, check the controls against real attacks, and fund what removes the most loss.
+  products: [opencrq, opencti, openaev, xtm-one]
+  shot: opencrq-treatment-plan
+  steps:
+    - {url: /opencrq/concepts/risk-scopes-and-assets/, label: Scope the business at risk}
+    - {url: /opencrq/use/attack-surface/assets/, label: Map the estate that carries it}
+    - {url: /opencrq/use/sources/opencti/, label: Bring in the threats from OpenCTI}
+    - {url: /opencrq/use/threats/threat-center/, label: See who targets the scope}
+    - {url: /opencrq/use/attack-surface/findings/, label: Find the open doors}
+    - {url: /opencrq/use/quantify/risk-scenarios/, label: Price each risk in money}
+    - {url: /opencrq/use/defenses/controls/, label: Declare the controls}
+    - {url: /openaev/use/simulations/, label: Test the controls with real attacks}
+    - {url: /opencrq/use/sources/openaev/, label: Measure the controls on the results}
+    - {url: /opencrq/use/decide/treatment-plans/, label: Fund what removes the most loss}
+    - {url: /xtm-one/use/dashboard/, label: Follow the five stages in XTM One}
+
+- id: investigate-an-incident
+  title: Investigate an incident
+  outcome: From the lure to the people it reached, one night's intrusion is worked as a case in OpenCTI, replayed in OpenAEV to check the fix, priced again in OpenCRQ, and summarized for the CISO by XTM One.
+  products: [opencti, openaev, opencrq, xtm-one]
+  shot: opencti-events-incident-overview
+  steps:
+    - {url: /opencti/use/explore/entities/, label: The event the lure posed as}
+    - {url: /opencti/use/explore/events/, label: The incident and its sightings}
+    - {url: /opencti/use/explore/entities/, label: The people involved}
+    - {url: /opencti/use/analyze/cases/, label: Work it as a case}
+    - {url: /openaev/use/scenarios/from-opencti/, label: Replay the attack in OpenAEV}
+    - {url: /opencrq/use/quantify/risk-scenarios/, label: Price the breach again in OpenCRQ}
+    - {url: /xtm-one/use/in-opencti/, label: Summarize with XTM One}
+
+- id: brief-a-sector
+  title: Brief a sector on its threats
+  outcome: A sector CERT turns what targets its members into a monthly brief and sends it to the right people.
+  products: [opencti, xtm-one]
+  shot: opencti-report-overview
+  steps:
+    - {url: /opencti/use/explore/entities/, label: The threat picture of the sector}
+    - {url: /opencti/use/explore/analysis/, label: Gather the reports behind the brief}
+    - {url: /opencti/use/share/dissemination-lists/, label: Send it to the members}
+    - {url: /xtm-one/use/in-opencti/, label: Summarize with XTM One}
+
+- id: rehearse-a-crisis
+  title: Rehearse a cyber crisis with the people who would live it
+  outcome: The crisis cell lives the night of the intrusion again, with the EDR alert, the press article and the questions it must answer, knows what the breach would cost, and leaves with its lessons learned and an AI briefing.
+  products: [openaev, opencrq, xtm-one]
+  shot: openaev-media-pressure-articles
+  steps:
+    - {url: /openaev/concepts/scenarios-simulations/, label: Plan the exercise}
+    - {url: /openaev/use/scenarios/build/, label: Build the exercise and its injects}
+    - {url: /openaev/use/targets/people/, label: Gather the crisis cell}
+    - {url: /openaev/use/components/documents/, label: Share the alert and the playbook}
+    - {url: /openaev/use/components/channels/, label: Create the press outlet}
+    - {url: /openaev/use/components/media-pressure/, label: Publish the article}
+    - {url: /openaev/use/components/challenges/, label: Ask the cell to investigate}
+    - {url: /opencrq/use/decide/dashboards/, label: Know what the breach costs}
+    - {url: /xtm-one/build/agents/, label: Brief the cell with an agent}
+    - {url: /openaev/use/simulations/, label: Run the exercise}
+    - {url: /openaev/use/components/lessons/, label: Collect the lessons learned}
+
+- id: test-your-people
+  title: Test whether your staff fall for the lure
+  outcome: Front-desk staff receive the booking request Velvet Harbor sent, and you see who opened it, who clicked and who typed a password, then train the ones who did.
+  products: [opencti, openaev, xtm-one]
+  shot: openaev-phishing-person-results
+  steps:
+    - {url: /opencti/use/explore/entities/, label: Know the lure from OpenCTI}
+    - {url: /openaev/use/phishing/, label: Understand a phishing exercise}
+    - {url: /openaev/use/phishing/email-templates/, label: Write the lure email}
+    - {url: /openaev/use/phishing/landing-pages/, label: Build the landing page}
+    - {url: /xtm-one/use/in-openaev/, label: Let XTM One draft them}
+    - {url: /openaev/use/phishing/run/, label: Send it to your teams}
+    - {url: /openaev/use/phishing/results/, label: Read who clicked}
+
+- id: validate-detections
+  title: Keep your detections tested every week
+  outcome: Your EDR runs the attacker's commands on schedule, every alert it raises scores a step, a drop in the score warns you, and the night shift gets a detection rule for what was missed.
+  products: [openaev, xtm-one]
+  shot: openaev-dashboards-home
+  steps:
+    - {url: /openaev/use/executors/, label: Run attacks through your EDR}
+    - {url: /openaev/use/threat-arsenal/, label: Build the attacker's actions}
+    - {url: /openaev/use/atomic-testing/, label: Check one technique first}
+    - {url: /openaev/use/scenarios/build/, label: Schedule the scenario}
+    - {url: /openaev/use/collectors/, label: Collect the alerts}
+    - {url: /openaev/use/dashboards/, label: Follow the trend}
+    - {url: /openaev/configure/notifications/, label: Get warned of a drop}
+    - {url: /xtm-one/build/skills/, label: Write the missing rule with an agent}
+
+- id: build-an-agent
+  title: Build an AI agent your team can trust
+  outcome: An agent that knows your policies, reads OpenCTI without changing it, is shared with the right team, runs on schedule within a budget, and leaves a trace of everything it did.
+  products: [xtm-one, opencti]
+  shot: xtm-one-chat-conversation
+  steps:
+    - {url: /xtm-one/concepts/agents/, label: Know what an agent is made of}
+    - {url: /xtm-one/build/knowledge-bases/, label: Give it your documents}
+    - {url: /xtm-one/build/integrations/, label: Connect it to OpenCTI}
+    - {url: /xtm-one/build/skills/, label: Teach it a procedure}
+    - {url: /xtm-one/build/agents/, label: Create the agent}
+    - {url: /xtm-one/use/chat/, label: Try it in the chat}
+    - {url: /xtm-one/build/sharing/, label: Share it with the team}
+    - {url: /xtm-one/use/webhook-triggers/, label: Start it from another tool}
+    - {url: /xtm-one/use/run-budgets/, label: Cap what it spends}
+    - {url: /xtm-one/use/work-history/, label: Review what it did}
+
+- id: govern-ai
+  title: Govern how AI is used across the platform
+  outcome: Only your people sign in, each agent reaches only what it must, prompts are screened for injection, risky tools wait for an approval, and one switch stops every agent.
+  products: [xtm-one, opencti, openaev, opencrq]
+  shot: xtm-one-administer-tool-approvals
+  steps:
+    - {url: /xtm-one/administer/editions/, label: Know what your edition brings}
+    - {url: /xtm-one/administer/sso/, label: Sign in with your identity provider}
+    - {url: /xtm-one/concepts/access/, label: Give access with groups}
+    - {url: /xtm-one/administer/ai-governance/, label: Approve what agents do}
+    - {url: /xtm-one/administer/prompt-safety/, label: Protect agents from prompt injection}
+    - {url: /xtm-one/administer/intents/, label: Choose which agent answers}
+    - {url: /xtm-one/administer/secret-vaults/, label: Keep secrets in your vault}
+    - {url: /xtm-one/administer/emergency-stop/, label: Stop every agent at once}
+    - {url: /xtm-one/use/platform-insights/, label: Watch how AI is used}
+
+- id: deploy-the-suite
+  title: Deploy the XTM platform
+  outcome: OpenCTI, OpenAEV, OpenCRQ and XTM One run side by side behind your proxy, know each other, share one license, and are watched.
+  products: [opencti, openaev, opencrq, xtm-one]
+  diagram: deploy-plan-topologies
+  steps:
+    - {url: /deploy/plan/architecture/, label: Plan the architecture}
+    - {url: /deploy/plan/requirements/, label: Check the requirements}
+    - {url: /deploy/install/docker-compose/, label: Install with Docker Compose}
+    - {url: /deploy/install/xtm-one/, label: Install XTM One}
+    - {url: /deploy/install/opencrq/, label: Install OpenCRQ}
+    - {url: /deploy/configure/connect-modules/, label: Connect the modules}
+    - {url: /deploy/configure/xtm-one/, label: Configure XTM One}
+    - {url: /deploy/operate/xtm-one/, label: Monitor XTM One}
+    - {url: /deploy/upgrade/, label: Upgrade}
+
+- id: answer-from-slack
+  title: Let the night shift ask agents from Slack
+  outcome: The SOC asks an agent from the channel it already works in, and the agent answers with what OpenCTI and OpenAEV know, with only the tools an administrator let it run there.
+  products: [xtm-one, opencti, openaev]
+  shot: xtm-one-channels-settings
+  steps:
+    - {url: /xtm-one/administer/channels/, label: Understand channels}
+    - {url: /xtm-one/administer/channels/slack/, label: Connect Slack}
+    - {url: /xtm-one/administer/ai-governance/, label: Decide which tools it runs without asking}
+    - {url: /xtm-one/use/in-opencti/, label: What it reads in OpenCTI}
+    - {url: /xtm-one/use/in-openaev/, label: What it reads in OpenAEV}
+
+- id: reuse-from-hub
+  title: Reuse ready-made content from XTM Hub
+  outcome: A dashboard of the threats to your sector and a triage playbook in OpenCTI, and a phishing scenario in OpenAEV, deployed in one click from XTM Hub and adapted to your data before they go live.
+  products: [opencti, openaev, xtm-one]
+  shot: opencti-dashboards-overview
+  steps:
+    - {url: /opencti/configure/xtm-hub/, label: Connect OpenCTI to XTM Hub}
+    - {url: /openaev/administer/xtm-hub/, label: Connect the OpenAEV tenant}
+    - {url: /opencti/configure/xtm-hub/content-library/, label: Know what the library offers}
+    - {url: /opencti/use/dashboards/share/, label: Deploy a dashboard}
+    - {url: /opencti/use/automate/playbooks/create/, label: Check and start a playbook}
+    - {url: /openaev/use/scenarios/build/, label: Deploy and adapt a scenario}
+    - {url: /openaev/use/simulations/, label: Try it on a small team}
+    - {url: /opencti/configure/xtm-hub/news-feed/, label: Hear about new content}
+    - {url: /xtm-one/build/integrations/, label: Let an agent find the next item}
+
+- id: composer-rollout
+  title: Deploy integrations across the platform with XTM Composer
+  outcome: The teams deploy their connectors, collectors and injectors from the catalog of their platform, XTM Composer runs each one as a container, and every integration is followed from its platform.
+  products: [composer, opencti, openaev]
+  shot: openaev-integrations-collectors-deployed
+  steps:
+    - {url: /deploy/integrations/install-composer/, label: Run XTM Composer next to the platforms}
+    - {url: /opencti/administer/service-accounts/, label: Prepare the accounts connectors write as}
+    - {url: /opencti/use/ingest/connectors/, label: Deploy the OpenCTI connectors}
+    - {url: /openaev/use/collectors/, label: Deploy the collector of your EDR}
+    - {url: /openaev/use/injectors/, label: Deploy the injectors your scenarios need}
+    - {url: /deploy/integrations/migrate/, label: Move the integrations you run by hand}
+    - {url: /deploy/integrations/troubleshoot/, label: Fix an integration that does not start}

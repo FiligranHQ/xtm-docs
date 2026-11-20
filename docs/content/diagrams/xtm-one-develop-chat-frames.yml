@@ -1,0 +1,26 @@
+title: A script sends a message over HTTP and reads the frames of its request as server-sent events until it ends
+lanes:
+  - label: Your script
+    tone: external
+    nodes:
+      - {id: login, label: Sign in, icon: LogIn, note: "POST /api/v1/auth/login"}
+      - {id: send, label: Send, icon: ArrowLeftRight, note: "POST …/web/chat/messages"}
+      - {id: follow, label: Follow, icon: Search, note: "GET …/conversations/{id}/events"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: conversation, label: Conversation, icon: MessageSquare, note: "One request at a time"}
+      - {id: agent, label: Agent, icon: Bot, note: "Tools, models"}
+  - label: Frames
+    tone: product
+    nodes:
+      - {id: progress, label: Progress, icon: Activity, note: "turn_started, status, stream"}
+      - {id: end, label: End, icon: Check, note: "done, error or cancelled"}
+edges:
+  - {from: login, to: send, label: access_token}
+  - {from: send, to: conversation, label: "{\"content\": …}"}
+  - {from: conversation, to: agent, label: runs the request}
+  - {from: agent, to: progress, label: as it works}
+  - {from: agent, to: end, label: once}
+  - {from: progress, to: send, label: SSE response, style: dashed}
+  - {from: conversation, to: follow, label: other requests, style: dashed}

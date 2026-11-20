@@ -1,0 +1,22 @@
+title: You record by hand what no collector reports, from the Validations of a simulation or from the result of the inject
+lanes:
+  - label: Waiting
+    tone: product
+    nodes:
+      - {id: manual, label: Manual expectation, icon: ClipboardCheck, note: Pending validation}
+      - {id: technical, label: Detection or prevention, icon: ShieldCheck, note: No collector answered}
+  - label: Where you answer
+    tone: product
+    nodes:
+      - {id: validations, label: Validations, icon: ListChecks, note: Execution tab of a simulation}
+      - {id: result, label: Add a result, icon: Gauge, note: Results by target}
+  - label: Score
+    tone: core
+    nodes:
+      - {id: score, label: Score, icon: Check, note: Success at the expected score}
+edges:
+  - {from: manual, to: validations, label: team or person}
+  - {from: manual, to: result, label: or here}
+  - {from: technical, to: result, label: security platform}
+  - {from: validations, to: score, label: Validate}
+  - {from: result, to: score, label: Validate}

@@ -1,0 +1,22 @@
+title: A simulation waits until it starts, runs its injects until every expectation is answered or expired, and can be paused, stopped or reset to run again
+lanes:
+  - label: Before
+    tone: product
+    nodes:
+      - {id: scheduled, label: Scheduled, icon: Clock, note: "Draft without a start date"}
+  - label: Running
+    tone: product
+    nodes:
+      - {id: ongoing, label: On-going, icon: PlayCircle, note: "Injects run, collectors answer"}
+      - {id: paused, label: Paused, icon: History, note: "Injects wait"}
+  - label: After
+    tone: product
+    nodes:
+      - {id: finished, label: Finished, icon: ClipboardCheck, note: "Every expectation answered or expired"}
+      - {id: canceled, label: Canceled, icon: X, note: "Stopped, results kept"}
+edges:
+  - {from: scheduled, to: ongoing, label: start}
+  - {from: ongoing, to: paused, label: Pause, both: true}
+  - {from: ongoing, to: finished, label: all answered}
+  - {from: ongoing, to: canceled, label: Stop}
+  - {from: finished, to: scheduled, label: Reset, style: dashed}

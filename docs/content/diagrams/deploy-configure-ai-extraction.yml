@@ -1,0 +1,25 @@
+title: OpenCTI hands each imported document to the connector, which sends it to the extraction web service in your stack and imports the STIX bundle, while the other AI features call the model of the ai keys
+lanes:
+  - label: Documents
+    tone: external
+    nodes:
+      - {id: documents, label: Documents, icon: FileText, note: "PDF, text, HTML, Markdown"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Data > Import"}
+  - label: Connector
+    tone: external
+    nodes:
+      - {id: connector, label: ImportDocumentAI, icon: Puzzle, note: connector-import-document-ai}
+  - label: On your premises
+    tone: external
+    nodes:
+      - {id: webservice, label: Extraction web service, icon: Cpu, note: "import-document-ai-webservice:8000"}
+      - {id: model, label: Your language model, icon: Bot, note: "ai:endpoint, such as vLLM"}
+edges:
+  - {from: documents, to: opencti, label: upload}
+  - {from: opencti, to: connector, label: launch import}
+  - {from: connector, to: webservice, label: document and license}
+  - {from: connector, to: opencti, label: STIX bundle, style: dashed}
+  - {from: opencti, to: model, label: "summaries, search, text"}

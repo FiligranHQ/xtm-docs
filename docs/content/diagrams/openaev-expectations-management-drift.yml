@@ -1,0 +1,20 @@
+title: An inject copies the expectations its action proposes, you tune them, and Realign expectations brings them back when the action changes
+lanes:
+  - label: Threat Arsenal
+    tone: product
+    nodes:
+      - {id: action, label: Action, icon: BookOpen, note: Proposes its expectations}
+  - label: Inject
+    tone: product
+    nodes:
+      - {id: expectations, label: Inject expectations, icon: ClipboardCheck, note: "Name, score, expiration, mode"}
+      - {id: drift, label: Review expectations, icon: TriangleAlert, note: The action changed since}
+  - label: Simulation
+    tone: core
+    nodes:
+      - {id: run, label: Run, icon: PlayCircle, note: One expectation per target}
+edges:
+  - {from: action, to: expectations, label: copied at creation}
+  - {from: action, to: drift, label: changes later, style: dashed}
+  - {from: drift, to: expectations, label: Realign expectations}
+  - {from: expectations, to: run, label: at launch}

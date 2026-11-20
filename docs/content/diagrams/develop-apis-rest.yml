@@ -1,0 +1,20 @@
+title: A script calls the REST API of OpenAEV or XTM One with a token of its user, and each product checks that user's rights
+lanes:
+  - label: Your code
+    tone: external
+    nodes:
+      - {id: script, label: Script or integration, icon: Terminal, note: "curl, Python, CI job"}
+  - label: REST APIs
+    tone: product
+    nodes:
+      - {id: openaev, label: OpenAEV API, icon: LogoOpenAEV, note: "/api, Swagger UI"}
+      - {id: xtmone, label: XTM One API, icon: LogoXTMOne, note: "/api/v1, API reference"}
+  - label: Checked as the user
+    tone: store
+    nodes:
+      - {id: rights, label: User rights, icon: KeyRound, note: "Capabilities, grants, key scope"}
+edges:
+  - {from: script, to: openaev, label: Bearer API token}
+  - {from: script, to: xtmone, label: Bearer API key}
+  - {from: openaev, to: rights, label: checks}
+  - {from: xtmone, to: rights, label: checks}

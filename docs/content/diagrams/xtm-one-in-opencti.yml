@@ -1,0 +1,29 @@
+title: The AI features of OpenCTI hand each request to an XTM One agent, which works with OpenCTI as the person who asked
+lanes:
+  - label: Where you ask
+    tone: external
+    nodes:
+      - {id: screens, label: OpenCTI screens, icon: Sparkles, note: "Ask Ariane, Ask AI, AI Insights, search"}
+      - {id: playbooks, label: Playbooks, icon: Workflow, note: AI agent steps, href: /opencti/use/automate/playbooks/}
+      - {id: clients, label: AI clients, icon: Laptop, note: "Cursor, Claude Desktop"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Signs a token for you}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: agents, label: Agents, icon: Bot, note: One per task (intent)}
+      - {id: mcp, label: MCP server, icon: Server, note: /mcp/opencti}
+  - label: Models
+    tone: external
+    nodes:
+      - {id: models, label: Language models, icon: Cpu, note: Set in XTM One}
+edges:
+  - {from: screens, to: opencti, label: your request}
+  - {from: playbooks, to: opencti, label: as Run as}
+  - {from: opencti, to: agents, label: task and token}
+  - {from: agents, to: models, label: prompts}
+  - {from: agents, to: opencti, label: reads and writes as you, style: dashed}
+  - {from: clients, to: mcp, label: personal API key}
+  - {from: mcp, to: opencti, label: calls as you, style: dashed}

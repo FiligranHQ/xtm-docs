@@ -1,0 +1,25 @@
+title: The attack path of a chained run links each action to the endpoints it reached and to what it found, and each finding to the action it triggered
+lanes:
+  - label: Actions
+    tone: product
+    nodes:
+      - {id: scan, label: List the connections, icon: Terminal, note: Neither prevented nor detected}
+      - {id: creds, label: Look for saved credentials, icon: Terminal, note: Detected by Meridian EDR}
+      - {id: query, label: Query the booking database, icon: Terminal, note: Neither prevented nor detected}
+  - label: Targets
+    tone: external
+    nodes:
+      - {id: desk, label: fd-par-07, icon: Laptop, note: Chokepoint}
+  - label: Findings
+    tone: store
+    nodes:
+      - {id: port, label: "10.20.8.15:1433", icon: Network, note: Ports scan}
+      - {id: user, label: "GRANDMERIDIAN\\night.audit", icon: KeyRound, note: Username}
+edges:
+  - {from: scan, to: desk, label: ran on}
+  - {from: creds, to: desk, label: ran on}
+  - {from: query, to: desk, label: ran on}
+  - {from: desk, to: port, label: found}
+  - {from: desk, to: user, label: found}
+  - {from: port, to: creds, label: event link, style: dashed}
+  - {from: user, to: query, label: event link, style: dashed}

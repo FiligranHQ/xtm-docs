@@ -1,0 +1,21 @@
+title: OpenCTI exports observability metrics to your own monitoring, and its usage telemetry goes only to Filigran
+lanes:
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenCTI, note: "Metrics on with app:telemetry:metrics:enabled"}
+      - {id: manager, label: Telemetry manager, icon: Gauge, note: Usage gauges on its own meter}
+  - label: Your monitoring
+    tone: external
+    nodes:
+      - {id: prometheus, label: Prometheus, icon: Activity, note: Scrapes /metrics on its port}
+      - {id: otlp, label: OTLP collector, icon: Network, note: Receives a push every second}
+  - label: Filigran
+    tone: external
+    nodes:
+      - {id: filigran, label: telemetry.filigran.io, icon: LogoFiligran, note: Usage telemetry}
+edges:
+  - {from: platform, to: prometheus, label: exposes}
+  - {from: platform, to: otlp, label: pushes}
+  - {from: platform, to: manager, label: usage counts}
+  - {from: manager, to: filigran, label: sends}

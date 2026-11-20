@@ -1,0 +1,26 @@
+title: OpenCRQ reads its settings from environment variables when it starts, refuses a wrong one, and uses them to reach its database, its file storage, XTM One and the tools each tenant connects
+lanes:
+  - label: Settings
+    tone: external
+    nodes:
+      - {id: env, label: Environment variables, icon: Terminal, note: "POSTGRES__HOST and others"}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: opencrq, label: OpenCRQ, icon: LogoOpenCRQ, note: Checks them at boot}
+  - label: Deployment
+    tone: store
+    nodes:
+      - {id: pgsql, label: PostgreSQL, icon: Layers, note: Required}
+      - {id: s3, label: S3 storage, icon: Boxes, note: Optional}
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: Required}
+  - label: Per tenant
+    tone: external
+    nodes:
+      - {id: tools, label: Connected tools, icon: Puzzle, note: "OpenCTI, OpenAEV, NVD, Defender, Drata"}
+edges:
+  - {from: env, to: opencrq, label: read at start}
+  - {from: opencrq, to: pgsql, label: POSTGRES__*}
+  - {from: opencrq, to: s3, label: FILE_STORAGE__*}
+  - {from: opencrq, to: xtmone, label: XTM_ONE__*}
+  - {from: opencrq, to: tools, label: CONNECTORS__*}

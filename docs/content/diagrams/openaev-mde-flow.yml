@@ -1,0 +1,22 @@
+title: OpenAEV imports the onboarded devices of your device groups, then opens a Live Response session that runs your library script, which starts the implant
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: executor, label: MDE executor, icon: LogoOpenAEV, note: Signs in as an Entra application}
+      - {id: assets, label: Endpoints, icon: Server, note: One per onboarded device}
+  - label: Microsoft Defender
+    tone: external
+    nodes:
+      - {id: api, label: Defender API, icon: ShieldCheck, note: "Machines, Advanced Hunting"}
+      - {id: script, label: Live Response script, icon: Code2, note: Decodes the command}
+  - label: Device
+    tone: external
+    nodes:
+      - {id: implant, label: Implant, icon: Cpu, note: "From a SYSTEM task on Windows"}
+edges:
+  - {from: executor, to: api, label: list devices}
+  - {from: executor, to: assets, label: imports}
+  - {from: api, to: script, label: Live Response}
+  - {from: script, to: implant, label: starts}
+  - {from: implant, to: assets, label: results, style: dashed}

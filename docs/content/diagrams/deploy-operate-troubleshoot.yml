@@ -1,0 +1,27 @@
+title: Each symptom has its place to look, the health and logs of the services, the works of the connectors or the health of the Elasticsearch cluster, before you ask for help
+lanes:
+  - label: Symptoms
+    tone: external
+    nodes:
+      - {id: start, label: Stack does not start, icon: TriangleAlert, note: Or a platform stays unhealthy}
+      - {id: ingest, label: Data rejected, icon: Bug, note: Bundles OpenCTI could not write}
+      - {id: es, label: Elasticsearch errors, icon: Server, note: "Disk full, shards not available"}
+  - label: Where to look
+    tone: product
+    nodes:
+      - {id: ps, label: docker compose ps, icon: Terminal, note: Services and their health}
+      - {id: logs, label: docker compose logs, icon: FileText, note: JSON lines of each service}
+      - {id: works, label: Connector works, icon: Puzzle, note: Error codes of the bundles}
+      - {id: cluster, label: Cluster health, icon: Activity, note: "_cluster/health"}
+  - label: Ask for help
+    tone: external
+    nodes:
+      - {id: package, label: Support package, icon: Boxes, note: Logs of every OpenCTI node}
+      - {id: community, label: Community Slack, icon: MessageSquare, note: Or a GitHub issue}
+edges:
+  - {from: start, to: ps, label: health}
+  - {from: start, to: logs, label: why it fails}
+  - {from: ingest, to: works, label: error code}
+  - {from: es, to: cluster, label: check}
+  - {from: logs, to: package, label: still stuck}
+  - {from: package, to: community, label: attach}

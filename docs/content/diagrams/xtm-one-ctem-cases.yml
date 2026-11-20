@@ -1,0 +1,25 @@
+title: Cases group the open issues you see in OpenCTI and OpenAEV by the fix that closes them, and follow each fix to its end
+lanes:
+  - label: Open issues you can see
+    tone: external
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Vulnerabilities of your tech stack}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: CVE findings of 90 days}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: recompute, label: Recompute, icon: ListChecks, note: One case per fix}
+      - {id: agents, label: Case agents, icon: Bot, note: Enterprise Edition}
+  - label: Case states
+    tone: product
+    nodes:
+      - {id: needs, label: Needs attention, icon: Gauge, note: New or reopened}
+      - {id: progress, label: In progress, icon: FileText, note: An owner on it}
+      - {id: closed, label: Resolved or accepted, icon: ListChecks, note: 'Evidence, or a reason and an expiry'}
+edges:
+  - {from: opencti, to: recompute, label: your own access}
+  - {from: openaev, to: recompute, label: your own access}
+  - {from: recompute, to: needs, label: new fix}
+  - {from: needs, to: progress, label: Start}
+  - {from: progress, to: closed, label: Resolve or accept}
+  - {from: agents, to: progress, label: update, style: dashed}

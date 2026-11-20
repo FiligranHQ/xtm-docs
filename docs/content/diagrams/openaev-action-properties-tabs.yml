@@ -1,0 +1,20 @@
+title: The four tabs of an action say what it is, what it runs, what it extracts and how a security platform detects it
+lanes:
+  - label: Action form
+    tone: product
+    nodes:
+      - {id: general, label: General, icon: FileText, note: "Name, domains, expectations"}
+      - {id: commands, label: Commands, icon: Terminal, note: "Type, platforms, arguments"}
+      - {id: output, label: Output, icon: Search, note: Parsing rules}
+      - {id: remediation, label: Remediation, icon: ShieldCheck, note: Enterprise Edition}
+  - label: In a test
+    tone: external
+    nodes:
+      - {id: inject, label: Inject, icon: Crosshair, note: Runs on the targets}
+      - {id: findings, label: Findings and outputs, icon: KeyRound, note: For results and chaining}
+      - {id: rules, label: Detection rules, icon: ClipboardCheck, note: Per security platform}
+edges:
+  - {from: general, to: inject, label: expectations}
+  - {from: commands, to: inject, label: what runs}
+  - {from: output, to: findings, label: parsed values}
+  - {from: remediation, to: rules, label: shown on results}

@@ -1,0 +1,27 @@
+title: XTM Composer puts your registry in front of the image name the platform asks for, and the container engine pulls it from there with your credentials
+lanes:
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "opencti/connector-mitre:<version>"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "openaev/collector-mitre-attack"}
+  - label: XTM Composer
+    tone: external
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Workflow, note: "DAEMON__REGISTRY__SERVER in front"}
+  - label: Container engine
+    tone: external
+    nodes:
+      - {id: docker, label: Docker or Podman, icon: Boxes, note: Credentials with each pull}
+      - {id: kubernetes, label: Kubernetes, icon: Boxes, note: "Pull Secret registry-example-com"}
+  - label: Registry
+    tone: store
+    nodes:
+      - {id: registry, label: Your registry, icon: Server, note: "registry.example.com, Docker Hub names"}
+edges:
+  - {from: opencti, to: composer, label: image name}
+  - {from: openaev, to: composer, label: image name}
+  - {from: composer, to: docker, label: prefixed image}
+  - {from: composer, to: kubernetes, label: prefixed image}
+  - {from: docker, to: registry, label: pull}
+  - {from: kubernetes, to: registry, label: pull}

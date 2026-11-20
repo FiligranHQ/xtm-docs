@@ -1,0 +1,4791 @@
+{
+  "name": "configuration",
+  "version": "3.261118.0",
+  "source": "OpenAEV-Platform/openaev@d61524e (openaev-api/src/main/resources/application.properties, the @Value and @ConfigurationProperties of the Java code)",
+  "intro": "Every key OpenAEV reads at startup, from `application.properties` and from its code, grouped by block, with its environment variable: the key in upper case with each dot replaced by an underscore (`openaev.base-url` is `OPENAEV_BASE-URL`). **Shipped** says whether `application.properties` sets the key, shows it commented out, or leaves it to the code. A key also read under the former name `openbas.*` keeps that name working.",
+  "filter": "Filter keys, variables, descriptions",
+  "sections": [
+    {
+      "title": "ai",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "ai.enabled",
+          "cells": [
+            "`AI_ENABLED`",
+            "`false`",
+            "Set",
+            "Enable AI capabilities"
+          ]
+        },
+        {
+          "key": "ai.endpoint",
+          "cells": [
+            "`AI_ENDPOINT`",
+            "",
+            "Set",
+            "Endpoint URL. Required when AI is enabled"
+          ]
+        },
+        {
+          "key": "ai.model",
+          "cells": [
+            "`AI_MODEL`",
+            "`mistral`",
+            "Set",
+            "Model to be used for text generation (depending on type)"
+          ]
+        },
+        {
+          "key": "ai.model_images",
+          "cells": [
+            "`AI_MODEL_IMAGES`",
+            "",
+            "Set",
+            "Model to be used for image generation (depending on type)"
+          ]
+        },
+        {
+          "key": "ai.model-images",
+          "cells": [
+            "`AI_MODEL-IMAGES`",
+            "",
+            "Code only",
+            "Other spelling of `ai.model_images`, bound to the same setting; the platform reads it but no feature uses it."
+          ]
+        },
+        {
+          "key": "ai.token",
+          "cells": [
+            "`AI_TOKEN`",
+            "",
+            "Set",
+            "Token for endpoint credentials"
+          ]
+        },
+        {
+          "key": "ai.type",
+          "cells": [
+            "`AI_TYPE`",
+            "`mistralai`",
+            "Set",
+            "AI type (`mistralai` or `openai`)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "collector.expectations-expiration-manager",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "collector.expectations-expiration-manager.batch-size",
+          "cells": [
+            "`COLLECTOR_EXPECTATIONS-EXPIRATION-MANAGER_BATCH-SIZE`",
+            "`1000`",
+            "Code only",
+            "Maximum number of expired expectations the Expectations Expiration Manager concludes in one run for each tenant; the rest waits for the next run. Default `1000`."
+          ]
+        },
+        {
+          "key": "collector.expectations-expiration-manager.enable",
+          "cells": [
+            "`COLLECTOR_EXPECTATIONS-EXPIRATION-MANAGER_ENABLE`",
+            "`true`",
+            "Code only",
+            "Turns on the Expectations Expiration Manager, the built-in job that concludes the pending expectations whose expiration time has passed (as failed, or as not vulnerable for a vulnerability expectation). When `false`, the job is never scheduled and expired expectations stay pending. Default `true`."
+          ]
+        },
+        {
+          "key": "collector.expectations-expiration-manager.expiration-time",
+          "cells": [
+            "`COLLECTOR_EXPECTATIONS-EXPIRATION-MANAGER_EXPIRATION-TIME`",
+            "`21600`",
+            "Code only",
+            "The platform reads it but only writes it in a debug log line; each expectation expires after its own expiration time, set on the inject or by default by the `openaev.expectation.<type>.expiration-time` keys. Unit: seconds, default `21600`."
+          ]
+        },
+        {
+          "key": "collector.expectations-expiration-manager.expiration-time-for-asset",
+          "cells": [
+            "`COLLECTOR_EXPECTATIONS-EXPIRATION-MANAGER_EXPIRATION-TIME-FOR-ASSET`",
+            "`3600`",
+            "Code only",
+            "The platform reads it but only writes it in a debug log line; each expectation expires after its own expiration time, set on the inject or by default by the `openaev.expectation.<type>.expiration-time` keys. Unit: seconds, default `3600`."
+          ]
+        },
+        {
+          "key": "collector.expectations-expiration-manager.id",
+          "cells": [
+            "`COLLECTOR_EXPECTATIONS-EXPIRATION-MANAGER_ID`",
+            "`96e476e0-b9c4-4660-869c-98585adf754d`",
+            "Code only",
+            "ID under which OpenAEV registers the built-in Expectations Expiration Manager collector and records its expiration results. The score computation recognizes these results by the default ID `96e476e0-b9c4-4660-869c-98585adf754d`, so keep the default."
+          ]
+        },
+        {
+          "key": "collector.expectations-expiration-manager.interval",
+          "cells": [
+            "`COLLECTOR_EXPECTATIONS-EXPIRATION-MANAGER_INTERVAL`",
+            "`60`",
+            "Code only",
+            "Time in seconds between two runs of the Expectations Expiration Manager; the first run starts 30 seconds after startup. Default `60`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "engine",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "engine.client",
+          "cells": [
+            "`ENGINE_CLIENT`",
+            "",
+            "Commented out",
+            "Leave to `auto` or set `opensearch`: AWS SigV4 authentication only works with the OpenSearch client"
+          ]
+        },
+        {
+          "key": "engine.connect-timeout-ms",
+          "cells": [
+            "`ENGINE_CONNECT-TIMEOUT-MS`",
+            "",
+            "Commented out",
+            "Engine client timeouts and connection cap (defaults: 5s connect, 60s socket, 40 connections)."
+          ]
+        },
+        {
+          "key": "engine.engine-aws-host",
+          "cells": [
+            "`ENGINE_ENGINE-AWS-HOST`",
+            "",
+            "Code only",
+            "URL of the OpenSearch database, no http(s) prefix"
+          ]
+        },
+        {
+          "key": "engine.engine-aws-mode",
+          "cells": [
+            "`ENGINE_ENGINE-AWS-MODE`",
+            "`no`",
+            "Set",
+            "Whether to use AWS SigV4 authentication Amazon OpenSearch or Amazon OpenSearch Serverless (`es` or `aoss`)"
+          ]
+        },
+        {
+          "key": "engine.engine-aws-region",
+          "cells": [
+            "`ENGINE_ENGINE-AWS-REGION`",
+            "",
+            "Code only",
+            "Example: eu-west-3"
+          ]
+        },
+        {
+          "key": "engine.index-prefix",
+          "cells": [
+            "`ENGINE_INDEX-PREFIX`",
+            "`openaev`",
+            "Set",
+            "Prefix of the index and lifecycle policy names"
+          ]
+        },
+        {
+          "key": "engine.index-suffix",
+          "cells": [
+            "`ENGINE_INDEX-SUFFIX`",
+            "`-000001`",
+            "Set",
+            "Suffix appended to the name of the first index OpenAEV creates for each model behind its `<prefix>_<model>` alias, so that rollovers number the next ones; default `-000001`."
+          ]
+        },
+        {
+          "key": "engine.indexing-batch-size",
+          "cells": [
+            "`ENGINE_INDEXING-BATCH-SIZE`",
+            "",
+            "Commented out",
+            "Maximum number of records fetched per indexing batch from the database"
+          ]
+        },
+        {
+          "key": "engine.indexing-grace-window-seconds",
+          "cells": [
+            "`ENGINE_INDEXING-GRACE-WINDOW-SECONDS`",
+            "",
+            "Commented out",
+            "Indexing cursor grace window in seconds. The cursor persisted after each indexing round never gets closer to wall-clock than this window, so rows committed late by long write transactions are still indexed. Must exceed the longest expected write transaction."
+          ]
+        },
+        {
+          "key": "engine.indexing-max-concurrent-models",
+          "cells": [
+            "`ENGINE_INDEXING-MAX-CONCURRENT-MODELS`",
+            "",
+            "Commented out",
+            "How many models may run their indexing sync concurrently (default 3). Each sync pass holds a database connection for its whole fetch query; during a full reindex those queries are heavy, so a higher value trades platform responsiveness for reindexing throughput."
+          ]
+        },
+        {
+          "key": "engine.indexing-misfire-threshold-ms",
+          "cells": [
+            "`ENGINE_INDEXING-MISFIRE-THRESHOLD-MS`",
+            "",
+            "Commented out",
+            "Threshold in milliseconds after which a model synchronisation is declared misfired and is rescheduled."
+          ]
+        },
+        {
+          "key": "engine.indexing-refeed-reassert-delay-seconds",
+          "cells": [
+            "`ENGINE_INDEXING-REFEED-REASSERT-DELAY-SECONDS`",
+            "",
+            "Commented out",
+            "Delay in seconds after which the instance that applied an upgrade re-feeding an index in place (for example the findings index, to mask the sensitive values indexed before) re-feeds it a second time. During a rolling deploy, instances still running the previous version take part in the first re-feed and write their own documents, such as finding values in cleartext; the second re-feed rewrites them. Set it longer than your longest rolling deploy plus one indexing round (15 seconds). Set to `0` to skip the second re-feed, which is safe when a single instance runs."
+          ]
+        },
+        {
+          "key": "engine.indexing-reset-epoch-reassert-delay-seconds",
+          "cells": [
+            "`ENGINE_INDEXING-RESET-EPOCH-REASSERT-DELAY-SECONDS`",
+            "",
+            "Commented out",
+            "Delay in seconds after which an instance that reset an index during a rolling deploy re-asserts the indexing cursor of that model, so a stale cursor written by an instance still running an older version does not skip rows. Must exceed the longest indexing round. Set to `0` to disable once every instance runs OpenAEV 3.261001.0 or later."
+          ]
+        },
+        {
+          "key": "engine.max-connections",
+          "cells": [
+            "`ENGINE_MAX-CONNECTIONS`",
+            "",
+            "Commented out",
+            "Maximum number of concurrent connections of the search engine client, applied both per route and in total; default `40`."
+          ]
+        },
+        {
+          "key": "engine.max-fields-size",
+          "cells": [
+            "`ENGINE_MAX-FIELDS-SIZE`",
+            "",
+            "Code only",
+            "Maximum number of fields per index (`index.mapping.total_fields.limit`) set in the index templates OpenAEV creates; default `4096`."
+          ]
+        },
+        {
+          "key": "engine.max-primary-shard-docs",
+          "cells": [
+            "`ENGINE_MAX-PRIMARY-SHARD-DOCS`",
+            "",
+            "Code only",
+            "Number of documents in a primary shard at which the lifecycle policy OpenAEV creates (ILM on Elasticsearch, ISM on OpenSearch) rolls an index over to a new one; default `75000000`."
+          ]
+        },
+        {
+          "key": "engine.max-primary-shards-size",
+          "cells": [
+            "`ENGINE_MAX-PRIMARY-SHARDS-SIZE`",
+            "",
+            "Code only",
+            "Size of a primary shard at which the lifecycle policy OpenAEV creates (ILM on Elasticsearch, ISM on OpenSearch) rolls an index over to a new one; default `50Gb`."
+          ]
+        },
+        {
+          "key": "engine.max-result-window",
+          "cells": [
+            "`ENGINE_MAX-RESULT-WINDOW`",
+            "",
+            "Code only",
+            "Maximum `from + size` of a search on the indices OpenAEV creates (`index.max_result_window`), which bounds how deep results can be paged; default `100000`. Applies to new indices only."
+          ]
+        },
+        {
+          "key": "engine.number-of-replicas",
+          "cells": [
+            "`ENGINE_NUMBER-OF-REPLICAS`",
+            "",
+            "Code only",
+            "Number of replica shards of each index OpenAEV creates in the search engine; default `1`. Applies to new indices only."
+          ]
+        },
+        {
+          "key": "engine.number-of-shards",
+          "cells": [
+            "`ENGINE_NUMBER-OF-SHARDS`",
+            "",
+            "Code only",
+            "Number of primary shards of each index OpenAEV creates in the search engine; default `1`. Applies to new indices only."
+          ]
+        },
+        {
+          "key": "engine.password",
+          "cells": [
+            "`ENGINE_PASSWORD`",
+            "",
+            "Code only",
+            "Optional. Password for the engine"
+          ]
+        },
+        {
+          "key": "engine.reject-unauthorized",
+          "cells": [
+            "`ENGINE_REJECT-UNAUTHORIZED`",
+            "",
+            "Code only",
+            "Whether OpenAEV verifies the TLS certificate of the search engine against its trusted certificates; default `true`. Set to `false` to accept any certificate and host name, for a self-signed engine."
+          ]
+        },
+        {
+          "key": "engine.search-cap",
+          "cells": [
+            "`ENGINE_SEARCH-CAP`",
+            "",
+            "Code only",
+            "Maximum number of results a full-text search across all of OpenAEV's indices returns; default `500`."
+          ]
+        },
+        {
+          "key": "engine.socket-timeout-ms",
+          "cells": [
+            "`ENGINE_SOCKET-TIMEOUT-MS`",
+            "",
+            "Commented out",
+            "How long, in milliseconds, the search engine client waits for a response (and for a free connection in its pool) before failing the request; default `60000`."
+          ]
+        },
+        {
+          "key": "engine.url",
+          "cells": [
+            "`ENGINE_URL`",
+            "`http://localhost:9200`",
+            "Set",
+            "URL of the engine"
+          ]
+        },
+        {
+          "key": "engine.username",
+          "cells": [
+            "`ENGINE_USERNAME`",
+            "",
+            "Code only",
+            "Optional. Login for the engine"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "executor.caldera",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "executor.caldera.api-key",
+          "cells": [
+            "`EXECUTOR_CALDERA_API-KEY`",
+            "`<caldera-api-key>`",
+            "Set",
+            "Caldera API key"
+          ]
+        },
+        {
+          "key": "executor.caldera.enable",
+          "cells": [
+            "`EXECUTOR_CALDERA_ENABLE`",
+            "`false`",
+            "Set",
+            "When `true` at the first startup that migrates the executor settings into the integration catalog, OpenAEV creates and starts a Caldera executor from the `executor.caldera.*` keys; that migration runs only once. The Caldera executor also refuses to launch injects while this key is `false`, even when deployed from the catalog."
+          ]
+        },
+        {
+          "key": "executor.caldera.id",
+          "cells": [
+            "`EXECUTOR_CALDERA_ID`",
+            "`2f9a0936-c327-4e95-b406-d161d32a2500`",
+            "Set",
+            "ID of the builtin Caldera executor"
+          ]
+        },
+        {
+          "key": "executor.caldera.name",
+          "cells": [
+            "`EXECUTOR_CALDERA_NAME`",
+            "`Caldera`",
+            "Code only",
+            "Name of the builtin Caldera executor"
+          ]
+        },
+        {
+          "key": "executor.caldera.public-url",
+          "cells": [
+            "`EXECUTOR_CALDERA_PUBLIC-URL`",
+            "`<caldera-public-url>`",
+            "Set",
+            "Caldera URL accessible from endpoints (ex: http://caldera.myopenaev.myorganization.com:8888)"
+          ]
+        },
+        {
+          "key": "executor.caldera.url",
+          "cells": [
+            "`EXECUTOR_CALDERA_URL`",
+            "`<caldera-url>`",
+            "Set",
+            "Caldera URL"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "executor.crowdstrike",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "executor.crowdstrike.api-batch-execution-action-pagination",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_API-BATCH-EXECUTION-ACTION-PAGINATION`",
+            "`2500`",
+            "Set",
+            "Crowdstrike API pagination per 5 seconds to set for hosts batch executions (number of hosts sent per 5 seconds to Crowdstrike to execute a payload)"
+          ]
+        },
+        {
+          "key": "executor.crowdstrike.api-register-interval",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_API-REGISTER-INTERVAL`",
+            "`1200`",
+            "Set",
+            "Crowdstrike API interval to register/update the host groups/hosts/agents in OpenAEV (in seconds)"
+          ]
+        },
+        {
+          "key": "executor.crowdstrike.api-url",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_API-URL`",
+            "`https://api.us-2.crowdstrike.com`",
+            "Set",
+            "Crowdstrike API url"
+          ]
+        },
+        {
+          "key": "executor.crowdstrike.clean-implant-interval",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_CLEAN-IMPLANT-INTERVAL`",
+            "`8`",
+            "Set",
+            "Crowdstrike clean old implant interval (in hours)"
+          ]
+        },
+        {
+          "key": "executor.crowdstrike.client-id",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_CLIENT-ID`",
+            "`<crowdstrike-client-id>`",
+            "Set",
+            "Crowdstrike client id"
+          ]
+        },
+        {
+          "key": "executor.crowdstrike.client-secret",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_CLIENT-SECRET`",
+            "`<crowdstrike-client-secret>`",
+            "Set",
+            "Crowdstrike client secret"
+          ]
+        },
+        {
+          "key": "executor.crowdstrike.enable",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_ENABLE`",
+            "`false`",
+            "Set",
+            "Read once, at the first startup that migrates the executor settings into the integration catalog: when `true`, OpenAEV creates and starts a CrowdStrike executor from the `executor.crowdstrike.*` keys; when `false`, it creates none. Changing it afterwards has no effect, and the executor is then deployed from the catalog."
+          ]
+        },
+        {
+          "key": "executor.crowdstrike.host-group",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_HOST-GROUP`",
+            "`<host-group>`",
+            "Set",
+            "Crowdstrike host group id or hosts groups ids separated with commas"
+          ]
+        },
+        {
+          "key": "executor.crowdstrike.id",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_ID`",
+            "`2a16dcc4-55ac-40fc-8110-d5968a46cdd1`",
+            "Set",
+            "ID of the builtin Crowdstrike executor"
+          ]
+        },
+        {
+          "key": "executor.crowdstrike.name",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_NAME`",
+            "`CrowdStrike`",
+            "Code only",
+            "Name of the builtin Crowdstrike executor"
+          ]
+        },
+        {
+          "key": "executor.crowdstrike.unix-script-name",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_UNIX-SCRIPT-NAME`",
+            "`OpenAEV Subprocessor (Unix)`",
+            "Set",
+            "Name of the OpenAEV Crowdstrike unix script"
+          ]
+        },
+        {
+          "key": "executor.crowdstrike.windows-script-name",
+          "cells": [
+            "`EXECUTOR_CROWDSTRIKE_WINDOWS-SCRIPT-NAME`",
+            "`OpenAEV Subprocessor (Windows)`",
+            "Set",
+            "Name of the OpenAEV Crowdstrike windows script"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "executor.mde",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "executor.mde.api-batch-execution-action-pagination",
+          "cells": [
+            "`EXECUTOR_MDE_API-BATCH-EXECUTION-ACTION-PAGINATION`",
+            "`10`",
+            "Code only",
+            "Number of machines sent per minute to MDE Live Response API to execute a payload (MDE allows 10 calls per minute)"
+          ]
+        },
+        {
+          "key": "executor.mde.api-register-interval",
+          "cells": [
+            "`EXECUTOR_MDE_API-REGISTER-INTERVAL`",
+            "`1200`",
+            "Code only",
+            "MDE API interval to register/update device groups and agents in OpenAEV (in seconds)"
+          ]
+        },
+        {
+          "key": "executor.mde.api-url",
+          "cells": [
+            "`EXECUTOR_MDE_API-URL`",
+            "`https://api.securitycenter.microsoft.com/api`",
+            "Code only",
+            "Microsoft Defender for Endpoint API base URL"
+          ]
+        },
+        {
+          "key": "executor.mde.auth-url",
+          "cells": [
+            "`EXECUTOR_MDE_AUTH-URL`",
+            "`https://login.microsoftonline.com`",
+            "Code only",
+            "Microsoft Azure Active Directory OAuth2 token endpoint base URL"
+          ]
+        },
+        {
+          "key": "executor.mde.azure-tenant-id",
+          "cells": [
+            "`EXECUTOR_MDE_AZURE-TENANT-ID`",
+            "",
+            "Code only",
+            "Azure Active Directory tenant ID (Directory ID)"
+          ]
+        },
+        {
+          "key": "executor.mde.client-id",
+          "cells": [
+            "`EXECUTOR_MDE_CLIENT-ID`",
+            "",
+            "Code only",
+            "Azure App Registration client ID with Machine.LiveResponse.All permission"
+          ]
+        },
+        {
+          "key": "executor.mde.client-secret",
+          "cells": [
+            "`EXECUTOR_MDE_CLIENT-SECRET`",
+            "",
+            "Code only",
+            "Azure App Registration client secret"
+          ]
+        },
+        {
+          "key": "executor.mde.device-group",
+          "cells": [
+            "`EXECUTOR_MDE_DEVICE-GROUP`",
+            "",
+            "Code only",
+            "MDE device group ID(s) separated by commas (rbacGroupId). Leave empty to sync all devices."
+          ]
+        },
+        {
+          "key": "executor.mde.id",
+          "cells": [
+            "`EXECUTOR_MDE_ID`",
+            "`f9c4a0e1-3b7d-4f8a-9e2c-1d5b6a0f8e3c`",
+            "Code only",
+            "ID of the builtin Microsoft Defender for Endpoint executor"
+          ]
+        },
+        {
+          "key": "executor.mde.name",
+          "cells": [
+            "`EXECUTOR_MDE_NAME`",
+            "`Microsoft Defender for Endpoint`",
+            "Code only",
+            "Name of the builtin Microsoft Defender for Endpoint executor"
+          ]
+        },
+        {
+          "key": "executor.mde.stale-pending-threshold-minutes",
+          "cells": [
+            "`EXECUTOR_MDE_STALE-PENDING-THRESHOLD-MINUTES`",
+            "`30`",
+            "Code only",
+            "Age in minutes above which a stuck Pending MDE Live Response action is cancelled before a new dispatch. MDE allows a single Live Response session per machine, so a Pending action left by an offline machine blocks every later inject on it. Kept well above the inject timeout so a concurrent inject's fresh session is never cancelled."
+          ]
+        },
+        {
+          "key": "executor.mde.unix-script-name",
+          "cells": [
+            "`EXECUTOR_MDE_UNIX-SCRIPT-NAME`",
+            "`openaev-subprocessor.sh`",
+            "Code only",
+            "Name of the OpenAEV Unix subprocessor script uploaded to MDE Live Response Library"
+          ]
+        },
+        {
+          "key": "executor.mde.windows-script-name",
+          "cells": [
+            "`EXECUTOR_MDE_WINDOWS-SCRIPT-NAME`",
+            "`openaev-subprocessor.ps1`",
+            "Code only",
+            "Name of the OpenAEV Windows subprocessor script uploaded to MDE Live Response Library"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "executor.openaev",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "executor.openaev.agent.auto-update-enabled",
+          "cells": [
+            "`EXECUTOR_OPENAEV_AGENT_AUTO-UPDATE-ENABLED`",
+            "`true`",
+            "Set",
+            "When `false`, the platform does not queue agent upgrade jobs. Only applies with an active Enterprise Edition license"
+          ]
+        },
+        {
+          "key": "executor.openaev.agent.max-simultaneous-jobs",
+          "cells": [
+            "`EXECUTOR_OPENAEV_AGENT_MAX-SIMULTANEOUS-JOBS`",
+            "`5`",
+            "Set",
+            "Maximum number of simultaneous jobs per agent, to avoid overloading the endpoint"
+          ]
+        },
+        {
+          "key": "executor.openaev.binaries.origin",
+          "cells": [
+            "`EXECUTOR_OPENAEV_BINARIES_ORIGIN`",
+            "`local`",
+            "Set",
+            "Common defaults (apply to both agent and implant unless overridden below) Valid values: local | repository"
+          ]
+        },
+        {
+          "key": "executor.openaev.binaries.version",
+          "cells": [
+            "`EXECUTOR_OPENAEV_BINARIES_VERSION`",
+            "",
+            "Set",
+            "if executor.openaev.agent.binaries.origin is set to \"local\", this config is ignored default: the OpenAEV instance's version"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "executor.openaev-agent",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "executor.openaev-agent.binaries.origin",
+          "cells": [
+            "`EXECUTOR_OPENAEV-AGENT_BINARIES_ORIGIN`",
+            "`local`",
+            "Commented out",
+            "Agent-specific overrides"
+          ]
+        },
+        {
+          "key": "executor.openaev-agent.binaries.version",
+          "cells": [
+            "`EXECUTOR_OPENAEV-AGENT_BINARIES_VERSION`",
+            "`unknown`",
+            "Commented out",
+            "Version of the OpenAEV agent binaries and installers the platform fetches from the remote repository when the agent origin (`executor.openaev-agent.binaries.origin`) is `repository`; ignored with `local`. Unset, it falls back to `executor.openaev.binaries.version`, then to the platform's own version."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "executor.openaev-implant",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "executor.openaev-implant.binaries.origin",
+          "cells": [
+            "`EXECUTOR_OPENAEV-IMPLANT_BINARIES_ORIGIN`",
+            "`local`",
+            "Commented out",
+            "Implant-specific overrides"
+          ]
+        },
+        {
+          "key": "executor.openaev-implant.binaries.version",
+          "cells": [
+            "`EXECUTOR_OPENAEV-IMPLANT_BINARIES_VERSION`",
+            "`unknown`",
+            "Commented out",
+            "Version of the OpenAEV implant binaries the platform fetches from the remote repository when the implant origin (`executor.openaev-implant.binaries.origin`) is `repository`; ignored with `local`. Unset, it falls back to `executor.openaev.binaries.version`, then to the platform's own version."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "executor.paloaltocortex",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "executor.paloaltocortex.api-batch-execution-action-pagination",
+          "cells": [
+            "`EXECUTOR_PALOALTOCORTEX_API-BATCH-EXECUTION-ACTION-PAGINATION`",
+            "`100`",
+            "Code only",
+            "Palo Alto Cortex API pagination per 5 seconds to set for endpoints batch executions (number of endpoints sent per 5 seconds to Palo Alto Cortex to execute a payload)"
+          ]
+        },
+        {
+          "key": "executor.paloaltocortex.api-key",
+          "cells": [
+            "`EXECUTOR_PALOALTOCORTEX_API-KEY`",
+            "",
+            "Code only",
+            "Palo Alto Cortex API key"
+          ]
+        },
+        {
+          "key": "executor.paloaltocortex.api-key-id",
+          "cells": [
+            "`EXECUTOR_PALOALTOCORTEX_API-KEY-ID`",
+            "",
+            "Code only",
+            "Palo Alto Cortex API key id"
+          ]
+        },
+        {
+          "key": "executor.paloaltocortex.api-register-interval",
+          "cells": [
+            "`EXECUTOR_PALOALTOCORTEX_API-REGISTER-INTERVAL`",
+            "`1200`",
+            "Code only",
+            "Palo Alto Cortex API interval to register/update the groups/endpoints in OpenAEV (in seconds)"
+          ]
+        },
+        {
+          "key": "executor.paloaltocortex.clean-implant-interval",
+          "cells": [
+            "`EXECUTOR_PALOALTOCORTEX_CLEAN-IMPLANT-INTERVAL`",
+            "`8`",
+            "Code only",
+            "Palo Alto Cortex clean old implant interval (in hours)"
+          ]
+        },
+        {
+          "key": "executor.paloaltocortex.group-name",
+          "cells": [
+            "`EXECUTOR_PALOALTOCORTEX_GROUP-NAME`",
+            "",
+            "Code only",
+            "Palo Alto Cortex group name or groups names separated with commas"
+          ]
+        },
+        {
+          "key": "executor.paloaltocortex.id",
+          "cells": [
+            "`EXECUTOR_PALOALTOCORTEX_ID`",
+            "`2177ceeb-a9e2-4a33-bf30-1bf7c47f150a`",
+            "Code only",
+            "ID of the builtin Palo Alto Cortex executor"
+          ]
+        },
+        {
+          "key": "executor.paloaltocortex.name",
+          "cells": [
+            "`EXECUTOR_PALOALTOCORTEX_NAME`",
+            "`PaloAltoCortex`",
+            "Code only",
+            "Name of the builtin Palo Alto Cortex executor"
+          ]
+        },
+        {
+          "key": "executor.paloaltocortex.unix-script-uid",
+          "cells": [
+            "`EXECUTOR_PALOALTOCORTEX_UNIX-SCRIPT-UID`",
+            "",
+            "Code only",
+            "Uid of the OpenAEV Palo Alto Cortex Unix script"
+          ]
+        },
+        {
+          "key": "executor.paloaltocortex.url",
+          "cells": [
+            "`EXECUTOR_PALOALTOCORTEX_URL`",
+            "",
+            "Code only",
+            "Palo Alto Cortex URL, the API version used is the 1.0"
+          ]
+        },
+        {
+          "key": "executor.paloaltocortex.windows-script-uid",
+          "cells": [
+            "`EXECUTOR_PALOALTOCORTEX_WINDOWS-SCRIPT-UID`",
+            "",
+            "Code only",
+            "Uid of the OpenAEV Palo Alto Cortex Windows script"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "executor.sentinelone",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "executor.sentinelone.account-id",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_ACCOUNT-ID`",
+            "",
+            "Set",
+            "SentinelOne account id or accounts ids separated with commas (optional if site or group is filled)"
+          ]
+        },
+        {
+          "key": "executor.sentinelone.api-batch-execution-action-pagination",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_API-BATCH-EXECUTION-ACTION-PAGINATION`",
+            "`2500`",
+            "Set",
+            "SentinelOne API pagination per 5 seconds to set for agents batch executions (number of agents sent per 5 seconds to SentinelOne to execute a payload)"
+          ]
+        },
+        {
+          "key": "executor.sentinelone.api-key",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_API-KEY`",
+            "`<sentinelone-api-key>`",
+            "Set",
+            "SentinelOne API key"
+          ]
+        },
+        {
+          "key": "executor.sentinelone.api-register-interval",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_API-REGISTER-INTERVAL`",
+            "`1200`",
+            "Set",
+            "SentinelOne API interval to register/update the accounts/sites/groups/agents in OpenAEV (in seconds)"
+          ]
+        },
+        {
+          "key": "executor.sentinelone.clean-implant-cron",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_CLEAN-IMPLANT-CRON`",
+            "`0 0 3 * * ?`",
+            "Code only",
+            "Cron expression scheduling the SentinelOne garbage collector that removes implant directories older than 24 hours (default: daily at 3:00 AM)"
+          ]
+        },
+        {
+          "key": "executor.sentinelone.clean-implant-interval",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_CLEAN-IMPLANT-INTERVAL`",
+            "`8`",
+            "Set",
+            "No setting of the SentinelOne executor reads it: old implants are cleaned on the schedule of `executor.sentinelone.clean-implant-cron`."
+          ]
+        },
+        {
+          "key": "executor.sentinelone.enable",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_ENABLE`",
+            "`false`",
+            "Set",
+            "Read once, at the first startup that migrates the executor settings into the integration catalog: when `true`, OpenAEV creates and starts a SentinelOne executor from the `executor.sentinelone.*` keys; when `false`, it creates none. Changing it afterwards has no effect, and the executor is then deployed from the catalog."
+          ]
+        },
+        {
+          "key": "executor.sentinelone.group-id",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_GROUP-ID`",
+            "",
+            "Set",
+            "SentinelOne group id or groups ids separated with commas (optional if site or account is filled)"
+          ]
+        },
+        {
+          "key": "executor.sentinelone.id",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_ID`",
+            "`9a12c0dd-1f6d-4ed4-a773-8034934fc111`",
+            "Set",
+            "ID of the builtin SentinelOne executor"
+          ]
+        },
+        {
+          "key": "executor.sentinelone.name",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_NAME`",
+            "`SentinelOne`",
+            "Code only",
+            "Name of the builtin Caldera executor"
+          ]
+        },
+        {
+          "key": "executor.sentinelone.site-id",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_SITE-ID`",
+            "",
+            "Set",
+            "SentinelOne site id or sites ids separated with commas (optional if account or group is filled)"
+          ]
+        },
+        {
+          "key": "executor.sentinelone.unix-script-id",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_UNIX-SCRIPT-ID`",
+            "",
+            "Set",
+            "Id of the OpenAEV SentinelOne Unix script"
+          ]
+        },
+        {
+          "key": "executor.sentinelone.url",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_URL`",
+            "`<sentinelone-url>`",
+            "Set",
+            "SentinelOne URL, the API version used is the 2.1"
+          ]
+        },
+        {
+          "key": "executor.sentinelone.windows-script-id",
+          "cells": [
+            "`EXECUTOR_SENTINELONE_WINDOWS-SCRIPT-ID`",
+            "",
+            "Set",
+            "Id of the OpenAEV SentinelOne Windows script"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "executor.tanium",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "executor.tanium.action-group-id",
+          "cells": [
+            "`EXECUTOR_TANIUM_ACTION-GROUP-ID`",
+            "`4`",
+            "Set",
+            "Tanium Action Group to apply actions to"
+          ]
+        },
+        {
+          "key": "executor.tanium.api-batch-execution-action-pagination",
+          "cells": [
+            "`EXECUTOR_TANIUM_API-BATCH-EXECUTION-ACTION-PAGINATION`",
+            "`100`",
+            "Set",
+            "Tanium API pagination per 5 seconds to set for endpoints batch executions (number of endpoints sent per 5 seconds to Tanium to execute a payload)"
+          ]
+        },
+        {
+          "key": "executor.tanium.api-key",
+          "cells": [
+            "`EXECUTOR_TANIUM_API-KEY`",
+            "`<tanium-api-key>`",
+            "Set",
+            "Tanium API key"
+          ]
+        },
+        {
+          "key": "executor.tanium.api-register-interval",
+          "cells": [
+            "`EXECUTOR_TANIUM_API-REGISTER-INTERVAL`",
+            "`1200`",
+            "Set",
+            "Tanium API interval to register/update the computer groups/endpoints in OpenAEV (in seconds)"
+          ]
+        },
+        {
+          "key": "executor.tanium.clean-implant-interval",
+          "cells": [
+            "`EXECUTOR_TANIUM_CLEAN-IMPLANT-INTERVAL`",
+            "`8`",
+            "Set",
+            "Tanium clean old implant interval (in hours)"
+          ]
+        },
+        {
+          "key": "executor.tanium.computer-group-id",
+          "cells": [
+            "`EXECUTOR_TANIUM_COMPUTER-GROUP-ID`",
+            "`1`",
+            "Set",
+            "Tanium Computer Group to be used in simulations"
+          ]
+        },
+        {
+          "key": "executor.tanium.enable",
+          "cells": [
+            "`EXECUTOR_TANIUM_ENABLE`",
+            "`false`",
+            "Set",
+            "Read once, at the first startup that migrates the executor settings into the integration catalog: when `true`, OpenAEV creates and starts a Tanium executor from the `executor.tanium.*` keys; when `false`, it creates none. Changing it afterwards has no effect, and the executor is then deployed from the catalog."
+          ]
+        },
+        {
+          "key": "executor.tanium.id",
+          "cells": [
+            "`EXECUTOR_TANIUM_ID`",
+            "`fbcce3cc-9cd3-4fdb-b451-1c90f4ae035d`",
+            "Set",
+            "ID of the builtin Tanium executor"
+          ]
+        },
+        {
+          "key": "executor.tanium.name",
+          "cells": [
+            "`EXECUTOR_TANIUM_NAME`",
+            "`Tanium`",
+            "Code only",
+            "Name of the builtin Caldera executor"
+          ]
+        },
+        {
+          "key": "executor.tanium.unix-package-id",
+          "cells": [
+            "`EXECUTOR_TANIUM_UNIX-PACKAGE-ID`",
+            "",
+            "Set",
+            "ID of the OpenAEV Tanium Unix package"
+          ]
+        },
+        {
+          "key": "executor.tanium.url",
+          "cells": [
+            "`EXECUTOR_TANIUM_URL`",
+            "`<tanium-url>`",
+            "Set",
+            "Tanium API URL"
+          ]
+        },
+        {
+          "key": "executor.tanium.windows-package-id",
+          "cells": [
+            "`EXECUTOR_TANIUM_WINDOWS-PACKAGE-ID`",
+            "",
+            "Set",
+            "ID of the OpenAEV Tanium Windows package"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "info",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "info.app.name",
+          "cells": [
+            "`INFO_APP_NAME`",
+            "",
+            "Set",
+            "Application name filled at build time with the project description; no OpenAEV code reads it, so leave it as shipped."
+          ]
+        },
+        {
+          "key": "info.app.version",
+          "cells": [
+            "`INFO_APP_VERSION`",
+            "`unknown`",
+            "Set",
+            "Version of the platform, filled at build time; OpenAEV reports it in its anonymous telemetry and serves the agent and implant binaries of that version by default, so leave it as shipped."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "inject",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "inject.execution.batch-size",
+          "cells": [
+            "`INJECT_EXECUTION_BATCH-SIZE`",
+            "`500`",
+            "Code only",
+            "Maximum number of due injects, and separately of atomic tests, OpenAEV picks up in one pass of the inject execution job; the others wait for the next pass. Default `500`."
+          ]
+        },
+        {
+          "key": "inject.execution.threshold.minutes",
+          "cells": [
+            "`INJECT_EXECUTION_THRESHOLD_MINUTES`",
+            "`10`",
+            "Set",
+            "Time in minutes OpenAEV waits for Agents to report back after an inject is sent. Agents that did not report get a `TIMEOUT` trace and the inject is set to `ERROR` or `PARTIAL`. Late starts are handled by `openaev.scheduling.inject-staleness-threshold`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "injector.caldera",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "injector.caldera.api-key",
+          "cells": [
+            "`INJECTOR_CALDERA_API-KEY`",
+            "`<caldera-api-key>`",
+            "Set",
+            "Shipped as a Caldera API key, but no code of the platform reads it; the Caldera integration authenticates with `executor.caldera.api-key`."
+          ]
+        },
+        {
+          "key": "injector.caldera.enable",
+          "cells": [
+            "`INJECTOR_CALDERA_ENABLE`",
+            "`false`",
+            "Set",
+            "Shipped in the configuration, but no code of the platform reads it; the Caldera integration is driven by the `executor.caldera.*` keys."
+          ]
+        },
+        {
+          "key": "injector.caldera.id",
+          "cells": [
+            "`INJECTOR_CALDERA_ID`",
+            "`7736918d-6a3f-46c7-b303-cbf5dc476c84`",
+            "Set",
+            "Shipped in the configuration, but no code of the platform reads it; the Caldera integration takes its ID from `executor.caldera.id`."
+          ]
+        },
+        {
+          "key": "injector.caldera.public-url",
+          "cells": [
+            "`INJECTOR_CALDERA_PUBLIC-URL`",
+            "`<caldera-public-url>`",
+            "Set",
+            "Shipped in the configuration, but no code of the platform reads it; the Caldera integration takes its endpoint-facing URL from `executor.caldera.public-url`."
+          ]
+        },
+        {
+          "key": "injector.caldera.url",
+          "cells": [
+            "`INJECTOR_CALDERA_URL`",
+            "`<caldera-url>`",
+            "Set",
+            "Shipped in the configuration, but no code of the platform reads it; the Caldera integration takes its URL from `executor.caldera.url`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "injector.opencti",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "injector.opencti.id",
+          "cells": [
+            "`INJECTOR_OPENCTI_ID`",
+            "`2cbc77af-67f2-46af-bfd2-755d06a46da0`",
+            "Code only",
+            "ID of the builtin Opencti injector"
+          ]
+        },
+        {
+          "key": "injector.opencti.name",
+          "cells": [
+            "`INJECTOR_OPENCTI_NAME`",
+            "`OpenCTI`",
+            "Code only",
+            "Name of the builtin opencti injector"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "lade",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "lade.enable",
+          "cells": [
+            "`LADE_ENABLE`",
+            "`false`",
+            "Set",
+            "Shipped for the Airbus LADE integration, but no code of the platform reads it."
+          ]
+        },
+        {
+          "key": "lade.password",
+          "cells": [
+            "`LADE_PASSWORD`",
+            "`<password>`",
+            "Set",
+            "Shipped as the password of the Airbus LADE account, but no code of the platform reads it."
+          ]
+        },
+        {
+          "key": "lade.session",
+          "cells": [
+            "`LADE_SESSION`",
+            "`30`",
+            "Set",
+            "Shipped for the Airbus LADE integration, but no code of the platform reads it."
+          ]
+        },
+        {
+          "key": "lade.url",
+          "cells": [
+            "`LADE_URL`",
+            "`<url>`",
+            "Set",
+            "Shipped as the Airbus LADE URL, but no code of the platform reads it."
+          ]
+        },
+        {
+          "key": "lade.username",
+          "cells": [
+            "`LADE_USERNAME`",
+            "`<username>`",
+            "Set",
+            "Shipped as the user name of the Airbus LADE account, but no code of the platform reads it."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "logging",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "logging.file.name",
+          "cells": [
+            "`LOGGING_FILE_NAME`",
+            "`./logs/openaev.log`",
+            "Set",
+            "Log file path (in addition to console output)"
+          ]
+        },
+        {
+          "key": "logging.level.com.zaxxer.hikari",
+          "cells": [
+            "`LOGGING_LEVEL_COM_ZAXXER_HIKARI`",
+            "`warn`",
+            "Set",
+            "Log level of the HikariCP database connection pool; the platform ships `warn`, which keeps its connection leak warnings (connections held more than 30 seconds) visible."
+          ]
+        },
+        {
+          "key": "logging.level.io.openaev",
+          "cells": [
+            "`LOGGING_LEVEL_IO_OPENAEV`",
+            "`error`",
+            "Set",
+            "OpenAEV log level"
+          ]
+        },
+        {
+          "key": "logging.level.io.openaev.debug",
+          "cells": [
+            "`LOGGING_LEVEL_IO_OPENAEV_DEBUG`",
+            "`INFO`",
+            "Set",
+            "Debug mode emits on io.openaev.debug at INFO/WARN; the parent io.openaev is pinned to ERROR, so the debug subtree is raised explicitly. Harmless when debug mode is off (those classes emit nothing)."
+          ]
+        },
+        {
+          "key": "logging.level.org.flywaydb",
+          "cells": [
+            "`LOGGING_LEVEL_ORG_FLYWAYDB`",
+            "`error`",
+            "Set",
+            "Log level of Flyway, which migrates the database at startup; the platform ships `error`."
+          ]
+        },
+        {
+          "key": "logging.level.root",
+          "cells": [
+            "`LOGGING_LEVEL_ROOT`",
+            "`fatal`",
+            "Set",
+            "Root log level"
+          ]
+        },
+        {
+          "key": "logging.logback.rollingpolicy.file-name-pattern",
+          "cells": [
+            "`LOGGING_LOGBACK_ROLLINGPOLICY_FILE-NAME-PATTERN`",
+            "`${LOG_FILE}.-%d{yyyy-MM-dd}.%i`",
+            "Set",
+            "Name pattern of the rotated files of Spring Boot's default log file appender; the platform ships `${LOG_FILE}.-%d{yyyy-MM-dd}.%i`, but OpenAEV's logging configuration writes its logs to the console and does not use that appender, so it has no effect."
+          ]
+        },
+        {
+          "key": "logging.logback.rollingpolicy.max-file-size",
+          "cells": [
+            "`LOGGING_LOGBACK_ROLLINGPOLICY_MAX-FILE-SIZE`",
+            "`10MB`",
+            "Set",
+            "Rolling max file size"
+          ]
+        },
+        {
+          "key": "logging.logback.rollingpolicy.max-history",
+          "cells": [
+            "`LOGGING_LOGBACK_ROLLINGPOLICY_MAX-HISTORY`",
+            "`7`",
+            "Set",
+            "Rolling max days"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "management.endpoint",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "management.endpoint.health.show-details",
+          "cells": [
+            "`MANAGEMENT_ENDPOINT_HEALTH_SHOW-DETAILS`",
+            "`always`",
+            "Set",
+            "Whether the Actuator health endpoint shows the details of each component; the platform ships `always`, but only the `prometheus` endpoint is exposed over HTTP."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "management.endpoints",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "management.endpoints.web.exposure.include",
+          "cells": [
+            "`MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE`",
+            "`prometheus`",
+            "Set",
+            "Actuator: only the Prometheus scrape is exposed, and it is served on the API port, so it is rejected with a 401 unless openaev.metrics.key is set and sent as \"Authorization: Bearer <key>\". Empty key (the default) denies every actuator request. The management port follows server.port so the scrape stays on the port ActuatorSecurityConfig guards; a hardened deployment can point it at a dedicated, unpublished port instead."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "management.server",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "management.server.port",
+          "cells": [
+            "`MANAGEMENT_SERVER_PORT`",
+            "`${server.port}`",
+            "Set",
+            "Port on which OpenAEV serves the Actuator endpoints (the Prometheus scrape); the platform ships `${server.port}`, so the scrape stays behind the `openaev.metrics.key` check, and a hardened deployment can move it to a dedicated port that is not published."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "management.tracing",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "management.tracing.sampling.probability",
+          "cells": [
+            "`MANAGEMENT_TRACING_SAMPLING_PROBABILITY`",
+            "`1.0`",
+            "Set",
+            "Correlation ids: DebugTracingContextInitializer excludes the tracing auto-configuration unless debug mode is active, so no Tracer is created and no span/traceId is produced on any request, message or job path when off (management.tracing.enabled only gates export, not span creation). This sampling probability applies once tracing is active under debug mode."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "manager",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "manager.integrations.concurrency",
+          "cells": [
+            "`MANAGER_INTEGRATIONS_CONCURRENCY`",
+            "",
+            "Code only",
+            "Number of tenants whose integrations OpenAEV synchronizes at the same time (at least `1`). Unset, it is 40% of `spring.datasource.hikari.maximum-pool-size`, so the synchronization leaves database connections to the rest of the platform."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "mastodon",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "mastodon.enable",
+          "cells": [
+            "`MASTODON_ENABLE`",
+            "`false`",
+            "Set",
+            "Shipped for a Mastodon integration, but no code of the platform reads it."
+          ]
+        },
+        {
+          "key": "mastodon.url",
+          "cells": [
+            "`MASTODON_URL`",
+            "`<url>`",
+            "Set",
+            "Shipped as the Mastodon URL, but no code of the platform reads it."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "minio",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "minio.access-key",
+          "cells": [
+            "`MINIO_ACCESS-KEY`",
+            "`<key>`",
+            "Set",
+            "Access key for the S3 service"
+          ]
+        },
+        {
+          "key": "minio.access-secret",
+          "cells": [
+            "`MINIO_ACCESS-SECRET`",
+            "`<secret>`",
+            "Set",
+            "Secret key for the S3 service"
+          ]
+        },
+        {
+          "key": "minio.bucket",
+          "cells": [
+            "`MINIO_BUCKET`",
+            "`openaev`",
+            "Set",
+            "S3 bucket name. Created at startup if missing"
+          ]
+        },
+        {
+          "key": "minio.endpoint",
+          "cells": [
+            "`MINIO_ENDPOINT`",
+            "`localhost`",
+            "Set",
+            "Hostname of the S3 service. For AWS S3, for example `s3.us-east-1.amazonaws.com`"
+          ]
+        },
+        {
+          "key": "minio.port",
+          "cells": [
+            "`MINIO_PORT`",
+            "`9000`",
+            "Set",
+            "Port of the S3 service. For AWS S3 over HTTPS, usually `443`"
+          ]
+        },
+        {
+          "key": "minio.secure",
+          "cells": [
+            "`MINIO_SECURE`",
+            "`false`",
+            "Code only",
+            "Turn on when the S3 service uses TLS (for example AWS S3 over HTTPS)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.agent-url",
+          "cells": [
+            "`OPENAEV_AGENT-URL`",
+            "",
+            "Commented out",
+            "Optional URL agents use to reach the platform when it differs from `openaev.base-url` (reverse proxy, VPN, load balancer, network segregation). When unset, agent installer scripts and executor commands fall back to `openaev.base-url`."
+          ]
+        },
+        {
+          "key": "openaev.application-license",
+          "cells": [
+            "`OPENAEV_APPLICATION-LICENSE`",
+            "",
+            "Set",
+            "Enterprise Edition license certificate (PEM) of the platform; when set, it takes precedence over the license entered in the settings. Empty by default: the license from the settings applies, if any."
+          ]
+        },
+        {
+          "key": "openaev.auth-kerberos-enable",
+          "cells": [
+            "`OPENAEV_AUTH-KERBEROS-ENABLE`",
+            "`false`",
+            "Set",
+            "Only reported in the anonymous usage telemetry, which lists the enabled authentication strategies; this version has no Kerberos login. `false` by default."
+          ]
+        },
+        {
+          "key": "openaev.auth-local-enable",
+          "cells": [
+            "`OPENAEV_AUTH-LOCAL-ENABLE`",
+            "`true`",
+            "Set",
+            "Shows the email and password login form on the login page. `true` in the shipped file, `false` when absent."
+          ]
+        },
+        {
+          "key": "openaev.auth-openid-enable",
+          "cells": [
+            "`OPENAEV_AUTH-OPENID-ENABLE`",
+            "`false`",
+            "Set",
+            "Turns on OpenID Connect / OAuth2 login with the providers declared under `spring.security.oauth2.client.registration.<registrationId>.*`, each shown as a button on the login page. `false` by default."
+          ]
+        },
+        {
+          "key": "openaev.auth-saml2-enable",
+          "cells": [
+            "`OPENAEV_AUTH-SAML2-ENABLE`",
+            "`false`",
+            "Set",
+            "Turns on SAML2 login with the providers declared under `spring.security.saml2.relyingparty.registration.<registrationId>.*`, each shown as a button on the login page. `false` by default."
+          ]
+        },
+        {
+          "key": "openaev.base-url",
+          "cells": [
+            "`OPENAEV_BASE-URL`",
+            "`http://localhost:8080`",
+            "Set",
+            "Base URL of the application, used for some email links and as the default agent URL (agent installer scripts and executor commands) unless `openaev.agent-url` is set. In production environments, ensure this URL can be resolved from endpoints where agents will be deployed."
+          ]
+        },
+        {
+          "key": "openaev.commit",
+          "cells": [
+            "`OPENAEV_COMMIT`",
+            "",
+            "Code only",
+            "Commit the running build was made from, filled when the Docker image is built (`OPENAEV_COMMIT`); operators do not set it. Shown with the version in the platform information panel, hidden when empty."
+          ]
+        },
+        {
+          "key": "openaev.cookie-duration",
+          "cells": [
+            "`OPENAEV_COOKIE-DURATION`",
+            "`P1D`",
+            "Set",
+            "Cookie validity sliding window (default 1 day). Each request re-issues the cookie with this Max-Age, so active users are never logged out by cookie expiration"
+          ]
+        },
+        {
+          "key": "openaev.cookie-name",
+          "cells": [
+            "`OPENAEV_COOKIE-NAME`",
+            "`openaev_token`",
+            "Set",
+            "Name of the browser cookie from which the platform reads a user's API token; the cookie is also deleted at logout. Default `openaev_token`."
+          ]
+        },
+        {
+          "key": "openaev.cookie-secure",
+          "cells": [
+            "`OPENAEV_COOKIE-SECURE`",
+            "`false`",
+            "Set",
+            "Turn on if the access is done in HTTPS"
+          ]
+        },
+        {
+          "key": "openaev.default-mailer",
+          "cells": [
+            "`OPENAEV_DEFAULT-MAILER`",
+            "`no-reply@openaev.io`",
+            "Set",
+            "Sender email address of all outgoing emails (the IMAP username is used instead when IMAP is enabled). It cannot be changed from the UI"
+          ]
+        },
+        {
+          "key": "openaev.default-mailer-name",
+          "cells": [
+            "`OPENAEV_DEFAULT-MAILER-NAME`",
+            "`no-reply`",
+            "Set",
+            "Default sender display name (\"Sender email from\"), pre-fills the sender name on new Scenario/Simulation creation. Editable per-Scenario/Simulation afterwards in the UI"
+          ]
+        },
+        {
+          "key": "openaev.default-reply-to",
+          "cells": [
+            "`OPENAEV_DEFAULT-REPLY-TO`",
+            "`contact@openaev.io`",
+            "Set",
+            "Default Reply-To address used on outgoing emails"
+          ]
+        },
+        {
+          "key": "openaev.enabled-dev-features",
+          "cells": [
+            "`OPENAEV_ENABLED-DEV-FEATURES`",
+            "",
+            "Set",
+            "Reserved to development: leave it unset."
+          ]
+        },
+        {
+          "key": "openaev.extra-trusted-certs-dir",
+          "cells": [
+            "`OPENAEV_EXTRA-TRUSTED-CERTS-DIR`",
+            "",
+            "Set",
+            "Local folder with extra trusted TLS certificates (public `.pem` files) to reach external applications such as CrowdStrike, Tanium or SentinelOne. With Docker, uncomment the volume in the [docker compose file](https://github.com/OpenAEV-Platform/docker/blob/master/docker-compose.yml) and set this value"
+          ]
+        },
+        {
+          "key": "openaev.frontend-url",
+          "cells": [
+            "`OPENAEV_FRONTEND-URL`",
+            "",
+            "Commented out",
+            "Setting up the frontend url if frontend and backend are on a different server"
+          ]
+        },
+        {
+          "key": "openaev.id",
+          "cells": [
+            "`OPENAEV_ID`",
+            "`global`",
+            "Code only",
+            "Internal identifier of the platform configuration, `global` by default; operators do not set it, and no code of this version reads it."
+          ]
+        },
+        {
+          "key": "openaev.implant-logs-max-size",
+          "cells": [
+            "`OPENAEV_IMPLANT-LOGS-MAX-SIZE`",
+            "`1000000`",
+            "Code only",
+            "Maximum size of the logs an implant sends back, passed as its `max_size` argument in the commands the executors run on endpoints. Default `1000000`; the unit is decided by the implant, not by the platform."
+          ]
+        },
+        {
+          "key": "openaev.instance-id",
+          "cells": [
+            "`OPENAEV_INSTANCE-ID`",
+            "",
+            "Code only",
+            "UUID of this platform instance, which platform-bound Enterprise Edition licenses must match. Empty: a random UUID is generated at the first start and kept in the database; when set, it must be a valid UUID and replaces the stored one at startup."
+          ]
+        },
+        {
+          "key": "openaev.logout-success-url",
+          "cells": [
+            "`OPENAEV_LOGOUT-SUCCESS-URL`",
+            "`/`",
+            "Commented out",
+            "Path the browser is sent to after logout, appended to `openaev.frontend-url`. Default `/`."
+          ]
+        },
+        {
+          "key": "openaev.map-tile-server-dark",
+          "cells": [
+            "`OPENAEV_MAP-TILE-SERVER-DARK`",
+            "",
+            "Code only",
+            "URL of a map tile server for the dark theme, passed to the web interface in the platform settings; no screen of this version reads it. Empty by default."
+          ]
+        },
+        {
+          "key": "openaev.map-tile-server-light",
+          "cells": [
+            "`OPENAEV_MAP-TILE-SERVER-LIGHT`",
+            "",
+            "Code only",
+            "URL of a map tile server for the light theme, passed to the web interface in the platform settings; no screen of this version reads it. Empty by default."
+          ]
+        },
+        {
+          "key": "openaev.name",
+          "cells": [
+            "`OPENAEV_NAME`",
+            "`OpenAEV`",
+            "Set",
+            "Application name, filled at build time from the project name; operators do not set it. Used as the Spring application name and in the footer of scheduled report emails (`OpenAEV` when empty)."
+          ]
+        },
+        {
+          "key": "openaev.queue-config",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG`",
+            "",
+            "Code only",
+            "Map of the RabbitMQ batching queues, one entry per queue (`inject-trace`, `workflows-ready`, `workflows-update`) with the settings below, declared for every tenant. Without `workflows-ready` or `workflows-update` the platform does not start; without `inject-trace`, execution traces are processed one by one as they arrive."
+          ]
+        },
+        {
+          "key": "openaev.run-mode",
+          "cells": [
+            "`OPENAEV_RUN-MODE`",
+            "`normal`",
+            "Set",
+            "Startup run mode (`normal` or `safe`). In `safe`, Quartz background processing is disabled. See [Run modes](../../deployment/platform/run-modes.md)."
+          ]
+        },
+        {
+          "key": "openaev.session-cookie",
+          "cells": [
+            "`OPENAEV_SESSION-COOKIE`",
+            "`false`",
+            "Set",
+            "When `true`, the session cookie dies when the browser closes (server-side timeout still applies). When `false`, users stay logged in across browser restarts: the cookie is re-issued on every request (sliding Max-Age), so it only expires after `openaev.cookie-duration` of inactivity"
+          ]
+        },
+        {
+          "key": "openaev.session-cookie-same-site",
+          "cells": [
+            "`OPENAEV_SESSION-COOKIE-SAME-SITE`",
+            "",
+            "Set",
+            "SameSite attribute of the session cookie: `None`, `Lax`, `Strict`, or blank to omit it. `Lax` drops the cookie on POST login callbacks (SAML2, OpenID `form_post`); `Strict` breaks all SSO (Single Sign-On) callbacks. `None` forces the `Secure` flag, for HTTPS SSO deployments"
+          ]
+        },
+        {
+          "key": "openaev.session-idle-timeout",
+          "cells": [
+            "`OPENAEV_SESSION-IDLE-TIMEOUT`",
+            "`0`",
+            "Set",
+            "Idle time before the UI locks the screen and asks the user to continue or log out (0 = disabled, e.g. 30m). Must be lower than the session timeout"
+          ]
+        },
+        {
+          "key": "openaev.unsecured-certificate",
+          "cells": [
+            "`OPENAEV_UNSECURED-CERTIFICATE`",
+            "`false`",
+            "Set",
+            "Turn on to accept self-signed or insecure SSL certificates"
+          ]
+        },
+        {
+          "key": "openaev.version",
+          "cells": [
+            "`OPENAEV_VERSION`",
+            "",
+            "Set",
+            "Platform version, filled at build time from the project version; operators do not set it. Shown in the platform information panel and in the API description."
+          ]
+        },
+        {
+          "key": "openaev.with-proxy",
+          "cells": [
+            "`OPENAEV_WITH-PROXY`",
+            "`false`",
+            "Set",
+            "Turn on for environments that use a proxy"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.admin",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.admin.email",
+          "cells": [
+            "`OPENAEV_ADMIN_EMAIL`",
+            "",
+            "Commented out",
+            "Login email of the admin user (for example `admin@openaev.io`)"
+          ]
+        },
+        {
+          "key": "openaev.admin.encryption_key",
+          "cells": [
+            "`OPENAEV_ADMIN_ENCRYPTION_KEY`",
+            "",
+            "Commented out",
+            "Key used with the salt to derive the 256-bit key that encrypts sensitive data in the database"
+          ]
+        },
+        {
+          "key": "openaev.admin.encryption_salt",
+          "cells": [
+            "`OPENAEV_ADMIN_ENCRYPTION_SALT`",
+            "",
+            "Commented out",
+            "Salt used with the encryption key. Must be at least 8 bytes long"
+          ]
+        },
+        {
+          "key": "openaev.admin.password",
+          "cells": [
+            "`OPENAEV_ADMIN_PASSWORD`",
+            "",
+            "Commented out",
+            "Password of the admin user"
+          ]
+        },
+        {
+          "key": "openaev.admin.token",
+          "cells": [
+            "`OPENAEV_ADMIN_TOKEN`",
+            "",
+            "Commented out",
+            "API token of the admin user (must be a valid UUIDv4)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.agent",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.agent.queue-threshold",
+          "cells": [
+            "`OPENAEV_AGENT_QUEUE-THRESHOLD`",
+            "`0`",
+            "Set",
+            "Max number of pending jobs per agent before marking it overloaded. 0 disables the check."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.attackpath",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.attackpath.collapse-threshold",
+          "cells": [
+            "`OPENAEV_ATTACKPATH_COLLAPSE-THRESHOLD`",
+            "`20000`",
+            "Set",
+            "Above this many executions a simulation's graph is served collapsed by default. The bound is the front's render ceiling, not backend latency: a full graph larger than this is not renderable."
+          ]
+        },
+        {
+          "key": "openaev.attackpath.delta-max-rows",
+          "cells": [
+            "`OPENAEV_ATTACKPATH_DELTA-MAX-ROWS`",
+            "`5000`",
+            "Set",
+            "Beyond this many changed rows, a delta poll is answered with a resync instead: past that size assembling the delta costs more than a reload, which the client would do anyway to re-lay out."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.audit",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.audit.normalization.max-event-size-bytes",
+          "cells": [
+            "`OPENAEV_AUDIT_NORMALIZATION_MAX-EVENT-SIZE-BYTES`",
+            "`32768`",
+            "Code only",
+            "Maximum size, in bytes, of the input or output of a change recorded in an audit log event; a larger one has its long strings cut, then keeps only key fields, then is replaced by a short preview. Default `32768`; `0` or less removes the cap."
+          ]
+        },
+        {
+          "key": "openaev.audit.normalization.max-heap-usage-ratio",
+          "cells": [
+            "`OPENAEV_AUDIT_NORMALIZATION_MAX-HEAP-USAGE-RATIO`",
+            "`0.90`",
+            "Code only",
+            "Share of the maximum JVM heap in use (from `0` to `1`) at which audit events skip the full normalization and keep only the redaction rules and the size cap, when `skip-on-high-load` is on. Default `0.90`."
+          ]
+        },
+        {
+          "key": "openaev.audit.normalization.max-process-cpu-load",
+          "cells": [
+            "`OPENAEV_AUDIT_NORMALIZATION_MAX-PROCESS-CPU-LOAD`",
+            "`0.90`",
+            "Code only",
+            "Process CPU load (from `0` to `1`) at which audit events skip the full normalization and keep only the redaction rules and the size cap, when `skip-on-high-load` is on. Default `0.90`."
+          ]
+        },
+        {
+          "key": "openaev.audit.normalization.max-string-bytes",
+          "cells": [
+            "`OPENAEV_AUDIT_NORMALIZATION_MAX-STRING-BYTES`",
+            "`1024`",
+            "Code only",
+            "Maximum size, in bytes, of a text value in an audit event that exceeds `max-event-size-bytes`; longer values are cut and end with `...[TRUNCATED]`. Default `1024`."
+          ]
+        },
+        {
+          "key": "openaev.audit.normalization.skip-all",
+          "cells": [
+            "`OPENAEV_AUDIT_NORMALIZATION_SKIP-ALL`",
+            "`false`",
+            "Code only",
+            "Turns off the normalization of audit events: inputs and outputs are recorded as they come, with no size cap, only the field redaction done beforehand still applies. Default `false`."
+          ]
+        },
+        {
+          "key": "openaev.audit.normalization.skip-on-high-load",
+          "cells": [
+            "`OPENAEV_AUDIT_NORMALIZATION_SKIP-ON-HIGH-LOAD`",
+            "`true`",
+            "Code only",
+            "When `true` (default), audit events skip the full normalization while heap usage or process CPU load reaches `max-heap-usage-ratio` or `max-process-cpu-load`, keeping only the redaction rules and the size cap."
+          ]
+        },
+        {
+          "key": "openaev.audit.normalization.truncation.preview-bytes",
+          "cells": [
+            "`OPENAEV_AUDIT_NORMALIZATION_TRUNCATION_PREVIEW-BYTES`",
+            "`2048`",
+            "Code only",
+            "Length, in characters, of the serialized payload kept as `preview` when an audit event still exceeds `max-event-size-bytes` after truncation. Default `2048`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.audit-logs",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.audit-logs.engine.retention-days",
+          "cells": [
+            "`OPENAEV_AUDIT-LOGS_ENGINE_RETENTION-DAYS`",
+            "",
+            "Commented out",
+            "Engine (Elasticsearch) transport configuration TODO(#6587): Re-enable and revisit these defaults when audit log engine transport is implemented. https://github.com/OpenAEV-Platform/openaev/issues/6587"
+          ]
+        },
+        {
+          "key": "openaev.audit-logs.engine.rollover-max-age",
+          "cells": [
+            "`OPENAEV_AUDIT-LOGS_ENGINE_ROLLOVER-MAX-AGE`",
+            "",
+            "Commented out",
+            "Not read by this version: kept commented out in the shipped file until audit logs sent to the search engine get their own rollover policy."
+          ]
+        },
+        {
+          "key": "openaev.audit-logs.engine.rollover-max-size",
+          "cells": [
+            "`OPENAEV_AUDIT-LOGS_ENGINE_ROLLOVER-MAX-SIZE`",
+            "",
+            "Commented out",
+            "Not read by this version: kept commented out in the shipped file until audit logs sent to the search engine get their own rollover policy."
+          ]
+        },
+        {
+          "key": "openaev.audit-logs.file.dir",
+          "cells": [
+            "`OPENAEV_AUDIT-LOGS_FILE_DIR`",
+            "`logs`",
+            "Set",
+            "Audit log directory for the `file` transport"
+          ]
+        },
+        {
+          "key": "openaev.audit-logs.file.filename",
+          "cells": [
+            "`OPENAEV_AUDIT-LOGS_FILE_FILENAME`",
+            "`audit`",
+            "Set",
+            "Audit log basename (without extension) for the `file` transport"
+          ]
+        },
+        {
+          "key": "openaev.audit-logs.file.retention-days",
+          "cells": [
+            "`OPENAEV_AUDIT-LOGS_FILE_RETENTION-DAYS`",
+            "`365`",
+            "Set",
+            "Number of days of rolled audit log files to keep"
+          ]
+        },
+        {
+          "key": "openaev.audit-logs.file.rollover-max-size",
+          "cells": [
+            "`OPENAEV_AUDIT-LOGS_FILE_ROLLOVER-MAX-SIZE`",
+            "`100MB`",
+            "Set",
+            "Maximum size of one audit log file before rollover"
+          ]
+        },
+        {
+          "key": "openaev.audit-logs.file.rollover-total-size-cap",
+          "cells": [
+            "`OPENAEV_AUDIT-LOGS_FILE_ROLLOVER-TOTAL-SIZE-CAP`",
+            "`20GB`",
+            "Set",
+            "Maximum total size of the audit log files. The oldest files are deleted first"
+          ]
+        },
+        {
+          "key": "openaev.audit-logs.halt-on-failure",
+          "cells": [
+            "`OPENAEV_AUDIT-LOGS_HALT-ON-FAILURE`",
+            "`false`",
+            "Set",
+            "Stop the platform when audit logging fails"
+          ]
+        },
+        {
+          "key": "openaev.audit-logs.transports",
+          "cells": [
+            "`OPENAEV_AUDIT-LOGS_TRANSPORTS`",
+            "",
+            "Set",
+            "Comma-separated list of transports: `file`, `console`. Empty disables audit logging. `engine` is accepted but not usable yet"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.chaining",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.chaining.max-retry-count",
+          "cells": [
+            "`OPENAEV_CHAINING_MAX-RETRY-COUNT`",
+            "`5`",
+            "Set",
+            "Maximum number of times an event can be re-queued after a transactional failure."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.credentials",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.credentials.status-validation.cron",
+          "cells": [
+            "`OPENAEV_CREDENTIALS_STATUS-VALIDATION_CRON`",
+            "`0 0 */6 * * ?`",
+            "Set",
+            "Quartz cron expression driving the job. The default runs every 6 hours. Each run makes one outbound call per stale credential."
+          ]
+        },
+        {
+          "key": "openaev.credentials.status-validation.enabled",
+          "cells": [
+            "`OPENAEV_CREDENTIALS_STATUS-VALIDATION_ENABLED`",
+            "`true`",
+            "Set",
+            "Enables the credential status validation job. When false, the job returns immediately and writes nothing."
+          ]
+        },
+        {
+          "key": "openaev.credentials.status-validation.max-per-run",
+          "cells": [
+            "`OPENAEV_CREDENTIALS_STATUS-VALIDATION_MAX-PER-RUN`",
+            "`500`",
+            "Set",
+            "Maximum number of credentials checked per tenant and per run. Oldest verification first."
+          ]
+        },
+        {
+          "key": "openaev.credentials.status-validation.revalidate-after-days",
+          "cells": [
+            "`OPENAEV_CREDENTIALS_STATUS-VALIDATION_REVALIDATE-AFTER-DAYS`",
+            "`1`",
+            "Set",
+            "How long a credential status stays fresh. Past this age the credential is checked again."
+          ]
+        },
+        {
+          "key": "openaev.credentials.status-validation.timeout-seconds",
+          "cells": [
+            "`OPENAEV_CREDENTIALS_STATUS-VALIDATION_TIMEOUT-SECONDS`",
+            "`10`",
+            "Set",
+            "Per-call budget for a single provider probe. A probe exceeding it is inconclusive, not a rejection."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.cron",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.cron.config.agent.inactivity.monitor.interval",
+          "cells": [
+            "`OPENAEV_CRON_CONFIG_AGENT_INACTIVITY_MONITOR_INTERVAL`",
+            "`5`",
+            "Set",
+            "Polling interval in minutes for the agent inactivity monitor job."
+          ]
+        },
+        {
+          "key": "openaev.cron.config.steps.delay.queue.polling.interval",
+          "cells": [
+            "`OPENAEV_CRON_CONFIG_STEPS_DELAY_QUEUE_POLLING_INTERVAL`",
+            "`10000`",
+            "Set",
+            "Interval, in milliseconds, at which the platform processes the delayed workflow steps whose time has come. Default `10000`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.debug",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.debug.allow-in-production",
+          "cells": [
+            "`OPENAEV_DEBUG_ALLOW-IN-PRODUCTION`",
+            "`false`",
+            "Set",
+            "Production barrier: in production (no dev/test/ci profile) the mode refuses to start unless this separate override is also set. Turning openaev.debug.enabled on is not enough in production."
+          ]
+        },
+        {
+          "key": "openaev.debug.auto-disable-after",
+          "cells": [
+            "`OPENAEV_DEBUG_AUTO-DISABLE-AFTER`",
+            "`0`",
+            "Set",
+            "Auto-disable the verbose tracing after this duration (0 = never). A full removal of the datasource proxy still needs a restart."
+          ]
+        },
+        {
+          "key": "openaev.debug.enabled",
+          "cells": [
+            "`OPENAEV_DEBUG_ENABLED`",
+            "`false`",
+            "Set",
+            "Global, instance-wide debug mode. OFF by default. When off there is no datasource proxy on the query hot path, no parameter capture and no extra per-request allocation. Activate (ideally via env var OPENAEV_DEBUG_ENABLED=true) ONLY for diagnostics, never in steady production: a loud warning is logged repeatedly while it is on. See docs/docs/administration/debug-mode.md for the full reference and the writable volume needed in containers."
+          ]
+        },
+        {
+          "key": "openaev.debug.jfr",
+          "cells": [
+            "`OPENAEV_DEBUG_JFR`",
+            "",
+            "Code only",
+            "Group of the Java Flight Recorder settings of debug mode (`enabled`, `max-size`, `max-age`, `duration`, `settings`); a recording starts while `openaev.debug.enabled` is `true` and `openaev.debug.jfr.enabled` is `true`, its default."
+          ]
+        },
+        {
+          "key": "openaev.debug.jfr.duration",
+          "cells": [
+            "`OPENAEV_DEBUG_JFR_DURATION`",
+            "`10m`",
+            "Set",
+            "Interval between two dumps of the debug JFR recording to a `.jfr` file in `openaev.debug.output-dir`, as a duration (at least one second). Default `10m`."
+          ]
+        },
+        {
+          "key": "openaev.debug.jfr.enabled",
+          "cells": [
+            "`OPENAEV_DEBUG_JFR_ENABLED`",
+            "`true`",
+            "Set",
+            "JFR recording (bounded in size and time, written to output-dir)."
+          ]
+        },
+        {
+          "key": "openaev.debug.jfr.max-age",
+          "cells": [
+            "`OPENAEV_DEBUG_JFR_MAX-AGE`",
+            "`1h`",
+            "Set",
+            "Maximum age of the events the debug JFR recording keeps, as a duration. Default `1h`."
+          ]
+        },
+        {
+          "key": "openaev.debug.jfr.max-size",
+          "cells": [
+            "`OPENAEV_DEBUG_JFR_MAX-SIZE`",
+            "`100MB`",
+            "Set",
+            "Maximum on-disk size of the debug JFR recording, as a data size. Default `100MB`."
+          ]
+        },
+        {
+          "key": "openaev.debug.jfr.settings",
+          "cells": [
+            "`OPENAEV_DEBUG_JFR_SETTINGS`",
+            "`profile`",
+            "Set",
+            "Built-in JFR profile of the debug recording: `profile` (default, richer, with a noticeable overhead) or `default` (lighter)."
+          ]
+        },
+        {
+          "key": "openaev.debug.masking",
+          "cells": [
+            "`OPENAEV_DEBUG_MASKING`",
+            "",
+            "Code only",
+            "Group of the masking settings of debug output: `enabled` (`true` by default, keep it) hides secrets and personal data such as passwords, tokens and email addresses, and `mask-all-parameters` masks every SQL parameter value."
+          ]
+        },
+        {
+          "key": "openaev.debug.masking.enabled",
+          "cells": [
+            "`OPENAEV_DEBUG_MASKING_ENABLED`",
+            "`true`",
+            "Set",
+            "Masking of secrets and personal data. Keep enabled."
+          ]
+        },
+        {
+          "key": "openaev.debug.masking.mask-all-parameters",
+          "cells": [
+            "`OPENAEV_DEBUG_MASKING_MASK-ALL-PARAMETERS`",
+            "`false`",
+            "Set",
+            "Deny-by-default: mask every parameter value (keep only column name + type). Opt-in to reveal less."
+          ]
+        },
+        {
+          "key": "openaev.debug.orm",
+          "cells": [
+            "`OPENAEV_DEBUG_ORM`",
+            "",
+            "Code only",
+            "Group of the per-request ORM summary of debug mode, one log event per request to spot repeated queries; `summary-to-file`, `false` by default, writes it to a rotated file in `openaev.debug.output-dir` instead of the console."
+          ]
+        },
+        {
+          "key": "openaev.debug.output-dir",
+          "cells": [
+            "`OPENAEV_DEBUG_OUTPUT-DIR`",
+            "`./logs/debug`",
+            "Set",
+            "Writable directory for debug artifacts: JFR recordings and the rotated SQL log file. On a read-only container, point this at a mounted writable volume."
+          ]
+        },
+        {
+          "key": "openaev.debug.sql",
+          "cells": [
+            "`OPENAEV_DEBUG_SQL`",
+            "",
+            "Code only",
+            "Group of the SQL logging of debug mode: while `openaev.debug.enabled` is `true` and `enabled` is `true` (its default), every statement is written with its timing and masked parameters to the rotated file `openaev-debug-sql.log` in `openaev.debug.output-dir`. Set `slow-query-threshold` (for example `50ms`) to log only slower statements."
+          ]
+        },
+        {
+          "key": "openaev.debug.sql.enabled",
+          "cells": [
+            "`OPENAEV_DEBUG_SQL_ENABLED`",
+            "`true`",
+            "Set",
+            "SQL statement logging (timing + masked parameters), written to a rotated file (openaev-debug-sql.log) in output-dir, off the console. Active only when debug mode is on."
+          ]
+        },
+        {
+          "key": "openaev.debug.sql.slow-query-threshold",
+          "cells": [
+            "`OPENAEV_DEBUG_SQL_SLOW-QUERY-THRESHOLD`",
+            "`0ms`",
+            "Set",
+            "0 logs every statement; set e.g. 50ms to only log slow ones."
+          ]
+        },
+        {
+          "key": "openaev.debug.warning-interval",
+          "cells": [
+            "`OPENAEV_DEBUG_WARNING-INTERVAL`",
+            "",
+            "Code only",
+            "How often the \"debug mode is active\" warning repeats."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.dev",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.dev.auto-start-database",
+          "cells": [
+            "`OPENAEV_DEV_AUTO-START-DATABASE`",
+            "`false`",
+            "Set",
+            "Database auto-generated per branch"
+          ]
+        },
+        {
+          "key": "openaev.dev.container-runtime",
+          "cells": [
+            "`OPENAEV_DEV_CONTAINER-RUNTIME`",
+            "",
+            "Commented out",
+            "Container runtime: auto-detected (podman first, then docker) or force with:"
+          ]
+        },
+        {
+          "key": "openaev.dev.database-port",
+          "cells": [
+            "`OPENAEV_DEV_DATABASE-PORT`",
+            "`5432`",
+            "Set",
+            "If you want to set a static port. Otherwise, you can comment it"
+          ]
+        },
+        {
+          "key": "openaev.dev.frontend-url",
+          "cells": [
+            "`OPENAEV_DEV_FRONTEND-URL`",
+            "`http://localhost:3001`",
+            "Code only",
+            "Reserved to development: leave it unset."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.expectation",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.expectation.article.expiration-time",
+          "cells": [
+            "`OPENAEV_EXPECTATION_ARTICLE_EXPIRATION-TIME`",
+            "",
+            "Commented out",
+            "Default time, in seconds, an article expectation waits for a result before it expires, used when the inject sets none. Empty falls back to `openaev.expectation.human.expiration-time`, then to `86400` (24 hours)."
+          ]
+        },
+        {
+          "key": "openaev.expectation.challenge.expiration-time",
+          "cells": [
+            "`OPENAEV_EXPECTATION_CHALLENGE_EXPIRATION-TIME`",
+            "",
+            "Commented out",
+            "Default time, in seconds, a challenge expectation waits for a result before it expires, used when the inject sets none. Empty falls back to `openaev.expectation.human.expiration-time`, then to `86400` (24 hours)."
+          ]
+        },
+        {
+          "key": "openaev.expectation.detection.expiration-time",
+          "cells": [
+            "`OPENAEV_EXPECTATION_DETECTION_EXPIRATION-TIME`",
+            "",
+            "Commented out",
+            "Default time, in seconds, a detection expectation waits for a result before it expires, used when the inject sets none. Empty falls back to `openaev.expectation.technical.expiration-time`, then to `21600` (6 hours)."
+          ]
+        },
+        {
+          "key": "openaev.expectation.human.expiration-time",
+          "cells": [
+            "`OPENAEV_EXPECTATION_HUMAN_EXPIRATION-TIME`",
+            "`86400`",
+            "Set",
+            "Default expiration time, in seconds, of the human expectations (challenge, article, manual) whose own key is empty. Empty means `86400` (24 hours)."
+          ]
+        },
+        {
+          "key": "openaev.expectation.logging.expiration-time",
+          "cells": [
+            "`OPENAEV_EXPECTATION_LOGGING_EXPIRATION-TIME`",
+            "",
+            "Code only",
+            "Reserved to development: leave it unset. It sets the expiration time, in seconds, of an expectation type that a default platform does not offer; empty falls back to `openaev.expectation.technical.expiration-time`, then to `21600` (6 hours)."
+          ]
+        },
+        {
+          "key": "openaev.expectation.manual.default-score-value",
+          "cells": [
+            "`OPENAEV_EXPECTATION_MANUAL_DEFAULT-SCORE-VALUE`",
+            "`50`",
+            "Set",
+            "Min value: 1 Max value: 100 Default value: 50"
+          ]
+        },
+        {
+          "key": "openaev.expectation.manual.expiration-time",
+          "cells": [
+            "`OPENAEV_EXPECTATION_MANUAL_EXPIRATION-TIME`",
+            "",
+            "Commented out",
+            "Default time, in seconds, a manual expectation waits for a result before it expires, used when the inject sets none. Empty falls back to `openaev.expectation.human.expiration-time`, then to `86400` (24 hours)."
+          ]
+        },
+        {
+          "key": "openaev.expectation.prevention.expiration-time",
+          "cells": [
+            "`OPENAEV_EXPECTATION_PREVENTION_EXPIRATION-TIME`",
+            "",
+            "Code only",
+            "Default time, in seconds, a prevention expectation waits for a result before it expires, used when the inject sets none. Empty falls back to `openaev.expectation.technical.expiration-time`, then to `21600` (6 hours)."
+          ]
+        },
+        {
+          "key": "openaev.expectation.technical.expiration-time",
+          "cells": [
+            "`OPENAEV_EXPECTATION_TECHNICAL_EXPIRATION-TIME`",
+            "`21600`",
+            "Set",
+            "Default expiration time, in seconds, of the technical expectations (detection, prevention, vulnerability) whose own key is empty. Empty means `21600` (6 hours)."
+          ]
+        },
+        {
+          "key": "openaev.expectation.vulnerability.expiration-time",
+          "cells": [
+            "`OPENAEV_EXPECTATION_VULNERABILITY_EXPIRATION-TIME`",
+            "",
+            "Code only",
+            "Default time, in seconds, a vulnerability expectation waits for a result before it expires, used when the inject sets none. Empty falls back to `openaev.expectation.technical.expiration-time`, then to `21600` (6 hours)."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.healthcheck",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.healthcheck.connectivity-probe-interval",
+          "cells": [
+            "`OPENAEV_HEALTHCHECK_CONNECTIVITY-PROBE-INTERVAL`",
+            "`PT10S`",
+            "Set",
+            "Interval between two background connectivity probes of the dependencies (ISO-8601 duration). `/api/health` serves the result of the last probe and never contacts a dependency itself; it answers 503 once a required dependency (database, RabbitMQ, file storage) is down or has not been probed for 3 intervals"
+          ]
+        },
+        {
+          "key": "openaev.healthcheck.key",
+          "cells": [
+            "`OPENAEV_HEALTHCHECK_KEY`",
+            "`ChangeMe`",
+            "Set",
+            "Key passed as `health_access_key` to the health check endpoint (`/api/health`). Change it in production"
+          ]
+        },
+        {
+          "key": "openaev.healthcheck.storage-probe-interval",
+          "cells": [
+            "`OPENAEV_HEALTHCHECK_STORAGE-PROBE-INTERVAL`",
+            "`PT4H`",
+            "Set",
+            "Interval between two background computations of the storage sizes returned by `/api/health?details=true` and exported as `openaev_storage_used_bytes` (ISO-8601 duration). Computing them walks the whole object storage listing and queries the engine cluster, so low values are costly"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.listener",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.listener.smtp.enabled",
+          "cells": [
+            "`OPENAEV_LISTENER_SMTP_ENABLED`",
+            "`true`",
+            "Code only",
+            "SMTP connection monitoring, enabled by default. Allow you to monitor service state from healthchecks and settings page"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.mail",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.mail.imap.auth",
+          "cells": [
+            "`OPENAEV_MAIL_IMAP_AUTH`",
+            "`true`",
+            "Set",
+            "Turn on IMAP authentication"
+          ]
+        },
+        {
+          "key": "openaev.mail.imap.enabled",
+          "cells": [
+            "`OPENAEV_MAIL_IMAP_ENABLED`",
+            "`false`",
+            "Set",
+            "Turn on to enable IMAP mail synchronization. Injector email must be well configured"
+          ]
+        },
+        {
+          "key": "openaev.mail.imap.host",
+          "cells": [
+            "`OPENAEV_MAIL_IMAP_HOST`",
+            "`imap.mail.com`",
+            "Set",
+            "IMAP Server hostname"
+          ]
+        },
+        {
+          "key": "openaev.mail.imap.inbox",
+          "cells": [
+            "`OPENAEV_MAIL_IMAP_INBOX`",
+            "`INBOX`",
+            "Set",
+            "IMAP inbox directory to synchronize from"
+          ]
+        },
+        {
+          "key": "openaev.mail.imap.password",
+          "cells": [
+            "`OPENAEV_MAIL_IMAP_PASSWORD`",
+            "`<password>`",
+            "Set",
+            "IMAP Server password"
+          ]
+        },
+        {
+          "key": "openaev.mail.imap.port",
+          "cells": [
+            "`OPENAEV_MAIL_IMAP_PORT`",
+            "`993`",
+            "Set",
+            "IMAP Server port"
+          ]
+        },
+        {
+          "key": "openaev.mail.imap.sent",
+          "cells": [
+            "`OPENAEV_MAIL_IMAP_SENT`",
+            "`Sent`",
+            "Set",
+            "IMAP sent directory to synchronize from"
+          ]
+        },
+        {
+          "key": "openaev.mail.imap.ssl.enable",
+          "cells": [
+            "`OPENAEV_MAIL_IMAP_SSL_ENABLE`",
+            "`true`",
+            "Set",
+            "Turn on IMAP SSL mode"
+          ]
+        },
+        {
+          "key": "openaev.mail.imap.ssl.trust",
+          "cells": [
+            "`OPENAEV_MAIL_IMAP_SSL_TRUST`",
+            "`*`",
+            "Set",
+            "Trust unverified certificates"
+          ]
+        },
+        {
+          "key": "openaev.mail.imap.starttls.enable",
+          "cells": [
+            "`OPENAEV_MAIL_IMAP_STARTTLS_ENABLE`",
+            "`false`",
+            "Set",
+            "Turn on IMAP STARTTLS"
+          ]
+        },
+        {
+          "key": "openaev.mail.imap.username",
+          "cells": [
+            "`OPENAEV_MAIL_IMAP_USERNAME`",
+            "`<username@mail.com>`",
+            "Set",
+            "IMAP Server username"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.marking",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.marking.active-tables",
+          "cells": [
+            "`OPENAEV_MARKING_ACTIVE-TABLES`",
+            "`assets`",
+            "Set",
+            "Tables filtered by marking clearance (statement inspector + is_marking_set_allowed). A table is eligible once it has a `marking_ids text[]` column; listing it here turns the filtering on - but only once the MARKING preview feature is also enabled via openaev.enabled-dev-features (see above). Empty means the marking dimension is inert and the emitted SQL is unchanged. Only tables carrying markings are listed: the tables derived from them (findings, injects_expectations... see MarkingDerivedTables) are filtered with them, and are not listed."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.metrics",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.metrics.key",
+          "cells": [
+            "`OPENAEV_METRICS_KEY`",
+            "",
+            "Set",
+            "Scrape key for `/actuator/prometheus`, sent by the scraper as `Authorization: Bearer <key>`. While empty (the default), every `/actuator/**` request is rejected with a 401"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.notification",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.notification.simulation-completed-delay-seconds",
+          "cells": [
+            "`OPENAEV_NOTIFICATION_SIMULATION-COMPLETED-DELAY-SECONDS`",
+            "`3600`",
+            "Set",
+            "Delay in seconds before processing the SIMULATION_COMPLETED notification event (default: 3600 = 1h, allows expectations to be scored first)"
+          ]
+        },
+        {
+          "key": "openaev.notification.webhook-allow-internal-targets",
+          "cells": [
+            "`OPENAEV_NOTIFICATION_WEBHOOK-ALLOW-INTERNAL-TARGETS`",
+            "`false`",
+            "Code only",
+            "Turn on to let webhook notifiers call internal or private addresses. This skips the SSRF (Server-Side Request Forgery) check on private addresses; scheme, host and HTTP verb checks still apply"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.notifications",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.notifications.event-retention-days",
+          "cells": [
+            "`OPENAEV_NOTIFICATIONS_EVENT-RETENTION-DAYS`",
+            "`35`",
+            "Code only",
+            "Number of days notification events are kept, in every tenant, before the purge deletes them. Default `35`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.provider",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.provider.<registrationId>.audience",
+          "cells": [
+            "`OPENAEV_PROVIDER_<REGISTRATIONID>_AUDIENCE`",
+            "",
+            "Commented out",
+            "Value of the `audience` parameter added to the authorization request sent to this OpenID provider. Empty adds none."
+          ]
+        },
+        {
+          "key": "openaev.provider.<registrationId>.firstname_attribute_key",
+          "cells": [
+            "`OPENAEV_PROVIDER_<REGISTRATIONID>_FIRSTNAME_ATTRIBUTE_KEY`",
+            "",
+            "Commented out",
+            "Name of the SAML attribute that holds the user's first name for this SAML2 provider, copied to the user at each login. OpenID providers use the `given_name` claim instead."
+          ]
+        },
+        {
+          "key": "openaev.provider.<registrationId>.groups_management",
+          "cells": [
+            "`OPENAEV_PROVIDER_<REGISTRATIONID>_GROUPS_MANAGEMENT`",
+            "",
+            "Commented out",
+            "JSON list of group mappings for this provider, each with `idpGroup`, `userGroup`, `autoCreate` and an optional `tenantId`: at each login the user joins the mapped groups found in their `groups_path` attributes and leaves the mapped groups no longer there. Empty maps no group."
+          ]
+        },
+        {
+          "key": "openaev.provider.<registrationId>.lastname_attribute_key",
+          "cells": [
+            "`OPENAEV_PROVIDER_<REGISTRATIONID>_LASTNAME_ATTRIBUTE_KEY`",
+            "",
+            "Commented out",
+            "Name of the SAML attribute that holds the user's last name for this SAML2 provider, copied to the user at each login. OpenID providers use the `family_name` claim instead."
+          ]
+        },
+        {
+          "key": "openaev.provider.<registrationId>.roles_admin",
+          "cells": [
+            "`OPENAEV_PROVIDER_<REGISTRATIONID>_ROLES_ADMIN`",
+            "",
+            "Commented out",
+            "Comma-separated roles that make a user a platform administrator when one of them is found in the `roles_path` attributes; when set, the administrator status is granted or removed at each login. Empty creates new users as non-administrators and leaves existing users unchanged."
+          ]
+        },
+        {
+          "key": "openaev.provider.<registrationId>.roles_path",
+          "cells": [
+            "`OPENAEV_PROVIDER_<REGISTRATIONID>_ROLES_PATH`",
+            "",
+            "Commented out",
+            "Comma-separated names of the attributes (SAML) or claims (OpenID) of this provider from which the platform reads the user's roles, compared with `roles_admin`. Empty reads no role."
+          ]
+        },
+        {
+          "key": "openaev.provider.<registrationId>.tenant_id",
+          "cells": [
+            "`OPENAEV_PROVIDER_<REGISTRATIONID>_TENANT_ID`",
+            "",
+            "Commented out",
+            "Tenant a user signing in through this provider is attached to, with that tenant's auto-assign groups, the first time. Empty uses the default tenant; an id missing from the database is logged and ignored."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.queue-config",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.queue-config.inject-trace.consumer-number",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_INJECT-TRACE_CONSUMER-NUMBER`",
+            "`8`",
+            "Set",
+            "Number of RabbitMQ channels consuming the queue that batches the execution traces implants and injectors send back. `8` in the shipped file, `1` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.inject-trace.consumer-qos",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_INJECT-TRACE_CONSUMER-QOS`",
+            "`1000`",
+            "Set",
+            "Prefetch count of each consumer channel of the queue that batches the execution traces implants and injectors send back: how many messages RabbitMQ hands over before they are acknowledged. `1000` in the shipped file, `30` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.inject-trace.max-size",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_INJECT-TRACE_MAX-SIZE`",
+            "`200`",
+            "Set",
+            "Batch threshold of the queue that batches the execution traces implants and injectors send back: once more than this many messages are buffered for one worker, the batch is processed at once, without waiting for `worker-frequency`. `200` in the shipped file, `100` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.inject-trace.publisher-number",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_INJECT-TRACE_PUBLISHER-NUMBER`",
+            "`2`",
+            "Set",
+            "Number of RabbitMQ channels publishing to the queue that batches the execution traces implants and injectors send back. `2` in the shipped file, `1` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.inject-trace.publisher-qos",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_INJECT-TRACE_PUBLISHER-QOS`",
+            "`0`",
+            "Set",
+            "Prefetch count set on each publishing channel of the queue that batches the execution traces implants and injectors send back; `0`, the shipped value, means no limit, and `30` applies when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.inject-trace.queue-name",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_INJECT-TRACE_QUEUE-NAME`",
+            "`inject-trace`",
+            "Set",
+            "Name of the queue that batches the execution traces implants and injectors send back in RabbitMQ: the platform declares the queue `<rabbitmq prefix>-<tenant id>_execution_<name>` and its exchange from it. `inject-trace` in the shipped file."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.inject-trace.worker-frequency",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_INJECT-TRACE_WORKER-FREQUENCY`",
+            "`10000`",
+            "Set",
+            "Interval, in milliseconds, at which the buffered messages of the queue that batches the execution traces implants and injectors send back are processed even when the batch is not full. Default `10000`."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.inject-trace.worker-number",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_INJECT-TRACE_WORKER-NUMBER`",
+            "`8`",
+            "Set",
+            "Number of worker threads processing the batches of the queue that batches the execution traces implants and injectors send back; messages are spread across workers by their key. `8` in the shipped file, `1` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-ready.consumer-number",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-READY_CONSUMER-NUMBER`",
+            "`1`",
+            "Set",
+            "Number of RabbitMQ channels consuming the queue of workflow steps ready to run. `1` in the shipped file, `1` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-ready.consumer-qos",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-READY_CONSUMER-QOS`",
+            "`1000`",
+            "Set",
+            "Prefetch count of each consumer channel of the queue of workflow steps ready to run: how many messages RabbitMQ hands over before they are acknowledged. `1000` in the shipped file, `30` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-ready.max-size",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-READY_MAX-SIZE`",
+            "`200`",
+            "Set",
+            "Batch threshold of the queue of workflow steps ready to run: once more than this many messages are buffered for one worker, the batch is processed at once, without waiting for `worker-frequency`. `200` in the shipped file, `100` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-ready.publisher-number",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-READY_PUBLISHER-NUMBER`",
+            "`1`",
+            "Set",
+            "Number of RabbitMQ channels publishing to the queue of workflow steps ready to run. `1` in the shipped file, `1` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-ready.publisher-qos",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-READY_PUBLISHER-QOS`",
+            "`0`",
+            "Set",
+            "Prefetch count set on each publishing channel of the queue of workflow steps ready to run; `0`, the shipped value, means no limit, and `30` applies when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-ready.queue-name",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-READY_QUEUE-NAME`",
+            "`workflows-ready`",
+            "Set",
+            "Name of the queue of workflow steps ready to run in RabbitMQ: the platform declares the queue `<rabbitmq prefix>-<tenant id>_execution_<name>` and its exchange from it. `workflows-ready` in the shipped file."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-ready.worker-frequency",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-READY_WORKER-FREQUENCY`",
+            "`10000`",
+            "Set",
+            "Interval, in milliseconds, at which the buffered messages of the queue of workflow steps ready to run are processed even when the batch is not full. Default `10000`."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-ready.worker-number",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-READY_WORKER-NUMBER`",
+            "`1`",
+            "Set",
+            "Number of worker threads processing the batches of the queue of workflow steps ready to run; messages are spread across workers by their key. `1` in the shipped file, `1` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-update.consumer-number",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-UPDATE_CONSUMER-NUMBER`",
+            "`1`",
+            "Set",
+            "Number of RabbitMQ channels consuming the queue of update events (new trace, new output) of running workflow steps. `1` in the shipped file, `1` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-update.consumer-qos",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-UPDATE_CONSUMER-QOS`",
+            "`1000`",
+            "Set",
+            "Prefetch count of each consumer channel of the queue of update events (new trace, new output) of running workflow steps: how many messages RabbitMQ hands over before they are acknowledged. `1000` in the shipped file, `30` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-update.max-size",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-UPDATE_MAX-SIZE`",
+            "`200`",
+            "Set",
+            "Batch threshold of the queue of update events (new trace, new output) of running workflow steps: once more than this many messages are buffered for one worker, the batch is processed at once, without waiting for `worker-frequency`. `200` in the shipped file, `100` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-update.publisher-number",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-UPDATE_PUBLISHER-NUMBER`",
+            "`1`",
+            "Set",
+            "Number of RabbitMQ channels publishing to the queue of update events (new trace, new output) of running workflow steps. `1` in the shipped file, `1` when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-update.publisher-qos",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-UPDATE_PUBLISHER-QOS`",
+            "`0`",
+            "Set",
+            "Prefetch count set on each publishing channel of the queue of update events (new trace, new output) of running workflow steps; `0`, the shipped value, means no limit, and `30` applies when the entry omits it."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-update.queue-name",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-UPDATE_QUEUE-NAME`",
+            "`workflows-update`",
+            "Set",
+            "Name of the queue of update events (new trace, new output) of running workflow steps in RabbitMQ: the platform declares the queue `<rabbitmq prefix>-<tenant id>_execution_<name>` and its exchange from it. `workflows-update` in the shipped file."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-update.worker-frequency",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-UPDATE_WORKER-FREQUENCY`",
+            "`10000`",
+            "Set",
+            "Interval, in milliseconds, at which the buffered messages of the queue of update events (new trace, new output) of running workflow steps are processed even when the batch is not full. Default `10000`."
+          ]
+        },
+        {
+          "key": "openaev.queue-config.workflows-update.worker-number",
+          "cells": [
+            "`OPENAEV_QUEUE-CONFIG_WORKFLOWS-UPDATE_WORKER-NUMBER`",
+            "`1`",
+            "Set",
+            "Number of worker threads processing the batches of the queue of update events (new trace, new output) of running workflow steps; messages are spread across workers by their key. `1` in the shipped file, `1` when the entry omits it."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.rabbitmq",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.rabbitmq.hostname",
+          "cells": [
+            "`OPENAEV_RABBITMQ_HOSTNAME`",
+            "`localhost`",
+            "Set",
+            "Hostname of the RabbitMQ server"
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.management-insecure",
+          "cells": [
+            "`OPENAEV_RABBITMQ_MANAGEMENT-INSECURE`",
+            "`true`",
+            "Set",
+            "No effect, kept for compatibility (deprecated). The calls to the management plugin are always verified (see `openaev.rabbitmq.trust-store`)."
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.management-port",
+          "cells": [
+            "`OPENAEV_RABBITMQ_MANAGEMENT-PORT`",
+            "`15672`",
+            "Set",
+            "Management port of the RabbitMQ Server"
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.pass",
+          "cells": [
+            "`OPENAEV_RABBITMQ_PASS`",
+            "`guest`",
+            "Set",
+            "RabbitMQ password"
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.port",
+          "cells": [
+            "`OPENAEV_RABBITMQ_PORT`",
+            "`5672`",
+            "Set",
+            "Port of the RabbitMQ Server"
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.prefix",
+          "cells": [
+            "`OPENAEV_RABBITMQ_PREFIX`",
+            "`openaev`",
+            "Set",
+            "Prefix for the queue names"
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.publish-timeout-ms",
+          "cells": [
+            "`OPENAEV_RABBITMQ_PUBLISH-TIMEOUT-MS`",
+            "`30000`",
+            "Set",
+            "Hard cap in milliseconds on a single publish, so a broker that stops answering cannot hold a database transaction open. Must be strictly positive, otherwise the default applies."
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.queue-type",
+          "cells": [
+            "`OPENAEV_RABBITMQ_QUEUE-TYPE`",
+            "`classic`",
+            "Set",
+            "RabbitMQ Queue Type (\"classic\" or \"quorum\")"
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.ssl",
+          "cells": [
+            "`OPENAEV_RABBITMQ_SSL`",
+            "`false`",
+            "Set",
+            "Connects to RabbitMQ over TLS: the AMQP connection, and the calls to the management plugin over `https`. The broker certificate is checked against `openaev.rabbitmq.trust-store` when it points to a file, otherwise against the platform trust store (the Java default CAs plus the certificates of `openaev.extra-trusted-certs-dir`). A client certificate set with the standard `javax.net.ssl.keyStore` Java properties is presented. Default `false`."
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.trust-store",
+          "cells": [
+            "`OPENAEV_RABBITMQ_TRUST-STORE`",
+            "`<file:/path/to/client-store.p12>`",
+            "Set",
+            "Path to a PKCS#12 trust store (for example `file:/opt/openaev/rabbitmq-ca.p12`) holding the CA of the RabbitMQ server certificate, used when `openaev.rabbitmq.ssl` is `true`. When it points to a file, the AMQP connection trusts only this store, over TLS 1.3, and the management calls trust it or the platform trust store. The shipped value `<file:/path/to/client-store.p12>` is a placeholder that points to no file: until you set it, the platform trust store applies (the Java default CAs plus the certificates of `openaev.extra-trusted-certs-dir`). Set it only when the broker's CA is in neither."
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.trust-store-password",
+          "cells": [
+            "`OPENAEV_RABBITMQ_TRUST-STORE-PASSWORD`",
+            "`<trust-store-password>`",
+            "Set",
+            "Password of the trust store set in `openaev.rabbitmq.trust-store`. The shipped value `<trust-store-password>` is a placeholder, unused while the trust store points to no file."
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.user",
+          "cells": [
+            "`OPENAEV_RABBITMQ_USER`",
+            "`guest`",
+            "Set",
+            "RabbitMQ user"
+          ]
+        },
+        {
+          "key": "openaev.rabbitmq.vhost",
+          "cells": [
+            "`OPENAEV_RABBITMQ_VHOST`",
+            "`/`",
+            "Set",
+            "Vhost of the RabbitMQ server"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.ratelimit",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.ratelimit.authenticated-rps",
+          "cells": [
+            "`OPENAEV_RATELIMIT_AUTHENTICATED-RPS`",
+            "`300`",
+            "Code only",
+            "Maximum requests per second for authenticated requests, segmented per user account."
+          ]
+        },
+        {
+          "key": "openaev.ratelimit.default-rps",
+          "cells": [
+            "`OPENAEV_RATELIMIT_DEFAULT-RPS`",
+            "`10`",
+            "Code only",
+            "Maximum requests per second for unauthenticated requests, segmented per originating IP address."
+          ]
+        },
+        {
+          "key": "openaev.ratelimit.enabled",
+          "cells": [
+            "`OPENAEV_RATELIMIT_ENABLED`",
+            "`true`",
+            "Code only",
+            "Turn on to enable global rate limiting on the REST API"
+          ]
+        },
+        {
+          "key": "openaev.ratelimit.store-backend",
+          "cells": [
+            "`OPENAEV_RATELIMIT_STORE-BACKEND`",
+            "`IN_MEMORY`",
+            "Code only",
+            "Rate limit bucket store backend. Only `IN_MEMORY` is available."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.reporting",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.reporting.max-concurrent-renders",
+          "cells": [
+            "`OPENAEV_REPORTING_MAX-CONCURRENT-RENDERS`",
+            "`2`",
+            "Set",
+            "Maximum number of simultaneous browser contexts. Bounds Chromium memory usage"
+          ]
+        },
+        {
+          "key": "openaev.reporting.render-base-url",
+          "cells": [
+            "`OPENAEV_REPORTING_RENDER-BASE-URL`",
+            "",
+            "Set",
+            "URL the headless browser uses to reach the platform. Empty uses loopback (`http(s)://localhost:{server.port}`). Override only when loopback does not serve the UI"
+          ]
+        },
+        {
+          "key": "openaev.reporting.render-timeout-seconds",
+          "cells": [
+            "`OPENAEV_REPORTING_RENDER-TIMEOUT-SECONDS`",
+            "`90`",
+            "Set",
+            "Maximum duration of a single render, in seconds"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.retention",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.retention.execution-traces.retention-days",
+          "cells": [
+            "`OPENAEV_RETENTION_EXECUTION-TRACES_RETENTION-DAYS`",
+            "`0`",
+            "Set",
+            "Number of days to keep execution traces (one row per agent execution message). `0` disables the purge job"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.s3",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.s3.sts-endpoint",
+          "cells": [
+            "`OPENAEV_S3_STS-ENDPOINT`",
+            "",
+            "Set",
+            "`experimental` Optional custom STS endpoint. When empty, OpenAEV uses the global AWS STS endpoint (`https://sts.amazonaws.com`), or the [regional one](https://docs.aws.amazon.com/general/latest/gr/sts.html#sts_region) when `AWS_REGION` is set"
+          ]
+        },
+        {
+          "key": "openaev.s3.use-aws-role",
+          "cells": [
+            "`OPENAEV_S3_USE-AWS-ROLE`",
+            "`false`",
+            "Set",
+            "Use the AWS IAM role of the host, through AWS STS (Security Token Service), instead of access keys"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.scheduling",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.scheduling.inject-staleness-threshold",
+          "cells": [
+            "`OPENAEV_SCHEDULING_INJECT-STALENESS-THRESHOLD`",
+            "`4`",
+            "Commented out",
+            "Grace period in minutes after the start time of a time-based Inject, during which it can still run. Past this period, the Inject is set in error. Values below `1` are treated as `1`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.starterpack",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.starterpack.enabled",
+          "cells": [
+            "`OPENAEV_STARTERPACK_ENABLED`",
+            "`true`",
+            "Set",
+            "StarterPack feature, providing default endpoint, asset group, scenarios and dashboards"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.tenant",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.tenant.active-tables",
+          "cells": [
+            "`OPENAEV_TENANT_ACTIVE-TABLES`",
+            "`import_mappers,lessons_templates,mitigations,cwes,collectors,executors,injectors,tags,tag_rules,attackpath_execution,attackpath_finding,secret_references,secrets,connector_instances,autonomous_runs,autonomous_events,autonomous_directives,kill_chain_phases,security_coverages,domains,challenges,asset_groups,channels,notifications,assets,findings,tenant_xtmhub_registrations,notifiers,notification_triggers,notification_events,custom_dashboards,widgets,marking_definitions,documents,custom_domains,collector_types,phishing_email_templates,phishing_landing_pages,attackpath_execution_collector,attackpath_execution_remediation,asset_agent_jobs,payloads,vulnerabilities,phishing_results,reporting_schedules,reportings,reporting_generations,datapacks,teams,attack_patterns,organizations,agents,autonomous_objective_templates,catalog_items,catalog_releases,parameters,payload_identities,workflows,steps,conditions,scope_variables,steps_delay_queue,workflow_scope_rules,workflow_states,injectors_contracts,injector_contract_tags,injectors_contracts_attack_patterns,injectors_contracts_domains,injectors_contracts_vulnerabilities,injectors_injector_contracts,catalog_history,scenario_identities,payload_revocations`",
+            "Set",
+            "Database tables whose tenant isolation the database itself enforces, on every statement. Each release ships the list its code needs: leave it as shipped and do not override it. A table left out can lose its tenant isolation, and naming a table that isolates itself stops the platform at startup."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.test-bench",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.test-bench.user-password",
+          "cells": [
+            "`OPENAEV_TEST-BENCH_USER-PASSWORD`",
+            "",
+            "Code only",
+            "Reserved to development: leave it unset."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.theme",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.theme.asset-allow-internal-targets",
+          "cells": [
+            "`OPENAEV_THEME_ASSET-ALLOW-INTERNAL-TARGETS`",
+            "`false`",
+            "Code only",
+            "Turn on to let theme logo and image URLs point at internal or private addresses, for on-premise networks with no public place to host a logo. This skips the SSRF (Server-Side Request Forgery) check on private addresses, both when the theme is saved and when reports are rendered, where it applies to every external resource the renderer loads. The URL must still use `https` and have a host"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.url",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.url.access.token.expiry-margin-days",
+          "cells": [
+            "`OPENAEV_URL_ACCESS_TOKEN_EXPIRY-MARGIN-DAYS`",
+            "`7`",
+            "Set",
+            "Number of days added after an exercise end date before URL access tokens expire"
+          ]
+        },
+        {
+          "key": "openaev.url.access.token.retention-days",
+          "cells": [
+            "`OPENAEV_URL_ACCESS_TOKEN_RETENTION-DAYS`",
+            "`30`",
+            "Set",
+            "Number of days to retain expired or revoked URL access tokens before the purge job deletes them"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.xls",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.xls.import.mail.enable",
+          "cells": [
+            "`OPENAEV_XLS_IMPORT_MAIL_ENABLE`",
+            "`true`",
+            "Set",
+            "Makes the built-in email injector contracts available to XLS import mappers. `true` in the shipped file; the key has no default, so the platform does not start without it."
+          ]
+        },
+        {
+          "key": "openaev.xls.import.sms.enable",
+          "cells": [
+            "`OPENAEV_XLS_IMPORT_SMS_ENABLE`",
+            "`true`",
+            "Set",
+            "Makes the built-in SMS (OVH) injector contract available to XLS import mappers. `true` in the shipped file; the key has no default, so the platform does not start without it."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "openaev.xtm",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "openaev.xtm.hub.collector.connectivity-check-interval",
+          "cells": [
+            "`OPENAEV_XTM_HUB_COLLECTOR_CONNECTIVITY-CHECK-INTERVAL`",
+            "`3600`",
+            "Commented out",
+            "Interval in seconds at which the connectivity with XTM Hub is checked"
+          ]
+        },
+        {
+          "key": "openaev.xtm.hub.collector.enable",
+          "cells": [
+            "`OPENAEV_XTM_HUB_COLLECTOR_ENABLE`",
+            "`false`",
+            "Set",
+            "Enables the XTM Hub connectivity collector"
+          ]
+        },
+        {
+          "key": "openaev.xtm.hub.collector.id",
+          "cells": [
+            "`OPENAEV_XTM_HUB_COLLECTOR_ID`",
+            "`b402f1f5-29ba-4ee3-b366-f0467754cf4e`",
+            "Set",
+            "Identifier of the XTM Hub connectivity collector"
+          ]
+        },
+        {
+          "key": "openaev.xtm.hub.collector.news-feed-interval",
+          "cells": [
+            "`OPENAEV_XTM_HUB_COLLECTOR_NEWS-FEED-INTERVAL`",
+            "`3600`",
+            "Commented out",
+            "Interval, in seconds, between two syncs of the XTM Hub news feed, counted from the end of the previous run, when `openaev.xtm.hub.collector.enable` is `true`. Default `3600`; `0` or less falls back to it."
+          ]
+        },
+        {
+          "key": "openaev.xtm.hub.connectivity-email-enable",
+          "cells": [
+            "`OPENAEV_XTM_HUB_CONNECTIVITY-EMAIL-ENABLE`",
+            "`true`",
+            "Set",
+            "Emails the platform or tenant administrators when the connection to XTM Hub has been lost for more than 24 hours. `true` by default."
+          ]
+        },
+        {
+          "key": "openaev.xtm.hub.enable",
+          "cells": [
+            "`OPENAEV_XTM_HUB_ENABLE`",
+            "`true`",
+            "Set",
+            "Enables integration with XTM Hub"
+          ]
+        },
+        {
+          "key": "openaev.xtm.hub.override-api-url",
+          "cells": [
+            "`OPENAEV_XTM_HUB_OVERRIDE-API-URL`",
+            "",
+            "Commented out",
+            "When specified, override `openaev.xtm.hub.url` during backend calls"
+          ]
+        },
+        {
+          "key": "openaev.xtm.hub.url",
+          "cells": [
+            "`OPENAEV_XTM_HUB_URL`",
+            "`https://hub.filigran.io`",
+            "Set",
+            "XTM Hub URL"
+          ]
+        },
+        {
+          "key": "openaev.xtm.one.token",
+          "cells": [
+            "`OPENAEV_XTM_ONE_TOKEN`",
+            "",
+            "Commented out",
+            "XTM One registration token. With the URL, OpenAEV registers with XTM One every 5 minutes"
+          ]
+        },
+        {
+          "key": "openaev.xtm.one.url",
+          "cells": [
+            "`OPENAEV_XTM_ONE_URL`",
+            "",
+            "Commented out",
+            "XTM One URL, as reachable from OpenAEV (an internal address such as `http://xtm-one:4000` in Docker works)"
+          ]
+        },
+        {
+          "key": "openaev.xtm.opencti.2cffad3a-0001-4078-b0e2-ef74274022c3.api_url",
+          "cells": [
+            "`OPENAEV_XTM_OPENCTI_2CFFAD3A-0001-4078-B0E2-EF74274022C3_API_URL`",
+            "",
+            "Commented out",
+            "GraphQL API URL of the OpenCTI platform of the default tenant, when it is not `url` followed by `/graphql`. The code reads it as `api-url`: under the `api_url` spelling of the shipped file it is not matched and the default URL applies."
+          ]
+        },
+        {
+          "key": "openaev.xtm.opencti.2cffad3a-0001-4078-b0e2-ef74274022c3.enable",
+          "cells": [
+            "`OPENAEV_XTM_OPENCTI_2CFFAD3A-0001-4078-B0E2-EF74274022C3_ENABLE`",
+            "`false`",
+            "Set",
+            "Connects the default tenant (one entry per tenant id) to OpenCTI: with `url` and `token` set, the platform registers its security coverage connector there and keeps it alive. `false` in the shipped file."
+          ]
+        },
+        {
+          "key": "openaev.xtm.opencti.2cffad3a-0001-4078-b0e2-ef74274022c3.token",
+          "cells": [
+            "`OPENAEV_XTM_OPENCTI_2CFFAD3A-0001-4078-B0E2-EF74274022C3_TOKEN`",
+            "`<opencti-token>`",
+            "Set",
+            "API token the platform uses to authenticate to the OpenCTI platform of the default tenant; required for the connection to be made."
+          ]
+        },
+        {
+          "key": "openaev.xtm.opencti.2cffad3a-0001-4078-b0e2-ef74274022c3.url",
+          "cells": [
+            "`OPENAEV_XTM_OPENCTI_2CFFAD3A-0001-4078-B0E2-EF74274022C3_URL`",
+            "`<opencti-url>`",
+            "Set",
+            "URL of the OpenCTI platform of the default tenant, also shown in the tenant settings; its GraphQL API is reached at this URL followed by `/graphql`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ovh",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "ovh.sms.ak",
+          "cells": [
+            "`OVH_SMS_AK`",
+            "`<ak>`",
+            "Set",
+            "OVHCloud Access Key"
+          ]
+        },
+        {
+          "key": "ovh.sms.as",
+          "cells": [
+            "`OVH_SMS_AS`",
+            "`<as>`",
+            "Set",
+            "OVHCloud Access Secret"
+          ]
+        },
+        {
+          "key": "ovh.sms.ck",
+          "cells": [
+            "`OVH_SMS_CK`",
+            "`<ck>`",
+            "Set",
+            "OVHCloud consumer key"
+          ]
+        },
+        {
+          "key": "ovh.sms.enable",
+          "cells": [
+            "`OVH_SMS_ENABLE`",
+            "`false`",
+            "Set",
+            "Read once, at the first startup that migrates the injector settings into the integration catalog: when `true`, OpenAEV creates and starts an OVHCloud SMS injector from the `ovh.sms.*` keys; when `false`, it creates none. Changing it afterwards has no effect, and the injector is then deployed from the catalog."
+          ]
+        },
+        {
+          "key": "ovh.sms.id",
+          "cells": [
+            "`OVH_SMS_ID`",
+            "`e5aefbca-cf8f-4a57-9384-0503a8ffc22f`",
+            "Code only",
+            "ID of the builtin Ovh injector"
+          ]
+        },
+        {
+          "key": "ovh.sms.name",
+          "cells": [
+            "`OVH_SMS_NAME`",
+            "`OVHCloud SMS Platform`",
+            "Code only",
+            "Name of the builtin Ovh injector"
+          ]
+        },
+        {
+          "key": "ovh.sms.sender",
+          "cells": [
+            "`OVH_SMS_SENDER`",
+            "`<sender>`",
+            "Set",
+            "OVHCloud sms sender"
+          ]
+        },
+        {
+          "key": "ovh.sms.service",
+          "cells": [
+            "`OVH_SMS_SERVICE`",
+            "`<service>`",
+            "Set",
+            "OVHCloud Service Identifier"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "pyroscope",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "pyroscope.agent.enabled",
+          "cells": [
+            "`PYROSCOPE_AGENT_ENABLED`",
+            "`false`",
+            "Set",
+            "Whether OpenAEV starts the Pyroscope continuous profiling agent at startup and labels profiles with the REST endpoint or background job being run; the platform ships `false`. While it is on, debug mode does not start its own JFR recording."
+          ]
+        },
+        {
+          "key": "pyroscope.agent.instance",
+          "cells": [
+            "`PYROSCOPE_AGENT_INSTANCE`",
+            "`OpenAEV`",
+            "Set",
+            "Application name under which OpenAEV sends its profiles to the Pyroscope server; default `OpenAEV`."
+          ]
+        },
+        {
+          "key": "pyroscope.profile.export.timeout",
+          "cells": [
+            "`PYROSCOPE_PROFILE_EXPORT_TIMEOUT`",
+            "`300s`",
+            "Set",
+            "Timeout for uploading a profile to the Pyroscope server, as a duration; the platform ships `300s`."
+          ]
+        },
+        {
+          "key": "pyroscope.profiler.alloc",
+          "cells": [
+            "`PYROSCOPE_PROFILER_ALLOC`",
+            "`512k`",
+            "Set",
+            "Allocation profiling threshold of the Pyroscope agent, in bytes allocated between two samples; the platform ships `512k`, and an empty value disables allocation profiling."
+          ]
+        },
+        {
+          "key": "pyroscope.profiler.event",
+          "cells": [
+            "`PYROSCOPE_PROFILER_EVENT`",
+            "`itimer`",
+            "Set",
+            "Event the Pyroscope agent samples for CPU profiling (`itimer`, `cpu`, `wall`, `ctimer`...); default `itimer`."
+          ]
+        },
+        {
+          "key": "pyroscope.profiler.lock",
+          "cells": [
+            "`PYROSCOPE_PROFILER_LOCK`",
+            "`10ms`",
+            "Set",
+            "Lock contention threshold of the Pyroscope agent: lock waits longer than this are recorded; the platform ships `10ms`, and an empty value disables lock profiling."
+          ]
+        },
+        {
+          "key": "pyroscope.server.address",
+          "cells": [
+            "`PYROSCOPE_SERVER_ADDRESS`",
+            "`<pyroscope.url>`",
+            "Set",
+            "URL of the Pyroscope server OpenAEV sends its profiles to when the agent is enabled; the platform ships the placeholder `<pyroscope.url>`, and the code defaults to `http://localhost:4040`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "remediation",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "remediation.detection.webservice",
+          "cells": [
+            "`REMEDIATION_DETECTION_WEBSERVICE`",
+            "",
+            "Commented out",
+            "remediation detection AI Webservice"
+          ]
+        },
+        {
+          "key": "remediation.detection.webservice.retry",
+          "cells": [
+            "`REMEDIATION_DETECTION_WEBSERVICE_RETRY`",
+            "",
+            "Commented out",
+            "Maximum number of attempts OpenAEV makes when the AI remediation webservice (`remediation.detection.webservice`) answers an HTTP error; after the last one, the request fails. Unset, `3`."
+          ]
+        },
+        {
+          "key": "remediation.detection.webservice.retry.waiting.milliseconds",
+          "cells": [
+            "`REMEDIATION_DETECTION_WEBSERVICE_RETRY_WAITING_MILLISECONDS`",
+            "",
+            "Commented out",
+            "Time in milliseconds OpenAEV waits before calling the AI remediation webservice again after an HTTP error. Unset, `30000`; `0` or less retries at once."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "server",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "server.address",
+          "cells": [
+            "`SERVER_ADDRESS`",
+            "`0.0.0.0`",
+            "Set",
+            "Listen address of the application"
+          ]
+        },
+        {
+          "key": "server.compression.enabled",
+          "cells": [
+            "`SERVER_COMPRESSION_ENABLED`",
+            "`true`",
+            "Set",
+            "Whether the web server compresses its HTTP responses (gzip) for clients that accept it; the platform ships `true`."
+          ]
+        },
+        {
+          "key": "server.forward-headers-strategy",
+          "cells": [
+            "`SERVER_FORWARD-HEADERS-STRATEGY`",
+            "`framework`",
+            "Set",
+            "How OpenAEV honors the `X-Forwarded-*` and `Forwarded` headers set by a reverse proxy when it builds redirect and callback URLs; the platform ships `framework`, which applies them in Spring."
+          ]
+        },
+        {
+          "key": "server.http2.enabled",
+          "cells": [
+            "`SERVER_HTTP2_ENABLED`",
+            "`true`",
+            "Set",
+            "Whether the web server accepts HTTP/2; the platform ships `true`, over TLS when `server.ssl.enabled` is on and in cleartext (h2c) otherwise."
+          ]
+        },
+        {
+          "key": "server.port",
+          "cells": [
+            "`SERVER_PORT`",
+            "`8080`",
+            "Set",
+            "Listen port of the application"
+          ]
+        },
+        {
+          "key": "server.servlet.context-path",
+          "cells": [
+            "`SERVER_SERVLET_CONTEXT-PATH`",
+            "`/`",
+            "Set",
+            "Path under which OpenAEV serves its web interface and API; the platform ships `/`. The frontend and the report renderer follow it, so set it when a reverse proxy publishes OpenAEV under a sub-path."
+          ]
+        },
+        {
+          "key": "server.servlet.encoding.charset",
+          "cells": [
+            "`SERVER_SERVLET_ENCODING_CHARSET`",
+            "`UTF-8`",
+            "Set",
+            "Character set of HTTP requests and responses; the platform ships `UTF-8`."
+          ]
+        },
+        {
+          "key": "server.servlet.session.timeout",
+          "cells": [
+            "`SERVER_SERVLET_SESSION_TIMEOUT`",
+            "`1440m`",
+            "Set",
+            "Rolling session timeout: every request extends the session by this duration. Sessions are persisted in PostgreSQL and survive platform restarts"
+          ]
+        },
+        {
+          "key": "server.ssl.enabled",
+          "cells": [
+            "`SERVER_SSL_ENABLED`",
+            "`false`",
+            "Set",
+            "Turn on to enable SSL on the local server"
+          ]
+        },
+        {
+          "key": "server.ssl.key-alias",
+          "cells": [
+            "`SERVER_SSL_KEY-ALIAS`",
+            "`localhost`",
+            "Set",
+            "SSL key alias"
+          ]
+        },
+        {
+          "key": "server.ssl.key-store",
+          "cells": [
+            "`SERVER_SSL_KEY-STORE`",
+            "`classpath:localhost.p12`",
+            "Set",
+            "SSL keystore path"
+          ]
+        },
+        {
+          "key": "server.ssl.key-store-password",
+          "cells": [
+            "`SERVER_SSL_KEY-STORE-PASSWORD`",
+            "`admin`",
+            "Set",
+            "SSL keystore password"
+          ]
+        },
+        {
+          "key": "server.ssl.key-store-type",
+          "cells": [
+            "`SERVER_SSL_KEY-STORE-TYPE`",
+            "`PKCS12`",
+            "Set",
+            "Type of SSL keystore"
+          ]
+        },
+        {
+          "key": "server.tomcat.uri-encoding",
+          "cells": [
+            "`SERVER_TOMCAT_URI-ENCODING`",
+            "`UTF-8`",
+            "Set",
+            "Character set the web server uses to decode request URLs; the platform ships `UTF-8`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.application",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.application.name",
+          "cells": [
+            "`SPRING_APPLICATION_NAME`",
+            "`${openaev.name}`",
+            "Set",
+            "Name of the application; the platform ships `${openaev.name}`, the platform name."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.data",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.data.rest.basePath",
+          "cells": [
+            "`SPRING_DATA_REST_BASEPATH`",
+            "`/api`",
+            "Set",
+            "Base path of the repository endpoints Spring Data REST would expose; the platform ships `/api`, the path under which OpenAEV's own REST API is served."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.datasource",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.datasource.hikari.data-source-properties.cachePrepStmts",
+          "cells": [
+            "`SPRING_DATASOURCE_HIKARI_DATA-SOURCE-PROPERTIES_CACHEPREPSTMTS`",
+            "`true`",
+            "Set",
+            "Connection property HikariCP passes to the JDBC driver; the platform ships `true`, but it is a MySQL driver setting that the PostgreSQL driver does not read."
+          ]
+        },
+        {
+          "key": "spring.datasource.hikari.data-source-properties.prepStmtCacheSize",
+          "cells": [
+            "`SPRING_DATASOURCE_HIKARI_DATA-SOURCE-PROPERTIES_PREPSTMTCACHESIZE`",
+            "`250`",
+            "Set",
+            "Connection property HikariCP passes to the JDBC driver; the platform ships `250`, but it is a MySQL driver setting that the PostgreSQL driver does not read."
+          ]
+        },
+        {
+          "key": "spring.datasource.hikari.data-source-properties.prepStmtCacheSqlLimit",
+          "cells": [
+            "`SPRING_DATASOURCE_HIKARI_DATA-SOURCE-PROPERTIES_PREPSTMTCACHESQLLIMIT`",
+            "`2048`",
+            "Set",
+            "Connection property HikariCP passes to the JDBC driver; the platform ships `2048`, but it is a MySQL driver setting that the PostgreSQL driver does not read."
+          ]
+        },
+        {
+          "key": "spring.datasource.hikari.data-source-properties.useServerPrepStmts",
+          "cells": [
+            "`SPRING_DATASOURCE_HIKARI_DATA-SOURCE-PROPERTIES_USESERVERPREPSTMTS`",
+            "`true`",
+            "Set",
+            "Connection property HikariCP passes to the JDBC driver; the platform ships `true`, but it is a MySQL driver setting that the PostgreSQL driver does not read."
+          ]
+        },
+        {
+          "key": "spring.datasource.hikari.leak-detection-threshold",
+          "cells": [
+            "`SPRING_DATASOURCE_HIKARI_LEAK-DETECTION-THRESHOLD`",
+            "`30000`",
+            "Set",
+            "Log the acquisition stack trace of any thread holding a connection for more than 30s (\"Apparent connection leak detected\", WARN on com.zaxxer.hikari ? visible with production log levels). Together with io.openaev.diagnostics.PoolExhaustionWatchdog (ERROR + thread dump on sustained saturation), this names the code paths pinning connections whenever the pool gets exhausted. The connection is NOT killed: legit long holders (bulk indexing, migrations) just log evidence."
+          ]
+        },
+        {
+          "key": "spring.datasource.hikari.maximum-pool-size",
+          "cells": [
+            "`SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE`",
+            "`20`",
+            "Set",
+            "Maximum number of database connections in the pool"
+          ]
+        },
+        {
+          "key": "spring.datasource.password",
+          "cells": [
+            "`SPRING_DATASOURCE_PASSWORD`",
+            "",
+            "Commented out",
+            "Password for the database"
+          ]
+        },
+        {
+          "key": "spring.datasource.url",
+          "cells": [
+            "`SPRING_DATASOURCE_URL`",
+            "`jdbc:postgresql://localhost:5432/openaev`",
+            "Set",
+            "URL of the PostgreSQL database"
+          ]
+        },
+        {
+          "key": "spring.datasource.username",
+          "cells": [
+            "`SPRING_DATASOURCE_USERNAME`",
+            "",
+            "Commented out",
+            "Login for the database"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.flyway",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.flyway.baseline-on-migrate",
+          "cells": [
+            "`SPRING_FLYWAY_BASELINE-ON-MIGRATE`",
+            "`true`",
+            "Set",
+            "Whether Flyway baselines a non-empty database that has no migration history table before migrating it; the platform ships `true`."
+          ]
+        },
+        {
+          "key": "spring.flyway.baseline-version",
+          "cells": [
+            "`SPRING_FLYWAY_BASELINE-VERSION`",
+            "`0`",
+            "Set",
+            "Version Flyway records when it baselines an existing database; the platform ships `0`, so every OpenAEV migration still runs."
+          ]
+        },
+        {
+          "key": "spring.flyway.ignore-migration-patterns",
+          "cells": [
+            "`SPRING_FLYWAY_IGNORE-MIGRATION-PATTERNS`",
+            "`${OPENAEV_FLYWAY_IGNORE_MIGRATION_PATTERNS:*:missing}`",
+            "Set",
+            "Ignore applied migrations that are no longer resolved locally (e.g. the 20260720 migrations renumbered in #6808): instances that already ran the old version numbers must not fail validation on boot. The renumbered replacements are idempotent."
+          ]
+        },
+        {
+          "key": "spring.flyway.locations",
+          "cells": [
+            "`SPRING_FLYWAY_LOCATIONS`",
+            "`classpath:io/openaev/migration`",
+            "Set",
+            "Where Flyway finds the database migrations OpenAEV applies at startup; the platform ships `classpath:io/openaev/migration`, the migrations bundled with the platform, and it should not be changed."
+          ]
+        },
+        {
+          "key": "spring.flyway.out-of-order",
+          "cells": [
+            "`SPRING_FLYWAY_OUT-OF-ORDER`",
+            "`${OPENAEV_FLYWAY_OUT_OF_ORDER:false}`",
+            "Set",
+            "optionally enable out of order processing. this allows for easier development by avoiding migrations clashes https://github.com/OpenAEV-Platform/openaev/issues/5281"
+          ]
+        },
+        {
+          "key": "spring.flyway.password",
+          "cells": [
+            "`SPRING_FLYWAY_PASSWORD`",
+            "`${spring.datasource.password}`",
+            "Set",
+            "Password of the PostgreSQL account Flyway uses to migrate the database schema at startup; the platform ships `${spring.datasource.password}`, the password of the main datasource."
+          ]
+        },
+        {
+          "key": "spring.flyway.postgresql.transactional-lock",
+          "cells": [
+            "`SPRING_FLYWAY_POSTGRESQL_TRANSACTIONAL-LOCK`",
+            "`false`",
+            "Set",
+            "Whether Flyway takes a transaction-level advisory lock on PostgreSQL while migrating; the platform ships `false`, so Flyway uses a session-level lock instead."
+          ]
+        },
+        {
+          "key": "spring.flyway.table",
+          "cells": [
+            "`SPRING_FLYWAY_TABLE`",
+            "`migrations`",
+            "Set",
+            "Name of the table in which Flyway records the migrations already applied; the platform ships `migrations`."
+          ]
+        },
+        {
+          "key": "spring.flyway.url",
+          "cells": [
+            "`SPRING_FLYWAY_URL`",
+            "`${spring.datasource.url}`",
+            "Set",
+            "JDBC URL of the PostgreSQL database Flyway migrates at startup; the platform ships `${spring.datasource.url}`, the main datasource."
+          ]
+        },
+        {
+          "key": "spring.flyway.user",
+          "cells": [
+            "`SPRING_FLYWAY_USER`",
+            "`${spring.datasource.username}`",
+            "Set",
+            "PostgreSQL account Flyway uses to migrate the database schema at startup; the platform ships `${spring.datasource.username}`, the account of the main datasource."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.freemarker",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.freemarker.charset",
+          "cells": [
+            "`SPRING_FREEMARKER_CHARSET`",
+            "`UTF-8`",
+            "Set",
+            "Character set of the templates rendered through Spring Boot's FreeMarker support; the platform ships `UTF-8`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.jpa",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.jpa.hibernate.ddl-auto",
+          "cells": [
+            "`SPRING_JPA_HIBERNATE_DDL-AUTO`",
+            "`none`",
+            "Set",
+            "Whether Hibernate creates or alters the database schema at startup; the platform ships `none`, because the Flyway migrations manage the schema."
+          ]
+        },
+        {
+          "key": "spring.jpa.properties.hibernate.default_batch_fetch_size",
+          "cells": [
+            "`SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_BATCH_FETCH_SIZE`",
+            "`50`",
+            "Set",
+            "Batch lazy/eager association loading (IN (?, ?, ...) instead of one SELECT per entity). The model has many EAGER collections without @Fetch(SUBSELECT); this caps the N+1 cost."
+          ]
+        },
+        {
+          "key": "spring.jpa.properties.hibernate.jdbc.batch_size",
+          "cells": [
+            "`SPRING_JPA_PROPERTIES_HIBERNATE_JDBC_BATCH_SIZE`",
+            "`30`",
+            "Set",
+            "Number of statements Hibernate groups into one JDBC batch when it writes to PostgreSQL; the platform ships `30`."
+          ]
+        },
+        {
+          "key": "spring.jpa.properties.hibernate.order_inserts",
+          "cells": [
+            "`SPRING_JPA_PROPERTIES_HIBERNATE_ORDER_INSERTS`",
+            "`true`",
+            "Set",
+            "Whether Hibernate orders inserts by entity so that they can be sent in JDBC batches; the platform ships `true`."
+          ]
+        },
+        {
+          "key": "spring.jpa.properties.hibernate.order_updates",
+          "cells": [
+            "`SPRING_JPA_PROPERTIES_HIBERNATE_ORDER_UPDATES`",
+            "`true`",
+            "Set",
+            "Whether Hibernate orders updates by entity so that they can be sent in JDBC batches; the platform ships `true`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.mail",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.mail.default-encoding",
+          "cells": [
+            "`SPRING_MAIL_DEFAULT-ENCODING`",
+            "`UTF-8`",
+            "Set",
+            "Character set of the emails OpenAEV sends through its SMTP server, such as the email injects; the platform ships `UTF-8`."
+          ]
+        },
+        {
+          "key": "spring.mail.host",
+          "cells": [
+            "`SPRING_MAIL_HOST`",
+            "`smtp.gmail.com`",
+            "Set",
+            "SMTP Server hostname"
+          ]
+        },
+        {
+          "key": "spring.mail.password",
+          "cells": [
+            "`SPRING_MAIL_PASSWORD`",
+            "`<password>`",
+            "Set",
+            "SMTP Server password"
+          ]
+        },
+        {
+          "key": "spring.mail.port",
+          "cells": [
+            "`SPRING_MAIL_PORT`",
+            "`587`",
+            "Set",
+            "SMTP Server port"
+          ]
+        },
+        {
+          "key": "spring.mail.properties.mail.smtp.auth",
+          "cells": [
+            "`SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH`",
+            "`true`",
+            "Set",
+            "Turn on SMTP authentication"
+          ]
+        },
+        {
+          "key": "spring.mail.properties.mail.smtp.ssl.enable",
+          "cells": [
+            "`SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE`",
+            "`false`",
+            "Set",
+            "Turn on SMTP SSL mode"
+          ]
+        },
+        {
+          "key": "spring.mail.properties.mail.smtp.ssl.trust",
+          "cells": [
+            "`SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_TRUST`",
+            "`*`",
+            "Set",
+            "Trust unverified certificates"
+          ]
+        },
+        {
+          "key": "spring.mail.properties.mail.smtp.starttls.enable",
+          "cells": [
+            "`SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE`",
+            "`true`",
+            "Set",
+            "Turn on SMTP STARTTLS"
+          ]
+        },
+        {
+          "key": "spring.mail.username",
+          "cells": [
+            "`SPRING_MAIL_USERNAME`",
+            "`<username@mail.com>`",
+            "Set",
+            "SMTP Server username"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.messages",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.messages.encoding",
+          "cells": [
+            "`SPRING_MESSAGES_ENCODING`",
+            "`UTF-8`",
+            "Set",
+            "Character set of Spring message bundles; the platform ships `UTF-8`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.mvc",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.mvc.pathmatch.matching-strategy",
+          "cells": [
+            "`SPRING_MVC_PATHMATCH_MATCHING-STRATEGY`",
+            "`ant_path_matcher`",
+            "Set",
+            "Strategy Spring MVC uses to match request paths to the API routes; the platform ships `ant_path_matcher`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.quartz",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.quartz.properties.org.quartz.scheduler.instanceName",
+          "cells": [
+            "`SPRING_QUARTZ_PROPERTIES_ORG_QUARTZ_SCHEDULER_INSTANCENAME`",
+            "`OpenAEV_Scheduler`",
+            "Set",
+            "Name of the Quartz scheduler that runs OpenAEV's background jobs; the platform ships `OpenAEV_Scheduler`."
+          ]
+        },
+        {
+          "key": "spring.quartz.properties.org.quartz.threadPool.threadCount",
+          "cells": [
+            "`SPRING_QUARTZ_PROPERTIES_ORG_QUARTZ_THREADPOOL_THREADCOUNT`",
+            "`10`",
+            "Set",
+            "Number of threads of the Quartz scheduler that runs OpenAEV's background jobs, hence how many jobs run at the same time; the platform ships `10`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.security",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.security.oauth2.client.provider.<registrationId>.issuer-uri",
+          "cells": [
+            "`SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_<REGISTRATIONID>_ISSUER-URI`",
+            "",
+            "Commented out",
+            "Issuer URL of the OpenID Connect provider of this registration; OpenAEV discovers the provider's endpoints and keys from it."
+          ]
+        },
+        {
+          "key": "spring.security.oauth2.client.registration.<registrationId>.client-id",
+          "cells": [
+            "`SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_<REGISTRATIONID>_CLIENT-ID`",
+            "",
+            "Commented out",
+            "Client ID OpenAEV presents to the OpenID Connect provider of this registration."
+          ]
+        },
+        {
+          "key": "spring.security.oauth2.client.registration.<registrationId>.client-name",
+          "cells": [
+            "`SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_<REGISTRATIONID>_CLIENT-NAME`",
+            "",
+            "Commented out",
+            "Display name of this OpenID Connect registration in Spring Security; the OpenAEV login button does not show it, it shows `openaev.provider.<registrationId>.login`, or `Login with <registrationId>` when that is unset."
+          ]
+        },
+        {
+          "key": "spring.security.oauth2.client.registration.<registrationId>.client-secret",
+          "cells": [
+            "`SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_<REGISTRATIONID>_CLIENT-SECRET`",
+            "",
+            "Commented out",
+            "Client secret that authenticates OpenAEV to the OpenID Connect provider of this registration."
+          ]
+        },
+        {
+          "key": "spring.security.oauth2.client.registration.<registrationId>.redirect-uri",
+          "cells": [
+            "`SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_<REGISTRATIONID>_REDIRECT-URI`",
+            "",
+            "Commented out",
+            "URL the OpenID Connect provider of this registration sends users back to after they sign in, normally `${openaev.base-url}/login/oauth2/code/<registrationId>`; it must match the redirect URL declared at the provider."
+          ]
+        },
+        {
+          "key": "spring.security.oauth2.client.registration.<registrationId>.scope",
+          "cells": [
+            "`SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_<REGISTRATIONID>_SCOPE`",
+            "",
+            "Commented out",
+            "Comma-separated scopes OpenAEV requests from the OpenID Connect provider of this registration, for example `openid,profile,email`."
+          ]
+        },
+        {
+          "key": "spring.security.saml2.relyingparty.registration.<registrationId>.assertingparty.metadata-uri",
+          "cells": [
+            "`SPRING_SECURITY_SAML2_RELYINGPARTY_REGISTRATION_<REGISTRATIONID>_ASSERTINGPARTY_METADATA-URI`",
+            "",
+            "Commented out",
+            "URL or location of the SAML 2 metadata of the identity provider of this registration, from which OpenAEV reads its sign-in URL and signing certificates."
+          ]
+        },
+        {
+          "key": "spring.security.saml2.relyingparty.registration.<registrationId>.entity-id",
+          "cells": [
+            "`SPRING_SECURITY_SAML2_RELYINGPARTY_REGISTRATION_<REGISTRATIONID>_ENTITY-ID`",
+            "",
+            "Commented out",
+            "Entity ID by which OpenAEV identifies itself to the SAML 2 identity provider of this registration; it must match the service provider declared at the identity provider."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.servlet",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.servlet.multipart.max-file-size",
+          "cells": [
+            "`SPRING_SERVLET_MULTIPART_MAX-FILE-SIZE`",
+            "`5GB`",
+            "Set",
+            "Maximum size of one file uploaded to OpenAEV; the platform ships `5GB`."
+          ]
+        },
+        {
+          "key": "spring.servlet.multipart.max-request-size",
+          "cells": [
+            "`SPRING_SERVLET_MULTIPART_MAX-REQUEST-SIZE`",
+            "`5GB`",
+            "Set",
+            "Maximum size of one upload request to OpenAEV, all files included; the platform ships `5GB`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "spring.session",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "spring.session.jdbc.cleanup-cron",
+          "cells": [
+            "`SPRING_SESSION_JDBC_CLEANUP-CRON`",
+            "`-`",
+            "Set",
+            "Built-in cleanup is disabled: the SessionManager audit-aware cleanup job replaces it."
+          ]
+        },
+        {
+          "key": "spring.session.jdbc.initialize-schema",
+          "cells": [
+            "`SPRING_SESSION_JDBC_INITIALIZE-SCHEMA`",
+            "`never`",
+            "Set",
+            "Session tables are created by a Flyway migration, never by Spring Session itself."
+          ]
+        },
+        {
+          "key": "spring.session.timeout",
+          "cells": [
+            "`SPRING_SESSION_TIMEOUT`",
+            "`${server.servlet.session.timeout}`",
+            "Set",
+            "Idle timeout of the user sessions stored in PostgreSQL: every authenticated request extends the session by this duration; the platform ships `${server.servlet.session.timeout}`, so it follows that key (`1440m`, 24 hours)."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "springdoc",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "springdoc.api-docs.path",
+          "cells": [
+            "`SPRINGDOC_API-DOCS_PATH`",
+            "`/api-docs`",
+            "Set",
+            "Path at which OpenAEV serves the OpenAPI description of its REST API; the platform ships `/api-docs`."
+          ]
+        },
+        {
+          "key": "springdoc.override-with-generic-response",
+          "cells": [
+            "`SPRINGDOC_OVERRIDE-WITH-GENERIC-RESPONSE`",
+            "`false`",
+            "Set",
+            "Fixes incompatibiliy between spring boot >=3.5.7 and springdoc-api <= 2.8.15 https://github.com/springdoc/springdoc-openapi/issues/3041"
+          ]
+        },
+        {
+          "key": "springdoc.swagger-ui.validatorUrl",
+          "cells": [
+            "`SPRINGDOC_SWAGGER-UI_VALIDATORURL`",
+            "`none`",
+            "Set",
+            "Validator the Swagger UI calls to check the OpenAPI description; the platform ships `none`, which turns the external validation off."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "telemetry",
+      "columns": [
+        "Environment variable",
+        "Default",
+        "Shipped",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "telemetry.tags",
+          "cells": [
+            "`TELEMETRY_TAGS`",
+            "",
+            "Set",
+            "Telemetry deployment tags (optional): comma-separated freeform tags (e.g. saas,eu-west) attached to the anonymous usage telemetry as a resource attribute so adoption analytics can slice metrics by deployment dimension. Normalized (trim, lowercase, dedupe, sort)."
+          ]
+        }
+      ]
+    }
+  ]
+}

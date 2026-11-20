@@ -1,0 +1,14 @@
+title: A flag listed in FEATURE_FLAGS shows a feature still in development; the others stay hidden
+lanes:
+  - label: You set
+    tone: external
+    nodes:
+      - {id: env, label: FEATURE_FLAGS, icon: Terminal, note: "A list, or * for every flag"}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: check, label: Boot check, icon: ShieldCheck, note: An unknown flag stops the platform}
+      - {id: feature, label: Flagged feature, icon: Lightbulb, note: Off by default}
+edges:
+  - {from: env, to: check}
+  - {from: check, to: feature, label: turns on}

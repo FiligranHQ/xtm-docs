@@ -1,0 +1,24 @@
+title: OpenCTI and OpenAEV each set their own minimum version for the shared services they use
+lanes:
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Minimum versions it needs}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: Versions it recommends}
+  - label: Shared services
+    tone: store
+    nodes:
+      - {id: es, label: Elasticsearch, icon: Server, note: "Or OpenSearch 2.9+ for OpenCTI; image 8.19.18"}
+      - {id: mq, label: RabbitMQ, icon: ArrowLeftRight, note: "Image 4.3-management"}
+      - {id: redis, label: Redis, icon: Activity, note: "Image 8.8.0"}
+      - {id: s3, label: S3 storage, icon: Boxes, note: "RustFS or MinIO; image rustfs/rustfs"}
+      - {id: pg, label: PostgreSQL, icon: Server, note: "pgvector pg17, shared with XTM One"}
+edges:
+  - {from: opencti, to: es, label: "8.0 or later"}
+  - {from: openaev, to: es, label: "8.19 or later"}
+  - {from: opencti, to: mq, label: "3.11 or later"}
+  - {from: openaev, to: mq, label: "4.1 or later"}
+  - {from: opencti, to: redis, label: "7.1 or later"}
+  - {from: opencti, to: s3, label: "MinIO 2023-02 or later"}
+  - {from: openaev, to: s3, label: "MinIO 2025-06-13 or later"}
+  - {from: openaev, to: pg, label: "17.0 or later"}

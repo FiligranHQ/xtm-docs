@@ -1,0 +1,2371 @@
+{
+  "name": "controls",
+  "version": "0.261116.0",
+  "source": "OpenCRQ-Platform/opencrq@a185f01 (module/src/modules/controls/capability/data/capabilities.generated.ts)",
+  "intro": "The 51 controls of the defense catalogue 9.2.4, mapped to ATT&CK 20.0: what each one does, how many techniques it prevents and detects, and the ATT&CK mitigations and NIST CSF 2.0 outcomes it answers; then, by domain, what each strength level of a control means. A control you declare takes a strength (Not deployed, Basic, Intermediate, Master), a coverage and a reliability; OpenCRQ prices how it stops or reveals an attack from them.",
+  "filter": "Filter controls, techniques counts, mappings",
+  "sections": [
+    {
+      "title": "Endpoints and servers",
+      "columns": [
+        "Control",
+        "What it does",
+        "Prevents",
+        "Detects",
+        "Maps to"
+      ],
+      "rows": [
+        {
+          "key": "EDR",
+          "cells": [
+            "**Endpoint Detection and Response** `EDR`",
+            "Agent installed on workstations and servers that blocks malware and attack behaviour at execution, records host activity, and lets a machine be isolated or cleaned up remotely. Coverage: hosts where the agent is installed, active or silent.",
+            "147 techniques",
+            "566 techniques",
+            "ATT&CK mitigations: M1022, M1024, M1025, M1034, M1038, M1040, M1042, M1043, M1047, M1049, M1054; NIST CSF 2.0: DE.AE-02, DE.CM-09, ID.AM-02, PR.DS-10, PR.PS-05, RS.MI-01, RS.MI-02"
+          ]
+        },
+        {
+          "key": "OSH",
+          "cells": [
+            "**System Hardening** `OSH`",
+            "Security settings of operating systems and hypervisors (baselines, executable allowlisting, unique local administrator passwords, unneeded features disabled) that make techniques relying on a default configuration fail. Coverage: assets under an applied baseline.",
+            "250 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1022, M1024, M1026, M1027, M1028, M1033, M1035, M1037, M1038, M1039, M1041, M1042, M1043, M1044, M1045, M1046, M1048, M1050, M1052, M1054; NIST CSF 2.0: PR.AA-01, PR.AA-04, PR.AA-05, PR.DS-01, PR.IR-01, PR.PS-01, PR.PS-05"
+          ]
+        },
+        {
+          "key": "FIM",
+          "cells": [
+            "**File Integrity Monitoring** `FIM`",
+            "Monitoring of changes to a system's critical files and configurations, to detect tampering (backdoor, persistence, unauthorised change). Coverage: monitored servers and devices.",
+            "0 techniques",
+            "376 techniques",
+            "NIST CSF 2.0: DE.CM-09"
+          ]
+        },
+        {
+          "key": "UEM",
+          "cells": [
+            "**Unified Endpoint Management (UEM / MDM)** `UEM`",
+            "Central management of workstations, laptops and mobile devices: inventory and compliance, restrictions, encryption and remote wipe. Coverage: enrolled devices.",
+            "8 techniques",
+            "41 techniques",
+            "ATT&CK mitigations: M1033, M1038, M1041; NIST CSF 2.0: DE.CM-09, ID.AM-01, PR.DS-01, PR.PS-05, RS.MI-01"
+          ]
+        },
+        {
+          "key": "PATCH",
+          "cells": [
+            "**Patch Management** `PATCH`",
+            "Tooled process deploying patches to systems, applications, firmware and images, which removes exploitable vulnerabilities within target delays. Coverage: assets managed by the deployment tool.",
+            "17 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1051; NIST CSF 2.0: ID.RA-01, PR.PS-02"
+          ]
+        },
+        {
+          "key": "MSEG",
+          "cells": [
+            "**Microsegmentation** `MSEG`",
+            "Filtering of flows between workloads (east-west) enforced by an agent, which limits lateral movement and lets a workload be quarantined. Coverage: workloads carrying the agent.",
+            "26 techniques",
+            "212 techniques",
+            "ATT&CK mitigations: M1030, M1035; NIST CSF 2.0: DE.CM-01, PR.IR-01, RS.MI-01"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Network",
+      "columns": [
+        "Control",
+        "What it does",
+        "Prevents",
+        "Detects",
+        "Maps to"
+      ],
+      "rows": [
+        {
+          "key": "NGFW",
+          "cells": [
+            "**Firewall and Network Segmentation** `NGFW`",
+            "Network firewall that filters flows between zones and to the outside, and enforces network segmentation. Coverage: segments and flows crossing the firewall.",
+            "68 techniques",
+            "220 techniques",
+            "ATT&CK mitigations: M1030, M1031, M1035, M1037; NIST CSF 2.0: DE.CM-01, PR.IR-01, RS.MI-01"
+          ]
+        },
+        {
+          "key": "IPS",
+          "cells": [
+            "**Network Intrusion Prevention** `IPS`",
+            "Inspection of network traffic that blocks known exploits and command and control communications, as a firewall module or a dedicated probe. Coverage: inspected flows.",
+            "51 techniques",
+            "290 techniques",
+            "ATT&CK mitigations: M1031, M1037; NIST CSF 2.0: DE.CM-01, PR.IR-01"
+          ]
+        },
+        {
+          "key": "NDR",
+          "cells": [
+            "**Network Detection and Response** `NDR`",
+            "Probes that analyse network traffic to detect attack behaviour (beacons, lateral movement, exfiltration) and map flows. Coverage: segments a probe observes.",
+            "0 techniques",
+            "573 techniques",
+            "NIST CSF 2.0: DE.AE-02, DE.CM-01, ID.AM-03"
+          ]
+        },
+        {
+          "key": "CPS",
+          "cells": [
+            "**OT / IoT Network Detection** `CPS`",
+            "Passive probe dedicated to industrial and IoT networks, which inventories these devices and detects abnormal commands without disturbing them. Coverage: observed OT / IoT segments.",
+            "0 techniques",
+            "32 techniques",
+            "NIST CSF 2.0: DE.CM-01"
+          ]
+        },
+        {
+          "key": "SWG",
+          "cells": [
+            "**Secure Web Gateway** `SWG`",
+            "Gateway controlling users' access to the Internet: URL and DNS filtering, download inspection, browser isolation, control of unsanctioned cloud applications. Coverage: workstations and servers whose traffic goes through the gateway or the resolver.",
+            "43 techniques",
+            "290 techniques",
+            "ATT&CK mitigations: M1021, M1037, M1048, M1049, M1057; NIST CSF 2.0: DE.CM-01, PR.DS-10, PR.IR-01, PR.PS-05, RS.MI-01"
+          ]
+        },
+        {
+          "key": "ZTNA",
+          "cells": [
+            "**Secure Remote Access (VPN / ZTNA)** `ZTNA`",
+            "Remote users' access to the information system through a VPN or per-application access (ZTNA), checking the identity and the device's posture at connection. Coverage: remote access going through the solution.",
+            "30 techniques",
+            "291 techniques",
+            "ATT&CK mitigations: M1030, M1032, M1035; NIST CSF 2.0: DE.CM-03, PR.AA-03, PR.IR-01, RS.MI-01"
+          ]
+        },
+        {
+          "key": "NAC",
+          "cells": [
+            "**Network Access Control** `NAC`",
+            "Control of the devices connecting to the local network: authentication, compliance check, quarantine. Coverage: controlled ports and access points.",
+            "17 techniques",
+            "234 techniques",
+            "ATT&CK mitigations: M1030, M1034, M1035; NIST CSF 2.0: DE.CM-01, ID.AM-01, PR.AA-03, PR.IR-01, RS.MI-01"
+          ]
+        },
+        {
+          "key": "WIFI",
+          "cells": [
+            "**Wi-Fi Security** `WIFI`",
+            "Enterprise authentication and encryption of wireless networks, detection of rogue access points. Coverage: enterprise Wi-Fi networks.",
+            "18 techniques",
+            "108 techniques",
+            "ATT&CK mitigations: M1030, M1032, M1041; NIST CSF 2.0: DE.CM-01, PR.AA-03, PR.IR-01"
+          ]
+        },
+        {
+          "key": "DDOS",
+          "cells": [
+            "**DDoS Protection** `DDOS`",
+            "Service or appliance that absorbs flooding attacks, volumetric or application-layer, before they reach exposed services. Coverage: protected exposed services.",
+            "7 techniques",
+            "108 techniques",
+            "ATT&CK mitigations: M1037; NIST CSF 2.0: DE.CM-01, PR.IR-04"
+          ]
+        },
+        {
+          "key": "TLS",
+          "cells": [
+            "**Internal Traffic Encryption** `TLS`",
+            "Encryption and mutual authentication of internal communications (mTLS, IPsec, encrypted SMB, service mesh) that prevent traffic interception and replay. Coverage: encrypted internal flows.",
+            "14 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1037, M1041; NIST CSF 2.0: PR.DS-02"
+          ]
+        },
+        {
+          "key": "NDH",
+          "cells": [
+            "**Network Device Hardening** `NDH`",
+            "Security settings of routers, switches and other network devices, integrity of their images and restoration of their configuration. Coverage: devices under a baseline.",
+            "45 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1026, M1027, M1030, M1035, M1037, M1042, M1045, M1046, M1053; NIST CSF 2.0: PR.AA-05, PR.IR-01, PR.PS-01, RC.RP-02"
+          ]
+        },
+        {
+          "key": "DECEP",
+          "cells": [
+            "**Deception** `DECEP`",
+            "Fake accounts, credentials, files, hosts, services or AI endpoints placed in the information system to reveal an attacker who touches them. Coverage: areas of the information system where decoys are deployed.",
+            "0 techniques",
+            "575 techniques",
+            "NIST CSF 2.0: DE.CM-01, DE.CM-03"
+          ]
+        },
+        {
+          "key": "SEB",
+          "cells": [
+            "**Enterprise Browser** `SEB`",
+            "Managed browser that protects sessions and data in the browser itself (device-bound cookies, controlled extensions, restricted copy and upload) on SaaS and internal web applications. Coverage: deployed managed browsers.",
+            "13 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1021; NIST CSF 2.0: PR.AA-04"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Identities",
+      "columns": [
+        "Control",
+        "What it does",
+        "Prevents",
+        "Detects",
+        "Maps to"
+      ],
+      "rows": [
+        {
+          "key": "IDP",
+          "cells": [
+            "**Identity Platform (IdP, SSO, MFA, Conditional Access)** `IDP`",
+            "Central identity provider that authenticates users (SSO), requires a second factor, ideally phishing-resistant, enforces conditional access rules by risk, device and context, and manages sessions and tokens. Coverage: federated applications and accounts; MFA carries its own coverage (accounts subject to the second factor).",
+            "30 techniques",
+            "187 techniques",
+            "ATT&CK mitigations: M1017, M1018, M1032, M1036, M1047, M1054; NIST CSF 2.0: DE.CM-03, ID.AM-08, PR.AA-03, PR.AA-04, PR.AA-05, RS.MI-01"
+          ]
+        },
+        {
+          "key": "PAM",
+          "cells": [
+            "**Privileged Access Management** `PAM`",
+            "Protection of privileged accounts and technical secrets: vault and rotation, access through a bastion with session recording, just-in-time elevation, application secrets management. Coverage: managed privileged accounts and secrets.",
+            "92 techniques",
+            "408 techniques",
+            "ATT&CK mitigations: M1026, M1027, M1035, M1041, M1047, M1052; NIST CSF 2.0: DE.CM-03, DE.CM-09, ID.AM-08, PR.AA-01, PR.AA-05, RS.MI-01, RS.MI-02"
+          ]
+        },
+        {
+          "key": "IGA",
+          "cells": [
+            "**Identity Governance and Administration** `IGA`",
+            "Management of the lifecycle of identities and entitlements: joiners, movers, leavers, access reviews. Coverage: accounts attached to the identity repository.",
+            "3 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1018; NIST CSF 2.0: PR.AA-01, PR.AA-05"
+          ]
+        },
+        {
+          "key": "ADH",
+          "cells": [
+            "**Directory Hardening (Active Directory, Entra ID)** `ADH`",
+            "Security settings of the directory: authentication protocols, tiered administration, password policy, native audit log, restoration. Coverage: directory accounts and objects.",
+            "53 techniques",
+            "556 techniques",
+            "ATT&CK mitigations: M1015, M1018, M1026, M1027, M1036, M1041, M1047; NIST CSF 2.0: DE.CM-03, PR.AA-01, PR.AA-04, PR.AA-05, RC.RP-02, RS.MI-02"
+          ]
+        },
+        {
+          "key": "ITDR",
+          "cells": [
+            "**Identity Threat Detection and Response** `ITDR`",
+            "Tool that reveals the directory's attack paths and weaknesses and detects attacks on identities (token theft, Kerberos abuse, replication), automatically blocking risky accounts. Coverage: monitored directories and identity providers.",
+            "4 techniques",
+            "103 techniques",
+            "NIST CSF 2.0: DE.AE-02, DE.CM-03, ID.RA-01, PR.AA-03"
+          ]
+        },
+        {
+          "key": "PKI",
+          "cells": [
+            "**Public Key Infrastructure** `PKI`",
+            "Certificate infrastructure: inventory and expiry tracking, hardening of the authority and its templates, revocation of compromised certificates. Coverage: managed authorities and certificates.",
+            "12 techniques",
+            "5 techniques",
+            "ATT&CK mitigations: M1015, M1041, M1047; NIST CSF 2.0: DE.CM-09, ID.AM-02, PR.AA-04, RS.MI-02"
+          ]
+        },
+        {
+          "key": "IDV",
+          "cells": [
+            "**Help Desk Identity Verification** `IDV`",
+            "Procedure, tooled or not, by which the help desk verifies a person's identity before resetting a password, re-enrolling a second factor or registering a device, which defeats account takeover through a help desk call. Coverage: requests going through the procedure.",
+            "13 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1017; NIST CSF 2.0: PR.AA-02"
+          ]
+        },
+        {
+          "key": "PWM",
+          "cells": [
+            "**Enterprise Password Manager** `PWM`",
+            "Password vault distributed to users, with a browser extension and an application, that generates and stores a unique password per service and allows controlled sharing, so a password leaked on one service opens no other. Coverage: equipped users.",
+            "6 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1027; NIST CSF 2.0: PR.AA-01"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Email and SaaS",
+      "columns": [
+        "Control",
+        "What it does",
+        "Prevents",
+        "Detects",
+        "Maps to"
+      ],
+      "rows": [
+        {
+          "key": "SEG",
+          "cells": [
+            "**Email Security** `SEG`",
+            "Filtering of inbound and outbound email (phishing, malicious attachments and links, domain spoofing through SPF, DKIM and DMARC) and purge of messages after delivery. Coverage: protected mailboxes and domains.",
+            "24 techniques",
+            "16 techniques",
+            "ATT&CK mitigations: M1021, M1047, M1049, M1054; NIST CSF 2.0: DE.CM-03, PR.AA-04, PR.PS-05, RS.MI-01"
+          ]
+        },
+        {
+          "key": "SAASH",
+          "cells": [
+            "**SaaS Tenant Hardening** `SAASH`",
+            "Native security settings of SaaS and collaboration tenants: external sharing, third-party applications, native audit logs. Coverage: configured tenants.",
+            "31 techniques",
+            "198 techniques",
+            "ATT&CK mitigations: M1018, M1027, M1032, M1036, M1042, M1047, M1054, M1057; NIST CSF 2.0: DE.CM-03, DE.CM-06, PR.AA-03, PR.DS-10, PR.PS-01"
+          ]
+        },
+        {
+          "key": "SSPM",
+          "cells": [
+            "**SaaS Security Posture Management** `SSPM`",
+            "Tool that reads, through connectors, the configuration and usage of SaaS applications, reports deviations and lets an account or an integration be suspended. Coverage: connected tenants.",
+            "0 techniques",
+            "198 techniques",
+            "NIST CSF 2.0: DE.AE-02, ID.RA-01, PR.PS-01, RS.MI-01"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Applications",
+      "columns": [
+        "Control",
+        "What it does",
+        "Prevents",
+        "Detects",
+        "Maps to"
+      ],
+      "rows": [
+        {
+          "key": "WAF",
+          "cells": [
+            "**Web Application and API Protection** `WAF`",
+            "Protection of exposed web applications and APIs: filtering of malicious requests, bot management, API inventory and control, API gateway. Coverage: applications and APIs behind the service.",
+            "34 techniques",
+            "15 techniques",
+            "ATT&CK mitigations: M1013, M1031, M1032, M1047; NIST CSF 2.0: DE.CM-01, ID.AM-02, PR.AA-03, PR.IR-01, RS.MI-01"
+          ]
+        },
+        {
+          "key": "RASP",
+          "cells": [
+            "**Runtime Application Self-Protection** `RASP`",
+            "Agent embedded in the application that blocks the exploitation of vulnerabilities at runtime. Coverage: instrumented applications.",
+            "5 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1050; NIST CSF 2.0: PR.PS-01"
+          ]
+        },
+        {
+          "key": "SCA",
+          "cells": [
+            "**Software Composition Analysis (SCA / SBOM)** `SCA`",
+            "Analysis of the dependencies and third-party components of a piece of software or a container image, with a bill of materials (SBOM), to spot vulnerable or compromised components. Coverage: analysed repositories and images.",
+            "3 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1051; NIST CSF 2.0: ID.RA-01, ID.RA-09, PR.PS-02"
+          ]
+        },
+        {
+          "key": "SSDLC",
+          "cells": [
+            "**Secure Software Development** `SSDLC`",
+            "Development practices that reduce shipped defects: threat modelling, application hardening templates, securing the build chain and signing artefacts. Coverage: projects and pipelines concerned.",
+            "6 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1045, M1051; NIST CSF 2.0: PR.PS-06"
+          ]
+        },
+        {
+          "key": "APM",
+          "cells": [
+            "**Application Performance Monitoring** `APM`",
+            "Monitoring of how applications run (errors, latencies, abnormal calls), which can reveal application abuse or compromise. Coverage: instrumented applications.",
+            "0 techniques",
+            "9 techniques",
+            "NIST CSF 2.0: DE.CM-09, PR.IR-04"
+          ]
+        },
+        {
+          "key": "ITIM",
+          "cells": [
+            "**Capacity and Infrastructure Monitoring** `ITIM`",
+            "Monitoring of infrastructure availability and capacity headroom, which detects saturation or abnormal resource usage. Coverage: monitored infrastructure.",
+            "0 techniques",
+            "35 techniques",
+            "ATT&CK mitigations: M1047; NIST CSF 2.0: DE.CM-09, PR.IR-04"
+          ]
+        },
+        {
+          "key": "APPH",
+          "cells": [
+            "**Native Application Configuration** `APPH`",
+            "Security settings of the application itself, federated or not: native authentication (password policy, lockout, native second factor), role model and least privilege, anti-automation, hardening at delivery (headers, cookies, input validation). Coverage: configured applications.",
+            "28 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1013, M1018, M1026, M1027, M1032, M1036, M1054; NIST CSF 2.0: PR.AA-03, PR.AA-05, PR.PS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cloud",
+      "columns": [
+        "Control",
+        "What it does",
+        "Prevents",
+        "Detects",
+        "Maps to"
+      ],
+      "rows": [
+        {
+          "key": "CNAPP",
+          "cells": [
+            "**Cloud Posture and Detection (CNAPP)** `CNAPP`",
+            "Cloud-native application protection platform, posture and detection side: reads through connectors the configuration of cloud accounts, effective entitlements (CIEM) and Kubernetes posture (KSPM), fixes part of the deviations automatically, and analyses control plane activity to detect malicious use (CDR). Coverage: connected accounts and clusters.",
+            "0 techniques",
+            "204 techniques",
+            "NIST CSF 2.0: DE.AE-02, ID.RA-01, PR.AA-05, PR.PS-01"
+          ]
+        },
+        {
+          "key": "CLDH",
+          "cells": [
+            "**Native Cloud Hardening** `CLDH`",
+            "Native security settings of cloud and Kubernetes platforms: IAM, segmentation, storage protection, container runtime standards, native logging and the protection of these logs. Coverage: accounts, networks and clusters under a baseline.",
+            "87 techniques",
+            "235 techniques",
+            "ATT&CK mitigations: M1018, M1022, M1026, M1027, M1030, M1032, M1037, M1041, M1047, M1048, M1054; NIST CSF 2.0: DE.CM-01, DE.CM-09, PR.AA-03, PR.AA-05, PR.DS-01, PR.IR-01, PR.PS-01, PR.PS-04"
+          ]
+        },
+        {
+          "key": "CWPP",
+          "cells": [
+            "**Cloud Workload and Container Protection** `CWPP`",
+            "Runtime protection of virtual machines, containers and cloud workloads: admission control, detection and blocking of malicious behaviour. Coverage: protected workloads.",
+            "22 techniques",
+            "223 techniques",
+            "ATT&CK mitigations: M1038, M1040, M1045, M1047, M1049; NIST CSF 2.0: DE.CM-09, ID.AM-02, PR.PS-05"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Data",
+      "columns": [
+        "Control",
+        "What it does",
+        "Prevents",
+        "Detects",
+        "Maps to"
+      ],
+      "rows": [
+        {
+          "key": "DLP",
+          "cells": [
+            "**Data Loss Prevention** `DLP`",
+            "Detection and blocking of sensitive data transfers outside authorised channels (endpoint, web, email). Coverage: channels and users under a DLP policy.",
+            "31 techniques",
+            "29 techniques",
+            "ATT&CK mitigations: M1034, M1057; NIST CSF 2.0: DE.CM-09, PR.DS-02, PR.DS-10"
+          ]
+        },
+        {
+          "key": "DSPM",
+          "cells": [
+            "**Information Classification and Protection** `DSPM`",
+            "Discovery and classification of sensitive data, labelling and persistent protection of documents (encryption, usage rights). Coverage: scanned repositories and labelled documents.",
+            "17 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1041, M1057; NIST CSF 2.0: ID.AM-05, ID.AM-07, PR.AA-05, PR.DS-01"
+          ]
+        },
+        {
+          "key": "KMS",
+          "cells": [
+            "**Encryption at Rest and Key Management** `KMS`",
+            "Encryption of disks and stored data, key management (KMS, HSM) and a log of key usage, which make data unusable without the key. Coverage: managed volumes, databases and keys.",
+            "20 techniques",
+            "5 techniques",
+            "ATT&CK mitigations: M1041, M1047; NIST CSF 2.0: DE.CM-09, ID.AM-07, PR.AA-01, PR.DS-01"
+          ]
+        },
+        {
+          "key": "DAM",
+          "cells": [
+            "**Database Activity Monitoring** `DAM`",
+            "Monitoring and filtering of database queries, detection of abnormal access. Coverage: monitored databases.",
+            "9 techniques",
+            "76 techniques",
+            "ATT&CK mitigations: M1047, M1057; NIST CSF 2.0: DE.AE-02, DE.CM-09, PR.DS-10"
+          ]
+        },
+        {
+          "key": "BKP",
+          "cells": [
+            "**Backup and Restore** `BKP`",
+            "Isolated and immutable copies of data and systems, SaaS applications included, with tested restores. Coverage: backed-up data and systems.",
+            "9 techniques",
+            "14 techniques",
+            "ATT&CK mitigations: M1026, M1029, M1047, M1053; NIST CSF 2.0: DE.CM-09, PR.DS-11, RC.RP-02"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Detection and response",
+      "columns": [
+        "Control",
+        "What it does",
+        "Prevents",
+        "Detects",
+        "Maps to"
+      ],
+      "rows": [
+        {
+          "key": "SIEM",
+          "cells": [
+            "**Security Information and Event Management** `SIEM`",
+            "Collection and correlation of security logs across the information system, detection rules and behavioural analytics (UEBA). Coverage: log sources received.",
+            "0 techniques",
+            "608 techniques",
+            "ATT&CK mitigations: M1029, M1047; NIST CSF 2.0: DE.AE-02, DE.AE-03, PR.PS-04"
+          ]
+        },
+        {
+          "key": "SOC",
+          "cells": [
+            "**Security Operations Center** `SOC`",
+            "Internal team that triages alerts and hunts threats. Coverage: time slots staffed.",
+            "0 techniques",
+            "608 techniques",
+            "NIST CSF 2.0: DE.AE-02, RS.MA-02"
+          ]
+        },
+        {
+          "key": "MDR",
+          "cells": [
+            "**Managed Detection and Response** `MDR`",
+            "Provider handling detection, triage and first response on the customer's behalf; an alternative to an internal SOC. Coverage: scope entrusted by contract.",
+            "0 techniques",
+            "608 techniques",
+            "NIST CSF 2.0: RS.MA-02, RS.MI-01"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "People and third parties",
+      "columns": [
+        "Control",
+        "What it does",
+        "Prevents",
+        "Detects",
+        "Maps to"
+      ],
+      "rows": [
+        {
+          "key": "SAT",
+          "cells": [
+            "**Security Awareness** `SAT`",
+            "Awareness and phishing simulation campaigns, reporting by users, an accepted acceptable-use policy and compliance training (data handling, authorised applications). Coverage: trained and exercised users.",
+            "16 techniques",
+            "15 techniques",
+            "ATT&CK mitigations: M1017; NIST CSF 2.0: DE.CM-03, PR.AT-01"
+          ]
+        },
+        {
+          "key": "FRAUD",
+          "cells": [
+            "**Payment Fraud Controls** `FRAUD`",
+            "Finance team procedure that submits every payment and every change of bank details to dual approval and to a call-back through a known channel, which defeats CEO fraud and payment diversion. Coverage: payment flows subject to the procedure.",
+            "4 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1017; NIST CSF 2.0: PR.AA-05"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "AI",
+      "columns": [
+        "Control",
+        "What it does",
+        "Prevents",
+        "Detects",
+        "Maps to"
+      ],
+      "rows": [
+        {
+          "key": "AIGW",
+          "cells": [
+            "**Generative AI Guardrails (AI Gateway)** `AIGW`",
+            "Filter placed in front of models and agents that blocks injections, jailbreaks and leaks in inputs and outputs, limits request volume and controls access to models; it logs prompts and decisions. Coverage: AI applications behind the gateway.",
+            "3 techniques",
+            "0 techniques",
+            "ATT&CK mitigations: M1047; NIST CSF 2.0: DE.CM-09, PR.AA-03, PR.IR-04, PR.PS-05, RS.MI-02"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Strength levels: Endpoints and servers",
+      "columns": [
+        "Control",
+        "Level",
+        "What it takes"
+      ],
+      "rows": [
+        {
+          "key": "EDR:L0",
+          "cells": [
+            "Endpoint Detection and Response",
+            "Not deployed",
+            "No endpoint agent: files and processes run with no anti-malware scanning, no behaviour blocking and no record of host activity. Commodity malware runs as freely as a hands-on attacker."
+          ]
+        },
+        {
+          "key": "EDR:L1",
+          "cells": [
+            "Endpoint Detection and Response",
+            "Basic",
+            "An agent blocks known malicious files and scripts before they execute, by signature, reputation or emulation, and quarantines them. Commodity malware no longer runs; a new or repacked sample, a fileless attack and abuse of built-in tools still do."
+          ]
+        },
+        {
+          "key": "EDR:L2",
+          "cells": [
+            "Endpoint Detection and Response",
+            "Intermediate",
+            "Adds behaviour blocking and activity recording: a process caught injecting into another, reading LSASS memory, mass-encrypting files or deleting shadow copies is killed at once, and process, file, registry, network and script activity goes to the console, whose vendor rules raise alerts. Unknown payloads are stopped by what they do, and an intrusion leaves a trail to investigate."
+          ]
+        },
+        {
+          "key": "EDR:L3",
+          "cells": [
+            "Endpoint Detection and Response",
+            "Master",
+            "Adds tamper protection that a local administrator cannot switch off, and response from the console: a host can be isolated from the network and cleaned of processes, files and persistence remotely, by an analyst or a playbook. An attacker with admin rights can no longer blind the agent, and a compromised host is cut off before it spreads."
+          ]
+        },
+        {
+          "key": "OSH:L0",
+          "cells": [
+            "System Hardening",
+            "Not deployed",
+            "Systems run with vendor default settings: legacy protocols on, Office macros from the internet allowed, users holding local admin rights, one local administrator password shared across machines."
+          ]
+        },
+        {
+          "key": "OSH:L1",
+          "cells": [
+            "System Hardening",
+            "Basic",
+            "A security baseline (CIS or vendor) is applied to systems: legacy protocols and features off (LLMNR, NetBIOS, SMBv1, PowerShell v2), macros from the internet blocked, the host firewall denying inbound RDP, SMB and WinRM, and OS memory protections (DEP, ASLR) on. Closes the default-configuration paths most attacks start with."
+          ]
+        },
+        {
+          "key": "OSH:L2",
+          "cells": [
+            "System Hardening",
+            "Intermediate",
+            "Adds credential and privilege hardening: a unique, rotated local administrator password per machine (LAPS), LSASS protection or Credential Guard with WDigest off, no permanent local admin rights for users, software and extensions installed from a catalogue only, and executable allowlisting by path. A password or hash stolen on one machine no longer opens the others."
+          ]
+        },
+        {
+          "key": "OSH:L3",
+          "cells": [
+            "System Hardening",
+            "Master",
+            "Adds allowlisting by publisher or hash for executables, scripts and libraries, with Secure Boot and signed drivers enforced. A renamed or copied tool cannot run, and a bootkit or malicious driver cannot load beneath the OS."
+          ]
+        },
+        {
+          "key": "FIM:L0",
+          "cells": [
+            "File Integrity Monitoring",
+            "Not deployed",
+            "No integrity monitoring: changes to system binaries, configuration files and sensitive registry keys are not recorded."
+          ]
+        },
+        {
+          "key": "FIM:L1",
+          "cells": [
+            "File Integrity Monitoring",
+            "Basic",
+            "Periodic scans (daily or slower) compare system binaries and configuration files on servers with a baseline and report the differences. Tampering is found, but hours or days after it happened."
+          ]
+        },
+        {
+          "key": "FIM:L2",
+          "cells": [
+            "File Integrity Monitoring",
+            "Intermediate",
+            "Real-time monitoring raises an alert on each change to binaries, configuration files, sensitive registry keys and persistence locations (services, scheduled tasks, startup keys, web roots), naming the account and process behind it. A backdoor or persistence is reported as it is planted."
+          ]
+        },
+        {
+          "key": "FIM:L3",
+          "cells": [
+            "File Integrity Monitoring",
+            "Master",
+            "Adds reconciliation with approved changes, so only unexplained changes alert, and those alerts correlated in the SIEM with the rest of the host's activity. Tampering hidden among routine maintenance is singled out."
+          ]
+        },
+        {
+          "key": "UEM:L0",
+          "cells": [
+            "Unified Endpoint Management (UEM / MDM)",
+            "Not deployed",
+            "Laptops and mobile devices are not enrolled in any management tool: no passcode, encryption or OS version is enforced, and applications install from anywhere."
+          ]
+        },
+        {
+          "key": "UEM:L1",
+          "cells": [
+            "Unified Endpoint Management (UEM / MDM)",
+            "Basic",
+            "Enrolled devices get a basic policy: screen lock or passcode, storage encryption, remote lock and wipe, and an inventory of their OS versions. A lost or stolen device no longer exposes its data; a malicious app or an outdated OS still gets through."
+          ]
+        },
+        {
+          "key": "UEM:L2",
+          "cells": [
+            "Unified Endpoint Management (UEM / MDM)",
+            "Intermediate",
+            "Adds enforced compliance: a minimum OS and patch level, applications limited to the store or the company catalogue with sideloading blocked, jailbroken or rooted devices flagged, and compliance status fed to conditional access so a non-compliant device loses corporate access. Malicious apps no longer install, and a compromised device is cut off."
+          ]
+        },
+        {
+          "key": "UEM:L3",
+          "cells": [
+            "Unified Endpoint Management (UEM / MDM)",
+            "Master",
+            "Adds hardware-backed attestation of boot and firmware state (TPM, Secure Boot), corporate apps and data held in a managed work profile or under app protection policies, and automatic quarantine or wipe when a device drifts or is reported compromised. A tampered device can no longer pass as compliant."
+          ]
+        },
+        {
+          "key": "PATCH:L0",
+          "cells": [
+            "Patch Management",
+            "Not deployed",
+            "No patch process: security updates are installed ad hoc or not at all, and known exploitable flaws stay open indefinitely."
+          ]
+        },
+        {
+          "key": "PATCH:L1",
+          "cells": [
+            "Patch Management",
+            "Basic",
+            "Security patches are installed on a regular cycle, by hand or by tool, critical OS flaws first, with no deadline beyond the cycle and third-party applications and firmware patched when someone notices. The worst known flaws eventually close; the exposure window is long and unmeasured."
+          ]
+        },
+        {
+          "key": "PATCH:L2",
+          "cells": [
+            "Patch Management",
+            "Intermediate",
+            "OS and third-party application patches are deployed automatically with deadlines by severity (critical flaws within days, others within a month). The window on known flaws becomes short and predictable."
+          ]
+        },
+        {
+          "key": "PATCH:L3",
+          "cells": [
+            "Patch Management",
+            "Master",
+            "Adds priority by real exploitation (known-exploited vulnerabilities patched within days, out-of-cycle emergency patching), and firmware and images of network devices, appliances and containers held to the same deadlines. The flaws attackers actually use close first, beyond the OS."
+          ]
+        },
+        {
+          "key": "MSEG:L0",
+          "cells": [
+            "Microsegmentation",
+            "Not deployed",
+            "No microsegmentation: workloads in the same network segment can reach each other on any port, or only the OS host firewall filters them, which System Hardening covers."
+          ]
+        },
+        {
+          "key": "MSEG:L1",
+          "cells": [
+            "Microsegmentation",
+            "Basic",
+            "Agents on servers, containers and cloud instances record the flows between them, with policy in observation mode: nothing is blocked, but unexpected connections show up. Lateral movement is visible, not stopped."
+          ]
+        },
+        {
+          "key": "MSEG:L2",
+          "cells": [
+            "Microsegmentation",
+            "Intermediate",
+            "Policy is enforced between application groups or environments (production, development, sensitive applications): flows it does not allow are denied, administration protocols between workloads included. Spread from a compromised workload stops at its application's fence."
+          ]
+        },
+        {
+          "key": "MSEG:L3",
+          "cells": [
+            "Microsegmentation",
+            "Master",
+            "Default deny per workload: each server, container or cloud instance accepts only the flows its own role needs, and a compromised workload can be quarantined from the console by an analyst or a playbook. Scanning and lateral movement fail even inside one application group."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Strength levels: Network",
+      "columns": [
+        "Control",
+        "Level",
+        "What it takes"
+      ],
+      "rows": [
+        {
+          "key": "NGFW:L0",
+          "cells": [
+            "Firewall and Network Segmentation",
+            "Not deployed",
+            "No firewall between the internet and internal networks or between internal zones: every flow is allowed, or a router's address translation is the only barrier."
+          ]
+        },
+        {
+          "key": "NGFW:L1",
+          "cells": [
+            "Firewall and Network Segmentation",
+            "Basic",
+            "Inbound traffic from the internet is denied by default: only published services are reachable, RDP, SMB, SSH and administration interfaces are closed from outside, and outbound traffic is open or filtered by port only. Direct attacks on unpublished services fail; inside, the network is flat."
+          ]
+        },
+        {
+          "key": "NGFW:L2",
+          "cells": [
+            "Firewall and Network Segmentation",
+            "Intermediate",
+            "Adds internal zones with default deny between them (users, servers, OT, cloud, administration) and outbound filtering of servers by port and destination, so they reach only the destinations they need. Lateral movement across zones and command-and-control from servers are blocked."
+          ]
+        },
+        {
+          "key": "NGFW:L3",
+          "cells": [
+            "Firewall and Network Segmentation",
+            "Master",
+            "Adds application-aware rules that identify traffic whatever its port, with TLS inspection of outbound traffic. Command-and-control and transfers hidden in allowed web traffic are caught."
+          ]
+        },
+        {
+          "key": "IPS:L0",
+          "cells": [
+            "Network Intrusion Prevention",
+            "Not deployed",
+            "No intrusion prevention: traffic crosses the network boundary with no inspection for exploits or command-and-control."
+          ]
+        },
+        {
+          "key": "IPS:L1",
+          "cells": [
+            "Network Intrusion Prevention",
+            "Basic",
+            "Inline inspection drops traffic matching the vendor's signatures for known exploits, scans and command-and-control, with rules updated automatically. Known attacks are stopped; encrypted traffic and new tools pass unseen."
+          ]
+        },
+        {
+          "key": "IPS:L2",
+          "cells": [
+            "Network Intrusion Prevention",
+            "Intermediate",
+            "Adds tuning to the estate: rules chosen for the systems actually exposed, with virtual patches for their known CVEs until the patch lands, reputation blocking of known-bad destinations, and protocol anomaly rules (DNS tunnelling, protocol misuse). Catches what static signatures miss."
+          ]
+        },
+        {
+          "key": "IPS:L3",
+          "cells": [
+            "Network Intrusion Prevention",
+            "Master",
+            "Adds inspection of encrypted traffic after TLS decryption, custom signatures from threat intelligence and past incidents, and alerts sent to the SIEM so each blocked attempt is investigated. Exploits and command-and-control inside TLS are no longer invisible."
+          ]
+        },
+        {
+          "key": "NDR:L0",
+          "cells": [
+            "Network Detection and Response",
+            "Not deployed",
+            "No network detection: traffic is neither recorded nor analysed for attack behaviour."
+          ]
+        },
+        {
+          "key": "NDR:L1",
+          "cells": [
+            "Network Detection and Response",
+            "Basic",
+            "Flow records (NetFlow, IPFIX) are matched against threat intelligence and signatures, flagging known command-and-control destinations, scans and floods. Blind to packet content and to behaviour no signature names."
+          ]
+        },
+        {
+          "key": "NDR:L2",
+          "cells": [
+            "Network Detection and Response",
+            "Intermediate",
+            "Sensors capture full traffic, extract protocol metadata (DNS, HTTP, SMB, Kerberos, RDP) and run behavioural analytics: beaconing, DNS tunnelling, unusual remote sessions, lateral movement and abnormal transfers raise alerts with no rule written by the team. Spread and tunnelling that static feeds miss become visible."
+          ]
+        },
+        {
+          "key": "NDR:L3",
+          "cells": [
+            "Network Detection and Response",
+            "Master",
+            "Adds response and encrypted traffic analysis: alerts feed a workflow that blocks or isolates within minutes, through the firewall, NAC or EDR, and encrypted sessions are classified by their fingerprints or decrypted where allowed. Encrypted command-and-control is flagged, and detection turns into interruption."
+          ]
+        },
+        {
+          "key": "CPS:L0",
+          "cells": [
+            "OT / IoT Network Detection",
+            "Not deployed",
+            "No OT or IoT network monitoring: commands to controllers and traffic between industrial devices are not observed."
+          ]
+        },
+        {
+          "key": "CPS:L1",
+          "cells": [
+            "OT / IoT Network Detection",
+            "Basic",
+            "A passive sensor identifies OT and IoT devices from their traffic and alerts on known attack signatures and on new devices appearing. The industrial network is inventoried and known attacks are flagged."
+          ]
+        },
+        {
+          "key": "CPS:L2",
+          "cells": [
+            "OT / IoT Network Detection",
+            "Intermediate",
+            "Adds deep inspection of industrial protocols (Modbus, S7, DNP3, EtherNet/IP and others) against a baseline of normal communications: a write to a controller from an unauthorised station, a firmware or logic download, a scan or a new remote session raises an alert. Misuse of legitimate commands is caught."
+          ]
+        },
+        {
+          "key": "CPS:L3",
+          "cells": [
+            "OT / IoT Network Detection",
+            "Master",
+            "Adds OT alerts handled by the security operations: correlated in the SIEM with IT-side events and triaged with OT playbooks agreed with operations. An attack crossing from IT to OT is followed end to end and handled without disrupting production."
+          ]
+        },
+        {
+          "key": "SWG:L0",
+          "cells": [
+            "Secure Web Gateway",
+            "Not deployed",
+            "No web gateway: web traffic leaves with no URL filtering, download inspection or protective DNS."
+          ]
+        },
+        {
+          "key": "SWG:L1",
+          "cells": [
+            "Secure Web Gateway",
+            "Basic",
+            "Web traffic goes through a proxy that blocks known malicious and forbidden categories and scans downloads, or through a protective DNS resolver that blocks known malicious domains, without TLS inspection. Known-bad sites are blocked; HTTPS payloads and fresh domains pass."
+          ]
+        },
+        {
+          "key": "SWG:L2",
+          "cells": [
+            "Secure Web Gateway",
+            "Intermediate",
+            "Adds TLS inspection, so HTTPS downloads are scanned and detonated in a sandbox before release, blocking of newly registered and uncategorised domains, and DNS filtering of malicious and generated domains and DNS tunnels. Drive-by payloads and command-and-control over the web or DNS are stopped."
+          ]
+        },
+        {
+          "key": "SWG:L3",
+          "cells": [
+            "Secure Web Gateway",
+            "Master",
+            "Adds remote browser isolation for risky or uncategorised sites, so web code never reaches the endpoint, with inline control of unsanctioned cloud and generative AI applications. Exploits through the browser fail, and data cannot leave to unapproved cloud services."
+          ]
+        },
+        {
+          "key": "ZTNA:L0",
+          "cells": [
+            "Secure Remote Access (VPN / ZTNA)",
+            "Not deployed",
+            "No controlled remote access: internal services are published directly on the internet, or reached through shared or unauthenticated access."
+          ]
+        },
+        {
+          "key": "ZTNA:L1",
+          "cells": [
+            "Secure Remote Access (VPN / ZTNA)",
+            "Basic",
+            "Remote users connect through a VPN or ZTNA after authenticating with their own account, and internal services are no longer exposed on the internet, but a connected user reaches the whole internal network. Internet scans find nothing to attack; a stolen account opens everything."
+          ]
+        },
+        {
+          "key": "ZTNA:L2",
+          "cells": [
+            "Secure Remote Access (VPN / ZTNA)",
+            "Intermediate",
+            "Adds least-privilege access with multi-factor authentication at connection: each remote session reaches only the applications or servers its user's group needs, through ZTNA or per-group VPN rules, never the network as a whole. A stolen password alone fails, and a connected account cannot scan or hop to other servers."
+          ]
+        },
+        {
+          "key": "ZTNA:L3",
+          "cells": [
+            "Secure Remote Access (VPN / ZTNA)",
+            "Master",
+            "Adds a device posture check at every connection (managed, compliant, EDR agent running, valid certificate) and sessions re-evaluated during use, cut when the account or device is flagged compromised. Stolen credentials used from a foreign device are refused."
+          ]
+        },
+        {
+          "key": "NAC:L0",
+          "cells": [
+            "Network Access Control",
+            "Not deployed",
+            "No network access control: any device plugged into a port or joining the Wi-Fi gets network access."
+          ]
+        },
+        {
+          "key": "NAC:L1",
+          "cells": [
+            "Network Access Control",
+            "Basic",
+            "Devices must authenticate (802.1X, or MAC address for those that cannot) on controlled ports and SSIDs, and unknown devices are refused or sent to a guest network. A device brought in by an intruder gets no foothold."
+          ]
+        },
+        {
+          "key": "NAC:L2",
+          "cells": [
+            "Network Access Control",
+            "Intermediate",
+            "Adds profiling and dynamic segmentation: each device is identified (workstation, printer, IoT, mobile) and placed automatically in the VLAN of its profile, with compliance checked at admission in audit mode. A compromised printer or IoT device cannot reach the rest of the network."
+          ]
+        },
+        {
+          "key": "NAC:L3",
+          "cells": [
+            "Network Access Control",
+            "Master",
+            "Adds a blocking compliance check at admission (EDR running, patches, encryption) that sends non-compliant devices to a remediation zone, and quarantine of a device reported compromised by changing its port or SSID authorisation remotely. Unhealthy devices never join, and an infected one is cut off in minutes."
+          ]
+        },
+        {
+          "key": "WIFI:L0",
+          "cells": [
+            "Wi-Fi Security",
+            "Not deployed",
+            "Corporate Wi-Fi is open or uses a shared passphrase, with no guest separation and no watch for rogue access points."
+          ]
+        },
+        {
+          "key": "WIFI:L1",
+          "cells": [
+            "Wi-Fi Security",
+            "Basic",
+            "Corporate Wi-Fi uses WPA2 or WPA3-Enterprise authentication per user or device, and guests use a separate network with no route to internal resources. Holding a passphrase no longer opens the network."
+          ]
+        },
+        {
+          "key": "WIFI:L2",
+          "cells": [
+            "Wi-Fi Security",
+            "Intermediate",
+            "Adds certificate authentication (EAP-TLS) with server certificate validation enforced on clients, protected management frames, and client isolation so wireless clients cannot reach each other. A fake access point imitating the network fails, and a compromised laptop cannot attack its wireless neighbours."
+          ]
+        },
+        {
+          "key": "WIFI:L3",
+          "cells": [
+            "Wi-Fi Security",
+            "Master",
+            "Adds wireless intrusion detection: radio sensors find rogue access points and evil twins imitating the corporate network and alert the operations team. Attacks that rely on a nearby radio are spotted, not just resisted."
+          ]
+        },
+        {
+          "key": "DDOS:L0",
+          "cells": [
+            "DDoS Protection",
+            "Not deployed",
+            "No denial-of-service protection: floods reach the exposed services and internet links directly."
+          ]
+        },
+        {
+          "key": "DDOS:L1",
+          "cells": [
+            "DDoS Protection",
+            "Basic",
+            "Network-layer protection, upstream at the provider or operator or at the perimeter, always on or on demand, absorbs volumetric and reflection floods against the protected addresses on fixed thresholds. Network floods are dropped before the service; floods of legitimate-looking requests still get through."
+          ]
+        },
+        {
+          "key": "DDOS:L2",
+          "cells": [
+            "DDoS Protection",
+            "Intermediate",
+            "Adds always-on application-layer protection: HTTP request rate limiting and challenges for suspicious clients, with thresholds learned from normal traffic and mitigation starting automatically. Application floods are mitigated without manual tuning."
+          ]
+        },
+        {
+          "key": "DDOS:L3",
+          "cells": [
+            "DDoS Protection",
+            "Master",
+            "Adds a managed service with guaranteed scrubbing capacity and response times, diverting traffic within minutes of an attack. Large or low-and-slow attacks are absorbed with capacity to spare."
+          ]
+        },
+        {
+          "key": "TLS:L0",
+          "cells": [
+            "Internal Traffic Encryption",
+            "Not deployed",
+            "Internal traffic travels in clear text and unsigned: LDAP, SMB, HTTP and database connections can be read, relayed or altered on the network."
+          ]
+        },
+        {
+          "key": "TLS:L1",
+          "cells": [
+            "Internal Traffic Encryption",
+            "Basic",
+            "SMB and LDAP signing are required, and internal web, directory and database connections use TLS. Authentication relay is closed on the main protocols; some flows stay readable and certificates are not always checked."
+          ]
+        },
+        {
+          "key": "TLS:L2",
+          "cells": [
+            "Internal Traffic Encryption",
+            "Intermediate",
+            "Adds encryption of every sensitive internal flow with TLS 1.2 or later and certificate validation, and weak protocols disabled (SSL, TLS 1.0, RC4, NTLMv1). Interception, downgrade and replay of internal traffic fail."
+          ]
+        },
+        {
+          "key": "TLS:L3",
+          "cells": [
+            "Internal Traffic Encryption",
+            "Master",
+            "Adds mutual authentication of internal peers, through mTLS (such as a service mesh) or IPsec between servers. Only authenticated peers can talk, and a relayed or tampered connection is refused."
+          ]
+        },
+        {
+          "key": "NDH:L0",
+          "cells": [
+            "Network Device Hardening",
+            "Not deployed",
+            "Network devices run with vendor defaults: default accounts, management reachable from user networks, clear-text protocols (Telnet, SNMPv1 or v2, HTTP)."
+          ]
+        },
+        {
+          "key": "NDH:L1",
+          "cells": [
+            "Network Device Hardening",
+            "Basic",
+            "Default accounts are removed, management uses SSH or HTTPS only with central authentication (TACACS+ or RADIUS), and SNMPv3 replaces older versions. Taking over a device through its default credentials fails."
+          ]
+        },
+        {
+          "key": "NDH:L2",
+          "cells": [
+            "Network Device Hardening",
+            "Intermediate",
+            "Adds management reachable only from a dedicated administration network, unused services and ports disabled, and access-layer protections on switches (DHCP snooping, dynamic ARP inspection, port security). A machine on a user segment can neither administer a device nor intercept its neighbours' traffic."
+          ]
+        },
+        {
+          "key": "NDH:L3",
+          "cells": [
+            "Network Device Hardening",
+            "Master",
+            "Adds signed system images verified at boot, so a modified or downgraded image cannot load, configuration backups compared with the running configuration, and restoration of a device to a known-good configuration and image. Persistence in device firmware fails, and a tampered device is restored quickly."
+          ]
+        },
+        {
+          "key": "DECEP:L0",
+          "cells": [
+            "Deception",
+            "Not deployed",
+            "No deception: no decoys, honeytokens or canaries are deployed, so touching a fake asset reveals nothing because none exists."
+          ]
+        },
+        {
+          "key": "DECEP:L1",
+          "cells": [
+            "Deception",
+            "Basic",
+            "A few decoy credentials, accounts and bait files are placed by hand and alert when used or opened. A first high-confidence tripwire exists; sparse and static, an attacker may never meet it."
+          ]
+        },
+        {
+          "key": "DECEP:L2",
+          "cells": [
+            "Deception",
+            "Intermediate",
+            "A deception platform deploys and refreshes decoy accounts, credentials, files and shares in the directory, on endpoints and in SaaS, and decoy hosts and services on the network, along the paths attacks take, with alerts sent to the SOC. An attacker doing discovery, credential theft or lateral movement is likely to trip one."
+          ]
+        },
+        {
+          "key": "DECEP:L3",
+          "cells": [
+            "Deception",
+            "Master",
+            "Adds decoys generated to look like production, high-interaction decoys that keep the attacker engaged, and alerts that trigger automated containment of the source host or account. Decoys resist fingerprinting, and the alert-to-containment loop closes on its own."
+          ]
+        },
+        {
+          "key": "SEB:L0",
+          "cells": [
+            "Enterprise Browser",
+            "Not deployed",
+            "No managed browser: users browse with any browser, extensions install freely, and session cookies can be copied off the device."
+          ]
+        },
+        {
+          "key": "SEB:L1",
+          "cells": [
+            "Enterprise Browser",
+            "Basic",
+            "A managed enterprise browser enforces central policy: extensions limited to an approved list, password saving and sync to personal accounts turned off. Malicious extensions and saved-password theft are closed."
+          ]
+        },
+        {
+          "key": "SEB:L2",
+          "cells": [
+            "Enterprise Browser",
+            "Intermediate",
+            "Adds session protection: corporate SaaS and internal applications are reachable only through the managed browser, and session cookies are bound to the device, so a stolen cookie cannot be replayed elsewhere. Session hijacking through cookie theft fails."
+          ]
+        },
+        {
+          "key": "SEB:L3",
+          "cells": [
+            "Enterprise Browser",
+            "Master",
+            "Adds data controls in the browser: copy, paste, download, upload, print and screenshot restricted per application and data sensitivity. Data from sensitive applications can no longer leave through the browser."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Strength levels: Identities",
+      "columns": [
+        "Control",
+        "Level",
+        "What it takes"
+      ],
+      "rows": [
+        {
+          "key": "IDP:L0",
+          "cells": [
+            "Identity Platform (IdP, SSO, MFA, Conditional Access)",
+            "Not deployed",
+            "No second factor: a password alone opens the session on the identity provider and the applications behind it."
+          ]
+        },
+        {
+          "key": "IDP:L1",
+          "cells": [
+            "Identity Platform (IdP, SSO, MFA, Conditional Access)",
+            "Basic",
+            "Multi-factor authentication on interactive sign-ins with a one-time code (SMS, voice call, email, authenticator app) or a push approval without number matching. Guessed, sprayed or reused passwords no longer open a session; push fatigue, phishing relay of the code and legacy protocols skipping MFA still do."
+          ]
+        },
+        {
+          "key": "IDP:L2",
+          "cells": [
+            "Identity Platform (IdP, SSO, MFA, Conditional Access)",
+            "Intermediate",
+            "Push approval with number matching, conditional access (such as on location, device or sign-in risk), and legacy authentication protocols restricted. Reflexive approval and the obvious MFA bypasses are closed; a real-time phishing relay still succeeds."
+          ]
+        },
+        {
+          "key": "IDP:L3",
+          "cells": [
+            "Identity Platform (IdP, SSO, MFA, Conditional Access)",
+            "Master",
+            "Phishing-resistant authentication (FIDO2 security keys or passkeys) bound to the legitimate site and to the device, legacy authentication blocked, and MFA required on dormant and deactivated accounts and failing closed. Credential phishing, relay and push fatigue all fail; a session cookie stolen after sign-in remains the residual path."
+          ]
+        },
+        {
+          "key": "PAM:L0",
+          "cells": [
+            "Privileged Access Management",
+            "Not deployed",
+            "Privileged accounts are standing and shared, and administrator and service passwords are known to people and reused across systems."
+          ]
+        },
+        {
+          "key": "PAM:L1",
+          "cells": [
+            "Privileged Access Management",
+            "Basic",
+            "Privileged and service account passwords are kept in a vault, checked out per use and rotated automatically, so no administrator knows or reuses them. A captured password expires; standing admin rights remain."
+          ]
+        },
+        {
+          "key": "PAM:L2",
+          "cells": [
+            "Privileged Access Management",
+            "Intermediate",
+            "Adds administration through a bastion that injects credentials without revealing them and records sessions, just-in-time elevation with approval instead of standing admin rights, and elevation on workstations granted to approved applications only. There is no permanent admin identity to steal, and the administrator's workstation never holds the target secret."
+          ]
+        },
+        {
+          "key": "PAM:L3",
+          "cells": [
+            "Privileged Access Management",
+            "Master",
+            "Adds zero standing privilege: privileged accounts or their secrets are created per approved task and expire with it, and application secrets are served from a vault at runtime instead of code and configuration files. Privilege exists only for the length of a task, and no secret sits in code."
+          ]
+        },
+        {
+          "key": "IGA:L0",
+          "cells": [
+            "Identity Governance and Administration",
+            "Not deployed",
+            "Accounts are created and removed by hand on request, with no link to HR: leavers keep active accounts and entitlements accumulate unreviewed."
+          ]
+        },
+        {
+          "key": "IGA:L1",
+          "cells": [
+            "Identity Governance and Administration",
+            "Basic",
+            "Leavers' accounts are disabled when HR reports a departure, by hand or by script, and accounts left inactive past a set period are disabled. Dormant and departed accounts stop being reusable targets; access piles up on those who stay."
+          ]
+        },
+        {
+          "key": "IGA:L2",
+          "cells": [
+            "Identity Governance and Administration",
+            "Intermediate",
+            "Joiners, movers and leavers are provisioned and deprovisioned automatically from HR, and access reviews by managers run in a tool that revokes what they reject, privileged rights first. Excess access is removed on a cycle, not just account existence managed."
+          ]
+        },
+        {
+          "key": "IGA:L3",
+          "cells": [
+            "Identity Governance and Administration",
+            "Master",
+            "Adds an owner and periodic review for every service and orphaned account, segregation-of-duties rules enforced at assignment, and continuous risk-based certification that removes unused or toxic entitlements automatically. Excess privilege is corrected as it appears instead of at the next review."
+          ]
+        },
+        {
+          "key": "ADH:L0",
+          "cells": [
+            "Directory Hardening (Active Directory, Entra ID)",
+            "Not deployed",
+            "The directory runs with default settings: NTLMv1 and RC4 allowed, broad rights on replication and Group Policy, no lockout or banned-password policy."
+          ]
+        },
+        {
+          "key": "ADH:L1",
+          "cells": [
+            "Directory Hardening (Active Directory, Entra ID)",
+            "Basic",
+            "Account lockout after repeated failures and a password policy are enforced, default and dormant administrative accounts are removed, and domain controllers log sign-ins, Kerberos ticket requests and object changes. Online password guessing fails, and directory activity leaves a trace."
+          ]
+        },
+        {
+          "key": "ADH:L2",
+          "cells": [
+            "Directory Hardening (Active Directory, Entra ID)",
+            "Intermediate",
+            "Adds banned and breached-password lists, Kerberos and NTLM hardening (AES only, pre-authentication required, NTLMv1 off, managed service accounts with long passwords), and sensitive rights restricted (replication, Group Policy edits, trusts) so an ordinary account cannot run DCSync. Password spraying, Kerberoasting and hash extraction fail."
+          ]
+        },
+        {
+          "key": "ADH:L3",
+          "cells": [
+            "Directory Hardening (Active Directory, Entra ID)",
+            "Master",
+            "Adds tiered administration with domain admins signing in only from dedicated admin workstations, the krbtgt account and federation signing secrets rotated, and the directory restorable from its recycle bin or a system-state backup. A stolen admin credential is unusable from an ordinary workstation, and forged tickets are invalidated."
+          ]
+        },
+        {
+          "key": "ITDR:L0",
+          "cells": [
+            "Identity Threat Detection and Response",
+            "Not deployed",
+            "No identity threat detection: attacks on the directory and identity provider are found, if ever, in raw logs."
+          ]
+        },
+        {
+          "key": "ITDR:L1",
+          "cells": [
+            "Identity Threat Detection and Response",
+            "Basic",
+            "The vendor's analytics read directory and identity provider logs and raise qualified alerts on known identity attacks: password spraying, Kerberoasting, DCSync, pass-the-ticket, risky sign-ins. Common identity attacks are detected."
+          ]
+        },
+        {
+          "key": "ITDR:L2",
+          "cells": [
+            "Identity Threat Detection and Response",
+            "Intermediate",
+            "Adds sensors on domain controllers and the identity provider that observe authentication traffic (Kerberos, NTLM, LDAP, replication) independently of logs, and continuous assessment of attack paths and directory weaknesses that alerts on each new path to domain admin. Attacks that leave no log, and new exposure, are caught."
+          ]
+        },
+        {
+          "key": "ITDR:L3",
+          "cells": [
+            "Identity Threat Detection and Response",
+            "Master",
+            "Adds automatic response: an account whose activity is detected as malicious is disabled or blocked by a predefined policy, without waiting for a human decision. A spraying or ticket attack is stopped within seconds of detection."
+          ]
+        },
+        {
+          "key": "PKI:L0",
+          "cells": [
+            "Public Key Infrastructure",
+            "Not deployed",
+            "Certificates are issued and tracked by hand: the authority and its templates run with default settings, and nobody knows which certificates are in use or when they expire."
+          ]
+        },
+        {
+          "key": "PKI:L1",
+          "cells": [
+            "Public Key Infrastructure",
+            "Basic",
+            "Certificates in use are inventoried with their issuer and expiry, and the authority logs every issuance and revocation. Unknown and expiring certificates become visible."
+          ]
+        },
+        {
+          "key": "PKI:L2",
+          "cells": [
+            "Public Key Infrastructure",
+            "Intermediate",
+            "Adds hardened templates and authority: no requester-supplied subject name on authentication templates, enrolment rights restricted, approval on sensitive templates, and revocation checked by the services that rely on certificates. The known paths to a certificate in another user's name are closed."
+          ]
+        },
+        {
+          "key": "PKI:L3",
+          "cells": [
+            "Public Key Infrastructure",
+            "Master",
+            "Adds authority keys held in an HSM, alerts on unusual issuance sent to the SIEM, automated renewal, and revocation of a stolen or forged certificate published within hours. A compromised certificate stops working quickly, and the authority's own key cannot be stolen."
+          ]
+        },
+        {
+          "key": "IDV:L0",
+          "cells": [
+            "Help Desk Identity Verification",
+            "Not deployed",
+            "The help desk resets passwords, re-enrols second factors and registers devices on a caller's word."
+          ]
+        },
+        {
+          "key": "IDV:L1",
+          "cells": [
+            "Help Desk Identity Verification",
+            "Basic",
+            "Before a reset, re-enrolment or device registration, the request is confirmed through a channel the caller does not control: the person's manager, or a call-back or code sent to contact details on file. An isolated call fails; an attacker who also controls that channel still succeeds."
+          ]
+        },
+        {
+          "key": "IDV:L2",
+          "cells": [
+            "Help Desk Identity Verification",
+            "Intermediate",
+            "Identity is proven before the action: an ID document checked on video, or a question whose answer is not in the directory. Ordinary impersonation fails, including of the manager."
+          ]
+        },
+        {
+          "key": "IDV:L3",
+          "cells": [
+            "Help Desk Identity Verification",
+            "Master",
+            "Identity is verified by a tool (document and liveness check, or a prompt to an already enrolled factor) or in person. A cloned voice or deepfake video no longer gets an account reset."
+          ]
+        },
+        {
+          "key": "PWM:L0",
+          "cells": [
+            "Enterprise Password Manager",
+            "Not deployed",
+            "No enterprise password manager: users reuse passwords or store them in browsers, files or notes."
+          ]
+        },
+        {
+          "key": "PWM:L1",
+          "cells": [
+            "Enterprise Password Manager",
+            "Basic",
+            "An enterprise password manager is provided and users keep their work passwords in it, behind a master password. Passwords leave browsers and files."
+          ]
+        },
+        {
+          "key": "PWM:L2",
+          "cells": [
+            "Enterprise Password Manager",
+            "Intermediate",
+            "Adds a unique random password generated for each service, password saving in browsers turned off, controlled sharing of team credentials, and alerts on reused, weak or breached passwords in the vault. A password leaked on one service opens no other."
+          ]
+        },
+        {
+          "key": "PWM:L3",
+          "cells": [
+            "Enterprise Password Manager",
+            "Master",
+            "Adds a vault unlocked with a second factor or through single sign-on with phishing-resistant authentication, enforced vault policies (minimum length, no export), and offboarding that revokes access and lists the shared secrets to rotate. The vault itself resists theft, and departures leave no usable secret behind."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Strength levels: Email and SaaS",
+      "columns": [
+        "Control",
+        "Level",
+        "What it takes"
+      ],
+      "rows": [
+        {
+          "key": "SEG:L0",
+          "cells": [
+            "Email Security",
+            "Not deployed",
+            "Mail is accepted and delivered with no filtering beyond the mail server's defaults."
+          ]
+        },
+        {
+          "key": "SEG:L1",
+          "cells": [
+            "Email Security",
+            "Basic",
+            "Inbound mail is filtered by reputation and signature: anti-spam, sender and IP reputation, SPF checks, anti-malware on attachments and blocklists of known malicious links. Known-bad senders, attachments and links are blocked at delivery; unknown payloads and links weaponised after delivery still arrive."
+          ]
+        },
+        {
+          "key": "SEG:L2",
+          "cells": [
+            "Email Security",
+            "Intermediate",
+            "Adds dynamic analysis and sender authentication: unknown attachments detonated in a sandbox, links rewritten and checked at click time, impersonation checks, and DMARC and DKIM enforced on inbound mail. New malicious attachments and links are caught by behaviour, and spoofed senders are refused."
+          ]
+        },
+        {
+          "key": "SEG:L3",
+          "cells": [
+            "Email Security",
+            "Master",
+            "Adds content disarm and reconstruction of attachments, analysis of message intent for payment fraud and business email compromise with no malicious artefact, and automatic removal of delivered messages whose verdict changes. Active content is neutralised even when the verdict is uncertain, and lures with no payload are caught."
+          ]
+        },
+        {
+          "key": "SAASH:L0",
+          "cells": [
+            "SaaS Tenant Hardening",
+            "Not deployed",
+            "SaaS and collaboration tenants run with vendor defaults: open external sharing, any user can add third-party apps, automatic forwarding allowed, audit logs off or short."
+          ]
+        },
+        {
+          "key": "SAASH:L1",
+          "cells": [
+            "SaaS Tenant Hardening",
+            "Basic",
+            "Native audit logging is on in the email and SaaS tenants (sign-ins, sharing, settings, mailbox rules and delegations), automatic forwarding to external addresses is blocked, and local accounts have a password policy with legacy authentication blocked. Mail diversion and password guessing on local accounts fail, and tenant activity leaves a trace."
+          ]
+        },
+        {
+          "key": "SAASH:L2",
+          "cells": [
+            "SaaS Tenant Hardening",
+            "Intermediate",
+            "Adds restricted sharing and integrations: anonymous links and sharing to external tenants limited to approved domains, third-party apps and user consent limited to an approved list, and mailbox delegations controlled. Documents cannot leave to an outside account by a share, and an illicit integration cannot be added."
+          ]
+        },
+        {
+          "key": "SAASH:L3",
+          "cells": [
+            "SaaS Tenant Hardening",
+            "Master",
+            "Adds local and break-glass accounts outside single sign-on inventoried, vaulted and under a native second factor, and sensitive sites and teams labelled so downloads from unmanaged devices are blocked. No account offers a way in without MFA, and sensitive content stays on managed devices."
+          ]
+        },
+        {
+          "key": "SSPM:L0",
+          "cells": [
+            "SaaS Security Posture Management",
+            "Not deployed",
+            "No SaaS posture tool: tenant settings, third-party integrations and user activity are not read by any connector."
+          ]
+        },
+        {
+          "key": "SSPM:L1",
+          "cells": [
+            "SaaS Security Posture Management",
+            "Basic",
+            "Connectors read the settings of connected SaaS tenants against a baseline (MFA enforced, external sharing, legacy authentication, third-party apps) and report deviations, assessed periodically or on demand. Misconfigurations are surfaced; fixing them is manual."
+          ]
+        },
+        {
+          "key": "SSPM:L2",
+          "cells": [
+            "SaaS Security Posture Management",
+            "Intermediate",
+            "Continuous assessment with each deviation tracked to closure, and alerts on risky activity in the tenants, such as mass downloads, unusual sharing, impossible travel or risky OAuth grants. Drift is caught between reviews, and a compromised account or exfiltration in progress is flagged."
+          ]
+        },
+        {
+          "key": "SSPM:L3",
+          "cells": [
+            "SaaS Security Posture Management",
+            "Master",
+            "The tool acts on what it finds without waiting for a manual fix: it remediates deviations automatically, or suspends a compromised account or risky integration in the tenant, by rule or playbook. Drift and an attacker's foothold in a tenant are cut within minutes."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Strength levels: Applications",
+      "columns": [
+        "Control",
+        "Level",
+        "What it takes"
+      ],
+      "rows": [
+        {
+          "key": "WAF:L0",
+          "cells": [
+            "Web Application and API Protection",
+            "Not deployed",
+            "Web applications and APIs receive requests unfiltered, with no WAF, gateway or rate limiting in front."
+          ]
+        },
+        {
+          "key": "WAF:L1",
+          "cells": [
+            "Web Application and API Protection",
+            "Basic",
+            "A WAF in blocking mode with the vendor's managed rules (OWASP core rule set or equivalent) blocks common injection, path traversal and code execution attempts, and APIs require an authenticated token at a gateway. Known exploit payloads and anonymous API calls are stopped; encoded payloads and logic abuse pass."
+          ]
+        },
+        {
+          "key": "WAF:L2",
+          "cells": [
+            "Web Application and API Protection",
+            "Intermediate",
+            "Adds rules tuned to each application with virtual patches for its known CVEs, rate limiting and bot management against credential stuffing and scraping, and call quotas per API client. Known vulnerabilities are shielded before the patch lands, and automated abuse is slowed or blocked."
+          ]
+        },
+        {
+          "key": "WAF:L3",
+          "cells": [
+            "Web Application and API Protection",
+            "Master",
+            "Adds API security: calls outside the published schema rejected, access to another user's objects detected and blocked, and APIs discovered from traffic and checked against the catalogue so none is left unprotected. Business-logic and API authorisation abuse that signatures admit is now blocked."
+          ]
+        },
+        {
+          "key": "RASP:L0",
+          "cells": [
+            "Runtime Application Self-Protection",
+            "Not deployed",
+            "No runtime self-protection: the application relies only on its own code and on filters in front of it."
+          ]
+        },
+        {
+          "key": "RASP:L1",
+          "cells": [
+            "Runtime Application Self-Protection",
+            "Basic",
+            "A RASP agent instruments the application and blocks, under the vendor's default policy, SQL and command injection at the moment the query or system call runs. Injection encoded to slip past a WAF fails inside the application."
+          ]
+        },
+        {
+          "key": "RASP:L2",
+          "cells": [
+            "Runtime Application Self-Protection",
+            "Intermediate",
+            "Adds blocking of the other attack classes the agent supports (path traversal, deserialisation, server-side request forgery, expression language injection), tuned to the application so blocking mode stays on without breaking legitimate use. Most exploitation of the application's own code fails at runtime."
+          ]
+        },
+        {
+          "key": "RASP:L3",
+          "cells": [
+            "Runtime Application Self-Protection",
+            "Master",
+            "Adds virtual patches for known CVEs in the application's libraries, blocking of webshell execution, and blocked attacks sent with full context to the SOC. Vulnerable dependencies are shielded until updated, and each attempt is investigated."
+          ]
+        },
+        {
+          "key": "SCA:L0",
+          "cells": [
+            "Software Composition Analysis (SCA / SBOM)",
+            "Not deployed",
+            "Third-party components and container images are not analysed: nobody knows which vulnerable libraries or base images run in production."
+          ]
+        },
+        {
+          "key": "SCA:L1",
+          "cells": [
+            "Software Composition Analysis (SCA / SBOM)",
+            "Basic",
+            "Dependencies and container images are scanned for known vulnerabilities on demand or at release, and results go to the teams with no gate. Vulnerable components are known, not stopped."
+          ]
+        },
+        {
+          "key": "SCA:L2",
+          "cells": [
+            "Software Composition Analysis (SCA / SBOM)",
+            "Intermediate",
+            "A bill of materials (SBOM) is produced at every release and rescanned continuously, so a new critical vulnerability in a component already deployed alerts its owner. New flaws are tied to what runs as soon as they are published."
+          ]
+        },
+        {
+          "key": "SCA:L3",
+          "cells": [
+            "Software Composition Analysis (SCA / SBOM)",
+            "Master",
+            "The pipeline blocks builds and images with critical vulnerabilities or malicious packages. A critical or malicious component never reaches production."
+          ]
+        },
+        {
+          "key": "SSDLC:L0",
+          "cells": [
+            "Secure Software Development",
+            "Not deployed",
+            "No secure development practice: code reaches production through unprotected branches and pipelines, with unsigned artefacts."
+          ]
+        },
+        {
+          "key": "SSDLC:L1",
+          "cells": [
+            "Secure Software Development",
+            "Basic",
+            "Main branches are protected with mandatory peer review before merge, and pipeline credentials are scoped per project. A single compromised developer account cannot push code to production unseen."
+          ]
+        },
+        {
+          "key": "SSDLC:L2",
+          "cells": [
+            "Secure Software Development",
+            "Intermediate",
+            "Adds an isolated build chain: pipelines run on dedicated runners that untrusted pull requests cannot trigger with secrets, dependencies are pinned, and critical projects are threat-modelled at design. Poisoning a pipeline or swapping a dependency fails."
+          ]
+        },
+        {
+          "key": "SSDLC:L3",
+          "cells": [
+            "Secure Software Development",
+            "Master",
+            "Adds artefacts signed by the official pipeline and verified at deployment with provenance attestation, so nothing built elsewhere can be deployed, and threat model findings tracked to closure before release. An altered artefact or image cannot reach production."
+          ]
+        },
+        {
+          "key": "APM:L0",
+          "cells": [
+            "Application Performance Monitoring",
+            "Not deployed",
+            "Applications are not instrumented: errors, latency and abnormal calls are seen only when users complain."
+          ]
+        },
+        {
+          "key": "APM:L1",
+          "cells": [
+            "Application Performance Monitoring",
+            "Basic",
+            "Application availability is checked from outside, with alerts to operations when a service goes down. Outages are noticed; attacks that do not take the service down are not."
+          ]
+        },
+        {
+          "key": "APM:L2",
+          "cells": [
+            "Application Performance Monitoring",
+            "Intermediate",
+            "Applications are instrumented for traces, metrics and exceptions, with thresholds on error rates, latency and saturation that alert operations. Exploitation attempts that throw errors and saturation attacks become visible."
+          ]
+        },
+        {
+          "key": "APM:L3",
+          "cells": [
+            "Application Performance Monitoring",
+            "Master",
+            "Adds anomaly detection against a baseline per application and endpoint, and error spikes, unusual call patterns and exceptions typical of exploitation (injection errors, deserialisation failures) forwarded to the SOC. Application abuse is flagged as a security event, not just a performance one."
+          ]
+        },
+        {
+          "key": "ITIM:L0",
+          "cells": [
+            "Capacity and Infrastructure Monitoring",
+            "Not deployed",
+            "Infrastructure availability and capacity are not monitored."
+          ]
+        },
+        {
+          "key": "ITIM:L1",
+          "cells": [
+            "Capacity and Infrastructure Monitoring",
+            "Basic",
+            "Availability of servers, network devices, cloud resources and containers is monitored, with alerts when a service stops. Outages are noticed; their cause is not."
+          ]
+        },
+        {
+          "key": "ITIM:L2",
+          "cells": [
+            "Capacity and Infrastructure Monitoring",
+            "Intermediate",
+            "Adds capacity and performance thresholds (CPU, memory, storage, bandwidth), alerting on saturation and abnormal consumption such as a cryptominer or a disk filling up. Resource hijacking and denial of service show up as they build."
+          ]
+        },
+        {
+          "key": "ITIM:L3",
+          "cells": [
+            "Capacity and Infrastructure Monitoring",
+            "Master",
+            "Adds a baseline per resource with anomaly alerts forwarded to the SOC (unexpected service stops, mass deletion, resource hijacking). Destructive activity and saturation are reported as security events."
+          ]
+        },
+        {
+          "key": "APPH:L0",
+          "cells": [
+            "Native Application Configuration",
+            "Not deployed",
+            "The application runs with its framework defaults: no security headers, weak cookie settings, no lockout on local accounts, roles that reach most functions."
+          ]
+        },
+        {
+          "key": "APPH:L1",
+          "cells": [
+            "Native Application Configuration",
+            "Basic",
+            "Local accounts have a password policy with lockout after repeated failures, cookies carry the Secure, HttpOnly and SameSite flags, and inputs are validated server-side. Password guessing and the simplest injection and session theft fail."
+          ]
+        },
+        {
+          "key": "APPH:L2",
+          "cells": [
+            "Native Application Configuration",
+            "Intermediate",
+            "Adds a breached-password check, a least-privilege role model separating sensitive functions, a content security policy with security headers, and rate limiting with challenges on sign-in and sensitive functions. Credential stuffing, script injection in the browser and access beyond one's role fail."
+          ]
+        },
+        {
+          "key": "APPH:L3",
+          "cells": [
+            "Native Application Configuration",
+            "Master",
+            "Adds a native second factor on every local account the application keeps outside federation, and anti-automation that blocks scripted abuse of business functions (account creation, scraping, checkout) even with no WAF in front. A stolen local password alone opens nothing, and bots fail inside the application."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Strength levels: Cloud",
+      "columns": [
+        "Control",
+        "Level",
+        "What it takes"
+      ],
+      "rows": [
+        {
+          "key": "CNAPP:L0",
+          "cells": [
+            "Cloud Posture and Detection (CNAPP)",
+            "Not deployed",
+            "No cloud posture or detection tool: misconfigurations, excessive entitlements and malicious control plane activity in cloud accounts go unseen."
+          ]
+        },
+        {
+          "key": "CNAPP:L1",
+          "cells": [
+            "Cloud Posture and Detection (CNAPP)",
+            "Basic",
+            "Connectors read the configuration of cloud accounts against a baseline (public exposure, missing encryption, logging disabled, legacy instance metadata) and report deviations for manual fixing. Common misconfigurations are surfaced, with drift between scans."
+          ]
+        },
+        {
+          "key": "CNAPP:L2",
+          "cells": [
+            "Cloud Posture and Detection (CNAPP)",
+            "Intermediate",
+            "Continuous assessment of configuration, effective entitlements and Kubernetes posture, with deviations tracked to closure, plus detection of malicious control plane activity (stolen credentials, new accounts, storage exfiltration) by the vendor's or provider's rules. Misconfiguration, excess privilege and malicious cloud activity are flagged as they happen."
+          ]
+        },
+        {
+          "key": "CNAPP:L3",
+          "cells": [
+            "Cloud Posture and Detection (CNAPP)",
+            "Master",
+            "The tool corrects as well as reports: the safest deviations, such as public buckets or open security groups, are fixed automatically with a log and rollback. Drift is closed as it appears instead of waiting for a ticket."
+          ]
+        },
+        {
+          "key": "CLDH:L0",
+          "cells": [
+            "Native Cloud Hardening",
+            "Not deployed",
+            "Cloud accounts and clusters run with provider defaults: broad roles, open security groups, public storage possible, audit logs off or deletable."
+          ]
+        },
+        {
+          "key": "CLDH:L1",
+          "cells": [
+            "Native Cloud Hardening",
+            "Basic",
+            "Control plane audit logging is on, MFA is enforced on root and native IAM users, public storage access is blocked at account level, and security groups deny inbound traffic by default. Accidental exposure and password-only takeover of cloud accounts fail."
+          ]
+        },
+        {
+          "key": "CLDH:L2",
+          "cells": [
+            "Native Cloud Hardening",
+            "Intermediate",
+            "Adds least-privilege IAM with organisation guardrails and permission boundaries, protected instance metadata (IMDSv2), private endpoints for data services, Kubernetes pod security standards with restricted RBAC, and flow, Kubernetes audit and data access logs on. Credential theft from instances, privilege escalation and container escape become hard."
+          ]
+        },
+        {
+          "key": "CLDH:L3",
+          "cells": [
+            "Native Cloud Hardening",
+            "Master",
+            "Adds a separate logging account that workload administrators cannot alter, versioning and object lock on critical storage, long-lived access keys forbidden, unused regions disabled by guardrail, and containers running unprivileged with read-only filesystems and seccomp or AppArmor profiles. Even an account administrator cannot erase the trail or destroy locked data."
+          ]
+        },
+        {
+          "key": "CWPP:L0",
+          "cells": [
+            "Cloud Workload and Container Protection",
+            "Not deployed",
+            "No workload protection: cloud instances and containers run any image and process with no runtime monitoring."
+          ]
+        },
+        {
+          "key": "CWPP:L1",
+          "cells": [
+            "Cloud Workload and Container Protection",
+            "Basic",
+            "An agent or sensor records process, file and network activity of cloud instances and containers at runtime and raises the vendor's alerts (cryptominers, reverse shells, dropped binaries), in detection mode. Malicious runtime behaviour is reported, not stopped."
+          ]
+        },
+        {
+          "key": "CWPP:L2",
+          "cells": [
+            "Cloud Workload and Container Protection",
+            "Intermediate",
+            "Adds runtime blocking: malicious behaviour such as a cryptominer, a reverse shell or execution of a dropped binary is stopped as it happens, as an EDR does on a workstation. Most runtime attacks on workloads fail."
+          ]
+        },
+        {
+          "key": "CWPP:L3",
+          "cells": [
+            "Cloud Workload and Container Protection",
+            "Master",
+            "Adds admission control and drift prevention: unsigned images, images with critical vulnerabilities and privileged pods are refused at deployment, and new executables appearing in a running container are blocked. A malicious workload cannot be planted, and a running container cannot be changed."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Strength levels: Data",
+      "columns": [
+        "Control",
+        "Level",
+        "What it takes"
+      ],
+      "rows": [
+        {
+          "key": "DLP:L0",
+          "cells": [
+            "Data Loss Prevention",
+            "Not deployed",
+            "No data loss prevention: content leaving through email, web, removable media or SaaS sharing is not inspected."
+          ]
+        },
+        {
+          "key": "DLP:L1",
+          "cells": [
+            "Data Loss Prevention",
+            "Basic",
+            "Pattern-based policies (keywords, regular expressions, card and identity numbers) on email and removable media, blocking the clearest matches. Structured sensitive data no longer leaves by the main channels; unstructured and labelled documents still do."
+          ]
+        },
+        {
+          "key": "DLP:L2",
+          "cells": [
+            "Data Loss Prevention",
+            "Intermediate",
+            "Adds content classification (document fingerprints, exact data match, sensitivity labels) enforced in blocking mode on web uploads, email, endpoints and SaaS sharing, with HTTPS inspected. Sensitive documents are recognised beyond simple patterns on every major channel."
+          ]
+        },
+        {
+          "key": "DLP:L3",
+          "cells": [
+            "Data Loss Prevention",
+            "Master",
+            "Adds machine-learning classification and blocking on side channels: clipboard, printing, remote sessions and uploads to generative AI. Data leaving by a side channel is caught; data the attacker encrypts before transfer still passes."
+          ]
+        },
+        {
+          "key": "DSPM:L0",
+          "cells": [
+            "Information Classification and Protection",
+            "Not deployed",
+            "Sensitive data is neither located nor labelled, and documents are protected only by the permissions of where they sit."
+          ]
+        },
+        {
+          "key": "DSPM:L1",
+          "cells": [
+            "Information Classification and Protection",
+            "Basic",
+            "Sensitive data is discovered and classified periodically across file shares, SaaS repositories and cloud storage, and documents carry sensitivity labels set by users. Where sensitive data lives becomes known."
+          ]
+        },
+        {
+          "key": "DSPM:L2",
+          "cells": [
+            "Information Classification and Protection",
+            "Intermediate",
+            "Adds persistent protection: sensitive documents are encrypted with usage rights that follow them (rights management), so a copied or exfiltrated file stays unreadable outside the authorised identities, and labels are recommended automatically. Stolen files are useless to the thief."
+          ]
+        },
+        {
+          "key": "DSPM:L3",
+          "cells": [
+            "Information Classification and Protection",
+            "Master",
+            "Adds mandatory automatic labelling checked against discovered data, continuous discovery with alerts on exposure (public access, overly broad sharing), and excessive share rights removed automatically with a data owner arbitrating. Sensitive data is protected and narrowly shared as soon as it appears."
+          ]
+        },
+        {
+          "key": "KMS:L0",
+          "cells": [
+            "Encryption at Rest and Key Management",
+            "Not deployed",
+            "Data at rest is stored unencrypted, or encryption keys sit next to the data they protect."
+          ]
+        },
+        {
+          "key": "KMS:L1",
+          "cells": [
+            "Encryption at Rest and Key Management",
+            "Basic",
+            "Disks, volumes, databases and cloud storage are encrypted at rest with provider- or OS-managed keys (full-disk encryption, default cloud encryption). Stolen media and raw storage yield ciphertext; any authorised access path decrypts transparently."
+          ]
+        },
+        {
+          "key": "KMS:L2",
+          "cells": [
+            "Encryption at Rest and Key Management",
+            "Intermediate",
+            "Adds customer-managed keys in a KMS for sensitive stores, backups and snapshots, so a copy taken to another account or offline cannot be read, with key usage logged and keys rotated on schedule. Data exfiltrated by copying storage stays unreadable."
+          ]
+        },
+        {
+          "key": "KMS:L3",
+          "cells": [
+            "Encryption at Rest and Key Management",
+            "Master",
+            "Adds non-exportable keys in an HSM or KMS with dual approval for deletion, separation between key and data administrators, alerts on mass decryption or key export, and application-level or client-side encryption for the most sensitive data. The storage operator cannot read the data and keys cannot be taken from a compromised host; a compromised application allowed to decrypt still reads what it can reach."
+          ]
+        },
+        {
+          "key": "DAM:L0",
+          "cells": [
+            "Database Activity Monitoring",
+            "Not deployed",
+            "Database queries and connections are not recorded beyond the database's defaults."
+          ]
+        },
+        {
+          "key": "DAM:L1",
+          "cells": [
+            "Database Activity Monitoring",
+            "Basic",
+            "Database activity is logged (logins, privileged operations, schema changes, access to sensitive tables) and sent to the SIEM. Database abuse leaves a trace to investigate."
+          ]
+        },
+        {
+          "key": "DAM:L2",
+          "cells": [
+            "Database Activity Monitoring",
+            "Intermediate",
+            "Adds behavioural analytics per account and application: mass extraction, an application account used at unusual hours or from an unusual host, and queries outside the usual profile raise alerts. Data theft and misuse of a stolen account are flagged as they happen."
+          ]
+        },
+        {
+          "key": "DAM:L3",
+          "cells": [
+            "Database Activity Monitoring",
+            "Master",
+            "Adds blocking of risky queries in front of or on the database: mass extraction outside the profile, stored procedure creation by an application account, destructive statements. Theft and destruction of data through the database are stopped, not just reported."
+          ]
+        },
+        {
+          "key": "BKP:L0",
+          "cells": [
+            "Backup and Restore",
+            "Not deployed",
+            "No usable backup: data and systems are not backed up, or backups sit within reach of the domain and storage an attacker would control."
+          ]
+        },
+        {
+          "key": "BKP:L1",
+          "cells": [
+            "Backup and Restore",
+            "Basic",
+            "Servers, databases, cloud workloads and SaaS data are backed up regularly, administered with accounts separate from the domain. A domain administrator cannot reach the backups; a compromised backup administrator can."
+          ]
+        },
+        {
+          "key": "BKP:L2",
+          "cells": [
+            "Backup and Restore",
+            "Intermediate",
+            "Adds immutable copies that even a backup administrator cannot delete or alter before their retention ends, and alerts on deletion of restore points, snapshots or volumes. Ransomware cannot destroy the copies it needs to win."
+          ]
+        },
+        {
+          "key": "BKP:L3",
+          "cells": [
+            "Backup and Restore",
+            "Master",
+            "Adds an offline or isolated copy that survives the compromise of the backup platform itself. Recovery holds even when the attacker owns the backup system."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Strength levels: Detection and response",
+      "columns": [
+        "Control",
+        "Level",
+        "What it takes"
+      ],
+      "rows": [
+        {
+          "key": "SIEM:L0",
+          "cells": [
+            "Security Information and Event Management",
+            "Not deployed",
+            "Logs stay on their sources: nothing is collected centrally or correlated."
+          ]
+        },
+        {
+          "key": "SIEM:L1",
+          "cells": [
+            "Security Information and Event Management",
+            "Basic",
+            "Logs are collected centrally and the vendor's out-of-the-box rules run on them (brute force, new accounts, log clearing). Obvious attacks are flagged; most techniques have no rule."
+          ]
+        },
+        {
+          "key": "SIEM:L2",
+          "cells": [
+            "Security Information and Event Management",
+            "Intermediate",
+            "Correlation rules mapped to attack techniques run across sources (endpoints, domain controllers, identity provider, cloud, network), tuned to the estate and feeding a triage queue. Multi-step attacks such as ticket abuse, DCSync and lateral movement chains are caught by correlation."
+          ]
+        },
+        {
+          "key": "SIEM:L3",
+          "cells": [
+            "Security Information and Event Management",
+            "Master",
+            "Adds behavioural analytics (UEBA) that flag accounts and machines acting outside their profile, risk-based alerting, rules updated from threat intelligence, and logs held tamper-proof (immutable storage, separate admin accounts). Valid-account misuse and low-and-slow activity surface, and an attacker cannot erase the collected trail."
+          ]
+        },
+        {
+          "key": "SOC:L0",
+          "cells": [
+            "Security Operations Center",
+            "Not deployed",
+            "No team triages security alerts: alerts accumulate in consoles until an incident becomes obvious."
+          ]
+        },
+        {
+          "key": "SOC:L1",
+          "cells": [
+            "Security Operations Center",
+            "Basic",
+            "Analysts review alerts from the security tools as they arrive, separate true from false positives and escalate, following written triage procedures. Alerts are read; investigation and response depend on escalation."
+          ]
+        },
+        {
+          "key": "SOC:L2",
+          "cells": [
+            "Security Operations Center",
+            "Intermediate",
+            "Adds playbooks per alert type with time targets, investigation across tools (EDR, SIEM, identity, cloud), and authority to trigger containment (isolate a host, disable an account) without waiting for management. Confirmed attacks are contained within the hour."
+          ]
+        },
+        {
+          "key": "SOC:L3",
+          "cells": [
+            "Security Operations Center",
+            "Master",
+            "Adds regular hypothesis-driven threat hunting for compromise that raised no alert, with what it finds turned into new detection rules. Intrusions that evade every rule are found, and detection improves after each one."
+          ]
+        },
+        {
+          "key": "MDR:L0",
+          "cells": [
+            "Managed Detection and Response",
+            "Not deployed",
+            "No managed detection service: no provider watches or triages the organisation's alerts."
+          ]
+        },
+        {
+          "key": "MDR:L1",
+          "cells": [
+            "Managed Detection and Response",
+            "Basic",
+            "A provider monitors and triages the alerts of the entrusted tools and notifies the organisation, which then decides and acts. Alerts are read around the clock; response waits for the organisation."
+          ]
+        },
+        {
+          "key": "MDR:L2",
+          "cells": [
+            "Managed Detection and Response",
+            "Intermediate",
+            "Adds investigation across the entrusted tools and delegated containment: under a written mandate, the provider isolates hosts and disables accounts itself with the organisation's tools. Confirmed attacks are contained at any hour without waiting for the organisation."
+          ]
+        },
+        {
+          "key": "MDR:L3",
+          "cells": [
+            "Managed Detection and Response",
+            "Master",
+            "Adds proactive threat hunting by the provider and detections tuned to the organisation. Intrusions that raise no alert are found."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Strength levels: People and third parties",
+      "columns": [
+        "Control",
+        "Level",
+        "What it takes"
+      ],
+      "rows": [
+        {
+          "key": "SAT:L0",
+          "cells": [
+            "Security Awareness",
+            "Not deployed",
+            "No awareness programme: users get no training on phishing, social engineering or acceptable use."
+          ]
+        },
+        {
+          "key": "SAT:L1",
+          "cells": [
+            "Security Awareness",
+            "Basic",
+            "Awareness training at onboarding and once a year (phishing, passwords, acceptable use), with completion tracked and an acceptable-use policy signed. Obvious lures are recognised more often; recognition fades between sessions."
+          ]
+        },
+        {
+          "key": "SAT:L2",
+          "cells": [
+            "Security Awareness",
+            "Intermediate",
+            "Adds regular phishing simulations with follow-up of users who click, and a one-click report button that sends suspicious mail to the security team. Click rates fall and are measured, and lures that pass the filters get reported."
+          ]
+        },
+        {
+          "key": "SAT:L3",
+          "cells": [
+            "Security Awareness",
+            "Master",
+            "Adds simulations beyond email links that mirror current attacks (QR codes, voice calls, push fatigue, consent phishing), with targeted reinforcement for those who fail. Users resist the lures in use today, not just last year's."
+          ]
+        },
+        {
+          "key": "FRAUD:L0",
+          "cells": [
+            "Payment Fraud Controls",
+            "Not deployed",
+            "A payment or a change of bank details can be executed on one person's say-so, on the strength of an email or a call."
+          ]
+        },
+        {
+          "key": "FRAUD:L1",
+          "cells": [
+            "Payment Fraud Controls",
+            "Basic",
+            "Payments above a threshold and every change of supplier bank details need a second approver. A single deceived employee can no longer send money alone."
+          ]
+        },
+        {
+          "key": "FRAUD:L2",
+          "cells": [
+            "Payment Fraud Controls",
+            "Intermediate",
+            "Adds a call-back through a channel already on file, never the one given in the request, before any change of bank details or urgent payment, with the procedure written down and the finance team trained on CEO and supplier fraud. A spoofed email or cloned voice no longer triggers a transfer."
+          ]
+        },
+        {
+          "key": "FRAUD:L3",
+          "cells": [
+            "Payment Fraud Controls",
+            "Master",
+            "Adds dual approval and call-back enforced in the payment and ERP tools themselves with no override, a hold period on new or changed beneficiaries, and the bank's payee name check where available. The procedure cannot be skipped under pressure, and diverted payments are caught before release."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Strength levels: AI",
+      "columns": [
+        "Control",
+        "Level",
+        "What it takes"
+      ],
+      "rows": [
+        {
+          "key": "AIGW:L0",
+          "cells": [
+            "Generative AI Guardrails (AI Gateway)",
+            "Not deployed",
+            "Models and agents are called directly, with no filtering of prompts and responses."
+          ]
+        },
+        {
+          "key": "AIGW:L1",
+          "cells": [
+            "Generative AI Guardrails (AI Gateway)",
+            "Basic",
+            "A gateway in front of the models authenticates callers and applies the provider's default content filters to prompts and responses. Unauthenticated use and blatant misuse are blocked; crafted injections pass."
+          ]
+        },
+        {
+          "key": "AIGW:L2",
+          "cells": [
+            "Generative AI Guardrails (AI Gateway)",
+            "Intermediate",
+            "Adds guardrails tuned to each application that block prompt injection, jailbreaks and system prompt extraction in inputs and outputs, filtering of sensitive data in responses, and request and token quotas per user and application. Direct injection and data leakage through the model fail."
+          ]
+        },
+        {
+          "key": "AIGW:L3",
+          "cells": [
+            "Generative AI Guardrails (AI Gateway)",
+            "Master",
+            "Adds inspection of retrieved documents and agents' tool results for indirect injection, logging of prompts, responses, guardrail decisions and tool calls to the SOC, and revocation of an agent's tokens or a tool from the gateway on decision. Injections hidden in content the model reads are blocked, and agent misuse is traced and cut."
+          ]
+        }
+      ]
+    }
+  ]
+}

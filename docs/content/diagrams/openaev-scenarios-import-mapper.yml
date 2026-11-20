@@ -1,0 +1,19 @@
+title: An XLS mapper reads each row of a spreadsheet, picks the inject type from one column and fills the inject from the others, and the import adds the injects to the scenario
+lanes:
+  - label: Your timeline
+    tone: external
+    nodes:
+      - {id: sheet, label: Spreadsheet, icon: FileText, note: "One row per action, .xlsx or .xls"}
+  - label: Settings
+    tone: product
+    nodes:
+      - {id: mapper, label: XLS mapper, icon: Workflow, note: "Inject type column, rules per type"}
+  - label: Scenario
+    tone: product
+    nodes:
+      - {id: injects, label: Injects, icon: ListChecks, note: "Emails and SMS, with their delays"}
+      - {id: teams, label: Teams, icon: Users, note: "Existing, or created for the scenario"}
+edges:
+  - {from: sheet, to: mapper, label: rows}
+  - {from: mapper, to: injects, label: one inject per row}
+  - {from: mapper, to: teams, label: team names}

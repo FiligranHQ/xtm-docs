@@ -1,0 +1,26 @@
+title: A scenario holds the injects of an attack, each launch or scheduled run makes a simulation of it, and the overview of the scenario follows the results of every run
+lanes:
+  - label: Build
+    tone: product
+    nodes:
+      - {id: scenario, label: Scenario, icon: LogoOpenAEV, note: "Time-based or chained"}
+  - label: Fill
+    tone: external
+    nodes:
+      - {id: manual, label: Injects by hand, icon: Wrench, note: "From the Threat Arsenal"}
+      - {id: assistant, label: Scenario assistant, icon: Sparkles, note: "Targets and TTPs"}
+      - {id: import, label: Import, icon: FileText, note: "Spreadsheet, file, XTM Hub"}
+  - label: Run
+    tone: product
+    nodes:
+      - {id: simulation, label: Simulations, icon: PlayCircle, note: "Launch or Scheduling"}
+  - label: Follow
+    tone: product
+    nodes:
+      - {id: overview, label: Overview, icon: Gauge, note: "Latest run posture, trend"}
+edges:
+  - {from: manual, to: scenario, label: add}
+  - {from: assistant, to: scenario, label: generate}
+  - {from: import, to: scenario, label: import}
+  - {from: scenario, to: simulation, label: copied at each run}
+  - {from: simulation, to: overview, label: results}

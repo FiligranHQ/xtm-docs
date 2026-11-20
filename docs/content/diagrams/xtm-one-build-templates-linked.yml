@@ -1,0 +1,23 @@
+title: Decks stay linked to their template, so one edit of the template restyles every deck wearing it
+lanes:
+  - label: Template
+    tone: core
+    nodes:
+      - {id: design, label: Design, icon: Layers, note: "Palettes, fonts, guidance", href: /xtm-one/build/templates/}
+      - {id: assets, label: Assets, icon: FileText, note: "Logos, diagrams"}
+  - label: Who picks it
+    tone: product
+    nodes:
+      - {id: person, label: You, icon: Users, note: New presentation or chat}
+      - {id: default, label: Default template, icon: Check, note: For automations}
+  - label: Output
+    tone: product
+    nodes:
+      - {id: deck, label: Deck, icon: PlayCircle, note: Drawn from the template, href: /xtm-one/use/presentations/}
+      - {id: report, label: Report, icon: FileText, note: Report kind}
+edges:
+  - {from: design, to: deck, label: read at each draw}
+  - {from: assets, to: deck, label: placed by agents}
+  - {from: person, to: deck, label: chooses}
+  - {from: default, to: deck, label: otherwise, style: dashed}
+  - {from: design, to: report, label: dresses}

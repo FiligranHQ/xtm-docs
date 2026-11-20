@@ -1,0 +1,23 @@
+title: The debug mode writes a request trace, the SQL it ran and a JVM recording to a folder you choose
+lanes:
+  - label: Platform
+    tone: product
+    nodes:
+      - {id: request, label: Request, icon: LogoOpenAEV, note: "trace id, tenant, user"}
+  - label: Debug mode
+    tone: core
+    nodes:
+      - {id: sql, label: SQL detail, icon: Search, note: "Time and masked values"}
+      - {id: orm, label: ORM summary, icon: TriangleAlert, note: Flags N+1 queries}
+      - {id: jfr, label: JFR recording, icon: Cpu, note: CPU and memory}
+  - label: Output folder
+    tone: store
+    nodes:
+      - {id: files, label: openaev.debug.output-dir, icon: FileText, note: "Rotated files, size caps"}
+      - {id: console, label: Console log, icon: Terminal, note: ORM summary by default}
+edges:
+  - {from: request, to: sql, label: each statement}
+  - {from: request, to: orm, label: one per request}
+  - {from: sql, to: files, label: writes}
+  - {from: orm, to: console, label: writes}
+  - {from: jfr, to: files, label: dumps}

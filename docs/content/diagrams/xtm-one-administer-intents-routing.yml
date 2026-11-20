@@ -1,0 +1,23 @@
+title: A connected product asks for an intent, and the binding of highest priority for its vertical decides which agent answers
+lanes:
+  - label: Connected product
+    tone: external
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Declares intents, vertical cti"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "Declares intents, vertical aev"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: intent, label: Intent, icon: Workflow, note: "cti.container_summary"}
+      - {id: bindings, label: Bindings, icon: ListChecks, note: "Per vertical, by priority"}
+  - label: Agents
+    tone: product
+    nodes:
+      - {id: builtin, label: Built-in agent, icon: Bot, note: "Bound at startup"}
+      - {id: yours, label: Your agent, icon: Bot, note: "Shared, enabled"}
+edges:
+  - {from: opencti, to: intent, label: asks}
+  - {from: openaev, to: intent, label: asks, style: dashed}
+  - {from: intent, to: bindings, label: resolved by}
+  - {from: bindings, to: yours, label: highest priority}
+  - {from: bindings, to: builtin, label: next, style: dashed}

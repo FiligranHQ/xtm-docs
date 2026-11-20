@@ -1,0 +1,29 @@
+title: Integration settings tell connectors, the worker and XTM Composer how to reach the platform, RabbitMQ, S3 and the orchestrator
+lanes:
+  - label: Integrations
+    tone: product
+    nodes:
+      - {id: connector, label: Connector, icon: Puzzle, note: Settings read through pycti}
+      - {id: worker, label: Worker, icon: Cpu, note: Writes queued bundles}
+      - {id: composer, label: XTM Composer, icon: Boxes, note: Deploys managed connectors}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenCTI, note: URL and token}
+  - label: Services
+    tone: store
+    nodes:
+      - {id: rabbitmq, label: RabbitMQ, icon: Layers, note: Message queue}
+      - {id: s3, label: S3 storage, icon: Server, note: Bundle storage}
+  - label: Orchestrator
+    tone: external
+    nodes:
+      - {id: orchestrator, label: Orchestrator, icon: Server, note: "Docker, Podman, Swarm, Kubernetes, Portainer"}
+edges:
+  - {from: connector, to: platform, label: OpenCTI connection}
+  - {from: worker, to: platform, label: OpenCTI connection}
+  - {from: composer, to: platform, label: OpenCTI connection}
+  - {from: connector, to: rabbitmq, label: message queue}
+  - {from: worker, to: rabbitmq, label: message queue}
+  - {from: connector, to: s3, label: uploads bundles}
+  - {from: composer, to: orchestrator, label: starts connectors}

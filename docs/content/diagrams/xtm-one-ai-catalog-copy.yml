@@ -1,0 +1,19 @@
+title: A resource published to the AI Catalog is copied into your account, with what you must finish yourself listed at the end
+lanes:
+  - label: Publisher
+    tone: external
+    nodes:
+      - {id: publisher, label: Published resource, icon: Sparkles, note: Include in AI Catalog}
+  - label: AI Catalog
+    tone: core
+    nodes:
+      - {id: catalog, label: AI Catalog, icon: BookOpen, note: "Agents, skills, prompts, MCP servers, tools"}
+  - label: Your account
+    tone: product
+    nodes:
+      - {id: copy, label: Your copy, icon: Copy, note: Assignments disabled}
+      - {id: todo, label: Left to finish, icon: ListChecks, note: "Integrations, secrets, documents"}
+edges:
+  - {from: publisher, to: catalog, label: listed}
+  - {from: catalog, to: copy, label: Add to my account}
+  - {from: copy, to: todo, label: warnings}

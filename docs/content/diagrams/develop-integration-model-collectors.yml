@@ -1,0 +1,20 @@
+title: A collector reads the pending expectations, looks for matching alerts in its security tool, and writes the verdicts back
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: expectations, label: Expectations, icon: ListChecks, note: Detection and prevention}
+      - {id: api, label: REST API, icon: LogoOpenAEV, note: "/api/collectors, /api/injects/expectations"}
+  - label: Collector
+    tone: external
+    nodes:
+      - {id: collector, label: Your collector, icon: Search, note: Runs every period}
+  - label: Security tool
+    tone: external
+    nodes:
+      - {id: tool, label: EDR or SIEM, icon: ShieldCheck, note: Alerts with process tree}
+edges:
+  - {from: collector, to: api, label: register and ping}
+  - {from: expectations, to: collector, label: pending for this source}
+  - {from: collector, to: tool, label: search alerts}
+  - {from: collector, to: expectations, label: verdicts and traces}

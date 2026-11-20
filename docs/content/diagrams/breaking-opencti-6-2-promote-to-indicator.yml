@@ -1,0 +1,24 @@
+title: From OpenCTI 6.2, new promote calls of the GraphQL API and the Python client return the created Indicator instead of the observable, and the old calls are gone in 6.8
+lanes:
+  - label: Removed in OpenCTI 6.8
+    tone: external
+    nodes:
+      - {id: old-gql, label: promote, icon: Code2, note: GraphQL mutation}
+      - {id: old-py, label: promote_to_indicator, icon: Terminal, note: Python client method}
+  - label: From OpenCTI 6.2
+    tone: product
+    nodes:
+      - {id: new-gql, label: promoteToIndicator, icon: Code2, note: GraphQL mutation}
+      - {id: new-py, label: promote_to_indicator_v2, icon: Terminal, note: Python client method}
+  - label: What the call returns
+    tone: store
+    nodes:
+      - {id: observable, label: The observable, icon: Search, note: Returned by the old calls}
+      - {id: indicator, label: The new Indicator, icon: LogoOpenCTI, note: Adapt the fields you read}
+edges:
+  - {from: old-gql, to: new-gql, label: replace with}
+  - {from: old-py, to: new-py, label: replace with}
+  - {from: new-gql, to: indicator, label: returns}
+  - {from: new-py, to: indicator, label: returns}
+  - {from: old-gql, to: observable, label: returned, style: dashed}
+  - {from: old-py, to: observable, label: returned, style: dashed}

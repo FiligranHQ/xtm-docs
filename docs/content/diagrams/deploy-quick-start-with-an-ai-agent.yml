@@ -1,0 +1,27 @@
+title: You give a coding agent one prompt, it reads the quick start and runs each step and its check on your machine, then gives you the platform URLs without any secret
+lanes:
+  - label: You
+    tone: external
+    nodes:
+      - {id: you, label: Your prompt, icon: MessageSquare, note: The modules you want}
+  - label: Agent
+    tone: external
+    nodes:
+      - {id: agent, label: Coding agent, icon: Bot, note: Such as Claude Code}
+  - label: What it works from
+    tone: store
+    nodes:
+      - {id: quickstart, label: Quick start in Markdown, icon: FileText, note: Commands and checks, href: /deploy/quick-start/}
+      - {id: stackjson, label: stack.json, icon: Code2, note: "Modules, services, ports"}
+      - {id: llms, label: llms.txt, icon: BookOpen, note: Map of the documentation}
+  - label: Your machine
+    tone: product
+    nodes:
+      - {id: suite, label: XTM platform in Docker, icon: Server, note: XTM One and the modules you chose}
+edges:
+  - {from: you, to: agent, label: prompt}
+  - {from: agent, to: quickstart, label: follows step by step}
+  - {from: agent, to: stackjson, label: reads}
+  - {from: agent, to: llms, label: reads}
+  - {from: agent, to: suite, label: commands and checks}
+  - {from: agent, to: you, label: "URLs, no secrets", style: dashed}

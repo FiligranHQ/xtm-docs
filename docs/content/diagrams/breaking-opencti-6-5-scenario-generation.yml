@@ -1,0 +1,21 @@
+title: On OpenCTI 6.5 to 6.x, scripts call the WithInjectPlaceholders mutations with a SimulationConfig, and from OpenCTI 7 OpenAEV generates the scenarios from the security coverage instead
+lanes:
+  - label: Your script
+    tone: external
+    nodes:
+      - {id: script, label: Script, icon: Code2, note: Calls the GraphQL API}
+  - label: OpenCTI GraphQL API
+    tone: product
+    nodes:
+      - {id: old, label: obas...GenerateScenario, icon: LogoOpenCTI, note: "Container, threat, victim: removed in 6.8"}
+      - {id: new, label: ...WithInjectPlaceholders, icon: LogoOpenCTI, note: "OpenCTI 6.5 to 6.x, returns a GenerationResponse"}
+      - {id: cti7, label: OpenCTI 7.260309 and later, icon: LogoOpenCTI, note: Has neither mutation}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: openaev, label: Scenario, icon: LogoOpenAEV, note: "Its URL in urlResponse"}
+edges:
+  - {from: script, to: old, label: replace the call, style: dashed}
+  - {from: script, to: new, label: SimulationConfig}
+  - {from: new, to: openaev, label: generates}
+  - {from: cti7, to: openaev, label: security coverage}

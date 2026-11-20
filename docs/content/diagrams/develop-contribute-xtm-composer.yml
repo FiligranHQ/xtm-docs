@@ -1,0 +1,23 @@
+title: In development, XTM Composer runs from source and starts connectors next to an OpenCTI you run locally
+lanes:
+  - label: From source
+    tone: product
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Workflow, note: "cargo run"}
+  - label: Your local OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI back end, icon: LogoOpenCTI, note: "Port 4000"}
+  - label: Container engine
+    tone: external
+    nodes:
+      - {id: connector, label: Connectors, icon: Puzzle, note: One container each}
+  - label: opencti-dev containers
+    tone: store
+    nodes:
+      - {id: rabbitmq, label: RabbitMQ, icon: ArrowLeftRight, note: "Port 5672"}
+edges:
+  - {from: composer, to: opencti, label: registers and polls}
+  - {from: composer, to: connector, label: starts and stops}
+  - {from: connector, to: opencti, label: OPENCTI_URL}
+  - {from: connector, to: rabbitmq, label: queues, style: dashed}

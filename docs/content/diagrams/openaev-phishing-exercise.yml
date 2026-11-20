@@ -1,0 +1,29 @@
+title: A landing page and an email template become a phishing inject, each person gets their own email, and what they do turns their steps red
+lanes:
+  - label: You build
+    tone: product
+    nodes:
+      - {id: page, label: Landing page, icon: Laptop, note: The page the link opens}
+      - {id: email, label: Email template, icon: FileText, note: "Subject, sender, body"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: inject, label: Phishing inject, icon: LogoOpenAEV, note: "In a simulation or atomic test"}
+  - label: Your people
+    tone: external
+    nodes:
+      - {id: gateway, label: Email gateway, icon: ShieldCheck, note: Inspects the email}
+      - {id: people, label: Targeted teams, icon: Users, note: One link per person}
+  - label: Results
+    tone: product
+    nodes:
+      - {id: steps, label: Expectations, icon: ClipboardCheck, note: "Opened, clicked, submitted"}
+      - {id: findings, label: Findings, icon: KeyRound, note: Submitted credentials}
+edges:
+  - {from: page, to: inject, label: Threat Arsenal action}
+  - {from: email, to: inject, label: chosen in the inject}
+  - {from: inject, to: gateway, label: lure email}
+  - {from: gateway, to: people, label: delivers}
+  - {from: people, to: steps, label: "open, click, submit"}
+  - {from: people, to: findings, label: form submitted}
+  - {from: gateway, to: steps, label: "detected, blocked", style: dashed}

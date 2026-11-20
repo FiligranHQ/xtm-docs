@@ -1,0 +1,19 @@
+title: Each loss driver is priced as a range and reported in its loss category
+lanes:
+  - label: You give
+    tone: external
+    nodes:
+      - {id: range, label: A range per driver, icon: Scale, note: 'Minimum, most likely, maximum'}
+  - label: Loss drivers
+    tone: product
+    nodes:
+      - {id: driver, label: Loss driver, icon: ListChecks, note: "Forensics, downtime, fines..."}
+      - {id: scale, label: Scales with, icon: Gauge, note: "Outage days, records, revenue..."}
+  - label: The report
+    tone: store
+    nodes:
+      - {id: category, label: Loss category, icon: BookOpen, note: "Response, restoration, interruption..."}
+edges:
+  - {from: range, to: driver, label: prices}
+  - {from: scale, to: driver, label: sizes}
+  - {from: driver, to: category, label: adds up in}

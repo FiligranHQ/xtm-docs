@@ -1,0 +1,18 @@
+title: A change, the clock or a connector's schedule books a job, and the worker runs it
+lanes:
+  - label: What books a job
+    tone: external
+    nodes:
+      - {id: change, label: A change, icon: Activity, note: Data a job read changed}
+      - {id: clock, label: The clock, icon: Clock, note: "Every day at recompute.daily_at"}
+      - {id: schedule, label: A schedule, icon: Clock, note: A connector's}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: queue, label: Job queue, icon: ListChecks, note: A burst folds into one run}
+      - {id: worker, label: Worker, icon: Cpu, note: Runs the jobs}
+edges:
+  - {from: change, to: queue, label: books}
+  - {from: clock, to: queue, label: books}
+  - {from: schedule, to: queue, label: books}
+  - {from: queue, to: worker, label: runs}

@@ -1,0 +1,23 @@
+title: Each limit of a run comes from the agent's run budget when it is set there, then from its fleet, then from the platform
+lanes:
+  - label: Platform
+    tone: external
+    nodes:
+      - {id: platform, label: Platform budget, icon: Server, note: "Set by an administrator, the ceiling"}
+  - label: Agent and fleet
+    tone: core
+    nodes:
+      - {id: fleet, label: Fleet run defaults, icon: Boxes, note: For its members}
+      - {id: agent, label: Agent run budget, icon: Bot, note: "Value tab, empty field inherits"}
+  - label: One run
+    tone: product
+    nodes:
+      - {id: run, label: Effective budget, icon: Gauge, note: "Cost, tokens, tool calls, time"}
+      - {id: answer, label: Final answer, icon: FileText, note: Paid from the reserve}
+edges:
+  - {from: platform, to: agent, label: caps}
+  - {from: platform, to: fleet, label: caps}
+  - {from: agent, to: run, label: pinned limits}
+  - {from: fleet, to: run, label: limits left empty, style: dashed}
+  - {from: platform, to: run, label: other limits, style: dashed}
+  - {from: run, to: answer, label: limit reached}

@@ -1,0 +1,21 @@
+title: One OpenAEV platform holds several tenants, each with its own data, people and integrations
+lanes:
+  - label: Platform
+    tone: core
+    nodes:
+      - {id: platform, label: Platform scope, icon: LogoOpenAEV, note: "Tenants, platform users, groups, roles"}
+  - label: Tenants
+    tone: product
+    nodes:
+      - {id: cert, label: Example CERT, icon: Boxes, note: 'The default tenant, renamed'}
+      - {id: gm, label: Grand Meridian Hotels, icon: Boxes, note: "Scenarios, assets, teams, findings"}
+      - {id: other, label: Another member chain, icon: Boxes, note: Sees nothing of the others}
+  - label: In each tenant
+    tone: store
+    nodes:
+      - {id: content, label: Own content, icon: Layers, note: "Users, groups, roles, integrations"}
+edges:
+  - {from: platform, to: cert, label: creates}
+  - {from: platform, to: gm, label: creates}
+  - {from: platform, to: other, label: creates}
+  - {from: gm, to: content, label: holds}

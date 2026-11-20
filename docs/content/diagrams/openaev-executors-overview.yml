@@ -1,0 +1,21 @@
+title: OpenAEV reaches an endpoint through its own agent or through the API of the EDR already there, and either way an implant runs the actions and reports back
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenAEV, note: Builds the implant command}
+  - label: Executors
+    tone: external
+    nodes:
+      - {id: agent, label: OpenAEV agent, icon: Laptop, note: Fetches its jobs, href: /openaev/use/agents/}
+      - {id: edr, label: EDR API, icon: ShieldCheck, note: "CrowdStrike, MDE, SentinelOne, Cortex, Tanium", href: /openaev/use/executors/}
+  - label: Endpoint
+    tone: external
+    nodes:
+      - {id: implant, label: Implant, icon: Cpu, note: Runs the actions}
+edges:
+  - {from: agent, to: platform, label: fetch jobs, style: dashed}
+  - {from: platform, to: edr, label: run script}
+  - {from: agent, to: implant, label: starts}
+  - {from: edr, to: implant, label: starts}
+  - {from: implant, to: platform, label: results}

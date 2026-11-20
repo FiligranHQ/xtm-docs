@@ -1,0 +1,21 @@
+title: The platform takes each key from its environment variable, else from the configuration file of a non-production environment, else from default.json, else from the schema
+lanes:
+  - label: You set
+    tone: external
+    nodes:
+      - {id: env, label: Environment variable, icon: Terminal, note: "JOBS__MAX_CONCURRENT, in Docker"}
+      - {id: file, label: "config/<env>.json", icon: FileText, note: Outside production only}
+  - label: The release ships
+    tone: store
+    nodes:
+      - {id: defaults, label: config/default.json, icon: FileText, note: "Jobs, recomputations, processes"}
+      - {id: schema, label: Schema default, icon: Code2, note: The other keys}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenCRQ, note: "Checks every key at boot"}
+edges:
+  - {from: env, to: platform, label: first}
+  - {from: file, to: platform, label: then}
+  - {from: defaults, to: platform, label: then}
+  - {from: schema, to: platform, label: last, style: dashed}

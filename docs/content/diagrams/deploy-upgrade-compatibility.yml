@@ -1,0 +1,20 @@
+title: From OpenCTI 7.260224.0, OpenCTI needs XTM Composer 2 and OpenAEV 2.2 or later, and OpenAEV 2.3.4 needs integrations released for it
+lanes:
+  - label: Integrations
+    tone: external
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Workflow, note: "2 or later"}
+      - {id: aevint, label: OpenAEV integrations, icon: Puzzle, note: "Collectors, injectors, agents"}
+  - label: Platforms documented together
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "7.261030.1"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "3.261029.0"}
+  - label: At the center
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "1.261112.0"}
+edges:
+  - {from: composer, to: opencti, label: "2+ from 7.260224.0"}
+  - {from: opencti, to: openaev, label: "2.2+ from 7.260224.0", both: true}
+  - {from: aevint, to: openaev, label: "released for 2.3.4+"}

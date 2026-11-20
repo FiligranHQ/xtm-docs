@@ -1,0 +1,19 @@
+title: OpenAEV runs the attacker's actions through your EDR every week, scores them from its alerts, warns you of a drop, and an XTM One agent writes the rule for what was missed
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: scenario, label: Replay scheduled, icon: LogoOpenAEV, note: "Velvet Harbor replay, weekly", href: /openaev/use/scenarios/build/}
+      - {id: edr, label: EDR runs it, icon: ShieldCheck, note: "Meridian EDR raises alerts", href: /openaev/use/executors/}
+      - {id: collector, label: Steps scored, icon: Activity, note: "From the EDR's alerts", href: /openaev/use/collectors/}
+      - {id: trend, label: Drop flagged, icon: Gauge, note: "Dashboard and trigger", href: /openaev/configure/notifications/}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: agent, label: Rule written, icon: LogoXTMOne, note: "Night shift triage, Sigma skill", href: /xtm-one/build/skills/}
+edges:
+  - {from: scenario, to: edr, label: actions on schedule}
+  - {from: edr, to: collector, label: alerts}
+  - {from: collector, to: trend, label: scores per run}
+  - {from: trend, to: agent, label: missed technique}
+  - {from: agent, to: edr, label: detection rule, style: dashed}

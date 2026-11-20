@@ -1,0 +1,21 @@
+title: XTM Composer reads its default file, an optional file for its environment, then its environment variables
+lanes:
+  - label: Sources, in order
+    tone: store
+    nodes:
+      - {id: defaults, label: config/default.yaml, icon: FileText, note: Shipped in the image}
+      - {id: envfile, label: "config/<COMPOSER_ENV>.yaml", icon: FileText, note: When it exists}
+      - {id: vars, label: Environment variables, icon: Terminal, note: "OPENCTI__URL, MANAGER__ID..."}
+  - label: XTM Composer
+    tone: product
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Boxes, note: "manager, opencti, openaev"}
+  - label: Container engine
+    tone: external
+    nodes:
+      - {id: engine, label: Container engine, icon: Server, note: "Kubernetes, Docker, Podman, Swarm, Portainer"}
+edges:
+  - {from: defaults, to: composer, label: first}
+  - {from: envfile, to: composer, label: overrides}
+  - {from: vars, to: composer, label: override last}
+  - {from: composer, to: engine, label: deploys integrations}

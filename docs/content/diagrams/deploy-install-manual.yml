@@ -1,0 +1,24 @@
+title: OpenCTI or OpenAEV runs from its release archive on a Linux host and connects to shared services you run, OpenCTI adding Redis and OpenAEV PostgreSQL
+lanes:
+  - label: Releases
+    tone: external
+    nodes:
+      - {id: release, label: Release archive, icon: GitBranch, note: From the GitHub releases}
+  - label: Your Linux host
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Node.js, Python workers, port 4000"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "Java 21, port 8080"}
+  - label: Shared services you run
+    tone: store
+    nodes:
+      - {id: common, label: "Elasticsearch, RabbitMQ, S3", icon: Layers, note: Both platforms}
+      - {id: redis, label: Redis, icon: Server, note: OpenCTI only}
+      - {id: pg, label: PostgreSQL, icon: Server, note: OpenAEV only}
+edges:
+  - {from: release, to: opencti, label: extract and configure}
+  - {from: release, to: openaev, label: extract and configure}
+  - {from: opencti, to: common}
+  - {from: openaev, to: common}
+  - {from: opencti, to: redis}
+  - {from: openaev, to: pg}

@@ -1,0 +1,30 @@
+title: XTM One decides who signs in, which agent answers each AI feature of OpenCTI, OpenAEV and OpenCRQ, what waits for a person, and can stop every agent at once, while every use is measured
+lanes:
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: access, label: Sign-in and groups, icon: LogIn, note: "Your identity provider, two roles", href: /xtm-one/concepts/access/}
+      - {id: routing, label: Intents, icon: Workflow, note: "Which agent answers", href: /xtm-one/administer/intents/}
+      - {id: guard, label: Approvals and prompt guard, icon: ShieldCheck, note: "Changes wait, injections logged or blocked", href: /xtm-one/administer/ai-governance/}
+      - {id: stop, label: Emergency stop, icon: TriangleAlert, note: "Every agent, one switch", href: /xtm-one/administer/emergency-stop/}
+      - {id: watch, label: Usage and audit, icon: Gauge, note: "Costs, traces, logs", href: /xtm-one/use/platform-insights/}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: Ask Ariane and AI Insights, icon: LogoOpenCTI, note: "Vertical cti", href: /xtm-one/use/in-opencti/}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: openaev, label: AI features and attack paths, icon: LogoOpenAEV, note: "Vertical aev", href: /xtm-one/use/in-openaev/}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: opencrq, label: Ask Ariane, icon: LogoOpenCRQ, note: "Vertical grc", href: /xtm-one/use/in-opencrq/}
+edges:
+  - {from: opencti, to: routing, label: "intents, license"}
+  - {from: openaev, to: routing, label: "intents, license"}
+  - {from: opencrq, to: routing, label: intents}
+  - {from: access, to: routing, label: who asks}
+  - {from: routing, to: guard, label: every tool call}
+  - {from: guard, to: watch, label: "logs, traces"}
+  - {from: stop, to: openaev, label: attack paths cancelled, style: dashed}

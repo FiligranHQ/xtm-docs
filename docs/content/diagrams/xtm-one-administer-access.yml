@@ -1,0 +1,29 @@
+title: People sign in, get a role, join groups, and reach what they own, what is shared with them and what the company publishes
+lanes:
+  - label: Sign in
+    tone: external
+    nodes:
+      - {id: local, label: Password, icon: KeyRound, note: "Created, invited or registered"}
+      - {id: sso, label: Single sign-on, icon: LogIn, note: "OpenID Connect or SAML", href: /xtm-one/administer/sso/}
+  - label: Accounts
+    tone: core
+    nodes:
+      - {id: admin, label: Administrator, icon: ShieldCheck, note: "Admin menu and Settings"}
+      - {id: user, label: User, icon: Users, note: "Builds and uses agents"}
+  - label: Groups
+    tone: core
+    nodes:
+      - {id: groups, label: Groups, icon: Users, note: "Members and managers"}
+  - label: What they reach
+    tone: product
+    nodes:
+      - {id: own, label: Their own, icon: Bot, note: "Private by default"}
+      - {id: shared, label: Shared, icon: Layers, note: "With people or groups", href: /xtm-one/build/sharing/}
+      - {id: company, label: Company-managed, icon: Boxes, note: "For everyone, edited by admins"}
+edges:
+  - {from: local, to: user, label: role set by admin}
+  - {from: sso, to: user, label: created on first sign-in}
+  - {from: user, to: groups, label: member of}
+  - {from: user, to: own, label: creates}
+  - {from: groups, to: shared, label: granted}
+  - {from: admin, to: company, label: publishes}

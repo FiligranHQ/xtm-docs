@@ -1,0 +1,1277 @@
+{
+  "product": "opencti",
+  "version": "7.260811.0-lts.1",
+  "source": "OpenCTI-Platform/opencti@c9f5ea5",
+  "categories": {
+    "start_playbook": "Entry points",
+    "transform_and_enrich": "Transform and enrich",
+    "share_and_access": "Share and control access",
+    "end_playbook": "End steps"
+  },
+  "components": [
+    {
+      "id": "PLAYBOOK_INTERNAL_MANUAL_TRIGGER",
+      "name": "Available for manual enrollment / trigger",
+      "description": "Use to trigger manual enrollment from any entity in OpenCTI",
+      "category": "start_playbook",
+      "entryPoint": true,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "filters",
+          "label": "Filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/playbook-components.ts",
+      "slug": "playbook-internal-manual-trigger",
+      "category_title": "Entry points",
+      "summary": "Starts the playbook when a user enrolls an entity by hand, from the entity view or in bulk from a list.",
+      "use_when": "an analyst should decide which entities go through the playbook. The filters decide on which entities the playbook is offered.",
+      "notes": [],
+      "requires": [],
+      "see_also": [
+        {
+          "label": "Run a playbook on selected entities",
+          "to": "/opencti/use/automate/playbooks/create/#run-a-playbook-on-selected-entities"
+        }
+      ],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_INTERNAL_DATA_STREAM",
+      "name": "Listen knowledge events",
+      "description": "Listen for all platform knowledge events",
+      "category": "start_playbook",
+      "entryPoint": true,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "create",
+          "label": "Create",
+          "type": "boolean",
+          "required": true,
+          "default": "true",
+          "runtimeValues": false
+        },
+        {
+          "key": "update",
+          "label": "Update",
+          "type": "boolean",
+          "required": true,
+          "default": "false",
+          "runtimeValues": false
+        },
+        {
+          "key": "delete",
+          "label": "Delete",
+          "type": "boolean",
+          "required": true,
+          "default": "false",
+          "runtimeValues": false
+        },
+        {
+          "key": "filters",
+          "label": "Filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        },
+        {
+          "key": "canEnrollManually",
+          "label": "Can enroll manually",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/playbook-components.ts",
+      "slug": "playbook-internal-data-stream",
+      "category_title": "Entry points",
+      "summary": "Starts the playbook on every knowledge event (creation, update or deletion) that matches the filters.",
+      "use_when": "the playbook must react to data as it arrives, for example to enrich every new indicator, or to act when a label is added.",
+      "notes": [
+        "Filters on this component accept two extra operators, \"has changed\" and \"has not changed\", to react to a change of one property such as a status or a score.",
+        "Only the filters available for stream events that carry STIX objects can be used."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_DATA_STREAM_PIR",
+      "name": "Listen PIR events",
+      "description": "Listen for updates to your PIR(s)",
+      "category": "start_playbook",
+      "entryPoint": true,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "inPirFilters",
+          "label": "In pir filters",
+          "type": "list of string",
+          "required": false,
+          "runtimeValues": true
+        },
+        {
+          "key": "create",
+          "label": "A new entity enters a selected PIR",
+          "type": "boolean",
+          "required": true,
+          "default": "true",
+          "runtimeValues": false
+        },
+        {
+          "key": "delete",
+          "label": "An entity has left a selected PIR",
+          "type": "boolean",
+          "required": true,
+          "default": "false",
+          "runtimeValues": false
+        },
+        {
+          "key": "update",
+          "label": "An entity from a selected PIR has been updated",
+          "type": "boolean",
+          "required": true,
+          "default": "false",
+          "runtimeValues": false
+        },
+        {
+          "key": "create_rel",
+          "label": "An entity is linked to an entity from a selected PIR",
+          "type": "boolean",
+          "required": true,
+          "default": "false",
+          "runtimeValues": false
+        },
+        {
+          "key": "filters",
+          "label": "Filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/data-stream-pir-component.ts",
+      "slug": "playbook-data-stream-pir",
+      "category_title": "Entry points",
+      "summary": "Starts the playbook on events of the Priority Intelligence Requirements (PIR) you select. When no PIR is selected, events of every PIR are processed.",
+      "use_when": "you want to act when an entity enters or leaves a PIR, is updated while in it, or gets linked to an entity of the PIR.",
+      "notes": [
+        "Combine with a PIR score filter to react only to highly relevant entities. The \"has changed\" and \"has not changed\" operators are available here too."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_INTERNAL_DATA_CRON",
+      "name": "Query knowledge on a regular basis",
+      "description": "Run regular knowledge queries",
+      "category": "start_playbook",
+      "entryPoint": true,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "period",
+          "label": "Period",
+          "type": "string",
+          "required": true,
+          "default": "hour",
+          "runtimeValues": false
+        },
+        {
+          "key": "triggerTime",
+          "label": "Trigger time",
+          "type": "string",
+          "required": true,
+          "runtimeValues": false
+        },
+        {
+          "key": "onlyLast",
+          "label": "Only last modified entities after the last run",
+          "type": "boolean",
+          "required": true,
+          "default": "false",
+          "runtimeValues": false
+        },
+        {
+          "key": "includeAll",
+          "label": "Include all entities in a single bundle",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "runtimeValues": false
+        },
+        {
+          "key": "filters",
+          "label": "Filters",
+          "type": "string",
+          "required": true,
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/playbook-components.ts",
+      "slug": "playbook-internal-data-cron",
+      "category_title": "Entry points",
+      "summary": "Queries knowledge on a schedule (every minute, hour, day, week or month) and runs the playbook on the matching entities.",
+      "use_when": "the result should be periodic, such as a weekly digest, rather than event by event.",
+      "notes": [
+        "Turn on \"Include all entities in a single bundle\" to send one notification or one email covering every match instead of one per entity."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_LOGGER_COMPONENT",
+      "name": "Log data in standard output",
+      "description": "Print bundle in platform logs",
+      "category": "transform_and_enrich",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "level",
+          "label": "Log level",
+          "type": "string",
+          "required": true,
+          "default": "debug",
+          "values": [
+            "debug",
+            "info",
+            "warn",
+            "error"
+          ],
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/playbook-components.ts",
+      "slug": "playbook-logger-component",
+      "category_title": "Transform and enrich",
+      "summary": "Writes the bundle to the platform logs at the chosen level, then passes it on unchanged.",
+      "use_when": "you debug a playbook and need to see the exact bundle at a given step on the server side.",
+      "notes": [],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_INGESTION_COMPONENT",
+      "name": "Send for ingestion",
+      "description": "Send STIX bundle to knowledge for ingestion",
+      "category": "end_playbook",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [],
+      "fields": [],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/playbook-components.ts",
+      "slug": "playbook-ingestion-component",
+      "category_title": "End steps",
+      "summary": "Writes the bundle to the knowledge base. Without this step, nothing the playbook changed is saved.",
+      "use_when": "always, at the end of every branch that changes data.",
+      "notes": [],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_FILTERING_COMPONENT",
+      "name": "Match knowledge",
+      "description": "Match STIX bundle to filter (pass bundle to OUT if filter matches)",
+      "category": "transform_and_enrich",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out",
+          "meaning": "at least one element was changed or matched"
+        },
+        {
+          "id": "no-match",
+          "meaning": "no element matched the filters"
+        }
+      ],
+      "fields": [
+        {
+          "key": "all",
+          "label": "Match on any elements included in the bundle",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "runtimeValues": false
+        },
+        {
+          "key": "filters",
+          "label": "Filters",
+          "type": "string",
+          "required": true,
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/playbook-components.ts",
+      "slug": "playbook-filtering-component",
+      "category_title": "Transform and enrich",
+      "summary": "Lets the bundle continue only if at least one element matches the filters. Use the no-match output to handle the other case.",
+      "use_when": "you need a condition, for example to treat high-score indicators differently from the others.",
+      "notes": [],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_CONNECTOR_COMPONENT",
+      "name": "Enrich through connector",
+      "description": "Use a registered platform connector for enrichment",
+      "category": "transform_and_enrich",
+      "entryPoint": false,
+      "internal": false,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "connector",
+          "label": "Enrichment connector",
+          "type": "string",
+          "required": true,
+          "runtimeValues": true
+        }
+      ],
+      "runtimeOptions": true,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/playbook-components.ts",
+      "slug": "playbook-connector-component",
+      "category_title": "Transform and enrich",
+      "summary": "Sends the bundle to an enrichment connector registered on your platform and continues with the enriched bundle.",
+      "use_when": "you need data from an external source (reputation, WHOIS, sandbox) in the middle of a playbook.",
+      "notes": [
+        "The step fails if an element does not match the connector scope. Remove incompatible elements first with Reduce knowledge, or route them by type with Match knowledge.",
+        "The step can also stop when the external source has no record for the observable."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_UPDATE_KNOWLEDGE_COMPONENT",
+      "name": "Manipulate knowledge",
+      "description": "Manipulate STIX bundle according to actions",
+      "category": "transform_and_enrich",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out",
+          "meaning": "at least one element was changed or matched"
+        },
+        {
+          "id": "unmodified",
+          "meaning": "nothing was changed and the bundle passes through as received"
+        }
+      ],
+      "fields": [
+        {
+          "key": "applyToElements",
+          "label": "Apply to",
+          "type": "string",
+          "required": true,
+          "default": "Only main element in the bundle",
+          "values": [
+            "Only main element in the bundle",
+            "All elements in the bundle",
+            "All except main element in the bundle"
+          ],
+          "runtimeValues": false
+        },
+        {
+          "key": "applyWithFilters",
+          "label": "Apply with filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        },
+        {
+          "key": "actions",
+          "label": "Actions",
+          "type": "list of object",
+          "required": true,
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/manipulate-knowledge-component.ts",
+      "slug": "playbook-update-knowledge-component",
+      "category_title": "Transform and enrich",
+      "summary": "Adds, replaces or removes values of attributes (labels, markings, score, author) on the elements in scope.",
+      "use_when": "you set or clean attributes automatically, for example to label everything a feed creates.",
+      "notes": [
+        "Add appends values, replace overwrites the whole set, remove deletes only the listed values.",
+        "When an enrichment connector follows this step, its changes and yours are both kept in the final write.",
+        "From 7.261109, the Field list also offers the custom fields of the platform, by their label. Replace and remove work on every custom field; add only on a multiple selection list, option by option.",
+        "From 7.261117, the Field list also offers Report types, with add, replace and remove. Its values come from the report types vocabulary, and only reports in scope are changed.",
+        "From 7.261119, replacing the Status asks for an Entity type first, then lists only the statuses of that type's workflow. The step sets the status on the elements of that type and leaves the other types untouched. A Status action saved before 7.261119 has no entity type and still applies to every element in scope."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_CONTAINER_WRAPPER_COMPONENT",
+      "name": "Container wrapper",
+      "description": "Create a container and wrap the element inside it",
+      "category": "transform_and_enrich",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "container_type",
+          "label": "Container type",
+          "type": "string",
+          "required": true,
+          "runtimeValues": true
+        },
+        {
+          "key": "caseTemplates",
+          "label": "Case templates",
+          "type": "list of string",
+          "required": false,
+          "runtimeValues": true
+        },
+        {
+          "key": "applyToElements",
+          "label": "Apply to",
+          "type": "string",
+          "required": true,
+          "default": "Only main element in the bundle",
+          "values": [
+            "Only main element in the bundle",
+            "All elements in the bundle",
+            "All except main element in the bundle"
+          ],
+          "runtimeValues": false
+        },
+        {
+          "key": "applyWithFilters",
+          "label": "Apply with filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        },
+        {
+          "key": "copyFiles",
+          "label": "Copy files from main element to the container",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "runtimeValues": false
+        },
+        {
+          "key": "newContainer",
+          "label": "Create a new container at each run",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": true,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/container-wrapper-component.ts",
+      "slug": "playbook-container-wrapper-component",
+      "category_title": "Transform and enrich",
+      "summary": "Puts the elements of the bundle in a container (report, grouping, case) of the type you choose.",
+      "use_when": "you turn matching data into an analyst work item, for example a case created from an incident.",
+      "notes": [
+        "Choosing a case type unlocks case templates, which create the case with its tasks.",
+        "By default the playbook keeps filling the same container on later runs. Turn on \"Create a new container at each run\" to get one container per run.",
+        "When the main element is an incident wrapped into a case, the case reuses its author, labels, assignees, participants, title, markings and, when the value exists for cases, its severity."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_SECURITY_COVERAGE_COMPONENT",
+      "name": "Create Security Coverage",
+      "description": "Create a security coverage for the given entity(ies) (when type is compatible)",
+      "category": "transform_and_enrich",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "applyToElements",
+          "label": "Apply to",
+          "type": "string",
+          "required": true,
+          "default": "Only main element in the bundle",
+          "values": [
+            "Only main element in the bundle",
+            "All elements in the bundle",
+            "All except main element in the bundle"
+          ],
+          "runtimeValues": false
+        },
+        {
+          "key": "applyWithFilters",
+          "label": "Apply with filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        },
+        {
+          "key": "auto_enrichment_disable",
+          "label": "Force manual coverage (prevent enrichment connectors from running)",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "runtimeValues": false
+        },
+        {
+          "key": "periodicity",
+          "label": "Coverage recurrence (every x)",
+          "type": "string",
+          "required": true,
+          "default": "P1D",
+          "runtimeValues": false
+        },
+        {
+          "key": "duration",
+          "label": "Duration",
+          "type": "string",
+          "required": true,
+          "default": "P30D",
+          "runtimeValues": false
+        },
+        {
+          "key": "type_affinity",
+          "label": "Type affinity",
+          "type": "string",
+          "required": true,
+          "default": "ENDPOINT",
+          "runtimeValues": false
+        },
+        {
+          "key": "platforms_affinity",
+          "label": "Platform(s) affinity",
+          "type": "list of string",
+          "required": true,
+          "default": "[\"windows\",\"linux\",\"macos\"]",
+          "runtimeValues": true
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/security-coverage-component.ts",
+      "slug": "playbook-security-coverage-component",
+      "category_title": "Transform and enrich",
+      "summary": "Creates a security coverage for each compatible element in scope and adds it to the bundle, so OpenAEV can test your defenses against it.",
+      "use_when": "you want threats that reach OpenCTI to be checked automatically by OpenAEV simulations.",
+      "notes": [],
+      "requires": [],
+      "see_also": [
+        {
+          "label": "Threat-informed validation workflow",
+          "to": "/workflows/threat-informed-validation/"
+        }
+      ],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_SHARING_COMPONENT",
+      "name": "Share with organizations",
+      "description": "Add sharing permissions to the STIX bundle",
+      "category": "share_and_access",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "organizations",
+          "label": "Target organizations",
+          "type": "list of string",
+          "required": true,
+          "runtimeValues": true
+        },
+        {
+          "key": "applyToElements",
+          "label": "Apply to",
+          "type": "string",
+          "required": true,
+          "default": "Only main element in the bundle",
+          "values": [
+            "Only main element in the bundle",
+            "All elements in the bundle",
+            "All except main element in the bundle"
+          ],
+          "runtimeValues": false
+        },
+        {
+          "key": "applyWithFilters",
+          "label": "Apply with filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/sharing-component.ts",
+      "slug": "playbook-sharing-component",
+      "category_title": "Share and control access",
+      "summary": "Shares the elements in scope with the organizations you select.",
+      "use_when": "you distribute intelligence to member organizations automatically.",
+      "notes": [
+        "Your platform needs a main organization, set in Settings > Security > Policies.",
+        "The component reads the database before the ingestion step. An element created earlier in the same playbook does not exist yet, so the step fails. Share it from a second playbook.",
+        "From 7.261119, an organization that no longer exists on the platform (deleted since, or named by a playbook imported from another platform) shows as \"<name> - deleted\" in Target organizations, with the message \"A selected item no longer exists: remove it and pick another\". Replace it to set the step again."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_UNSHARING_COMPONENT",
+      "name": "Unshare with organizations",
+      "description": "Remove sharing permissions to the STIX bundle",
+      "category": "share_and_access",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "organizations",
+          "label": "Target organizations",
+          "type": "list of string",
+          "required": true,
+          "runtimeValues": true
+        },
+        {
+          "key": "applyToElements",
+          "label": "Apply to",
+          "type": "string",
+          "required": true,
+          "default": "Only main element in the bundle",
+          "values": [
+            "Only main element in the bundle",
+            "All elements in the bundle",
+            "All except main element in the bundle"
+          ],
+          "runtimeValues": false
+        },
+        {
+          "key": "applyWithFilters",
+          "label": "Apply with filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/unsharing-component.ts",
+      "slug": "playbook-unsharing-component",
+      "category_title": "Share and control access",
+      "summary": "Stops sharing the elements in scope with the organizations you select.",
+      "use_when": "an element must no longer be visible to an organization.",
+      "notes": [
+        "Place unsharing before any sharing step, or in its own playbook, so the two do not conflict.",
+        "Like sharing, it reads the database before ingestion and fails on elements created in the same playbook.",
+        "From 7.261119, an organization that no longer exists on the platform shows as \"<name> - deleted\" in Target organizations, as for sharing. Replace it to set the step again."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_ACCESS_RESTRICTIONS_COMPONENT",
+      "name": "Manage access restrictions",
+      "description": "Manage advanced access restrictions to the STIX containers and organisations",
+      "category": "share_and_access",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "applyToElements",
+          "label": "Apply to",
+          "type": "string",
+          "required": true,
+          "default": "Only main element in the bundle",
+          "values": [
+            "Only main element in the bundle",
+            "All elements in the bundle",
+            "All except main element in the bundle"
+          ],
+          "runtimeValues": false
+        },
+        {
+          "key": "applyWithFilters",
+          "label": "Apply with filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        },
+        {
+          "key": "access_restrictions",
+          "label": "Access restrictions",
+          "type": "list of object",
+          "required": true,
+          "default": "[{\"label\":\"Administrator\",\"type\":\"User\",\"value\":{\"expression\":\"OPENCTI_ADMIN_UUID\"},\"accessRight\":\"admin\",\"groupsRestriction\":[]}]",
+          "runtimeValues": true
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/access-restrictions-component.ts",
+      "slug": "playbook-access-restrictions-component",
+      "category_title": "Share and control access",
+      "summary": "Restricts access to containers and organization entities to the authorized members you set, either fixed users, groups and organizations, or taken from the data (author, creator, assignees, participants, organizations in the bundle).",
+      "use_when": "a case or report must only be visible to the people working on it.",
+      "notes": [
+        "For other entity types, share with organizations instead.",
+        "The component reads the database before ingestion. Restrict access to a container created in the same playbook from a second playbook."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_REMOVE_ACCESS_RESTRICTIONS_COMPONENT",
+      "name": "Remove access restrictions",
+      "description": "Remove access restrictions to the STIX bundle",
+      "category": "share_and_access",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out"
+        }
+      ],
+      "fields": [
+        {
+          "key": "applyToElements",
+          "label": "Apply to",
+          "type": "string",
+          "required": true,
+          "default": "Only main element in the bundle",
+          "values": [
+            "Only main element in the bundle",
+            "All elements in the bundle",
+            "All except main element in the bundle"
+          ],
+          "runtimeValues": false
+        },
+        {
+          "key": "applyWithFilters",
+          "label": "Apply with filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/remove-access-restrictions-component.ts",
+      "slug": "playbook-remove-access-restrictions-component",
+      "category_title": "Share and control access",
+      "summary": "Removes authorized-member restrictions from containers and organization entities in scope.",
+      "use_when": "a restricted container must be opened to everyone who can otherwise see it.",
+      "notes": [],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_RULE_COMPONENT",
+      "name": "Apply predefined rule",
+      "description": "Run predefined rule on STIX bundle",
+      "category": "transform_and_enrich",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out",
+          "meaning": "at least one element was changed or matched"
+        },
+        {
+          "id": "unmodified",
+          "meaning": "nothing was changed and the bundle passes through as received"
+        }
+      ],
+      "fields": [
+        {
+          "key": "rule",
+          "label": "Rule to apply",
+          "type": "string",
+          "required": true,
+          "values": [
+            "First/Last seen computing extension from report publication date",
+            "Resolve indicators based on observables (add in bundle)",
+            "Resolve observables an indicator is based on (add in bundle)",
+            "Resolve container references (add in bundle)",
+            "Resolve neighbors relations and entities (add in bundle)",
+            "Resolve containers containing the entity (add in bundle)"
+          ],
+          "runtimeValues": false
+        },
+        {
+          "key": "inferences",
+          "label": "Include inferred objects",
+          "type": "boolean",
+          "required": true,
+          "default": "false",
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/playbook-components.ts",
+      "slug": "playbook-rule-component",
+      "category_title": "Transform and enrich",
+      "summary": "Applies one built-in inference rule to the bundle, for example to add the observables an indicator is based on, or the content of a container.",
+      "use_when": "later steps need related elements that are not in the triggering event.",
+      "notes": [
+        "You cannot chain two rules in the same playbook. The playbook stops at the second one.",
+        "Rules can be expensive on large containers."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_NOTIFIER_COMPONENT",
+      "name": "Send to notifier",
+      "description": "Automatically send notification",
+      "category": "end_playbook",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [],
+      "fields": [
+        {
+          "key": "notifiers",
+          "label": "Notifiers",
+          "type": "list of string",
+          "required": true,
+          "runtimeValues": true
+        },
+        {
+          "key": "authorized_members",
+          "label": "Authorized members",
+          "type": "list of object",
+          "required": true,
+          "runtimeValues": false
+        },
+        {
+          "key": "applyToElements",
+          "label": "Resolve dynamic targets from",
+          "type": "string",
+          "required": false,
+          "default": "Only main element in the bundle",
+          "values": [
+            "Only main element in the bundle",
+            "All elements in the bundle",
+            "All except main element in the bundle"
+          ],
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": true,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/notifier-component.ts",
+      "slug": "playbook-notifier-component",
+      "category_title": "End steps",
+      "summary": "Sends a notification through the notifier you choose, to fixed recipients or to people taken from the data. It ends the branch and saves nothing.",
+      "use_when": "people must be told about what the playbook found.",
+      "notes": [
+        "To both notify and save, add a second branch from the same parent ending with Send for ingestion.",
+        "Besides fixed users, groups and organizations, Targets offers dynamic recipients: Author (organization), the users of the organization that authored the element, Creators, Assignees and Participants, all read from the elements set in Resolve dynamic targets from, and Organizations, the users of every organization in the bundle."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_CREATE_INDICATOR_COMPONENT",
+      "name": "Promote observable to indicator",
+      "description": "Create an indicator based on an observable",
+      "category": "transform_and_enrich",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out",
+          "meaning": "at least one element was changed or matched"
+        },
+        {
+          "id": "unmodified",
+          "meaning": "nothing was changed and the bundle passes through as received"
+        }
+      ],
+      "fields": [
+        {
+          "key": "types",
+          "label": "Types",
+          "type": "list of string",
+          "required": false,
+          "runtimeValues": true
+        },
+        {
+          "key": "applyToElements",
+          "label": "Apply to",
+          "type": "string",
+          "required": true,
+          "default": "Only main element in the bundle",
+          "values": [
+            "Only main element in the bundle",
+            "All observables in the bundle",
+            "All except main element in the bundle"
+          ],
+          "runtimeValues": false
+        },
+        {
+          "key": "applyWithFilters",
+          "label": "Apply with filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        },
+        {
+          "key": "wrap_in_container",
+          "label": "If main entity is a container, wrap indicators in container",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": true,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/create-indicator-component.ts",
+      "slug": "playbook-create-indicator-component",
+      "category_title": "Transform and enrich",
+      "summary": "Creates an indicator from each observable in scope.",
+      "use_when": "observables from a trusted source should become detection content.",
+      "notes": [
+        "When the main element is a container, you can add the new indicators and their relationships to it."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_REDUCING_COMPONENT",
+      "name": "Reduce knowledge",
+      "description": "Remove data from STIX bundle that does not match the filter. The main element will always remain.",
+      "category": "transform_and_enrich",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out",
+          "meaning": "at least one element was changed or matched"
+        },
+        {
+          "id": "unmatch",
+          "meaning": "no element matched the filters and the bundle passes through unchanged"
+        }
+      ],
+      "fields": [
+        {
+          "key": "filters",
+          "label": "Filters",
+          "type": "string",
+          "required": true,
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/playbook-components.ts",
+      "slug": "playbook-reducing-component",
+      "category_title": "Transform and enrich",
+      "summary": "Removes from the bundle every element that does not match the filters. The main element is always kept.",
+      "use_when": "a rule or a connector added more elements than the next steps should handle.",
+      "notes": [
+        "Because the main element is always kept, set later steps to \"All elements except the main one\" when they should touch only what was kept."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_CREATE_OBSERVABLE_COMPONENT",
+      "name": "Extract observables from indicator",
+      "description": "Create observables based on an indicator",
+      "category": "transform_and_enrich",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out",
+          "meaning": "at least one element was changed or matched"
+        },
+        {
+          "id": "unmodified",
+          "meaning": "nothing was changed and the bundle passes through as received"
+        }
+      ],
+      "fields": [
+        {
+          "key": "applyToElements",
+          "label": "Apply to",
+          "type": "string",
+          "required": true,
+          "default": "Only main element in the bundle",
+          "values": [
+            "Only main element in the bundle",
+            "All indicators in the bundle",
+            "All except main element in the bundle"
+          ],
+          "runtimeValues": false
+        },
+        {
+          "key": "applyWithFilters",
+          "label": "Apply with filters",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        },
+        {
+          "key": "wrap_in_container",
+          "label": "If main entity is a container, wrap observables in container",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": false,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/create-observable-component.ts",
+      "slug": "playbook-create-observable-component",
+      "category_title": "Transform and enrich",
+      "summary": "Creates the observables described by each indicator pattern in scope.",
+      "use_when": "you need observables to enrich or pivot on, starting from indicators.",
+      "notes": [
+        "When the main element is a container, you can add the new observables and their relationships to it."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_SEND_EMAIL_TEMPLATE_COMPONENT",
+      "name": "Send email from template",
+      "description": "Automatically send template email",
+      "category": "end_playbook",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [],
+      "fields": [
+        {
+          "key": "email_template",
+          "label": "Email template",
+          "type": "string",
+          "required": true,
+          "runtimeValues": true
+        },
+        {
+          "key": "targets",
+          "label": "Targets",
+          "type": "object",
+          "required": false,
+          "runtimeValues": false
+        },
+        {
+          "key": "applyToElements",
+          "label": "Resolve dynamic targets from",
+          "type": "string",
+          "required": false,
+          "default": "Only main element in the bundle",
+          "values": [
+            "Only main element in the bundle",
+            "All elements in the bundle",
+            "All except main element in the bundle"
+          ],
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": true,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/send-email-template-component.ts",
+      "slug": "playbook-send-email-template-component",
+      "category_title": "End steps",
+      "summary": "Sends an email built from one of your email templates, to fixed recipients or to people taken from the data.",
+      "use_when": "the message needs your own wording and layout.",
+      "notes": [
+        "Besides fixed users, groups and organizations, Targets offers dynamic recipients: Author (organization), the users of the organization that authored the element, Creators, Assignees and Participants, all read from the elements set in Resolve dynamic targets from, and Organizations, the users of every organization in the bundle."
+      ],
+      "requires": [],
+      "see_also": [],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_AI_AGENT_TRANSFORM_COMPONENT",
+      "name": "Transform with AI agent",
+      "description": "Send the STIX bundle to an AI agent and continue with the transformed bundle",
+      "category": "transform_and_enrich",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [
+        {
+          "id": "out",
+          "meaning": "at least one element was changed or matched"
+        },
+        {
+          "id": "unmodified",
+          "meaning": "nothing was changed and the bundle passes through as received"
+        }
+      ],
+      "fields": [
+        {
+          "key": "agent_slug",
+          "label": "AI agent",
+          "type": "string",
+          "required": true,
+          "runtimeValues": true
+        },
+        {
+          "key": "run_as",
+          "label": "Run as",
+          "type": "object",
+          "required": false,
+          "default": "",
+          "runtimeValues": true
+        },
+        {
+          "key": "prompt",
+          "label": "Additional instructions (optional, prepended to the STIX bundle)",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": true,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/ai-agent-component.ts",
+      "slug": "playbook-ai-agent-transform-component",
+      "category_title": "Transform and enrich",
+      "summary": "Sends the bundle to an XTM One AI agent and continues with the STIX bundle it returns. The default agent, CTI STIX transformer, only produces valid STIX 2.1.",
+      "use_when": "a transformation is easier to describe in words than to build from components.",
+      "notes": [
+        "For security, the agent can only run as you or as a service account.",
+        "The step waits up to 10 minutes for the agent's answer (5 minutes before 7.261117). When the call fails, times out or returns no valid STIX bundle, the bundle continues unchanged on the unmodified output."
+      ],
+      "requires": [
+        "XTM One (each run uses your XTM One quota)"
+      ],
+      "see_also": [
+        {
+          "label": "AI-assisted intelligence workflow",
+          "to": "/workflows/ai-assisted-intelligence/"
+        }
+      ],
+      "documented": true
+    },
+    {
+      "id": "PLAYBOOK_AI_AGENT_SEND_COMPONENT",
+      "name": "Send to AI agent",
+      "description": "Send the STIX bundle to an AI agent as the final step of the playbook",
+      "category": "end_playbook",
+      "entryPoint": false,
+      "internal": true,
+      "ports": [],
+      "fields": [
+        {
+          "key": "agent_slug",
+          "label": "AI agent",
+          "type": "string",
+          "required": true,
+          "runtimeValues": true
+        },
+        {
+          "key": "run_as",
+          "label": "Run as",
+          "type": "object",
+          "required": false,
+          "default": "",
+          "runtimeValues": true
+        },
+        {
+          "key": "prompt",
+          "label": "Instructions (optional, prepended to the STIX bundle)",
+          "type": "string",
+          "required": false,
+          "runtimeValues": false
+        }
+      ],
+      "runtimeOptions": true,
+      "file": "opencti-platform/opencti-graphql/src/modules/playbook/components/ai-agent-send-component.ts",
+      "slug": "playbook-ai-agent-send-component",
+      "category_title": "End steps",
+      "summary": "Hands the bundle to an XTM One AI agent and ends the branch. The agent carries on with your instructions and writes what it creates to a draft for an analyst to review.",
+      "use_when": "you delegate follow-up work, such as a weekly grouping, to an AI agent.",
+      "notes": [
+        "For security, the agent can only run as you or as a service account.",
+        "The step waits up to 10 minutes for the agent's answer (5 minutes before 7.261117). A call that fails or times out is written to the platform logs; the branch ends either way."
+      ],
+      "requires": [
+        "XTM One (each run uses your XTM One quota)"
+      ],
+      "see_also": [
+        {
+          "label": "AI-assisted intelligence workflow",
+          "to": "/workflows/ai-assisted-intelligence/"
+        }
+      ],
+      "documented": true
+    }
+  ]
+}
