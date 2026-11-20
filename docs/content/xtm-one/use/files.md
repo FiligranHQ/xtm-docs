@@ -31,20 +31,21 @@ Administrators get no wider view here: they reach another person's conversation 
 :::steps
 1. Open :menu[Work > Files].
 2. Type part of the file's name in the search field.
-3. Narrow the list with the three filters, one segment each:
+3. Click **Filters** and choose a segment in each of its three filters. The button then counts the filters that narrow the list.
 
    | Filter | Segments | Question it answers |
    | --- | --- | --- |
-   | Where the file lives | **Everywhere**, **Conversations**, **Runs**, **Other** | In a chat, from an assignment run, or elsewhere (datasets, tool tests) |
-   | How it got there | **Any origin**, **Uploaded**, **Generated** | Did a person attach it, or did an agent produce it |
-   | Whose files | **Mine**, **Company**, **Shared**, **All** | Your own files (attached by you, in your conversations or from your runs), the outputs of company-managed agents' runs, the other files you may read, such as those of a conversation shared with you, or all of them |
+   | **Context** | **Everywhere**, **Conversations**, **Runs**, **Other** | In a chat, from an assignment run, or elsewhere (datasets, tool tests) |
+   | **Origin** | **Any origin**, **Uploaded**, **Generated** | Did a person attach it, or did an agent produce it |
+   | **State** | **Any state**, **Available**, **Deleted** | Can you still download it, or did the retention policy delete its content |
 
-4. Read the counter at the right of the filters: the number of files for the current filters.
+4. Choose whose files, beside **Filters**: **Mine**, your own files (attached by you, in your conversations or from your runs); **Company**, the outputs of company-managed agents' runs; **Shared**, the other files you may read, such as those of a conversation shared with you; or **All** of them.
+5. Read the counter at the right of the filters: the number of files for the current filters.
 
-::screenshot{id=xtm-one-files-list alt="The filters of the Files page: Everywhere, Conversations, Runs or Other; Any origin, Uploaded or Generated; Mine, Company, Shared or All; and the Group switch turned on."}
+::screenshot{id=xtm-one-files-list alt="The toolbar of the Files page with the Filters panel open: Context with Everywhere, Conversations, Runs or Other; Origin with Any origin, Uploaded or Generated; State with Any state, Available or Deleted. Beside it Mine, Company, Shared or All, and the Group switch turned on."}
 :::
 
-Each of **Mine**, **Company**, **Shared** and **All** shows how many files it holds under the other filters. With none chosen, the page opens on the first one that holds a file. When **Mine** is empty while the others are not, **Show all** moves to every file you can read.
+Each of **Mine**, **Company**, **Shared** and **All** shows how many files it holds under the other filters, whatever the **State**. With none chosen, the page opens on the first one that holds a file. When **Mine** is empty while the others are not, **Show all** moves to every file you can read.
 
 **Group**, on by default, folds the list by conversation or run, with its title and owner. Switch it off for a flat list, the most recent first, where each row names its context.
 
@@ -70,12 +71,23 @@ On 12 April 2026, Julien Bernard, SOC manager at Grand Meridian Hotels, needs th
 | Filter | Value |
 | --- | --- |
 | Search | `velvet` |
-| Where the file lives | **Conversations** |
-| How it got there | **Generated** |
+| **Filters** > **Context** | **Conversations** |
+| **Filters** > **Origin** | **Generated** |
 | Whose files | **Shared** |
 
 The list shows Paul's conversation with **Night shift triage**, and under it `velvet-harbor-indicators-block.csv`, **Generated**. Julien clicks **Download** and loads the file into the EDR's block list. He can read the file but not delete it: the conversation is Paul's.
 :::
+
+## Know when a file is deleted for you
+
+An administrator decides how long each kind of stored file is kept, in **Storage & retention**: see [Set up the platform in Settings](/xtm-one/administer/settings/#usage-and-quotas). By default, the files agents work on and the files they deliver to you go after 60 days without use; the files you attach are kept for good.
+
+- **Before**: the row of a file the retention policy will delete reads **Expires {date} if unused**. Hover it for the time. For the files agents work on or deliver, each download, preview or reading by an agent moves the date forward. A file that an open work item, a workset, a presentation or a report still uses is kept past it.
+- **After**: only the content goes. The row stays, greyed, with "Deleted on {date} by the retention policy", and offers no **Download**; **Open conversation** or **Open run** still leads to its place. **State** > **Deleted** lists these files.
+- **In the conversation or the run**: the file shows as a card with a dashed border, its name, its size and the same sentence, in place of the file or its preview. An old link to it says the file was deleted by the retention policy.
+- **For the agent**: an agent that reads the file again is told it was deleted, and when, instead of getting its content. Ask it to produce the file again if you still need it.
+
+**Delete**, in a row's menu, is different: it removes the file and its row from the list at once.
 
 ## What's next
 

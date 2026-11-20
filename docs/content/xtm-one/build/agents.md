@@ -214,13 +214,46 @@ To show what the brief is worth, Sophie opens **Configuration** > **Outcomes**, 
 The General Assistant builds agents too. Describe the agent in the chat: it creates it with its model, tools, read-only integrations and knowledge bases in one step, lists the integrations it bound, and runs it once on a prompt so you see an answer before anything is scheduled. It can also share an agent with a group or with named colleagues who have an account. It acts as you, with the same checks as the screens.
 :::
 
+## Let Platform Health improve it
+
+Platform Health is the platform's built-in supervisor. Its own agents read the agents you opt in: they diagnose them from their conversations, ratings and costs, consolidate their memories, and measure a better persona, skill or assignment prompt on copies before proposing it. Nothing changes on your agent until one of its managers approves a proposal.
+
+Platform Health works only once an administrator turns on **Enable Platform Health**, off by default, in :menu[Administration > Settings > Agents and automations > Platform Health], and only on the agents its **Supervision scope** covers. See [Set up the platform in Settings](/xtm-one/administer/settings/#agents-and-automations).
+
+:::steps
+1. On the agent's **Overview**, find the **Improvement by Platform Health** card.
+2. Read the notice under the switch: what Platform Health reads once the agent is opted in, and who sees it.
+3. Turn on **Opt in to improvement**. Only the people who can manage the agent change it; the others read "Only the agent's managers can change this."
+:::
+
+::screenshot{id=xtm-one-build-agents-health-opt-in alt="The Improvement by Platform Health card of the Velvet Harbor watcher's Overview, with Opt in to improvement turned on and the notice on what Platform Health reads and who sees it."}
+
+Once the agent is opted in, Platform Health reads its memories and the content of its conversations. Excerpts of those conversations become evaluation cases, unredacted, which the agent's managers and the administrators can see. A person who turns on **Opt out of Platform Health** in their [profile](/xtm-one/use/profile/) is left out: their memories and conversations are never read, and the cases already built from them are deleted. Turning **Opt in to improvement** off stops every read at once, and withdraws the cases built from the agent's content.
+
+The people who can manage the agent also get the **Improvements** card on its **Overview**: what Platform Health proposes for the agent, and its **Cycles**, each investigation it ran. **Improve with Platform Health** asks it to investigate the agent now; the button takes the name your administrator gave Platform Health. When it cannot start, a message says why: Platform Health is not enabled, the agent is outside its supervision scope, it is already working on the agent, or its budget is reached.
+
+Each proposal shows its type (**Persona**, **Skill**, **Assignment prompt**), what its experiment measured (**Measured gain**, **No measured change**, **Measured regression** or **Unmeasured**) and its status: **Awaiting your decision** on a proposal you can decide, **Awaiting approval** for the others until someone decides. Expand it to read the change as a diff, the figures under **Measured** and the traces, ratings and runs it rests on, then click **Approve** or **Reject**. An approved change is applied and watched: one that measures worse afterwards is rolled back.
+
+The built-in tools of **Configuration** > **Tooling** list the tool suites of Platform Health too:
+
+- **Platform Health** reads its signals, cycles and digests, and asks it to investigate an agent or a flow. In a person's chat, it reads only the agents and flows that person manages.
+- **Improvement Proposals** lists the proposals on the agents, skills, assignments and flows the caller may read, with the verdict of their experiment.
+- **Health Sandbox** and **Health Evaluation** copy agents and flows into a sandbox where every write is intercepted, and measure them on cases from production, for Platform Health and administrators.
+- **Memory Steward**, **Health Diagnosis**, **Health Experiments** and **Health Flow Lab** are the tools of Platform Health's own agents. They work only inside a Platform Health run, and a chat never offers them.
+
+:::example[The CTI team rates the watcher's answers down]
+In May 2026, Camille Roux and the CTI team rate several answers of the Velvet Harbor watcher **Not helpful**: its summaries leave out the indicators. Hélène Marchetti, the CISO, has turned on **Enable Platform Health**. Sophie Laurent opens the watcher's **Overview**, turns on **Opt in to improvement** in **Improvement by Platform Health**, then clicks **Improve with Platform Health** in the **Improvements** card.
+
+A few days later, the card lists a **Persona** proposal with **Measured gain**, **Awaiting your decision**. Sophie expands it: the diff adds a line that asks for the indicators of each report, in a table, and **Measured** compares the current persona and the variant on the conversations the team rated. She clicks **Approve**. The next summaries list the indicators, and Platform Health keeps watching the ratings in case the change measures worse.
+:::
+
 ## The agent's page
 
 :menu[Orchestration > Agents] opens on **Mine** when you have agents of your own, otherwise on the first of **Company**, **Shared** and **All** that lists agents. **Company** holds the company-managed agents and the built-in agents of the platform. Once your organization has company-managed agents of its own, **Company** hides the built-in ones: its count leaves them out, and its tooltip says how many are hidden. To list them, check **Built-in** in the **Properties** filter; XTM One keeps your choice for your next visits. A search that matches only built-in agents lists them anyway. Click an agent to open its page:
 
 | Tab | What it is for |
 | --- | --- |
-| **Overview** | What the agent does and what is bound to it, at a glance, and its assignments. Its **Fleet** card names the [fleet](/xtm-one/build/fleets/) the agent belongs to, the agent it reports to and the fleets that connect it, with **Open the fleet** and how many of its automations are on; an agent in no fleet says **In no fleet: this agent is in the playground.** |
+| **Overview** | What the agent does and what is bound to it, at a glance, and its assignments. Its **Fleet** card names the [fleet](/xtm-one/build/fleets/) the agent belongs to, the agent it reports to and the fleets that connect it, with **Open the fleet** and how many of its automations are on; an agent in no fleet says **In no fleet: this agent is in the playground.** The **Improvement by Platform Health** card opts the agent in to Platform Health, and its managers also get the **Improvements** card: see [Let Platform Health improve it](#let-platform-health-improve-it). |
 | **Configuration** | **General** (persona, guardrails, model, organization context, sharing), **Tooling** (built-in tools, integrations, MCP servers, custom tools), **Knowledge** (knowledge bases, memory, prompts, skills), **Channels & Bots**, which lets the agent answer in Slack, Microsoft Teams and other messaging apps ([Talk to agents from your messaging apps](/xtm-one/administer/channels/)), and **Outcomes**, the unit of work its runs count in ROI. A built-in tool this deployment switched off shows **Unavailable**. |
 | **Value** | What the agent returns, then what one run may spend. Its **ROI** comes first ([Count what an agent produces](#count-what-an-agent-produces)), then the caps on a run's spend. Lowering a limit is open to whoever edits the agent; raising one above the platform's own is an administrator's. See [Limit what an agent run may spend](/xtm-one/use/run-budgets/). A link to the former **Budget** tab, or to the ROI of the **Overview**, opens **Value**. |
 | **Versioning** | Every version of the persona and the tracked settings, to compare and roll back. |
@@ -232,6 +265,8 @@ The General Assistant builds agents too. Describe the agent in the chat: it crea
 Another agent can call this one, to consult it or hand it a background task, and ask for the answer in a format of its own. By default such a call is refused before the agent runs, so the agent always answers in its configured format. To accept it, turn on **Accept a format requested by the caller** in the **Pipeline** card of **Configuration** > **General**: the caller's format then replaces the agent's for that call. Only the people who can manage the agent change it.
 
 A disabled agent stays listed, dimmed: its chat is limited and its assignments do not run. **Disable agent** and **Enable agent** are in the page header.
+
+The agents of Platform Health's own [fleet](/xtm-one/build/fleets/) ship with the platform and are read-only for everyone, administrators included: their header shows **Read-only**, whose tip reads "Platform Health is built in and read-only.", and nobody changes, disables, duplicates or deletes them. An administrator tunes Platform Health in :menu[Administration > Settings > Agents and automations > Platform Health] instead.
 
 Deleting an agent, from the bin icon of the page header, removes it and all its assignments for good; its conversations are kept with their whole history. On a narrow screen, **Duplicate**, **Export** and **Delete agent** are under **More actions**. In **Continue its conversations with**, pick an enabled agent to take them over: the conversations of the people who can use it continue with that agent, which reads the earlier answers. With **No agent**, each owner can continue a conversation with an agent of theirs from its menu. Click **Delete**; for a shared agent, click **Continue**, then type its name in **Delete Shared Agent** to confirm.
 

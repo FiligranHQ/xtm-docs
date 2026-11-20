@@ -1,7 +1,7 @@
 {
   "name": "configuration",
-  "version": "1.261119.0",
-  "source": "XTM-One-Platform/xtm-one@d2a203a: backend/app/core/config.py, docs/docs/deployment/configuration.md",
+  "version": "1.261119.1",
+  "source": "XTM-One-Platform/xtm-one@cd3a70e: backend/app/core/config.py, docs/docs/deployment/configuration.md",
   "intro": "Every environment variable XTM One reads at startup, on the platform and on the worker. Authentication, integrations and most security options are set from the **Settings** screens instead, and stored in the database.",
   "filter": "Filter by variable or description",
   "sections": [
@@ -1123,7 +1123,52 @@
             "`AGENT_CHECK_FILE_RETENTION_DAYS`",
             "",
             "`7`",
-            "Days the pictures an assistant makes to check its own work (frames and region crops of a video, contact sheets, screen-insert sweeps, slide captures, page renders) are kept after they were made. They are working files, collapsed under the reply; a picture a video uses (an image scene, a backdrop) is kept. `0` = kept forever."
+            "How long, in days, the pictures a tool makes for an AI agent to check its own work (frames and region crops of a video, contact sheets, slide captures, page renders) are kept after they were made (7 by default). A picture a video uses is kept. Also in Settings > Usage and quotas > Storage & retention, as **Check pictures**; the variable, when set, wins and locks the field. `0` keeps them forever."
+          ]
+        },
+        {
+          "key": "FILE_RETENTION_AGENT_WORKING_DAYS",
+          "cells": [
+            "`FILE_RETENTION_AGENT_WORKING_DAYS`",
+            "",
+            "`60`",
+            "How long, in days, the scratch files AI agents write while they work are kept after their last use: a download, a preview, a read by an agent or an attachment (60 by default). Also in Settings > Usage and quotas > Storage & retention, as **Agent working files**; the variable, when set, wins and locks the field (the same for every `FILE_RETENTION_*` variable). An hourly sweep deletes the content of a file past it, unless an open work item, a workset, an active shared state, a presentation, a report or a video still uses it; the file stays in its conversation or run as a deleted card, and its download answers `410 Gone`. `0` keeps the files forever; the most is 3650."
+          ]
+        },
+        {
+          "key": "FILE_RETENTION_AGENT_DOWNLOAD_DAYS",
+          "cells": [
+            "`FILE_RETENTION_AGENT_DOWNLOAD_DAYS`",
+            "",
+            "`60`",
+            "How long, in days, the files AI agents hand to people to download are kept after their last use (60 by default). Also in Settings > Usage and quotas > Storage & retention, as **Agent deliverables**. The sweep, what keeps a file and the deleted card are those of `FILE_RETENTION_AGENT_WORKING_DAYS`. `0` keeps the files forever; the most is 3650."
+          ]
+        },
+        {
+          "key": "FILE_RETENTION_AGENT_DAYS",
+          "cells": [
+            "`FILE_RETENTION_AGENT_DAYS`",
+            "",
+            "`0`",
+            "How long, in days, the other files AI agents, tools and MCP servers return are kept after they were made, used or not. Also in Settings > Usage and quotas > Storage & retention, as **Other agent files**. `0`, the default, keeps them forever; set it to free storage on a busy platform. The sweep, what keeps a file and the deleted card are those of `FILE_RETENTION_AGENT_WORKING_DAYS`."
+          ]
+        },
+        {
+          "key": "FILE_RETENTION_CHAT_DAYS",
+          "cells": [
+            "`FILE_RETENTION_CHAT_DAYS`",
+            "",
+            "`0`",
+            "How long, in days, the files people attach in a conversation are kept after they were uploaded. Also in Settings > Usage and quotas > Storage & retention, as **Chat uploads**. `0`, the default, keeps them forever; set it when your data policy limits how long uploaded documents may be stored. The sweep, what keeps a file and the deleted card are those of `FILE_RETENTION_AGENT_WORKING_DAYS`."
+          ]
+        },
+        {
+          "key": "FILE_RETENTION_CHANNEL_DAYS",
+          "cells": [
+            "`FILE_RETENTION_CHANNEL_DAYS`",
+            "",
+            "`0`",
+            "How long, in days, the files received from Teams, Outlook and the other channels are kept after they arrived. Also in Settings > Usage and quotas > Storage & retention, as **Channel files**. `0`, the default, keeps them forever. The sweep, what keeps a file and the deleted card are those of `FILE_RETENTION_AGENT_WORKING_DAYS`."
           ]
         }
       ]
@@ -3896,6 +3941,15 @@
             "",
             "`false`",
             "Whether a custom dashboard's managers may publish it as a link anyone can open without an account, showing a snapshot of its data read with the publisher's access."
+          ]
+        },
+        {
+          "key": "WEB_FETCH_TRUSTED_CA_CERTIFICATES",
+          "cells": [
+            "`WEB_FETCH_TRUSTED_CA_CERTIFICATES`",
+            "",
+            "",
+            "PEM certificates the web page fetches trust on top of the system store: the certificate of a private certificate authority, or a host's self-signed certificate, so that `web_fetch`, the knowledge base URL crawl and Deep Investigation reach an internal site such as `https://wiki.example.com`. Verification stays on and the host name must still match the certificate. Up to 20 certificates and 64000 characters, each between `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`; a private key, other text or a certificate that cannot be read stops the platform at startup. Empty by default: the system store alone. Also in Settings > Access and security > Security options, as **Trusted certificates for web fetches**; the variable, when set, wins and locks the field."
           ]
         },
         {

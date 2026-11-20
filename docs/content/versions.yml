@@ -23,8 +23,8 @@ openaev:
     tag: 3.261118.0
 xtm-one:
   latest:
-    version: 1.261119.0
-    tag: 1.261119.0
+    version: 1.261119.1
+    tag: 1.261119.1
 # XTM Composer runs the integrations of OpenCTI and OpenAEV, on releases of its own: the documentation
 # describes its latest one (its configuration reference, docs/generated/composer/<version>/).
 composer:

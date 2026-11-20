@@ -33,7 +33,7 @@ Each tab and each of its sections has its own address, such as `/settings/usage/
 4. Still in **Access and security**, open **Security audit** and select **Re-run**. Fix each `Critical` and `Warning` finding, or dismiss the ones you accept on purpose.
 5. In **Usage and quotas** > **Quotas**, set the agentic limit per user, then the exceptions per group or per user.
 6. In **Integrations** > **Channels & Bots**, connect the messaging apps your teams use. See [Talk to agents from your messaging apps](/xtm-one/administer/channels/).
-7. In **Usage and quotas** > **Observability**, choose how long traces and audit log entries are kept, and whether traces keep the prompts and answers.
+7. In **Usage and quotas** > **Observability**, choose how long traces and audit log entries are kept, and whether traces keep the prompts and answers. In **Storage & retention**, choose how long the files people upload and agents create are kept.
 8. In **Organization** > **Profile**, fill in the profile of your organization that agents read: sector, regions, crown jewels, tech stack, assets, risk appetite. See [Set up the organization profile agents read](/xtm-one/administer/organization-profile/).
 
 :::
@@ -68,7 +68,7 @@ Before you start:
 
 ::screenshot{id=xtm-one-administer-settings-provisioning alt="The SCIM provisioning card of Settings > Access and security > Provisioning: the Endpoint URL ending with /api/v1/scim/v2 and its Copy button, the token Microsoft Entra production with its prefix, Never used and Revoke, and the Token name field with Generate token."}
 
-Microsoft Entra runs a first cycle, then one about every 40 minutes; **Provision on demand**, in the application, tests one person first. The token's line then shows when it was last used, and **Latest SCIM changes** lists the last 50 accounts and groups the identity provider created, changed or deactivated. A call XTM One refused is not listed there: Entra's provisioning logs show it (`401` for a wrong or revoked token, `409` for an email already linked to another Entra user).
+Microsoft Entra runs a first cycle, then one about every 40 minutes; **Provision on demand**, in the application, tests one person first. The token's line then shows when it was last used, and **Latest SCIM changes** lists the last 50 accounts and groups the identity provider created, changed or deactivated. Each line reads in the language of the interface, such as "Account Camille Roux provisioned" or "Group SOC changed", with its date. A call XTM One refused is not listed there: Entra's provisioning logs show it (`401` for a wrong or revoked token, `409` for an email already linked to another Entra user).
 
 What Microsoft Entra sends:
 
@@ -132,6 +132,19 @@ The other sections of the tab:
 - **CTEM stage agents**, on XTM One only: the platform's default analyst for the dashboard briefing and for each of the five CTEM stages, per vertical. Each user can still pick their own in their profile.
 - **Agent runs** bounds the `wait` tool for every run of chat, assignments and evaluations: **Longest single wait** and **Total wait per run**, in seconds. An agent or an assignment may lower them, never raise them. **Waits on named work are not counted** leaves out of the total the waits that name the tasks or runs they wait for.
 - **Quality**: the feedback criteria people score when they rate an agent's work, beyond the thumbs up or down. A criterion is a **Scale** (1 to 5, for example), **Categorical** (options, each worth a score from 0 to 1) or **Numeric**, with a weight. Its kind cannot change once created. Deleting a criterion deletes the scores given on it; switch it off to keep them.
+- **Platform Health** (`/settings/automations/health`) sets up the platform's own maintenance agents. They consolidate memories, diagnose agents and flows, try changes on sandbox copies and propose improvements that the managers approve. **Open Platform Health** leads to what it found and proposes, in :menu[Administration > Platform Health]: see [Review what Platform Health finds and proposes for your agents](/xtm-one/administer/platform-health/). **Edit** opens the settings below, and one **Save** keeps them together:
+  - **Enable Platform Health** is off by default. While it is off, Platform Health reads nothing and starts no work, and its settings are kept. **Name** is what people call it on its page, in the inbox and on its agent: up to 40 characters, "Platform Health" when empty.
+  - **Supervision scope**: **All agents and flows**, the default, or **Selected agents and flows**, picked in **Supervised agents** and **Supervised flows**. Either way, it reads an agent or a flow only once its managers opted it in, and never the memories and conversations of a user who opted out.
+  - **Budget**: Platform Health's own caps, on top of the license and the quotas. A cycle that reaches **Tokens per cycle**, 500,000 by default, or **Cost per cycle (USD)**, 5, starts no more work. Past **Tokens per month**, 10,000,000, or **Cost per month (USD)**, 100, it starts nothing until the next month. An empty cap reads **No cap**, and the line below the caps gives what it spent this month.
+  - **Schedule**: when each fleet-wide cycle starts, as a **Cron expression** read in the **Timezone** (UTC by default). **Memory consolidation** runs every day at 02:00 (`0 2 * * *`); **Quality review**, **Flow review** and **Weekly digest** run every Monday at 03:00, 04:00 and 07:00. Each one can be switched off.
+  - **Signals**: thresholds read without any model call. A crossing starts one investigation on its agent or flow, never a second while one is open there. **Feedback drop**: a score down 10 points over 3 days, with at least 10 ratings. **Failure spike**: above 5 % over the last 20 runs. **Cost drift**: up by 20 % over 7 days, with at least 10 runs. **Model change**: the model of a supervised agent changes.
+  - **Durations**: an applied improvement is watched for **Watch an applied proposal**, 7 days, and a regression in that time proposes the rollback. A flow that replaces an assignment first runs beside it without acting, for **Flow shadow** (3 days) and **Shadow pairs needed** (5 runs side by side). Once it replaced the assignment, it is watched for **Watch a switched-over flow**, 7 days.
+  - **Dry-run**: **Log every write instead of executing it**, off by default, logs every write of Platform Health's agents (memories, proposals, sandbox copies) without making it. Use it to see what Platform Health would do before letting it act.
+  - **Companion pets**, outside **Edit**: the pets users may pick for their companion. **Add a pet** takes a package of up to 8 MB in the Codex pet format: `pet.json` and an 8-column spritesheet of 192x208 cells, in PNG or WebP. Upload it as one `.zip` or as the two files. The pets that come with the platform show **Built-in** and stay. Removing a pet you added gives the users who picked it the default pet.
+
+  Platform Health works only with AI switched on and the Enterprise Edition.
+
+::screenshot{id=xtm-one-administer-settings-health alt="The Platform Health section of Settings > Agents and automations at rest, with Open Platform Health and Edit: Enable Platform Health reads Off and the name Platform Health, Supervise reads All agents and flows, and the Budget block shows its four caps, 500,000 and 10,000,000 tokens, 5 and 100 USD."}
 
 ### Integrations
 
@@ -161,7 +174,7 @@ With an SMTP server (`SMTP_HOSTNAME`), changing the default model or the model l
 
 See [Protect your data and approve what agents do](/xtm-one/administer/ai-governance/) for what is sent to a provider.
 
-**Media** chooses the models of image generation and speech.
+**Media** chooses the models of image generation and speech. With the Filigran AI Gateway as provider, an image model the gateway declares for editing also takes up to three reference pictures and a mask. Agents can then edit a picture, as with OpenAI's own image models, rather than only draw a new one.
 
 **General Assistant** is the assistant every user can talk to without picking an agent: its prompt, its model, the tools and resources it may use (**Built-in Tools**), the agents it may hand work to (**Agent Handover**), its **Skills** and its behavior on the channels (**Channels & Routing**).
 
@@ -177,7 +190,7 @@ Nine sections, each with its own address under `/settings/security/`:
 | Section | What it is for |
 | --- | --- |
 | **Security audit** | Checks the configuration the platform runs with and reports findings as `Critical`, `Warning` or `Info`, with how to fix them. **Findings** and **Controls** are its two views; **Dismiss finding** accepts a finding you chose on purpose. It runs every hour, and a new `Critical` or `Warning` finding notifies every administrator once. |
-| **Security options** | The platform-wide security switches: session lifetime and idle timeout, password length, link lifetimes, webhook secrets, the prompt guard, the code interpreter and custom tools. Each is also an environment variable, which wins. See [Security switches](/reference/xtm-one/configuration/#security-switches). |
+| **Security options** | The platform-wide security switches: session lifetime and idle timeout, password length, link lifetimes, webhook secrets, the prompt guard, the code interpreter and custom tools. **Trusted certificates for web fetches** takes the PEM certificate of a private certificate authority, or a host's self-signed one, so that `web_fetch`, the knowledge base URL crawl and Deep Investigation reach an internal site. Verification stays on and the host name must still match; paste the certificate only, never its private key. Empty, only the system certificate store is trusted. Each option is also an environment variable, which wins, such as `WEB_FETCH_TRUSTED_CA_CERTIFICATES`. See [Security switches](/reference/xtm-one/configuration/#security-switches). |
 | **Tool approvals** | Whether agents ask a person before running tools, and which tools ask. See [Protect your data and approve what agents do](/xtm-one/administer/ai-governance/#approve-what-agents-do). |
 | **Authentication** | Local accounts, OpenID Connect, SAML and allowed email domains. See [Configure single sign-on](/xtm-one/administer/sso/). |
 | **Provisioning** | **SCIM provisioning**, the endpoint and the tokens an identity provider creates and deactivates accounts with; **Deactivation review**, what each deactivation moved or disabled; **Latest SCIM changes**. See [Provision accounts from Microsoft Entra](#provision-accounts-from-microsoft-entra). |
@@ -209,6 +222,27 @@ A change to the two switches applies within seconds, to the traces written from 
 
 **Model pricing** holds the price of each model, which **Model usage** computes costs with.
 
+**Storage & retention** (`/settings/usage/storage`) decides how long each category of stored file is kept. Its table shows, per category, how many files and how much space it holds today, and in **Last sweep** how many files the last sweep deleted:
+
+| Category | What it holds | Kept by default | Counted from |
+| --- | --- | --- | --- |
+| **Agent working files** | Scratch files agents write while they work | 60 days | The last use |
+| **Agent deliverables** | Files agents hand to people to download | 60 days | The last use |
+| **Other agent files** | Files tools and MCP servers return | **Never** deleted | The file's creation |
+| **Chat uploads** | Files people attach in a conversation | **Never** deleted | The upload |
+| **Channel files** | Files received from Teams, Outlook and other channels | **Never** deleted | The file's arrival |
+| **Check pictures** | Frames and captures a tool makes for the agent to look at | 7 days | The capture |
+
+- **The last use** of a file is a download, a preview or an agent reading it.
+- **Edit** takes a number of days per category, from 0 to 3650. `0` keeps the files for good.
+- **A category set by its environment variable** shows "Set by" and the variable, such as `FILE_RETENTION_CHAT_DAYS`, and cannot be changed here. See [Performance](/reference/xtm-one/configuration/#performance) in the configuration reference.
+- **A sweep runs every hour**, and the line below the table dates the next one and the last one. It never deletes a file younger than an hour, or one that a work item, a workset, a shared state, a presentation, a report or a video still uses.
+- **A deleted file** stays in its conversation as a card, "Deleted on {date} by the retention policy": only its content goes, and it can no longer be downloaded. See [Find the files agents created and received](/xtm-one/use/files/).
+
+Shortening a retention, or giving days to a category kept **Never**, deletes files at the next sweep. **Save** then waits for **Preview**, which counts what the next sweep would delete, per category and in all, and the files kept because they are in use.
+
+::screenshot{id=xtm-one-administer-settings-storage alt="The Storage & retention section of Settings > Usage and quotas: six categories of stored files, from Agent working files to Check pictures. Agent working files and Agent deliverables are kept 60 days after the last use, Check pictures 7 days after creation, the other three Never; each row gives its files and their size."}
+
 ### Platform
 
 The platform's identity and license: the **Instance ID** that a license is generated for, the registration on the XTM Hub, the license itself (**Install License**, or `ENTERPRISE_LICENSE`, which then wins), the **Default language** of the interface for the users who have not chosen one (**Platform Language**), the **Default Presentation Template** applied to the decks agents generate, the **Brand asset source**, and **Platform Branding**: **Identity** (platform name, login message), **In-App Colors**, **Browser & PWA** and **Media Assets** (logo and favicon).
@@ -231,6 +265,8 @@ Hélène Marchetti sets up `https://xtm-one.grand-meridian.example`, which Marc 
 - **Access and security** > **Security audit**: **Re-run** reports sessions that last 7 days; she sets **Absolute session lifetime (minutes)** to `1440` in **Security options**, so that everyone signs in again every day.
 - **Usage and quotas** > **Quotas**: 50 agentic executions a day per user, and **Unlimited** on the group **SOC**, whose night shift runs "Night shift triage" all night.
 - **Usage and quotas** > **Observability**: **Trace retention (days)** at `30`, **Store full payloads** off, **Audit log retention (days)** at `365`.
+- **Usage and quotas** > **Storage & retention**: **Chat uploads** at `365` days, as the company's data policy asks. **Preview** finds nothing older to delete, and she saves.
+- **Agents and automations** > **Platform Health**: she turns on **Enable Platform Health** with **Log every write instead of executing it**, to read what it would change before letting it act.
 - **Organization** > **Profile**: hospitality and Europe on **Identity and risk**, the payment platform and the booking engine as crown jewels on **Business**. She imports the hotels' assets from OpenAEV with **Draft** > **From the platforms**, which fills the **Exposure** tab, and keeps them in sync every day from **Knowledge and sources**.
 
 The next morning, the audit shows no `Critical` finding, and Julien Bernard sees the SOC's usage in **Model usage**.

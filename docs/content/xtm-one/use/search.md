@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [cti-analyst, soc-analyst, ai-builder]
 owner: docs-xtm-one
-last_reviewed: 2026-11-12
+last_reviewed: 2026-11-19
 ---
 
 The **Search the platform** field, at the top of every page, finds any object you can see by its name: an agent, a fleet, an assignment, a conversation, a work item, a document, a prompt, a file, and about twenty types in all. You open the brief an agent wrote last week, or the agent behind it, without knowing which menu it lives in. The **Search** page lists every match, narrows it to one type, and keeps the search in its address, to bookmark or send to a colleague.
@@ -53,7 +53,7 @@ A result opens where you work on it:
 | A document | Its knowledge base |
 | A file | :menu[Work > Files] |
 | A flow | Its builder |
-| An intent | The **Intents** list |
+| An intent | The **Intents** list. On a platform started in another mode than XTM One, such as Copilot, that list does not exist and the result opens the home page |
 | Any other object | Its page |
 
 ## Narrow and sort the results

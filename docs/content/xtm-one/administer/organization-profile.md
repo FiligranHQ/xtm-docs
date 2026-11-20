@@ -161,6 +161,14 @@ An agent's **Configuration** > **General**, and an assignment's parameters, set 
 
 The built-in tool group **Organization Profile Editing** lets an agent change the profile, run imports, and list, create and run syncs. Only an administrator binds it to an agent. Its tools are offered only on a turn that acts for an administrator. Each change is a new version authored by that administrator, with the agent and its basis kept.
 
+The same group decides the proposals waiting for review. A proposal is a change nobody has applied yet: a batch of tracked organizations drafted with a model, or the fields the CTEM Assistant or Platform Health noted in a chat with an administrator, such as "add Salesforce to our tech stack". Neither writes the profile itself. The agent lists the proposals, newest first, by state (pending, accepted or rejected), then accepts or rejects one as the administrator it acts for:
+
+- It names the fields, or the organizations, it keeps. Naming none rejects the whole proposal, for example one already applied by hand.
+- An accepted field is checked against the current version of the profile, so a save made since the proposal is never overwritten by a field it did not name. The result is a new version.
+- A proposal already decided cannot be decided again.
+
+Each decision writes an entry in :menu[Administration > Audit logs], "Organization proposal accepted by agent" or "rejected by agent", followed by the agent's name. For the drafts of tracked organizations, see [Track the organizations your company depends on](/xtm-one/administer/tracked-organizations/).
+
 :::example[Grand Meridian Hotels loads its attack surface]
 Hélène Marchetti, CISO of Grand Meridian Hotels, wants the CTEM funnel to rank findings on the hotels' real assets.
 

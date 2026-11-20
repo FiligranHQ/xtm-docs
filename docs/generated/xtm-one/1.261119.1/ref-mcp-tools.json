@@ -1,7 +1,7 @@
 {
   "name": "mcp-tools",
-  "version": "1.261119.0",
-  "source": "XTM-One-Platform/xtm-one@d2a203a: backend/app/api/v1/mcp_platform.py, backend/app/integrations/providers",
+  "version": "1.261119.1",
+  "source": "XTM-One-Platform/xtm-one@cd3a70e: backend/app/api/v1/mcp_platform.py, backend/app/integrations/providers",
   "intro": "Every tool of the Model Context Protocol (MCP) servers XTM One exposes for OpenCTI, OpenAEV and OpenCRQ: 164 tools. An assistant or an agent of your own calls them with an API key of a user, and works with that user's rights in each product: see [MCP servers](/develop/apis/mcp/) for the endpoints, the protocol and the authentication. A tool marked Write changes data; a read-only key cannot call it.",
   "filter": "Filter by tool or by what it does",
   "sections": [

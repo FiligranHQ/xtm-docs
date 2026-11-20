@@ -61,6 +61,8 @@ The toolbar above the graph narrows and arranges the map. The map keeps your lay
 
 **Company** holds both the company-managed agents your organization made and the built-in agents XTM One provides. When your organization has company-managed agents of its own, the map folds the built-in ones away: **Company** draws and counts your organization's agents only, and hovering it tells how many are hidden ("3 built-in hidden"). Turn on **Show the built-in catalogue under Company**, in **Filters**, to draw them again. On a platform with no company-managed agent of its own, the built-in ones show by default. The map remembers your choice, and the General Assistant stays drawn either way.
 
+The built-in agents include those of **Platform Health**, the platform's own maintenance fleet: an agent named after it, and the **Memory Steward**, **Quality Analyst**, **Flow Lab** and **Experimenter**. Their handovers are read-only for everyone, administrators included. They work only when an administrator turns Platform Health on, and its own cycles start them: see [Read Platform Health's fleet](/xtm-one/build/fleets/#read-platform-health-s-fleet).
+
 ### Focus on a few agents
 
 On a large platform, type an agent's name in the **Focus** field, or double-click the agent on the graph; double-click a fleet to focus on its agents. Add several to compare them; **Clear** removes them all. Then choose how the focus shows:

@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [cti-analyst, soc-analyst]
 owner: docs-xtm-one
-last_reviewed: 2026-11-16
+last_reviewed: 2026-11-19
 edition: ee
 migrated_from:
   - xtm-one:/usage/workspaces/
@@ -36,6 +36,8 @@ You can also create one from the chat: **New workspace**, next to **Workspaces**
 **List view** shows the workspaces as a table instead of cards, with the **Name**, **Owner**, **Slug**, **Status** and **Updated** columns; **Columns** hides the ones you do not need, and **Grid view** goes back to the cards. Either way, **Search workspaces...** finds a workspace by its name, its slug, its description or its owner's name. **Owner** keeps the workspaces of one person (**You** for yours), and **Status** keeps the **Default**, **Active** or **Archived** ones. **Export CSV** downloads the rows as filtered and sorted. **Rename**, in a workspace's actions menu, changes its name; its **Handle**, the slug shown on its row, stays, so existing links keep working. In the chat's sidebar, you edit the name in place.
 
 Everyone has one default workspace, **General**, created the first time they open the list, listed first and marked **Default**. Nothing is filed in it on its own: a new conversation is in no workspace until you file it. **Make default**, in another workspace's actions menu, makes that one your default; only a workspace you own, not archived and not company-managed, can be. The default workspace cannot be archived or deleted.
+
+The list also holds **Platform Health**, a company-managed workspace every platform has. It hosts the built-in Platform Health fleet, which checks the platform's agents and configuration for the administrators; see [Run agents as a team with fleets](/xtm-one/build/fleets/).
 
 ## Give the workspace its knowledge
 
@@ -96,6 +98,8 @@ The owner keeps the workspace whatever a member does; only an administrator can 
 A workspace shared with you shows **Shared by** with its owner's name, and **Read-only** when you may only read it. Its agents read the work items and shared state of every workspace you can see that is not archived, and write only where you can change the workspace.
 
 Administrators also see **Company-managed workspace**: switched on, the workspace is visible to everyone and changed only by administrators. **Restrict access** then limits it to the people and groups listed.
+
+An administrator can also ask an agent in the chat to make an existing workspace company-managed, or personal again ("make Velvet Harbor investigation company-managed"). The workspace changes in place: its conversations, its knowledge, its links and the fleet it hosts stay with it. The agent refuses for a person's default workspace, and keeps company-managed a workspace that hosts a company-managed fleet until that fleet is made personal or moved. A fleet becomes company-managed only in a company-managed workspace: make its workspace company-managed first, then the fleet, as described in [Run agents as a team with fleets](/xtm-one/build/fleets/).
 
 ## Archive or delete a workspace
 

@@ -57,10 +57,48 @@ A local server runs with the permissions of the platform: run only servers you t
 A server that authenticates with OAuth needs one more step: open its **Configuration** tab and click **Authorize** in the **OAuth Connection** card, sign in at the provider, and come back to the server page, which shows **OAuth connected**.
 
 :::warning
-The OAuth token belongs to the server, not to each user. Everyone who uses the server calls it with the account that authorized it, as they would share its API key. Authorize with a service account that has only the rights your agents need. On a company-managed server, only an administrator can authorize.
+By default, the OAuth token belongs to the server, not to each user. Everyone who uses the server calls it with the account that authorized it, as they would share its API key. Authorize with a service account that has only the rights your agents need, or let each person use their own account (next section). On a company-managed server with one shared account, only an administrator can authorize.
 :::
 
 If the provider requires a client registered in advance, register `https://xtm-one.grand-meridian.example/api/oauth/callback` (your platform's address followed by `/api/oauth/callback`) as its redirect URI, then enter the **Client ID** and **Client Secret** it issued.
+
+### Let each person use their own account
+
+An OAuth server calls the provider with one shared account, or with the account of each person it acts for. With their own account, the provider applies each person's rights and records each action under their name: a ticket opened by an agent shows the analyst who asked for it, not a service account.
+
+To choose, open the server's **Configuration** tab, click **Edit**, pick the **Connected account**, and click **Save changes**. Only the people who can edit the server choose it.
+
+| **Connected account** | Whose account a call carries | Who connects it |
+| --- | --- | --- |
+| **One shared account** (default) | The one account authorized for the server, for every person who can use it. | The server's owner, or an administrator on a company-managed server, with **Authorize**. |
+| **Each person's own account** | The account of the person the agent acts for: the person asking in the chat, the person an assignment's run acts as. Never another person's account. | Each person, once, with **Connect your account**. |
+
+Changing it discards what the other choice stored. Moving to **Each person's own account** discards the shared connection. Moving back to **One shared account** disconnects every person's own account, and the server has to be authorized again, once for everyone.
+
+On a server that uses each person's own account, the **Configuration** tab shows a **Your account** card instead of **OAuth Connection**, to everyone who can see the server, company-managed servers included. The OAuth badges of the server list and of the server page show your own connection too.
+
+::screenshot{id=xtm-one-build-mcp-servers-your-account alt="The Your account card of the Grand Meridian service desk server, seen by Paul Garnier: Not connected, a note that each person uses their own account on this server and that its tools fail until he connects, and the Connect your account button."}
+
+- **Connect your account** sends you to the provider to sign in, then back to the server page. Tokens are then refreshed automatically.
+- Until you connect, the server's tools are called for you without any account, and fail. The error the agent receives tells it that the person the run acts as must connect their account on the server's page.
+- **Error** means your connection failed to refresh: click **Connect again**.
+- **Disconnect your account** removes your connection. Other people's connections stay.
+- **Test connection** runs with your own account: connect it before you test.
+
+:::example[Open service desk tickets under each analyst's name]
+Grand Meridian Hotels' service desk publishes its tools over MCP and records who opens each ticket. The SOC wants a ticket opened from a triage chat to name the analyst, not a shared robot account.
+
+Marc Dupuis, an administrator, adds a company-managed server:
+
+- **Server Name**: `Grand Meridian service desk`
+- **Transport**: **Streamable HTTP**
+- **Server URL**: `https://servicedesk.grand-meridian.example/mcp`
+- **Authentication**: **OAuth 2.0**, with **Detect settings**
+
+He opens its **Configuration** tab, clicks **Edit**, chooses **Each person's own account** under **Connected account**, and clicks **Save changes**. Then he clicks **Connect your account** and signs in with his own service desk account, so that **Test connection** answers.
+
+Paul Garnier opens the server from :menu[Tools & Integrations > MCP Servers], clicks **Connect your account** and signs in. The tickets an agent opens for him through this server now carry his name. For a colleague who has not connected, the call fails: it never uses Paul's account.
+:::
 
 ### Import servers from a client configuration
 
@@ -99,9 +137,9 @@ To see what agents do with the server, open its **Activity** tab. It lists the r
 
 ## Share a server
 
-A server you own can be shared with groups or people, as **Read only** (they attach it to their agents) or **Can configure** (they also edit and test it). Sharing a server lends its credentials: whoever uses it calls the external system with your headers, variables or OAuth token, and XTM One asks you to confirm before it lends them. See [Share agents and resources](/xtm-one/build/sharing/).
+A server you own can be shared with groups or people, as **Read only** (they attach it to their agents) or **Can configure** (they also edit and test it). Sharing a server lends its credentials: whoever uses it calls the external system with your headers, variables or OAuth token, and XTM One asks you to confirm before it lends them. An OAuth server set to **Each person's own account** never lends yours: each person connects their own. See [Share agents and resources](/xtm-one/build/sharing/).
 
-For a server the whole organization relies on, ask an administrator for a company-managed server authorized with a dedicated service account. **Restrict access** limits it to named groups and people. The read tools of enabled company-managed servers are also the only MCP tools that run without asking on an agent that asks before running tools. See [Govern how AI is used](/xtm-one/administer/ai-governance/).
+For a server the whole organization relies on, ask an administrator for a company-managed server, authorized with a dedicated service account or set to each person's own account. **Restrict access** limits it to named groups and people. The read tools of enabled company-managed servers are also the only MCP tools that run without asking on an agent that asks before running tools. See [Govern how AI is used](/xtm-one/administer/ai-governance/).
 
 :::example[Give the triage agent the booking platform's lookup tools]
 The hotel booking platform of Grand Meridian Hotels publishes internal tools over MCP, inside the Paris datacenter. Paul Garnier's night shift often needs to know whether a guest booking named in an alert is real. Sophie Laurent connects the server and gives its lookup tools to the **Night shift triage** agent.
@@ -122,8 +160,9 @@ In :menu[Tools & Integrations > MCP Servers], **Add Server**, then **Custom Serv
 | What you see | What to do |
 | --- | --- |
 | A command not found on the platform | The command of a local server is not installed in the XTM One images. Ask the platform team to add it, or use a remote server. |
-| **Authorization required** | Set the headers, or authorize the server. On a server you do not own, its owner (an administrator, for a company-managed server) authorizes it. |
-| The OAuth status shows **Error** | The token could not be refreshed. Click **Re-authorize**. |
+| **Authorization required** | Set the headers, or authorize the server. On a server you do not own, its owner (an administrator, for a company-managed server) authorizes it. On a server that uses each person's own account, click **Connect your account**. |
+| The OAuth status shows **Error** | The token could not be refreshed. Click **Re-authorize**, or **Connect again** in the **Your account** card. |
+| The server's tools fail for you, not for a colleague | The server uses each person's own account and yours is **Not connected**: click **Connect your account** in its **Configuration** tab. |
 | The server is not offered on the agent | You cannot see it, it is disabled, or the agent is company-managed and the server is not. |
 | The agent does not use a tool you expect | Check its tool scope, click **Refresh Tools** on the server, and look for another attached source with a tool of the same name. |
 

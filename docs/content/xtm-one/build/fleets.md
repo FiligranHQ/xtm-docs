@@ -22,7 +22,7 @@ A fleet is a team of agents. Its agents hand work to each other, and it works in
 
 ## Create a fleet
 
-Open :menu[Orchestration > Fleets]. The page lists the fleets you can see: yours, the ones shared with you, and the fleets the platform ships, marked **Built-in**. Search them, filter them by owner, workspace or orchestrator, and sort them by **Name**, **Status**, **Last run** or **Net value (30d)**.
+Open :menu[Orchestration > Fleets]. The page lists the fleets you can see: yours, the ones shared with you, and the fleets the platform ships, marked **Built-in**, [Platform Health's fleet](#read-platform-health-s-fleet) among them. Search them, filter them by owner, workspace or orchestrator, and sort them by **Name**, **Status**, **Last run** or **Net value (30d)**.
 
 The page opens on **Mine** when you own a fleet. Under **Company**, the built-in fleets are hidden once your organization has company-managed fleets of its own, and the tooltip of **Company** says how many are hidden. Tick **Built-in** in the **Properties** filter to list them again: your browser remembers the choice for this list. A search that only matches built-in fleets lists them anyway. At the right of the toolbar, a line counts the agents in no fleet, and its link **Show in Agents** lists them.
 
@@ -42,7 +42,7 @@ The page opens on **Mine** when you own a fleet. Under **Company**, the built-in
 A new fleet runs nothing yet: its members' automations stay as they were until you enable the fleet.
 
 :::xtm-one[Set up a fleet in a chat interview]
-**Create with a prompt** opens the chat on an assistant that manages fleets, and starts a setup interview at once. The assistant asks one question at a time: what the fleet is for, which agents it needs, its orchestrator, its workspace, then the integrations and knowledge its agents need. It proposes the whole configuration, and creates the fleet only once you confirm, as you, with the same checks as the dialog. In the same step, it can give each member its role and the member it reports to. Then it walks you through each prerequisite still missing, such as an integration to connect. Leave the chat and ask again later: it resumes at the next step the fleet needs. On a fleet's page, **Modify with AI** opens the same chat beside the page, to change that fleet.
+**Create with a prompt** opens the chat on an assistant that manages fleets, and starts a setup interview at once. The assistant asks one question at a time: what the fleet is for, which agents it needs, its orchestrator, its workspace, then the integrations and knowledge its agents need. It proposes the whole configuration, and creates the fleet only once you confirm, as you, with the same checks as the dialog. In the same step, it can give each member its role and the member it reports to, and create the fleet at the [human approval level](#choose-what-waits-for-a-person) you asked for rather than **Full human gates**: check it on **Approval** once the fleet exists. Then it walks you through each prerequisite still missing, such as an integration to connect. Leave the chat and ask again later: it resumes at the next step the fleet needs. On a fleet's page, **Modify with AI** opens the same chat beside the page, to change that fleet.
 :::
 
 ## Read a fleet's page
@@ -71,9 +71,17 @@ Under the fleet's name, the header shows its orchestrator, its workspace, and a 
 | **Operations** | The fleet's runs, delegations, work items, shared state and worksets. |
 | **ROI** | What the fleet's work is worth against what it costs, for the people who manage it. To someone who is not an administrator, when fewer people than the **Smallest group shown apart** set in Settings used the fleet in the period, the tab shows only their own use of it, or says that the totals are hidden. See [Follow what agents do and what they cost](/xtm-one/administer/observability/). |
 
+### Read Platform Health's fleet
+
+**Platform Health** is the fleet of the platform's built-in supervisor: its orchestrator, also named Platform Health, and the Memory Steward, Quality Analyst, Flow Lab and Experimenter, working in a company-managed workspace also named Platform Health. Every user sees it, and nobody changes it, administrators included. Its header shows **Read-only**, whose tooltip reads "Platform Health is built in and read-only.", and **Settings** is its only action: no **Modify with AI**, no **Duplicate**, no **Enable fleet** and no **ROI** tab. **Fleet settings** open with every field locked, and **About** lists the fleet's prerequisites without a fix or a **Set up**. The platform writes the fleet's whole definition again at every start, so a change would not last anyway.
+
+Its automations start from Platform Health's own cycles, never from this page: an administrator turns on **Enable Platform Health**, off by default, and sets its schedules and budget in :menu[Administration > Settings > Agents and automations > Platform Health]. See [Set up the platform in Settings](/xtm-one/administer/settings/#agents-and-automations).
+
+::screenshot{id=xtm-one-build-fleets-platform-health alt="The page of Platform Health's built-in fleet, as an administrator sees it: the Built-in and Read-only badges under its name, Settings as the only action at the top right, no Duplicate, Modify with AI or Enable fleet, and the tabs up to Operations, without ROI."}
+
 ## Switch its automations on
 
-A fleet is opt-in: opening it, even a built-in one, switches nothing on. The fleet's owner and the people it is shared with for editing enable it; a built-in fleet, only an administrator.
+A fleet is opt-in: opening it, even a built-in one, switches nothing on. The fleet's owner and the people it is shared with for editing enable it; a built-in fleet, only an administrator; Platform Health's fleet, nobody from its page.
 
 :::steps
 1. On the fleet's page, click **Enable fleet**. When some automations are already on, the button reads **Enable N more**.
@@ -98,7 +106,7 @@ On **Approval**, **Human approval** sets which of the fleet's actions wait for a
 
 | Level | What waits |
 | --- | --- |
-| **Full human gates** | Every action that writes outside XTM One waits for approval. Drafts and reads need none. The level of every fleet you create. |
+| **Full human gates** | Every action that writes outside XTM One waits for approval. Drafts and reads need none. The level of every fleet created with **New fleet**. |
 | **Medium** | Low-impact writes run without approval; launches and deployments still wait. |
 | **Low** | Only destructive actions and actions on production assets wait. The level the built-in fleets ship with. |
 | **Full autonomous** | Nothing waits for approval. Every action is still logged and reported in **Operations**. |
@@ -160,8 +168,9 @@ A partner's tooltip names its integration and the addresses of its agent cards. 
 
 - **Settings** opens **Fleet settings**: the name, description, icon and colour, the workspace, the orchestrator, **Exposed to other fleets**, **Visibility and sharing**, and **Run defaults**, what one run of a member may spend when the agent sets no limit of its own (the agent's own limit wins, see [Set what one agent run may spend](/xtm-one/use/run-budgets/)).
 - To share the fleet and its workspace in one step, ask the assistant of **Modify with AI**: name the people, by email, or the groups, and whether they view or edit. It adds them to both, and can also remove people, replace the whole list, or say who has access. Only an administrator, or the owner of the fleet's workspace, shares this way. A company-managed fleet that every user sees needs no sharing.
-- **Hide activity from non-admins**, in **Fleet settings**, is for administrators, on a company-managed fleet: the runs, traces, work items and shared state of its members and of its workspace become visible to administrators only. An administrator can still change it on a built-in fleet, whose other settings are read-only.
-- **Duplicate** makes a copy you own and can change, of any fleet you see, built-in ones included. Duplicate a built-in fleet to adapt it: the built-in one stays as Filigran ships it.
+- An administrator can also ask the assistant of **Modify with AI** to make the fleet company-managed, or personal again. It refuses while a home member or the fleet's workspace is personal, and names them: make them company-managed first.
+- **Hide activity from non-admins**, in **Fleet settings**, is for administrators, on a company-managed fleet: the runs, traces, work items and shared state of its members and of its workspace become visible to administrators only. An administrator can still change it on a built-in fleet, whose other settings are read-only, except on Platform Health's fleet.
+- **Duplicate** makes a copy you own and can change, of any fleet you see, built-in ones included, except Platform Health's. Duplicate a built-in fleet to adapt it: the built-in one stays as Filigran ships it.
 - **Archive the fleet**, at the bottom of **Fleet settings**, hides it from the Fleets page and freezes its members. Turn on **Show archived** in the page's filters to find it, then **Restore the fleet** brings it back.
 - **Delete the fleet** deletes no agent: the members go back to being in no fleet, with their handovers and assignments, and the workspace is kept.
 

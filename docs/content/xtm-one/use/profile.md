@@ -1,11 +1,11 @@
 ---
 title: Set up your profile and API keys
-description: Set your XTM One profile, time zone and two-factor authentication, choose the agent that answers you, review what agents remember, and create scoped API keys and the MCP endpoint for your own tools.
+description: Set your XTM One profile and two-factor authentication, choose the agent that answers you, review what agents remember or keep it from Platform Health, and create API keys and your MCP endpoint.
 doc_type: how-to
 products: [xtm-one]
 personas: [cti-analyst, developer, ai-builder]
 owner: docs-xtm-one
-last_reviewed: 2026-11-08
+last_reviewed: 2026-11-19
 migrated_from:
   - xtm-one:/usage/my-profile/
 ---
@@ -22,6 +22,7 @@ The **Profile** tab holds your name, title, email, time zone, theme, language an
 - **Email**: another address must not belong to another account. The platform administrator's account, the one `ADMIN_EMAIL` names, keeps that address: saving another one fails with "The platform admin account's email is set by ADMIN_EMAIL and cannot be changed". Change `ADMIN_EMAIL` instead (see the [XTM One configuration](/reference/xtm-one/configuration/)).
 - **Password**: shown with a local account. With single sign-on, your identity provider manages it.
 - **Work items waiting for you**: the notification bell lists each work item waiting for your decision until you answer it. Turn off **Notify me of work items waiting for me** to take them out of the bell only: the notice of the home dashboard and the **Waiting for me** view of :menu[Work > Operations] still list them.
+- **Companion**, for administrators only: turn on **Show the companion**, off by default, and pick a pet. The pet sits in the bottom right corner of every page and shows what Platform Health, the platform's built-in supervisor, and your runs are doing: "A run is waiting for your approval.", "A proposal is ready for your review.", or a run that did not go through. Click it to open its bubble: the open findings of Platform Health ("No open finding.", or how many critical findings or warnings are open), a button to :menu[Administration > Platform Health], named after Platform Health ("Open Platform Health" unless your administrator renamed it), and **Hide**, which turns the companion off until you turn it on again here.
 
 ### Turn on two-factor authentication
 
@@ -57,6 +58,24 @@ The **Memory** tab shows what XTM One remembers about you, in two parts:
 - **Per-Agent Memory**: what each agent noted while working for you, such as a pending review or a triage rule. No other agent reads it. A note about something that can change is shown to its agent as unverified, with its date, and dropped after 72 hours.
 
 **Purge Profile** clears the cross-agent profile; clearing an agent's memory also removes the notes its work left in your profile; **Purge All** resets everything. Check this tab when an agent remembers something you no longer want it to.
+
+### Opt out of Platform Health
+
+Platform Health, the platform's built-in supervisor, improves the agents their managers opted in. To do so, it reads their memories and the content of their conversations, yours included. Excerpts become evaluation cases, unredacted, that the agent's managers and the administrators can see. You can keep your own content out of it.
+
+:::steps
+1. On the **Memory** tab, find the **Platform Health** card. Under **Opt out of Platform Health**, it reads "Your memories and conversations with opted-in agents may be read."
+2. Turn on **Opt out of Platform Health**.
+3. Confirm with **Opt out**.
+
+::screenshot{id=xtm-one-profile-health-opt-out alt="The Platform Health card of the Memory tab: Opt out of Platform Health, still off, with the line saying your memories and conversations with opted-in agents may be read, and the notice on what Platform Health reads and who sees it."}
+:::
+
+The card then reads "Platform Health reads none of your memories and conversations.", and the evaluation cases already built from them are deleted at once. Turning the switch off again lets Platform Health read your content from then on, but does not bring the deleted cases back. Whether an agent is opted in is decided on its page: see [Let Platform Health improve it](/xtm-one/build/agents/#let-platform-health-improve-it).
+
+:::example[Keep guest records out of the evaluation cases]
+In May 2026, Sophie Laurent opts the **Velvet Harbor watcher** in to Platform Health. Camille Roux, CTI analyst at Grand Meridian Hotels, has pasted the names of guests whose records Velvet Harbor took into her conversations with the watcher. She opens **My Profile**, tab **Memory**, turns on **Opt out of Platform Health** and confirms with **Opt out**. Platform Health no longer reads her memories and conversations, and the cases built from them are gone. It goes on improving the watcher from the conversations of the colleagues who did not opt out.
+:::
 
 ## Check your quota
 

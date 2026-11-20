@@ -1,8 +1,8 @@
 {
   "name": "api",
-  "version": "1.261119.0",
-  "source": "XTM-One-Platform/xtm-one@d2a203a: backend/app/main.py, backend/app/api",
-  "intro": "Every route of the XTM One REST API: 1057 in 70 areas. The interface calls the same routes, so a script does what a person does on screen, with the rights of the user whose API key it sends: see [Script OpenAEV and XTM One with their REST APIs](/develop/apis/rest/). Your platform serves the same list with the fields of each route at `/api/reference`, and as an OpenAPI document at `/api/openapi.json`.",
+  "version": "1.261119.1",
+  "source": "XTM-One-Platform/xtm-one@cd3a70e: backend/app/main.py, backend/app/api",
+  "intro": "Every route of the XTM One REST API: 1062 in 70 areas. The interface calls the same routes, so a script does what a person does on screen, with the rights of the user whose API key it sends: see [Script OpenAEV and XTM One with their REST APIs](/develop/apis/rest/). Your platform serves the same list with the fields of each route at `/api/reference`, and as an OpenAPI document at `/api/openapi.json`.",
   "filter": "Filter by path or by what a route does",
   "sections": [
     {
@@ -4484,6 +4484,14 @@
           ]
         },
         {
+          "key": "DELETE /api/v1/mcp-servers/{server_id}/my-credential",
+          "cells": [
+            "`DELETE`",
+            "`/api/v1/mcp-servers/{server_id}/my-credential`",
+            "Disconnect one's own account from a `per_user` MCP server (idempotent)."
+          ]
+        },
+        {
           "key": "POST /api/v1/mcp-servers/{server_id}/refresh-tools",
           "cells": [
             "`POST`",
@@ -7111,6 +7119,38 @@
             "`DELETE`",
             "`/api/v1/settings/disabled-providers/{provider}`",
             "Re-enable ONE provider, leaving every other entry alone (admin only)."
+          ]
+        },
+        {
+          "key": "GET /api/v1/settings/file-retention",
+          "cells": [
+            "`GET`",
+            "`/api/v1/settings/file-retention`",
+            "Every file retention rule, with what each category holds today (administrators)."
+          ]
+        },
+        {
+          "key": "PUT /api/v1/settings/file-retention",
+          "cells": [
+            "`PUT`",
+            "`/api/v1/settings/file-retention`",
+            "Change the days of the categories given (administrators); an audit entry names each change."
+          ]
+        },
+        {
+          "key": "POST /api/v1/settings/file-retention/preview",
+          "cells": [
+            "`POST`",
+            "`/api/v1/settings/file-retention/preview`",
+            "What the next sweep would delete per category under body (the stored days elsewhere); nothing written."
+          ]
+        },
+        {
+          "key": "GET /api/v1/settings/file-retention/rules",
+          "cells": [
+            "`GET`",
+            "`/api/v1/settings/file-retention/rules`",
+            "The rules alone (days per category), for any signed-in person or agent: what a file's card says."
           ]
         },
         {

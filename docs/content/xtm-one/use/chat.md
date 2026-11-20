@@ -89,6 +89,12 @@ To change a file the agent produced, say what to change in plain words: "remove 
 
 Every file of your conversations is also listed in :menu[Work > Files]: see [Find the files agents created and received](/xtm-one/use/files/).
 
+### When a file was deleted
+
+XTM One does not keep every file for good: an administrator sets how long each kind of file is kept. By default, the files an agent hands you and its working files go after 60 days without use; downloading a file, or an agent reading it, counts as a use. The files you attach are kept unless an administrator sets a limit. A file that an open work item, a presentation or a report still uses is kept.
+
+When a file's content is deleted, its conversation keeps a card where the file was: its name and size, greyed, with when and why it went, such as `Deleted on Jun 12, 2026 by the retention policy`. A working file shows struck through. The card no longer downloads, and a link to the file in an answer shows **Download failed**, with `"indicators-to-block.csv" was deleted by the retention policy.` The agent reads the same notice instead of the file: ask it to produce the file again. **Conversation options** > **Conversation files** lists a deleted file with the same notice, without **Download** or **Add to the workspace's sources**. Download the files you want to keep. How long each kind of file is kept is set in [Settings](/xtm-one/administer/settings/).
+
 ## Rate an answer
 
 Point at a finished answer to show its thumbs, **Helpful response** and **Not helpful**. A thumbs down opens a dialog to say what went wrong. When administrators have defined [feedback criteria](/xtm-one/administer/settings/), any rating opens it, to score each criterion. The people who manage the agent read every rating in its **Feedback** tab.

@@ -5,13 +5,13 @@ doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-08
+last_reviewed: 2026-11-19
 edition: ee
 migrated_from:
   - xtm-one:/usage/resources/templates/
 ---
 
-A template is the design the presentations and reports of your agents wear: a palette for each theme, the heading and body typefaces, the logos drawn on every slide, the assets a deck may place (diagrams, screenshots, partner logos), the layouts it may use, and a few sentences of guidance on how to compose in that brand. Agents find templates by name, kind, aspect ratio, tags and supported themes, so the same request gives everyone on-brand output. This page creates a template, gives it its assets, adds brand packs to the built-in templates, and explains how decks use it; generating decks is in [Presentations](/xtm-one/use/presentations/).
+A template is the design the presentations and reports of your agents wear: a palette for each theme, the heading and body typefaces, the logos drawn on every slide, the assets a deck may place (diagrams, screenshots, partner logos), the layouts it may use, and a few sentences of guidance on how to compose in that brand. Agents find templates by name, kind, aspect ratio, tags and supported themes, so the same request gives everyone on-brand output. This page creates a template, gives it its assets, adds brand packs to the built-in templates, and explains how decks and reports use it; generating decks is in [Presentations](/xtm-one/use/presentations/).
 
 ::diagram{id=xtm-one-build-templates-linked}
 
@@ -28,6 +28,17 @@ A template is the design the presentations and reports of your agents wear: a pa
 - **Only the design travels.** A template restyles a deck through its palette, fonts, logos and footer pattern; it can never inject styling or scripts into the pages that render it.
 
 The **XTM One Brand Deck** ships with every platform: the product's purple palette on dark surfaces, the XTM One logo, and the logos, diagrams and screenshots of the XTM platform as assets. Built-in templates carry the **Built-in** badge and are read-only, because every upgrade rewrites them. To start from it, open it and click **Duplicate** (under **More actions** when the window is narrower than 1280 pixels, with **Export** and **Delete template**): the copy is yours.
+
+## How reports use a template
+
+An executive report wears a template of the **Report** kind, the same way a deck wears a presentation template.
+
+- **A report that names no template wears the platform's brand**: the built-in **XTM One Brand Report**, with a dark navy masthead, the XTM One purple accent, the Geologica and IBM Plex Sans typefaces, and the XTM One logos. On a platform started with `PLATFORM_MODE=copilot`, it is the **Filigran Brand Report**. The **Default Presentation Template** of :menu[Administration > Settings > Platform] applies to decks only.
+- **The brand is read when the report is opened**, never stored in it: the viewer, the PDF export and a report written before this brand existed all show it.
+- **Name your own template in the request.** An agent passes a template only when you name one, or for a company report template that is not the brand; otherwise it leaves the brand to apply.
+- **The report's theme picks the scheme.** A report is light by default, white cards on a light page made for print and PDF, or dark for a screen readout: ask for a dark report to read on screen. The brand report template carries a palette for each, with the masthead dark in both; a template with a single palette is drawn as you designed it, whatever the theme.
+
+The brand report template carries the **Built-in** badge and is read-only, rewritten at every startup: to derive your own report palette, open it and click **Duplicate**.
 
 ## Create a template
 
@@ -113,7 +124,7 @@ A platform engineer can also mount pack folders in the container and name them i
 
 ## Check that it works
 
-On the template's page, click **Preview**, or **New presentation with this template**: the sample deck shows your palette, fonts and logo. In a chat, ask an agent with **Presentation Generation** for a deck "in the Grand Meridian briefing template": it uses it without asking.
+On the template's page, click **Preview**, or **New presentation with this template**: the sample deck shows your palette, fonts and logo. In a chat, ask an agent with **Presentation Generation** for a deck "in the Grand Meridian briefing template": it uses it without asking. Ask an agent with **Report Generation** for a report on Velvet Harbor without naming a template: it opens on the masthead of the **XTM One Brand Report**.
 
 ## What's next
 

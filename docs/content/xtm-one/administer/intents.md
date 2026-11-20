@@ -31,6 +31,7 @@ An intent a platform declared and no agent is bound to shows **Unbound** in the 
 ## Before you start
 
 - XTM One runs the Enterprise Edition with AI switched on: **Intents** is an AI area.
+- The platform runs in its XTM One mode, `PLATFORM_MODE=xtm_one`, the default. Started in another mode, such as `copilot`, it routes no request through an intent: **Intents** is neither in the menu nor in the command palette (**Browse intents**), and `/intents` opens the home page.
 - Your account is an administrator, to set the bindings everyone follows.
 - The agent to bind is enabled, and company-managed or shared with at least one group. XTM One refuses a binding for everyone to a private agent, since it would reach the people of the connected product. See [Share agents and resources](/xtm-one/build/sharing/).
 - The connected product is registered: see [Configure XTM One](/deploy/configure/xtm-one/).

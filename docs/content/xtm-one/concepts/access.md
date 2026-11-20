@@ -20,7 +20,7 @@ XTM One has two roles, **Administrator** and **User**, and no finer permission s
 | Role | What it gives |
 | --- | --- |
 | **User** | Chats with the agents they may reach, builds their own agents, knowledge bases, prompts and tools, and shares them. Sees no administration menu. |
-| **Administrator** | Everything a user does, plus the **Administration** menu (**Observability**, with **Model usage**, **Outcomes**, **Traces** and **Sessions**, then **Users and groups**, **Objects**, **Audit logs** and **Settings**) and **Intents** in the **Orchestration** menu. Only an administrator edits a company-managed resource. |
+| **Administrator** | Everything a user does, plus the **Administration** menu (**Observability**, with **Model usage**, **Outcomes**, **Traces** and **Sessions**, then **AI Adoption**, **Platform Health**, **Users and groups**, **Objects**, **Audit logs** and **Settings**) and, on a platform in its XTM One mode, **Intents** in the **Orchestration** menu. Only an administrator edits a company-managed resource. |
 
 The role is the only switch. **Promote** and **Demote**, on a user's page, change it, and every change is recorded in **Audit logs**.
 

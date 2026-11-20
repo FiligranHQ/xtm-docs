@@ -3774,17 +3774,17 @@
   "xtm-one-agent-overview": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/26d2ba051fac7b851b17780f140c39e1f404a4c515db64058e34512292cc1732.webp",
-        "dark": "/shots/21873155a61c4d2ded66e8c637af3dc4a207073f5d12f327a0aa4949fc93a0c2.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/2b8ea5a6e94fce21425f276234c812e5f9a546b717892c6a9ebc93c41ea7bdfb.webp",
+        "dark": "/shots/f77c65bab695f78f2aea175ac58c85ab4026d763363aa862bcdb1346afd10654.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-administer-users": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/3797bda94e87718832d0e1d76fec5a4511c43ab1ac615f6a8fc7d1824ba2ed9f.webp",
         "dark": "/shots/b641d002039ae04d9a1a801423a4b59685685c0f0d92101a81f9e563eed64168.webp",
         "captured_at": "2026-11-17"
@@ -3795,10 +3795,10 @@
     "product": "xtm-one",
     "since": "1.261119.0",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/f79c9846e0a62570fde208360d3cf1dab00d06c917b9ab8e7f9db6583a299f75.webp",
-        "dark": "/shots/da444cb0477ddcf09b559512c9db3f7753946a0bed2f27c7e62a2ddac56f3384.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/98e6dbc94121d9c0710a99b79a8e58a576f62074dc4ae6372f434009ddba5a7b.webp",
+        "dark": "/shots/67d3740881fdc2ae36150de879e4c998218e8878d3be34ad324605418d830e96.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -3806,7 +3806,7 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/0baea211df569a0ca2f35f9cf3e728f186c2c1dcc5aa81ee558ab8dff4c26dfa.webp",
         "dark": "/shots/7b22f24c53c9a7c5e76f38001c0fdd3b1478c49e31903b8350c426c7c7b76105.webp",
         "captured_at": "2026-11-17"
@@ -3817,10 +3817,10 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/06c796df636600e30d74fa1ff97d314c8043dd031ed4b0e6ec0c36c3019e3014.webp",
         "dark": "/shots/815ea978d0b72e6d4a448d1d53e5270d00c83ec2b16c4a18f29aa6069eed1f28.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -3828,10 +3828,10 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/8f7b4772695abd3a25064dce3c8972f5c843b8aa2d04031a2dd097a6fe4bb661.webp",
         "dark": "/shots/97649331914c79495a31f9b0e9c9d08ba1c578f902a6cd9604ee242010d75b46.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -3839,7 +3839,7 @@
     "product": "xtm-one",
     "since": "1.261116.1",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/431c7cda49cd140a2245b2a65ef9891dad3a2ed7948051b781b84a07603f440a.webp",
         "dark": "/shots/8d15f9022d8fe1630d3e4c77771e11d47bfcd04449915f22a1c6cf679de21609.webp",
         "captured_at": "2026-11-17"
@@ -3850,17 +3850,17 @@
     "product": "xtm-one",
     "since": "1.261119.0",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/ce6a108cd7b52bf46ec7df8620aff42b37bfc4270d00e1cca8ac6b2a5b36e31e.webp",
         "dark": "/shots/be5ec36609bf7180fd16628f5243d46571253bb11daea2efbaa1e59d47bead09.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-administer-settings-parameters": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/bc6cc653828ac645b22ea0ab41b92a7c40dbb4a571c85b7994551bb99e8b560a.webp",
         "dark": "/shots/50daa6010f8d899de6e82b742715a90337f81809949be72910b7f5a8cd83a469.webp",
         "captured_at": "2026-11-12"
@@ -3871,37 +3871,70 @@
     "product": "xtm-one",
     "since": "1.261119.0",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/5a219453af0aef4cb3e03b7a3395b76eedfe67447a598a3587e0e4aea99dab06.webp",
         "dark": "/shots/2332b69bc8b27acb2bce51a1a79c7fe7bd0377e1b9b465cda46a28d6faacd287.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
+      }
+    }
+  },
+  "xtm-one-administer-settings-storage": {
+    "product": "xtm-one",
+    "since": "1.261119.1",
+    "versions": {
+      "1.261119.1": {
+        "light": "/shots/8632a69411c680b065348c0da829a3845316f236432b720b4c15081dd00ab78d.webp",
+        "dark": "/shots/330811b5778bcf99340d9cce793ec9ecbb73ca1e096665ad59cb5e0736a05426.webp",
+        "captured_at": "2026-11-20"
+      }
+    }
+  },
+  "xtm-one-administer-settings-health": {
+    "product": "xtm-one",
+    "since": "1.261119.1",
+    "versions": {
+      "1.261119.1": {
+        "light": "/shots/641b17d900fe2d2fd4ed5d11d086ebd8dd6444001332c96acc124f29f29eb911.webp",
+        "dark": "/shots/b28ece9960467d6f280c4289ac90bf2da218b50085417c67817fa4b3d041a1ba.webp",
+        "captured_at": "2026-11-20"
+      }
+    }
+  },
+  "xtm-one-administer-platform-health": {
+    "product": "xtm-one",
+    "since": "1.261119.1",
+    "versions": {
+      "1.261119.1": {
+        "light": "/shots/897c3a1873668ffd40570c0d7a7847adfbd2ea1f5aed23af2816597de788b659.webp",
+        "dark": "/shots/cdd0ee53435f75052853bb9cb3507dd9f83cd8349a33c182ae4e80929086e695.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-administer-tool-approvals": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/25200c63d92aa7e56536e35c8656889357cacd46d3e17525dcc5fa5a07126342.webp",
-        "dark": "/shots/71352fae306115c8997f4bb68a21de87d201a625e27ddf0f6f68bfef5fdac57b.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/1bbbbb34144e578dd7f4977ace8ee81c2b3682fb7b73647ef287ade570de323e.webp",
+        "dark": "/shots/99aa3f179a08e7b6f55ad9deed38795c44ad7154719761ba5f60f1dcab1d756f.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-overview-studio": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/4d119db41b36e87253124eaf6e164d9df286f8209832ac5d3a5866293e77a47b.webp",
         "dark": "/shots/8352c5b452bbd0be5862805b174e10a0b5cf82a9ceedd71b216fad46caeafec6.webp",
-        "captured_at": "2026-11-17"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-agents-wizard-persona": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/fbd1bf4f76f3f9a9c39123d9e6a558e0d1dd13e1d44c87839d54d2fdba095a9e.webp",
         "dark": "/shots/1e4a0dddebff7794240cb075c5a34fa94582e0c1fb04f8b4e5201fa2971a7ccf.webp",
         "captured_at": "2026-11-17"
@@ -3911,7 +3944,7 @@
   "xtm-one-build-agents-assignment": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/667d4463869e478400d03fac48a9c78f5c87200b7e7800404606fa7e3d286eed.webp",
         "dark": "/shots/ff7eceeb956ff9fdf05ffaa90b1126a66a4eef1f8a8fdbd66883ae32b6b0451b.webp",
         "captured_at": "2026-11-17"
@@ -3922,10 +3955,21 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/55a3ef90cc3f5d31ab63a107299d4967d6f7e2f70acb3a8318b238530f72c6d4.webp",
         "dark": "/shots/bf939e5bd0450e03ad6f510e5e8b1bf8d09f24ea9491ffe4fbe564e97f0b5d9b.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
+      }
+    }
+  },
+  "xtm-one-build-agents-health-opt-in": {
+    "product": "xtm-one",
+    "since": "1.261119.1",
+    "versions": {
+      "1.261119.1": {
+        "light": "/shots/1fe315d3be56a019cc2f839566d6ad0dfd7c28619e13b3975dddfbbc3c1f0281.webp",
+        "dark": "/shots/0c36d7ddfd345c7d3cbce83f55ff33fa39e99184738fb00310c2e3b1ba8f74bf.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -3933,10 +3977,10 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/274dd8464b7b41452172dd6b4faa6ab9186ed45dee77b35a518ccd10612739f9.webp",
-        "dark": "/shots/1c3bc689ba129794930747a847af85a93227354b4d49ec37e15ef9434c4cdb06.webp",
-        "captured_at": "2026-11-17"
+      "1.261119.1": {
+        "light": "/shots/29db8fa08c1892cc649944d536f25d1523b52d097a23d1e22190b0559e013149.webp",
+        "dark": "/shots/e1c593ee3c0a7091449b1e420c54c61fc21e01f67e1a8366809ea7565e81a648.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -3944,10 +3988,10 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/4b67395c5915401948f55b2c8d8d5bf498973c7c47747163b69f90c6c299e03c.webp",
         "dark": "/shots/81f9879d3ee8d1939f037edb473596f9726ce9b3b7ac68642f390239cd5835aa.webp",
-        "captured_at": "2026-11-17"
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -3955,10 +3999,10 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/05c2e4c9b4cac8e4a7b746fa35b80f46ca3c0b76995cae05ada7af3986bd957c.webp",
         "dark": "/shots/2b367c8936272214aaa0e13dbb276de8bbd3c0339d5e79495eeb16ac1bbf922e.webp",
-        "captured_at": "2026-11-17"
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -3966,37 +4010,48 @@
     "product": "xtm-one",
     "since": "1.261116.1",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/57ebe23aafa7f7b809b79e3f615fecf1994a8634291f99b8217903780f2bee42.webp",
         "dark": "/shots/7472dfcdabf34f4d912d8f3dede44d812ab91b45bee71f062d8be5162183b260.webp",
-        "captured_at": "2026-11-17"
+        "captured_at": "2026-11-20"
+      }
+    }
+  },
+  "xtm-one-build-fleets-platform-health": {
+    "product": "xtm-one",
+    "since": "1.261119.1",
+    "versions": {
+      "1.261119.1": {
+        "light": "/shots/4099d878a734428a43416ca2846640db920560be5e10832765805227ed8d106c.webp",
+        "dark": "/shots/0e61a36a495b679a1a9739416b000b3d8095fe97140eb7bc81a97c1623ba8159.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-knowledge-bases-documents": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/75cd8138c176b698b824c9175036071d9f61847af7f622fa41250df52b8b34a8.webp",
         "dark": "/shots/ccef52aafddd338a80f3a0e215c0886151cc9dbe33386cd26eb170c370cf52e2.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-sharing-agent-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/0e32c6c35b52e0b1ca2632902a60a55999581bf465f5a45d1b388ce98b7d38ae.webp",
         "dark": "/shots/1609f2c337b56f0b4824a2e0925626688c7c5527df474ae04281be94048d3c4a.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-prompts-create": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/90318092044b02068c84f3adeada87c63a55f12f3ab872af2b406f70ff955853.webp",
         "dark": "/shots/45ddd85ff306cd451ccf3eb5d5347e8b6d124deb140ca5d3948ddca237f058cb.webp",
         "captured_at": "2026-11-17"
@@ -4006,17 +4061,17 @@
   "xtm-one-channels-settings": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/a4f68973a69248b8ce997654bf431ce2f83e42f4243a2be40c79fb6497b77d2a.webp",
         "dark": "/shots/6c5e78538c7b2518c12ce8284db227c8f952807fd30ac276f9591d2bfb55e728.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-editions-license-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/0989c589aedb43b8dc20b13a02345bcf676f43d979d74d2fd549246790d34946.webp",
         "dark": "/shots/46f3fd25f33ad2eb5dff27f099fb915394b7421f86f464213be8eecd8c1cf1c2.webp",
         "captured_at": "2026-11-12"
@@ -4026,17 +4081,17 @@
   "xtm-one-data-model-agent-tabs": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/575348bc1f5e945ac895656f52cae75ed935d79a2a319e535227e4b743f4d2a8.webp",
         "dark": "/shots/6bc851b0553d0ef806085fe59a11a55f736a792df350f8230748974418178b05.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-scopes-sharing": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/724caef09e89349aef979f2915fa3ea5bbb7f9aaf0afa12c4971ea9a66d388ca.webp",
         "dark": "/shots/cc4edc2242217752460481734d99da7c02eebc5e53b11b5d1dbb61a62f0f49e7.webp",
         "captured_at": "2026-11-17"
@@ -4046,27 +4101,27 @@
   "xtm-one-dates-and-status-executions": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/a72e8c9b292e800abd3c8d94d7e4b8b2c4325251a85fcf9217e93d1811280d57.webp",
-        "dark": "/shots/566d53d2f44926cdb43585cf134bfa53f39d77f0b51cf5f87953ed46dcd0f176.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/c4961295af87cddb165bfb42f7bf3a91ee51151d103c475d632e725b9af2cd0d.webp",
+        "dark": "/shots/a4b2b8a516febb1ddf2737e35de26fdc1ae6b116e1b3f1c20e9bb31b126cbaa2.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-dates-and-status-work-items": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/c5a37e61800d8921cd4a78f6d165ea7e5d00bdf72a8535bafb32d5761e73a645.webp",
         "dark": "/shots/0a75d5c6e6ce4f8c41b3f19e843098d2f1a305dbae4c2d3fc2a1eec6317e376b.webp",
-        "captured_at": "2026-11-17"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-in-opencti-decay-guardian": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/0573a492e78c6bfeb63250290c6608ff9aaab2947ef290b0a8a372f12e6ecb42.webp",
         "dark": "/shots/0ae0b5225422ff924bb03a696e4a1b5180b5a63da7596b746cd5625fab8a00f6.webp",
         "captured_at": "2026-11-19"
@@ -4077,10 +4132,10 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/9210fee6ccdff4232c4e755da877905b9fcc9f027e3e2fc65ad7823cf2b89532.webp",
-        "dark": "/shots/8ed59dd829a3dd6229b29397f84d92ba8c8c76ff4d269a58e150ae90718772a0.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/cdf4e176974e8bd3fa05dbc591e3903bf563a0fa1fef815ac47a9642ec69fbc0.webp",
+        "dark": "/shots/c08d336160e2db23742bc6449cad6effb57eb7d8fb799f07b49d0f112c864d9d.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4088,27 +4143,27 @@
     "product": "xtm-one",
     "since": "1.261119.0",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/cc2755b3b3a4637750add07bc0072fd484aac67eaf87ebd3c5fcad87d18e0772.webp",
-        "dark": "/shots/54a2d74571f71db2ac2fbcbf2ca23791a11cd012850e30c0d3ad6134a48f67a6.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/ef932b45c629c6129e6067828d4898fe605580700a35440d41afc20afc4966f5.webp",
+        "dark": "/shots/9dce5db80b51e071e6ee144d21cc94c63751dc05e57fce08488c64dcd2ee273c.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-agentic-flow-schedule": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/2577d8f38f4298df3bc4506d1e80bb2c24211d4e58976cc83ca2c6681fd5efa1.webp",
-        "dark": "/shots/716ff0babb3a6c3eaf79025a5391c194e301e6f8e41d407c134736e49d8958c0.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/9b18bf12f2bdd27f7154f0c15a49538c0aa547904431914702bac06bd9412cc8.webp",
+        "dark": "/shots/4bd16048d2e99ade001ec3e9e87b7f46815011a16c03373dea4a8f6090bcebc1.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-webhook-triggers-trigger-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/ad4d6fc649e98f8c537617dbe194b8fd49723f7628377ba0f763aa28d7187c5c.webp",
         "dark": "/shots/cdf3b7a21db15816170eb4749bd57861e63c7d013f18f9c0c2d1ebcd9a46a79d.webp",
         "captured_at": "2026-11-10"
@@ -4118,7 +4173,7 @@
   "xtm-one-run-budgets-tab": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/b0f3b50df47f3d90ecbe1d4ad08468c41e47e2a2dd888442a9fe286138e42790.webp",
         "dark": "/shots/a9deebca2c9cb63e272f81bff1802fe67982f16f41baff98c6ac0ed0c13ec06e.webp",
         "captured_at": "2026-11-17"
@@ -4128,10 +4183,10 @@
   "xtm-one-workspaces-list": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/601e56b4be5401d70287f0cd38f3c2b5a2a73c72ddf6863670004a077e023aca.webp",
-        "dark": "/shots/92c9d45704908b1420c8502dbc18989bd1d6a7d29e3467b8edfb9e9520741679.webp",
-        "captured_at": "2026-11-17"
+      "1.261119.1": {
+        "light": "/shots/9d270a32352383982bfa349cead449211c76bca906a0fc70714df8164d860818.webp",
+        "dark": "/shots/345e19cc0ba52de0164ec2df18d70e3c5dfc5e552cfa72c24f0437bb5f45a5a1.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4139,20 +4194,20 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/a35bf86f321df9691547cbbd2702f6bed562aeeb69a87498c446af2cf579c0f0.webp",
         "dark": "/shots/5ca4a0ae63e4e1d8e005d79abe4cdb587a550aff55a64463a55b41da10dc4bc6.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-files-list": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/52106e5fc03abfb131c4b428c41f378fdc9a7e4923df9143c067c7e848c02c2d.webp",
-        "dark": "/shots/ea05c69d5333ccd9311cfeba4ab898046de8ad55705c3e5e790a28c85e2deb25.webp",
-        "captured_at": "2026-11-17"
+      "1.261119.1": {
+        "light": "/shots/f4e7523cc1bb992a29520c66b6a7145cca6655227312efa3b66464fc58aae7d0.webp",
+        "dark": "/shots/4b195d29237d7804d48349cf55913722bb255a58f6c6e29c9472963e6c849e45.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4160,10 +4215,10 @@
     "product": "xtm-one",
     "since": "1.261112.0",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/583c27615fc5e81b1de1caa567f6c84766491fc593dce88ee6d45dfd5a273eb7.webp",
         "dark": "/shots/62b1ad0a4674521af0c80e06811cfe1253498f417e9c4a5fcd4562825a8644dc.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4171,20 +4226,20 @@
     "product": "xtm-one",
     "since": "1.261112.0",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/39a501510a5cdfe5f33f0a4e1cdc7b03d41e9537eda0022a4bd4f1921e17e834.webp",
-        "dark": "/shots/d7acc5f22f16366b451c835f51fc0fa2584519f29e82464259bcee235ebd0ace.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/1d35bb713be9b390e7b25f66b304de97a90d09bf10860b1c54c3d6163114bbe0.webp",
+        "dark": "/shots/19b1fffe2984dd1d0fd4165ad650861ec8b23f961b1ddf7d6675b4e6fc4cf311.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-dashboard-command-center": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/2a371ca34e3f97df6d46e147033d1b033378419ef60f2dccf6db05e0f023f971.webp",
-        "dark": "/shots/c4afe664791e7632e76519f238d2da71660eec893376fb67d0598857f6c978fa.webp",
-        "captured_at": "2026-11-17"
+      "1.261119.1": {
+        "light": "/shots/b149a73969013d87112f9d22aa4fc810f253155f35f7d65db074b4f81829682f.webp",
+        "dark": "/shots/691f8cd6f5f6e3bda83892cddb4cb3b922f824cec90c64163f2a5c42db80417e.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4192,7 +4247,7 @@
     "product": "xtm-one",
     "since": "1.261116.1",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/1b9067331100cd5af0f7a3019104fde1bab09022e2bd8a29201bc79e2d65bc76.webp",
         "dark": "/shots/7029e84891adcc0a2f83b5fc1e4f87ae0da212adc6fe6684df25dd91c2e3b231.webp",
         "captured_at": "2026-11-19"
@@ -4203,7 +4258,7 @@
     "product": "xtm-one",
     "since": "1.261116.1",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/715dbc5b18b50bf746d9f9373c59990b90dd0cbe36fbdc8d65f306612c8e546a.webp",
         "dark": "/shots/824d45e7345a291fe028fd0e5ed6ac3929df75c9d7ed2c4d38774ede0be2f87e.webp",
         "captured_at": "2026-11-17"
@@ -4213,30 +4268,41 @@
   "xtm-one-work-history-executions": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/173cdfad0364bc5fcbfb951ee1c326c0067ce0dc38d0978ce542b00c00faf3d7.webp",
-        "dark": "/shots/ab53b9f4627ac0898d0fbf23069bb95064ea0cb57527f78eadd4d14aa4e1b6ca.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/ee88528ce2df90b733cca6a858617acab1dcbcea6a6f00e1b1b8260b320bf4dd.webp",
+        "dark": "/shots/e0752becdad3ed34a9221ad2b3be06f01e47390275a29762f499199af0d13064.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-profile-two-factor": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/1dce78ef7b8e70e737dc563d2936d3c96d15765ee426134e0e442d06b9b5f919.webp",
         "dark": "/shots/dd98ae542afbb87c0aca9448c137086f68e2d292a440f0481be4aa4edb031d78.webp",
         "captured_at": "2026-11-10"
       }
     }
   },
+  "xtm-one-profile-health-opt-out": {
+    "product": "xtm-one",
+    "since": "1.261119.1",
+    "versions": {
+      "1.261119.1": {
+        "light": "/shots/d4bd02513870c78bcc565659045d3d140fe82cd00d96463f047b0f8bc71f7c01.webp",
+        "dark": "/shots/bf9b6bf755838c5fe5cd993a4528913bba9a4da7bd0cbb5c45057c329e4362c1.webp",
+        "captured_at": "2026-11-20"
+      }
+    }
+  },
   "xtm-one-chat-conversation": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/b503f0e20ce06070f26d5df1ac6e90ee3231b5e8c050ef917adbd6840b9f7899.webp",
-        "dark": "/shots/666218311998465045a6ec1783de15b1f9058ae64da40ece9e0e504298b31a76.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/f61bf2a5aef8e3d73d5a49dfb214271a0d86ed17e95deb99457a0aae05feee88.webp",
+        "dark": "/shots/8a956ceb7d443c936e14297be5c35e3e153c8457d036a5fe8151f9c1423dee50.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4244,47 +4310,58 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/284ae068eb37386c3be91328d4d4207d72de63dfaac30711e1f402f9ce1d8518.webp",
         "dark": "/shots/a9a119e79613a19af630a888c22a0acad8d12ae72e3d1feba2a12c18dd8b49f8.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-work-items-schedule-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/3700536fafcf3ebe90825f23b6a807c3be0d1c55f6dc56abf36cf9827a944193.webp",
         "dark": "/shots/b07de01b04b453ff04c25285dfa33b452512e1dfd429301c50f5898cc44a166c.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-agents-chat-test": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/8c3bb5320c4075feaf9a8d557cc538f9453aff127ac67c0ab6eebaa44dee67c4.webp",
         "dark": "/shots/dfd0d35d740f7f2eb6e4563e9ba2db2bd98e633d753fb7d1c2466167eaaa37b3.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-mcp-servers-presets": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/0dbc58d0618b0f1c03c0c4313fda1edb94eb96089948ad940f43b7c014fe5c15.webp",
-        "dark": "/shots/618b5817c3c2bb99d995695e2453a267f174988fe79c420612640aed9739bdb7.webp",
-        "captured_at": "2026-11-17"
+      "1.261119.1": {
+        "light": "/shots/e89267a2c6e13f947802f9ff6b53c1d5f9c7a0cfbad1d71a5812dc0ab52e3e3e.webp",
+        "dark": "/shots/bf65de13a77a85460b287e0b3662a3eaa7fd4be139e227e203eb80dc8c6e7543.webp",
+        "captured_at": "2026-11-20"
+      }
+    }
+  },
+  "xtm-one-build-mcp-servers-your-account": {
+    "product": "xtm-one",
+    "since": "1.261119.1",
+    "versions": {
+      "1.261119.1": {
+        "light": "/shots/5b8ffbccdc64442e9b97e641a5f73b3b4c36183ebea96a75da28bedd4d902cc9.webp",
+        "dark": "/shots/fcc6e845ac91bb562f936ccf27380c9e57914fdc9313e671502e3ad0ed7f342d.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-administer-intents": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/d179403e998105df87e6cde09bb629dae311ec3ebe2a567b9346374f28fdd027.webp",
         "dark": "/shots/d8269f107a2f875a8ac2514c6e604a90b52b975dec738954477444244a9d82b0.webp",
         "captured_at": "2026-11-17"
@@ -4295,107 +4372,107 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/ae7dcbe1aae758f2ef0904fa840873b6abc8950d8deb7eb93058737c731b4861.webp",
         "dark": "/shots/a950561c57816a0dc3f0b3cdd5e1b27f041fa7b4d7d76beabe0d73f905b974d2.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-agents-tool-scope": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/24e814e5db34ad20c9c80856bd4471df8f3362074429580b1345fcd66b4e5d1f.webp",
         "dark": "/shots/1f04049d7acf923f2a246b7435d9c28754244114381e739d5aef29264484e27f.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-platform-mcp-servers-profile": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/4ced3f0e683bf9de447d10f237dca75c798f5f468782d53e01c428a82205d4f1.webp",
-        "dark": "/shots/0b06e0edba7b9134086c8ae2540597496d1432616d44b17d05116e68cd0b5887.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/8a88cd5d40642705c7aeab94aee371283f95002bc41505df60cfe61d1a9f54d0.webp",
+        "dark": "/shots/ad158784332678f091649ea8263fe26205b7b9b2d1174f64d7a20a32536a1653.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-profile-api-key": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/1b7cd65aa69c0154814a448edeaf133fb2dd89207eca5fc2ed5cea1e8b15d932.webp",
         "dark": "/shots/891f19a15b877ea66fa36083b453331e51b46d22a04e29adeff4a6790fe4c9a5.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-channels-telegram-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/8ca2419e229aeadfdf449eae39858c7b989480ec27a62cc5af55f7a741edb068.webp",
         "dark": "/shots/67b3b20622564c7d9ace08cdf9b71115dd4f828f077851e6fc5535d34d24391b.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-channels-discord-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/9051be6ad7aecb80799b46c55d5fccadb64f3e2abbdf109195338c06165e6e04.webp",
         "dark": "/shots/93d81330b589b7dbf1f19cd827213bf86d96d98a546809881079dc3cb1485041.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-channels-google-chat-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/99129b70c78441709f290ee8e52a3ff45dbe6016013a56c0904111d62f1db370.webp",
         "dark": "/shots/95bf1be16627dd37d49501d1e52ffa384fceeabe438659ad03d147b7bb6ca3e0.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-channels-whatsapp-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/6985c75e399a891c37e9de992901f77a557b266c95ea1e707d2b2bb7fbbc2b4d.webp",
         "dark": "/shots/cba6bc6c2e2d093239d8b9b7fd56a81de315ff1b2e9b514c9aa7a2bd77f87d09.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-channels-teams-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/3e6e70c931d201f731260c6a342abb1a6d764bbdc2cb1fa4f2033acbbda189d9.webp",
         "dark": "/shots/970001f6fe43f813d784d0a3f6f604e20a371375a98a4e049d7134c53d2a76e8.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-channels-slack-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/77f0a05b7b0d3c63d705948e9fbeb2ccde29f8023d162952a83c32c41b8dd28a.webp",
         "dark": "/shots/d7e200bed7730f671c94f22f836eaeeec1413b2a0625fc23e13f789a0bffda47.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-variables-board": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/e80cc301f34dbce744ed6da3cfc61535aa8a03b2bc8457826689d3d6c98d1cbd.webp",
         "dark": "/shots/9e23fc26f95448bfe7bff380381a9b42badca99a200026ea5300e200e859e15a.webp",
         "captured_at": "2026-11-17"
@@ -4405,10 +4482,10 @@
   "xtm-one-build-tools-create": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/60e3fa8945418ff3d509eefecd9911e80b70011f9e1e1f6112bbe803c6a34ddf.webp",
         "dark": "/shots/8d02b7370296359f89a58af30516f74e83d9ce6ad95418b4ccec8f0da6a5ec03.webp",
-        "captured_at": "2026-11-17"
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4416,10 +4493,10 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/0dfa1f0de4abec3f2be0fc3be69864a24c0d1131150678a2bd35f3fc572e2302.webp",
-        "dark": "/shots/d3296e38b7427c9f2c075951b5835b55364a6ffe79d0b957cbf7a7c9a16ae8b8.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/193563e69f33fee78c492fe188dad2c8de8f4183a57ea175e22c02c2fd2375c8.webp",
+        "dark": "/shots/01009e31d6fa9cbb6ffaf758d691ec3a851b9272321c8d8e86d54a54f3286a45.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4427,20 +4504,20 @@
     "product": "xtm-one",
     "since": "1.261116.1",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/84c7c0566228bd26b362ee5ab4c496fb7ebc36ed1712544f49b38f0bfa951f5f.webp",
         "dark": "/shots/72cd5b3242ecea7243a6e5cedd03437e937cd3636b688c281104ba55607502b1.webp",
-        "captured_at": "2026-11-17"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-skills-catalog": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/30f0a3faf4fda24d6dc07ea93041794521b0789ccb300422afbc834dcb219522.webp",
         "dark": "/shots/717f211523baf3271d943a5c2d61efdc5b82039ea5847bbd01bc5283b2482d7b.webp",
-        "captured_at": "2026-11-17"
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4448,7 +4525,7 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/2829aeb877c8f79a6a3edbb52eb5f67793851efb38d39a8bad33d927ef5c06d3.webp",
         "dark": "/shots/69785f469c35a04e7dfb256d68abe84d78c7979af03ee1e2e1a8ddb9589eeb10.webp",
         "captured_at": "2026-11-17"
@@ -4458,7 +4535,7 @@
   "xtm-one-build-integrations-list": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/ff468be33cb99edd95325fb684e22dd648e069bbb02dc8d1b387adadd515f12b.webp",
         "dark": "/shots/1302ed503131b40a619c9647807f0fd59dc2db714517036f7fb7e3c4dfa55b7b.webp",
         "captured_at": "2026-11-19"
@@ -4468,7 +4545,7 @@
   "xtm-one-build-integrations-tools": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/f47ffc63083849abf874a7eaf37e14177c08510d8440964d11f786861de10226.webp",
         "dark": "/shots/cc44922a4c5df235cd247804ded8a1896bceb73d04cf98dad2a2ea6a5886717e.webp",
         "captured_at": "2026-11-19"
@@ -4479,7 +4556,7 @@
     "product": "xtm-one",
     "since": "1.261119.0",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/f81016b1bdab8f962199c05ca69ce17d7e06154ecae7b5021180380a401f7471.webp",
         "dark": "/shots/bdbab012ba02af9f6921f22ea1ac3ab86cf9f0b95789bcf620a7ad49c656d9ca.webp",
         "captured_at": "2026-11-19"
@@ -4490,7 +4567,7 @@
     "product": "xtm-one",
     "since": "1.261112.0",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/f5eaaddaf0cd4deefc792d353a67ad6deab35e0d8aa2ff2d52e8927046384537.webp",
         "dark": "/shots/0f664a1c0bad31219a3fc2124f4d4343ebaa636b2232d07a7d09d12664514a35.webp",
         "captured_at": "2026-11-19"
@@ -4500,7 +4577,7 @@
   "xtm-one-running-without-ai-parameters": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/4d39697b7883ce4ad91cd45f371359abd780648059519c1f97e2e4bf8be09193.webp",
         "dark": "/shots/3e8ecee0487fb1065817a9a5e6416e38d616d6c0d5c22190246ff7e30160fbad.webp",
         "captured_at": "2026-11-12"
@@ -4520,7 +4597,7 @@
   "xtm-one-observability-analytics": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/83945875db27044fb1970779a6773ae742233dd2d16e9cb85be7750d330ac0a9.webp",
         "dark": "/shots/8e409c33d9490599ef80008cd2ce0dd9e78386b46ac6d306470650e738cb83fa.webp",
         "captured_at": "2026-11-17"
@@ -4531,10 +4608,10 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/b39542cee28e4941ef7b3415149846cb0dbe89983fe37d1c2cb02d93fa4172b2.webp",
-        "dark": "/shots/fb76b96fb5c3922d9b35f527e7b14021c6b2baf34bdc5cc8855f1e56ae11ca84.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/fd7f316eef374c00c13069e5e9081a6882040b71df6ba177a1798bbe139c81ad.webp",
+        "dark": "/shots/77d5888b99505b5860e279e7c0c3fe1d4d6580b57271e83da1ac3d883376e00f.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4542,10 +4619,10 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/4da195350c8c9be07b6a9e2a0bbbb67a24ba66123c9893b251402e3524efa5ad.webp",
-        "dark": "/shots/fab1e77b2187b780ad7cea2d4c52b6012de3315ba65b07df4efa043498b69144.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/b3e523d4ba1e07020f22758b0ee105ba11242dfac094b72e2c74eea8eccc35bf.webp",
+        "dark": "/shots/3310ff385c7be5ecb268569e5c8ac3c3eae6b6cea5fbc4c0eec0e9de2ca52826.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4553,7 +4630,7 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/9917f9f2b61751bd4a4de2c94f9e2c8f281ac138c987f373902f5818eb309fc3.webp",
         "dark": "/shots/cc18870ae9d3051f52d4c61d4d349017205c450741bf2190923b91c81104acd0.webp",
         "captured_at": "2026-11-17"
@@ -4563,7 +4640,7 @@
   "xtm-one-observability-traces": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/773d1200650a5cd46bd162048f1d9aa9515946c3d9eaab1c5250837023b2465e.webp",
         "dark": "/shots/0c1204e3bc6a0ae3e1baaa65f163bf994235976a15352aee6fb4ab8cbf2ab3b6.webp",
         "captured_at": "2026-11-17"
@@ -4573,7 +4650,7 @@
   "xtm-one-observability-trace-detail": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/dd2c85bec2d4ae3571717cc7295f9421790d243c6e82c92801a37c2295c86a22.webp",
         "dark": "/shots/f57fe224f17621644f27d078ed287bb13c179ca48660956551c442543795f449.webp",
         "captured_at": "2026-11-19"
@@ -4583,7 +4660,7 @@
   "xtm-one-observability-sessions": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/16a79a4f23279979661a0f10128e7c210dfdfd8f54442898efe79d3645cafc66.webp",
         "dark": "/shots/4c6df7776cc019374f80330e128c9c154fa53688a7305c247e0fce90213a49dd.webp",
         "captured_at": "2026-11-17"
@@ -4593,10 +4670,10 @@
   "xtm-one-audit-logs-list": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/6e1899a816b56922749fdae2867a9b2f8f08318defbbbf3b531f69f94a6520d7.webp",
-        "dark": "/shots/b377d33977f5d18c3cbcd5821d1922558fe587826c11898c9d1edd0046bf158f.webp",
-        "captured_at": "2026-11-17"
+      "1.261119.1": {
+        "light": "/shots/87b454f30960f4c53fd577c775106cb71611b54169d7a33fcc24a4c27f59cd74.webp",
+        "dark": "/shots/99e46ef20abba3d4bdd9fa334837a92d4559a6c5646ca6c5ee3d8d71ad17a752.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -4613,67 +4690,67 @@
   "xtm-one-settings-security-audit": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/5bb32ab51bf4432a2c54b3be58042081f9f691b4e245112ee904aada953210fb.webp",
-        "dark": "/shots/84b5bc59c8b2480adb556f7b653ffbbb071d9468291dadff1082edcecf04e19e.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/49200a888cc61c092b38522e26730b611f631ad3dcb1da18fac9cc1752c55f00.webp",
+        "dark": "/shots/516f061062a22dc98e93aab97bf395d26f5fdaaf6684c4e25adefeaf46196f57.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-settings-ai-models": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/af4fdf992b6e596bf5c02cedca15e885081b5c6104143927e17af05cef2db4f9.webp",
-        "dark": "/shots/dc45484771f176c3a0e6a3df2b5b8019aab2117fbb82611cef6c126270106da8.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/67f5d97d0049b84e64355854e04eacfa8531859e7cbd6b56efc17465a616f255.webp",
+        "dark": "/shots/a4672cbda70d58303d2a405ab79fc32c23e30ecd458905e9d309b2420112e0f9.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-emergency-stop-token": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/cb457c3519a7c7a1dd142a135e9402c0ef0ed6afdabebb12d899c612477e333b.webp",
         "dark": "/shots/158864384def373355eaf3c7e103afcf70f3d9ae15cda09aa536524e9703c954.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-emergency-stop-dialog": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/b64d7ccb9bf8c199c3fb416f2c74c00c1bfa7c3613b7a6550dce144f4b29435e.webp",
         "dark": "/shots/9b948db709f5922dc835cbb5da2171fb54fbb461e79b4851e33ec89240de9f06.webp",
-        "captured_at": "2026-11-17"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-administer-sso-authentication": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/cb3e884a0781fdac10b8d6a012ec9398945e979390a2d04ede56fba5478664de.webp",
         "dark": "/shots/2c9ff5acf16eb67a78f6fb193c0f8115879bffbf20ae18538cab0ede88717229.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-ai-catalog-agent": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/8cfb62903ee8f8963e0473232fb65da9cc6279ea9eef2bfb5be447b27364188f.webp",
-        "dark": "/shots/8cfb62903ee8f8963e0473232fb65da9cc6279ea9eef2bfb5be447b27364188f.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/8cde34489452f74bed6f62e9319d76559dda0f7d14d737637a6de06ea914e4de.webp",
+        "dark": "/shots/8cde34489452f74bed6f62e9319d76559dda0f7d14d737637a6de06ea914e4de.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-build-relays-enroll": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/bd2dbdb58306ea2ebf50fbad510c5c0f8dbbe48b55584110bc372b48f9b83174.webp",
         "dark": "/shots/cbadd4bb4daff1255a1e999c866379bd93fb50c0e60d8b1ab9a3cf1eba20b1eb.webp",
         "captured_at": "2026-11-17"
@@ -4683,7 +4760,7 @@
   "xtm-one-build-runners-desktop": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/276c4d67753e5f2ea01df6094d475c4bc374a9b5892f1fc5816090db55a2274d.webp",
         "dark": "/shots/849dc2295ac006c18f45faf0301422ec80995f601e6267c65cf267d13f4baafc.webp",
         "captured_at": "2026-11-17"
@@ -4693,7 +4770,7 @@
   "xtm-one-build-templates-design": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/418c6410b08b9d47bf314fe1bd078812bb40f0a6a4ec2fa36eed4340bf581fd0.webp",
         "dark": "/shots/28ba0c01ac3a6be3b76a2a2b8292229b0bc43e9d058626205e3dbbedfa861c7f.webp",
         "captured_at": "2026-11-17"
@@ -4703,7 +4780,7 @@
   "xtm-one-build-browser-profiles-new": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/4618bc89b08ed5ced17841cfb0e547cb93e2218b1ddb801e0af2cc5dc94113ca.webp",
         "dark": "/shots/e63ed0e5c2fbba35b46ba5750561e202c74f070f9c012797df3eb86d43bc42f9.webp",
         "captured_at": "2026-11-17"
@@ -4713,7 +4790,7 @@
   "xtm-one-presentations-deck-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/de633ad88d9ef07ca8b3700da27cb90e7d90b9bd5c55ea8efa3ee106c0200925.webp",
         "dark": "/shots/de633ad88d9ef07ca8b3700da27cb90e7d90b9bd5c55ea8efa3ee106c0200925.webp",
         "captured_at": "2026-11-19"
@@ -4724,7 +4801,7 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/49b25d201e2ac76fe7f64c199d2cdd089867903d8094d31d30d076aa86cac8c3.webp",
         "dark": "/shots/49b25d201e2ac76fe7f64c199d2cdd089867903d8094d31d30d076aa86cac8c3.webp",
         "captured_at": "2026-11-19"
@@ -4735,7 +4812,7 @@
     "product": "xtm-one",
     "since": "1.261112.0",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/84e3126ae815c2b599dd4f9079ee0928374077b6470c211197a30460c3ca5e07.webp",
         "dark": "/shots/46de03cbad3f2b60f286e1ff5b539ea7d97007219399d2106b0c2fa156a50b8e.webp",
         "captured_at": "2026-11-19"
@@ -4746,7 +4823,7 @@
     "product": "xtm-one",
     "since": "1.261116.1",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/b05a841056d2502d5d01014872935df07286eee5aa17f59d0698a0690ba93918.webp",
         "dark": "/shots/b05a841056d2502d5d01014872935df07286eee5aa17f59d0698a0690ba93918.webp",
         "captured_at": "2026-11-19"
@@ -4757,7 +4834,7 @@
     "product": "xtm-one",
     "since": "1.261110.2",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/a08973c49c8ceeb73178e62b42cd765b48c30def4e7b214b794b8ef4890d3cb1.webp",
         "dark": "/shots/a08973c49c8ceeb73178e62b42cd765b48c30def4e7b214b794b8ef4890d3cb1.webp",
         "captured_at": "2026-11-19"
@@ -4767,20 +4844,20 @@
   "xtm-one-sandbox-workspace-code-run": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/af52295cf3f464b91db0715fe7bca7b6fee2403fd47d9784ea2821dd849b9915.webp",
-        "dark": "/shots/4751d63fbc5cccd9e3032173cfe571f1de830638e37a13af732cde1ea8de243a.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/c12f2c77fb062b0689b938427463b9fdb8d8016059ac7c035d9b8313e48459f0.webp",
+        "dark": "/shots/0e3b3b569420888785c14ab0eed6e14391a39988c34ab9119ce0144d16cf47c7.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-administer-secret-vaults": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
+      "1.261119.1": {
         "light": "/shots/fd67bd7fa676d2455331a902c31009cb48c1b8f1c9c125278fa7dbfa00687547.webp",
         "dark": "/shots/9f38a8de83ae48a359cd1ab5004e00ee9d69ccd3d57018ded4f0b5c4fdfea215.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-20"
       }
     }
   },
@@ -5269,20 +5346,20 @@
   "xtm-one-platform-insights-chart": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/f3d70c0a5136a57b28b438cdf2822677f4002bf2b39cf6e6975c9bbf829896c6.webp",
-        "dark": "/shots/db5396dcb8d3bd49b384fd2e72c4e6cf236c4d09f7cfceb7d178b8987527aa90.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/f863d6113900e279dfc8a16f4a740d438be8845be61b332e9c8669d7e99cbf75.webp",
+        "dark": "/shots/eafad35d087775f905c5162b82c30ff35e215edc04c0cc68f0a098546806c329.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },
   "xtm-one-presentations-chat-card": {
     "product": "xtm-one",
     "versions": {
-      "1.261119.0": {
-        "light": "/shots/9b93520ff50b78ad75ec48bf462fc1fe59d66d340edc206373a8b06bba803831.webp",
-        "dark": "/shots/3ef368b10428f7fd9ae01fcdbe3c08770c402834035c09ff87c2f6fbc9c8f5c9.webp",
-        "captured_at": "2026-11-19"
+      "1.261119.1": {
+        "light": "/shots/c2c96020462e81721b8ed1bfb887e1c343ea2c9d53bdf42b203fcad1c70ca59e.webp",
+        "dark": "/shots/b1449a4f5694f3a394938827eb41177dc096eba586fd73d73a0268a3b34b2b6e.webp",
+        "captured_at": "2026-11-20"
       }
     }
   },

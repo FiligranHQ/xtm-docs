@@ -38,6 +38,8 @@ To follow the documents of every knowledge base you can see at once, click **Vie
 
 XTM One keeps each document whole, not only its passages: downloading it returns the file you added, and an agent that needs the full text reads the original. Keep very large documents out of a knowledge base agents should read whole. Above about 200,000 characters, a document is never loaded whole into an agent's context: the agent is steered to search it for passages instead. Splitting it into meaningful documents works better.
 
+From a Word document, XTM One indexes the body with its tables, headers and footers, and the text of its content controls, text boxes and fields. The pictures it holds are not read.
+
 Only the text layer of a PDF is indexed by default: what a diagram, a chart, a screenshot or a scanned page shows is never found by a search. To index it too, open **Configuration**, click **Edit**, turn on **Describe PDF figures**, and click **Save changes** before you upload the PDFs: the switch applies to PDFs uploaded from then on, so a PDF already there is described only if you upload it again. The platform's vision model reads each page that carries a figure or has no text layer, and its description is indexed next to the page's text. Each such page costs one model call, up to 30 pages per document. On **Documents**, the PDF shows **Figures pending** until its pages are read, then how many pages had their figures described. **Figures partly described** and **Figures not described** say why when you hover them, for example when no model was available to read the pages.
 
 ## Keep it in sync with a source
@@ -55,7 +57,15 @@ On **Import Sources**, click **Configure Source**, pick the source type, fill it
 
 A source that needs an integration stays visible but disabled until one is connected. You can only choose an integration you can see; the source then syncs with it on every run, whoever starts it. When a sync fails, the people who can manage the knowledge base see the full error, which may name internal hosts; everyone else sees a short description.
 
+A Word file synced from OneDrive, SharePoint or Google Drive is checked after its text is read. When far less text came out than the file holds, or almost none from a large file such as a scan, its document is flagged. Agents that list or read it are warned that its text may be incomplete and that they should open the original file.
+
 A source that keeps failing is quarantined: XTM One stops syncing it after several consecutive errors or hangs, or when the folder or page it reads is no longer found. The owner of the knowledge base gets a notification that names it, and so does every administrator when the knowledge base is company-managed. **Activity** records the event as **Sync quarantined**. Fix the source's settings, then click **Force Re-sync**.
+
+:::xtm-one[Rescope a drive source from the chat]
+The General Assistant reads a knowledge base's sources: what each one reads, its schedule, its last sync and its error. It also changes what a **OneDrive / SharePoint** source reads: several folders, folders or files left out, subfolders or not. Name what to leave out as a folder or file name at any depth, a path from the top of the drive, or a pattern with `*`: "leave out every `XX. Archives` folder". The documents the new scope leaves out are removed at the next sync.
+
+It starts that sync for one source or for all the enabled ones, or a full re-sync that deletes the source's documents first, like **Force Re-sync**. It acts as you, with the rights **Import Sources** gives you. Once it has set a source's folders, change them from the chat: **Folder path** no longer applies, and the source shows only its first folder.
+:::
 
 ## Check what agents will find
 

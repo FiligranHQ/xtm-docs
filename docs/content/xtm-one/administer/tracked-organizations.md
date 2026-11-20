@@ -67,6 +67,8 @@ Only the accepted rows are created, each one with **Monitoring off**, and you ar
 
 The review page has its own address, `/settings/organization/tracked/ai-draft/` followed by the draft's id: keep it to come back to a draft you have not decided yet, or to send it to another administrator. A decided draft still opens, read-only, with each row marked **Accepted** or **Rejected** and the line "This draft was already decided; nothing more can be created from it."
 
+An agent can decide a draft for you too. A draft waiting for review is a pending proposal of the organization profile. An agent with the built-in tool group **Organization Profile Editing**, on a turn that acts for an administrator, lists the pending proposals and accepts or rejects one. It names the rows it accepts; the others are rejected, as with **Create accepted**. Each accepted row keeps the OpenCTI organization the draft picked, and each decision writes an audit log entry. The review page then opens read-only. See [Let an agent maintain the profile](/xtm-one/administer/organization-profile/#let-an-agent-maintain-the-profile).
+
 Some rows may show **Already tracked**, with the line "See it in Tracked organizations", or **Not drafted**. Neither can be selected. Click an **Already tracked** row to go back to :menu[Administration > Settings > Organization]: the organization is listed on its **Business** tab. When the model failed on some names, a line says how many, **Details** says why, and **Retry** opens the dialog again with those names, for a new run. When OpenCTI could not be searched, every row shows **No match**: check the OpenCTI integration and your token, then draft again.
 
 ## Change or archive an organization

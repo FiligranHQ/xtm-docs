@@ -63,6 +63,8 @@ Someone who cannot answer a run can ask the people who can, from the card of its
 
 Click a run to open its page: its title, its state, its agent, the trigger that started it, when it was created, started and completed, and links to its agent, its assignment or its parent run. A finished run shows, depending on what it did, its final summary, the actions of its tools, its steps, what it sent to another system, and the runs it started by delegating. Under **Generated Files**, the files it delivered show as cards; its working files, such as scratch files, stay folded under one line.
 
+A file whose content was deleted keeps its place, greyed out, with its name, its size and why it went: "Deleted on Mar 12, 2026 by the retention policy", "Deleted on Mar 12, 2026 by an administrator", or "Deleted on Mar 12, 2026 with what it belonged to". It no longer opens nor downloads. An administrator sets how long agents' files are kept, under **Storage & retention** in [Settings](/xtm-one/administer/settings/); [Find the files agents created and received](/xtm-one/use/files/) lists them.
+
 The page says how the run ended:
 
 - **Partial result**, next to the run's state: the run completed but stopped before its agent finished, because it used all its **Max iterations**, reached its timeout or its budget, the model did not answer in time, or tasks it delegated were still running. A notice in the **Result** card says which.
@@ -119,9 +121,11 @@ Each row gives the item's title, its status, its priority, its owner agent (the 
 
 A blocked item reads **Waiting** while items it waits for are unfinished: it reopens by itself. It reads **Blocked** when someone has to act: an item it waited for was cancelled, a restart cut the run that held it, or someone blocked it by hand. Hover the chip for the items, or the reason. A blocked item that does not say what it waits for carries **No reason**; a red count on the toolbar says how many, and lists them when you click it.
 
+An item whose pull request waits in its repository's merge queue on GitHub stays parked until the queue merges it: no run starts only to find the merge still pending. When the queue drops the pull request without merging it, a note at the top of the item's **Details** says so and why. The item goes back to the queue for its owner agent to fix the pull request, or stays blocked while other items it waits for are unfinished.
+
 Click a row, or **View details** in its menu, for the whole item: its **Details**, its **Result**, its payload and its timeline, who created it and where, and its dates. **Files** lists the files its creator attached to it and those an agent added while working on it or completing it, each with its type, its size and **Download**; a line counts the files no longer stored. **Who acts on it** says what acts on it next, the agents its completion reaches, what holds it, its pull requests and what it waits for. When the item counts a unit of work, its **Result** carries the same **ROI outcome** row as a run.
 
-When an agent waits for your decision, the item opens on **Waiting for your decision**: the question, one button per option with what it does, the option the agent suggests marked **Recommended**, and the deadline, if any. Click an option, or write in **Or answer in your own words** and click **Send answer**: the item goes back to its agent with your answer. Only an administrator answers a company-managed item.
+An item that waits for a person's decision is **Blocked** from the moment an agent asks, so its owner agent does not take it before someone answers; under what it waits for, its row reads **a person's decision**. When an agent waits for your decision, the item opens on **Waiting for your decision**: the question, one button per option with what it does, the option the agent suggests marked **Recommended**, and the deadline, if any. Click an option, or write in **Or answer in your own words** and click **Send answer**: the item goes back to the queue, and its owner agent takes it with your answer. Only an administrator answers a company-managed item.
 
 On an unfinished item, **Ask the agent** opens a chat with its owner agent, the message ready for you to complete and send:
 
