@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-16
+last_reviewed: 2026-11-19
 edition: ee
 migrated_from:
   - xtm-one:/usage/resources/integrations/
@@ -45,7 +45,7 @@ When the deployment sets a Brave Search or a Google Search API key, XTM One crea
 
 :::steps
 1. Open :menu[Tools & Integrations > Integrations] and click **New Integration**.
-2. Search the catalog and pick the service. **Certified** marks the integrations Filigran qualifies and supports: the Filigran products, and the services its own agent fleets run on every day in production. Among them are Jira, GitHub, Slack, Microsoft 365, Google, Notion, HubSpot, Microsoft Defender and HackerOne. **Preview** marks the others. A provider an administrator switched off shows **Disabled by your administrator**.
+2. Search the catalog, or narrow it with the filters on its left, and pick the service. A filter whose name is too long for the column ends with an ellipsis: hover it to read it whole. **Certified** marks the integrations Filigran qualifies and supports: the Filigran products, and the services its own agent fleets run on every day in production. Among them are Jira, GitHub, Slack, Microsoft 365, Google, Notion, HubSpot, Microsoft Defender and HackerOne. **Preview** marks the others. A provider an administrator switched off shows **Disabled by your administrator**.
 3. Enter a **Name** your colleagues will recognize, and a **Description** of what the connection reaches. Agents read the description as context for its tools, so say which workspace, site or projects it covers.
 4. Fill in the credentials the **Authentication mode** asks for:
    - **OAuth**: keep **Use admin pre-configured credentials** when your administrator set up the app, or enter your own **Client ID** and **Client Secret**. Register your platform's address followed by `/api/oauth/callback` as the redirect URI of your own app.
@@ -65,7 +65,9 @@ The status badge of each card on the list page tells you at a glance whether a c
 
 Open the integration's **Configuration** tab. The **Available Tools** card splits its tools into **Read Tools**, which retrieve information, and **Write Tools**, which change something in the service. That split is how you judge the risk of binding it. Hover a tool and click **Test** to try it with the real credentials before any agent does.
 
-Some write tools reach far. The Microsoft Intune integration creates and updates configuration policies and remediation scripts, runs a remediation on a device, and assigns a policy, script or app to groups, to every device or to every user. The Microsoft integration posts in Teams chats as the signed-in account, and adds or removes an emoji reaction on any message of a chat that account belongs to. The OVHcloud integration reboots, starts and stops bare metal servers, Public Cloud instances, VPS and Hosted Private Cloud virtual machines. Keep such tools for the agents whose task needs them.
+Some write tools reach far. The Microsoft Intune integration creates and updates configuration policies and remediation scripts, runs a remediation on a device, and assigns a policy, script or app to groups, to every device or to every user. The Microsoft integration posts in Teams chats as the signed-in account, and adds or removes an emoji reaction on any message of a chat that account belongs to. The OVHcloud integration reboots, starts and stops bare metal servers, Public Cloud instances, VPS and Hosted Private Cloud virtual machines. The Grafana integration creates, updates and deletes Grafana-managed alert rules. Keep such tools for the agents whose task needs them.
+
+The XTM Hub integration gives one tool per operation of the XTM Hub API, each acting with the personal API token the integration holds. The tools of its queries read and those of its mutations write, so a read-only binding keeps the reads.
 
 ::screenshot{id=xtm-one-build-integrations-tools alt="The Available Tools card of the OpenCTI integration: the Read Tools group first, each tool with its description and its Read badge."}
 
@@ -74,6 +76,7 @@ On the same tab:
 - **Ask for approval before running its tools** makes an agent that asks before running tools stop for a person's decision on every tool of this integration. See [Govern how AI is used](/xtm-one/administer/ai-governance/).
 - For a service that sends events, a card says which changes an agent can react to and how they arrive. New Slack messages, and new Microsoft 365 emails and Teams messages, are read every 5 minutes with no setup. For Slack messages in real time, set the URL the card shows as the Request URL of your Slack app, and store the app's Signing Secret in the integration's **Signing secret** field (or in the Slack OAuth default, when your administrator provides the app). Store the secret before you enter the URL.
 - A Jira integration wakes the assignments that react to Jira: new issues, changes, transitions, reassignments and comments are read every minute. For a Jira integration connected with OAuth, XTM One also registers a Jira webhook, so that a change arrives the moment it is made, when the platform's address is a public `https` URL Jira can call. [Create an agent](/xtm-one/build/agents/) sets up these assignments.
+- A Wordsmith integration wakes the assignments that react to Wordsmith events, such as a task assigned, a review completed or an input request from a Wordsmith agent. For each enabled assignment, XTM One creates a signed webhook endpoint in Wordsmith, checks it every 6 hours, and deletes it when the assignment stops reading Wordsmith. Every 15 minutes it also reads the Wordsmith event log, so a delivery Wordsmith gave up on still runs once. Connected with OAuth, XTM One registers itself with Wordsmith: there is no client ID to enter, but Wordsmith must first allow the platform's redirect URI. Until then, use an API key.
 
 The **Overview** tab says why a connection works or does not (authentication, authorized and missing scopes). Its **Who can use it** card lists everyone who reaches the integration: look there before you change a shared integration. See [Share it](#share-it).
 
@@ -109,6 +112,52 @@ The **Who can use it** card of the integration's **Overview** lists every way it
 An agent's binding works only while its owner can see the integration. When the owner loses access, because a share was revoked or they left a group, the agent stays bound, but every run refuses the integration's tools: chats, assignments, its public link and channels. The card marks it **Owner no longer has access**, and someone who manages the agent clicks **Unbind** to remove the binding. A company-managed agent is never cut off this way. Before you save a change of sharing that would cut an owner off, the confirmation lists their agents under **These agents would lose this integration**: check **Unbind them too** to remove those bindings in the same step.
 
 How sharing works for every resource is in [Share agents and resources](/xtm-one/build/sharing/).
+
+## Let a partner's agents work with yours over A2A
+
+The agent-to-agent (A2A) protocol lets an agent outside the platform, at a partner or on another XTM One, send work to one of your AI agents, or lets yours hand work to it. An A2A integration holds that trust: **OAuth A2A** for any partner that can run an OAuth exchange, **Foundry A2A** for Azure AI Foundry partners and **Google Agent Platform A2A** for Google partners. A2A is available only where chatting with agents is, and never while AI is switched off.
+
+The **Direction**, chosen at creation, decides what binding the integration to an agent does. It cannot change while an agent binds the integration.
+
+- **Inbound: a partner tasks our agents**: binding it exposes the agent to the partner. The partner's work runs as the agent's owner, or as the user an administrator chose for a company-managed agent, and sees what that user sees. It uses the agent's whole tool set, and that of the agents it hands work over to: bind only agents whose tools you accept to lend.
+- **Outbound: our agents task a partner**: you enter the partner's agent card URLs, its token endpoint, and the client ID and secret it issued you. Each partner agent XTM One verifies becomes one tool the bound agent uses to delegate work.
+
+### Give a partner its credential
+
+An inbound **OAuth A2A** integration carries one credential, issued by XTM One: a client ID and a secret the partner exchanges for a short-lived token. It works on every agent the integration is bound to. Generating it requires the right to manage the integration.
+
+:::steps
+1. Open :menu[Tools & Integrations > Integrations], click **New Integration**, and pick **OAuth A2A**.
+2. Enter a **Name**, choose **Inbound: a partner tasks our agents**, and click **Create integration**.
+3. On its **Configuration** tab, click **Generate credential** in the **Partner credential** card. Copy the client ID and the secret at once, or both with **Copy both**: the secret is never shown again.
+4. Bind the integration to each agent the partner should reach, as in [Bind it to an agent](#bind-it-to-an-agent).
+5. Send the partner the client ID, the secret, the agent's address from the **Agent card URLs** card, and the **Token URL** of the **Partner credential** card. The token URL shows once a bound agent publishes its card. A partner on XTM One pastes it into its **Partner token endpoint** field.
+:::
+
+The **Partner reachability** card then reads **Ready. This partner has not connected yet.**, or names what still blocks the partner: no credential, no agent bound, or a bound agent with no published card.
+
+::screenshot{id=xtm-one-build-integrations-a2a-credential alt="The Partner credential card of an inbound OAuth A2A integration: the client ID with its copy button, the Regenerate secret button at the top, and Rotate client ID and secret below."}
+
+When the secret is lost or leaked, click **Regenerate secret**. The client ID stays the same: the partner pastes the new secret only. The old secret stops working at once on every bound agent, and so do the tokens the partner obtained with it. To change the client ID too, click **Rotate client ID and secret**: both change, and the partner pastes the new pair.
+
+When the partner's token request fails, the card shows the **Last refused token request**, with its date, the client ID presented and the reason:
+
+- **Wrong secret for the current client ID**: the partner must paste the latest secret.
+- **Client ID rotated away**: the partner presents a client ID you rotated, and must paste the current client ID and secret.
+- **No agent exposed**: the credential is valid, but no agent bound to the integration is exposed.
+
+Only the people who manage the integration see this panel: the partner receives the same refusal whatever the reason.
+
+:::example[Let Example CERT's triage agent task the Velvet Harbor watcher]
+Example CERT runs its own XTM One and wants its triage agent to ask the **Velvet Harbor watcher** of Grand Meridian Hotels for the latest sightings. Hélène Marchetti opens :menu[Tools & Integrations > Integrations], **New Integration**, **OAuth A2A**:
+
+- **Name**: `Example CERT triage partner`
+- **Direction**: **Inbound: a partner tasks our agents**
+
+She clicks **Create integration**, then **Generate credential**, and copies the pair with **Copy both**. She binds **Example CERT triage partner** to **Velvet Harbor watcher**, and sends Example CERT the client ID, the secret, the watcher's agent card URL and the token URL, `https://xtm-one.grand-meridian.example/mcp/oauth/token`.
+
+A month later the secret leaks in a support ticket. Hélène clicks **Regenerate secret** and sends only the new secret: Example CERT keeps its client ID, and the leaked secret no longer gets a token.
+:::
 
 ## Connect an API from its OpenAPI document
 

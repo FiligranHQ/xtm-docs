@@ -1,7 +1,7 @@
 {
   "name": "configuration",
-  "version": "1.261116.1",
-  "source": "XTM-One-Platform/xtm-one@ee30e87: backend/app/core/config.py, docs/docs/deployment/configuration.md",
+  "version": "1.261119.0",
+  "source": "XTM-One-Platform/xtm-one@d2a203a: backend/app/core/config.py, docs/docs/deployment/configuration.md",
   "intro": "Every environment variable XTM One reads at startup, on the platform and on the worker. Authentication, integrations and most security options are set from the **Settings** screens instead, and stored in the database.",
   "filter": "Filter by variable or description",
   "sections": [
@@ -679,8 +679,8 @@
           "cells": [
             "`LLM_PROVIDER_<NAME>_MODELS`",
             "",
-            "`All available`",
-            "Comma-separated list of models to expose. Either pinned or an editable baseline, depending on `LLM_PROVIDER_MODELS_EDITABLE`. When unset, the provider's stored model list is never touched by the startup seed. A provider that lists no model chats on its built-in chat model only while no configured provider lists one: next to providers whose models are listed, it takes no chat and no failover. A key set for the image, video, speech or music models alone (`DEFAULT_*_PROVIDER` below) therefore needs no model list."
+            "",
+            "Comma-separated list of models to expose. Either pinned or an editable baseline, depending on `LLM_PROVIDER_MODELS_EDITABLE`. When unset, the provider's stored model list is never touched by the startup seed, except for `filigran_gateway`: when no other provider offers a chat model (and, with `LLM_PROVIDER_MODELS_EDITABLE=true` or `BYOLLM_ACTIVATED=true`, the gateway has no model list yet), startup lists the gateway's chat models and uses them as the list. From then on the list is refreshed on every startup, even once another provider offers chat models, until an administrator edits it (possible with either of those two variables). A model the gateway stops listing leaves the list, but agents and users that picked it keep their choice. If the gateway does not answer, the stored list is kept. A provider that lists no model chats on its built-in chat model only while no configured provider lists one: next to providers whose models are listed, it takes no chat and no failover. A key set for the image, video, speech or music models alone (`DEFAULT_*_PROVIDER` below) therefore needs no model list."
           ]
         },
         {
@@ -2186,6 +2186,15 @@
             "",
             "",
             "Comma-separated list of domains/IPs to allow as egress from every OpenSandbox container. Empty means all egress is denied. In a JavaScript custom tool, a `fetch` to a host outside the list is refused at once with the egress-policy message, and a `fetch` to a listed host fails after 10 s when the host does not accept the connection."
+          ]
+        },
+        {
+          "key": "SANDBOX_REGISTRY_MIRROR_URL",
+          "cells": [
+            "`SANDBOX_REGISTRY_MIRROR_URL`",
+            "",
+            "",
+            "The address of a read-only npm and PyPI mirror, such as `http://registry-mirror:8080`, through which the checks and services an agent runs in its workspace (`sandbox_run_command`, `sandbox_start_service`) install their packages. Set, its host joins the egress those containers may reach, and npm, Yarn, corepack, pip and uv install from its `/npm/` and `/pypi/simple/` paths; the code interpreter and custom tools never use it. Keep `registry.npmjs.org`, `pypi.org` and `files.pythonhosted.org` out of `OPENSANDBOX_NETWORK_ALLOW`, so the mirror stays the only route to the registries. An address that is not `http` or `https`, or that carries a user, a password, a query or a fragment, stops the platform at startup. Empty by default: those containers stay offline and install only the packages their images hold."
           ]
         },
         {
@@ -3796,7 +3805,7 @@
             "`EMBEDDING_RESET_STATEMENT_TIMEOUT_SECS`",
             "",
             "`600`",
-            "Per-statement timeout (seconds) applied to the bulk KB embedding purge that runs when the platform embedding model/provider/dimensions change (see `_reset_kb_embeddings_for_new_model` in api/v1/settings.py)."
+            "Per-statement timeout (seconds) applied to the bulk KB embedding purge that runs when the platform embedding model/dimensions change (see `_reset_kb_embeddings_for_new_model` in api/v1/settings.py)."
           ]
         },
         {

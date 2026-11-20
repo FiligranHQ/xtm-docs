@@ -6,7 +6,7 @@ products:
   - xtm-one
 personas: [admin, platform-engineer]
 owner: docs-xtm-one
-last_reviewed: 2026-11-08
+last_reviewed: 2026-11-19
 migrated_from:
   - xtm-one:/administration/settings/
 ---
@@ -28,8 +28,8 @@ Each tab and each of its sections has its own address, such as `/settings/usage/
 :::steps
 
 1. In **Platform**, check the **Instance ID**, then install the license with **Install License**, or connect an Enterprise Edition OpenCTI, OpenAEV or OpenCRQ. Choose the **Default language** under **Platform Language**, then click **Edit** on **Platform Branding** to set the platform's name, logo and colors.
-2. In **AI and models** > **Models**, click **Add Provider**, validate it, and choose the platform default model. Choose the embedding model before anyone fills a knowledge base: changing it later indexes every knowledge base again.
-3. In **Access and security**, open **Authentication** and connect your identity provider. See [Configure single sign-on](/xtm-one/administer/sso/).
+2. In **AI and models** > **Models**, click **Add Provider**, validate it, and choose the platform default model. Choose the embedding model before anyone fills a knowledge base: changing the model or its dimensions later indexes every knowledge base again.
+3. In **Access and security**, open **Authentication** and connect your identity provider. See [Configure single sign-on](/xtm-one/administer/sso/). To let it create and deactivate the accounts too, see [Provision accounts from Microsoft Entra](#provision-accounts-from-microsoft-entra).
 4. Still in **Access and security**, open **Security audit** and select **Re-run**. Fix each `Critical` and `Warning` finding, or dismiss the ones you accept on purpose.
 5. In **Usage and quotas** > **Quotas**, set the agentic limit per user, then the exceptions per group or per user.
 6. In **Integrations** > **Channels & Bots**, connect the messaging apps your teams use. See [Talk to agents from your messaging apps](/xtm-one/administer/channels/).
@@ -42,13 +42,83 @@ Each tab and each of its sections has its own address, such as `/settings/usage/
 
 Every change made in Settings is recorded in :menu[Administration > Audit logs].
 
+## Provision accounts from Microsoft Entra
+
+With SCIM provisioning, Microsoft Entra ID manages the XTM One accounts for you: it creates the account of each person you assign to the application, keeps their name, title and department current, adds them to groups, and deactivates the account when they leave. People still sign in through single sign-on: an account SCIM creates has no password, and it is a user account, never an administrator.
+
+Before you start:
+
+- Your account is an administrator. Provisioning needs no Enterprise Edition.
+- [Single sign-on](/xtm-one/administer/sso/) works with Microsoft Entra ID, through OpenID Connect or SAML.
+- In Microsoft Entra, you may create an enterprise application and configure its provisioning (Application Administrator or Cloud Application Administrator).
+- Microsoft Entra reaches XTM One from the internet: its provisioning service calls the platform from Microsoft's cloud.
+
+:::steps
+
+1. Open :menu[Administration > Settings > Access and security > Provisioning] (`/settings/security/provisioning`). On the **SCIM provisioning** card, copy the **Endpoint URL** with **Copy**: the address you open XTM One with, followed by `/api/v1/scim/v2`.
+2. In **Token name**, name the identity provider, such as `Microsoft Entra production`, and select **Generate token**. Use one token per identity provider, so that you can revoke one without stopping the others.
+3. Copy the token at once: it shows only this time, and XTM One keeps only a hash of it.
+4. In the Microsoft Entra admin center, open **Enterprise applications** > **New application** > **Create your own application**, name it `XTM One`, and choose the application you don't find in the gallery.
+5. In the application, open **Provisioning** > **Get started** and set **Provisioning Mode** to **Automatic**.
+6. Under **Admin Credentials**, paste the endpoint URL in **Tenant URL** and the token in **Secret Token**. Select **Test Connection**, then **Save**.
+7. Under **Users and groups**, assign the people or the groups who should have an XTM One account.
+8. Under **Provisioning**, set **Provisioning Status** to **On** and save.
+
+:::
+
+::screenshot{id=xtm-one-administer-settings-provisioning alt="The SCIM provisioning card of Settings > Access and security > Provisioning: the Endpoint URL ending with /api/v1/scim/v2 and its Copy button, the token Microsoft Entra production with its prefix, Never used and Revoke, and the Token name field with Generate token."}
+
+Microsoft Entra runs a first cycle, then one about every 40 minutes; **Provision on demand**, in the application, tests one person first. The token's line then shows when it was last used, and **Latest SCIM changes** lists the last 50 accounts and groups the identity provider created, changed or deactivated. A call XTM One refused is not listed there: Entra's provisioning logs show it (`401` for a wrong or revoked token, `409` for an email already linked to another Entra user).
+
+What Microsoft Entra sends:
+
+| Entra attribute | XTM One field |
+| --- | --- |
+| `userPrincipalName` (or `mail`) | The email, which the person signs in with |
+| `objectId` | The link to the Entra user |
+| `active` (the default mapping) | Whether the account is active or deactivated |
+| `displayName`, `jobTitle`, `department` | The full name, the title and the department |
+
+The other attributes (phone numbers, addresses, manager) are accepted and ignored. When Entra creates a person whose email already has an account, created by single sign-on or by an administrator, XTM One links that account instead of creating a second one, and the **Users** list then shows the account comes from SCIM. To provision groups, turn on the group mappings in Entra: SCIM then only removes the members it added itself, never one an administrator or the SAML group sync added.
+
+When Entra disables, unassigns or deletes a person, XTM One deactivates the account at once, as **Disable** does on the person's page: sign-in is refused, the personal API keys are revoked, the runs stop, the private agents are disabled, and what the person shared moves to an administrator. Nothing is deleted: a deletion in Entra also shows **Removed by the identity provider**. Reactivating the person in Entra brings their agents and assignments back. See [How access works in XTM One](/xtm-one/concepts/access/).
+
+**Deactivation review**, on the same page, lists each account deactivated this way or any other way, with what the deactivation did to each of its objects: **Disabled**, **Moved**, **Paused**, **Disconnected**, **Kept, no administrator** (no other active administrator could take it) or **Used by another agent**. Check each item, then record what you decided with **Mark as kept**, **Mark as reassigned** or **Mark as deleted**: these buttons only record your review, and the transfer or the deletion itself is yours to make. The account's group memberships are kept for audit.
+
+**Revoke**, beside a token, cuts the identity provider off: it can no longer create, update or deactivate accounts until you generate a new token and paste it in **Secret Token**. Each token makes at most 600 calls a minute; beyond, Entra waits and retries on its own. Every change it makes is recorded in :menu[Administration > Audit logs] under the token's name.
+
+:::example[Let Microsoft Entra ID manage the Grand Meridian accounts]
+Grand Meridian Hotels signs its staff in with Microsoft Entra ID through OpenID Connect. Hélène Marchetti opens **Provisioning** on `https://xtm-one.grand-meridian.example`, types `Microsoft Entra production` in **Token name** and selects **Generate token**. In the Entra admin center, she creates the enterprise application "XTM One", pastes `https://xtm-one.grand-meridian.example/api/v1/scim/v2` in **Tenant URL** and the token in **Secret Token**, and **Test Connection** succeeds. She assigns the Entra groups of the SOC and of the CTI team, runs **Provision on demand** for Camille Roux, whose existing account is linked rather than duplicated, and sets **Provisioning Status** to **On**.
+
+When Paul Garnier leaves the SOC, Entra deactivates his account in its next cycle. **Deactivation review** lists his private agent as **Disabled** and the agent he shared with the SOC as **Moved** to the administrator of the platform. Hélène Marchetti gives that agent to Julien Bernard, then selects **Mark as reassigned**.
+:::
+
 ## The tabs
 
 ### Organization
 
-What agents know about your organization, and what the Value page counts their work with:
+What agents know about your organization, and what the Value page counts their work with.
 
-- **Profile**: the **Organization profile** every agent and fleet reads before it ranks, scopes or estimates. It is shared context: every user and every agent of the platform sees it. It holds **Identity** (size, regions of operation), **Risk appetite and costs**, **Ticketing and intelligence** (the ticketing integration and project, the OpenCTI PIRs agents follow), **Crown jewels and business services**, **Tech stack**, **AI systems inventory**, **Assets and exposure**, **Asset groups**, the **Prioritization policy** of the CTEM funnel and **Enterprise knowledge**. Agents cite the fields they used and name the ones not filled, never guess them; each save is a new version. Outside edit mode, the lists read as tables you search, filter and export to CSV; each list card has its own **Edit**. **Draft** fills the profile **From the platforms**, **With AI** or **From a connected integration**, and the **Syncs** card runs the platform imports again on a schedule. **Organization context in agents** chooses whether every agent starts with a summary of the profile. See [Set up the organization profile agents read](/xtm-one/administer/organization-profile/). While fields are not filled, **Continue onboarding in chat** opens a new chat with your default assistant, which asks for the missing fields one at a time, proposes a value when it can infer one, and saves each answer you confirm as a new version. You can skip a field for now, and a chat started later resumes at the next field. The same interview starts after an AI draft saved outside edit mode. It requires the Enterprise Edition and AI switched on. **Tracked organizations**, at the bottom, lists your providers, customers, partners and subsidiaries: see [Track the organizations your company depends on](/xtm-one/administer/tracked-organizations/). The first administrator to sign in while the profile was never saved gets the **Set up your organization profile** dialog: **Set up now** opens this profile in edit mode, with the **Draft** menu to start **From the platforms** or **With AI**, and nothing is saved before **Save**. The dialog shows once for the whole platform, whatever the answer.
+**Profile** is the **Organization profile** every agent and fleet reads before it ranks, scopes or estimates. It is shared context: every user and every agent of the platform sees it, as its info bubble **About the organization profile** recalls. Agents cite the fields they used and name the ones not filled, never guess them; each save is a new version. It has five tabs, each with its own address:
+
+| Tab | What it holds | Address |
+| --- | --- | --- |
+| **Identity and risk** | **Identity** (size, regions of operation), **Risk appetite and costs**, **Ticketing and intelligence** (the ticketing integration and project, the OpenCTI PIRs agents follow) | `/settings/organization` |
+| **Business** | **Crown jewels and business services**, and **Tracked organizations**: your providers, customers, partners and subsidiaries. See [Track the organizations your company depends on](/xtm-one/administer/tracked-organizations/). | `/settings/organization/profile/business` |
+| **Technology** | **Tech stack**, **AI systems inventory** | `/settings/organization/profile/technology` |
+| **Exposure** | **Assets and exposure**, **Asset groups**, the **Prioritization policy** of the CTEM funnel | `/settings/organization/profile/exposure` |
+| **Knowledge and sources** | **Enterprise knowledge**; **Syncs**, which runs the platform imports again on a schedule; **Organization context in agents**, which chooses whether every agent starts with a summary of the profile | `/settings/organization/profile/knowledge` |
+
+Each tab shows how many of its fields are filled, such as `3/5`, and a mark when a draft filled some of them, when it holds changes not saved yet, or when one of its fields is refused. The fields not filled are listed at the top of their tab, under "Fields not filled, reported by every agent that needs them": each one opens the form on that field. An address followed by `?card=` and a card's key opens the tab on that card: the CTEM pages link there when a stage lacks its data, such as **Add tech stack** or **Map crown jewels to assets**.
+
+**Edit** opens the whole profile: switching tabs keeps what you typed, one **Save** saves every tab, and closing or reloading the browser page before you save asks first. Outside edit mode, the lists read as tables you search, filter and export to CSV; each list card has its own **Edit**. **Draft** fills the profile **From the platforms**, **With AI** or **From a connected integration**; a draft from the platforms lists the fields it filled tab by tab, with their number. See [Set up the organization profile agents read](/xtm-one/administer/organization-profile/).
+
+While fields are not filled, a line above the tabs counts them, with **Continue onboarding in chat**. It opens a new chat with your default assistant, which asks for the missing fields one at a time, proposes a value when it can infer one, and saves each answer you confirm as a new version. You can skip a field for now, and a chat started later resumes at the next field. The same interview starts after an AI draft saved outside edit mode. It requires the Enterprise Edition and AI switched on.
+
+The first administrator to sign in while the profile was never saved gets the **Set up your organization profile** dialog: **Set up now** opens this profile in edit mode, with the **Draft** menu to start **From the platforms** or **With AI**, and nothing is saved before **Save**. The dialog shows once for the whole platform, whatever the answer.
+
+The other sections of the tab:
+
 - **Departments**: the org units usage is rolled up by in **Model usage**, and who belongs to which, from group rules, the department your identity provider sends at sign-in, or an import.
 - **Units of work** and **Rates by role**: the minutes each kind of work takes by hand and the hourly rate of each role, which the Value page computes hours saved and value with. See [How XTM One computes the value of agents' work](/xtm-one/concepts/value-methodology/).
 - **Value visibility and privacy**, under **Rates by role**, chooses who sees the value figures:
@@ -83,6 +153,10 @@ Three choices on a provider card matter for governance:
 - **Never use for people and groups**, in **Access**, keeps some people off a provider whatever else grants it, for example where a regulation forbids a vendor for one jurisdiction. The card shows **Exclusions**. Embeddings and image generation are platform-wide: an excluded person's knowledge base searches and image requests are refused rather than sent to that provider.
 - **Delete** first shows what moves to another provider: the default models, the agents and users that picked a model on it. The embedding model is never switched automatically: it is cleared, because content indexed with one model cannot be found with another.
 
+When every chat provider is configured but offers no model, the section says so: "The configured LLM providers offer no model". Agents and the features that call a model wait until one does. For a provider set by environment variables, it names the `LLM_PROVIDER_<NAME>_MODELS` variable to set before a restart, or `LLM_PROVIDER_MODELS_EDITABLE=true` to choose its models here; otherwise, select models on a provider of the section. See [AI providers](/reference/xtm-one/configuration/#ai-providers).
+
+Changing the embedding model or its dimensions indexes every knowledge base again, and their documents cannot be searched until they are. Moving the same model, with the same dimensions, to another provider keeps what is indexed: use it when a provider fails, for example from OpenAI to Azure OpenAI with the same `text-embedding-3-small`. The documents that failed to index on the former provider are then tried again at once. Without an embedding model chosen, each provider uses its own default, so changing the provider indexes everything again.
+
 With an SMTP server (`SMTP_HOSTNAME`), changing the default model or the model list offers to email the users about it. Set `MODEL_ANNOUNCEMENT_EMAILS_DISABLED` to `true` to turn these emails off: XTM One then says that the users cannot be emailed. See the [XTM One configuration reference](/reference/xtm-one/configuration/).
 
 See [Protect your data and approve what agents do](/xtm-one/administer/ai-governance/) for what is sent to a provider.
@@ -98,7 +172,7 @@ See [Protect your data and approve what agents do](/xtm-one/administer/ai-govern
 
 ### Access and security
 
-Eight sections, each with its own address under `/settings/security/`:
+Nine sections, each with its own address under `/settings/security/`:
 
 | Section | What it is for |
 | --- | --- |
@@ -106,6 +180,7 @@ Eight sections, each with its own address under `/settings/security/`:
 | **Security options** | The platform-wide security switches: session lifetime and idle timeout, password length, link lifetimes, webhook secrets, the prompt guard, the code interpreter and custom tools. Each is also an environment variable, which wins. See [Security switches](/reference/xtm-one/configuration/#security-switches). |
 | **Tool approvals** | Whether agents ask a person before running tools, and which tools ask. See [Protect your data and approve what agents do](/xtm-one/administer/ai-governance/#approve-what-agents-do). |
 | **Authentication** | Local accounts, OpenID Connect, SAML and allowed email domains. See [Configure single sign-on](/xtm-one/administer/sso/). |
+| **Provisioning** | **SCIM provisioning**, the endpoint and the tokens an identity provider creates and deactivates accounts with; **Deactivation review**, what each deactivation moved or disabled; **Latest SCIM changes**. See [Provision accounts from Microsoft Entra](#provision-accounts-from-microsoft-entra). |
 | **Secret vaults** | The vaults secret fields read from. See [Keep secrets in your vault](/xtm-one/administer/secret-vaults/). |
 | **API keys** | Every personal API key of the platform, whoever owns it, with **Revoke**. The key itself is never shown. |
 | **Emergency stop** | The token that stops every agent from outside a session. See [Stop every agent at once](/xtm-one/administer/emergency-stop/). |
@@ -156,7 +231,7 @@ Hélène Marchetti sets up `https://xtm-one.grand-meridian.example`, which Marc 
 - **Access and security** > **Security audit**: **Re-run** reports sessions that last 7 days; she sets **Absolute session lifetime (minutes)** to `1440` in **Security options**, so that everyone signs in again every day.
 - **Usage and quotas** > **Quotas**: 50 agentic executions a day per user, and **Unlimited** on the group **SOC**, whose night shift runs "Night shift triage" all night.
 - **Usage and quotas** > **Observability**: **Trace retention (days)** at `30`, **Store full payloads** off, **Audit log retention (days)** at `365`.
-- **Organization** > **Profile**: hospitality, Europe, the payment platform and the booking engine as crown jewels. She imports the hotels' assets from OpenAEV with **Draft** > **From the platforms**, kept in sync every day.
+- **Organization** > **Profile**: hospitality and Europe on **Identity and risk**, the payment platform and the booking engine as crown jewels on **Business**. She imports the hotels' assets from OpenAEV with **Draft** > **From the platforms**, which fills the **Exposure** tab, and keeps them in sync every day from **Knowledge and sources**.
 
 The next morning, the audit shows no `Critical` finding, and Julien Bernard sees the SOC's usage in **Model usage**.
 :::

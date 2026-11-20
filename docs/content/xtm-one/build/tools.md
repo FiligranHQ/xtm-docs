@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, developer, admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-16
+last_reviewed: 2026-11-19
 edition: ee
 migrated_from:
   - xtm-one:/usage/resources/tools/
@@ -29,12 +29,20 @@ A tool is an action an agent can take beyond writing text: fetch a web page, run
 | **Design** | Find a [template](/xtm-one/build/templates/) and read its layouts and assets, write one from a conversation, and read the exact palette and typefaces of a PDF, a PowerPoint file or an HTML page. |
 | **Code Interpreter** | Run Python in a sandbox for calculations and charts. Off by default on XTM One: an administrator turns off **Disable the code interpreter** in :menu[Administration > Settings > Access and security > Security options]. |
 | **Threat Intelligence** | Check the structure and references of a STIX 2.1 bundle before it is imported, compare two bundles, analyse a timeline, and run statistical tests and FIMI metrics, each result with its formula. |
+| **STIX Extraction** | Turn threat reports, attached or pasted, into one STIX 2.1 bundle in OpenCTI's ontology. Each entity, relationship, indicator and ATT&CK technique is tied to the sentence that states it. Off by default, and not part of **Threat Intelligence**: see below. |
 | **Coordination** | Coordinate agents across runs: a shared work queue, a key-value store, a large working corpus. |
 | **Traces** | Read the agent's own traces, to review how its runs went. It also reads other agents' traces: for an administrator, those of any agent they can see; for anyone else, those of the agents listed in its **Trace supervision allow-list**, which shows under the card while you edit it. |
+| **User Administration** | Administer accounts and groups as :menu[Administration > Users and groups] does: list and read accounts, disable them and enable them again, add and remove group members, and work the deactivation review. Only an administrator adds it to an agent, and its functions are offered only when the agent acts for an administrator. |
 | **Platform Insights** | Answer questions about the platform's AI usage and cost, its objects and its audit trail, with charts: see [Get answers about the platform's own activity](/xtm-one/use/platform-insights/). |
 | **Computer Use (Runners)** | Drive a computer enrolled with XTM One Desktop: see [Let agents act on a computer with XTM One Desktop](/xtm-one/build/runners/). |
 
 Give an agent only the tools its job needs: every tool is something it can act through. When the wizard's **Tools** step is left empty, the agent starts with the platform's default tool set, which you can change on its page afterwards.
+
+**STIX Extraction** reads each report passage by passage with the agent's own model, so one report costs many model calls and a long one takes minutes. These calls count in the run's budget: when it runs out, the bundle comes back marked incomplete. One call stops after 30 minutes, or sooner when the run has less time left, and names the reports it could not finish. The tool never runs on the General Assistant: switch it on only for an agent that extracts. The built-in agent **CTI STIX Extractor (Grounded)** carries it alone and answers with the bundle the tool returns. That agent takes no chat and is bound to no intent, so OpenCTI's imports still go to the harvester agents. See [Choose which agent answers each AI feature](/xtm-one/administer/intents/).
+
+**User Administration** disables an account through the same steps as **Disable** on the person's page: see [What disabling an account does](/xtm-one/concepts/access/#what-disabling-an-account-does). It previews what a deactivation would do, and acts only when the agent explicitly asks it to. It refuses your own account, the bootstrap account, the last active administrator, and an account protected as a break-glass or service account. No screen sets that protection. A group your identity provider manages through SCIM stays read-only. Each change is recorded in **Audit logs** as the administrator's, with the agent and the run.
+
+When an MCP server bound to the agent offers a tool with the same name as a built-in, integration or custom tool, the agent keeps the platform's tool and the server's is left out. A server that is another XTM One, for example, offers its own agent and skill tools: they never take the place of this platform's.
 
 ### Keep only some functions of a tool
 
@@ -53,11 +61,13 @@ An agent set up with one of the earlier, narrower tools, such as **Browser** or 
 
 An assignment can narrow the functions further for its own runs, never beyond the agent's: on its **Prompt & Bindings** tab, the **Built-in Tool Scope** card lists the agent's tools that keep more than one function. Click **Edit**, then a tool's button, choose in the same dialog, and click **Save**.
 
-A function that a release adds to a tool is not given to an agent that keeps only some of its functions: nothing is granted on its own. After the upgrade, the agent's owner gets one notification, under **Built-in tools**, naming the new functions and the agents left without them. It opens the first agent's **Tooling** section, where a notice reads, for example, "1 new built-in tool is outside this agent's allowlist" and lists each function by its identifier:
+A function that a release adds to a tool is not given to an agent that a person narrowed to some of its functions: nothing is granted on its own. After the upgrade, the agent's owner gets one notification, under **Built-in tools**, naming the new functions and the agents left without them. It opens the first agent's **Tooling** section, where a notice reads, for example, "1 new built-in tool is outside this agent's allowlist" and lists each function by its identifier:
 
 - **Add** gives the function to the agent, and **Dismiss** leaves it out. With several functions, **Add all** and **Dismiss all** act on every one. Both need AI switched on.
 - A dismissed function is never listed again for that agent. The tool's **Function Scope** dialog still offers it.
 - The notification is marked read once nothing it names is left to add or dismiss. For the other agents it names, open their **Function Scope** dialog.
+
+A list of functions that XTM One wrote itself, and no person chose, is not held back. That is the case when a fleet role gives a member some functions of a tool it lacked. It is also the case when saving an agent turns an earlier, narrower tool into the tool that includes it. A release adds its new functions to such a list on its own, with no notification. The list becomes a person's choice once someone saves a different one for that tool.
 
 ## Before you write a custom tool
 

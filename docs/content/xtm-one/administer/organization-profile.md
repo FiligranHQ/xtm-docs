@@ -5,35 +5,45 @@ doc_type: how-to
 products: [xtm-one]
 personas: [admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-16
+last_reviewed: 2026-11-19
 ---
 
-Agents rank, scope and estimate with what they know of your organization: its sector and regions, its crown jewels, its tech stack, its assets and what the internet can reach. They read it in the organization profile, in :menu[Administration > Settings > Organization]. This page fills the profile from your platforms or by hand, keeps it in sync, sets the rules the CTEM funnel applies, and chooses how much of it every agent receives.
+Agents rank, scope and estimate with what they know of your organization: its sector and regions, its crown jewels, its tech stack, its assets and what the internet can reach. They read it in the organization profile, in :menu[Administration > Settings > Organization], split into five tabs. This page fills the profile from your platforms or by hand, keeps it in sync, sets the rules the CTEM funnel applies, and chooses how much of it every agent receives.
 
 ::screenshot{id=xtm-one-administer-organization-import alt="The Import from the platforms dialog of Settings > Organization at its first step, What to import: the sections Assets, Asset groups, AI systems, Tech stack, Crown jewels and PIRs, and Quick setup to fill the empty fields from every connected platform."}
 
 ## Before you start
 
 - Your account is an administrator. Only administrators open Settings, and only they change the profile.
-- The profile is shared context. The header says it: "Shared context: the whole profile is visible to every user and every agent of this XTM One platform."
+- The profile is shared context. The info bubble next to its title, **About the organization profile**, says it: "Shared context: the whole profile is visible to every user and every agent of this XTM One platform."
 - An import reads the source with your own permissions. The source's access rules, such as organization segregation and markings, are not carried over. This applies to the profile only: integrations, dashboards and every other feature keep each user's permissions.
 - **From the platforms** needs OpenCTI, OpenAEV or OpenCRQ connected, and readable by you. It uses no AI and works on the Community Edition.
 - **With AI** and **From a connected integration** need AI switched on. See [Run XTM One with AI switched off](/xtm-one/administer/running-without-ai/).
 
 ## What the profile holds
 
-Each card of **Profile** is one part of what agents read. The links at the top of the page jump to each list. A list card shows how many rows it holds, and a badge when some rows need attention.
+Each card of **Profile** is one part of what agents read, and each card sits on one of five tabs. A list card shows how many rows it holds, and a badge when some rows need attention.
 
-| Card | What agents learn from it |
-| --- | --- |
-| **Identity**, **Risk appetite and costs**, **Ticketing and intelligence** | Size, regions, money thresholds, the ticketing project and the OpenCTI PIRs to follow |
-| **Crown jewels and business services** | What matters most, its owner, its criticality and the assets it runs on |
-| **Tech stack** and **AI systems inventory** | The products you run, and the AI systems you expose |
-| **Assets and exposure** and **Asset groups** | What runs where, and what the internet can reach |
-| **Prioritization policy** | The rules the CTEM funnel and its agents apply to findings |
-| **Enterprise knowledge** | Your procedures, which agents search on demand |
+| Tab | Card | What agents learn from it |
+| --- | --- | --- |
+| **Identity and risk** | **Identity**, **Risk appetite and costs**, **Ticketing and intelligence** | Size, regions, money thresholds, the ticketing project and the OpenCTI PIRs to follow |
+| **Business** | **Crown jewels and business services** | What matters most, its owner, its criticality and the assets it runs on |
+| **Business** | **Tracked organizations** | The providers, customers, partners and subsidiaries you depend on: see [Track the organizations your company depends on](/xtm-one/administer/tracked-organizations/) |
+| **Technology** | **Tech stack** and **AI systems inventory** | The products you run, and the AI systems you expose |
+| **Exposure** | **Assets and exposure** and **Asset groups** | What runs where, and what the internet can reach |
+| **Exposure** | **Prioritization policy** | The rules the CTEM funnel and its agents apply to findings |
+| **Knowledge and sources** | **Enterprise knowledge** | Your procedures, which agents search on demand |
+| **Knowledge and sources** | **Syncs** and **Organization context in agents** | Not read by agents: the imports run on a schedule, and how much of the profile every agent receives |
+
+Each tab has its own address, so you can bookmark it or send it to a colleague: `/settings/organization` for **Identity and risk**, then `/settings/organization/profile/` followed by `business`, `technology`, `exposure` or `knowledge`. Add `?card=` and a card's key, such as `?card=tech_stack`, to open the tab on that card. The CTEM pages link there when a stage lacks its data: **Add tech stack** opens the **Tech stack** card of **Technology**.
+
+::screenshot{id=xtm-one-administer-organization-profile-tabs alt="The Technology tab of the organization profile of Grand Meridian Hotels. Above the tabs, the line that counts the fields not filled, with Continue onboarding in chat. On the tab bar, Identity and risk 4/10, Business 0/1 and Technology 1/2. At the top of the tab, AI systems inventory among the fields not filled, then the Tech stack card with Example Edge Gateway."}
+
+Agents read some fields of the profile as a contract: the organization name, sector, regions and size, the crown jewels, the tech stack, the AI systems, the PIRs, the money thresholds, the hourly rate, the currency and the ticketing target. A tab that holds some of them shows how many are filled, such as `1/2`. While fields are not filled, a line above the tabs counts them, with **Continue onboarding in chat**, and each tab lists its own at the top under "Fields not filled, reported by every agent that needs them:". Click one to open the form on that field.
 
 Each save writes a new version of the profile. Agents cite the fields they used and name the ones not filled; they never guess them.
+
+**Edit** opens the whole profile, on every tab. Switching tabs keeps what you typed, and one **Save** at the bottom saves every tab. Until then, a tab shows a dot when it holds changes not saved yet, a sparkle when a draft filled some of its fields, and an alert when one of its fields is refused: **Save** opens the tab of the refused field. Closing or reloading the browser page with an edit not saved asks you first.
 
 ## Import a section from the platforms
 
@@ -60,7 +70,7 @@ The preview counts the rows in four kinds:
 
 Rows a previous import wrote that the platform no longer holds are kept by default. A switch under the counts removes them.
 
-**Quick setup**, on the first step, fills every empty field from every connected platform in one click. The values land in the form for you to review, and nothing is saved before **Save**.
+**Quick setup**, on the first step, fills every empty field from every connected platform in one click. The values land in the form for you to review, and nothing is saved before **Save**. The form opens on the first tab the platforms filled, a sparkle marks each tab they filled, and a notice lists each field filled and its platform, tab by tab, with their number. A draft **With AI** groups its proposals by tab in the same way; applied during an edit, it opens the first tab it changed.
 
 ## Keep a section in sync
 
@@ -72,7 +82,7 @@ An import runs once. To run it again on a schedule, turn on **Keep in sync** on 
 
 The button then reads "Import n rows and keep in sync". The sync runs as you: the preview says so.
 
-The **Syncs** card lists every scheduled import, with its section, source, filters, schedule, last and next run, and who it runs as. Its **Status** is **Enabled**, **Disabled**, or **Paused** with the reason. From a row:
+The **Syncs** card, on the **Knowledge and sources** tab, lists every scheduled import, with its section, source, filters, schedule, last and next run, and who it runs as. Its **Status** is **Enabled**, **Disabled**, or **Paused** with the reason. From a row:
 
 - **Run now** runs it at once.
 - **Edit** opens the import again. Saving makes the sync run as you, and resumes it when it was paused.
@@ -104,14 +114,14 @@ The card's **Save** writes the new version.
 
 ## List your assets and exposure
 
-**Assets and exposure** holds what runs where, and what the internet can reach. The prioritization funnel needs it to tell internet-facing findings apart.
+**Assets and exposure**, on the **Exposure** tab, holds what runs where, and what the internet can reach. The prioritization funnel needs it to tell internet-facing findings apart.
 
 - **Type** follows OpenAEV's taxonomy, such as **Host**, **Web application**, **Cloud resource** or **Security platform**, with its subcategories.
 - **Criticality** goes from **Low** to **Very high**, or **Criticality unknown**.
 - **Exposure** is **Internet-facing**, **Internal only** or **Exposure unknown**.
 - **Asset group** is a group of the **Asset groups** card, or none.
 
-Link each crown jewel to its assets in the **Assets** column of **Crown jewels and business services**: in edit, **Link assets** lists the asset groups and the assets.
+Link each crown jewel to its assets in the **Assets** column of **Crown jewels and business services**, on the **Business** tab: in edit, **Link assets** lists the asset groups and the assets.
 
 To load many assets, click **Import CSV**, then **Choose a CSV file**. Its header row names the columns, and only `name` is required:
 
@@ -123,7 +133,7 @@ A file holds up to 5,000 rows and 2 MB. The preview counts the assets read and t
 
 ## Set the prioritization policy
 
-**Prioritization policy** holds the rules the CTEM funnel and its agents apply. Money thresholds stay in **Risk appetite and costs**. Without a policy, findings rank as before: click **Edit**, then **Use the recommended policy** to start from CVSS 7, EPSS 0.1 and known exploited vulnerabilities always in.
+**Prioritization policy**, on the **Exposure** tab, holds the rules the CTEM funnel and its agents apply. Money thresholds stay in **Risk appetite and costs**, on **Identity and risk**. Without a policy, findings rank as before: click **Edit**, then **Use the recommended policy** to start from CVSS 7, EPSS 0.1 and known exploited vulnerabilities always in.
 
 - **CVSS minimum**, from 0 to 10, and **EPSS minimum**, from 0 to 1. Empty: no threshold.
 - **Minimum crown jewel criticality** keeps only findings on assets linked to a crown jewel at this level or above. **Any criticality** keeps them all.
@@ -134,13 +144,13 @@ A file holds up to 5,000 rows and 2 MB. The preview counts the assets read and t
 
 ## Point agents to your procedures
 
-**Enterprise knowledge** links the knowledge bases of your procedures, such as runbooks and patch policies. Click **Link a knowledge base**, pick it, and choose its **Kind**: **Standard operating procedure**, **Runbook**, **Patch policy**, **Reference** or **Other**.
+**Enterprise knowledge**, on the **Knowledge and sources** tab, links the knowledge bases of your procedures, such as runbooks and patch policies. Click **Link a knowledge base**, pick it, and choose its **Kind**: **Standard operating procedure**, **Runbook**, **Patch policy**, **Reference** or **Other**.
 
 Agents search them on demand, each within the knowledge bases its user can read. A knowledge base you cannot read shows **Not readable by you**.
 
 ## Choose what every agent receives
 
-**Organization context in agents** is the default of every agent and assignment. Click **Edit** to change it.
+**Organization context in agents**, on the **Knowledge and sources** tab, is the default of every agent and assignment. Click **Edit** to change it.
 
 - **Use organization context in every agent**, on by default, starts each agent with a summary of the profile. The summary gives the name, sector, regions, size and risk appetite, and one line per part of the profile.
 - **Preloaded organization categories** adds whole parts of the profile to that summary. Empty, nothing more is preloaded: an agent reads each part with `get_organization_context` when it needs it.

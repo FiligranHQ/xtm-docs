@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, cti-analyst]
 owner: docs-xtm-one
-last_reviewed: 2026-11-16
+last_reviewed: 2026-11-19
 edition: ee
 migrated_from:
   - xtm-one:/usage/resources/knowledge-bases/
@@ -107,6 +107,8 @@ An agent with write access to a knowledge base stores documents in it and revise
 **Activity** shows one event per row: **When**, **Event**, **Details**, **Source** and **Documents**. Search it, filter it by **Event type** (**Syncs**, **Documents**, **Embeddings**, several at once), sort it by time, and export it. When a search or a filter narrows the list, its total says how many of all the events it keeps.
 
 The badges explain missing actions: **System managed** means the platform fills it, from an assignment's runs; **Content locked** (**Locked** on the list) means **Read-only content** is on; **Company-managed** with **Read-only** means you may read it but not administer it.
+
+A workset keeps its items in a knowledge base of its own, which no list shows, not even to administrators. An old link or an activity entry that leads to one opens **Internal storage of a workset**, which names the workset. Click **View the workset** to find it on the **Worksets** tab of :menu[Work > Operations], described in [Find a run](/xtm-one/use/work-history/#find-a-run). You get this screen only for a workset you can read: yours, a company-managed one, or any as an administrator. Otherwise the knowledge base is not found.
 
 ## What's next
 

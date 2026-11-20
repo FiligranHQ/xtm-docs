@@ -59,7 +59,7 @@ Hover a dot to read the risk and its days. Under the strip, the five risks that 
 
 An expired risk is a decision to review with its owner. To change a risk, an administrator edits **Accepted risks** in the **Prioritization policy** card: see [Set up the organization profile agents read](/xtm-one/administer/organization-profile/#set-the-prioritization-policy).
 
-With no accepted risk, the card says "No accepted risk with an expiry in the prioritization policy". An administrator gets **Open the prioritization policy**, which opens :menu[Administration > Settings > Organization].
+With no accepted risk, the card says "No accepted risk with an expiry in the prioritization policy". An administrator gets **Open the prioritization policy**, which opens the **Exposure** tab of :menu[Administration > Settings > Organization] on the **Prioritization policy** card, where **Accepted risks** is edited.
 
 ## Read the SLA adherence
 

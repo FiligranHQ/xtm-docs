@@ -1,11 +1,11 @@
 ---
 title: Review what agents did
-description: Follow the runs of XTM One agents in Operations, answer a run that waits for you, read a result and rate it, follow delegated work, and read the work items agents queue for each other.
+description: Follow the runs of XTM One agents in Operations, answer a run that waits for you, read and rate a result, and follow delegated work, partners' tasks and the work items agents queue.
 doc_type: how-to
 products: [xtm-one]
 personas: [ai-builder, soc-manager, auditor]
 owner: docs-xtm-one
-last_reviewed: 2026-11-16
+last_reviewed: 2026-11-19
 migrated_from:
   - xtm-one:/usage/work-history/
 ---
@@ -79,6 +79,18 @@ When the run counts a unit of work for its agent, its assignment or its fleet, t
 ## Follow delegated work
 
 One run can start others when its agent hands work to another agent. In the list, such a run counts its delegation steps on its row, and a delegated run reads **Delegation** when it has no assignment. The run's page links its child runs and its parent: follow them to see where the work started, which agent took it over, and which parts succeeded or failed. How agents hand work to each other is drawn in [Follow how agents hand work to each other](/xtm-one/use/agentic-flow/).
+
+## Follow a task a partner's agent sent
+
+An agent outside the platform, at a partner or on another XTM One, can send a task to one of your agents through an agent-to-agent (A2A) integration: see [Let a partner's agents work with yours over A2A](/xtm-one/build/integrations/#let-a-partner-s-agents-work-with-yours-over-a2a). Each task runs as a run of your agent. Its page shows where the task came from in its overview: **Source** reads **A2A**, with the **Client ID** the partner presented and the **A2A Provider**, the kind of integration the task came through, such as **OAuth A2A**.
+
+Your agent can ask the partner's agent a question before it goes on. Its run then ends, and the task waits for the answer:
+
+- The run reads **Waiting on caller**, in the list and on its page, rather than **Completed**. Under **Status**, it counts among **Completed**.
+- Its page shows the card **Waiting on its caller**, with the question under **The agent asked**. The **Result** card says "No result yet: the task is waiting for its caller to answer the question above."
+- Nobody answers it from XTM One: the agent that sent the task answers, and the page updates on its own when it does.
+
+The answer continues the task in a new run of the same agent. The run that asked then shows **Asked its caller** with the badge **Answered**, and **View the run that continued it**. The new run shows the card **Continues the task after its caller answered**, with **The agent asked** and **The caller answered**, and **View the run that asked**. When the partner cancels the task before answering, or the task outlives its maximum lifetime, four hours by default, the run that asked shows **Cancelled before an answer**. A linked run you cannot open is not linked.
 
 ## Read a work item
 

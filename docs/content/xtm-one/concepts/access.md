@@ -42,11 +42,12 @@ The bootstrap account keeps working when the identity provider is down, as long 
 
 ### Create an account
 
-Three ways bring a person in:
+Four ways bring a person in:
 
 - **New User** creates the account now. Choose **Local Account** to set an email and a password yourself, or **SSO Pre-provision** to create it without a password: the person's first single sign-on links to it by email, with the role you set. **SSO Pre-provision** is offered once OpenID Connect or SAML is on. Turn on **Administrator** to create an administrator.
 - **Invite user** emails a single-use link bound to one address and one role. The invitee sets their own password, and you never see it. The link lasts 7 days by default (`INVITATION_EXPIRE_HOURS`, at most 30 days). An invitation works even while **Local Registration** is off or the email domain is not allowed. **Pending invitations**, in the same dialog, lists the links not used yet, and revokes one.
 - **Single sign-on** creates the account at the first sign-in, unless you turned on-the-fly creation off. See [Configure single sign-on](/xtm-one/administer/sso/).
+- **SCIM provisioning** lets an identity provider such as Microsoft Entra create, update and deactivate accounts through System for Cross-domain Identity Management (SCIM), from a token you generate in :menu[Settings > Access and security > Provisioning]. It creates a **User** without a password, and links an account that already has the same email instead of creating a second one. See [Set up the platform in Settings](/xtm-one/administer/settings/#access-and-security).
 
 A local password has at least 8 characters by default (`MIN_PASSWORD_LENGTH`), with a letter and a digit. Invitations and password reset emails need an SMTP server: when it refuses the message, the dialog says so and the link stays pending.
 
@@ -65,11 +66,37 @@ The secret of an authenticator app and its recovery codes are never readable, no
 
 ### Disable, impersonate, delete
 
-- **Disable** stops the person from signing in and pauses the assignments and flows they own, the shared ones included. The company-managed ones they created keep running. **Enable** resumes everything as it was, their shares included. Disable rather than delete when someone leaves: removing a person from the identity provider stops their sign-in, but their account and automations stay active.
+- **Disable** stops the person from signing in and stops everything that runs as them. It first opens **Disable {name}?**, which lists under **What happens** what the account will lose, then **Disable account** does it. See [What disabling an account does](#what-disabling-an-account-does).
+- **Enable** gives the account back its sign-in, its private agents, its paused assignments and the objects moved away from it. See [Enable an account again](#enable-an-account-again).
 - **Impersonate** signs you in as the person, to see what they see. A banner shows it the whole time, every action is recorded in **Audit logs** as yours, and the impersonation ends with your own session. A disabled account cannot be impersonated.
 - **Delete** removes the account and everything it owns: agents, assignments, runs, conversations, integrations, knowledge bases, MCP servers, custom tools, API keys and audit entries. It cannot be undone. Transfer what the team still needs first.
 
-You cannot disable or delete your own account.
+You cannot disable or delete your own account. Disable rather than delete when someone leaves: the account, its history and its shares stay, and nothing runs as the person any more.
+
+### What disabling an account does
+
+Every way of disabling an account runs the same steps: **Disable** on the person's page, the identity provider through SCIM (an account set inactive, or removed: XTM One then deactivates it and purges nothing), and an AI agent with the **User Administration** tools. The dialog counts each step before you confirm:
+
+| Step | What happens |
+| --- | --- |
+| Sign-in and keys | The person can no longer sign in, and their personal API keys are revoked. |
+| Live work | Their running and queued runs stop, their armed timers and their scheduled actions are cancelled. |
+| Private agents | The agents they own that are neither shared nor company-managed are disabled, with their assignments. |
+| Shared objects | Their shared and company-managed agents, fleets, workspaces and integrations move to the platform administrator: the `ADMIN_EMAIL` account when it is active, else the oldest active administrator. |
+| Assignments run as them | On a moved agent, the assignments that run as the person are paused; the others keep running as the new owner. |
+| Integrations | Their private integrations are disconnected, and their personal sign-ins to shared integrations are removed. |
+
+Their group memberships and the shares that name them are kept, for audit and for a later **Enable**. Their private fleets and workspaces stay with them: nothing in them runs. When no other active administrator exists, the shared objects stay with the account, and the dialog warns about it.
+
+Every active administrator gets a notification and an email. Each object the steps moved, paused, disconnected or had to keep with the account, and another person's agent that used one of the disconnected integrations, waits in the **Deactivation review** card of :menu[Settings > Access and security > Provisioning]. **Mark as kept**, **Mark as reassigned** or **Mark as deleted** records what you decided, once you have done it: marking an object changes nothing else.
+
+On your own page, the dialog only says "Cannot deactivate yourself", and **Disable account** stays off. The bootstrap account, marked **Platform Admin**, has no **Disable** at all.
+
+::screenshot{id=xtm-one-administer-user-disable alt="The Disable Sophie Laurent? dialog: under What happens, the count of shared agents that move to the platform administrator, then the Disable account button."}
+
+### Enable an account again
+
+**Enable** runs no dialog. It gives back the sign-in, turns the private agents on again, resumes the assignments paused because of the person, and returns the moved objects to them. An object comes back only if the successor still owns it and no administrator marked it in **Deactivation review**. Revoked API keys, cancelled timers and scheduled actions, stopped runs and disconnected integrations stay ended: the person creates new keys and connects their integrations again.
 
 ## Groups
 
@@ -115,7 +142,8 @@ Administrators find any item, whoever owns it, fleets included, in :menu[Adminis
 ## Check after a change
 
 - **Audit logs** records every role change, account toggle, impersonation, group change, the AI access of a group included, and sharing change, with who did it.
-- A user's **Objects** tab shows what they own before you disable or delete them.
+- A user's **Objects** tab shows what they own before you disable or delete them, and **Disable {name}?** counts what disabling will stop and move.
+- The **Deactivation review** card of :menu[Settings > Access and security > Provisioning] lists what each deactivation moved, disabled or kept, until you mark it.
 - The **Security audit** of Settings lists the active accounts nobody signed in to for 30 days that still own an automation. See [Set up the platform in Settings](/xtm-one/administer/settings/#access-and-security).
 
 :::example[Organize the security teams of Grand Meridian Hotels]
@@ -129,6 +157,8 @@ Hélène Marchetti, the CISO, administers XTM One at `https://xtm-one.grand-meri
 6. For the firm that reviews the hotels' access controls each quarter, she creates **Outside auditors** and turns on **AI disabled for this group** in its **AI access** card: the auditors read what is shared with them, and no model runs on their behalf.
 
 When Paul leaves the night shift, Hélène removes him from **SOC**: XTM One first lists what the group's shares stop lending him, "Night shift triage" included.
+
+When Sophie leaves Grand Meridian Hotels, Hélène opens her page and clicks **Disable**. Under **What happens**, **Disable Sophie Laurent?** counts the shared agents that move to the platform administrator. Hélène clicks **Disable account**, then finds "Night shift triage" and "Velvet Harbor watcher" in **Deactivation review**, marked **Moved**, and clicks **Mark as kept** on each: the SOC and the CTI team keep chatting with them.
 :::
 
 ## What's next

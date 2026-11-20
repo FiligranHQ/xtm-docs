@@ -5,12 +5,12 @@ doc_type: how-to
 products: [xtm-one]
 personas: [admin]
 owner: docs-xtm-one
-last_reviewed: 2026-11-16
+last_reviewed: 2026-11-19
 ---
 
 Your organization's profile tells agents who you are. Tracked organizations tell them who you depend on and who you serve: the providers whose breach can reach you, the customers whose breach is your exposure, your partners and your subsidiaries. This page adds them one by one or drafts a whole list with AI, links each one to its organization in OpenCTI, and says where agents read them.
 
-::screenshot{id=xtm-one-administer-tracked-organizations alt="The Tracked organizations card of Settings > Organization, with Draft with AI and Add an organization at the top right, and four organizations of Grand Meridian Hotels: Tidewell Payments, Lanternway Hotel Cloud, Grand Meridian Iberia and Example CERT, each with its relationship, criticality, OpenCTI link and Monitoring off."}
+::screenshot{id=xtm-one-administer-tracked-organizations alt="The Tracked organizations card of the Business tab of Settings > Organization, with Draft with AI and Add an organization at the top right, and four organizations of Grand Meridian Hotels: Tidewell Payments, Lanternway Hotel Cloud, Grand Meridian Iberia and Example CERT, each with its relationship, criticality, OpenCTI link and Monitoring off."}
 
 ## Before you start
 
@@ -21,7 +21,7 @@ Your organization's profile tells agents who you are. Tracked organizations tell
 ## Add an organization
 
 :::steps
-1. Open :menu[Administration > Settings > Organization]. The **Tracked organizations** card is at the bottom of **Profile**.
+1. Open :menu[Administration > Settings > Organization], then the **Business** tab of the profile. The **Tracked organizations** card is under **Crown jewels**. Its address, `/settings/organization/profile/business`, opens that tab directly.
 2. Click **Add an organization**.
 3. In **Name**, type the name agents will use for it in briefs and reports.
 4. In **Relationship**, pick what it is to your organization: **Provider** (it supplies a product or a service you depend on), **Customer**, **Partner** or **Subsidiary**. Agents word their briefs from it: a provider's breach can reach you, a customer's breach is your exposure.
@@ -63,11 +63,11 @@ The review page, **Review drafted organizations**, lists one row per name, with 
 3. Click **Create accepted**. The button shows how many rows you accepted.
 :::
 
-Only the accepted rows are created, each one with **Monitoring off**, and you are back on :menu[Administration > Settings > Organization]. Its sector and regions become its profile. The rows still to review are rejected, and the draft is closed: nothing more can be created from it. **Discard draft** closes it without creating anything.
+Only the accepted rows are created, each one with **Monitoring off**, and you are back on :menu[Administration > Settings > Organization], on its first tab, **Identity and risk**. Open **Business** to see them in the list. Each one's sector and regions become its profile. The rows still to review are rejected, and the draft is closed: nothing more can be created from it. **Discard draft** closes it without creating anything.
 
 The review page has its own address, `/settings/organization/tracked/ai-draft/` followed by the draft's id: keep it to come back to a draft you have not decided yet, or to send it to another administrator. A decided draft still opens, read-only, with each row marked **Accepted** or **Rejected** and the line "This draft was already decided; nothing more can be created from it."
 
-Some rows may show **Already tracked**, with the line "See it in Tracked organizations", or **Not drafted**. Neither can be selected. Click an **Already tracked** row to go back to :menu[Administration > Settings > Organization], where the organization is listed. When the model failed on some names, a line says how many, **Details** says why, and **Retry** opens the dialog again with those names, for a new run. When OpenCTI could not be searched, every row shows **No match**: check the OpenCTI integration and your token, then draft again.
+Some rows may show **Already tracked**, with the line "See it in Tracked organizations", or **Not drafted**. Neither can be selected. Click an **Already tracked** row to go back to :menu[Administration > Settings > Organization]: the organization is listed on its **Business** tab. When the model failed on some names, a line says how many, **Details** says why, and **Retry** opens the dialog again with those names, for a new run. When OpenCTI could not be searched, every row shows **No match**: check the OpenCTI integration and your token, then draft again.
 
 ## Change or archive an organization
 

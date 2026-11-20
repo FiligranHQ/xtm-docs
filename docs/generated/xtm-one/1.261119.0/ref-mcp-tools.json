@@ -1,13 +1,13 @@
 {
   "name": "mcp-tools",
-  "version": "1.261116.1",
-  "source": "XTM-One-Platform/xtm-one@ee30e87: backend/app/api/v1/mcp_platform.py, backend/app/integrations/providers",
-  "intro": "Every tool of the Model Context Protocol (MCP) servers XTM One exposes for OpenCTI, OpenAEV and OpenCRQ: 163 tools. An assistant or an agent of your own calls them with an API key of a user, and works with that user's rights in each product: see [MCP servers](/develop/apis/mcp/) for the endpoints, the protocol and the authentication. A tool marked Write changes data; a read-only key cannot call it.",
+  "version": "1.261119.0",
+  "source": "XTM-One-Platform/xtm-one@d2a203a: backend/app/api/v1/mcp_platform.py, backend/app/integrations/providers",
+  "intro": "Every tool of the Model Context Protocol (MCP) servers XTM One exposes for OpenCTI, OpenAEV and OpenCRQ: 164 tools. An assistant or an agent of your own calls them with an API key of a user, and works with that user's rights in each product: see [MCP servers](/develop/apis/mcp/) for the endpoints, the protocol and the authentication. A tool marked Write changes data; a read-only key cannot call it.",
   "filter": "Filter by tool or by what it does",
   "sections": [
     {
       "title": "OpenCTI server",
-      "text": "`/mcp/opencti` on XTM One: 28 tools on the knowledge of OpenCTI: entities, observables, indicators, relationships, containers, notes, labels and markings. A read-only API key calls the 11 marked Read.",
+      "text": "`/mcp/opencti` on XTM One: 29 tools on the knowledge of OpenCTI: entities, observables, indicators, relationships, containers, notes, labels and markings. A read-only API key calls the 11 marked Read.",
       "columns": [
         "Tool",
         "Group",
@@ -241,6 +241,15 @@
           ]
         },
         {
+          "key": "list_opencti_markings",
+          "cells": [
+            "`list_opencti_markings`",
+            "Labels & markings",
+            "Write",
+            "List OpenCTI marking definitions (TLP, PAP, statements; read-only) with their internal id and STIX id. add_opencti_marking and the ingestion feed tools take the internal id, the STIX id or the name (TLP:CLEAR)."
+          ]
+        },
+        {
           "key": "add_opencti_to_container",
           "cells": [
             "`add_opencti_to_container`",
@@ -312,7 +321,7 @@
             "`get_openaev_asset_group`",
             "Search / read",
             "Read",
-            "Get full details of a specific asset group by ID."
+            "Get an asset group by ID: its dynamic filter, tags and its members, static and dynamic, paged (name, id, type, hostname)."
           ]
         },
         {
@@ -429,7 +438,7 @@
             "`get_openaev_injector_contract`",
             "Search / read",
             "Read",
-            "Get full details of an injector contract by ID."
+            "Get full details of an injector contract by ID, with its input fields (inject_content keys, types, mandatory flags, defaults, choices, linked fields and visibility conditions): build inject content from them, never from the injector's sour…"
           ]
         },
         {

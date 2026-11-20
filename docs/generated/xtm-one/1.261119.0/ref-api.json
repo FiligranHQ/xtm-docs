@@ -1,8 +1,8 @@
 {
   "name": "api",
-  "version": "1.261116.1",
-  "source": "XTM-One-Platform/xtm-one@ee30e87: backend/app/main.py, backend/app/api",
-  "intro": "Every route of the XTM One REST API: 1032 in 68 areas. The interface calls the same routes, so a script does what a person does on screen, with the rights of the user whose API key it sends: see [Script OpenAEV and XTM One with their REST APIs](/develop/apis/rest/). Your platform serves the same list with the fields of each route at `/api/reference`, and as an OpenAPI document at `/api/openapi.json`.",
+  "version": "1.261119.0",
+  "source": "XTM-One-Platform/xtm-one@d2a203a: backend/app/main.py, backend/app/api",
+  "intro": "Every route of the XTM One REST API: 1057 in 70 areas. The interface calls the same routes, so a script does what a person does on screen, with the rights of the user whose API key it sends: see [Script OpenAEV and XTM One with their REST APIs](/develop/apis/rest/). Your platform serves the same list with the fields of each route at `/api/reference`, and as an OpenAPI document at `/api/openapi.json`.",
   "filter": "Filter by path or by what a route does",
   "sections": [
     {
@@ -61,6 +61,24 @@
             "`POST`",
             "`/api/v1/a2a/client/{integration_id}/verify`",
             "Re-verify this partner's card now."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "A2A liaisons",
+      "columns": [
+        "Method",
+        "Path",
+        "What it does"
+      ],
+      "rows": [
+        {
+          "key": "GET /api/v1/a2a/liaisons",
+          "cells": [
+            "`GET`",
+            "`/api/v1/a2a/liaisons`",
+            "Partner nodes and directed edges of the caller's visible A2A bindings."
           ]
         }
       ]
@@ -3420,7 +3438,7 @@
           "cells": [
             "`POST`",
             "`/api/v1/integrations/{integration_id}/a2a-credential`",
-            "Mint a fresh client id / secret for an `oauth_a2a` integration."
+            "Generate, or rotate, the partner credential of an `oauth_a2a` integration."
           ]
         },
         {
@@ -6616,6 +6634,184 @@
       ]
     },
     {
+      "title": "Scim",
+      "columns": [
+        "Method",
+        "Path",
+        "What it does"
+      ],
+      "rows": [
+        {
+          "key": "GET /api/v1/scim/tokens",
+          "cells": [
+            "`GET`",
+            "`/api/v1/scim/tokens`",
+            "The SCIM endpoint URL and every token, never a raw value."
+          ]
+        },
+        {
+          "key": "POST /api/v1/scim/tokens",
+          "cells": [
+            "`POST`",
+            "`/api/v1/scim/tokens`",
+            "Generate a token: its raw value is in this answer and nowhere else."
+          ]
+        },
+        {
+          "key": "DELETE /api/v1/scim/tokens/{token_id}",
+          "cells": [
+            "`DELETE`",
+            "`/api/v1/scim/tokens/{token_id}`",
+            ""
+          ]
+        },
+        {
+          "key": "GET /api/v1/scim/tokens/activity",
+          "cells": [
+            "`GET`",
+            "`/api/v1/scim/tokens/activity`",
+            "The latest SCIM writes, newest first: every SCIM write is audited under `system:scim:<token name>` (reads and refused calls are not audited)."
+          ]
+        },
+        {
+          "key": "GET /api/v1/scim/v2/Groups",
+          "cells": [
+            "`GET`",
+            "`/api/v1/scim/v2/Groups`",
+            ""
+          ]
+        },
+        {
+          "key": "POST /api/v1/scim/v2/Groups",
+          "cells": [
+            "`POST`",
+            "`/api/v1/scim/v2/Groups`",
+            ""
+          ]
+        },
+        {
+          "key": "GET /api/v1/scim/v2/Groups/{group_id}",
+          "cells": [
+            "`GET`",
+            "`/api/v1/scim/v2/Groups/{group_id}`",
+            ""
+          ]
+        },
+        {
+          "key": "PUT /api/v1/scim/v2/Groups/{group_id}",
+          "cells": [
+            "`PUT`",
+            "`/api/v1/scim/v2/Groups/{group_id}`",
+            ""
+          ]
+        },
+        {
+          "key": "PATCH /api/v1/scim/v2/Groups/{group_id}",
+          "cells": [
+            "`PATCH`",
+            "`/api/v1/scim/v2/Groups/{group_id}`",
+            ""
+          ]
+        },
+        {
+          "key": "DELETE /api/v1/scim/v2/Groups/{group_id}",
+          "cells": [
+            "`DELETE`",
+            "`/api/v1/scim/v2/Groups/{group_id}`",
+            "Delete the group the way an administrator does (`api/v1/groups.py`): refused while an LLM provider excludes it, its grants pruned first."
+          ]
+        },
+        {
+          "key": "GET /api/v1/scim/v2/ResourceTypes",
+          "cells": [
+            "`GET`",
+            "`/api/v1/scim/v2/ResourceTypes`",
+            ""
+          ]
+        },
+        {
+          "key": "GET /api/v1/scim/v2/ResourceTypes/{type_id}",
+          "cells": [
+            "`GET`",
+            "`/api/v1/scim/v2/ResourceTypes/{type_id}`",
+            ""
+          ]
+        },
+        {
+          "key": "GET /api/v1/scim/v2/Schemas",
+          "cells": [
+            "`GET`",
+            "`/api/v1/scim/v2/Schemas`",
+            ""
+          ]
+        },
+        {
+          "key": "GET /api/v1/scim/v2/Schemas/{schema_id}",
+          "cells": [
+            "`GET`",
+            "`/api/v1/scim/v2/Schemas/{schema_id}`",
+            ""
+          ]
+        },
+        {
+          "key": "GET /api/v1/scim/v2/ServiceProviderConfig",
+          "cells": [
+            "`GET`",
+            "`/api/v1/scim/v2/ServiceProviderConfig`",
+            ""
+          ]
+        },
+        {
+          "key": "GET /api/v1/scim/v2/Users",
+          "cells": [
+            "`GET`",
+            "`/api/v1/scim/v2/Users`",
+            ""
+          ]
+        },
+        {
+          "key": "POST /api/v1/scim/v2/Users",
+          "cells": [
+            "`POST`",
+            "`/api/v1/scim/v2/Users`",
+            ""
+          ]
+        },
+        {
+          "key": "GET /api/v1/scim/v2/Users/{user_id}",
+          "cells": [
+            "`GET`",
+            "`/api/v1/scim/v2/Users/{user_id}`",
+            ""
+          ]
+        },
+        {
+          "key": "PUT /api/v1/scim/v2/Users/{user_id}",
+          "cells": [
+            "`PUT`",
+            "`/api/v1/scim/v2/Users/{user_id}`",
+            ""
+          ]
+        },
+        {
+          "key": "PATCH /api/v1/scim/v2/Users/{user_id}",
+          "cells": [
+            "`PATCH`",
+            "`/api/v1/scim/v2/Users/{user_id}`",
+            ""
+          ]
+        },
+        {
+          "key": "DELETE /api/v1/scim/v2/Users/{user_id}",
+          "cells": [
+            "`DELETE`",
+            "`/api/v1/scim/v2/Users/{user_id}`",
+            "Deprovision: the cascade's deactivation plus `deprovisioned_at`."
+          ]
+        }
+      ]
+    },
+    {
       "title": "Search",
       "columns": [
         "Method",
@@ -8288,6 +8484,14 @@
           ]
         },
         {
+          "key": "GET /api/v1/users/{user_id}/deactivation-preview",
+          "cells": [
+            "`GET`",
+            "`/api/v1/users/{user_id}/deactivation-preview`",
+            "What deactivating the account would do, read without writing."
+          ]
+        },
+        {
           "key": "GET /api/v1/users/{user_id}/groups",
           "cells": [
             "`GET`",
@@ -8413,6 +8617,22 @@
             "`GET`",
             "`/api/v1/users/count`",
             "How many users match the filters of `GET /users` (admin-only): the table's total."
+          ]
+        },
+        {
+          "key": "GET /api/v1/users/deactivations",
+          "cells": [
+            "`GET`",
+            "`/api/v1/users/deactivations`",
+            "The deactivation episodes, newest first, with their review list."
+          ]
+        },
+        {
+          "key": "POST /api/v1/users/deactivations/{deactivation_id}/review",
+          "cells": [
+            "`POST`",
+            "`/api/v1/users/deactivations/{deactivation_id}/review`",
+            "Mark one review item done (`keep`, `reassign` or `delete`)."
           ]
         },
         {

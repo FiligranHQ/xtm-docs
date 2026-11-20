@@ -1,6 +1,6 @@
 ---
 title: Configure XTM One
-description: Pass environment variables to XTM One in the XTM stack, and set its secrets, public URL and proxy trust, language models, edition, links to the platform, mail, security headers and sizing.
+description: Pass environment variables to XTM One in the XTM stack, and set its secrets, public URL and proxy trust, language models, edition, platform links, mail, security headers, sandbox mirror and sizing.
 doc_type: how-to
 products:
   - xtm-one
@@ -13,7 +13,7 @@ migrated_from:
   - xtm-one:/deployment/security-headers/
 ---
 
-This page sets the configuration a deployment of XTM One decides on: its secrets, its public URL and the proxy it trusts, the language models, its edition, its links to the other platforms, mail, the security headers of its pages and the size of its processes. Every setting here is an environment variable of the `xtm-one` and `xtm-one-worker` containers, read when they start. [Install XTM One](/deploy/install/xtm-one/) sets the minimum; come back here to change a setting, and read the [XTM One configuration](/reference/xtm-one/configuration/) reference for every variable.
+This page sets the configuration a deployment of XTM One decides on: its secrets, its public URL and the proxy it trusts, the language models, its edition, its links to the other platforms, mail, the security headers of its pages, the package mirror of its sandbox and the size of its processes. Every setting here is an environment variable of the `xtm-one` and `xtm-one-worker` containers, read when they start. [Install XTM One](/deploy/install/xtm-one/) sets the minimum; come back here to change a setting, and read the [XTM One configuration](/reference/xtm-one/configuration/) reference for every variable.
 
 ::diagram{id=xtm-one-deploy-configure-sources}
 
@@ -38,7 +38,7 @@ xtm-docker passes XTM One a fixed list of variables, built from `.env`:
 | Fixed | `PLATFORM_MODE=xtm_one`, `REDIS_URL=redis://redis:6379`, `S3_ENDPOINT=minio:9000`, `S3_USE_SSL=false` | Both |
 | Fixed | `OPENCTI_API_URL=http://opencti:8080`, `OPENAEV_API_URL=http://openaev:8080`, `XTM_AUTH_ACCEPTED_AUDIENCES=http://xtm-one:4000` | `xtm-one` |
 
-Any other variable goes in `docker-compose.override.yml`, under the `environment` of the service, above the `# Pinned versions` line: see [Change the stack without editing docker-compose.yml](/deploy/install/docker-compose/#change-the-stack-without-editing-docker-compose-yml). The Docker Compose file of the product passes its own list in the same way: what it does not list never reaches the containers. Its list holds every on/off switch of `.env.sample`, except `DEBUG`, `A2A_ALLOW_INSECURE_LOOPBACK` and `TRUST_PROXY_HEADERS`. It also holds the sandbox of the custom tools and the code interpreter, `CUSTOM_TOOL_SANDBOX` and the `OPENSANDBOX_*` variables: see [Run XTM One on its own host](/deploy/install/xtm-one/#run-xtm-one-on-its-own-host) for the `CUSTOM_TOOL_SANDBOX` line of `.env.sample`. A switch that is also a security option of **Settings** reaches the containers blank until `.env` sets it: the screen decides while it is blank.
+Any other variable goes in `docker-compose.override.yml`, under the `environment` of the service, above the `# Pinned versions` line: see [Change the stack without editing docker-compose.yml](/deploy/install/docker-compose/#change-the-stack-without-editing-docker-compose-yml). The Docker Compose file of the product passes its own list in the same way: what it does not list never reaches the containers. Its list holds every on/off switch of `.env.sample`, except `DEBUG`, `A2A_ALLOW_INSECURE_LOOPBACK` and `TRUST_PROXY_HEADERS`. It also holds the sandbox of the custom tools and the code interpreter, `CUSTOM_TOOL_SANDBOX` and the `OPENSANDBOX_*` variables, and the package mirror of the sandbox, `SANDBOX_REGISTRY_MIRROR_URL`: see [Run XTM One on its own host](/deploy/install/xtm-one/#run-xtm-one-on-its-own-host) for the `CUSTOM_TOOL_SANDBOX` line of `.env.sample`. A switch that is also a security option of **Settings** reaches the containers blank until `.env` sets it: the screen decides while it is blank.
 
 ## Secrets and the administrator
 
@@ -71,14 +71,20 @@ An administrator can add providers in **Settings** > **AI and models** > **Model
 
 | Variable | Default | What it sets |
 | --- | --- | --- |
-| `LLM_PROVIDER_<NAME>_API_KEY` | None | The key of a provider. `<NAME>` is `OPENAI`, `ANTHROPIC`, `GEMINI`, `MISTRAL`, `AZURE_OPENAI`, `BEDROCK`, `OPENROUTER`, `OLLAMA`, `LITELLM` or `CUSTOM_OPENAI`. The provider shows an **Env** badge and cannot be deleted from the screen: remove the variable and restart to remove it |
-| `LLM_PROVIDER_<NAME>_MODELS` | Every model of the provider | The models offered, comma-separated |
+| `LLM_PROVIDER_<NAME>_API_KEY` | None | The key of a provider. `<NAME>` is `OPENAI`, `ANTHROPIC`, `GEMINI`, `MISTRAL`, `AZURE_OPENAI`, `BEDROCK`, `OPENROUTER`, `OLLAMA`, `LITELLM`, `CUSTOM_OPENAI` or `FILIGRAN_GATEWAY`. The provider shows an **Env** badge and cannot be deleted from the screen: remove the variable and restart to remove it |
+| `LLM_PROVIDER_<NAME>_MODELS` | None | The models offered, comma-separated. Unset, XTM One leaves the list stored for the provider as it is. A provider with no list chats on its built-in model only while no other provider lists one. `FILIGRAN_GATEWAY` is the exception: see below |
 | `LLM_PROVIDER_MODELS_EDITABLE` | `false` | `false`: the list of the variable is the catalog, rewritten at each start. `true`: it is a baseline that administrators can curate in **Models** |
 | `MODELS_ENV_PROVIDING_ONLY` | `false` | `true` refuses every change to providers from the screen and the API |
 | `DEFAULT_MODEL` | The first model configured | The default model of the agents, applied again at each start while a provider offers it |
 | `BYOLLM_ACTIVATED` | `false` | Hands the language models to the administrators: `DEFAULT_*` values apply once, to an install that has no configuration of its own yet |
 
-For `CUSTOM_OPENAI`, an endpoint that speaks the OpenAI API, the value is the key, two vertical bars, then the base URL of the endpoint. On a host without internet access, use a model served on your network, through `OLLAMA`, `LITELLM` or `CUSTOM_OPENAI`. The rest of the AI settings, such as image and speech models, are in [AI providers](/reference/xtm-one/configuration/#ai-providers).
+For `CUSTOM_OPENAI`, an endpoint that speaks the OpenAI API, the value is the key, two vertical bars, then the base URL of the endpoint. For `FILIGRAN_GATEWAY`, the **Filigran AI Gateway**, the URL comes first, optionally followed by `||` and the provider it targets, then `||` and a token; without a token, XTM One signs its calls with its own token.
+
+When `LLM_PROVIDER_FILIGRAN_GATEWAY_MODELS` is unset and no other provider offers a chat model, XTM One asks the gateway for its chat models at start and uses them as its list. It refreshes that list at every start, even once another provider offers chat models, until an administrator edits it in **Models**, which `LLM_PROVIDER_MODELS_EDITABLE=true` or `BYOLLM_ACTIVATED=true` allows. With either of these, the first listing also needs the gateway to have no list yet. A model the gateway stops listing leaves the list, but the agents and people that chose it keep their choice. If the gateway does not answer within 5 seconds, XTM One keeps the stored list and logs `could not list the filigran_gateway models`.
+
+When every provider that chats lists no model, **Models** says so: "The configured LLM providers offer no model. Agentic and LLM-powered platform features are unavailable until one does." For a provider set by its variable, whose models administrators cannot edit, an administrator also reads the variable to set, such as "Set LLM_PROVIDER_OPENAI_MODELS and restart, or set LLM_PROVIDER_MODELS_EDITABLE=true to select its models here."
+
+On a host without internet access, use a model served on your network, through `OLLAMA`, `LITELLM` or `CUSTOM_OPENAI`. The rest of the AI settings, such as image and speech models, are in [AI providers](/reference/xtm-one/configuration/#ai-providers).
 
 ## Edition and AI
 
@@ -141,6 +147,28 @@ curl -sI https://xtm-one.example.com/ | grep -i '^content-security-policy'
 ```
 The header reads `content-security-policy:`, without `-report-only`. To go back, set `report-only` again: nothing else is stored.
 :::
+
+## Install packages in the sandbox through a mirror
+
+When XTM One runs its sandbox on OpenSandbox, the checks and services an agent runs in a workspace (`sandbox_run_command`, `sandbox_start_service`) run in containers of their own. By default, npm, Yarn, pip and uv install there only the packages their images hold. To let them install others without opening the internet to those containers, run a read-only mirror of npm and PyPI and name it on both containers:
+
+| Variable | Default | What it sets |
+| --- | --- | --- |
+| `SANDBOX_REGISTRY_MIRROR_URL` | None | The mirror, such as `http://registry-mirror:8080`. Its host joins the egress of the command and service containers, on top of `OPENSANDBOX_NETWORK_ALLOW`, and npm, Yarn, corepack, pip and uv install from its `/npm/` and `/pypi/simple/` paths. The code interpreter and custom tools never use it. An address that is not `http` or `https`, or that holds a user, a password, a query or a fragment, stops XTM One at start |
+
+The product ships a mirror, `backend/sandbox/registry-mirror/nginx.conf`, for an unprivileged nginx (`nginxinc/nginx-unprivileged`) with the file mounted as `/etc/nginx/nginx.conf`, on port 8080. It answers only `GET` and `HEAD` on the packages of npm and PyPI and refuses every other path with `403`, so no one can publish or sign in through it. It drops the `Authorization` and `Cookie` headers, holds no credential, and rewrites the download links of the registries to itself. Its container needs DNS and egress to `registry.npmjs.org`, `pypi.org` and `files.pythonhosted.org`. It resolves them through the Kubernetes DNS, `kube-dns.kube-system.svc.cluster.local`: elsewhere, change its `resolver` line to the resolver of your network.
+
+Keep the three registries out of `OPENSANDBOX_NETWORK_ALLOW`, so that the mirror stays the only way to them. With xtm-docker, add the variable to `docker-compose.override.yml`:
+
+```yaml
+services:
+  xtm-one:
+    environment:
+      - SANDBOX_REGISTRY_MIRROR_URL=http://registry-mirror:8080
+  xtm-one-worker:
+    environment:
+      - SANDBOX_REGISTRY_MIRROR_URL=http://registry-mirror:8080
+```
 
 ## Size the platform and the worker
 

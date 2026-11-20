@@ -5,7 +5,7 @@ doc_type: how-to
 products: [xtm-one, opencti]
 personas: [ai-builder]
 owner: docs-xtm-one
-last_reviewed: 2026-11-16
+last_reviewed: 2026-11-19
 edition: ee
 migrated_from:
   - xtm-one:/usage/agents/
@@ -147,6 +147,15 @@ An assignment is a task the agent runs on its own: a prompt, and a trigger that 
 On the assignment's page, **Overview** holds the trigger, the run-as identity and the parameters. Under **Output visibility**, **Show as notification** (off by default) sends a bell notification when a run completes, and **Show in latest results** lists the result in the dashboard digest. Under **Safety & reliability**, **Simulate without executing actions** stubs every tool call, so the runs only describe their plan: use it to try an assignment that writes, and turn it off once the plan is right. **Prompt & Bindings** narrows the integrations and knowledge bases the assignment uses, **Channels & Bots** posts its result to a messaging channel, and **Activity** lists its runs. **Run Now** starts a run at once; **Pause** and **Resume** stop and restart its trigger.
 
 ::screenshot{id=xtm-one-build-agents-assignment alt="The Overview of the assignment Weekly Velvet Harbor brief, shared by Sophie Laurent: Active, Scheduled on 0 6 * * 1 with 2 runs, an AI-generated label turned on, and every knowledge base of the agent read through RAG."}
+
+### Skip the runs with nothing to do
+
+An assignment woken by every event or every schedule often has nothing to do. Two gates, on its **Prompt & Bindings** tab, stop such a run before it spends anything. Click **Edit** on the **Action Prompt** card to set them:
+
+- **Tool check** calls one read-only tool of the agent, such as `list_work_items`, with the JSON object of **Tool arguments (JSON)**, and says when the run goes ahead: **Runs when the result is not empty** (the default), **Runs when the result is empty**, or **Runs when a field matches**: a **Field path** such as `$.status` that **is one of**, **is none of** or **contains** the **Values**. The platform calls the tool without any model: a run whose check fails is skipped, with no tokens spent. A check that cannot be evaluated, because the agent has no such tool or the tool fails, never blocks the run.
+- **Gate prompt** asks the model whether to run, after the tool check, for example "Is this a question I should answer? YES or NO."
+
+The card sets one check. From the chat, the General Assistant can add up to three more to it, in one of two ways: checks that must all pass, or alternatives, where the run goes ahead as soon as one check passes and is skipped only when every one fails. Saving the card keeps them. A skipped run's summary starts with "Skipped: gate check" and names each check that failed.
 
 ## Count what an agent produces
 

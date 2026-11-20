@@ -122,9 +122,18 @@ While none of these rows is tailored to the organization profile, **These action
 
 ## Follow the funnel and the cases
 
-**Prioritization funnel** narrows the vulnerabilities OpenCTI knows down to the cases open on them, one layer at a time. The layers go from the known vulnerabilities to those relevant to you, exploitable, exposed, with a business impact, and left after your policy. Each layer gives its count: click it to open its list in OpenCTI, or the cases. A layer not configured yet is counted apart. **Open Prioritization** opens the stage. Without OpenCTI, the widget shows a sample.
+**Prioritization funnel** narrows the vulnerabilities OpenCTI knows down to the cases open on them, one layer at a time. The layers go from the known vulnerabilities to those relevant to you, exploitable, exposed, with a business impact, and left after your policy. Each layer gives its count: click it to open its list in OpenCTI, or the cases. A layer not configured yet says **Not configured** and is counted apart. Its link opens the organization profile on the tab and card that set it:
 
-**Cases** counts the cases you can see, by state: **Needs attention**, **In progress**, **Resolved** and **Accepted risk**. Click a state to open the list of cases on it; **Open Cases** opens them all. To work on them, see [Track the fixes that close your exposures](/xtm-one/use/ctem-cases/). The widget also says how many cases are overdue, and how many accepted risks expire within 14 days. Cases appear when open issues on your stack share a fix. While the organization profile names no tech stack and OpenAEV is not connected, the widget proposes **Add tech stack** and **Connect OpenAEV**.
+| Link | Opens, in :menu[Administration > Settings > Organization] |
+| --- | --- |
+| **Add your tech stack** (relevant to you, and the cases) | The **Technology** tab, on **Tech stack** |
+| **Add your assets and exposure** (exposed) | The **Exposure** tab, on **Assets and exposure** |
+| **Map crown jewels to assets** (business impact) | The **Business** tab, on **Crown jewels** |
+| **Set a prioritization policy** (after policy) | The **Exposure** tab, on **Prioritization policy** |
+
+**Open Prioritization** opens the stage. Without OpenCTI, the widget shows a sample.
+
+**Cases** counts the cases you can see, by state: **Needs attention**, **In progress**, **Resolved** and **Accepted risk**. Click a state to open the list of cases on it; **Open Cases** opens them all. To work on them, see [Track the fixes that close your exposures](/xtm-one/use/ctem-cases/). The widget also says how many cases are overdue, and how many accepted risks expire within 14 days. Cases appear when open issues on your stack share a fix. While the organization profile names no tech stack and OpenAEV is not connected, the widget proposes **Add tech stack**, which opens the **Tech stack** card of the profile's **Technology** tab, and **Connect OpenAEV**.
 
 ## Read the coverage and the stats
 

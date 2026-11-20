@@ -12,7 +12,7 @@ lanes:
   - label: Protection
     tone: core
     nodes:
-      - {id: security, label: Access and security, icon: ShieldCheck, note: "Sign-in, audit, approvals", href: /xtm-one/administer/sso/}
+      - {id: security, label: Access and security, icon: ShieldCheck, note: "Sign-in, provisioning, audit", href: /xtm-one/administer/sso/}
       - {id: quotas, label: Usage and quotas, icon: Gauge, note: "Agentic limits"}
   - label: Reach
     tone: product

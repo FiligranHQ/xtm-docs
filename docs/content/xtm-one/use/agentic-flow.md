@@ -70,6 +70,17 @@ On a large platform, type an agent's name in the **Focus** field, or double-clic
 
 A focused agent that is no longer on the graph is ignored; when none is, the whole graph shows.
 
+### See the partners outside the platform
+
+An agent can work with an agent outside the platform, at a partner or on another XTM One, through an agent-to-agent (A2A) integration. The map draws these partners beside the agents they work with, as ghost nodes marked **Inbound A2A partner** or **Outbound A2A partner**, and joins each one to its agent with a pink dash-dot arrow:
+
+- **Tasks** runs from an inbound partner to the agent: the partner sends the agent work.
+- **Delegates** runs from the agent to an outbound partner: the agent hands work to that partner agent. An outbound integration gets one node per partner agent it lists, or a single node, named after the integration, while it lists none.
+
+::screenshot{id=xtm-one-agentic-flow-a2a-partner alt="The Agent-to-agent map of Hélène Marchetti on Mine: her agent CERT liaison and, outside the platform, the ghost node Example CERT intelligence desk marked Outbound A2A partner, joined by a pink dash-dot arrow labelled Delegates."}
+
+A partner's tooltip names its integration and the addresses of its agent cards. Click a partner to open its integration, and **Back to Agentic Flow** to come back. These arrows are not handovers: you cannot draw, change or remove one on the map, and the line under the graph counts neither the partners as agents nor their arrows as handovers. They come from binding the integration to the agent, on the agent's **Configuration** > **Tooling** or on the integration's page: see [Connect agents to your tools with integrations](/xtm-one/build/integrations/). The map draws a partner only when you can see its integration and the agent is on the graph, and none while AI is off. When partners are drawn, **Legend** explains them: **A2A partner outside the platform**.
+
 ## Change a handover from the map
 
 :::steps
