@@ -72,7 +72,7 @@ Each expectation counts as **Success** when its score reaches the expected score
 | --- | --- | --- | --- |
 | **Prevention** | Prevented | Partially Prevented | Not Prevented |
 | **Detection** | Detected | Partially Detected | Not Detected |
-| **Vulnerability** | Not vulnerable | Partially vulnerable | Vulnerable |
+| **Vulnerability** | Not vulnerable | Partially Vulnerable | Vulnerable |
 | **Human response** | Successful | Partial | Failed |
 
 An expectation that expires unanswered fails: a technique that no collector reported counts as not detected. Before you conclude that an attack went unseen, check on the inject that the collector of that security platform ran.

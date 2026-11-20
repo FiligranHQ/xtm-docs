@@ -6,7 +6,7 @@ products:
   - openaev
 personas: [validation-engineer]
 owner: docs-openaev
-last_reviewed: 2026-11-07
+last_reviewed: 2026-11-18
 migrated_from:
   - openaev:/usage/build/threat-arsenals/threat-arsenals/
 ---
@@ -76,7 +76,7 @@ The toolbar also **Delete**s user-created actions in bulk, **Tag**s several at o
 
 ## Import and export actions
 
-Export the current list as a **CSV (Comma-Separated Values)** file, which carries the columns the page shows, for any action. Export user-created actions as a JSON ZIP archive instead, which carries the whole action, command, arguments and output parsers, to import on another platform. The import button takes such an archive.
+Export the current list as a **CSV (Comma-Separated Values)** file, which carries the columns the page shows, for any action. Export user-created actions as a JSON ZIP archive instead, which carries the whole action, command, arguments and output parsers, to import on another platform. The archive also holds the file of an **Executable** or **File Drop** action, and importing it attaches that file to the new action. The import button takes such an archive. Import the archive as it was exported: a file changed or renamed inside it no longer matches its name, and the action is imported without it.
 
 Importing a scenario or a simulation also brings the actions of its injects. An action a collector provides, such as Atomic Red Team, is matched by the identifier its collector gives it. Any other action is reused only when your tenant holds an identical one, and created otherwise. Identical means the same type, name, description, platforms, architecture, command or attached file, cleanup, arguments, prerequisites, expectations, output parsers, detection rules and attack patterns, on an action you can read. An action that differs in one detail, such as a changed command, is imported as a new one and never replaces yours.
 

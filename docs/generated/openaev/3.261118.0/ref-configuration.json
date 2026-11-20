@@ -1,7 +1,7 @@
 {
   "name": "configuration",
-  "version": "3.261116.1",
-  "source": "OpenAEV-Platform/openaev@6d8572a (openaev-api/src/main/resources/application.properties, the @Value and @ConfigurationProperties of the Java code)",
+  "version": "3.261118.0",
+  "source": "OpenAEV-Platform/openaev@d61524e (openaev-api/src/main/resources/application.properties, the @Value and @ConfigurationProperties of the Java code)",
   "intro": "Every key OpenAEV reads at startup, from `application.properties` and from its code, grouped by block, with its environment variable: the key in upper case with each dot replaced by an underscore (`openaev.base-url` is `OPENAEV_BASE-URL`). **Shipped** says whether `application.properties` sets the key, shows it commented out, or leaves it to the code. A key also read under the former name `openbas.*` keeps that name working.",
   "filter": "Filter keys, variables, descriptions",
   "sections": [

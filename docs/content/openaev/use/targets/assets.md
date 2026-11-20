@@ -6,7 +6,7 @@ products:
   - openaev
 personas: [validation-engineer]
 owner: docs-openaev
-last_reviewed: 2026-11-07
+last_reviewed: 2026-11-18
 migrated_from:
   - openaev:/usage/assets/
 ---
@@ -81,12 +81,20 @@ An asset group is what most injects target: one inject on a group runs on each o
 :::steps
 1. Open :menu[Asset groups] and click **Create**. The **Create a new asset group** panel opens.
 2. Enter the **Name**, and optionally a **Description** and **Tags**.
-3. Under **Rule**, add the filters that select the assets: category, subcategory, criticality, cloud provider, exposure to the internet, platform, architecture, hostname or IP addresses. Leave the rule empty to choose every member by hand.
+3. Under **Rule**, add the filters that select the assets. Leave the rule empty to choose every member by hand. A rule can filter on:
+   - what describes the asset: **Tags**, **Name**, **Description**, **External reference**, **Category**, **Subcategory**, **Criticality** and **Status** (**Active**, **Inactive** or **Agentless**)
+   - its exposure and its cloud: **Internet-facing**, **Cloud provider**, **Cloud region** and **Cloud native type**
+   - its network: **Hostname**, **IP addresses**, **Seen IP Address**, **MAC Addresses** and **URL**
+   - its system: **Platform** and **Architecture**, which only hosts have. A rule that uses them selects hosts only.
 4. Click **Create**.
 5. To add assets by hand, open the menu at the end of the group's line, choose **Manage assets**, and add them.
 :::
 
-Open the group to check its members: the list shows both kinds. The rule is evaluated each time the group is read, so a host that registers tomorrow and matches it joins the group, and the scenarios that target the group, without anyone editing them.
+Open the group to check its members: the list shows both kinds. The rule is evaluated each time the group is read, so a host that registers tomorrow and matches it joins the group, and the scenarios that target the group, without anyone editing them. A rule only selects assets of the tenant the group belongs to.
+
+A rule on **Tags** follows the way your team already labels its assets: tag a server `velvet-harbor`, and every group whose rule selects that tag gets it, whatever its category.
+
+::screenshot{id=openaev-asset-group-tag-rule alt="The page of the asset group Velvet Harbor targets: its rule selects the tag velvet-harbor, and its assets list holds the two servers carrying that tag, booking-db-01 and booking-web-01."}
 
 A new tenant already holds asset groups by platform and architecture, such as **All Windows x86_64** or **All Linux arm64**, which the default asset rules of OpenCTI scenarios use. See [Set default asset groups by scenario tag](/openaev/configure/asset-rules/).
 
@@ -97,7 +105,7 @@ A new tenant already holds asset groups by platform and architecture, such as **
 Click an asset to open its page. Its header counts its **Agents**, **Findings**, **Injects played** and **Expectations tested**. The **Overview** tab gives its **Asset Information**, its network details, the **Asset groups** it belongs to, its agents, and the findings, expectations and injects that concern it. The **Statistics** tab draws its **Posture score over time** and **Injects played over time**: the asset that keeps failing is the one to look at.
 
 :::example[Prepare the assets of the Velvet Harbor replay]
-At Grand Meridian Hotels, the OpenAEV agent runs on the front-desk workstations of its hotels in France and Spain, from `fd-paris-01` to `fd-barcelona-03`, and on the booking database server `booking-db-01`: they appear as **Host** assets, **Active**. The validation engineer then adds by hand:
+At Grand Meridian Hotels, the OpenAEV agent runs on the front-desk workstations of its hotels in France and Spain, from `fd-paris-01` to `fd-barcelona-03`, and on the booking servers `booking-db-01` and `booking-web-01`, tagged `velvet-harbor`: they appear as **Host** assets, **Active**. The validation engineer then adds by hand:
 
 | Field | Booking portal | Shared night audit account |
 | --- | --- | --- |
@@ -112,6 +120,8 @@ At Grand Meridian Hotels, the OpenAEV agent runs on the front-desk workstations 
 | **Tags** | `velvet-harbor` | `velvet-harbor` |
 
 Then the asset group **Front desk workstations**, with the **Rule** hostname starts with `fd-`. When the new hotel in Lyon installs the agent on `fd-lyon-01` next month, the workstation joins the group, and the weekly Velvet Harbor simulation covers it.
+
+Last, the asset group **Velvet Harbor targets**, with the **Rule** **Tags** contains `velvet-harbor`. It gathers the booking servers `booking-db-01` and `booking-web-01`, the **Booking portal** and the `night.audit` account: the hosts and the assets described by hand, in one group, from the tag alone.
 :::
 
 ::screenshot{id=openaev-asset-detail alt="The page of fd-barcelona-03: one agent, no injects played yet, its description, criticality Medium and tag front-desk, its network details, the asset groups it falls in, Front desk workstations among them, and its Active OpenAEV agent."}

@@ -69,12 +69,12 @@ Set the sender on the template when it belongs to the story the email tells, and
 
 ## Decide on the tracking pixel
 
-**Add tracking pixel** adds an invisible image at the end of the email. When the person's mail client loads it, the **Email not opened** step turns red. Two limits:
+**Add tracking pixel** adds an invisible image at the end of the email. Loading it never turns a step red, because mail gateways and image proxies load images with nobody reading. It only notes on the person's **Email not opened** step, still green, **Email image loaded, open not confirmed** and where the request came from. The step turns red when the person moves on the landing page. Two limits on what the note tells you:
 
-- A mail client that blocks remote images never loads the pixel: the email can be read while the step stays green. A click later turns it red anyway.
-- Mail gateways load images on delivery to inspect them. OpenAEV ignores a hit within 10 seconds of the email or from a known scanner, but an image proxy that also serves real readers, such as Gmail's, still counts, marked **Possibly automated**.
+- A mail client that blocks remote images never loads the pixel: the email can be read with no note.
+- Mail gateways load images on delivery to inspect them. A hit within 10 seconds of the email or from a known scanner reads **Automated scanner activity detected and ignored** instead, and a hit through an image proxy that also serves real readers, such as Gmail's, is marked **Possibly automated**.
 
-Turn it off when you only want to measure clicks and submissions.
+Turn it off when you do not need these notes: the scores stay the same.
 
 :::example[The fake booking request of the European Hospitality Summit]
 Velvet Harbor reached Grand Meridian's night auditor with a booking request for the European Hospitality Summit 2026. The awareness manager writes a lure in the same spirit, with a link instead of an attachment, for the [EHS 2026 booking portal](/openaev/use/phishing/landing-pages/) landing page.

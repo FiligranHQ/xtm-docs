@@ -48,11 +48,12 @@ An atomic test runs the whole chain, from the sending to the score, without wait
 2. Open the landing page, from :menu[Components > Phishing], and click **Create atomic test**. The atomic test opens on the phishing action.
 3. Choose the email template and your test team, then create the atomic test.
 4. Click **Launch now**, then **Confirm**.
-5. Open the email you received, click its link, and submit the form.
+5. Open the email you received and click its link.
+6. On the landing page, move the mouse or scroll, then submit the form.
 
 :::
 
-Each step of your result turns red in turn. Clicks within 10 seconds of the email are ignored as a mail gateway's inspection: wait a little before you click. Delete the atomic test when you are done: its finding would otherwise stay in the **Findings** list.
+Opening the email leaves **Email not opened** green, reading **Email image loaded, open not confirmed**: mail scanners load the images of an email too, so they prove nothing. Your first move on the landing page turns **Email not opened** and **Link not clicked** red together, and the submission turns **Credentials not submitted** red. Clicks within 10 seconds of the email are ignored as a mail gateway's inspection: wait a little before you click. Delete the atomic test when you are done: its finding would otherwise stay in the **Findings** list.
 
 ## Check that every email left
 
@@ -71,9 +72,13 @@ A person who clicks while the others are still being sent is counted: their link
 
 ## What the person receives
 
-The link in the email reads `https://` followed by the host and `/auth/` and a long random token, such as `https://reservations.grand-meridian.example/auth/q3V9…`. The host is the [custom domain](/openaev/use/phishing/custom-domains/) of the landing page, or the platform's address. Nothing in it names OpenAEV, the tenant or the exercise. Links of emails sent before an upgrade keep working.
+The link in the email reads `https://` followed by the host and `/auth/` and a long random token, such as `https://reservations.grand-meridian.example/auth/q3V9…`. The host is the [custom domain](/openaev/use/phishing/custom-domains/) of the landing page, or the platform's address. Nothing in it names OpenAEV, the tenant or the exercise.
 
-The link opens the landing page, which turns **Link not clicked** red. Submitting its form turns **Credentials not submitted** red, then takes the person to the landing page's redirect URL, if it has one.
+The link opens the landing page. Opening it is not counted yet, because mail scanners open links on their own. The person's first move on the page counts: a mouse movement, a touch, a key or a scroll, at least 800 milliseconds after the page shows. It turns **Email not opened** and **Link not clicked** red together. A move sooner than that is not counted, and the page waits for the next one. A browser driven by automation tools, such as Selenium or Puppeteer, is logged as automated and never scored.
+
+Submitting the form turns **Credentials not submitted** red, and the two steps before it if they were still green, then takes the person to the landing page's redirect URL, if it has one.
+
+Links of emails sent before an upgrade keep working. An older link, whose address still names the tenant, counts the click as soon as the person follows it.
 
 :::example[Send the fake summit booking to the French and Spanish front desks]
 Grand Meridian Hotels runs its front-desk awareness exercise on 12 April 2026, with the lure Velvet Harbor sent to Paul Garnier's night shift. In the scenario **Front-desk phishing**, the awareness manager adds the inject:

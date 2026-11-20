@@ -29,7 +29,7 @@ The results of a phishing exercise say, for every person who received the lure, 
 
 :::
 
-::screenshot{id=openaev-phishing-person-results alt="The Persons of the phishing inject, Javier Morales green and the four others red, and the results of Paul Garnier: Email not opened, Link not clicked and Credentials not submitted failed, each with its outcome, its time and its origin 10.20.4.11, 2 or 3 minutes after delivery."}
+::screenshot{id=openaev-phishing-person-results alt="The Persons of the phishing inject, Lucía Ortega and Paul Garnier red and the three others green, and the results of Paul Garnier: Email not opened, Link not clicked and Credentials not submitted failed, each with its outcome, its time and its origin 10.20.4.11, 2 or 3 minutes after delivery."}
 
 ::diagram{id=openaev-phishing-results-steps}
 
@@ -38,9 +38,9 @@ The results of a phishing exercise say, for every person who received the lure, 
 The three phishing steps are named after what you want to see, so the colors read the other way from a detection:
 
 - **Green**: the person has not done it. The card's outcome reads **No phishing interaction detected**.
-- **Red**: the person fell for that step. The outcome reads **Opened the phishing email**, **Opened the phishing landing page** or **Submitted data on the phishing page**.
+- **Red**: the person fell for that step. The outcome reads **Opened the phishing landing page** or **Submitted data on the phishing page**. An exercise run before the upgrade to 3.261118.0 may also show **Opened the phishing email**, from the time the tracking image counted as an open.
 
-Every step is green from the moment the email leaves, and phishing steps never expire: a person who ignores the email keeps three green steps, and you can read the results at any time. A later step turns the earlier ones red: a click also turns **Email not opened** red, a submission all three, even when the person's mail client blocked the tracking pixel. Each step keeps the origin of the request that turned it red.
+Every step is green from the moment the email leaves, and phishing steps never expire: a person who ignores the email keeps three green steps, and you can read the results at any time. Only what the person does on the landing page turns a step red: their first move on the page (a mouse movement, a touch, a key or a scroll) turns **Email not opened** and **Link not clicked** red together, and a submission all three. The tracking image of the email alone never does, since mail scanners load it too: it leaves **Email not opened** green, reading **Email image loaded, open not confirmed**, with the origin of the request. Each red step keeps the origin of the request that turned it red.
 
 A team follows the validation rule of the expectation, shown as **Validation rule:** on its card:
 
@@ -55,10 +55,14 @@ A team follows the validation rule of the expectation, shown as **Validation rul
 
 Mail gateways, link checkers and chat previews open links and images on their own, often within seconds of delivery. OpenAEV does not score them:
 
+- Loading the tracking image or the landing page counts for nothing on its own. Only the person's first move on the landing page, at least 800 milliseconds after it shows, turns a step red.
 - A hit within 10 seconds of delivery, or whose client is a known scanner (Proofpoint, Mimecast, Microsoft Safe Links, Barracuda and others), leaves the step green. The card reads **Automated scanner activity detected and ignored**, with its origin and a **Likely automated** chip. A submission from a scanner is not captured either.
-- A hit through an image proxy that also carries real readers, such as Gmail's or Microsoft Office's, still turns the step red, with a **Possibly automated** chip. Weigh it with its delay and the person's other steps: an open from a proxy followed by a click from a browser is a person.
+- A browser driven by automation tools, such as Selenium or Puppeteer, is ignored the same way, even when it moves on the page.
+- A tracking image loaded by anything else, a person's mail client or an image proxy such as Gmail's, leaves **Email not opened** green, reading **Email image loaded, open not confirmed**. Through an image proxy, its origin carries a **Possibly automated** chip.
 
-The chips are advice: they never change a score.
+::screenshot{id=openaev-phishing-unconfirmed-open alt="The results of Camille Roux, who opened the email but never moved on the landing page: Email not opened stays green, reading Email image loaded, open not confirmed, with its origin 10.20.4.12, and her two other steps green."}
+
+The chips are advice: they never change a score. A person whose **Email not opened** stays green may still have read the email: the step only proves who went as far as the landing page.
 
 ## Detection and prevention
 
@@ -83,7 +87,7 @@ They are in the **Findings** tab of the simulation and in :menu[Findings]. A cre
 :::example[What the front desks did with the fake summit booking]
 On 12 April 2026, a few minutes after the emails left, the awareness manager of Grand Meridian Hotels opens the inject **Fake EHS 2026 group booking** of the simulation **Front-desk phishing**, sent to the 5 people of `Front desk France` and `Front desk Spain`.
 
-- 4 people have **Email not opened** red, 2 have **Link not clicked** red, and 1 has **Credentials not submitted** red. Javier Morales never opened the email: his three steps stay green.
+- 2 people have **Email not opened** and **Link not clicked** red, and 1 has **Credentials not submitted** red. Camille Roux and Julien Bernard loaded the email's images but never went to the page: their **Email not opened** stays green, reading **Email image loaded, open not confirmed**. Javier Morales never opened the email: his three steps stay green.
 - Under the default rule, **Front desk France** is red on all three steps, and **Front desk Spain** on the first two: Lucía Ortega opened the page but submitted nothing.
 - The one who submitted is Paul Garnier, the night auditor of the Paris hotel: his **Credentials not submitted** reads `3 minutes after delivery`, from `10.20.4.11`, the address of the front-desk workstation `fd-paris-01`. Its **Credentials** finding holds the shared account `night.audit`, without the password, because the page does not keep passwords.
 

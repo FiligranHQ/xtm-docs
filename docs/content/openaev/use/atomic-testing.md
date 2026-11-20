@@ -61,6 +61,8 @@ A network scan such as Nmap or Nuclei can aim at addresses typed by hand instead
 - **Relaunch now** runs it again. The new run replaces the previous one: its results are deleted. Tick **Realign expectations to the current action before relaunching** when the action changed in the Threat Arsenal since the test was created.
 - **Scheduling** opens the same dialog as for a scenario: **Once**, **Hourly**, **Daily**, **Weekly** or **Monthly**, a **Start date** and an **End date (optional)**. The header then reads **Scheduled**, and **Stop** removes the schedule. OpenAEV launches the test a minute before each time, unless the previous run is still waiting to start.
 
+To schedule a test through the API, give its recurrence as a Spring cron of six fields, seconds first, read in UTC, such as `0 0 2 * * *`, or as an ISO 8601 period such as `P1D`. OpenAEV refuses another expression, such as a five-field Unix cron, with an error that names these two forms.
+
 Each scheduled run replaces the results of the one before. To keep the history of a technique's results, run it in a scheduled scenario instead: each simulation keeps its own results.
 
 The menu of the header also offers **Update**, **Duplicate**, the JSON export and **Delete**. **Import JSON**, at the top of :menu[Atomic testings], imports an exported test.

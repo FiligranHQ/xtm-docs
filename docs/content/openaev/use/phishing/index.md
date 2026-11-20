@@ -40,13 +40,13 @@ Each inject measures three steps for every person, in the order an attack unfold
 
 | Step | Turns red when the person |
 | --- | --- |
-| **Email not opened** | Opens the email and loads its images (a tracking pixel) |
-| **Link not clicked** | Opens the landing page from the link |
+| **Email not opened** | Follows the link and moves on the landing page: reaching the page proves the email was opened. Its tracking image alone does not count |
+| **Link not clicked** | Follows the link and moves on the landing page (a mouse movement, a touch, a key or a scroll) |
 | **Credentials not submitted** | Submits the form of the landing page |
 
 The names state the outcome you want, so a step is green while it stays true and red once the person falls for it. Every step is green when the email leaves, and nothing expires: a person who never reacts keeps three green steps. A later step also turns the earlier ones red, since a person who submits the form has opened the email.
 
-Mail security gateways open every link and image of an incoming email to inspect it. OpenAEV ignores a hit that arrives within 10 seconds of the email or that comes from a known scanner, so the inspection does not count as a person's click. What the person submits can be kept as a **Credentials** finding.
+Mail security gateways open every link and image of an incoming email to inspect it. That is why loading the email's image or the landing page counts for nothing on its own: only a person's move on the page does. OpenAEV also ignores a hit that arrives within 10 seconds of the email, that comes from a known scanner, or from a browser driven by automation tools, so the inspection does not count as a person's click. What the person submits can be kept as a **Credentials** finding.
 
 Two more expectations come with every phishing inject: **Detection** and **Prevention**, which a security platform of the **Email Security** type fills when it detects or blocks the email. Reading all of it is in [Read who opened, clicked and submitted](/openaev/use/phishing/results/).
 

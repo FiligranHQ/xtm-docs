@@ -24,4 +24,4 @@ edges:
   - {from: smtp, to: gateway, label: sends}
   - {from: gateway, to: people, label: delivers}
   - {from: people, to: page, label: clicks the link}
-  - {from: page, to: platform, label: "click, submit", style: dashed}
+  - {from: page, to: platform, label: "first move, submit", style: dashed}

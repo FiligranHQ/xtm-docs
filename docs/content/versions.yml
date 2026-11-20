@@ -19,8 +19,8 @@ opencti:
 # with these versions, for the screens that span products (CTEM journeys).
 openaev:
   latest:
-    version: 3.261116.1
-    tag: 3.261116.1
+    version: 3.261118.0
+    tag: 3.261118.0
 xtm-one:
   latest:
     version: 1.261119.0
