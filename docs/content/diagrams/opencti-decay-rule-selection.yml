@@ -1,0 +1,20 @@
+title: When an indicator is created, an exclusion rule wins over decay rules
+lanes:
+  - label: Created
+    nodes:
+      - {id: indicator, label: New indicator, icon: Crosshair, note: Score and filters}
+  - label: Rules
+    tone: product
+    nodes:
+      - {id: exclusion, label: Exclusion rules, icon: ShieldCheck, note: Any active match wins}
+      - {id: decay, label: Decay rules, icon: Gauge, note: Highest order that matches}
+  - label: Lifecycle
+    tone: store
+    nodes:
+      - {id: kept, label: Never decays, icon: Clock, note: Valid until has no end}
+      - {id: lowered, label: Score lowered, icon: History, note: Revoked at revoke score}
+edges:
+  - {from: indicator, to: exclusion, label: checked}
+  - {from: exclusion, to: kept, label: match}
+  - {from: exclusion, to: decay, label: no match, style: dashed}
+  - {from: decay, to: lowered, label: applies}

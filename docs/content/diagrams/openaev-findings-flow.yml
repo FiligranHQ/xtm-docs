@@ -1,0 +1,26 @@
+title: An output parser turns what an inject prints into findings, one per value, and the Findings menu groups the same value found by every inject
+lanes:
+  - label: Inject
+    tone: external
+    nodes:
+      - {id: output, label: Command output, icon: Terminal, note: "Scan, dump, enumeration"}
+  - label: Parsing
+    tone: product
+    nodes:
+      - {id: parser, label: Output parser, icon: Code2, note: Set on the action}
+  - label: Findings
+    tone: product
+    nodes:
+      - {id: finding, label: Finding, icon: Search, note: "Type, value, assets"}
+      - {id: masked, label: Masked secret, icon: KeyRound, note: Credentials shown in part}
+  - label: Where you read them
+    tone: core
+    nodes:
+      - {id: list, label: Findings menu, icon: ListChecks, note: Grouped by value}
+      - {id: detail, label: Finding page, icon: History, note: Occurrences over time}
+edges:
+  - {from: output, to: parser, label: read by}
+  - {from: parser, to: finding, label: one per value}
+  - {from: finding, to: masked, label: if secret, style: dashed}
+  - {from: finding, to: list, label: listed}
+  - {from: list, to: detail, label: open}

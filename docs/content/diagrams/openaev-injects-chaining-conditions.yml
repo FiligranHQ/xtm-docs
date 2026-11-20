@@ -1,0 +1,19 @@
+title: A child inject runs only when the conditions on its parent hold at its own time, otherwise it ends in error and so do its children
+lanes:
+  - label: Parent
+    tone: product
+    nodes:
+      - {id: parent, label: Phishing email, icon: MessageSquare, note: Sent at the start}
+  - label: Condition
+    tone: core
+    nodes:
+      - {id: condition, label: Execution condition, icon: GitBranch, note: "Execution or an expectation, Success or Fail"}
+  - label: Children
+    tone: product
+    nodes:
+      - {id: child, label: Child inject, icon: Terminal, note: Runs at its scheduled time}
+      - {id: error, label: Error, icon: TriangleAlert, note: Conditions not met}
+edges:
+  - {from: parent, to: condition, label: results}
+  - {from: condition, to: child, label: holds}
+  - {from: condition, to: error, label: does not hold, style: dashed}

@@ -1,0 +1,22 @@
+title: The booking probe injector, from its registration to the result of each inject
+lanes:
+  - label: Injector
+    tone: external
+    nodes:
+      - {id: contract, label: contract.py, icon: Code2, note: Fields of the form}
+      - {id: main, label: main.py, icon: Crosshair, note: "Register, ping, consume"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: api, label: REST API, icon: LogoOpenAEV, note: Registration and status}
+      - {id: queue, label: RabbitMQ, icon: Layers, note: Queue of the injector}
+  - label: Grand Meridian Hotels
+    tone: external
+    nodes:
+      - {id: booking, label: Booking API, icon: Network, note: booking.example.com}
+edges:
+  - {from: contract, to: main, label: contract}
+  - {from: main, to: api, label: register every 40 s}
+  - {from: queue, to: main, label: inject}
+  - {from: main, to: booking, label: fake booking request}
+  - {from: main, to: api, label: reception and result, style: dashed}

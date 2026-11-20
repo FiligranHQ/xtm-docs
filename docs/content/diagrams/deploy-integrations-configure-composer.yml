@@ -1,0 +1,29 @@
+title: XTM Composer merges three sources of settings, the last one winning, and creates each integration on the engine that the selector of its platform names
+lanes:
+  - label: Settings, last one wins
+    tone: external
+    nodes:
+      - {id: default, label: config/default.yaml, icon: FileText, note: Shipped in the image}
+      - {id: production, label: "config/<COMPOSER_ENV>.yaml", icon: FileText, note: "production.yaml by default"}
+      - {id: env, label: Environment variables, icon: Terminal, note: "__ between levels"}
+  - label: XTM Composer
+    tone: external
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Workflow, note: "daemon.selector per platform"}
+  - label: Container engine
+    tone: external
+    nodes:
+      - {id: docker, label: Docker, icon: Boxes, note: A container}
+      - {id: podman, label: Podman, icon: Boxes, note: A container}
+      - {id: kubernetes, label: Kubernetes, icon: Boxes, note: "A Deployment, the default"}
+      - {id: swarm, label: Docker Swarm, icon: Boxes, note: A replicated service}
+      - {id: portainer, label: Portainer, icon: Boxes, note: A container through its API}
+edges:
+  - {from: default, to: composer, label: read first}
+  - {from: production, to: composer, label: overrides}
+  - {from: env, to: composer, label: wins}
+  - {from: composer, to: docker, label: docker}
+  - {from: composer, to: podman, label: podman}
+  - {from: composer, to: kubernetes, label: kubernetes}
+  - {from: composer, to: swarm, label: swarm}
+  - {from: composer, to: portainer, label: portainer}

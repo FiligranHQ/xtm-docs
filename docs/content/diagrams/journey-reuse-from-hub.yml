@@ -1,0 +1,24 @@
+title: OpenCTI and an OpenAEV tenant connect to XTM Hub, deploy a dashboard, a playbook and a scenario in one click, adapt them before they go live, and an XTM One agent finds the next item
+lanes:
+  - label: XTM Hub
+    tone: external
+    nodes:
+      - {id: library, label: Content library, icon: BookOpen, note: "Filigran and community"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: dashboard, label: Sector dashboard, icon: Gauge, note: "Pointed at your scope"}
+      - {id: playbook, label: Triage playbook, icon: Workflow, note: "Tested, then started"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: scenario, label: Phishing scenario, icon: LogoOpenAEV, note: "Your teams, your lure"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: agent, label: Next item found, icon: LogoXTMOne, note: "XTM Hub integration"}
+edges:
+  - {from: library, to: dashboard, label: one click}
+  - {from: library, to: playbook, label: one click}
+  - {from: library, to: scenario, label: one click}
+  - {from: agent, to: library, label: searches, style: dashed}

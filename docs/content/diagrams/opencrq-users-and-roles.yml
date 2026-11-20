@@ -1,0 +1,24 @@
+title: A person gets rights in a tenant from its groups, and on the platform from the platform groups
+lanes:
+  - label: Who
+    tone: external
+    nodes:
+      - {id: invite, label: Add members, icon: LogIn, note: "From XTM One's directory"}
+      - {id: user, label: User, icon: Users, note: Signs in through XTM One}
+  - label: In a tenant
+    tone: product
+    nodes:
+      - {id: group, label: Groups, icon: Users, note: 'Admin, Connectors, yours'}
+      - {id: role, label: Roles, icon: KeyRound, note: Manage Security}
+  - label: On the platform
+    tone: core
+    nodes:
+      - {id: pgroup, label: Platform groups, icon: LogoOpenCRQ, note: Yours}
+      - {id: prole, label: Platform roles, icon: ShieldCheck, note: 'Tenants, users, access'}
+edges:
+  - {from: invite, to: user, label: adds to a tenant}
+  - {from: invite, to: group, label: places in}
+  - {from: user, to: group, label: member of}
+  - {from: group, to: role, label: holds}
+  - {from: user, to: pgroup, label: member of, style: dashed}
+  - {from: pgroup, to: prole, label: holds}

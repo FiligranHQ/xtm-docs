@@ -1,0 +1,23 @@
+title: An error raised in OpenCTI goes back to the client in the GraphQL answer, with its message, its error type and its data
+lanes:
+  - label: Request
+    tone: external
+    nodes:
+      - {id: client, label: User or API client, icon: Laptop, note: Interface or script}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: api, label: GraphQL API, icon: LogoOpenCTI, note: Runs the operation}
+      - {id: area, label: Area of the code, icon: Code2, note: "Domain, database, modules"}
+  - label: Answer to the client
+    tone: store
+    nodes:
+      - {id: message, label: Message, icon: MessageSquare, note: Parts in braces computed at run time}
+      - {id: type, label: Error type, icon: TriangleAlert, note: "extensions.code, such as FORBIDDEN_ACCESS"}
+      - {id: data, label: Data attached, icon: Info, note: extensions.data}
+edges:
+  - {from: client, to: api, label: query or mutation}
+  - {from: api, to: area, label: calls}
+  - {from: area, to: message, label: raises}
+  - {from: area, to: type, label: raises}
+  - {from: area, to: data, label: attaches}

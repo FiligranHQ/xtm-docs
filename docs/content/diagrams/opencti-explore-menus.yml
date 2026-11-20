@@ -1,0 +1,24 @@
+title: The knowledge menus, from the work you do to the context it refers to
+lanes:
+  - label: Work
+    tone: product
+    nodes:
+      - {id: analyses, label: Analyses, icon: FileText, note: "Reports, groupings, notes"}
+      - {id: cases, label: Cases, icon: ClipboardCheck, note: "Responses, requests, tasks"}
+  - label: Evidence
+    nodes:
+      - {id: events, label: Events, icon: Activity, note: "Incidents, sightings"}
+      - {id: observations, label: Observations, icon: Search, note: "Observables, indicators"}
+  - label: Context
+    tone: store
+    nodes:
+      - {id: threats, label: Threats, icon: Crosshair, note: "Actors, intrusion sets, campaigns"}
+      - {id: arsenal, label: Arsenal and techniques, icon: Wrench, note: "Malware, tools, attack patterns"}
+      - {id: victims, label: Entities and locations, icon: Network, note: "Sectors, organizations, countries"}
+edges:
+  - {from: analyses, to: events, label: contain}
+  - {from: cases, to: observations, label: contain}
+  - {from: analyses, to: threats, label: describe}
+  - {from: observations, to: threats, label: indicate}
+  - {from: events, to: victims, label: affect}
+  - {from: cases, to: arsenal, label: refer to, style: dashed}

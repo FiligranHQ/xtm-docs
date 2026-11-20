@@ -1,0 +1,27 @@
+title: An agent proposes, a person approves what it may change, and every step is recorded for review
+lanes:
+  - label: People
+    tone: external
+    nodes:
+      - {id: person, label: Reviewer, icon: Users, note: Approves and reads}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: agent, label: Agent, icon: Bot, note: Proposes actions}
+      - {id: gate, label: Tool approval, icon: ShieldCheck, note: Approval Needed}
+  - label: Records
+    tone: store
+    nodes:
+      - {id: run, label: Run page, icon: ClipboardCheck, note: "Actions, files, result"}
+      - {id: trace, label: Trace, icon: Search, note: "Prompts, tool calls, tokens"}
+  - label: Your systems
+    tone: external
+    nodes:
+      - {id: systems, label: Tools, icon: Server, note: "OpenCTI, Jira, Slack"}
+edges:
+  - {from: agent, to: gate, label: wants a tool}
+  - {from: person, to: gate, label: approve or deny}
+  - {from: gate, to: systems, label: runs if approved}
+  - {from: agent, to: run, label: records each step}
+  - {from: run, to: trace, label: links}
+  - {from: person, to: run, label: reviews, style: dashed}

@@ -1,0 +1,17 @@
+title: OpenAEV describes its REST API at /api-docs, which Swagger UI and your API clients read
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenAEV, note: REST API under /api}
+      - {id: spec, label: OpenAPI description, icon: FileText, note: /api-docs}
+  - label: Readers
+    tone: external
+    nodes:
+      - {id: swagger, label: Swagger UI, icon: BookOpen, note: /swagger-ui/index.html}
+      - {id: client, label: API client, icon: Code2, note: Generated or hand-written}
+edges:
+  - {from: platform, to: spec, label: generates at startup}
+  - {from: spec, to: swagger, label: rendered by}
+  - {from: spec, to: client, label: generates}
+  - {from: client, to: platform, label: "calls, with a token"}

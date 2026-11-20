@@ -1,0 +1,4005 @@
+{
+  "name": "api",
+  "version": "0.261116.0",
+  "source": "OpenCRQ-Platform/opencrq@a185f01 (back/trpc-procedures.json)",
+  "intro": "Every procedure of the OpenCRQ API: 428 (292 queries, 135 mutations, 1 subscription) in 52 namespaces. The API is [tRPC](https://trpc.io) over HTTP under `/trpc/<procedure>`: a query is a `GET` with its input as JSON in the `input` parameter, a mutation a `POST` with its input as the JSON body. Authenticate with the session cookie of a signed-in user, or a service account's token in `Authorization: Bearer <token>`; a procedure that reads or writes a tenant's data needs the tenant in the `x-tenant-id` header. An input field marked `?` is optional.",
+  "filter": "Filter procedures and input fields",
+  "sections": [
+    {
+      "title": "Platform",
+      "text": "The procedures outside any namespace (5 queries, 1 mutation): sign-in, invitations, the platform itself.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "authStatus",
+          "cells": [
+            "`authStatus`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "getMe",
+          "cells": [
+            "`getMe`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "health",
+          "cells": [
+            "`health`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "isLoggedIn",
+          "cells": [
+            "`isLoggedIn`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "procedureManifest",
+          "cells": [
+            "`procedureManifest`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "signOut",
+          "cells": [
+            "`signOut`",
+            "mutation",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "aleChangeExplain",
+      "text": "3 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "aleChangeExplain.getRunChangeGroup",
+          "cells": [
+            "`aleChangeExplain.getRunChangeGroup`",
+            "query",
+            "`riskScenarioId: uuid`, `firstRunId: uuid`, `secondRunId: uuid`, `category: \"run-results\" | \"technique-coverage\" | \"model\" | \"controls\" | \"findings-critical\" | \"findings-high\" | \"findings-other\" | \"assets-critical\" | \"assets-high\" | \"assets-other\" | \"attack-frequency\"`, `kind: \"appeared\" | \"left\" | \"no-longer-reported\" | \"band-moved\" | \"first-measured\" | \"posture-moved\"`, `from: date-time`, `to: date-time`, `search: string`, `sort?: {by, desc} | null`, `offset: integer`, `limit: integer`"
+          ]
+        },
+        {
+          "key": "aleChangeExplain.getRunChanges",
+          "cells": [
+            "`aleChangeExplain.getRunChanges`",
+            "query",
+            "`riskScenarioId: uuid`, `firstRunId: uuid`, `secondRunId: uuid`, `timeZone: string`"
+          ]
+        },
+        {
+          "key": "aleChangeExplain.getRunCurve",
+          "cells": [
+            "`aleChangeExplain.getRunCurve`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "assetDependencies",
+      "text": "7 queries, 8 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "assetDependencies.createPrimaryToPrimaryLinks",
+          "cells": [
+            "`assetDependencies.createPrimaryToPrimaryLinks`",
+            "mutation",
+            "`{id, dependentAssetId, providerAssetId, strength}[]`"
+          ]
+        },
+        {
+          "key": "assetDependencies.createSupportToPrimaryLinks",
+          "cells": [
+            "`assetDependencies.createSupportToPrimaryLinks`",
+            "mutation",
+            "`{id, supportingAssetId, primaryAssetId, roles}[]`"
+          ]
+        },
+        {
+          "key": "assetDependencies.createSupportToSupportLinks",
+          "cells": [
+            "`assetDependencies.createSupportToSupportLinks`",
+            "mutation",
+            "`{id, providerAssetId, dependentAssetId}[]`"
+          ]
+        },
+        {
+          "key": "assetDependencies.deletePrimaryToPrimaryLinks",
+          "cells": [
+            "`assetDependencies.deletePrimaryToPrimaryLinks`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "assetDependencies.deleteSupportToPrimaryLinks",
+          "cells": [
+            "`assetDependencies.deleteSupportToPrimaryLinks`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "assetDependencies.deleteSupportToSupportLinks",
+          "cells": [
+            "`assetDependencies.deleteSupportToSupportLinks`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "assetDependencies.getPrimaryAssetDependencyGraph",
+          "cells": [
+            "`assetDependencies.getPrimaryAssetDependencyGraph`",
+            "query",
+            "`primaryAssetId: uuid`, `depth?: integer`"
+          ]
+        },
+        {
+          "key": "assetDependencies.getPrimaryToPrimaryLinks",
+          "cells": [
+            "`assetDependencies.getPrimaryToPrimaryLinks`",
+            "query",
+            "`primaryAssetId: uuid`"
+          ]
+        },
+        {
+          "key": "assetDependencies.getSupportingAssetDependencyGraph",
+          "cells": [
+            "`assetDependencies.getSupportingAssetDependencyGraph`",
+            "query",
+            "`supportingAssetId: uuid`, `depth?: integer`"
+          ]
+        },
+        {
+          "key": "assetDependencies.getSupportToPrimaryLinksByPrimaryAssetId",
+          "cells": [
+            "`assetDependencies.getSupportToPrimaryLinksByPrimaryAssetId`",
+            "query",
+            "`primaryAssetId: uuid`"
+          ]
+        },
+        {
+          "key": "assetDependencies.getSupportToPrimaryLinksBySupportingAssetId",
+          "cells": [
+            "`assetDependencies.getSupportToPrimaryLinksBySupportingAssetId`",
+            "query",
+            "`supportingAssetId: uuid`"
+          ]
+        },
+        {
+          "key": "assetDependencies.getSupportToSupportLinks",
+          "cells": [
+            "`assetDependencies.getSupportToSupportLinks`",
+            "query",
+            "`assetId: uuid`"
+          ]
+        },
+        {
+          "key": "assetDependencies.listSupportingAssetCandidates",
+          "cells": [
+            "`assetDependencies.listSupportingAssetCandidates`",
+            "query",
+            "`relation: \"dependsOn\" | \"providesTo\" | \"supportsPrimary\"`, `assetId: uuid`, `page?: integer`, `limit?: integer`, `search?: string`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`, `categoryId?: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"security_platform\" | \"generic_asset\" | null`, `linkedOnly?: boolean`"
+          ]
+        },
+        {
+          "key": "assetDependencies.updatePrimaryToPrimaryLinks",
+          "cells": [
+            "`assetDependencies.updatePrimaryToPrimaryLinks`",
+            "mutation",
+            "`{id, strength}[]`"
+          ]
+        },
+        {
+          "key": "assetDependencies.updateSupportToPrimaryLinks",
+          "cells": [
+            "`assetDependencies.updateSupportToPrimaryLinks`",
+            "mutation",
+            "`{id, roles}[]`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "attackOutcomes",
+      "text": "5 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "attackOutcomes.getAttackOutcome",
+          "cells": [
+            "`attackOutcomes.getAttackOutcome`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "attackOutcomes.getAttackOutcomes",
+          "cells": [
+            "`attackOutcomes.getAttackOutcomes`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "attackOutcomes.getCuratedMitreTechniquesForOutcome",
+          "cells": [
+            "`attackOutcomes.getCuratedMitreTechniquesForOutcome`",
+            "query",
+            "`attackOutcomeId: uuid`"
+          ]
+        },
+        {
+          "key": "attackOutcomes.getMitreTechniquesForOutcome",
+          "cells": [
+            "`attackOutcomes.getMitreTechniquesForOutcome`",
+            "query",
+            "`attackOutcomeId: uuid`, `organizationId: uuid`"
+          ]
+        },
+        {
+          "key": "attackOutcomes.getRepertoireTechniquesForOutcome",
+          "cells": [
+            "`attackOutcomes.getRepertoireTechniquesForOutcome`",
+            "query",
+            "`attackOutcomeId: uuid`, `organizationId: uuid`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "budgetReviews",
+      "text": "7 queries, 9 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "budgetReviews.closeBudgetReview",
+          "cells": [
+            "`budgetReviews.closeBudgetReview`",
+            "mutation",
+            "`reviewId: uuid`"
+          ]
+        },
+        {
+          "key": "budgetReviews.createBudgetReview",
+          "cells": [
+            "`budgetReviews.createBudgetReview`",
+            "mutation",
+            "`name: string`, `ownerId?: uuid | null`, `context?: string`, `organizationId: uuid`, `periodStart: date`"
+          ]
+        },
+        {
+          "key": "budgetReviews.createBudgetReviewLine",
+          "cells": [
+            "`budgetReviews.createBudgetReviewLine`",
+            "mutation",
+            "`reviewId: uuid`, `values: {name, nature, amountSpent, amortizationYears, capabilityIds}`"
+          ]
+        },
+        {
+          "key": "budgetReviews.deleteBudgetReviewLines",
+          "cells": [
+            "`budgetReviews.deleteBudgetReviewLines`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "budgetReviews.deleteBudgetReviews",
+          "cells": [
+            "`budgetReviews.deleteBudgetReviews`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "budgetReviews.getBudgetReview",
+          "cells": [
+            "`budgetReviews.getBudgetReview`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "budgetReviews.getBudgetReviewControlPostures",
+          "cells": [
+            "`budgetReviews.getBudgetReviewControlPostures`",
+            "query",
+            "`reviewId: uuid`, `including?: uuid[]`"
+          ]
+        },
+        {
+          "key": "budgetReviews.getBudgetReviewFigures",
+          "cells": [
+            "`budgetReviews.getBudgetReviewFigures`",
+            "query",
+            "`reviewId: uuid`"
+          ]
+        },
+        {
+          "key": "budgetReviews.getBudgetReviewRiskSeries",
+          "cells": [
+            "`budgetReviews.getBudgetReviewRiskSeries`",
+            "query",
+            "`reviewId: uuid`"
+          ]
+        },
+        {
+          "key": "budgetReviews.getBudgetReviews",
+          "cells": [
+            "`budgetReviews.getBudgetReviews`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "budgetReviews.getBudgetReviewSimulationState",
+          "cells": [
+            "`budgetReviews.getBudgetReviewSimulationState`",
+            "query",
+            "`reviewId: uuid`"
+          ]
+        },
+        {
+          "key": "budgetReviews.getBudgetReviewTolerance",
+          "cells": [
+            "`budgetReviews.getBudgetReviewTolerance`",
+            "query",
+            "`reviewId: uuid`"
+          ]
+        },
+        {
+          "key": "budgetReviews.reopenBudgetReview",
+          "cells": [
+            "`budgetReviews.reopenBudgetReview`",
+            "mutation",
+            "`reviewId: uuid`"
+          ]
+        },
+        {
+          "key": "budgetReviews.resimulateBudgetReviewScenarios",
+          "cells": [
+            "`budgetReviews.resimulateBudgetReviewScenarios`",
+            "mutation",
+            "`reviewId: uuid`"
+          ]
+        },
+        {
+          "key": "budgetReviews.updateBudgetReview",
+          "cells": [
+            "`budgetReviews.updateBudgetReview`",
+            "mutation",
+            "`id: uuid`, `values: {name, ownerId, context, periodStart}`"
+          ]
+        },
+        {
+          "key": "budgetReviews.updateBudgetReviewLine",
+          "cells": [
+            "`budgetReviews.updateBudgetReviewLine`",
+            "mutation",
+            "`id: uuid`, `values: {name, nature, amountSpent, amortizationYears, capabilityIds}`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "businessValueCategories",
+      "text": "2 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "businessValueCategories.getBusinessValueCategories",
+          "cells": [
+            "`businessValueCategories.getBusinessValueCategories`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "businessValueCategories.getBusinessValueCategory",
+          "cells": [
+            "`businessValueCategories.getBusinessValueCategory`",
+            "query",
+            "`id: uuid`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "capabilities",
+      "text": "4 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "capabilities.getCapabilities",
+          "cells": [
+            "`capabilities.getCapabilities`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "capabilities.getServiceAccountEffectivePermissions",
+          "cells": [
+            "`capabilities.getServiceAccountEffectivePermissions`",
+            "query",
+            "`serviceAccountId: uuid`"
+          ]
+        },
+        {
+          "key": "capabilities.getUserEffectivePermissions",
+          "cells": [
+            "`capabilities.getUserEffectivePermissions`",
+            "query",
+            "`userId: uuid`"
+          ]
+        },
+        {
+          "key": "capabilities.hasManageSecurity",
+          "cells": [
+            "`capabilities.hasManageSecurity`",
+            "query",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "complianceAssessments",
+      "text": "4 queries, 6 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "complianceAssessments.answerRequirement",
+          "cells": [
+            "`complianceAssessments.answerRequirement`",
+            "mutation",
+            "`assessmentId: uuid`, `requirementId: uuid`, `ownerId: uuid | null`, `dueDate: date | null`, `level: 0 | 1 | 2 | 3 | 4 | 5 | null`, `notApplicable: boolean`, `comment: string | null`, `updatedAt: date-time | null`"
+          ]
+        },
+        {
+          "key": "complianceAssessments.createAssessment",
+          "cells": [
+            "`complianceAssessments.createAssessment`",
+            "mutation",
+            "`name: string`, `frameworkId: uuid`"
+          ]
+        },
+        {
+          "key": "complianceAssessments.deleteAssessment",
+          "cells": [
+            "`complianceAssessments.deleteAssessment`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "complianceAssessments.getAssessment",
+          "cells": [
+            "`complianceAssessments.getAssessment`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "complianceAssessments.getAssessments",
+          "cells": [
+            "`complianceAssessments.getAssessments`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "complianceAssessments.getControlEvidence",
+          "cells": [
+            "`complianceAssessments.getControlEvidence`",
+            "query",
+            "`capabilityId: uuid`"
+          ]
+        },
+        {
+          "key": "complianceAssessments.getFrameworks",
+          "cells": [
+            "`complianceAssessments.getFrameworks`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "complianceAssessments.publishAssessment",
+          "cells": [
+            "`complianceAssessments.publishAssessment`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "complianceAssessments.renameAssessment",
+          "cells": [
+            "`complianceAssessments.renameAssessment`",
+            "mutation",
+            "`id: uuid`, `name: string`"
+          ]
+        },
+        {
+          "key": "complianceAssessments.reopenAssessment",
+          "cells": [
+            "`complianceAssessments.reopenAssessment`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "connectors",
+      "text": "7 queries, 4 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "connectors.getConnector",
+          "cells": [
+            "`connectors.getConnector`",
+            "query",
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"opencti\" | \"default_threats\"`"
+          ]
+        },
+        {
+          "key": "connectors.getPipelineSnapshot",
+          "cells": [
+            "`connectors.getPipelineSnapshot`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "connectors.getSchedule",
+          "cells": [
+            "`connectors.getSchedule`",
+            "query",
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"opencti\" | \"default_threats\"`"
+          ]
+        },
+        {
+          "key": "connectors.getStreamState",
+          "cells": [
+            "`connectors.getStreamState`",
+            "query",
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"opencti\" | \"default_threats\"`"
+          ]
+        },
+        {
+          "key": "connectors.listConnectors",
+          "cells": [
+            "`connectors.listConnectors`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "connectors.listLogs",
+          "cells": [
+            "`connectors.listLogs`",
+            "query",
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"opencti\" | \"default_threats\"`"
+          ]
+        },
+        {
+          "key": "connectors.listRuns",
+          "cells": [
+            "`connectors.listRuns`",
+            "query",
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"opencti\" | \"default_threats\"`"
+          ]
+        },
+        {
+          "key": "connectors.reconnectStream",
+          "cells": [
+            "`connectors.reconnectStream`",
+            "mutation",
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"opencti\" | \"default_threats\"`"
+          ]
+        },
+        {
+          "key": "connectors.resetState",
+          "cells": [
+            "`connectors.resetState`",
+            "mutation",
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"opencti\" | \"default_threats\"`"
+          ]
+        },
+        {
+          "key": "connectors.setSchedule",
+          "cells": [
+            "`connectors.setSchedule`",
+            "mutation",
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"default_threats\"`, `cadence: \"manual\" | \"hourly\" | \"every_6_hours\" | \"every_12_hours\" | \"daily\" | \"weekly\"`, `atMinute: integer | null`, `weekday: integer | null`, `timeZone: string | null`"
+          ]
+        },
+        {
+          "key": "connectors.syncNow",
+          "cells": [
+            "`connectors.syncNow`",
+            "mutation",
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"opencti\" | \"default_threats\"`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "controlCapabilities",
+      "text": "8 queries, 7 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "controlCapabilities.addTechniqueOverride",
+          "cells": [
+            "`controlCapabilities.addTechniqueOverride`",
+            "mutation",
+            "`capabilityId: uuid`, `techniqueId: uuid`, `function: \"prevent\" | \"detect\"`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.clearScopeControlPosture",
+          "cells": [
+            "`controlCapabilities.clearScopeControlPosture`",
+            "mutation",
+            "`organizationId: uuid`, `capabilityId: uuid`, `dimension: \"strength\" | \"coverage\"`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.declareScopeControlPosture",
+          "cells": [
+            "`controlCapabilities.declareScopeControlPosture`",
+            "mutation",
+            "`organizationId: uuid`, `capabilityId: uuid`, `strengthRung: \"L0\" | \"L1\" | \"L2\" | \"L3\" | null`, `coverageBucket: \"L0\" | \"L1\" | \"L2\" | \"L3\" | null`, `comment: string | null`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.getCapabilitiesForTechnique",
+          "cells": [
+            "`controlCapabilities.getCapabilitiesForTechnique`",
+            "query",
+            "`techniqueId: uuid`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.getCapabilityEvents",
+          "cells": [
+            "`controlCapabilities.getCapabilityEvents`",
+            "query",
+            "`capabilityId: uuid`, `organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.getControlCapabilities",
+          "cells": [
+            "`controlCapabilities.getControlCapabilities`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "controlCapabilities.getControlCapability",
+          "cells": [
+            "`controlCapabilities.getControlCapability`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.getControlCapabilityRiskScenarios",
+          "cells": [
+            "`controlCapabilities.getControlCapabilityRiskScenarios`",
+            "query",
+            "`id: uuid`, `organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.getEffectivenessHistory",
+          "cells": [
+            "`controlCapabilities.getEffectivenessHistory`",
+            "query",
+            "`capabilityId: uuid`, `organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.getPooledAssessment",
+          "cells": [
+            "`controlCapabilities.getPooledAssessment`",
+            "query",
+            "`capabilityId: uuid`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.getResolvedControlPosture",
+          "cells": [
+            "`controlCapabilities.getResolvedControlPosture`",
+            "query",
+            "`organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.removeTechnique",
+          "cells": [
+            "`controlCapabilities.removeTechnique`",
+            "mutation",
+            "`capabilityId: uuid`, `techniqueId: uuid`, `function: \"prevent\" | \"detect\"`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.resetTechniqueOverrides",
+          "cells": [
+            "`controlCapabilities.resetTechniqueOverrides`",
+            "mutation",
+            "`capabilityId: uuid`, `function: \"prevent\" | \"detect\"`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.restoreTechnique",
+          "cells": [
+            "`controlCapabilities.restoreTechnique`",
+            "mutation",
+            "`capabilityId: uuid`, `techniqueId: uuid`, `function: \"prevent\" | \"detect\"`"
+          ]
+        },
+        {
+          "key": "controlCapabilities.upsertAssessment",
+          "cells": [
+            "`controlCapabilities.upsertAssessment`",
+            "mutation",
+            "`capabilityId: uuid`, `strengthRung: \"L0\" | \"L1\" | \"L2\" | \"L3\" | null`, `coverageBucket: \"L0\" | \"L1\" | \"L2\" | \"L3\" | null`, `reattach?: \"strength\" | \"coverage\"[]`, `comment: string | null`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "controlValidation",
+      "text": "8 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "controlValidation.getControlTechniqueTestReadings",
+          "cells": [
+            "`controlValidation.getControlTechniqueTestReadings`",
+            "query",
+            "`capabilityId: uuid`, `function: \"prevent\" | \"detect\"`, `organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "controlValidation.getControlValidation",
+          "cells": [
+            "`controlValidation.getControlValidation`",
+            "query",
+            "`capabilityId: uuid`, `organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "controlValidation.getControlValidationEvidence",
+          "cells": [
+            "`controlValidation.getControlValidationEvidence`",
+            "query",
+            "`capabilityId: uuid`, `organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "controlValidation.getProvenPostureHistory",
+          "cells": [
+            "`controlValidation.getProvenPostureHistory`",
+            "query",
+            "`capabilityId: uuid`, `organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "controlValidation.getTechniquesCoverage",
+          "cells": [
+            "`controlValidation.getTechniquesCoverage`",
+            "query",
+            "`threatId: uuid`, `organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "controlValidation.getTechniqueTestReadings",
+          "cells": [
+            "`controlValidation.getTechniqueTestReadings`",
+            "query",
+            "`techniqueId: uuid`, `organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "controlValidation.listControlValidationEvidence",
+          "cells": [
+            "`controlValidation.listControlValidationEvidence`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"technique\" | \"scenario\" | \"family\" | \"function\" | \"verdict\" | \"evaluatedAt\" | \"assets\"`, `sortDesc?: boolean`, `capabilityId: uuid`, `organizationId?: uuid | null`, `technique?: string`, `function?: \"prevent\" | \"detect\"`, `result?: \"validated\" | \"contradicted\"`, `securityPlatformType?: string`"
+          ]
+        },
+        {
+          "key": "controlValidation.listControlValidationEvidenceTechniques",
+          "cells": [
+            "`controlValidation.listControlValidationEvidenceTechniques`",
+            "query",
+            "`capabilityId: uuid`, `organizationId?: uuid | null`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "countries",
+      "text": "1 query.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "countries.getCountries",
+          "cells": [
+            "`countries.getCountries`",
+            "query",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "crqIndicators",
+      "text": "15 queries, 4 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "crqIndicators.enqueueFamilyRecompute",
+          "cells": [
+            "`crqIndicators.enqueueFamilyRecompute`",
+            "mutation",
+            "`riskScenarioId: uuid`, `family: \"levers\" | \"techniques\" | \"cves\"`"
+          ]
+        },
+        {
+          "key": "crqIndicators.enqueueSimulation",
+          "cells": [
+            "`crqIndicators.enqueueSimulation`",
+            "mutation",
+            "`riskScenarioId: uuid`, `onlyIfNoRun?: boolean`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getActiveSimulation",
+          "cells": [
+            "`crqIndicators.getActiveSimulation`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getAutoTefEstimate",
+          "cells": [
+            "`crqIndicators.getAutoTefEstimate`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getCrqSummaryForOutcome",
+          "cells": [
+            "`crqIndicators.getCrqSummaryForOutcome`",
+            "query",
+            "`attackOutcomeId: uuid`, `organizationId?: uuid`, `topControlsLimit?: integer`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getCveScenarioGains",
+          "cells": [
+            "`crqIndicators.getCveScenarioGains`",
+            "query",
+            "`organizationId?: uuid | null`, `cveId: string`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getFigureFamilyDates",
+          "cells": [
+            "`crqIndicators.getFigureFamilyDates`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getLatestRun",
+          "cells": [
+            "`crqIndicators.getLatestRun`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getRunHistory",
+          "cells": [
+            "`crqIndicators.getRunHistory`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getRunTimeline",
+          "cells": [
+            "`crqIndicators.getRunTimeline`",
+            "query",
+            "`riskScenarioId: uuid`, `windowDays: integer`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getRunWithScores",
+          "cells": [
+            "`crqIndicators.getRunWithScores`",
+            "query",
+            "`runId: uuid`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getScopeScenarioTefs",
+          "cells": [
+            "`crqIndicators.getScopeScenarioTefs`",
+            "query",
+            "`organizationId: uuid`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getTefCatalogGrid",
+          "cells": [
+            "`crqIndicators.getTefCatalogGrid`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "crqIndicators.getTefInput",
+          "cells": [
+            "`crqIndicators.getTefInput`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getTefMode",
+          "cells": [
+            "`crqIndicators.getTefMode`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getWhatIfResults",
+          "cells": [
+            "`crqIndicators.getWhatIfResults`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "crqIndicators.listRunHistory",
+          "cells": [
+            "`crqIndicators.listRunHistory`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortDesc?: boolean`, `riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "crqIndicators.setTefMode",
+          "cells": [
+            "`crqIndicators.setTefMode`",
+            "mutation",
+            "`riskScenarioId: uuid`, `tefMode: \"manual\" | \"auto\"`"
+          ]
+        },
+        {
+          "key": "crqIndicators.upsertTefInput",
+          "cells": [
+            "`crqIndicators.upsertTefInput`",
+            "mutation",
+            "`riskScenarioId: uuid`, `min: number`, `likely: number`, `max: number`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "crqIndicatorSettings",
+      "text": "1 query, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "crqIndicatorSettings.getCrqIndicatorSettings",
+          "cells": [
+            "`crqIndicatorSettings.getCrqIndicatorSettings`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "crqIndicatorSettings.updateCrqIndicatorSettings",
+          "cells": [
+            "`crqIndicatorSettings.updateCrqIndicatorSettings`",
+            "mutation",
+            "`iterations?: integer`, `exposureWeightInternetFacing?: number`, `exposureWeightInternal?: number`, `susceptibilityGamma?: number`, `measuredValidityDays?: integer | null`, `unknownCriticalityCountsAs?: \"low\" | \"medium\" | \"high\" | \"very_high\"`, `unknownExposureCountsAs?: \"internal\" | \"internet_facing\"`, `phishingFailureRate?: number | null`, `phishingFailureMeasuredOn?: date | null`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "cve",
+      "text": "5 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "cve.getByIds",
+          "cells": [
+            "`cve.getByIds`",
+            "query",
+            "`cveIds: string[]`"
+          ]
+        },
+        {
+          "key": "cve.getInfo",
+          "cells": [
+            "`cve.getInfo`",
+            "query",
+            "`cveId: string`"
+          ]
+        },
+        {
+          "key": "cve.getRemediation",
+          "cells": [
+            "`cve.getRemediation`",
+            "query",
+            "`cveId: string`"
+          ]
+        },
+        {
+          "key": "cve.list",
+          "cells": [
+            "`cve.list`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"cveId\" | \"cvss\" | \"epss\" | \"kev\" | \"updatedAt\"`, `sortDesc?: boolean`, `search?: string`"
+          ]
+        },
+        {
+          "key": "cve.search",
+          "cells": [
+            "`cve.search`",
+            "query",
+            "`query: string`, `excludeAttachedToAssetId?: uuid | null`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "cwe",
+      "text": "2 queries, 4 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "cwe.addTechnique",
+          "cells": [
+            "`cwe.addTechnique`",
+            "mutation",
+            "`cweId: string`, `techniqueId: uuid`"
+          ]
+        },
+        {
+          "key": "cwe.get",
+          "cells": [
+            "`cwe.get`",
+            "query",
+            "`cweId: string`"
+          ]
+        },
+        {
+          "key": "cwe.list",
+          "cells": [
+            "`cwe.list`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "cwe.removeTechnique",
+          "cells": [
+            "`cwe.removeTechnique`",
+            "mutation",
+            "`cweId: string`, `techniqueId: uuid`"
+          ]
+        },
+        {
+          "key": "cwe.reset",
+          "cells": [
+            "`cwe.reset`",
+            "mutation",
+            "`cweId: string`"
+          ]
+        },
+        {
+          "key": "cwe.restoreTechnique",
+          "cells": [
+            "`cwe.restoreTechnique`",
+            "mutation",
+            "`cweId: string`, `techniqueId: uuid`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "dashboard",
+      "text": "18 queries, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "dashboard.getAssetsOverview",
+          "cells": [
+            "`dashboard.getAssetsOverview`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "dashboard.getExposureBand",
+          "cells": [
+            "`dashboard.getExposureBand`",
+            "query",
+            "`organizationId?: uuid`, `windowDays: integer | null`"
+          ]
+        },
+        {
+          "key": "dashboard.getExposureFlow",
+          "cells": [
+            "`dashboard.getExposureFlow`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "dashboard.getExposureTrend",
+          "cells": [
+            "`dashboard.getExposureTrend`",
+            "query",
+            "`organizationId?: uuid`, `windowDays?: integer`"
+          ]
+        },
+        {
+          "key": "dashboard.getFindingsOverview",
+          "cells": [
+            "`dashboard.getFindingsOverview`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "dashboard.getMostActiveThreats",
+          "cells": [
+            "`dashboard.getMostActiveThreats`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "dashboard.getRemediationPace",
+          "cells": [
+            "`dashboard.getRemediationPace`",
+            "query",
+            "`organizationId?: uuid`, `windowDays: 30 | 90`"
+          ]
+        },
+        {
+          "key": "dashboard.getRiskScopeFigures",
+          "cells": [
+            "`dashboard.getRiskScopeFigures`",
+            "query",
+            "`windowDays: integer`"
+          ]
+        },
+        {
+          "key": "dashboard.getRiskTreatment",
+          "cells": [
+            "`dashboard.getRiskTreatment`",
+            "query",
+            "`organizationId?: uuid`, `riskScenarioId?: uuid`"
+          ]
+        },
+        {
+          "key": "dashboard.getRiskTreatmentSeries",
+          "cells": [
+            "`dashboard.getRiskTreatmentSeries`",
+            "query",
+            "`riskScenarioId: uuid`, `windowDays: integer`"
+          ]
+        },
+        {
+          "key": "dashboard.getScenarioSummaries",
+          "cells": [
+            "`dashboard.getScenarioSummaries`",
+            "query",
+            "`organizationId?: uuid`, `windowDays?: integer`"
+          ]
+        },
+        {
+          "key": "dashboard.getTechniqueFindingCounts",
+          "cells": [
+            "`dashboard.getTechniqueFindingCounts`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "dashboard.getTechniqueGains",
+          "cells": [
+            "`dashboard.getTechniqueGains`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "dashboard.getTenantHomeDashboard",
+          "cells": [
+            "`dashboard.getTenantHomeDashboard`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "dashboard.getToleranceCounts",
+          "cells": [
+            "`dashboard.getToleranceCounts`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "dashboard.getToleranceGaps",
+          "cells": [
+            "`dashboard.getToleranceGaps`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "dashboard.getTopControlMoves",
+          "cells": [
+            "`dashboard.getTopControlMoves`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "dashboard.getTopControls",
+          "cells": [
+            "`dashboard.getTopControls`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "dashboard.setTenantHomeDashboard",
+          "cells": [
+            "`dashboard.setTenantHomeDashboard`",
+            "mutation",
+            "`dashboardId: string`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "declaredEstate",
+      "text": "3 queries, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "declaredEstate.comparison",
+          "cells": [
+            "`declaredEstate.comparison`",
+            "query",
+            "`organizationId: uuid | null`"
+          ]
+        },
+        {
+          "key": "declaredEstate.get",
+          "cells": [
+            "`declaredEstate.get`",
+            "query",
+            "`organizationId: uuid`"
+          ]
+        },
+        {
+          "key": "declaredEstate.history",
+          "cells": [
+            "`declaredEstate.history`",
+            "query",
+            "`organizationId: uuid`"
+          ]
+        },
+        {
+          "key": "declaredEstate.save",
+          "cells": [
+            "`declaredEstate.save`",
+            "mutation",
+            "`organizationId: uuid`, `answers: {kind, bounds, internetFacing}[]`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "defaultThreats",
+      "text": "1 query, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "defaultThreats.getOverview",
+          "cells": [
+            "`defaultThreats.getOverview`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "defaultThreats.setEnabled",
+          "cells": [
+            "`defaultThreats.setEnabled`",
+            "mutation",
+            "`enabled: boolean`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "drata",
+      "text": "7 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "drata.getCapabilityDerivation",
+          "cells": [
+            "`drata.getCapabilityDerivation`",
+            "query",
+            "`capabilityId: uuid`"
+          ]
+        },
+        {
+          "key": "drata.getControlsForFramework",
+          "cells": [
+            "`drata.getControlsForFramework`",
+            "query",
+            "`frameworkId: uuid`"
+          ]
+        },
+        {
+          "key": "drata.getControlsForRequirement",
+          "cells": [
+            "`drata.getControlsForRequirement`",
+            "query",
+            "`requirementId: uuid`"
+          ]
+        },
+        {
+          "key": "drata.getFramework",
+          "cells": [
+            "`drata.getFramework`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "drata.getFrameworks",
+          "cells": [
+            "`drata.getFrameworks`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "drata.getRequirement",
+          "cells": [
+            "`drata.getRequirement`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "drata.getRequirements",
+          "cells": [
+            "`drata.getRequirements`",
+            "query",
+            "`frameworkId: uuid`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "edition",
+      "text": "3 queries, 3 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "edition.checkWithXtmOne",
+          "cells": [
+            "`edition.checkWithXtmOne`",
+            "mutation",
+            ""
+          ]
+        },
+        {
+          "key": "edition.getFiligranLicense",
+          "cells": [
+            "`edition.getFiligranLicense`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "edition.getInstance",
+          "cells": [
+            "`edition.getInstance`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "edition.getStatus",
+          "cells": [
+            "`edition.getStatus`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "edition.installFiligranLicense",
+          "cells": [
+            "`edition.installFiligranLicense`",
+            "mutation",
+            "`pem: string`"
+          ]
+        },
+        {
+          "key": "edition.removeFiligranLicense",
+          "cells": [
+            "`edition.removeFiligranLicense`",
+            "mutation",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "events",
+      "text": "1 subscription.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "events.onDataChanged",
+          "cells": [
+            "`events.onDataChanged`",
+            "subscription",
+            "`tenantId: uuid | null`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "fileStorage",
+      "text": "3 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "fileStorage.getNamesByIds",
+          "cells": [
+            "`fileStorage.getNamesByIds`",
+            "query",
+            "`ids: uuid[]`"
+          ]
+        },
+        {
+          "key": "fileStorage.getSettings",
+          "cells": [
+            "`fileStorage.getSettings`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "fileStorage.list",
+          "cells": [
+            "`fileStorage.list`",
+            "query",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "financialProfiles",
+      "text": "2 queries, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "financialProfiles.getFinancialProfile",
+          "cells": [
+            "`financialProfiles.getFinancialProfile`",
+            "query",
+            "`organizationId: uuid`"
+          ]
+        },
+        {
+          "key": "financialProfiles.getFinancialProfileHistory",
+          "cells": [
+            "`financialProfiles.getFinancialProfileHistory`",
+            "query",
+            "`organizationId: uuid`"
+          ]
+        },
+        {
+          "key": "financialProfiles.saveFinancialProfile",
+          "cells": [
+            "`financialProfiles.saveFinancialProfile`",
+            "mutation",
+            "`organizationId: uuid`, `answers: {loadedDailyLabourCost, annualRevenue, grossMarginPct, operatingDaysBand, seasonalPeakPct, itDependentRevenuePct, timeToRevenueImpactBand, fullRestoreBand, revenueRecaptureBand, restoreTestRecency, recordsHeldGate, individualsBand, cardTransactionsBand, sensitiveRecordsBand, largestRepositoryBand, regulatoryRegime, customerCountBand, b2cRevenuePct, recurringRevenuePct, contractedRevenueBand, contractualLiabilityCapBand, paymentFlowDailyValueBand, outOfBandVerificationGate, outOfBandThreshold, rdIpValueBand, ransomPaymentPosture, ransomPaymentCeiling, worstOutageBand, costliestIncidentBand}`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "findingScore",
+      "text": "22 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "findingScore.getAssetPosture",
+          "cells": [
+            "`findingScore.getAssetPosture`",
+            "query",
+            "`supportingAssetId: uuid`"
+          ]
+        },
+        {
+          "key": "findingScore.getAssetPostureHistory",
+          "cells": [
+            "`findingScore.getAssetPostureHistory`",
+            "query",
+            "`supportingAssetId: uuid`"
+          ]
+        },
+        {
+          "key": "findingScore.getAssetTechniqueScores",
+          "cells": [
+            "`findingScore.getAssetTechniqueScores`",
+            "query",
+            "`supportingAssetId: uuid`"
+          ]
+        },
+        {
+          "key": "findingScore.getAssetTechniqueTestDetail",
+          "cells": [
+            "`findingScore.getAssetTechniqueTestDetail`",
+            "query",
+            "`supportingAssetId: uuid`, `mitreTechniqueId: uuid`"
+          ]
+        },
+        {
+          "key": "findingScore.getAssetTechniqueTests",
+          "cells": [
+            "`findingScore.getAssetTechniqueTests`",
+            "query",
+            "`supportingAssetId: uuid`"
+          ]
+        },
+        {
+          "key": "findingScore.getFindingBaselines",
+          "cells": [
+            "`findingScore.getFindingBaselines`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "findingScore.getFindingCountsBySource",
+          "cells": [
+            "`findingScore.getFindingCountsBySource`",
+            "query",
+            "`organizationId?: uuid | null`, `applicableOnly?: boolean`"
+          ]
+        },
+        {
+          "key": "findingScore.getFindingScoreBreakdown",
+          "cells": [
+            "`findingScore.getFindingScoreBreakdown`",
+            "query",
+            "`evidenceId: uuid`"
+          ]
+        },
+        {
+          "key": "findingScore.getFindingScoreHistory",
+          "cells": [
+            "`findingScore.getFindingScoreHistory`",
+            "query",
+            "`evidenceId: uuid`"
+          ]
+        },
+        {
+          "key": "findingScore.getFindingsPanelCounts",
+          "cells": [
+            "`findingScore.getFindingsPanelCounts`",
+            "query",
+            "`organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "findingScore.getOpenFindingFigures",
+          "cells": [
+            "`findingScore.getOpenFindingFigures`",
+            "query",
+            "`organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "findingScore.getTechniqueTestPosture",
+          "cells": [
+            "`findingScore.getTechniqueTestPosture`",
+            "query",
+            "`organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "findingScore.getTopVulnerabilities",
+          "cells": [
+            "`findingScore.getTopVulnerabilities`",
+            "query",
+            "`organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "findingScore.getUniqueCveFinding",
+          "cells": [
+            "`findingScore.getUniqueCveFinding`",
+            "query",
+            "`organizationId?: uuid | null`, `cveId: string`"
+          ]
+        },
+        {
+          "key": "findingScore.getUniqueCveFindingAttack",
+          "cells": [
+            "`findingScore.getUniqueCveFindingAttack`",
+            "query",
+            "`organizationId?: uuid | null`, `cveId: string`"
+          ]
+        },
+        {
+          "key": "findingScore.getUniqueFindingScoreHistory",
+          "cells": [
+            "`findingScore.getUniqueFindingScoreHistory`",
+            "query",
+            "`organizationId?: uuid | null`, `cveId: string`"
+          ]
+        },
+        {
+          "key": "findingScore.getUniqueFindingsPanelCounts",
+          "cells": [
+            "`findingScore.getUniqueFindingsPanelCounts`",
+            "query",
+            "`organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "findingScore.getUniqueTechniqueFinding",
+          "cells": [
+            "`findingScore.getUniqueTechniqueFinding`",
+            "query",
+            "`organizationId?: uuid | null`, `externalId: string`, `expectationType: \"detection\" | \"prevention\"`"
+          ]
+        },
+        {
+          "key": "findingScore.listAssetFindings",
+          "cells": [
+            "`findingScore.listAssetFindings`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"score\" | \"name\" | \"kind\" | \"currentState\" | \"assetName\" | \"assetCategoryId\" | \"lastEvaluatedAt\" | \"firstSeenAt\"`, `sortDesc?: boolean`, `supportingAssetId: uuid`, `state?: \"applicable\" | \"dismissed\" | null`, `mitreTechniqueExternalId?: string | null`, `expectationType?: \"detection\" | \"prevention\" | null`, `search?: string | null`"
+          ]
+        },
+        {
+          "key": "findingScore.listScoredFindings",
+          "cells": [
+            "`findingScore.listScoredFindings`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"score\" | \"name\" | \"kind\" | \"currentState\" | \"assetName\" | \"assetCategoryId\" | \"lastEvaluatedAt\" | \"firstSeenAt\"`, `sortDesc?: boolean`, `organizationId?: uuid | null`, `state?: \"applicable\" | \"dismissed\" | null`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`, `vulnerability?: {kind, cveId} | {kind, externalId, expectationType} | null`, `technique?: string | null`"
+          ]
+        },
+        {
+          "key": "findingScore.listUniqueFindingEvents",
+          "cells": [
+            "`findingScore.listUniqueFindingEvents`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `organizationId?: uuid | null`, `cveId: string`"
+          ]
+        },
+        {
+          "key": "findingScore.listUniqueFindings",
+          "cells": [
+            "`findingScore.listUniqueFindings`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"score\" | \"affectedAssets\" | \"name\" | \"age\"`, `sortDesc?: boolean`, `organizationId?: uuid | null`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "groups",
+      "text": "6 queries, 7 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "groups.addRoleToGroup",
+          "cells": [
+            "`groups.addRoleToGroup`",
+            "mutation",
+            "`groupId: uuid`, `roleId: uuid`"
+          ]
+        },
+        {
+          "key": "groups.addUserToGroup",
+          "cells": [
+            "`groups.addUserToGroup`",
+            "mutation",
+            "`groupId: uuid`, `userId: uuid`"
+          ]
+        },
+        {
+          "key": "groups.createGroup",
+          "cells": [
+            "`groups.createGroup`",
+            "mutation",
+            "`id: uuid`, `name: string`"
+          ]
+        },
+        {
+          "key": "groups.deleteGroup",
+          "cells": [
+            "`groups.deleteGroup`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "groups.getGroup",
+          "cells": [
+            "`groups.getGroup`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "groups.getGroupRoles",
+          "cells": [
+            "`groups.getGroupRoles`",
+            "query",
+            "`groupId: uuid`"
+          ]
+        },
+        {
+          "key": "groups.getGroups",
+          "cells": [
+            "`groups.getGroups`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "groups.getGroupUsers",
+          "cells": [
+            "`groups.getGroupUsers`",
+            "query",
+            "`groupId: uuid`"
+          ]
+        },
+        {
+          "key": "groups.getUserGroups",
+          "cells": [
+            "`groups.getUserGroups`",
+            "query",
+            "`userId: uuid`"
+          ]
+        },
+        {
+          "key": "groups.listGroups",
+          "cells": [
+            "`groups.listGroups`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "groups.removeRoleFromGroup",
+          "cells": [
+            "`groups.removeRoleFromGroup`",
+            "mutation",
+            "`groupId: uuid`, `roleId: uuid`"
+          ]
+        },
+        {
+          "key": "groups.removeUserFromGroup",
+          "cells": [
+            "`groups.removeUserFromGroup`",
+            "mutation",
+            "`groupId: uuid`, `userId: uuid`"
+          ]
+        },
+        {
+          "key": "groups.updateGroup",
+          "cells": [
+            "`groups.updateGroup`",
+            "mutation",
+            "`id: uuid`, `name: string`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "integrations",
+      "text": "2 queries, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "integrations.configure",
+          "cells": [
+            "`integrations.configure`",
+            "mutation",
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\"`, `serviceAccountId: uuid | null`"
+          ]
+        },
+        {
+          "key": "integrations.getConnectorsStatus",
+          "cells": [
+            "`integrations.getConnectorsStatus`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "integrations.getSettings",
+          "cells": [
+            "`integrations.getSettings`",
+            "query",
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\"`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "invitations",
+      "text": "2 queries, 3 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "invitations.cancelInvitation",
+          "cells": [
+            "`invitations.cancelInvitation`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "invitations.checkEmail",
+          "cells": [
+            "`invitations.checkEmail`",
+            "query",
+            "`email: email`"
+          ]
+        },
+        {
+          "key": "invitations.createInvitation",
+          "cells": [
+            "`invitations.createInvitation`",
+            "mutation",
+            "`email: email`, `groupIds: uuid[]`"
+          ]
+        },
+        {
+          "key": "invitations.getInvitations",
+          "cells": [
+            "`invitations.getInvitations`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "invitations.resendInvitation",
+          "cells": [
+            "`invitations.resendInvitation`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "jobs",
+      "text": "13 queries, 2 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "jobs.cancelJob",
+          "cells": [
+            "`jobs.cancelJob`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "jobs.getActiveRunCounts",
+          "cells": [
+            "`jobs.getActiveRunCounts`",
+            "query",
+            "`kinds: string[]`"
+          ]
+        },
+        {
+          "key": "jobs.getJob",
+          "cells": [
+            "`jobs.getJob`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "jobs.getJobKind",
+          "cells": [
+            "`jobs.getJobKind`",
+            "query",
+            "`kind: string`"
+          ]
+        },
+        {
+          "key": "jobs.getLastJob",
+          "cells": [
+            "`jobs.getLastJob`",
+            "query",
+            "`kind: string`"
+          ]
+        },
+        {
+          "key": "jobs.getRun",
+          "cells": [
+            "`jobs.getRun`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "jobs.listAllRuns",
+          "cells": [
+            "`jobs.listAllRuns`",
+            "query",
+            "`kinds?: string[] | null`, `statuses?: \"queued\" | \"running\" | \"succeeded\" | \"cancelled\" | \"dlq\"[] | null`, `triggeredBy?: \"user\" | \"scheduler\" | \"system\" | \"event\" | \"connector\"[] | null`, `enqueuedFrom?: date-time | null`, `enqueuedTo?: date-time | null`, `startedFrom?: date-time | null`, `startedTo?: date-time | null`, `finishedFrom?: date-time | null`, `finishedTo?: date-time | null`, `search?: string`, `sortBy?: \"enqueuedAt\" | \"startedAt\" | \"claimedAt\" | \"finishedAt\" | \"kind\" | \"status\" | \"triggeredBy\" | \"attempt\" | \"priority\" | \"duration\"`, `sortDesc?: boolean`, `limit?: integer`, `offset?: integer`"
+          ]
+        },
+        {
+          "key": "jobs.listJobErrors",
+          "cells": [
+            "`jobs.listJobErrors`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "jobs.listJobKinds",
+          "cells": [
+            "`jobs.listJobKinds`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "jobs.listLogs",
+          "cells": [
+            "`jobs.listLogs`",
+            "query",
+            "`kind: string`"
+          ]
+        },
+        {
+          "key": "jobs.listQueue",
+          "cells": [
+            "`jobs.listQueue`",
+            "query",
+            "`pending: {page, limit}`, `running: {page, limit}`, `failed: {page, limit}`, `succeeded: {page, limit}`"
+          ]
+        },
+        {
+          "key": "jobs.listRunLogs",
+          "cells": [
+            "`jobs.listRunLogs`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "jobs.listRuns",
+          "cells": [
+            "`jobs.listRuns`",
+            "query",
+            "`kind: string`"
+          ]
+        },
+        {
+          "key": "jobs.listSchedules",
+          "cells": [
+            "`jobs.listSchedules`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "jobs.retryFromDlq",
+          "cells": [
+            "`jobs.retryFromDlq`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "lossDrivers",
+      "text": "5 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "lossDrivers.getCompatibleBusinessValueCategoryIds",
+          "cells": [
+            "`lossDrivers.getCompatibleBusinessValueCategoryIds`",
+            "query",
+            "`attackOutcomeId: uuid`"
+          ]
+        },
+        {
+          "key": "lossDrivers.getLossDriver",
+          "cells": [
+            "`lossDrivers.getLossDriver`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "lossDrivers.getLossDriverActivations",
+          "cells": [
+            "`lossDrivers.getLossDriverActivations`",
+            "query",
+            "`lossDriverId: uuid`"
+          ]
+        },
+        {
+          "key": "lossDrivers.getLossDrivers",
+          "cells": [
+            "`lossDrivers.getLossDrivers`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "lossDrivers.getScenarioDriverRecommendation",
+          "cells": [
+            "`lossDrivers.getScenarioDriverRecommendation`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "members",
+      "text": "1 query, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "members.addMembers",
+          "cells": [
+            "`members.addMembers`",
+            "mutation",
+            "`members: {email, xtmUserId, fullName}[]`, `groupIds: uuid[]`"
+          ]
+        },
+        {
+          "key": "members.searchDirectory",
+          "cells": [
+            "`members.searchDirectory`",
+            "query",
+            "`query: string`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "mitreAttack",
+      "text": "7 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "mitreAttack.getMatrix",
+          "cells": [
+            "`mitreAttack.getMatrix`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "mitreAttack.getMitigationByExternalId",
+          "cells": [
+            "`mitreAttack.getMitigationByExternalId`",
+            "query",
+            "`externalId: string`"
+          ]
+        },
+        {
+          "key": "mitreAttack.getMitigations",
+          "cells": [
+            "`mitreAttack.getMitigations`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "mitreAttack.getTacticByExternalId",
+          "cells": [
+            "`mitreAttack.getTacticByExternalId`",
+            "query",
+            "`externalId: string`"
+          ]
+        },
+        {
+          "key": "mitreAttack.getTactics",
+          "cells": [
+            "`mitreAttack.getTactics`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "mitreAttack.getTechniqueByExternalId",
+          "cells": [
+            "`mitreAttack.getTechniqueByExternalId`",
+            "query",
+            "`externalId: string`"
+          ]
+        },
+        {
+          "key": "mitreAttack.getTechniques",
+          "cells": [
+            "`mitreAttack.getTechniques`",
+            "query",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "notifications",
+      "text": "2 queries, 4 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "notifications.deleteMany",
+          "cells": [
+            "`notifications.deleteMany`",
+            "mutation",
+            "`ids: uuid[]`"
+          ]
+        },
+        {
+          "key": "notifications.getNotifications",
+          "cells": [
+            "`notifications.getNotifications`",
+            "query",
+            "`offset?: integer`, `limit?: integer`, `unreadOnly?: boolean`"
+          ]
+        },
+        {
+          "key": "notifications.getUnreadCount",
+          "cells": [
+            "`notifications.getUnreadCount`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "notifications.markAllAsRead",
+          "cells": [
+            "`notifications.markAllAsRead`",
+            "mutation",
+            ""
+          ]
+        },
+        {
+          "key": "notifications.markManyAsRead",
+          "cells": [
+            "`notifications.markManyAsRead`",
+            "mutation",
+            "`ids: uuid[]`"
+          ]
+        },
+        {
+          "key": "notifications.markManyAsUnread",
+          "cells": [
+            "`notifications.markManyAsUnread`",
+            "mutation",
+            "`ids: uuid[]`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "opencti",
+      "text": "3 queries, 2 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "opencti.configure",
+          "cells": [
+            "`opencti.configure`",
+            "mutation",
+            "`serviceAccountId: uuid`, `streamId: string`"
+          ]
+        },
+        {
+          "key": "opencti.getBackfillProgress",
+          "cells": [
+            "`opencti.getBackfillProgress`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "opencti.getSettings",
+          "cells": [
+            "`opencti.getSettings`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "opencti.listStreams",
+          "cells": [
+            "`opencti.listStreams`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "opencti.setEnabled",
+          "cells": [
+            "`opencti.setEnabled`",
+            "mutation",
+            "`enabled: boolean`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "organizations",
+      "text": "7 queries, 5 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "organizations.createOrganizationsTransaction",
+          "cells": [
+            "`organizations.createOrganizationsTransaction`",
+            "mutation",
+            "`{description, legalEntityName, sectorId, countryId, revenueBand, employeeCount, domain, reactionTimeMin, reactionTimeLikely, reactionTimeMax, estateMode, id, name, mappedAssetIds}[]`"
+          ]
+        },
+        {
+          "key": "organizations.deleteOrganizations",
+          "cells": [
+            "`organizations.deleteOrganizations`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "organizations.getAssetMappingEventAssets",
+          "cells": [
+            "`organizations.getAssetMappingEventAssets`",
+            "query",
+            "`eventId: uuid`"
+          ]
+        },
+        {
+          "key": "organizations.getAssetMappingHistory",
+          "cells": [
+            "`organizations.getAssetMappingHistory`",
+            "query",
+            "`organizationId: uuid`"
+          ]
+        },
+        {
+          "key": "organizations.getIdentityHistory",
+          "cells": [
+            "`organizations.getIdentityHistory`",
+            "query",
+            "`organizationId: uuid`"
+          ]
+        },
+        {
+          "key": "organizations.getOrganization",
+          "cells": [
+            "`organizations.getOrganization`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "organizations.getOrganizations",
+          "cells": [
+            "`organizations.getOrganizations`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "organizations.getRiskTolerance",
+          "cells": [
+            "`organizations.getRiskTolerance`",
+            "query",
+            "`organizationId: uuid`"
+          ]
+        },
+        {
+          "key": "organizations.getUnpinnedOrganizationIds",
+          "cells": [
+            "`organizations.getUnpinnedOrganizationIds`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "organizations.setOrganizationPinned",
+          "cells": [
+            "`organizations.setOrganizationPinned`",
+            "mutation",
+            "`id: uuid`, `pinned: boolean`"
+          ]
+        },
+        {
+          "key": "organizations.setRiskTolerance",
+          "cells": [
+            "`organizations.setRiskTolerance`",
+            "mutation",
+            "`organizationId: uuid`, `tolerance: {annualLoss, maxExceedanceProbability}`"
+          ]
+        },
+        {
+          "key": "organizations.updateOrganization",
+          "cells": [
+            "`organizations.updateOrganization`",
+            "mutation",
+            "`description?: string`, `legalEntityName?: string`, `sectorId?: uuid | null`, `countryId?: uuid | null`, `revenueBand?: \"under_10m\" | \"10m_100m\" | \"100m_1b\" | \"1b_10b\" | \"10b_100b\" | \"over_100b\" | null`, `employeeCount?: integer | null`, `domain?: string`, `reactionTimeMin?: number | null`, `reactionTimeLikely?: number | null`, `reactionTimeMax?: number | null`, `estateMode?: \"open\" | \"closed\"`, `id: uuid`, `name?: string`, `mapping?: {added, removed}`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "platformCapabilities",
+      "text": "4 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "platformCapabilities.getPlatformCapabilities",
+          "cells": [
+            "`platformCapabilities.getPlatformCapabilities`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "platformCapabilities.getUserPlatformEffectivePermissions",
+          "cells": [
+            "`platformCapabilities.getUserPlatformEffectivePermissions`",
+            "query",
+            "`userId: uuid`"
+          ]
+        },
+        {
+          "key": "platformCapabilities.hasPlatformAccess",
+          "cells": [
+            "`platformCapabilities.hasPlatformAccess`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "platformCapabilities.hasPlatformCapability",
+          "cells": [
+            "`platformCapabilities.hasPlatformCapability`",
+            "query",
+            "`capabilityId: uuid`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "platformGroups",
+      "text": "6 queries, 7 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "platformGroups.addRoleToPlatformGroup",
+          "cells": [
+            "`platformGroups.addRoleToPlatformGroup`",
+            "mutation",
+            "`platformGroupId: uuid`, `platformRoleId: uuid`"
+          ]
+        },
+        {
+          "key": "platformGroups.addUserToPlatformGroup",
+          "cells": [
+            "`platformGroups.addUserToPlatformGroup`",
+            "mutation",
+            "`platformGroupId: uuid`, `userId: uuid`"
+          ]
+        },
+        {
+          "key": "platformGroups.createPlatformGroup",
+          "cells": [
+            "`platformGroups.createPlatformGroup`",
+            "mutation",
+            "`id: uuid`, `name: string`"
+          ]
+        },
+        {
+          "key": "platformGroups.deletePlatformGroup",
+          "cells": [
+            "`platformGroups.deletePlatformGroup`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "platformGroups.getPlatformGroup",
+          "cells": [
+            "`platformGroups.getPlatformGroup`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "platformGroups.getPlatformGroupRoles",
+          "cells": [
+            "`platformGroups.getPlatformGroupRoles`",
+            "query",
+            "`platformGroupId: uuid`"
+          ]
+        },
+        {
+          "key": "platformGroups.getPlatformGroups",
+          "cells": [
+            "`platformGroups.getPlatformGroups`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "platformGroups.getPlatformGroupUsers",
+          "cells": [
+            "`platformGroups.getPlatformGroupUsers`",
+            "query",
+            "`platformGroupId: uuid`"
+          ]
+        },
+        {
+          "key": "platformGroups.getUserPlatformGroups",
+          "cells": [
+            "`platformGroups.getUserPlatformGroups`",
+            "query",
+            "`userId: uuid`"
+          ]
+        },
+        {
+          "key": "platformGroups.listPlatformGroups",
+          "cells": [
+            "`platformGroups.listPlatformGroups`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "platformGroups.removeRoleFromPlatformGroup",
+          "cells": [
+            "`platformGroups.removeRoleFromPlatformGroup`",
+            "mutation",
+            "`platformGroupId: uuid`, `platformRoleId: uuid`"
+          ]
+        },
+        {
+          "key": "platformGroups.removeUserFromPlatformGroup",
+          "cells": [
+            "`platformGroups.removeUserFromPlatformGroup`",
+            "mutation",
+            "`platformGroupId: uuid`, `userId: uuid`"
+          ]
+        },
+        {
+          "key": "platformGroups.updatePlatformGroup",
+          "cells": [
+            "`platformGroups.updatePlatformGroup`",
+            "mutation",
+            "`id: uuid`, `name: string`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "platformMembers",
+      "text": "1 query, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "platformMembers.addMembers",
+          "cells": [
+            "`platformMembers.addMembers`",
+            "mutation",
+            "`members: {email, xtmUserId, fullName}[]`, `platformGroupIds: uuid[]`"
+          ]
+        },
+        {
+          "key": "platformMembers.searchDirectory",
+          "cells": [
+            "`platformMembers.searchDirectory`",
+            "query",
+            "`query: string`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "platformRoles",
+      "text": "5 queries, 5 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "platformRoles.addCapabilityToPlatformRole",
+          "cells": [
+            "`platformRoles.addCapabilityToPlatformRole`",
+            "mutation",
+            "`platformRoleId: uuid`, `capabilityId: uuid`"
+          ]
+        },
+        {
+          "key": "platformRoles.createPlatformRole",
+          "cells": [
+            "`platformRoles.createPlatformRole`",
+            "mutation",
+            "`id: uuid`, `name: string`"
+          ]
+        },
+        {
+          "key": "platformRoles.deletePlatformRole",
+          "cells": [
+            "`platformRoles.deletePlatformRole`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "platformRoles.getPlatformRole",
+          "cells": [
+            "`platformRoles.getPlatformRole`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "platformRoles.getPlatformRoleCapabilities",
+          "cells": [
+            "`platformRoles.getPlatformRoleCapabilities`",
+            "query",
+            "`platformRoleId: uuid`"
+          ]
+        },
+        {
+          "key": "platformRoles.getPlatformRoles",
+          "cells": [
+            "`platformRoles.getPlatformRoles`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "platformRoles.getUserPlatformRoles",
+          "cells": [
+            "`platformRoles.getUserPlatformRoles`",
+            "query",
+            "`userId: uuid`"
+          ]
+        },
+        {
+          "key": "platformRoles.listPlatformRoles",
+          "cells": [
+            "`platformRoles.listPlatformRoles`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "platformRoles.removeCapabilityFromPlatformRole",
+          "cells": [
+            "`platformRoles.removeCapabilityFromPlatformRole`",
+            "mutation",
+            "`platformRoleId: uuid`, `capabilityId: uuid`"
+          ]
+        },
+        {
+          "key": "platformRoles.updatePlatformRole",
+          "cells": [
+            "`platformRoles.updatePlatformRole`",
+            "mutation",
+            "`id: uuid`, `name: string`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "primaryAssets",
+      "text": "3 queries, 3 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "primaryAssets.createPrimaryAsset",
+          "cells": [
+            "`primaryAssets.createPrimaryAsset`",
+            "mutation",
+            "`id: uuid`, `organizationId: uuid`, `name: string`, `description: string`, `ownerId: uuid | null`, `businessValueCategoryIds: uuid[]`, `reference?: string | null`, `businessFunction?: string | null`, `availability?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `integrity?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `confidentiality?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `traceability?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `rtoMinutes?: integer | null`, `rpoMinutes?: integer | null`, `mtpdMinutes?: integer | null`"
+          ]
+        },
+        {
+          "key": "primaryAssets.deletePrimaryAssets",
+          "cells": [
+            "`primaryAssets.deletePrimaryAssets`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "primaryAssets.getPrimaryAsset",
+          "cells": [
+            "`primaryAssets.getPrimaryAsset`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "primaryAssets.getPrimaryAssets",
+          "cells": [
+            "`primaryAssets.getPrimaryAssets`",
+            "query",
+            "`organizationId: uuid`"
+          ]
+        },
+        {
+          "key": "primaryAssets.getPrimaryAssetsWithScope",
+          "cells": [
+            "`primaryAssets.getPrimaryAssetsWithScope`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "primaryAssets.updatePrimaryAsset",
+          "cells": [
+            "`primaryAssets.updatePrimaryAsset`",
+            "mutation",
+            "`id: uuid`, `name?: string`, `description?: string`, `ownerId?: uuid | null`, `businessValueCategoryIds?: uuid[]`, `reference?: string | null`, `businessFunction?: string | null`, `availability?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `integrity?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `confidentiality?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `traceability?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `rtoMinutes?: integer | null`, `rpoMinutes?: integer | null`, `mtpdMinutes?: integer | null`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "riskScenarios",
+      "text": "10 queries, 4 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "riskScenarios.createRiskScenario",
+          "cells": [
+            "`riskScenarios.createRiskScenario`",
+            "mutation",
+            "`id: uuid`, `organizationId: uuid`, `name: string`, `description: string`, `ownerId?: uuid | null`, `attackOutcomeId: uuid`, `primaryAssetIds?: uuid[]`, `businessValueCategoryIds?: uuid[]`"
+          ]
+        },
+        {
+          "key": "riskScenarios.deleteRiskScenarios",
+          "cells": [
+            "`riskScenarios.deleteRiskScenarios`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "riskScenarios.getControlCapabilitiesForRiskScenario",
+          "cells": [
+            "`riskScenarios.getControlCapabilitiesForRiskScenario`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "riskScenarios.getDependencyGraph",
+          "cells": [
+            "`riskScenarios.getDependencyGraph`",
+            "query",
+            "`riskScenarioId: uuid`, `depth?: integer`"
+          ]
+        },
+        {
+          "key": "riskScenarios.getDerivedSupportingAssets",
+          "cells": [
+            "`riskScenarios.getDerivedSupportingAssets`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "riskScenarios.getFindingsSummaryForRiskScenario",
+          "cells": [
+            "`riskScenarios.getFindingsSummaryForRiskScenario`",
+            "query",
+            "`riskScenarioId: uuid`, `topLimit?: integer`"
+          ]
+        },
+        {
+          "key": "riskScenarios.getNamesByIds",
+          "cells": [
+            "`riskScenarios.getNamesByIds`",
+            "query",
+            "`ids: uuid[]`"
+          ]
+        },
+        {
+          "key": "riskScenarios.getRiskScenario",
+          "cells": [
+            "`riskScenarios.getRiskScenario`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "riskScenarios.getRiskScenariosOverview",
+          "cells": [
+            "`riskScenarios.getRiskScenariosOverview`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "riskScenarios.listDerivedSupportingAssets",
+          "cells": [
+            "`riskScenarios.listDerivedSupportingAssets`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"impact\" | \"supportingAsset\" | \"depth\" | \"via\"`, `sortDesc?: boolean`, `riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "riskScenarios.listFindingsForRiskScenario",
+          "cells": [
+            "`riskScenarios.listFindingsForRiskScenario`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"score\" | \"name\" | \"currentState\" | \"assetName\" | \"assetCategoryId\" | \"lastEvaluatedAt\" | \"ageDays\"`, `sortDesc?: boolean`, `riskScenarioId: uuid`, `state?: \"all\" | \"applicable\" | \"dismissed\"`, `severity?: \"all\" | \"critical\" | \"high\" | \"medium\" | \"low\" | \"unscored\"`"
+          ]
+        },
+        {
+          "key": "riskScenarios.listUniqueCvesForRiskScenario",
+          "cells": [
+            "`riskScenarios.listUniqueCvesForRiskScenario`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"gain\" | \"score\" | \"affectedAssets\" | \"name\" | \"age\"`, `sortDesc?: boolean`, `riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "riskScenarios.setRiskTolerance",
+          "cells": [
+            "`riskScenarios.setRiskTolerance`",
+            "mutation",
+            "`riskScenarioId: uuid`, `tolerance: {annualLoss, maxExceedanceProbability} | null`"
+          ]
+        },
+        {
+          "key": "riskScenarios.updateRiskScenario",
+          "cells": [
+            "`riskScenarios.updateRiskScenario`",
+            "mutation",
+            "`id: uuid`, `name?: string`, `description?: string`, `ownerId?: uuid | null`, `primaryAssetIds?: uuid[]`, `businessValueCategoryIds?: uuid[]`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "roles",
+      "text": "6 queries, 5 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "roles.addCapabilityToRole",
+          "cells": [
+            "`roles.addCapabilityToRole`",
+            "mutation",
+            "`roleId: uuid`, `capabilityId: uuid`"
+          ]
+        },
+        {
+          "key": "roles.createRole",
+          "cells": [
+            "`roles.createRole`",
+            "mutation",
+            "`id: uuid`, `name: string`"
+          ]
+        },
+        {
+          "key": "roles.deleteRole",
+          "cells": [
+            "`roles.deleteRole`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "roles.getRole",
+          "cells": [
+            "`roles.getRole`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "roles.getRoleCapabilities",
+          "cells": [
+            "`roles.getRoleCapabilities`",
+            "query",
+            "`roleId: uuid`"
+          ]
+        },
+        {
+          "key": "roles.getRoleGroups",
+          "cells": [
+            "`roles.getRoleGroups`",
+            "query",
+            "`roleId: uuid`"
+          ]
+        },
+        {
+          "key": "roles.getRoles",
+          "cells": [
+            "`roles.getRoles`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "roles.getUserRoles",
+          "cells": [
+            "`roles.getUserRoles`",
+            "query",
+            "`userId: uuid`"
+          ]
+        },
+        {
+          "key": "roles.listRoles",
+          "cells": [
+            "`roles.listRoles`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "roles.removeCapabilityFromRole",
+          "cells": [
+            "`roles.removeCapabilityFromRole`",
+            "mutation",
+            "`roleId: uuid`, `capabilityId: uuid`"
+          ]
+        },
+        {
+          "key": "roles.updateRole",
+          "cells": [
+            "`roles.updateRole`",
+            "mutation",
+            "`id: uuid`, `name: string`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "scenarioLossEstimates",
+      "text": "4 queries, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "scenarioLossEstimates.getAutomaticEstimates",
+          "cells": [
+            "`scenarioLossEstimates.getAutomaticEstimates`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "scenarioLossEstimates.getFinancialSummary",
+          "cells": [
+            "`scenarioLossEstimates.getFinancialSummary`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "scenarioLossEstimates.getLossDriverSplitForOutcome",
+          "cells": [
+            "`scenarioLossEstimates.getLossDriverSplitForOutcome`",
+            "query",
+            "`attackOutcomeId: uuid`"
+          ]
+        },
+        {
+          "key": "scenarioLossEstimates.getScenarioLossEstimates",
+          "cells": [
+            "`scenarioLossEstimates.getScenarioLossEstimates`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "scenarioLossEstimates.upsertScenarioLossEstimates",
+          "cells": [
+            "`scenarioLossEstimates.upsertScenarioLossEstimates`",
+            "mutation",
+            "`riskScenarioId: uuid`, `estimates: {lossDriverId, action, minValue, likelyValue, maxValue} | {lossDriverId, action}[]`, `updatedAt: date-time | null`, `rowCount: integer`, `revertLossDriverIds?: uuid[]`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "sectors",
+      "text": "1 query.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "sectors.getSectors",
+          "cells": [
+            "`sectors.getSectors`",
+            "query",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "serviceAccounts",
+      "text": "8 queries, 7 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "serviceAccounts.addGroupToServiceAccount",
+          "cells": [
+            "`serviceAccounts.addGroupToServiceAccount`",
+            "mutation",
+            "`serviceAccountId: uuid`, `groupId: uuid`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.createServiceAccount",
+          "cells": [
+            "`serviceAccounts.createServiceAccount`",
+            "mutation",
+            "`id: uuid`, `name: string`, `description?: string`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.generateToken",
+          "cells": [
+            "`serviceAccounts.generateToken`",
+            "mutation",
+            "`serviceAccountId: uuid`, `name: string`, `expiresAt?: string`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.getGroupServiceAccounts",
+          "cells": [
+            "`serviceAccounts.getGroupServiceAccounts`",
+            "query",
+            "`groupId: uuid`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.getNamesByIds",
+          "cells": [
+            "`serviceAccounts.getNamesByIds`",
+            "query",
+            "`ids: uuid[]`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.getServiceAccount",
+          "cells": [
+            "`serviceAccounts.getServiceAccount`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.getServiceAccountGroups",
+          "cells": [
+            "`serviceAccounts.getServiceAccountGroups`",
+            "query",
+            "`serviceAccountId: uuid`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.getServiceAccountRoles",
+          "cells": [
+            "`serviceAccounts.getServiceAccountRoles`",
+            "query",
+            "`serviceAccountId: uuid`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.getServiceAccounts",
+          "cells": [
+            "`serviceAccounts.getServiceAccounts`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "serviceAccounts.listServiceAccounts",
+          "cells": [
+            "`serviceAccounts.listServiceAccounts`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "serviceAccounts.listTokens",
+          "cells": [
+            "`serviceAccounts.listTokens`",
+            "query",
+            "`serviceAccountId: uuid`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.removeGroupFromServiceAccount",
+          "cells": [
+            "`serviceAccounts.removeGroupFromServiceAccount`",
+            "mutation",
+            "`serviceAccountId: uuid`, `groupId: uuid`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.revokeToken",
+          "cells": [
+            "`serviceAccounts.revokeToken`",
+            "mutation",
+            "`tokenId: uuid`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.rotateToken",
+          "cells": [
+            "`serviceAccounts.rotateToken`",
+            "mutation",
+            "`tokenId: uuid`"
+          ]
+        },
+        {
+          "key": "serviceAccounts.updateServiceAccount",
+          "cells": [
+            "`serviceAccounts.updateServiceAccount`",
+            "mutation",
+            "`id: uuid`, `name?: string`, `active?: boolean`, `description?: string`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "supportingAssets",
+      "text": "19 queries, 12 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "supportingAssets.createAssetEvidence",
+          "cells": [
+            "`supportingAssets.createAssetEvidence`",
+            "mutation",
+            "`supportingAssetId: uuid`, `cveId: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.createSupportingAsset",
+          "cells": [
+            "`supportingAssets.createSupportingAsset`",
+            "mutation",
+            "`id: uuid`, `name: string`, `description: string`, `ownerId?: uuid | null`, `ownerName?: string`, `exposure: \"internet_facing\" | \"internal\" | \"unknown\"`, `categoryId: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"security_platform\" | \"generic_asset\"`, `subcategoryId?: \"server\" | \"workstation\" | \"laptop\" | \"virtual_machine\" | \"hypervisor\" | \"mainframe\" | \"thin_client\" | \"container\" | \"container_image\" | \"kubernetes_pod\" | \"kubernetes_cluster\" | \"kubernetes_node\" | \"serverless_function\" | \"compute\" | \"storage\" | \"database\" | \"networking\" | \"serverless\" | \"container_registry\" | \"kubernetes\" | \"iam_principal\" | \"secrets_key_mgmt\" | \"messaging_queue\" | \"analytics_data\" | \"ai_ml_service\" | \"iac_template\" | \"cloud_other\" | \"website\" | \"web_api\" | \"single_page_app\" | \"graphql_api\" | \"web_service\" | \"microservice\" | \"router\" | \"switch\" | \"firewall\" | \"load_balancer\" | \"vpn_gateway\" | \"wireless_ap\" | \"proxy\" | \"dns_server\" | \"dhcp_server\" | \"san_nas\" | \"network_other\" | \"smartphone\" | \"tablet\" | \"iot_sensor\" | \"ip_camera\" | \"gateway\" | \"point_of_sale\" | \"media_device\" | \"plc\" | \"rtu\" | \"hmi\" | \"scada_historian\" | \"medical_device\" | \"printer_peripheral\" | \"building_mgmt\" | \"user_account\" | \"service_account\" | \"group\" | \"role\" | \"shared_mailbox\" | \"non_human_identity\" | \"saas_app\" | \"saas_tenant\" | \"llm_model\" | \"ai_agent\" | \"mcp_server\" | \"rag_pipeline\" | \"edr\" | \"xdr\" | \"siem\" | \"soar\" | \"ndr\" | \"ispm\" | \"email_security\" | \"llm_firewall\" | \"ai_gateway\" | \"vulnerability_scanner\" | null`, `criticality?: \"unknown\" | \"low\" | \"medium\" | \"high\" | \"very_high\"`, `url?: string`, `linkedPerson?: string`, `properties?: {family, hostname, ipAddresses, macAddresses, seenIp, cloudProvider, cloudNativeType, cloudRegion, platform, arch, vendor, model, operatingSystem, osVersion, isEol} | {family, provider, endpointUrl, model, modality, systemPrompt} | {family, userPrincipalName, accountDomain, accountName, identityProvider, department, jobTitle, isEnabled, assignedRoles, privilegedPimRoles}`, `tagNames?: string[]`, `groups?: {name, externalReference}[]`, `organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "supportingAssets.deleteAssetEvidence",
+          "cells": [
+            "`supportingAssets.deleteAssetEvidence`",
+            "mutation",
+            "`evidenceId: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.deleteSupportingAssets",
+          "cells": [
+            "`supportingAssets.deleteSupportingAssets`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "supportingAssets.deleteTag",
+          "cells": [
+            "`supportingAssets.deleteTag`",
+            "mutation",
+            "`tagId: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getApplicableTechniquesForAsset",
+          "cells": [
+            "`supportingAssets.getApplicableTechniquesForAsset`",
+            "query",
+            "`assetId: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getAssetCountBySubcategory",
+          "cells": [
+            "`supportingAssets.getAssetCountBySubcategory`",
+            "query",
+            "`organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getAssetCountsBySource",
+          "cells": [
+            "`supportingAssets.getAssetCountsBySource`",
+            "query",
+            "`organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getEvidenceActivityForAsset",
+          "cells": [
+            "`supportingAssets.getEvidenceActivityForAsset`",
+            "query",
+            "`assetId: uuid`, `timeZone: string`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getEvidenceActivityForCve",
+          "cells": [
+            "`supportingAssets.getEvidenceActivityForCve`",
+            "query",
+            "`organizationId?: uuid | null`, `cveId: string`, `timeZone: string`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getEvidenceActivityForTechnique",
+          "cells": [
+            "`supportingAssets.getEvidenceActivityForTechnique`",
+            "query",
+            "`mitreTechniqueId: uuid`, `timeZone: string`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getEvidenceDetail",
+          "cells": [
+            "`supportingAssets.getEvidenceDetail`",
+            "query",
+            "`evidenceId: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getEvidencesForCve",
+          "cells": [
+            "`supportingAssets.getEvidencesForCve`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"assetName\" | \"assetCategoryId\" | \"assetCriticality\" | \"currentState\" | \"stateChangedAt\"`, `sortDesc?: boolean`, `cveId: string`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getEvidencesForTechnique",
+          "cells": [
+            "`supportingAssets.getEvidencesForTechnique`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"assetName\" | \"assetCategoryId\" | \"assetCriticality\" | \"currentState\" | \"stateChangedAt\" | \"expectationType\" | \"securityPlatformType\"`, `sortDesc?: boolean`, `mitreTechniqueId: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getOpenaevPosture",
+          "cells": [
+            "`supportingAssets.getOpenaevPosture`",
+            "query",
+            "`supportingAssetId: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getProtectingControls",
+          "cells": [
+            "`supportingAssets.getProtectingControls`",
+            "query",
+            "`supportingAssetId: uuid`, `organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getSupportingAsset",
+          "cells": [
+            "`supportingAssets.getSupportingAsset`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getSupportingAssetRelationGraph",
+          "cells": [
+            "`supportingAssets.getSupportingAssetRelationGraph`",
+            "query",
+            "`supportingAssetId: uuid`, `depth?: integer`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getTechniqueCountPerCategory",
+          "cells": [
+            "`supportingAssets.getTechniqueCountPerCategory`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "supportingAssets.getTechniquesByCategory",
+          "cells": [
+            "`supportingAssets.getTechniquesByCategory`",
+            "query",
+            "`categoryId: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"security_platform\" | \"generic_asset\"`"
+          ]
+        },
+        {
+          "key": "supportingAssets.listAssetGroups",
+          "cells": [
+            "`supportingAssets.listAssetGroups`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "supportingAssets.listManagedTags",
+          "cells": [
+            "`supportingAssets.listManagedTags`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "supportingAssets.listSupportingAssets",
+          "cells": [
+            "`supportingAssets.listSupportingAssets`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"name\" | \"categoryId\" | \"subcategoryId\" | \"exposure\" | \"criticality\" | \"lastSeenAt\" | \"posture\" | \"mapped\"`, `sortDesc?: boolean`, `organizationId?: uuid | null`, `search?: string`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`, `categoryId?: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"security_platform\" | \"generic_asset\" | null`, `categoryMode?: \"only\" | \"except\"`, `groupId?: uuid | null`, `membershipOrganizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "supportingAssets.listTags",
+          "cells": [
+            "`supportingAssets.listTags`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "supportingAssets.mergeTag",
+          "cells": [
+            "`supportingAssets.mergeTag`",
+            "mutation",
+            "`tagId: uuid`, `targetTagId: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.renameTag",
+          "cells": [
+            "`supportingAssets.renameTag`",
+            "mutation",
+            "`tagId: uuid`, `name: string`"
+          ]
+        },
+        {
+          "key": "supportingAssets.resetEvidenceState",
+          "cells": [
+            "`supportingAssets.resetEvidenceState`",
+            "mutation",
+            "`evidenceId: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.resyncSupportingAssetWithConnectors",
+          "cells": [
+            "`supportingAssets.resyncSupportingAssetWithConnectors`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.unmergeTag",
+          "cells": [
+            "`supportingAssets.unmergeTag`",
+            "mutation",
+            "`tagId: uuid`"
+          ]
+        },
+        {
+          "key": "supportingAssets.updateEvidenceState",
+          "cells": [
+            "`supportingAssets.updateEvidenceState`",
+            "mutation",
+            "`{evidenceId, state} | {evidenceId, state, dismissalType, reasonCode, reason}`"
+          ]
+        },
+        {
+          "key": "supportingAssets.updateSupportingAsset",
+          "cells": [
+            "`supportingAssets.updateSupportingAsset`",
+            "mutation",
+            "`id: uuid`, `name?: string`, `description?: string`, `ownerId?: uuid | null`, `ownerName?: string`, `exposure?: \"internet_facing\" | \"internal\" | \"unknown\"`, `categoryId?: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"security_platform\" | \"generic_asset\"`, `subcategoryId?: \"server\" | \"workstation\" | \"laptop\" | \"virtual_machine\" | \"hypervisor\" | \"mainframe\" | \"thin_client\" | \"container\" | \"container_image\" | \"kubernetes_pod\" | \"kubernetes_cluster\" | \"kubernetes_node\" | \"serverless_function\" | \"compute\" | \"storage\" | \"database\" | \"networking\" | \"serverless\" | \"container_registry\" | \"kubernetes\" | \"iam_principal\" | \"secrets_key_mgmt\" | \"messaging_queue\" | \"analytics_data\" | \"ai_ml_service\" | \"iac_template\" | \"cloud_other\" | \"website\" | \"web_api\" | \"single_page_app\" | \"graphql_api\" | \"web_service\" | \"microservice\" | \"router\" | \"switch\" | \"firewall\" | \"load_balancer\" | \"vpn_gateway\" | \"wireless_ap\" | \"proxy\" | \"dns_server\" | \"dhcp_server\" | \"san_nas\" | \"network_other\" | \"smartphone\" | \"tablet\" | \"iot_sensor\" | \"ip_camera\" | \"gateway\" | \"point_of_sale\" | \"media_device\" | \"plc\" | \"rtu\" | \"hmi\" | \"scada_historian\" | \"medical_device\" | \"printer_peripheral\" | \"building_mgmt\" | \"user_account\" | \"service_account\" | \"group\" | \"role\" | \"shared_mailbox\" | \"non_human_identity\" | \"saas_app\" | \"saas_tenant\" | \"llm_model\" | \"ai_agent\" | \"mcp_server\" | \"rag_pipeline\" | \"edr\" | \"xdr\" | \"siem\" | \"soar\" | \"ndr\" | \"ispm\" | \"email_security\" | \"llm_firewall\" | \"ai_gateway\" | \"vulnerability_scanner\" | null`, `criticality?: \"unknown\" | \"low\" | \"medium\" | \"high\" | \"very_high\"`, `url?: string`, `linkedPerson?: string`, `properties?: {family, hostname, ipAddresses, macAddresses, seenIp, cloudProvider, cloudNativeType, cloudRegion, platform, arch, vendor, model, operatingSystem, osVersion, isEol} | {family, provider, endpointUrl, model, modality, systemPrompt} | {family, userPrincipalName, accountDomain, accountName, identityProvider, department, jobTitle, isEnabled, assignedRoles, privilegedPimRoles}`, `tagNames?: string[]`, `groups?: {name, externalReference}[]`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tenants",
+      "text": "7 queries, 5 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "tenants.createTenantsTransaction",
+          "cells": [
+            "`tenants.createTenantsTransaction`",
+            "mutation",
+            "`id: uuid`, `name: string`"
+          ]
+        },
+        {
+          "key": "tenants.deleteTenantsTransaction",
+          "cells": [
+            "`tenants.deleteTenantsTransaction`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "tenants.getTenant",
+          "cells": [
+            "`tenants.getTenant`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "tenants.getTenants",
+          "cells": [
+            "`tenants.getTenants`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "tenants.getTenantsWithMemberCount",
+          "cells": [
+            "`tenants.getTenantsWithMemberCount`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "tenants.getTenantUserNamesByIds",
+          "cells": [
+            "`tenants.getTenantUserNamesByIds`",
+            "query",
+            "`tenantId: uuid`, `ids: uuid[]`"
+          ]
+        },
+        {
+          "key": "tenants.getTenantUserProfile",
+          "cells": [
+            "`tenants.getTenantUserProfile`",
+            "query",
+            "`tenantId: uuid`, `userId: uuid`"
+          ]
+        },
+        {
+          "key": "tenants.getTenantUsers",
+          "cells": [
+            "`tenants.getTenantUsers`",
+            "query",
+            "`tenantId: uuid`"
+          ]
+        },
+        {
+          "key": "tenants.listTenantUsers",
+          "cells": [
+            "`tenants.listTenantUsers`",
+            "query",
+            "`tenantId: uuid`"
+          ]
+        },
+        {
+          "key": "tenants.removeTenantUser",
+          "cells": [
+            "`tenants.removeTenantUser`",
+            "mutation",
+            "`tenantId: uuid`, `userId: uuid`"
+          ]
+        },
+        {
+          "key": "tenants.setTenantDefaultLocale",
+          "cells": [
+            "`tenants.setTenantDefaultLocale`",
+            "mutation",
+            "`locale: \"en\" | \"fr\" | null`"
+          ]
+        },
+        {
+          "key": "tenants.updateTenantUserProfile",
+          "cells": [
+            "`tenants.updateTenantUserProfile`",
+            "mutation",
+            "`tenantId: uuid`, `userId: uuid`, `name?: string`, `title?: string`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "threatRelevanceSettings",
+      "text": "1 query, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "threatRelevanceSettings.getThreatRelevanceSettings",
+          "cells": [
+            "`threatRelevanceSettings.getThreatRelevanceSettings`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "threatRelevanceSettings.updateThreatRelevanceSettings",
+          "cells": [
+            "`threatRelevanceSettings.updateThreatRelevanceSettings`",
+            "mutation",
+            "`actHalfLifeObservedDays: integer`, `actHalfLifeAuthoredDays: integer`, `confidenceGate: number`, `unknownActivityAgeDays?: integer`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "threats",
+      "text": "12 queries, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "threats.deleteImported",
+          "cells": [
+            "`threats.deleteImported`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "threats.getActivityForCve",
+          "cells": [
+            "`threats.getActivityForCve`",
+            "query",
+            "`cveId: string`"
+          ]
+        },
+        {
+          "key": "threats.getByCveId",
+          "cells": [
+            "`threats.getByCveId`",
+            "query",
+            "`cveId: string`"
+          ]
+        },
+        {
+          "key": "threats.getCatalogKpis",
+          "cells": [
+            "`threats.getCatalogKpis`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "threats.getCatalogVolumes",
+          "cells": [
+            "`threats.getCatalogVolumes`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "threats.getDetail",
+          "cells": [
+            "`threats.getDetail`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "threats.getMatchingActorsForOutcome",
+          "cells": [
+            "`threats.getMatchingActorsForOutcome`",
+            "query",
+            "`attackOutcomeId: uuid`"
+          ]
+        },
+        {
+          "key": "threats.getOutcomeScoresForAnalysis",
+          "cells": [
+            "`threats.getOutcomeScoresForAnalysis`",
+            "query",
+            "`analysisId: uuid`"
+          ]
+        },
+        {
+          "key": "threats.getRelevanceProof",
+          "cells": [
+            "`threats.getRelevanceProof`",
+            "query",
+            "`analysisId: uuid`, `scenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "threats.getRelevantForScenario",
+          "cells": [
+            "`threats.getRelevantForScenario`",
+            "query",
+            "`scenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "threats.hasAny",
+          "cells": [
+            "`threats.hasAny`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "threats.list",
+          "cells": [
+            "`threats.list`",
+            "query",
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"name\" | \"mitreGroupId\" | \"outcomeScore\" | \"cveCount\" | \"techniqueCount\" | \"activityScore\" | \"lastObservedAt\" | \"stixCreated\" | \"updatedAt\"`, `sortDesc?: boolean`, `outcomeId?: uuid`, `search?: string`, `entityType?: \"intrusion-set\" | \"threat-actor\" | \"campaign\"`, `kind?: \"stix-import\" | \"connector\" | \"default-threats\"`"
+          ]
+        },
+        {
+          "key": "threats.listCveFindings",
+          "cells": [
+            "`threats.listCveFindings`",
+            "query",
+            "`organizationId?: uuid | null`, `threatId: uuid`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "treatmentPlans",
+      "text": "7 queries, 6 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "treatmentPlans.addTreatmentPlanMoves",
+          "cells": [
+            "`treatmentPlans.addTreatmentPlanMoves`",
+            "mutation",
+            "`planId: uuid`, `moves: {capabilityId, targetStrengthRung, targetCoverageBucket}[]`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.createTreatmentPlan",
+          "cells": [
+            "`treatmentPlans.createTreatmentPlan`",
+            "mutation",
+            "`name: string`, `ownerId?: uuid | null`, `startDate?: date | null`, `endDate?: date | null`, `rationale?: string`, `costOneOff?: number | null`, `costRecurringAnnual?: number | null`, `organizationId: uuid`, `moves?: {capabilityId, targetStrengthRung, targetCoverageBucket}[]`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.deleteTreatmentPlans",
+          "cells": [
+            "`treatmentPlans.deleteTreatmentPlans`",
+            "mutation",
+            "`uuid[]`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.getScopeTreatmentPlanCandidates",
+          "cells": [
+            "`treatmentPlans.getScopeTreatmentPlanCandidates`",
+            "query",
+            "`organizationId: uuid`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.getTreatmentPlan",
+          "cells": [
+            "`treatmentPlans.getTreatmentPlan`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.getTreatmentPlanCandidates",
+          "cells": [
+            "`treatmentPlans.getTreatmentPlanCandidates`",
+            "query",
+            "`planId: uuid`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.getTreatmentPlanMoves",
+          "cells": [
+            "`treatmentPlans.getTreatmentPlanMoves`",
+            "query",
+            "`planId: uuid`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.getTreatmentPlanProjection",
+          "cells": [
+            "`treatmentPlans.getTreatmentPlanProjection`",
+            "query",
+            "`planId: uuid`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.getTreatmentPlans",
+          "cells": [
+            "`treatmentPlans.getTreatmentPlans`",
+            "query",
+            "`organizationId?: uuid`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.getTreatmentPlanSimulationState",
+          "cells": [
+            "`treatmentPlans.getTreatmentPlanSimulationState`",
+            "query",
+            "`planId: uuid`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.resimulateTreatmentPlanScenarios",
+          "cells": [
+            "`treatmentPlans.resimulateTreatmentPlanScenarios`",
+            "mutation",
+            "`planId: uuid`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.setTreatmentPlanScope",
+          "cells": [
+            "`treatmentPlans.setTreatmentPlanScope`",
+            "mutation",
+            "`planId: uuid`, `moves: {capabilityId, targetStrengthRung, targetCoverageBucket}[]`"
+          ]
+        },
+        {
+          "key": "treatmentPlans.updateTreatmentPlan",
+          "cells": [
+            "`treatmentPlans.updateTreatmentPlan`",
+            "mutation",
+            "`id: uuid`, `values: {name, ownerId, startDate, endDate, rationale, costOneOff, costRecurringAnnual}`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "users",
+      "text": "6 queries, 1 mutation.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "users.getUser",
+          "cells": [
+            "`users.getUser`",
+            "query",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "users.getUserHomeDashboard",
+          "cells": [
+            "`users.getUserHomeDashboard`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "users.getUserLocale",
+          "cells": [
+            "`users.getUserLocale`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "users.getUsers",
+          "cells": [
+            "`users.getUsers`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "users.getUserTheme",
+          "cells": [
+            "`users.getUserTheme`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "users.listPlatformUsers",
+          "cells": [
+            "`users.listPlatformUsers`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "users.updateUser",
+          "cells": [
+            "`users.updateUser`",
+            "mutation",
+            "`locale?: \"en\" | \"fr\" | null`, `theme?: \"light\" | \"dark\" | \"system\"`, `homeDashboardId?: string | null`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "xtmOne",
+      "text": "1 query.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "xtmOne.getSettings",
+          "cells": [
+            "`xtmOne.getSettings`",
+            "query",
+            ""
+          ]
+        }
+      ]
+    }
+  ]
+}

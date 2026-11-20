@@ -1,0 +1,21 @@
+title: A single sign-on login creates or updates the user, then sets its groups and organizations from the mapping
+lanes:
+  - label: Identity provider
+    tone: external
+    nodes:
+      - {id: idp, label: Identity provider, icon: KeyRound, note: Authenticates and returns claims}
+  - label: Platform
+    tone: product
+    nodes:
+      - {id: user, label: User mapping, icon: LogIn, note: Email identifies the account}
+      - {id: mapping, label: Group mapping, icon: ArrowLeftRight, note: Provider value to platform name}
+  - label: Stored
+    tone: store
+    nodes:
+      - {id: account, label: User account, icon: Server, note: Created at first login}
+      - {id: groups, label: Groups and organizations, icon: Layers, note: Replaced at each login}
+edges:
+  - {from: idp, to: user, label: claims}
+  - {from: user, to: account, label: create or update}
+  - {from: idp, to: mapping, label: groups}
+  - {from: mapping, to: groups, label: mapped names}

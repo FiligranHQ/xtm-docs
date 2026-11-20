@@ -1,0 +1,22 @@
+title: How OpenCTI sends usage telemetry to Filigran
+lanes:
+  - label: Platform
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenCTI, note: Counts usage every hour}
+  - label: Sender
+    tone: product
+    nodes:
+      - {id: manager, label: Telemetry manager, icon: Gauge, note: Sends every 6 hours}
+  - label: Local copy
+    tone: store
+    nodes:
+      - {id: logs, label: Telemetry logs, icon: FileText, note: Included in support packages}
+  - label: Filigran
+    tone: external
+    nodes:
+      - {id: filigran, label: telemetry.filigran.io, icon: LogoFiligran, note: OTLP over HTTPS}
+edges:
+  - {from: platform, to: manager, label: counts and flags}
+  - {from: manager, to: logs, label: writes}
+  - {from: manager, to: filigran, label: sends}

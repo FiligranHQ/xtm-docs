@@ -1,0 +1,21 @@
+title: A control prevents or detects ATT&CK techniques, as strongly and as widely as you declare it
+lanes:
+  - label: You declare
+    tone: external
+    nodes:
+      - {id: strength, label: Strength, icon: Gauge, note: 'Not deployed, basic, intermediate, master'}
+      - {id: coverage, label: Coverage, icon: ShieldCheck, note: Share of the estate it protects}
+  - label: The catalogue
+    tone: product
+    nodes:
+      - {id: control, label: Control, icon: ShieldCheck, note: "EDR, MFA, backups..."}
+  - label: The attack
+    tone: external
+    nodes:
+      - {id: technique, label: ATT&CK technique, icon: Crosshair, note: On the attack path}
+      - {id: openaev, label: OpenAEV results, icon: LogoOpenAEV, note: How it held when tested}
+edges:
+  - {from: strength, to: control}
+  - {from: coverage, to: control}
+  - {from: control, to: technique, label: prevents or detects}
+  - {from: openaev, to: control, label: shows, style: dashed}

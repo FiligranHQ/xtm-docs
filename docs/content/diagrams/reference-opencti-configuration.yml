@@ -1,0 +1,21 @@
+title: The platform takes each key from its environment variable, else from production.json, else from default.json, else from the code
+lanes:
+  - label: You set
+    tone: external
+    nodes:
+      - {id: env, label: Environment variable, icon: Terminal, note: "APP__BASE_URL, in Docker"}
+      - {id: prod, label: config/production.json, icon: FileText, note: "Without containers, or the file CONF names"}
+  - label: The release ships
+    tone: store
+    nodes:
+      - {id: defaults, label: config/default.json, icon: FileText, note: Defaults of the release}
+      - {id: code, label: Code default, icon: Code2, note: Keys not in default.json}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenCTI, note: "Reads app:base_url"}
+edges:
+  - {from: env, to: platform, label: first}
+  - {from: prod, to: platform, label: then}
+  - {from: defaults, to: platform, label: then}
+  - {from: code, to: platform, label: last, style: dashed}

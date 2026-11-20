@@ -1,0 +1,24 @@
+title: The Velvet Harbor watcher reads OpenCTI with read-only tools, searches the security policies, and answers the CTI team
+lanes:
+  - label: Built by
+    tone: external
+    nodes:
+      - {id: sophie, label: Sophie Laurent, icon: Sparkles, note: Agent wizard}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: agent, label: Velvet Harbor watcher, icon: Bot, note: "Persona, guardrails, model"}
+      - {id: kb, label: Security policies, icon: BookOpen, note: Knowledge base, href: /xtm-one/build/knowledge-bases/}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Read tools only}
+  - label: Who uses it
+    tone: external
+    nodes:
+      - {id: cti, label: CTI team, icon: Users, note: Shared read only, href: /xtm-one/build/sharing/}
+edges:
+  - {from: sophie, to: agent, label: creates and tests}
+  - {from: agent, to: kb, label: searches}
+  - {from: agent, to: opencti, label: "search, get, list"}
+  - {from: cti, to: agent, label: chats}

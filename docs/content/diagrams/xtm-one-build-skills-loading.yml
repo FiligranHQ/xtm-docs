@@ -1,0 +1,26 @@
+title: An agent carries a catalog of its skills and loads one only when the task calls for it
+lanes:
+  - label: Sources
+    tone: external
+    nodes:
+      - {id: url, label: SKILL.md URL, icon: GitBranch, note: Refreshed daily}
+      - {id: paste, label: Pasted or package, icon: FileText, note: "Upload, .zip import"}
+  - label: Skill library
+    tone: core
+    nodes:
+      - {id: skill, label: Skill, icon: Lightbulb, note: "Instructions, resources", href: /xtm-one/build/skills/}
+  - label: Agent prompt
+    tone: product
+    nodes:
+      - {id: catalog, label: Catalog entry, icon: ListChecks, note: Name and description}
+      - {id: pinned, label: Pinned skill, icon: BookOpen, note: Always in full}
+  - label: In the run
+    tone: product
+    nodes:
+      - {id: load, label: Skill loaded, icon: Sparkles, note: When the task matches}
+edges:
+  - {from: url, to: skill, label: fetched}
+  - {from: paste, to: skill, label: created}
+  - {from: skill, to: catalog, label: attached}
+  - {from: skill, to: pinned, label: pinned, style: dashed}
+  - {from: catalog, to: load, label: load_skill}

@@ -1,0 +1,27 @@
+title: A custom domain points at the platform with a CNAME record, proves its owner with a TXT record, and gets its certificate from your edge once OpenAEV says it is verified
+lanes:
+  - label: Your DNS zone
+    tone: external
+    nodes:
+      - {id: cname, label: CNAME record, icon: ArrowRight, note: Hostname to the platform}
+      - {id: txt, label: TXT record, icon: KeyRound, note: _openaev-challenge token}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: verify, label: Verify domain, icon: ShieldCheck, note: Looks the token up}
+      - {id: check, label: Domain check, icon: ListChecks, note: "200 if verified, 404 if not"}
+      - {id: page, label: Landing page, icon: Laptop, note: Serve on domain}
+  - label: Your edge
+    tone: external
+    nodes:
+      - {id: edge, label: Reverse proxy, icon: Server, note: HTTPS for the hostname}
+  - label: Your people
+    tone: external
+    nodes:
+      - {id: person, label: Person's browser, icon: Users, note: Opens the link}
+edges:
+  - {from: txt, to: verify, label: read}
+  - {from: cname, to: edge, label: resolves to}
+  - {from: person, to: edge, label: https link}
+  - {from: edge, to: check, label: before a certificate}
+  - {from: edge, to: page, label: forwards}

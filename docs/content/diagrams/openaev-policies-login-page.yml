@@ -1,0 +1,18 @@
+title: The three login messages decide what the login page shows before anyone signs in
+lanes:
+  - label: Policies
+    tone: product
+    nodes:
+      - {id: message, label: Platform login message, icon: MessageSquare, note: Shown above the form}
+      - {id: consent, label: Platform consent message, icon: FileText, note: Hides the form until accepted}
+      - {id: confirm, label: Platform consent confirm text, icon: ClipboardCheck, note: Text of the checkbox}
+  - label: Login page
+    tone: external
+    nodes:
+      - {id: page, label: Login page, icon: LogIn, note: Same for every tenant}
+      - {id: form, label: Form and SSO buttons, icon: KeyRound, note: Once the box is checked}
+edges:
+  - {from: message, to: page, label: shows}
+  - {from: consent, to: page, label: shows}
+  - {from: confirm, to: page, label: labels the box}
+  - {from: page, to: form, label: unlocks}

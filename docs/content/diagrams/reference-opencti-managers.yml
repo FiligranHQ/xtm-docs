@@ -1,0 +1,26 @@
+title: Managers run in the background of the platform, some on every event of a stream and others on a schedule, each turned on by its enabled key
+lanes:
+  - label: Configuration
+    nodes:
+      - {id: config, label: enabled key, icon: Wrench, note: "Such as rule_engine:enabled"}
+  - label: Triggers
+    tone: store
+    nodes:
+      - {id: stream, label: Streams, icon: Activity, note: "Live, activity, notification"}
+      - {id: schedule, label: Schedule, icon: Clock, note: "Interval key, in milliseconds"}
+  - label: Managers
+    tone: product
+    nodes:
+      - {id: streamManagers, label: Stream managers, icon: Workflow, note: "Rules engine, history, playbooks"}
+      - {id: scheduledManagers, label: Scheduled managers, icon: Gauge, note: "Tasks, expiration, decay, ingestion"}
+  - label: Result
+    tone: product
+    nodes:
+      - {id: platform, label: Platform data, icon: LogoOpenCTI, note: "Inferences, history, scores, deletions"}
+edges:
+  - {from: config, to: streamManagers, label: turns on, style: dashed}
+  - {from: config, to: scheduledManagers, label: turns on, style: dashed}
+  - {from: stream, to: streamManagers, label: every event}
+  - {from: schedule, to: scheduledManagers, label: every interval}
+  - {from: streamManagers, to: platform, label: write}
+  - {from: scheduledManagers, to: platform, label: write}

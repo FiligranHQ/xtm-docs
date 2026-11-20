@@ -1,0 +1,21 @@
+title: The browser loads its map tiles from OpenCTI, which serves the custom file of its S3 bucket when an administrator uploaded one, else the file bundled in its image
+lanes:
+  - label: Browsers
+    tone: external
+    nodes:
+      - {id: browser, label: Browser, icon: Laptop, note: Renders vector tiles}
+      - {id: admin, label: Administrator, icon: Users, note: "Settings > Parameters > Map configuration"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "/maps/world.pmtiles"}
+  - label: Map files
+    tone: store
+    nodes:
+      - {id: custom, label: Custom file, icon: Boxes, note: In the S3 bucket of OpenCTI}
+      - {id: bundled, label: Bundled file, icon: Layers, note: In the image of OpenCTI}
+edges:
+  - {from: browser, to: opencti, label: range requests}
+  - {from: admin, to: opencti, label: upload}
+  - {from: opencti, to: custom, label: wins when present}
+  - {from: opencti, to: bundled, label: otherwise, style: dashed}

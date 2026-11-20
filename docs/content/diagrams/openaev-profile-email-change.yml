@@ -1,0 +1,22 @@
+title: A new email address applies only after you follow the link OpenAEV sends to your current address, within 10 minutes
+lanes:
+  - label: Your profile
+    tone: product
+    nodes:
+      - {id: request, label: Email section, icon: KeyRound, note: Current password and new address}
+  - label: Your current mailbox
+    tone: external
+    nodes:
+      - {id: link, label: Confirmation link, icon: MessageSquare, note: Valid 10 minutes}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: applied, label: New address applied, icon: Check, note: Other sessions signed out}
+  - label: Your new mailbox
+    tone: external
+    nodes:
+      - {id: notice, label: Confirmation, icon: Info, note: The change is done}
+edges:
+  - {from: request, to: link, label: sends}
+  - {from: link, to: applied, label: followed}
+  - {from: applied, to: notice, label: sends}

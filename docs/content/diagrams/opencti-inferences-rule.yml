@@ -1,0 +1,19 @@
+title: An active rule turns two existing relationships into a new, inferred one
+lanes:
+  - label: Your knowledge
+    tone: store
+    nodes:
+      - {id: fact1, label: Intrusion set targets France, icon: Crosshair, note: Asserted by a source}
+      - {id: fact2, label: France located at Europe, icon: Network, note: Asserted by a source}
+  - label: Rules engine
+    tone: product
+    nodes:
+      - {id: rule, label: Targeting propagation, icon: Workflow, note: "Active rule: IF ... THEN ..."}
+  - label: Inferred knowledge
+    tone: product
+    nodes:
+      - {id: inferred, label: Intrusion set targets Europe, icon: Sparkles, note: "Explained by the rule, removed with its facts"}
+edges:
+  - {from: fact1, to: rule, label: condition 1}
+  - {from: fact2, to: rule, label: condition 2}
+  - {from: rule, to: inferred, label: creates}

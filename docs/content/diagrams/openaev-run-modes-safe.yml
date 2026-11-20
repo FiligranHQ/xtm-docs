@@ -1,0 +1,21 @@
+title: In safe mode, the interface and the API keep answering while every background job stays stopped
+lanes:
+  - label: Configuration
+    tone: external
+    nodes:
+      - {id: key, label: openaev.run-mode, icon: Wrench, note: "normal (default) or safe"}
+  - label: Still running
+    tone: product
+    nodes:
+      - {id: ui, label: Interface and API, icon: LogoOpenAEV, note: With a safe mode banner}
+  - label: Stopped
+    tone: store
+    nodes:
+      - {id: exec, label: Inject execution, icon: PlayCircle, note: "Simulations, atomic tests"}
+      - {id: sync, label: Integrations and indexing, icon: Layers, note: "Search, coverage, XTM Composer"}
+      - {id: purge, label: Retention and purges, icon: Clock, note: "Tenants, tokens, traces"}
+edges:
+  - {from: key, to: ui, label: safe}
+  - {from: key, to: exec, label: not started}
+  - {from: key, to: sync, label: not started}
+  - {from: key, to: purge, label: not started}

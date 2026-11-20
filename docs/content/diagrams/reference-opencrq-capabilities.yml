@@ -1,0 +1,21 @@
+title: A user gets the capabilities of the roles of their groups, in a tenant or on the platform
+lanes:
+  - label: Who
+    tone: external
+    nodes:
+      - {id: user, label: User or service account, icon: Users, note: Member of groups}
+  - label: Through
+    tone: product
+    nodes:
+      - {id: group, label: Group, icon: Users, note: Holds roles}
+      - {id: role, label: Role, icon: KeyRound, note: Grants capabilities}
+  - label: Grants
+    tone: store
+    nodes:
+      - {id: tenant, label: Tenant capability, icon: ShieldCheck, note: In its tenant only}
+      - {id: platform, label: Platform capability, icon: ShieldCheck, note: On the whole platform}
+edges:
+  - {from: user, to: group, label: belongs to}
+  - {from: group, to: role, label: holds}
+  - {from: role, to: tenant, label: a tenant role}
+  - {from: role, to: platform, label: a platform role}

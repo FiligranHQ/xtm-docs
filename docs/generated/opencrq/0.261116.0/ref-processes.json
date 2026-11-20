@@ -1,0 +1,352 @@
+{
+  "name": "processes",
+  "version": "0.261116.0",
+  "source": "OpenCRQ-Platform/opencrq@a185f01 (back/src: index-http.ts, index-worker.ts, index.ts, features/)",
+  "intro": "What OpenCRQ runs in the background: the kinds of job its worker runs (listed in **Settings > Jobs > Kinds**, each run in **Runs**), and the engines its processes start. A job runs again when the data its last run read changes, every day at `recompute.daily_at` (03:00 UTC by default), on a connector's schedule, or when someone or something asks for it. In the `split` profile the HTTP process serves the interface and the API and the worker runs the jobs; the `monolith` profile runs both in one process.",
+  "filter": "Filter jobs and engines",
+  "sections": [
+    {
+      "title": "Job kinds",
+      "columns": [
+        "Job kind",
+        "What it does",
+        "When it runs",
+        "Runs on"
+      ],
+      "rows": [
+        {
+          "key": "asset-criticality-lift-recompute",
+          "cells": [
+            "`asset-criticality-lift-recompute`",
+            "Raises the criticality of a device from the identities assigned to it: a device used by a very high criticality account is lifted to high, one used by a high criticality account to medium. It reruns when a connector sync or a person changes an identity's criticality or a device's assigned users.",
+            "When the data it read changes",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "attack-outcome-mixture-recompute",
+          "cells": [
+            "`attack-outcome-mixture-recompute`",
+            "Recomputes, for each risk scope and attack outcome that has a risk scenario, the mixture of attackers that weighs the outcome's ATT&CK techniques: the threats likely to lead to the outcome, weighed by their targeting and by the activity half-lives of the threat relevance settings. It reruns when the threats, the scopes or the settings change, and the daily run lets the weights age. See [Set how OpenCRQ weighs threats, controls and assets](/opencrq/configure/quantification-engine/).",
+            "When the data it read changes, every day at `recompute.daily_at`",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "capability-derivation",
+          "cells": [
+            "`capability-derivation`",
+            "Recomputes the strength and coverage of every control from the Drata frameworks and the published compliance assessments, keeping any axis a person set by hand, then the control's test results on each technique from the OpenAEV simulation results. When a control moves enough to change its price, it books the recompute of that control's levers in the risk scenarios that depend on it. See [control catalogue](/reference/opencrq/controls/).",
+            "When the data it read changes, every day at `recompute.daily_at`",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "crq-levers-booking",
+          "cells": [
+            "`crq-levers-booking`",
+            "Finds the risk scenarios a control's change of strength, coverage or OpenAEV test results affects, and asks a CRQ simulation of each to recompute that control's levers. It is booked by the control derivation, after a sync moved a control.",
+            "When asked",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "crq-price-recompute",
+          "cells": [
+            "`crq-price-recompute`",
+            "Keeps the annualized loss of every risk scenario current: whenever something a scenario's price depends on changes (findings, supporting assets, controls, threats, loss estimates), it reprices the scenarios whose inputs actually moved, without recomputing their what-ifs. The daily run catches what changes with time alone, such as threat activity and expiring OpenAEV evidence. See [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).",
+            "When the data it read changes, every day at `recompute.daily_at`; one at a time per tenant, with `crq-simulation`",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "crq-simulation",
+          "cells": [
+            "`crq-simulation`",
+            "Prices one risk scenario: the annualized loss, the paths an attack takes, and the what-ifs asked for (control levers, techniques, CVEs, treatment plans), together with the open budget reviews of its risk scope. It runs when someone clicks Run or recomputes a figure, evaluates a treatment plan or a budget review, and after a change of a control's posture or of the scenario's loss estimates. See [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).",
+            "When asked; one at a time per tenant",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "cve-cvss-sync",
+          "cells": [
+            "`cve-cvss-sync`",
+            "Imports the NIST National Vulnerability Database: each CVE's CVSS scores and vectors, description and weaknesses, and, for the CVEs your findings carry, the references and the affected and fixed versions. The full catalogue takes several runs to walk, each resuming where the last stopped, and goes faster with an NVD API key. See [configuration](/reference/opencrq/configuration/).",
+            "On its connector's schedule (default: every day at 06:00 UTC); one at a time per tenant",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "cve-epss-sync",
+          "cells": [
+            "`cve-epss-sync`",
+            "Imports FIRST's EPSS score of every CVE, the probability that it is exploited in the next 30 days, which the finding scores read.",
+            "On its connector's schedule (default: every day at 06:00 UTC); one at a time per tenant",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "cve-kev-sync",
+          "cells": [
+            "`cve-kev-sync`",
+            "Imports CISA's Known Exploited Vulnerabilities catalogue, flagging each listed CVE with the date it was added, the required action and due date, and whether it is known to be used in ransomware campaigns.",
+            "On its connector's schedule (default: every day at 06:00 UTC); one at a time per tenant",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "default-threats-sync",
+          "cells": [
+            "`default-threats-sync`",
+            "Loads the OpenCRQ Default Threats dataset, threat groups and campaigns derived from MITRE ATT&CK, into the tenant when its file changed, and retracts the default threats the file no longer holds. It is on by default in every tenant and runs every day at 06:00 UTC by default; switching the connector off removes its threats. See [configuration](/reference/opencrq/configuration/).",
+            "On its connector's schedule (default: every day at 06:00 UTC); one at a time per tenant",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "drata-sync",
+          "cells": [
+            "`drata-sync`",
+            "Imports from Drata the compliance frameworks in use, with each requirement's scope and readiness, and the Drata controls, replacing the previous import. The control derivation then turns them into the strength and coverage of OpenCRQ's controls. See [configuration](/reference/opencrq/configuration/).",
+            "On its connector's schedule (default: every day at 06:00 UTC); one at a time per tenant",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "financial-estimates-recompute",
+          "cells": [
+            "`financial-estimates-recompute`",
+            "Derives the loss estimates of each risk scenario from its risk scope's financial profile questionnaire, keeping any amount entered by hand, and asks a new CRQ simulation of every scenario whose amounts changed. It reruns when the questionnaire, the risk scope or the scenario changes, for a newly created scenario, and every hour to fill in estimates that are still missing.",
+            "When the data it read changes",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "finding-score-recompute",
+          "cells": [
+            "`finding-score-recompute`",
+            "Scores every finding from its CVE's exploitability (CVSS, EPSS, CISA listing, the threats that cite it) and the exposure and criticality of its supporting asset, then the posture of each supporting asset and the daily count of findings by severity. It also refreshes what the CRQ reads of the findings, and keeps a year of score history by default (recompute.score_history_retention_days). See [configuration](/reference/opencrq/configuration/).",
+            "When the data it read changes, every day at `recompute.daily_at`",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "jobs-retention",
+          "cells": [
+            "`jobs-retention`",
+            "Deletes the finished job runs older than jobs.run_retention_days (30 days by default), with their errors and logs. See [configuration](/reference/opencrq/configuration/).",
+            "Every day at `recompute.daily_at`",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "microsoft-graph-sync",
+          "cells": [
+            "`microsoft-graph-sync`",
+            "Imports from Microsoft Defender, through Microsoft Graph, every device as a supporting asset with its vulnerabilities as findings, closing the findings Defender no longer reports, and the Entra ID identities with their privileges and the devices they use. It rates criticality from what Defender knows (domain controllers, certificate servers) and from directory roles. See [configuration](/reference/opencrq/configuration/).",
+            "On its connector's schedule (default: every 6 hours); one at a time per tenant",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "noop",
+          "cells": [
+            "`noop`",
+            "A test job that does nothing, used to check the job runtime; it is not listed under Settings > Jobs.",
+            "When asked",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "openaev-findings-sync",
+          "cells": [
+            "`openaev-findings-sync`",
+            "Imports from OpenAEV its asset inventory as supporting assets, with their tags, the prevention and detection results of its finished simulations for each asset and technique, and the CVEs it found as findings; it retires what OpenAEV no longer reports. Where those results fall short of a control's declared strength and coverage, they lower the efficacy the engine prices it at. See [configuration](/reference/opencrq/configuration/).",
+            "On its connector's schedule (default: every hour); one at a time per tenant",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "opencti-mirror-rebuild",
+          "cells": [
+            "`opencti-mirror-rebuild`",
+            "Turns what the OpenCTI live stream delivered into OpenCRQ's threats, with their techniques, targets and attributions: it rebuilds each threat the stream created, changed, merged or renamed, and removes the ones deleted in OpenCTI. It runs after the stream writes, in bounded batches until the backlog is drained.",
+            "When the data it read changes",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "primary-asset-reach-recompute",
+          "cells": [
+            "`primary-asset-reach-recompute`",
+            "Lists, for each primary asset, every supporting asset it depends on, directly or through up to five levels of dependencies between supporting assets, which dashboards and the findings of a risk scenario read. It reruns when a link, a primary asset or its risk scope changes.",
+            "When the data it read changes",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "proven-posture-record",
+          "cells": [
+            "`proven-posture-record`",
+            "Records each day, for every control and for the tenant and each risk scope, the prevention and detection success rates and the proof coverage that OpenAEV's results establish, which the control's success rate history shows. It runs only when the OpenAEV connector is configured, replays the past of a new risk scope from stored results, and keeps a year of history.",
+            "When the data it read changes, every day at `recompute.daily_at`",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "tef-recompute",
+          "cells": [
+            "`tef-recompute`",
+            "Recomputes the threat event frequency of a risk scenario in automatic mode from the catalogue, for its risk scope's sector, country, revenue band and headcount. It is booked for each such scenario when one of these changes, including through the financial profile questionnaire. See [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).",
+            "When asked",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "threat-activity-recompute",
+          "cells": [
+            "`threat-activity-recompute`",
+            "Recomputes each threat's last activity date, activity score and status (active, declining, dormant or unknown) from the dates its intelligence carries. It reruns after threat intelligence is imported, and the daily run lets the statuses age with time.",
+            "When the data it read changes, every day at `recompute.daily_at`",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "threat-bundle-analysis",
+          "cells": [
+            "`threat-bundle-analysis`",
+            "Reads a STIX bundle uploaded on the Threats page or by a connector's service account, and creates or updates one threat per intrusion set, threat actor or campaign it contains, with its techniques, targets and declared intent, and gives it the probability of leading to each attack outcome that OpenCRQ's outcome model reads from its intelligence.",
+            "When asked",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "threat-bundle-outcome-rescore",
+          "cells": [
+            "`threat-bundle-outcome-rescore`",
+            "Reads again the uploaded STIX bundles that hold threats scored under an older outcome model, and rescores those threats from the latest upload that carries each one. It is booked by threat-outcome-counter-recompute.",
+            "When asked",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "threat-list-projection-recompute",
+          "cells": [
+            "`threat-list-projection-recompute`",
+            "Refreshes what the Threats list shows of each threat: its score against each attack outcome and its counts. It reruns after threat intelligence is imported, and for every threat when the source confidence gate or the attack outcome catalogue changes.",
+            "When the data it read changes",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "threat-outcome-counter-recompute",
+          "cells": [
+            "`threat-outcome-counter-recompute`",
+            "Rescores the attack outcome probabilities of every threat when a new release brings a new version of OpenCRQ's outcome model: it sends each threat back to its source, the OpenCTI mirror for a streamed threat and the threat-bundle-outcome-rescore job for an uploaded one. An imported threat is scored as it arrives.",
+            "When the data it read changes, every day at `recompute.daily_at`",
+            "Worker (or the monolith)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Engines",
+      "columns": [
+        "Engine",
+        "What it does",
+        "Runs on"
+      ],
+      "rows": [
+        {
+          "key": "db",
+          "cells": [
+            "`db`",
+            "Connects to PostgreSQL and applies the database migrations when the platform starts.",
+            "HTTP and worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "edition",
+          "cells": [
+            "`edition`",
+            "Applies the Enterprise Edition entitlement that XTM One's license grants in every process, serving Community Edition until that answer arrives (at most five seconds at startup) or after the license lapses.",
+            "HTTP and worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "filigran-telemetry",
+          "cells": [
+            "`filigran-telemetry`",
+            "Sends Filigran anonymous, aggregate usage counts, with no names, content or per-tenant detail.",
+            "HTTP and worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "financial-estimates-recompute",
+          "cells": [
+            "`financial-estimates-recompute`",
+            "Every hour and at startup, books for each tenant the loss estimate recompute that fills in the estimates still missing, which also covers an upgrade and any recompute missed; it never overwrites an estimate already derived.",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "http-server",
+          "cells": [
+            "`http-server`",
+            "Serves the web interface and the API.",
+            "HTTP (or the monolith)"
+          ]
+        },
+        {
+          "key": "job-runtime",
+          "cells": [
+            "`job-runtime`",
+            "Runs the jobs on the queue: it claims them up to jobs.max_concurrent at a time, enforces their time limits and retries, and never runs two runs of a serialized job for one tenant at once. See [configuration](/reference/opencrq/configuration/).",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "job-scheduler",
+          "cells": [
+            "`job-scheduler`",
+            "Checks every minute, for each tenant, which connector syncs are due on their schedule (their default one until an administrator saves another) and which daily jobs are due at recompute.daily_at, spread over the following hour across tenants, and books them, retrying a failed day with growing delays. See [configuration](/reference/opencrq/configuration/).",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "opencti",
+          "cells": [
+            "`opencti`",
+            "Keeps one connection per tenant to its OpenCTI live stream, recording every threat, relationship and identity the stream sends and resuming from its last position after a restart; the mirror rebuild job then turns them into threats.",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "outcome-counter-model",
+          "cells": [
+            "`outcome-counter-model`",
+            "Checks at startup, in the processes that analyze threat intelligence, that the outcome model is in place: the model that gives each threat its probability for each attack outcome (about 2 MB, loaded on first use). A build that left it out fails here, before any threat is analyzed.",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "recompute-dispatcher",
+          "cells": [
+            "`recompute-dispatcher`",
+            "Watches every change made to the data and books the observed jobs whose last run read what changed, after a short pause that groups a burst of changes (recompute.debounce_* settings). This is what keeps scores, threats and prices current without a manual recompute. See [configuration](/reference/opencrq/configuration/).",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "xtm-one",
+          "cells": [
+            "`xtm-one`",
+            "Registers OpenCRQ with XTM One at startup and every five minutes, which brings back the license that decides the Enterprise Edition and the AI agents behind Ask Ariane.",
+            "HTTP (or the monolith)"
+          ]
+        }
+      ]
+    }
+  ]
+}

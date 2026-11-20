@@ -1,0 +1,24 @@
+title: An upgrade of XTM One backs up its data, pulls the new images, lets the platform migrate its database at start, then checks it before people sign in
+lanes:
+  - label: Before
+    tone: external
+    nodes:
+      - {id: notes, label: Release notes, icon: FileText, note: "Renamed variables, notes"}
+      - {id: backup, label: Back up, icon: History, note: "xtm_one database, bucket, .env"}
+  - label: Upgrade
+    tone: core
+    nodes:
+      - {id: pull, label: New images, icon: Rocket, note: "Platform and worker, same version"}
+      - {id: migrate, label: Migrations, icon: Layers, note: "Run by the platform at start"}
+  - label: After
+    tone: product
+    nodes:
+      - {id: ready, label: Ready, icon: Check, note: "/api/health/ready"}
+      - {id: check, label: Checks, icon: ClipboardCheck, note: "Platforms, security audit"}
+edges:
+  - {from: notes, to: backup, label: then}
+  - {from: backup, to: pull, label: then}
+  - {from: pull, to: migrate, label: docker compose up -d}
+  - {from: migrate, to: ready, label: worker waits}
+  - {from: ready, to: check, label: then}
+  - {from: check, to: backup, label: roll back by restoring, style: dashed}

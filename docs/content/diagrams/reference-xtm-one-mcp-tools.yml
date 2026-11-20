@@ -1,0 +1,25 @@
+title: An assistant calls a tool of an MCP server of XTM One, and the product runs it with the rights of the key's user
+lanes:
+  - label: Client
+    tone: external
+    nodes:
+      - {id: assistant, label: Assistant or agent, icon: Bot, note: "API key or OAuth token"}
+  - label: XTM One MCP servers
+    tone: core
+    nodes:
+      - {id: cti, label: /mcp/opencti, icon: LogoXTMOne, note: OpenCTI tools}
+      - {id: aev, label: /mcp/openaev, icon: LogoXTMOne, note: OpenAEV tools}
+      - {id: crq, label: /mcp/opencrq, icon: LogoXTMOne, note: OpenCRQ tools}
+  - label: Products
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: As the user}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: As the user}
+      - {id: opencrq, label: OpenCRQ, icon: LogoOpenCRQ, note: As the user}
+edges:
+  - {from: assistant, to: cti, label: tools/call}
+  - {from: assistant, to: aev}
+  - {from: assistant, to: crq}
+  - {from: cti, to: opencti, label: token signed for the user}
+  - {from: aev, to: openaev}
+  - {from: crq, to: opencrq}

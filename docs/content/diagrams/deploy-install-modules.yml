@@ -1,0 +1,25 @@
+title: A deployment that ran only some modules drops the lines that chose them from .env, pulls and runs up, and the whole stack starts beside the data already in the shared volumes
+lanes:
+  - label: You
+    tone: external
+    nodes:
+      - {id: env, label: Clean .env, icon: FileText, note: "COMPOSE_PROFILES and Composer switches out"}
+  - label: Docker Compose
+    tone: product
+    nodes:
+      - {id: up, label: docker compose up -d, icon: Terminal, note: After docker compose pull}
+  - label: The stack
+    tone: product
+    nodes:
+      - {id: kept, label: Modules that ran, icon: Boxes, note: Recreated when their configuration changed}
+      - {id: new, label: Modules that did not run, icon: Boxes, note: "Created: OpenCTI, OpenAEV, XTM Composer..."}
+  - label: Data
+    tone: store
+    nodes:
+      - {id: volumes, label: Shared volumes, icon: Layers, note: "esdata, pgsqlshareddata, s3data and others"}
+edges:
+  - {from: env, to: up, label: after git pull}
+  - {from: up, to: kept, label: keeps or recreates}
+  - {from: up, to: new, label: starts}
+  - {from: kept, to: volumes, label: data stays, style: dashed}
+  - {from: new, to: volumes, label: creates its own, style: dashed}

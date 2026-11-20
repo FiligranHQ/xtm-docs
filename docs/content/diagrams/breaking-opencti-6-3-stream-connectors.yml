@@ -1,0 +1,23 @@
+title: From OpenCTI 6.3, each two-way stream connector is split into an external import connector for the incidents and a stream connector for the data OpenCTI sends
+lanes:
+  - label: Security tool
+    tone: external
+    nodes:
+      - {id: tool, label: Security tool, icon: ShieldCheck, note: "Tanium, HarfangLab, Microsoft Sentinel"}
+  - label: Connectors
+    tone: core
+    nodes:
+      - {id: old, label: Two-way connector, icon: Puzzle, note: "tanium, harfang-lab, sentinel: removed in 6.6"}
+      - {id: incidents, label: External import connector, icon: Puzzle, note: "tanium-incidents, harfang-lab-incidents, sentinel-incidents"}
+      - {id: intel, label: Stream connector, icon: Puzzle, note: "tanium-intel, harfang-lab-intel, sentinel-intel"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Platform}
+edges:
+  - {from: tool, to: old, label: both ways, style: dashed, both: true}
+  - {from: old, to: opencti, label: both ways, style: dashed, both: true}
+  - {from: tool, to: incidents, label: incidents}
+  - {from: incidents, to: opencti, label: imports}
+  - {from: opencti, to: intel, label: stream}
+  - {from: intel, to: tool, label: sends data}

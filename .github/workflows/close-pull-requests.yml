@@ -1,0 +1,23 @@
+# This repository is a one-way mirror of the documentation's sources: a pull request here can never be merged. It is
+# closed at once, with a comment that says where a change goes instead. Nothing of the pull request is checked out
+# or run.
+name: Close pull requests
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close it, and say why
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh pr close "$NUMBER" -R "$REPO" --comment "Thank you! This repository is a one-way mirror of the XTM documentation's sources, so a pull request here cannot be merged. Please [open an issue](https://github.com/$REPO/issues/new/choose) with what should change: the documentation team writes it, has it reviewed and publishes it. See [CONTRIBUTING.md](https://github.com/$REPO/blob/main/CONTRIBUTING.md)."

@@ -1,0 +1,23 @@
+title: A filter group combines its filters and its nested groups with one mode, and each nested group has a mode of its own
+lanes:
+  - label: Filter group
+    tone: product
+    nodes:
+      - {id: root, label: "mode: and", icon: ListChecks, note: Every member must match}
+  - label: Members
+    tone: core
+    nodes:
+      - {id: type, label: entity_type eq Report, icon: Search, note: Filter}
+      - {id: author, label: createdBy eq Example CERT, icon: Search, note: Filter}
+      - {id: nested, label: "mode: or", icon: ListChecks, note: Nested group}
+  - label: Nested members
+    tone: core
+    nodes:
+      - {id: confidence, label: confidence gt 80, icon: Search, note: Filter}
+      - {id: marking, label: objectMarking nil, icon: Search, note: Filter}
+edges:
+  - {from: root, to: type, label: filters}
+  - {from: root, to: author, label: filters}
+  - {from: root, to: nested, label: filterGroups}
+  - {from: nested, to: confidence, label: filters}
+  - {from: nested, to: marking, label: filters}

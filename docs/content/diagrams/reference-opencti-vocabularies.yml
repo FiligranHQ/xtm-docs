@@ -1,0 +1,20 @@
+title: A vocabulary category holds the built-in values and yours, and the fields that use it offer them in their drop-downs
+lanes:
+  - label: Category
+    tone: product
+    nodes:
+      - {id: category, label: report_types_ov, icon: ListChecks, note: "Settings > Taxonomies > Vocabularies"}
+  - label: Values
+    tone: store
+    nodes:
+      - {id: builtin, label: Built-in values, icon: BookOpen, note: "threat-report, internal-report"}
+      - {id: yours, label: Your values, icon: Wrench, note: "With aliases and an order"}
+  - label: Used in
+    tone: product
+    nodes:
+      - {id: field, label: Report types field, icon: FileText, note: Of every report}
+edges:
+  - {from: category, to: builtin, label: holds}
+  - {from: category, to: yours, label: holds}
+  - {from: builtin, to: field, label: offered}
+  - {from: yours, to: field, label: offered}
