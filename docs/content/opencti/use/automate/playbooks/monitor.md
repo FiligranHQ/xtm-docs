@@ -61,16 +61,20 @@ The panel keeps the last 20 runs of the playbook, for up to 90 days.
 | The playbook never runs | It is stopped, or the entry point filters match nothing | Check that the header says **Playbook is running**, then loosen the filters |
 | The playbook runs again and again on the same objects | Two playbooks change data the other listens to | Narrow the filters of one of them, for example on a label the other does not set. A playbook never reacts to its own changes |
 
-:::example[Find why hotel reports keep the NEW status]
+::::example[Find why hotel reports keep the NEW status]
 The CTI team receives an alert for every new `hotel-sector` report from the playbook `Triage new hospitality reports`, but the reports keep the `NEW` status and have no assignee.
 
 1. Open the playbook and click **Open last execution traces**. Pick the run of the last report, *Night-time exports from a hotel booking platform*.
 2. The run lists three steps, all green: `Listen to new reports`, `Mark as in progress` and `Notify the CTI team`. Click `Mark as in progress`: its **Raw data** holds the report with the `IN_PROGRESS` status and Ana Duval as assignee, so the change was made.
 3. No **Send for ingestion** step follows: the change was never written. On the canvas, `Mark as in progress` leads only to `Notify the CTI team`.
-4. Click **Add a sibling node** on `Notify the CTI team` and choose **Send for ingestion**.
+4. Use **Add a sibling node** on `Notify the CTI team` and choose **Send for ingestion**.
+
+   :::only{opencti=">=7.261119"}
+   The playbook is running, so it opened in view only: turn on **Edit mode** in its header first. **Add a sibling node** is in the menu of the step, behind its three dots.
+   :::
 
 The next report shows four steps in its run, and opens with the `IN_PROGRESS` status and Ana Duval as assignee.
-:::
+::::
 
 To see the full bundle on the server side, an administrator can add a temporary **Log data in standard output** step; it writes the bundle to the platform logs at the **Log level** you choose.
 

@@ -124,6 +124,10 @@ The CTI team confirms that the domain still serves the fake booking page. Click 
 
 An indicator under a decay exclusion rule shows its **Lifecycle** button in a warning color. The dialog names the rule, with **View rule** to open it.
 
+:::only{opencti=">=7.261119"}
+An indicator under a decay exclusion rule keeps its score, and has no end date unless the source or the analyst gives a **Valid until** at creation. Without one, its **Valid until** shows `-`, also when a connector sends the field empty.
+:::
+
 ## What's next
 
 - [Age indicators with decay rules](/opencti/configure/decay/), to tune lifetimes and reaction points to your detection thresholds.

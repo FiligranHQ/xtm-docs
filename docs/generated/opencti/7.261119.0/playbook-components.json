@@ -1,7 +1,7 @@
 {
   "product": "opencti",
-  "version": "7.261117.0",
-  "source": "OpenCTI-Platform/opencti@1b89a14",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9",
   "categories": {
     "start_playbook": "Entry points",
     "transform_and_enrich": "Transform and enrich",
@@ -446,7 +446,8 @@
         "Add appends values, replace overwrites the whole set, remove deletes only the listed values.",
         "When an enrichment connector follows this step, its changes and yours are both kept in the final write.",
         "From 7.261109, the Field list also offers the custom fields of the platform, by their label. Replace and remove work on every custom field; add only on a multiple selection list, option by option.",
-        "From 7.261117, the Field list also offers Report types, with add, replace and remove. Its values come from the report types vocabulary, and only reports in scope are changed."
+        "From 7.261117, the Field list also offers Report types, with add, replace and remove. Its values come from the report types vocabulary, and only reports in scope are changed.",
+        "From 7.261119, replacing the Status asks for an Entity type first, then lists only the statuses of that type's workflow. The step sets the status on the elements of that type and leaves the other types untouched. A Status action saved before 7.261119 has no entity type and still applies to every element in scope."
       ],
       "requires": [],
       "see_also": [],
@@ -670,7 +671,8 @@
       "use_when": "you distribute intelligence to member organizations automatically.",
       "notes": [
         "Your platform needs a main organization, set in Settings > Security > Policies.",
-        "The component reads the database before the ingestion step. An element created earlier in the same playbook does not exist yet, so the step fails. Share it from a second playbook."
+        "The component reads the database before the ingestion step. An element created earlier in the same playbook does not exist yet, so the step fails. Share it from a second playbook.",
+        "From 7.261119, an organization that no longer exists on the platform (deleted since, or named by a playbook imported from another platform) shows as \"<name> - deleted\" in Target organizations, with the message \"A selected item no longer exists: remove it and pick another\". Replace it to set the step again."
       ],
       "requires": [],
       "see_also": [],
@@ -725,7 +727,8 @@
       "use_when": "an element must no longer be visible to an organization.",
       "notes": [
         "Place unsharing before any sharing step, or in its own playbook, so the two do not conflict.",
-        "Like sharing, it reads the database before ingestion and fails on elements created in the same playbook."
+        "Like sharing, it reads the database before ingestion and fails on elements created in the same playbook.",
+        "From 7.261119, an organization that no longer exists on the platform shows as \"<name> - deleted\" in Target organizations, as for sharing. Replace it to set the step again."
       ],
       "requires": [],
       "see_also": [],

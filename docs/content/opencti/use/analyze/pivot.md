@@ -50,6 +50,10 @@ A counter on a node says how many of its relationships are not drawn yet. The nu
 
    ::screenshot{id=opencti-pivot-expand alt="The expansion dialog listing target entity types and relationship types with their counts, and the Expand button."}
 
+   :::only{opencti=">=7.261119"}
+   **Reset filters**, on by default, clears the filters of the graph toolbar once the expansion is done, so that no filter hides what it brought in. Turn it off to keep your filters. The **Enrichment Results** dialog of an enrichment has the same switch.
+   :::
+
 3. Repeat on the new entities that look relevant. Click an entity to read its details in the side panel without leaving the graph.
 
 :::
@@ -95,6 +99,43 @@ The graph gains a second address the domain resolves to, `203.0.113.82`, beside 
 :::
 
 ::screenshot{id=opencti-pivot-enrichment-added alt="The graph of the investigation Velvet Harbor pivot after Add all to graph, in its hierarchical layout: booking-velvetharbor.example now links to 203.0.113.82 and 203.0.113.10, Harbor Stealer, Velvet Harbor and Operation Night Desk, under the domain's indicator, VirusTotal's report and notes, and VirusTotal's external references."}
+::::
+
+::::only{opencti=">=7.261119"}
+## See the techniques on the ATT&CK matrix
+
+Once the graph holds attack patterns, the **Matrix view** places them on the MITRE ATT&CK matrix, and its heat map shows which techniques come back most often among the entities you investigate. Use it to tell your detection team which techniques to hunt for first.
+
+The **Graph view** and **Matrix view** buttons sit in the page header, left of **Update**. They show only when your role has **Access knowledge**: without it, the investigation stays a graph.
+
+:::steps
+
+1. Click **Matrix view**. The matrix opens on the `mitre-attack` kill chain when the platform has it; **Kill chain :** picks another one. The techniques of the investigation are highlighted, labeled with their ATT&CK ID, such as `T1059.001 - PowerShell`.
+2. Click **Display only used techniques** to hide the techniques that are not in the investigation. Click it again, now **Display the whole matrix**, to bring them back.
+3. Click **Displays heat map of attack pattern use**. Each technique is colored by the number of entities of the investigation that use it, from yellow to red, under the legend **Technique usage (low → high)**. A technique whose sub-techniques are used, but not itself, gets a colored border only.
+4. Hover a technique to read its **Linked entities**, the entities of the investigation that count for it.
+5. To see what your defenses should catch, pick your security platforms in **Compare with my security posture**, as on a threat's matrix (see [Match threats with your security platforms](/opencti/use/explore/entities/#match-threats-with-your-security-platforms)).
+
+:::
+
+::screenshot{id=opencti-pivot-matrix alt="The Matrix view of the investigation Velvet Harbor techniques, with only used techniques shown and the heat map on: PowerShell and Web Protocols in red, used by two entities each, the other techniques in yellow, under the legend Technique usage from 1 to 2."}
+
+An entity counts for a technique when the investigation also holds the relationship between them: a **uses** relationship in either direction, an indicator that **indicates** the technique, or a container that contains it. Each entity counts once, and the colors scale to the most used technique of the selected kill chain. The heat map stays off until at least one technique has such an entity.
+
+The matrix reads the whole investigation: the filters of the graph toolbar do not apply, and the matrix says **Graph filters don't apply to the matrix** while some are on. An attack pattern that has no phase in the selected kill chain is not drawn, and a line above the matrix counts it. With no attack pattern in the investigation, the matrix says **Add attack patterns to the graph view to visualise them here**: expand a threat or a malware with **Attack pattern** as target type, then come back. Your choices in the matrix toolbar last until you leave the investigation.
+
+In **Matrix view**, **Export to image** and **Export to PDF** in the page header save the matrix, in a file named after the investigation followed by `Tactics matrix`. They require **Can use web interface export functions (PDF, PNG, etc.)**.
+
+:::example[Tell the SOC which Velvet Harbor techniques to hunt first]
+Your investigation `Velvet Harbor techniques` holds the intrusion set **Velvet Harbor**, its malware Velvet Loader and Harbor Stealer, and the seven techniques they use. Before the weekly SOC briefing, you want the techniques that come back most.
+
+1. Open the investigation and click **Matrix view**. The `mitre-attack` kill chain shows, with the seven techniques highlighted.
+2. Click **Display only used techniques**, then **Displays heat map of attack pattern use**. The legend goes from 1 to 2.
+3. Hover `T1059.001 - PowerShell`: **Linked entities (2)** lists Velvet Harbor and Velvet Loader. `T1071.001 - Web Protocols` is used by Velvet Harbor and Harbor Stealer.
+4. Click **Export to image** in the page header, then **Dark (with background)**.
+
+The image `Velvet Harbor techniques - Tactics matrix` goes into the briefing: PowerShell and web traffic to the command and control servers come first in the hunt, ahead of the phishing techniques only Velvet Harbor uses.
+:::
 ::::
 
 ## Capitalize on the investigation

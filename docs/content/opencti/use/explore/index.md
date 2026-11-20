@@ -141,12 +141,23 @@ For an entity, **Knowledge** lists everything linked to it, directly or through 
 
 The **Knowledge** of a report, a grouping or a case has views you switch with the icons at the top right:
 
+:::only{opencti=">=7.261119"}
+| View | Use it to | Containers |
+| --- | --- | --- |
+| **Graph view** | See and edit the objects and relationships: add an entity to the container, create relationships and sightings, filter by type or time range | All |
+| **TimeLine view** | Follow an attack or a campaign in time, when the container dates its knowledge | Reports and cases, not groupings |
+| **Correlation view** | Find the other containers that share its indicators and observables, or with **Show all correlated entities** any of its objects, such as a malware or an intrusion set | All |
+| **Matrix view** | See the techniques of the container on the MITRE ATT&CK matrix, with the options of the [attack patterns](#attack-patterns) of a threat | All |
+:::
+
+:::only{opencti="<7.261119"}
 | View | Use it to | Containers |
 | --- | --- | --- |
 | **Graph view** | See and edit the objects and relationships: add an entity to the container, create relationships and sightings, filter by type or time range | All |
 | **TimeLine view** | Follow an attack or a campaign in time, when the container dates its knowledge | Reports and cases, not groupings |
 | **Correlation view** | Find the other containers that share its indicators and observables, or with **Show all correlated entities** any of its objects, such as a malware or an intrusion set | All |
 | **Tactics matrix view** | See the techniques of the container on the MITRE ATT&CK matrix, with the options of the [attack patterns](#attack-patterns) of a threat | All |
+:::
 
 Reading a report through these views, with the Velvet Harbor example, is in [Explore analysis](/opencti/use/explore/analysis/#read-a-report-in-its-knowledge-tab); working a case through them, in [Handle incidents and requests in cases](/opencti/use/analyze/cases/).
 
@@ -229,6 +240,10 @@ An object you are not allowed to see shows as **Restricted**: the relationship e
 
 **Content view** previews the selected file, **Editor view** edits it, and **Save** keeps your changes. On a PDF or HTML file, **Disseminate** emails it to a dissemination list: it requires the Enterprise Edition and the **Disseminate files by email** capability. See [Send intelligence by email](/opencti/use/share/dissemination-lists/).
 
+:::only{opencti=">=7.261119"}
+**Files** lists the PDF, text, HTML, Markdown, PNG and JPEG files of the object, and its exports in PDF. A PNG or JPEG image, such as the screenshot of a phishing page, previews like a PDF: **Zoom in** and **Zoom out** resize it, and it cannot be edited. The menu of an image adds **Open in a new tab**, to see it at full size in the browser. A file that may be malicious, the file of an artifact or a program (`.exe`, `.dll`, `.pif`), is never opened: **Download file** and **Open in a new tab** ask you to choose between **Raw file** and **Encrypted archive**.
+:::
+
 Containers add **Content mapping view**, which turns text into structured knowledge: see [Explore analysis](/opencti/use/explore/analysis/#turn-a-report-s-text-into-knowledge).
 
 :::only{opencti=">=7.260811"}
@@ -259,6 +274,10 @@ Containers list what they hold in three tables, with search and filters: **Entit
 
 Attaching a file requires **Upload knowledge files**.
 
+:::only{opencti=">=7.261119"}
+A click on a file of **Uploaded files** or **Exported files** opens it in the **Content** tab, when that tab lists it: a PDF, text, HTML, Markdown, PNG or JPEG file you uploaded, or a PDF export. You read it next to the knowledge of the object, without downloading it. A click on another kind of file does nothing. On every line, **Open in a new tab** shows the file in the browser and **Download this file** saves it. The files of artifacts, notes and observed data are not opened in **Content**, and a program file (`.exe`, `.dll`, `.pif`) or the file of an artifact is never opened in the browser: you choose between **Raw file** and **Encrypted archive**.
+:::
+
 :::only{opencti=">=7.261030"}
 When the type has a FINTEL template, **Generate an export** can produce a PDF from it: choose the **HTML content files to PDF** connector and keep **Export as fintel** on. **File to export** then reads **Generated file**: OpenCTI fills the template with the knowledge of the object rather than converting one of its files. See [Generate a finished intelligence document](/opencti/use/share/export/#generate-a-finished-intelligence-document).
 :::
@@ -266,6 +285,10 @@ When the type has a FINTEL template, **Generate an export** can produce a PDF fr
 ### History
 
 **History** lists every change: **Entity** for the changes to the object itself, **Relations of the entity** for the relationships created or deleted around it. Click a line to open **Knowledge log details**, which shows each **Field** with what was **Added** and **Removed**. History is rebuilt from the platform event stream, so a change can take a few seconds to show.
+
+:::only{opencti=">=7.261119"}
+Each change fits on one line, cut when it is long: hover the line to read the whole message. A chevron at the end of the line marks a change with details to open. In **Knowledge log details**, a long description or content reads as plain text rather than as its formatting code.
+:::
 
 ## Display an identity as an author
 

@@ -1,8 +1,8 @@
 {
   "name": "data-model",
-  "version": "7.261117.0",
-  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/src/database/stix.ts and the 88 files of opencti-platform/opencti-graphql/src/schema and opencti-platform/opencti-graphql/src/modules that register types, attributes or modules; opencti-platform/opencti-front/src/private/components/nav/useNavMenu.tsx; opencti-platform/opencti-front/lang/front/en.json)",
-  "intro": "The 84 entity and observable types of OpenCTI 7.261117.0, grouped as the navigation menu groups them, with the attributes each type adds to its family (_required_: the API refuses a creation without it) and the relationships it can start; any type can also start `related-to` and `revoked-by`. [Data model](/opencti/concepts/data-model/) explains how these types form the knowledge graph.",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/database/stix.ts and the 88 files of opencti-platform/opencti-graphql/src/schema and opencti-platform/opencti-graphql/src/modules that register types, attributes or modules; opencti-platform/opencti-front/src/private/components/nav/useNavMenu.tsx; opencti-platform/opencti-front/lang/front/en.json)",
+  "intro": "The 84 entity and observable types of OpenCTI 7.261119.0, grouped as the navigation menu groups them, with the attributes each type adds to its family (_required_: the API refuses a creation without it) and the relationships it can start; any type can also start `related-to` and `revoked-by`. [Data model](/opencti/concepts/data-model/) explains how these types form the knowledge graph.",
   "filter": "Filter types, attributes and relationships",
   "sections": [
     {
@@ -806,7 +806,7 @@
             "Organization",
             "`Organization`",
             "`identity`",
-            "Identity attributes, plus `authorized_authorities` (string list), `authorized_members_activation_date` (date), `default_dashboard` (string), `default_hidden_types` (string list), `grantable_groups` (string list), `restricted_members` (object list), `x_opencti_aliases` (string list), `x_opencti_organization_type` (vocabulary), `x_opencti_reliability` (vocabulary), `x_opencti_score` (number)",
+            "Identity attributes, plus `authorized_authorities` (string list), `authorized_members_activation_date` (date), `default_dashboard` (string), `default_dashboard_preset` (string), `default_hidden_types` (string list), `grantable_groups` (string list), `restricted_members` (object list), `x_opencti_aliases` (string list), `x_opencti_organization_type` (vocabulary), `x_opencti_reliability` (vocabulary), `x_opencti_score` (number)",
             "`derived-from`, `has`, `located-at`, `owns`, `part-of`, `publishes`, `should-cover`, `uses`"
           ]
         },

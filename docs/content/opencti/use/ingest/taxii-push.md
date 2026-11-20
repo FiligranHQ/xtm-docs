@@ -58,6 +58,10 @@ Content-Type: application/taxii+json;version=2.1
 
 The body is a TAXII envelope with an `objects` array of STIX 2.1 objects. `application/vnd.oasis.stix+json;version=2.1` is accepted too. A request body larger than 50 MB is refused: a partner with more to send splits its objects into several requests, or a platform engineer raises `app:max_payload_body_size` (`APP__MAX_PAYLOAD_BODY_SIZE`, see [Network and security](/reference/opencti/configuration/#network-and-security)).
 
+:::only{opencti=">=7.261119"}
+On a platform that runs with the [secure HTTP defaults](/deploy/operate/harden/#secure-http-defaults) and leaves `app:max_payload_body_size` unset, the limit is 10 MB instead. Ask your platform engineer which limit applies before you tell the partner. Their TAXII client can read it too: the API root, `https://<platform>/taxii2/root/`, gives it in bytes as `max_content_length`.
+:::
+
 ::::only{opencti=">=7.260811"}
 The collection ID is the last part of the address of the collection's page, which you open from the **Deployed** tab of :menu[Integrations].
 ::::

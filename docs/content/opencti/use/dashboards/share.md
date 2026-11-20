@@ -31,6 +31,10 @@ Keep three rules in mind:
 - **It shows your data, capped by markings.** Widgets show what you, its creator, can see, limited to the **Max level markings** you choose. Filters on **@me** use your user too.
 - **Anyone with the link can open it** while it is enabled. Disable or delete it when it is no longer needed. Deleting the custom dashboard deletes its public dashboards too.
 
+:::only{opencti=">=7.261119"}
+The period and the values of the dashboard variables are frozen as well: you choose them under **Published values** when you create the public dashboard, and visitors cannot change them. See [Choose the published values](#choose-the-published-values).
+:::
+
 Check the widgets before you share, because a few of them do not work on the public page:
 
 - a **Bookmark** widget, or any widget of the **Activity & history** perspective, shows a message saying it is not supported;
@@ -54,17 +58,44 @@ A number of relationships without a title reads **Relationships number**.
 
 ### Create a public dashboard
 
-:::steps
+::::steps
 
 1. Open the custom dashboard, open the actions menu (⋮) in its header and choose **Create a public dashboard**. You can also start from :menu[Dashboards > Public dashboards] with **Create Public Dashboard**, then choose the **Custom dashboard**.
 2. Enter a **Name**. It is shown on the public page and generates the **Public dashboard URI KEY**, the end of the link: lowercase, with dashes for spaces and no special characters. The key must be unique on the platform, so choose a name no other public dashboard uses.
 3. Leave **Enabled** on to make the link work right away.
 4. In **Max level markings**, choose the highest marking of each kind the widgets may show, for example `TLP:AMBER`. Data marked higher is left out. You only see the markings your groups allow you to share.
+
+   :::only{opencti=">=7.261119"}
+   Below, check the period and the variable values under **Published values**, as [Choose the published values](#choose-the-published-values) explains.
+   :::
+
 5. Click **Create**.
 
    ::screenshot{id=opencti-dashboards-share-public-form alt="The Create a public dashboard panel with the custom dashboard to share, the Name, the Public dashboard URI KEY that the name fills in, the Enabled switch and Max level markings."}
 
+::::
+
+::::only{opencti=">=7.261119"}
+### Choose the published values
+
+Once a custom dashboard is chosen, the **Published values** section of the panel sets what the public page computes its widgets on. The values start from what you see on the dashboard: the period and variable values of its address when you start from the dashboard itself, else the last ones you used in this browser, else your default preset, else the defaults of the dashboard. Change them to publish another view, without changing the dashboard.
+
+- **Load a preset** shows when the dashboard has presets. Choosing one fills the period and the variables with its values. The public dashboard keeps a copy of them: changing the preset later does not change it.
+- **Relative time**, or **Start date** and **End date**, set the period. A date in the future, or an end before the start, blocks **Create** until you fix it.
+- One field per variable that a widget uses, named after the variable. Variables that no widget uses are not offered. A text or number field left empty publishes the default value of the variable, as the line under it says.
+
+::screenshot{id=opencti-dashboards-share-published-values alt="The Published values section of the Create a public dashboard panel for Partner briefing: Load a preset, the Relative time, Start date and End date of the period, and the Report type variable."}
+
+The public page shows the period, greyed out, and computes every widget with the values you published. Visitors cannot change them. To publish other values, create another public dashboard.
+
+:::example[Publish the member advisories of the last six months]
+The `Partner briefing` dashboard has a **Report type** variable, used by its `Reports of the selected type` widget, and a `Member advisories` preset. The CTI team lead wants partner hotels to see the advisories written for them, while the team keeps working on threat reports in the same dashboard. In the dashboard's actions menu, choose **Create a public dashboard**, enter the **Name** `Member advisories for partners` and the **Max level markings** `TLP:GREEN`, then, under **Published values**:
+
+- **Load a preset**: `Member advisories`. **Relative time** becomes **Last 6 months**, and **Report type** becomes `member-advisory`.
+
+Click **Create**. The public page lists the member advisories of the last six months. The team can switch the dashboard back to `threat-report` for its own work: the public page keeps showing the member advisories.
 :::
+::::
 
 :::example[Show the hotel campaign to partner hotels]
 The CTI team wants the security managers of partner hotel chains, who have no account on the platform, to follow the campaign. From the `Hotel sector campaign` dashboard, choose **Create a public dashboard** and enter:

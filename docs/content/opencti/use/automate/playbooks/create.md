@@ -26,22 +26,45 @@ This page builds a playbook that triages every new hospitality report for your t
 
 ## Build and start a playbook
 
-:::steps
+::::steps
 
 1. Open :menu[Data > Processing > Automation] and click **Create Playbook**.
 2. Give the playbook a name and a description that says what it does, then click **Create**. The playbook opens on an empty canvas, stopped.
 
    ::screenshot{id=opencti-playbook-create-dialog alt="The Create a playbook panel with an empty Name field, an empty Description field, and the Cancel and Create buttons."}
 
-3. Click **Add component** in the middle of the canvas and choose the entry point: **Listen knowledge events**, **Listen PIR events**, **Query knowledge on a regular basis** or **Available for manual enrollment / trigger**. Set its filters so the playbook only runs on the data you mean; the [filter key reference](/reference/opencti/filter-keys/) lists the keys and operators they accept.
+3. Open the list of entry points from the middle of the empty canvas.
+
+   :::only{opencti=">=7.261119"}
+   Click **Add an entry point**.
+   :::
+
+   :::only{opencti="<7.261119"}
+   Click **Add component**.
+   :::
+
+   Choose **Listen knowledge events**, **Listen PIR events**, **Query knowledge on a regular basis** or **Available for manual enrollment / trigger**, and set its filters so the playbook only runs on the data you mean; the [filter key reference](/reference/opencti/filter-keys/) lists the keys and operators they accept.
 
    ::screenshot{id=opencti-playbook-entry-points alt="The Add component panel listing the four entry points under Start Playbook: manual enrollment, knowledge events, PIR events and scheduled knowledge queries."}
 
 4. Add the steps that filter, enrich or change the data. On the canvas:
+
+   :::only{opencti=">=7.261119"}
+   - to add a step after a component, click the dashed **+** next to its output, **Add component**, then type a few words in **Search components**: the list keeps the components whose name or description contains them all;
+   - to insert a step between two components, click **Insert a component on this link**, the **+** on the link between them. A step that ends a playbook, such as **Send for ingestion**, goes on a new branch of the same output, and the steps after the link stay in place;
+   - to start a second branch from the same output, open the menu of the step already there, with its three dots or a right click, and choose **Add a sibling node**;
+   - to swap a component for another, open its menu and choose **Replace**;
+   - to move a step, with the steps after it, under another output, drag that output onto the step, or the input of the step onto that output.
+
+   Each setting the component requires must be filled, such as the **Notifiers** and **Authorized members** of a notifier: until then the form shows **This field is required** and does not save.
+   :::
+
+   :::only{opencti="<7.261119"}
    - to add a step after a component, click **Add component** under its output;
    - to insert a step between two components, click the **+** on the link between them;
    - to start a second branch from the same output, click **Add a sibling node**, the arrow at the bottom-right of a component;
    - to swap a component for another, open its menu and choose **Replace**.
+   :::
 
    ::screenshot{id=opencti-playbook-component-palette alt="The Add component panel opened after an entry point, listing the components that transform, enrich, share and end a playbook."}
 
@@ -51,9 +74,9 @@ This page builds a playbook that triages every new hospitality report for your t
 
 6. Open the menu next to the playbook name, choose **Start** and confirm. The header shows **Playbook is running**. From now on, every matching event runs it.
 
-:::
+::::
 
-:::example[Triage new hospitality reports automatically]
+::::example[Triage new hospitality reports automatically]
 Barbara leads the CTI team of Example CERT. Every new report labelled `hotel-sector` must be marked as in progress, assigned to the analyst on duty this week, Ana Duval, and announced to the CTI analysts. She creates the playbook `Triage new hospitality reports` with four components:
 
 | Component | Name on the canvas | Settings |
@@ -63,8 +86,12 @@ Barbara leads the CTI team of Example CERT. Every new report labelled `hotel-sec
 | **Send for ingestion** | `Send for ingestion` | No settings. Linked to the output of `Mark as in progress` |
 | **Send to notifier** | `Notify the CTI team` | **Notifiers**: **User interface**. **Authorized members**: the **CTI analysts** group. Added with **Add a sibling node** on `Send for ingestion`, so both branches start from the output of `Mark as in progress` |
 
-When a partner publishes a report with the `hotel-sector` label, the report is saved with the `IN_PROGRESS` status and Ana Duval as assignee, and every CTI analyst gets an alert in the platform. A report without the label does not start the playbook. When the duty changes, Barbara replaces `Ana Duval` in the second action.
+:::only{opencti=">=7.261119"}
+For the status, Barbara first sets **Entity type** to Report, then picks `IN_PROGRESS` among the statuses of the report workflow.
 :::
+
+When a partner publishes a report with the `hotel-sector` label, the report is saved with the `IN_PROGRESS` status and Ana Duval as assignee, and every CTI analyst gets an alert in the platform. A report without the label does not start the playbook. When the duty changes, Barbara replaces `Ana Duval` in the second action.
+::::
 
 ::::only{opencti=">=7.260811"}
 :::xtm-one[Hand the result to XTM One]
@@ -90,6 +117,29 @@ Its `out` output leads to a **Match knowledge** step on **Label** = `hotel-secto
 4. Remove the **Creator** filter. The playbook now runs on everyone's data.
 
 :::
+
+::::only{opencti=">=7.261119"}
+## Change a playbook
+
+A playbook follows the team: the analyst on duty changes, a step turns out to be useless. Open the playbook from :menu[Data > Processing > Automation].
+
+A stopped playbook opens in **Edit mode** when your role has **Manage Playbooks**. A running playbook opens in view only: you can move around the canvas, zoom, change the layout and open the last execution traces, but not change a step. To change it while it runs, turn on **Edit mode** in the header. The canvas then warns that "This playbook is running: your changes apply immediately."
+
+::screenshot{id=opencti-playbook-editor alt="The triage playbook in Edit mode: each card shows the kind of its step, such as Trigger or End of playbook, and a summary of its settings, and the toolbar at the top right holds Undo, Redo, the two layouts, the zoom buttons and Fit view."}
+
+Each card shows the name of the step, its kind and a summary of its settings, such as `2 filters`. The kind is **Trigger** for the entry point, **End of playbook** for a step without outputs, and the category of the component for the others. A step with a required setting left empty, for example after an import, shows **Configuration required**; a step whose component no longer exists shows **Component unavailable**. Once the playbook has run, a badge on each step gives the result and the duration of its **Last execution**. Click a card to open its settings.
+
+- **Delete** a step from its menu. When steps follow it, choose **Delete this step only**, the default, to link them to the step before it, or delete them with it. Deleting the entry point deletes every step after it.
+- **Undo** and **Redo**, at the top right of the canvas, take back or replay your last 50 changes until you leave the page. Ctrl+Z and Shift+Ctrl+Z do the same, with ⌘ on macOS. Deleting a step with the steps after it, inserting a step on a link, or replacing a component by one with fewer outputs cannot be undone, and empties the history.
+- Drag an output onto a step, or the input of a step onto an output, to move that step and the steps after it under that output. OpenCTI refuses a link that would make a loop or leave a step without a parent.
+- **Vertical layout** and **Horizontal layout** draw the playbook from top to bottom or from left to right, and your browser remembers the choice for each playbook. **Fit view** brings the whole playbook into view. Press **?** on the canvas to list the keyboard shortcuts.
+
+:::example[Hand the triage over to a new duty analyst]
+Ana Duval goes on leave and Leo Martin takes the duty while `Triage new hospitality reports` is running. Barbara opens the playbook: it shows in view only. She turns on **Edit mode**, clicks the `Mark as in progress` card, replaces `Ana Duval` with `Leo Martin` in the **Assignees** action and clicks **Update**.
+
+The next hospitality report is assigned to Leo Martin; the reports triaged before keep Ana Duval. Had she picked the wrong analyst, **Undo** would bring back the previous settings of the step.
+:::
+::::
 
 ## Run a playbook on selected entities
 
@@ -124,6 +174,12 @@ To offer a playbook on any entity, leave the entry point filters empty and put a
 | Enrich through connector | The connector exists and is running. Its ID is in the URL of its monitoring page |
 | Container wrapper | The case template and its task templates |
 | Send to notifier, Send email from template | The notifier or email template, and every recipient |
+
+:::only{opencti=">=7.261119"}
+In a step that shares or unshares with organizations, an organization this platform does not have, or no longer has, shows in **Target organizations** with `- deleted` after its name, and the field says **A selected item no longer exists: remove it and pick another**. Replace it before you start the playbook.
+
+OpenCTI refuses to import or duplicate a playbook with more than one entry point, a step without a parent, or a step whose settings or filters are not valid JSON. Fix the playbook where it comes from, then export it again.
+:::
 
 ### From the XTM Hub
 

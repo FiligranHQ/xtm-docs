@@ -43,23 +43,40 @@ Every widget only counts what you can access, so two people can see different nu
 
 ## Choose your home dashboard
 
-:::steps
+::::steps
 
 1. Open **Profile** in the top bar, then **Profile** in its menu.
 2. In **Dashboard settings**, pick a **Custom dashboard**:
    - **Default dashboard** opens the first dashboard set for your groups or organization, or the platform dashboard when none is set;
    - **Platform dashboard** always opens the built-in dashboard above;
    - any dashboard listed under **Dashboards from your groups & organizations** or **Other custom dashboards** opens that one.
+
+   :::only{opencti=">=7.261119"}
+   When you pick a custom dashboard, **Default preset** shows under it. Choose one of the presets saved on that dashboard: your home page then opens on its variable values and time range. Left on **No preset (default values of the dashboard)**, it opens on the values the dashboard itself sets. Choosing another dashboard clears the preset.
+
+   ::screenshot{id=opencti-insights-default-preset alt="The Dashboard settings of the profile: Technical date as the Date reference, Member hotel overview as the Custom dashboard and, under it, Last month in Default preset, whose helper text says the dashboard opens on the values and time range of this preset."}
+   :::
+
 3. Pick a **Date reference** for the counters: **Technical date** counts objects by when they were created in the platform, **Functional date** by the dates the knowledge itself carries.
 4. Click **Home** to check the result.
 
-:::
+::::
 
 :::example[Count threats by when they were active, not when they were imported]
 After a connector imported two years of history in one night, the home counters jump for the current month. In **Dashboard settings**, keep **Custom dashboard** on **Platform dashboard** and set **Date reference** to **Functional date**. The widgets now count knowledge by the dates it carries, such as the publication date of a report, so the reports on Velvet Harbor spread from October 2025 to January 2026 instead of piling up on the day of the import.
 :::
 
+::::only{opencti=">=7.261119"}
+:::example[Open the member dashboard on last month's activity]
+Every Monday you brief the member hotels from **Member hotel overview**. Its time range is the last three months, and its editor saved a **Last month** preset. In **Dashboard settings**, set **Custom dashboard** to **Member hotel overview** and **Default preset** to **Last month**. Click **Home**: the dashboard opens on the last month, ready for the briefing, and the dashboard itself keeps its three months.
+:::
+::::
+
 Administrators set the default dashboards of a group or an organization in their settings. See [Organize users in groups](/opencti/administer/groups/). To build a dashboard, see [Dashboards](/opencti/use/dashboards/).
+
+:::only{opencti=">=7.261119"}
+They can also set the preset that dashboard opens on: with **Default dashboard**, your home page opens on the preset your organization, or else your group, set with it. Your own choice of a dashboard, with or without a preset, comes first. See [Separate data between organizations](/opencti/administer/organizations/).
+:::
 
 ## Get an AI summary of an entity or a report
 

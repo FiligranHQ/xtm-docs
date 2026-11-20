@@ -57,7 +57,7 @@ Reports now show `NEW`, `IN_PROGRESS`, `IN_REVIEW`, `ANALYZED` and `CLOSED`, in 
 :::
 
 :::only{opencti=">=7.261030"}
-**Entity status sync**, in the **Workflow** card, decides what happens to the status of entities that arrive through a stream synchronization from another OpenCTI platform, for example from a partner CERT. With **Update entities' statuses by name match** on, OpenCTI gives them the local status of the same name, such as `IN_PROGRESS`; off, it drops their status.
+The **Entity status sync** switch, in the **Workflow** card, decides what happens to the status of entities that arrive through a stream synchronization from another OpenCTI platform, for example from a partner CERT. On, OpenCTI gives them the local status of the same name, such as `IN_PROGRESS`; off, which is the default, it drops their status. The switch is set per entity type, and is grayed out for the types it does not apply to.
 :::
 
 Requests for information of the request access type follow their own workflow, with the statuses to apply when a request is approved or declined. See [Let users request access](/opencti/administer/request-access/).

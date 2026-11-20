@@ -70,6 +70,10 @@ The data falls into a few groups: the platform itself (version, unique identifie
 When the operator sets `telemetry_manager:tags`, such as `saas,eu-west`, the deployment tags are sent too, lowercased and sorted.
 :::
 
+:::only{opencti=">=7.261119"}
+The number of investigations is sent too, as `opencti_investigations_count`: every investigation of the platform counts, whoever it is shared with. Only the number leaves the platform, never their names or content.
+:::
+
 The [Usage telemetry sent to Filigran](/reference/opencti/metrics/#usage-telemetry-sent-to-filigran) section of the metrics reference lists every value your version sends. Earlier versions send fewer.
 
 ## What's next

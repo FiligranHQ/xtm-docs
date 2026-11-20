@@ -1,6 +1,6 @@
 ---
 title: What's new
-description: What OpenCTI 7.261109.0 brings to analysts, team leads, administrators and platform engineers coming from 7.260811 LTS, each change linked to the page that documents it.
+description: What OpenCTI 7.261119.0 brings to analysts, team leads, administrators and platform engineers coming from 7.260811 LTS, each change linked to the page that documents it.
 doc_type: reference
 products:
   - opencti
@@ -12,8 +12,8 @@ last_reviewed: 2026-11-01
 sidebar_position: 4
 ---
 
-::::only{opencti=">=7.261109"}
-OpenCTI 7.261109.0, released in November 2026, is the latest release that this documentation describes. This page lists what it changes if you come from the 7.260811 long-term support (LTS) line, the changes of 7.261030 included. The changes are grouped by who uses them, each with the page that documents it. It leaves out bug fixes and internal changes: the [OpenCTI release notes](https://github.com/OpenCTI-Platform/opencti/releases) on GitHub list every release since 7.260811.0, one by one.
+::::only{opencti=">=7.261119"}
+OpenCTI 7.261119.0, released in November 2026, is the latest release that this documentation describes. This page lists what it changes if you come from the 7.260811 long-term support (LTS) line, the changes of 7.261030 and 7.261109 included. The changes are grouped by who uses them, each with the page that documents it. It leaves out bug fixes and internal changes: the [OpenCTI release notes](https://github.com/OpenCTI-Platform/opencti/releases) on GitHub list every release since 7.260811.0, one by one.
 
 ::screenshot{id=opencti-graphs-knowledge alt="The new knowledge graph of a report: badges above the nodes, the legend at the bottom left and the toolbar under the graph."}
 
@@ -36,6 +36,11 @@ OpenCTI 7.261109.0, released in November 2026, is the latest release that this d
 | Enrichment inside an investigation | **Enrichment** in the investigation toolbar runs connectors on the selected entities, and you choose which results join the graph | [Pivot and investigate](/opencti/use/analyze/pivot/) |
 | Your team's own fields | The custom fields your administrator defines show in the forms and the **Details** card of the types they apply to, and work in filters, bulk updates and playbooks | [Manage labels, vocabularies and templates](/opencti/configure/taxonomies/#custom-fields) |
 | Several linked entities at once | **Add relationship** on a relationship's **Linked entities** links several objects in one go, and creates the missing ones | [Explore knowledge](/opencti/use/explore/) |
+| Variables in dashboards | A variables bar on custom dashboards: a widget filter takes a **Variable** instead of a **Fixed value**, so changing the variable updates every widget that uses it. **Save** > **Save as new preset…** keeps the values of the variables with the time range, to restore them in one click | [Build dashboards](/opencti/use/dashboards/) |
+| A matrix in investigations | **Matrix view**, beside **Graph view**, places the attack patterns of an investigation on the tactics matrix, with a heat map of how much each technique is used, and **Export to image** saves it. On reports, groupings and cases, **Tactics matrix view** is now named **Matrix view** | [Pivot and investigate](/opencti/use/analyze/pivot/) |
+| Images in the Content tab | PNG and JPEG files preview in the **Content** tab, a protected PDF asks for its password, and a file of the **Data** tab opens there, with **Open in a new tab** beside it | [Explore knowledge](/opencti/use/explore/) |
+| A history read at a glance | Each event of the history fits on one line, with the full text in a tooltip and the details on a click | [Explore knowledge](/opencti/use/explore/) |
+| Empty numeric fields | **Empty** and **Not empty** in numeric filters, such as the EPSS score of vulnerabilities | [Explore arsenal](/opencti/use/explore/arsenal/) |
 
 :::xtm-one[XTM One in this release]
 **Choose AI agent**, beside **Ask AI** in the search bar, picks the XTM One agent that translates your question into filters. Exports generated with **Ask AI (multiple formats supported)** go through XTM One too. See [Search for knowledge](/opencti/use/explore/search/) and [Refine content with AI](/opencti/use/enrich/refine-content/).
@@ -46,7 +51,12 @@ OpenCTI 7.261109.0, released in November 2026, is the latest release that this d
 | Change | What you get | Page |
 | --- | --- | --- |
 | Ready-made custom views | **Import from Hub** in the **Custom Views** tab, to browse the views of the XTM Hub | [Add a dashboard tab to entity pages](/opencti/use/dashboards/custom-views/) |
-| Statuses kept between platforms | **Update entities' statuses by name match**, so entities received from another OpenCTI platform keep a status of the same name | [Track the progress of reports and cases](/opencti/use/automate/entity-workflows/), [Import from another OpenCTI platform](/opencti/use/ingest/streams/) |
+| Statuses kept between platforms | **Entity status sync**, so entities received from another OpenCTI platform keep a status of the same name | [Track the progress of reports and cases](/opencti/use/automate/entity-workflows/), [Import from another OpenCTI platform](/opencti/use/ingest/streams/) |
+| A new playbook editor | **Add an entry point** on an empty canvas, **Insert a component on this link**, a **Components** panel with **Search components**, **Undo** and **Redo**, **Edit mode** and **View only**, a **Horizontal layout** or a **Vertical layout**, and **Delete this step only** to keep the steps after it. A playbook has a single entry point, and a step whose required choice is empty cannot be saved | [Automate with playbooks](/opencti/use/automate/playbooks/) |
+| A status per entity type in playbooks | **Manipulate knowledge** asks for the **Entity type** whose workflow holds the **Status** it sets, and leaves the elements of other types untouched | [Playbook components](/reference/opencti/playbook-components/) |
+| A default dashboard preset | **Default preset**, under **Default dashboard** on a profile, a group or an organization, opens the dashboard on the variable values and time range of that preset | [Read the home dashboard and AI summaries](/opencti/use/explore/insights/), [Separate data between organizations](/opencti/administer/organizations/) |
+| A license bound to its platform | A Filigran license of the latest model, entered in OpenCTI, must be issued for this platform or for every platform; any other is refused | [Editions and licensing](/start/editions/) |
+| OpenID Connect with Basic authentication | `token_endpoint_auth_method` set to `client_secret_basic` in the **Extra configuration** of an OpenID Connect provider is now applied, as Okta and Authelia expect | [Manage login providers in the UI](/opencti/administer/authentications/) |
 | Logs of every feed | A **Logs** tab on TAXII, CSV, RSS and JSON feeds and on OpenCTI streams, with each run | [How intelligence gets into OpenCTI](/opencti/use/ingest/) |
 | Faster draft review | Users with **Bypass all capabilities** move a draft to any status from the toolbar | [Approve drafts step by step](/opencti/use/automate/draft-workflow/) |
 | Clearer connector status | Filters on the **Deployment** (**Managed** or **Manual**), the state (**Started** or **Stopped**) and the **Version** of each connector | [Import with connectors](/opencti/use/ingest/connectors/) |
@@ -83,14 +93,17 @@ OpenCTI 7.261109.0, released in November 2026, is the latest release that this d
 | Search engine client | `ELASTICSEARCH__ENGINE_CLIENT` replaces `ELASTICSEARCH__ENGINE_SELECTOR` and `ELASTICSEARCH__ENGINE_CHECK`, now ignored. Elasticsearch 9 gets its own client; versions before 9 are deprecated | [Shared services](/deploy/configure/shared-services/) |
 | Prometheus address | `APP__TELEMETRY__METRICS__EXPORTER_PROMETHEUS_HOST`, `0.0.0.0` by default, sets where the metrics endpoint listens | [OpenCTI configuration](/reference/opencti/configuration/#telemetry) |
 | JSONPath limits | JSONPath filters of JSON mappers and feeds run in worker threads, with a timeout and memory limits set by the `json_path` keys | [OpenCTI configuration](/reference/opencti/configuration/#technical-customization) |
+| Secure HTTP defaults | `APP__HTTP__SECURE_BY_DEFAULT` lowers the default request body limit to 10 MB, the default rate protection to 30000 requests per 60 seconds and the redirects followed by outgoing calls to 5. A key you set keeps its value. Off by default, with a warning at start: a later version turns it on | [Harden the deployment](/deploy/operate/harden/) |
+| Redirects of outgoing calls | `APP__HTTP__MAX_REDIRECTS`, 21 by default, caps the redirects that feeds, synchronizers and notifiers follow | [Harden the deployment](/deploy/operate/harden/) |
+| TAXII payload size | The TAXII API root advertises `app:max_payload_body_size` as its `max_content_length`, instead of a fixed 100 MB | [OpenCTI configuration](/reference/opencti/configuration/) |
 
 Before you upgrade, read [Breaking changes](/deploy/upgrade/breaking-changes/) and [Upgrade](/deploy/upgrade/).
 
 ## The other products
 
-This documentation describes OpenAEV 3.261029.0 and XTM One 1.261112.0 with OpenCTI 7.261109.0. XTM One 1.261112.0 streams its chat over HTTP instead of a WebSocket: the reverse proxy in front of it must serve HTTP/2 to browsers, without buffering `/api/` and with a read timeout above 15 seconds. See [XTM One 1.261112.0](/deploy/upgrade/breaking-changes/#xtm-one-1-261112-0). What each OpenAEV release changes is in the [OpenAEV release notes](https://github.com/OpenAEV-Platform/openaev/releases) on GitHub; which versions work together is in the [compatibility matrix](/deploy/upgrade/compatibility/).
+This documentation describes OpenAEV 3.261118.0 and XTM One 1.261119.0 with OpenCTI 7.261119.0. Since 1.261112.0, XTM One streams its chat over HTTP instead of a WebSocket: the reverse proxy in front of it must serve HTTP/2 to browsers, without buffering `/api/` and with a read timeout above 15 seconds. See [XTM One 1.261112.0](/deploy/upgrade/breaking-changes/#xtm-one-1-261112-0). What each OpenAEV release changes is in the [OpenAEV release notes](https://github.com/OpenAEV-Platform/openaev/releases) on GitHub; which versions work together is in the [compatibility matrix](/deploy/upgrade/compatibility/).
 ::::
 
-::::only{opencti="<7.261109"}
+::::only{opencti="<7.261119"}
 You are reading the documentation of an OpenCTI long-term support (LTS) line. What the latest release brings is on this page in the documentation of the latest version: switch to it with the version picker. The [OpenCTI release notes](https://github.com/OpenCTI-Platform/opencti/releases) on GitHub list every release, and [Release lifecycle](/deploy/upgrade/lifecycle/) explains how to choose between an LTS line and the latest releases.
 ::::

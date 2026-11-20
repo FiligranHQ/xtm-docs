@@ -324,7 +324,7 @@
       ],
       "default": true,
       "theme": "Network and security",
-      "description": "When set to false, prevents the application from loading insecure (HTTP) resources (images, manifests, connections, objects)"
+      "description": "When set to false, prevents the application from loading insecure (HTTP) resources (images, manifests, connections, objects) and sends `upgrade-insecure-requests`. Unset, `true`, and from 7.261119 the opposite of `app:http:secure_by_default`, which refuses these resources without sending `upgrade-insecure-requests`"
     },
     {
       "key": "app:app_logs:control:max_array_size",
@@ -1363,7 +1363,7 @@
       ],
       "default": "50mb",
       "theme": "Network and security",
-      "description": "Maximum size of a JSON request body accepted by the API, the TAXII server and the other HTTP routes, such as `50mb`. Raise it if large requests are rejected."
+      "description": "Maximum size of a JSON request body accepted by the API, the TAXII server and the other HTTP routes, such as `50mb`. Raise it if large requests are rejected. Unset, `50mb`, and from 7.261119 `10mb` with `app:http:secure_by_default`. From 7.261119, the TAXII API root advertises this limit, in bytes, as its `max_content_length` (before, a fixed 100 MB)."
     },
     {
       "key": "app:node_identifier",
@@ -1478,7 +1478,7 @@
       ],
       "default": 10000,
       "theme": "Network and security",
-      "description": "Maximum of request allow per IP and per window duration, 0 will deny all"
+      "description": "Maximum of request allow per IP and per window duration, 0 will deny all. Unset, `10000`, and from 7.261119 `30000` with `app:http:secure_by_default`"
     },
     {
       "key": "app:rate_protection:time_window",
@@ -1491,7 +1491,7 @@
       ],
       "default": 1,
       "theme": "Network and security",
-      "description": "Time window for rate protection in seconds"
+      "description": "Time window for rate protection in seconds. Unset, `1`, and from 7.261119 `60` with `app:http:secure_by_default`"
     },
     {
       "key": "app:rate_protection:user_agent_skip_prefixes",

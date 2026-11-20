@@ -4,8 +4,8 @@
 # Source: OpenCTI product life cycle (LTS every 6 months, supported 1 year).
 opencti:
   latest:
-    version: 7.261117.0
-    tag: 7.261117.0
+    version: 7.261119.0
+    tag: 7.261119.0
   lts:
     - line: 7.260811-lts
       version: 7.260811.0-lts.1

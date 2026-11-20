@@ -86,7 +86,11 @@ The field types offered for an attribute depend on its type. Markings, labels, a
 ### Containers, indicators and observables
 
 - **A container as main entity.** With a report, a grouping or a case, **Include entities in container** adds the additional entities to it. When a submission creates several containers, they are created one after the other: each also contains the containers created before it.
-- **Indicators and observables.** For an Indicator, **Automatically convert to STIX patterns** lets analysts type plain values, such as an IP address, and **Automatically create observables from indicators** adds the matching observables. For an observable, **Automatically create indicators from observables** does the reverse. Turn on one direction only.
+- **Indicators and observables.** For an Indicator, **Automatically convert to STIX patterns** lets analysts type plain values, such as an IP address, and **Automatically create observables from indicators** adds the matching observables. For an observable, **Automatically create indicators from observables** does the reverse. Turn on one direction only. These switches show once the entity takes **Parsed values**, and the two **Automatically create** switches only for the main entity.
+
+:::only{opencti="<7.261119"}
+In this version, the two **Automatically create** switches are saved with the form but create nothing on submission.
+:::
 
 ::::only{opencti=">=7.260811"}
 ### Draft settings
@@ -117,6 +121,10 @@ Values set in the form override the default and required values of entity type c
 
 :::only{opencti=">=7.261109"}
 A form you open while you work in a draft submits into that draft. Entities you create on the fly in a lookup field are created only when you submit, with their files. When the submission goes to a draft you cannot open, the form says **Your submission has been sent and is being processed.**, with **Submit again** to fill it in once more and **Close**.
+:::
+
+:::only{opencti=">=7.261119"}
+An entity you pick in a lookup field is only referenced: the submission creates its relationships and adds it to the container when the form includes entities in it, but never changes the entity itself. This holds for every type, an existing Observed Data included.
 :::
 
 :::example[Let member hotels report an incident to the sector CERT]

@@ -74,9 +74,14 @@ XTM One exposes OpenCTI to any MCP client, such as Cursor or an AI agent your te
 | --- | --- | --- |
 | Items in one page of a GraphQL list | 500 when `first` is left out, 5,000 at most | `elasticsearch:default_pagination_result`, `elasticsearch:max_pagination_result` |
 | Requests per client, by address and user agent | 10,000 a second, then HTTP `429` | `app:rate_protection:max_requests`, `app:rate_protection:time_window` |
+| Size of one JSON request body: GraphQL, TAXII, REST | 50 MB | `app:max_payload_body_size` |
 | Events a live stream consumer can resume from | The last 2,000,000 events of the platform | `redis:trimming` |
 | Objects in one answer of a CSV feed | 5,000 | `data_sharing:max_csv_feed_result` |
 | Objects in one page of a TAXII collection | 500 | `app:data_sharing:taxii:max_pagination_result` |
+
+:::only{opencti=">=7.261119"}
+A platform that turns on the secure HTTP defaults (`app:http:secure_by_default` set to `true`) applies stricter limits to the keys it leaves unset: 30,000 requests a minute per client, and 10 MB per request body. Ask the platform engineer which values your platform runs with before you size a bulk import. See [Rate limiting](/deploy/operate/harden/#rate-limiting).
+:::
 
 A platform engineer changes them in the configuration: see the [configuration reference](/reference/opencti/configuration/).
 

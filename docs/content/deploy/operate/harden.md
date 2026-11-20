@@ -109,6 +109,10 @@ A request is not limited when it matches any of the three lists. For example, 5,
 ```
 :::
 
+:::only{opencti=">=7.261119"}
+Unset, `app:rate_protection:max_requests` and `app:rate_protection:time_window` follow `app:http:secure_by_default`: 30,000 requests per 60 seconds when it is `true`. See [Secure HTTP defaults](#secure-http-defaults).
+:::
+
 Behind a reverse proxy, OpenCTI limits each client by the address in the proxy's `X-Forwarded-For` header only when it trusts the proxy. Loopback, link-local and private addresses are trusted.
 
 :::only{opencti=">=7.260811"}
@@ -171,6 +175,33 @@ It is `false` by default, and OpenCTI logs a warning at each start while it is: 
 Here the armor protection is on and WebSocket carries only subscriptions, while the playground stays available to your analysts.
 :::
 
+:::only{opencti=">=7.261119"}
+### Secure HTTP defaults
+
+`app:http:secure_by_default` (`APP__HTTP__SECURE_BY_DEFAULT`) tightens, in one setting, the HTTP protections you have not set yourself:
+
+| Protection | Unset key, by default | Unset key, when `app:http:secure_by_default` is `true` | Overridden by |
+| --- | --- | --- | --- |
+| [Rate limiting](#rate-limiting) of each client | 10,000 requests per second | 30,000 requests per 60 seconds | `app:rate_protection:max_requests`, `app:rate_protection:time_window` |
+| Largest JSON request body, on the GraphQL, TAXII and REST APIs | `50mb` | `10mb` | `app:max_payload_body_size` |
+| [Resources over plain HTTP](#insecure-http-resources) in the pages of the platform | Allowed | Refused | `app:allow_unsecure_http_resources` |
+| Redirects followed by the requests OpenCTI sends, for feeds, synchronizers and notifiers | `21` | `5` | `app:http:max_redirects` |
+
+It is `false` by default, and OpenCTI logs a warning at each start while it is: `HTTP secure defaults are disabled for the protections that do not set their own option`. A later version turns it on by default.
+
+- `app:max_payload_body_size` (`APP__MAX_PAYLOAD_BODY_SIZE`) takes a number of bytes, or a value with `kb`, `mb` or `gb`. A larger body is refused. The TAXII API root advertises this limit, in bytes, as its `max_content_length`.
+- `app:http:max_redirects` (`APP__HTTP__MAX_REDIRECTS`) takes a whole number, `0` to follow no redirect. A request that needs more redirects fails with `Maximum number of redirects exceeded`. Any other value falls back to the default, and OpenCTI logs `Invalid value for app:http:max_redirects, it must be a non-negative integer: using the default instead` at start.
+
+Turn it on in a staging platform first. Check that your connectors and scripts stay under the rate limit and send bodies under 10 MB, then set the other keys only where you need an exception:
+
+```yaml
+- APP__HTTP__SECURE_BY_DEFAULT=true
+- APP__MAX_PAYLOAD_BODY_SIZE=50mb
+```
+
+Here the rate limit, the plain HTTP resources and the redirects take their secure values, while the API still accepts the 50 MB bundles of connectors that send them over HTTP.
+:::
+
 ### Requests and uploads
 
 `app:request_timeout` closes a connection that stays idle this many milliseconds. The default, `1200000`, is 20 minutes. Keep the timeout of your reverse proxy consistent with it, or long requests fail at the proxy first.
@@ -211,15 +242,23 @@ Behind a reverse proxy, OpenCTI does not need certificates. When it serves HTTPS
 
 By default, no other website can embed a public dashboard. To allow some, list them in `app:public_dashboard_authorized_domains`, as the sources of a Content Security Policy `frame-ancestors` directive, separated by spaces, such as `https://intranet.example.com`. Leave it empty to keep embedding forbidden.
 
-:::only{opencti=">=7.260811"}
+::::only{opencti=">=7.260811"}
 ### Insecure HTTP resources
 
+:::only{opencti=">=7.261119"}
+`app:allow_unsecure_http_resources` decides whether the pages of the platform may load images, files and connections from `http://` addresses, through its Content Security Policy. Unset, it is the opposite of `app:http:secure_by_default`: allowed by default, refused with the [secure HTTP defaults](#secure-http-defaults).
+
+Set it to `false` to also make browsers load every resource of the platform over HTTPS: OpenCTI then sends the `upgrade-insecure-requests` directive. The secure HTTP defaults alone do not send it, so a platform served over plain HTTP keeps working with them.
+:::
+
+:::only{opencti="<7.261119"}
 `app:allow_unsecure_http_resources` is `true` by default. Set it to `false` to make browsers load every resource of the platform over HTTPS: OpenCTI then sends the `upgrade-insecure-requests` directive.
+:::
 
 ### Ingestion URL filtering
 
 To keep feeds from reaching internal addresses, a server-side request forgery (SSRF) risk, list the URIs that no ingestion feed may call in `app:uri_deny_list`. See [Tune feeds and streams](/opencti/use/ingest/feed-options/).
-:::
+::::
 
 ### Logs
 

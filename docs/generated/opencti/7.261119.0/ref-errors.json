@@ -1,8 +1,8 @@
 {
   "name": "errors",
-  "version": "7.261117.0",
-  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/src/config/errors.ts and every call of its constructors)",
-  "intro": "The 943 error messages OpenCTI 7.261117.0 can answer to a user or an API client, by the area of the code that raises them. The GraphQL answer carries the message, the error type in `extensions.code` and the data attached in `extensions.data`; `{name}` marks a part computed at run time. Listed: the 22 error types `ACCESS_REQUIRED`, `ALREADY_DELETED_ERROR`, `AUTH_FAILURE`, `AUTH_REQUIRED`, `BAD_USER_INPUT_ERROR`, `DATABASE_ERROR`, `DRAFT_LOCKED`, `FORBIDDEN_ACCESS`, `FUNCTIONAL_ERROR`, `LOCK_ERROR`, `LTS_REQUIRED_ACTIVATION`, `MISSING_REFERENCE_ERROR`, `OTP_REQUIRED`, `OTP_REQUIRED_ACTIVATION`, `PASSWORD_CHANGE_REQUIRED`, `PASSWORD_CHANGE_THROTTLED`, `PASSWORD_RESET_EXPIRED`, `PASSWORD_REUSED`, `RESOURCE_NOT_FOUND`, `UNSUPPORTED_ERROR`, `VALIDATION_ERROR`, `WORK_NOT_ALIVE`. Left out: the errors the code classes as technical (`ComplexSearchError`, `ConfigurationError`, `DatabaseError`, `FilesystemError`, `UnknownError`), the code that runs at startup or in background managers, messages held entirely in a variable and developer guards (*unexpected*, *not implemented*, schema registration). Read the platform logs as [Troubleshooting](/deploy/operate/troubleshoot/) explains.",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/config/errors.ts and every call of its constructors)",
+  "intro": "The 974 error messages OpenCTI 7.261119.0 can answer to a user or an API client, by the area of the code that raises them. The GraphQL answer carries the message, the error type in `extensions.code` and the data attached in `extensions.data`; `{name}` marks a part computed at run time. Listed: the 22 error types `ACCESS_REQUIRED`, `ALREADY_DELETED_ERROR`, `AUTH_FAILURE`, `AUTH_REQUIRED`, `BAD_USER_INPUT_ERROR`, `DATABASE_ERROR`, `DRAFT_LOCKED`, `FORBIDDEN_ACCESS`, `FUNCTIONAL_ERROR`, `LOCK_ERROR`, `LTS_REQUIRED_ACTIVATION`, `MISSING_REFERENCE_ERROR`, `OTP_REQUIRED`, `OTP_REQUIRED_ACTIVATION`, `PASSWORD_CHANGE_REQUIRED`, `PASSWORD_CHANGE_THROTTLED`, `PASSWORD_RESET_EXPIRED`, `PASSWORD_REUSED`, `RESOURCE_NOT_FOUND`, `UNSUPPORTED_ERROR`, `VALIDATION_ERROR`, `WORK_NOT_ALIVE`. Left out: the errors the code classes as technical (`ComplexSearchError`, `ConfigurationError`, `DatabaseError`, `FilesystemError`, `UnknownError`), the code that runs at startup or in background managers, messages held entirely in a variable and developer guards (*unexpected*, *not implemented*, schema registration). Read the platform logs as [Troubleshooting](/deploy/operate/troubleshoot/) explains.",
   "filter": "Filter messages, error types and functions",
   "sections": [
     {
@@ -234,7 +234,7 @@
           "cells": [
             "Invalid filter configuration",
             "`UNSUPPORTED_ERROR`",
-            "`buildLocalMustFilter` (database/engine), `adaptFilterToCustomFieldFilterKey` (utils/filtering/filtering-completeSpecialFilterKeys)",
+            "`buildLocalMustFilter` (database/engine-query-builder), `adaptFilterToCustomFieldFilterKey` (utils/filtering/filtering-completeSpecialFilterKeys)",
             "`filter`"
           ]
         },
@@ -425,7 +425,7 @@
           "cells": [
             "A filter key must be defined",
             "`FUNCTIONAL_ERROR`",
-            "`buildLocalMustFilter` (database/engine)",
+            "`buildLocalMustFilter` (database/engine-query-builder)",
             "`key`"
           ]
         },
@@ -916,11 +916,20 @@
           ]
         },
         {
+          "key": "UNSUPPORTED_ERROR|Entities from the cache are shared by every caller and must not be modified",
+          "cells": [
+            "Entities from the cache are shared by every caller and must not be modified",
+            "`UNSUPPORTED_ERROR`",
+            "`rejectSharedEntitiesChange` (database/cache)",
+            ""
+          ]
+        },
+        {
           "key": "UNSUPPORTED_ERROR|Fail to compute indices for unknown type",
           "cells": [
             "Fail to compute indices for unknown type",
             "`UNSUPPORTED_ERROR`",
-            "`computeQueryIndices` (database/engine)",
+            "`computeQueryIndices` (database/engine-indices)",
             "`type`"
           ]
         },
@@ -947,7 +956,7 @@
           "cells": [
             "File body is null or undefined",
             "`UNSUPPORTED_ERROR`",
-            "`downloadFile` (database/raw-file-storage), `downloadFileRange` (database/raw-file-storage)",
+            "`downloadFile` (database/raw-file-storage), `downloadFileRange` (database/raw-file-storage), `downloadFileWithoutLogging` (database/raw-file-storage)",
             "`fileId`"
           ]
         },
@@ -1001,7 +1010,7 @@
           "cells": [
             "Filter must have only one field",
             "`UNSUPPORTED_ERROR`",
-            "`buildLocalMustFilter` (database/engine)",
+            "`buildLocalMustFilter` (database/engine-query-builder)",
             "`keys`, `operator`"
           ]
         },
@@ -1010,7 +1019,7 @@
           "cells": [
             "Filter script is not allowed",
             "`UNSUPPORTED_ERROR`",
-            "`buildLocalMustFilter` (database/engine)",
+            "`buildLocalMustFilter` (database/engine-query-builder)",
             "`filter`"
           ]
         },
@@ -1280,7 +1289,7 @@
           "cells": [
             "Not supported filter operator",
             "`UNSUPPORTED_ERROR`",
-            "`buildLocalMustFilter` (database/engine)",
+            "`buildLocalMustFilter` (database/engine-query-builder)",
             "`filter`, `filterOperator`"
           ]
         },
@@ -1298,7 +1307,7 @@
           "cells": [
             "Range filter must have only one field",
             "`UNSUPPORTED_ERROR`",
-            "`buildLocalMustFilter` (database/engine)",
+            "`buildLocalMustFilter` (database/engine-query-builder)",
             "`keys`"
           ]
         },
@@ -1352,7 +1361,7 @@
           "cells": [
             "Runtime mapping is only possible with elastic \\>=7.12",
             "`UNSUPPORTED_ERROR`",
-            "`elQueryBodyBuilder` (database/engine)",
+            "`elQueryBodyBuilder` (database/engine-query-builder)",
             "`order`"
           ]
         },
@@ -1363,6 +1372,15 @@
             "`UNSUPPORTED_ERROR`",
             "`loadElementMetaDependencies` (database/middleware)",
             "`inputKey`, `key`, `type`"
+          ]
+        },
+        {
+          "key": "UNSUPPORTED_ERROR|Staged sync file not found",
+          "cells": [
+            "Staged sync file not found",
+            "`UNSUPPORTED_ERROR`",
+            "`resolveConsumedStagedFile` (database/file-storage)",
+            ""
           ]
         },
         {
@@ -1559,7 +1577,7 @@
           "cells": [
             "Within filter must have only one field",
             "`UNSUPPORTED_ERROR`",
-            "`buildLocalMustFilter` (database/engine)",
+            "`buildLocalMustFilter` (database/engine-query-builder)",
             "`keys`"
           ]
         },
@@ -1568,8 +1586,17 @@
           "cells": [
             "Within filter must have two values",
             "`UNSUPPORTED_ERROR`",
-            "`buildLocalMustFilter` (database/engine)",
+            "`buildLocalMustFilter` (database/engine-query-builder)",
             "`values`"
+          ]
+        },
+        {
+          "key": "FORBIDDEN_ACCESS|You are not allowed to merge kill chain phases.",
+          "cells": [
+            "You are not allowed to merge kill chain phases.",
+            "`FORBIDDEN_ACCESS`",
+            "`mergeEntities` (database/middleware)",
+            "`capability`"
           ]
         },
         {
@@ -2610,6 +2637,15 @@
           ]
         },
         {
+          "key": "UNSUPPORTED_ERROR|The Enterprise Edition is granted by the Filigran license of XTM One and cannot be disabled in this platform",
+          "cells": [
+            "The Enterprise Edition is granted by the Filigran license of XTM One and cannot be disabled in this platform",
+            "`UNSUPPORTED_ERROR`",
+            "`settingsEditField` (domain/settings)",
+            ""
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|The password history count can only be changed with the local authentication settings",
           "cells": [
             "The password history count can only be changed with the local authentication settings",
@@ -3471,6 +3507,15 @@
             "`UNSUPPORTED_ERROR`",
             "`toKeptGraphqlSession` (modules/configPreset/import/configPreset-import-session-domain)",
             "`event`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The logo of the fintel design \"{name}\" is not a supported image",
+          "cells": [
+            "The logo of the fintel design \"{name}\" is not a supported image",
+            "`FUNCTIONAL_ERROR`",
+            "`read` (modules/configPreset/registry/fintelDesigns-configPreset-registry)",
+            "`id`, `name`"
           ]
         },
         {
@@ -4994,6 +5039,51 @@
             "`uploadFintelDesignFile` (modules/fintelDesign/fintelDesign-domain)",
             "`mimeType`"
           ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The logo of the fintel design \"{name}\" is missing from the storage",
+          "cells": [
+            "The logo of the fintel design \"{name}\" is missing from the storage",
+            "`FUNCTIONAL_ERROR`",
+            "`readFintelDesignLogo` (modules/fintelDesign/fintelDesign-logo)",
+            "`id`, `name`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The logo of the fintel design \"{name}\" is not its own file",
+          "cells": [
+            "The logo of the fintel design \"{name}\" is not its own file",
+            "`FUNCTIONAL_ERROR`",
+            "`readFintelDesignLogo` (modules/fintelDesign/fintelDesign-logo)",
+            "`id`, `name`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The logo of the fintel design \"{name}\" is too large",
+          "cells": [
+            "The logo of the fintel design \"{name}\" is too large",
+            "`FUNCTIONAL_ERROR`",
+            "`readFintelDesignLogo` (modules/fintelDesign/fintelDesign-logo)",
+            "`id`, `maxFileSize`, `name`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The logo of the fintel design is not a supported image",
+          "cells": [
+            "The logo of the fintel design is not a supported image",
+            "`FUNCTIONAL_ERROR`",
+            "`readFintelDesignLogoUpload` (modules/fintelDesign/fintelDesign-logo)",
+            ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The logo of the fintel design is too large",
+          "cells": [
+            "The logo of the fintel design is too large",
+            "`FUNCTIONAL_ERROR`",
+            "`transform` (modules/fintelDesign/fintelDesign-logo)",
+            "`maxFileSize`"
+          ]
         }
       ]
     },
@@ -6183,6 +6273,51 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Playbook definition is not valid JSON",
+          "cells": [
+            "Playbook definition is not valid JSON",
+            "`FUNCTIONAL_ERROR`",
+            "`assertPlaybookDefinitionStringIsValid` (modules/playbook/playbook-domain)",
+            ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook entry point cannot be deleted alone: its steps would have no parent",
+          "cells": [
+            "Playbook entry point cannot be deleted alone: its steps would have no parent",
+            "`FUNCTIONAL_ERROR`",
+            "`removePlaybookNodeKeepChildren` (modules/playbook/playbook-domain)",
+            "`node_id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook entry point cannot have a parent",
+          "cells": [
+            "Playbook entry point cannot have a parent",
+            "`FUNCTIONAL_ERROR`",
+            "`assertPlaybookDefinitionIsValid` (modules/playbook/playbook-domain), `playbookAddNode` (modules/playbook/playbook-domain), `playbookMoveNode` (modules/playbook/playbook-domain)",
+            "`node_id`, `parentNodeId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook link cannot be deleted: its target node would be left without a parent, delete the node instead",
+          "cells": [
+            "Playbook link cannot be deleted: its target node would be left without a parent, delete the node instead",
+            "`FUNCTIONAL_ERROR`",
+            "`playbookDeleteLink` (modules/playbook/playbook-domain)",
+            "`link_id`, `node_id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook link duplication is not possible",
+          "cells": [
+            "Playbook link duplication is not possible",
+            "`FUNCTIONAL_ERROR`",
+            "`playbookRelink` (modules/playbook/playbook-domain)",
+            "`link_id`"
+          ]
+        },
+        {
           "key": "UNSUPPORTED_ERROR|Playbook link duplication is not possible",
           "cells": [
             "Playbook link duplication is not possible",
@@ -6201,12 +6336,57 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Playbook link must connect existing nodes",
+          "cells": [
+            "Playbook link must connect existing nodes",
+            "`FUNCTIONAL_ERROR`",
+            "`assertPlaybookDefinitionIsValid` (modules/playbook/playbook-domain)",
+            "`link_id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook link must leave an out port of its source node",
+          "cells": [
+            "Playbook link must leave an out port of its source node",
+            "`FUNCTIONAL_ERROR`",
+            "`assertOutPort` (modules/playbook/playbook-domain), `assertPlaybookDefinitionIsValid` (modules/playbook/playbook-domain)",
+            "`link_id`, `node_id`, `port`"
+          ]
+        },
+        {
           "key": "UNSUPPORTED_ERROR|Playbook link node from not found",
           "cells": [
             "Playbook link node from not found",
             "`UNSUPPORTED_ERROR`",
             "`playbookAddLink` (modules/playbook/playbook-domain)",
             "`id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook link not found",
+          "cells": [
+            "Playbook link not found",
+            "`FUNCTIONAL_ERROR`",
+            "`playbookRelink` (modules/playbook/playbook-domain)",
+            "`link_id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook link source component not found",
+          "cells": [
+            "Playbook link source component not found",
+            "`FUNCTIONAL_ERROR`",
+            "`assertPlaybookDefinitionIsValid` (modules/playbook/playbook-domain)",
+            "`component_id`, `link_id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook links cannot form a cycle",
+          "cells": [
+            "Playbook links cannot form a cycle",
+            "`FUNCTIONAL_ERROR`",
+            "`assertPlaybookDefinitionIsAcyclicAndReachable` (modules/playbook/playbook-domain), `playbookMoveNode` (modules/playbook/playbook-domain), `playbookRelink` (modules/playbook/playbook-domain)",
+            "`node_id`"
           ]
         },
         {
@@ -6219,12 +6399,102 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Playbook must have a single entry point: every other node needs a parent",
+          "cells": [
+            "Playbook must have a single entry point: every other node needs a parent",
+            "`FUNCTIONAL_ERROR`",
+            "`assertPlaybookDefinitionIsValid` (modules/playbook/playbook-domain)",
+            "`root_ids`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook node configuration is not valid JSON",
+          "cells": [
+            "Playbook node configuration is not valid JSON",
+            "`FUNCTIONAL_ERROR`",
+            "`assertPlaybookDefinitionStringIsValid` (modules/playbook/playbook-domain), `assertNodeConfigurationIsComplete` (modules/playbook/playbook-utils)",
+            "`component_id`, `node_id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook node configuration misses required fields",
+          "cells": [
+            "Playbook node configuration misses required fields",
+            "`FUNCTIONAL_ERROR`",
+            "`assertNodeConfigurationIsComplete` (modules/playbook/playbook-utils)",
+            "`component_id`, `missing`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook node filters are not valid JSON",
+          "cells": [
+            "Playbook node filters are not valid JSON",
+            "`FUNCTIONAL_ERROR`",
+            "`assertPlaybookDefinitionStringIsValid` (modules/playbook/playbook-domain)",
+            "`component_id`, `field`, `node_id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook node needs a parent: only the entry point has none, give parentNodeId and parentPortId",
+          "cells": [
+            "Playbook node needs a parent: only the entry point has none, give parentNodeId and parentPortId",
+            "`FUNCTIONAL_ERROR`",
+            "`playbookAddNode` (modules/playbook/playbook-domain)",
+            "`component_id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook node not found",
+          "cells": [
+            "Playbook node not found",
+            "`FUNCTIONAL_ERROR`",
+            "`assertOutPort` (modules/playbook/playbook-domain), `playbookMoveNode` (modules/playbook/playbook-domain), `playbookRelink` (modules/playbook/playbook-domain) and 1 more",
+            "`node_id`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook node parent needs both parentNodeId and parentPortId",
+          "cells": [
+            "Playbook node parent needs both parentNodeId and parentPortId",
+            "`FUNCTIONAL_ERROR`",
+            "`playbookAddNode` (modules/playbook/playbook-domain)",
+            "`parentNodeId`, `parentPortId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook nodes must stay reachable from the entry point",
+          "cells": [
+            "Playbook nodes must stay reachable from the entry point",
+            "`FUNCTIONAL_ERROR`",
+            "`assertPlaybookDefinitionIsAcyclicAndReachable` (modules/playbook/playbook-domain)",
+            "`node_ids`"
+          ]
+        },
+        {
           "key": "UNSUPPORTED_ERROR|Playbook related component not found",
           "cells": [
             "Playbook related component not found",
             "`UNSUPPORTED_ERROR`",
             "`playbookAddNode` (modules/playbook/playbook-domain), `playbookInsertNode` (modules/playbook/playbook-domain), `playbookReplaceNode` (modules/playbook/playbook-domain)",
             "`id`, `input`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook relink needs both fromNodeId and fromPortId to change the source",
+          "cells": [
+            "Playbook relink needs both fromNodeId and fromPortId to change the source",
+            "`FUNCTIONAL_ERROR`",
+            "`playbookRelink` (modules/playbook/playbook-domain)",
+            "`fromNodeId`, `fromPortId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook root must be an entry point component",
+          "cells": [
+            "Playbook root must be an entry point component",
+            "`FUNCTIONAL_ERROR`",
+            "`assertPlaybookDefinitionIsValid` (modules/playbook/playbook-domain)",
+            "`component_id`, `node_id`"
           ]
         },
         {
@@ -7570,7 +7840,7 @@
           "cells": [
             "Cannot publish workflow with validation errors",
             "`FUNCTIONAL_ERROR`",
-            "`publishWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`publishWorkflowDraftUnderLock` (modules/workflow/domain/workflow-domain)",
             "`entityType`, `errorCount`, `errors`"
           ]
         },
@@ -7579,7 +7849,7 @@
           "cells": [
             "Cannot publish workflow: the following statuses are in use and cannot be removed. Move all items out of those statuses first.",
             "`FUNCTIONAL_ERROR`",
-            "`publishWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`publishWorkflowDraftUnderLock` (modules/workflow/domain/workflow-domain)",
             "`entityType`, `removedStates`"
           ]
         },
@@ -7588,7 +7858,7 @@
           "cells": [
             "Cannot publish workflow: the following statuses are still assigned to entities and cannot be removed.",
             "`FUNCTIONAL_ERROR`",
-            "`publishWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`publishWorkflowDraftUnderLock` (modules/workflow/domain/workflow-domain)",
             "`entityType`, `removedStatus`"
           ]
         },
@@ -7597,7 +7867,7 @@
           "cells": [
             "Consistency error: Cannot publish draft_version that is not in all_versions",
             "`FUNCTIONAL_ERROR`",
-            "`publishWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`publishWorkflowDraftUnderLock` (modules/workflow/domain/workflow-domain)",
             "`draftVersionId`"
           ]
         },
@@ -7642,7 +7912,7 @@
           "cells": [
             "Entity setting not found for type",
             "`FUNCTIONAL_ERROR`",
-            "`migrateWorkflowFromStatuses` (modules/workflow/domain/workflow-domain), `publishWorkflowDefinition` (modules/workflow/domain/workflow-domain), `restorePublishedWorkflowDefinition` (modules/workflow/domain/workflow-domain) and 1 more",
+            "`migrateWorkflowFromStatuses` (modules/workflow/domain/workflow-domain), `publishWorkflowDraftUnderLock` (modules/workflow/domain/workflow-domain), `restorePublishedWorkflowUnderLock` (modules/workflow/domain/workflow-domain) and 1 more",
             "`entityType`"
           ]
         },
@@ -7687,7 +7957,7 @@
           "cells": [
             "Invalid workflow definition JSON",
             "`FUNCTIONAL_ERROR`",
-            "`setWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`saveWorkflowDraftUnderLock` (modules/workflow/domain/workflow-domain)",
             ""
           ]
         },
@@ -7696,7 +7966,7 @@
           "cells": [
             "No draft version to publish",
             "`FUNCTIONAL_ERROR`",
-            "`publishWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`publishWorkflowDraftUnderLock` (modules/workflow/domain/workflow-domain)",
             "`entityType`"
           ]
         },
@@ -7714,7 +7984,7 @@
           "cells": [
             "No published version to restore",
             "`FUNCTIONAL_ERROR`",
-            "`restorePublishedWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`restorePublishedWorkflowUnderLock` (modules/workflow/domain/workflow-domain)",
             "`entityType`"
           ]
         },
@@ -7732,7 +8002,7 @@
           "cells": [
             "No workflow definition found",
             "`FUNCTIONAL_ERROR`",
-            "`restorePublishedWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`restorePublishedWorkflowUnderLock` (modules/workflow/domain/workflow-domain)",
             "`entityType`"
           ]
         },
@@ -7741,7 +8011,7 @@
           "cells": [
             "No workflow definition to publish",
             "`FUNCTIONAL_ERROR`",
-            "`publishWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`publishWorkflowDraftUnderLock` (modules/workflow/domain/workflow-domain)",
             "`entityType`"
           ]
         },
@@ -7858,7 +8128,7 @@
           "cells": [
             "The Global and Request access workflows must have different names",
             "`FUNCTIONAL_ERROR`",
-            "`setWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`saveWorkflowDraftUnderLock` (modules/workflow/domain/workflow-domain)",
             "`entityType`, `name`, `scope`"
           ]
         },
@@ -7894,7 +8164,7 @@
           "cells": [
             "Workflow definition not found",
             "`FUNCTIONAL_ERROR`",
-            "`publishWorkflowDefinition` (modules/workflow/domain/workflow-domain), `restorePublishedWorkflowDefinition` (modules/workflow/domain/workflow-domain)",
+            "`publishWorkflowDraftUnderLock` (modules/workflow/domain/workflow-domain), `restorePublishedWorkflowUnderLock` (modules/workflow/domain/workflow-domain)",
             "`workflowId`"
           ]
         },
@@ -7914,6 +8184,15 @@
             "`FUNCTIONAL_ERROR`",
             "`assertScopeAllowed` (modules/workflow/domain/workflow-domain)",
             "`entityType`, `scope`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Workflow transitions cannot be applied to an entity while in a draft",
+          "cells": [
+            "Workflow transitions cannot be applied to an entity while in a draft",
+            "`FUNCTIONAL_ERROR`",
+            "`assertEntityWorkflowNotInDraft` (modules/workflow/domain/workflow-domain)",
+            "`entityId`"
           ]
         }
       ]

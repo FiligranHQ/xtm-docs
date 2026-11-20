@@ -67,9 +67,19 @@ Each part of the case page holds one kind of evidence:
 | **Overview**, card **Origin of the case** | What started the case: the incident, the sighting or the report. Click **Add** on the card |
 | **Observables** tab | The technical values of the alert: IP addresses, domains, URLs, hashes, email addresses. Click **Add observable**: the **Add observables** panel finds existing values, and **Create an observable** adds a new one. To add the addresses of an alert in one go, pick the type in **Create an observable**, open **Create multiple observables** and paste one value per line |
 | **Entities** tab | Everything else: the intrusion set or malware behind the attack, the affected organization, the attack patterns. Click **Add entity**: the **Add entities** panel works the same way, with **Create an entity** |
-| **Knowledge** tab | The same objects and their relationships, in the [views of a container](/opencti/use/explore/#the-views-of-a-container): **Graph view**, **TimeLine view**, **Correlation view** and **Tactics matrix view**. Draw relationships here, such as the domain that resolves to an address |
+| **Knowledge** tab | The same objects and their relationships, in the [views of a container](/opencti/use/explore/#the-views-of-a-container): a graph, a timeline, the other containers they correlate with, and the MITRE ATT&CK matrix of their techniques. Draw relationships here, such as the domain that resolves to an address |
 | **Content** tab | Your write-up: the incident report or the answer to the request |
 | **Data** tab | The files: logs, screenshots, the original phishing email, and the exports of the case |
+
+:::only{opencti=">=7.261119"}
+The buttons at the top right of **Knowledge** switch between **Graph view**, **TimeLine view**, **Correlation view** and **Matrix view**.
+
+A screenshot or a document you add in **Data**, in PNG, JPEG, PDF, text, HTML or Markdown, opens in the **Content** tab when you click its line, next to your write-up: you read the capture of the alert without downloading it. On every line, **Open in a new tab** shows the file in the browser and **Download this file** saves it. A program file (`.exe`, `.dll`, `.pif`) is never opened: you choose between **Raw file** and **Encrypted archive**. A click on another kind of file, such as the original email, does nothing: use these two buttons.
+:::
+
+:::only{opencti="<7.261119"}
+The buttons at the top right of **Knowledge** switch between **Graph view**, **TimeLine view**, **Correlation view** and **Tactics matrix view**.
+:::
 
 The **Overview** splits what the case holds into **Observables** and **Other entities**. In **Details**, **Correlated containers** lists the reports and cases that share objects with this one: the fastest sign that the incident belongs to a known campaign. Click **Display the correlation graph** to see what they share.
 

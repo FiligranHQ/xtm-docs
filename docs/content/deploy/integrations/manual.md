@@ -163,8 +163,8 @@ Without Docker, an integration runs as a Python program with the same settings, 
 
 An integration reaches RabbitMQ at the host name and port that the platform gives it when it registers: the RabbitMQ settings of the platform. From another network, that name may not resolve.
 
-::::tabs
-:::tab[Override the RabbitMQ address]
+:::::tabs
+::::tab[Override the RabbitMQ address]
 Give the connector the address and credentials it must use instead, with these variables or the `mq` block of `config.yml`:
 
 | Variable | `config.yml` key |
@@ -177,12 +177,16 @@ Give the connector the address and credentials it must use instead, with these v
 | `MQ_PASS` | `mq.pass` |
 
 These variables are read by OpenCTI connectors.
-:::
-:::tab[Use HTTP instead of RabbitMQ (OpenCTI)]
+::::
+::::tab[Use HTTP instead of RabbitMQ (OpenCTI)]
 An OpenCTI connector can skip RabbitMQ entirely.
 
 - `CONNECTOR_QUEUE_PROTOCOL=api` sends the bundles it produces to the OpenCTI API over HTTP instead of RabbitMQ (`amqp`, the default). It applies to import, enrichment and file import connectors. OpenCTI refuses a request larger than `app:max_payload_body_size` (`APP__MAX_PAYLOAD_BODY_SIZE`), `50mb` by default: raise it on the platform for a connector that sends large bundles.
 - `CONNECTOR_LISTEN_PROTOCOL=api` makes the connector receive its jobs over HTTP: it starts an HTTP server, and the OpenCTI workers call it. It applies to enrichment and export connectors.
+
+:::only{opencti=">=7.261119"}
+When the platform runs with `app:http:secure_by_default` (`APP__HTTP__SECURE_BY_DEFAULT`) set to `true`, an unset `app:max_payload_body_size` is `10mb` instead: set it on the platform before you send large bundles over HTTP. See [Secure HTTP defaults](/deploy/operate/harden/#secure-http-defaults).
+:::
 
 | Variable | Default | What it sets |
 | --- | --- | --- |
@@ -200,8 +204,8 @@ The workers make these calls. Three settings of the `worker` service shape them:
 | `WORKER_LISTEN_API_SSL_VERIFY` | `false` | `true` makes the workers check the certificate of a connector that serves HTTPS |
 | `WORKER_LISTEN_API_HTTP_PROXY` | | A proxy for the calls to `http://` connectors |
 | `WORKER_LISTEN_API_HTTPS_PROXY` | | A proxy for the calls to `https://` connectors |
-:::
 ::::
+:::::
 
 ## Check that it works
 

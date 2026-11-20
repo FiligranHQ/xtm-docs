@@ -223,10 +223,14 @@ The user page has three tabs: **Overview**, **Analytics** and **History**. Use t
 - **Permissions**: the **Roles**, **Groups** and **Organizations** the user gets, their open **Sessions**, their **Hidden entity types** and their effective **Max Confidence Level**. A tooltip next to the level says where it comes from: a group, the user, or **Bypass all capabilities**. Per-type levels follow, each marked **from group** with the group's name, or **from user**.
 - **Triggers and Digests**: the notifications sent to the user. Service accounts have none.
 - **Operations**: the **Number of operations** of the user per month. Requires Enterprise Edition.
-- **History**: the latest changes the user made, with links to every entity and relationship they created. It requires the **Access security activity** capability.
+- **History**: the latest changes the user made, with links to every entity and relationship they created. It requires the **Access security activity** capability. Each line gives the date, then the user's name and what they did; a line too long for the card is cut, and hovering over it shows it whole.
 
 :::only{opencti=">=7.260811"}
 For a user, **Basic information** also shows **Password valid until**, the date the password must be changed.
+:::
+
+:::only{opencti=">=7.261119"}
+Every line of the **History** card reads as plain text on one line, including changes recorded by earlier versions whose values held formatting or line breaks, such as a rich-text description.
 :::
 
 ### Analytics

@@ -160,7 +160,7 @@ OpenCTI does not check a default value when you save it. Enter one the field acc
 The **Workflow** tab sets the processing statuses an object of this type moves through, for example New, In progress and Analyzed. Statuses come from the status templates of :menu[Settings > Taxonomies > Status templates]. How to design and use them is in [Track the progress of reports and cases](/opencti/use/automate/entity-workflows/); the draft workflow is in [Approve drafts step by step](/opencti/use/automate/draft-workflow/).
 
 :::only{opencti=">=7.261030"}
-The tab also has **Entity status sync**. Turn on **Update entities' statuses by name match** when you receive this type from another OpenCTI platform through a [live stream](/opencti/use/ingest/streams/). Without it, OpenCTI keeps the internal reference of the remote status as it is, and that reference matches no local status. With it, OpenCTI applies the local status that has the same name:
+The tab also has the **Entity status sync** switch, off by default. Turn it on when you receive this type from another OpenCTI platform through a [live stream](/opencti/use/ingest/streams/). Without it, OpenCTI keeps the internal reference of the remote status as it is, and that reference matches no local status. With it, OpenCTI applies the local status that has the same name:
 
 - if a local status matches, the object gets it;
 - if none matches, a new object gets the default status of its workflow, and an object already synchronized keeps its current status.

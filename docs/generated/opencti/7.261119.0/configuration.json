@@ -1,6 +1,6 @@
 {
-  "version": "7.261117.0",
-  "source": "OpenCTI-Platform/opencti@1b89a14",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9",
   "themes": [
     "Basic parameters",
     "Network and security",
@@ -316,14 +316,14 @@
       "key": "app:allow_unsecure_http_resources",
       "env": "APP__ALLOW_UNSECURE_HTTP_RESOURCES",
       "type": "boolean",
-      "declared": true,
+      "declared": false,
       "read": true,
       "files": [
         "http/httpConfig.ts"
       ],
-      "default": true,
+      "default": "!HTTP_SECURE_BY_DEFAULT",
       "theme": "Network and security",
-      "description": "When set to false, prevents the application from loading insecure (HTTP) resources (images, manifests, connections, objects)"
+      "description": "When set to false, prevents the application from loading insecure (HTTP) resources (images, manifests, connections, objects) and sends `upgrade-insecure-requests`. Unset, `true`, and from 7.261119 the opposite of `app:http:secure_by_default`, which refuses these resources without sending `upgrade-insecure-requests`"
     },
     {
       "key": "app:app_logs:control:max_array_size",
@@ -1219,6 +1219,31 @@
       "description": "Interval in milliseconds between two collections of storage and ingestion usage metrics, collected by the `platform_usage_metrics_manager` (disabled by default, see `platform_usage_metrics_manager:enabled`) and shared across the cluster through Redis. Also the polling interval every node uses to adopt that shared value. Set to `0` to disable the collection."
     },
     {
+      "key": "app:http:max_redirects",
+      "env": "APP__HTTP__MAX_REDIRECTS",
+      "type": "string",
+      "declared": false,
+      "read": true,
+      "files": [
+        "http/httpConfig.ts"
+      ],
+      "theme": "Network and security",
+      "description": "Number of redirects the platform's outgoing HTTP requests follow (feeds, synchronizers, notifiers), `0` to follow none. A request that needs more fails with `Maximum number of redirects exceeded`. Unset, `21`, or `5` with `app:http:secure_by_default`. A value that is not a whole number of zero or more falls back to the default, with a warning at start."
+    },
+    {
+      "key": "app:http:secure_by_default",
+      "env": "APP__HTTP__SECURE_BY_DEFAULT",
+      "type": "boolean",
+      "declared": true,
+      "read": true,
+      "files": [
+        "http/httpConfig.ts"
+      ],
+      "default": false,
+      "theme": "Network and security",
+      "description": "Default of the HTTP protections that do not set their own option. When `true`, the rate limit is 30,000 requests per 60 seconds (`app:rate_protection:max_requests`, `app:rate_protection:time_window`), a JSON request body is limited to `10mb` (`app:max_payload_body_size`), the pages of the platform refuse `http://` resources (`app:allow_unsecure_http_resources`), and outgoing requests follow 5 redirects (`app:http:max_redirects`). It does not send `upgrade-insecure-requests`: only an explicit `app:allow_unsecure_http_resources` set to `false` does. `false` by default for now, and the platform logs a warning at start; a later version turns it on by default. An explicit value of the other keys always wins."
+    },
+    {
       "key": "app:https_cert:ca",
       "env": "APP__HTTPS_CERT__CA",
       "type": "list",
@@ -1463,13 +1488,10 @@
       "declared": false,
       "read": true,
       "files": [
-        "http/httpPlatform.js",
-        "http/httpServer.js",
-        "http/httpTaxii.js"
+        "http/httpConfig.ts"
       ],
-      "default": "50mb",
       "theme": "Network and security",
-      "description": "Maximum size of a JSON request body accepted by the API, the TAXII server and the other HTTP routes, such as `50mb`. Raise it if large requests are rejected."
+      "description": "Maximum size of a JSON request body accepted by the API, the TAXII server and the other HTTP routes, such as `50mb`. Raise it if large requests are rejected. Unset, `50mb`, and from 7.261119 `10mb` with `app:http:secure_by_default`. From 7.261119, the TAXII API root advertises this limit, in bytes, as its `max_content_length` (before, a fixed 100 MB)."
     },
     {
       "key": "app:max_upload_file_size",
@@ -1626,28 +1648,26 @@
     {
       "key": "app:rate_protection:max_requests",
       "env": "APP__RATE_PROTECTION__MAX_REQUESTS",
-      "type": "number",
-      "declared": true,
+      "type": "string",
+      "declared": false,
       "read": true,
       "files": [
         "http/httpConfig.ts"
       ],
-      "default": 10000,
       "theme": "Network and security",
-      "description": "Maximum of request allow per IP and per window duration, 0 will deny all"
+      "description": "Maximum of request allow per IP and per window duration, 0 will deny all. Unset, `10000`, and from 7.261119 `30000` with `app:http:secure_by_default`"
     },
     {
       "key": "app:rate_protection:time_window",
       "env": "APP__RATE_PROTECTION__TIME_WINDOW",
-      "type": "number",
-      "declared": true,
+      "type": "string",
+      "declared": false,
       "read": true,
       "files": [
         "http/httpConfig.ts"
       ],
-      "default": 1,
       "theme": "Network and security",
-      "description": "Time window for rate protection in seconds"
+      "description": "Time window for rate protection in seconds. Unset, `1`, and from 7.261119 `60` with `app:http:secure_by_default`"
     },
     {
       "key": "app:rate_protection:user_agent_skip_prefixes",
@@ -2270,6 +2290,7 @@
       "declared": true,
       "read": true,
       "files": [
+        "database/engine-config.ts",
         "database/engine.ts"
       ],
       "default": 500,
@@ -2414,6 +2435,7 @@
       "declared": true,
       "read": true,
       "files": [
+        "database/engine-config.ts",
         "database/engine.ts"
       ],
       "default": 5000,
@@ -2466,6 +2488,7 @@
       "declared": true,
       "read": true,
       "files": [
+        "database/engine-config.ts",
         "database/engine.ts"
       ],
       "default": 5000,

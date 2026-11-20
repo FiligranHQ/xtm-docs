@@ -100,6 +100,29 @@ Click **Update** to open the **Update the organization** panel. **Name**, **Desc
 
 To hide organizations from one another, for example the customers of a managed security provider, restrict each organization entity with [authorized members](/opencti/administer/sharing/): your administrators and its own members only. Do it when you create the organization, before you share anything with it.
 
+::::only{opencti=">=7.261119"}
+### Open the default dashboard on a preset
+
+Once you choose a **Default dashboard**, a **Default preset** field shows under it. It lists the presets saved on that dashboard: each one holds values for the dashboard's variables and a time range, saved with **Save** > **Save as new preset…** on the dashboard (see [Build a dashboard](/opencti/use/dashboards/)). Members of the organization then open the dashboard on these values instead of its defaults.
+
+::screenshot{id=opencti-organizations-default-preset alt="The Update the organization panel of Grand Meridian Hotels: Member hotel overview as the Default dashboard and, under it, the Last month preset in Default preset, with the helper text saying the dashboard opens on the values and time range of this preset."}
+
+- Left empty, the field reads **No preset (default values of the dashboard)**: the dashboard opens on its own values. Clear the field to come back to it.
+- Choosing another default dashboard empties the preset, since presets belong to one dashboard.
+- A preset deleted from the dashboard no longer applies: members open the dashboard on its own values.
+- When a member's profile, their organizations and their groups point to the same dashboard, the first of them decides, in this order: the profile, the organizations, the groups. A member who chose this dashboard on their profile without a preset does not get the organization's preset.
+- On their home page, members always see the default preset. When they open the dashboard itself, a preset they pick there is kept in their browser and replaces the default one.
+
+:::example[Open the member dashboard on the last month]
+Example CERT publishes the Member hotel overview dashboard to Grand Meridian Hotels, with the organization among its authorized members. It wants the hotel's analysts to see the last month when they sign in, not the three months the dashboard shows by default. A dashboard editor saves the Last month preset on the dashboard. In the **Update the organization** panel of Grand Meridian Hotels, set:
+
+- **Default dashboard**: Member hotel overview;
+- **Default preset**: Last month.
+
+The hotel's analysts now land on Member hotel overview with the time range of the last month.
+:::
+::::
+
 ## Share knowledge with an organization
 
 ### By hand

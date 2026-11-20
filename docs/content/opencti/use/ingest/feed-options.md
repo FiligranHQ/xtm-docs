@@ -62,6 +62,18 @@ The ingestion manager polls the TAXII, RSS, CSV and JSON feeds.
 | `ingestion_manager:feed:request_timeout` | `INGESTION_MANAGER__FEED__REQUEST_TIMEOUT` | `300000` | Time a feed waits for the source to answer, in milliseconds |
 ::::
 
+::::only{opencti=">=7.261119"}
+## Redirects
+
+The TAXII, RSS, CSV and JSON feeds, the OpenCTI streams and the notifiers follow the redirects a source answers with, up to a limit.
+
+| Key | Environment variable | Default | Effect |
+| --- | --- | --- | --- |
+| `app:http:max_redirects` | `APP__HTTP__MAX_REDIRECTS` | `21`, or `5` when `app:http:secure_by_default` is `true` | Number of redirects a request follows. `0` follows none. A request that needs more fails with `Maximum number of redirects exceeded` |
+
+A value that is not a whole number of zero or more falls back to the default, with a warning in the log at start. Lower the limit when you want a feed to fail rather than wander through a chain of redirects; raise it when a source sits behind several redirecting gateways. See [Secure HTTP defaults](/deploy/operate/harden/#secure-http-defaults).
+::::
+
 ## TAXII feeds
 
 | Key | Environment variable | Default | Effect |
@@ -77,6 +89,10 @@ Set a limit when a server times out or sends answers too large to process. The f
 | `app:max_payload_body_size` | `APP__MAX_PAYLOAD_BODY_SIZE` | `50mb` | Largest request body the platform accepts, on its API and on the TAXII push collections. A larger push is refused |
 
 Raise it when partners push large bundles in one request, and check that your reverse proxy accepts the same size.
+
+:::only{opencti=">=7.261119"}
+Unset, the limit falls to `10mb` when `app:http:secure_by_default` is `true`: see [Secure HTTP defaults](/deploy/operate/harden/#secure-http-defaults). The TAXII API root, `/taxii2/root/`, advertises the limit in bytes as `max_content_length`, so that a TAXII client knows how large a push the platform accepts.
+:::
 
 ## RSS feeds
 

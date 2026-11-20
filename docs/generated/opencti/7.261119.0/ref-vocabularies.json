@@ -1,8 +1,8 @@
 {
   "name": "vocabularies",
-  "version": "7.261117.0",
-  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/src/modules/vocabulary/vocabulary-types.ts, opencti-platform/opencti-graphql/src/modules/vocabulary/vocabulary-utils.ts)",
-  "intro": "The 54 vocabulary categories of OpenCTI 7.261117.0, as **Settings > Taxonomies > Vocabularies** lists them, with the entity types and fields that take their values and the 470 values a new platform is created with. Add, rename or merge values as [Taxonomies](/opencti/configure/taxonomies/#vocabularies) explains.",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/modules/vocabulary/vocabulary-types.ts, opencti-platform/opencti-graphql/src/modules/vocabulary/vocabulary-utils.ts)",
+  "intro": "The 54 vocabulary categories of OpenCTI 7.261119.0, as **Settings > Taxonomies > Vocabularies** lists them, with the entity types and fields that take their values and the 470 values a new platform is created with. Add, rename or merge values as [Taxonomies](/opencti/configure/taxonomies/#vocabularies) explains.",
   "filter": "Filter categories and values",
   "sections": [
     {

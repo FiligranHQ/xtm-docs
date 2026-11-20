@@ -1,8 +1,8 @@
 {
   "name": "http-endpoints",
-  "version": "7.261117.0",
-  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/src/http, graphql/sseMiddleware.js and every file that adds a route)",
-  "intro": "The 58 HTTP endpoints OpenCTI 7.261117.0 serves, the GraphQL API included. Paths are relative to the base path (`app:base_path`, empty by default) and use the Express syntax: `:id` is one segment, `*file` the rest of the path. *Token or session* means an `Authorization: Bearer <API token>` header, a Basic login or the cookie of a browser session; a rate limiter applies to every request. Share data through these endpoints as [Feeds, TAXII collections and streams](/opencti/use/share/feeds/) explains; probe the platform as [Health probes](/deploy/operate/health-probes/) explains.",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/http, graphql/sseMiddleware.js and every file that adds a route)",
+  "intro": "The 58 HTTP endpoints OpenCTI 7.261119.0 serves, the GraphQL API included. Paths are relative to the base path (`app:base_path`, empty by default) and use the Express syntax: `:id` is one segment, `*file` the rest of the path. *Token or session* means an `Authorization: Bearer <API token>` header, a Basic login or the cookie of a browser session; a rate limiter applies to every request. Share data through these endpoints as [Feeds, TAXII collections and streams](/opencti/use/share/feeds/) explains; probe the platform as [Health probes](/deploy/operate/health-probes/) explains.",
   "filter": "Filter endpoints and paths",
   "sections": [
     {

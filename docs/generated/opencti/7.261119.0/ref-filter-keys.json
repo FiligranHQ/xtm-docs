@@ -1,8 +1,8 @@
 {
   "name": "filter-keys",
-  "version": "7.261117.0",
-  "source": "OpenCTI-Platform/opencti@1b89a14 (95 files, including opencti-platform/opencti-graphql/src/domain/filterKeysSchema.ts and opencti-platform/opencti-graphql/src/utils/filtering/filtering-constants.ts)",
-  "intro": "The 23 operators and 557 filter keys a filter group accepts in OpenCTI 7.261117.0, in the API and in the filter menu of the interface. [Filters](/develop/apis/filters/) explains how to write a filter group.",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (95 files, including opencti-platform/opencti-graphql/src/domain/filterKeysSchema.ts and opencti-platform/opencti-graphql/src/utils/filtering/filtering-constants.ts)",
+  "intro": "The 23 operators and 557 filter keys a filter group accepts in OpenCTI 7.261119.0, in the API and in the filter menu of the interface. [Filters](/develop/apis/filters/) explains how to write a filter group.",
   "filter": "Filter keys, types and operators",
   "sections": [
     {
@@ -101,7 +101,7 @@
           "cells": [
             "`nil`",
             "Empty",
-            "short text, long text, date, ID, vocabulary value, value from a fixed list",
+            "short text, long text, integer, number, date, ID, vocabulary value, value from a fixed list",
             "The key has no value. Takes no values."
           ]
         },
@@ -146,7 +146,7 @@
           "cells": [
             "`not_nil`",
             "Not empty",
-            "short text, long text, date, ID, vocabulary value, value from a fixed list",
+            "short text, long text, integer, number, date, ID, vocabulary value, value from a fixed list",
             "The key has a value. Takes no values."
           ]
         },
@@ -410,7 +410,7 @@
           "cells": [
             "`pir_score`",
             "Stream, trigger and playbook filters",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**PIR Score**. The score of an entity in a Priority Intelligence Requirement, with the PIR in the `pir_ids` sub-key. Value: integer."
           ]
         },
@@ -482,7 +482,7 @@
           "cells": [
             "Entity metrics (set at run time)",
             "The entity types the configuration names",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "One key per metric attribute declared in `app:schema_metrics`, labeled with the metric name. Value: number."
           ]
         },
@@ -974,7 +974,7 @@
           "cells": [
             "`attribute_count`",
             "`stix-sighting-relationship`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Count**. Value: integer."
           ]
         },
@@ -1001,7 +1001,7 @@
           "cells": [
             "`attribute_order`",
             "`Capability`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Capability order**. Value: integer."
           ]
         },
@@ -1262,7 +1262,7 @@
           "cells": [
             "`completed_number`",
             "`work`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Completed number**. Value: integer."
           ]
         },
@@ -1280,7 +1280,7 @@
           "cells": [
             "`confidence`",
             "`DeleteOperation`, `Stix-Domain-Object`, `Threat-Actor-Individual`, `participate-to`, `stix-relationship`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Confidence**. Value: integer."
           ]
         },
@@ -1559,7 +1559,7 @@
           "cells": [
             "`cvv`",
             "`Payment-Card`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**CVV**. Value: integer."
           ]
         },
@@ -1622,7 +1622,7 @@
           "cells": [
             "`decay_lifetime`",
             "`DecayRule`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Lifetime**. Value: integer."
           ]
         },
@@ -1631,7 +1631,7 @@
           "cells": [
             "`decay_points`",
             "`DecayRule`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Reaction points**. Value: integer, several values."
           ]
         },
@@ -1640,7 +1640,7 @@
           "cells": [
             "`decay_pound`",
             "`DecayRule`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Decay factor**. Value: number."
           ]
         },
@@ -1649,7 +1649,7 @@
           "cells": [
             "`decay_revoke_score`",
             "`DecayRule`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Revoke score**. Value: integer."
           ]
         },
@@ -1802,7 +1802,7 @@
           "cells": [
             "`dst_byte_count`",
             "`Network-Traffic`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**DST byte count**. Value: integer."
           ]
         },
@@ -1811,7 +1811,7 @@
           "cells": [
             "`dst_packets`",
             "`Network-Traffic`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**DST packets**. Value: integer."
           ]
         },
@@ -1820,7 +1820,7 @@
           "cells": [
             "`dst_port`",
             "`Network-Traffic`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**DST port**. Value: integer."
           ]
         },
@@ -2387,7 +2387,7 @@
           "cells": [
             "`import_expected_number`",
             "`work`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Expected import number**. Value: integer."
           ]
         },
@@ -2702,7 +2702,7 @@
           "cells": [
             "`last_deleted_count`",
             "`RetentionRule`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Last deleted count**. Value: integer."
           ]
         },
@@ -2792,7 +2792,7 @@
           "cells": [
             "`likelihood`",
             "`Note`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Likelihood**. Value: integer."
           ]
         },
@@ -2900,7 +2900,7 @@
           "cells": [
             "`max_distinct_count`",
             "`Observed-Data`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Max distinct count**. Value: integer."
           ]
         },
@@ -2909,7 +2909,7 @@
           "cells": [
             "`max_retention`",
             "`RetentionRule`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Maximum retention**. Value: integer."
           ]
         },
@@ -3107,7 +3107,7 @@
           "cells": [
             "`nodes_count`",
             "`Support-Package`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Number of nodes in cluster**. Value: integer."
           ]
         },
@@ -3161,7 +3161,7 @@
           "cells": [
             "`number`",
             "`Autonomous-System`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Autonomous system number**. Value: integer."
           ]
         },
@@ -3170,7 +3170,7 @@
           "cells": [
             "`number_observed`",
             "`Observed-Data`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Number observed**. Value: integer."
           ]
         },
@@ -3179,7 +3179,7 @@
           "cells": [
             "`number_of_subkeys`",
             "`Windows-Registry-Key`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Number of sub-keys**. Value: integer."
           ]
         },
@@ -3188,7 +3188,7 @@
           "cells": [
             "`number_seen`",
             "`Observed-Data`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Number seen**. Value: integer."
           ]
         },
@@ -3323,7 +3323,7 @@
           "cells": [
             "`opinions_metrics.max`",
             "`Stix-Core-Object`, `stix-core-relationship`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Opinions max**. Value: integer."
           ]
         },
@@ -3332,7 +3332,7 @@
           "cells": [
             "`opinions_metrics.mean`",
             "`Stix-Core-Object`, `stix-core-relationship`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Opinions mean**. Value: number."
           ]
         },
@@ -3341,7 +3341,7 @@
           "cells": [
             "`opinions_metrics.min`",
             "`Stix-Core-Object`, `stix-core-relationship`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Opinions min**. Value: integer."
           ]
         },
@@ -3350,7 +3350,7 @@
           "cells": [
             "`opinions_metrics.total`",
             "`Stix-Core-Object`, `stix-core-relationship`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Opinions total number**. Value: integer."
           ]
         },
@@ -3359,7 +3359,7 @@
           "cells": [
             "`order`",
             "`DecayRule`, `Status`, `Vocabulary`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Order**. Value: integer."
           ]
         },
@@ -3521,7 +3521,7 @@
           "cells": [
             "`pid`",
             "`Process`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**PID**. Value: integer."
           ]
         },
@@ -3530,7 +3530,7 @@
           "cells": [
             "`pir_rescan_days`",
             "`Pir`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**PIR Rescan in days**. Value: integer."
           ]
         },
@@ -3719,7 +3719,7 @@
           "cells": [
             "`rating`",
             "`Feedback`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Rating**. Value: integer."
           ]
         },
@@ -3764,7 +3764,7 @@
           "cells": [
             "`remaining_count`",
             "`RetentionRule`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Remaining count**. Value: integer."
           ]
         },
@@ -3872,7 +3872,7 @@
           "cells": [
             "`rolling_time`",
             "`Feed`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Rolling time**. Value: integer."
           ]
         },
@@ -4016,7 +4016,7 @@
           "cells": [
             "`size`",
             "`StixFile`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**File size**. Value: integer."
           ]
         },
@@ -4070,7 +4070,7 @@
           "cells": [
             "`src_byte_count`",
             "`Network-Traffic`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**SRC byte count**. Value: integer."
           ]
         },
@@ -4079,7 +4079,7 @@
           "cells": [
             "`src_packets`",
             "`Network-Traffic`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**SRC packets**. Value: integer."
           ]
         },
@@ -4088,7 +4088,7 @@
           "cells": [
             "`src_port`",
             "`Network-Traffic`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**SRC port**. Value: integer."
           ]
         },
@@ -4241,7 +4241,7 @@
           "cells": [
             "`subject_public_key_exponent`",
             "`X509-Certificate`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Subject public key exponent**. Value: integer."
           ]
         },
@@ -4718,7 +4718,7 @@
           "cells": [
             "`x_opencti_cvss_base_score`",
             "`Vulnerability`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**CVSS3 Score**. Value: number."
           ]
         },
@@ -4799,7 +4799,7 @@
           "cells": [
             "`x_opencti_cvss_temporal_score`",
             "`Vulnerability`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**CVSS3 Temporal Score**. Value: number."
           ]
         },
@@ -4853,7 +4853,7 @@
           "cells": [
             "`x_opencti_cvss_v2_base_score`",
             "`Vulnerability`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**CVSS2 Score**. Value: number."
           ]
         },
@@ -4907,7 +4907,7 @@
           "cells": [
             "`x_opencti_cvss_v2_temporal_score`",
             "`Vulnerability`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**CVSS2 Temporal Score**. Value: number."
           ]
         },
@@ -4970,7 +4970,7 @@
           "cells": [
             "`x_opencti_cvss_v4_base_score`",
             "`Vulnerability`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**CVSS4 Score**. Value: number."
           ]
         },
@@ -5105,7 +5105,7 @@
           "cells": [
             "`x_opencti_epss_percentile`",
             "`Vulnerability`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**EPSS Percentile**. Value: number."
           ]
         },
@@ -5114,7 +5114,7 @@
           "cells": [
             "`x_opencti_epss_score`",
             "`Vulnerability`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**EPSS Score**. Value: number."
           ]
         },
@@ -5168,7 +5168,7 @@
           "cells": [
             "`x_opencti_order`",
             "`Kill-Chain-Phase`, `Marking-Definition`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Marking order**. Value: integer."
           ]
         },
@@ -5213,7 +5213,7 @@
           "cells": [
             "`x_opencti_score`",
             "`Event`, `Incident`, `Indicator`, `Intrusion-Set`, `Malware`, `Organization`, `Stix-Cyber-Observable`, `Threat-Actor-Group`, `Vulnerability`",
-            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
             "**Score**. Value: integer."
           ]
         },

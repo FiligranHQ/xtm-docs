@@ -150,6 +150,16 @@ A **Processing rate** that stays below the **Stream rate** means the consumer fa
 
 To change a stream, choose **Update** in its actions menu: the **Update a live stream** panel has the same fields as the creation. Filter changes apply to connected consumers from the next event. Objects that now match are not sent until they change, so a consumer that needs them at once reconnects with `recover`.
 
+:::only{opencti=">=7.261119"}
+A connected consumer also follows the rights of its user. Before each batch of events, the stream reads the user again: a change of its groups, organizations or markings applies from the next events, and the stream forgets the dependencies it already sent, so that they are checked again against the new rights. The stream ends the connection, and the consumer has to reconnect, when:
+
+- its user is deleted or merged into another one;
+- the account of its user is no longer active, for example locked or past its expiration date (for a restricted stream);
+- you turn **Public stream** on or off, or choose another user in **Share data corresponding to permissions associated with this user**.
+:::
+
+To cut a consumer off at once, stop or delete its stream.
+
 To check what a stream sends, choose **Open stream** in its actions menu: the browser shows its events.
 
 ## Create a CSV feed
@@ -244,6 +254,10 @@ These limits are configuration keys of the platform, set by a platform engineer.
 | Objects a live stream connection remembers as already sent, so as not to send them again as dependencies | `app:live_stream:cache_max_size` | `APP__LIVE_STREAM__CACHE_MAX_SIZE` | `5000` |
 | Time, in hours, a live stream connection remembers an object it sent | `app:live_stream:cache_max_time` | `APP__LIVE_STREAM__CACHE_MAX_TIME` | `2` |
 | Size of a request body the platform accepts, such as objects pushed to a [TAXII push](/opencti/use/ingest/taxii-push/) collection | `app:max_payload_body_size` | `APP__MAX_PAYLOAD_BODY_SIZE` | `50mb` |
+
+:::only{opencti=">=7.261119"}
+When `app:http:secure_by_default` (`APP__HTTP__SECURE_BY_DEFAULT`) is `true`, the size of a request body defaults to `10mb` instead of `50mb`: set `app:max_payload_body_size` if your TAXII push clients send larger bundles. The TAXII API root, `/taxii2/root/`, gives this limit in bytes as its `max_content_length`, such as `52428800` for `50mb`.
+:::
 
 Raise a result limit only after you test what your platform serves in one answer: a larger page costs memory on the platform and on Elasticsearch. Keeping more stream events costs Redis memory. The configuration reference describes each key with its theme: [Technical customization](/reference/opencti/configuration/#technical-customization), [Functional customization](/reference/opencti/configuration/#functional-customization), [Redis](/reference/opencti/configuration/#redis) and [Network and security](/reference/opencti/configuration/#network-and-security).
 

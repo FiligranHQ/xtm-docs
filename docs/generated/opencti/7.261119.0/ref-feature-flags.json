@@ -1,8 +1,8 @@
 {
   "name": "feature-flags",
-  "version": "7.261117.0",
-  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/src/config/conf.js, opencti-platform/opencti-graphql/src/**/*.{ts,js,graphql}, opencti-platform/opencti-front/src/**/*.{ts,tsx,js,jsx})",
-  "intro": "The 11 feature flags of OpenCTI 7.261117.0: features still in development, hidden until the platform lists them in `app:enabled_dev_features` (see the [configuration reference](/reference/opencti/configuration/)). Reserved to development and not supported: a flagged feature can change or disappear in any release, so leave flags off in production; the guides describe the platform without them, and a feature is documented when a release removes its flag.",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/config/conf.js, opencti-platform/opencti-graphql/src/**/*.{ts,js,graphql}, opencti-platform/opencti-front/src/**/*.{ts,tsx,js,jsx})",
+  "intro": "The 10 feature flags of OpenCTI 7.261119.0: features still in development, hidden until the platform lists them in `app:enabled_dev_features` (see the [configuration reference](/reference/opencti/configuration/)). Reserved to development and not supported: a flagged feature can change or disappear in any release, so leave flags off in production; the guides describe the platform without them, and a feature is documented when a release removes its flag.",
   "filter": "Filter flags, API fields and screens",
   "sections": [
     {
@@ -30,15 +30,6 @@
             "Configuration presets, to export and import bundles of platform configuration, and the bootstrap wizard that offers one to the first administrator of a new platform.",
             "Back end (6 files), front (5 files)",
             "Queries `configPresetExportableItems`, `configPresetExportableTypes`, `configPresetImportPreview`, `configPresetImportRunning`, `configPresetImportSession`<br>Mutations `configPresetExport`, `configPresetImport`, `configPresetImportSessionBackToSelection`, `configPresetImportSessionClear`, `configPresetImportSessionSave`, `configPresetImportUpload`, `configPresetPartialImport`, `configPresetPartialImportPreview`<br>API fields `bootstrap_wizard_skipped` of `MeUser`<br>Attributes `bootstrap_wizard_skipped`, `platform_bootstrap_status`<br>Configuration `app:bootstrap_wizard:enabled`<br>Parts of `ConfigPresetBootstrapWizard`, `Experience`, `ThemeImporter`, `useConfigPresetExportAccess`, `useConfigPresetPartialImportAccess`"
-          ]
-        },
-        {
-          "key": "DASHBOARD_VARIABLES",
-          "cells": [
-            "`DASHBOARD_VARIABLES`",
-            "Variables in custom dashboards, whose values (from the URL, the viewer's last choice or their default) feed the filters of the widgets.",
-            "Back end (9 files), front (5 files)",
-            "Mutations `workspacePresetDelete`, `workspacePresetUpsert`, `workspaceVariableDelete`, `workspaceVariableUpsert`<br>API fields `default_dashboard_preset` (2 types), `currentUserDefaultPresetId` of `Workspace`, `presets` of `Workspace`, `variables` of `Workspace`<br>Attributes `default_dashboard_preset`<br>Parts of `CustomDashboard`, `DashboardPresetField`, `PublicDashboardCreationForm`, `useDashboardTimeRange`, `useDashboardVariables`"
           ]
         },
         {
@@ -100,8 +91,8 @@
           "cells": [
             "`LOCAL_AUTH_LOCKOUT`",
             "Local authentication lockout policy feature flag",
-            "Back end (5 files), front (1 file)",
-            "Attributes `local_auth_lockout_admin_max_attempts`, `local_auth_lockout_duration`, `local_auth_lockout_enabled`, `local_auth_lockout_final_action`, `local_auth_lockout_max_attempts`, `local_auth_lockout_window`, `lock_duration`, `lock_source`, `lock_type`, `max_attempts`<br>Parts of `LocalStrategyForm`"
+            "Back end (7 files), front (2 files)",
+            "Attributes `local_auth_lockout_admin_max_attempts`, `local_auth_lockout_duration`, `local_auth_lockout_enabled`, `local_auth_lockout_final_action`, `local_auth_lockout_max_attempts`, `local_auth_lockout_window`, `lock_duration`, `lock_source`, `lock_type`, `max_attempts`<br>Parts of `EmailTemplateAttributesSidebar`, `LocalStrategyForm`"
           ]
         },
         {

@@ -308,6 +308,10 @@ The errors you meet first:
 
 The platform also limits each client, by address and user agent, to 10,000 requests a second by default (`app:rate_protection:max_requests`, `app:rate_protection:time_window`). Beyond it, the answer is HTTP `429` with `{"message":"Too many requests, please try again later."}`. The [errors reference](/reference/opencti/errors/#common-errors-and-what-to-do) lists every message and what to do.
 
+:::only{opencti=">=7.261119"}
+A platform with the [secure HTTP defaults](/deploy/operate/harden/#secure-http-defaults) on allows 30,000 requests per 60 seconds instead, unless its platform engineer sets these two keys. It also refuses a request body over 10 MB unless `app:max_payload_body_size` is set: split a large STIX bundle sent to `stixBundlePush` into smaller ones.
+:::
+
 ## Use the playground
 
 The playground is a GraphiQL editor at `/public/graphql`, also opened by **Playground** in the **API access** card of your profile. It sends requests with the session of your browser, so it runs with your own rights; to try another user's token, add an `Authorization` header in its **Headers** panel. It opens with two example operations, one of them with a filter in its variables.

@@ -37,6 +37,8 @@ An incident in **Events** is the event itself. The work your team does to respon
 3. Click an incident to open it on **Overview**.
 :::
 
+Each line of the list also gives the **Assignees**, **Labels**, **Processing status** and **Marking** of the incident. Sort on **Severity** to put the worst first, or on **Original creation date**, the date the source recorded the incident, to put the latest first.
+
 ::screenshot{id=opencti-events-incident-overview alt="The Overview of the incident Unauthorized access to booking database: incident type Compromise and severity high, first seen on January 9, 2026 at 2:10 AM, reported by Grand Meridian Hotels, and an Entities distribution of the attack patterns, places, people, systems and threats linked to it."}
 
 The **Details** of an incident tell you how serious it is and what it was about:
@@ -51,7 +53,7 @@ The **Details** of an incident tell you how serious it is and what it was about:
 | **Entities distribution**, **Observables distribution** | The kinds of objects and values linked to the incident |
 
 :::only{opencti=">=7.261030"}
-An incident also carries a **Score**, from 0 to 100, set by its source or by your team to rank incidents across sources.
+An incident also carries a **Score**, from 0 to 100, set by its source or by your team to rank incidents across sources. The incidents list shows it in its **Score** column, which you can sort on.
 :::
 
 **Latest containers about the object** lists the reports and cases that hold the incident, often the quickest way to its story. **Knowledge** opens on the diamond model, a timeline and the global kill chain, as for threats. Its side menu splits what is linked to the incident: **Attribution** for the threats it is attributed to, [**Victimology**](/opencti/use/explore/#victimology) for who and where it hit, then the malware, attack patterns, indicators and observables involved.

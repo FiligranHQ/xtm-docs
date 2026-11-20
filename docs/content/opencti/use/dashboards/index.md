@@ -51,7 +51,7 @@ When the question is about each value of a field, such as "how many reports of e
 
 :::
 
-:::example[Threats targeting the hospitality sector over six months]
+::::example[Threats targeting the hospitality sector over six months]
 The head of Example CERT wants the CISOs of member hotel chains to see, on one screen, what threatens the sector over the last six months. Create the dashboard with the **Name** `Hotel sector campaign` and the **Description** `Follow the campaign against the hospitality sector.`, set **Relative time** to **Last 6 months**, then add five widgets:
 
 | Title | Visualization | Perspective | Filters | Parameters |
@@ -64,8 +64,12 @@ The head of Example CERT wants the CISOs of member hotel chains to see, on one s
 
 Put the counter and the threat ranking in a narrow column on the left, the line and the map on the right, and the list across the bottom. Then choose **Manage access restriction** and give the group of member CISOs **can view**.
 
-The CISOs see how many hospitality reports were published in the last six months; Velvet Harbor, Ember Tide, Copper Lantern, Velvet Loader and Operation Low Season among the threats that target the sector; France, Spain and Italy on the map; and whether new indicators keep coming. Next month, the same dashboard covers the six months before it without any change.
+:::only{opencti=">=7.261119"}
+Also choose **Save** > **Set as dashboard defaults** in the bar above the widgets, so that the CISOs open the dashboard on the last six months, not only you.
 :::
+
+The CISOs see how many hospitality reports were published in the last six months; Velvet Harbor, Ember Tide, Copper Lantern, Velvet Loader and Operation Low Season among the threats that target the sector; France, Spain and Italy on the map; and whether new indicators keep coming. Next month, the same dashboard covers the six months before it without any change.
+::::
 
 To start from a dashboard someone else built, import its JSON file with **Import dashboard**, or browse ready-made dashboards with **Import from Hub**, which only shows when your platform can reach the XTM Hub. See [Share dashboards](/opencti/use/dashboards/share/).
 
@@ -78,11 +82,59 @@ The period applies to every widget, each on the date chosen in its own **Date at
 
 **Last 3 months** is a moving window, not a calendar quarter. For "the third quarter of 2026", set **Start date** and **End date**.
 
+:::only{opencti="<7.261119"}
 The period is saved with the dashboard, and only users who can edit it see these controls. A reader with **can view** always sees the period the editor chose.
+:::
+
+:::only{opencti=">=7.261119"}
+A dashboard opens on the period saved with it. Changing the period changes your own view only: the other readers keep theirs. To save the period for everyone, an editor then chooses **Save** > **Set as dashboard defaults**, as described in [Let each reader choose the values](#let-each-reader-choose-the-values). Readers with **can view** also get these controls, unless an editor turns off **Allow viewers to edit time filters**: they then always see the period saved with the dashboard.
+:::
 
 :::only{opencti=">=7.260811"}
 For a wall screen, choose a refresh interval in **Refresh interval**, next to **Refresh**, from **1m** to **1d**, or **Off**. The interval is saved with the dashboard, so every reader's screen reloads its widgets at that pace. Click **Refresh** to reload them now.
 :::
+
+::::only{opencti=">=7.261119"}
+## Let each reader choose the values
+
+When the same question comes back for several values, such as one briefing per report type, a variable saves you a copy of the dashboard per value. The widgets filter on the variable, and each reader picks its value in a chip of the bar above the widgets. A preset saves variable values and a period under a name, to switch to that view in one click.
+
+:::steps
+
+1. In the bar above the widgets, click **Variable**. In **Create variable**, enter a **Name** and choose a **Type**, such as **Entity**, **Label**, **Marking**, **Status**, **Vocabulary**, **Entity type**, **Text**, **Numeric** or **Date**. Some types ask for one more setting: the **Entity types** of an entity, the **Vocabulary category** of a vocabulary, the **Kill chain** of a kill chain phase.
+2. Choose which values readers can pick. **No restriction** offers every value of the type. **Manual selection** offers only the **Values** you list. **By filter**, for an entity, offers the entities that match the filters you set.
+3. Choose the **Default value**, then click **Create**. The variable shows as a chip in the bar. A dashboard holds up to 50 variables.
+4. In the filters of each widget that must follow the variable, set the value of the filter to **Variable** instead of **Fixed value**, and pick the variable. A marker on the widget then lists, in its tooltip, the variables it uses.
+5. Pick values in the chips and a period, then click **Save** and choose **Save as new preset…**. Enter the **Preset name** and click **Save**.
+
+   ::screenshot{id=opencti-dashboards-variables alt="The Partner briefing dashboard with, above its widgets, the bar of variables: the Preset list, the Report type chip set to threat-report, the Variable button and the Save menu."}
+
+:::
+
+The **Save** menu says for whom each choice writes:
+
+- **Update** followed by the name of the active preset saves the values on screen in that preset, for everyone using it.
+- **Save as new preset…** saves them under a new name, for anyone to pick.
+- **Set as dashboard defaults** makes them the values and the period the dashboard opens on, for everyone without a preset.
+
+The **Preset** list, at the start of the bar, switches from one preset to another, and **No preset** goes back to the values of the dashboard. For editors, its menu also offers **Rename preset** and **Delete preset**. The users and groups that open the dashboard on a deleted preset see its default values instead. A preset can be the one a dashboard opens on for a user, a group or an organization: see [Read the home dashboard and AI summaries](/opencti/use/explore/insights/) and [Separate data between organizations](/opencti/administer/organizations/).
+
+A value, a period or a preset that a reader picks changes their own view only. **Modified**, and a dot on each changed chip, show that the view departs from the preset or from the defaults; **Reset to defaults**, or **Reset to** the reader's default preset, goes back. To change or remove a variable, use the menu of its chip. In **Edit variable**, the **Type** and the setting that comes with it can no longer change. **Delete variable** lists the widgets that use the variable: they show no data until you change their filters. The value of the variable also leaves the presets that hold it.
+
+Readers with **can view** can change the period, the variable values and the preset for themselves. To fix what they see, click **Update** in the header of the dashboard and turn off **Allow viewers to edit time filters**, **Allow viewers to change variable values** or **Allow viewers to switch presets**. None of these switches lets a reader change the dashboard.
+
+:::example[One partner briefing for every report type]
+The CTI team lead briefs partner hotels on threat reports, and sometimes on the advisories written for members or on malware analyses. Rather than three dashboards, the `Partner briefing` dashboard gets a variable. Click **Variable** and set:
+
+- **Name**: `Report type`, **Type**: **Vocabulary**, **Vocabulary category**: report types.
+- **Manual selection**, with the **Values** `threat-report`, `member-advisory` and `malware`.
+- **Default value**: `threat-report`.
+
+In the `Reports of the selected type` widget, set the report type filter to **Variable** and pick `Report type`. Then choose `member-advisory` in the **Report type** chip and **Last 6 months** in **Relative time**, click **Save** > **Save as new preset…** and enter the **Preset name** `Member advisories`.
+
+Readers open the dashboard on threat reports. Choosing **Member advisories** in the **Preset** list shows six months of member advisories, without changing what the rest of the team sees.
+:::
+::::
 
 ## Share it with your team and leadership
 
@@ -118,6 +170,10 @@ The dashboard header, its actions menu (⋮), and the menu at the end of its lin
 - **Delete** removes the dashboard and every public dashboard made from it. A dashboard does not go to the trash: this cannot be undone. To delete several dashboards, select them with their checkboxes and delete them from the toolbar.
 
 The menu of each widget offers **Update**, **Duplicate**, **Export** and **Delete** for that widget.
+
+:::only{opencti=">=7.261119"}
+An exported widget does not carry the variables it uses. Imported into a dashboard that lacks them, it shows no data until you fix its filters, and a message says how many variables are missing.
+:::
 
 :::note
 **Investigations**, the graph workspaces in the menu of the same name, use the same access levels with their own capabilities, **Create / Update investigations** and **Delete investigations**. See [Pivot and investigate](/opencti/use/analyze/pivot/).

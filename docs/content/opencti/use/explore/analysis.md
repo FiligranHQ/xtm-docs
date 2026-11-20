@@ -63,7 +63,7 @@ A report opens on **Overview**. Its other tabs show the same content from other 
 | Tab | Its views | Use it to |
 | --- | --- | --- |
 | **Overview** | | Judge how far to trust the report and find the reports that share its objects, as above |
-| **Knowledge** | **Graph view**, **TimeLine view**, **Correlation view**, **Tactics matrix view** | Read and build what the report contains: see [Read a report in its Knowledge tab](#read-a-report-in-its-knowledge-tab) |
+| **Knowledge** | **Graph view**, **TimeLine view**, **Correlation view** and a matrix view | Read and build what the report contains: see [Read a report in its Knowledge tab](#read-a-report-in-its-knowledge-tab) |
 | **Content** | **Content view**, **Editor view**, **Content mapping view** | Read or edit the report's text and files, and link the words of the text to objects: see [Turn a report's text into knowledge](#turn-a-report-s-text-into-knowledge) |
 | **Entities** | | List the threats, victims, techniques and other entities of the report as a table, with search and filters |
 | **Observables** | | List the IP addresses, domains, files and other observables of the report, to hunt for them or export them |
@@ -79,9 +79,21 @@ The relationships of the report are in its **Knowledge** tab only.
 
 Each table shows whether an object was added directly or by an inference rule.
 
+:::only{opencti=">=7.261119"}
+In **Data**, a click on the source document, such as the PDF of a vendor report or a PNG or JPEG capture, opens it in **Content**, to read it next to the report's text without downloading it. **Open in a new tab** shows it in the browser. See [Explore knowledge](/opencti/use/explore/#data).
+:::
+
 ## Read a report in its Knowledge tab
 
-**Knowledge** shows what the report contains, through the four views of a container: **Graph view**, **TimeLine view**, **Correlation view** and **Tactics matrix view**, also described in [Explore knowledge](/opencti/use/explore/#the-views-of-a-container). Switch between them with the icons at the top right.
+**Knowledge** shows what the report contains, through the four views of a container, also described in [Explore knowledge](/opencti/use/explore/#the-views-of-a-container): a graph, a timeline, the correlations and the ATT&CK matrix.
+
+:::only{opencti=">=7.261119"}
+Switch between them with the icons at the top right: **Graph view**, **TimeLine view**, **Correlation view** and **Matrix view**.
+:::
+
+:::only{opencti="<7.261119"}
+Switch between them with the icons at the top right: **Graph view**, **TimeLine view**, **Correlation view** and **Tactics matrix view**.
+:::
 
 **Graph view** draws the objects and the relationships of the report, and is where you add to it.
 
@@ -97,9 +109,9 @@ Each table shows whether an object was added directly or by an inference rule.
 
 Groupings offer the same views except the timeline. In the graph, **Open the suggestions** proposes relationships that would make the knowledge consistent, **Start an investigation** copies the graph to a new investigation, and **Export to PDF** saves it. Layouts, selection and creation tools are described in [Work with graphs](/opencti/use/analyze/graphs/).
 
-In **Tactics matrix view**, the techniques of the report show on the MITRE ATT&CK matrix, with the views and options of the **Attack patterns** section of a threat, described in [Explore knowledge](/opencti/use/explore/#attack-patterns). **Display only used techniques** keeps only the techniques of the report, **Courses of action view** lists their mitigations, what defenders need from your report, and **Compare with my security posture** shows which of them your security platforms should cover.
+In the matrix view, the techniques of the report show on the MITRE ATT&CK matrix, with the views and options of the **Attack patterns** section of a threat, described in [Explore knowledge](/opencti/use/explore/#attack-patterns). **Display only used techniques** keeps only the techniques of the report, **Courses of action view** lists their mitigations, what defenders need from your report, and **Compare with my security posture** shows which of them your security platforms should cover.
 
-::screenshot{id=opencti-analysis-report-matrix alt="The Tactics matrix view of the report Velvet Harbor targets hotel booking systems, limited to its three techniques: spearphishing attachment, PowerShell and web protocols."}
+::screenshot{id=opencti-analysis-report-matrix alt="The matrix view of the report Velvet Harbor targets hotel booking systems, limited to its three techniques: spearphishing attachment, PowerShell and web protocols."}
 
 The **Observables** tab lists what you can hunt for, with the type and value of each observable:
 

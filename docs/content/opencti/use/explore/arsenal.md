@@ -94,6 +94,10 @@ Each CVSS tab gives the base **Score** with its severity, the **Vector** string,
 
 The three impacts measure what an attacker gains: **Confidentiality Impact (C)**, **Integrity Impact (I)** and **Availability Impact (A)**. The temporal metrics and the **Temporal Score** say how the severity changes once exploits and fixes exist. The **Score** next to **CISA KEV** is not a CVSS score: it is a value from 0 to 100 that your team or the source sets.
 
+:::only{opencti=">=7.261119"}
+A CVSS score that no source gave shows `-`, not 0: the **Temporal Score** of a vulnerability scored on its base metrics only, or the **Score** of a CVSS version no source used.
+:::
+
 To record a severity yourself, create the vulnerability or open the CVSS tabs of its edit panel. Enter the vector string of your source in **CVSS2 Vector**, **CVSS3 Vector** or **CVSS4 Vector**, and leave **CVSS2 Score**, **CVSS3 Score** or **CVSS4 Score** empty: OpenCTI fills each metric from the vector and computes the base score and its severity. At creation, a score you type is kept as your source states it. Changing the vector later computes the score again, and changing one metric rewrites the vector. OpenCTI refuses a CVSS 3 vector that does not start with `CVSS:3.`, and a CVSS 4 vector that does not start with `CVSS:4.0/`.
 
 :::only{opencti=">=7.261030"}
@@ -102,11 +106,15 @@ An **SSVC** tab adds the Stakeholder-Specific Vulnerability Categorization decis
 
 ::screenshot{id=opencti-arsenal-vulnerability-overview alt="The Overview of a vulnerability: its EPSS score and percentile, its presence in the CISA KEV catalog, its CVSS 3 score and vector, and the software it affects."}
 
-:::example[Decide whether CVE-2024-3400 is urgent]
+::::example[Decide whether CVE-2024-3400 is urgent]
 A hotel asks whether to patch its edge gateways tonight. In :menu[Arsenal > Vulnerabilities], search `CVE-2024-3400` and open it. **Details** shows an **EPSS - Score** of 0.94 and an **EPSS - Percentile** of 0.99, **CISA KEV** **Yes**, and the associated CWE `CWE-77`. The **CVSS V3** tab gives a score of 10.0, with a network attack vector, no privileges and no user interaction. **Knowledge** shows that Velvet Harbor targets it. A critical score, known exploitation and a threat active in the sector: patch now.
 
 To list every vulnerability in the same situation, filter the list on **CISA KEV**, operator **Equals**, value `true`, and **EPSS - Score**, operator **Greater than/ Equals**, value `0.5`. Filter on **EPSS - Percentile** instead, value `0.9`, to keep the vulnerabilities more likely to be exploited than nine CVEs out of ten.
+
+:::only{opencti=">=7.261119"}
+These filters leave out the vulnerabilities that no source has scored yet. To find them, filter on **EPSS - Score**, operator **Empty**: the list keeps CVE-2023-46805, which has a CVSS 3 score of 8.2 but no EPSS score, a vulnerability to enrich before you rely on the list. **Not empty** keeps the scored ones only. Every numeric filter, such as **Score** or **CVSS3 Score**, offers these two operators.
 :::
+::::
 
 ## What's next
 

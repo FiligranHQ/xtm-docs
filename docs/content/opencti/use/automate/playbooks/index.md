@@ -19,6 +19,10 @@ A playbook does for your team what it would otherwise do by hand, the same way, 
 
 You find playbooks in :menu[Data > Processing > Automation]. They require an Enterprise Edition license. Building and running them takes the **Manage Playbooks** capability, and the buttons that create or import a playbook also need **Create / Update knowledge**; enrolling an entity in a running playbook takes **Use Playbooks**.
 
+:::only{opencti=">=7.261119"}
+A stopped playbook opens in **Edit mode** for users with **Manage Playbooks**. A running playbook opens in view only, so that nobody changes live automation by accident: turn on the **Edit mode** switch of its header to change it, knowing that each change applies at once. Users without **Manage Playbooks** see playbooks in view only, without the switch.
+:::
+
 ## What playbooks do for a team
 
 | Outcome for the team | Example |
@@ -45,6 +49,10 @@ Five rules explain most of what you will see:
 4. **Nothing is saved until Send for ingestion.** A branch that ends with a notifier or an email only informs. To save and notify, end one branch with **Send for ingestion** and another with the notifier.
 5. **A playbook does not trigger itself.** It ignores the events its own changes cause, so it cannot loop on itself. It does react to changes made by another playbook: that is how you chain two playbooks, and how two playbooks with overlapping filters can feed each other endlessly.
 
+:::only{opencti=">=7.261119"}
+Every step but the entry point hangs from the output of another step. OpenCTI refuses a change, an import or a duplicate that would add a second entry point or leave a step without a parent.
+:::
+
 :::only{opencti=">=7.260811"}
 The scope is the **Apply to** setting: **Only main element in the bundle** (the default), **All elements in the bundle**, or **All except main element in the bundle**. **Apply with filters** narrows it further, for example to the IP addresses of the bundle.
 :::
@@ -61,6 +69,10 @@ Playbooks work with [custom fields](/opencti/configure/taxonomies/#custom-fields
 
 :::only{opencti=">=7.261117"}
 **Manipulate knowledge** also sets the **Report types** of reports: **Add** a type, **Replace** them all, or **Remove** one. A playbook can type every report a partner feed brings as `threat-report`, so that analysts filter on it. The action leaves the other entities of the bundle untouched.
+:::
+
+:::only{opencti=">=7.261119"}
+Each entity type has its own workflow, so a **Status** set by **Manipulate knowledge** belongs to one type. You choose the **Entity type** first, then one of its statuses, and the action only changes the elements of that type: a report status is never written on the case of the same bundle. An action saved in an earlier version, without a type, keeps applying to every element in its scope.
 :::
 
 ## What to decide before you build

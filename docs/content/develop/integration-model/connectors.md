@@ -152,8 +152,12 @@ By default, a connector sends its bundles to RabbitMQ and receives its jobs from
 
 | Setting | Effect |
 | --- | --- |
-| `CONNECTOR_QUEUE_PROTOCOL=api` | Sends bundles through the platform API instead of RabbitMQ. A bundle cannot exceed the platform's `app:max_payload_body_size` (`APP__MAX_PAYLOAD_BODY_SIZE`). `QUEUE_PROTOCOL` is its former name, read only when `CONNECTOR_QUEUE_PROTOCOL` is unset |
+| `CONNECTOR_QUEUE_PROTOCOL=api` | Sends bundles through the platform API instead of RabbitMQ. A bundle cannot exceed the platform's `app:max_payload_body_size` (`APP__MAX_PAYLOAD_BODY_SIZE`), 50 MB by default. `QUEUE_PROTOCOL` is its former name, read only when `CONNECTOR_QUEUE_PROTOCOL` is unset |
 | `CONNECTOR_LISTEN_PROTOCOL=API` | Starts an HTTP server in the connector, and the workers post the jobs to it at `CONNECTOR_LISTEN_PROTOCOL_API_URI` followed by `CONNECTOR_LISTEN_PROTOCOL_API_PATH`. For enrichment, file import, analysis and export connectors |
+
+:::only{opencti=">=7.261119"}
+When the platform turns on the secure HTTP defaults (`app:http:secure_by_default` set to `true`) and leaves `app:max_payload_body_size` unset, the limit drops to 10 MB. A connector that sends large bundles over the API then has its larger bundles refused: send smaller bundles, or ask the platform engineer to set `APP__MAX_PAYLOAD_BODY_SIZE` explicitly.
+:::
 
 With both, an enrichment connector never connects to RabbitMQ. The `MQ_*` settings override the RabbitMQ address the platform returns; [Run an integration without XTM Composer](/deploy/integrations/manual/) shows them in a deployment.
 

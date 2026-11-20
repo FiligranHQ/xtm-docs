@@ -80,7 +80,7 @@ The **Advanced options** section of the form holds two settings meant for specif
 
 ::::only{opencti=">=7.261030"}
 :::tip[Keep processing statuses]
-Imported entities lose their processing status, because the remote status does not exist on your platform. To keep it, give your workflow statuses the same names as the remote ones, then, on your platform, turn on **Update entities' statuses by name match** under **Entity status sync** for each entity type you receive. The remote platform needs no setting, but it must run version 7.261030 or later: earlier versions do not send status names in their streams. See [Customize entity types](/opencti/configure/entities/).
+Imported entities lose their processing status, because the remote status does not exist on your platform. To keep it, give your workflow statuses the same names as the remote ones, then, on your platform, turn on the **Entity status sync** switch in the **Workflow** card of each entity type you receive, in :menu[Settings > Customization > Entity types]. The remote platform needs no setting, but it must run version 7.261030 or later: earlier versions do not send status names in their streams. See [Customize entity types](/opencti/configure/entities/).
 :::
 ::::
 

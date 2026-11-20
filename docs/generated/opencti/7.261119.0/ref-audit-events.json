@@ -1,8 +1,8 @@
 {
   "name": "audit-events",
-  "version": "7.261117.0",
-  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/src: calls to publishUserAction, manager/activityListener.ts)",
-  "intro": "The 241 events OpenCTI 7.261117.0 publishes to its activity, with the message each one writes and the function that publishes it; {braces} mark a value of the event. The activity module records them only when Enterprise Edition is on: administration events for every user, extended events only for the users you listen to, as [Activity](/opencti/configure/activity/) explains; read them on the [Activity events](/opencti/configure/activity/events/) screen.",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src: calls to publishUserAction, manager/activityListener.ts)",
+  "intro": "The 241 events OpenCTI 7.261119.0 publishes to its activity, with the message each one writes and the function that publishes it; {braces} mark a value of the event. The activity module records them only when Enterprise Edition is on: administration events for every user, extended events only for the users you listen to, as [Activity](/opencti/configure/activity/) explains; read them on the [Activity events](/opencti/configure/activity/events/) screen.",
   "filter": "Filter events, messages and functions",
   "sections": [
     {

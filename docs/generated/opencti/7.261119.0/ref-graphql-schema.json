@@ -1,8 +1,8 @@
 {
   "name": "graphql-schema",
-  "version": "7.261117.0",
-  "source": "OpenCTI-Platform/opencti@1b89a14 (opencti-platform/opencti-graphql/config/schema/opencti.graphql and 78 module schemas in opencti-platform/opencti-graphql/src)",
-  "intro": "The public GraphQL API of OpenCTI 7.261117.0: its 453 queries, 514 mutations (and the 292 mutations of the objects they return), 28 subscriptions and the input types the mutations take, each with the capability it requires. How to call the API, authenticate and explore the schema is in [GraphQL API](/develop/apis/graphql/); the capabilities are explained in [Roles and capabilities](/opencti/administer/roles/).",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/config/schema/opencti.graphql and 78 module schemas in opencti-platform/opencti-graphql/src)",
+  "intro": "The public GraphQL API of OpenCTI 7.261119.0: its 453 queries, 516 mutations (and the 292 mutations of the objects they return), 28 subscriptions and the input types the mutations take, each with the capability it requires. How to call the API, authenticate and explore the schema is in [GraphQL API](/develop/apis/graphql/); the capabilities are explained in [Roles and capabilities](/opencti/administer/roles/).",
   "filter": "Filter queries, mutations, types and capabilities",
   "sections": [
     {
@@ -4026,7 +4026,7 @@
             "`workflowDefinitionPublished`",
             "`entityType: String!`",
             "`Boolean`",
-            "Requires `KNOWLEDGE_KNUPDATE`."
+            "Requires one of `KNOWLEDGE_KNUPDATE`, `AUTOMATION_AUTMANAGE`."
           ]
         },
         {
@@ -4062,7 +4062,7 @@
             "`workflowStatuses`",
             "`entityType: String!`",
             "`[Status!]!`",
-            "Requires `KNOWLEDGE_KNUPDATE`. Behind the feature flag `ENTITIES_WORKFLOW` (returns an empty value while it is off)."
+            "Requires one of `KNOWLEDGE_KNUPDATE`, `AUTOMATION_AUTMANAGE`. Behind the feature flag `ENTITIES_WORKFLOW` (returns an empty value while it is off)."
           ]
         },
         {
@@ -8215,7 +8215,7 @@
           "key": "Mutation.playbookDeleteNode",
           "cells": [
             "`playbookDeleteNode`",
-            "`id: ID!`, `nodeId: ID!`",
+            "`id: ID!`, `nodeId: ID!`, `keepChildren: Boolean`",
             "`Playbook`",
             "Requires `AUTOMATION_AUTMANAGE`."
           ]
@@ -8263,6 +8263,24 @@
             "`id: ID!`, `parentNodeId: ID!`, `parentPortId: ID!`, `childNodeId: ID!`, `input: PlaybookAddNodeInput!`",
             "`PlaybookInsertResult!`",
             "Requires `AUTOMATION_AUTMANAGE`."
+          ]
+        },
+        {
+          "key": "Mutation.playbookMoveNode",
+          "cells": [
+            "`playbookMoveNode`",
+            "`id: ID!`, `nodeId: ID!`, `parentNodeId: ID!`, `parentPortId: ID!`",
+            "`String!`",
+            "Move a node and its branch under another out port in a single write: every link reaching the node is replaced by one link from parentNodeId / parentPortId. Requires `AUTOMATION_AUTMANAGE`."
+          ]
+        },
+        {
+          "key": "Mutation.playbookRelink",
+          "cells": [
+            "`playbookRelink`",
+            "`id: ID!`, `linkId: ID!`, `toNodeId: ID!`, `fromNodeId: ID`, `fromPortId: ID`",
+            "`String!`",
+            "Re-point one link in a single write: a new target node, and optionally a new source node and out port. Refuses a cycle and a node left without a parent. Requires `AUTOMATION_AUTMANAGE`."
           ]
         },
         {
@@ -11611,7 +11629,7 @@
             "`workspacePresetDelete`",
             "`id: ID!`, `presetId: ID!`",
             "`Workspace`",
-            "Requires `EXPLORE_EXUPDATE`. Behind the feature flag `DASHBOARD_VARIABLES`."
+            "Requires `EXPLORE_EXUPDATE`."
           ]
         },
         {
@@ -11620,7 +11638,7 @@
             "`workspacePresetUpsert`",
             "`id: ID!`, `input: DashboardPresetInput!`",
             "`Workspace`",
-            "Requires `EXPLORE_EXUPDATE`. Behind the feature flag `DASHBOARD_VARIABLES`."
+            "Requires `EXPLORE_EXUPDATE`."
           ]
         },
         {
@@ -11629,7 +11647,7 @@
             "`workspaceVariableDelete`",
             "`id: ID!`, `variableId: ID!`",
             "`Workspace`",
-            "Requires `EXPLORE_EXUPDATE`. Behind the feature flag `DASHBOARD_VARIABLES`."
+            "Requires `EXPLORE_EXUPDATE`."
           ]
         },
         {
@@ -11638,7 +11656,7 @@
             "`workspaceVariableUpsert`",
             "`id: ID!`, `input: DashboardVariableInput!`",
             "`Workspace`",
-            "Requires `EXPLORE_EXUPDATE`. Behind the feature flag `DASHBOARD_VARIABLES`."
+            "Requires `EXPLORE_EXUPDATE`."
           ]
         },
         {
@@ -12993,7 +13011,7 @@
           "key": "input.PlaybookAddNodeInput",
           "cells": [
             "`PlaybookAddNodeInput`",
-            "`name: String!`, `component_id: String!`, `position: PositionInput!`, `configuration: String`, `description: String`",
+            "`name: String!`, `component_id: String!`, `position: PositionInput!`, `configuration: String`, `description: String`, `parentNodeId: ID`, `parentPortId: ID`",
             "`playbookAddNode`, `playbookInsertNode`, `playbookReplaceNode`"
           ]
         },

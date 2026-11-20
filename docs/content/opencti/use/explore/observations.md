@@ -79,6 +79,10 @@ An artifact is an observable that holds a file, such as a malware sample. Its fi
 A sample can harm the computer that opens it. Prefer **Encrypted archive**. The archive password is `infected` unless an administrator changed it with `app:artifact_zip_password` (see the [configuration reference](/reference/opencti/configuration/#functional-customization)). Ask your administrator if `infected` does not open it.
 :::
 
+:::only{opencti=">=7.261119"}
+The file is also listed under **Uploaded files** in the **Data** tab of the artifact. A click on its line does nothing there, and OpenCTI never opens it in the browser: **Download this file** and **Open in a new tab** both make you choose between **Encrypted archive** and **Raw file**. See [Data](/opencti/use/explore/#data).
+:::
+
 To add a sample, click **Create Artifact** in :menu[Observations > Artifacts] and upload the file. OpenCTI computes its hashes. A ZIP archive is unpacked and its first file becomes the artifact, so you can upload a sample in an archive protected with the platform archive password; Office documents are kept as they are.
 
 :::only{opencti=">=7.261030"}
