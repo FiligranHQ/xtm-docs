@@ -1,15 +1,15 @@
 ---
 title: Install OpenCRQ
-description: Start OpenCRQ with the XTM stack deployed with Docker Compose, where its database, its bucket and its registration with XTM One are set up for you, and create its first administrator.
+description: Start OpenCRQ in the XTM stack deployed with Docker Compose, which sets up its database, bucket and registration with XTM One, then sign in through XTM One and create its first tenant.
 doc_type: how-to
 products:
   - opencrq
 personas: [platform-engineer]
 owner: docs-opencrq
-last_reviewed: 2026-11-16
+last_reviewed: 2026-11-20
 ---
 
-This page starts OpenCRQ, the cyber risk quantification module of the XTM platform, in an XTM stack installed with [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker). xtm-docker ships OpenCRQ with the rest of the stack: its database in the shared PostgreSQL, its bucket in the shared S3 storage, its registration with XTM One and its connectors to OpenCTI and OpenAEV are set up for you. You give it its public URL. At the end, OpenCRQ answers at that URL and you have created its first administrator.
+This page starts OpenCRQ, the cyber risk quantification module of the XTM platform, in an XTM stack installed with [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker). xtm-docker ships OpenCRQ with the rest of the stack: its database in the shared PostgreSQL, its bucket in the shared S3 storage, its registration with XTM One and its connectors to OpenCTI and OpenAEV are set up for you. You give it its public URL. At the end, OpenCRQ answers at that URL, you have signed in through XTM One as its super administrator, and you have created its first tenant.
 
 ::diagram{id=deploy-install-opencrq}
 
@@ -30,14 +30,17 @@ The stack also gives the shared PostgreSQL 1 GB of shared memory, which the larg
 | `OPENCRQ_EXTERNAL_SCHEME`, `OPENCRQ_HOST`, `OPENCRQ_PORT` | `http`, `localhost`, `8082` | The public URL of OpenCRQ. It is also its identity towards XTM One: the tokens OpenCRQ signs name it, and the tokens XTM One sends must be addressed to it |
 | `OPENCRQ_S3_BUCKET` | `opencrq` | The bucket of OpenCRQ in the shared S3 storage |
 
-OpenCRQ registers with XTM One with `PLATFORM_REGISTRATION_TOKEN`, as OpenCTI and OpenAEV do. Its OpenCTI and OpenAEV connectors are set for the **Default** tenant with the admin tokens of both platforms (`OPENCTI_ADMIN_TOKEN`, `OPENAEV_ADMIN_TOKEN`). OpenCRQ also reaches the internet for the vulnerability sources it reads by default (NIST, FIRST and CISA).
+OpenCRQ registers with XTM One with `PLATFORM_REGISTRATION_TOKEN`, as OpenCTI and OpenAEV do. Its users sign in through XTM One: OpenCRQ keeps no password, and has no sign-in form of its own. OpenCRQ also reaches the internet for the vulnerability sources it reads by default (NIST, FIRST and CISA).
+
+The connections to OpenCTI and OpenAEV are set per tenant, by the tenant's identifier. OpenCRQ creates no tenant on its own: you create the first one once you have signed in, and it gets a new identifier. Connect it to OpenCTI and OpenAEV afterwards, as [Connect the first tenant](#connect-the-first-tenant) shows.
 
 OpenCRQ adds two processes to the host: the HTTP server, with a heap of 512 MB, and the worker that runs the background jobs, with a heap of 4,096 MB. Plan about 5 GB for OpenCRQ on top of the stack, and about 50 more PostgreSQL connections at peak.
 
 ## Before you start
 
 - The stack installed as [Install with Docker Compose](/deploy/install/docker-compose/) describes, with `PLATFORM_REGISTRATION_TOKEN` set to a value of your own: see [Connect the modules to each other](/deploy/configure/connect-modules/#register-the-platforms-with-xtm-one). Run the commands of this page from its folder.
-- The host name users will type, such as `opencrq.example.com`, served over HTTPS by your reverse proxy: see [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/). The session cookie of OpenCRQ is `Secure`: over plain HTTP, browsers keep it on `localhost` only.
+- The host name users will type, such as `opencrq.example.com`, served over HTTPS by your reverse proxy: see [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/). XTM One sends users back to OpenCRQ at that URL after they sign in, and accepts it only over HTTPS, or on `localhost` for a trial. The session cookie of OpenCRQ is `Secure`: over plain HTTP, browsers keep it on `localhost` only.
+- The credentials of XTM One's administrator, the account of `XTM_ONE_ADMIN_EMAIL` in `.env`: it is the only account that can open OpenCRQ before any tenant exists.
 
 ## Start OpenCRQ
 
@@ -75,20 +78,45 @@ OpenCRQ adds two processes to the host: the HTTP server, with a heap of 512 MB, 
 
    The line names the version of XTM One, and `eeEnabled` says whether the XTM license covers OpenCRQ. OpenCRQ registers when it starts, then every 5 minutes. A `XTM One registration failed` line with HTTP 401 or 403 means that the registration token was changed in `.env` without recreating `opencrq` and the XTM One containers: run `docker compose up -d` again.
 
-4. Put the reverse proxy in front of port 8082 of the host, for `opencrq.example.com`, once you have created the first administrator below.
+4. Put the reverse proxy in front of port 8082 of the host, for `opencrq.example.com`. Sign-in goes through this URL: XTM One sends the browser back to `https://opencrq.example.com/api/auth/xtm/callback`, and a sign-in started at another address first moves the browser there.
+
+   :::verify
+   ```bash
+   docker compose logs opencrq | grep "Sign-in with XTM One stays off"
+   ```
+   The command prints nothing. A line means the public URL of OpenCRQ is neither HTTPS nor `localhost`: XTM One would refuse it, so nobody can sign in. Fix `OPENCRQ_EXTERNAL_SCHEME` and run `docker compose up -d` again.
+   :::
 :::
 
-## Create the first administrator
+## Sign in and create the first tenant
 
-The first person to open OpenCRQ creates its owner account. Until that account exists, anyone who reaches port 8082 of the host can create it: create it right after the first start, before the reverse proxy publishes OpenCRQ, through an SSH tunnel to port 8082 if you work from another machine.
+OpenCRQ has no first-administrator form. XTM One's administrator is OpenCRQ's super administrator: every right on the platform and in every tenant, given again at each sign-in, without being a member of any group. They create the first tenant.
 
 :::steps
-1. Open OpenCRQ in a browser. It asks you to **Please create the owner account to secure the system and complete the setup.**
-2. Enter the **Email** of the administrator, a **Password** of 8 characters or more, and **Repeat Password**. Use the admin email of XTM One, `XTM_ONE_ADMIN_EMAIL` in `.env`: XTM One finds a person in each product by their email, and the assistant and the MCP server work for that account only if both match.
-3. Click **Create Admin Account & Launch**.
+1. Open `https://opencrq.example.com` in a browser and click **Sign in with XTM One**.
+2. Sign in to XTM One with the account of `XTM_ONE_ADMIN_EMAIL`. If XTM One already has a session in this browser, it sends you back at once.
+3. OpenCRQ opens on the **Tenants** page of the platform, `/platform/security/tenants`. Click **Create**.
+4. In the **Create a new tenant** panel, enter the **Name** of the organization OpenCRQ prices risk for, and click **Submit**.
+5. Open the new tenant from its card.
 :::
 
-You are signed in, with every platform capability, in a tenant named **Default**. Its identifier, `01a043da-ff47-72c2-aaa4-7da56d85c83e`, is the same on every installation: it is the tenant the OpenCTI and OpenAEV connectors of xtm-docker are set for. Each connector still waits for a service account in **Integrations**: see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/). For OpenCTI, pick a live stream whose filter lets through the threats and their relationships (`targets`, `uses`, `attributed-to`): a stream filtered on threats alone delivers bare threats. Other administrators sign in with an invitation: see [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
+::screenshot{id=opencrq-install-first-tenant alt="The Tenants page of the platform, opened by XTM One's administrator right after the first sign-in, shows the first tenant's card with its number of members."}
+
+The tenant starts with an **Admin** group and a **Connectors** group, and with no member: you reach it as super administrator, tagged **Super Administrator** in its **Users** list, without belonging to it. Add its people from :menu[Settings > Security > Users] with **Add members**: see [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/). Anyone else who signs in before then reads **You don't have access to OpenCRQ yet**. A Community Edition platform serves this one tenant; more require the Enterprise Edition: see [Run several tenants in one platform](/opencrq/administer/tenants/).
+
+When the sign-in does not work:
+
+| OpenCRQ shows | What it means |
+| --- | --- |
+| **XTM One is unavailable**, with **Try again** | XTM One does not answer OpenCRQ, or has given it no sign-in client yet. There is no other way in. Check that XTM One is healthy, that `PLATFORM_REGISTRATION_TOKEN` is not the published default (XTM One then creates no sign-in client), and the reverse proxy step of [Start OpenCRQ](#start-opencrq). Then click **Try again** |
+| **You are not signed in**, with the reason | XTM One refused or interrupted the sign-in, or it was cancelled. Click **Sign in with XTM One** again |
+| **You don't have access to OpenCRQ yet** | You signed in with another XTM One account than its administrator. Click **Sign out**, sign out of XTM One too, and sign in again with the account of `XTM_ONE_ADMIN_EMAIL` |
+
+## Connect the first tenant
+
+The connectors to OpenCTI and OpenAEV take the identifier of the tenant in their variables. Read it in the tenant's :menu[Settings > Parameters], under **Identifier**, and set the URL and the admin token of each platform for it in the `environment` of the `opencrq` service, then run `docker compose up -d`. [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant) lists the variables of every connector.
+
+Each connector then waits for a service account in **Integrations**: see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/). For OpenCTI, pick a live stream whose filter lets through the threats and their relationships (`targets`, `uses`, `attributed-to`): a stream filtered on threats alone delivers bare threats.
 
 :::example[Start OpenCRQ in Example CERT's stack]
 Example CERT runs the XTM stack for its member hotel chains, with OpenCTI at `https://opencti.example.com` and XTM One at `https://xtm-one.example.com`. Its platform engineer starts OpenCRQ at `https://opencrq.example.com` for Grand Meridian Hotels and the other members:
@@ -103,7 +131,17 @@ cp .env "$SECRETS_DIR/xtm-stack.env"
 docker compose pull && docker compose up -d
 ```
 
-`SECRETS_DIR` is the folder the team's secret store syncs. The log of `opencrq` shows `Registered with XTM One`. The CERT's administrator, `admin@example.com` in OpenCTI, OpenAEV and XTM One alike, then creates the owner account of OpenCRQ with the same email, through an SSH tunnel to port 8082, before the reverse proxy publishes `opencrq.example.com`.
+`SECRETS_DIR` is the folder the team's secret store syncs. The log of `opencrq` shows `Registered with XTM One`, and no `Sign-in with XTM One stays off` line. Once the reverse proxy publishes `opencrq.example.com`, the CERT's administrator, `admin@example.com` in XTM One (`XTM_ONE_ADMIN_EMAIL`), clicks **Sign in with XTM One** and creates the tenant **Grand Meridian Hotels**. Its :menu[Settings > Parameters] shows the **Identifier** `019a8d21-4b7e-7f30-8c15-3e9a6b2d4f71`. The platform engineer connects it to the stack's OpenCTI and OpenAEV, in `docker-compose.override.yml`, under the `opencrq` service:
+
+```yaml
+    environment:
+      - CONNECTORS__OPENCTI__019a8d21-4b7e-7f30-8c15-3e9a6b2d4f71__URL=http://opencti:8080
+      - CONNECTORS__OPENCTI__019a8d21-4b7e-7f30-8c15-3e9a6b2d4f71__TOKEN=${OPENCTI_ADMIN_TOKEN}
+      - CONNECTORS__OPENAEV__019a8d21-4b7e-7f30-8c15-3e9a6b2d4f71__URL=http://openaev:8080
+      - CONNECTORS__OPENAEV__019a8d21-4b7e-7f30-8c15-3e9a6b2d4f71__TOKEN=${OPENAEV_ADMIN_TOKEN}
+```
+
+After `docker compose up -d`, both connectors show in the tenant's **Integrations**, waiting for their service account. The administrator then adds Grand Meridian's risk manager with **Add members**.
 :::
 
 ## Where the data is

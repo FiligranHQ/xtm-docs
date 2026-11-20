@@ -19,27 +19,27 @@ A tenant holds everything OpenCRQ knows about one organization: its risk scopes,
 ## Before you start
 
 - More than one tenant requires the Enterprise Edition. OpenCRQ is in Enterprise Edition while XTM One grants it an XTM license that covers this instance, when OpenCRQ registers with XTM One (the `xtm_one` keys of the [configuration](/reference/opencrq/configuration/#xtm-one)).
-- Your platform role has **Create Tenants**, and **Platform Administration Access** to open the **Platform** pages of :menu[Settings > Security]. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
+- Your platform role has **Create Tenants**, and **Platform Administration Access** to open the **Platform** pages of :menu[Settings > Security]. XTM One's administrator, who signs in to OpenCRQ as its super administrator, holds both. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
 
-A Community Edition platform serves one tenant. The first administrator gets it when OpenCRQ starts for the first time: it is named **Default**, and has the same identifier on every installation. Creating a second one is refused with "Multiple tenants require an Enterprise Edition license". A platform that returns to the Community Edition keeps every tenant and its data, but each person then reaches only the first tenant they were given.
+A Community Edition platform serves one tenant. OpenCRQ starts with none: XTM One's administrator signs in through XTM One and creates the first one (see [Install OpenCRQ](/deploy/install/opencrq/)). Creating a second one is refused with "Multiple tenants require an Enterprise Edition license". A platform that returns to the Community Edition keeps every tenant and its data, but each person then reaches only one: the oldest of the tenants they belong to.
 
 ## Create a tenant
 
 :::steps
 
-1. Open :menu[Settings > Security], choose **Platform** at the top of the menu, and open **Tenants**. On a platform without any tenant, the page is at `/platform/security/tenants`.
+1. Open :menu[Settings > Security], choose **Platform** at the top of the menu, and open **Tenants**. When you reach no tenant yet, OpenCRQ opens on this page, at `/platform/security/tenants`.
 2. Click **Create**. In the **Create a new tenant** panel, enter the **Name** of the organization and click **Submit**.
-3. Open the new tenant from its card. You are its first member, in its **Admin** group: invite its people from :menu[Settings > Security > Invitations].
+3. Open the new tenant from its card, and add its people from :menu[Settings > Security > Users] with **Add members**. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
 
 :::
 
-A new tenant starts with its two groups, **Admin** and **Connectors**, its own copy of the reference catalogues (countries, sectors, attack outcomes and loss drivers), and **Automatic** as its **Default language**. It has no risk scope, no member but you, and no integration. Its name cannot be changed afterwards in this version.
+A new tenant starts with its two groups, **Admin** and **Connectors**, its own copy of the reference catalogues (countries, sectors, attack outcomes and loss drivers), and **Automatic** as its **Default language**. It has no risk scope and no integration. Its only member is the person who created it, in its **Admin** group, unless that person is the super administrator: they reach every tenant without being a member of any, so a tenant they create starts with no member. Its name cannot be changed afterwards in this version.
 
-The **Tenants** page lists the tenants you belong to, with their number of members; the lines view adds their **Identifier**. The card of the tenant you are in is marked **Current tenant**.
+The **Tenants** page lists the tenants you belong to, with their number of members; the super administrator sees every tenant. The lines view adds their **Identifier**. The card of the tenant you are in is marked **Current tenant**.
 
 ## Switch between tenants
 
-When you belong to more than one tenant, the header shows a **Tenant** selector: choose a tenant to open its home. With a single tenant, the header shows its name. A person belongs to each tenant through its own invitation, and has a **Name** and a **Title** of their own in each.
+When you belong to more than one tenant, the header shows a **Tenant** selector: choose a tenant to open its home. With a single tenant, the header shows its name. A person is added to each tenant on its own, by an administrator of that tenant, and can give themselves a **Full name** and a **Title** of their own in each, in the **Tenant profile** of their profile page.
 
 ## Set the default language of a tenant
 
@@ -62,7 +62,7 @@ Each tenant has its own integrations, configured from its **Integrations** page 
 Example CERT already prices the risk of Grand Meridian Hotels in OpenCRQ, and takes on Seaside Resorts, another member hotel chain, whose figures Grand Meridian must not see.
 
 - A platform administrator of Example CERT creates the tenant: **Name** `Seaside Resorts`.
-- In the new tenant, they invite the risk manager of Seaside Resorts, `nina.hart@seaside-resorts.example`, into the **Admin** group, so that she manages her own members and integrations.
+- In the new tenant, they click **Add members** in :menu[Settings > Security > Users], find the risk manager of Seaside Resorts, `nina.hart@seaside-resorts.example`, in XTM One's directory under **Find a person**, and choose `Admin` under **Assign to groups**, so that she manages her own members and integrations. XTM One emails her to sign in.
 - :menu[Settings > Parameters] of the new tenant shows its **Identifier**, `019a3c5e-8f21-7c4d-9b6a-2e7f1d0c4a83`. The platform engineer gives the tenant its own connection to Example CERT's OpenCTI, in the `environment` of the `opencrq` service:
 
 ```yaml
@@ -75,11 +75,11 @@ After a restart, Nina configures the OpenCTI integration of her tenant with the 
 
 ## Delete a tenant
 
-Open the **Tenants** page, open the tenant's actions menu, choose **Delete**, and confirm with **Delete**. You need **Create Tenants** and must be a member of the tenant. OpenCRQ deletes the tenant and everything in it: its risk scopes, scenarios, plans and reviews, its groups, roles and service accounts, and its configuration. This cannot be undone. Its members keep their accounts and their other tenants. The tenant's connection keys stay in the deployment configuration until you remove them.
+Open the **Tenants** page, open the tenant's actions menu, choose **Delete**, and confirm with **Delete**. You need **Create Tenants** and must reach the tenant: be its member, or be the super administrator. OpenCRQ deletes the tenant and everything in it: its risk scopes, scenarios, plans and reviews, its groups, roles and service accounts, and its configuration. This cannot be undone. Its members keep their accounts and their other tenants. The tenant's connection keys stay in the deployment configuration until you remove them.
 
 ## Check that it works
 
-Open the new tenant from the **Tenant** selector: its :menu[Settings > Parameters] shows its **Name** and **Identifier**, and its **Users** list shows you as the only member, in the **Admin** group.
+Open the new tenant from the **Tenant** selector: its :menu[Settings > Parameters] shows its **Name** and **Identifier**. Its **Users** list in :menu[Settings > Security] shows you in the **Admin** group, or, when you are the super administrator, tagged **Super Administrator**, and then the people you add.
 
 ## What's next
 

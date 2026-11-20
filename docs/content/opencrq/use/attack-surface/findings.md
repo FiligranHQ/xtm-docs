@@ -45,7 +45,7 @@ A finding is one flaw on one asset. When two integrations report the same CVE on
 The **Score** tab breaks the score in two parts, each out of 100, and the score is their geometric mean.
 
 - **Exploitability** is how likely the flaw gets used. It averages two factors and multiplies the result by the controls the attack meets on the way:
-  - **Reachability**: the asset's exposure (internet-facing weighs 1, internal 0.4, as set under :menu[Settings > Engine > CRQ Indicators]) times how the CVSS vector says the flaw is reached.
+  - **Reachability**: the asset's exposure (internet-facing weighs 1, internal 0.4, as an administrator with **Manage Security** sets them under :menu[Settings > Engine > CRQ Indicators]) times how the CVSS vector says the flaw is reached.
   - **Threat intelligence**: the strongest signal wins. A listing in CISA KEV sets it at 0.9; a threat from OpenCTI that cites the CVE and is active, observed in the last 90 days, sets 0.35; otherwise the EPSS probability, never below 0.05. Two independent signals lift it a third of the way toward 1.
   - **Controls**: the posture of the controls that prevent or detect the techniques exploiting the flaw. The weakest path decides.
 - **Impact** is what the flaw would damage: the asset's criticality times the CVSS impact, reduced by the controls that stand on the impact techniques.

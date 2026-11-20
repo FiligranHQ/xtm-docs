@@ -7,14 +7,14 @@ products:
   - opencrq
 personas: [admin, platform-engineer]
 owner: docs-opencrq
-last_reviewed: 2026-11-04
+last_reviewed: 2026-11-20
 ---
 
 Most of what OpenCRQ shows is computed in the background: the price of each risk scenario, the score of each finding, the threats OpenCTI streams in, the imports of each connector. :menu[Settings > Jobs] shows every run of these jobs in a tenant, what waits in the queue, the health and logs of each kind of job, and when each one is due. This page reads them to answer the usual questions: did the figures take the last change into account, why did an import fail, and how do I run it again. What each kind of job does is in [OpenCRQ background processes](/reference/opencrq/processes/#job-kinds).
 
 ## Before you start
 
-- Your role has **Manage Security** in the tenant, or your platform role has **Platform Administration Access**. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
+- Your role has **Manage Security** in the tenant, or your platform role has **Platform Administration Access**. XTM One's administrator, who signs in to OpenCRQ as its super administrator, holds both. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
 - Jobs belong to a tenant: :menu[Settings > Jobs] shows the runs of the tenant you are in.
 
 ## How a run comes about

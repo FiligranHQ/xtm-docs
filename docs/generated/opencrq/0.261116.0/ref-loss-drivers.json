@@ -1,7 +1,7 @@
 {
   "name": "loss-drivers",
-  "version": "ab702fd",
-  "source": "OpenCRQ-Platform/opencrq@ab702fd (module/src/modules/loss-drivers/data/loss-drivers-data.ts)",
+  "version": "0.261116.0",
+  "source": "OpenCRQ-Platform/opencrq@a185f01 (module/src/modules/loss-drivers/data/loss-drivers-data.ts)",
   "intro": "The loss drivers a risk scenario prices, by loss category, the reporting level above them. Each driver says how much the attacker's dwell time changes its size (**Dwell sensitivity**) and the business quantity its amount scales with (**Scales with**), as the interface shows them. Every tenant gets this catalog at boot.",
   "sections": [
     {

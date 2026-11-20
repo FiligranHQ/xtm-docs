@@ -27,7 +27,7 @@ Open :menu[Settings > Taxonomies], then a catalogue in the menu on the right. **
 | **Attack Outcomes** | The seven ends an attacker pursues, such as **Ransomware** or **Data Breach & Resale** | A risk scenario names one. It decides which threats are admitted and how the attack ends | [Attack outcomes](/reference/opencrq/attack-outcomes/) |
 | **Business Resources** | The ten kinds of value a primary asset holds, such as **Personal data** or **Payment card data** | A primary asset holds one or more. With the outcome, they decide which loss drivers OpenCRQ recommends | [Business resources](/reference/opencrq/business-resources/) |
 | **Loss Drivers** | What an impact costs, grouped by loss category, such as **Extortion** or **Business Interruption (own operations)** | A scenario prices its loss drivers as ranges | [Loss drivers](/reference/opencrq/loss-drivers/) |
-| **Supporting Asset Categories** | The eleven kinds of asset, such as **Host**, **Identity** or **Web application**, with the number of ATT&CK techniques that apply to each (**TTP count**) | An attack only uses the techniques that apply to the assets it goes through | Open a category for its techniques |
+| **Supporting Asset Categories** | The twelve kinds of asset, such as **Host**, **Identity** or **Web application**, with the number of ATT&CK techniques that apply to each (**TTP count**). **Security platform** holds your detection and prevention tools (EDR, SIEM, email security): no technique applies to it | An attack only uses the techniques that apply to the assets it goes through. A security platform is inventoried but never priced as a target of loss | Open a category for its techniques |
 | **Sectors** | The 22 sectors, such as **Hospitality** | A risk scope has one. A threat that targets it weighs four times more in the scope's scenarios, and the threat event frequency catalog reads it | |
 | **Countries** | The 250 countries, with their **ISO Alpha-2** and **ISO Alpha-3** codes | A risk scope has one. A threat that targets it weighs 2.5 times more, ten times when it also targets the sector | |
 | **Tags** | The tags of your assets, set by hand or reported by a connector | The labels an asset carries. Tags do not enter a price | |
@@ -66,10 +66,10 @@ The board hears one sentence per line: the ransomware risk costs $254K a year in
 
 ## Manage the tags of your assets
 
-A tag labels assets, such as all the assets of the booking platform. Tags come from two sources: a person who tags an asset, and a connector that reports the tags of its own tool, such as OpenAEV. The same idea often arrives under several names; merge them into one.
+A tag labels assets, such as all the assets of the booking platform. Tags come from three sources: a person who tags an asset (**Manual**), a push from XTM One (**XTM One**), and a connector that reports the tags of its own tool, such as OpenAEV. OpenCRQ counts as an XTM One push every tag written through its API with a service account's token. A person's tags and a push's tags never replace each other: each only replaces its own. The same idea often arrives under several names; merge them into one.
 
 :::steps
-1. Open :menu[Settings > Taxonomies > Tags]. Each tag shows its **Source** (**Manual** or the connector), the names connectors report it under, the **Merged tags** it holds and its number of **Assets**. Search with **Search tags...** and filter with **Filter by source**.
+1. Open :menu[Settings > Taxonomies > Tags]. Each tag shows its **Source** (**Manual**, **XTM One** or the connector), the names connectors report it under, the **Merged tags** it holds and its number of **Assets**. Search with **Search tags...** and filter with **Filter by source**.
 
    ::screenshot{id=opencrq-taxonomies-tags alt="The four Tags of the Grand Meridian Hotels tenant, all Manual: booking-platform on 2 assets, front-desk on 3, pci-dss and remote-access on 1 each."}
 

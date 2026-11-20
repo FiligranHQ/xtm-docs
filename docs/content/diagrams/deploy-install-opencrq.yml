@@ -1,4 +1,4 @@
-title: OpenCRQ runs in the XTM stack, keeps its data in its own database and bucket of the shared services, and registers with XTM One, without which it does not start
+title: OpenCRQ runs in the XTM stack, keeps its data in its own database and bucket of the shared services, and registers with XTM One, through which its users sign in
 lanes:
   - label: Users
     tone: external
@@ -19,6 +19,7 @@ lanes:
       - {id: s3, label: S3 storage, icon: Boxes, note: "opencrq bucket"}
 edges:
   - {from: browser, to: opencrq, label: through the reverse proxy}
+  - {from: browser, to: xtmone, label: signs in, style: dashed}
   - {from: opencrq, to: xtmone, label: registers every 5 minutes}
   - {from: xtmone, to: opencrq, label: calls as the user, style: dashed}
   - {from: opencrq, to: pgsql, label: its data}

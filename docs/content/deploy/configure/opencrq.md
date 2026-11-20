@@ -71,7 +71,7 @@ Keep these rules:
 
 ## Connectors of each tenant
 
-The credentials of a connector are set per tenant, never in the interface: two tenants can read two different OpenCTI platforms. A variable takes the identifier of the tenant, shown as **Identifier** in :menu[Settings > Parameters]: `CONNECTORS__<NAME>__<tenant identifier>__<FIELD>`. The default tenant every installation creates is `01a043da-ff47-72c2-aaa4-7da56d85c83e`.
+The credentials of a connector are set per tenant, never in the interface: two tenants can read two different OpenCTI platforms. A variable takes the identifier of the tenant, shown as **Identifier** in :menu[Settings > Parameters]: `CONNECTORS__<NAME>__<tenant identifier>__<FIELD>`. OpenCRQ creates no tenant on its own: each tenant gets its identifier when it is created, the first one after the first sign-in (see [Install OpenCRQ](/deploy/install/opencrq/#sign-in-and-create-the-first-tenant)).
 
 | Connector | Variables, after `CONNECTORS__` and the tenant identifier | Without them |
 | --- | --- | --- |

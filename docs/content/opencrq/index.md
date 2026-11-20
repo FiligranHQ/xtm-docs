@@ -47,9 +47,9 @@ Your intelligence and your test results set the price: see what OpenCRQ reads fr
 4. [Set how strong your controls are and read how they held](/opencrq/use/defenses/controls/): the posture the attack runs face.
 :::
 :::tab[Administrators]
-You give people access and connect OpenCRQ to the sources that feed it.
+You give people access and connect OpenCRQ to the sources that feed it. People sign in to OpenCRQ with their XTM One account: OpenCRQ keeps no password.
 
-1. [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/): members, invitations and the platform's own administrators.
+1. [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/): add members from XTM One's directory, and the platform's own administrators.
 2. [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/): the accounts connectors and scripts write as.
 3. [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/): the first connector to set, since threats drive every price.
 4. [Follow the background jobs and run one again](/opencrq/administer/background-jobs/): what OpenCRQ computes on its own, and how to see it is done.
@@ -57,7 +57,7 @@ You give people access and connect OpenCRQ to the sources that feed it.
 :::tab[Platform engineers]
 You deploy OpenCRQ beside the XTM platform and keep it running.
 
-1. [Install OpenCRQ](/deploy/install/opencrq/): its service, its database and file storage, and the first administrator.
+1. [Install OpenCRQ](/deploy/install/opencrq/): its service, its database and file storage, and its sign-in through XTM One.
 2. [Configure OpenCRQ](/deploy/configure/opencrq/): the settings a deployment sets, and the connectors of each tenant.
 3. [OpenCRQ configuration](/reference/opencrq/configuration/): every key, its variable and its default.
 :::

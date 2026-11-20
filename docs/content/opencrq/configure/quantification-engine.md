@@ -14,7 +14,7 @@ Every price OpenCRQ gives rests on a few assumptions: which threat intelligence 
 
 ## Before you start
 
-- You are a member of the tenant. The two pages need no capability: anyone in the tenant can read and change them, so agree in your team who owns them.
+- Your role has **Manage Security** in the tenant. Without it, **Engine** does not show under **Settings**, and its address leads back to the tenant's home: only those who hold the capability read and change these settings. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
 - The settings apply to every risk scope of the tenant. A change reprices every scenario it touches, so note the current values before you change one: the pages keep no history.
 
 ## Choose which threats count
@@ -66,7 +66,7 @@ An authored date says less about when the actor was active, so it decays more sl
 | **Exposure Weights** > **Internet facing**, **Internal** | The multipliers the finding score applies by exposure, to how reachable a flaw is and how much an asset matters for each technique | `1` and `0.4`; any number above 0 |
 | **Unknown exposure** > **Counts as** | The exposure of an asset that declares none: on its TTP tab, in the finding score, and in the simulation at initial access and along the paths | **Internal**, or **Internet-facing** |
 | **Control aggregation** > **Diminishing returns factor (γ)** | How several controls on the same technique combine. The strongest counts fully, and each additional one is discounted by γ. At `1` every control counts fully; at `0` only the strongest counts | `0.7`, from 0 to 1 |
-| **Phishing simulations** > **People caught (%)**, **Campaign measured on** | The share of your people your last phishing simulation caught, which replaces the default rate for phishing at initial access | Empty: the engine reads 7 %, from published click rates. Both fields are set together or cleared together with **Clear the declaration**; the date cannot be after today (UTC) |
+| **Phishing simulations** > **People caught (%)**, **Campaign measured on** | The share of your people your last phishing simulation caught, which replaces the default rate for phishing at initial access | Empty: the engine reads 7 %, the share of recipients who enter credentials or enable a macro on a phishing email before any awareness training. Both fields are set together or cleared together with **Clear the declaration**; the date cannot be after today (UTC) |
 | **Validity of a test result** > **Result stays valid for (days)** | When a control's test result stops counting as a validation of the control, and when a declared phishing simulation gives way to the default rate | Empty: a result counts however old it is |
 | **Unknown criticality** > **Counts as** | The criticality of an asset that declares none, in the finding score and in the weight of the assets an attacker moves through | **Low**; **Medium**, **High** or **Very High** |
 
@@ -101,7 +101,7 @@ OpenCRQ keeps its figures current without a manual recompute: the background job
 To see the effect on one scenario at once, open it and run its simulation: [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/).
 
 :::xtm-one[Change the settings with XTM One]
-XTM One agents read and update both pages, the threat relevance settings and the CRQ indicator settings, as the person who asks them. Ask Ariane, the assistant, needs the Enterprise Edition; an XTM One administrator can make the update tools wait for your approval before they run. See [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
+XTM One agents read and update both pages, the threat relevance settings and the CRQ indicator settings, as the person who asks them: that person needs **Manage Security** in the tenant. Ask Ariane, the assistant, needs the Enterprise Edition; an XTM One administrator can make the update tools wait for your approval before they run. See [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
 :::
 
 ## What's next

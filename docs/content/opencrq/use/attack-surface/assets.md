@@ -23,7 +23,7 @@ Supporting assets belong to the tenant, not to a risk scope. A scope measured ov
 
 | Field | Values | What it changes |
 | --- | --- | --- |
-| **Category** and **Subcategory** | **Host**, **Web application**, **Network device**, **Identity**, **IoT / OT device**, **Cloud resource**, **SaaS application**, **Mobile device**, **Container / Workload**, **AI target**, **Generic asset**; then a subcategory such as **Server**, **Workstation**, **Website**, **VPN gateway**, **User account**, **Point of sale** | The attack techniques that apply to the asset. Its **TTP** tab lists them as **Category TTPs** |
+| **Category** and **Subcategory** | **Host**, **Web application**, **Network device**, **Identity**, **IoT / OT device**, **Cloud resource**, **SaaS application**, **Mobile device**, **Container / Workload**, **AI target**, **Security platform**, **Generic asset**; then a subcategory such as **Server**, **Workstation**, **Website**, **VPN gateway**, **User account**, **Point of sale**, **EDR** or **SIEM** | The attack techniques that apply to the asset. Its **TTP** tab lists them as **Category TTPs**. A **Security platform**, a detection or prevention tool such as an EDR or a SIEM, stays in the inventory but has no technique and carries no loss: the price never counts it as a target |
 | **Exposure** | **Internet Facing**, **Internal**, **Unknown** (the default) | Where an attack gets in. Exploiting a public service needs an internet-facing asset; phishing goes through workstations and user accounts. At the door, an internet-facing asset weighs 1, an internal one 0.4 |
 | **Criticality** | **Very High**, **High**, **Medium**, **Low**, **Unknown** (the default) | How much an asset weighs once the attacker is inside and moves toward the target: 1 for **Very High**, 0.9, 0.7 and 0.4 below. It measures the blast radius of the asset, not its business value, which the primary assets carry. It also raises the score of the findings on the asset |
 
@@ -38,8 +38,8 @@ An asset left on **Unknown** is priced as the tenant setting says: **Internal** 
 
 2. Select **Create**. The **Create a new supporting asset** panel opens.
 3. Enter the **Name** and, optionally, an **Owner** and a **Description**.
-4. Choose the **Exposure**, the **Category** (**Host** by default) and the **Criticality**.
-5. Choose a **Subcategory**, then fill the fields the category adds: a host takes a **Hostname**, a **Seen IP**, its **IP addresses**, a **Platform** and an **Operating system**; a web application takes its **URL**; an identity takes its **User principal name** and **Account name**.
+4. Choose the **Exposure**, the **Category** (**Host** by default) and the **Criticality**. Each category in the list says what it covers.
+5. Choose a **Subcategory**, described in the list too, then fill the fields the category adds: a host takes a **Hostname**, a **Seen IP**, its **IP addresses**, a **Platform** and an **Operating system**; a web application takes its **URL**; an identity takes its **User principal name** and **Account name**.
 6. Add **Your tags** if you sort your estate by tag, then select **Create**.
 
    ::screenshot{id=opencrq-assets-create alt="The Create a new supporting asset panel, with Exposure on Unknown, Category on Host and Criticality on Unknown, then the Subcategory and the first host fields, Hostname and Seen IP."}
@@ -52,6 +52,28 @@ The asset opens on its **Overview**. Every value you set by hand carries the **S
 An integration sets the fields of the assets it imports, and updates them at each synchronization. To correct one, open the asset and select **Edit**: the value you set wins over the integration's and carries the **Set by user** mark, synchronization after synchronization. Each field's **What it means and how it is computed** button tells which rule or source the value comes from.
 
 To hand the asset back to its integrations, open **More actions**, select **Resync with connectors**, then **Resync**: every value you set by hand is cleared and the integrations' values apply again.
+
+## Find the assets of a group
+
+An asset group is a named set of assets, such as the servers of the head office. OpenCRQ does not create groups from its own screens: they come from your other tools.
+
+- **The OpenAEV connector** mirrors the asset groups of OpenAEV at each run, with their static members and the members a dynamic group's filter finds at that moment. A member OpenCRQ did not import is left out. A group deleted in OpenAEV is deleted in OpenCRQ once every OpenAEV tenant has answered the run, so an OpenAEV outage never empties your groups. See [Import OpenAEV results](/opencrq/use/sources/openaev/).
+- **XTM One, or a script**, puts an asset in groups by name when it writes the asset through OpenCRQ's API, and creates a group that does not exist yet.
+
+Each source keeps its own memberships: a sync replaces only the members its connector added, never those XTM One or a person added.
+
+:::steps
+1. Go to :menu[Attack surface > Assets]. The **Groups** column shows the groups of each asset on one line, with **+N** for the rest.
+2. Open **Filter by group**, shown once the tenant has groups, and choose a group: each one shows its number of assets. **All groups** shows the whole list again.
+
+   ::screenshot{id=opencrq-assets-groups alt="The Assets list of Grand Meridian Hotels filtered on the Hotel front desks group: the front-desk workstations, the night.audit account and the Spanish payment terminals, each with Hotel front desks in its Groups column."}
+:::
+
+The filter combines with the search, the source and the category, and stays in the page's address, so you can share the filtered list.
+
+:::example[Review the front desks before the awareness campaign]
+Grand Meridian's risk manager prepares the front desks' training budget. In :menu[Attack surface > Assets], she chooses **Hotel front desks (3)** in **Filter by group**. The list shows three assets: the Front-desk workstations, the night.audit account and the Front-desk payment terminals of Spain. Two of them have a **Criticality** of **High**: those are the assets she names in the training request.
+:::
 
 ## Link the asset to what it supports
 

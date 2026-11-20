@@ -1,7 +1,7 @@
 {
   "name": "processes",
-  "version": "ab702fd",
-  "source": "OpenCRQ-Platform/opencrq@ab702fd (back/src: index-http.ts, index-worker.ts, index.ts, features/)",
+  "version": "0.261116.0",
+  "source": "OpenCRQ-Platform/opencrq@a185f01 (back/src: index-http.ts, index-worker.ts, index.ts, features/)",
   "intro": "What OpenCRQ runs in the background: the kinds of job its worker runs (listed in **Settings > Jobs > Kinds**, each run in **Runs**), and the engines its processes start. A job runs again when the data its last run read changes, every day at `recompute.daily_at` (03:00 UTC by default), on a connector's schedule, or when someone or something asks for it. In the `split` profile the HTTP process serves the interface and the API and the worker runs the jobs; the `monolith` profile runs both in one process.",
   "filter": "Filter jobs and engines",
   "sections": [

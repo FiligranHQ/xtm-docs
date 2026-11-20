@@ -26,13 +26,15 @@ Open :menu[Settings > Parameters]. It has two cards:
 
 The copy button next to the **Identifier**, the **Version** and the **Instance identifier** puts the value in your clipboard.
 
-::screenshot{id=opencrq-parameters alt="The Parameters page of the Grand Meridian Hotels tenant: the Tenant card with its name, its identifier, the CISO home dashboard and the Automatic default language, and the OpenCRQ platform card with its version, ab702fd, and its instance identifier."}
+::screenshot{id=opencrq-parameters alt="The Parameters page of the Grand Meridian Hotels tenant: the Tenant card with its name, its identifier, the CISO home dashboard and the Automatic default language, and the OpenCRQ platform card with its version and its instance identifier."}
 
 The **Identifier** is what the deployment settings of the tenant use: the connections to OpenCTI, OpenAEV, Microsoft Defender and Drata, and the NVD API key, are keyed by it (the `connectors` keys of the [configuration](/reference/opencrq/configuration/#connectors)). It never changes. The tenant's name is set when it is created; see [Run several tenants in one platform](/opencrq/administer/tenants/).
 
 ## The platform pages, before any tenant
 
-Everything in OpenCRQ happens in a tenant: a person who signs in lands in one of the tenants they belong to. A platform administrator who belongs to none, for example on a platform whose only tenant was deleted, lands on the platform's own pages at `/platform/security`: **Roles**, **Groups** and **Users** of the platform, and **Tenants**, where they create one. A person who belongs to no tenant and has no **Platform Administration Access** is signed out. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/#manage-the-platform-administrators) and [Run several tenants in one platform](/opencrq/administer/tenants/).
+Everything in OpenCRQ happens in a tenant: a person who signs in through XTM One lands in the first of the tenants they belong to. A platform administrator who belongs to none lands on the platform's **Tenants** page, at `/platform/security/tenants`, where they create one. That is where XTM One's administrator, signed in as the **Super Administrator**, creates the first tenant of a new platform. The platform's pages also hold its **Roles**, **Groups** and **Users**.
+
+Once they belong to a tenant, a platform administrator reaches the same pages inside it: an address under `/platform/security` opens the page under the tenant's :menu[Settings > Security], with `?scope=platform`. A person who belongs to no tenant and has no **Platform Administration Access** reads **You don't have access to OpenCRQ yet** and "Ask your administrator for access.", with a **Sign out** button. Without that access, an address under `/platform` leads back to the home page. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/#manage-the-platform-administrators) and [Run several tenants in one platform](/opencrq/administer/tenants/).
 
 ## Choose the home dashboard of the tenant
 

@@ -68,7 +68,7 @@ The consequences:
 
 - **An agent sees what you see**, in the tenants you belong to.
 - **An agent changes only what you could change.** Its tools read and change risk scopes, primary and supporting assets, risk scenarios and their loss estimates, controls and their postures, and the engine settings; they run a simulation; they read treatment plans, budget reviews, findings and threats; and, for an administrator, they manage users, groups, roles, invitations and tenants. A tool your capabilities do not allow fails as you would.
-- **Your email must be the same in both products.** An account with no match in OpenCRQ gets no data. Use the same email for the first administrator of OpenCRQ as for the administrator of XTM One: see [Install OpenCRQ](/deploy/install/opencrq/#create-the-first-administrator).
+- **Your email must be the same in both products.** An account with no match in OpenCRQ gets no data. OpenCRQ's super administrator is XTM One's administrator, who signs in to OpenCRQ through XTM One: see [Install OpenCRQ](/deploy/install/opencrq/#sign-in-and-create-the-first-tenant).
 - **What leaves OpenCRQ** is your message, the address of the page, the files you attach, and what the agent reads through the API. XTM One sends them to the language models its administrator configured.
 
 ## CTEM Command Center

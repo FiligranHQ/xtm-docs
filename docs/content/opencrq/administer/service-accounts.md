@@ -7,7 +7,7 @@ products:
   - opencrq
 personas: [admin, developer]
 owner: docs-opencrq
-last_reviewed: 2026-11-04
+last_reviewed: 2026-11-20
 ---
 
 A service account is the identity an integration uses in a tenant of OpenCRQ: the threats the OpenCTI connector streams in, the results it imports from OpenAEV, the requests a script sends to the API. It belongs to no person, so the work it does survives the departure of whoever set it up, and you can see, limit and cut off what each integration does. This page creates one for a connector, gives one a token for a script, and shows how to rotate, revoke and disable them.
@@ -18,11 +18,11 @@ A service account is the identity an integration uses in a tenant of OpenCRQ: th
 - **Its groups add capabilities.** Like a person, it gets the capabilities of the roles of its groups. The creation panel puts a new account in the tenant's **Connectors** group, which has no role: it can work on data, and cannot manage the tenant's security.
 - **OpenCRQ's own connectors write as it, without a token.** The OpenCTI, OpenAEV, Microsoft Defender, Drata and CVE connectors run inside OpenCRQ: their **Configure integration** panel asks for a **Service account**, and what they import is recorded as that account's work. A connector without an account does not run its scheduled syncs. **OpenCRQ Default Threats** is the exception: it reads a public file, asks for no account, and writes as the platform.
 - **A script signs in with a token.** It sends `Authorization: Bearer` and the token to the [OpenCRQ API](/reference/opencrq/api/). Tokens start with `ogrc_`.
-- **Its work is traced.** A run of a background job it started shows **Service account** under **Triggered by** in :menu[Settings > Jobs], and a file it stored shows its name under **Uploaded By** in :menu[Settings > File Storage].
+- **Its work is traced.** A run of a background job it started shows **Service account** under **Triggered by** in :menu[Settings > Jobs], and a file it stored shows its name under **Uploaded By** in :menu[Settings > File Storage]. The tags and groups it sets on an asset through the API count as a push from XTM One: such a tag shows **XTM One** as its **Source** in :menu[Settings > Taxonomies > Tags], and a push replaces only what an earlier push set, never the tags and groups people set by hand. See [Manage the tags of your assets](/opencrq/configure/risk-taxonomies/#manage-the-tags-of-your-assets).
 
 ## Before you start
 
-- Your role has **Manage Security** in the tenant. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
+- Your role has **Manage Security** in the tenant. XTM One's administrator, who signs in to OpenCRQ as its super administrator, holds it in every tenant. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
 
 ## Create a service account
 
@@ -30,7 +30,7 @@ A service account is the identity an integration uses in a tenant of OpenCRQ: th
 
 1. Open :menu[Settings > Security > Service accounts] and click **Create**.
 2. In the **Create a new service account** panel, enter a **Name** that says which integration uses it, and a **Description**.
-3. Under **Groups**, keep **Connectors**, which is chosen for you. Add a group whose role grants **Manage Security** only if the integration must manage members, groups or integrations.
+3. Under **Groups**, keep **Connectors**, which is chosen for you. Add a group whose role grants **Manage Security** only if the integration must manage members, groups or integrations, or read or change the settings of :menu[Settings > Engine]: OpenCRQ refuses these calls to an account without it.
 4. Click **Save**. The account appears in the list as **Active**.
 
    ::screenshot{id=opencrq-service-accounts-list alt="The Service accounts list of the Grand Meridian Hotels tenant: the OpenCTI connector account, Active, in the Connectors group."}
@@ -84,7 +84,7 @@ The answer lists the scenarios of Grand Meridian France and Spain with their lat
 Keep each integration on its own account and its own token, give each token the shortest expiry the integration tolerates, and revoke the tokens whose **Last used** date shows they are no longer used.
 
 :::xtm-one[XTM One agents work as people, not as service accounts]
-An XTM One agent that works in OpenCRQ acts as the person who asks it: XTM One signs each call with that person's email address, and OpenCRQ matches it to their account. No service account or token is needed for XTM One, and what an agent does is recorded as that person's work.
+An XTM One agent that works in OpenCRQ acts as the person who asks it: XTM One signs each call with that person's XTM One identity, and OpenCRQ matches it to the account that person signs in with, never to an email address. No service account or token is needed for XTM One, and what an agent does is recorded as that person's work.
 :::
 
 ## Check that it works

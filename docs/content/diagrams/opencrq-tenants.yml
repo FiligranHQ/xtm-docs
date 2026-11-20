@@ -4,7 +4,7 @@ lanes:
     tone: core
     nodes:
       - {id: admins, label: Platform administrators, icon: Users, note: Create Tenants}
-      - {id: license, label: XTM One, icon: LogoXTMOne, note: Grants the XTM license}
+      - {id: license, label: XTM One, icon: LogoXTMOne, note: 'Signs people in, grants the XTM license'}
   - label: Tenants
     tone: product
     nodes:

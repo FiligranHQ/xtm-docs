@@ -7,7 +7,7 @@ products:
   - opencrq
 personas: [risk-manager]
 owner: docs-opencrq
-last_reviewed: 2026-11-04
+last_reviewed: 2026-11-20
 ---
 
 A risk scenario is one line of your risk register, priced in money: an attack outcome, such as ransomware or a data breach, on the primary assets of a risk scope. OpenCRQ prices it as an **Annualized Loss Expectancy** (ALE), with the range of annual losses around it, and keeps the price current as threats, controls and assets change. This page creates a scenario, reads its price, and follows it in the scenario list. If you are new to the method, read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) first.
@@ -41,7 +41,7 @@ The scenario opens on its **Overview** tab, and OpenCRQ runs its first simulatio
 
 A scenario's tabs hold its inputs. Two of them decide most of the price:
 
-- **Threat** holds the **Threat Event Frequency (TEF)**, how many attack attempts a year the scenario faces. A new scenario takes it from the catalogue, in **Auto** mode. See [Set the threat event frequency](/opencrq/use/threats/threat-event-frequency/). The same tab lists the **Relevant Threats** OpenCTI brought.
+- **Threat** holds the **Threat Event Frequency (TEF)**, how many attack attempts a year the scenario faces. A new scenario takes it from the catalogue, in **Auto** mode. See [Set the threat event frequency](/opencrq/use/threats/threat-event-frequency/). The same tab lists the **Relevant Threats** that weigh on the scenario, whatever their source: click one to see why it weighs, and whether its probability on the outcome comes from OpenCRQ's model or from the judgment of **OpenCRQ Default Threats**. See [How a threat gets into a scenario](/opencrq/use/threats/threat-center/#how-a-threat-gets-into-a-scenario).
 - **Financial Impact** holds the loss estimates, derived from the scope's financial profile. See [Set what an attack costs with the financial profile](/opencrq/use/quantify/loss-drivers/).
 
 **Targets** shows the supporting assets behind the primary assets, **Findings** the vulnerabilities on them, **TTP** the techniques the scenario's threats use, and **Controls** how your controls stand against those techniques. When an input is missing, the scenario says which one, with a link to the tab that fills it.

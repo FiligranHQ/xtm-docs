@@ -1,7 +1,7 @@
 {
   "name": "configuration",
-  "version": "ab702fd",
-  "source": "OpenCRQ-Platform/opencrq@ab702fd (back/src/config-schema.ts)",
+  "version": "0.261116.0",
+  "source": "OpenCRQ-Platform/opencrq@a185f01 (back/src/config-schema.ts)",
   "intro": "Every key OpenCRQ reads at boot, from its configuration schema, grouped by block, by its environment variable: the key in upper case with `__` between the levels (`JOBS__MAX_CONCURRENT` is `jobs.max_concurrent` in a configuration file). A variable with `<tenant-uuid>` is set per tenant: `CONNECTORS__OPENCTI__<tenant-uuid>__URL`. **Required** says what a block needs when it is set; a whole block the platform does not use (file storage, a connector) can be left out.",
   "filter": "Filter keys, variables, descriptions",
   "sections": [
@@ -242,7 +242,7 @@
             "string",
             "",
             "When `platform_seed.enabled` is true",
-            "Plain password. Pass through a secret store (Vault, K8s Secret, SOPS, CI secret) — never a `ConfigMap` or committed JSON file."
+            "The password every seeded user gets in XTM One, where the seed creates them when `PLATFORM_SEED__XTM_ONE_ADMIN__EMAIL` is set. OpenCRQ stores it nowhere: its users have no OpenCRQ password and sign in through XTM One. Pass through a secret store (Vault, K8s Secret, SOPS, CI secret) — never a `ConfigMap` or committed JSON file."
           ]
         },
         {
@@ -283,6 +283,26 @@
             "`30000`",
             "No",
             "How many of those assets the closed risk scope is measured over. At least three, one per primary asset the profile writes, or the seed refuses the profile."
+          ]
+        },
+        {
+          "key": "platform_seed.xtm_one_admin.email",
+          "cells": [
+            "`PLATFORM_SEED__XTM_ONE_ADMIN__EMAIL`",
+            "string",
+            "",
+            "When `platform_seed.enabled` is true",
+            "Email of an administrator of the XTM One in `XTM_ONE__URL`, which the platform seed signs in as to create the seeded users there: each one a local XTM One account with the `PLATFORM_SEED__ADMIN__PASSWORD` password (the seeded platform administrator as an XTM One administrator), its OpenCRQ account tied to that XTM One user, so the seeded users sign in through XTM One. An XTM One account that already holds the email is reused. Optional, even with the seed enabled: unset, the seed creates its users in OpenCRQ only, none of them can sign in, and the log warns so; the demo data stays reachable with a service account token or by XTM One's own administrator, who reaches every tenant. Set it on a demo or test platform whose people must sign in as the seeded users. The account must sign in without a second factor, which the seed cannot give; a refusal from XTM One, or no answer within 5 seconds, fails the seed and the platform boots without it."
+          ]
+        },
+        {
+          "key": "platform_seed.xtm_one_admin.password",
+          "cells": [
+            "`PLATFORM_SEED__XTM_ONE_ADMIN__PASSWORD`",
+            "string",
+            "",
+            "When `platform_seed.enabled` is true",
+            "That XTM One administrator's password, required once its email is set. Pass it through a secret store, like `PLATFORM_SEED__ADMIN__PASSWORD`."
           ]
         }
       ]
@@ -935,7 +955,7 @@
           "key": "feature_flags",
           "cells": [
             "`FEATURE_FLAGS`",
-            "list of \"*\" | \"enterprise-edition-status\" | \"technique-coverage-changes\" | \"xtm-sign-in\"",
+            "list of \"*\" | \"enterprise-edition-status\" | \"technique-coverage-changes\"",
             "`[]`",
             "No",
             "Comma-separated list of enabled flags (e.g. `FEATURE_FLAGS=*`). Each value must be a name declared in the registry, or `*`. The indexed form `FEATURE_FLAGS__0`, `FEATURE_FLAGS__1`, … also works; in a JSON config file this is the `feature_flags` array."

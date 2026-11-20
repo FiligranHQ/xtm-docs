@@ -213,9 +213,7 @@ All the configuration is in `.env`, except the ports, the image versions and the
    ```
    :::
 
-3. Create the owner account of OpenCRQ before you publish it: see [Install OpenCRQ](/deploy/install/opencrq/#create-the-first-administrator). Until it exists, anyone who reaches OpenCRQ can create it.
-
-4. Put the reverse proxy in front of the platforms, as [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/) describes, then sign in at each public URL with the admin email and password of `.env`.
+3. Put the reverse proxy in front of the platforms, as [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/) describes, then sign in at each public URL with the admin email and password of `.env`. OpenCRQ has no password of its own: XTM One's administrator signs in to it through XTM One and creates its first tenant, as [Install OpenCRQ](/deploy/install/opencrq/#sign-in-and-create-the-first-tenant) describes.
 :::
 
 ## Change the stack without editing docker-compose.yml
