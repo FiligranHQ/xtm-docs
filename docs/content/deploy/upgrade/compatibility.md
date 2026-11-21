@@ -24,6 +24,7 @@ The documentation, and the stack its screenshots are taken from, run these versi
 | OpenCTI | 7.261030.1 | `opencti/platform:7.261030.1` |
 | OpenAEV | 3.261029.0 | `openaev/platform:3.261029.0` |
 | XTM One | 1.261112.0 | `xtmone/platform:1.261112.0` |
+| XTM Composer | 3.261120.0 | `filigran/xtm-composer:3.261120.0`, or `filigran/xtm-composer:3.261120.0-fips` for FIPS 140-3 |
 
 The OpenCTI LTS lines, [7.260811-lts and 7.260309-lts](/deploy/upgrade/lifecycle/#supported-lts-lines), are documented for OpenCTI alone: no OpenAEV or XTM One version is documented with them.
 
@@ -37,6 +38,9 @@ The OpenCTI LTS lines, [7.260811-lts and 7.260309-lts](/deploy/upgrade/lifecycle
 | OpenCTI 7.260224.0 or later, connected to OpenAEV | OpenAEV 2.2 or later | [OpenCTI 7.260224.0](/deploy/upgrade/breaking-changes/#opencti-7-260224-0) |
 | OpenAEV 2.2.0, connected to OpenCTI | OpenCTI 7. OpenAEV 2.2.1 and later work with older OpenCTI versions again | [Scenario generation from OpenCTI security coverage](/deploy/upgrade/breaking-changes/openaev/2-2-0-security-coverage/) |
 | OpenAEV 2.3.4 or later | Collectors, injectors, OpenAEV agents and custom integrations released for OpenAEV 2.3.4 or later | [CSRF token enforcement](/deploy/upgrade/breaking-changes/openaev/2-3-4-csrf-token-enforcement/) |
+| XTM Composer 3.261120.0 or later, with `MANAGER__IMAGE_TAG_SUFFIX` set, as in its FIPS image (`-fips`) | Integrations published with that tag, for every platform XTM Composer serves. OpenAEV publishes no FIPS images: an integration without the tag is not deployed | [Configure XTM Composer](/deploy/integrations/configure-composer/) |
+| XTM Composer 3.261120.0 or later, serving OpenAEV on Kubernetes, Docker Swarm or Portainer from a private registry | The registry in the `openaev` block, `OPENAEV__DAEMON__REGISTRY__*`: these engines no longer read the `opencti` block for OpenAEV | [Pull integrations from a private registry](/deploy/integrations/private-registry/) |
+| XTM Composer 3.261021.1 or earlier, after a rollback from 3.261120.0 | Nothing more: 3.261120.0 keeps the `opencti-manager`, `opencti-connector-id` and `opencti-platform` labels and `OPENCTI_CONFIG_HASH` next to its `xtm-*` keys, so an older XTM Composer still recognizes the integrations | [XTM Composer architecture](/deploy/integrations/architecture/) |
 | XTM One 1.261112.0 or later, behind a reverse proxy | A proxy that serves HTTP/2 to browsers, buffers no response under `/api/` and keeps a read timeout above 15 seconds: the chat streams over HTTP | [XTM One 1.261112.0](/deploy/upgrade/breaking-changes/#xtm-one-1-261112-0) |
 | xtm-docker with public and internal URLs that differ | XTM One, OpenCTI and OpenAEV releases that include [xtm-one#4883](https://github.com/XTM-One-Platform/xtm-one/pull/4883), [opencti#18585](https://github.com/OpenCTI-Platform/opencti/pull/18585) and [openaev#8143](https://github.com/OpenAEV-Platform/openaev/pull/8143) | [xtm-docker README](https://github.com/FiligranHQ/xtm-docker#readme) |
 

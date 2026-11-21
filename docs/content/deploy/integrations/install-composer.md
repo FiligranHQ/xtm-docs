@@ -30,7 +30,7 @@ This page installs XTM Composer next to OpenCTI, OpenAEV or both, on the contain
 
 | Part | Value |
 | --- | --- |
-| Image | `filigran/xtm-composer`, for `linux/amd64` and `linux/arm64`. Tags: `latest`, each release such as `3.261021.1`, and a FIPS build tagged `latest-fips` or `<release>-fips` |
+| Image | `filigran/xtm-composer`, for `linux/amd64` and `linux/arm64`. Tags: `latest`, each release such as `3.261120.0`, and a FIPS build tagged `latest-fips` or `<release>-fips`. The FIPS build deploys the `-fips` images of the integrations: see `manager.image_tag_suffix` in [Configure XTM Composer](/deploy/integrations/configure-composer/#xtm-composer-itself) |
 | RSA private key | 4096 bits, PKCS#8 PEM (`-----BEGIN PRIVATE KEY-----`), given with `MANAGER__CREDENTIALS_KEY_FILEPATH` or `MANAGER__CREDENTIALS_KEY` |
 | Identifier | `MANAGER__ID`, the same at every restart. xtm-docker uses a UUID |
 | Platforms | `OPENCTI__ENABLE`, `OPENCTI__URL`, `OPENCTI__TOKEN`, and the same with `OPENAEV__`. OpenCTI is enabled by default, OpenAEV is not |

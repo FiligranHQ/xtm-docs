@@ -1,4 +1,4 @@
-title: XTM Composer gives each integration it creates the proxy and its certificate authority, sends its own requests through the proxy, and the integrations reach the hosts of NO_PROXY directly
+title: XTM Composer gives each integration it creates the proxy and its certificate authority, and both XTM Composer and the integrations reach the hosts of NO_PROXY directly
 lanes:
   - label: XTM Composer
     tone: external
@@ -19,8 +19,7 @@ lanes:
       - {id: rabbitmq, label: RabbitMQ, icon: Server, note: rabbitmq}
 edges:
   - {from: composer, to: containers, label: proxy and CA}
-  - {from: composer, to: proxy, label: its own requests}
-  - {from: proxy, to: platform, label: XTM Composer requests, style: dashed}
+  - {from: composer, to: platform, label: direct, style: dashed}
   - {from: containers, to: proxy, label: other traffic}
   - {from: containers, to: platform, label: direct}
   - {from: containers, to: rabbitmq, label: direct}

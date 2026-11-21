@@ -49,10 +49,19 @@ Lists, such as `extra_hosts` or `cap_add`, go in the YAML file. A YAML file does
 | `manager.credentials_key` | `MANAGER__CREDENTIALS_KEY` | | The key itself, when you cannot mount a file |
 | `manager.execute_schedule` | `MANAGER__EXECUTE_SCHEDULE` | `10` | Seconds between two reconciliations |
 | `manager.ping_alive_schedule` | `MANAGER__PING_ALIVE_SCHEDULE` | `60` | Seconds between two pings to each platform |
+| `manager.image_tag_suffix` | `MANAGER__IMAGE_TAG_SUFFIX` | None, and `-fips` in the FIPS image of XTM Composer | `-fips` or `-ubi9`, to run the FIPS or Red Hat Universal Base Image (UBI) builds of the integrations. Another value stops XTM Composer at start |
 | `manager.logger.level` | `MANAGER__LOGGER__LEVEL` | `info` | `trace`, `debug`, `info`, `warn` or `error` |
 | `manager.logger.format` | `MANAGER__LOGGER__FORMAT` | `json` | `json` or `pretty` |
 
 One of `credentials_key_filepath` and `credentials_key` is required: XTM Composer stops at start without a key. When it serves OpenAEV alone, it reads the key only at its first registration, and logs the error then.
+
+XTM Composer adds `manager.image_tag_suffix` to the tag of every integration image it deploys, for both platforms and on every container engine:
+
+- `opencti/connector-mitre:6.9.0` becomes `opencti/connector-mitre:6.9.0-fips`, and an image without a tag gets `latest-fips`.
+- A tag that already ends with the suffix keeps it once, and an image pinned by digest (`@sha256:…`) stays as it is.
+- With a private registry, the suffix goes after the tag: `registry.example.com/opencti/connector-mitre:6.9.0-fips`.
+
+Every integration you deploy needs an image with that tag. OpenAEV publishes no FIPS images, as [Install offline or with FIPS 140-3](/deploy/install/air-gapped/) says. When the image cannot be pulled, XTM Composer deploys nothing and logs the reason on the integration in the platform: see [Troubleshoot XTM Composer](/deploy/integrations/troubleshoot/). An empty value turns the suffix off, in the FIPS image too: `MANAGER__IMAGE_TAG_SUFFIX=""`.
 
 Keep `manager.logger.directory` and `manager.logger.console` at their default, `true`: XTM Composer then writes its logs to its standard output and to daily files in a `logs` folder next to its executable.
 
@@ -337,7 +346,7 @@ Replace the `id` with a UUID of your own, generated once with `python3 -c 'impor
 
 ## Check that it works
 
-Restart XTM Composer and read its first lines: it logs `Starting XTM composer` with its version, then `Successfully loaded RSA private key (PKCS#8 format)`, then `Manager registered` for each platform it serves. A setting it cannot read stops it at start, with an error that names the setting.
+Restart XTM Composer and read its first lines: it logs `Starting XTM composer` with its version and its `image_tag_suffix`, then `Successfully loaded RSA private key (PKCS#8 format)`, then `Manager registered` for each platform it serves. A setting it cannot read stops it at start, with an error that names the setting.
 
 ## What's next
 

@@ -8,12 +8,12 @@ lanes:
   - label: XTM Composer
     tone: external
     nodes:
-      - {id: composer, label: XTM Composer, icon: Workflow, note: "DAEMON__REGISTRY__SERVER in front"}
+      - {id: composer, label: XTM Composer, icon: Workflow, note: "Registry of each platform in front"}
   - label: Container engine
     tone: external
     nodes:
       - {id: docker, label: Docker or Podman, icon: Boxes, note: Credentials with each pull}
-      - {id: kubernetes, label: Kubernetes, icon: Boxes, note: "Pull Secret registry-example-com"}
+      - {id: kubernetes, label: Kubernetes, icon: Boxes, note: "Pull Secret registry-example-com-opencti"}
   - label: Registry
     tone: store
     nodes:

@@ -57,7 +57,7 @@ In the Grand Meridian Hotels tenant of OpenAEV, the validation engineer deploys 
 
 The platform engineer lists the integrations the Compose files start and finds each one in the catalog of its platform. In OpenCTI, a new instance with the same settings replaces the old container and starts from the beginning; in OpenAEV, **Migrate** keeps the identifier of the collector or injector. Integrations the catalog does not offer keep running by hand ([step 6](/deploy/integrations/migrate/)).
 
-From then on, the **Deployed** tab of each platform shows every integration, its state and its last activity, and its **Logs** tab the latest lines of its container. A container that restarts in a loop is reported to the platform. When an integration does not start or does not appear, the platform engineer starts from the logs of XTM Composer ([step 7](/deploy/integrations/troubleshoot/)).
+From then on, the **Deployed** tab of each platform shows every integration, its state and its last activity, and its **Logs** tab the latest lines of its container. A container that restarts in a loop is reported to the platform. So is an image the engine cannot pull: a new integration does not run, one already running keeps its previous container, and the **Logs** tab says which image failed. When an integration does not start or does not appear, the platform engineer starts from the logs of XTM Composer ([step 7](/deploy/integrations/troubleshoot/)).
 
 ## The steps
 

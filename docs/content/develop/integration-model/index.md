@@ -45,7 +45,7 @@ A connector speaks STIX 2.1. An import or enrichment connector does not write ob
 
 | Way | Who runs the container | What the integration must provide |
 | --- | --- | --- |
-| [XTM Composer](/deploy/integrations/composer/) | XTM Composer, on Docker, Podman or Kubernetes, from the catalog of the platform. Requires the Enterprise Edition | A Docker image, and an entry in a catalog with a configuration schema: see [Integration manifest](/develop/build/manifest/) |
+| [XTM Composer](/deploy/integrations/composer/) | XTM Composer, on Docker, Podman, Kubernetes, Docker Swarm or Portainer, from the catalog of the platform. Requires the Enterprise Edition | A Docker image, and an entry in a catalog with a configuration schema: see [Integration manifest](/develop/build/manifest/). An XTM Composer that sets a tag suffix, `-fips` in its FIPS image, pulls the `-fips` or `-ubi9` tag of that image |
 | [By hand](/deploy/integrations/manual/) | You, with Docker Compose, Kubernetes or Python | A Docker image or the Python sources, and a `README.md` listing its settings |
 
 XTM Composer reads what it deploys from the catalog: the image, its version, and the settings to ask for in the form. A connector that should be deployable from the interface therefore ships a manifest next to its code. [Community resources](/develop/integration-model/resources/) lists where the catalogs, the repositories and the SDKs live.
