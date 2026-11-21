@@ -40,7 +40,7 @@ What the assistant knows when you ask:
 
 Everything else, the assistant reads from OpenCRQ as you, with the tools of its agent. An answer can also produce a slide deck, a report or a video, which you download from its card. Your browser never talks to XTM One directly: OpenCRQ relays each message, with a short-lived token it signs for you.
 
-The agent that answers is the one XTM One binds to the assistant of OpenCRQ. When OpenCRQ registers, it declares its tasks, and an XTM One administrator binds agents to each; the one with the highest priority answers first. OpenCRQ declares the assistant (`global.assistant`), the text tasks every platform shares (`global.summarize`, `global.explain`, `global.fix_spelling` and others), and two risk tasks: `grc.control_gap_analysis` and `grc.risk_scenario_generator`. In this version, **Ask Ariane** is the screen of OpenCRQ that calls an agent.
+The agent that answers is the one XTM One binds to the assistant of OpenCRQ. When OpenCRQ registers, it declares its tasks, and an XTM One administrator binds agents to each; the one with the highest priority answers first. OpenCRQ declares the assistant (`global.assistant`), the text tasks every platform shares (`global.summarize`, `global.explain`, `global.fix_spelling` and others), and two risk tasks: `crq.control_gap_analysis` and `crq.risk_scenario_generator`. In this version, **Ask Ariane** is the screen of OpenCRQ that calls an agent.
 
 ### Approve what the assistant does
 

@@ -20,7 +20,7 @@ Every AI feature of OpenCTI, OpenAEV and OpenCRQ (summarize a report, turn a que
 
 ## How a request reaches an agent
 
-1. OpenCTI, OpenAEV or OpenCRQ registers with XTM One and declares the intents it uses, with its vertical: `cti`, `aev` or `grc`.
+1. OpenCTI, OpenAEV or OpenCRQ registers with XTM One and declares the intents it uses, with its vertical: `cti`, `aev` or `crq`.
 2. XTM One adds the intents it does not know to the list, tagged with the platform that declared them.
 3. You bind one or more agents to each intent, for one vertical or for **All verticals**, in an order of priority.
 4. When a person uses the feature, the product asks which agents are bound to the intent for its vertical, and uses the one of highest priority.
@@ -62,7 +62,7 @@ The General Assistant, and any agent with the agent builder built-in tool, manag
 
 ## Verticals and priorities
 
-A vertical is the business context of a connected platform: `cti` for OpenCTI, `aev` for OpenAEV, `grc` for OpenCRQ, and others a platform may declare, such as `fimi`. It lets the same intent reach a different agent depending on where the request comes from.
+A vertical is the business context of a connected platform: `cti` for OpenCTI, `aev` for OpenAEV, `crq` for OpenCRQ, and others a platform may declare, such as `fimi`. It lets the same intent reach a different agent depending on where the request comes from.
 
 - The **Verticals** panel, at the top of the page, unfolds into the table of verticals, with how many bindings use each. A vertical a platform declares is created by itself; **Add Vertical** adds your own: type its **Vertical name**, a lowercase id such as `fimi`, and click **Add**.
 - The pencil of a vertical's row renames it, and its bindings follow. A vertical still used by a binding cannot be deleted, and a built-in vertical can be neither renamed nor deleted.
@@ -76,7 +76,7 @@ XTM One binds its built-in agents to the intents the modules declare. These bind
 | Intent | What the product asks | Built-in agent | Vertical |
 | --- | --- | --- | --- |
 | `global.assistant` | The assistant behind the in-product chat | **CTEM Assistant** and **XTM-One Assistant**, then the assistant of each product | all |
-| `global.summarize`, `global.explain`, `global.fix_spelling`, `global.change_tone`... | Rewrite a text | **OpenCTI Assistant**, **OpenAEV Assistant**, **OpenCRQ Assistant** | `cti`, `aev`, `grc` |
+| `global.summarize`, `global.explain`, `global.fix_spelling`, `global.change_tone`... | Rewrite a text | **OpenCTI Assistant**, **OpenAEV Assistant**, **OpenCRQ Assistant** | `cti`, `aev`, `crq` |
 | `cti.nlq_search` | Turn a question into OpenCTI search filters | **OpenCTI NLQ** | `cti` |
 | `cti.container_summary`, `cti.container_report`, `cti.entity_activity`... | Summarize a report, a grouping or a case, or an entity's activity | **OpenCTI Entity Insights** | `cti` |
 | `cti.stix_harvester` | Extract a STIX 2.1 bundle from a document | **CTI STIX Harvester (Filigran AI)**, then **CTI STIX Harvester** | `cti` |
@@ -84,7 +84,7 @@ XTM One binds its built-in agents to the intents the modules declare. These bind
 | `cti.ttp_harvester` | Extract techniques from documents | **CTI TTP Harvester (Filigran AI)** | `aev` |
 | `aev.attack_path_orchestrator` | Drive an autonomous attack path in OpenAEV | **OpenAEV Attack Path Orchestrator** | `aev` |
 | `aev.phishing_email_html_generator`, `aev.detection_rules_generator`... | Write a phishing lure or detection rules for an exercise | The AEV generators | `aev` |
-| `grc.risk_scenario_generator`, `grc.control_gap_analysis`, `grc.assessment_summary` | Draft risk scenarios, analyze control gaps, summarize an assessment | **OpenCRQ Assistant** | `grc` |
+| `crq.risk_scenario_generator`, `crq.control_gap_analysis`, `crq.assessment_summary` | Draft risk scenarios, analyze control gaps, summarize an assessment | **OpenCRQ Assistant** | `crq` |
 
 The **Intents** page of your platform is the reference: it shows what the connected products declared and what is bound today, and **Export CSV** downloads it as filtered and sorted, with the description of each intent. The **CTEM Assistant** has the highest priority on `global.assistant`, and hands the conversation to the assistant of the product.
 
