@@ -1,0 +1,30 @@
+title: The navigation of XTM One reads as a sentence, from the agents you talk to, to what they produce and what they are made of
+lanes:
+  - label: Talk and watch
+    tone: core
+    nodes:
+      - {id: home, label: Home, icon: Gauge, note: Exposure posture, href: /xtm-one/use/dashboard/}
+      - {id: chat, label: Chat, icon: MessageSquare, note: Ask an agent, href: /xtm-one/use/chat/}
+  - label: Orchestration
+    tone: core
+    nodes:
+      - {id: agents, label: Agents, icon: Bot, note: Assistants and their assignments, href: /xtm-one/build/agents/}
+      - {id: fleets, label: Fleets, icon: Boxes, note: Agents working as a team, href: /xtm-one/build/fleets/}
+      - {id: flow, label: Agentic Flow, icon: Workflow, note: Who hands work to whom, href: /xtm-one/use/agentic-flow/}
+  - label: What they produce
+    tone: product
+    nodes:
+      - {id: work, label: Work, icon: ClipboardCheck, note: "Operations, Value, Presentations, Files", href: /xtm-one/use/work-history/}
+  - label: What they are made of
+    tone: external
+    nodes:
+      - {id: studio, label: Agent Studio, icon: Sparkles, note: "Knowledge, prompts, skills", href: /xtm-one/build/}
+      - {id: tools, label: Tools & Integrations, icon: Puzzle, note: "MCP servers, tools, connections", href: /xtm-one/build/integrations/}
+edges:
+  - {from: chat, to: agents, label: talks to}
+  - {from: agents, to: work, label: produce}
+  - {from: fleets, to: work, label: produce}
+  - {from: flow, to: work, label: maps who runs}
+  - {from: studio, to: agents, label: define}
+  - {from: tools, to: agents, label: act through}
+  - {from: work, to: home, label: summed up on, style: dashed}

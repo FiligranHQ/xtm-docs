@@ -1,0 +1,27 @@
+title: A run waits, works, may pause for a person, then ends in one of three states
+lanes:
+  - label: Waiting
+    tone: external
+    nodes:
+      - {id: waiting, label: "Pending, Delayed, Queued", icon: Clock, note: Created but not started}
+      - {id: held, label: Held, icon: Info, note: Waits for AI to be available}
+  - label: Working
+    tone: core
+    nodes:
+      - {id: running, label: Running, icon: PlayCircle, note: The agent is working}
+      - {id: awaiting, label: Awaiting Input, icon: Users, note: Waits for a person}
+  - label: Ended
+    tone: product
+    nodes:
+      - {id: completed, label: Completed, icon: Check, note: Finished; read the result}
+      - {id: failed, label: Failed, icon: TriangleAlert, note: With its cause}
+      - {id: cancelled, label: "Cancelled, Skipped", icon: X, note: Stopped or never started}
+edges:
+  - {from: waiting, to: running, label: a worker starts it}
+  - {from: waiting, to: held, label: AI unavailable, style: dashed}
+  - {from: held, to: running, label: AI back}
+  - {from: running, to: awaiting, label: asks}
+  - {from: awaiting, to: running, label: answered}
+  - {from: running, to: completed, label: done}
+  - {from: running, to: failed, label: error}
+  - {from: running, to: cancelled, label: stopped}

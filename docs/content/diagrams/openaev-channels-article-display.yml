@@ -1,0 +1,20 @@
+title: The channel gives the page its type, colors and logos, the article gives its content, and the player reads both on the channel's page
+lanes:
+  - label: Components
+    tone: product
+    nodes:
+      - {id: channel, label: Channel, icon: Layers, note: "Type, colors, logos"}
+      - {id: documents, label: Documents, icon: FileText, note: Logos and images}
+  - label: Scenario
+    tone: product
+    nodes:
+      - {id: article, label: Article, icon: BookOpen, note: "Title, author, content"}
+  - label: Players
+    tone: external
+    nodes:
+      - {id: page, label: Channel page, icon: Laptop, note: Newest article first}
+edges:
+  - {from: documents, to: channel, label: logos}
+  - {from: channel, to: article, label: shapes}
+  - {from: documents, to: article, label: images or videos}
+  - {from: article, to: page, label: published}

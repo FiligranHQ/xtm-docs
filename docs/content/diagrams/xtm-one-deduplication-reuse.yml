@@ -1,0 +1,25 @@
+title: You choose between linking a shared object and duplicating it; what arrives twice is handled once
+lanes:
+  - label: What you do
+    tone: external
+    nodes:
+      - {id: link, label: Link a resource, icon: Puzzle, note: From a second agent}
+      - {id: duplicate, label: Duplicate, icon: Copy, note: When only yours must differ}
+  - label: What arrives again
+    tone: external
+    nodes:
+      - {id: webhook, label: Webhook delivery, icon: ArrowRight, note: Sent twice by the sender}
+      - {id: document, label: Synced document, icon: FileText, note: Content unchanged}
+      - {id: event, label: Integration event, icon: MessageSquare, note: "Same email, same message"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: shared, label: One shared object, icon: Layers, note: Every agent points to it}
+      - {id: copy, label: Private copy, icon: Copy, note: "Copy of ..., yours"}
+      - {id: once, label: Handled once, icon: Check, note: No second run or indexing}
+edges:
+  - {from: link, to: shared, label: no copy}
+  - {from: duplicate, to: copy, label: new object}
+  - {from: webhook, to: once, label: same key in 5 minutes}
+  - {from: document, to: once, label: same content}
+  - {from: event, to: once, label: already seen}

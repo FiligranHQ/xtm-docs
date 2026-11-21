@@ -1,0 +1,20 @@
+title: A message written in a messaging app reaches an agent through the channel bot, which filters it, and the agent answers in the same conversation
+lanes:
+  - label: Messaging app
+    tone: external
+    nodes:
+      - {id: people, label: Conversation, icon: MessageSquare, note: "Channel, thread or DM"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: bot, label: Channel bot, icon: ShieldCheck, note: "Whitelists, mention, anonymous", href: /xtm-one/administer/channels/}
+      - {id: agent, label: Agent, icon: Bot, note: "Receive and Publish", href: /xtm-one/build/agents/}
+  - label: Suite
+    tone: product
+    nodes:
+      - {id: products, label: OpenCTI and OpenAEV, icon: LogoXTMOne, note: Read through integrations}
+edges:
+  - {from: people, to: bot, label: webhook}
+  - {from: bot, to: agent, label: routed}
+  - {from: agent, to: products, label: reads}
+  - {from: agent, to: people, label: answers, style: dashed}

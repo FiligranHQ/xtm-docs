@@ -1,0 +1,20 @@
+title: Users get what they can do from the roles of their groups, and what they can see from markings and organizations
+lanes:
+  - label: Who
+    nodes:
+      - {id: user, label: User, icon: LogIn, note: A person or a service account}
+  - label: Grouped by
+    tone: product
+    nodes:
+      - {id: group, label: Group, icon: Layers, note: 'Membership, defaults, confidence'}
+      - {id: org, label: Organization, icon: Boxes, note: Data segregation}
+  - label: Grants
+    tone: store
+    nodes:
+      - {id: role, label: Role, icon: ShieldCheck, note: A set of capabilities}
+      - {id: markings, label: Allowed markings, icon: KeyRound, note: Which data is visible}
+edges:
+  - {from: user, to: group, label: member of}
+  - {from: user, to: org, label: member of}
+  - {from: group, to: role, label: has roles}
+  - {from: group, to: markings, label: allows}

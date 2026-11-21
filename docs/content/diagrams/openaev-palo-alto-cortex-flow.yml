@@ -1,0 +1,22 @@
+title: OpenAEV imports the endpoints of your Cortex groups, then asks Cortex to run your library script, which starts the implant
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: executor, label: Cortex executor, icon: LogoOpenAEV, note: Runs inside the platform}
+      - {id: assets, label: Endpoints, icon: Server, note: Seen in the last 24 hours}
+  - label: Palo Alto Cortex
+    tone: external
+    nodes:
+      - {id: api, label: Cortex API, icon: ShieldCheck, note: "Endpoints, run script"}
+      - {id: script, label: Library script, icon: Code2, note: Decodes the command}
+  - label: Endpoint
+    tone: external
+    nodes:
+      - {id: implant, label: Implant, icon: Cpu, note: "From a SYSTEM task on Windows"}
+edges:
+  - {from: executor, to: api, label: list endpoints}
+  - {from: executor, to: assets, label: imports}
+  - {from: api, to: script, label: runs}
+  - {from: script, to: implant, label: starts}
+  - {from: implant, to: assets, label: results, style: dashed}

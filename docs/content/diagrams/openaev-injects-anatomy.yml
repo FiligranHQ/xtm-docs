@@ -1,0 +1,25 @@
+title: An inject is one action from the Threat Arsenal, aimed at targets, with the expectations that score it, run by an injector or an agent
+lanes:
+  - label: Where it lives
+    tone: product
+    nodes:
+      - {id: scenario, label: Scenario, icon: FileText, note: The plan every simulation copies}
+      - {id: simulation, label: Simulation, icon: PlayCircle, note: One run on a date}
+      - {id: atomic, label: Atomic test, icon: Crosshair, note: One inject on its own}
+  - label: The inject
+    tone: product
+    nodes:
+      - {id: action, label: Action, icon: BookOpen, note: "From the Threat Arsenal: email, command, scan"}
+      - {id: targets, label: Targets, icon: Users, note: "Teams, persons, assets, asset groups"}
+      - {id: expectations, label: Expectations, icon: ClipboardCheck, note: "Prevention, detection, manual"}
+  - label: Runs on
+    tone: external
+    nodes:
+      - {id: injector, label: Injector, icon: Puzzle, note: "Mail, SMS, HTTP, scanners"}
+      - {id: agent, label: Agent, icon: Laptop, note: Runs commands on endpoints}
+edges:
+  - {from: scenario, to: action, label: holds injects}
+  - {from: simulation, to: action, label: holds injects}
+  - {from: atomic, to: action, label: is one inject}
+  - {from: action, to: injector, label: delivered by}
+  - {from: action, to: agent, label: or executed by}

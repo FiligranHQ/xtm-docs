@@ -1,0 +1,24 @@
+title: A widget is built in three steps, how it looks, what it counts, and how it breaks the data down, then follows the dashboard's filters
+lanes:
+  - label: Visualization
+    tone: product
+    nodes:
+      - {id: visualization, label: Visualization, icon: Gauge, note: "Matrix, chart, list, number"}
+  - label: Dimensions
+    tone: product
+    nodes:
+      - {id: dimensions, label: Dimensions, icon: Layers, note: Entity type and filters per series}
+  - label: Parameters
+    tone: product
+    nodes:
+      - {id: parameters, label: Parameters, icon: Wrench, note: "Breakdown, interval, time range"}
+  - label: Dashboard
+    tone: product
+    nodes:
+      - {id: widget, label: Widget, icon: Activity, note: Placed at the end of the grid}
+      - {id: filters, label: Dashboard filters, icon: Clock, note: "Time range, scenario, simulation"}
+edges:
+  - {from: visualization, to: dimensions, label: next}
+  - {from: dimensions, to: parameters, label: Validate}
+  - {from: parameters, to: widget, label: Create}
+  - {from: filters, to: widget, label: followed, style: dashed}

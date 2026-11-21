@@ -1,0 +1,27 @@
+title: From the front-desk workstation, a connection to the database server leads to a saved account, and the account to a query of the booking database
+lanes:
+  - label: Discovery
+    tone: product
+    nodes:
+      - {id: connections, label: List the connections, icon: Terminal, note: netstat on fd-par-07}
+  - label: Event
+    tone: product
+    nodes:
+      - {id: dbreachable, label: Booking database reachable, icon: GitBranch, note: Port equals 1433}
+  - label: Credential access
+    tone: product
+    nodes:
+      - {id: cmdkey, label: Look for saved credentials, icon: KeyRound, note: cmdkey /list}
+  - label: Event
+    tone: product
+    nodes:
+      - {id: account, label: Front-desk account saved, icon: GitBranch, note: Username contains night.audit}
+  - label: Collection
+    tone: product
+    nodes:
+      - {id: query, label: Query the booking database, icon: Server, note: sqlcmd on the host found}
+edges:
+  - {from: connections, to: dbreachable, label: provides Port, style: dashed}
+  - {from: dbreachable, to: cmdkey, label: triggers}
+  - {from: cmdkey, to: account, label: provides Username, style: dashed}
+  - {from: account, to: query, label: triggers}

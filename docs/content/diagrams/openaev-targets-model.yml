@@ -1,0 +1,27 @@
+title: Assets reach injects directly or through asset groups, and persons always through their teams
+lanes:
+  - label: Things
+    tone: external
+    nodes:
+      - {id: assets, label: Assets, icon: Laptop, note: "Hosts, apps, cloud, AI", href: /openaev/use/targets/assets/}
+      - {id: groups, label: Asset groups, icon: Boxes, note: By hand or by rule, href: /openaev/use/targets/assets/}
+  - label: People
+    tone: external
+    nodes:
+      - {id: persons, label: Persons, icon: Users, note: "Email, phone, PGP key", href: /openaev/use/targets/people/}
+      - {id: teams, label: Teams, icon: Network, note: Added to the scenario, href: /openaev/use/targets/people/}
+  - label: Inject
+    tone: product
+    nodes:
+      - {id: inject, label: Inject, icon: Crosshair, note: Its type decides the targets}
+  - label: Scored
+    tone: product
+    nodes:
+      - {id: expectations, label: Expectations, icon: ClipboardCheck, note: One set per target}
+edges:
+  - {from: assets, to: groups, label: members}
+  - {from: persons, to: teams, label: members}
+  - {from: assets, to: inject, label: targeted}
+  - {from: groups, to: inject, label: targeted}
+  - {from: teams, to: inject, label: targeted}
+  - {from: inject, to: expectations, label: creates}

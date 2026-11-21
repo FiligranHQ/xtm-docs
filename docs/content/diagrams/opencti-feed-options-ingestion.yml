@@ -1,0 +1,30 @@
+title: Which manager fetches each kind of feed, and where the data goes
+lanes:
+  - label: Sources
+    tone: external
+    nodes:
+      - {id: taxii, label: TAXII servers, icon: Network, note: Paged by a request limit}
+      - {id: rss, label: RSS sites, icon: BookOpen, note: Fetched with a user agent}
+      - {id: files, label: CSV and JSON, icon: FileText, note: At least 5 minutes apart}
+      - {id: remote, label: Remote OpenCTI, icon: LogoOpenCTI, note: OpenCTI streams}
+  - label: Managers
+    tone: product
+    nodes:
+      - {id: ingestion, label: Ingestion manager, icon: Clock, note: Refuses denied URIs}
+      - {id: sync, label: Sync manager, icon: GitBranch, note: Follows remote streams}
+  - label: Processing
+    tone: product
+    nodes:
+      - {id: workers, label: Workers, icon: Cpu, note: Write the bundles}
+  - label: Storage
+    tone: store
+    nodes:
+      - {id: knowledge, label: Knowledge, icon: Server, note: Elasticsearch}
+edges:
+  - {from: taxii, to: ingestion, label: poll}
+  - {from: rss, to: ingestion, label: fetch}
+  - {from: files, to: ingestion, label: fetch}
+  - {from: remote, to: sync, label: stream}
+  - {from: ingestion, to: workers, label: bundles}
+  - {from: sync, to: workers, label: bundles}
+  - {from: workers, to: knowledge, label: write}

@@ -1,0 +1,25 @@
+title: An agent calls built-in tools and custom tools; a custom tool runs in a sandbox and returns what it prints
+lanes:
+  - label: Agent
+    tone: core
+    nodes:
+      - {id: agent, label: Agent, icon: Bot, note: Decides from descriptions, href: /xtm-one/build/agents/}
+  - label: Tools
+    tone: product
+    nodes:
+      - {id: builtin, label: Built-in tools, icon: Sparkles, note: "Web Fetch, Browser, files"}
+      - {id: custom, label: Custom tool, icon: Code2, note: JavaScript or Python, href: /xtm-one/build/tools/}
+  - label: Runs in
+    tone: store
+    nodes:
+      - {id: sandbox, label: Sandbox, icon: ShieldCheck, note: "Container, timeout"}
+  - label: Reaches
+    tone: external
+    nodes:
+      - {id: api, label: Your web service, icon: Server, note: Through fetch}
+edges:
+  - {from: agent, to: builtin, label: calls}
+  - {from: agent, to: custom, label: "calls with inputs"}
+  - {from: custom, to: sandbox, label: runs}
+  - {from: sandbox, to: api, label: HTTP, style: dashed}
+  - {from: sandbox, to: agent, label: printed output}

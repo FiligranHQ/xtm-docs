@@ -1,0 +1,1887 @@
+{
+  "name": "audit-events",
+  "version": "7.260309.0-lts.8",
+  "source": "OpenCTI-Platform/opencti@22c7908 (opencti-platform/opencti-graphql/src: calls to publishUserAction, manager/activityListener.ts)",
+  "intro": "The 194 events OpenCTI 7.260309.0-lts.8 publishes to its activity, with the message each one writes and the function that publishes it; {braces} mark a value of the event. The activity module records them only when Enterprise Edition is on: administration events for every user, extended events only for the users you listen to, as [Activity](/opencti/configure/activity/) explains; read them on the [Activity events](/opencti/configure/activity/events/) screen.",
+  "filter": "Filter events, messages and functions",
+  "sections": [
+    {
+      "title": "Authentication",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "sessionLogin:authentication.login!:6b210abf",
+          "cells": [
+            "`authentication` · `login`, status `error`",
+            "detects `login failure` for `{username}`",
+            "`sessionLogin` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "sessionAuthenticateUser:authentication.login:f0a14376",
+          "cells": [
+            "`authentication` · `login`",
+            "login from provider `{provider}` [(killing {session kill} sessions)]",
+            "`sessionAuthenticateUser` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "createApp:authentication.logout:1527deeb",
+          "cells": [
+            "`authentication` · `logout`",
+            "logout",
+            "`createApp` in `httpPlatform.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "askSendOtp:authentication.forgot:f239d7a4",
+          "cells": [
+            "`authentication` · `forgot`",
+            "Invalid email {email} provided for password reset",
+            "`askSendOtp` in `auth-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "askSendOtp:authentication.forgot:a06a8d05",
+          "cells": [
+            "`authentication` · `forgot`",
+            "sends password reset code to {user email}",
+            "`askSendOtp` in `auth-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "askSendOtp:authentication.forgot:2289c0ed",
+          "cells": [
+            "`authentication` · `forgot`",
+            "Failed to send password reset code to {email}",
+            "`askSendOtp` in `auth-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "verifyOtp:authentication.forgot:eaebb257",
+          "cells": [
+            "`authentication` · `forgot`",
+            "Password reset code is expired or not found for {transaction id}",
+            "`verifyOtp` in `auth-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "verifyOtp:authentication.forgot:e5c1f932",
+          "cells": [
+            "`authentication` · `forgot`",
+            "Password reset code is invalid for {email}",
+            "`verifyOtp` in `auth-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "verifyOtp:authentication.forgot:0524832f",
+          "cells": [
+            "`authentication` · `forgot`",
+            "Password reset code is valid for {email}",
+            "`verifyOtp` in `auth-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "changePassword:authentication.forgot:e5c1f932",
+          "cells": [
+            "`authentication` · `forgot`",
+            "Password reset code is invalid for {email}",
+            "`changePassword` in `auth-domain.ts`",
+            "Administration (always)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Unauthorized attempts",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "willSendResponse:mutation.unauthorized!:b607583a",
+          "cells": [
+            "`mutation` · `unauthorized`, status `error`",
+            "tries an `unauthorized mutation`",
+            "`willSendResponse` in `loggerPlugin.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "willSendResponse:read.unauthorized!:4ca7dcb3",
+          "cells": [
+            "`read` · `unauthorized`, status `error`",
+            "tries an `unauthorized read`",
+            "`willSendResponse` in `loggerPlugin.js`",
+            "Administration (always)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Reads",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "storeLoadById:read.read:436e66e6",
+          "cells": [
+            "`read` · `read`",
+            "reads `{entity name}` ({entity type})",
+            "`storeLoadById` in `middleware-loader.ts`",
+            "Extended (listened users)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Files",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "uploadImport:file.create:583d666b",
+          "cells": [
+            "`file` · `create`",
+            "adds a new version of `{file name}` in `files` for `{entity name}` ({entity type}) *or* adds `{file name}` in `files` for `{entity name}` ({entity type}) *or* creates Analyst Workbench `{file name}` for `{entity name}` ({entity type})",
+            "`uploadImport` in `file.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "uploadPending:file.create:583d666b",
+          "cells": [
+            "`file` · `create`",
+            "adds a new version of `{file name}` in `files` for `{entity name}` ({entity type}) *or* adds `{file name}` in `files` for `{entity name}` ({entity type}) *or* creates Analyst Workbench `{file name}` for `{entity name}` ({entity type})",
+            "`uploadPending` in `file.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "deleteImport:file.delete:130877db",
+          "cells": [
+            "`file` · `delete`",
+            "removes `{file name}` in `files` for `{entity name}` ({entity type}) *or* removes Analyst Workbench `{file name}` for `{entity name}` ({entity type})",
+            "`deleteImport` in `file.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "stixCoreObjectExportPush:file.create:583d666b",
+          "cells": [
+            "`file` · `create`",
+            "adds a new version of `{file name}` in `files` for `{entity name}` ({entity type}) *or* adds `{file name}` in `files` for `{entity name}` ({entity type}) *or* creates Analyst Workbench `{file name}` for `{entity name}` ({entity type})",
+            "`stixCoreObjectExportPush` in `stixCoreObject.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "stixCoreObjectAnalysisPush:file.create:583d666b",
+          "cells": [
+            "`file` · `create`",
+            "adds a new version of `{file name}` in `files` for `{entity name}` ({entity type}) *or* adds `{file name}` in `files` for `{entity name}` ({entity type}) *or* creates Analyst Workbench `{file name}` for `{entity name}` ({entity type})",
+            "`stixCoreObjectAnalysisPush` in `stixCoreObject.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "analysisClear:file.delete:130877db",
+          "cells": [
+            "`file` · `delete`",
+            "removes `{file name}` in `files` for `{entity name}` ({entity type}) *or* removes Analyst Workbench `{file name}` for `{entity name}` ({entity type})",
+            "`analysisClear` in `stixCoreObject.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "stixCoreObjectImportPush:file.create:583d666b",
+          "cells": [
+            "`file` · `create`",
+            "adds a new version of `{file name}` in `files` for `{entity name}` ({entity type}) *or* adds `{file name}` in `files` for `{entity name}` ({entity type}) *or* creates Analyst Workbench `{file name}` for `{entity name}` ({entity type})",
+            "`stixCoreObjectImportPush` in `stixCoreObject.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "stixCoreObjectImportDelete:file.delete:130877db",
+          "cells": [
+            "`file` · `delete`",
+            "removes `{file name}` in `files` for `{entity name}` ({entity type}) *or* removes Analyst Workbench `{file name}` for `{entity name}` ({entity type})",
+            "`stixCoreObjectImportDelete` in `stixCoreObject.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "publishFileDownload:file.download:1fb55a22",
+          "cells": [
+            "`file` · `download`",
+            "downloads from `{entity name}` the file `{file name}`",
+            "`publishFileDownload` in `httpPlatform.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "publishFileRead:file.read:bc74827e",
+          "cells": [
+            "`file` · `read`",
+            "reads from `{entity name}` the file `{file name}`",
+            "`publishFileRead` in `httpPlatform.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "sendToDisseminationList:file.disseminate:9cc6ea40",
+          "cells": [
+            "`file` · `disseminate`",
+            "disseminate `{files}` to `{dissemination}` from `{entity name}` ({entity type})",
+            "`sendToDisseminationList` in `disseminationList-domain.ts`",
+            "Administration (always)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Commands",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "askJobImport:command.import:f09fdd38",
+          "cells": [
+            "`command` · `import`",
+            "asks for `{file mime}` import of `{file name}` in `{entity name}`",
+            "`askJobImport` in `connector.ts`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "askListExport:command.export:67191a02",
+          "cells": [
+            "`command` · `export`",
+            "asks for `{format}` export in `{entity name}`",
+            "`askListExport` in `stix.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "askEntityExport:command.export:67191a02",
+          "cells": [
+            "`command` · `export`",
+            "asks for `{format}` export in `{entity name}`",
+            "`askEntityExport` in `stix.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "globalSearchPaginated:command.search:adf1243f",
+          "cells": [
+            "`command` · `search`",
+            "asks for `global search`",
+            "`globalSearchPaginated` in `stixCoreObject.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "askElementEnrichmentForConnectors:command.enrich:c704330a",
+          "cells": [
+            "`command` · `enrich`",
+            "asks for `{entity name}` enrichment with connector `{connector name}`",
+            "`askElementEnrichmentForConnectors` in `stixCoreObject.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "publishAnalysisAction:command.analyze:d684c7ed",
+          "cells": [
+            "`command` · `analyze`",
+            "asks for `{entity name}` analysis with connector `{connector name}`",
+            "`publishAnalysisAction` in `stixCoreObject.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "sendEmailToUser:command.send:1b9b5a7d",
+          "cells": [
+            "`command` · `send`",
+            "send an email about `{entity name}` ({entity type}) to `{to}`",
+            "`sendEmailToUser` in `user.js`",
+            "Administration (always)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Security",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "addRole:mutation.create:eec248d1",
+          "cells": [
+            "`mutation` · `create`",
+            "creates role `{name}`",
+            "`addRole` in `grant.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addGroup:mutation.create:aa125b38",
+          "cells": [
+            "`mutation` · `create`",
+            "creates group `{name}`",
+            "`addGroup` in `grant.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "groupDelete:mutation.delete:62227507",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes group `{name}`",
+            "`groupDelete` in `group.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "groupEditField:mutation.update:f73958c9",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for group `{name}`",
+            "`groupEditField` in `group.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "groupAddRelation:mutation.update:0914a06e",
+          "cells": [
+            "`mutation` · `update`",
+            "adds {entity type} `{name}` for user `{user email}`",
+            "`groupAddRelation` in `group.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "groupAddRelation:mutation.update:371306e6",
+          "cells": [
+            "`mutation` · `update`",
+            "adds {entity type} `{name}` for group `{name}`",
+            "`groupAddRelation` in `group.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "groupDeleteRelation:mutation.update:d310e507",
+          "cells": [
+            "`mutation` · `update`",
+            "removes {entity type} `{name}` for user `{user email}`",
+            "`groupDeleteRelation` in `group.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "groupDeleteRelation:mutation.update:efa8fe91",
+          "cells": [
+            "`mutation` · `update`",
+            "removes {entity type} `{name}` for group `{name}`",
+            "`groupDeleteRelation` in `group.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "updateLocalAuth:mutation.update:374cfbd0",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `local authentication settings` for `platform settings`",
+            "`updateLocalAuth` in `setting-auth.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "updateCertAuth:mutation.update:46be28c5",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `cert authentication settings` for `platform settings`",
+            "`updateCertAuth` in `setting-auth.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "updateHeaderAuth:mutation.update:6d425c88",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `header authentication settings` for `platform settings`",
+            "`updateHeaderAuth` in `setting-auth.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "roleDelete:mutation.delete:4783316c",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes role `{name}`",
+            "`roleDelete` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "assignOrganizationToUser:mutation.update:6bdfcc00",
+          "cells": [
+            "`mutation` · `update`",
+            "adds {to type} `{name}` to user `{user email}`",
+            "`assignOrganizationToUser` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addUser:mutation.create:c906bac4",
+          "cells": [
+            "`mutation` · `create`",
+            "creates user `{user email}`",
+            "`addUser` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "roleEditField:mutation.update:493cd1be",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for role `{name}`",
+            "`roleEditField` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "roleAddRelation:mutation.update:fc38dc67",
+          "cells": [
+            "`mutation` · `update`",
+            "adds {entity type} `{name}` for role `{name}`",
+            "`roleAddRelation` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "roleDeleteRelation:mutation.update:f3a96346",
+          "cells": [
+            "`mutation` · `update`",
+            "removes {entity type} `{name}` for role `{name}`",
+            "`roleDeleteRelation` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "userEditField:mutation.update:f867d6d8",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for `themselves` *or* user `{user email}`",
+            "`userEditField` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "userDelete:mutation.delete:ae373789",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes user `{user email}`",
+            "`userDelete` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "userAddRelation:mutation.update:af3b9c98",
+          "cells": [
+            "`mutation` · `update`",
+            "adds {to type} `{name}` for user `{user email}`",
+            "`userAddRelation` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "userDeleteRelation:mutation.update:d310e507",
+          "cells": [
+            "`mutation` · `update`",
+            "removes {entity type} `{name}` for user `{user email}`",
+            "`userDeleteRelation` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "userDeleteOrganizationRelation:mutation.update:d310e507",
+          "cells": [
+            "`mutation` · `update`",
+            "removes {entity type} `{name}` for user `{user email}`",
+            "`userDeleteOrganizationRelation` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addAuthenticationProvider:mutation.create:627ddbfc",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Authentication `{type}` - `{identifier}`",
+            "`addAuthenticationProvider` in `authenticationProvider-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "editAuthenticationProvider:mutation.update:3d6adbf1",
+          "cells": [
+            "`mutation` · `update`",
+            "updates Authentication `{type}` - `{identifier}`",
+            "`editAuthenticationProvider` in `authenticationProvider-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteAuthenticationProvider:mutation.delete:35adecbc",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Authentication `{type}` - `{deleted identifier}`",
+            "`deleteAuthenticationProvider` in `authenticationProvider-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addDisseminationList>createInternalObject:mutation.create:83717618",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Dissemination List `{name}`",
+            "`addDisseminationList` in `disseminationList-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fieldPatchDisseminationList>editInternalObject:mutation.update:8f9eb507",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for Dissemination List `{name}`",
+            "`fieldPatchDisseminationList` in `disseminationList-domain.ts`, through `editInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteDisseminationList>deleteInternalObject:mutation.delete:108f9775",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Dissemination List `{name}`",
+            "`deleteDisseminationList` in `disseminationList-domain.ts`, through `deleteInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addEmailTemplate>createInternalObject:mutation.create:2fe6a3cf",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Email Template `{name}`",
+            "`addEmailTemplate` in `emailTemplate-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fieldPatchEmailTemplate:mutation.update:7592d08c",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for email template `{name}`",
+            "`fieldPatchEmailTemplate` in `emailTemplate-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteEmailTemplate>deleteInternalObject:mutation.delete:93833502",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Email Template `{name}`",
+            "`deleteEmailTemplate` in `emailTemplate-domain.ts`, through `deleteInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "organizationAdminAdd:mutation.update:4c218ee9",
+          "cells": [
+            "`mutation` · `update`",
+            "Promoting `{name}` as admin organization of `{name}`",
+            "`organizationAdminAdd` in `organization-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "organizationAdminRemove:mutation.update:ad7689c5",
+          "cells": [
+            "`mutation` · `update`",
+            "Demoting `{name}` as admin orga of `{name}`",
+            "`organizationAdminRemove` in `organization-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "approveRequestAccess:mutation.update:3b8bca83",
+          "cells": [
+            "`mutation` · `update`",
+            "approved demand of request access for entity {main representative}",
+            "`approveRequestAccess` in `requestAccess-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "declineRequestAccess:mutation.update:dd2b4da2",
+          "cells": [
+            "`mutation` · `update`",
+            "declined demand of request access for entity {main representative}",
+            "`declineRequestAccess` in `requestAccess-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addUserToken>addToken:mutation.update:188ba1c7",
+          "cells": [
+            "`mutation` · `update`",
+            "generated a new API token '{name}'",
+            "`addUserToken` in `user-domain.ts`, through `addToken`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addUserTokenByAdmin>addToken:mutation.update:e94cff38",
+          "cells": [
+            "`mutation` · `update`",
+            "generated a new API token '{name}' for user '{user email}'",
+            "`addUserTokenByAdmin` in `user-domain.ts`, through `addToken`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "revokeUserToken>revokeToken:mutation.update:c1d2a2b5",
+          "cells": [
+            "`mutation` · `update`",
+            "revoked API token '{name}'",
+            "`revokeUserToken` in `user-domain.ts`, through `revokeToken`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "revokeUserTokenByAdmin>revokeToken:mutation.update:8bfcb69e",
+          "cells": [
+            "`mutation` · `update`",
+            "revoked API token '{name}' for user '{user email}'",
+            "`revokeUserTokenByAdmin` in `user-domain.ts`, through `revokeToken`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "sessionKill:mutation.update:99c82c6f",
+          "cells": [
+            "`mutation` · `update`",
+            "kills `specific session` for user `{user email}`",
+            "`sessionKill` in `user.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "userSessionsKill:mutation.update:df25fa3f",
+          "cells": [
+            "`mutation` · `update`",
+            "kills `all sessions` for user `{user email}`",
+            "`userSessionsKill` in `user.js`",
+            "Administration (always)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Parameters",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "settingsEditField:mutation.update:e5e8cc19",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for `platform settings`",
+            "`settingsEditField` in `settings.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "managerConfigurationEditField:mutation.update:e1c1eca8",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for manager configuration `{manager id}`",
+            "`managerConfigurationEditField` in `managerConfiguration-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteSupportPackage>deleteInternalObject:mutation.delete:69c5c032",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Support- Package `{name}`",
+            "`deleteSupportPackage` in `support-domain.ts`, through `deleteInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "prepareNewSupportPackage>createInternalObject:mutation.create:aa92466f",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Support- Package `{name}`",
+            "`prepareNewSupportPackage` in `support-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addTheme>createInternalObject:mutation.create:baf9deca",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Theme `{name}`",
+            "`addTheme` in `theme-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteTheme>deleteInternalObject:mutation.delete:fdcd0de1",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Theme `{name}`",
+            "`deleteTheme` in `theme-domain.ts`, through `deleteInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fieldPatchTheme:mutation.update:3d3e4617",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for theme `{name}`",
+            "`fieldPatchTheme` in `theme-domain.ts`",
+            "Administration (always)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Customization",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "resetFileIndexing:mutation.update:4a99913a",
+          "cells": [
+            "`mutation` · `update`",
+            "Reset file indexing",
+            "`resetFileIndexing` in `indexedFile.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "createRetentionRule:mutation.create:b5376f95",
+          "cells": [
+            "`mutation` · `create`",
+            "creates retention rule `{name}`",
+            "`createRetentionRule` in `retentionRule.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "retentionRuleEditField:mutation.update:c6141526",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for retention rule `{name}`",
+            "`retentionRuleEditField` in `retentionRule.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteRetentionRule:mutation.delete:b400e960",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes retention rule `{name}`",
+            "`deleteRetentionRule` in `retentionRule.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "setRuleActivation:mutation.update:d93f2b3e",
+          "cells": [
+            "`mutation` · `update`",
+            "activates *or* deactivates rule `{name}`",
+            "`setRuleActivation` in `rules.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "createStatusTemplate:mutation.create:738adfad",
+          "cells": [
+            "`mutation` · `create`",
+            "creates status template `{name}`",
+            "`createStatusTemplate` in `status.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "statusEditField:mutation.update:a7d6b707",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `workflow` for entity setting `{sub type id}`",
+            "`statusEditField` in `status.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "statusTemplateEditField:mutation.update:0167c638",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for status template `{name}`",
+            "`statusTemplateEditField` in `status.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "statusDelete:mutation.update:a7d6b707",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `workflow` for entity setting `{sub type id}`",
+            "`statusDelete` in `status.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "statusTemplateDelete:mutation.delete:542e45f2",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes status template `{name}`",
+            "`statusTemplateDelete` in `status.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "caseTemplateAdd:mutation.create:138a9407",
+          "cells": [
+            "`mutation` · `create`",
+            "creates case template `{name}`",
+            "`caseTemplateAdd` in `case-template-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "caseTemplateDelete:mutation.delete:2f5c6b3c",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes case template `{name}`",
+            "`caseTemplateDelete` in `case-template-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "caseTemplateEdit:mutation.update:cee6df3a",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for case template `{name}`",
+            "`caseTemplateEdit` in `case-template-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "caseTemplateAddRelation:mutation.update:65db237d",
+          "cells": [
+            "`mutation` · `update`",
+            "adds Task template `{name}` for case template `{name}`",
+            "`caseTemplateAddRelation` in `case-template-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "caseTemplateDeleteRelation:mutation.delete:2cd446ca",
+          "cells": [
+            "`mutation` · `delete`",
+            "removes Task template `{name}` for case template `{name}`",
+            "`caseTemplateDeleteRelation` in `case-template-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addDecayRule>createInternalObject:mutation.create:fe330aa5",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Decay Rule `{name}`",
+            "`addDecayRule` in `decayRule-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fieldPatchDecayRule:mutation.update:b708ff26",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for decay rule `{name}`",
+            "`fieldPatchDecayRule` in `decayRule-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteDecayRule:mutation.delete:24f09b2c",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes decay rule `{name}`",
+            "`deleteDecayRule` in `decayRule-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addDecayExclusionRule>createInternalObject:mutation.create:1273f219",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Decay Exclusion Rule `{name}`",
+            "`addDecayExclusionRule` in `decayExclusionRule-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fieldPatchDecayExclusionRule:mutation.update:a38aa052",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for decay exclusion rule `{name}`",
+            "`fieldPatchDecayExclusionRule` in `decayExclusionRule-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteDecayExclusionRule:mutation.delete:5dcf8aa8",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes decay exclusion rule `{name}`",
+            "`deleteDecayExclusionRule` in `decayExclusionRule-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "entitySettingEditField:mutation.update:50986ba5",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for entity setting `{target type}`",
+            "`entitySettingEditField` in `entitySetting-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "storeAndCreateExclusionList>createInternalObject:mutation.create:a768bd41",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Exclusion List `{name}`",
+            "`storeAndCreateExclusionList` in `exclusionList-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fieldPatchExclusionList:mutation.update:cab15a5e",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for exclusion list `{name}`",
+            "`fieldPatchExclusionList` in `exclusionList-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteExclusionList>deleteInternalObject:mutation.delete:4145bda8",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Exclusion List `{name}`",
+            "`deleteExclusionList` in `exclusionList-domain.ts`, through `deleteInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addFintelDesign:mutation.create:0426f636",
+          "cells": [
+            "`mutation` · `create`",
+            "creates fintel design '{name}",
+            "`addFintelDesign` in `fintelDesign-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fintelDesignEditField:mutation.update:075129dc",
+          "cells": [
+            "`mutation` · `update`",
+            "updates {fields} for fintel design {name}",
+            "`fintelDesignEditField` in `fintelDesign-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fintelDesignDelete:mutation.delete:cb7ffa72",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes fintel design `{name}`",
+            "`fintelDesignDelete` in `fintelDesign-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addFintelTemplate:mutation.create:0223d065",
+          "cells": [
+            "`mutation` · `create`",
+            "creates fintel template `{name}`",
+            "`addFintelTemplate` in `fintelTemplate-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fintelTemplateEditField:mutation.update:ce046cc6",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for fintel template {name}",
+            "`fintelTemplateEditField` in `fintelTemplate-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fintelTemplateDelete:mutation.delete:3a671e56",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes fintel template `{name}`",
+            "`fintelTemplateDelete` in `fintelTemplate-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addForm:mutation.create:d37ebbfb",
+          "cells": [
+            "`mutation` · `create`",
+            "creates form intake `{name}`",
+            "`addForm` in `form-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "formEditField:mutation.update:afedcfaa",
+          "cells": [
+            "`mutation` · `update`",
+            "updates form intake `{name}`",
+            "`formEditField` in `form-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "formDelete:mutation.delete:92b66d50",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes form intake `{name}`",
+            "`formDelete` in `form-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "importFormConfiguration:mutation.create:3c059854",
+          "cells": [
+            "`mutation` · `create`",
+            "imports form `{name}`",
+            "`importFormConfiguration` in `form-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addNotifier:mutation.create:842b6c6b",
+          "cells": [
+            "`mutation` · `create`",
+            "creates notifier `{name}` for connector `{notifier connector id}`",
+            "`addNotifier` in `notifier-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "notifierEdit:mutation.update:690282f4",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for notifier `{name}`",
+            "`notifierEdit` in `notifier-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addSavedFilter>createInternalObject:mutation.create:e7e6ac18",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Saved Filter `{name}`",
+            "`addSavedFilter` in `savedFilter-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteSavedFilter>deleteInternalObject:mutation.delete:f1856115",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Saved Filter `{name}`",
+            "`deleteSavedFilter` in `savedFilter-domain.ts`, through `deleteInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fieldPatchSavedFilter:mutation.update:dc921cce",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `filters` for saved filters `{name}`",
+            "`fieldPatchSavedFilter` in `savedFilter-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "taskTemplateAdd:mutation.create:31d690ce",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Task `{name}`",
+            "`taskTemplateAdd` in `task-template-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "taskTemplateDelete:mutation.delete:c793164f",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Task `{name}`",
+            "`taskTemplateDelete` in `task-template-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "taskTemplateEdit:mutation.update:791e1c29",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for Task `{name}`",
+            "`taskTemplateEdit` in `task-template-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "statusAdd>createStatus:mutation.update:860cc9f3",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `workflow` for entity setting `{id}`",
+            "`statusAdd` in `subType.js`, through `createStatus`",
+            "Administration (always)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ingestion and processing",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "createListTask:mutation.create:e0545fe9",
+          "cells": [
+            "`mutation` · `create`",
+            "creates `background task`",
+            "`createListTask` in `backgroundTask-common.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "createQueryTask:mutation.create:e0545fe9",
+          "cells": [
+            "`mutation` · `create`",
+            "creates `background task`",
+            "`createQueryTask` in `backgroundTask.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "deleteTask:mutation.delete:9ca72a7c",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes `background task`",
+            "`deleteTask` in `backgroundTask.js`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "migrateConnectorToManaged:mutation.update:10a0ed0d",
+          "cells": [
+            "`mutation` · `update`",
+            "migrates connector `{name}` to managed",
+            "`migrateConnectorToManaged` in `connector-migration.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "resetStateConnector:mutation.update:3897ed1b",
+          "cells": [
+            "`mutation` · `update`",
+            "resets `state` and purge queues for Connector `{name}`",
+            "`resetStateConnector` in `connector.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "managedConnectorAdd:mutation.create:1ec72458",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Connector `{name}`",
+            "`managedConnectorAdd` in `connector.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "registerConnector:mutation.create:1ec72458",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Connector `{name}`",
+            "`registerConnector` in `connector.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "connectorDelete:mutation.delete:25af415b",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Connector `{name}`",
+            "`connectorDelete` in `connector.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "updateConnector:mutation.update:c86709dd",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for connector `{name}`",
+            "`updateConnector` in `connector.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "registerSync:mutation.create:475e348d",
+          "cells": [
+            "`mutation` · `create`",
+            "creates synchronizer `{name}`",
+            "`registerSync` in `connector.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "syncEditField:mutation.update:3ea32a3a",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for synchronizer `{name}`",
+            "`syncEditField` in `connector.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "syncDelete:mutation.delete:6c96c0c0",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes synchronizer `{name}`",
+            "`syncDelete` in `connector.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteWork:mutation.delete:03f2f040",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Connector Work `{name}`",
+            "`deleteWork` in `work.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteWorkForConnector:mutation.update:e31b2b87",
+          "cells": [
+            "`mutation` · `update`",
+            "cleans `all works` for connector `{name}`",
+            "`deleteWorkForConnector` in `work.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addIngestionCsv:mutation.create:c6bff9ff",
+          "cells": [
+            "`mutation` · `create`",
+            "creates csv ingestion `{name}`",
+            "`addIngestionCsv` in `ingestion-csv-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "ingestionCsvEditField:mutation.update:01a40c2e",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for csv ingestion `{name}`",
+            "`ingestionCsvEditField` in `ingestion-csv-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "ingestionCsvResetState:mutation.update:e6f9eb6d",
+          "cells": [
+            "`mutation` · `update`",
+            "reset state of csv ingestion {name}",
+            "`ingestionCsvResetState` in `ingestion-csv-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteIngestionCsv:mutation.delete:da21b1a0",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes csv ingestion `{name}`",
+            "`deleteIngestionCsv` in `ingestion-csv-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteIngestionJson:mutation.delete:5a0c311c",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes json ingestion `{name}`",
+            "`deleteIngestionJson` in `ingestion-json-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addIngestionJson:mutation.create:a12d2211",
+          "cells": [
+            "`mutation` · `create`",
+            "creates json ingestion `{name}`",
+            "`addIngestionJson` in `ingestion-json-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "ingestionJsonEditField:mutation.update:d0e645ca",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for json ingestion `{name}`",
+            "`ingestionJsonEditField` in `ingestion-json-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "ingestionJsonResetState:mutation.update:0482f37f",
+          "cells": [
+            "`mutation` · `update`",
+            "reset state of json ingestion {name}",
+            "`ingestionJsonResetState` in `ingestion-json-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addIngestion:mutation.create:43f5202b",
+          "cells": [
+            "`mutation` · `create`",
+            "creates rss ingestion `{name}`",
+            "`addIngestion` in `ingestion-rss-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "ingestionEditField:mutation.update:826e699a",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for rss ingestion `{name}`",
+            "`ingestionEditField` in `ingestion-rss-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "ingestionDelete:mutation.delete:38cb5e24",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes rss ingestion `{name}`",
+            "`ingestionDelete` in `ingestion-rss-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addIngestion:mutation.create:2faaf7d0",
+          "cells": [
+            "`mutation` · `create`",
+            "creates taxii collection ingestion `{name}`",
+            "`addIngestion` in `ingestion-taxii-collection-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "ingestionEditField:mutation.update:bc01ab3b",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for taxii collection ingestion `{name}`",
+            "`ingestionEditField` in `ingestion-taxii-collection-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "ingestionDelete:mutation.delete:fdc89911",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes taxii collection ingestion `{name}`",
+            "`ingestionDelete` in `ingestion-taxii-collection-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addIngestion:mutation.create:011f7aee",
+          "cells": [
+            "`mutation` · `create`",
+            "creates taxii ingestion `{name}`",
+            "`addIngestion` in `ingestion-taxii-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "ingestionEditField:mutation.update:c46580a7",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for taxii ingestion `{name}`",
+            "`ingestionEditField` in `ingestion-taxii-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "ingestionDelete:mutation.delete:8e4b835d",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes taxii ingestion `{name}`",
+            "`ingestionDelete` in `ingestion-taxii-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "ingestionTaxiiResetState:mutation.update:ab5235e6",
+          "cells": [
+            "`mutation` · `update`",
+            "reset state of taxii ingestion `{name}`",
+            "`ingestionTaxiiResetState` in `ingestion-taxii-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "createCsvMapper>createInternalObject:mutation.create:30dc48c6",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Csv Mapper `{name}`",
+            "`createCsvMapper` in `csvMapper-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fieldPatchCsvMapper>editInternalObject:mutation.update:01672315",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for Csv Mapper `{name}`",
+            "`fieldPatchCsvMapper` in `csvMapper-domain.ts`, through `editInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deleteCsvMapper>deleteInternalObject:mutation.delete:2c613063",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Csv Mapper `{name}`",
+            "`deleteCsvMapper` in `csvMapper-domain.ts`, through `deleteInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "jsonMapperImport:mutation.create:fa2afb82",
+          "cells": [
+            "`mutation` · `create`",
+            "import {name} json mapper",
+            "`jsonMapperImport` in `jsonMapper-domain.ts`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "deleteJsonMapper>deleteInternalObject:mutation.delete:ba7f2a77",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Json Mapper `{name}`",
+            "`deleteJsonMapper` in `jsonMapper-domain.ts`, through `deleteInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "createJsonMapper>createInternalObject:mutation.create:637d152c",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Json Mapper `{name}`",
+            "`createJsonMapper` in `jsonMapper-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "fieldPatchJsonMapper>editInternalObject:mutation.update:0aac4ef9",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for Json Mapper `{name}`",
+            "`fieldPatchJsonMapper` in `jsonMapper-domain.ts`, through `editInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "playbookImport:mutation.create:59b38c6c",
+          "cells": [
+            "`mutation` · `create`",
+            "import {name} playbook",
+            "`playbookImport` in `playbook-domain.ts`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "playbookDuplicate:mutation.create:63d7d55e",
+          "cells": [
+            "`mutation` · `create`",
+            "duplicate {name} playbook",
+            "`playbookDuplicate` in `playbook-domain.ts`",
+            "Extended (listened users)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Data sharing",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "createFeed:mutation.create:218a3dd5",
+          "cells": [
+            "`mutation` · `create`",
+            "creates csv feed `{name}`",
+            "`createFeed` in `feed.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "editFeed:mutation.update:5c1749af",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `configuration` for csv feed `{name}`",
+            "`editFeed` in `feed.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "feedDelete:mutation.delete:4fe07108",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes csv feed `{name}`",
+            "`feedDelete` in `feed.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "createStreamCollection:mutation.create:7dcf0a53",
+          "cells": [
+            "`mutation` · `create`",
+            "creates live stream `{name}`",
+            "`createStreamCollection` in `stream.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "streamCollectionEditField:mutation.update:3ae470ea",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for live stream `{name}`",
+            "`streamCollectionEditField` in `stream.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "streamCollectionDelete:mutation.delete:ab8d7fd8",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes live stream `{name}`",
+            "`streamCollectionDelete` in `stream.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "createTaxiiCollection:mutation.create:ad621e86",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Taxii collection `{name}`",
+            "`createTaxiiCollection` in `taxii.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "taxiiCollectionEditField:mutation.update:e814adb5",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for Taxii collection `{name}`",
+            "`taxiiCollectionEditField` in `taxii.js`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "taxiiCollectionDelete:mutation.delete:403bf1f7",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Taxii collection `{name}`",
+            "`taxiiCollectionDelete` in `taxii.js`",
+            "Administration (always)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Collaboration",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "addDraftWorkspace:mutation.create:aafe6663",
+          "cells": [
+            "`mutation` · `create`",
+            "creates draft workspace `{name}`",
+            "`addDraftWorkspace` in `draftWorkspace-domain.ts`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "deleteDraftWorkspace:mutation.delete:007486b4",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes draft workspace `{name}`",
+            "`deleteDraftWorkspace` in `draftWorkspace-domain.ts`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "addTrigger:mutation.create:09f33438",
+          "cells": [
+            "`mutation` · `create`",
+            "creates {type} trigger `{name}` for `themselves` *or* `{name}`",
+            "`addTrigger` in `notification-domain.ts`",
+            "Set at run time: Extended (listened users) when `isSelfTrigger`, otherwise Administration (always)"
+          ]
+        },
+        {
+          "key": "addTriggerActivity:mutation.create:f27b76de",
+          "cells": [
+            "`mutation` · `create`",
+            "creates {type} activity trigger `{name}` for `{name}`, …",
+            "`addTriggerActivity` in `notification-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "triggerDelete:mutation.delete:f86d9807",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes trigger `{name}` for `themselves` *or* `{recipient names}`, …",
+            "`triggerDelete` in `notification-domain.ts`",
+            "Set at run time: Extended (listened users) when `isSelfTrigger`, otherwise Administration (always)"
+          ]
+        },
+        {
+          "key": "pirAdd:mutation.create:1f1c6918",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Pir `{name}`",
+            "`pirAdd` in `pir-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "deletePir>deleteInternalObject:mutation.delete:9571f38b",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes Pir `{name}`",
+            "`deletePir` in `pir-domain.ts`, through `deleteInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "updatePir>editInternalObject:mutation.update:3324d505",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for Pir `{name}`",
+            "`updatePir` in `pir-domain.ts`, through `editInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "addPublicDashboard:mutation.create:c0203d36",
+          "cells": [
+            "`mutation` · `create`",
+            "creates public dashboard `{name}`",
+            "`addPublicDashboard` in `publicDashboard-domain.ts`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "publicDashboardEditField:mutation.update:379f7641",
+          "cells": [
+            "`mutation` · `update`",
+            "Update public dashboard",
+            "`publicDashboardEditField` in `publicDashboard-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "publicDashboardDelete:mutation.delete:df7d90b7",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes public dashboard `{name}`",
+            "`publicDashboardDelete` in `publicDashboard-domain.ts`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "addWorkspace>createInternalObject:mutation.create:59a20e42",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Workspace `{name}`",
+            "`addWorkspace` in `workspace-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "workspaceDelete:mutation.delete:c5d21aff",
+          "cells": [
+            "`mutation` · `delete`",
+            "deletes {type} workspace `{name}`",
+            "`workspaceDelete` in `workspace-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "workspaceEditField>editInternalObject:mutation.update:5da28593",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for Workspace `{name}`",
+            "`workspaceEditField` in `workspace-domain.ts`, through `editInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "workspaceImportConfiguration:mutation.create:39ec62d8",
+          "cells": [
+            "`mutation` · `create`",
+            "import {name} workspace",
+            "`workspaceImportConfiguration` in `workspace-domain.ts`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "duplicateWorkspace:mutation.create:7852a731",
+          "cells": [
+            "`mutation` · `create`",
+            "creates {type} workspace `{name}` from custom-named duplication",
+            "`duplicateWorkspace` in `workspace-domain.ts`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "workspaceImportWidgetConfiguration:mutation.create:6185d00f",
+          "cells": [
+            "`mutation` · `create`",
+            "import widget (id : {imported widget id}) in workspace (id : {workspace id})",
+            "`workspaceImportWidgetConfiguration` in `workspace-domain.ts`",
+            "Extended (listened users)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Platform initialization",
+      "columns": [
+        "Event",
+        "Message",
+        "Triggered by",
+        "Access"
+      ],
+      "rows": [
+        {
+          "key": "createDefaultStatusTemplates>createStatus:mutation.update:c94dbf38",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `workflow` for entity setting `Report`",
+            "`createDefaultStatusTemplates` in `data-initialization.js`, through `createStatus`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "createDefaultStatusTemplates>createStatus:mutation.update:7c54be4c",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `workflow` for entity setting `Case-Rfi`",
+            "`createDefaultStatusTemplates` in `data-initialization.js`, through `createStatus`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "createInitialRequestAccessFlow>createStatus:mutation.update:7c54be4c",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `workflow` for entity setting `Case-Rfi`",
+            "`createInitialRequestAccessFlow` in `data-initialization.js`, through `createStatus`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "up>createStatus:mutation.update:c94dbf38",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `workflow` for entity setting `Report`",
+            "`up` in `1630337822820-report_status.js`, through `createStatus`",
+            "Administration (always)"
+          ]
+        }
+      ]
+    }
+  ]
+}

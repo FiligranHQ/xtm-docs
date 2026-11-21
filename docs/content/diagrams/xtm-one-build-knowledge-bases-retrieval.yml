@@ -1,0 +1,22 @@
+title: Documents go into a knowledge base, are split and indexed, and the agents bound to it search them while they answer
+lanes:
+  - label: Content
+    tone: external
+    nodes:
+      - {id: files, label: Files and text, icon: FileText, note: "Upload Files, Paste Text"}
+      - {id: sources, label: Import sources, icon: History, note: "Website, GitHub, Notion, drives"}
+  - label: Knowledge base
+    tone: core
+    nodes:
+      - {id: kb, label: Knowledge base, icon: BookOpen, note: Original documents kept}
+      - {id: index, label: Search index, icon: Search, note: Chunks and embeddings}
+  - label: Agents
+    tone: core
+    nodes:
+      - {id: agent, label: Bound agents, icon: Bot, note: Search only by default, href: /xtm-one/build/agents/}
+edges:
+  - {from: files, to: kb, label: added}
+  - {from: sources, to: kb, label: synced on schedule}
+  - {from: kb, to: index, label: embedded}
+  - {from: agent, to: index, label: searches passages}
+  - {from: agent, to: kb, label: writes back if allowed, style: dashed}

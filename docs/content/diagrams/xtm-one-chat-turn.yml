@@ -1,0 +1,24 @@
+title: A message reaches the conversation's agent, then each agent you mention, and the answers come back with their files
+lanes:
+  - label: You
+    tone: external
+    nodes:
+      - {id: message, label: Your message, icon: MessageSquare, note: "Files, prompt, @mentions"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: agent, label: Conversation's agent, icon: Bot, note: Answers first}
+      - {id: mentioned, label: Mentioned agents, icon: Users, note: Answer in turn}
+      - {id: tools, label: Session tools, icon: Wrench, note: "Knowledge, MCP, integrations"}
+  - label: What you get back
+    tone: product
+    nodes:
+      - {id: answers, label: Answers, icon: FileText, note: One per agent}
+      - {id: files, label: Files, icon: Layers, note: New revision on request}
+edges:
+  - {from: message, to: agent, label: sends}
+  - {from: agent, to: mentioned, label: then}
+  - {from: agent, to: tools, label: calls, both: true}
+  - {from: agent, to: answers, label: writes}
+  - {from: mentioned, to: answers, label: write}
+  - {from: answers, to: files, label: attach}

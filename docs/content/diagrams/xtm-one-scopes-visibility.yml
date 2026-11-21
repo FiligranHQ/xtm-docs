@@ -1,0 +1,25 @@
+title: An object starts personal, its owner shares it with people and groups, an administrator can make it company-managed for everyone
+lanes:
+  - label: Who decides
+    tone: external
+    nodes:
+      - {id: owner, label: Owner, icon: Users, note: Creates the object}
+      - {id: admin, label: Administrator, icon: ShieldCheck, note: Sees every object}
+  - label: Scope of the object
+    tone: core
+    nodes:
+      - {id: personal, label: Personal, icon: KeyRound, note: Only the owner}
+      - {id: shared, label: Shared, icon: Users, note: People and groups picked}
+      - {id: company, label: Company-managed, icon: Boxes, note: "Everyone sees, admins edit"}
+  - label: Who else reaches it
+    tone: product
+    nodes:
+      - {id: grantees, label: Grantees, icon: Check, note: "Read only, Can configure, Full access"}
+      - {id: everyone, label: Every user, icon: Users, note: Unless access is restricted}
+edges:
+  - {from: owner, to: personal, label: creates}
+  - {from: personal, to: shared, label: shares}
+  - {from: shared, to: grantees, label: per permission}
+  - {from: admin, to: company, label: switches on}
+  - {from: company, to: everyone, label: read and use}
+  - {from: company, to: grantees, label: restrict access, style: dashed}

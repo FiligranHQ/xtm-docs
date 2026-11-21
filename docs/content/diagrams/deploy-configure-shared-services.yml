@@ -1,0 +1,31 @@
+title: OpenCTI, OpenAEV and XTM One share five services, each module keeping its data apart in its own index prefix, bucket and database
+lanes:
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV}
+  - label: At the center
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne}
+  - label: Shared services
+    tone: store
+    nodes:
+      - {id: elasticsearch, label: Elasticsearch, icon: Search, note: "Or OpenSearch, an index prefix each"}
+      - {id: rabbitmq, label: RabbitMQ, icon: Layers, note: Work for workers and integrations}
+      - {id: redis, label: Redis, icon: Activity, note: Event stream of OpenCTI}
+      - {id: s3, label: S3 object storage, icon: Boxes, note: "Service minio, a bucket each"}
+      - {id: pgsql, label: PostgreSQL, icon: Server, note: "pgvector, a database each"}
+edges:
+  - {from: opencti, to: elasticsearch}
+  - {from: opencti, to: rabbitmq}
+  - {from: opencti, to: redis}
+  - {from: opencti, to: s3}
+  - {from: openaev, to: elasticsearch}
+  - {from: openaev, to: rabbitmq}
+  - {from: openaev, to: s3}
+  - {from: openaev, to: pgsql}
+  - {from: xtmone, to: redis}
+  - {from: xtmone, to: s3}
+  - {from: xtmone, to: pgsql}

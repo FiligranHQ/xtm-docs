@@ -1,0 +1,30 @@
+title: The XTM stack starts rsa-key-generator and XTM Composer, which registers with both platforms and runs as a container every integration you start
+lanes:
+  - label: xtm-docker
+    tone: external
+    nodes:
+      - {id: stack, label: docker compose up, icon: Terminal, note: "modules/xtm-composer.yml"}
+  - label: Key
+    tone: external
+    nodes:
+      - {id: keygen, label: rsa-key-generator, icon: KeyRound, note: "4096-bit key in rsakeys"}
+  - label: XTM Composer
+    tone: external
+    nodes:
+      - {id: composer, label: xtm-composer, icon: Workflow, note: Starts once the platforms are healthy}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Catalog: Deploy, Create, Start"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "Catalog: Deploy, Create, Start"}
+  - label: Docker
+    tone: external
+    nodes:
+      - {id: container, label: Integration container, icon: Puzzle, note: "Label opencti-manager"}
+edges:
+  - {from: stack, to: keygen, label: starts}
+  - {from: stack, to: composer, label: starts}
+  - {from: keygen, to: composer, label: RSA key}
+  - {from: composer, to: opencti, label: Manager registered}
+  - {from: composer, to: openaev, label: Manager registered}
+  - {from: composer, to: container, label: creates on Start}

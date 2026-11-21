@@ -1,0 +1,22 @@
+title: OpenAEV asks Caldera to run an ability on the Caldera agent of the endpoint, which starts the OpenAEV implant
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: executor, label: Caldera executor, icon: LogoOpenAEV, note: Reads the agents every minute}
+      - {id: assets, label: Endpoints, icon: Server, note: One per Caldera agent}
+  - label: Caldera
+    tone: external
+    nodes:
+      - {id: server, label: Caldera server, icon: Server, note: "Abilities, group red"}
+  - label: Endpoint
+    tone: external
+    nodes:
+      - {id: sandcat, label: Caldera agent, icon: Laptop, note: Installed from OpenAEV}
+      - {id: implant, label: Implant, icon: Cpu, note: Runs the actions}
+edges:
+  - {from: executor, to: server, label: run ability}
+  - {from: executor, to: assets, label: imports}
+  - {from: sandcat, to: server, label: beacons}
+  - {from: sandcat, to: implant, label: starts}
+  - {from: implant, to: assets, label: results, style: dashed}

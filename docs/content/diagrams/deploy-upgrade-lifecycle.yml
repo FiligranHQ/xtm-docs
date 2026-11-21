@@ -1,0 +1,28 @@
+title: An OpenCTI LTS line is branched from the latest release, released after one month of stabilization, and supported for one year, overlapping the next line
+lanes:
+  - label: Regular releases
+    tone: product
+    nodes:
+      - {id: latest, label: Latest release, icon: LogoOpenCTI, note: "x.dddddd.z, daily to weekly"}
+  - label: Branched
+    tone: product
+    nodes:
+      - {id: b1, label: 7.260309-lts, icon: GitBranch, note: "9 March 2026"}
+      - {id: b2, label: 7.260811-lts, icon: GitBranch, note: "11 August 2026"}
+  - label: Released
+    tone: product
+    nodes:
+      - {id: r1, label: 7.260309-lts released, icon: Rocket, note: "After stabilization, March to April 2026"}
+      - {id: r2, label: 7.260811-lts released, icon: Rocket, note: "September 2026"}
+  - label: End of support
+    tone: external
+    nodes:
+      - {id: e1, label: 7.260309-lts ends, icon: Clock, note: "April 2027"}
+      - {id: e2, label: 7.260811-lts ends, icon: Clock, note: "September 2027"}
+edges:
+  - {from: latest, to: b1, label: branched}
+  - {from: latest, to: b2, label: branched}
+  - {from: b1, to: r1, label: 1 month stabilization}
+  - {from: b2, to: r2, label: 1 month stabilization}
+  - {from: r1, to: e1, label: critical and security fixes}
+  - {from: r2, to: e2, label: critical and security fixes}

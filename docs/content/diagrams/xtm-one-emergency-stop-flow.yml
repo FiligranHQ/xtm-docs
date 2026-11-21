@@ -1,0 +1,29 @@
+title: The stop first closes the door, then cancels what runs, and stays in effect until someone lifts it with a reason
+lanes:
+  - label: Press
+    tone: external
+    nodes:
+      - {id: menu, label: Profile menu, icon: Users, note: "My activity, or whole platform"}
+      - {id: token, label: Emergency token, icon: KeyRound, note: "Printed procedure, monitoring", href: /develop/apis/emergency-stop/}
+  - label: The stop
+    tone: core
+    nodes:
+      - {id: door, label: Close the door, icon: ShieldCheck, note: "Pause assignments, AI off"}
+      - {id: cancel, label: Cancel live work, icon: X, note: "Runs, tasks, chat turns"}
+  - label: While in effect
+    tone: product
+    nodes:
+      - {id: banner, label: Red banner, icon: TriangleAlert, note: "Who, when, why"}
+      - {id: logs, label: Logs, icon: History, note: One entry per stop and resume}
+  - label: Lift
+    tone: external
+    nodes:
+      - {id: resume, label: Resume, icon: PlayCircle, note: Reason required}
+edges:
+  - {from: menu, to: door, label: press}
+  - {from: token, to: door, label: whole platform}
+  - {from: door, to: cancel, label: then}
+  - {from: cancel, to: banner, label: shows}
+  - {from: cancel, to: logs, label: records}
+  - {from: banner, to: resume, label: Resume}
+  - {from: resume, to: door, label: reopens, style: dashed}

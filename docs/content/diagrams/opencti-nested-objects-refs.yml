@@ -1,0 +1,24 @@
+title: Each nested reference of a STIX object becomes a link to a separate, shared object in OpenCTI
+lanes:
+  - label: STIX object
+    tone: external
+    nodes:
+      - {id: object, label: Intrusion Set, icon: Crosshair, note: Velvet Harbor}
+  - label: OpenCTI graph
+    tone: product
+    nodes:
+      - {id: author, label: Author, icon: Users, note: Example CERT}
+      - {id: marking, label: Marking, icon: KeyRound, note: TLP:AMBER}
+      - {id: label, label: Label, icon: ListChecks, note: hotel-sector}
+      - {id: extref, label: External reference, icon: ExternalLink, note: An advisory URL}
+  - label: Shared with
+    tone: store
+    nodes:
+      - {id: others, label: Other objects, icon: Boxes, note: "Reports, malware, indicators"}
+edges:
+  - {from: object, to: author, label: created_by_ref}
+  - {from: object, to: marking, label: object_marking_refs}
+  - {from: object, to: label, label: labels}
+  - {from: object, to: extref, label: external_references}
+  - {from: label, to: others, label: same label object, style: dashed}
+  - {from: author, to: others, label: same author, style: dashed}

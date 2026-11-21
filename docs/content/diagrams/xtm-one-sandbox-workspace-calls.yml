@@ -1,0 +1,23 @@
+title: Each code interpreter call runs in an isolated process, and the sandbox workspace keeps its files from one call to the next
+lanes:
+  - label: Content in
+    tone: external
+    nodes:
+      - {id: repo, label: Repository, icon: GitBranch, note: Checked out by the server}
+      - {id: files, label: Conversation files, icon: FileText, note: Uploads and downloads}
+  - label: Sandbox
+    tone: core
+    nodes:
+      - {id: call, label: Code interpreter call, icon: Terminal, note: "No network, no credential"}
+      - {id: workspace, label: workspace/ directory, icon: Layers, note: "Up to 2 GB, one per conversation or run"}
+  - label: Content out
+    tone: product
+    nodes:
+      - {id: output, label: Conversation file, icon: ArrowUpRight, note: Handed to you}
+      - {id: commit, label: Repository commit, icon: GitPullRequest, note: What changed in the checkout}
+edges:
+  - {from: repo, to: workspace, label: materialize}
+  - {from: files, to: workspace, label: copy in}
+  - {from: call, to: workspace, label: reads and writes, both: true}
+  - {from: workspace, to: output, label: copy out}
+  - {from: workspace, to: commit, label: commit}

@@ -1,0 +1,21 @@
+title: XTM One prepares the agents and binds them, an OpenCTI playbook hands each new report to them, and every run leaves a trace
+lanes:
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: agents, label: Agents ready, icon: Bot, note: "Transformer, digest agent"}
+      - {id: binding, label: Bound to intents, icon: KeyRound, note: "cti.stix_consumer"}
+      - {id: brief, label: Weekly brief, icon: Clock, note: "Assignment, in Operations"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: playbook, label: Triage playbook, icon: Workflow, note: "Runs as playbook-automation"}
+      - {id: report, label: Labelled and summarized, icon: FileText, note: "hotel-sector, a note"}
+      - {id: traces, label: Execution traces, icon: History, note: "Each step's bundle"}
+edges:
+  - {from: agents, to: binding, label: shared and bound}
+  - {from: binding, to: playbook, label: agents offered}
+  - {from: playbook, to: agents, label: STIX bundle}
+  - {from: agents, to: report, label: label and summary}
+  - {from: playbook, to: traces, label: every run}
+  - {from: agents, to: brief, label: every Monday, style: dashed}

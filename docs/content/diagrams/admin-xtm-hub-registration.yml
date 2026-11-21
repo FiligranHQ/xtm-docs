@@ -1,0 +1,15 @@
+title: A connected OpenCTI platform checks its link with the XTM Hub every hour and alerts its administrators when the link is lost
+lanes:
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenCTI, note: Registration token}
+      - {id: admins, label: Administrators, icon: MessageSquare, note: Manage XTM Hub}
+  - label: Filigran
+    tone: external
+    nodes:
+      - {id: hub, label: XTM Hub, icon: LogoFiligran, note: hub.filigran.io}
+edges:
+  - {from: platform, to: hub, label: connects}
+  - {from: platform, to: hub, label: hourly check}
+  - {from: platform, to: admins, label: lost link email, style: dashed}

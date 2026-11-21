@@ -1,0 +1,19 @@
+title: How the OpenCTI session cookie keeps a user logged in
+lanes:
+  - label: Clients
+    tone: external
+    nodes:
+      - {id: browser, label: Browser, icon: Laptop, note: Sends opencti_session on every request}
+      - {id: api, label: API clients, icon: Code2, note: 'Send a token, get no cookie'}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenCTI, note: Checks and renews the session}
+  - label: Sessions
+    tone: store
+    nodes:
+      - {id: redis, label: Redis, icon: Server, note: Shared sessions by default}
+edges:
+  - {from: browser, to: platform, label: session cookie, both: true}
+  - {from: api, to: platform, label: Authorization header}
+  - {from: platform, to: redis, label: stores the session}

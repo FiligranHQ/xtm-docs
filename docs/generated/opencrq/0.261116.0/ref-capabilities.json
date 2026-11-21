@@ -1,0 +1,62 @@
+{
+  "name": "capabilities",
+  "version": "0.261116.0",
+  "source": "OpenCRQ-Platform/opencrq@a185f01 (module/src/modules/capabilities, module/src/modules/platform-capabilities)",
+  "intro": "The capabilities a role grants in OpenCRQ, as the role editors name them. A tenant role grants its capabilities in its tenant only; a platform role grants the platform's. A capability reaches a person through a group: a group holds roles, and a user or a service account belongs to groups. The first administrator gets an **Admin** role and group with every platform capability, and each new tenant an **Admin** role and group with every tenant capability.",
+  "sections": [
+    {
+      "title": "Tenant capabilities",
+      "text": "Granted by the roles of a tenant (the tenant's **Settings > Security > Roles**).",
+      "columns": [
+        "Capability",
+        "What it allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "MANAGE_SECURITY",
+          "cells": [
+            "**Manage Security**",
+            "Manage users, groups, roles and their capabilities.",
+            "`MANAGE_SECURITY`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Platform capabilities",
+      "text": "Granted by the roles of the platform (the platform's **Settings > Security > Roles**).",
+      "columns": [
+        "Capability",
+        "What it allows",
+        "Code"
+      ],
+      "rows": [
+        {
+          "key": "Create Tenants",
+          "cells": [
+            "**Create Tenants**",
+            "Create and manage tenants.",
+            "`Create Tenants`"
+          ]
+        },
+        {
+          "key": "Manage Users",
+          "cells": [
+            "**Manage Users**",
+            "Create and manage platform users.",
+            "`Manage Users`"
+          ]
+        },
+        {
+          "key": "Platform Administration Access",
+          "cells": [
+            "**Platform Administration Access**",
+            "Access to the platform administration section.",
+            "`Platform Administration Access`"
+          ]
+        }
+      ]
+    }
+  ]
+}

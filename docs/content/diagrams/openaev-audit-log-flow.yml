@@ -1,0 +1,25 @@
+title: OpenAEV writes one audit event per login, change, denied access or simulation step, to the console, a file or both
+lanes:
+  - label: What happens
+    tone: external
+    nodes:
+      - {id: login, label: Logins, icon: LogIn, note: "Success, failure, logout"}
+      - {id: change, label: Changes, icon: Wrench, note: "Create, update, delete, launch"}
+      - {id: denied, label: Denied access, icon: ShieldCheck, note: "Refused by a role"}
+      - {id: runs, label: Simulation runs, icon: PlayCircle, note: "Injects and results"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: audit, label: Audit logger, icon: LogoOpenAEV, note: "Who, what, from where"}
+  - label: Transports
+    tone: store
+    nodes:
+      - {id: console, label: console, icon: Terminal, note: JSON lines in the log}
+      - {id: file, label: file, icon: FileText, note: "audit.log, rolled daily"}
+edges:
+  - {from: login, to: audit}
+  - {from: change, to: audit}
+  - {from: denied, to: audit}
+  - {from: runs, to: audit}
+  - {from: audit, to: console, label: writes}
+  - {from: audit, to: file, label: writes}

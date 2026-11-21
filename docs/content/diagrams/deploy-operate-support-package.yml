@@ -1,0 +1,25 @@
+title: Every OpenCTI node uploads its support log and usage statistics, and OpenCTI gathers them into one ZIP file to download
+lanes:
+  - label: You
+    tone: external
+    nodes:
+      - {id: admin, label: Generate Support Package, icon: LogIn, note: "Settings > Filigran Experience"}
+  - label: OpenCTI nodes
+    tone: product
+    nodes:
+      - {id: node1, label: OpenCTI node, icon: LogoOpenCTI, note: Support log and usage statistics}
+      - {id: node2, label: Other OpenCTI nodes, icon: LogoOpenCTI, note: The same files each}
+  - label: Support package
+    tone: store
+    nodes:
+      - {id: pkg, label: Support package, icon: Boxes, note: "IN_PROGRESS, then READY, or TIMEOUT after 5 minutes"}
+  - label: Download
+    tone: external
+    nodes:
+      - {id: zip, label: ZIP file, icon: FileText, note: "Partial with Force download after 1 minute"}
+edges:
+  - {from: admin, to: node1, label: request}
+  - {from: admin, to: node2, label: request}
+  - {from: node1, to: pkg, label: upload files}
+  - {from: node2, to: pkg, label: upload files}
+  - {from: pkg, to: zip, label: download}
