@@ -1,4 +1,4 @@
-title: OpenCRQ reads its settings from environment variables when it starts, refuses a wrong one, and uses them to reach its database, its file storage, XTM One and the tools each tenant connects
+title: OpenCRQ reads its settings from environment variables when it starts, refuses a wrong one, and uses them to reach its database, its file storage, XTM One, the tools each tenant connects and your monitoring
 lanes:
   - label: Settings
     tone: external
@@ -18,9 +18,14 @@ lanes:
     tone: external
     nodes:
       - {id: tools, label: Connected tools, icon: Puzzle, note: "OpenCTI, OpenAEV, NVD, Defender, Drata"}
+  - label: Monitoring
+    tone: external
+    nodes:
+      - {id: monitoring, label: Your monitoring, icon: Gauge, note: "Metrics, traces, logs"}
 edges:
   - {from: env, to: opencrq, label: read at start}
   - {from: opencrq, to: pgsql, label: POSTGRES__*}
   - {from: opencrq, to: s3, label: FILE_STORAGE__*}
   - {from: opencrq, to: xtmone, label: XTM_ONE__*}
   - {from: opencrq, to: tools, label: CONNECTORS__*}
+  - {from: opencrq, to: monitoring, label: TELEMETRY__*, style: dashed}

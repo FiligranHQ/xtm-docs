@@ -32,7 +32,7 @@ An asset left on **Unknown** is priced as the tenant setting says: **Internal** 
 ## Declare a supporting asset
 
 :::steps
-1. Go to :menu[Attack surface > Assets]. The card above the list counts the assets of each category, the largest first, and the list shows each asset with its **Exposure**, **Criticality**, **Category TTPs** and **Findings**. Inside a risk scope, the card also sets the scope's [declared estate](/opencrq/concepts/risk-scopes-and-assets/#the-declared-estate) beside what is measured, and **Estimate my estate** (**Review my estimate** once the scope has one) leads to the risk scope to answer it.
+1. Go to :menu[Attack surface > Assets]. The card above the list counts the assets of each category, the largest first, and the list shows each asset with its **Exposure**, **Criticality**, **Category TTPs** and **Findings**. On a short screen, the card shows its first three categories, and **Show all categories** opens the rest. Inside a risk scope, the card also sets the scope's [declared estate](/opencrq/concepts/risk-scopes-and-assets/#the-declared-estate) beside what is measured, and **Estimate my estate** (**Review my estimate** once the scope has one) leads to the risk scope to answer it.
 
    ::screenshot{id=opencrq-assets-list alt="The Assets list of Grand Meridian Hotels: six assets, from the internet-facing booking web application and VPN gateway to the internal database server, workstations, night.audit account and Spanish payment terminals, each with its exposure and criticality."}
 
@@ -64,15 +64,15 @@ Each source keeps its own memberships: a sync replaces only the members its conn
 
 :::steps
 1. Go to :menu[Attack surface > Assets]. The **Groups** column shows the groups of each asset on one line, with **+N** for the rest.
-2. Open **Filter by group**, shown once the tenant has groups, and choose a group: each one shows its number of assets. **All groups** shows the whole list again.
+2. Open the **Group** filter, shown beside **Source** and **Category** once the tenant has groups, and choose a group: each one shows its number of assets. The filter then reads the group's name, such as **Group: Hotel front desks**. **All groups** shows the whole list again.
 
    ::screenshot{id=opencrq-assets-groups alt="The Assets list of Grand Meridian Hotels filtered on the Hotel front desks group: the front-desk workstations, the night.audit account and the Spanish payment terminals, each with Hotel front desks in its Groups column."}
 :::
 
-The filter combines with the search, the source and the category, and stays in the page's address, so you can share the filtered list.
+The group filter combines with the search and the other filters: **Source** keeps the assets one integration observed, or, with **Set by user**, those declared by hand; **Category** keeps one category, or, under **Match**, every category **Except** that one. The count of active filters shows after them, with **Clear all** to lift every filter and the search at once. When nothing matches, the list reads **No results**, with **Clear filters**. The filters stay in the page's address, so you can share the filtered list.
 
 :::example[Review the front desks before the awareness campaign]
-Grand Meridian's risk manager prepares the front desks' training budget. In :menu[Attack surface > Assets], she chooses **Hotel front desks (3)** in **Filter by group**. The list shows three assets: the Front-desk workstations, the night.audit account and the Front-desk payment terminals of Spain. Two of them have a **Criticality** of **High**: those are the assets she names in the training request.
+Grand Meridian's risk manager prepares the front desks' training budget. In :menu[Attack surface > Assets], she opens the **Group** filter and chooses **Hotel front desks (3)**. The list shows three assets: the Front-desk workstations, the night.audit account and the Front-desk payment terminals of Spain. Two of them have a **Criticality** of **High**: those are the assets she names in the training request.
 :::
 
 ## Link the asset to what it supports
@@ -90,6 +90,12 @@ A primary asset is lost through the supporting assets that carry it. The links s
 :::
 
 Each role passes some security criteria of the primary asset to the supporting asset; [Links and their roles](/opencrq/concepts/risk-scopes-and-assets/#links-and-their-roles) gives the table. A scenario reads the links two ways. At initial access, the run tells apart the assets linked to the scenario's primary assets from the rest of the estate. And the **Targets** tab of the scenario ranks the supporting assets by the share of its loss each one carries, a share halved at each dependency step.
+
+## See the asset in OpenCTI and OpenAEV
+
+An asset with a **Hostname** is the same machine in OpenCTI, as a System, and in OpenAEV, as an asset. When the tenant's OpenCTI or OpenAEV connector is set, the asset's page shows an **In OpenCTI** or **In OpenAEV** card above its tabs: the link that opens the machine there. OpenCTI finds it by name; the **In OpenAEV** card adds the key facts OpenAEV returns about it. The card reads **Not found in OpenCTI.** or **Not found in OpenAEV.** when that product does not hold the hostname.
+
+When a connector is not set, the page offers **Connect OpenCTI** or **Connect OpenAEV** beside **Edit**, which opens the connector's settings. Without **Manage Security**, the button is disabled, and its hint says to ask an administrator. An administrator sets the connectors: see [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/) and [Import OpenAEV results](/opencrq/use/sources/openaev/).
 
 ## Read access relations and events
 

@@ -1,7 +1,7 @@
 {
   "name": "configuration",
-  "version": "0.261116.0",
-  "source": "OpenCRQ-Platform/opencrq@a185f01 (back/src/config-schema.ts)",
+  "version": "0.261120.0",
+  "source": "OpenCRQ-Platform/opencrq@a91d685 (back/src/config-schema.ts)",
   "intro": "Every key OpenCRQ reads at boot, from its configuration schema, grouped by block, by its environment variable: the key in upper case with `__` between the levels (`JOBS__MAX_CONCURRENT` is `jobs.max_concurrent` in a configuration file). A variable with `<tenant-uuid>` is set per tenant: `CONNECTORS__OPENCTI__<tenant-uuid>__URL`. **Required** says what a block needs when it is set; a whole block the platform does not use (file storage, a connector) can be left out.",
   "filter": "Filter keys, variables, descriptions",
   "sections": [
@@ -308,6 +308,38 @@
       ]
     },
     {
+      "title": "initial_tenant",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "initial_tenant.id",
+          "cells": [
+            "`INITIAL_TENANT__ID`",
+            "UUID",
+            "`01a043da-ff47-72c2-aaa4-7da56d85c83e`",
+            "No",
+            "Identifier (a UUID) of the tenant OpenCRQ creates at boot when the platform holds no tenant yet. Set it before the first boot to write the tenant's `CONNECTORS__<NAME>__<tenant id>__…` keys in the same deployment. Read only at that first boot: once a tenant exists, changing it does nothing."
+          ]
+        },
+        {
+          "key": "initial_tenant.name",
+          "cells": [
+            "`INITIAL_TENANT__NAME`",
+            "string",
+            "`Default`",
+            "No",
+            "Name of the tenant OpenCRQ creates at boot when the platform holds no tenant yet. Like a tenant created from the platform, it gets a first risk scope **Enterprise** and a Get started wizard; it can be renamed afterwards from the Tenants page."
+          ]
+        }
+      ]
+    },
+    {
       "title": "telemetry",
       "columns": [
         "Environment variable",
@@ -318,183 +350,13 @@
       ],
       "rows": [
         {
-          "key": "telemetry.application_name",
+          "key": "telemetry",
           "cells": [
-            "`TELEMETRY__APPLICATION_NAME`",
-            "string",
-            "`opengrc-platform`",
-            "No",
-            "Service name as it will appear in telemetry interfaces."
-          ]
-        },
-        {
-          "key": "telemetry.tags",
-          "cells": [
-            "`TELEMETRY__TAGS`",
-            "string",
-            "``",
-            "No",
-            "Comma-separated deployment tags (e.g. `saas,eu-west`) attached to anonymous usage telemetry as the `filigran.telemetry.tags` resource attribute. Normalized (trimmed, lowercased, deduplicated, sorted) before export. Empty by default: no tags attribute is exported."
-          ]
-        },
-        {
-          "key": "telemetry.traces.enabled",
-          "cells": [
-            "`TELEMETRY__TRACES__ENABLED`",
-            "boolean",
-            "`false`",
-            "No",
-            "Enable or disable OpenTelemetry traces."
-          ]
-        },
-        {
-          "key": "telemetry.traces.exporter_otlp",
-          "cells": [
-            "`TELEMETRY__TRACES__EXPORTER_OTLP`",
-            "string",
-            "",
-            "When `telemetry.traces.enabled` is true",
-            "OTLP endpoint for exporting traces (e.g., `http://otel-collector:4317`)."
-          ]
-        },
-        {
-          "key": "telemetry.metrics.otlp.enabled",
-          "cells": [
-            "`TELEMETRY__METRICS__OTLP__ENABLED`",
-            "boolean",
-            "`false`",
-            "No",
-            "Enable or disable the OTLP metrics push transport. Renamed from `TELEMETRY__METRICS__ENABLED`."
-          ]
-        },
-        {
-          "key": "telemetry.metrics.otlp.exporter",
-          "cells": [
-            "`TELEMETRY__METRICS__OTLP__EXPORTER`",
-            "string",
-            "",
-            "When `telemetry.metrics.otlp.enabled` is true",
-            "OTLP endpoint for exporting metrics (e.g., `http://otel-collector:4317`). Renamed from `TELEMETRY__METRICS__EXPORTER_OTLP`."
-          ]
-        },
-        {
-          "key": "telemetry.metrics.prometheus.enabled",
-          "cells": [
-            "`TELEMETRY__METRICS__PROMETHEUS__ENABLED`",
-            "boolean",
-            "`false`",
-            "No",
-            "Enable or disable the Prometheus scrape endpoint."
-          ]
-        },
-        {
-          "key": "telemetry.metrics.prometheus.port",
-          "cells": [
-            "`TELEMETRY__METRICS__PROMETHEUS__PORT`",
-            "number",
-            "`14269`",
-            "No",
-            "Port the Prometheus scrape endpoint listens on."
-          ]
-        },
-        {
-          "key": "telemetry.metrics.prometheus.public_port",
-          "cells": [
-            "`TELEMETRY__METRICS__PROMETHEUS__PUBLIC_PORT`",
-            "number",
+            "`TELEMETRY`",
+            "strictObject",
             "",
             "No",
-            "Port the scrape endpoint is advertised on, when it is published under a different one."
-          ]
-        },
-        {
-          "key": "telemetry.metrics.prometheus.host",
-          "cells": [
-            "`TELEMETRY__METRICS__PROMETHEUS__HOST`",
-            "string",
-            "`0.0.0.0`",
-            "No",
-            "Bind address of the scrape endpoint. Binding it to loopback makes it unreachable from outside the container while the application keeps serving."
-          ]
-        },
-        {
-          "key": "telemetry.metrics.prometheus.collect_timeout_ms",
-          "cells": [
-            "`TELEMETRY__METRICS__PROMETHEUS__COLLECT_TIMEOUT_MS`",
-            "number",
-            "`2500`",
-            "No",
-            "Per-process bound on one collection. A process exceeding it is reported as a collection outcome rather than delaying the response."
-          ]
-        },
-        {
-          "key": "telemetry.metrics.prometheus.round_deadline_ms",
-          "cells": [
-            "`TELEMETRY__METRICS__PROMETHEUS__ROUND_DEADLINE_MS`",
-            "number",
-            "`4500`",
-            "No",
-            "Bound on a whole collection round. Must be strictly above the per-process timeout, and is deliberately not a multiple of it so the two bounds stay distinguishable."
-          ]
-        },
-        {
-          "key": "telemetry.metrics.prometheus.min_interval_ms",
-          "cells": [
-            "`TELEMETRY__METRICS__PROMETHEUS__MIN_INTERVAL_MS`",
-            "number",
-            "`5000`",
-            "No",
-            "Minimum interval between two collections. Requests arriving inside it are served the cached document, failures included."
-          ]
-        },
-        {
-          "key": "telemetry.metrics.prometheus.max_reply_bytes",
-          "cells": [
-            "`TELEMETRY__METRICS__PROMETHEUS__MAX_REPLY_BYTES`",
-            "number",
-            "`2097152`",
-            "No",
-            "Maximum size of one process's contribution. A larger one is refused and reported as a collection outcome."
-          ]
-        },
-        {
-          "key": "telemetry.logs.enabled",
-          "cells": [
-            "`TELEMETRY__LOGS__ENABLED`",
-            "boolean",
-            "`false`",
-            "No",
-            "Enable or disable OpenTelemetry logs."
-          ]
-        },
-        {
-          "key": "telemetry.logs.exporter_otlp",
-          "cells": [
-            "`TELEMETRY__LOGS__EXPORTER_OTLP`",
-            "string",
-            "",
-            "When `telemetry.logs.enabled` is true",
-            "OTLP endpoint for exporting logs (e.g., `http://otel-collector:4317`)."
-          ]
-        },
-        {
-          "key": "telemetry.pyroscope.enabled",
-          "cells": [
-            "`TELEMETRY__PYROSCOPE__ENABLED`",
-            "boolean",
-            "`false`",
-            "No",
-            "Enable or disable Pyroscope profiling."
-          ]
-        },
-        {
-          "key": "telemetry.pyroscope.server_address",
-          "cells": [
-            "`TELEMETRY__PYROSCOPE__SERVER_ADDRESS`",
-            "string",
-            "",
-            "When `telemetry.pyroscope.enabled` is true",
-            "URL used by the App agent to send profiles. **Required** when Pyroscope is enabled (e.g. `http://pyroscope:4040` in the dev/prod Compose files)."
+            "Two groups of settings. `TELEMETRY__USAGE__*` is the anonymous usage telemetry sent to Filigran. `TELEMETRY__USAGE__ENABLED` (default `true`) turns it off with `false`: the platform then never contacts Filigran's collector. `TELEMETRY__USAGE__TAGS` (empty by default) takes comma-separated deployment tags, such as `saas,eu-west`, exported as the `filigran.telemetry.tags` resource attribute. `TELEMETRY__OBSERVABILITY__*` is the monitoring data sent to your own tools, its variables named after that prefix. `SERVICE_NAME` (default `opencrq-platform`) is the service name of every OTLP signal and of the Prometheus endpoint, and the Pyroscope application name. `OTLP__TRACES__`, `OTLP__METRICS__` and `OTLP__LOGS__` each take `ENABLED` (default `false`) and `EXPORTER`, the OTLP endpoint (such as `http://otel-collector:4317`), required once the signal is on: traces are turned on with `TELEMETRY__OBSERVABILITY__OTLP__TRACES__ENABLED`. `PROMETHEUS__ENABLED` (default `false`) opens the scrape endpoint, with `PORT` (`14269`), `HOST` (`0.0.0.0`), `PUBLIC_PORT`, `COLLECT_TIMEOUT_MS` (`2500`), `ROUND_DEADLINE_MS` (`4500`, strictly above the timeout), `MIN_INTERVAL_MS` (`5000`) and `MAX_REPLY_BYTES` (`2097152`). `PYROSCOPE__ENABLED` (default `false`) sends profiles to `PYROSCOPE__SERVER_ADDRESS`, required once it is on. A transport switched off does not read its other settings. The block is strict: a `TELEMETRY__*` variable the platform does not know, such as `TELEMETRY__TRACES__ENABLED` of earlier builds, stops the platform at boot with `Unrecognized key`."
           ]
         }
       ]
@@ -792,7 +654,7 @@
             "union",
             "",
             "No",
-            "Folder the OpenCRQ Default Threats connector reads its file (`default-threats-v1.json`) from, for every tenant: a STIX bundle of threat groups and campaigns derived from MITRE ATT&CK, which gives a tenant without a threat feed of its own the threats its risk scenarios need. The connector is on by default in every tenant, which can switch it off in its **Configure integration** panel; it syncs every day at 06:00 UTC by default, and an unchanged file costs one conditional request. Unset, it reads OpenCRQ's dataset repository, `https://raw.githubusercontent.com/OpenCRQ-Platform/datasets/main/data/`. Set it to a mirror of that folder on a platform without internet access, or to an empty string to turn the connector off for every tenant. One value for the platform, not keyed by tenant; restart OpenCRQ after a change."
+            "Folder the OpenCRQ Default Threats connector reads its file (`default-threats-v1.json`) from, for every tenant: a STIX bundle of threat groups and campaigns derived from MITRE ATT&CK, which gives a tenant without a threat feed of its own the threats its risk scenarios need. A tenant created from the platform, and the initial tenant, start with the connector switched off: someone with Manage Security switches it on from the Threats step of Get started or in its **Configure integration** panel, where it can also be switched off again. A tenant created before 0.261120.0 keeps it on. It syncs every day at 06:00 UTC by default, and an unchanged file costs one conditional request. Unset, it reads OpenCRQ's dataset repository, `https://raw.githubusercontent.com/OpenCRQ-Platform/datasets/main/data/`. Set it to a mirror of that folder on a platform without internet access, or to an empty string to turn the connector off for every tenant. One value for the platform, not keyed by tenant; restart OpenCRQ after a change."
           ]
         },
         {
@@ -924,7 +786,7 @@
           "cells": [
             "`FILE_STORAGE__BUCKET`",
             "string",
-            "`opengrc`",
+            "`opencrq`",
             "No",
             "Bucket that holds all tenant files."
           ]

@@ -20,9 +20,9 @@ In OpenCRQ, a person works in a tenant: the risk scopes, scenarios, assets, plan
 - **A capability adds what only some should do.** A tenant has one capability, **Manage Security**: it opens :menu[Settings > Security] (users, groups, roles, service accounts), **Integrations**, :menu[Settings > Engine], :menu[Settings > Jobs], the changes to a CWE's techniques, and the choice of the tenant's home dashboard. A person gets it from a role, through a group.
 - **The platform has its own capabilities**, granted by platform roles through platform groups: **Create Tenants**, **Manage Users** and **Platform Administration Access**. They never give access to the data of a tenant. See [OpenCRQ capabilities](/reference/opencrq/capabilities/).
 - **People sign in through XTM One.** OpenCRQ has no password of its own: a person clicks **Sign in with XTM One**, and their OpenCRQ account is tied to their XTM One account. A session lasts about an hour, and XTM One renews it while the person works: an account disabled in XTM One loses OpenCRQ within the hour.
-- **XTM One's administrator is the super administrator.** Tagged **Super Administrator**, they hold every capability of the platform and of every tenant, from XTM One at each sign-in, without being a member of any tenant or group. They create the first tenant (see [Install OpenCRQ](/deploy/install/opencrq/)).
+- **XTM One's administrator is the super administrator.** Tagged **Super Administrator**, they hold every capability of the platform and of every tenant, from XTM One at each sign-in, without being a member of any tenant or group. When OpenCRQ starts on a platform with no tenant, it creates one, named **Default** unless the installation names it otherwise (see [Install OpenCRQ](/deploy/install/opencrq/)): the super administrator adds its first members.
 
-Each tenant starts with two groups. **Admin** holds the **Admin** role, which has every tenant capability, and contains the person who created the tenant, unless the super administrator created it. **Connectors** has no role: it is the group a new service account joins by default (see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/)).
+Each tenant starts with two groups. **Admin** holds the **Admin** role, which has every tenant capability, and contains the person who created the tenant, unless the super administrator created it. The **Admin** group of the tenant OpenCRQ creates at its start has no member. **Connectors** has no role: it is the group a new service account joins by default (see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/)).
 
 ## Before you start
 
@@ -98,14 +98,21 @@ The **Security** menu shows **This tenant** and **Platform** at the top when you
 | --- | --- |
 | **Platform Administration Access** | Open the **Platform** pages of :menu[Settings > Security], and :menu[Settings > Jobs] in every tenant you belong to |
 | **Manage Users** | Create and change platform roles and platform groups, choose the platform groups of each user, and add members to the platform |
-| **Create Tenants** | Create and delete tenants. See [Run several tenants in one platform](/opencrq/administer/tenants/) |
+| **Create Tenants** | Create, rename and delete tenants. See [Run several tenants in one platform](/opencrq/administer/tenants/) |
 
 - To create a platform role, open **Roles**, click **Create**, then **Edit capabilities** and check its **Platform Capabilities**.
 - To create a platform group, open **Groups**, click **Create**, then **Edit** to choose its **Platform Roles** and its **Members**.
 - To make someone a platform administrator, open **Users**, click the person, click **Update**, and add the **Platform Groups** they join. The list shows every account of the platform, with its **Platform groups**, **Roles** and **Tenants**; the super administrator's reads **All tenants**.
 - To make a platform administrator of someone who has no OpenCRQ account yet, click **Add members** on the **Users** page, find them under **Find a person**, choose at least one group under **Assign to platform groups**, and click **Add**. XTM One emails or invites them as for a tenant; once signed in, they land on the platform's **Tenants** page.
 
-A new platform has no platform group and no platform role: the super administrator holds the three capabilities from XTM One, and creates the groups and roles the other administrators need. OpenCRQ refuses to remove a role from a platform group, a person from a platform group, or a whole platform group or role, when no user would then hold **Manage Users** or **Platform Administration Access** through a platform group. The super administrator does not count.
+The super administrator holds the three capabilities from XTM One. When a platform has no platform role and no platform group at its start, OpenCRQ creates two of each, with no member:
+
+| Platform group | Its platform role | Capabilities |
+| --- | --- | --- |
+| **Platform administrators** | **Platform administrator** | **Create Tenants**, **Manage Users**, **Platform Administration Access** |
+| **User managers** | **User manager** | **Manage Users**, **Platform Administration Access** |
+
+To make someone a platform administrator, add them to one of these groups; create other groups and roles when the administrators need another split. OpenCRQ refuses to remove a role from a platform group, a person from a platform group, or a whole platform group or role, when no user would then hold **Manage Users** or **Platform Administration Access** through a platform group. The super administrator does not count.
 
 :::example[Bring the risk team of Grand Meridian Hotels in]
 Claire Morel, cyber risk manager of Grand Meridian Hotels, administers XTM One, and reaches the tenant as OpenCRQ's super administrator. After the incident of 9 January 2026, she opens it to two people who already have an XTM One account: an analyst who reads and prices the scenarios but should not manage access, and the head of IT security, who takes over the integrations.

@@ -1,7 +1,7 @@
 {
   "name": "attack-outcomes",
-  "version": "0.261116.0",
-  "source": "OpenCRQ-Platform/opencrq@a185f01 (module/src/modules/attack-outcomes/data/attack-outcomes-data.ts)",
+  "version": "0.261120.0",
+  "source": "OpenCRQ-Platform/opencrq@a91d685 (module/src/modules/attack-outcomes/data/attack-outcomes-data.ts)",
   "intro": "The attack outcomes a risk scenario names: what the attacker is after, how the attack ends (the ATT&CK tactic whose success realizes the outcome), how long an attacker usually stays before it (the median of the dwell time OpenCRQ draws), which security criteria of the primary asset the outcome breaches, and the techniques that mark it. Every tenant gets this catalog at boot.",
   "sections": [
     {

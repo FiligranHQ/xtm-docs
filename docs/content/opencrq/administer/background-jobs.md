@@ -31,6 +31,8 @@ A run is booked for one kind of job in one tenant. Its **Triggered by** says why
 
 A worker takes the run from the queue. When an attempt fails, the run waits and tries again, up to its number of attempts (**1 / 3** reads first attempt of three). When the last one fails, the run lands in the **Dead-letter queue** and stays there. Some kinds run one at a time per tenant: a second run waits until the first ends.
 
+The price of a scenario (`crq-simulation`) can start before the weights of the attackers of its outcome are computed. It then goes back to the queue without an error and without spending an attempt, and tries again from 2 to 30 seconds later. It waits so for at most `recompute.debounce_cap_ms` plus five minutes from its first start, 10 minutes by default; past that, it lands in the dead-letter queue.
+
 ## Follow the runs
 
 :::steps
@@ -67,6 +69,8 @@ The **Kinds** tab lists every kind of job with its **Health**, its **Last run**,
 | **Running** or **Queued** | A run is under way, or booked and waiting for a worker |
 | **Never ran** | No run was ever recorded for this kind in this tenant, such as the sync of a connector not configured |
 
+When OpenCRQ is registered with XTM One (the `xtm_one` keys of the [configuration](/reference/opencrq/configuration/#xtm-one)), its registration, every 5 minutes, also sends XTM One one health per kind for the whole platform: the worst that any tenant reads. A kind whose last run landed in the dead-letter queue in one tenant is sent as failing, whatever the other tenants read.
+
 Click a kind to open it. **Observed** marks a kind whose reads are recorded, so that a change of that data books it again; **Daily** marks a kind also booked once a day. Its **Overview** tab shows its last run, and for a connector's sync, a link to the connector: **Open the connector**. Its **Runs** tab lists its runs in progress and its most recent completed ones. Its **Logs** tab shows the lines its last runs wrote, filtered by text or by **Levels** (**trace**, **error**).
 
 ::screenshot{id=opencrq-background-jobs-logs alt="The Logs tab of the daily jobs-retention job, Healthy: its runs of 12 and 10 April 2026, both Succeeded, each with the three lines Attempt 1 of 3 started, Job runs purged and Job completed successfully, and the note that older runs are not kept."}
@@ -76,7 +80,7 @@ Click a kind to open it. **Observed** marks a kind whose reads are recorded, so 
 The **Schedules** tab lists the kinds that run on a schedule, with their **Origin**, their **Schedule**, their **Next run** and their **Last run**.
 
 - **Platform**: the daily recomputes, at `recompute.daily_at` (03:00 UTC by default). Each tenant starts at its own minute within the hour that follows. It is set in the deployment configuration, not here.
-- A connector (**OpenAEV**, **Microsoft Defender**, **Drata**, **NIST NVD CVE**, **FIRST EPSS**, **CISA Known Exploited Vulnerabilities (KEV)**, **OpenCRQ Default Threats**): its sync, every hour, every 6 hours or every day at 06:00 UTC by default. Change it with **Frequency**, **Day**, **Time** and **Time zone** in the connector's **Configure integration** panel. A connector without a configuration has no **Next run**. **OpenCRQ Default Threats** needs no configuration: it is on in every tenant until switched off in that panel, and in a tenant that has loaded none of its threats yet, its `default-threats-sync` runs at once instead of waiting for its schedule.
+- A connector (**OpenAEV**, **Microsoft Defender**, **Drata**, **NIST NVD CVE**, **FIRST EPSS**, **CISA Known Exploited Vulnerabilities (KEV)**, **OpenCRQ Default Threats**): its sync, every hour, every 6 hours or every day at 06:00 UTC by default. Change it with **Frequency**, **Day**, **Time** and **Time zone** in the connector's **Configure integration** panel. A connector without a configuration has no **Next run**. **OpenCRQ Default Threats** needs no configuration. A tenant created from the platform, and the tenant OpenCRQ creates at its first boot, start with it switched off: the scheduler skips it until someone with **Manage Security** clicks **Enable** in the **Threats** step of **Get started**, or turns on the **Enabled** switch of its **Configure integration** panel. Switching it on books its `default-threats-sync` at once, triggered by **User**. A tenant where it is on but none of its threats is loaded yet also gets that run at once from the scheduler, instead of waiting for its schedule. Switched off, it has no **Next run**.
 
 ## Run a job again
 
@@ -88,6 +92,8 @@ The jobs pages only read. You start a run again where its work is:
 | A connector's failed sync | On the connector's page, click **Retry**: its last run, which landed in the dead-letter queue, gets another attempt |
 | The price of a risk scenario | Click **Run** on the scenario. See [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/) |
 | A recompute (scores, prices, threats, reach) | Nothing to do: it runs again at the next change of the data it reads, and every day for the **Daily** kinds |
+
+**Cancel** and **Retry** are for those who hold **Manage Security** in the tenant or **Platform Administration Access**. A member without them sees these buttons only on a run they started themselves with **Sync now**. Once another request has joined that run, its **Cancel** stays greyed out with the hint "Other requests are waiting on this run, so you can no longer cancel it.": an administrator can still cancel it.
 
 ## How long runs and logs are kept
 

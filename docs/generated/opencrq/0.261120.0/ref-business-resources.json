@@ -1,7 +1,7 @@
 {
   "name": "business-resources",
-  "version": "0.261116.0",
-  "source": "OpenCRQ-Platform/opencrq@a185f01 (module/src/modules/business-value-categories/data, module/src/modules/loss-drivers/data/loss-activation-matrix.ts)",
+  "version": "0.261120.0",
+  "source": "OpenCRQ-Platform/opencrq@a91d685 (module/src/modules/business-value-categories/data, module/src/modules/loss-drivers/data/loss-activation-matrix.ts)",
   "intro": "The business resources a primary asset holds, and for each attack outcome the loss drivers OpenCRQ recommends when the outcome hits a resource: 35 pairings of an outcome with a resource. A pairing absent here is one the model holds to be unrealistic. The recommendation never restricts: a scenario can price any loss driver of the catalog.",
   "sections": [
     {

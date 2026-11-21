@@ -1,8 +1,8 @@
 {
   "name": "api",
-  "version": "0.261116.0",
-  "source": "OpenCRQ-Platform/opencrq@a185f01 (back/trpc-procedures.json)",
-  "intro": "Every procedure of the OpenCRQ API: 428 (292 queries, 135 mutations, 1 subscription) in 52 namespaces. The API is [tRPC](https://trpc.io) over HTTP under `/trpc/<procedure>`: a query is a `GET` with its input as JSON in the `input` parameter, a mutation a `POST` with its input as the JSON body. Authenticate with the session cookie of a signed-in user, or a service account's token in `Authorization: Bearer <token>`; a procedure that reads or writes a tenant's data needs the tenant in the `x-tenant-id` header. An input field marked `?` is optional.",
+  "version": "0.261120.0",
+  "source": "OpenCRQ-Platform/opencrq@a91d685 (back/trpc-procedures.json)",
+  "intro": "Every procedure of the OpenCRQ API: 430 (297 queries, 132 mutations, 1 subscription) in 53 namespaces. The API is [tRPC](https://trpc.io) over HTTP under `/trpc/<procedure>`: a query is a `GET` with its input as JSON in the `input` parameter, a mutation a `POST` with its input as the JSON body. Authenticate with the session cookie of a signed-in user, or a service account's token in `Authorization: Bearer <token>`; a procedure that reads or writes a tenant's data needs the tenant in the `x-tenant-id` header. An input field marked `?` is optional.",
   "filter": "Filter procedures and input fields",
   "sections": [
     {
@@ -907,7 +907,7 @@
     },
     {
       "title": "crqIndicators",
-      "text": "15 queries, 4 mutations.",
+      "text": "18 queries, 4 mutations.",
       "columns": [
         "Procedure",
         "Kind",
@@ -979,6 +979,14 @@
           ]
         },
         {
+          "key": "crqIndicators.getPendingComputation",
+          "cells": [
+            "`crqIndicators.getPendingComputation`",
+            "query",
+            "`riskScenarioId: uuid`"
+          ]
+        },
+        {
           "key": "crqIndicators.getRunHistory",
           "cells": [
             "`crqIndicators.getRunHistory`",
@@ -1011,9 +1019,25 @@
           ]
         },
         {
-          "key": "crqIndicators.getTefCatalogGrid",
+          "key": "crqIndicators.getTefCatalog",
           "cells": [
-            "`crqIndicators.getTefCatalogGrid`",
+            "`crqIndicators.getTefCatalog`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "crqIndicators.getTefCatalogReading",
+          "cells": [
+            "`crqIndicators.getTefCatalogReading`",
+            "query",
+            "`countryId: uuid | null`, `sectorId: uuid | null`, `employeeCount: integer | null`, `revenueBand: \"under_10m\" | \"10m_100m\" | \"100m_1b\" | \"1b_10b\" | \"10b_100b\" | \"over_100b\" | null`"
+          ]
+        },
+        {
+          "key": "crqIndicators.getTefCatalogScopeReadings",
+          "cells": [
+            "`crqIndicators.getTefCatalogScopeReadings`",
             "query",
             ""
           ]
@@ -1507,7 +1531,7 @@
     },
     {
       "title": "edition",
-      "text": "3 queries, 3 mutations.",
+      "text": "3 queries, 2 mutations.",
       "columns": [
         "Procedure",
         "Kind",
@@ -1544,14 +1568,6 @@
             "`edition.getStatus`",
             "query",
             ""
-          ]
-        },
-        {
-          "key": "edition.installFiligranLicense",
-          "cells": [
-            "`edition.installFiligranLicense`",
-            "mutation",
-            "`pem: string`"
           ]
         },
         {
@@ -1819,7 +1835,7 @@
           "cells": [
             "`findingScore.listScoredFindings`",
             "query",
-            "`page?: integer`, `limit?: integer`, `sortBy?: \"score\" | \"name\" | \"kind\" | \"currentState\" | \"assetName\" | \"assetCategoryId\" | \"lastEvaluatedAt\" | \"firstSeenAt\"`, `sortDesc?: boolean`, `organizationId?: uuid | null`, `state?: \"applicable\" | \"dismissed\" | null`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`, `vulnerability?: {kind, cveId} | {kind, externalId, expectationType} | null`, `technique?: string | null`"
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"score\" | \"name\" | \"kind\" | \"currentState\" | \"assetName\" | \"assetCategoryId\" | \"lastEvaluatedAt\" | \"firstSeenAt\"`, `sortDesc?: boolean`, `organizationId?: uuid | null`, `state?: \"applicable\" | \"dismissed\" | null`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`, `vulnerability?: {kind, cveId} | {kind, externalId, expectationType} | null`, `technique?: string | null`, `search?: string | null`"
           ]
         },
         {
@@ -1835,7 +1851,7 @@
           "cells": [
             "`findingScore.listUniqueFindings`",
             "query",
-            "`page?: integer`, `limit?: integer`, `sortBy?: \"score\" | \"affectedAssets\" | \"name\" | \"age\"`, `sortDesc?: boolean`, `organizationId?: uuid | null`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`"
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"score\" | \"affectedAssets\" | \"name\" | \"age\"`, `sortDesc?: boolean`, `organizationId?: uuid | null`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`, `search?: string | null`"
           ]
         }
       ]
@@ -1986,57 +2002,6 @@
             "`integrations.getSettings`",
             "query",
             "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\"`"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "invitations",
-      "text": "2 queries, 3 mutations.",
-      "columns": [
-        "Procedure",
-        "Kind",
-        "Input"
-      ],
-      "rows": [
-        {
-          "key": "invitations.cancelInvitation",
-          "cells": [
-            "`invitations.cancelInvitation`",
-            "mutation",
-            "`id: uuid`"
-          ]
-        },
-        {
-          "key": "invitations.checkEmail",
-          "cells": [
-            "`invitations.checkEmail`",
-            "query",
-            "`email: email`"
-          ]
-        },
-        {
-          "key": "invitations.createInvitation",
-          "cells": [
-            "`invitations.createInvitation`",
-            "mutation",
-            "`email: email`, `groupIds: uuid[]`"
-          ]
-        },
-        {
-          "key": "invitations.getInvitations",
-          "cells": [
-            "`invitations.getInvitations`",
-            "query",
-            ""
-          ]
-        },
-        {
-          "key": "invitations.resendInvitation",
-          "cells": [
-            "`invitations.resendInvitation`",
-            "mutation",
-            "`id: uuid`"
           ]
         }
       ]
@@ -2372,6 +2337,25 @@
             "`notifications.markManyAsUnread`",
             "mutation",
             "`ids: uuid[]`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "onboardingWizard",
+      "text": "1 query.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "onboardingWizard.getOnboardingWizard",
+          "cells": [
+            "`onboardingWizard.getOnboardingWizard`",
+            "query",
+            ""
           ]
         }
       ]
@@ -2824,7 +2808,7 @@
           "cells": [
             "`primaryAssets.createPrimaryAsset`",
             "mutation",
-            "`id: uuid`, `organizationId: uuid`, `name: string`, `description: string`, `ownerId: uuid | null`, `businessValueCategoryIds: uuid[]`, `reference?: string | null`, `businessFunction?: string | null`, `availability?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `integrity?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `confidentiality?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `traceability?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `rtoMinutes?: integer | null`, `rpoMinutes?: integer | null`, `mtpdMinutes?: integer | null`"
+            "`id: uuid`, `organizationId: uuid`, `name: string`, `description: string`, `ownerId: uuid | null`, `businessValueCategoryIds: uuid[]`, `onboardingTemplate?: \"customer-data\" | \"payments-and-treasury\" | \"production-and-operations\" | \"hr-data\" | \"intellectual-property\" | \"email-and-collaboration\" | null`, `reference?: string | null`, `businessFunction?: string | null`, `availability?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `integrity?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `confidentiality?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `traceability?: \"low\" | \"medium\" | \"high\" | \"very_high\" | null`, `rtoMinutes?: integer | null`, `rpoMinutes?: integer | null`, `mtpdMinutes?: integer | null`"
           ]
         },
         {
@@ -3553,7 +3537,7 @@
     },
     {
       "title": "tenants",
-      "text": "7 queries, 5 mutations.",
+      "text": "7 queries, 6 mutations.",
       "columns": [
         "Procedure",
         "Kind",
@@ -3638,6 +3622,14 @@
             "`tenants.removeTenantUser`",
             "mutation",
             "`tenantId: uuid`, `userId: uuid`"
+          ]
+        },
+        {
+          "key": "tenants.renameTenant",
+          "cells": [
+            "`tenants.renameTenant`",
+            "mutation",
+            "`id: uuid`, `name: string`"
           ]
         },
         {
@@ -3978,6 +3970,41 @@
             "`users.updateUser`",
             "mutation",
             "`locale?: \"en\" | \"fr\" | null`, `theme?: \"light\" | \"dark\" | \"system\"`, `homeDashboardId?: string | null`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "xtm",
+      "text": "3 queries.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "xtm.connections",
+          "cells": [
+            "`xtm.connections`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "xtm.counterparts",
+          "cells": [
+            "`xtm.counterparts`",
+            "query",
+            "`kind: \"ASSET\" | \"ATTACK_PATTERN\" | \"VULNERABILITY\" | \"THREAT\"`, `keys: string[]`"
+          ]
+        },
+        {
+          "key": "xtm.lookup",
+          "cells": [
+            "`xtm.lookup`",
+            "query",
+            "`kind: \"THREAT\" | \"VULNERABILITY\" | \"ASSET\"`, `keys: string[]`"
           ]
         }
       ]
