@@ -19,7 +19,7 @@ lanes:
   - label: OpenCRQ
     tone: product
     nodes:
-      - {id: opencrq, label: Ask Ariane, icon: LogoOpenCRQ, note: "Vertical grc", href: /xtm-one/use/in-opencrq/}
+      - {id: opencrq, label: Ask Ariane, icon: LogoOpenCRQ, note: "Vertical crq", href: /xtm-one/use/in-opencrq/}
 edges:
   - {from: opencti, to: routing, label: "intents, license"}
   - {from: openaev, to: routing, label: "intents, license"}
