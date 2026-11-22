@@ -304,7 +304,7 @@ The errors you meet first:
 | `GRAPHQL_VALIDATION_FAILED` | The query does not match the schema, such as `Cannot query field "title" on type "Report"`, or calls one query too many times through aliases | Check the field names in the schema reference. A request can call the same query twice and the same mutation once (`app:graphql:batching_protection:query_default`, `app:graphql:batching_protection:mutation_default`) |
 | `BAD_USER_INPUT_ERROR` | An argument is wrong, such as an unknown filter key, listed in `extensions.data.keys` | Fix the key, using the [filter keys reference](/reference/opencti/filter-keys/) |
 | `VALIDATION_ERROR` | A value breaks a rule, such as `The score should be an integer between 0 and 100`; `extensions.data.field` names the field | Fix the value |
-| `RESOURCE_NOT_FOUND` | An introspection query (`__schema`) while introspection is turned off | Read the schema from `/schema` or from the schema reference |
+| `RESOURCE_NOT_FOUND` | An introspection query while introspection is turned off: `GraphQL introspection not authorized!`. Up to 7.260811, a query with `__schema`; from 7.261109.0, `__type` too, such as `__type(name: "Connector")` to test whether a field exists | Read the schema from `/schema` or from the schema reference, or decide from the version (`about { version }`) |
 
 The platform also limits each client, by address and user agent, to 10,000 requests a second by default (`app:rate_protection:max_requests`, `app:rate_protection:time_window`). Beyond it, the answer is HTTP `429` with `{"message":"Too many requests, please try again later."}`. The [errors reference](/reference/opencti/errors/#common-errors-and-what-to-do) lists every message and what to do.
 
