@@ -39,7 +39,9 @@ This page sets up XTM Composer for development. You build it from source and run
 | `config/default.yaml` | Every key with its default value |
 | `dev/` | IntelliJ IDEA run configurations, and examples for Podman and Kubernetes |
 
-A new container engine implements the `Orchestrator` trait of `src/orchestrator/mod.rs`: `get`, `list`, `start`, `stop`, `remove`, `refresh`, `deploy` and `logs`.
+A new container engine implements the `Orchestrator` trait of `src/orchestrator/mod.rs`: `get`, `list`, `start`, `stop`, `remove`, `refresh`, `deploy` and `logs`, and `pull` when XTM Composer pulls the image itself. `src/orchestrator/composer.rs` calls `pull` before every deploy and refresh: when it fails, nothing is deployed and the running workload is kept. Docker, Podman, Swarm and Portainer implement it; Kubernetes keeps the default, which does nothing, because its nodes pull the image, and reports a pod stuck on its image through the `image_pull_error` of the container `get` returns.
+
+Tag every workload with `self.labels(workload)`, which writes the `xtm-manager`, `xtm-workload-id` and `xtm-platform` labels next to their legacy keys, `opencti-manager`, `opencti-connector-id` and `opencti-platform`. The environment of the workload already holds the configuration hash under `XTM_CONFIG_HASH` and `OPENCTI_CONFIG_HASH` (`config_hash_entries`). The legacy keys let an older XTM Composer recognize the workloads after a rollback. `list` runs one query per filter of `manager_label_filters` and merges the results with `dedup_containers`.
 
 ## Build and run it
 

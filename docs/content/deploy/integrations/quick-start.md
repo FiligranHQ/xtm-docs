@@ -82,12 +82,12 @@ The catalog no longer says that deploying requires the installation of the Integ
 3. Click **Start**.
 
    :::verify
-   On the host, XTM Composer has created a container for the instance, named after the instance name in lower case, with the label `opencti-manager` it puts on every container it manages:
+   On the host, XTM Composer has created a container for the instance, named after the instance name in lower case, with the label `xtm-manager` it puts on every container it manages:
 
    ```bash
-   docker ps --filter label=opencti-manager --format '{{.Names}} {{.Status}}'
+   docker ps --filter label=xtm-manager --format '{{.Names}} {{.Status}}'
    ```
-   The instance is `Up`, and its **Logs** tab in the platform fills within a few seconds.
+   The instance is `Up`, and its **Logs** tab in the platform fills within a few seconds. XTM Composer 3.261021.1 and earlier label the container `opencti-manager` only. If no container appears and the **Logs** tab says that the image cannot be pulled, see [The image cannot be pulled](/deploy/integrations/troubleshoot/#the-image-cannot-be-pulled).
    :::
 ::::
 

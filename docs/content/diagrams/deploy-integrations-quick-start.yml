@@ -20,7 +20,7 @@ lanes:
   - label: Docker
     tone: external
     nodes:
-      - {id: container, label: Integration container, icon: Puzzle, note: "Label opencti-manager"}
+      - {id: container, label: Integration container, icon: Puzzle, note: "Label xtm-manager"}
 edges:
   - {from: stack, to: keygen, label: starts}
   - {from: stack, to: composer, label: starts}

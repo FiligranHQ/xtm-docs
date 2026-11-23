@@ -8,7 +8,7 @@ products:
   - openaev
 personas: [platform-engineer]
 owner: docs-platform
-last_reviewed: 2026-10-31
+last_reviewed: 2026-11-20
 migrated_from:
   - opencti:/deployment/integration-manager/architecture/
 ---
@@ -45,7 +45,7 @@ Every `execute_schedule` seconds, XTM Composer fetches the integration instances
 | No container | Pulls the image and creates the container, stopped, then reports it as stopped |
 | The requested state is started and the container is stopped | Starts it |
 | The requested state is stopped and the container runs | Stops it |
-| The configuration hash of the instance differs from the one of the container | Removes the container and creates it again with the new configuration |
+| The configuration hash of the instance differs from the one of the container | Pulls the image, then removes the container and creates it again with the new configuration |
 | The container runs | Reports its health, its restart count and its start date: when it starts and every 30 seconds |
 | `logs_schedule` seconds have passed, 10 by default | Sends the latest lines of its logs to the platform |
 | A container of that name belongs to another instance | Leaves it alone and writes in the logs of the instance that the name is taken |
@@ -54,16 +54,34 @@ Then it removes the containers it manages for this platform that no longer match
 
 A container counts as in a reboot loop when it has restarted more than three times and has been up for less than five minutes. XTM Composer reports it to the platform with its health.
 
+### When the image cannot be pulled
+
+XTM Composer pulls the image of an instance before it deploys it or applies a new configuration. On Kubernetes, the nodes pull the image: XTM Composer reads the pull failures from the pods instead. A missing image never replaces a running integration.
+
+| Situation | What XTM Composer does |
+| --- | --- |
+| The pull fails before a first deployment | Deploys nothing and reports the instance as stopped. The logs of the instance say `[XTM Composer] Connector not deployed`, followed by the image and the error |
+| The pull fails before a new configuration is applied | Keeps the container that runs, with its previous configuration. The logs of the instance say `[XTM Composer] Connector not updated, the previous deployment is kept`, followed by the image and the error |
+| On Kubernetes, a pod waits for its image (`ErrImagePull`, `ImagePullBackOff`, `InvalidImageName`, `ErrImageNeverPull`) | With no pod running, reports the instance as stopped, does not start it again and writes `Connector waiting for its image` in its logs. When the previous pod still runs, writes `Connector not updated, the previous deployment is kept`. Stopping the instance still scales the Deployment down |
+
+XTM Composer tries again at each pass, so the instance deploys or updates once the image is in the registry. Its own logs say `Cannot pull the workload image`. See [Troubleshoot XTM Composer](/deploy/integrations/troubleshoot/) for the usual causes.
+
+### Runtime and logs on Kubernetes
+
+During a rolling update, the Deployment of an instance may have a new pod next to the one that runs. XTM Composer reads the restart count, the start date and the logs from a pod whose integration container runs, the newest one when there are several. It sends the last 100 lines of the integration container only, not those of its sidecars. When no pod answers, the logs of the instance say `[XTM Composer] Cannot read the connector logs`, followed by the error.
+
 ### How it marks its containers
 
-XTM Composer lists and cleans up only the containers whose `opencti-manager` label is its own `manager.id`. Every container it creates has:
+XTM Composer lists and cleans up only the containers whose `xtm-manager` or `opencti-manager` label is its own `manager.id`. Every container it creates carries each key twice, under its `xtm-` name and under its former `opencti-` name:
 
-| Label or variable | Value |
-| --- | --- |
-| Label `opencti-manager` | `manager.id` |
-| Label `opencti-connector-id` | The ID of the instance in the platform |
-| Label `opencti-platform` | `opencti` or `openaev` |
-| Variable `OPENCTI_CONFIG_HASH` | The configuration hash of the instance |
+| Label or variable | Former name, still written | Value |
+| --- | --- | --- |
+| Label `xtm-manager` | `opencti-manager` | `manager.id` |
+| Label `xtm-workload-id` | `opencti-connector-id` | The ID of the instance in the platform |
+| Label `xtm-platform` | `opencti-platform` | `opencti` or `openaev` |
+| Variable `XTM_CONFIG_HASH` | `OPENCTI_CONFIG_HASH` | The configuration hash of the instance. On Kubernetes, an annotation of the Deployment |
+
+The former names keep a rollback to an earlier XTM Composer working, and keep the containers deployed by earlier versions recognized: XTM Composer reads the `xtm-` labels first, then the former ones. A later version will stop writing the former names: filter on `xtm-manager` in new scripts and monitoring. A command such as `docker ps --filter label=opencti-manager` still works in this version.
 
 The container is named after the instance: its name in lower case, every character other than a letter or a digit replaced by `-`. On Kubernetes, the instance is a Deployment of that name with one replica when started and zero when stopped.
 

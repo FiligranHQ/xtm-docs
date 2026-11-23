@@ -17,6 +17,7 @@ edges:
   - {from: stops, to: composerlogs, label: at start}
   - {from: noreg, to: composerlogs, label: Fail to fetch version}
   - {from: noreg, to: catalog, label: with OpenAEV, style: dashed}
-  - {from: nodeploy, to: composerlogs, label: Error fetching container image}
+  - {from: nodeploy, to: composerlogs, label: Cannot pull the workload image}
+  - {from: nodeploy, to: intlogs, label: image cannot be pulled, style: dashed}
   - {from: fails, to: composerlogs, label: Reboot loop detected}
   - {from: fails, to: intlogs, label: the cause}

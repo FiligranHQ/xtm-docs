@@ -7,7 +7,7 @@ products:
   - opencti
 personas: [platform-engineer]
 owner: docs-platform
-last_reviewed: 2026-10-31
+last_reviewed: 2026-11-20
 migrated_from:
   - opencti:/reference/fips/
 ---
@@ -92,7 +92,7 @@ The OpenCTI map loads its tiles in the browser from `map.opencti.io`. On a netwo
 
 ## Switch OpenCTI to its FIPS images
 
-The FIPS 140-3 images of OpenCTI are built on Alpine Linux with the OpenSSL FIPS provider enabled, from the [base image that Filigran maintains](https://github.com/FiligranHQ/docker-python-nodejs-fips). They exist for the platform, the worker and the connectors, with the tag of the version followed by `-fips`: `7.261030.1-fips`, or `7.260811.0-lts.1-fips` for a long-term support release. OpenAEV and XTM One have no FIPS images.
+The FIPS 140-3 images of OpenCTI are built on Alpine Linux with the OpenSSL FIPS provider enabled, from the [base image that Filigran maintains](https://github.com/FiligranHQ/docker-python-nodejs-fips). They exist for the platform, the worker and the connectors, with the tag of the version followed by `-fips`: `7.261030.1-fips`, or `7.260811.0-lts.1-fips` for a long-term support release. XTM Composer has a FIPS image too, which deploys the FIPS images of the connectors. OpenAEV and XTM One have no FIPS images.
 
 :::steps
 1. Pin the versions as [Pin the image versions](/deploy/install/docker-compose/#pin-the-image-versions) describes.
@@ -114,7 +114,27 @@ The FIPS 140-3 images of OpenCTI are built on Alpine Linux with the OpenSSL FIPS
    Every OpenCTI image ends with `-fips`, except `opencti/connector-import-external-reference`.
    :::
 
-3. For each other connector you deploy, use its `-fips` tag when Docker Hub lists one, such as [the FIPS tags of the STIX file export connector](https://hub.docker.com/r/opencti/connector-export-file-stix/tags?name=fips).
+3. Switch XTM Composer to its FIPS image, so that the connectors you deploy from the catalog run their FIPS images. Add these lines under the `services:` key of `docker-compose.override.yml`, above the `# Pinned versions` line. The pinning commands do not change the image of XTM Composer, so this tag stays.
+
+   ```yaml
+     xtm-composer:
+       image: filigran/xtm-composer:3.261120.0-fips
+   ```
+
+   The FIPS image of XTM Composer sets `manager.image_tag_suffix` (`MANAGER__IMAGE_TAG_SUFFIX`) to `-fips`: it adds `-fips` to the tag of every integration it deploys. `opencti/connector-mitre:7.261030.1` runs as `opencti/connector-mitre:7.261030.1-fips`, and an image without a tag as `latest-fips`. A tag that already ends with `-fips`, or an image pinned by digest, stays as it is. On a host without internet access, the registry XTM Composer pulls from must hold these `-fips` tags: see [Pull integrations from a private registry](/deploy/integrations/private-registry/).
+
+   :::verify
+   ```bash
+   docker compose config --images | grep xtm-composer
+   ```
+   It prints `filigran/xtm-composer:3.261120.0-fips`. Once the stack runs, `docker compose logs xtm-composer | grep 'Starting XTM composer'` shows `fips` set to `true` and `image_tag_suffix` set to `-fips`.
+   :::
+
+   :::warning[Integrations without a FIPS image]
+   XTM Composer adds the suffix to every integration it deploys, for OpenAEV as for OpenCTI. An integration with no image under the `-fips` tag, such as the Import External Reference connector, is not deployed: its **Logs** tab says `[XTM Composer] Connector not deployed`, then that the image cannot be pulled, with the error of the registry. XTM Composer tries again at each pass.
+   :::
+
+4. For each connector you run outside XTM Composer, use its `-fips` tag when Docker Hub lists one, such as [the FIPS tags of the STIX file export connector](https://hub.docker.com/r/opencti/connector-export-file-stix/tags?name=fips).
 :::
 
 ### What the images guarantee

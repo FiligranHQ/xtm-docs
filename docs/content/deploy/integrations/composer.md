@@ -8,7 +8,7 @@ products:
   - openaev
 personas: [platform-engineer, admin]
 owner: docs-platform
-last_reviewed: 2026-10-31
+last_reviewed: 2026-11-20
 edition: ee
 migrated_from:
   - opencti:/deployment/integration-manager/
@@ -29,6 +29,8 @@ In the interface of both platforms, XTM Composer appears as the **Integration Ma
 | OpenAEV | External collectors, injectors and executors | **Integrations** > **Catalog** |
 
 One XTM Composer can serve OpenCTI, OpenAEV or both: each platform has its own block in its configuration (`opencti` and `openaev`), switched on or off with `enable`. The integrations built into a platform, such as the email injector of OpenAEV, do not need it. See [How integrations run](/deploy/integrations/how-they-run/).
+
+XTM Composer runs the image the catalog names for each integration. To run the FIPS 140-3 or Red Hat Universal Base Image 9 builds of the integrations instead, `manager.image_tag_suffix` adds `-fips` or `-ubi9` to the tag of every image it deploys. The FIPS image of XTM Composer sets `-fips`. See [Configure XTM Composer](/deploy/integrations/configure-composer/).
 
 ## What it needs
 
@@ -76,7 +78,8 @@ The deployed instances are listed in **Integrations** > **Collectors**, **Inject
 ## What you manage from the interface
 
 - Only the instances XTM Composer manages can be started and stopped from the interface, and only they show their logs there.
-- You can update the configuration of a managed instance with **Update**. XTM Composer applies it within a few seconds by recreating the container.
+- You can update the configuration of a managed instance with **Update**. XTM Composer applies it within a few seconds by recreating the container, or by updating the Deployment on Kubernetes.
+- When the image of an integration cannot be pulled, XTM Composer deploys nothing, or keeps the container that runs with its previous configuration, and says so in the **Logs** tab: `[XTM Composer] Connector not deployed` or `[XTM Composer] Connector not updated, the previous deployment is kept`, with the image and the error. It tries again at each pass. See [Troubleshoot XTM Composer](/deploy/integrations/troubleshoot/).
 - Secrets such as API keys are encrypted when you save them and never shown again.
 - An integration you deployed by hand can be taken over by XTM Composer: see [Migrate to XTM Composer](/deploy/integrations/migrate/).
 

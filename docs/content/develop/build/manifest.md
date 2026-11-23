@@ -46,7 +46,7 @@ The [OpenCTI-Platform/connectors](https://github.com/OpenCTI-Platform/connectors
 | `source_code` | URL | Where the code lives |
 | `manager_supported` | Boolean | `true`: the card has a **Deploy** button and XTM Composer can run the connector. With a `config_schema`, `container_image` and `container_type` are required, or OpenCTI refuses the whole catalog; without one, OpenCTI logs a warning |
 | `container_image` | String, without tag | The Docker image XTM Composer pulls |
-| `container_version` | String | The image tag, `rolling` or a version. XTM Composer runs `container_image:container_version`; pycti reports it as the connector's version |
+| `container_version` | String | The image tag, `rolling` or a version. XTM Composer runs `container_image:container_version`, plus its `manager.image_tag_suffix` when set (`1.0.0-fips`); pycti reports it as the connector's version |
 | `container_type` | Connector type | `EXTERNAL_IMPORT`, `INTERNAL_ENRICHMENT`, `INTERNAL_IMPORT_FILE`, `INTERNAL_EXPORT_FILE`, `INTERNAL_ANALYSIS` or `STREAM` |
 | `config_schema` | JSON Schema | Filled from `connector_config_schema.json` by the catalog build |
 
@@ -231,7 +231,7 @@ OpenCTI also reads a newer catalog format, marked with `"manifest_schema_version
 
 List your catalogs in `app:custom_catalogs` (`APP__CUSTOM_CATALOGS`) of the platform, as a JSON array of file paths the platform can read or `http(s)://` URLs. The catalog manager loads them next to the built-in catalog; their connectors appear in :menu[Integrations], **Available** tab, and XTM Composer deploys the ones with `manager_supported: true`. [XTM Composer](/deploy/integrations/composer/#add-your-own-connectors-to-the-opencti-catalog) shows the Docker Compose block. Filigran may remove this setting in a later version.
 
-Push the image to a registry XTM Composer can pull from: [Pull integrations from a private registry](/deploy/integrations/private-registry/) covers a registry that needs credentials.
+Push the image to a registry XTM Composer can pull from: [Pull integrations from a private registry](/deploy/integrations/private-registry/) covers a registry that needs credentials. An XTM Composer that sets `manager.image_tag_suffix`, as its FIPS image does with `-fips`, pulls the suffixed tag, such as `connector-hospitality-feed:1.0.0-fips`: push that tag too, or it deploys nothing and logs the failed pull on the connector. See [Configure XTM Composer](/deploy/integrations/configure-composer/#xtm-composer-itself) for the values it accepts.
 
 ## What's next
 

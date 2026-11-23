@@ -35,7 +35,7 @@ This page sends XTM Composer and the integrations it deploys through your proxy.
    OPENCTI__NO_PROXY=localhost,127.0.0.1,opencti,openaev,rabbitmq
    ```
 
-   Put in `NO_PROXY` every host the integrations reach directly: the platform and RabbitMQ at least, as the XTM stack names them here.
+   Put in `NO_PROXY` every host XTM Composer and the integrations reach directly: the platform and RabbitMQ at least, as the XTM stack names them here.
 
 2. Restart XTM Composer. Integrations get the proxy when XTM Composer creates their container. For an integration already deployed, change its configuration with **Update**, or stop it and remove its container: XTM Composer then creates it again.
 :::
@@ -45,9 +45,11 @@ This page sends XTM Composer and the integrations it deploys through your proxy.
 | `opencti.with_proxy` | `OPENCTI__WITH_PROXY` | `false` | `true` turns the proxy on for this platform. With `false`, XTM Composer ignores every proxy, including the `HTTP_PROXY` variables of its own environment |
 | `opencti.http_proxy` | `OPENCTI__HTTP_PROXY` | | The proxy for HTTP. Without it, XTM Composer uses `HTTP_PROXY` from its own environment |
 | `opencti.https_proxy` | `OPENCTI__HTTPS_PROXY` | | The proxy for HTTPS. Without it, XTM Composer uses `HTTPS_PROXY` from its own environment |
-| `opencti.no_proxy` | `OPENCTI__NO_PROXY` | | Comma-separated hosts the integrations reach without the proxy. Without it, `NO_PROXY` from the environment of XTM Composer. It applies to the integrations only: when `http_proxy` or `https_proxy` is set, XTM Composer sends its own requests to the platform through that proxy even if the platform is in this list |
+| `opencti.no_proxy` | `OPENCTI__NO_PROXY` | | Comma-separated hosts, domains or CIDR ranges reached without the proxy, such as `opencti,.example.com,10.0.0.0/8`. Without it, `NO_PROXY` from the environment of XTM Composer. It applies to the integrations and to the requests of XTM Composer to the platform |
 
-With the proxy on, XTM Composer sends its own requests to the platform through it, and gives each integration container `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY`.
+With the proxy on, XTM Composer sends its own requests to the platform through it, except to the hosts of `no_proxy`, and gives each integration container `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY`. When you set `no_proxy` but neither `http_proxy` nor `https_proxy`, XTM Composer takes the proxy for its own requests from `HTTP_PROXY` and `HTTPS_PROXY` of its environment, else from `ALL_PROXY`.
+
+Up to XTM Composer 3.261021.1, `no_proxy` applied to the integrations only: with `http_proxy` or `https_proxy` set, XTM Composer reached the platform through the proxy even when the platform was in the list.
 
 ## Trust a TLS-intercepting proxy
 
@@ -84,7 +86,17 @@ These settings are only for the proxy. The certificate of the platform itself is
 
 ## Check that it works
 
-Read the environment of an integration container XTM Composer created after the change:
+Check the proxy XTM Composer uses for its own requests, in its logs at start:
+
+```bash
+docker logs xtm-composer 2>&1 | grep -E 'Using HTTPS? proxy'
+```
+
+:::verify
+A line `Using HTTP proxy` or `Using HTTPS proxy` per platform, with its `no_proxy` list and its `source`: `explicit` for the URL of the platform block, `environment` for a URL read from the environment. When the block sets no proxy URL and no `no_proxy`, XTM Composer uses the proxy variables of its environment and logs no such line.
+:::
+
+Then read the environment of an integration container XTM Composer created after the change:
 
 ```bash
 docker ps --filter label=opencti-manager --format '{{.Names}}'

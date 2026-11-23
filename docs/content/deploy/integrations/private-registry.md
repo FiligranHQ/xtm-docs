@@ -20,12 +20,14 @@ This page makes XTM Composer pull the images of the integrations from your own r
 
 ## Before you start
 
-- A registry that holds the integration images under the same names as Docker Hub, such as `opencti/connector-mitre` or `openaev/collector-mitre-attack`, with the same tags.
+- A registry that holds the integration images under the same names as Docker Hub, such as `opencti/connector-mitre` or `openaev/collector-mitre-attack`, with the same tags: the `-fips` or `-ubi9` tags when XTM Composer adds a tag suffix.
 - The host name of the registry, and a user and password or token if it requires them.
 
 ## How XTM Composer names the image
 
 Without a registry, XTM Composer pulls the image the platform asks for, such as `opencti/connector-mitre:<version>`, from Docker Hub. With a registry `server`, it puts the server in front of every image name: `registry.example.com/opencti/connector-mitre:<version>`. It does not check whether the name already has a registry, so mirror the images under their Docker Hub names.
+
+When `manager.image_tag_suffix` is set, XTM Composer also adds it to the tag: `registry.example.com/opencti/connector-mitre:6.9.0-fips`, or `latest-fips` for an image without a tag. The FIPS image of XTM Composer sets `-fips` by default. Mirror the suffixed tags too, or the pulls fail. See [Configure XTM Composer](/deploy/integrations/configure-composer/) for the values it accepts.
 
 ## Set the registry
 
@@ -50,8 +52,10 @@ Without a registry, XTM Composer pulls the image the platform asks for, such as 
 | `opencti.daemon.registry.password` | `OPENCTI__DAEMON__REGISTRY__PASSWORD` | The password or token |
 | `opencti.daemon.registry.email` | `OPENCTI__DAEMON__REGISTRY__EMAIL` | Optional |
 
+Each platform pulls with the registry of its own block, on every engine. Up to XTM Composer 3.261021.1, Kubernetes, Docker Swarm and Portainer read the `opencti` block for both platforms.
+
 :::warning
-On Kubernetes, Docker Swarm and Portainer, XTM Composer reads the registry of the `opencti` block for both platforms. When it serves OpenAEV with one of these engines, set the registry in `OPENCTI__DAEMON__REGISTRY__*`. On Docker and Podman, each platform uses its own block.
+If XTM Composer serves OpenAEV on Kubernetes, Docker Swarm or Portainer, and you set its registry in `OPENCTI__DAEMON__REGISTRY__*` only, set it in `OPENAEV__DAEMON__REGISTRY__*` before you upgrade. Otherwise XTM Composer pulls the OpenAEV images from Docker Hub.
 :::
 
 ## What each engine does with it
@@ -67,9 +71,13 @@ sudo podman login --authfile /root/.config/containers/auth.json registry.example
 For a rootless Podman, run `podman login --authfile ~/.config/containers/auth.json registry.example.com` as the user that runs the integrations.
 :::
 :::tab[Kubernetes]
-When a user and a password are set, XTM Composer creates at start an image pull Secret of type `kubernetes.io/dockerconfigjson` in its namespace, and attaches it to the Deployment of each integration. It deletes and recreates the Secret at every start, so a changed password takes effect on restart.
+When a user and a password are set, XTM Composer creates at start an image pull Secret of type `kubernetes.io/dockerconfigjson` in its namespace for each platform, and attaches it to the Deployment of each integration of that platform. It deletes and recreates the Secrets at every start, so a changed password takes effect on restart.
 
-The Secret is named after the server, in the Kubernetes naming format: `registry.example.com` gives `registry-example-com`. The role of XTM Composer must allow `create` and `delete` on `secrets`, as in [Install XTM Composer](/deploy/integrations/install-composer/).
+Each Secret is named after the server and the platform, in the Kubernetes naming format: `registry.example.com` gives `registry-example-com-opencti` and `registry-example-com-openaev`. Two platforms in the same namespace can then use the same server with different credentials.
+
+XTM Composer also keeps the Secret of its earlier versions, named after the server only (`registry-example-com`), up to date from the `opencti` block: the Deployments created before the upgrade use it until XTM Composer updates them after a configuration change. A later version of XTM Composer will stop maintaining it.
+
+The role of XTM Composer must allow `create` and `delete` on `secrets`, as in [Install XTM Composer](/deploy/integrations/install-composer/).
 :::
 ::::
 
@@ -90,16 +98,16 @@ Each image starts with your registry, such as `registry.example.com/opencti/conn
 ::::tab[Kubernetes]
 ```bash
 kubectl -n xtm-composer logs deploy/xtm-composer | grep 'Kubernetes registry secret'
-kubectl -n xtm-composer get secret registry-example-com
+kubectl -n xtm-composer get secret registry-example-com-opencti
 ```
 
 :::verify
-The logs say `Kubernetes registry secret created`, and the Secret exists. Replace `registry-example-com` with the name of your server, dots replaced by dashes.
+The logs say `Kubernetes registry secret created` with the name of each Secret, and the Secret exists. Replace `registry-example-com` with the name of your server, dots and colons replaced by dashes, and `opencti` with `openaev` for OpenAEV.
 :::
 ::::
 :::::
 
-On Docker and Podman, when the pull fails, XTM Composer logs `Error fetching container image` with the image name: check the name in the registry and the credentials.
+When the image cannot be pulled, XTM Composer deploys nothing, or keeps the previous deployment running after a configuration change. The **Logs** of the integration on the platform say why, such as `[XTM Composer] Connector not deployed: the image "registry.example.com/opencti/connector-mitre:6.9.0" cannot be pulled:` followed by the error of the engine. On Kubernetes, the cluster pulls the image: the logs say `Connector waiting for its image` while the pod waits. Check the name and the tag in the registry, and the credentials. See [Troubleshoot XTM Composer](/deploy/integrations/troubleshoot/).
 
 ## What's next
 

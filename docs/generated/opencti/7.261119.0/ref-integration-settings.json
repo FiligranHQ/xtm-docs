@@ -1,8 +1,8 @@
 {
   "name": "integration-settings",
   "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9 (client-python/pycti/api/opencti_api_client.py, client-python/pycti/connector/opencti_connector_helper.py, client-python/pycti/utils/opencti_stix2.py, opencti-worker/src/worker.py); FiligranHQ/xtm-composer@1267662 (config/default.yaml, src/api/mod.rs, src/config/settings.rs, src/orchestrator/podman/mod.rs)",
-  "intro": "The settings OpenCTI 7.261119.0's integrations read: the 66 every connector shares through pycti, the 22 of the worker, the 4 variables pycti reads for both, and the 102 of XTM Composer. [Run an integration without XTM Composer](/deploy/integrations/manual/) and [Configure XTM Composer](/deploy/integrations/configure-composer/) explain how to set them.",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (client-python/pycti/api/opencti_api_client.py, client-python/pycti/connector/opencti_connector_helper.py, client-python/pycti/utils/opencti_stix2.py, opencti-worker/src/worker.py); FiligranHQ/xtm-composer@6964488 (config/default.yaml, src/config/settings.rs, src/orchestrator/podman/mod.rs)",
+  "intro": "The settings OpenCTI 7.261119.0's integrations read: the 66 every connector shares through pycti, the 22 of the worker, the 4 variables pycti reads for both, and the 100 of XTM Composer. [Run an integration without XTM Composer](/deploy/integrations/manual/) and [Configure XTM Composer](/deploy/integrations/configure-composer/) explain how to set them.",
   "filter": "Filter settings and variables",
   "sections": [
     {
@@ -1095,6 +1095,16 @@
           ]
         },
         {
+          "key": "composer:manager.image_tag_suffix",
+          "cells": [
+            "`manager.image_tag_suffix`",
+            "`MANAGER__IMAGE_TAG_SUFFIX`",
+            "String",
+            "Not set",
+            "Suffix Composer adds to the tag of every connector image it deploys, `-fips` or `-ubi9`, for the FIPS or Red Hat UBI builds of the connectors (`6.9.0` becomes `6.9.0-fips`, an image without a tag `latest-fips`). Any other value stops Composer at start. The FIPS image of Composer sets `-fips`."
+          ]
+        },
+        {
           "key": "composer:manager.logger.console",
           "cells": [
             "`manager.logger.console`",
@@ -2121,36 +2131,6 @@
             "String",
             "`production`",
             "Name of a second configuration file Composer reads after `config/default.yaml`: `config/<COMPOSER_ENV>.yaml`, when it exists."
-          ]
-        },
-        {
-          "key": "composer:HTTPS_PROXY",
-          "cells": [
-            "Environment only",
-            "`HTTPS_PROXY`, `https_proxy`",
-            "String",
-            "Not set",
-            "HTTPS proxy passed to the connectors when `opencti.with_proxy` is on and `opencti.https_proxy` is not set; Composer's own API calls then use it too."
-          ]
-        },
-        {
-          "key": "composer:HTTP_PROXY",
-          "cells": [
-            "Environment only",
-            "`HTTP_PROXY`, `http_proxy`",
-            "String",
-            "Not set",
-            "HTTP proxy passed to the connectors when `opencti.with_proxy` is on and `opencti.http_proxy` is not set; Composer's own API calls then use it too."
-          ]
-        },
-        {
-          "key": "composer:NO_PROXY",
-          "cells": [
-            "Environment only",
-            "`NO_PROXY`, `no_proxy`",
-            "String",
-            "Not set",
-            "Hosts reached without the proxy, passed to the connectors when `opencti.with_proxy` is on and `opencti.no_proxy` is not set."
           ]
         },
         {
