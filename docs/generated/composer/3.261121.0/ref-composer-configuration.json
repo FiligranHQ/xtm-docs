@@ -1,8 +1,8 @@
 {
   "name": "composer-configuration",
-  "version": "3.261120.0",
-  "source": "FiligranHQ/xtm-composer@6964488 (config/default.yaml, src/config/settings.rs, src/orchestrator/podman/mod.rs)",
-  "intro": "The 100 settings XTM Composer 3.261120.0 reads, block by block: its own (`manager`), the connection to each platform and the container engine it deploys the integrations on. Each key is also an environment variable: the key in upper case, with `__` between its levels. [Configure XTM Composer](/deploy/integrations/configure-composer/) explains how to set them.",
+  "version": "3.261121.0",
+  "source": "FiligranHQ/xtm-composer@832c5b1 (config/default.yaml, src/config/settings.rs, src/orchestrator/podman/mod.rs)",
+  "intro": "The 100 settings XTM Composer 3.261121.0 reads, block by block: its own (`manager`), the connection to each platform and the container engine it deploys the integrations on. Each key is also an environment variable: the key in upper case, with `__` between its levels. [Configure XTM Composer](/deploy/integrations/configure-composer/) explains how to set them.",
   "filter": "Filter settings and variables",
   "sections": [
     {

@@ -73,7 +73,7 @@ A proxy that decrypts HTTPS presents certificates signed by its own authority. G
    -v /tmp/xtm-composer-proxy-ca:/tmp/xtm-composer-proxy-ca
    ```
 
-   On Kubernetes, nothing to add: XTM Composer puts the bundle in a Secret named `<integration>-proxy-ca` and mounts it from there.
+   On Kubernetes, nothing to add: XTM Composer puts the bundle in a Secret named after the integration's Deployment, `<deployment>-proxy-ca` cut to 63 characters, and mounts it from there. From XTM Composer 3.261121.0, when the integration's name is not a valid Kubernetes name, such as one longer than 63 characters, the Deployment name ends with 8 characters of a hash, and so does the Secret: see the naming rule in [XTM Composer architecture](/deploy/integrations/architecture/).
 
 3. Restart XTM Composer, then recreate the integrations as in the previous procedure.
 :::

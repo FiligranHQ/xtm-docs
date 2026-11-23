@@ -15,7 +15,7 @@ OpenCRQ prices an attack on the estate it can reach: the applications, servers, 
 
 - You are a member of the tenant. Every member works on its assets: no capability is needed.
 - The risk scopes and their primary assets exist. See [Risk scopes, primary assets and supporting assets](/opencrq/concepts/risk-scopes-and-assets/).
-- To import assets rather than declare them, an administrator with **Manage Security** connects [OpenAEV](/opencrq/use/sources/openaev/) or [Microsoft Defender](/opencrq/use/sources/microsoft-defender/) in :menu[Administration > Integrations].
+- To import assets rather than declare them, an administrator with **Manage Security** connects [OpenAEV](/opencrq/use/sources/openaev/) or [Microsoft Defender](/opencrq/use/sources/microsoft-defender/) in :menu[Integrations].
 
 ## What the price reads on an asset
 

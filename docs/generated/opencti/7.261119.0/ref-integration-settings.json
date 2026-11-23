@@ -1,7 +1,7 @@
 {
   "name": "integration-settings",
   "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9 (client-python/pycti/api/opencti_api_client.py, client-python/pycti/connector/opencti_connector_helper.py, client-python/pycti/utils/opencti_stix2.py, opencti-worker/src/worker.py); FiligranHQ/xtm-composer@6964488 (config/default.yaml, src/config/settings.rs, src/orchestrator/podman/mod.rs)",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (client-python/pycti/api/opencti_api_client.py, client-python/pycti/connector/opencti_connector_helper.py, client-python/pycti/utils/opencti_stix2.py, opencti-worker/src/worker.py); FiligranHQ/xtm-composer@832c5b1 (config/default.yaml, src/config/settings.rs, src/orchestrator/podman/mod.rs)",
   "intro": "The settings OpenCTI 7.261119.0's integrations read: the 66 every connector shares through pycti, the 22 of the worker, the 4 variables pycti reads for both, and the 100 of XTM Composer. [Run an integration without XTM Composer](/deploy/integrations/manual/) and [Configure XTM Composer](/deploy/integrations/configure-composer/) explain how to set them.",
   "filter": "Filter settings and variables",
   "sections": [

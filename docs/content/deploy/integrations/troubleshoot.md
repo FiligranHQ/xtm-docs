@@ -103,7 +103,8 @@ OpenAEV shows its own messages when you deploy from **Integrations** > **Catalog
 | Message in the logs of XTM Composer | Cause | Fix |
 | --- | --- | --- |
 | `Refusing to deploy connector: some encrypted configuration values cannot be decrypted` (or `refresh`) | The key of XTM Composer is not the one the platform encrypted the secrets with, for example after a new key | Put the previous key back. Otherwise, enter the secrets of the integration again with **Update** |
-| `Connector name collision detected` | A container of the same name belongs to another integration | Rename the instance, or remove the other container. The platform logs of the instance say which one |
+| `Connector name collision detected` | A container, Kubernetes Deployment or Swarm service of the same name belongs to another integration, or was created by hand | Rename the instance, or remove the other workload. The **Logs** tab of the instance names it: `[XTM Composer] Connector not deployed: a deployment named "<name>" already exists and belongs to another owner (<id>).` |
+| `Kubernetes creation api error`, `Error creating swarm service` | The engine refused the workload, for the reason in the `error` field. XTM Composer 3.261120.0 and earlier named it after the instance as is, so the engine refused a name longer than 63 characters, as many OpenAEV integrations have | Upgrade XTM Composer to 3.261121.0 or later, which shortens such names. Otherwise, fix what the `error` field names |
 | `Cannot pull the workload image, deployment canceled` | The engine cannot pull the image in the `image` field, for the reason in the `error` field. XTM Composer deploys nothing and tries again at its next pass | See [The image cannot be pulled](#the-image-cannot-be-pulled) |
 | `Cannot pull the workload image, refresh canceled` | The same, after a change of the configuration of the integration. The previous container keeps running, with the previous configuration | See [The image cannot be pulled](#the-image-cannot-be-pulled). XTM Composer applies the change once the pull works |
 | `Error creating container` | Docker refused the container, for the reason in the `error` field, such as a network that does not exist | Set `DAEMON__DOCKER__NETWORK_MODE` to a network that `docker network ls` lists, such as `xtm_default` in xtm-docker |
@@ -171,7 +172,13 @@ docker logs --tail 50 <container name>
 
 XTM Composer labels each container with `xtm-manager` and, until a future version drops it, with `opencti-manager`. Containers deployed before XTM Composer 3.261120.0 carry `opencti-manager` only, so the filter above lists them all.
 
-On Kubernetes, the integration is the Deployment of the same name: `kubectl -n xtm-composer logs deploy/<name>`.
+On Kubernetes, the integration is a Deployment named after the instance: `kubectl -n xtm-composer logs deploy/<name>`. The name is the instance name in lower case, with `-` for every symbol and space. Since XTM Composer 3.261121.0, when that name is not a valid Kubernetes name, XTM Composer shortens it. This happens when the name is longer than 63 characters, has an accented letter, or starts or ends with a symbol. XTM Composer then keeps up to 54 characters and adds `-` and 8 hexadecimal characters. For example, an OpenAEV integration, named after its title and the ID of the instance, becomes `dns-enumeration--subdomains-and-dns-records--7653e749-` followed by those 8 characters. A name that was already valid does not change. To find the Deployment of an integration, list them with the ID of their instance, in `opencti-connector-id` for the Deployments made before XTM Composer 3.261120.0:
+
+```bash
+kubectl -n xtm-composer get deployments -L xtm-workload-id,opencti-connector-id
+```
+
+On Docker Swarm, the service follows the same rule: `docker service logs <name>`.
 
 The usual causes:
 

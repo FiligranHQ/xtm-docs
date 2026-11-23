@@ -8,7 +8,7 @@ products:
   - openaev
 personas: [platform-engineer, admin]
 owner: docs-platform
-last_reviewed: 2026-11-20
+last_reviewed: 2026-11-21
 edition: ee
 migrated_from:
   - opencti:/deployment/integration-manager/
@@ -80,6 +80,7 @@ The deployed instances are listed in **Integrations** > **Collectors**, **Inject
 - Only the instances XTM Composer manages can be started and stopped from the interface, and only they show their logs there.
 - You can update the configuration of a managed instance with **Update**. XTM Composer applies it within a few seconds by recreating the container, or by updating the Deployment on Kubernetes.
 - When the image of an integration cannot be pulled, XTM Composer deploys nothing, or keeps the container that runs with its previous configuration, and says so in the **Logs** tab: `[XTM Composer] Connector not deployed` or `[XTM Composer] Connector not updated, the previous deployment is kept`, with the image and the error. It tries again at each pass. See [Troubleshoot XTM Composer](/deploy/integrations/troubleshoot/).
+- On Kubernetes and Docker Swarm, the Deployment or the service of an instance takes a name of 63 characters at most. An instance name that is longer, frequent in OpenAEV, or holds accented letters is converted and ends with 8 characters of a hash. See [how XTM Composer names containers](/deploy/integrations/architecture/#how-it-marks-its-containers).
 - Secrets such as API keys are encrypted when you save them and never shown again.
 - An integration you deployed by hand can be taken over by XTM Composer: see [Migrate to XTM Composer](/deploy/integrations/migrate/).
 

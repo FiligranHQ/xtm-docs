@@ -8,7 +8,7 @@ products:
   - openaev
 personas: [platform-engineer]
 owner: docs-platform
-last_reviewed: 2026-11-20
+last_reviewed: 2026-11-21
 migrated_from:
   - opencti:/deployment/integration-manager/architecture/
 ---
@@ -83,7 +83,17 @@ XTM Composer lists and cleans up only the containers whose `xtm-manager` or `ope
 
 The former names keep a rollback to an earlier XTM Composer working, and keep the containers deployed by earlier versions recognized: XTM Composer reads the `xtm-` labels first, then the former ones. A later version will stop writing the former names: filter on `xtm-manager` in new scripts and monitoring. A command such as `docker ps --filter label=opencti-manager` still works in this version.
 
-The container is named after the instance: its name in lower case, every character other than a letter or a digit replaced by `-`. On Kubernetes, the instance is a Deployment of that name with one replica when started and zero when stopped.
+The container is named after the instance: its name in lower case, every character other than a letter or a digit replaced by `-`. On Docker, Podman and Portainer, that is the name of the container, whatever its length.
+
+On Kubernetes and Docker Swarm, the name must be a DNS label (RFC 1123): lowercase ASCII letters, digits and `-`, no `-` at either end, 63 characters at most. XTM Composer keeps the container name when it already is one. Otherwise, for example when the name is longer than 63 characters or holds an accented letter, it builds a label from the instance name:
+
+1. It puts the name in lower case, replaces every character other than an ASCII letter or digit with `-`, and removes the `-` at both ends.
+2. It keeps the first 54 characters, without a final `-`.
+3. It appends `-` and the first 8 hexadecimal characters of the SHA-256 hash of the full instance name.
+
+The label is the same at every pass, and two long names that share their first characters still get two labels. OpenAEV names its instances after the catalog title and the instance ID, so their names often take the suffix: `DNS Enumeration (subdomains and DNS records)-7653e749-8c9d-4723-a656-84f3b9fda3ab` becomes `dns-enumeration--subdomains-and-dns-records--7653e749-` followed by 8 hexadecimal characters. A name such as `Import File (STIX) v2` stays `import-file--stix--v2`. This rule arrives with XTM Composer 3.261121.0. It does not rename or redeploy the instances that already run: their names were valid labels, since Kubernetes and Docker Swarm refuse any other. An instance whose name was refused before now deploys at the next pass.
+
+On Kubernetes, the instance is a Deployment of that name, whose integration container has the same name, with one replica when started and zero when stopped. On Docker Swarm, it is a service of that name. To find the Deployment or the service of an instance without computing its name, filter on its `xtm-workload-id` label.
 
 ### What the container receives
 

@@ -54,7 +54,7 @@ A figure that is not valid says why, such as **Enter a number.** or **The minimu
 Select **Configure** on the **Microsoft Defender** tile. The **Microsoft Defender** panel opens:
 
 - When Microsoft Defender is not set up for the tenant, the panel lists the three variables a platform administrator sets in the platform's environment before restarting it. **Copy** copies them, and **See the documentation** opens [Give OpenCRQ the credentials](/opencrq/use/sources/microsoft-defender/#give-opencrq-the-credentials).
-- When it is set up and you have **Manage Security**, choose the **Service account** and the **Schedule**, then select **Save**. **Sync now** starts a run at once, once a service account is bound and no run is going. **Follow in Integrations** opens the connector in :menu[Administration > Integrations].
+- When it is set up and you have **Manage Security**, choose the **Service account** and the **Schedule**, then select **Save**. **Sync now** starts a run at once, once a service account is bound and no run is going. **Follow in Integrations** opens the connector in :menu[Integrations].
 - Without **Manage Security**, the panel reads "An administrator configures this connector."
 
 While a run goes, the tile shows its progress, and the **Assets** step turns in the stepper.
