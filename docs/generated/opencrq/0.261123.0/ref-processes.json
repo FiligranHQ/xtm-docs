@@ -1,7 +1,7 @@
 {
   "name": "processes",
-  "version": "0.261120.0",
-  "source": "OpenCRQ-Platform/opencrq@a91d685 (back/src: index-http.ts, index-worker.ts, index.ts, features/)",
+  "version": "0.261123.0",
+  "source": "OpenCRQ-Platform/opencrq@d61ebb5 (back/src: index-http.ts, index-worker.ts, index.ts, features/)",
   "intro": "What OpenCRQ runs in the background: the kinds of job its worker runs (listed in **Settings > Jobs > Kinds**, each run in **Runs**), and the engines its processes start. A job runs again when the data its last run read changes, every day at `recompute.daily_at` (03:00 UTC by default), on a connector's schedule, or when someone or something asks for it. In the `split` profile the HTTP process serves the interface and the API and the worker runs the jobs; the `monolith` profile runs both in one process.",
   "filter": "Filter jobs and engines",
   "sections": [
@@ -267,6 +267,14 @@
           ]
         },
         {
+          "key": "deployment-integrations",
+          "cells": [
+            "`deployment-integrations`",
+            "",
+            "Worker (or the monolith)"
+          ]
+        },
+        {
           "key": "edition",
           "cells": [
             "`edition`",
@@ -336,6 +344,14 @@
             "`recompute-dispatcher`",
             "Watches every change made to the data and books the observed jobs whose last run read what changed, after a short pause that groups a burst of changes (recompute.debounce_* settings). This is what keeps scores, threats and prices current without a manual recompute. See [configuration](/reference/opencrq/configuration/).",
             "Worker (or the monolith)"
+          ]
+        },
+        {
+          "key": "xtm-admin-bearer",
+          "cells": [
+            "`xtm-admin-bearer`",
+            "",
+            "HTTP (or the monolith)"
           ]
         },
         {

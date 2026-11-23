@@ -1,6 +1,6 @@
 ---
 title: Connect the modules to each other
-description: Register OpenCTI and OpenAEV with XTM One, link OpenCTI and OpenAEV, and give XTM Composer its tokens, with the public and internal URLs each link uses.
+description: Register OpenCTI and OpenAEV with XTM One, link OpenCTI and OpenAEV, connect OpenCRQ to both, and give XTM Composer its tokens, with the public and internal URLs each link uses.
 doc_type: how-to
 products:
   - suite
@@ -9,7 +9,7 @@ owner: docs-platform
 last_reviewed: 2026-10-31
 ---
 
-This page connects the modules of the XTM stack: OpenCTI and OpenAEV to XTM One, OpenCTI and OpenAEV to each other, and XTM Composer to both. xtm-docker wires every link from `.env`, so on a new stack you mostly set one shared secret and check the result. Read it too when you publish the platforms on other URLs, or run a module outside xtm-docker.
+This page connects the modules of the XTM stack: OpenCTI and OpenAEV to XTM One, OpenCTI and OpenAEV to each other, OpenCRQ to both, and XTM Composer to both. xtm-docker wires every link from `.env`, so on a new stack you mostly set one shared secret and check the result. Read it too when you publish the platforms on other URLs, or run a module outside xtm-docker.
 
 ::diagram{id=deploy-configure-connect-modules}
 
@@ -28,6 +28,8 @@ This page connects the modules of the XTM stack: OpenCTI and OpenAEV to XTM One,
 | XTM One calls OpenCTI and OpenAEV | `xtm-one` service | `OPENCTI_API_URL=http://opencti:8080`, `OPENAEV_API_URL=http://openaev:8080` | A short-lived token signed for each user |
 | OpenAEV answers OpenCTI | `openaev` service | `openaev.xtm.opencti.api-url=http://opencti:8080/graphql` | `OPENAEV_XTM_OPENCTI_TOKEN`, from `OPENCTI_ADMIN_TOKEN` |
 | OpenCTI links to OpenAEV | `opencti` service | `XTM__OPENAEV_URL` (public) | None: a link in the interface |
+| OpenCRQ reads OpenCTI, for one tenant | `opencrq` service | `CONNECTORS__OPENCTI__<tenant>__URL` | `CONNECTORS__OPENCTI__<tenant>__TOKEN` |
+| OpenCRQ reads OpenAEV, for one tenant | `opencrq` service | `CONNECTORS__OPENAEV__<tenant>__URL` | `CONNECTORS__OPENAEV__<tenant>__TOKEN` |
 | XTM Composer runs integrations | `xtm-composer` service | `http://opencti:8080`, `http://openaev:8080` | `OPENCTI_ADMIN_TOKEN`, `OPENAEV_ADMIN_TOKEN` |
 
 :::only{opencti="<7.260811"}
@@ -176,6 +178,30 @@ curl -s "http://localhost:$OPENCTI_PORT/graphql" \
   -d '{"query":"{ connectors { name active connector_scope } }"}'
 ```
 The list holds `OpenAEV Coverage - 2cffad3a-0001-4078-b0e2-ef74274022c3`, the default tenant of OpenAEV, with the scope `security-coverage`.
+:::
+
+## Link OpenCRQ to OpenCTI and OpenAEV
+
+OpenCRQ reads the threats of OpenCTI and the simulation results of OpenAEV, for each of its tenants separately. The connection of a tenant is two variables per platform on the `opencrq` service, keyed by the tenant's identifier, which its **Settings** > **Parameters** page in OpenCRQ shows under **Identifier**: see [Connect the first tenant](/deploy/install/opencrq/#connect-the-first-tenant), and every connector in [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant).
+
+A connection set this way comes up enabled. At each start, for every tenant it holds with these variables, OpenCRQ does the following:
+
+- **OpenAEV.** It creates the service account `OpenAEV (deployment)` in the tenant's **Connectors** group, and binds the OpenAEV connector to it.
+- **OpenCTI.** It creates the Live Stream `OpenCRQ threat feed` in OpenCTI, with the token of the connection, or brings its filter back to what OpenCRQ needs: the Intrusion Sets, Threat Actors, Campaigns and Reports, and the `targets`, `uses` and `attributed-to` relationships between them and what they target or use. It then binds that stream with the service account `OpenCTI (deployment)`.
+
+These steps never replace a choice a tenant administrator made in **Integrations**: an account already bound, a stream already chosen or a connector turned off stay as they are. A variable that names a tenant the platform does not hold is skipped, and a platform that does not answer leaves its connector for the next start. After you create a tenant and add its variables, run `docker compose up -d` so that OpenCRQ starts again and connects it.
+
+To create or update its stream, the user of the OpenCTI token needs **Manage data sharing** or **Bypass all capabilities**: the admin token of OpenCTI holds the second. With another token, OpenCRQ changes nothing in OpenCTI, and a connector nobody configured stays idle, its page saying which capability the token lacks. Grant the capability in OpenCTI and restart OpenCRQ, or let a tenant administrator choose a stream with **Configure**: see [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/). OpenCRQ finds its stream again by a marker in the stream's description, so a stream renamed in OpenCTI still counts; an edit to its filter is replaced at the next start.
+
+:::verify
+Ask OpenCTI for its streams:
+
+```bash
+curl -s "http://localhost:$OPENCTI_PORT/graphql" \
+  -H "Authorization: Bearer $OPENCTI_ADMIN_TOKEN" -H 'Content-Type: application/json' \
+  -d '{"query":"{ streamCollections { edges { node { name stream_live } } } }"}'
+```
+The list holds `OpenCRQ threat feed`, with `stream_live` set to `true`. In OpenCRQ, the tenant's **Settings** > **Security** > **Service accounts** lists `OpenCTI (deployment)` and `OpenAEV (deployment)`.
 :::
 
 ## Give XTM Composer its tokens

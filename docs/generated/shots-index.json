@@ -2879,47 +2879,47 @@
   "opencrq-risk-scenarios-list": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/bfc3513f7851e9acc29b618a31eb6498808c6dcdf614b2494a078382bfd843f1.webp",
-        "dark": "/shots/d7a859d51ae4412e57010e76f71543af9019df6204691e1809fecc1ce4b0131c.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/4e54996dadb537f8eea9690836ab668339f133f30615e4481c0c65a17f4e603e.webp",
+        "dark": "/shots/89f983cd6173028fc159b8591d05b28f27896ccf489a87ad4a58ab35df34d62e.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-risk-scenario-crq": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/db671f0545e52372b04bce987a252b264ae80f78845f44a7d3279776d21d9464.webp",
-        "dark": "/shots/961c9d7c6bcb975fa766b9c18279c1faa85db2f1e356afe2c9df92435026f950.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/5b95d287e0847cf7b9ffc9657a9197647483731ebed10e6301484528f8f7e677.webp",
+        "dark": "/shots/b9c7471bff01fc3a27b6861edd670673ddad347e9ff0f3f4f663bb49c196cfad.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-risk-scenario-changes": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/cd52e99930504044fae122a4920e42e044432b1c0f16c7df0f94b00850c992c1.webp",
-        "dark": "/shots/e70e3ed07af8270e9b9a00d734ae020291451d8a35c8fd88e8331b16eb854b72.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/6701296ec8203b2413132ed0337db8945183d68722007a3ccc575cf8e2816977.webp",
+        "dark": "/shots/df87a3c5f9bf0b391bcdf2ee731efb65000ef6562a316dedb6844378e7846f07.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-threat-center": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/e1adf90ec7eb8c0e6f6105a2369a50985f7afc5f5e96667088a121c62eeb7cd3.webp",
-        "dark": "/shots/957619ddd22dcce6b359d0c8a288f38dc58e0a0f9ce429d478c8bb78324bc39f.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/010cd149eebc0017af3dbe9d123fa8568edbd11127cf2a6a8b91d7210adc3e0a.webp",
+        "dark": "/shots/ad51280a0a0dec77310a117df0e8fe8ba346a33cca3a8f114a7c6f596cbf419e.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-controls": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/aa897385cc90d0afb28327d1df17d5e7c44ccb01ff691fe13e042cc81b83191d.webp",
         "dark": "/shots/1fd7f99df2a191034cb174578fdf8bca74e2f2d2ffffd13c78f8d4a274f12d0f.webp",
         "captured_at": "2026-11-21"
@@ -2929,47 +2929,47 @@
   "opencrq-treatment-plan": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/4a2496404cb03a7aaf8bed4fb7850c34857a1506da7fa8fec3ed858d42a06164.webp",
-        "dark": "/shots/f6add247fb1b48ddb0144271902e95c9b8a2072f98346093fd09b1b6f811447b.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/d56960ddc9af0d42d8676944b31aef07c15549577e3d3774e65379c3f8ff32ac.webp",
+        "dark": "/shots/a16ce67a950a0f868ca777fa2a308af546f12d0950998b823b5cdf2e09365ee9.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-integrations": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/8bb7b3283a23241eef7ae5b9d3922131e5191172a2711be50c26db3396808927.webp",
-        "dark": "/shots/6620b98837b2125fdd87b76a069fc13702b22722fde89b0eb21ed401ec82d1dd.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/08e5f4833430218b5f5287f0024624207eb4edbf33cd746fb7b31f7e1f8a04f5.webp",
+        "dark": "/shots/d7046cd3c6f06333d13a2e91f3eac86f17153805e0d01ed1824f5971e5940550.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-risk-scopes-and-assets-dependencies": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/46e615abf5416b3c600ff7696cd5456cd05d1182e4dbd56d0d1b9c552c97de18.webp",
-        "dark": "/shots/424ab4adb43394409d617fed13472ef7f2825f1c1bc11e86dfbce188ef8bb3c6.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/6afe24163c5690b73e14d409f544064fe91df8637ac00fe3aa90ad9bad30fdbc.webp",
+        "dark": "/shots/0163d9c3a396e4a3ee4ab0f8f4c9626982d196c39dd08481ec2f201ea5067220.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-risk-scenarios-create-outcome": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/1d90ede95268ea367933ede7c0adeadef6ce00263bd10d8f679d270541117b20.webp",
-        "dark": "/shots/ff6e031eca0e5a65ab1fb3a1e169fb2b5d417315ee1ba67ce8dcbfc7ec26c97c.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/5222f71b7b10434d783773107d3a55282fc3363b17473fc99006550269fbb236.webp",
+        "dark": "/shots/97223102990625f907d0a237dbb8640d352c77d4fba7a510b2bba59b419a790b.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-threat-event-frequency-scope": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/cbbf0a3902163d3b776b34fc0d2edf0fe300330a7483d1734904513bfa82aff6.webp",
         "dark": "/shots/275c54a2d366245e0aa874ca45235c66ece5c9201b0baa1c52dafc271fd95aae.webp",
         "captured_at": "2026-11-21"
@@ -2979,7 +2979,7 @@
   "opencrq-threat-event-frequency-scopes": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/c96414fddb140e58654a6f6a92a0a07ffdf682084d6a7844baed94d5ccdd34c2.webp",
         "dark": "/shots/6c57424d7eff1e8f4b7baa8068cbde2a36c523bac356443f25f44ee2ae002c12.webp",
         "captured_at": "2026-11-21"
@@ -2989,7 +2989,7 @@
   "opencrq-threat-event-frequency-manual": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/9bfef8bb94e1e415e6c087eb779f627c501f78b0f54d6495b60ecd03623375f1.webp",
         "dark": "/shots/4809fad5061718fb2b65a1848555b7066f2be74a28ed68f6a67158341173d527.webp",
         "captured_at": "2026-11-21"
@@ -2999,7 +2999,7 @@
   "opencrq-loss-drivers-questionnaire": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/c071430463dc85bd166b02cfd85f4e8a21afcf1cf911c5a7aae94f32c3729492.webp",
         "dark": "/shots/9ff546bb2a56a7acb42be6c08e1f1ce753899cf3b307bd94942be8709789030c.webp",
         "captured_at": "2026-11-21"
@@ -3009,7 +3009,7 @@
   "opencrq-loss-drivers-financial-impact": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/587a0dc689f577426cee0f3d6b0486bd6012c873fce9709d054040c4ee5ca7c8.webp",
         "dark": "/shots/c09385b1d21cfecd824f50dc27408ba2d6f0f5f03415c2bc02dc806759f6da55.webp",
         "captured_at": "2026-11-21"
@@ -3019,10 +3019,10 @@
   "opencrq-assets-list": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/11bee8d47382254f58e7bb54e5a71e3ce430f0c0d26a9c9b3019808c34735a12.webp",
-        "dark": "/shots/0173a111860030eed2f1ece34a55b669ba84da832a73872dbbf188aa00cfda77.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/1499ba7797cd926358f66a1c5890d0aedb1802559fc76e531a902647d0a79ce7.webp",
+        "dark": "/shots/8e5428138547e7f17b6f1d214397f37980c589be9e2f82657631390783778acd.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
@@ -3030,17 +3030,17 @@
     "product": "opencrq",
     "since": "0.261116.0",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/5b2c4c6999caf7b8aed6200e70dd331fb78c17058d113db6c947a0e2d62653a6.webp",
-        "dark": "/shots/ef635a8d36a6b0576ae233b3c8b6a87b1559a46a8d2ec4af3ae8274b007b07e4.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/e2083c2f27d4735377aba42e703f7d2b2c012b913c44d13891f28d549c949d59.webp",
+        "dark": "/shots/9b933028ff42f0e75b03f05f029ee2065a59a3dccec9d76d834e46911d6de428.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-assets-create": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/8498e37a8659bdeda81edc518314b85351536ababe7ec30a29909cf52f062387.webp",
         "dark": "/shots/a5a89968e98c18a228f91541b5ec21703d90a4bee30134c3217cf59ab6d3451b.webp",
         "captured_at": "2026-11-21"
@@ -3050,10 +3050,10 @@
   "opencrq-assets-dependencies": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/5d0c3b6dc053484228fd8c2d01e0692fc42db27fc4156baa727f6b765821a219.webp",
-        "dark": "/shots/2836031829f1ebc4c677b287be35f4d2280916554eba969f10c41c356922322b.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/9e927b72054458f2187287f022bffaae76fbad7690a32037cb4b5a0e04d64dbe.webp",
+        "dark": "/shots/57ed53b3c54a587b79b027951f5a5df97cbc057572ae72a0fd85ff1c24775504.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
@@ -3061,7 +3061,7 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/0ccf1fefc1da02031c96fcf1c7dd2df481c72598b6ba777635c4a3922e3d1348.webp",
         "dark": "/shots/a6a006bc60e660f5b5f8cd5e89632612c4be45fdd98c352cd1a1e87ae79542a3.webp",
         "captured_at": "2026-11-21"
@@ -3072,10 +3072,10 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/193ea50a0b4e55295dd8553802c0bfdfaa27520db73d16c2fbd6ba7085f7a5cb.webp",
-        "dark": "/shots/34c0dd9ee03e7a660eb7d60587098d6e22f0e38ab83257edf8a418ea2068264f.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/6bbbe5a25fade024ccc351bf34384257c08aab058bbcda27dfa640b2d2aa64dc.webp",
+        "dark": "/shots/8209f615da4363a5d50e2151f17946033b37f143656f53100e2e7be50f5b2738.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
@@ -3083,10 +3083,10 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/5b88a8ac571068aff8bd1c52738f14a8df38b275878d399c90757e8a4f1953d0.webp",
-        "dark": "/shots/a9e3902ced8e3ad25ead0130449f517dbf502996bb2225b9b90f23877785eb88.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/f5487e2dbf48ab93659161fe3f5b4f72c6466e3be2a90fcb5f33f087034f0896.webp",
+        "dark": "/shots/cc16f5a45fe17272f3581ffe6348fe17f74934dfea99fd1465be5241529aedd4.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
@@ -3094,10 +3094,10 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/410863cd17cbfab67532f5ac06e3da3977d0748495c0ea9e182d8c0074cadf1f.webp",
-        "dark": "/shots/4fcc06b752ff4f7858b9106304cd43b88aac7d284f661a93a86582819d969149.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/098dabe5732f426b423639bc76aec5a853bade8e3e3714cf69564d334670eede.webp",
+        "dark": "/shots/d0d0fefc44476f87ffe7eb24399587ed11e349041f26ede31093af39e60ee5e1.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
@@ -3105,7 +3105,7 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/1b1479b31f7efa71ea4c047e297bffec13443f27278f9733229379c66aa8d62c.webp",
         "dark": "/shots/132d4853cafa53831d656bd00ec67c62bde43c839c94abf454d00c850addd9a8.webp",
         "captured_at": "2026-11-21"
@@ -3116,10 +3116,10 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/585b6bb29b7f4c3816e7e1c5afd877b21d3f56f48bb6f608dde59a79769d2635.webp",
-        "dark": "/shots/20574288425984c6085238215545b352d5d00208ce1ca2e2f375285506740ff3.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/fbee3f5f231ac15e225ec89605ce285fa4532926908c29e25352b8827e9803bb.webp",
+        "dark": "/shots/a42fc7b98ac9ab86a14a2c6efd36f634ee55529b278ff8a1e8f226b7aa384455.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
@@ -3127,10 +3127,10 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/cb09065e5f6050554f227bf2642edef709b7ad5d96507b7c68cf6ce13c0f0c40.webp",
-        "dark": "/shots/8efaaa0181c064771e8d301a2d3226ef90d0d17f7db9b42daacd1089a10c7571.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/d7690e727ebce4f48c9d38e40c8af9ae78537fad97e8816159fa16d879506c79.webp",
+        "dark": "/shots/cd688f62efd8225519fc5e9a615ba495b59e29fc72786cd47b01fc79b6f8072f.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
@@ -3138,7 +3138,7 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/03af526d6f6fd95b5e132856ea092045d55197fb46006e87a5cefec4d2420e67.webp",
         "dark": "/shots/fb32896c5abc6c11cd10cf620a0a3ae2c4db51c56d5e984f9465132cee9cf74e.webp",
         "captured_at": "2026-11-21"
@@ -3149,7 +3149,7 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/e4d266e7e09d80c1a669491f9e4714f191268ce3a7d7c557b03013fb92fe3759.webp",
         "dark": "/shots/15e2aa32dc585e4f0bcf107a479bb0b70c33075579fc6c47346f54f3082a4518.webp",
         "captured_at": "2026-11-21"
@@ -3160,7 +3160,7 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/90930acef93cf8ad0161e5220f11f62de97d7518bb42243bb69cc6a44e905c42.webp",
         "dark": "/shots/e88d900be5d2a13f11eb91918d5b192ba2addf5b22b28883f667042fa8ef3837.webp",
         "captured_at": "2026-11-21"
@@ -3170,10 +3170,10 @@
   "opencrq-findings-list": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/5a7829ccf93caff037a2ef6c04b43fc2ead915cdca0c4429dab6292c2978f1a5.webp",
-        "dark": "/shots/15fd77117e26274ff9619fbe9049c6237b6932add0a4ab9d05cb4f653a94e83a.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/e20e9247a2da22f9d977130848a6c50bc6313100d92c19d550a4089507e2f037.webp",
+        "dark": "/shots/5fc64f706c5c497c38b0424451dd98ad84c0afa3f3ebfa82791b669162eb6115.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
@@ -3181,17 +3181,17 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/9acfb795a11684e2959d26c1a18f4e18804ef340048fde513176ac686cdc5b02.webp",
-        "dark": "/shots/4933835e7b4debb35f2af8b7687985ba467c8fa4eb45d4490c853425863a94e2.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/0bdd1906fa1c666bdcd492cbad963ae0b17b4ee449c1c9ffbae9ab47606027c9.webp",
+        "dark": "/shots/6a5f1b4d30674399b3e5b33a14ddf000ae867747594a126eb3e815649790fb3e.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-threat-center-threat": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/19e73bfe1429292c07dd970a7d8e32452ef1a9797a25fd35d4b305fb235d83ce.webp",
         "dark": "/shots/74e9404b69b1638618d7ddd363337af2f01238281c2cb552d000ff24d7af7264.webp",
         "captured_at": "2026-11-21"
@@ -3201,17 +3201,28 @@
   "opencrq-threat-center-relevant-threats": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/ff566440d3a0c7e34c46c34cfc3cd9d5e1b7497941642dbf42847b18c457ed3d.webp",
         "dark": "/shots/6073a5b824776eaae305ad0ac5899eaf8ac56013d7105415aaf105b30239d7c8.webp",
         "captured_at": "2026-11-21"
       }
     }
   },
+  "opencrq-search": {
+    "product": "opencrq",
+    "since": "0.261123.0",
+    "versions": {
+      "0.261123.0": {
+        "light": "/shots/fa862bc76720a105bc78d8de2e8dba10a4d9a3a14fbc6edf8d853792215e6cd7.webp",
+        "dark": "/shots/1973557bf1abf16959696f0d5089d743167b47d947cef61e5ba4165ce01de59c.webp",
+        "captured_at": "2026-11-23"
+      }
+    }
+  },
   "opencrq-controls-assessment": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/f0ab414a37dd7e22c56416de75e76ff6c686afa84a98e7f3b6d327f3459fb0b4.webp",
         "dark": "/shots/f9bdb3d5cd2f12ced046bf4a38956c3a9b32bc3d6e25cb89033e62afe2dc2d5a.webp",
         "captured_at": "2026-11-21"
@@ -3221,7 +3232,7 @@
   "opencrq-compliance-assessment": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/4014be5e24ca5994c1c184a4bca03f2df60012d93bf6407e6864abd20ff9a24b.webp",
         "dark": "/shots/2c334c1ab9d12cea0a64873a96015c58ae097265d1c2faac301bfb57a109349b.webp",
         "captured_at": "2026-11-21"
@@ -3231,57 +3242,57 @@
   "opencrq-treatment-plans-controls": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/8ed172a2d2294f71ecee21d2ebdf07e593a3f7c442ecf22afa72f8403bec850b.webp",
-        "dark": "/shots/860d5265fd6b25f162b926f4d331ed061e148f5a542badf86348c6cd1b33ee3f.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/743c85f8e78edcf3652925a45490477224528c3890c9f58d0ac399113efbfb6a.webp",
+        "dark": "/shots/9b26f5fbd9562793e0913c59d58fab5b94b4641965ae73a260ed48657835a1e8.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-treatment-plans-list": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/d52c6dceb4175001436a7bb4534e068472630d87dd65e8429af99c037cf3ef9d.webp",
-        "dark": "/shots/16b7b5685f64ceca25dee6b73d8c4218fbff159977dfab537a0b29ad7c8fb6f3.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/fd828f91b7827275ab16f1ea3c2f655b86c510c975bfd07f35ecdbb27ec55282.webp",
+        "dark": "/shots/998b848a676b44e312d5b590f604384f9f57b89b4d12ac30cc7a750e156d2c11.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-budget-review": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/34ff5c57f19cdda9dba95c359b0d7dd0a4b48ed7fec0636ed25b7e2af986be41.webp",
-        "dark": "/shots/1132c8430a0a936dd18ad52d77765eaacdd14b71b27961762fc98355e9df2b11.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/fbf250771cd17e8303182cfcac4e179029664dfbb6c4da40dd34566334dfdccd.webp",
+        "dark": "/shots/0051369212072c2f071a320cd0c22b3376a758141c83e56008803155bf685d6a.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-budget-reviews-returned": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/e78ec38da3b43734c54e50e42c8baa02e006cfcf00b7c7953af6d61ff3e4621a.webp",
-        "dark": "/shots/6d7fea0442127d746a187e55861d779767cfc0238a14a223430c889d31a74104.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/7fc08eaf8e6afc5cc3b7bad115648e9ce05bada505b1c73aca0142e910ab95a5.webp",
+        "dark": "/shots/7948a0385855b2fd099ff59c7585ddfc7c764ea6cb9d9a3f36c0804fbdeb2134.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-budget-reviews-line-drawer": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/b4f43e03e9eb38fb602f2fc1183d24494d8cbfb12c01fbec3cebf9df3b024898.webp",
         "dark": "/shots/ca3a2ee8c2e5149306db12a90383901edb19b285cd87b1113aed2976d2eaa3ce.webp",
-        "captured_at": "2026-11-21"
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-dashboards-list": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/026cd1f30211d17b8df032816b1ffde716b5e72ffda55155ca50acb6a0b757e1.webp",
         "dark": "/shots/e231e96ce03a52965dcf90410db4cc72254fbb71300437e7b37876f3d2a9e093.webp",
         "captured_at": "2026-11-21"
@@ -3291,7 +3302,7 @@
   "opencrq-dashboards-aggregate-risk": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/eb58a254dac094df49bf1968cff4c2d19b10433911a95dc2bc915b6c23f113a1.webp",
         "dark": "/shots/f897736a42487559e47e2dc8321db4a017d064175373806123ead90ce2ef63c4.webp",
         "captured_at": "2026-11-21"
@@ -3301,37 +3312,37 @@
   "opencrq-profile": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/e814a4ff29c6570db7c0128ef1ece333e67bd9e6c8c1caf92b943787dfd2a8e9.webp",
-        "dark": "/shots/b8d5fc9b25c2448cd9b9c5b37b38322fa6d4dad19aa3b86595245fb194afdabe.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/12f010f53a2d203300a40a7c55ab0f3a4dddb15a0f521b73a34e74d00aa5352b.webp",
+        "dark": "/shots/df0e4d15d94b8acfefd4b727f4365f819205ca020f2831eb9c710e79461de235.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-opencti-configure": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/6a0530435c115fb5731420279efd0772846117cf66d952bfc71a5f8205708949.webp",
-        "dark": "/shots/992183346f64fd4db91ccbd8be048b601304d3c9cbf694e33700760b7e43009b.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/6793ea7b364b204ae33f7a790f673734dc9454db8b95ae3eed37279427d0be02.webp",
+        "dark": "/shots/28e86b757b745025e65280baf882d396b46bcd01a0dcea4f311ac9e2bd18b200.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-opencti-stream": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/ba5af3a93c9cb7466f3c31bac02e13edd9d693fe05f0125a7d6c0aa621b42b35.webp",
-        "dark": "/shots/4180d82d09bddc13531f0ad9edcbbb3da34020126b4fb93408abe5431371491b.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/44506bd2eb983dbc63eda0f29202697165ae3fc2c055dafde502a706eb7b67ae.webp",
+        "dark": "/shots/698cfd7992944cefab5e013d48e01178d8bbfac11b4440ee93cc99908bbd3fff.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-openaev-configure": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/fee862aadee51e2967ed88ec1be5f18602118cd0b9f3dbf06f2bf061b91ae0f3.webp",
         "dark": "/shots/60039d3f263df3a06b723b279284a0413734419112d4b3fe1a8f2d64e465debb.webp",
         "captured_at": "2026-11-21"
@@ -3341,7 +3352,7 @@
   "opencrq-defender-connector": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/b4cdf50e56a0753427c7a75e283080341f35ae640e092579206b695b8afefd7c.webp",
         "dark": "/shots/136a9d99fa632f8c926dfbd77a98b90b4bb7aeda61cc5c43ef2c91e223012ce1.webp",
         "captured_at": "2026-11-21"
@@ -3351,7 +3362,7 @@
   "opencrq-drata-configure": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/95ea2b27375eb66fa78b7ba85e947b959b8a54ab9268c1cf356f87d0a8efe964.webp",
         "dark": "/shots/ec306352be05057cb70debf11b8e7d06b790828d040edf1c7b530cf77612faf8.webp",
         "captured_at": "2026-11-21"
@@ -3362,7 +3373,7 @@
     "product": "opencrq",
     "since": "0.261116.0",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/137ecf40b0dd9c0165503ca7da9f543ac29ed1c298429f81f5f241a96e194559.webp",
         "dark": "/shots/37f0d6cfc9125a8e8bf02338a7367280187ff2eb9fea63f778d7f328a99c3ae4.webp",
         "captured_at": "2026-11-21"
@@ -3373,27 +3384,27 @@
     "product": "opencrq",
     "since": "0.261116.0",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/fea5b2fd7d06735652194bc75b91e5c9b3b8dab9d45178a79e92c4ff877df591.webp",
-        "dark": "/shots/b4112331cf6f29c95f6ae5a307b10bfe0aa493f38834b134d876e0022d735da3.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/5fd1d84294783ccb7a7df37e3cc1abfbd8d464bdf851d88d949323e4c920f1e7.webp",
+        "dark": "/shots/9d88b30db5c9121e8e9fbbd029f6d7f59a6749230928fb254062d713832acfdd.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-users-and-roles-user": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/54694dac5e09ec3df7cd686707914abd3ff866fe3e0b47b4236c27108fb97042.webp",
-        "dark": "/shots/1e0d0af0afeb990a0f77478fa1c6629840b241f9d0deb877bdc1ec7b503f9da4.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/7b8e1419aa32638f1ea883bf2aee84fe33b3b1eaebd9d9630f484d8e2ac4daff.webp",
+        "dark": "/shots/d69c91f0f9540c6782ecbf61b3659f386ad427680ab943035634c370c53b53cf.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-service-accounts-list": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/132aab47e93a1697b72fb5db92a5438043296096c202ab85e2dfb6e8dbd08e6c.webp",
         "dark": "/shots/8d139dcd7a94f10277ae82a65fe596b46fbbdaf75225e6ffc6972d79d4d6a98b.webp",
         "captured_at": "2026-11-21"
@@ -3403,7 +3414,7 @@
   "opencrq-service-accounts-token": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/ca48a5804dcf3373c00abc755cb2b3bc1069247c7c2e3972b5a8c41419ae786b.webp",
         "dark": "/shots/72de929189bda947ca619d7b0796e7bdf3d5b75a6cfc21596c326b2f01488f42.webp",
         "captured_at": "2026-11-21"
@@ -3413,30 +3424,30 @@
   "opencrq-background-jobs-runs": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/084723bc7297f735761998ecd805631a454da53b74c37edb2b32aec215517a76.webp",
-        "dark": "/shots/42d197dea393704a802ebac53cc3fcdf9eaccb5344ebb491f620fe6a14a8bc8c.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/74a693aded6ccee542af179115e22fb30b43431a327d5d85d895733c561271c7.webp",
+        "dark": "/shots/e48718a741b84fb170d9f68f42e32b64fb0d5d46a3f1be15e2d00d9d2732d749.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-background-jobs-logs": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/5874cefcb1708b07ae7cfb736606806ac08e59852cd78054ef1d0cd2aa0fded9.webp",
-        "dark": "/shots/96112d8475e7d86695418c1fe22e3f144441b461bffa4f85456ea875c69519ec.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/7c74938933b025c8a683cb091961ae4a5a4567d7ab74a7ecfdf15dd467ad8d84.webp",
+        "dark": "/shots/e07bdf3b3d65a181fd951d0d0f453ad633efd77cbf232263c4d22c6cefca7290.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-parameters": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/b158438cc912a254344f89a3f7412e5dc88e59696f4b241f5980a9b8192af8f4.webp",
-        "dark": "/shots/e9b385b58c45cc5f882b49349a908a61faaa1e32e9181c544df0ad584eef4a13.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/012a9d3474f75229ee4fb1f996de03ec50e0a2003a46e7da7a95e9b041e854c3.webp",
+        "dark": "/shots/d0f289349046b1eed8c7bb47a25b804ebcf9e701798011fc62917a016d6c8f3a.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
@@ -3444,7 +3455,7 @@
     "product": "opencrq",
     "since": "0.261116.0",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/b52c650fad4f51ed03dd2aff7aa0436d3ec458c76bcbe972f9ff6e8bb48af040.webp",
         "dark": "/shots/c28b4c572f2aed0f8864807ac74e451e70d113a728c59cd93689f3d64c48962c.webp",
         "captured_at": "2026-11-21"
@@ -3455,7 +3466,7 @@
     "product": "opencrq",
     "since": "0.261120.0",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/a64fca98fb2e7c2e99f77791c1a75692e127fec10f796a4f29d0b7eeb9fc6a8e.webp",
         "dark": "/shots/c2f32f3f2ed78aef9f2ad60ddf2a1c075f96a701f12042f99a7da33815c52433.webp",
         "captured_at": "2026-11-21"
@@ -3465,7 +3476,7 @@
   "opencrq-engine-threat-relevance": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/e5ec04157ed0dce570afc8a920667bee9ad3342ab18597189aa40bf9fab1987f.webp",
         "dark": "/shots/df2591ff3cff2ced10632d1428ee7b688fc9f744d527b37931fd3c2d4fa05d79.webp",
         "captured_at": "2026-11-21"
@@ -3475,7 +3486,7 @@
   "opencrq-engine-crq-indicators": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/d97b0d1f87cba6ce517f4e7221ec8f837ff0af0a0605da364061f05c7e5709fe.webp",
         "dark": "/shots/85a79e8f4923b718510204e9f154810498733814b5e69753e8e20851655758d9.webp",
         "captured_at": "2026-11-21"
@@ -3485,47 +3496,47 @@
   "opencrq-taxonomies-attack-outcome": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/9783f6dcaf3583ab1c1ad825c9787dcbae6a32ef23f2522df8b1f39ae48a98ea.webp",
-        "dark": "/shots/455e79cb06db0ad10bc44ae0709c708af02c4b347f9a75f0bc5cf7962820f752.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/72b78d09d732540ca747765eeaf2b9f03ddbf21f879276f601c0a09ced3f8c91.webp",
+        "dark": "/shots/723acb4c5f4880b9ce79aa2be0e6ebdf902dc277778d81578956ea4d25b7595f.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-taxonomies-tags": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/c3259af0541024150b0f8838e2adc88749ee7c57d736a180e6fdf2448b9e38f6.webp",
-        "dark": "/shots/a084a08fa247d28e9f4b4995636a70756f71789fc344d7ca11ccbc035bf41429.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/7a56198b6321f611f79e4a166e0f389c5d6bc9dd505034b08d315576864b6904.webp",
+        "dark": "/shots/4a71c5c48dc5e8c83e436078e2aadd72ae181d2bc731f20db06500c71370bd34.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-catalogues-technique-coverage": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/dd8ab07160043ff6d237b0eb76289e4221d334d95f0b122ed1c972ebb53b8777.webp",
-        "dark": "/shots/153920ff78f38953f55819513f9518fd9a880e06ce2d6cb0b1c3756ba9d60779.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/0dc11ef215a4eb395d40dec39cc0ef980bc150f52ab7b468c2390a4fafc1c4be.webp",
+        "dark": "/shots/2f48d04b20ab2c08d6f83edb6a055cfd043e1085707f09859cca284e621e9a7e.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-catalogues-cwe-weakness": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
-        "light": "/shots/b9cc57cd7b3536792539c4738dc5d33552ae099c85ebe182cede619615ddac9c.webp",
-        "dark": "/shots/0670651e4a798649786f8477a81463cf32ddbeb1fa27942ae0f1a25c44847abf.webp",
-        "captured_at": "2026-11-21"
+      "0.261123.0": {
+        "light": "/shots/f61aeba341699fe3b1ceac03f89827e86599aa479a744fc51aeb2072ccf8795a.webp",
+        "dark": "/shots/17f066c830a636328656cccd3b41727ea0a523ffad5a6abd970b63a96d48a429.webp",
+        "captured_at": "2026-11-23"
       }
     }
   },
   "opencrq-xtm-one-mcp-card": {
     "product": "opencrq",
     "versions": {
-      "0.261120.0": {
+      "0.261123.0": {
         "light": "/shots/25bc0ca37e329cc113775c839b97da4d5f46f767f0c97ef60faf5f088c6a094b.webp",
         "dark": "/shots/b7090830f96c45cef51d4898198e3587d13b8472341a56ee0d462fdc0fe493ee.webp",
         "captured_at": "2026-11-21"

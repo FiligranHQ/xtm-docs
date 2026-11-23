@@ -18,7 +18,7 @@ last_reviewed: 2026-11-20
 
 ## The asset sources
 
-Under **Asset sources**, the step reads "Use as many as you need, they add up." Beside it, the count of every asset in the tenant and **See all assets**, which opens :menu[Attack surface > Assets].
+Under **Asset sources**, the step reads "Use as many as you need, they add up." Beside it, the count of every asset in the tenant and **See all assets**, which opens :menu[Assets].
 
 ::screenshot{id=opencrq-get-started-assets alt="The Assets step of Get started for Grand Meridian Hotels: under Asset sources, the Declared estate tile with no kind declared, the Microsoft Defender tile Unavailable, and the Manual creation tile Active with 6 assets."}
 
@@ -54,7 +54,11 @@ A figure that is not valid says why, such as **Enter a number.** or **The minimu
 Select **Configure** on the **Microsoft Defender** tile. The **Microsoft Defender** panel opens:
 
 - When Microsoft Defender is not set up for the tenant, the panel lists the three variables a platform administrator sets in the platform's environment before restarting it. **Copy** copies them, and **See the documentation** opens [Give OpenCRQ the credentials](/opencrq/use/sources/microsoft-defender/#give-opencrq-the-credentials).
-- When it is set up and you have **Manage Security**, choose the **Service account** and the **Schedule**, then select **Save**. **Sync now** starts a run at once, once a service account is bound and no run is going. **Follow in Integrations** opens the connector in :menu[Integrations].
+- When it is set up and you have **Manage Security**, choose the account the connector runs as under **Service account**, and the **Schedule**, then select **Save**:
+  - **Create a new service account**, the default, creates the account with the integration, in the Connectors group. Its **Service account name** is filled in with "Microsoft Defender connector", which you can change.
+  - **Use an existing service account** runs the connector as an account the tenant already has, chosen in the **Service account** list.
+  - A tenant with no account to reuse is offered the new one only. A connector already bound to an account opens on that account.
+- Below the form, **Sync now** starts a run at once, once a service account is bound and no run is going. **Follow in Integrations** opens the connector in :menu[Integrations].
 - Without **Manage Security**, the panel reads "An administrator configures this connector."
 
 While a run goes, the tile shows its progress, and the **Assets** step turns in the stepper.

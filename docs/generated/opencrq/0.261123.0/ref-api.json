@@ -1,8 +1,8 @@
 {
   "name": "api",
-  "version": "0.261120.0",
-  "source": "OpenCRQ-Platform/opencrq@a91d685 (back/trpc-procedures.json)",
-  "intro": "Every procedure of the OpenCRQ API: 430 (297 queries, 132 mutations, 1 subscription) in 53 namespaces. The API is [tRPC](https://trpc.io) over HTTP under `/trpc/<procedure>`: a query is a `GET` with its input as JSON in the `input` parameter, a mutation a `POST` with its input as the JSON body. Authenticate with the session cookie of a signed-in user, or a service account's token in `Authorization: Bearer <token>`; a procedure that reads or writes a tenant's data needs the tenant in the `x-tenant-id` header. An input field marked `?` is optional.",
+  "version": "0.261123.0",
+  "source": "OpenCRQ-Platform/opencrq@d61ebb5 (back/trpc-procedures.json)",
+  "intro": "Every procedure of the OpenCRQ API: 443 (305 queries, 137 mutations, 1 subscription) in 55 namespaces. The API is [tRPC](https://trpc.io) over HTTP under `/trpc/<procedure>`: a query is a `GET` with its input as JSON in the `input` parameter, a mutation a `POST` with its input as the JSON body. Authenticate with the session cookie of a signed-in user, or a service account's token in `Authorization: Bearer <token>`; a procedure that reads or writes a tenant's data needs the tenant in the `x-tenant-id` header. An input field marked `?` is optional.",
   "filter": "Filter procedures and input fields",
   "sections": [
     {
@@ -209,7 +209,7 @@
           "cells": [
             "`assetDependencies.listSupportingAssetCandidates`",
             "query",
-            "`relation: \"dependsOn\" | \"providesTo\" | \"supportsPrimary\"`, `assetId: uuid`, `page?: integer`, `limit?: integer`, `search?: string`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`, `categoryId?: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"security_platform\" | \"generic_asset\" | null`, `linkedOnly?: boolean`"
+            "`relation: \"dependsOn\" | \"providesTo\" | \"supportsPrimary\"`, `assetId: uuid`, `page?: integer`, `limit?: integer`, `search?: string`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`, `categoryId?: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"source_code\" | \"security_platform\" | \"generic_asset\" | null`, `linkedOnly?: boolean`"
           ]
         },
         {
@@ -1857,6 +1857,25 @@
       ]
     },
     {
+      "title": "globalSearch",
+      "text": "1 query.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "globalSearch.search",
+          "cells": [
+            "`globalSearch.search`",
+            "query",
+            "`search: string`"
+          ]
+        }
+      ]
+    },
+    {
       "title": "groups",
       "text": "6 queries, 7 mutations.",
       "columns": [
@@ -1985,7 +2004,7 @@
           "cells": [
             "`integrations.configure`",
             "mutation",
-            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\"`, `serviceAccountId: uuid | null`"
+            "`source: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\"`, `serviceAccountId?: uuid | null`, `newServiceAccount?: {name}`"
           ]
         },
         {
@@ -2189,6 +2208,73 @@
       ]
     },
     {
+      "title": "markingDefinitions",
+      "text": "2 queries, 5 mutations.",
+      "columns": [
+        "Procedure",
+        "Kind",
+        "Input"
+      ],
+      "rows": [
+        {
+          "key": "markingDefinitions.addMarkingToGroup",
+          "cells": [
+            "`markingDefinitions.addMarkingToGroup`",
+            "mutation",
+            "`groupId: uuid`, `markingDefinitionId: uuid`"
+          ]
+        },
+        {
+          "key": "markingDefinitions.createMarkingDefinition",
+          "cells": [
+            "`markingDefinitions.createMarkingDefinition`",
+            "mutation",
+            "`definitionType: string`, `definition: string`, `color?: string`, `order?: integer`"
+          ]
+        },
+        {
+          "key": "markingDefinitions.deleteMarkingDefinition",
+          "cells": [
+            "`markingDefinitions.deleteMarkingDefinition`",
+            "mutation",
+            "`id: uuid`"
+          ]
+        },
+        {
+          "key": "markingDefinitions.getGroupMarkings",
+          "cells": [
+            "`markingDefinitions.getGroupMarkings`",
+            "query",
+            "`groupId: uuid`"
+          ]
+        },
+        {
+          "key": "markingDefinitions.listMarkingDefinitions",
+          "cells": [
+            "`markingDefinitions.listMarkingDefinitions`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "markingDefinitions.removeMarkingFromGroup",
+          "cells": [
+            "`markingDefinitions.removeMarkingFromGroup`",
+            "mutation",
+            "`groupId: uuid`, `markingDefinitionId: uuid`"
+          ]
+        },
+        {
+          "key": "markingDefinitions.updateMarkingDefinition",
+          "cells": [
+            "`markingDefinitions.updateMarkingDefinition`",
+            "mutation",
+            "`id: uuid`, `color?: string`, `order?: integer`"
+          ]
+        }
+      ]
+    },
+    {
       "title": "members",
       "text": "1 query, 1 mutation.",
       "columns": [
@@ -2374,7 +2460,7 @@
           "cells": [
             "`opencti.configure`",
             "mutation",
-            "`serviceAccountId: uuid`, `streamId: string`"
+            "`serviceAccountId?: uuid`, `newServiceAccount?: {name}`, `streamId: string`"
           ]
         },
         {
@@ -2855,7 +2941,7 @@
     },
     {
       "title": "riskScenarios",
-      "text": "10 queries, 4 mutations.",
+      "text": "12 queries, 4 mutations.",
       "columns": [
         "Procedure",
         "Kind",
@@ -2887,6 +2973,14 @@
           ]
         },
         {
+          "key": "riskScenarios.getCveExploitation",
+          "cells": [
+            "`riskScenarios.getCveExploitation`",
+            "query",
+            "`riskScenarioId: uuid`, `cveId: string`, `limit?: integer`"
+          ]
+        },
+        {
           "key": "riskScenarios.getDependencyGraph",
           "cells": [
             "`riskScenarios.getDependencyGraph`",
@@ -2900,6 +2994,14 @@
             "`riskScenarios.getDerivedSupportingAssets`",
             "query",
             "`riskScenarioId: uuid`"
+          ]
+        },
+        {
+          "key": "riskScenarios.getEvidenceHealth",
+          "cells": [
+            "`riskScenarios.getEvidenceHealth`",
+            "query",
+            "`riskScenarioId: uuid`, `maxAgeDays?: integer`, `limit?: integer`"
           ]
         },
         {
@@ -3278,7 +3380,7 @@
     },
     {
       "title": "supportingAssets",
-      "text": "19 queries, 12 mutations.",
+      "text": "20 queries, 12 mutations.",
       "columns": [
         "Procedure",
         "Kind",
@@ -3298,7 +3400,7 @@
           "cells": [
             "`supportingAssets.createSupportingAsset`",
             "mutation",
-            "`id: uuid`, `name: string`, `description: string`, `ownerId?: uuid | null`, `ownerName?: string`, `exposure: \"internet_facing\" | \"internal\" | \"unknown\"`, `categoryId: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"security_platform\" | \"generic_asset\"`, `subcategoryId?: \"server\" | \"workstation\" | \"laptop\" | \"virtual_machine\" | \"hypervisor\" | \"mainframe\" | \"thin_client\" | \"container\" | \"container_image\" | \"kubernetes_pod\" | \"kubernetes_cluster\" | \"kubernetes_node\" | \"serverless_function\" | \"compute\" | \"storage\" | \"database\" | \"networking\" | \"serverless\" | \"container_registry\" | \"kubernetes\" | \"iam_principal\" | \"secrets_key_mgmt\" | \"messaging_queue\" | \"analytics_data\" | \"ai_ml_service\" | \"iac_template\" | \"cloud_other\" | \"website\" | \"web_api\" | \"single_page_app\" | \"graphql_api\" | \"web_service\" | \"microservice\" | \"router\" | \"switch\" | \"firewall\" | \"load_balancer\" | \"vpn_gateway\" | \"wireless_ap\" | \"proxy\" | \"dns_server\" | \"dhcp_server\" | \"san_nas\" | \"network_other\" | \"smartphone\" | \"tablet\" | \"iot_sensor\" | \"ip_camera\" | \"gateway\" | \"point_of_sale\" | \"media_device\" | \"plc\" | \"rtu\" | \"hmi\" | \"scada_historian\" | \"medical_device\" | \"printer_peripheral\" | \"building_mgmt\" | \"user_account\" | \"service_account\" | \"group\" | \"role\" | \"shared_mailbox\" | \"non_human_identity\" | \"saas_app\" | \"saas_tenant\" | \"llm_model\" | \"ai_agent\" | \"mcp_server\" | \"rag_pipeline\" | \"edr\" | \"xdr\" | \"siem\" | \"soar\" | \"ndr\" | \"ispm\" | \"email_security\" | \"llm_firewall\" | \"ai_gateway\" | \"vulnerability_scanner\" | null`, `criticality?: \"unknown\" | \"low\" | \"medium\" | \"high\" | \"very_high\"`, `url?: string`, `linkedPerson?: string`, `properties?: {family, hostname, ipAddresses, macAddresses, seenIp, cloudProvider, cloudNativeType, cloudRegion, platform, arch, vendor, model, operatingSystem, osVersion, isEol} | {family, provider, endpointUrl, model, modality, systemPrompt} | {family, userPrincipalName, accountDomain, accountName, identityProvider, department, jobTitle, isEnabled, assignedRoles, privilegedPimRoles}`, `tagNames?: string[]`, `groups?: {name, externalReference}[]`, `organizationId?: uuid | null`"
+            "`id: uuid`, `name: string`, `description: string`, `ownerId?: uuid | null`, `ownerName?: string`, `exposure: \"internet_facing\" | \"internal\" | \"unknown\"`, `categoryId: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"source_code\" | \"security_platform\" | \"generic_asset\"`, `subcategoryId?: \"server\" | \"workstation\" | \"laptop\" | \"virtual_machine\" | \"hypervisor\" | \"mainframe\" | \"thin_client\" | \"container\" | \"container_image\" | \"kubernetes_pod\" | \"kubernetes_cluster\" | \"kubernetes_node\" | \"serverless_function\" | \"compute\" | \"storage\" | \"database\" | \"networking\" | \"serverless\" | \"container_registry\" | \"kubernetes\" | \"iam_principal\" | \"secrets_key_mgmt\" | \"messaging_queue\" | \"analytics_data\" | \"ai_ml_service\" | \"iac_template\" | \"cloud_other\" | \"website\" | \"web_api\" | \"single_page_app\" | \"graphql_api\" | \"web_service\" | \"microservice\" | \"router\" | \"switch\" | \"firewall\" | \"load_balancer\" | \"vpn_gateway\" | \"wireless_ap\" | \"proxy\" | \"dns_server\" | \"dhcp_server\" | \"san_nas\" | \"network_other\" | \"smartphone\" | \"tablet\" | \"iot_sensor\" | \"ip_camera\" | \"gateway\" | \"point_of_sale\" | \"media_device\" | \"plc\" | \"rtu\" | \"hmi\" | \"scada_historian\" | \"medical_device\" | \"printer_peripheral\" | \"building_mgmt\" | \"user_account\" | \"service_account\" | \"group\" | \"role\" | \"shared_mailbox\" | \"non_human_identity\" | \"saas_app\" | \"saas_tenant\" | \"llm_model\" | \"ai_agent\" | \"mcp_server\" | \"rag_pipeline\" | \"code_repository\" | \"ci_cd_pipeline\" | \"package_registry\" | \"software_package\" | \"code_other\" | \"edr\" | \"xdr\" | \"siem\" | \"soar\" | \"ndr\" | \"ispm\" | \"email_security\" | \"llm_firewall\" | \"ai_gateway\" | \"vulnerability_scanner\" | null`, `criticality?: \"unknown\" | \"low\" | \"medium\" | \"high\" | \"very_high\"`, `url?: string`, `linkedPerson?: string`, `properties?: {family, hostname, ipAddresses, macAddresses, seenIp, cloudProvider, cloudNativeType, cloudRegion, platform, arch, vendor, model, operatingSystem, osVersion, isEol} | {family, provider, endpointUrl, model, modality, systemPrompt} | {family, userPrincipalName, accountDomain, accountName, identityProvider, department, jobTitle, isEnabled, assignedRoles, privilegedPimRoles}`, `tagNames?: string[]`, `groups?: {name, externalReference}[]`, `organizationId?: uuid | null`"
           ]
         },
         {
@@ -3347,6 +3449,14 @@
             "`supportingAssets.getAssetCountsBySource`",
             "query",
             "`organizationId?: uuid | null`"
+          ]
+        },
+        {
+          "key": "supportingAssets.getAttackPathReach",
+          "cells": [
+            "`supportingAssets.getAttackPathReach`",
+            "query",
+            "`supportingAssetId: uuid`"
           ]
         },
         {
@@ -3442,7 +3552,7 @@
           "cells": [
             "`supportingAssets.getTechniquesByCategory`",
             "query",
-            "`categoryId: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"security_platform\" | \"generic_asset\"`"
+            "`categoryId: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"source_code\" | \"security_platform\" | \"generic_asset\"`"
           ]
         },
         {
@@ -3466,7 +3576,7 @@
           "cells": [
             "`supportingAssets.listSupportingAssets`",
             "query",
-            "`page?: integer`, `limit?: integer`, `sortBy?: \"name\" | \"categoryId\" | \"subcategoryId\" | \"exposure\" | \"criticality\" | \"lastSeenAt\" | \"posture\" | \"mapped\"`, `sortDesc?: boolean`, `organizationId?: uuid | null`, `search?: string`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`, `categoryId?: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"security_platform\" | \"generic_asset\" | null`, `categoryMode?: \"only\" | \"except\"`, `groupId?: uuid | null`, `membershipOrganizationId?: uuid | null`"
+            "`page?: integer`, `limit?: integer`, `sortBy?: \"name\" | \"categoryId\" | \"subcategoryId\" | \"exposure\" | \"criticality\" | \"lastSeenAt\" | \"posture\" | \"mapped\"`, `sortDesc?: boolean`, `organizationId?: uuid | null`, `search?: string`, `source?: \"first\" | \"nist\" | \"cisa\" | \"microsoft_graph\" | \"openaev\" | \"drata\" | \"user\" | null`, `categoryId?: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"source_code\" | \"security_platform\" | \"generic_asset\" | null`, `categoryMode?: \"only\" | \"except\"`, `groupId?: uuid | null`, `membershipOrganizationId?: uuid | null`"
           ]
         },
         {
@@ -3530,7 +3640,7 @@
           "cells": [
             "`supportingAssets.updateSupportingAsset`",
             "mutation",
-            "`id: uuid`, `name?: string`, `description?: string`, `ownerId?: uuid | null`, `ownerName?: string`, `exposure?: \"internet_facing\" | \"internal\" | \"unknown\"`, `categoryId?: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"security_platform\" | \"generic_asset\"`, `subcategoryId?: \"server\" | \"workstation\" | \"laptop\" | \"virtual_machine\" | \"hypervisor\" | \"mainframe\" | \"thin_client\" | \"container\" | \"container_image\" | \"kubernetes_pod\" | \"kubernetes_cluster\" | \"kubernetes_node\" | \"serverless_function\" | \"compute\" | \"storage\" | \"database\" | \"networking\" | \"serverless\" | \"container_registry\" | \"kubernetes\" | \"iam_principal\" | \"secrets_key_mgmt\" | \"messaging_queue\" | \"analytics_data\" | \"ai_ml_service\" | \"iac_template\" | \"cloud_other\" | \"website\" | \"web_api\" | \"single_page_app\" | \"graphql_api\" | \"web_service\" | \"microservice\" | \"router\" | \"switch\" | \"firewall\" | \"load_balancer\" | \"vpn_gateway\" | \"wireless_ap\" | \"proxy\" | \"dns_server\" | \"dhcp_server\" | \"san_nas\" | \"network_other\" | \"smartphone\" | \"tablet\" | \"iot_sensor\" | \"ip_camera\" | \"gateway\" | \"point_of_sale\" | \"media_device\" | \"plc\" | \"rtu\" | \"hmi\" | \"scada_historian\" | \"medical_device\" | \"printer_peripheral\" | \"building_mgmt\" | \"user_account\" | \"service_account\" | \"group\" | \"role\" | \"shared_mailbox\" | \"non_human_identity\" | \"saas_app\" | \"saas_tenant\" | \"llm_model\" | \"ai_agent\" | \"mcp_server\" | \"rag_pipeline\" | \"edr\" | \"xdr\" | \"siem\" | \"soar\" | \"ndr\" | \"ispm\" | \"email_security\" | \"llm_firewall\" | \"ai_gateway\" | \"vulnerability_scanner\" | null`, `criticality?: \"unknown\" | \"low\" | \"medium\" | \"high\" | \"very_high\"`, `url?: string`, `linkedPerson?: string`, `properties?: {family, hostname, ipAddresses, macAddresses, seenIp, cloudProvider, cloudNativeType, cloudRegion, platform, arch, vendor, model, operatingSystem, osVersion, isEol} | {family, provider, endpointUrl, model, modality, systemPrompt} | {family, userPrincipalName, accountDomain, accountName, identityProvider, department, jobTitle, isEnabled, assignedRoles, privilegedPimRoles}`, `tagNames?: string[]`, `groups?: {name, externalReference}[]`"
+            "`id: uuid`, `name?: string`, `description?: string`, `ownerId?: uuid | null`, `ownerName?: string`, `exposure?: \"internet_facing\" | \"internal\" | \"unknown\"`, `categoryId?: \"host\" | \"container_workload\" | \"cloud_resource\" | \"web_application\" | \"network_device\" | \"mobile_device\" | \"iot_ot_device\" | \"identity\" | \"saas_application\" | \"ai_target\" | \"source_code\" | \"security_platform\" | \"generic_asset\"`, `subcategoryId?: \"server\" | \"workstation\" | \"laptop\" | \"virtual_machine\" | \"hypervisor\" | \"mainframe\" | \"thin_client\" | \"container\" | \"container_image\" | \"kubernetes_pod\" | \"kubernetes_cluster\" | \"kubernetes_node\" | \"serverless_function\" | \"compute\" | \"storage\" | \"database\" | \"networking\" | \"serverless\" | \"container_registry\" | \"kubernetes\" | \"iam_principal\" | \"secrets_key_mgmt\" | \"messaging_queue\" | \"analytics_data\" | \"ai_ml_service\" | \"iac_template\" | \"cloud_other\" | \"website\" | \"web_api\" | \"single_page_app\" | \"graphql_api\" | \"web_service\" | \"microservice\" | \"router\" | \"switch\" | \"firewall\" | \"load_balancer\" | \"vpn_gateway\" | \"wireless_ap\" | \"proxy\" | \"dns_server\" | \"dhcp_server\" | \"san_nas\" | \"network_other\" | \"smartphone\" | \"tablet\" | \"iot_sensor\" | \"ip_camera\" | \"gateway\" | \"point_of_sale\" | \"media_device\" | \"plc\" | \"rtu\" | \"hmi\" | \"scada_historian\" | \"medical_device\" | \"printer_peripheral\" | \"building_mgmt\" | \"user_account\" | \"service_account\" | \"group\" | \"role\" | \"shared_mailbox\" | \"non_human_identity\" | \"saas_app\" | \"saas_tenant\" | \"llm_model\" | \"ai_agent\" | \"mcp_server\" | \"rag_pipeline\" | \"code_repository\" | \"ci_cd_pipeline\" | \"package_registry\" | \"software_package\" | \"code_other\" | \"edr\" | \"xdr\" | \"siem\" | \"soar\" | \"ndr\" | \"ispm\" | \"email_security\" | \"llm_firewall\" | \"ai_gateway\" | \"vulnerability_scanner\" | null`, `criticality?: \"unknown\" | \"low\" | \"medium\" | \"high\" | \"very_high\"`, `url?: string`, `linkedPerson?: string`, `properties?: {family, hostname, ipAddresses, macAddresses, seenIp, cloudProvider, cloudNativeType, cloudRegion, platform, arch, vendor, model, operatingSystem, osVersion, isEol} | {family, provider, endpointUrl, model, modality, systemPrompt} | {family, userPrincipalName, accountDomain, accountName, identityProvider, department, jobTitle, isEnabled, assignedRoles, privilegedPimRoles}`, `tagNames?: string[]`, `groups?: {name, externalReference}[]`"
           ]
         }
       ]
@@ -3909,7 +4019,7 @@
     },
     {
       "title": "users",
-      "text": "6 queries, 1 mutation.",
+      "text": "7 queries, 1 mutation.",
       "columns": [
         "Procedure",
         "Kind",
@@ -3936,6 +4046,14 @@
           "key": "users.getUserLocale",
           "cells": [
             "`users.getUserLocale`",
+            "query",
+            ""
+          ]
+        },
+        {
+          "key": "users.getUserPastelColours",
+          "cells": [
+            "`users.getUserPastelColours`",
             "query",
             ""
           ]
@@ -3969,14 +4087,14 @@
           "cells": [
             "`users.updateUser`",
             "mutation",
-            "`locale?: \"en\" | \"fr\" | null`, `theme?: \"light\" | \"dark\" | \"system\"`, `homeDashboardId?: string | null`"
+            "`locale?: \"en\" | \"fr\" | null`, `theme?: \"light\" | \"dark\" | \"system\"`, `pastelColours?: boolean`, `homeDashboardId?: string | null`"
           ]
         }
       ]
     },
     {
       "title": "xtm",
-      "text": "3 queries.",
+      "text": "4 queries.",
       "columns": [
         "Procedure",
         "Kind",
@@ -4005,6 +4123,14 @@
             "`xtm.lookup`",
             "query",
             "`kind: \"THREAT\" | \"VULNERABILITY\" | \"ASSET\"`, `keys: string[]`"
+          ]
+        },
+        {
+          "key": "xtm.products",
+          "cells": [
+            "`xtm.products`",
+            "query",
+            ""
           ]
         }
       ]

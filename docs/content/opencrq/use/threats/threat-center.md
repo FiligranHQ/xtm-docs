@@ -6,15 +6,15 @@ doc_type: how-to
 products: [opencrq, opencti]
 personas: [risk-manager, cti-analyst]
 owner: docs-opencrq
-last_reviewed: 2026-11-20
+last_reviewed: 2026-11-23
 ---
 
 OpenCRQ prices a risk scenario against the attackers that pursue it. It does not ask you to name them: it reads the threats your OpenCTI platform streams, keeps the ones its model judges likely to lead to the scenario's outcome, weighs more the ones that target your sector or your country, and weighs each by how recently it was seen acting. The **Threats** screen, the threat center, lists them. This page reads it, explains how a threat gets into a scenario and what it changes there, and shows how a threat's return moves the price. For the model behind the price, read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).
 
 ## Before you start
 
-- You are a member of the tenant: every member reads the threats.
-- An administrator with **Manage Security** has connected OpenCTI with a Live Stream. See [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/). Until then, the threats of **OpenCRQ Default Threats**, groups and campaigns derived from MITRE ATT&CK, can stand in. A new tenant starts with them switched off: someone with **Manage Security** clicks **Enable** in the **Threats** step of **Get started**.
+- You are a member of the tenant: every member reads the threats, those [they are cleared for](#which-threats-you-see).
+- OpenCTI is connected with a Live Stream. When the deployment of OpenCRQ carries OpenCTI's URL and token for your tenant, OpenCRQ creates the stream `OpenCRQ threat feed` in OpenCTI and binds it at start; otherwise an administrator with **Manage Security** chooses the stream. See [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/). Until then, the threats of **OpenCRQ Default Threats**, groups and campaigns derived from MITRE ATT&CK, can stand in. A new tenant starts with them switched off: someone with **Manage Security** clicks **Enable** in the **Threats** step of **Get started**.
 - The risk scopes have a **Sector** and a **Country**: they are what a threat is matched on. See [Risk scopes, primary assets and supporting assets](/opencrq/concepts/risk-scopes-and-assets/).
 
 ## What OpenCTI brings
@@ -28,12 +28,25 @@ OpenCRQ keeps three kinds of STIX objects as threats: **Threat actor**, **Intrus
 
 You cannot create or edit a threat in OpenCRQ: correct it in OpenCTI, and the stream brings the change. Besides the stream, **Analyze new bundle** imports a STIX bundle file; a threat imported this way, and only that one, can be deleted. The **Source** of a threat says which way it came: **OpenCTI**, **OpenCRQ Default Threats** or **STIX import**.
 
+## Which threats you see
+
+Two members of the same tenant can see different lists. A threat streamed from OpenCTI shows only to the members OpenCTI lets read it:
+
+- each of its markings, such as **TLP:AMBER**, is among the markings you hold in OpenCTI;
+- when it is shared with organizations or restricted to authorized members in OpenCTI, you belong to one of them. A user with **Bypass all capabilities** in OpenCTI is never held back by sharing or members.
+
+OpenCRQ asks OpenCTI as you, matched by your email address, and keeps the answer for a minute. When OpenCTI does not answer for you, for example because no OpenCTI user has your email address, you see only the threats with no marking and no restriction. The reports follow the same rule: a report you cannot read in OpenCTI does not tell you which threats it cites.
+
+A threat imported from a STIX bundle or from **OpenCRQ Default Threats** follows the clearance of your groups in OpenCRQ instead, on the markings the tenant defines: a marking the tenant does not define holds no one back. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
+
+The prices are the same for everyone: OpenCRQ weighs every threat it mirrors, including those some members cannot see.
+
 ## Read the threat center
 
 Three figures head the list, for the whole catalogue whatever the filters: **Active threats**, the threats seen in the last 90 days out of all of them; **Strong match with your outcomes**, the threats at 60% or more on one of your attack outcomes; and **Targeted CVEs**, the CVEs the threats target, with how many of them are findings on your estate.
 
 :::steps
-1. Go to :menu[Threats > Threats]. Each line is a threat, with its **Type**, its **Top outcome**, its **Observed activity**, the number of **CVE** and **TTP** it carries and its **Source**. When OpenCTI or OpenAEV is connected to the tenant and holds the same threat, its mark beside the threat's name opens it there, in a new tab.
+1. Go to :menu[Threats > Threats]. Each line is a threat, with its **Type**, its **Top outcome**, its **Observed activity**, the number of **CVE** and **TTP** it carries and its **Source**. When OpenCTI or OpenAEV is connected to the tenant and holds the same threat, its mark shows beside the threat's name. Hover it to see the threat's type and name in that product; click it to open the threat there, in a new tab.
 
    ::screenshot{id=opencrq-threat-center alt="The threat center of Grand Meridian Hotels, 2 Active threats out of 9: Ember Tide matches Ransomware at 99% and its campaign Operation Low Season at 71%, both Active and last observed on Apr 8, 2026, and Velvet Harbor matches Data Breach & Resale at 71%, Dormant since its last activity on Jan 9, 2026."}
 
@@ -46,14 +59,15 @@ Three figures head the list, for the whole catalogue whatever the filters: **Act
    Only observed dates count: the start and stop times of the threat's relationships, its last seen date, and those of the threats attributed to it, such as a campaign attributed to an intrusion set. Such a date climbs through attributions stated at or above the **Confidence gate**, up to three levels, and not from a campaign attributed to more than three threats. The date a report was written does not make a threat active. An observed date a source places after today counts as today.
 4. Select a threat. Its header gives its type, its MITRE ATT&CK group ID when it has one, its last observed activity, the outcome it best matches, how many of your countries and sectors it targets, and its **Resource level**. Its buttons:
    - **Quantify risk**, when the threat matches an outcome: it opens the [risk scenario wizard](/opencrq/use/quantify/risk-scenarios/) with that outcome chosen.
-   - **Open in OpenCTI**, for a threat from the stream or any other threat OpenCTI holds. **Open in OpenAEV**, when OpenAEV holds a scenario built from the threat. Both open it there, in a new tab.
-   - **Connect OpenCTI** or **Connect OpenAEV**, when that product is not connected to the tenant. With **Manage Security**, it opens the connector's page; without it, the button is disabled.
+   - The emblems of OpenCTI and OpenAEV, always in that order. An emblem in colour means the product holds the threat: for a threat from the stream, OpenCTI always does. Hover it for the threat's type and name there, the figures that product gives when it gives any, and what you find there: "See the reports, relationships and context of this object in OpenCTI." Click it to open the threat there, in a new tab.
+   - A greyed emblem when the product does not hold the threat: hover it to read "Not found in OpenCTI" (or OpenAEV) and how the threat gets there, by its STIX id. When the product is not connected to the tenant, the hover says "OpenCTI is not connected" (or OpenAEV), with the fields it would show. With **Manage Security**, the emblem opens the connector's page; without it, the hover reads "Ask an administrator to connect OpenCTI."
+   - A menu, for a threat imported from a STIX bundle, to delete it.
 
-   In a window narrower than 1280 pixels, the buttons of OpenCTI and OpenAEV show the product's mark alone.
+   The products answer with your own rights: an emblem stays greyed when the product holds the threat but does not let you read it.
 
    The threat's **Overview** shows its **Description**, the countries and sectors of yours it targets under **This concerns you**, its **Attack outcomes**, each with its **Probability** and **Weighs on** when it is above 50%, its **Profile**, with its **Declared intent**, and its **Attributions**, as a list or a graph. **Locations & Sectors** maps the **Targeted countries** and lists the locations and sectors, marking those that concern you. **CVE** lists the CVEs it targets, filtered **On your estate** or not, and **TTP** its techniques, with how your controls hold against each in **Prevention** and **Detection**. The "i" beside a control's figure opens its **Engine efficacy**. When OpenAEV tested a control on a technique the control does not declare, the engine leaves those tests out. The dialog then offers "Declare on" and the control's name, which links the technique to the control on that function without leaving the threat. Each line links back to OpenCTI when the threat came from the stream.
 
-   ::screenshot{id=opencrq-threat-center-threat alt="The overview of Ember Tide, an intrusion set, with Quantify risk and Open in OpenCTI in its header: Active, last activity observed on Apr 8, 2026, a best match of 99% on Ransomware, three countries and sectors of yours, and its attack outcomes, Ransomware at 99% and Data Theft Extortion at 76% marked Weighs on."}
+   ::screenshot{id=opencrq-threat-center-threat alt="The overview of Ember Tide, an intrusion set, with Quantify risk and the emblems of OpenCTI and OpenAEV in its header: Active, last activity observed on Apr 8, 2026, a best match of 99% on Ransomware, three countries and sectors of yours, and its attack outcomes, Ransomware at 99% and Data Theft Extortion at 76% marked Weighs on."}
 :::
 
 ## How a threat gets into a scenario
@@ -68,7 +82,7 @@ Targeting a scope does not make a threat weigh on its own: it raises the weight 
 - the **Countries** and **Sectors** that match your scope;
 - beside its name, the mark of OpenCTI or OpenAEV when that product holds it: it opens the threat there, in a new tab.
 
-Click a line to see why the threat weighs: its **Score**, **Relevance** and **Observed activity**. Under **Why the relevance is**, the panel gives the country, the sector and the attack outcome it matches, with the claims behind each. The attack outcome says where its probability comes from: **Assessed by OpenCRQ's internal model**. When the dataset of **OpenCRQ Default Threats** judged it, it says "Judged by OpenCRQ on" and the date instead.
+Click a line to see why the threat weighs: its **Score**, **Relevance** and **Observed activity**. Under **Why the relevance is**, the panel gives the country, the sector and the attack outcome it matches, with the claims behind each. The attack outcome says where its probability comes from: **Assessed by OpenCRQ's internal model**. When the dataset of **OpenCRQ Default Threats** judged it, it says "Judged by OpenCRQ on" and the date instead. The "i" beside the **Score** opens the calculation (**How the threat score is computed**), and recalls that the score counts every object mirrored from OpenCTI, including those some members cannot see there: it is not computed again for what each member can read.
 
 ::screenshot{id=opencrq-threat-center-relevant-threats alt="The Relevant Threats of the scenario Ransomware on the Booking Platform, 5 entities by Score: Ember Tide at 74, Strong, observed 4 days ago; Operation Low Season at 13, Moderate, 4 days ago; Velvet Harbor at 5 and Harbor Syndicate at 0, Weak, 3 months ago; each targeting France and the hospitality sector."}
 
@@ -89,12 +103,15 @@ On 10 April 2026, OpenCTI reports a new campaign against hotel chains, Operation
 In the threat center, the campaign reads **Active**, and so does Ember Tide: its own last observed activity is 5 January 2026, but the campaign attributed to it was observed in April, and that date climbs to Ember Tide. The campaign matches **Ransomware** at 71%, Ember Tide at 99%; Ember Tide's overview lists the campaign under **Attributions**.
 
 On the **Threat** tab of the scenario Ransomware on the Booking Platform (Grand Meridian France), the **Relevant Threats** are the five threats above 50% on **Ransomware**. Ember Tide leads with a **Score** of 74 and a **Strong** relevance, ahead of its campaign Operation Low Season at 13: both were observed 4 days ago. Velvet Harbor, also admitted for Data Breach & Resale, scores 5, and Harbor Syndicate and Velvet Harbour, a second record of Velvet Harbor under another spelling, score 0: their last activity is 3 months old, so they weigh little. On the **CRQ** tab, the **Actors** card splits the attacks between the classes of these threats, with the share each one takes, how often it lands an impact, and the part of the $254K of annual loss it accounts for. The amounts are in your currency.
+
+Example CERT marks Ember Tide **TLP:AMBER** in OpenCTI. A colleague whose OpenCTI account does not hold that marking does not find Ember Tide in the threat center, nor on the **Threat** tab. The scenario's price is the same for both of you: Ember Tide still weighs on it.
 :::
 
 ## Check that it works
 
 - The threat center lists the threats of your OpenCTI stream, with **OpenCTI** as their **Source** and a **Last ingested** date in the **Profile** of their overview.
 - Each risk scenario's **Threat** tab lists its **Relevant Threats**, and its **CRQ** tab counts its **Admitted actors**.
+- A member who misses a threat a colleague sees holds fewer markings in OpenCTI, or no OpenCTI account with the same email address. Check it in OpenCTI, where the markings are granted.
 
 ## What's next
 

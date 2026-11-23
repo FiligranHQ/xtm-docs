@@ -1,7 +1,7 @@
 {
   "name": "configuration",
-  "version": "0.261120.0",
-  "source": "OpenCRQ-Platform/opencrq@a91d685 (back/src/config-schema.ts)",
+  "version": "0.261123.0",
+  "source": "OpenCRQ-Platform/opencrq@d61ebb5 (back/src/config-schema.ts)",
   "intro": "Every key OpenCRQ reads at boot, from its configuration schema, grouped by block, by its environment variable: the key in upper case with `__` between the levels (`JOBS__MAX_CONCURRENT` is `jobs.max_concurrent` in a configuration file). A variable with `<tenant-uuid>` is set per tenant: `CONNECTORS__OPENCTI__<tenant-uuid>__URL`. **Required** says what a block needs when it is set; a whole block the platform does not use (file storage, a connector) can be left out.",
   "filter": "Filter keys, variables, descriptions",
   "sections": [
@@ -685,6 +685,60 @@
             "`1`",
             "No",
             "Drata workspace to read for that tenant. Accounts without Multiple Product Support always use workspace `1`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "app",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "app.admin.token",
+          "cells": [
+            "`APP__ADMIN__TOKEN`",
+            "UUID",
+            "",
+            "No",
+            "The deployment's bootstrap admin token, a UUID version 4, the counterpart of OpenCTI's `APP__ADMIN__TOKEN` and OpenAEV's `OPENAEV_ADMIN_TOKEN`. Set, it does two things. It authenticates the provisioning API a deployment manager calls to give a sibling product an account here: `POST /api/xtm/peer-tokens` (`consumer`, `name`, `email`, `token_name`) creates or updates the service account keyed by `email` in the initial tenant, in its Connectors group, revokes its tokens of that name and returns a new one that does not expire; `POST /api/xtm/peer-tokens/revoke` (`email`, `token_name`) revokes them. And it works as a bearer on the whole API (`Authorization: Bearer` and the token): it acts as the service account **Deployment admin token**, created at each start in the Admin group of the initial tenant (`INITIAL_TENANT__ID`), so it holds every capability of that group. When the initial tenant does not exist, the bearer stays off. Unset (the default), both are off and the provisioning API answers 404. A value that is not a UUID v4 stops the platform at boot. Pass it through a secret store, and set it only when a deployment manager or a single-token deployment needs it."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "xtm",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "xtm.opencti_url",
+          "cells": [
+            "`XTM__OPENCTI_URL`",
+            "URL",
+            "",
+            "No",
+            "URL of the OpenCTI platform of this deployment, the address people open in a browser. Only the API reads it: the `xtm.products` procedure answers it, and without it the URL of the tenant's OpenCTI connection (`CONNECTORS__OPENCTI__<tenant-uuid>__URL`). No screen uses it: **OpenCTI** in the product menu under the logo (**Filigran products**) opens the URL of the tenant's OpenCTI connection, and without one, OpenCTI's product page on filigran.io (**Get OpenCTI now**). A URL only: the connection itself is the `connectors.opencti` keys."
+          ]
+        },
+        {
+          "key": "xtm.openaev_url",
+          "cells": [
+            "`XTM__OPENAEV_URL`",
+            "URL",
+            "",
+            "No",
+            "URL of the OpenAEV platform of this deployment, the address people open in a browser. Only the API reads it: the `xtm.products` procedure answers it, and without it the URL of the tenant's OpenAEV connection (`CONNECTORS__OPENAEV__<tenant-uuid>__URL`). No screen uses it: **OpenAEV** in the product menu under the logo (**Filigran products**) opens the URL of the tenant's OpenAEV connection, and without one, OpenAEV's product page on filigran.io (**Get OpenAEV now**). A URL only: the connection itself is the `connectors.openaev` keys."
           ]
         }
       ]

@@ -2274,8 +2274,8 @@
     ]
   },
   "opencrq": {
-    "done": 37,
-    "total": 37,
+    "done": 38,
+    "total": 38,
     "groups": [
       {
         "id": "concepts",
@@ -2333,6 +2333,18 @@
             "status": "migrated",
             "more": 9,
             "more_done": 9,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/search/",
+            "title": "Find a scenario, an asset or a threat by its name",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
             "group": "use"
           },
           {

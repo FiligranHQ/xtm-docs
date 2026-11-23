@@ -116,7 +116,7 @@ When the sign-in does not work:
 
 The connectors to OpenCTI and OpenAEV take the identifier of the tenant in their variables. Read it in the tenant's :menu[Settings > Parameters], under **Identifier**, and set the URL and the admin token of each platform for it in the `environment` of the `opencrq` service, then run `docker compose up -d`. [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant) lists the variables of every connector.
 
-Each connector then waits for a service account in **Integrations**: see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/). For OpenCTI, pick a live stream whose filter lets through the threats and their relationships (`targets`, `uses`, `attributed-to`): a stream filtered on threats alone delivers bare threats.
+Both connectors then come up enabled: at that start, OpenCRQ creates their service accounts, `OpenCTI (deployment)` and `OpenAEV (deployment)`, and creates in OpenCTI the Live Stream `OpenCRQ threat feed`, which carries the threats and their relationships (`targets`, `uses`, `attributed-to`). The OpenCTI token needs **Manage data sharing** or **Bypass all capabilities** for that: see [Link OpenCRQ to OpenCTI and OpenAEV](/deploy/configure/connect-modules/#link-opencrq-to-opencti-and-openaev).
 
 :::example[Start OpenCRQ in Example CERT's stack]
 Example CERT runs the XTM stack for its member hotel chains, with OpenCTI at `https://opencti.example.com` and XTM One at `https://xtm-one.example.com`. Its platform engineer starts OpenCRQ at `https://opencrq.example.com` for Grand Meridian Hotels and the other members:
@@ -141,7 +141,7 @@ docker compose pull && docker compose up -d
       - CONNECTORS__OPENAEV__019a8d21-4b7e-7f30-8c15-3e9a6b2d4f71__TOKEN=${OPENAEV_ADMIN_TOKEN}
 ```
 
-After `docker compose up -d`, both connectors show in the tenant's **Integrations**, waiting for their service account. The administrator then adds Grand Meridian's risk manager with **Add members**.
+After `docker compose up -d`, both connectors come up enabled in the tenant's **Integrations**, and the OpenCTI one reads the Live Stream `OpenCRQ threat feed` that OpenCRQ created with the admin token. The administrator then adds Grand Meridian's risk manager with **Add members**.
 :::
 
 ## Where the data is

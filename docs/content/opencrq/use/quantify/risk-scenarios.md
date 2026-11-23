@@ -23,7 +23,7 @@ A risk scenario is one line of your risk register, priced in money: an attack ou
 
 :::steps
 
-1. In the sidebar, under **Risk scopes**, open your risk scope, click :menu[Risk Scenarios], then **Create**. From the tenant's own :menu[Risk Scenarios], the wizard starts with a **Risk scope** step instead.
+1. In the left navigation, open your risk scope, listed below **Budget Reviews**, click :menu[Risk Scenarios], then **Create**. From the tenant's own :menu[Risk Scenarios], the wizard starts with a **Risk scope** step instead.
 
 2. On **Outcome**, choose the attack outcome: what the attacker is after. You cannot change it after creation, because the scenario's timing assumptions and threat intelligence derive from it. The [attack outcomes reference](/reference/opencrq/attack-outcomes/) describes the seven. Click **Next**.
 
@@ -43,7 +43,7 @@ You can also start from a threat you follow. In :menu[Threats > Threats], the he
 
 A scenario's tabs hold its inputs. Two of them decide most of the price:
 
-- **Threat** holds the **Threat Event Frequency (TEF)**, how many attack attempts a year the scenario faces. A new scenario takes it from the catalogue, in **Auto** mode. See [Set the threat event frequency](/opencrq/use/threats/threat-event-frequency/). The same tab lists the **Relevant Threats** that weigh on the scenario, whatever their source: click one to see why it weighs, and whether its probability on the outcome comes from OpenCRQ's model or from the judgment of **OpenCRQ Default Threats**. See [How a threat gets into a scenario](/opencrq/use/threats/threat-center/#how-a-threat-gets-into-a-scenario). When OpenCTI or OpenAEV is connected to the tenant and holds the same threat, its mark beside the threat's name opens it there, in a new tab.
+- **Threat** holds the **Threat Event Frequency (TEF)**, how many attack attempts a year the scenario faces. A new scenario takes it from the catalogue, in **Auto** mode. See [Set the threat event frequency](/opencrq/use/threats/threat-event-frequency/). The same tab lists the **Relevant Threats** that weigh on the scenario, whatever their source: click one to see why it weighs, and whether its probability on the outcome comes from OpenCRQ's model or from the judgment of **OpenCRQ Default Threats**. See [How a threat gets into a scenario](/opencrq/use/threats/threat-center/#how-a-threat-gets-into-a-scenario). When OpenCTI or OpenAEV is connected to the tenant and holds the same threat, its mark beside the threat's name opens it there, in a new tab. Hover the mark to preview what that product holds on the threat first.
 - **Financial Impact** holds the loss estimates, derived from the scope's financial profile. See [Set what an attack costs with the financial profile](/opencrq/use/quantify/loss-drivers/).
 
 **Targets** shows the supporting assets behind the primary assets, **Findings** the vulnerabilities on them, **TTP** the techniques the scenario's threats use, and **Controls** how your controls stand against those techniques. When an input is missing, the scenario says which one, with a link to the tab that fills it.
@@ -117,6 +117,13 @@ When attacks rarely land, the mean can sit above the p90: nearly every simulated
 
 :::xtm-one[Ask XTM One to build or explain a scenario]
 With XTM One connected, an AI agent can create a risk scenario, run a CRQ simulation and read its latest run, for example to explain why the ALE of a scenario moved between two runs. Any change it proposes waits for a person to approve it.
+
+XTM One's continuous threat exposure management (CTEM) agents also read two answers OpenCRQ gives through its API only, with no screen of their own:
+
+- how a CVE would be exploited on the scenario's supporting assets: the ATT&CK techniques it opens on each asset, by the asset's exposure, with a confidence;
+- how fresh the evidence behind each supporting asset is: no source reports it, only a person entered it, no source ever dated an observation, its newest observation is older than the re-test delay (30 days unless the agent asks another), it is a machine whose operating system version no source reports, or it is current.
+
+The agent can then tell you which assets of the scenario rest on old or missing evidence before you trust its price.
 :::
 
 ## What's next

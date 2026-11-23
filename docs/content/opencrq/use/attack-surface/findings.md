@@ -14,6 +14,7 @@ A **finding** is a flaw an integration reports on one of your supporting assets:
 ## Before you start
 
 - You are a member of the tenant: every member can read findings, attach a CVE and set one aside. A service account cannot change a finding's state.
+- A finding on a marked asset, such as one OpenAEV marks TLP:RED, shows only to the members whose groups are cleared for all of the asset's markings. An unmarked finding shows to every member. An administrator sets the clearance: see [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
 - At least one integration brings findings in, connected by an administrator with **Manage Security**:
   - [OpenAEV](/opencrq/use/sources/openaev/): the CVEs it found on each asset, and the result of each simulated technique, per security platform.
   - [Microsoft Defender](/opencrq/use/sources/microsoft-defender/): the CVEs on each device.
@@ -31,7 +32,7 @@ A finding is one flaw on one asset. When two integrations report the same CVE on
 ## Read the findings
 
 :::steps
-1. Go to :menu[Attack surface > Findings]. The cards count the **Findings**, the **Impacted assets**, those **New, last 7 days**, and the findings in each band: **Critical**, **High**, **Medium**, **Low**. **Pending vector** counts the vulnerabilities whose CVE has no CVSS vector yet: they have no score and sit in no band.
+1. Go to :menu[Findings]. The cards count the **Findings**, the **Impacted assets**, those **New, last 7 days**, and the findings in each band: **Critical**, **High**, **Medium**, **Low**. **Pending vector** counts the vulnerabilities whose CVE has no CVSS vector yet: they have no score and sit in no band.
 
    ::screenshot{id=opencrq-findings-list alt="The All findings tab of Grand Meridian Hotels: one applicable finding, CVE-2024-3400 on the head-office VPN gateway, counted under Pending vector rather than in a band, its score pending."}
 
@@ -42,14 +43,20 @@ A finding is one flaw on one asset. When two integrations report the same CVE on
 
 ## See the CVE in OpenCTI and OpenAEV
 
-When the tenant's OpenCTI or OpenAEV connector is set, OpenCRQ shows where the same CVE lives in those products:
+OpenCRQ shows where the same CVE lives in OpenCTI and OpenAEV, matched by its identifier:
 
-- In **Unique findings**, a product mark beside a CVE's identifier, **Open in OpenCTI** or **Open in OpenAEV**, opens the vulnerability there.
-- On the CVE's page, an **In OpenCTI** or **In OpenAEV** card, above the tabs, links to the vulnerability there. OpenCTI finds it by its name, the CVE identifier. The **In OpenAEV** card adds the facts OpenAEV returns, such as its **Findings**, **Affected assets**, **Simulations** or **Last simulation**. A card reads **Not found in OpenCTI.** or **Not found in OpenAEV.** when that product does not hold the CVE.
+- On the CVE's page, the header always holds two emblems, OpenCTI then OpenAEV. When the product holds the CVE, its emblem is in colour, and selecting it opens the vulnerability there in a new tab. Hover over it to preview what you will find: the product, the object's type and name, and the facts the product returns, such as its **Findings**, **Affected assets**, **Simulations**, **Last simulation**, **Reports** or **Relationships**.
+- In **Unique findings**, a product mark beside a CVE's identifier shows only when that product holds the CVE. It opens the vulnerability there, with the same preview on hover.
 
-  ::screenshot{id=opencrq-findings-cve-counterparts alt="The page of CVE-2024-3400 across the estate of Grand Meridian Hotels, with the In OpenCTI card above the tabs linking to the Vulnerability CVE-2024-3400 in OpenCTI."}
+  ::screenshot{id=opencrq-findings-cve-counterparts alt="The page of CVE-2024-3400 across the estate of Grand Meridian Hotels, with the OpenCTI and OpenAEV emblems in its header, the OpenCTI one in colour because OpenCTI holds the Vulnerability CVE-2024-3400."}
 
-When a connector is not set, the CVE's page offers **Connect OpenCTI** or **Connect OpenAEV** instead, which opens the connector's settings. Without **Manage Security**, the button is disabled, and its hint says to ask an administrator. An administrator sets the connectors: see [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/) and [Import OpenAEV results](/opencrq/use/sources/openaev/).
+A greyed emblem opens nothing; hover over it to read why:
+
+- **Not found in OpenCTI** or **Not found in OpenAEV**: the product is connected but does not hold this CVE yet. The emblem turns active once it does.
+- **OpenCTI is not connected** or **OpenAEV is not connected**: the tenant's connector is not set. With **Manage Security**, the emblem opens the connector's page, and its preview ends with **Connect OpenCTI** or **Connect OpenAEV**. Without it, the preview reads **Ask an administrator to connect OpenCTI.** (or OpenAEV).
+- **OpenCTI could not be reached** or **OpenAEV could not be reached**: try again later.
+
+An administrator sets the connectors: see [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/) and [Import OpenAEV results](/opencrq/use/sources/openaev/).
 
 ## Read how a finding weighs
 
@@ -77,7 +84,7 @@ The other tabs explain the score's inputs:
 When you know of a vulnerability no integration reports:
 
 :::steps
-1. Open the asset from :menu[Attack surface > Assets], then its **Findings** tab.
+1. Open the asset from :menu[Assets], then its **Findings** tab.
 2. Select **Create**. The **Attach a CVE** panel opens.
 3. In **CVE ID**, type at least three characters of the identifier and pick the CVE from the list. Only CVEs the tenant already knows are listed, from its CVE sources or from the threats OpenCTI streams, and not those already on the asset.
 4. Select **Create**.
@@ -110,7 +117,7 @@ On 12 April the finding is **Applicable**, with **Set by user** as its source, b
 
 ## Check that it works
 
-- In :menu[Attack surface > Findings], the counters and the list show the findings of every integration, with **Set by user** for the ones you attached.
+- In :menu[Findings], the counters and the list show the findings of every integration, with **Set by user** for the ones you attached.
 - A finding you set aside shows under **Set aside, no longer reported or not exposed**, and the decision in the **History** of its **Activity** tab.
 - The asset's **Events** tab shows the change of its **OpenCRQ Posture**.
 

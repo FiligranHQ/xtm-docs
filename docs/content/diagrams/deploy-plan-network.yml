@@ -25,6 +25,9 @@ edges:
   - {from: opencti, to: xtmone, label: PLATFORM_REGISTRATION_TOKEN, both: true}
   - {from: openaev, to: xtmone, label: PLATFORM_REGISTRATION_TOKEN, both: true}
   - {from: opencrq, to: xtmone, label: PLATFORM_REGISTRATION_TOKEN, both: true}
+  - {from: opencrq, to: opencti, label: token of each tenant}
+  - {from: opencrq, to: openaev, label: token of each tenant}
   - {from: opencti, to: stores, label: by service name}
   - {from: openaev, to: stores, label: by service name}
   - {from: xtmone, to: stores, label: by service name}
+  - {from: opencrq, to: stores, label: by service name}

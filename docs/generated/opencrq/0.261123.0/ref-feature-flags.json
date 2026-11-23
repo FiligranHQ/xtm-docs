@@ -1,7 +1,7 @@
 {
   "name": "feature-flags",
-  "version": "0.261120.0",
-  "source": "OpenCRQ-Platform/opencrq@a91d685 (utils/src/feature-flags.ts)",
+  "version": "0.261123.0",
+  "source": "OpenCRQ-Platform/opencrq@d61ebb5 (utils/src/feature-flags.ts)",
   "intro": "The feature flags of this version: features still in development, off by default and reserved to development and testing. A guide never names a flag: it describes the platform without them. A flag disappears from the registry when its feature ships to everyone.",
   "sections": [
     {

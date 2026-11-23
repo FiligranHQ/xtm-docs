@@ -23,7 +23,7 @@ Supporting assets belong to the tenant, not to a risk scope. A scope measured ov
 
 | Field | Values | What it changes |
 | --- | --- | --- |
-| **Category** and **Subcategory** | **Host**, **Web application**, **Network device**, **Identity**, **IoT / OT device**, **Cloud resource**, **SaaS application**, **Mobile device**, **Container / Workload**, **AI target**, **Security platform**, **Generic asset**; then a subcategory such as **Server**, **Workstation**, **Website**, **VPN gateway**, **User account**, **Point of sale**, **EDR** or **SIEM** | The attack techniques that apply to the asset. Its **TTP** tab lists them as **Category TTPs**. A **Security platform**, a detection or prevention tool such as an EDR or a SIEM, stays in the inventory but has no technique and carries no loss: the price never counts it as a target |
+| **Category** and **Subcategory** | **Host**, **Web application**, **Network device**, **Identity**, **IoT / OT device**, **Cloud resource**, **SaaS application**, **Mobile device**, **Container / Workload**, **AI target**, **Security platform**, **Source code**, **Generic asset**; then a subcategory such as **Server**, **Workstation**, **Website**, **VPN gateway**, **User account**, **Point of sale**, **EDR**, **SIEM** or **Code repository** | The attack techniques that apply to the asset. Its **TTP** tab lists them as **Category TTPs**. A **Security platform**, a detection or prevention tool such as an EDR or a SIEM, stays in the inventory but has no technique and carries no loss: the price never counts it as a target |
 | **Exposure** | **Internet Facing**, **Internal**, **Unknown** (the default) | Where an attack gets in. Exploiting a public service needs an internet-facing asset; phishing goes through workstations and user accounts. At the door, an internet-facing asset weighs 1, an internal one 0.4 |
 | **Criticality** | **Very High**, **High**, **Medium**, **Low**, **Unknown** (the default) | How much an asset weighs once the attacker is inside and moves toward the target: 1 for **Very High**, 0.9, 0.7 and 0.4 below. It measures the blast radius of the asset, not its business value, which the primary assets carry. It also raises the score of the findings on the asset |
 
@@ -32,7 +32,7 @@ An asset left on **Unknown** is priced as the tenant setting says: **Internal** 
 ## Declare a supporting asset
 
 :::steps
-1. Go to :menu[Attack surface > Assets]. The card above the list counts the assets of each category, the largest first, and the list shows each asset with its **Exposure**, **Criticality**, **Category TTPs** and **Findings**. On a short screen, the card shows its first three categories, and **Show all categories** opens the rest. Inside a risk scope, the card also sets the scope's [declared estate](/opencrq/concepts/risk-scopes-and-assets/#the-declared-estate) beside what is measured, and **Estimate my estate** (**Review my estimate** once the scope has one) leads to the risk scope to answer it.
+1. Go to :menu[Assets]. The card above the list counts the assets of each category, the largest first, and the list shows each asset with its **Exposure**, **Criticality**, **Category TTPs** and **Findings**. On a short screen, the card shows its first three categories, and **Show all categories** opens the rest. Inside a risk scope, the card also sets the scope's [declared estate](/opencrq/concepts/risk-scopes-and-assets/#the-declared-estate) beside what is measured, and **Estimate my estate** (**Review my estimate** once the scope has one) leads to the risk scope to answer it.
 
    ::screenshot{id=opencrq-assets-list alt="The Assets list of Grand Meridian Hotels: six assets, from the internet-facing booking web application and VPN gateway to the internal database server, workstations, night.audit account and Spanish payment terminals, each with its exposure and criticality."}
 
@@ -63,7 +63,7 @@ An asset group is a named set of assets, such as the servers of the head office.
 Each source keeps its own memberships: a sync replaces only the members its connector added, never those XTM One or a person added.
 
 :::steps
-1. Go to :menu[Attack surface > Assets]. The **Groups** column shows the groups of each asset on one line, with **+N** for the rest.
+1. Go to :menu[Assets]. The **Groups** column shows the groups of each asset on one line, with **+N** for the rest.
 2. Open the **Group** filter, shown beside **Source** and **Category** once the tenant has groups, and choose a group: each one shows its number of assets. The filter then reads the group's name, such as **Group: Hotel front desks**. **All groups** shows the whole list again.
 
    ::screenshot{id=opencrq-assets-groups alt="The Assets list of Grand Meridian Hotels filtered on the Hotel front desks group: the front-desk workstations, the night.audit account and the Spanish payment terminals, each with Hotel front desks in its Groups column."}
@@ -72,7 +72,7 @@ Each source keeps its own memberships: a sync replaces only the members its conn
 The group filter combines with the search and the other filters: **Source** keeps the assets one integration observed, or, with **Set by user**, those declared by hand; **Category** keeps one category, or, under **Match**, every category **Except** that one. The count of active filters shows after them, with **Clear all** to lift every filter and the search at once. When nothing matches, the list reads **No results**, with **Clear filters**. The filters stay in the page's address, so you can share the filtered list.
 
 :::example[Review the front desks before the awareness campaign]
-Grand Meridian's risk manager prepares the front desks' training budget. In :menu[Attack surface > Assets], she opens the **Group** filter and chooses **Hotel front desks (3)**. The list shows three assets: the Front-desk workstations, the night.audit account and the Front-desk payment terminals of Spain. Two of them have a **Criticality** of **High**: those are the assets she names in the training request.
+Grand Meridian's risk manager prepares the front desks' training budget. In :menu[Assets], she opens the **Group** filter and chooses **Hotel front desks (3)**. The list shows three assets: the Front-desk workstations, the night.audit account and the Front-desk payment terminals of Spain. Two of them have a **Criticality** of **High**: those are the assets she names in the training request.
 :::
 
 ## Link the asset to what it supports
@@ -93,18 +93,32 @@ Each role passes some security criteria of the primary asset to the supporting a
 
 ## See the asset in OpenCTI and OpenAEV
 
-An asset with a **Hostname** is the same machine in OpenCTI, as a System, and in OpenAEV, as an asset. When the tenant's OpenCTI or OpenAEV connector is set, the asset's page shows an **In OpenCTI** or **In OpenAEV** card above its tabs: the link that opens the machine there. OpenCTI finds it by name; the **In OpenAEV** card adds the key facts OpenAEV returns about it. The card reads **Not found in OpenCTI.** or **Not found in OpenAEV.** when that product does not hold the hostname.
+An asset with a **Hostname** is the same machine in OpenCTI, as a System, and in OpenAEV, as an asset. The asset's header always shows two emblems beside **Edit**, OpenCTI then OpenAEV. An asset imported from one of them is found there from its import. Otherwise, OpenCRQ looks for its hostname with your own rights: the product answers as your account there, the one with your email address, so a machine you cannot see in it is not found. Hover an emblem, or move to it with the keyboard, to read what it stands for:
 
-When a connector is not set, the page offers **Connect OpenCTI** or **Connect OpenAEV** beside **Edit**, which opens the connector's settings. Without **Manage Security**, the button is disabled, and its hint says to ask an administrator. An administrator sets the connectors: see [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/) and [Import OpenAEV results](/opencrq/use/sources/openaev/).
+- In colour, the product holds the machine: the emblem opens it there, in a new tab. Its hint gives the product, the type and name of the machine there, the key facts the product returns about it, and what you find there: "See the reports, relationships and context of this object in OpenCTI." or "See the simulations and findings of this object in OpenAEV."
+- Greyed, the product does not hold it: the hint reads **Not found in OpenCTI** or **Not found in OpenAEV**, then "It appears here once OpenCTI holds a machine with the same hostname." An asset with no hostname is found only in the product it came from. While OpenCRQ looks, the hint reads **Looking in OpenAEV…**; when the product does not answer, **OpenAEV could not be reached** and "Try again later."
+- Greyed, the tenant is not connected to the product: the hint reads **OpenCTI is not connected** or **OpenAEV is not connected**, with the fields the product would show, as examples. With **Manage Security**, the emblem opens the connector's page in :menu[Integrations]; without it, the hint says "Ask an administrator to connect OpenCTI." See [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/) and [Import OpenAEV results](/opencrq/use/sources/openaev/).
 
 ## Read access relations and events
 
-- **Access relations** shows who uses which device: the user accounts that are the primary users of a device, as Microsoft Entra ID and Intune report them. Integrations set these relations, not people. The attack run reads them for phishing: a flaw on a device nobody uses opens nothing. Without such an integration, the tab says that no access relation is known.
+**Access relations** shows the relations that integrations observe between the asset and other assets of the inventory: people do not set them. The tab opens on a graph. Its list view, like the **Relations** card of the **Overview**, groups them by kind, each with the integration that reported it and the date it was last seen.
+
+- Who uses which device: the user accounts that are the primary users of a device, as Microsoft Entra ID and Intune report them, under **Assigned devices** and **Assigned to**. The attack run reads them for phishing: a flaw on a device nobody uses opens nothing.
+- Where an attack goes next: the attack paths of the OpenAEV simulations, from one asset of the inventory to the next, under **Leads to** and **Reached from**, and as **attack path** in the graph's legend. A step reads **OpenAEV, proven by a test** when an execution got through, and **OpenAEV, inferred** when OpenAEV drew it and no execution has proved it yet. A step that OpenAEV prevented is left out. The [OpenAEV connector](/opencrq/use/sources/openaev/) never deletes a step OpenAEV stops showing, so a purged simulation or an outage erases nothing: the date says how fresh it is. The price does not read attack paths.
+
+Without such an integration, the tab says that no access relation is known, and the **Overview** has no **Relations** card.
+
+Two other tabs say how the asset's findings moved and which controls cover it:
+
 - **Events** is the history of the asset's **OpenCRQ Posture**, the score out of 100 its findings give it: 75 and above is **Strong**, then **Moderate**, **Weak** and **Critical** below 25. Each line says what moved it, such as a new worst finding or a finding resolved. An asset without findings has no posture, and the tab reads **No history yet.** See [Review the findings on your assets](/opencrq/use/attack-surface/findings/).
 - **Protected by** lists the controls that cover the asset's category, with the posture each one has in your risk scopes. See [Set how strong your controls are and read how they held](/opencrq/use/defenses/controls/).
 
+:::xtm-one[XTM One follows the attack paths from an asset]
+XTM One reads through OpenCRQ how far an attack can go from an asset, the blast radius of a CTEM case: the assets the OpenAEV attack paths reach from it, step after step up to five steps, each step proven or inferred with the simulation that showed it, and the primary assets that depend on the assets reached. A weakness on an asset nothing depends on then still counts for the primary assets it opens the way to. A step OpenAEV has not reported for 30 days no longer counts. XTM One reads as the person it works for: an asset that person cannot read in OpenCRQ stops the path there and is never named.
+:::
+
 :::example[The booking web application of Grand Meridian France]
-Grand Meridian Hotels declares the estate behind its booking platform by hand, from :menu[Attack surface > Assets] with **Create**:
+Grand Meridian Hotels declares the estate behind its booking platform by hand, from :menu[Assets] with **Create**:
 
 - **Name** booking.grand-meridian.example, **Exposure** **Internet Facing**, **Category** **Web application**, **Subcategory** **Website**, **Criticality** **Very High**, and its URL https://booking.grand-meridian.example.
 - **Name** Booking database server, **Exposure** **Internal**, **Category** **Host**, **Subcategory** **Server**, **Criticality** **Very High**.
@@ -117,7 +131,7 @@ The list now reads 6 assets, two of them internet-facing: the web application an
 
 ## Check that it works
 
-- The asset shows in :menu[Attack surface > Assets] with the exposure and criticality you set, and the **Set by user** mark on each value you set.
+- The asset shows in :menu[Assets] with the exposure and criticality you set, and the **Set by user** mark on each value you set.
 - Its **Business dependencies** graph shows the primary assets it supports.
 - OpenCRQ prices the tenant's scenarios again when what they read changes, and once a day: the **CRQ** tab of a scenario dates its latest run.
 

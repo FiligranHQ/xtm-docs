@@ -91,7 +91,7 @@ OpenCRQ reads them only while the platform holds no tenant: once one exists, at 
 | Microsoft Defender, through Microsoft Graph | `MICROSOFT_GRAPH__…__AZURE_TENANT_ID`, `__CLIENT_ID`, `__CLIENT_SECRET` | Inactive for the tenant |
 | Drata | `DRATA__…__API_KEY`, and `__URL` (`https://public-api.drata.com` by default; `https://public-api.eu.drata.com` for an EU account), `__WORKSPACE_ID` (`1` by default) | Inactive for the tenant |
 
-A connector with its variables set still waits for a tenant administrator to give it a service account in **Integrations**: see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/). The [connectors reference](/reference/opencrq/connectors/) says what each one brings and when it runs, and the connector pages say what each tool must grant: [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/), [Import OpenAEV results](/opencrq/use/sources/openaev/).
+The OpenCTI and OpenAEV connectors come up enabled once their variables are set: at each start, OpenCRQ gives each one a service account and, for OpenCTI, creates the Live Stream it reads, unless a tenant administrator already configured them. See [Link OpenCRQ to OpenCTI and OpenAEV](/deploy/configure/connect-modules/#link-opencrq-to-opencti-and-openaev). Another connector with its variables set still waits for a tenant administrator to give it a service account in **Integrations**: see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/). The [connectors reference](/reference/opencrq/connectors/) says what each one brings and when it runs, and the connector pages say what each tool must grant: [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/), [Import OpenAEV results](/opencrq/use/sources/openaev/).
 
 ## Telemetry
 
@@ -145,7 +145,7 @@ Example CERT runs OpenCRQ for Grand Meridian Hotels, whose tenant identifier is 
       - CONNECTORS__NIST__abd0465d-51cd-5234-85b8-cb1cc781124c__API_KEY=${NVD_API_KEY}
 ```
 
-After `docker compose up -d`, the OpenCTI and OpenAEV connectors of the tenant show in **Integrations**, waiting for their service account; once it is given, the threats of Velvet Harbor and Ember Tide stream in, and the hotels' simulation results follow every hour.
+The user of `GRAND_MERIDIAN_OPENCTI_TOKEN` holds **Manage data sharing** in OpenCTI. After `docker compose up -d`, the OpenCTI and OpenAEV connectors of the tenant come up enabled in **Integrations**, OpenCTI holds the Live Stream `OpenCRQ threat feed`, the threats of Velvet Harbor and Ember Tide stream in, and the hotels' simulation results follow every hour.
 :::
 
 ## What's next

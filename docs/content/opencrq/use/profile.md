@@ -1,6 +1,6 @@
 ---
 title: Set your profile and follow your notifications
-description: Read the name XTM One gives you, set how OpenCRQ names you in each tenant, its language, theme and home dashboard, and follow the notifications that tell you where you were added.
+description: Read the name XTM One gives you, set how OpenCRQ names you in each tenant, its language, theme, colours and home dashboard, and follow the notifications that tell you where you were added.
 sidebar_position: 7
 doc_type: how-to
 products:
@@ -10,7 +10,7 @@ owner: docs-opencrq
 last_reviewed: 2026-11-20
 ---
 
-Your profile holds what you decide for yourself in OpenCRQ: the name and job title you go by in a tenant, the language and theme of the interface, and the dashboard Home opens on. Your global name, title and email come from your XTM One account, which you sign in with. Nothing you set here changes what other users see, except your own name and title. Your notifications tell you when someone adds you to a tenant or to the platform administration.
+Your profile holds what you decide for yourself in OpenCRQ: the name and job title you go by in a tenant, the language, theme and colours of the interface, and the dashboard Home opens on. Your global name, title and email come from your XTM One account, which you sign in with. Nothing you set here changes what other users see, except your own name and title. Your notifications tell you when someone adds you to a tenant or to the platform administration.
 
 ## Before you start
 
@@ -20,7 +20,7 @@ Every user has a profile and notifications: no capability is needed.
 
 In the top bar, click **Account**, then **Profile**. The menu also shows the email address you are signed in with, and **Sign out**.
 
-::screenshot{id=opencrq-profile alt="The profile page of Claire Morel, Cyber risk manager, with the Global profile card marked Managed in XTM One and its Edit in XTM One link, the Tenant profile card whose full name and title are marked Inherited, and the Preferences card with Language, Theme and Home dashboard."}
+::screenshot{id=opencrq-profile alt="The profile page of Claire Morel, Cyber risk manager, with the Global profile card marked Managed in XTM One and its Edit in XTM One link, the Tenant profile card whose full name and title are marked Inherited, and the Preferences card with Language, Theme, the Softer tones switch of Pastel colours, and Home dashboard."}
 
 The page holds four cards:
 
@@ -28,7 +28,7 @@ The page holds four cards:
 | --- | --- |
 | **Global profile** | Your **Full name**, **Title** and **Email**, read from your XTM One account and the same in every tenant. Marked **Managed in XTM One**: you cannot change them in OpenCRQ |
 | **Tenant profile** | The **Full name** and **Title** you go by in this tenant only |
-| **Preferences** | **Language**, **Theme** and **Home dashboard** |
+| **Preferences** | **Language**, **Theme**, **Pastel colours** and **Home dashboard** |
 | **XTM One MCP server** | Shown only when the platform is connected to XTM One |
 
 ## Set your name and title
@@ -49,7 +49,7 @@ In the **Tenant profile** card, each value says where it comes from: **Inherited
 
 The super administrator, the XTM One administrator who reaches every tenant without being a member of any, has no **Edit profile**: their **Tenant profile** always shows the global values.
 
-## Choose your language, theme and home dashboard
+## Choose your language, theme, colours and home dashboard
 
 The **Preferences** card changes the interface for you only, and each field saves as soon as you change it.
 
@@ -57,6 +57,7 @@ The **Preferences** card changes the interface for you only, and each field save
 | --- | --- | --- |
 | **Language** | **Automatic**, **English**, **French** | The language of the interface. **Automatic** follows the tenant's **Default language**, set by an administrator, then your browser's language when it is English or French, and English otherwise. A dialog asks to **Reload** the application to apply it |
 | **Theme** | **Light**, **Dark**, **System** | **System** follows the theme of your operating system |
+| **Pastel colours** | The **Softer tones** switch, off by default | On, severity, status and marking colours take softer tones: the chips of a finding's score history, for example, show a soft plain fill instead of an outline. Off, OpenCRQ draws the standard colours, the same in every Filigran product. The switch follows you in every tenant |
 | **Home dashboard** | **Tenant home**, or one of the five dashboards | The dashboard **Home** opens on. **Tenant home**, with the tenant's choice in parentheses, follows the dashboard an administrator chose for the tenant |
 
 The language changes the interface, not your data: a scenario named in English stays in English. [Track cyber risk in money with dashboards](/opencrq/use/decide/dashboards/) describes the five dashboards and how an administrator sets the tenant's home.
@@ -74,7 +75,7 @@ OpenCRQ notifies you when an administrator adds you:
 | Notification, for example | What it means |
 | --- | --- |
 | "Claire Morel added you to Grand Meridian Hotels", then "You can now open Grand Meridian Hotels." | You are a member of that tenant, in the groups the administrator chose. In the bell's panel, click the notification to open the tenant |
-| "Claire Morel added you to the platform administration (Admin)", then "You can now open the platform administration." | You are in those platform groups, and reach the platform administration under **Administration** |
+| "Claire Morel added you to the platform administration (Admin)", then "You can now open the platform administration." | You are in those platform groups, and reach the platform administration in :menu[Settings > Security], under **Platform** |
 
 There is nothing to accept: the access is yours as soon as the administrator adds you. XTM One usually tells you by email as well. How administrators add people is in [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
 
@@ -85,7 +86,7 @@ Claire Morel is the cyber risk manager of Grand Meridian Hotels. She signs in to
 
 - In her XTM One profile, her name is Claire Morel and her title Cyber risk manager. After she signs in, the **Global profile** card shows **Full name** Claire Morel and **Title** Cyber risk manager.
 - **Tenant profile**: she sets nothing, so both values stay **Inherited**.
-- **Preferences**: she keeps **Theme** on **System** and sets **Home dashboard** to **Risk treatment**.
+- **Preferences**: she keeps **Theme** on **System**, turns **Softer tones** on under **Pastel colours** for the long review sessions, and sets **Home dashboard** to **Risk treatment**.
 
 Home now opens on each scenario's likelihood, annual loss exposure and tolerance, while the rest of the tenant keeps the **CISO** dashboard. Her name shows as the owner of the treatment plan MFA for the front-desk accounts and of the budget review Security budget 2026.
 :::

@@ -57,15 +57,16 @@ Every service is on one Docker network, `<COMPOSE_PROJECT_NAME>_default`: `xtm_d
 
 | Address | Reached by |
 | --- | --- |
-| `http://opencti:8080` | The OpenCTI worker and connectors, XTM Composer, XTM One, and OpenAEV (on `/graphql`) |
-| `http://openaev:8080` | The OpenAEV collectors and injectors, XTM Composer, XTM One, OpenCTI |
+| `http://opencti:8080` | The OpenCTI worker and connectors, XTM Composer, XTM One, OpenAEV (on `/graphql`), and OpenCRQ once a tenant is connected to it |
+| `http://openaev:8080` | The OpenAEV collectors and injectors, XTM Composer, XTM One, OpenCTI, and OpenCRQ once a tenant is connected to it |
 | `http://xtm-one:4000` | OpenCTI, OpenAEV |
+| `http://opencrq:3002` | XTM One |
 | `elasticsearch:9200` | OpenCTI, OpenAEV |
 | `rabbitmq:5672` | OpenCTI, OpenAEV, and the integrations and workers they give the address to |
 | `rabbitmq:15672` | OpenCTI and OpenAEV, on the RabbitMQ management API |
 | `redis:6379` | OpenCTI, XTM One and its worker |
-| `minio:9000` | OpenCTI, OpenAEV, XTM One and its worker |
-| `pgsql:5432` | OpenAEV (database `openaev`), XTM One and its worker (database `xtm_one`), the `xtm-one-db-init` job |
+| `minio:9000` | OpenCTI, OpenAEV, XTM One and its worker, OpenCRQ and the `opencrq-bucket-init` job |
+| `pgsql:5432` | OpenAEV (database `openaev`), XTM One and its worker (database `xtm_one`), the `xtm-one-db-init` job, OpenCRQ (database `opencrq`) and the `opencrq-db-init` job |
 
 The containers XTM Composer starts join the same network: xtm-docker sets `OPENCTI__DAEMON__DOCKER__NETWORK_MODE` and `OPENAEV__DAEMON__DOCKER__NETWORK_MODE` to `${COMPOSE_PROJECT_NAME}_default`. An integration you run yourself must join it too, to reach its platform and RabbitMQ: see [Run an integration without XTM Composer](/deploy/integrations/manual/).
 
@@ -77,14 +78,20 @@ The containers XTM Composer starts join the same network: xtm-docker sets `OPENC
 | OpenAEV | XTM One | `OPENAEV_XTM_ONE_URL=http://xtm-one:4000` | `PLATFORM_REGISTRATION_TOKEN` |
 | XTM One | OpenCTI | `OPENCTI_API_URL=http://opencti:8080` | |
 | XTM One | OpenAEV | `OPENAEV_API_URL=http://openaev:8080` | |
+| OpenCRQ | XTM One | `XTM_ONE__URL` | `PLATFORM_REGISTRATION_TOKEN` |
+| XTM One | OpenCRQ | `OPENCRQ_API_URL=http://opencrq:3002` | |
 | OpenCTI | OpenAEV | `XTM__OPENAEV_API_URL=http://openaev:8080` | `OPENAEV_ADMIN_TOKEN` |
 | OpenAEV | OpenCTI | `openaev.xtm.opencti.api-url`, `http://opencti:8080/graphql` | `OPENCTI_ADMIN_TOKEN` |
+| OpenCRQ | OpenCTI, for one tenant | `CONNECTORS__OPENCTI__<tenant>__URL`, such as `http://opencti:8080` | `CONNECTORS__OPENCTI__<tenant>__TOKEN` |
+| OpenCRQ | OpenAEV, for one tenant | `CONNECTORS__OPENAEV__<tenant>__URL`, such as `http://openaev:8080` | `CONNECTORS__OPENAEV__<tenant>__TOKEN` |
 | XTM Composer | OpenCTI and OpenAEV | `http://opencti:8080`, `http://openaev:8080` | `OPENCTI_ADMIN_TOKEN`, `OPENAEV_ADMIN_TOKEN` |
 | XTM Composer | Docker on the host | `/var/run/docker.sock`, mounted in the container | |
 | Worker and connectors | OpenCTI | `OPENCTI_URL=http://opencti:8080` | `OPENCTI_ADMIN_TOKEN` |
 | Collectors and injectors | OpenAEV | `OPENAEV_URL=http://openaev:8080` | `OPENAEV_ADMIN_TOKEN` |
 
 OpenCTI connectors and OpenAEV injectors also connect to RabbitMQ, with the host name, port and credentials their platform gives them when they register: `rabbitmq` and `5672` in xtm-docker. If an integration runs where that name does not resolve, it cannot reach the queue.
+
+OpenCRQ reaches OpenCTI and OpenAEV with the address and token you set for each of its tenants on the `opencrq` service, as [Connect the first tenant](/deploy/install/opencrq/#connect-the-first-tenant) shows. It does not only read through that link: at each start, it creates in OpenCTI the Live Stream `OpenCRQ threat feed`, or brings it up to date. See [Link OpenCRQ to OpenCTI and OpenAEV](/deploy/configure/connect-modules/#link-opencrq-to-opencti-and-openaev) for what its token needs.
 
 XTM Composer controls Docker on the host through its socket. Treat access to the `xtm-composer` container like access to the host.
 
@@ -112,6 +119,9 @@ To publish the platforms over TLS behind a reverse proxy, set the scheme to `htt
 | OpenAEV | Your IMAP server, when `OPENAEV_MAIL_IMAP_ENABLED=true` | `IMAP_HOST` and `IMAP_PORT`, `993` in `.env.sample` |
 | Docker on the host | Docker Hub, and `docker.elastic.co` for Elasticsearch, to download the images | The `image` of each service |
 | XTM Composer | The registry of each integration image it deploys | See [Pull integrations from a private registry](/deploy/integrations/private-registry/) |
+| OpenCRQ | The public CVE sources: `services.nvd.nist.gov` (NIST NVD), `api.first.org` (FIRST EPSS) and `www.cisa.gov` (CISA KEV) | A tenant administrator, who turns each source on in **Integrations**: see [How CVE sources weigh your vulnerabilities](/opencrq/use/sources/vulnerability-sources/#turn-them-on) |
+| OpenCRQ | `raw.githubusercontent.com`, for the default threats it loads | `CONNECTORS__DEFAULT_THREATS__DATASET_URL` points it to a mirror, or, empty, turns the default threats off. See the [OpenCRQ configuration](/reference/opencrq/configuration/#connectors) |
+| OpenCRQ | `login.microsoftonline.com` and `graph.microsoft.com` for Microsoft Defender, `public-api.drata.com` by default for Drata, for a tenant connected to them | The variables of each tenant: see [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant) |
 
 Each integration also connects to the systems it works with. Its own documentation says which.
 

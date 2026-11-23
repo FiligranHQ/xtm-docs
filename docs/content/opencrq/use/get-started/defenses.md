@@ -14,7 +14,7 @@ last_reviewed: 2026-11-20
 ## Before you start
 
 - You are a member of the tenant. Assessing a control needs no capability.
-- To set up Drata, you have **Manage Security**, a service account exists for the connector, and a platform administrator has given OpenCRQ the Drata API key of the tenant. See [Import compliance readiness from Drata](/opencrq/use/sources/drata/#before-you-start).
+- To set up Drata, you have **Manage Security**, and a platform administrator has given OpenCRQ the Drata API key of the tenant. See [Import compliance readiness from Drata](/opencrq/use/sources/drata/#before-you-start).
 - You know what each control means for OpenCRQ: its **strength** and its **coverage**. See [What you declare](/opencrq/use/defenses/controls/#what-you-declare).
 
 ## The defense sources
@@ -63,7 +63,7 @@ The domain now reads **3 of 6 assessed**, the tile **3 capabilities assessed by 
 Select **Configure** on the **Drata** tile. The **Drata** panel opens:
 
 - When Drata is not set up for the tenant, the panel reads "A platform administrator enables Drata for this tenant: set the variables below in the platform's environment, then restart the platform." Below it, the variable to set, `CONNECTORS__DRATA__<tenant-id>__API_KEY=`, already holding the id of the tenant. **Copy** copies it, and **See the documentation** opens the platform's configuration on GitHub. The optional variables are in [Before you start](/opencrq/use/sources/drata/#before-you-start) of the Drata page.
-- When it is set up and you have **Manage Security**, choose the **Service account** and the **Schedule**, then select **Save**. **Sync now** starts a run at once, once a service account is bound and no run is going; "Sync job enqueued successfully." confirms it. **Follow in Integrations** opens the connector in :menu[Integrations].
+- When it is set up and you have **Manage Security**, choose the account the connector runs as under **Service account**, and the **Schedule**, then select **Save**. **Create a new service account**, the default, creates the account with the integration, in the Connectors group: its **Service account name** is filled in with "Drata connector", which you can change. **Use an existing service account** runs the connector as an account the tenant already has. A tenant with no account to reuse is offered the new one only. Below the form, **Sync now** starts a run at once, once a service account is bound and no run is going; "Sync job enqueued successfully." confirms it. **Follow in Integrations** opens the connector in :menu[Integrations].
 - Without **Manage Security**, the panel reads "An administrator configures this connector."
 
 Each run sets the strength and the coverage of the controls that Drata controls are mapped to, on the axes left automatic. See [Where it shows, and what it changes](/opencrq/use/sources/drata/#where-it-shows-and-what-it-changes).

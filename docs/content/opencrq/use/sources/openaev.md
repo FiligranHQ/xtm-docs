@@ -17,8 +17,9 @@ A control declared strong is an assumption until an attack tests it. The OpenAEV
 - **The results of finished simulations**, per asset, scenario, technique and expectation (prevention or detection), one per type of security platform that reported on it, such as an EDR or a SIEM. A technique a platform type did not stop counts as exposed. Each result keeps the link to its simulation and its inject. A simulation that is scheduled, running, paused or canceled brings nothing yet.
 - **The CVEs OpenAEV found on each asset**, from its findings.
 
-Two things are not imported:
+Three things are not imported:
 
+- **The markings** of an asset. It comes unmarked, so every member of the tenant reads it, as every user of OpenAEV does: see [Limit what people see with markings](/opencrq/administer/users-and-roles/#limit-what-people-see-with-markings).
 - **The posture score** of an asset. OpenCRQ reads it from OpenAEV each time the asset's page opens, and shows nothing when OpenAEV does not answer within 10 seconds. The sync never depends on it.
 - **Credentials of AI targets**: their token and configuration are never read into OpenCRQ.
 

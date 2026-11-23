@@ -1,4 +1,4 @@
-title: A person gets rights in a tenant from its groups, and on the platform from the platform groups
+title: A person gets rights and markings in a tenant from its groups, and rights on the platform from the platform groups
 lanes:
   - label: Who
     tone: external
@@ -10,6 +10,7 @@ lanes:
     nodes:
       - {id: group, label: Groups, icon: Users, note: 'Admin, Connectors, yours'}
       - {id: role, label: Roles, icon: KeyRound, note: Manage Security}
+      - {id: markings, label: Markings, icon: ShieldCheck, note: 'Assets and threats it may read'}
   - label: On the platform
     tone: core
     nodes:
@@ -20,5 +21,6 @@ edges:
   - {from: invite, to: group, label: places in}
   - {from: user, to: group, label: member of}
   - {from: group, to: role, label: holds}
+  - {from: group, to: markings, label: cleared for}
   - {from: user, to: pgroup, label: member of, style: dashed}
   - {from: pgroup, to: prole, label: holds}

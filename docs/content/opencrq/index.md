@@ -63,6 +63,12 @@ You deploy OpenCRQ beside the XTM platform and keep it running.
 :::
 ::::
 
+## Find your way around
+
+The menu on the left groups its entries between separators: **Home**, **Dashboards**, **Risk Scenarios**, **Treatment Plans** and **Budget Reviews** first; then your risk scopes and **All risk scopes**; then **Assets**, **Findings** and **Threats**; then **Controls** and **Compliance**; last **Integrations**, shown to those with **Manage Security**, and **Settings**. When you reach two tenants or more, the first row of the menu names the tenant you are in: click it to switch. The chevron next to the OpenCRQ logo opens **Filigran products**, which opens OpenCTI and OpenAEV when they are connected to the tenant, their product pages otherwise, and XTM Hub.
+
+To find a scenario, an asset, a threat, a risk scope or a control by its name, type part of it in **Search the platform...** at the top of the screen and press Enter. The results list the matches of the tenant by type, each with its count: **Risk Scenarios**, **Primary Assets**, **Assets**, **Threats**, **Risk scopes** and **Controls**. **View all** opens the full list when a type has more matches than the card shows. [Find a scenario, an asset or a threat by its name](/opencrq/use/search/) says what the search matches and how to share it.
+
 ## How OpenCRQ prices a risk
 
 You describe what you protect and what a loss would cost; the rest of the XTM platform measures who attacks and how well your defenses hold. OpenCRQ plays the attacks over thousands of simulated years, against your assets and your controls, and counts what lands. The result is a price that moves for a reason you can trace: a threat becomes active, a control is rolled out, a test shows a defense failing.

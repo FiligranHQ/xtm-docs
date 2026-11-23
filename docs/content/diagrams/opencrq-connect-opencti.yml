@@ -17,5 +17,6 @@ lanes:
 edges:
   - {from: knowledge, to: stream, label: matches the filter}
   - {from: stream, to: connector, label: "replay, then live"}
+  - {from: connector, to: stream, label: created at start, style: dashed}
   - {from: connector, to: threats, label: mirrors}
   - {from: threats, to: scenarios, label: priced again}

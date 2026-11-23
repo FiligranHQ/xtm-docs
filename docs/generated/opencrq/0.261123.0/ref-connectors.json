@@ -1,7 +1,7 @@
 {
   "name": "connectors",
-  "version": "0.261120.0",
-  "source": "OpenCRQ-Platform/opencrq@a91d685 (module/src/modules/connectors/inventory.ts)",
+  "version": "0.261123.0",
+  "source": "OpenCRQ-Platform/opencrq@d61ebb5 (module/src/modules/connectors/inventory.ts)",
   "intro": "The connectors of OpenCRQ, as **Administration > Integrations** lists them: what each brings, how it reads (a pull on a schedule, or a live stream), what it writes, the schedule it runs on until someone sets another, the shortest interval it accepts, and the settings that turn it on for a tenant. A connector reads for one tenant at a time: its credentials are set per tenant, in the environment (the [configuration](/reference/opencrq/configuration/#connectors)); its schedule, and for OpenCTI the Live Stream, are set on its page.",
   "sections": [
     {

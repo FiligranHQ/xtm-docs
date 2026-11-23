@@ -49,12 +49,14 @@ Select **Configure** on the **OpenCTI** tile. The **OpenCTI** panel opens:
 - Without **Manage Security**, the panel reads "An administrator configures this connector."
 - When OpenCTI does not answer, the panel reads "Unable to load Live Streams from OpenCTI right now. It may be temporarily unavailable, so try again shortly."
 
-Once the variables are set, and with **Manage Security**, bind the stream:
+Once the variables are set, OpenCRQ binds a stream itself at its next start. It creates the Live Stream `OpenCRQ threat feed` in OpenCTI, and binds it to the tenant with the service account "OpenCTI (deployment)". The tile then reads **Syncing** with nothing to configure. This needs the **Manage data sharing** capability, or **Bypass all capabilities**, for the user of the token in OpenCTI. Without it, OpenCRQ binds nothing, and the connector's page in :menu[Integrations] says which capability the token lacks. A stream you bound yourself is never replaced.
+
+To bind another stream, or when OpenCRQ could not create its own, bind the stream yourself with **Manage Security**:
 
 :::steps
 1. On the **OpenCTI** tile, select **Configure**.
 2. Choose the stream in **Live Stream**. OpenCRQ judges its filter before you save, as in [Bind the stream to your tenant](/opencrq/use/sources/opencti/#bind-the-stream-to-your-tenant).
-3. Choose the account the connector writes as in **Service account**.
+3. Under **Service account**, choose the account the connector writes as. **Create a new service account**, the default, creates it with the integration, in the Connectors group: its **Service account name** is filled in with "OpenCTI connector", which you can change. **Use an existing service account** lets you pick one the tenant already has, such as "OpenCTI (deployment)". A tenant with no account to reuse is offered the new one only.
 4. Select **Save**. The panel closes, and the connector reads the stream from its beginning.
 :::
 
@@ -70,12 +72,12 @@ The tile reads **Syncing**, with the percent of the stream's history replayed, t
 "Bundle analyzed successfully." confirms the import, and the tile counts the threats of the bundle. "Bundle analysis failed. Please check the file and try again." means the file is not a bundle OpenCRQ can read. Without file storage, the button is not available, and the tile reads "File storage must be configured on the platform to import a bundle."
 
 :::example[Give Grand Meridian the threats Example CERT tracks]
-Grand Meridian Hotels already follows Velvet Harbor and Ember Tide in its OpenCTI platform, at `https://opencti.example.com`. The platform engineer has set the tenant's two variables, and Claire Morel has created the service account `OpenCTI connector` in :menu[Settings > Security > Service accounts].
+Grand Meridian Hotels already follows Velvet Harbor and Ember Tide in its OpenCTI platform, at `https://opencti.example.com`. The platform engineer has set the tenant's two variables. Grand Meridian keeps the management of streams to its CTI team, so the token's user lacks **Manage data sharing**, and OpenCRQ bound no stream at its start.
 
-In the **Threats** step, Claire selects **Configure** on the **OpenCTI** tile:
+In the **Threats** step, Claire Morel selects **Configure** on the **OpenCTI** tile:
 
 - **Live Stream**: `Threats for risk quantification`, judged **Delivers threat actors**.
-- **Service account**: `OpenCTI connector`.
+- **Service account**: **Create a new service account**, with **Service account name** left on `OpenCTI connector`.
 
 She selects **Save**. The tile reads **Syncing** while the stream replays its history, then **Healthy**: Velvet Harbor and Ember Tide have arrived, with their campaigns and the techniques they use. She leaves **OpenCRQ Default Threats** switched off, since the stream covers the actors that target hotel chains in France and Spain. The stepper shows its check on **Threats**.
 :::

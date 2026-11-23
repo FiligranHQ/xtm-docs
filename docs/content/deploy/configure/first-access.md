@@ -1,10 +1,11 @@
 ---
 title: Sign in the first time and keep an emergency account
-description: Set the bootstrap admin of OpenCTI, OpenAEV and XTM One, sign in the first time, and keep a local account that still works when single sign-on fails.
+description: Set the bootstrap admin of OpenCTI, OpenAEV and XTM One, and the admin token of OpenCRQ, sign in the first time, and keep a local account that still works when single sign-on fails.
 doc_type: how-to
 products:
   - opencti
   - openaev
+  - opencrq
 personas: [platform-engineer, admin]
 owner: docs-platform
 last_reviewed: 2026-10-31
@@ -13,7 +14,7 @@ migrated_from:
   - openaev:/deployment/authentication/
 ---
 
-Each platform of the XTM stack creates its first administrator from `.env`: the bootstrap admin. This page explains how the three bootstrap admins behave, how to sign in the first time and change their passwords, and how to keep one of them as a break-glass account, a local account that still works when single sign-on (SSO) is down. Configuring SSO itself is in [Configure single sign-on](/opencti/administer/sso/).
+Each platform of the XTM stack creates its first administrator from `.env`: the bootstrap admin. This page explains how the three bootstrap admins behave, how to sign in the first time and change their passwords, and how to keep one of them as a break-glass account, a local account that still works when single sign-on (SSO) is down. OpenCRQ has no bootstrap admin: its users sign in through XTM One, and its optional admin token works on its API only. Configuring SSO itself is in [Configure single sign-on](/opencti/administer/sso/).
 
 ::diagram{id=deploy-configure-first-access}
 
@@ -35,6 +36,20 @@ Every platform applies these values again **at every start**: it creates the adm
 - A password changed in the interface lasts until the next restart. Change it in `.env`.
 - Anyone who can read `.env` and restart the stack can take over the admin accounts. Keep `.env` readable by its owner only (`chmod 600 .env`) and out of version control.
 - In xtm-docker, the admin tokens are also the credentials of the services that call the platforms: the OpenCTI worker and connectors, the OpenAEV collectors and injectors, XTM Composer, and the link between OpenCTI and OpenAEV. They all read the same variables of `.env`, so they follow a change of token.
+
+### OpenCRQ
+
+OpenCRQ keeps no password and has no sign-in form: XTM One signs its users in, and the account of `XTM_ONE_ADMIN_EMAIL` is its super administrator. See [Sign in and create the first tenant](/deploy/install/opencrq/#sign-in-and-create-the-first-tenant).
+
+`APP__ADMIN__TOKEN` on the `opencrq` service is an optional token for the API, the counterpart of the admin tokens of OpenCTI and OpenAEV. It signs nobody in to the interface.
+
+| `APP__ADMIN__TOKEN` | What OpenCRQ does |
+| --- | --- |
+| Unset | Both uses below are off. `/api/xtm/peer-tokens` answers `404` |
+| A UUID version 4 | A request with `Authorization: Bearer` and this token acts as the service account `Deployment admin token`, which OpenCRQ creates in the **Admin** group of the initial tenant, the tenant of `INITIAL_TENANT__ID`. The token also opens `/api/xtm/peer-tokens`, where a deployment manager gives another XTM product a service account and a token in that tenant, and `/api/xtm/peer-tokens/revoke` |
+| Another value | OpenCRQ does not start, and names the key |
+
+OpenCRQ applies it at every start, like the other platforms: it creates or updates the `Deployment admin token` account, and keeps no copy of the token, so a new value replaces the old one at the next start. The initial tenant is the one OpenCRQ creates at its first start, as [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant) describes. If it does not exist when OpenCRQ starts, for example after it was deleted, OpenCRQ refuses the token on the API.
 
 ## Sign in the first time
 
@@ -121,6 +136,11 @@ Local authentication is the **Local Authentication** switch in **Settings** > **
 At every start, XTM One also gives the `XTM_ONE_ADMIN_EMAIL` account back the administrator role and re-enables it, so an account disabled or demoted in the interface works again after a restart. When XTM Hub decides who is an administrator of XTM One, it never demotes this account.
 
 Its email cannot be changed in **My Profile**: whoever holds that address is the platform administrator, so XTM One refuses the change. To use another address, change `XTM_ONE_ADMIN_EMAIL` in `.env` and run `docker compose up -d`: XTM One then creates a new admin account with that address, and leaves the account of the previous address as it was.
+:::
+:::tab[OpenCRQ]
+OpenCRQ has no local account to keep: **Sign in with XTM One** is its only way in, and the account of `XTM_ONE_ADMIN_EMAIL` is its super administrator. The break-glass account of XTM One is therefore the one of OpenCRQ too: once it has signed in to XTM One with its password, it opens OpenCRQ.
+
+When XTM One does not answer, the sign-in page of OpenCRQ shows **XTM One is unavailable** and nobody can sign in to the interface until XTM One is back. The token of `APP__ADMIN__TOKEN` does not depend on XTM One and still works on the API: see [OpenCRQ](#opencrq).
 :::
 ::::
 

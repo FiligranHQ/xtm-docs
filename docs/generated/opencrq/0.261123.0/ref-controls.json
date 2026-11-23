@@ -1,7 +1,7 @@
 {
   "name": "controls",
-  "version": "0.261120.0",
-  "source": "OpenCRQ-Platform/opencrq@a91d685 (module/src/modules/controls/capability/data/capabilities.generated.ts)",
+  "version": "0.261123.0",
+  "source": "OpenCRQ-Platform/opencrq@d61ebb5 (module/src/modules/controls/capability/data/capabilities.generated.ts)",
   "intro": "The 51 controls of the defense catalogue 9.2.4, mapped to ATT&CK 20.0: what each one does, how many techniques it prevents and detects, and the ATT&CK mitigations and NIST CSF 2.0 outcomes it answers; then, by domain, what each strength level of a control means. A control you declare takes a strength (Not deployed, Basic, Intermediate, Master), a coverage and a reliability; OpenCRQ prices how it stops or reveals an attack from them.",
   "filter": "Filter controls, techniques counts, mappings",
   "sections": [
