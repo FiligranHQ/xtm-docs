@@ -36,5 +36,5 @@ composer:
 # whole: xtm-atlas reads the code at it (atlas/src/sources.ts ensureSourceAt).
 opencrq:
   latest:
-    version: 0.261116.0
-    tag: 0.261116.0
+    version: 0.261120.0
+    tag: 0.261120.0

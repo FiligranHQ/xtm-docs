@@ -114,7 +114,7 @@ Four counters sit above the list:
 
 No counter adds up the ALE reductions, for the reason given in [How a plan is priced](#how-a-plan-is-priced).
 
-A plan is created as **Draft**. The list also knows the **Active**, **Completed** and **Abandoned** statuses, which the counters read; this development version has no control yet to move a plan out of **Draft**.
+A plan is created as **Draft**. The list also knows the **Active**, **Completed** and **Abandoned** statuses, which the counters read; the plan's page and its edit drawer have no control yet to move a plan out of **Draft**.
 
 To delete a plan, open the menu of its card or row and click **Delete**. The plan and the control targets it holds are deleted for good; the scenarios and the controls are not touched.
 

@@ -35,10 +35,21 @@ A finding is one flaw on one asset. When two integrations report the same CVE on
 
    ::screenshot{id=opencrq-findings-list alt="The All findings tab of Grand Meridian Hotels: one applicable finding, CVE-2024-3400 on the head-office VPN gateway, counted under Pending vector rather than in a band, its score pending."}
 
-2. Stay on **All findings** to see one line per asset and flaw, sorted by **Score**, the worst first. **Filter by state** shows the **Applicable** findings by default; choose **Set aside, no longer reported or not exposed** or **All states** to see the others. **Filter by source** keeps one integration, or **Set by user** for the CVEs attached by hand.
-3. Open **Unique findings** to see one line per flaw across the estate: a CVE with its **Worst finding**, its **Affected assets** and its **KEV / EPSS** reading. Its **Score** is the worst asset's score, raised when the CVE reaches other assets at a close level, and capped at 100.
+2. Stay on **All findings** to see one line per asset and flaw, sorted by **Score**, the worst first. **Search findings...** keeps the findings whose CVE identifier or title, technique identifier or name, or asset name holds what you type, such as `CVE-2024-3400` or `VPN`; when none does, the list reads **No finding matches this search.** **Filter by state** shows the **Applicable** findings by default; choose **Set aside, no longer reported or not exposed** or **All states** to see the others. **Filter by source** keeps one integration, or **Set by user** for the CVEs attached by hand.
+3. Open **Unique findings** to see one line per flaw across the estate: a CVE with its **Worst finding**, its **Affected assets** and its **KEV / EPSS** reading. Its **Score** is the worst asset's score, raised when the CVE reaches other assets at a close level, and capped at 100. **Search findings...** works here too, on the CVE or the technique only. Select a CVE to open its page across the estate, with the tabs **Overview**, **Assets**, **Attack**, **Remediation** and **Events**.
 4. Select a finding to open it. A vulnerability opens on **Overview**, with the tabs **Score**, **Attack**, **Controls**, **Remediation**, **Activity** and **Events**.
 :::
+
+## See the CVE in OpenCTI and OpenAEV
+
+When the tenant's OpenCTI or OpenAEV connector is set, OpenCRQ shows where the same CVE lives in those products:
+
+- In **Unique findings**, a product mark beside a CVE's identifier, **Open in OpenCTI** or **Open in OpenAEV**, opens the vulnerability there.
+- On the CVE's page, an **In OpenCTI** or **In OpenAEV** card, above the tabs, links to the vulnerability there. OpenCTI finds it by its name, the CVE identifier. The **In OpenAEV** card adds the facts OpenAEV returns, such as its **Findings**, **Affected assets**, **Simulations** or **Last simulation**. A card reads **Not found in OpenCTI.** or **Not found in OpenAEV.** when that product does not hold the CVE.
+
+  ::screenshot{id=opencrq-findings-cve-counterparts alt="The page of CVE-2024-3400 across the estate of Grand Meridian Hotels, with the In OpenCTI card above the tabs linking to the Vulnerability CVE-2024-3400 in OpenCTI."}
+
+When a connector is not set, the CVE's page offers **Connect OpenCTI** or **Connect OpenAEV** instead, which opens the connector's settings. Without **Manage Security**, the button is disabled, and its hint says to ask an administrator. An administrator sets the connectors: see [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/) and [Import OpenAEV results](/opencrq/use/sources/openaev/).
 
 ## Read how a finding weighs
 

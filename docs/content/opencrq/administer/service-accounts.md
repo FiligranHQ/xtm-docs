@@ -16,8 +16,8 @@ A service account is the identity an integration uses in a tenant of OpenCRQ: th
 
 - **It belongs to one tenant.** It reads and writes that tenant's data like a member, and never sees another tenant. A token carries its tenant: a request made with it needs no `x-tenant-id` header.
 - **Its groups add capabilities.** Like a person, it gets the capabilities of the roles of its groups. The creation panel puts a new account in the tenant's **Connectors** group, which has no role: it can work on data, and cannot manage the tenant's security.
-- **OpenCRQ's own connectors write as it, without a token.** The OpenCTI, OpenAEV, Microsoft Defender, Drata and CVE connectors run inside OpenCRQ: their **Configure integration** panel asks for a **Service account**, and what they import is recorded as that account's work. A connector without an account does not run its scheduled syncs. **OpenCRQ Default Threats** is the exception: it reads a public file, asks for no account, and writes as the platform.
-- **A script signs in with a token.** It sends `Authorization: Bearer` and the token to the [OpenCRQ API](/reference/opencrq/api/). Tokens start with `ogrc_`.
+- **OpenCRQ's own connectors write as it, without a token.** The OpenCTI, OpenAEV, Microsoft Defender, Drata and CVE connectors run inside OpenCRQ: their **Configure integration** panel, and the panel of the same source in the steps of **Get started**, ask for a **Service account**, and what they import is recorded as that account's work. A connector without an account does not run its scheduled syncs. **OpenCRQ Default Threats** is the exception: it reads a public file, asks for no account, and writes as the platform.
+- **A script signs in with a token.** It sends `Authorization: Bearer` and the token to the [OpenCRQ API](/reference/opencrq/api/). Tokens start with `flgrn_ocrq_tkn_`.
 - **Its work is traced.** A run of a background job it started shows **Service account** under **Triggered by** in :menu[Settings > Jobs], and a file it stored shows its name under **Uploaded By** in :menu[Settings > File Storage]. The tags and groups it sets on an asset through the API count as a push from XTM One: such a tag shows **XTM One** as its **Source** in :menu[Settings > Taxonomies > Tags], and a push replaces only what an earlier push set, never the tags and groups people set by hand. See [Manage the tags of your assets](/opencrq/configure/risk-taxonomies/#manage-the-tags-of-your-assets).
 
 ## Before you start
@@ -63,6 +63,8 @@ In **Integrations**, the OpenCTI connector is configured with its **Live Stream*
 :::
 
 The **API Tokens** table lists each token by its name and the start of its value, with its **Status** (**Active**, **Revoked** or **Expired**), when it was **Last used**, when it **Expires**, and when it was **Created**. A token stops working at its expiry, when it is revoked, or while its account is disabled.
+
+A token generated before 0.261120.0 starts with `ogrc_`, and OpenCRQ refuses it, although the table still lists it as **Active** with the new prefix. After the upgrade, generate a new token for each script, update the script, then revoke the old token.
 
 :::example[Export the price of every scenario each week]
 Grand Meridian's finance team loads the annualized loss of each risk scenario into its budget workbook every Monday. Claire Morel creates a service account **Name** `Weekly risk export` in the **Connectors** group, and generates a token **Token name** `Finance workbook`, **Expiry** **90 days**. The finance script keeps it in the variable `OPENCRQ_EXPORT_TOKEN` of its scheduler and calls:

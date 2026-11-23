@@ -28,11 +28,13 @@ The copy button next to the **Identifier**, the **Version** and the **Instance i
 
 ::screenshot{id=opencrq-parameters alt="The Parameters page of the Grand Meridian Hotels tenant: the Tenant card with its name, its identifier, the CISO home dashboard and the Automatic default language, and the OpenCRQ platform card with its version and its instance identifier."}
 
-The **Identifier** is what the deployment settings of the tenant use: the connections to OpenCTI, OpenAEV, Microsoft Defender and Drata, and the NVD API key, are keyed by it (the `connectors` keys of the [configuration](/reference/opencrq/configuration/#connectors)). It never changes. The tenant's name is set when it is created; see [Run several tenants in one platform](/opencrq/administer/tenants/).
+The **Identifier** is what the deployment settings of the tenant use: the connections to OpenCTI, OpenAEV, Microsoft Defender and Drata, and the NVD API key, are keyed by it (the `connectors` keys of the [configuration](/reference/opencrq/configuration/#connectors)). It never changes. The tenant's name is set when it is created, and a platform administrator with **Create Tenants** changes it with **Rename** on the platform's **Tenants** page; see [Run several tenants in one platform](/opencrq/administer/tenants/).
 
 ## The platform pages, before any tenant
 
-Everything in OpenCRQ happens in a tenant: a person who signs in through XTM One lands in the first of the tenants they belong to. A platform administrator who belongs to none lands on the platform's **Tenants** page, at `/platform/security/tenants`, where they create one. That is where XTM One's administrator, signed in as the **Super Administrator**, creates the first tenant of a new platform. The platform's pages also hold its **Roles**, **Groups** and **Users**.
+Everything in OpenCRQ happens in a tenant. At its first start, a platform that holds no tenant creates one, named **Default**, with a first risk scope **Enterprise** and its **Get started** wizard. Its name and identifier come from the `initial_tenant` keys of the [configuration](/reference/opencrq/configuration/#initial-tenant), and it has no member yet. XTM One's administrator, signed in as the **Super Administrator**, reaches every tenant without being a member, and lands in it.
+
+A person who signs in through XTM One lands in the first of the tenants they belong to. A platform administrator who belongs to none lands on the platform's **Tenants** page, at `/platform/security/tenants`, where one with **Create Tenants** creates more. The platform's pages also hold its **Roles**, **Groups** and **Users**.
 
 Once they belong to a tenant, a platform administrator reaches the same pages inside it: an address under `/platform/security` opens the page under the tenant's :menu[Settings > Security], with `?scope=platform`. A person who belongs to no tenant and has no **Platform Administration Access** reads **You don't have access to OpenCRQ yet** and "Ask your administrator for access.", with a **Sign out** button. Without that access, an address under `/platform` leads back to the home page. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/#manage-the-platform-administrators) and [Run several tenants in one platform](/opencrq/administer/tenants/).
 
@@ -78,7 +80,7 @@ FILE_STORAGE__REGION: eu-west-3
 | `FILE_STORAGE__ENDPOINT` | | The S3 API endpoint. Setting it turns the file storage on |
 | `FILE_STORAGE__ACCESS_KEY` | | The access key. Required once the endpoint is set |
 | `FILE_STORAGE__SECRET_KEY` | | The secret key. Required once the endpoint is set. Pass it from a secret store |
-| `FILE_STORAGE__BUCKET` | `opengrc` | The bucket that holds the files of every tenant |
+| `FILE_STORAGE__BUCKET` | `opencrq` | The bucket that holds the files of every tenant |
 | `FILE_STORAGE__REGION` | `eu-west-3` | The region the S3 client sends. Any value for RustFS or MinIO |
 
 Once any `FILE_STORAGE__` key is set, the endpoint and both keys are required: a missing one stops OpenCRQ at start with a configuration error. Restart OpenCRQ after a change. See the `file_storage` keys of the [configuration](/reference/opencrq/configuration/#file-storage).

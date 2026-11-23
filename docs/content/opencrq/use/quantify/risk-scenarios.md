@@ -17,7 +17,7 @@ A risk scenario is one line of your risk register, priced in money: an attack ou
 - You are a member of the tenant. Every member works on risk scopes, scenarios and assets; no capability is needed.
 - The risk scope exists and holds at least one primary asset, with its business resources. See [Risk scopes, primary assets and supporting assets](/opencrq/concepts/risk-scopes-and-assets/).
 - The scope's financial profile is answered, so the scenario's losses have amounts: see [Set what an attack costs with the financial profile](/opencrq/use/quantify/loss-drivers/).
-- Threats reach the tenant from OpenCTI: see [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/). Until then, the threats of **OpenCRQ Default Threats** stand in. OpenCRQ prices a scenario against the threats likely to lead to its outcome, weighed more when they target the scope's sector and country: see [Follow the threats that target your scopes](/opencrq/use/threats/threat-center/). A scenario that no threat weighs on stays unpriced.
+- Threats reach the tenant from OpenCTI: see [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/). Without it, the threats of **OpenCRQ Default Threats** can stand in. A new tenant starts with them switched off: someone with **Manage Security** turns them on in the **Threats** step of **Get started**. OpenCRQ prices a scenario against the threats likely to lead to its outcome, weighed more when they target the scope's sector and country: see [Follow the threats that target your scopes](/opencrq/use/threats/threat-center/). A scenario that no threat weighs on stays unpriced.
 
 ## Create the scenario
 
@@ -37,20 +37,24 @@ A risk scenario is one line of your risk register, priced in money: an attack ou
 
 The scenario opens on its **Overview** tab, and OpenCRQ runs its first simulation. When **No loss driver is recommended** shows on the last step, the outcome and the business resources of these assets have no pairing in the loss model: you can still create the scenario and price any driver by hand.
 
+You can also start from a threat you follow. In :menu[Threats > Threats], the header of a threat offers **Quantify risk** when it names the outcome the threat best matches. It opens this wizard with that outcome chosen on **Outcome**, which you can still change. From the tenant's threat center, the wizard starts with the **Risk scope** step. See [Follow the threats that target your scopes](/opencrq/use/threats/threat-center/).
+
 ## Check what the price rests on
 
 A scenario's tabs hold its inputs. Two of them decide most of the price:
 
-- **Threat** holds the **Threat Event Frequency (TEF)**, how many attack attempts a year the scenario faces. A new scenario takes it from the catalogue, in **Auto** mode. See [Set the threat event frequency](/opencrq/use/threats/threat-event-frequency/). The same tab lists the **Relevant Threats** that weigh on the scenario, whatever their source: click one to see why it weighs, and whether its probability on the outcome comes from OpenCRQ's model or from the judgment of **OpenCRQ Default Threats**. See [How a threat gets into a scenario](/opencrq/use/threats/threat-center/#how-a-threat-gets-into-a-scenario).
+- **Threat** holds the **Threat Event Frequency (TEF)**, how many attack attempts a year the scenario faces. A new scenario takes it from the catalogue, in **Auto** mode. See [Set the threat event frequency](/opencrq/use/threats/threat-event-frequency/). The same tab lists the **Relevant Threats** that weigh on the scenario, whatever their source: click one to see why it weighs, and whether its probability on the outcome comes from OpenCRQ's model or from the judgment of **OpenCRQ Default Threats**. See [How a threat gets into a scenario](/opencrq/use/threats/threat-center/#how-a-threat-gets-into-a-scenario). When OpenCTI or OpenAEV is connected to the tenant and holds the same threat, its mark beside the threat's name opens it there, in a new tab.
 - **Financial Impact** holds the loss estimates, derived from the scope's financial profile. See [Set what an attack costs with the financial profile](/opencrq/use/quantify/loss-drivers/).
 
 **Targets** shows the supporting assets behind the primary assets, **Findings** the vulnerabilities on them, **TTP** the techniques the scenario's threats use, and **Controls** how your controls stand against those techniques. When an input is missing, the scenario says which one, with a link to the tab that fills it.
+
+To test the scenario's attackers against your defenses, click **Simulate in OpenAEV** in the scenario's header. It opens, in a new tab, the OpenAEV scenario built from one of the **Relevant Threats**: the one with the highest **Score** among those OpenAEV holds. The button shows only when OpenAEV is connected to the tenant and holds such a scenario. What the simulation proves about your controls comes back through the OpenAEV connector: see [Import OpenAEV results](/opencrq/use/sources/openaev/).
 
 ## Read the price on the CRQ tab
 
 The **Overview** tab gives the headline: the **Annual Loss Exposure**, and the three factors it multiplies, the **Threat event frequency (TEF)**, the **Effective susceptibility** (the share of attacks that land an impact) and the **Loss magnitude (LM)**. The **CRQ** tab shows the latest run in full.
 
-::screenshot{id=opencrq-risk-scenario-crq alt="The CRQ tab of Data Breach on Guest Records: 99.8% of attacks blocked before the objective, a loss event frequency of 0.001 a year, an annualized loss expectancy of $33K with a p10 of $217 and a p90 of $3K, and what the run rests on, with its two admitted actors."}
+::screenshot{id=opencrq-risk-scenario-crq alt="The CRQ tab of Data Breach on Guest Records: the attack run outcomes, nearly every attack blocked before the objective, the loss event frequency with its TEF input, the annualized loss expectancy with its p10 to p90 band, and what the run rests on, with its two admitted actors."}
 
 | Section | What it tells you |
 | --- | --- |
@@ -74,13 +78,13 @@ When a scenario has two runs or more, the **Overview** tab shows **What changed*
 - The tiles below count the changes between the two runs by category: **Run results**, **Model**, **Controls**, **Critical findings**, **High findings**, **Other findings**, **Critical assets**, **High assets**, **Other assets** and **Attack frequency**. Click tiles to keep only their categories; **Show all** brings the others back.
 - The chronology lists each change in order, from the **Earlier run** to the **Later run**, such as a control's strength or coverage that moved or a TEF switched from automatic to manual, with a link to the tab where it happened.
 
-::screenshot{id=opencrq-risk-scenario-changes alt="What changed for Data Breach on Guest Records, on its Annual Loss Exposure tab over 7 days: $33K on the run of Mar 2, 2026 and $33K on the run of Apr 12, 2026, a curve that fell from $97K in January, and two changes, one in Other findings and one in Run results."}
+::screenshot{id=opencrq-risk-scenario-changes alt="What changed for Data Breach on Guest Records, on its Annual Loss Exposure tab over 7 days: the exposure on the run of Mar 2, 2026 and on the run of Apr 12, 2026, its curve over every run since January, lower after March, and two changes, one in Other findings and one in Run results."}
 
 A change of **Model**, such as a new calibration or control catalogue, moves the figure without any change of your risk: weigh it before you report the change.
 
 ## Follow your scenarios
 
-:menu[Risk Scenarios] lists the scenarios of the scope, or of every scope from the tenant's own entry. The **Cards view** shows each scenario's ALE with its p10 to p90 band, the change over its history with a line of past prices, and its **Outcome**, **Targets**, **Owner** and last simulation. The **Lines view** shows the same as columns, with the **Status** of each scenario:
+:menu[Risk Scenarios] lists the scenarios of the scope, or of every scope from the tenant's own entry, where each card names its risk scope above the scenario. The **Cards view** shows each scenario's ALE with its p10 to p90 band, the change over its history with a line of past prices, and its **Outcome**, **Targets**, **Owner** and last simulation. The **Lines view** shows the same as columns, with the **Status** of each scenario:
 
 - **Ready**: every input is filled in and reflected by the latest simulation;
 - **Stale**: inputs changed after the latest simulation;
@@ -88,7 +92,7 @@ A change of **Model**, such as a new calibration or control catalogue, moves the
 - **Not simulated**: no simulation has run yet;
 - **No mapped asset**: the scope is measured over its mapped assets and holds none.
 
-::screenshot{id=opencrq-risk-scenarios-list alt="The Risk Scenarios of Grand Meridian France as cards: Ransomware on the Booking Platform at $254K a year, down $9K, and Data Breach on Guest Records at $33K, down $64K, each with its p10 to p90 band and a line of past prices."}
+::screenshot{id=opencrq-risk-scenarios-list alt="The Risk Scenarios of Grand Meridian France as cards: Ransomware on the Booking Platform at $254K a year, down $9K, and Data Breach on Guest Records, down since January, each with its ALE, its p10 to p90 band and a line of past prices."}
 
 ## Keep the price current
 
@@ -106,9 +110,9 @@ On 9 January 2026, the shared night.audit front-desk account exported guest reco
 | **Name** | `Data Breach on Guest Records` |
 | **Description** | Cybercriminals reach the guest records the booking platform holds, copy them and resell them: 2.4 million guests across the EU to notify, with the data protection authorities, and claims to answer. |
 
-OpenCRQ prices it at $97K a year on 12 January. After multi-factor authentication reaches every front-desk account on 2 March, the run falls to $33K, and stays there: on 12 April the **CRQ** tab reads an ALE of $33K, p10 $217, p90 $3K, from a **TEF input** of 0.003 to 1.569 attempts a year, with 99.8% of the attacks blocked before the objective. Its **Overview** multiplies a TEF of 0.31, an effective susceptibility of 0.2% and a loss magnitude of $59.0M. **What changed**, on its default **7 days**, compares the run of 2 March with the latest one: the same $33K, one new finding and no change of controls.
+OpenCRQ prices it on 12 January, its TEF in **Auto** mode, read in the TEF catalogue for the scope's country, sector and size. After multi-factor authentication reaches every front-desk account on 2 March, the price falls, and stays there. On 12 April, the **CRQ** tab shows nearly every attack blocked before the objective. **What changed**, on its default **7 days**, compares the run of 2 March with the latest one: one new finding and no change of controls.
 
-The mean sits above the p90: a loss event comes about once in a thousand years (LEF mean 0.001), so nearly every simulated year costs little and a rare one costs tens of millions. The ransomware scenario beside it reads $254K with p10 and p90 both at $0, for the same reason. For such a scenario, report the mean and the loss exceedance curve of its **Overview**, not the band.
+When attacks rarely land, the mean can sit above the p90: nearly every simulated year costs little, and a rare one costs tens of millions. The ransomware scenario beside it reads $254K with p10 and p90 both at $0, for that reason. For such a scenario, report the mean and the loss exceedance curve of its **Overview**, not the band.
 :::
 
 :::xtm-one[Ask XTM One to build or explain a scenario]

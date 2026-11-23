@@ -7,7 +7,7 @@ products:
   - opencrq
 personas: [risk-manager]
 owner: docs-opencrq
-last_reviewed: 2026-11-04
+last_reviewed: 2026-11-20
 ---
 
 What an attack costs is the other half of a risk's price, beside how often it happens. OpenCRQ breaks the cost into **loss drivers**: one line each for the forensics firm, the downtime, the notification of the people affected, the regulator's fine. Each driver is a range, minimum, most likely and maximum, in your currency. You do not type them one by one: you answer the **financial profile** of the risk scope, a questionnaire of 21 answers about revenue, downtime, data held and contracts, and OpenCRQ derives the ranges of every scenario of the scope from it. You then correct any driver you know better. [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) explains how the amounts enter the price.
@@ -20,6 +20,8 @@ What an attack costs is the other half of a risk's price, beside how often it ha
 ## Answer the financial profile
 
 You can answer it when you create the risk scope, on its optional **Financial profile** step, or at any time from the scope's details.
+
+In a new tenant, :menu[Get started] asks the same questions on its **Finances** step, for the tenant's first risk scope, **Enterprise** unless you renamed it on the **Company** step. There is no **Save**: each answer is saved when you leave its field or click a choice. The step counts as done once all 21 answers are given.
 
 :::steps
 
@@ -37,7 +39,7 @@ You can answer it when you create the risk scope, on its optional **Financial pr
 
 | Section | What it asks | What it drives |
 | --- | --- | --- |
-| **A · Revenue and margin** | **Loaded daily labour cost**, **Annual revenue**, **Gross margin**, **Operating days per year** and the seasonal peak | Every driver that scales with revenue, the lost margin of an outage. The annual revenue also sets the scope's revenue band, which positions its [threat event frequency](/opencrq/use/threats/threat-event-frequency/) |
+| **A · Revenue and margin** | **Loaded daily labour cost**, **Annual revenue**, **Gross margin**, **Operating days per year** and the seasonal peak | Every driver that scales with revenue, the lost margin of an outage. The annual revenue also sets the scope's revenue band, which positions its [threat event frequency](/opencrq/use/threats/threat-event-frequency/), each time you enter or change the amount: saving the other answers leaves a band chosen on the scope as it is |
 | **B · Digital dependency** | The share of turnover that stops when IT stops, the **Maximum tolerable downtime (MTD)**, the **Recovery time objective (RTO)**, whether lost business comes back, how recently a restore was tested | The downtime, restoration and response drivers |
 | **C · Data held** | How many people's personal data you hold, card transactions, sensitive records, the largest single repository | Notification, identity protection, claims, regulatory fines, card-brand assessments |
 | **D · Regulatory** | The strictest regime that applies: NIS2, DORA or another sectoral supervision | **Regulatory fines** and **Incident legal counsel** |

@@ -1,15 +1,15 @@
 ---
 title: Configure OpenCRQ
-description: Set the database, file storage, XTM One, per-tenant connector and HTTP settings of an OpenCRQ deployment, with their environment variables and what OpenCRQ does when one is wrong.
+description: Set the database, file storage, XTM One, first tenant, per-tenant connector, telemetry and HTTP settings of an OpenCRQ deployment, with their variables and what OpenCRQ does when one is wrong.
 doc_type: how-to
 products:
   - opencrq
 personas: [platform-engineer]
 owner: docs-opencrq
-last_reviewed: 2026-11-04
+last_reviewed: 2026-11-20
 ---
 
-This page sets the configuration an OpenCRQ deployment needs: where its database and file storage are, how it reaches XTM One, which tools each tenant reads, and how it listens. Every setting is an environment variable of the `opencrq` service, read when the platform starts. [Install OpenCRQ](/deploy/install/opencrq/) sets the minimum; come back here to connect tenants to OpenCTI and OpenAEV, size the database connections, or move a service out of the stack. The settings not covered here, such as telemetry and the background jobs, are in the [OpenCRQ configuration](/reference/opencrq/configuration/) reference.
+This page sets the configuration an OpenCRQ deployment needs: where its database and file storage are, how it reaches XTM One, which tools each tenant reads, what it reports, and how it listens. Every setting is an environment variable of the `opencrq` service, read when the platform starts. [Install OpenCRQ](/deploy/install/opencrq/) sets the minimum; come back here to connect tenants to OpenCTI and OpenAEV, size the database connections, turn the usage telemetry off, or move a service out of the stack. The settings not covered here, such as the background jobs, are in the [OpenCRQ configuration](/reference/opencrq/configuration/) reference.
 
 ::diagram{id=deploy-configure-opencrq}
 
@@ -48,7 +48,7 @@ OpenCRQ keeps the files people upload, such as the STIX bundles of the **Threats
 | --- | --- | --- |
 | `FILE_STORAGE__ENDPOINT` | Required in the block | The S3 API, such as `http://minio:9000` |
 | `FILE_STORAGE__ACCESS_KEY`, `FILE_STORAGE__SECRET_KEY` | Required in the block | The keys OpenCRQ signs in with |
-| `FILE_STORAGE__BUCKET` | `opengrc` | The bucket. Create it before the first start: OpenCRQ never creates it in production |
+| `FILE_STORAGE__BUCKET` | `opencrq` | The bucket. Create it before the first start: OpenCRQ never creates it in production |
 | `FILE_STORAGE__REGION` | `eu-west-3` | The region the S3 client sends. Any value works for MinIO-compatible storage |
 
 ## XTM One
@@ -71,7 +71,16 @@ Keep these rules:
 
 ## Connectors of each tenant
 
-The credentials of a connector are set per tenant, never in the interface: two tenants can read two different OpenCTI platforms. A variable takes the identifier of the tenant, shown as **Identifier** in :menu[Settings > Parameters]: `CONNECTORS__<NAME>__<tenant identifier>__<FIELD>`. OpenCRQ creates no tenant on its own: each tenant gets its identifier when it is created, the first one after the first sign-in (see [Install OpenCRQ](/deploy/install/opencrq/#sign-in-and-create-the-first-tenant)).
+The credentials of a connector are set per tenant, never in the interface: two tenants can read two different OpenCTI platforms. A variable takes the identifier of the tenant, shown as **Identifier** in :menu[Settings > Parameters]: `CONNECTORS__<NAME>__<tenant identifier>__<FIELD>`.
+
+At its first start, on a platform without any tenant, OpenCRQ creates one, so that you can write its connector variables before that start:
+
+| Variable | Default | What it sets |
+| --- | --- | --- |
+| `INITIAL_TENANT__ID` | `01a043da-ff47-72c2-aaa4-7da56d85c83e` | The identifier of that first tenant, a UUID |
+| `INITIAL_TENANT__NAME` | `Default` | Its name, which administrators can change afterwards |
+
+OpenCRQ reads them only while the platform holds no tenant: once one exists, at any later start, they change nothing. If the creation fails, OpenCRQ logs `Creating the initial tenant failed, booting without it` and starts without it. Every other tenant gets its identifier when an administrator creates it: see [Run several tenants in one platform](/opencrq/administer/tenants/).
 
 | Connector | Variables, after `CONNECTORS__` and the tenant identifier | Without them |
 | --- | --- | --- |
@@ -83,6 +92,29 @@ The credentials of a connector are set per tenant, never in the interface: two t
 | Drata | `DRATA__…__API_KEY`, and `__URL` (`https://public-api.drata.com` by default; `https://public-api.eu.drata.com` for an EU account), `__WORKSPACE_ID` (`1` by default) | Inactive for the tenant |
 
 A connector with its variables set still waits for a tenant administrator to give it a service account in **Integrations**: see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/). The [connectors reference](/reference/opencrq/connectors/) says what each one brings and when it runs, and the connector pages say what each tool must grant: [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/), [Import OpenAEV results](/opencrq/use/sources/openaev/).
+
+## Telemetry
+
+The `TELEMETRY__*` variables form two groups. `TELEMETRY__USAGE__*` sets the anonymous usage telemetry OpenCRQ sends to Filigran. `TELEMETRY__OBSERVABILITY__*` sets the observability metrics, traces, logs and profiles it sends to your own tools: see [Observability metrics](/deploy/operate/metrics/).
+
+OpenCRQ accepts no other `TELEMETRY__*` variable. An unknown one stops the platform at start with `Unrecognized key` and the name of the key under `telemetry`, rather than leaving a transport off without a word. The names of earlier builds count as unknown, so rename them:
+
+| Name in earlier builds | Name now |
+| --- | --- |
+| `TELEMETRY__TAGS` | `TELEMETRY__USAGE__TAGS` |
+| `TELEMETRY__APPLICATION_NAME` | `TELEMETRY__OBSERVABILITY__SERVICE_NAME` |
+| `TELEMETRY__TRACES__ENABLED`, `TELEMETRY__TRACES__EXPORTER_OTLP` | `TELEMETRY__OBSERVABILITY__OTLP__TRACES__ENABLED`, `TELEMETRY__OBSERVABILITY__OTLP__TRACES__EXPORTER` |
+| `TELEMETRY__LOGS__ENABLED`, `TELEMETRY__LOGS__EXPORTER_OTLP` | `TELEMETRY__OBSERVABILITY__OTLP__LOGS__ENABLED`, `TELEMETRY__OBSERVABILITY__OTLP__LOGS__EXPORTER` |
+| `TELEMETRY__METRICS__OTLP__*` | `TELEMETRY__OBSERVABILITY__OTLP__METRICS__*` |
+| `TELEMETRY__METRICS__PROMETHEUS__*` | `TELEMETRY__OBSERVABILITY__PROMETHEUS__*` |
+| `TELEMETRY__PYROSCOPE__*` | `TELEMETRY__OBSERVABILITY__PYROSCOPE__*` |
+
+| Variable | Default | What it sets |
+| --- | --- | --- |
+| `TELEMETRY__USAGE__ENABLED` | `true` | `false` turns the usage telemetry off: OpenCRQ never contacts Filigran's collector, and logs `Anonymous usage telemetry is disabled by TELEMETRY__USAGE__ENABLED=false, nothing is sent` |
+| `TELEMETRY__USAGE__TAGS` | Empty | Tags of the deployment, separated by commas, such as `saas,eu-west`, sent with the usage data. OpenCRQ trims, lowercases, deduplicates and sorts them |
+
+The usage telemetry sends counts over the whole platform, such as the number of tenants, users, risk scenarios and simulations run, and whether it runs in the Enterprise Edition: no names and no content. The image sends them every 6 hours to `https://telemetry.ocrq.filigran.io`. When the collector does not answer at start, as on a platform without internet access, OpenCRQ logs `Telemetry endpoint is not reachable, anonymous usage telemetry is disabled` and sends nothing until its next start.
 
 ## HTTP and processes
 
@@ -118,6 +150,7 @@ After `docker compose up -d`, the OpenCTI and OpenAEV connectors of the tenant s
 
 ## What's next
 
-- [OpenCRQ configuration](/reference/opencrq/configuration/), every key with its variable, type and default, including telemetry and the background jobs.
+- [OpenCRQ configuration](/reference/opencrq/configuration/), every key with its variable, type and default, including the background jobs.
+- [Observability metrics](/deploy/operate/metrics/), to scrape the metrics of OpenCRQ and send its traces, logs and profiles to your tools.
 - [Background processes](/reference/opencrq/processes/), what the worker runs and when.
 - [Connect the modules to each other](/deploy/configure/connect-modules/), for the registration token XTM One shares with every platform.

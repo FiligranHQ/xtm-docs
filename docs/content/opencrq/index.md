@@ -14,13 +14,13 @@ sidebar_position: 0
 OpenCRQ turns each line of your risk register, such as ransomware on the booking platform or a breach of customer records, into an annualized loss in your currency, with the chance of losing more. The price is not a score someone typed: OpenCRQ simulates the attacks that the threats targeting you would run against your assets and your controls, and keeps the figure current as they change. Then you compare what a control costs with the loss it removes.
 :::
 
-:::info[Not released yet]
-OpenCRQ is not released yet. These pages follow its development and will be versioned from its first release, like OpenCTI.
-:::
+OpenCRQ comes in two editions. The Community Edition, under the Apache 2.0 license, prices risk in one tenant. The Enterprise Edition, which OpenCRQ takes from XTM One's Filigran license, adds several tenants in one platform and the XTM One assistant.
 
 ## Start here
 
-Pick your role: each tab gives your goal and the pages to read first, in order.
+The first time you open a new tenant, OpenCRQ shows **Get started**, first in the menu: eight steps, **Company**, **Assets**, **Threats**, **Defenses**, **Finances**, **Tolerance**, **Protect** and **Scenarios**, that take you to a first quantified risk scenario in a few minutes. The menu shows how many are done. Once you finish them, **Get started** moves to the end of the menu, after **Settings**.
+
+Then pick your role: each tab gives your goal and the pages to read first, in order.
 
 ::::tabs
 :::tab[Risk managers]
@@ -57,7 +57,7 @@ You give people access and connect OpenCRQ to the sources that feed it. People s
 :::tab[Platform engineers]
 You deploy OpenCRQ beside the XTM platform and keep it running.
 
-1. [Install OpenCRQ](/deploy/install/opencrq/): its service, its database and file storage, and its sign-in through XTM One.
+1. [Install OpenCRQ](/deploy/install/opencrq/): its service, its database and file storage, its first tenant, and its sign-in through XTM One.
 2. [Configure OpenCRQ](/deploy/configure/opencrq/): the settings a deployment sets, and the connectors of each tenant.
 3. [OpenCRQ configuration](/reference/opencrq/configuration/): every key, its variable and its default.
 :::

@@ -2274,8 +2274,8 @@
     ]
   },
   "opencrq": {
-    "done": 27,
-    "total": 27,
+    "done": 37,
+    "total": 37,
     "groups": [
       {
         "id": "concepts",
@@ -2321,6 +2321,18 @@
             "status": "migrated",
             "more": 0,
             "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/get-started/",
+            "title": "Get your first quantified risk scenario in eight steps",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 9,
+            "more_done": 9,
             "group": "use"
           },
           {

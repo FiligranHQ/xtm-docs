@@ -6,6 +6,7 @@ products:
   - opencti
   - openaev
   - xtm-one
+  - opencrq
 personas: [admin, cti-analyst, platform-engineer]
 owner: docs-platform
 last_reviewed: 2026-11-01
@@ -101,7 +102,7 @@ Before you upgrade, read [Breaking changes](/deploy/upgrade/breaking-changes/) a
 
 ## The other products
 
-This documentation describes OpenAEV 3.261118.0 and XTM One 1.261119.0 with OpenCTI 7.261119.0. Since 1.261112.0, XTM One streams its chat over HTTP instead of a WebSocket: the reverse proxy in front of it must serve HTTP/2 to browsers, without buffering `/api/` and with a read timeout above 15 seconds. See [XTM One 1.261112.0](/deploy/upgrade/breaking-changes/#xtm-one-1-261112-0). What each OpenAEV release changes is in the [OpenAEV release notes](https://github.com/OpenAEV-Platform/openaev/releases) on GitHub; which versions work together is in the [compatibility matrix](/deploy/upgrade/compatibility/).
+This documentation describes OpenAEV 3.261118.0, XTM One 1.261119.0 and OpenCRQ 0.261120.0 with OpenCTI 7.261119.0. OpenCRQ 0.261120.0 is the first public release of the cyber risk quantification product: it prices each risk of your register in money, from the threats you track in OpenCTI and the results of your OpenAEV simulations. Start with [OpenCRQ](/opencrq/), then [Install OpenCRQ](/deploy/install/opencrq/). Since 1.261112.0, XTM One streams its chat over HTTP instead of a WebSocket: the reverse proxy in front of it must serve HTTP/2 to browsers, without buffering `/api/` and with a read timeout above 15 seconds. See [XTM One 1.261112.0](/deploy/upgrade/breaking-changes/#xtm-one-1-261112-0). What each OpenAEV release changes is in the [OpenAEV release notes](https://github.com/OpenAEV-Platform/openaev/releases) on GitHub; which versions work together is in the [compatibility matrix](/deploy/upgrade/compatibility/).
 ::::
 
 ::::only{opencti="<7.261119"}

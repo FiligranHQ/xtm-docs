@@ -13,7 +13,7 @@ lanes:
   - label: On the platform
     tone: core
     nodes:
-      - {id: pgroup, label: Platform groups, icon: LogoOpenCRQ, note: Yours}
+      - {id: pgroup, label: Platform groups, icon: LogoOpenCRQ, note: 'Platform administrators, User managers, yours'}
       - {id: prole, label: Platform roles, icon: ShieldCheck, note: 'Tenants, users, access'}
 edges:
   - {from: invite, to: user, label: adds to a tenant}

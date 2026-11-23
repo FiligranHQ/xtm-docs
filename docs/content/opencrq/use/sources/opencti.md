@@ -6,7 +6,7 @@ doc_type: how-to
 products: [opencrq, opencti]
 personas: [admin, risk-manager, cti-lead]
 owner: docs-opencrq
-last_reviewed: 2026-11-04
+last_reviewed: 2026-11-20
 ---
 
 OpenCRQ prices a risk scenario from the threat actors that target your sector and your country and pursue the scenario's outcome. The OpenCTI connector subscribes to an OpenCTI Live Stream and keeps those threats current: a threat created, edited, renamed, merged or deleted in OpenCTI changes the same way in OpenCRQ, and the scenarios it reaches are priced again. This page sets up the stream in OpenCTI, binds it to your tenant in OpenCRQ, and checks what arrives. To see where threats weigh in the price, read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).
@@ -28,7 +28,7 @@ The connector asks OpenCTI for the relationships its rules engine inferred too. 
 
 - In OpenCRQ, your role has the **Manage Security** capability. Configuring the connector, turning it on or off, reconnecting it and resetting it all require it.
 - In OpenCTI, you have the **Manage data sharing** capability, to create the Live Stream.
-- In OpenCTI, a user for OpenCRQ, with the **Access data sharing** capability and read access to every marking definition applied to the threats, their relationships and the identities that authored them. OpenCTI leaves out of the stream a relationship whose source or target this user cannot read, and OpenCRQ cannot tell that gap from a narrow filter.
+- In OpenCTI, a user for OpenCRQ, with the **Access data sharing** capability and read access to every marking definition applied to the threats, their relationships and the identities that authored them. OpenCTI leaves out of the stream a relationship whose source or target this user cannot read, and OpenCRQ cannot tell that gap from a narrow filter. For OpenCRQ to also find your threats, CVEs and assets in OpenCTI, the user needs **Access knowledge** too: see [Open the same object in OpenCTI](#open-the-same-object-in-opencti).
 - The deployment of OpenCRQ carries the OpenCTI URL and that user's token for your tenant. Until it does, the connector page shows **Unavailable** and says **Add this connector to your deployment configuration to use it.** See [Give OpenCRQ the URL and the token](#give-opencrq-the-url-and-the-token).
 
 ## Create the Live Stream in OpenCTI
@@ -82,7 +82,7 @@ The stream then shows in **Data > Data sharing > Live streams** of OpenCTI, with
 
 ## Give OpenCRQ the URL and the token
 
-The credentials are not stored in OpenCRQ's database: the deployment sets them per tenant, as two environment variables keyed by the tenant's id, and the connector reads that tenant's entry only. The tenant's id is the first segment of the address of OpenCRQ once you are signed in to that tenant.
+The credentials are not stored in OpenCRQ's database: the deployment sets them per tenant, as two environment variables keyed by the tenant's id, and the connector reads that tenant's entry only. The tenant's id is the first segment of the address of OpenCRQ once you are signed in to that tenant. Until the deployment carries them, **Configure** on the **OpenCTI** tile of the **Threats** step of **Get started** shows both variables with that id filled in, and **Copy** copies them. For the tenant OpenCRQ creates at its first boot, the id is `INITIAL_TENANT__ID`, so you can write the variables before that boot: see [Run several tenants in one platform](/opencrq/administer/tenants/).
 
 | Variable | What it holds |
 | --- | --- |
@@ -104,6 +104,8 @@ The connector writes the threats it receives as a service account of the tenant.
 
    ::screenshot{id=opencrq-opencti-configure alt="The Configure integration panel of the OpenCTI connector: the Enabled switch, the Live Stream Threats for risk quantification with the notice that its filter admits threat actors, and its filter in readable form, one group of conditions per kind of object."}
 :::
+
+On a new tenant, the **Threats** step of **Get started** offers the same fields: click **Configure** on the **OpenCTI** tile, choose the **Live Stream** and the **Service account**, and click **Save**. **Follow in Integrations** opens the connector's page. Without **Manage Security**, the panel it opens says **An administrator configures this connector.**
 
 A judgment other than **Delivers threat actors** is advice, not a block: you can still save.
 
@@ -148,6 +150,15 @@ The stream replays its history: Velvet Harbor arrives with its 10 techniques and
 
 The threats show in :menu[Threats], where you can filter them by source. Which of them a scenario counts depends on the sectors and countries of its risk scope and on its outcome: see [Follow the threats that target your scopes](/opencrq/use/threats/threat-center/).
 
+## Open the same object in OpenCTI
+
+With the URL and the token set, OpenCRQ also asks OpenCTI which of its objects OpenCTI holds, stream or no stream. It finds a threat by its STIX id, a CVE by its identifier, and an asset by its hostname. OpenCTI answers these questions only when the user of the token has **Access knowledge**.
+
+- In :menu[Threats > Threats] and the **Relevant Threats** of a scenario, the OpenCTI mark beside a threat's name opens it in OpenCTI, in a new tab. A threat's header offers **Open in OpenCTI**. See [Follow the threats that target your scopes](/opencrq/use/threats/threat-center/).
+- A CVE's page and an asset's page show an **In OpenCTI** card that links to it there. See [Review the findings on your assets](/opencrq/use/attack-surface/findings/).
+
+Without the variables, these pages offer **Connect OpenCTI** instead: with **Manage Security**, it opens the connector's page.
+
 ## Check that it works
 
 ::screenshot{id=opencrq-integrations alt="The Integrations page: the figures of the connector pipeline, with one configured connector, the stream catch-up at 100% and 88 records ingested, above the Deployed connectors grouped by domain."}
@@ -164,13 +175,15 @@ If nothing arrives, open the connector page: a banner names the problem, such as
 
 ## Retire the default threats
 
-A tenant starts with **OpenCRQ Default Threats**, a connector under **Threat intelligence** that loads threat groups and campaigns derived from MITRE ATT&CK, so that scenarios have threats before any feed is connected. It stays on when you connect OpenCTI. Once the stream reaches its live tail, the OpenCTI connector's **Overview** says **Your OpenCTI stream has caught up, and OpenCRQ Default Threats is still enabled.**: the default threats are listed beside yours, and a group both know counts once in a simulation.
+**OpenCRQ Default Threats** is a connector under **Threat intelligence** that loads threat groups and campaigns derived from MITRE ATT&CK, so that scenarios have threats before any feed is connected. A new tenant starts with it switched off: it loads once someone with **Manage Security** clicks **Enable** in the **Threats** step of **Get started**, or turns on its **Enabled** switch. Once on, it stays on when you connect OpenCTI. Once the stream reaches its live tail, the OpenCTI connector's **Overview** says **Your OpenCTI stream has caught up, and OpenCRQ Default Threats is still enabled.**: the default threats are listed beside yours, and a group both know counts once in a simulation.
 
 When your stream covers the threats you care about:
 
 1. Click **Review Default Threats** on that notice, then **Configure**.
 2. Turn the switch off. The confirmation says how many of its threats leave the tenant and how many from your other sources stay.
 3. Click **Disable**. Your risk scenarios are simulated again without the default threats; past simulations keep the names of the threats they used.
+
+On a tenant whose **Get started** is open, **Disable** on the **OpenCRQ Default Threats** tile of its **Threats** step asks the same confirmation.
 
 Turning the switch back on loads the default threats again. The platform reads them from OpenCRQ's dataset repository: on a platform without internet access, `CONNECTORS__DEFAULT_THREATS__DATASET_URL` points it to a mirror of that folder, and an empty value turns the connector off for every tenant. See the [configuration reference](/reference/opencrq/configuration/#connectors).
 

@@ -1,4 +1,4 @@
-title: Your Prometheus scrapes the metrics of OpenCTI, its workers and OpenAEV, and OpenCTI can also push metrics, traces and profiles to your own collectors
+title: Your Prometheus scrapes the metrics of OpenCTI, its workers, OpenAEV and OpenCRQ, and OpenCTI and OpenCRQ can also push metrics, traces and profiles to your own collectors
 lanes:
   - label: Platforms
     tone: product
@@ -6,17 +6,20 @@ lanes:
       - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "/metrics on port 14269"}
       - {id: workers, label: OpenCTI workers, icon: Cpu, note: "Port 14270"}
       - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "/actuator/prometheus, bearer key"}
+      - {id: opencrq, label: OpenCRQ, icon: LogoOpenCRQ, note: "/metrics on port 14269"}
   - label: Your monitoring
     tone: external
     nodes:
       - {id: prometheus, label: Prometheus, icon: Gauge, note: Scrapes the endpoints}
-      - {id: otlp, label: OTLP collector, icon: Activity, note: Metrics and traces}
+      - {id: otlp, label: OTLP collector, icon: Activity, note: "Metrics, traces, logs"}
       - {id: zipkin, label: Zipkin, icon: Search, note: Traces}
       - {id: pyroscope, label: Pyroscope, icon: Cpu, note: CPU and memory profiles}
 edges:
   - {from: opencti, to: prometheus, label: scraped}
   - {from: workers, to: prometheus, label: scraped}
   - {from: openaev, to: prometheus, label: scraped with key}
+  - {from: opencrq, to: prometheus, label: scraped}
+  - {from: opencrq, to: otlp, label: pushed, style: dashed}
   - {from: opencti, to: otlp, label: pushed, style: dashed}
   - {from: opencti, to: zipkin, label: traces, style: dashed}
   - {from: opencti, to: pyroscope, label: profiles, style: dashed}

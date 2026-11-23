@@ -68,7 +68,7 @@ Each person chooses their own; an administrator chooses the one for everyone who
 2. In the **Preferences** card, choose a dashboard in **Home dashboard**. **Tenant home** followed by the tenant's choice in parentheses keeps the tenant's home dashboard, and follows it when it changes.
 :::
 
-The choice is saved at once, and **Home** opens that dashboard from then on. See [Set your profile and follow your notifications](/opencrq/use/profile/).
+The choice is saved at once, and **Home** opens that dashboard from then on. On a new tenant whose **Get started** wizard is not finished, the first time you open the tenant in a browser, OpenCRQ opens **Get started** instead; **Home** in the sidebar opens your dashboard. See [Set your profile and follow your notifications](/opencrq/use/profile/).
 
 To set the tenant's home dashboard, open :menu[Settings > Parameters] and choose a dashboard in **Home dashboard**: it is shown on Home to every user who has not chosen their own. Without the **Manage Security** capability, the field shows the current choice and cannot be changed.
 
