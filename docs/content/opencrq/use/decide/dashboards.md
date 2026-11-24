@@ -17,7 +17,7 @@ OpenCRQ's dashboards put the cyber risk of your organization in money on one scr
 - Every member of the tenant reads the dashboards and chooses their own home dashboard: no capability is needed.
 - Setting the home dashboard of the whole tenant needs the **Manage Security** capability.
 - The figures need priced risk scenarios. See [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/).
-- OpenCRQ shows every amount in dollars today; the choice of currency is coming.
+- OpenCRQ works in US dollars: it shows every amount in dollars.
 
 ## The dashboards
 
@@ -33,7 +33,7 @@ OpenCRQ ships five dashboards. :menu[Dashboards] in the sidebar lists them, with
 | **Findings & Assets** | The findings backlog, their triage and the exposed estate |
 | **Remediation pace** | Incoming findings against the team's closing capacity, per severity band, over a **Time window** you choose |
 
-Each dashboard has a **Risk scope** menu at the top right: **All risk scopes** adds up every scope of the tenant, and a scope narrows every figure to it. Under a risk scope in the sidebar, **Overview** opens your home dashboard on that scope, and **Dashboards** lists the five dashboards for it.
+Opened from **Home** or **Dashboards**, each dashboard has a **Risk scope** menu at the top right: **All risk scopes** adds up every scope of the tenant, and a scope narrows every figure to it. Under a risk scope in the sidebar, **Overview** opens your home dashboard on that scope, and **Dashboards** lists the five dashboards for it, with no menu: they stay on that scope.
 
 ## Read the CISO dashboard
 
@@ -41,15 +41,15 @@ The CISO dashboard reads from top to bottom like a board briefing.
 
 ::screenshot{id=opencrq-dashboards-aggregate-risk alt="The Aggregate risk group of the CISO dashboard: a Likelihood of 4%, up 3 points, a Loss magnitude of $12.6M, down $28.4M, and an Annual loss exposure of $512K, up $182K, each with its twelve-month curve."}
 
-- **Risk scope**: what the figures cover, the tenant or one scope, with its count of risk scenarios.
+- **Risk scope**: what the figures cover. On **All risk scopes**, the tenant with its count of risk scopes and of risk scenarios; on one scope, its name, country, sector and annual revenue.
 - **Aggregate risk**: three figures, each with a curve of the last twelve months and its change:
   - **Likelihood**: the probability of at least one loss event in the year, across the scope's scenarios.
-  - **Loss magnitude**: the mean loss per loss event.
+  - **Loss magnitude**: the annual loss exposure divided by the loss event frequency. It also carries the response cost of the attacks evicted in time, which are not loss events. For the full cost of one loss event, read the **Loss magnitude (LM)** on a scenario's **Overview**.
   - **Annual loss exposure**: the loss to expect on average over a year, the loss event frequency times the loss magnitude. It is the sum of the scenarios' mean annual loss; no band is given, since adding the scenarios' bands would assume they all have their worst year at once.
 - **Risk treatment recommendations**: the **Top recommended controls**, the control moves that would remove the most annual loss, one per control, and the **Top recommended findings** to remediate first. Do not add up the **ALE reduction** column: each move is priced as if the others did not happen. **Create a risk treatment plan** starts a plan from here: see [Choose the treatment plan that removes the most loss](/opencrq/use/decide/treatment-plans/).
-- **Gap to tolerance**: how far each scenario sits from the risk tolerance applied to it, its own or its scope's. A bar to the right overruns the tolerance by that amount; to the left, it keeps that margin. Scenarios with no tolerance are counted below, with a **Set its risk tolerance** button.
+- **Gap to tolerance**: how far each scenario sits from the risk tolerance applied to it, its own or its scope's. A bar to the right overruns the tolerance by that amount; to the left, it keeps that margin. Scenarios with no tolerance are counted below. When they all belong to one scope, a **Set its risk tolerance** button opens that scope's tolerance.
 - **Where the risk sits**: the **Riskiest risk scopes**, ranked by annual loss exposure; the **Top risks**, a flow from primary assets to scenarios, attack outcomes and loss categories with each one's share; and the **Worst performing risk scenarios** and **Best performing risk scenarios**, whose likelihood rose or fell most over the last month.
-- **Threats**, **Attack surface** and **Defenses**: the threats OpenCTI streams to the tenant, the estate and its findings, and how the controls stand.
+- **Threats**, **Attack surface** and **Defenses and compliance**: the tenant's threats, from OpenCTI, **OpenCRQ Default Threats** or a STIX import, the estate and its findings, and how the controls and the compliance assessments stand.
 
 The **What it means and how it is computed** button next to a figure or a group gives its definition, its computation and its limits.
 
@@ -81,7 +81,7 @@ On 12 April 2026, the risk manager of Grand Meridian Hotels opens Home, the **CI
 
 The **Annual loss exposure** curve tells the story of the quarter: $330K on 12 January, when the scenarios were first priced; a step up on 19 January, once the risk manager set the ransomware frequency from the sector's incident reports, 1 to 10 attempts a year, 3 most likely; a step down on 2 March, when MFA covered every front-desk account; and a rise again on 10 April, when OpenCTI reported Ember Tide's new campaign against hotel chains, to $512K.
 
-**Riskiest risk scopes** puts Grand Meridian France first, at $287K, ahead of Grand Meridian Spain at $225K. In **Top risks**, the online booking platform carries $254K, about half of the exposure. Among the **Top recommended controls** is Secure Remote Access (VPN / ZTNA), not deployed at Grand Meridian France yet. That is the next plan to price.
+**Riskiest risk scopes** puts Grand Meridian France first, at $287K, ahead of Grand Meridian Spain at $225K. In **Top risks**, the online booking platform carries $254K, about half of the exposure. Among the **Top recommended controls** is Secure Remote Access (VPN / ZTNA), not deployed at Grand Meridian France yet: it is the control the plan Zero-trust remote access for the hotels, priced on 10 April, moves.
 :::
 
 ## What's next

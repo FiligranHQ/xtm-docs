@@ -40,7 +40,7 @@ OpenCRQ keeps the files people upload, such as the STIX bundles of the **Threats
 
 | What you set | What OpenCRQ does |
 | --- | --- |
-| No `FILE_STORAGE__*` variable | Starts without file storage: the screens offer no upload |
+| No `FILE_STORAGE__*` variable | Starts without file storage: on the **Threats** page, **Analyze new bundle** is greyed out, with **File storage is not configured** |
 | The block, with a wrong endpoint, wrong keys or a bucket that does not exist | Stops at start with a message: `File storage is misconfigured — fix FILE_STORAGE__* before restarting` |
 | The block, right, with the storage briefly unreachable | Starts, logs the error, and connects at the first upload |
 
@@ -64,9 +64,9 @@ OpenCRQ does not start without XTM One. It registers with XTM One when it starts
 
 Keep these rules:
 
-- **Your own registration token.** While XTM One runs with its published default token, it withholds the XTM license, and OpenCRQ stays in the Community Edition.
+- **Your own registration token.** Set it before the first start: OpenCRQ registers with XTM One with this token, and the registration brings both the sign-in through XTM One and the XTM license. XTM One refuses to register a new platform with its published default token, `xtm-default-registration-token`, with HTTP 401: it keeps only the heartbeat of a platform registered earlier, and withholds the XTM license from it.
 - **Public and internal URLs.** OpenCRQ reads XTM One's public identity from `/xtm/auth/metadata` on `XTM_ONE__URL`, once an hour, and uses it for the tokens and for the links users follow to XTM One. When `XTM_ONE__PLATFORM_URL` does not resolve inside Docker, set `OPENCRQ_API_URL` on the XTM One services to the internal address of OpenCRQ, as [Install OpenCRQ](/deploy/install/opencrq/) does.
-- **The edition.** The Enterprise Edition of OpenCRQ comes only from the XTM license that XTM One returns at registration, which OpenCRQ verifies. Each verified answer grants it for 7 days; a restart starts in the Community Edition until the next registration succeeds. The Enterprise Edition brings more than one tenant and the Ask Ariane assistant.
+- **The edition.** The Enterprise Edition of OpenCRQ comes from the XTM license that XTM One returns at registration, which OpenCRQ verifies, or, until it expires, from a Filigran license installed on the platform before 17 November 2026. Each verified answer of XTM One grants it for 7 days, in memory: after a restart, a platform without an installed license is in the Community Edition until the next registration succeeds. The Enterprise Edition brings more than one tenant and the Ask Ariane assistant.
 - **When XTM One is down.** OpenCRQ keeps serving and its health check stays healthy. Every user sees a message saying XTM One is not answering, its registration is refused, or its answer cannot be read, and Ask Ariane is unavailable until a registration succeeds.
 
 ## Connectors of each tenant
@@ -80,18 +80,18 @@ At its first start, on a platform without any tenant, OpenCRQ creates one, so th
 | `INITIAL_TENANT__ID` | `01a043da-ff47-72c2-aaa4-7da56d85c83e` | The identifier of that first tenant, a UUID |
 | `INITIAL_TENANT__NAME` | `Default` | Its name, which administrators can change afterwards |
 
-OpenCRQ reads them only while the platform holds no tenant: once one exists, at any later start, they change nothing. If the creation fails, OpenCRQ logs `Creating the initial tenant failed, booting without it` and starts without it. Every other tenant gets its identifier when an administrator creates it: see [Run several tenants in one platform](/opencrq/administer/tenants/).
+`INITIAL_TENANT__NAME` counts only while the platform holds no tenant: once one exists, changing it renames nothing. `INITIAL_TENANT__ID` is read at every start too: it names the tenant of the `APP__ADMIN__TOKEN` account and of the accounts `/api/xtm/peer-tokens` creates, as [Sign in the first time](/deploy/configure/first-access/#opencrq) describes. Changing it later creates no tenant. If the creation fails, OpenCRQ logs `Creating the initial tenant failed, booting without it` and starts without it. Every other tenant gets its identifier when an administrator creates it: see [Run several tenants in one platform](/opencrq/administer/tenants/).
 
 | Connector | Variables, after `CONNECTORS__` and the tenant identifier | Without them |
 | --- | --- | --- |
-| CISA KEV, FIRST EPSS | None | Always on |
-| NIST NVD | `NIST__…__API_KEY` | Runs, at NVD's lower rate limit without a key |
+| CISA KEV, FIRST EPSS | None | No variable needed. Off until a tenant administrator binds a service account in **Integrations** |
+| NIST NVD | `NIST__…__API_KEY` | Off until a tenant administrator binds a service account in **Integrations**. Without a key, it runs at NVD's lower rate limit |
 | OpenCTI | `OPENCTI__…__URL`, `OPENCTI__…__TOKEN` | Inactive for the tenant |
 | OpenAEV | `OPENAEV__…__URL`, `OPENAEV__…__TOKEN` | Inactive for the tenant |
 | Microsoft Defender, through Microsoft Graph | `MICROSOFT_GRAPH__…__AZURE_TENANT_ID`, `__CLIENT_ID`, `__CLIENT_SECRET` | Inactive for the tenant |
 | Drata | `DRATA__…__API_KEY`, and `__URL` (`https://public-api.drata.com` by default; `https://public-api.eu.drata.com` for an EU account), `__WORKSPACE_ID` (`1` by default) | Inactive for the tenant |
 
-The OpenCTI and OpenAEV connectors come up enabled once their variables are set: at each start, OpenCRQ gives each one a service account and, for OpenCTI, creates the Live Stream it reads, unless a tenant administrator already configured them. See [Link OpenCRQ to OpenCTI and OpenAEV](/deploy/configure/connect-modules/#link-opencrq-to-opencti-and-openaev). Another connector with its variables set still waits for a tenant administrator to give it a service account in **Integrations**: see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/). The [connectors reference](/reference/opencrq/connectors/) says what each one brings and when it runs, and the connector pages say what each tool must grant: [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/), [Import OpenAEV results](/opencrq/use/sources/openaev/).
+The OpenCTI and OpenAEV connectors come up enabled once their variables are set. At each start, OpenCRQ creates the Live Stream `OpenCRQ threat feed` in OpenCTI, or puts its filter back, and binds each of the two connectors that nobody configured to a service account. A binding a tenant administrator made is kept. See [Link OpenCRQ to OpenCTI and OpenAEV](/deploy/configure/connect-modules/#link-opencrq-to-opencti-and-openaev). Another connector with its variables set still waits for a tenant administrator to give it a service account in **Integrations**: see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/). The [connectors reference](/reference/opencrq/connectors/) says what each one brings and when it runs, and the connector pages say what each tool must grant: [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/), [Import OpenAEV results](/opencrq/use/sources/openaev/).
 
 ## Telemetry
 
@@ -120,7 +120,7 @@ The usage telemetry sends counts over the whole platform, such as the number of 
 
 | Variable | Default | What it sets |
 | --- | --- | --- |
-| `HTTP_SERVER__HOST`, `HTTP_SERVER__PORT` | Required | Where the interface and the API listen in the container, such as `0.0.0.0` and `3002` |
+| `HTTP_SERVER__HOST`, `HTTP_SERVER__PORT` | None | Where the interface and the API listen in the container, such as `0.0.0.0` and `3002`. Required for the interface and the API: without them, OpenCRQ starts with no HTTP server |
 | `HEALTHCHECK_HTTP_SERVER__PORT` | Required | The port of the health check, such as `8444`. It answers `200` with `{"healthy":true,...}` while every process runs, and `503` otherwise |
 | `HTTP_SERVER__PUBLIC_PORT`, `HEALTHCHECK_HTTP_SERVER__PUBLIC_PORT` | None | The ports published on the host, for the logs only |
 | `HTTP_SERVER__MAX_RESPONSE_ITEMS` | `20000` | The most items one API call returns. Above it, the call is refused with `PAYLOAD_TOO_LARGE` |
@@ -134,18 +134,18 @@ Leave `PLATFORM_SEED__ENABLED` and `PLATFORM__RESET_ON_VERSION_CHANGE` unset in 
 :::
 
 :::example[Connect Grand Meridian's tenant to OpenCTI and OpenAEV]
-Example CERT runs OpenCRQ for Grand Meridian Hotels, whose tenant identifier is `abd0465d-51cd-5234-85b8-cb1cc781124c`. Its platform engineer connects the tenant to the CERT's OpenCTI, to read the threats against the hospitality sector, to its OpenAEV, to read the simulation results of the hotels, and to the NVD with an API key. The tokens live in `.env`, as `GRAND_MERIDIAN_OPENCTI_TOKEN`, `GRAND_MERIDIAN_OPENAEV_TOKEN` and `NVD_API_KEY`. In `docker-compose.override.yml`, under the `opencrq` service:
+Example CERT runs OpenCRQ for Grand Meridian Hotels, whose tenant identifier is `01a043da-ff47-72c2-aaa4-7da56d85c83e`: OpenCRQ created that tenant at its first start. Its platform engineer connects the tenant to the CERT's OpenCTI, to read the threats against the hospitality sector, to its OpenAEV, to read the simulation results of the hotels, and to the NVD with an API key. The tokens live in `.env`, as `GRAND_MERIDIAN_OPENCTI_TOKEN`, `GRAND_MERIDIAN_OPENAEV_TOKEN` and `NVD_API_KEY`. In `docker-compose.override.yml`, under the `opencrq` service, these variables replace the ones xtm-docker sets for the same tenant with the admin tokens:
 
 ```yaml
     environment:
-      - CONNECTORS__OPENCTI__abd0465d-51cd-5234-85b8-cb1cc781124c__URL=http://opencti:8080
-      - CONNECTORS__OPENCTI__abd0465d-51cd-5234-85b8-cb1cc781124c__TOKEN=${GRAND_MERIDIAN_OPENCTI_TOKEN}
-      - CONNECTORS__OPENAEV__abd0465d-51cd-5234-85b8-cb1cc781124c__URL=http://openaev:8080
-      - CONNECTORS__OPENAEV__abd0465d-51cd-5234-85b8-cb1cc781124c__TOKEN=${GRAND_MERIDIAN_OPENAEV_TOKEN}
-      - CONNECTORS__NIST__abd0465d-51cd-5234-85b8-cb1cc781124c__API_KEY=${NVD_API_KEY}
+      - CONNECTORS__OPENCTI__01a043da-ff47-72c2-aaa4-7da56d85c83e__URL=http://opencti:8080
+      - CONNECTORS__OPENCTI__01a043da-ff47-72c2-aaa4-7da56d85c83e__TOKEN=${GRAND_MERIDIAN_OPENCTI_TOKEN}
+      - CONNECTORS__OPENAEV__01a043da-ff47-72c2-aaa4-7da56d85c83e__URL=http://openaev:8080
+      - CONNECTORS__OPENAEV__01a043da-ff47-72c2-aaa4-7da56d85c83e__TOKEN=${GRAND_MERIDIAN_OPENAEV_TOKEN}
+      - CONNECTORS__NIST__01a043da-ff47-72c2-aaa4-7da56d85c83e__API_KEY=${NVD_API_KEY}
 ```
 
-The user of `GRAND_MERIDIAN_OPENCTI_TOKEN` holds **Manage data sharing** in OpenCTI. After `docker compose up -d`, the OpenCTI and OpenAEV connectors of the tenant come up enabled in **Integrations**, OpenCTI holds the Live Stream `OpenCRQ threat feed`, the threats of Velvet Harbor and Ember Tide stream in, and the hotels' simulation results follow every hour.
+The user of `GRAND_MERIDIAN_OPENCTI_TOKEN` holds **Manage data sharing** in OpenCTI. After `docker compose up -d`, the OpenCTI and OpenAEV connectors of the tenant come up enabled in **Integrations**, OpenCTI holds the Live Stream `OpenCRQ threat feed`, the threats of Velvet Harbor and Ember Tide stream in, and the hotels' simulation results follow every hour. The NIST NVD connector runs once a tenant administrator binds a service account to it in **Integrations**.
 :::
 
 ## What's next

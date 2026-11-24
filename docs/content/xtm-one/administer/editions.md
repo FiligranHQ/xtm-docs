@@ -10,7 +10,7 @@ migrated_from:
   - xtm-one:/administration/editions-and-licensing/
 ---
 
-XTM One is one platform with two editions, and every deployment contains all of it. The edition decides one thing: whether AI is licensed. In the **Community Edition**, the platform runs without AI: sign-in, users, settings, the connections to OpenCTI, OpenAEV and OpenCRQ and their MCP servers work, while agents, chat and automations are listed but locked. In the **Enterprise Edition**, every capability is available. A deployment is in Enterprise Edition as soon as an OpenCTI, OpenAEV or OpenCRQ platform in Enterprise Edition is connected to it, or an XTM One license is installed; no redeployment is needed. Whether AI actually runs is a separate switch an administrator holds: see [Run XTM One with AI switched off](/xtm-one/administer/running-without-ai/).
+XTM One is one platform with two editions, and every deployment contains all of it. The edition decides one thing: whether AI is licensed. In the **Community Edition**, the platform runs without AI: sign-in, users, settings, the connections to OpenCTI, OpenAEV and OpenCRQ and their MCP servers work, while agents, chat and automations are listed but locked. In the **Enterprise Edition**, every capability is available. A deployment is in Enterprise Edition as soon as an OpenCTI or OpenAEV platform in Enterprise Edition is connected to it, or an XTM One license is installed; no redeployment is needed. OpenCRQ is never a source: it takes its own edition from the XTM One license. Whether AI actually runs is a separate switch an administrator holds: see [Run XTM One with AI switched off](/xtm-one/administer/running-without-ai/).
 
 ::diagram{id=xtm-one-editions-activation}
 
@@ -25,7 +25,7 @@ XTM One is one platform with two editions, and every deployment contains all of 
 | Integrations already connected, relays, browser profiles: kept and editable | Yes | Yes |
 | Preparing AI providers in :menu[Administration > Settings > AI and models > Models], for use once the Enterprise Edition is active | Yes | Yes |
 | :menu[Administration > Observability]: what AI activity already happened | Yes, read only | Yes |
-| Chat, in XTM One, in messaging apps and in the assistants of OpenCTI, OpenAEV and OpenCRQ | No | Yes |
+| Chat, in XTM One, in messaging apps and in the assistants of OpenCTI, OpenAEV and OpenCRQ (in OpenCRQ, only when the license names it as a Sub-License) | No | Yes |
 | Agents and their assignments, background tasks, workspaces | No | Yes |
 | :menu[Orchestration > Fleets]: [teams of agents](/xtm-one/build/fleets/) that work in one workspace | No | Yes |
 | :menu[Work > Value]: [what the agents' work is worth](/xtm-one/use/value/), in hours saved and net value | No | Yes |
@@ -43,7 +43,7 @@ In the Community Edition, the locked areas stay in the menu with a lock, and hov
 
 Two ways, neither needs a redeployment:
 
-- **Connect a platform in Enterprise Edition.** Register an OpenCTI, OpenAEV or OpenCRQ platform that holds its own Enterprise Edition license: XTM One is in Enterprise Edition as soon as the registration is accepted. See [Connect the modules to each other](/deploy/configure/connect-modules/).
+- **Connect a platform in Enterprise Edition.** Register an OpenCTI or OpenAEV platform that holds its own Enterprise Edition license: XTM One is in Enterprise Edition as soon as the registration is accepted. OpenCRQ sends no license when it registers, so registering it does not change the edition of XTM One. See [Connect the modules to each other](/deploy/configure/connect-modules/).
 - **Install an XTM One license.** In :menu[Administration > Settings > Platform], the card **Enterprise License** shows the **Instance ID** that Filigran needs to issue the license. Click **Install License**, paste the license's PEM certificate and confirm. You can set it in `ENTERPRISE_LICENSE` instead, on the platform and on the worker, then restart: the variable wins over a license pasted in the interface. See the [XTM One configuration](/reference/xtm-one/configuration/#platform-mode).
 
 A license is refused when it was not issued by Filigran for XTM One, for another instance, or has ended. After its end date, a standard license keeps working for a 90-day grace period, and the card warns **License expires within 3 months** beforehand; a trial license stops at its end date.

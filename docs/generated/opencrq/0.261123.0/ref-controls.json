@@ -2,7 +2,7 @@
   "name": "controls",
   "version": "0.261123.0",
   "source": "OpenCRQ-Platform/opencrq@d61ebb5 (module/src/modules/controls/capability/data/capabilities.generated.ts)",
-  "intro": "The 51 controls of the defense catalogue 9.2.4, mapped to ATT&CK 20.0: what each one does, how many techniques it prevents and detects, and the ATT&CK mitigations and NIST CSF 2.0 outcomes it answers; then, by domain, what each strength level of a control means. A control you declare takes a strength (Not deployed, Basic, Intermediate, Master), a coverage and a reliability; OpenCRQ prices how it stops or reveals an attack from them.",
+  "intro": "The 51 controls of the defense catalogue 9.2.4, mapped to ATT&CK 20.0: what each one does, how many techniques it prevents and detects, and what it maps to in NIST SP 800-53, NIST CSF 2.0, MITRE ATT&CK Mitigations and MITRE D3FEND; then, by domain, what each strength level of a control means. A control you declare takes a strength (Not deployed, Basic, Intermediate, Master) and a coverage; OpenCRQ prices how it stops or reveals an attack from them.",
   "filter": "Filter controls, techniques counts, mappings",
   "sections": [
     {
@@ -22,7 +22,7 @@
             "Agent installed on workstations and servers that blocks malware and attack behaviour at execution, records host activity, and lets a machine be isolated or cleaned up remotely. Coverage: hosts where the agent is installed, active or silent.",
             "147 techniques",
             "566 techniques",
-            "ATT&CK mitigations: M1022, M1024, M1025, M1034, M1038, M1040, M1042, M1043, M1047, M1049, M1054; NIST CSF 2.0: DE.AE-02, DE.CM-09, ID.AM-02, PR.DS-10, PR.PS-05, RS.MI-01, RS.MI-02"
+            "NIST SP 800-53: CA-7, CM-8(3), IR-4, IR-4(12), IR-4(2), IR-4(5); NIST CSF 2.0: DE.AE-02, DE.CM-09, ID.AM-02, PR.DS-10, PR.PS-05, RS.MI-01, RS.MI-02; MITRE ATT&CK Mitigations: M1022, M1024, M1025, M1034, M1038, M1040, M1042, M1043, M1047, M1049, M1054; MITRE D3FEND: D3-CQ, D3-DA, D3-EDL, D3-EFA, D3-EHB, D3-FAPA, D3-FCA, D3-FHRA, D3-HR, D3-IBCA, D3-IDA, D3-IOPR, D3-MBT, D3-PCSV, D3-PLA, D3-PS, D3-PSMD, D3-PT, D3-RKD, D3-RNA, D3-SBV, D3-SDM, D3-SEA, D3-SICA, D3-SJA, D3-SSC, D3-USICA"
           ]
         },
         {
@@ -32,7 +32,7 @@
             "Security settings of operating systems and hypervisors (baselines, executable allowlisting, unique local administrator passwords, unneeded features disabled) that make techniques relying on a default configuration fail. Coverage: assets under an applied baseline.",
             "250 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1022, M1024, M1026, M1027, M1028, M1033, M1035, M1037, M1038, M1039, M1041, M1042, M1043, M1044, M1045, M1046, M1048, M1050, M1052, M1054; NIST CSF 2.0: PR.AA-01, PR.AA-04, PR.AA-05, PR.DS-01, PR.IR-01, PR.PS-01, PR.PS-05"
+            "NIST SP 800-53: AC-19(5), AC-2(9), AC-3, AC-6, AC-6(10), AC-6(2), CM-11, CM-11(3), CM-2, CM-2(2), CM-3(3), CM-6, CM-6(1), CM-7, CM-7(1), CM-7(2), CM-7(5), CM-9, SC-28(1), SC-7(12); NIST CSF 2.0: PR.AA-01, PR.AA-04, PR.AA-05, PR.DS-01, PR.IR-01, PR.PS-01, PR.PS-05; MITRE ATT&CK Mitigations: M1022, M1024, M1026, M1027, M1028, M1033, M1035, M1037, M1038, M1039, M1041, M1042, M1043, M1044, M1045, M1046, M1048, M1050, M1052, M1054; MITRE D3FEND: D3-ABPI, D3-BA, D3-CDP, D3-CFI, D3-CTS, D3-DENCR, D3-DLIC, D3-DRA, D3-EAL, D3-EDL, D3-EHPV, D3-HBPI, D3-HBWP, D3-ITF, D3-LFAM, D3-LFP, D3-PAN, D3-PR, D3-PSEP, D3-RFAM, D3-SAOR, D3-SCP, D3-SFCV, D3-TBI, D3-UAP, D3-UGPH"
           ]
         },
         {
@@ -42,7 +42,7 @@
             "Monitoring of changes to a system's critical files and configurations, to detect tampering (backdoor, persistence, unauthorised change). Coverage: monitored servers and devices.",
             "0 techniques",
             "376 techniques",
-            "NIST CSF 2.0: DE.CM-09"
+            "NIST SP 800-53: CM-3(1), CM-5(1), CM-6(2); NIST CSF 2.0: DE.CM-09; MITRE D3FEND: D3-FIM"
           ]
         },
         {
@@ -52,7 +52,7 @@
             "Central management of workstations, laptops and mobile devices: inventory and compliance, restrictions, encryption and remote wipe. Coverage: enrolled devices.",
             "8 techniques",
             "41 techniques",
-            "ATT&CK mitigations: M1033, M1038, M1041; NIST CSF 2.0: DE.CM-09, ID.AM-01, PR.DS-01, PR.PS-05, RS.MI-01"
+            "NIST SP 800-53: AC-19, AC-19(5), AC-7(2), CM-11, CM-11(3), CM-8, CM-8(2), CM-8(3), IR-4; NIST CSF 2.0: DE.CM-09, ID.AM-01, PR.DS-01, PR.PS-05, RS.MI-01; MITRE ATT&CK Mitigations: M1033, M1038, M1041; MITRE D3FEND: D3-DENCR, D3-EDL, D3-FBA, D3-FEMC, D3-PFV, D3-SFV, D3-TBI"
           ]
         },
         {
@@ -62,7 +62,7 @@
             "Tooled process deploying patches to systems, applications, firmware and images, which removes exploitable vulnerabilities within target delays. Coverage: assets managed by the deployment tool.",
             "17 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1051; NIST CSF 2.0: ID.RA-01, PR.PS-02"
+            "NIST SP 800-53: CA-7, RA-5(6), SA-22; NIST CSF 2.0: ID.RA-01, PR.PS-02; MITRE ATT&CK Mitigations: M1051; MITRE D3FEND: D3-SU"
           ]
         },
         {
@@ -72,7 +72,7 @@
             "Filtering of flows between workloads (east-west) enforced by an agent, which limits lateral movement and lets a workload be quarantined. Coverage: workloads carrying the agent.",
             "26 techniques",
             "212 techniques",
-            "ATT&CK mitigations: M1030, M1035; NIST CSF 2.0: DE.CM-01, PR.IR-01, RS.MI-01"
+            "NIST SP 800-53: AC-4, IR-4(2), SC-7(20), SC-7(21); NIST CSF 2.0: DE.CM-01, PR.IR-01, RS.MI-01; MITRE ATT&CK Mitigations: M1030, M1035; MITRE D3FEND: D3-CAA, D3-ITF, D3-NTCD, D3-OTF, D3-RFAM"
           ]
         }
       ]
@@ -94,7 +94,7 @@
             "Network firewall that filters flows between zones and to the outside, and enforces network segmentation. Coverage: segments and flows crossing the firewall.",
             "68 techniques",
             "220 techniques",
-            "ATT&CK mitigations: M1030, M1031, M1035, M1037; NIST CSF 2.0: DE.CM-01, PR.IR-01, RS.MI-01"
+            "NIST SP 800-53: AC-4, IR-4(2), SC-32, SC-7, SC-7(10), SC-7(11), SC-7(16), SC-7(20), SC-7(21), SC-7(22), SC-7(29), SC-7(5), SC-7(9); NIST CSF 2.0: DE.CM-01, PR.IR-01, RS.MI-01; MITRE ATT&CK Mitigations: M1030, M1031, M1035, M1037; MITRE D3FEND: D3-ANAA, D3-BDI, D3-CAA, D3-ITF, D3-NTPM, D3-OTF, D3-RAM"
           ]
         },
         {
@@ -104,7 +104,7 @@
             "Inspection of network traffic that blocks known exploits and command and control communications, as a firewall module or a dedicated probe. Coverage: inspected flows.",
             "51 techniques",
             "290 techniques",
-            "ATT&CK mitigations: M1031, M1037; NIST CSF 2.0: DE.CM-01, PR.IR-01"
+            "NIST SP 800-53: SC-7; NIST CSF 2.0: DE.CM-01, PR.IR-01; MITRE ATT&CK Mitigations: M1031, M1037; MITRE D3FEND: D3-BSE, D3-DNRA, D3-IPRA, D3-ITF, D3-NTSA, D3-URA"
           ]
         },
         {
@@ -114,7 +114,7 @@
             "Probes that analyse network traffic to detect attack behaviour (beacons, lateral movement, exfiltration) and map flows. Coverage: segments a probe observes.",
             "0 techniques",
             "573 techniques",
-            "NIST CSF 2.0: DE.AE-02, DE.CM-01, ID.AM-03"
+            "NIST SP 800-53: CM-8(3), SC-7(5); NIST CSF 2.0: DE.AE-02, DE.CM-01, ID.AM-03; MITRE D3FEND: D3-ACA, D3-ANAA, D3-BSE, D3-CAA, D3-CSPP, D3-DNSTA, D3-FC, D3-IPCTA, D3-ISVA, D3-NNI, D3-NTCD, D3-NTPM, D3-NTSA, D3-PCA, D3-PHDURA, D3-PLLM, D3-PMAD, D3-RPA, D3-RTA, D3-RTSD"
           ]
         },
         {
@@ -124,7 +124,7 @@
             "Passive probe dedicated to industrial and IoT networks, which inventories these devices and detects abnormal commands without disturbing them. Coverage: observed OT / IoT segments.",
             "0 techniques",
             "32 techniques",
-            "NIST CSF 2.0: DE.CM-01"
+            "NIST SP 800-53: SC-7(17); NIST CSF 2.0: DE.CM-01; MITRE D3FEND: D3-APCA, D3-OMM, D3-RFUM"
           ]
         },
         {
@@ -134,7 +134,7 @@
             "Gateway controlling users' access to the Internet: URL and DNS filtering, download inspection, browser isolation, control of unsanctioned cloud applications. Coverage: workstations and servers whose traffic goes through the gateway or the resolver.",
             "43 techniques",
             "290 techniques",
-            "ATT&CK mitigations: M1021, M1037, M1048, M1049, M1057; NIST CSF 2.0: DE.CM-01, PR.DS-10, PR.IR-01, PR.PS-05, RS.MI-01"
+            "NIST SP 800-53: AC-20, AC-20(1), AC-20(3), IR-4(2), SC-18(5), SC-20, SC-21, SC-44, SC-7(8); NIST CSF 2.0: DE.CM-01, PR.DS-10, PR.IR-01, PR.PS-05, RS.MI-01; MITRE ATT&CK Mitigations: M1021, M1037, M1048, M1049, M1057; MITRE D3FEND: D3-CFC, D3-CNE, D3-CNR, D3-CNS, D3-DA, D3-DNRA, D3-DNSAL, D3-DNSCE, D3-DNSTA, D3-EFA, D3-FCDC, D3-FISV, D3-FMBV, D3-FMCV, D3-FRIDL, D3-HDDL, D3-HDL, D3-PBWSAM, D3-RRID, D3-UA, D3-URA, D3-WSAA"
           ]
         },
         {
@@ -144,7 +144,7 @@
             "Remote users' access to the information system through a VPN or per-application access (ZTNA), checking the identity and the device's posture at connection. Coverage: remote access going through the solution.",
             "30 techniques",
             "291 techniques",
-            "ATT&CK mitigations: M1030, M1032, M1035; NIST CSF 2.0: DE.CM-03, PR.AA-03, PR.IR-01, RS.MI-01"
+            "NIST SP 800-53: AC-12, AC-17, AC-17(1), AC-17(2), AC-17(3), AC-17(9), AC-19, AC-6, IR-4(2), SC-7(19), SC-7(21), SC-7(7); NIST CSF 2.0: DE.CM-03, PR.AA-03, PR.IR-01, RS.MI-01; MITRE ATT&CK Mitigations: M1030, M1032, M1035; MITRE D3FEND: D3-CBAN, D3-ET, D3-PBWSAM, D3-SDA, D3-ST, D3-UGLPA"
           ]
         },
         {
@@ -154,7 +154,7 @@
             "Control of the devices connecting to the local network: authentication, compliance check, quarantine. Coverage: controlled ports and access points.",
             "17 techniques",
             "234 techniques",
-            "ATT&CK mitigations: M1030, M1034, M1035; NIST CSF 2.0: DE.CM-01, ID.AM-01, PR.AA-03, PR.IR-01, RS.MI-01"
+            "NIST SP 800-53: AC-18(1), CM-6, CM-8(3), CM-8(8), IA-3, IR-4(2), SC-7(19), SC-7(20), SC-7(22); NIST CSF 2.0: DE.CM-01, ID.AM-01, PR.AA-03, PR.IR-01, RS.MI-01; MITRE ATT&CK Mitigations: M1030, M1034, M1035; MITRE D3FEND: D3-BDI, D3-CBAN, D3-HCI, D3-LAMED, D3-NNI"
           ]
         },
         {
@@ -164,7 +164,7 @@
             "Enterprise authentication and encryption of wireless networks, detection of rogue access points. Coverage: enterprise Wi-Fi networks.",
             "18 techniques",
             "108 techniques",
-            "ATT&CK mitigations: M1030, M1032, M1041; NIST CSF 2.0: DE.CM-01, PR.AA-03, PR.IR-01"
+            "NIST SP 800-53: AC-18, AC-18(1), SC-40, SC-40(4), SC-7(22); NIST CSF 2.0: DE.CM-01, PR.AA-03, PR.IR-01; MITRE ATT&CK Mitigations: M1030, M1032, M1041; MITRE D3FEND: D3-BDI, D3-CBAN, D3-ET"
           ]
         },
         {
@@ -174,7 +174,7 @@
             "Service or appliance that absorbs flooding attacks, volumetric or application-layer, before they reach exposed services. Coverage: protected exposed services.",
             "7 techniques",
             "108 techniques",
-            "ATT&CK mitigations: M1037; NIST CSF 2.0: DE.CM-01, PR.IR-04"
+            "NIST SP 800-53: SC-5, SC-5(1), SC-5(2), SC-5(3); NIST CSF 2.0: DE.CM-01, PR.IR-04; MITRE ATT&CK Mitigations: M1037; MITRE D3FEND: D3-ISVA"
           ]
         },
         {
@@ -184,7 +184,7 @@
             "Encryption and mutual authentication of internal communications (mTLS, IPsec, encrypted SMB, service mesh) that prevent traffic interception and replay. Coverage: encrypted internal flows.",
             "14 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1037, M1041; NIST CSF 2.0: PR.DS-02"
+            "NIST SP 800-53: AC-17(2), SC-23, SC-8, SC-8(1); NIST CSF 2.0: PR.DS-02; MITRE ATT&CK Mitigations: M1037, M1041; MITRE D3FEND: D3-BMA, D3-ET, D3-MENCR, D3-TAAN"
           ]
         },
         {
@@ -194,7 +194,7 @@
             "Security settings of routers, switches and other network devices, integrity of their images and restoration of their configuration. Coverage: devices under a baseline.",
             "45 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1026, M1027, M1030, M1035, M1037, M1042, M1045, M1046, M1053; NIST CSF 2.0: PR.AA-05, PR.IR-01, PR.PS-01, RC.RP-02"
+            "NIST SP 800-53: AC-17(4), CM-7, CP-10, CP-9, SC-7(14), SC-7(15); NIST CSF 2.0: PR.AA-05, PR.IR-01, PR.PS-01, RC.RP-02; MITRE ATT&CK Mitigations: M1026, M1027, M1030, M1035, M1037, M1042, M1045, M1046, M1053; MITRE D3FEND: D3-BA, D3-BDI, D3-CDP, D3-DLIC, D3-LAMED, D3-RAM, D3-RC, D3-RS, D3-UAP"
           ]
         },
         {
@@ -204,7 +204,7 @@
             "Fake accounts, credentials, files, hosts, services or AI endpoints placed in the information system to reveal an attacker who touches them. Coverage: areas of the information system where decoys are deployed.",
             "0 techniques",
             "575 techniques",
-            "NIST CSF 2.0: DE.CM-01, DE.CM-03"
+            "NIST SP 800-53: SC-26, SC-30, SC-30(4); NIST CSF 2.0: DE.CM-01, DE.CM-03; MITRE D3FEND: D3-CHN, D3-DF, D3-DNR, D3-DP, D3-DPR, D3-DST, D3-DUC, D3-IHN, D3-SHN"
           ]
         },
         {
@@ -214,7 +214,7 @@
             "Managed browser that protects sessions and data in the browser itself (device-bound cookies, controlled extensions, restricted copy and upload) on SaaS and internal web applications. Coverage: deployed managed browsers.",
             "13 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1021; NIST CSF 2.0: PR.AA-04"
+            "NIST SP 800-53: AC-20(1), SC-23; NIST CSF 2.0: PR.AA-04; MITRE ATT&CK Mitigations: M1021; MITRE D3FEND: D3-EDL, D3-TB"
           ]
         }
       ]
@@ -236,7 +236,7 @@
             "Central identity provider that authenticates users (SSO), requires a second factor, ideally phishing-resistant, enforces conditional access rules by risk, device and context, and manages sessions and tokens. Coverage: federated applications and accounts; MFA carries its own coverage (accounts subject to the second factor).",
             "30 techniques",
             "187 techniques",
-            "ATT&CK mitigations: M1017, M1018, M1032, M1036, M1047, M1054; NIST CSF 2.0: DE.CM-03, ID.AM-08, PR.AA-03, PR.AA-04, PR.AA-05, RS.MI-01"
+            "NIST SP 800-53: AC-12, AC-19, AC-2(11), AC-2(12), AC-2(13), AC-2(3), AC-2(4), AC-2(5), AC-20, AC-3(12), AC-6, AC-6(7), AC-7(4), CA-7, IA-13, IA-13(1), IA-13(2), IA-13(3), IR-4, SC-12, SC-23, SC-23(1), SC-23(3), SC-7(19); NIST CSF 2.0: DE.CM-03, ID.AM-08, PR.AA-03, PR.AA-04, PR.AA-05, RS.MI-01; MITRE ATT&CK Mitigations: M1017, M1018, M1032, M1036, M1047, M1054; MITRE D3FEND: D3-AL, D3-ANCI, D3-ANET, D3-BAN, D3-CBAN, D3-CR, D3-MFA, D3-OTP, D3-RIC, D3-SDA, D3-ST, D3-TB, D3-TBA, D3-UGLPA"
           ]
         },
         {
@@ -246,7 +246,7 @@
             "Protection of privileged accounts and technical secrets: vault and rotation, access through a bastion with session recording, just-in-time elevation, application secrets management. Coverage: managed privileged accounts and secrets.",
             "92 techniques",
             "408 techniques",
-            "ATT&CK mitigations: M1026, M1027, M1035, M1041, M1047, M1052; NIST CSF 2.0: DE.CM-03, DE.CM-09, ID.AM-08, PR.AA-01, PR.AA-05, RS.MI-01, RS.MI-02"
+            "NIST SP 800-53: AC-17(1), AC-17(4), AC-2, AC-2(6), AC-2(7), AC-2(8), AC-6(1), AC-6(2), AC-6(3), AC-6(5), AC-6(7), AC-6(8), AC-6(9), CM-8, IR-4, SC-12, SC-7(15); NIST CSF 2.0: DE.CM-03, DE.CM-09, ID.AM-08, PR.AA-01, PR.AA-05, RS.MI-01, RS.MI-02; MITRE ATT&CK Mitigations: M1026, M1027, M1035, M1041, M1047, M1052; MITRE D3FEND: D3-AM, D3-CDP, D3-CERO, D3-CR, D3-CRO, D3-CS, D3-CTS, D3-PR, D3-ST, D3-UAP"
           ]
         },
         {
@@ -256,7 +256,7 @@
             "Management of the lifecycle of identities and entitlements: joiners, movers, leavers, access reviews. Coverage: accounts attached to the identity repository.",
             "3 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1018; NIST CSF 2.0: PR.AA-01, PR.AA-05"
+            "NIST SP 800-53: AC-2, AC-2(1), AC-2(13), AC-2(2), AC-2(3), AC-2(6), AC-2(7), AC-2(8), AC-3(8), AC-5, AC-6, AC-6(7); NIST CSF 2.0: PR.AA-01, PR.AA-05; MITRE ATT&CK Mitigations: M1018; MITRE D3FEND: D3-AL"
           ]
         },
         {
@@ -266,7 +266,7 @@
             "Security settings of the directory: authentication protocols, tiered administration, password policy, native audit log, restoration. Coverage: directory accounts and objects.",
             "53 techniques",
             "556 techniques",
-            "ATT&CK mitigations: M1015, M1018, M1026, M1027, M1036, M1041, M1047; NIST CSF 2.0: DE.CM-03, PR.AA-01, PR.AA-04, PR.AA-05, RC.RP-02, RS.MI-02"
+            "NIST SP 800-53: AC-17(4), AC-2(3), AC-2(4), AC-5, AC-6(1), AC-6(3), AC-6(5), AC-6(9), AC-7, CP-10, CP-9, IR-4, SC-7(15); NIST CSF 2.0: DE.CM-03, PR.AA-01, PR.AA-04, PR.AA-05, RC.RP-02, RS.MI-02; MITRE ATT&CK Mitigations: M1015, M1018, M1026, M1027, M1036, M1041, M1047; MITRE D3FEND: D3-AL, D3-AZET, D3-CDP, D3-CERO, D3-CR, D3-DAM, D3-DTP, D3-LAM, D3-PR, D3-PWA, D3-RC, D3-SPP, D3-UAP, D3-UGPH, D3-ULA"
           ]
         },
         {
@@ -276,7 +276,7 @@
             "Tool that reveals the directory's attack paths and weaknesses and detects attacks on identities (token theft, Kerberos abuse, replication), automatically blocking risky accounts. Coverage: monitored directories and identity providers.",
             "4 techniques",
             "103 techniques",
-            "NIST CSF 2.0: DE.AE-02, DE.CM-03, ID.RA-01, PR.AA-03"
+            "NIST SP 800-53: AC-2(12), AC-2(13), AC-6(7), CA-7, IR-4(5), RA-5; NIST CSF 2.0: DE.AE-02, DE.CM-03, ID.RA-01, PR.AA-03; MITRE D3FEND: D3-AL, D3-AM, D3-ANAA, D3-ANET, D3-AZET, D3-CCSA, D3-CR, D3-DAM, D3-JFAPA, D3-LAM, D3-RAPA, D3-RTA, D3-SDA, D3-UGLPA"
           ]
         },
         {
@@ -286,7 +286,7 @@
             "Certificate infrastructure: inventory and expiry tracking, hardening of the authority and its templates, revocation of compromised certificates. Coverage: managed authorities and certificates.",
             "12 techniques",
             "5 techniques",
-            "ATT&CK mitigations: M1015, M1041, M1047; NIST CSF 2.0: DE.CM-09, ID.AM-02, PR.AA-04, RS.MI-02"
+            "NIST SP 800-53: CM-8, IR-4, SC-12(3), SC-17, SC-23(5); NIST CSF 2.0: DE.CM-09, ID.AM-02, PR.AA-04, RS.MI-02; MITRE ATT&CK Mitigations: M1015, M1041, M1047; MITRE D3FEND: D3-CBAN, D3-CERO, D3-CP, D3-CR, D3-PCA"
           ]
         },
         {
@@ -296,7 +296,7 @@
             "Procedure, tooled or not, by which the help desk verifies a person's identity before resetting a password, re-enrolling a second factor or registering a device, which defeats account takeover through a help desk call. Coverage: requests going through the procedure.",
             "13 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1017; NIST CSF 2.0: PR.AA-02"
+            "NIST SP 800-53: AT-2(3), IA-12, IA-12(1), IA-12(2), IA-12(3), IA-12(4), IA-5, IA-5(16); NIST CSF 2.0: PR.AA-02; MITRE ATT&CK Mitigations: M1017"
           ]
         },
         {
@@ -306,7 +306,7 @@
             "Password vault distributed to users, with a browser extension and an application, that generates and stores a unique password per service and allows controlled sharing, so a password leaked on one service opens no other. Coverage: equipped users.",
             "6 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1027; NIST CSF 2.0: PR.AA-01"
+            "NIST SP 800-53: IA-5(18), IA-5(8); NIST CSF 2.0: PR.AA-01; MITRE ATT&CK Mitigations: M1027; MITRE D3FEND: D3-SPP"
           ]
         }
       ]
@@ -328,7 +328,7 @@
             "Filtering of inbound and outbound email (phishing, malicious attachments and links, domain spoofing through SPF, DKIM and DMARC) and purge of messages after delivery. Coverage: protected mailboxes and domains.",
             "24 techniques",
             "16 techniques",
-            "ATT&CK mitigations: M1021, M1047, M1049, M1054; NIST CSF 2.0: DE.CM-03, PR.AA-04, PR.PS-05, RS.MI-01"
+            "NIST SP 800-53: AT-2(3), IR-4, SC-20, SC-44, SC-7, SC-8; NIST CSF 2.0: DE.CM-03, PR.AA-04, PR.PS-05, RS.MI-01; MITRE ATT&CK Mitigations: M1021, M1047, M1049, M1054; MITRE D3FEND: D3-CNE, D3-CNR, D3-CQ, D3-DA, D3-EF, D3-EFA, D3-ER, D3-FCDC, D3-FCR, D3-FISV, D3-FMBV, D3-FMCV, D3-HD, D3-MENCR, D3-SMRA, D3-SRA, D3-TAAN, D3-UA, D3-URA"
           ]
         },
         {
@@ -338,7 +338,7 @@
             "Native security settings of SaaS and collaboration tenants: external sharing, third-party applications, native audit logs. Coverage: configured tenants.",
             "31 techniques",
             "198 techniques",
-            "ATT&CK mitigations: M1018, M1027, M1032, M1036, M1042, M1047, M1054, M1057; NIST CSF 2.0: DE.CM-03, DE.CM-06, PR.AA-03, PR.DS-10, PR.PS-01"
+            "NIST SP 800-53: AC-2, AC-2(4), AC-2(7), AC-20, AC-21, AC-3, AC-4, CM-7, IA-2, IA-5(1); NIST CSF 2.0: DE.CM-03, DE.CM-06, PR.AA-03, PR.DS-10, PR.PS-01; MITRE ATT&CK Mitigations: M1018, M1027, M1032, M1036, M1042, M1047, M1054, M1057; MITRE D3FEND: D3-SPP, D3-UDTA, D3-WSAA"
           ]
         },
         {
@@ -348,7 +348,7 @@
             "Tool that reads, through connectors, the configuration and usage of SaaS applications, reports deviations and lets an account or an integration be suspended. Coverage: connected tenants.",
             "0 techniques",
             "198 techniques",
-            "NIST CSF 2.0: DE.AE-02, ID.RA-01, PR.PS-01, RS.MI-01"
+            "NIST SP 800-53: AC-2(12), CA-7, CM-2, CM-6, CM-6(1), IR-4; NIST CSF 2.0: DE.AE-02, ID.RA-01, PR.PS-01, RS.MI-01; MITRE D3FEND: D3-CR, D3-RAPA, D3-ST, D3-UDTA, D3-UGLPA, D3-WSAA"
           ]
         }
       ]
@@ -370,7 +370,7 @@
             "Protection of exposed web applications and APIs: filtering of malicious requests, bot management, API inventory and control, API gateway. Coverage: applications and APIs behind the service.",
             "34 techniques",
             "15 techniques",
-            "ATT&CK mitigations: M1013, M1031, M1032, M1047; NIST CSF 2.0: DE.CM-01, ID.AM-02, PR.AA-03, PR.IR-01, RS.MI-01"
+            "NIST SP 800-53: AC-3, AC-4(8), AC-7, CM-8, CM-8(3), IR-4(2), SA-4(9), SC-5, SC-7, SC-7(17), SC-7(20); NIST CSF 2.0: DE.CM-01, ID.AM-02, PR.AA-03, PR.IR-01, RS.MI-01; MITRE ATT&CK Mitigations: M1013, M1031, M1032, M1047; MITRE D3FEND: D3-DQSA, D3-NTSA, D3-PBWSAM, D3-TBA, D3-WSAA"
           ]
         },
         {
@@ -380,7 +380,7 @@
             "Agent embedded in the application that blocks the exploitation of vulnerabilities at runtime. Coverage: instrumented applications.",
             "5 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1050; NIST CSF 2.0: PR.PS-01"
+            "NIST SP 800-53: SA-8; NIST CSF 2.0: PR.PS-01; MITRE ATT&CK Mitigations: M1050; MITRE D3FEND: D3-DQSA, D3-SEA"
           ]
         },
         {
@@ -390,7 +390,7 @@
             "Analysis of the dependencies and third-party components of a piece of software or a container image, with a bill of materials (SBOM), to spot vulnerable or compromised components. Coverage: analysed repositories and images.",
             "3 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1051; NIST CSF 2.0: ID.RA-01, ID.RA-09, PR.PS-02"
+            "NIST SP 800-53: CM-10(1), RA-5, SA-10(1), SA-11, SA-22; NIST CSF 2.0: ID.RA-01, ID.RA-09, PR.PS-02; MITRE ATT&CK Mitigations: M1051; MITRE D3FEND: D3-CIA, D3-SU"
           ]
         },
         {
@@ -400,7 +400,7 @@
             "Development practices that reduce shipped defects: threat modelling, application hardening templates, securing the build chain and signing artefacts. Coverage: projects and pipelines concerned.",
             "6 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1045, M1051; NIST CSF 2.0: PR.PS-06"
+            "NIST SP 800-53: CM-14, CM-5, CM-5(6), SA-10, SA-10(1), SA-10(6), SA-11(2), SA-11(6), SA-15, SA-15(5), SA-17, SA-3, SA-8; NIST CSF 2.0: PR.PS-06; MITRE ATT&CK Mitigations: M1045, M1051"
           ]
         },
         {
@@ -410,7 +410,7 @@
             "Monitoring of how applications run (errors, latencies, abnormal calls), which can reveal application abuse or compromise. Coverage: instrumented applications.",
             "0 techniques",
             "9 techniques",
-            "NIST CSF 2.0: DE.CM-09, PR.IR-04"
+            "NIST SP 800-53: CA-7, CP-2(2), SA-15(13), SC-5(2), SC-6; NIST CSF 2.0: DE.CM-09, PR.IR-04; MITRE D3FEND: D3-AEM, D3-OPM"
           ]
         },
         {
@@ -420,7 +420,7 @@
             "Monitoring of infrastructure availability and capacity headroom, which detects saturation or abnormal resource usage. Coverage: monitored infrastructure.",
             "0 techniques",
             "35 techniques",
-            "ATT&CK mitigations: M1047; NIST CSF 2.0: DE.CM-09, PR.IR-04"
+            "NIST SP 800-53: CA-7(3), CP-2(2), SC-5(2), SC-5(3), SC-6; NIST CSF 2.0: DE.CM-09, PR.IR-04; MITRE ATT&CK Mitigations: M1047; MITRE D3FEND: D3-EHB, D3-OPM, D3-PUM, D3-SDM"
           ]
         },
         {
@@ -430,7 +430,7 @@
             "Security settings of the application itself, federated or not: native authentication (password policy, lockout, native second factor), role model and least privilege, anti-automation, hardening at delivery (headers, cookies, input validation). Coverage: configured applications.",
             "28 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1013, M1018, M1026, M1027, M1032, M1036, M1054; NIST CSF 2.0: PR.AA-03, PR.AA-05, PR.PS-01"
+            "NIST SP 800-53: AC-3, AC-5, AC-6, AC-6(1), AC-7, IA-11, IA-2, IA-2(1), IA-2(2), IA-5, IA-5(1), IA-8, SA-15(5), SA-8(23), SC-18, SC-23, SC-5(2), SI-10; NIST CSF 2.0: PR.AA-03, PR.AA-05, PR.PS-01; MITRE ATT&CK Mitigations: M1013, M1018, M1026, M1027, M1032, M1036, M1054; MITRE D3FEND: D3-CP, D3-OTP, D3-RTL, D3-SPP, D3-UAP"
           ]
         }
       ]
@@ -452,7 +452,7 @@
             "Cloud-native application protection platform, posture and detection side: reads through connectors the configuration of cloud accounts, effective entitlements (CIEM) and Kubernetes posture (KSPM), fixes part of the deviations automatically, and analyses control plane activity to detect malicious use (CDR). Coverage: connected accounts and clusters.",
             "0 techniques",
             "204 techniques",
-            "NIST CSF 2.0: DE.AE-02, ID.RA-01, PR.AA-05, PR.PS-01"
+            "NIST SP 800-53: AC-2(12), AC-6, AC-6(7), CA-7, CA-7(6), CM-2, CM-6(1), CM-6(2), RA-5, SI-4, SI-4(2); NIST CSF 2.0: DE.AE-02, ID.RA-01, PR.AA-05, PR.PS-01; MITRE D3FEND: D3-UBA"
           ]
         },
         {
@@ -462,7 +462,7 @@
             "Native security settings of cloud and Kubernetes platforms: IAM, segmentation, storage protection, container runtime standards, native logging and the protection of these logs. Coverage: accounts, networks and clusters under a baseline.",
             "87 techniques",
             "235 techniques",
-            "ATT&CK mitigations: M1018, M1022, M1026, M1027, M1030, M1032, M1037, M1041, M1047, M1048, M1054; NIST CSF 2.0: DE.CM-01, DE.CM-09, PR.AA-03, PR.AA-05, PR.DS-01, PR.IR-01, PR.PS-01, PR.PS-04"
+            "NIST SP 800-53: AC-2, AC-2(4), AC-22, AC-3, AC-3(7), AC-6, AC-6(1), AC-6(5), AC-6(9), CM-7, CP-9(7), IA-2(1), IA-5(1), IA-5(7), SC-28, SC-39, SC-7, SC-7(21), SC-7(5); NIST CSF 2.0: DE.CM-01, DE.CM-09, PR.AA-03, PR.AA-05, PR.DS-01, PR.IR-01, PR.PS-01, PR.PS-04; MITRE ATT&CK Mitigations: M1018, M1022, M1026, M1027, M1030, M1032, M1037, M1041, M1047, M1048, M1054; MITRE D3FEND: D3-ABPI, D3-CAA, D3-CTS, D3-ITF, D3-KBPI, D3-MFA, D3-NTCD, D3-OTF, D3-RAM, D3-UAP, D3-UDTA"
           ]
         },
         {
@@ -472,7 +472,7 @@
             "Runtime protection of virtual machines, containers and cloud workloads: admission control, detection and blocking of malicious behaviour. Coverage: protected workloads.",
             "22 techniques",
             "223 techniques",
-            "ATT&CK mitigations: M1038, M1040, M1045, M1047, M1049; NIST CSF 2.0: DE.CM-09, ID.AM-02, PR.PS-05"
+            "NIST SP 800-53: CA-7, CM-14, CM-7(5), CM-8(3), SA-10(1); NIST CSF 2.0: DE.CM-09, ID.AM-02, PR.PS-05; MITRE ATT&CK Mitigations: M1038, M1040, M1045, M1047, M1049; MITRE D3FEND: D3-EAL, D3-EHB, D3-FCA, D3-KBPI, D3-PLA, D3-PT, D3-SDM, D3-SEA"
           ]
         }
       ]
@@ -494,7 +494,7 @@
             "Detection and blocking of sensitive data transfers outside authorised channels (endpoint, web, email). Coverage: channels and users under a DLP policy.",
             "31 techniques",
             "29 techniques",
-            "ATT&CK mitigations: M1034, M1057; NIST CSF 2.0: DE.CM-09, PR.DS-02, PR.DS-10"
+            "NIST SP 800-53: AC-4, AC-4(15), AC-4(26), AC-4(8), SC-7(10); NIST CSF 2.0: DE.CM-09, PR.DS-02, PR.DS-10; MITRE ATT&CK Mitigations: M1034, M1057; MITRE D3FEND: D3-FCR, D3-UDTA"
           ]
         },
         {
@@ -504,7 +504,7 @@
             "Discovery and classification of sensitive data, labelling and persistent protection of documents (encryption, usage rights). Coverage: scanned repositories and labelled documents.",
             "17 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1041, M1057; NIST CSF 2.0: ID.AM-05, ID.AM-07, PR.AA-05, PR.DS-01"
+            "NIST SP 800-53: AC-16, AC-16(1), AC-3(9), AC-6(7), CM-12, CM-12(1), CM-13, RA-2, SC-28(1); NIST CSF 2.0: ID.AM-05, ID.AM-07, PR.AA-05, PR.DS-01; MITRE ATT&CK Mitigations: M1041, M1057; MITRE D3FEND: D3-DI, D3-FE"
           ]
         },
         {
@@ -514,7 +514,7 @@
             "Encryption of disks and stored data, key management (KMS, HSM) and a log of key usage, which make data unusable without the key. Coverage: managed volumes, databases and keys.",
             "20 techniques",
             "5 techniques",
-            "ATT&CK mitigations: M1041, M1047; NIST CSF 2.0: DE.CM-09, ID.AM-07, PR.AA-01, PR.DS-01"
+            "NIST SP 800-53: AC-3(2), AC-6(9), CA-7, CM-8, CP-9(8), SC-12, SC-12(1), SC-12(2), SC-12(3), SC-12(6), SC-13, SC-28, SC-28(1); NIST CSF 2.0: DE.CM-09, ID.AM-07, PR.AA-01, PR.DS-01; MITRE ATT&CK Mitigations: M1041, M1047; MITRE D3FEND: D3-DENCR, D3-FE"
           ]
         },
         {
@@ -524,7 +524,7 @@
             "Monitoring and filtering of database queries, detection of abnormal access. Coverage: monitored databases.",
             "9 techniques",
             "76 techniques",
-            "ATT&CK mitigations: M1047, M1057; NIST CSF 2.0: DE.AE-02, DE.CM-09, PR.DS-10"
+            "NIST SP 800-53: AC-2(12), AC-3, AC-4, AC-6(9); NIST CSF 2.0: DE.AE-02, DE.CM-09, PR.DS-10; MITRE ATT&CK Mitigations: M1047, M1057; MITRE D3FEND: D3-DQSA, D3-RAPA, D3-UDTA"
           ]
         },
         {
@@ -534,7 +534,7 @@
             "Isolated and immutable copies of data and systems, SaaS applications included, with tested restores. Coverage: backed-up data and systems.",
             "9 techniques",
             "14 techniques",
-            "ATT&CK mitigations: M1026, M1029, M1047, M1053; NIST CSF 2.0: DE.CM-09, PR.DS-11, RC.RP-02"
+            "NIST SP 800-53: AC-6(5), CA-7, CP-10, CP-10(2), CP-10(4), CP-4, CP-4(3), CP-6, CP-6(1), CP-9, CP-9(1), CP-9(2), CP-9(3), CP-9(5), CP-9(6), CP-9(7), CP-9(8), SC-28(2); NIST CSF 2.0: DE.CM-09, PR.DS-11, RC.RP-02; MITRE ATT&CK Mitigations: M1026, M1029, M1047, M1053; MITRE D3FEND: D3-RD, D3-RDI, D3-RE, D3-RF, D3-RS"
           ]
         }
       ]
@@ -556,7 +556,7 @@
             "Collection and correlation of security logs across the information system, detection rules and behavioural analytics (UEBA). Coverage: log sources received.",
             "0 techniques",
             "608 techniques",
-            "ATT&CK mitigations: M1029, M1047; NIST CSF 2.0: DE.AE-02, DE.AE-03, PR.PS-04"
+            "NIST SP 800-53: AC-2(12), AC-2(4), AU-11, AU-5, AU-9, AU-9(2), AU-9(3), AU-9(4), CA-7, CA-7(6), IR-4(13), IR-4(4), IR-5, IR-5(1); NIST CSF 2.0: DE.AE-02, DE.AE-03, PR.PS-04; MITRE ATT&CK Mitigations: M1029, M1047; MITRE D3FEND: D3-ANET, D3-AZET, D3-CCSA, D3-DNRA, D3-FAPA, D3-FHRA, D3-IAA, D3-IPRA, D3-JFAPA, D3-PLA, D3-RAPA, D3-SDA, D3-SJA, D3-UDTA, D3-UGLPA, D3-URA"
           ]
         },
         {
@@ -566,7 +566,7 @@
             "Internal team that triages alerts and hunts threats. Coverage: time slots staffed.",
             "0 techniques",
             "608 techniques",
-            "NIST CSF 2.0: DE.AE-02, RS.MA-02"
+            "NIST SP 800-53: IR-4, IR-4(12), IR-4(14), IR-5, IR-6, IR-7, RA-10; NIST CSF 2.0: DE.AE-02, RS.MA-02; MITRE D3FEND: D3-IAA"
           ]
         },
         {
@@ -576,7 +576,7 @@
             "Provider handling detection, triage and first response on the customer's behalf; an alternative to an internal SOC. Coverage: scope entrusted by contract.",
             "0 techniques",
             "608 techniques",
-            "NIST CSF 2.0: RS.MA-02, RS.MI-01"
+            "NIST SP 800-53: IR-4, IR-4(14), IR-7(2), SA-9, SA-9(2); NIST CSF 2.0: RS.MA-02, RS.MI-01"
           ]
         }
       ]
@@ -598,7 +598,7 @@
             "Awareness and phishing simulation campaigns, reporting by users, an accepted acceptable-use policy and compliance training (data handling, authorised applications). Coverage: trained and exercised users.",
             "16 techniques",
             "15 techniques",
-            "ATT&CK mitigations: M1017; NIST CSF 2.0: DE.CM-03, PR.AT-01"
+            "NIST SP 800-53: AT-2, AT-2(1), AT-2(3), AT-2(4), AT-6, IR-6, PL-4, PL-4(1), PS-6, PS-8; NIST CSF 2.0: DE.CM-03, PR.AT-01; MITRE ATT&CK Mitigations: M1017"
           ]
         },
         {
@@ -608,7 +608,7 @@
             "Finance team procedure that submits every payment and every change of bank details to dual approval and to a call-back through a known channel, which defeats CEO fraud and payment diversion. Coverage: payment flows subject to the procedure.",
             "4 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1017; NIST CSF 2.0: PR.AA-05"
+            "NIST SP 800-53: AC-3(2), AC-5, AT-2(3); NIST CSF 2.0: PR.AA-05; MITRE ATT&CK Mitigations: M1017"
           ]
         }
       ]
@@ -630,7 +630,7 @@
             "Filter placed in front of models and agents that blocks injections, jailbreaks and leaks in inputs and outputs, limits request volume and controls access to models; it logs prompts and decisions. Coverage: AI applications behind the gateway.",
             "3 techniques",
             "0 techniques",
-            "ATT&CK mitigations: M1047; NIST CSF 2.0: DE.CM-09, PR.AA-03, PR.IR-04, PR.PS-05, RS.MI-02"
+            "NIST SP 800-53: AC-3, IR-4, SC-7(21); NIST CSF 2.0: DE.CM-09, PR.AA-03, PR.IR-04, PR.PS-05, RS.MI-02; MITRE ATT&CK Mitigations: M1047; MITRE D3FEND: D3-CR, D3-ST"
           ]
         }
       ]

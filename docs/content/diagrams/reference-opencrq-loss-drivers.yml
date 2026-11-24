@@ -1,19 +1,19 @@
-title: Each loss driver is priced as a range and reported in its loss category
+title: Each loss driver of a scenario takes a range, and the drivers' draws add up to the cost of one loss event
 lanes:
-  - label: You give
+  - label: The range
     tone: external
     nodes:
-      - {id: range, label: A range per driver, icon: Scale, note: 'Minimum, most likely, maximum'}
+      - {id: profile, label: Financial profile, icon: FileText, note: Derives most ranges}
+      - {id: hand, label: Entered by hand, icon: Wrench, note: 'Minimum, most likely, maximum'}
   - label: Loss drivers
     tone: product
     nodes:
       - {id: driver, label: Loss driver, icon: ListChecks, note: "Forensics, downtime, fines..."}
-      - {id: scale, label: Scales with, icon: Gauge, note: "Outage days, records, revenue..."}
-  - label: The report
+  - label: The simulation
     tone: store
     nodes:
-      - {id: category, label: Loss category, icon: BookOpen, note: "Response, restoration, interruption..."}
+      - {id: event, label: One loss event, icon: Scale, note: "The drivers' draws added up"}
 edges:
-  - {from: range, to: driver, label: prices}
-  - {from: scale, to: driver, label: sizes}
-  - {from: driver, to: category, label: adds up in}
+  - {from: profile, to: driver, label: derives}
+  - {from: hand, to: driver, label: sets}
+  - {from: driver, to: event, label: adds up in}

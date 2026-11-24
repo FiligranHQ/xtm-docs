@@ -20,7 +20,7 @@ last_reviewed: 2026-11-20
 
 ## The threat sources
 
-Under **Threat sources**, the step reads "Use as many as you need, they add up." Beside it, the count of every threat in the tenant and **See all threats**, which opens the [Threat Center](/opencrq/use/threats/threat-center/).
+Under **Threat sources**, the step reads "Use as many as you need, they add up." Beside it, the count of the tenant's threats you can see, and **See all threats**, which opens the [Threat Center](/opencrq/use/threats/threat-center/).
 
 ::screenshot{id=opencrq-get-started-threats alt="The Threats step of Get started for Grand Meridian Hotels: under Threat sources, OpenCRQ Default Threats Never synced with Enable, OpenCTI with the threats its stream brought, and STIX bundle with Analyze new bundle."}
 
@@ -30,7 +30,7 @@ Under **Threat sources**, the step reads "Use as many as you need, they add up."
 | **OpenCTI** | The threats of an OpenCTI Live Stream, kept current as analysts change them in OpenCTI | The state of the connector: **Unavailable**, **Not configured**, **Never synced**, **Syncing**, **Healthy** or **Failing**. Then the number of threats it brought, and the progress of its replay in percent. **Configure** opens it |
 | **STIX bundle** | The threats of the bundle files you analyze | The number of threats imported from bundles, and **Active** once there is one. **Analyze new bundle** picks a file |
 
-The step is done as soon as the tenant holds one threat, whatever its source. While OpenCTI replays its stream or the default threats load, the **Threats** step turns in the stepper.
+The step is done as soon as you can see one threat of the tenant, whatever its source. While OpenCTI replays its stream or the default threats load, the **Threats** step turns in the stepper.
 
 ## Load the default threats
 
@@ -84,7 +84,7 @@ She selects **Save**. The tile reads **Syncing** while the stream replays its hi
 
 ## Check that it works
 
-- The tile of each source you used counts its threats, and the total counts every threat in the tenant.
+- The tile of each source you used counts its threats, and the total counts the tenant's threats you can see.
 - **See all threats** lists them in the Threat Center, where you can filter them by source.
 - The stepper shows a check on **Threats**.
 

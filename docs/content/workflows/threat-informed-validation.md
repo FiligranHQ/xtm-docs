@@ -30,7 +30,7 @@ Each product answers one part of the question "would we stop it today?":
 
 - **OpenCTI** knows the threat: the intrusion set, the report, the attack patterns and vulnerabilities it uses. A security coverage turns that knowledge into a request to test, and holds the scores next to the intelligence that raised the question.
 - **OpenAEV** tests it: one inject per technique, run by its agents on your own endpoints, on a schedule, and scored on prevention and detection by what your security tools saw.
-- **OpenCRQ** prices it: each technique your tools did not prevent becomes a finding, and the controls that should have stopped it are measured on the results instead of their declared strength.
+- **OpenCRQ** prices it: each technique your tools did not prevent, or did not detect, becomes a finding, and where a control held less often than you declared, OpenCRQ lowers it on that technique.
 - **XTM One** reads the three with your rights and writes the readout.
 
 Alone, OpenCTI says what could happen, OpenAEV says what happened on one run, and OpenCRQ prices assumptions. Together, the intelligence chooses the tests, the tests correct the price, and the loop runs again when the threat or your defenses change. Why a simulation scores what it scores is in [How you validate your defenses in OpenAEV](/openaev/concepts/validation/); why a test result moves a price is in [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).
@@ -66,7 +66,7 @@ The first simulation starts 2 minutes after the scenario is created, then every 
 
 Every hour, OpenCRQ reads the finished simulations: the Web Protocols result becomes a finding on the front-desk workstations, and the risk scenario Data Breach on Guest Records is priced again, the controls lowered on the techniques they did not stop ([step 8](/opencrq/use/sources/openaev/)). On the coverage or on the simulation, **Ask Ariane** answers "Summarize for the CISO how our front desks stand against Velvet Harbor, what is still missing, and what it costs" ([step 9](/xtm-one/use/in-openaev/)).
 
-When the SOC blocks the command and control traffic, the next weekly simulation prevents Web Protocols, OpenCRQ dismisses the finding as **No longer reported by OpenAEV**, and the scenario is priced again. Nobody restarts the journey: it runs until the **Duration** of the coverage ends.
+When the SOC blocks the command and control traffic, the next weekly simulation prevents Web Protocols: OpenCRQ dismisses the finding as **Not exposed**, prevented by the EDR in that simulation, and the scenario is priced again. Nobody restarts the journey: it runs until the **Duration** of the coverage ends.
 
 ## The steps
 

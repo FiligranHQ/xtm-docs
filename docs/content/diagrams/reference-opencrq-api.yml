@@ -13,10 +13,11 @@ lanes:
   - label: Access
     tone: product
     nodes:
-      - {id: tenant, label: Tenant, icon: Layers, note: "x-tenant-id header"}
+      - {id: tenant, label: Tenant, icon: Layers, note: "The token's, or x-tenant-id"}
 edges:
   - {from: client, to: queries, label: Bearer token}
   - {from: client, to: mutations, label: Bearer token}
   - {from: agent, to: queries, label: by name}
+  - {from: agent, to: mutations, label: by name}
   - {from: queries, to: tenant, label: scoped to}
   - {from: mutations, to: tenant, label: scoped to}

@@ -18,7 +18,7 @@ A budget review sets twelve months of security spend for one risk scope against 
 - The risk scope has scenarios that OpenCRQ has priced: a review is read against them. See [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/).
 - The scope's controls are declared, and their changes during the period are declared on the day they happened. OpenCRQ reads the posture of each control at the start and at the end of the period from that record. See [Set how strong your controls are and read how they held](/opencrq/use/defenses/controls/).
 - To read the third section, the scope or its scenarios have a risk tolerance: an annual loss and the highest probability you accept of exceeding it.
-- OpenCRQ shows every amount in dollars today; the choice of currency is coming.
+- OpenCRQ works in US dollars: enter every spend in dollars, and read every figure in dollars.
 
 ## How a line is priced
 
@@ -29,18 +29,20 @@ Every line of a review has a nature, and the nature decides what its loss avoide
 | **Build** | A project: controls deployed, strengthened or extended during the period | The annual loss the period's posture changes of its controls removed: the scope priced with those controls set back to their posture at the start of the fiscal year, minus the scope priced as they stand |
 | **Run** | A standing cost: licences, a team, a managed service that keeps controls running | The annual loss its controls protect against: the scope priced with those controls absent, minus the scope priced with them at the level they held at the start of the fiscal year |
 
-The posture the review reads as "as they stand" is today's while the period runs, the period's end once it is over, and the closing day for a review closed before its end. Every figure is priced on the same simulated years, so the difference between two postures is not blurred by chance.
+The posture the review reads as "as they stand" is today's while the period runs, the period's end once it is over, and the closing day for a review closed before its end. Every figure is priced on the same draws of the uncertain inputs, so the difference between two postures is not blurred by chance.
 
 Each figure has a return, computed the same way as a [treatment plan's](/opencrq/use/decide/treatment-plans/#how-a-plan-is-priced):
 
 > Return = (Loss avoided per year − Spent) / Spent
 
-- **Prudent (p10)** gives the same return with a cautious loss avoided: the one that 90% of the simulated years exceed.
+- **Prudent (p10)** gives the same return with a cautious loss avoided: for each scenario, the loss avoided that nine draws of the uncertain inputs in ten exceed, added up over the scope's scenarios.
 - A build line can be **Amortized over (years)**. Its return is then also read against what the work costs a year: the spend divided by the years, shown as **amortized** under the return.
 
 The **Build** and **Run** rows of the review price their lines together, and **Overall** prices everything the review funds as one basket. None of them is the sum of the lines below it: controls that cover the same techniques return less together than one by one, and removing controls together costs more than removing them one by one.
 
-Every simulation of one of the scope's scenarios prices the scope's open reviews too, whatever started it.
+Over a scope with several scenarios, the p10 to p90 band of a figure adds up each scenario's own band, as if the scenarios moved together. The band is wider than the true band of the total, and the prudent return more cautious. They are exact for a scope with one scenario.
+
+Every simulation of one of the scope's scenarios prices the scope's open reviews too, except the background pass that reprices the scenarios whose inputs changed. After that pass, the review names the scenarios that changed since it was priced, and **Re-simulate scenarios** brings it up to date.
 
 ## Create a review
 
@@ -67,7 +69,7 @@ The **What was funded** section lists the lines and their total. **Add a line** 
 1. Enter the **Name** of the line, the project or the cost as your budget names it.
 2. Choose its **Nature**: **Build** or **Run**.
 3. Enter what it cost in **Spent over the period**. It is required.
-4. For a build line, set **Amortized over (years)**, from 1 to 10, or leave it empty to read the full spend against one year.
+4. For a build line, keep or change **Amortized over (years)**, from 1 to 10. It starts at 3. Clear it to read the full spend against one year.
 5. Choose its controls:
    - **Build**: the list shows the scope's **Controls that moved** during the period, each with its posture at the start and now. Select the ones the project moved. A control moves in one build line at most: one already held by another line shows **In** and that line's name.
    - **Run**: search the scope's controls in **Add a control**. Each one shows the posture it held at the start of the period, the level the line is priced at.
@@ -76,7 +78,7 @@ The **What was funded** section lists the lines and their total. **Add a line** 
 
 When controls moved during the period and no build line holds them, the section says how many, with an **Assign** button that opens a new build line. A review with every move assigned tells the board where all the work of the year went.
 
-Adding or deleting a line, or changing a line's nature or controls, dates the review's figures: they show **Expired** until the scenarios are simulated again. Click **Re-simulate scenarios** in the **What it returned** section. Renaming a line or correcting its spend or amortization needs no simulation.
+Adding or deleting a line, or changing a line's nature or controls, dates the review's figures: they show **Expired**, or **Not priced** for a line or a review never priced yet, until the scenarios are simulated again. Click **Re-simulate scenarios** in the **What it returned** section. Renaming a line or correcting its spend or amortization needs no simulation.
 
 Next to the lines, **Spend by NIST CSF function** draws the spend on the six functions of the National Institute of Standards and Technology (NIST) Cybersecurity Framework (CSF) 2.0. A line counts in every function its controls map to, so the amounts do not add up to the review's spend.
 
@@ -86,7 +88,7 @@ Next to the lines, **Spend by NIST CSF function** draws the spend on the six fun
 
 The top of the review answers in one sentence: **From** the period's start **to** its end, the scope spent this much, and the build work removed this much annual loss and brought this many scenarios back within tolerance. Beside it, **In brief** gives the three figures: **Spent**, **Loss avoided per year** (the **Overall** figure, with the part of the build work below it) and the scenarios outside tolerance.
 
-The **What it returned** section is a table read left to right: **Spent**, then **Loss avoided per year** with its p10 to p90 band, then **Return** with its prudent and amortized readings, for the **Build**, **Run** and **Overall** rows. Each line also shows its own chain of figures in **What was funded**.
+The **What it returned** section is a table read left to right: **Spent**, then **Loss avoided per year** with its p10 to p90 band (added up over the scenarios, as [How a line is priced](#how-a-line-is-priced) explains), then **Return** with its prudent and amortized readings, for the **Build**, **Run** and **Overall** rows. Each line also shows its own chain of figures in **What was funded**.
 
 ::screenshot{id=opencrq-budget-reviews-returned alt="The What it returned table of a budget review: Build, $85K spent for $78K of loss avoided per year, a -8.5% return; Run, $140K for $265K, +89.6%; and Overall, $225K for $528K, +134.6%, each with its band and its prudent reading."}
 
@@ -96,7 +98,7 @@ Under it, **Risk over the period** draws the scope's **Simulated ALE** day by da
 
 The **Are we within our risk tolerance?** section reads, for each scenario, the probability that a year's loss exceeds its tolerance amount:
 
-- **Outside tolerance today**: the scenarios whose probability exceeds what their tolerance accepts, at the review's posture.
+- **Outside tolerance today**: the scenarios whose probability exceeds what their tolerance accepts, at the review's posture. Once the period is over, it reads **Outside tolerance at the fiscal year end**, and on a review closed before its end, **Outside tolerance at closing**.
 - **Outside tolerance without the period's build work**: the same, with the build lines' controls set back to the start of the fiscal year.
 - **Brought back within tolerance by the build work**: the difference, the argument a board remembers.
 
@@ -111,7 +113,7 @@ When the fiscal year is presented, close the review to keep its figures as they 
 2. Confirm. The figures are frozen at that day: later simulations no longer change them, and the lines can no longer be edited.
 :::
 
-A closed review shows **Closed** and a **Reopen** button. Reopening drops the frozen figures and prices the review again on today's model: they may differ from the ones presented. To delete a review, its lines and its figures, use **Delete** in the menu of its page or of its row in the list.
+A closed review shows **Closed** and a **Reopen** button. Reopening drops the frozen figures: the review shows its last figures as **Expired** until you click **Re-simulate scenarios**, which prices it on today's model. The new figures may differ from the ones presented. To delete a review, its lines and its figures, use **Delete** in the menu of its page or of its row in the list.
 
 ## Compare the years
 

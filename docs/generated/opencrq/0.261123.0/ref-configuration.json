@@ -2,7 +2,7 @@
   "name": "configuration",
   "version": "0.261123.0",
   "source": "OpenCRQ-Platform/opencrq@d61ebb5 (back/src/config-schema.ts)",
-  "intro": "Every key OpenCRQ reads at boot, from its configuration schema, grouped by block, by its environment variable: the key in upper case with `__` between the levels (`JOBS__MAX_CONCURRENT` is `jobs.max_concurrent` in a configuration file). A variable with `<tenant-uuid>` is set per tenant: `CONNECTORS__OPENCTI__<tenant-uuid>__URL`. **Required** says what a block needs when it is set; a whole block the platform does not use (file storage, a connector) can be left out.",
+  "intro": "Every key OpenCRQ reads at boot, from its configuration schema, grouped by block, by its environment variable: the key in upper case with `__` between the levels (`JOBS__MAX_CONCURRENT` is `jobs.max_concurrent` in a configuration file). A variable with `<tenant-uuid>` is set per tenant: `CONNECTORS__OPENCTI__<tenant-uuid>__URL`. **Required** says what a block needs when it is set; a whole block the platform does not use (file storage, a connector) can be left out. **When `<group>` is set** names an optional group inside a block (a connector of one tenant, the XTM One administrator of the platform seed): set all of its required keys, or none.",
   "filter": "Filter keys, variables, descriptions",
   "sections": [
     {
@@ -32,7 +32,7 @@
             "number",
             "",
             "No",
-            "Port exposed on the host for healthchecks. Separates management traffic from user traffic."
+            "The port the host publishes the healthcheck on, for information: OpenCRQ only writes it in its startup log when it differs from `HEALTHCHECK_HTTP_SERVER__PORT`."
           ]
         }
       ]
@@ -101,7 +101,7 @@
           "key": "postgres.pool_max",
           "cells": [
             "`POSTGRES__POOL_MAX`",
-            "number",
+            "number, at least 10",
             "`20`",
             "No",
             "Maximum number of PostgreSQL connections in the shared pool of one application process. Increase on high-volume environments. What must stay under PostgreSQL's own `max_connections` is the sum over every process, and a process opens connections this pool does not count: a control pool of 5 on every process that runs jobs, reserved for the job runtime's own claims, lease renewals and log writes so they never queue behind a handler's reads, and one long-lived client per `LISTEN` channel the process subscribes to."
@@ -146,14 +146,14 @@
             "number",
             "",
             "No",
-            "Port exposed on the host to access the application."
+            "The port the host publishes the application on, for information: OpenCRQ only writes it in its startup log when it differs from `HTTP_SERVER__PORT`."
           ]
         },
         {
           "key": "http_server.max_response_items",
           "cells": [
             "`HTTP_SERVER__MAX_RESPONSE_ITEMS`",
-            "number",
+            "integer, at least 1",
             "`20000`",
             "No",
             "Largest number of items an API call may return. Over it the call is refused with `PAYLOAD_TOO_LARGE` instead of serializing a list that would exhaust the process's memory; the procedure then needs a paginated input."
@@ -252,14 +252,14 @@
             "boolean",
             "`false`",
             "No",
-            "Adds a park of several hundred thousand assets, their findings and one closed risk scope mapping part of them, on top of the ordinary demo data. For performance work only: it writes over a million rows and takes minutes. See the large estate."
+            "Adds a park of several hundred thousand assets, their findings and one closed risk scope mapping part of them, on top of the ordinary demo data. For performance work only: it writes over a million rows and takes minutes."
           ]
         },
         {
           "key": "platform_seed.large_estate.assets",
           "cells": [
             "`PLATFORM_SEED__LARGE_ESTATE__ASSETS`",
-            "number",
+            "integer, at least 1",
             "`100000`",
             "No",
             "How many supporting assets the profile generates, in dependency chains three levels deep. Read only when the profile is enabled."
@@ -269,7 +269,7 @@
           "key": "platform_seed.large_estate.findings",
           "cells": [
             "`PLATFORM_SEED__LARGE_ESTATE__FINDINGS`",
-            "number",
+            "integer, at least 0",
             "`300000`",
             "No",
             "How many findings it hangs on them, over the CVEs the ordinary seed wrote. Read only when the profile is enabled."
@@ -279,7 +279,7 @@
           "key": "platform_seed.large_estate.mapped_assets",
           "cells": [
             "`PLATFORM_SEED__LARGE_ESTATE__MAPPED_ASSETS`",
-            "number",
+            "integer, at least 0",
             "`30000`",
             "No",
             "How many of those assets the closed risk scope is measured over. At least three, one per primary asset the profile writes, or the seed refuses the profile."
@@ -291,7 +291,7 @@
             "`PLATFORM_SEED__XTM_ONE_ADMIN__EMAIL`",
             "string",
             "",
-            "When `platform_seed.enabled` is true",
+            "When `platform_seed.xtm_one_admin` is set",
             "Email of an administrator of the XTM One in `XTM_ONE__URL`, which the platform seed signs in as to create the seeded users there: each one a local XTM One account with the `PLATFORM_SEED__ADMIN__PASSWORD` password (the seeded platform administrator as an XTM One administrator), its OpenCRQ account tied to that XTM One user, so the seeded users sign in through XTM One. An XTM One account that already holds the email is reused. Optional, even with the seed enabled: unset, the seed creates its users in OpenCRQ only, none of them can sign in, and the log warns so; the demo data stays reachable with a service account token or by XTM One's own administrator, who reaches every tenant. Set it on a demo or test platform whose people must sign in as the seeded users. The account must sign in without a second factor, which the seed cannot give; a refusal from XTM One, or no answer within 5 seconds, fails the seed and the platform boots without it."
           ]
         },
@@ -301,7 +301,7 @@
             "`PLATFORM_SEED__XTM_ONE_ADMIN__PASSWORD`",
             "string",
             "",
-            "When `platform_seed.enabled` is true",
+            "When `platform_seed.xtm_one_admin` is set",
             "That XTM One administrator's password, required once its email is set. Pass it through a secret store, like `PLATFORM_SEED__ADMIN__PASSWORD`."
           ]
         }
@@ -324,14 +324,14 @@
             "UUID",
             "`01a043da-ff47-72c2-aaa4-7da56d85c83e`",
             "No",
-            "Identifier (a UUID) of the tenant OpenCRQ creates at boot when the platform holds no tenant yet. Set it before the first boot to write the tenant's `CONNECTORS__<NAME>__<tenant id>__…` keys in the same deployment. Read only at that first boot: once a tenant exists, changing it does nothing."
+            "Identifier (a UUID) of the tenant OpenCRQ creates at boot when the platform holds no tenant yet. Set it before the first boot to write the tenant's `CONNECTORS__<NAME>__<tenant id>__…` keys in the same deployment. Once a tenant exists, changing it creates no other tenant, but OpenCRQ still reads it at every start: `APP__ADMIN__TOKEN` acts as a service account of this tenant, and the accounts its provisioning API creates belong to it. When no tenant has this identifier, the bearer stays off."
           ]
         },
         {
           "key": "initial_tenant.name",
           "cells": [
             "`INITIAL_TENANT__NAME`",
-            "string",
+            "string, not empty",
             "`Default`",
             "No",
             "Name of the tenant OpenCRQ creates at boot when the platform holds no tenant yet. Like a tenant created from the platform, it gets a first risk scope **Enterprise** and a Get started wizard; it can be renamed afterwards from the Tenants page."
@@ -353,7 +353,7 @@
           "key": "telemetry",
           "cells": [
             "`TELEMETRY`",
-            "strictObject",
+            "group of settings",
             "",
             "No",
             "Two groups of settings. `TELEMETRY__USAGE__*` is the anonymous usage telemetry sent to Filigran. `TELEMETRY__USAGE__ENABLED` (default `true`) turns it off with `false`: the platform then never contacts Filigran's collector. `TELEMETRY__USAGE__TAGS` (empty by default) takes comma-separated deployment tags, such as `saas,eu-west`, exported as the `filigran.telemetry.tags` resource attribute. `TELEMETRY__OBSERVABILITY__*` is the monitoring data sent to your own tools, its variables named after that prefix. `SERVICE_NAME` (default `opencrq-platform`) is the service name of every OTLP signal and of the Prometheus endpoint, and the Pyroscope application name. `OTLP__TRACES__`, `OTLP__METRICS__` and `OTLP__LOGS__` each take `ENABLED` (default `false`) and `EXPORTER`, the OTLP endpoint (such as `http://otel-collector:4317`), required once the signal is on: traces are turned on with `TELEMETRY__OBSERVABILITY__OTLP__TRACES__ENABLED`. `PROMETHEUS__ENABLED` (default `false`) opens the scrape endpoint, with `PORT` (`14269`), `HOST` (`0.0.0.0`), `PUBLIC_PORT`, `COLLECT_TIMEOUT_MS` (`2500`), `ROUND_DEADLINE_MS` (`4500`, strictly above the timeout), `MIN_INTERVAL_MS` (`5000`) and `MAX_REPLY_BYTES` (`2097152`). `PYROSCOPE__ENABLED` (default `false`) sends profiles to `PYROSCOPE__SERVER_ADDRESS`, required once it is on. A transport switched off does not read its other settings. The block is strict: a `TELEMETRY__*` variable the platform does not know, such as `TELEMETRY__TRACES__ENABLED` of earlier builds, stops the platform at boot with `Unrecognized key`."
@@ -378,7 +378,7 @@
             "boolean",
             "`true`",
             "No",
-            "Master switch for the job runtime. The block is optional and unset reads as off, so it must be explicitly set to `true` to run. With it off, nothing claims queued jobs, and the integrations page says so: the no-worker banner is permanent, which is the honest reading."
+            "Master switch for the job runtime. Unset, the runtime runs: the image's `config/default.json` sets it to `true`. Set it to `false` to stop it: nothing then claims queued jobs, and the integrations page keeps its no-worker banner."
           ]
         },
         {
@@ -405,7 +405,7 @@
           "key": "jobs.heartbeat_interval_ms",
           "cells": [
             "`JOBS__HEARTBEAT_INTERVAL_MS`",
-            "number",
+            "integer, 1 to 300000",
             "`10000`",
             "No",
             "How often each runtime process refreshes its registry row. The beat is unconditional: it does not depend on the process holding work, so an idle worker is never mistaken for an absent one."
@@ -415,7 +415,7 @@
           "key": "jobs.heartbeat_stale_after_ms",
           "cells": [
             "`JOBS__HEARTBEAT_STALE_AFTER_MS`",
-            "number",
+            "integer, at least 1",
             "`30000`",
             "No",
             "How long a heartbeat stays credible. Past it, the platform reads as having no worker and the banner appears. It must exceed `JOBS__HEARTBEAT_INTERVAL_MS`: a value at or below the interval is refused when the config is parsed at boot. Keep it a comfortable multiple of the interval: barely above it, ordinary scheduling jitter raises the banner."
@@ -425,7 +425,7 @@
           "key": "jobs.log_retention_runs",
           "cells": [
             "`JOBS__LOG_RETENTION_RUNS`",
-            "number",
+            "integer, at least 1",
             "`3`",
             "No",
             "Runs of one job kind whose captured log lines are kept, per tenant. A run that ends deletes the lines of the older ones, and a connector's Logs tab renders exactly what this keeps."
@@ -435,7 +435,7 @@
           "key": "jobs.log_retention_lines",
           "cells": [
             "`JOBS__LOG_RETENTION_LINES`",
-            "number",
+            "integer, at least 1",
             "`500`",
             "No",
             "Captured lines kept for the OpenCTI stream session, which never ends and so is bounded by count rather than by run."
@@ -445,7 +445,7 @@
           "key": "jobs.run_retention_days",
           "cells": [
             "`JOBS__RUN_RETENTION_DAYS`",
-            "number",
+            "integer, at least 1",
             "`30`",
             "No",
             "Days a finished run (`succeeded`, `cancelled`, `dlq`) is kept before the daily `jobs-retention` job purges its `jobs` row, taking its errors and captured log lines with it by cascade. The last finished run of each job kind is kept whatever its age, so a kind that runs rarely does not read as never ran."
@@ -467,7 +467,7 @@
           "key": "recompute.debounce_factor",
           "cells": [
             "`RECOMPUTE__DEBOUNCE_FACTOR`",
-            "number",
+            "number, above 0",
             "`1`",
             "No",
             "Multiplier on the last run's duration in the throttle delay, so a recompute that costs a minute is not asked for every five seconds."
@@ -477,7 +477,7 @@
           "key": "recompute.debounce_floor_ms",
           "cells": [
             "`RECOMPUTE__DEBOUNCE_FLOOR_MS`",
-            "number",
+            "integer, at least 1",
             "`500`",
             "No",
             "Shortest delay between the first event of a burst and the run it books. It is also the fastest cadence a continuously written table can drive a job at: the events arriving inside the delay fold into the run already booked, they never postpone it."
@@ -487,7 +487,7 @@
           "key": "recompute.debounce_cap_ms",
           "cells": [
             "`RECOMPUTE__DEBOUNCE_CAP_MS`",
-            "number",
+            "integer, at least 1",
             "`300000`",
             "No",
             "Longest that delay can grow to, whatever the last run cost."
@@ -497,7 +497,7 @@
           "key": "recompute.reconnect_min_interval_ms",
           "cells": [
             "`RECOMPUTE__RECONNECT_MIN_INTERVAL_MS`",
-            "number",
+            "integer, at least 1",
             "`600000`",
             "No",
             "When the platform reconnects to the database notifications that trigger recomputations, it asks every recomputation again for every tenant; two such catch-ups closer than this interval, in ms, count as one."
@@ -517,7 +517,7 @@
           "key": "recompute.score_history_retention_days",
           "cells": [
             "`RECOMPUTE__SCORE_HISTORY_RETENTION_DAYS`",
-            "number",
+            "integer, at least 1",
             "`365`",
             "No",
             "Days of finding score history kept, trimmed at the end of each run. Twelve months, the longest window a finding's score history offers on its page. A finding always keeps the line in force when the window opens, however old it is, so one whose score has not moved in a year still counts in every past figure."
@@ -539,7 +539,7 @@
           "key": "events.doorbell_window_ms",
           "cells": [
             "`EVENTS__DOORBELL_WINDOW_MS`",
-            "number",
+            "integer, 1 to 2147483647",
             "`100`",
             "No",
             "Window, in ms, in which the data changes a user makes are grouped into one signal telling the tenant's open pages to refresh."
@@ -549,7 +549,7 @@
           "key": "events.job_doorbell_window_ms",
           "cells": [
             "`EVENTS__JOB_DOORBELL_WINDOW_MS`",
-            "number",
+            "integer, 1 to 2147483647",
             "`30000`",
             "No",
             "The same window for the changes background jobs write, much coarser, so a bulk import does not refresh every open page during its whole run."
@@ -583,7 +583,7 @@
             "`CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__AZURE_TENANT_ID`",
             "string",
             "",
-            "Yes",
+            "When `connectors.microsoft_graph.<tenant-uuid>` is set",
             "Azure AD tenant ID used to build that tenant's OAuth2 token endpoint (`login.microsoftonline.com/{tenant}/...`)."
           ]
         },
@@ -593,7 +593,7 @@
             "`CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_ID`",
             "string",
             "",
-            "Yes",
+            "When `connectors.microsoft_graph.<tenant-uuid>` is set",
             "Client (application) ID of that tenant's Azure AD app registration."
           ]
         },
@@ -603,7 +603,7 @@
             "`CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_SECRET`",
             "string",
             "",
-            "Yes",
+            "When `connectors.microsoft_graph.<tenant-uuid>` is set",
             "Client secret of that tenant's Azure AD app registration. Pass through a secret store."
           ]
         },
@@ -613,7 +613,7 @@
             "`CONNECTORS__OPENAEV__<tenant-uuid>__URL`",
             "URL",
             "",
-            "Yes",
+            "When `connectors.openaev.<tenant-uuid>` is set",
             "Base URL of that tenant's OpenAEV instance (e.g. `https://openaev.mycompany.com`)."
           ]
         },
@@ -623,7 +623,7 @@
             "`CONNECTORS__OPENAEV__<tenant-uuid>__TOKEN`",
             "string",
             "",
-            "Yes",
+            "When `connectors.openaev.<tenant-uuid>` is set",
             "API token used to authenticate against that tenant's OpenAEV API. Pass through a secret store."
           ]
         },
@@ -633,7 +633,7 @@
             "`CONNECTORS__OPENCTI__<tenant-uuid>__URL`",
             "URL",
             "",
-            "Yes",
+            "When `connectors.opencti.<tenant-uuid>` is set",
             "Base URL of that tenant's OpenCTI instance (e.g. `https://opencti.mycompany.com`)."
           ]
         },
@@ -643,7 +643,7 @@
             "`CONNECTORS__OPENCTI__<tenant-uuid>__TOKEN`",
             "string",
             "",
-            "Yes",
+            "When `connectors.opencti.<tenant-uuid>` is set",
             "API token used to authenticate against that tenant's OpenCTI Live Stream/GraphQL API. Pass through a secret store."
           ]
         },
@@ -651,8 +651,8 @@
           "key": "connectors.default_threats.dataset_url",
           "cells": [
             "`CONNECTORS__DEFAULT_THREATS__DATASET_URL`",
-            "union",
-            "",
+            "URL, or empty",
+            "`https://raw.githubusercontent.com/OpenCRQ-Platform/datasets/main/data/`",
             "No",
             "Folder the OpenCRQ Default Threats connector reads its file (`default-threats-v1.json`) from, for every tenant: a STIX bundle of threat groups and campaigns derived from MITRE ATT&CK, which gives a tenant without a threat feed of its own the threats its risk scenarios need. A tenant created from the platform, and the initial tenant, start with the connector switched off: someone with Manage Security switches it on from the Threats step of Get started or in its **Configure integration** panel, where it can also be switched off again. A tenant created before 0.261120.0 keeps it on. It syncs every day at 06:00 UTC by default, and an unchanged file costs one conditional request. Unset, it reads OpenCRQ's dataset repository, `https://raw.githubusercontent.com/OpenCRQ-Platform/datasets/main/data/`. Set it to a mirror of that folder on a platform without internet access, or to an empty string to turn the connector off for every tenant. One value for the platform, not keyed by tenant; restart OpenCRQ after a change."
           ]
@@ -673,7 +673,7 @@
             "`CONNECTORS__DRATA__<tenant-uuid>__API_KEY`",
             "string",
             "",
-            "Yes",
+            "When `connectors.drata.<tenant-uuid>` is set",
             "That tenant's Drata API key with read scopes on Frameworks and Controls. Pass through a secret store. If the key restricts source IPs, allowlist this deployment's egress IP."
           ]
         },
@@ -767,27 +767,27 @@
           "key": "xtm_one.url",
           "cells": [
             "`XTM_ONE__URL`",
-            "string",
+            "string, not empty",
             "",
             "Yes",
-            "URL this OpenCRQ backend reaches XTM One on (e.g. `https://xtm-one.mycompany.com`, or an internal address such as `http://xtm-one:4000`). See below."
+            "URL this OpenCRQ backend reaches XTM One on (e.g. `https://xtm-one.mycompany.com`, or an internal address such as `http://xtm-one:4000`)."
           ]
         },
         {
           "key": "xtm_one.token",
           "cells": [
             "`XTM_ONE__TOKEN`",
-            "string",
+            "string, not empty",
             "",
             "Yes",
-            "Shared platform registration token (`PLATFORM_REGISTRATION_TOKEN` on the XTM One side). Pass through a secret store. XTM One withholds the XTM license while it runs with the published default `PLATFORM_REGISTRATION_TOKEN`: set a token of your own."
+            "Shared platform registration token (`PLATFORM_REGISTRATION_TOKEN` on the XTM One side). Pass through a secret store. Set a token of your own on both sides: XTM One refuses to register a platform that presents its published default token."
           ]
         },
         {
           "key": "xtm_one.platform_url",
           "cells": [
             "`XTM_ONE__PLATFORM_URL`",
-            "string",
+            "string, not empty",
             "",
             "Yes",
             "Public base URL of this OpenCRQ instance — used as the JWT issuer, the JWKS audience, and the `platform_url` sent at registration."
@@ -963,7 +963,7 @@
           "key": "process_manager.<profile>.<process>.postgres.pool_max",
           "cells": [
             "`PROCESS_MANAGER__<profile>__<process>__POSTGRES__POOL_MAX`",
-            "number",
+            "number, at least 10",
             "`20`",
             "No",
             "Overrides `postgres.pool_max` for this process of the profile."
@@ -1003,7 +1003,7 @@
           "key": "process_manager.<profile>.<process>.http_server.max_response_items",
           "cells": [
             "`PROCESS_MANAGER__<profile>__<process>__HTTP_SERVER__MAX_RESPONSE_ITEMS`",
-            "number",
+            "integer, at least 1",
             "`20000`",
             "No",
             "Overrides `http_server.max_response_items` for this process of the profile."
@@ -1025,7 +1025,7 @@
             "`PROCESS_MANAGER__<profile>__<process>__JOBS__ENABLED`",
             "boolean",
             "",
-            "Yes",
+            "When `process_manager.<profile>.<process>.jobs` is set",
             "Overrides `jobs.enabled` for this process of the profile."
           ]
         },
@@ -1053,7 +1053,7 @@
           "key": "process_manager.<profile>.<process>.jobs.heartbeat_interval_ms",
           "cells": [
             "`PROCESS_MANAGER__<profile>__<process>__JOBS__HEARTBEAT_INTERVAL_MS`",
-            "number",
+            "integer, 1 to 300000",
             "`10000`",
             "No",
             "Overrides `jobs.heartbeat_interval_ms` for this process of the profile."
@@ -1063,7 +1063,7 @@
           "key": "process_manager.<profile>.<process>.jobs.heartbeat_stale_after_ms",
           "cells": [
             "`PROCESS_MANAGER__<profile>__<process>__JOBS__HEARTBEAT_STALE_AFTER_MS`",
-            "number",
+            "integer, at least 1",
             "`30000`",
             "No",
             "Overrides `jobs.heartbeat_stale_after_ms` for this process of the profile."
@@ -1073,7 +1073,7 @@
           "key": "process_manager.<profile>.<process>.jobs.log_retention_runs",
           "cells": [
             "`PROCESS_MANAGER__<profile>__<process>__JOBS__LOG_RETENTION_RUNS`",
-            "number",
+            "integer, at least 1",
             "`3`",
             "No",
             "Overrides `jobs.log_retention_runs` for this process of the profile."
@@ -1083,7 +1083,7 @@
           "key": "process_manager.<profile>.<process>.jobs.log_retention_lines",
           "cells": [
             "`PROCESS_MANAGER__<profile>__<process>__JOBS__LOG_RETENTION_LINES`",
-            "number",
+            "integer, at least 1",
             "`500`",
             "No",
             "Overrides `jobs.log_retention_lines` for this process of the profile."
@@ -1093,7 +1093,7 @@
           "key": "process_manager.<profile>.<process>.jobs.run_retention_days",
           "cells": [
             "`PROCESS_MANAGER__<profile>__<process>__JOBS__RUN_RETENTION_DAYS`",
-            "number",
+            "integer, at least 1",
             "`30`",
             "No",
             "Overrides `jobs.run_retention_days` for this process of the profile."

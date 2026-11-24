@@ -1,6 +1,6 @@
 ---
 title: Risk scopes, primary assets and supporting assets
-description: How a risk scope, the primary assets the business would lose and the supporting assets that carry them frame what OpenCRQ prices.
+description: How a risk scope, its primary assets and the supporting assets behind them define what OpenCRQ prices.
 doc_type: explanation
 products:
   - opencrq
@@ -20,9 +20,9 @@ The terms follow ISO/IEC 27005: primary assets are business assets, supporting a
 | | Where you find it | What you set | What it changes in the price |
 | --- | --- | --- | --- |
 | Risk scope | :menu[All risk scopes], then the scope's **Details** | Identity, the estate it is measured over, its declared estate, the financial profile, the risk tolerance | How often attacks happen, which assets the attack run walks, how large the estate is beyond the assets listed, what each loss costs |
-| Primary asset | The scope's **Primary Assets** | **Name**, **Owner**, **Description** and its **Business resources**; for the record, its security needs and recovery objectives | Which loss drivers a scenario prices, and which supporting assets the attacks aim for |
+| Primary asset | The scope's **Primary Assets** | **Name**, **Owner**, **Description** and its **Business resources**; for the record, its security needs and recovery objectives | Which loss drivers OpenCRQ recommends for a scenario aimed at it, and which supporting assets the attacks aim for |
 | Supporting asset | :menu[Assets], for the whole tenant | Its category, exposure and criticality, declared or imported | Which attack techniques apply, and where the attacks get in |
-| Link | A primary asset's **Business dependencies** tab | The roles of each supporting asset toward the primary asset | How much of the scenario's loss a supporting asset carries |
+| Link | A primary asset's **Business dependencies** tab | The roles of each supporting asset toward the primary asset | Which supporting assets the attack run aims at: every supporting asset linked to one of the scenario's primary assets. The roles set the **Impact if compromised** of the **Targets** tab, which shows which supporting assets matter most to the scenario |
 
 ## A risk scope
 
@@ -37,7 +37,7 @@ A risk scope belongs to a tenant, and everything you price inside it reads its s
 
 ## Primary assets
 
-A primary asset belongs to one risk scope. To add one, open the risk scope in the sidebar, below **Budget Reviews**, click :menu[Primary Assets], then **Create**: the **Create a new primary asset** panel asks for its **Name**, an optional **Owner** and **Description**, and its **Business resources**. Its **Business resources** say what kind of value it holds: **Personal data**, **Payment card data**, **Operations and services**, **Services delivered to others under commitments**, and six more. At least one is required, and the choice matters: OpenCRQ recommends the loss drivers of a scenario from its attack outcome and the business resources of its primary assets. A ransomware scenario on **Operations and services** recommends lost margin from downtime; a data breach on **Personal data** recommends notification and regulatory fines. The [business resources reference](/reference/opencrq/business-resources/) lists each pairing.
+A primary asset belongs to one risk scope. To add one, open the risk scope in the sidebar, below **Budget Reviews**, click :menu[Primary Assets], then **Create**: the **Create a new primary asset** panel asks for its **Name**, an optional **Owner** and **Description**, and its **Business resources**. Its **Business resources** say what kind of value it holds: **Personal data**, **Payment card data**, **Operations and services**, **Services delivered to others under commitments**, and six more. At least one is required, and the choice matters: OpenCRQ recommends the loss drivers of a scenario from its attack outcome and its business resources. A scenario takes the business resources of its primary assets when you create it or change its primary assets; changing those of a primary asset later leaves the scenarios already aimed at it as they were. A ransomware scenario on **Operations and services** recommends lost margin from downtime; a data breach on **Personal data** recommends notification and regulatory fines. The [business resources reference](/reference/opencrq/business-resources/) lists each pairing.
 
 The panel also records what a business impact analysis says of the asset: a **Reference** that no other primary asset of the scope uses, its **Business function**, its **Security needs** (**Availability**, **Integrity**, **Confidentiality** and **Traceability**, each from **Low** to **Very High**) and its **Recovery objectives** (**RTO**, **RPO** and **MTPD**). The list shows the highest of the four needs as the **Overall level** and filters on it and on the business function. These fields document the asset; the price does not read them.
 
@@ -45,11 +45,11 @@ The panel also records what a business impact analysis says of the asset: a **Re
 
 Supporting assets live in the tenant's library, under :menu[Assets], shared by every risk scope. You declare them or import them, for example from Microsoft Defender. A detection and prevention source that OpenAEV imports, such as an EDR or a SIEM, gets the **Security platform** category. The code your organization builds and ships goes under **Source code**: a **Code repository**, a **CI/CD pipeline**, a **Package registry** or a **Software package**. The attack run reads three things about each one:
 
-- its category (web application, server, workstation, user account, network device, source code, point of sale...), which decides the techniques an attacker can play on it: a code repository opens supply chain compromise and the theft of credentials left in code;
-- its exposure: an internet-facing asset opens initial access by exploiting a public service, a workstation or an account opens it by phishing or stolen credentials;
+- its category (web application, server, workstation, user account, network device, source code, point of sale...), which decides the techniques an attacker can play on it: a user account opens phishing and stolen credentials, a workstation drive-by compromise, and a code repository the theft of credentials left in code, and of the code itself;
+- its exposure: an internet-facing asset opens initial access by exploiting a public service or an external remote service;
 - its criticality.
 
-The assets a scenario's primary assets depend on weigh more when an attack reaches for its objective: the CRQ tab of a scenario shows this as **Target boost**. See [Build the attack surface from your assets](/opencrq/use/attack-surface/assets/).
+The assets linked directly to a scenario's primary assets weigh more when an attack reaches for its objective: the CRQ tab of a scenario shows this as **Target boost**. See [Build the attack surface from your assets](/opencrq/use/attack-surface/assets/).
 
 ## The declared estate
 
@@ -57,7 +57,7 @@ The supporting assets you declare or import are rarely the whole estate: an inte
 
 You answer it in the **Declared estate** step when you create the scope, or later from its **Details**: the **Declared estate** tab shows the answers, and **Answer the questionnaire** opens them for editing beside the number of assets of each kind already measured. The declaration changes the price in two ways:
 
-- **The attack run** completes the assets it walks up to your answer. For each kind, it adds internal assets of **Unknown** criticality until the count reaches the lower bound of your answer, and each simulated year draws its own count within the range. When you answer that at least one is reachable from the Internet and none of the measured ones is, one added asset faces the internet. The added assets support no primary asset.
+- **The attack run** completes the assets it walks up to your answer. For each kind, it adds internal assets of **Unknown** criticality until the count reaches the lower bound of your answer, and each simulated world draws its own count within the range and keeps it for every year it plays. When you answer that at least one is reachable from the Internet and none of the measured ones is, one added asset faces the internet. The added assets support no primary asset.
 - **The workstation and server counts** size the forensics and restoration loss drivers. Without them, OpenCRQ estimates the counts from the employee count and the size of the organization.
 
 A scope measured over **Mapped assets only** that maps no asset is priced from its declaration alone. Under :menu[Assets], inside a risk scope, the card above the list sets the measured assets of each category beside the declared ones. The **Events** tab of the scope's **Details** keeps the history of its identity, mapped assets, financial profile and declared estate: who changed which answer, from what to what, and when.
@@ -79,7 +79,9 @@ A link from a supporting asset to a primary asset carries one or more roles. Eac
 
 A link with several roles keeps the strongest of each. **Unknown** inherits everything, so a link you have not qualified never counts for less than a qualified one. A link between two supporting assets (a web application running on a database server) carries no role: it passes on what its dependent inherits, halved at each step, up to five levels.
 
-Integrations also observe relations between two supporting assets that are not links: a user account assigned to a device, from Microsoft Entra ID or Intune, and an attack path OpenAEV showed from one asset to the next, **Leads to** and **Reached from**, either **OpenAEV, proven by a test** or **OpenAEV, inferred**. They show on the asset's **Access relations** tab, carry no role, and pass on no share of a scenario's loss. See [Build the attack surface from your assets](/opencrq/use/attack-surface/assets/).
+The **Impact if compromised** shows which supporting assets matter most to the scenario. To price it, the attack run aims at every supporting asset linked to the scenario's primary assets, whatever its roles, and weighs them 10 times more at the steps that reach for the objective (the **Target boost** of the CRQ tab). To have the attacks aim at an asset you reach through another supporting asset, such as a database server behind a web application, link it to the primary asset too.
+
+Integrations also observe relations between two supporting assets that are not links: a user account assigned to a device, from Microsoft Entra ID or Intune, and an attack path OpenAEV showed from one asset to the next, **Leads to** and **Reached from**, either **OpenAEV, proven by a test** or **OpenAEV, inferred**. They show on the asset's **Access relations** tab, carry no role, and make no asset a target of a scenario. The attack run reads one of them: a user account assigned to a device tells it which device a phished person works on. See [Build the attack surface from your assets](/opencrq/use/attack-surface/assets/).
 
 Each attack outcome breaches some criteria: ransomware reaches availability and confidentiality, and integrity in part; a data breach reaches confidentiality only. The share of those criteria a link passes on is the **Impact if compromised** that a scenario's **Targets** tab shows for each supporting asset.
 

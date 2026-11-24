@@ -160,7 +160,7 @@ All the configuration is in `.env`, except the ports, the image versions and the
    An integration that runs on another host, outside XTM Composer, needs to reach some of these services. See [Run an integration without XTM Composer](/deploy/integrations/manual/) before you close them.
    :::
 
-7. Pin the versions. `docker-compose.yml` uses the `latest` tag, so every `docker compose pull` could upgrade a platform. Write the releases you install in `docker-compose.override.yml` with the commands of [Pin the image versions](#pin-the-image-versions), here the current ones: `OPENCTI_VERSION=7.261030.1`, `OPENAEV_VERSION=3.261029.0`, `XTM_ONE_VERSION=1.261112.0` and `OPENCRQ_VERSION=0.261116.0`.
+7. Pin the versions. `docker-compose.yml` uses the `latest` tag, so every `docker compose pull` could upgrade a platform. Write the releases you install in `docker-compose.override.yml` with the commands of [Pin the image versions](#pin-the-image-versions), here the current ones: `OPENCTI_VERSION=7.261119.0`, `OPENAEV_VERSION=3.261118.0`, `XTM_ONE_VERSION=1.261119.1` and `OPENCRQ_VERSION=0.261123.0`.
 
    The OpenCTI connectors and the OpenAEV collectors and injectors follow the version of their platform. xtm-docker pins RustFS, the S3 storage, to `1.0.4`. XTM Composer, the `alpine/openssl` key generator and the AWS command line interface of `opencrq-bucket-init` keep `latest`. Check which versions work together in [Compatibility between modules](/deploy/upgrade/compatibility/).
 
@@ -213,7 +213,7 @@ All the configuration is in `.env`, except the ports, the image versions and the
    ```
    :::
 
-3. Put the reverse proxy in front of the platforms, as [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/) describes, then sign in at each public URL with the admin email and password of `.env`. OpenCRQ has no password of its own: XTM One's administrator signs in to it through XTM One and creates its first tenant, as [Install OpenCRQ](/deploy/install/opencrq/#sign-in-and-create-the-first-tenant) describes.
+3. Put the reverse proxy in front of the platforms, as [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/) describes, then sign in at each public URL with the admin email and password of `.env`. OpenCRQ has no password of its own: XTM One's administrator signs in to it through XTM One and lands in its first tenant, `Default`, which OpenCRQ creates at its first start. See [Install OpenCRQ](/deploy/install/opencrq/).
 :::
 
 ## Change the stack without editing docker-compose.yml
@@ -265,10 +265,10 @@ Apply the change with `docker compose up -d`: Docker Compose recreates the conta
 These commands pin the OpenCTI, OpenAEV, XTM One and OpenCRQ images of the stack. They write the image of each service, with the versions you set, at the end of `docker-compose.override.yml`. Run them again to change the versions: they replace that part of the file.
 
 ```bash
-OPENCTI_VERSION=7.261030.1
-OPENAEV_VERSION=3.261029.0
-XTM_ONE_VERSION=1.261112.0
-OPENCRQ_VERSION=0.261116.0
+OPENCTI_VERSION=7.261119.0
+OPENAEV_VERSION=3.261118.0
+XTM_ONE_VERSION=1.261119.1
+OPENCRQ_VERSION=0.261123.0
 touch docker-compose.override.yml
 sed -i.bak '/^# Pinned versions/,$d' docker-compose.override.yml
 PINNED=$(docker compose config --format json | python3 -c '

@@ -56,7 +56,7 @@
     - {url: /opencrq/use/quantify/risk-scenarios/, label: Price each risk in money}
     - {url: /opencrq/use/defenses/controls/, label: Declare the controls}
     - {url: /openaev/use/simulations/, label: Test the controls with real attacks}
-    - {url: /opencrq/use/sources/openaev/, label: Measure the controls on the results}
+    - {url: /opencrq/use/sources/openaev/, label: Audit the controls with the results}
     - {url: /opencrq/use/decide/treatment-plans/, label: Fund what removes the most loss}
     - {url: /xtm-one/use/dashboard/, label: Follow the five stages in XTM One}
 

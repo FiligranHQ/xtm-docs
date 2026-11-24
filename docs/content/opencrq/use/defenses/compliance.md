@@ -22,7 +22,7 @@ An assessment belongs to the tenant, not to a risk scope: it rates the organizat
 ## Create an assessment
 
 :::steps
-1. Go to :menu[Defenses > Compliance]. The list shows your assessments and the Drata frameworks, with their **Framework**, **Source**, **Progress**, **Maturity**, **Status** and **Updated** date.
+1. Open :menu[Compliance] in the sidebar. The list shows your assessments and the Drata frameworks, with their **Framework**, **Source**, **Progress**, **Maturity**, **Status** and **Updated** date.
 2. Select **New assessment**.
 3. Enter a **Name**, such as the framework and the period, and keep **NIST CSF 2.0** in **Framework**.
 4. Select **Create**. The assessment opens, in **Draft**.
@@ -48,12 +48,12 @@ The assessment shows the framework as a tree: functions, categories, then the su
    | 4 | **Managed** |
    | 5 | **Optimized** |
 
-   Each level's tooltip gives its definition.
+   The information icon beside the question lists the six levels with their definitions.
 4. In **Comment**, write what is in place and what is missing: it is the evidence an auditor reads.
 5. Select **Save**.
 :::
 
-When two people answer the same requirement at the same time, the second save is refused with a message saying the answer changed: reopen it to see the other answer before saving yours.
+When two people answer the same requirement at the same time, the second save is refused, and the drawer reloads the saved answer with your changes on top. Under a field you both changed, **Saved meanwhile** shows the other value: keep yours or select **Use saved value**, then save again.
 
 The cards at the top follow your answers. **Progress** counts the requirements answered or marked not applicable, out of 106. **Average maturity** is the mean level of the answered requirements, leaving out those not applicable. **Controls fed** counts the controls your answers feed, out of the 51 the framework reaches.
 
@@ -63,9 +63,9 @@ Select **Publish** when the assessment is complete. Publishing locks it: its ans
 
 A published assessment feeds the controls:
 
-- For each requirement, the answer of the latest published assessment counts. **Not applicable** feeds nothing.
+- For each requirement, the answer of the latest published assessment that answered it counts: a requirement left unanswered keeps the answer of an earlier published assessment. **Not applicable** feeds nothing, whatever an earlier assessment said.
 - A level becomes a strength: **Nonexistent** gives **Not deployed**, **Initial** and **Repeatable** give **Basic**, **Defined** gives **Intermediate**, **Managed** and **Optimized** give **Master**. A control fed by several requirements takes the mean, rounded to the nearest level. When nothing measures the control's coverage, OpenCRQ assumes one from the same answers.
-- Drata's reading of a control, when you have one, weighs twice as much as your answers: a self-declared maturity never outweighs a tool's reading.
+- Drata's reading of a control, when you have one, weighs twice as much as your answers. When Drata reads the highest strength its evidence can prove, higher answers can raise the control above Drata's reading.
 - Only the tenant's postures are fed, and only the axes left on **Auto**. A value you chose yourself, and the posture a risk scope declares on its own, stay as they are.
 
 OpenCRQ applies a published assessment to the controls in a background job, at the latest the next day, then prices the scenarios again. Each control lists the answers behind it under **Assessment evidence**. Reopening an assessment stops its answers from feeding the controls.
@@ -75,7 +75,7 @@ OpenCRQ applies a published assessment to the controls in a background job, at t
 Once Drata is synchronized, ISO/IEC 27001:2022 and SOC 2 show in the list with **Source** **Drata**, **Status** **Synced** and their readiness as a percentage. They are read-only: open one to see its **Readiness**, its in-scope requirements and controls, and **Open in Drata** to work on it there. Their controls' readiness feeds OpenCRQ's controls beside your assessments.
 
 :::example[Grand Meridian rates its access control after the MFA rollout]
-On 2 March 2026, after the front-desk MFA rollout, Claire Morel, risk manager of Grand Meridian Hotels, opens :menu[Defenses > Compliance], selects **New assessment**, enters **Name** "NIST CSF 2.0 · Q1 2026" and keeps **Framework** **NIST CSF 2.0**.
+On 2 March 2026, after the front-desk MFA rollout, Claire Morel, risk manager of Grand Meridian Hotels, opens :menu[Compliance], selects **New assessment**, enters **Name** "NIST CSF 2.0 · Q1 2026" and keeps **Framework** **NIST CSF 2.0**.
 
 In the tree, **Feeds controls** narrows the work to the 35 requirements that move the price. PR.AA-03, "Users, services, and hardware are authenticated", feeds ten controls, the identity platform (IDP) among them. She sets herself as **Owner**, the level **Defined**, and the **Comment** "MFA on every account since 2026-02-27; service accounts still on passwords". She rates PR.AA-01 (identities and credentials managed) and PR.AA-05 (access permissions and least privilege) **Repeatable**, with a **Due date** of 30 June 2026.
 
@@ -86,7 +86,7 @@ Once published, the PR.AA-03 answer counts toward a strength of **Intermediate**
 
 ## Check that it works
 
-- The assessment shows **Published** in :menu[Defenses > Compliance], with its **Progress** and **Maturity**.
+- The assessment shows **Published** in :menu[Compliance], with its **Progress** and **Maturity**.
 - A control the assessment feeds lists the answers under **Assessment evidence** on its **Overview**.
 
 ## What's next

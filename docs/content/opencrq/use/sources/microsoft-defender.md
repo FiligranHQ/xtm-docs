@@ -36,7 +36,7 @@ A machine that OpenAEV also reports becomes one asset: see [Import OpenAEV resul
 
 ## Before you start
 
-- In OpenCRQ, your role has the **Manage Security** capability, and a service account exists for the connector: see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/).
+- In OpenCRQ, your role has the **Manage Security** capability.
 - In Microsoft Entra ID, an app registration with a client secret, and these Microsoft Graph **application** permissions, each with admin consent:
 
   | Permission | Required | What it reads | Without it |
@@ -47,7 +47,7 @@ A machine that OpenAEV also reports becomes one asset: see [Import OpenAEV resul
 
 ## Give OpenCRQ the credentials
 
-The credentials are not stored in OpenCRQ's database: the deployment sets them per tenant, keyed by the tenant's id, the first segment of the address of OpenCRQ once you are signed in to that tenant. The connector turns available for a tenant once all three are set:
+The credentials are not stored in OpenCRQ's database: the deployment sets them per tenant, keyed by the tenant's id, the first segment of the address of OpenCRQ once you are signed in to that tenant. The connector turns available for a tenant once all three are set. Set them together: with one or two set, OpenCRQ does not start, and the error it stops on names the missing key under `connectors.microsoft_graph.<tenant-uuid>`.
 
 | Variable | What it holds |
 | --- | --- |
@@ -55,7 +55,7 @@ The credentials are not stored in OpenCRQ's database: the deployment sets them p
 | `CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_ID` | The application (client) ID of the app registration |
 | `CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_SECRET` | Its client secret. Pass it through a secret store |
 
-Until then, the **Microsoft Defender** card stays on the **Available** tab of :menu[Integrations], and its page reads **Unavailable**:
+With none of them set, the **Microsoft Defender** card stays on the **Available** tab of :menu[Integrations], and its page reads **Unavailable**:
 
 ::screenshot{id=opencrq-defender-connector alt="The Microsoft Defender connector page before its credentials are set: Unavailable, the notice to add it to the deployment configuration, the domain Vulnerability, a scheduled pull whose scope is supporting assets and findings, and a schedule of every 6 hours with no run yet."}
 
@@ -66,7 +66,7 @@ See the [configuration reference](/reference/opencrq/configuration/#connectors).
 :::steps
 1. Open :menu[Integrations], stay on the **Deployed** tab, and click the **Microsoft Defender** card, under **Vulnerability**. Its state reads **Not configured**.
 2. Click **Configure**.
-3. Choose the account in **Service account**. The connector writes the assets and findings as this account.
+3. Under **Service account**, keep **Create a new service account**, named `Microsoft Defender connector` by default, or choose **Use an existing service account**. The new account is created with the integration, in the **Connectors** group; a tenant with no account to reuse offers it alone. The connector writes the assets and findings as this account.
 4. Under **Schedule**, keep **Every 6 hours** in **Frequency**, or choose another: from **Every hour** to **Every week**, or **Manual only**. A run reads the whole estate, which takes minutes on a large tenant: run it more often only if the estate changes faster.
 5. Click **Save**, then **Sync now** to run it without waiting for the schedule.
 :::
@@ -76,18 +76,18 @@ A run stops after 30 minutes, and a failed run is tried again, up to 3 attempts.
 :::example[Import Grand Meridian's hotels from Defender]
 Grand Meridian Hotels manages the workstations of its front desks and the servers of its booking platform in Microsoft Defender for Endpoint, and assigns each front-desk workstation in Intune. The risk manager wants the booking servers that face the internet, and the CVEs on them, in the attack surface of Grand Meridian France.
 
-In Microsoft Entra ID, the administrator registers the application `OpenCRQ Defender connector`, creates a client secret, and grants `ThreatHunting.Read.All`, `Device.Read.All` and `DeviceManagementManagedDevices.Read.All` with admin consent. The platform engineer sets the entry of Grand Meridian's tenant, `abd0465d-51cd-5234-85b8-cb1cc781124c`:
+In Microsoft Entra ID, the administrator registers the application `OpenCRQ Defender connector`, creates a client secret, and grants `ThreatHunting.Read.All`, `Device.Read.All` and `DeviceManagementManagedDevices.Read.All` with admin consent. The platform engineer sets the entry of Grand Meridian's tenant, `01a043da-ff47-72c2-aaa4-7da56d85c83e`:
 
 ```yaml
 services:
   opencrq:
     environment:
-      - CONNECTORS__MICROSOFT_GRAPH__abd0465d-51cd-5234-85b8-cb1cc781124c__AZURE_TENANT_ID=${GRAND_MERIDIAN_ENTRA_TENANT_ID}
-      - CONNECTORS__MICROSOFT_GRAPH__abd0465d-51cd-5234-85b8-cb1cc781124c__CLIENT_ID=${GRAND_MERIDIAN_DEFENDER_CLIENT_ID}
-      - CONNECTORS__MICROSOFT_GRAPH__abd0465d-51cd-5234-85b8-cb1cc781124c__CLIENT_SECRET=${GRAND_MERIDIAN_DEFENDER_CLIENT_SECRET}
+      - CONNECTORS__MICROSOFT_GRAPH__01a043da-ff47-72c2-aaa4-7da56d85c83e__AZURE_TENANT_ID=${GRAND_MERIDIAN_ENTRA_TENANT_ID}
+      - CONNECTORS__MICROSOFT_GRAPH__01a043da-ff47-72c2-aaa4-7da56d85c83e__CLIENT_ID=${GRAND_MERIDIAN_DEFENDER_CLIENT_ID}
+      - CONNECTORS__MICROSOFT_GRAPH__01a043da-ff47-72c2-aaa4-7da56d85c83e__CLIENT_SECRET=${GRAND_MERIDIAN_DEFENDER_CLIENT_SECRET}
 ```
 
-In OpenCRQ, the administrator creates the service account `Microsoft Defender connector`, then in **Configure integration** chooses it, keeps **Every 6 hours**, saves and clicks **Sync now**.
+In OpenCRQ, the administrator opens **Configure integration**, keeps the new service account `Microsoft Defender connector` and **Every 6 hours**, saves and clicks **Sync now**.
 
 The booking servers arrive as internet facing when Defender flags them so, each with the CVEs Defender finds on it, and the domain controllers of the chain as very high criticality. The front-desk accounts arrive with the workstation each one uses. Every 6 hours, a CVE patched on a server is dismissed and the scenarios that reach it are priced again.
 :::

@@ -2,7 +2,7 @@
   "name": "attack-outcomes",
   "version": "0.261123.0",
   "source": "OpenCRQ-Platform/opencrq@d61ebb5 (module/src/modules/attack-outcomes/data/attack-outcomes-data.ts)",
-  "intro": "The attack outcomes a risk scenario names: what the attacker is after, how the attack ends (the ATT&CK tactic whose success realizes the outcome), how long an attacker usually stays before it (the median of the dwell time OpenCRQ draws), which security criteria of the primary asset the outcome breaches, and the techniques that mark it. Every tenant gets this catalog at boot.",
+  "intro": "The attack outcomes a risk scenario names: what the attacker is after, how the attack ends (the ATT&CK tactic whose success realizes the outcome), a reference dwell time (how long an attacker usually stays before it, a catalog value the price does not read), which security criteria of the primary asset the outcome breaches, and its techniques. OpenCRQ prices the attacks of a scenario on its signature and related techniques, each weighed by the share of the scenario's relevant threats that use it; with no relevant threat, a signature technique weighs 0.5 and a related one 0.2. A technique outside both lists joins them when enough relevant threats use it. Every tenant gets this catalog at boot.",
   "sections": [
     {
       "title": "Attack outcomes",

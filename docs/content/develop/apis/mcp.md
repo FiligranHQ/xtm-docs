@@ -13,7 +13,7 @@ last_reviewed: 2026-11-09
 sidebar_position: 6
 ---
 
-The modules of the XTM platform reach Model Context Protocol (MCP) clients through XTM One. XTM One serves one MCP server per registered product, OpenCTI, OpenAEV and OpenCRQ, and its own servers for its agents and its configuration. A client such as Claude, Cursor, VS Code or an agent you write calls their tools with the identity of a user, and each product applies that user's rights. This page is the reference of these servers in XTM One 1.261110: endpoints, protocol, authentication, answers and tools. To connect a client step by step, see [Use XTM One's own MCP servers from other clients](/xtm-one/build/platform-mcp-servers/).
+The modules of the XTM platform reach Model Context Protocol (MCP) clients through XTM One. XTM One serves one MCP server per registered product, OpenCTI, OpenAEV and OpenCRQ, and its own servers for its agents and its configuration. A client such as Claude, Cursor, VS Code or an agent you write calls their tools with the identity of a user, and each product applies that user's rights. This page is the reference of these servers in XTM One 1.261119: endpoints, protocol, authentication, answers and tools. To connect a client step by step, see [Use XTM One's own MCP servers from other clients](/xtm-one/build/platform-mcp-servers/).
 
 ::diagram{id=develop-apis-mcp}
 
@@ -58,7 +58,7 @@ A call to a tool the server does not list is a JSON-RPC error `-32602`, `Unknown
 
 A request without a valid credential answers `401` with a `WWW-Authenticate` header that points to the protected resource metadata (RFC 9728), from which an OAuth client finds the sign-in by itself.
 
-A product server never holds a token of the product. For each call, XTM One signs a short-lived token for the user, matched by email in OpenCTI, OpenAEV or OpenCRQ, and the product applies that account's capabilities, markings and audit trail. Changes made through `/mcp/opencti` go straight to the knowledge, not to a draft.
+A product server never holds a token of the product. For each call, XTM One signs a short-lived token for the user, matched by email in OpenCTI and OpenAEV. OpenCRQ matches it to the account tied to the user's XTM One account (the token's `sub`), never to an email address. The product applies that account's capabilities, markings and audit trail. Changes made through `/mcp/opencti` go straight to the knowledge, not to a draft.
 
 | API key setting | Effect on the MCP servers |
 | --- | --- |

@@ -63,7 +63,7 @@ The versions each module supports, and the version xtm-docker runs. A module mar
 | RabbitMQ | 4.3, with the management plugin | 3.11 or later | 4.1 or later | Not used | Not used |
 | Redis | 8.8.0 | 7.1 or later | Not used | Used, no minimum version documented | Not used |
 | S3-compatible storage | RustFS 1.0.4 | Any S3-compatible service; MinIO RELEASE.2023-02 or later | MinIO RELEASE.2025-06-13T11-33-47Z or later | Used, no minimum version documented | Any S3-compatible service, its bucket created beforehand |
-| PostgreSQL | 17, with the pgvector extension | Not used | 17 or later | With the pgvector extension | Its own Compose file runs 16; it creates the `unaccent` extension |
+| PostgreSQL | 17, with the pgvector extension | Not used | 17 or later | With the pgvector extension | 17 recommended, 16 at least; it creates the `unaccent` extension |
 
 The OpenAEV versions are the recommended ones: OpenAEV may work with earlier versions, but they are not supported. OpenAEV 3.261029.0 detects the search engine from its URL and works with Elasticsearch 8, Elasticsearch 9 or OpenSearch. OpenCTI also works with search, cache and queue services that speak the same protocols, such as managed cloud services: see [Topologies](/deploy/plan/topologies/).
 
@@ -75,7 +75,7 @@ xtm-docker already sets these. Set them yourself when you run the services anoth
 | --- | --- | --- |
 | Elasticsearch | `thread_pool.search.queue_size=5000` | Filigran recommends it for OpenCTI on a new installation |
 | RabbitMQ | `max_message_size = 536870912` and `consumer_timeout = 86400000` in `rabbitmq.conf` | Filigran recommends them for OpenCTI on a new installation |
-| PostgreSQL | `max_connections=200` | OpenAEV opens up to 20 connections and XTM One up to 35 per process, over its two web workers and its worker: more than the default of 100 |
+| PostgreSQL | `max_connections=200` | OpenAEV opens up to 20 connections, XTM One up to 35 per process over its two web workers and its worker, and OpenCRQ about 50 at peak: more than the default of 100 |
 | PostgreSQL | The `vector` extension in the `xtm_one` database, created by a superuser | pgvector is not a trusted extension, and the XTM One role is not a superuser. In xtm-docker, `xtm-one-db-init` creates it |
 
 ## Runtimes, for an installation without containers

@@ -29,7 +29,7 @@ A run is booked for one kind of job in one tenant. Its **Triggered by** says why
 | **Service account** | An integration asked for it, as its service account |
 | **System** | OpenCRQ asked for it itself |
 
-A worker takes the run from the queue. When an attempt fails, the run waits and tries again, up to its number of attempts (**1 / 3** reads first attempt of three). When the last one fails, the run lands in the **Dead-letter queue** and stays there. Some kinds run one at a time per tenant: a second run waits until the first ends.
+A worker takes the run from the queue. When an attempt fails, the run waits and tries again, up to its number of attempts (**1 / 3** reads first attempt of three). When the last one fails, the run lands in the **Dead-letter queue** and stays there. An error another attempt cannot fix sends it there at once, whatever attempts remain, such as a connector not configured, credentials the remote service refuses, or a file that is not a valid STIX bundle. Some kinds run one at a time per tenant: a second run waits until the first ends.
 
 The price of a scenario (`crq-simulation`) can start before the weights of the attackers of its outcome are computed. It then goes back to the queue without an error and without spending an attempt, and tries again from 2 to 30 seconds later. It waits so for at most `recompute.debounce_cap_ms` plus five minutes from its first start, 10 minutes by default; past that, it lands in the dead-letter queue.
 
@@ -99,7 +99,7 @@ The jobs pages only read. You start a run again where its work is:
 
 | What | Kept | Setting |
 | --- | --- | --- |
-| Finished runs, with their errors and logs | 30 days, deleted each day by the `jobs-retention` job | `jobs.run_retention_days` |
+| Finished runs, with their errors and logs | 30 days, deleted each day by the `jobs-retention` job, except the last run of each kind, kept whatever its age | `jobs.run_retention_days` |
 | Log lines of a kind | Those of its last 3 runs, per tenant | `jobs.log_retention_runs` |
 | Log lines of the OpenCTI stream | The last 500 | `jobs.log_retention_lines` |
 
@@ -118,7 +118,7 @@ On 10 April 2026, OpenCTI reports Ember Tide's new campaign against hotel chains
 - In **Runs**, with **Triggered by** set to **Data change**, the runs of 10 April come in order: `opencti-mirror-rebuild` (the threat streamed in), `threat-activity-recompute`, `threat-list-projection-recompute` and `attack-outcome-mixture-recompute` (Ember Tide's activity, and its weight among the attackers of each scenario), then `finding-score-recompute` and `crq-price-recompute` (the scores and the prices). Each is **Succeeded** on attempt **1 / 3**.
 - In **Kinds**, `opencti-mirror-rebuild` is **Healthy**, and its **Logs** show, for each run, "OpenCTI mirror rebuilt" and "Job completed successfully".
 
-The price of the ransomware scenario is current. For its quarterly audit, Example CERT also wants three months of run history instead of 30 days: its platform engineer sets `jobs.run_retention_days` to `90` in the deployment configuration of OpenCRQ, and the `jobs-retention` job keeps every run since mid-January.
+The price of the ransomware scenario is current. For its quarterly audit, Example CERT also wants three months of run history instead of 30 days: its platform engineer sets `jobs.run_retention_days` to `90` in the deployment configuration of OpenCRQ. The runs already deleted, those before 11 March, do not come back: from then on, the `jobs-retention` job keeps each run 90 days, so the history reaches three months in early June.
 :::
 
 ## Check that it works

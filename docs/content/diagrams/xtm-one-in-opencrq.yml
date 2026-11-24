@@ -13,7 +13,7 @@ lanes:
     tone: core
     nodes:
       - {id: agents, label: Agents, icon: Bot, note: "Assistant of OpenCRQ"}
-      - {id: mcp, label: MCP server, icon: Server, note: /mcp/opengrc}
+      - {id: mcp, label: MCP server, icon: Server, note: /mcp/opencrq}
 edges:
   - {from: panel, to: opencrq, label: your message}
   - {from: opencrq, to: agents, label: message and token}

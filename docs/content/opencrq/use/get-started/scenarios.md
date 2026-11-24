@@ -9,12 +9,12 @@ owner: docs-opencrq
 last_reviewed: 2026-11-20
 ---
 
-**Scenarios** is the last step of :menu[Get started], and its card reads **Your first scenarios**. A scenario pairs an attack outcome, such as ransomware, with the primary assets it reaches. OpenCRQ simulates thousands of attacks on it to estimate your annual loss. The step suggests the scenarios your primary assets call for, creates the ones you pick in the **Enterprise** risk scope, and prices them.
+**Scenarios** is the last step of :menu[Get started], and its card reads **Your first scenarios**. A scenario pairs an attack outcome, such as ransomware, with the primary assets it reaches. OpenCRQ prices it over a thousand draws of its uncertain inputs, by default, to estimate your annual loss. The step suggests the scenarios your primary assets call for, creates the ones you pick in the **Enterprise** risk scope, and prices them.
 
 ## Before you start
 
 - The **Enterprise** scope has at least one primary asset. See [Choose what you protect and link the assets behind it](/opencrq/use/get-started/protect/).
-- The tenant has threats, so the scenarios have an attack frequency. See [Import the threats that target your company](/opencrq/use/get-started/threats/).
+- The tenant has threats, so the scenarios have attackers to price. See [Import the threats that target your company](/opencrq/use/get-started/threats/).
 - The **Finances** step is answered, so the scenarios have a cost. See [Give your financial figures in the Finances step](/opencrq/use/get-started/finances/).
 
 ## The suggested scenarios
@@ -55,8 +55,8 @@ Under **Your scenarios**, each row shows the scenario's **Expected annual loss**
 
 | Status | What it lacks | Step to complete |
 | --- | --- | --- |
-| **No mapped asset** | A supporting asset linked to its primary assets | **Assets** |
-| **Incomplete** | A threat event frequency | **Threats** |
+| **No mapped asset** | Assets to measure: its scope measures **Mapped assets only**, and maps and declares none | **Assets** |
+| **Incomplete** | A threat event frequency: its first simulation sets it, and stops while no threat of the tenant is admitted for its outcome | **Threats** |
 | **Incomplete** | The figures of the financial profile | **Finances** |
 
 The other statuses, **Ready**, **Stale** and **Not simulated**, are the ones of :menu[Risk Scenarios]: see [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/). **See all risk scenarios** opens that list.

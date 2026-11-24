@@ -13,4 +13,4 @@ generator: reference:opencrq:loss-drivers
 
 ::diagram{id=reference-opencrq-loss-drivers}
 
-A loss driver is one line of what an incident costs: the forensics firm, the downtime, the regulator's fine. You give each driver a range (minimum, most likely, maximum); OpenCRQ draws from it in each simulated year and reports the result by loss category. Which drivers a scenario should price depends on its outcome and on what its primary assets hold: see the [business resources](/reference/opencrq/business-resources/).
+A loss driver is one line of what an incident costs: the forensics firm, the downtime, the regulator's fine. Each driver a scenario prices takes a range (minimum, most likely, maximum): OpenCRQ derives most of them from the risk scope's financial profile, and you can enter one by hand. OpenCRQ draws from every range and adds the draws up into the cost of one loss event; a simulated year adds up the cost of the loss events it holds. Which drivers a scenario should price depends on its outcome and on what its primary assets hold: see the [business resources](/reference/opencrq/business-resources/).

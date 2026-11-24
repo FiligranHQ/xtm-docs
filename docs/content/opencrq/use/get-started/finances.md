@@ -37,14 +37,14 @@ The step is started once one question is answered, and done once the 21 are. A s
 4. Select **Next** to go on to the **Tolerance** step.
 :::
 
-The step has no save button, and no message confirms a save. An answer that is not valid shows why under its field and is not saved. When a save fails, an error message says so, and your next change tries again. When the answers cannot be read, the step reads "Your financial figures could not be loaded." and shows no question, so that nothing is written over the answers already saved.
+The step has no save button, and no message confirms a save. Answers save together: each save checks the whole questionnaire. An answer that is not valid shows why under its field, and no answer saves until you correct it. When a save fails, an error message says so, and your next change tries again. When the answers cannot be read, the step reads "Your financial figures could not be loaded." and shows no question, so that nothing is written over the answers already saved.
 
-Each save is the same as in the scope's **Financial profile** tab: OpenCRQ recomputes the loss estimates of every scenario of the scope, then prices again those whose amounts moved. A new or changed **Annual revenue** also sets the scope's revenue band, the one the **Company** step shows, and the threat event frequency of the scope's scenarios is computed again.
+Each save is the same as in the scope's **Financial profile** tab: OpenCRQ recomputes the loss estimates of every scenario of the scope, then prices again those whose amounts moved. A new or changed **Annual revenue** also sets the scope's revenue band, the one the **Company** step shows. When the band moves, OpenCRQ computes again the threat event frequency of the scenarios set to **Auto**; the band changes it only when the scope has no **Employee Count**.
 
 :::example[Give Grand Meridian's figures]
 The **Enterprise** scope of Grand Meridian Hotels covers the whole chain, France and Spain. Claire Morel opens the **Finances** step with the figures of the finance team:
 
-- **Annual revenue**: `830,000,000` USD, $620 million in France and $210 million in Spain. The scope's revenue band follows, $100M to $1B.
+- **Annual revenue**: `830,000,000` USD, $620 million in France and $210 million in Spain. The scope's revenue band follows, **$100M-$1B**. The **Employee Count** of the **Company** step already sizes the chain, so the band leaves the threat event frequency as it is.
 - **Gross margin**: `31` %.
 - **Operating days per year**: **365 (continuous)**, for hotels open every day.
 - **Regulatory regime**: **NIS2 important**.

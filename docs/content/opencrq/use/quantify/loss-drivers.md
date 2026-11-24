@@ -10,7 +10,7 @@ owner: docs-opencrq
 last_reviewed: 2026-11-20
 ---
 
-What an attack costs is the other half of a risk's price, beside how often it happens. OpenCRQ breaks the cost into **loss drivers**: one line each for the forensics firm, the downtime, the notification of the people affected, the regulator's fine. Each driver is a range, minimum, most likely and maximum, in your currency. You do not type them one by one: you answer the **financial profile** of the risk scope, a questionnaire of 21 answers about revenue, downtime, data held and contracts, and OpenCRQ derives the ranges of every scenario of the scope from it. You then correct any driver you know better. [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) explains how the amounts enter the price.
+What an attack costs is the other half of a risk's price, beside how often it happens. OpenCRQ breaks the cost into **loss drivers**: one line each for the forensics firm, the downtime, the notification of the people affected, the regulator's fine. Each driver is a range, minimum, most likely and maximum, in US dollars: enter the financial profile in dollars too. You do not type them one by one: you answer the **financial profile** of the risk scope, a questionnaire of 21 answers about revenue, downtime, data held and contracts, and OpenCRQ derives from it the ranges of every scenario of the scope, for every driver but one. You then correct any driver you know better. [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) explains how the amounts enter the price.
 
 ## Before you start
 
@@ -21,11 +21,11 @@ What an attack costs is the other half of a risk's price, beside how often it ha
 
 You can answer it when you create the risk scope, on its optional **Financial profile** step, or at any time from the scope's details.
 
-In a new tenant, :menu[Get started] asks the same questions on its **Finances** step, for the tenant's first risk scope, **Enterprise** unless you renamed it on the **Company** step. There is no **Save**: each answer is saved when you leave its field or click a choice. The step counts as done once all 21 answers are given.
+In a new tenant, :menu[Get started] asks the same questions on its **Finances** step, for the tenant's first risk scope, **Enterprise** unless you renamed it on the **Company** step. There is no **Save**: the answers save together when you leave a field or click a choice, once every answer is valid. The step counts as done once all 21 answers are given.
 
 :::steps
 
-1. In the sidebar, under **Risk scopes**, open your risk scope, click :menu[Details], then the **Financial profile** tab. It shows how many answers are given, and each answer with the loss drivers it **Informs**.
+1. In the sidebar, open your risk scope, listed below **Budget Reviews**, click :menu[Details], then the **Financial profile** tab. It shows how many answers are given, and each answer with the loss drivers it **Informs**.
 
 2. Click **Answer the questionnaire**. The scope's edit panel opens on its **Financial profile** tab.
 
@@ -39,7 +39,7 @@ In a new tenant, :menu[Get started] asks the same questions on its **Finances** 
 
 | Section | What it asks | What it drives |
 | --- | --- | --- |
-| **A · Revenue and margin** | **Loaded daily labour cost**, **Annual revenue**, **Gross margin**, **Operating days per year** and the seasonal peak | Every driver that scales with revenue, the lost margin of an outage. The annual revenue also sets the scope's revenue band, which positions its [threat event frequency](/opencrq/use/threats/threat-event-frequency/), each time you enter or change the amount: saving the other answers leaves a band chosen on the scope as it is |
+| **A · Revenue and margin** | **Loaded daily labour cost**, **Annual revenue**, **Gross margin**, **Operating days per year** and the seasonal peak | Every driver that scales with revenue, the lost margin of an outage. The annual revenue also sets the scope's revenue band, which positions its [threat event frequency](/opencrq/use/threats/threat-event-frequency/), each time you enter, change or clear the amount. Clearing it clears the band too; saving the other answers leaves a band chosen on the scope as it is |
 | **B · Digital dependency** | The share of turnover that stops when IT stops, the **Maximum tolerable downtime (MTD)**, the **Recovery time objective (RTO)**, whether lost business comes back, how recently a restore was tested | The downtime, restoration and response drivers |
 | **C · Data held** | How many people's personal data you hold, card transactions, sensitive records, the largest single repository | Notification, identity protection, claims, regulatory fines, card-brand assessments |
 | **D · Regulatory** | The strictest regime that applies: NIS2, DORA or another sectoral supervision | **Regulatory fines** and **Incident legal counsel** |
@@ -50,7 +50,7 @@ In a new tenant, :menu[Get started] asks the same questions on its **Finances** 
 
 A few answers need care:
 
-- **Loaded daily labour cost** comes prefilled from a benchmark for the scope's country. Correct it if you know your own rate.
+- **Loaded daily labour cost** starts empty. Left blank, OpenCRQ uses the benchmark of the scope's country, or a platform default without a country, which the card shows, and flags internal response labour as low confidence. Enter your own rate if you know it.
 - **Restore test recency** left blank counts as tested. A restore tested long ago or never widens the worst case of the seven drivers that hang on the restore time, from forensics to customer attrition.
 - The workstations and servers of the scope are no longer asked here: declare them on the scope's **Declared estate** tab, beside **Financial profile**. The counts declared there, an exact number or a range, replace the estimate from the scope's size in the forensics and restoration drivers, and lift its low-confidence flag once both are declared. See [Risk scopes, primary assets and supporting assets](/opencrq/concepts/risk-scopes-and-assets/).
 - **Ransom payment posture** at **No** records the extortion payment as zero in every scenario, a **declared zero**, rather than leaving it unestimated.
@@ -87,12 +87,12 @@ A manual amount stays when the financial profile changes: OpenCRQ only recompute
 
 ## Look up a loss driver
 
-The scope's :menu[Details] has a **Loss Driver** tab: the catalogue of loss drivers, grouped by loss category, with the **Dwell sensitivity** of each, how much the attacker's time inside changes its size. Click a driver for its **Loss category**, its **Scaling variable**, and **When this driver applies**: a grid of attack outcomes by business resource, marked **Applies**, **Realistic pairing, driver not called** or **Pairing not held realistic**. Loss drivers are platform reference data and cannot be edited. The [loss drivers reference](/reference/opencrq/loss-drivers/) lists them all.
+The scope's :menu[Details] has a **Loss Driver** tab: the catalogue of loss drivers, grouped by loss category, with the **Dwell sensitivity** of each: how much its cost tends to grow with the attacker's time inside. It describes the driver; the estimates do not read it. Click a driver for its **Loss category**, its **Scaling variable**, and **When this driver applies**: a grid of attack outcomes by business resource, marked **Applies**, **Realistic pairing, driver not called** or **Pairing not held realistic**. Loss drivers are platform reference data and cannot be edited. The [loss drivers reference](/reference/opencrq/loss-drivers/) lists them all.
 
 ## Check that it works
 
 - The scope's **Financial profile** tab counts your answers, such as **21 of 21 answered**.
-- A scenario's **Financial Impact** tab shows **Auto** amounts, and none reads **Not estimated** for lack of an answer. While a recompute runs, a notice says the amounts shown are the previous ones.
+- A scenario's **Financial Impact** tab shows **Auto** amounts, and none reads **Not estimated** for lack of an answer. **Hardware & equipment replacement** is the exception: OpenCRQ never derives it, so enter its range in **Manual** when a scenario calls for it. While a recompute runs, a notice says the amounts shown are the previous ones.
 - The scenario's **Overview** shows the new **Loss magnitude (LM)**, the PERT expected total, and its **CRQ** tab a new run.
 
 :::example[The financial profile of Grand Meridian France]
@@ -109,11 +109,13 @@ The risk manager of Grand Meridian France answers the 21 questions with the fina
 | **Recovery time objective (RTO)** | **3 – 7 days** |
 | **Restore test recency** | **Tested over 12 months ago** |
 | **Personal data held** | **Yes**, **1M – 5M** individuals |
+| **Sensitive records** | **100k – 1M** |
+| **Largest single repository** | **1M – 5M** |
 | **Payment-card transactions** | **500k – 5M** |
 | **Regulatory regime** | **NIS2 important** |
 | **Ransom payment posture** | **No** |
 
-The panel warns that a recovery target of three to seven days is more than four times a tolerable downtime under six hours. For Data Breach on Guest Records, OpenCRQ derives ten drivers: an incident costs $19.4M at least, $52.4M most likely and $125.2M at most, a PERT expected $59.0M. Notification & call handling alone weighs $9.4M to $21.5M, for the 2.4 million guests to notify.
+The panel warns that a recovery target of three to seven days is more than four times a tolerable downtime under six hours. For Data Breach on Guest Records, OpenCRQ derives ten drivers: an incident costs $19.4M at least, $52.4M most likely and $125.2M at most, a PERT expected $59.0M. Notification & call handling alone weighs $9.4M to $21.5M: OpenCRQ counts the middle of the 1M – 5M band, about 2.2 million people to notify, and the sensitive records at three times the cost.
 :::
 
 ## What's next

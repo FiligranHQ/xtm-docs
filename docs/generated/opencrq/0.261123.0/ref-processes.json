@@ -19,7 +19,7 @@
           "cells": [
             "`asset-criticality-lift-recompute`",
             "Raises the criticality of a device from the identities assigned to it: a device used by a very high criticality account is lifted to high, one used by a high criticality account to medium. It reruns when a connector sync or a person changes an identity's criticality or a device's assigned users.",
-            "When the data it read changes",
+            "When the data it read changes; one at a time per tenant",
             "Worker (or the monolith)"
           ]
         },
@@ -28,7 +28,7 @@
           "cells": [
             "`attack-outcome-mixture-recompute`",
             "Recomputes, for each risk scope and attack outcome that has a risk scenario, the mixture of attackers that weighs the outcome's ATT&CK techniques: the threats likely to lead to the outcome, weighed by their targeting and by the activity half-lives of the threat relevance settings. It reruns when the threats, the scopes or the settings change, and the daily run lets the weights age. See [Set how OpenCRQ weighs threats, controls and assets](/opencrq/configure/quantification-engine/).",
-            "When the data it read changes, every day at `recompute.daily_at`",
+            "When the data it read changes, every day at `recompute.daily_at`; one at a time per tenant",
             "Worker (or the monolith)"
           ]
         },
@@ -37,7 +37,7 @@
           "cells": [
             "`capability-derivation`",
             "Recomputes the strength and coverage of every control from the Drata frameworks and the published compliance assessments, keeping any axis a person set by hand, then the control's test results on each technique from the OpenAEV simulation results. When a control moves enough to change its price, it books the recompute of that control's levers in the risk scenarios that depend on it. See [control catalogue](/reference/opencrq/controls/).",
-            "When the data it read changes, every day at `recompute.daily_at`",
+            "When the data it read changes, every day at `recompute.daily_at`; one at a time per tenant",
             "Worker (or the monolith)"
           ]
         },
@@ -64,7 +64,7 @@
           "cells": [
             "`crq-simulation`",
             "Prices one risk scenario: the annualized loss, the paths an attack takes, and the what-ifs asked for (control levers, techniques, CVEs, treatment plans), together with the open budget reviews of its risk scope. It runs when someone clicks Run or recomputes a figure, evaluates a treatment plan or a budget review, and after a change of a control's posture or of the scenario's loss estimates. See [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).",
-            "When asked; one at a time per tenant",
+            "When asked; one at a time per tenant, with `crq-price-recompute`",
             "Worker (or the monolith)"
           ]
         },
@@ -99,7 +99,7 @@
           "key": "default-threats-sync",
           "cells": [
             "`default-threats-sync`",
-            "Loads the OpenCRQ Default Threats dataset, threat groups and campaigns derived from MITRE ATT&CK, into the tenant when its file changed, and retracts the default threats the file no longer holds. It is on by default in every tenant and runs every day at 06:00 UTC by default; switching the connector off removes its threats. See [configuration](/reference/opencrq/configuration/).",
+            "Loads the OpenCRQ Default Threats dataset, threat groups and campaigns derived from MITRE ATT&CK, into the tenant when its file changed, and retracts the default threats the file no longer holds. A tenant created from the platform, and the initial tenant, start with it switched off: the **Threats** step of **Get started**, or its **Enabled** switch under **Configure**, turns it on. A tenant created before 0.261120.0 keeps it on. It then runs every day at 06:00 UTC by default; switching the connector off removes its threats. See [configuration](/reference/opencrq/configuration/).",
             "On its connector's schedule (default: every day at 06:00 UTC); one at a time per tenant",
             "Worker (or the monolith)"
           ]
@@ -118,7 +118,7 @@
           "cells": [
             "`financial-estimates-recompute`",
             "Derives the loss estimates of each risk scenario from its risk scope's financial profile questionnaire, keeping any amount entered by hand, and asks a new CRQ simulation of every scenario whose amounts changed. It reruns when the questionnaire, the risk scope or the scenario changes, for a newly created scenario, and every hour to fill in estimates that are still missing.",
-            "When the data it read changes",
+            "When the data it read changes, or when the `financial-estimates-recompute` engine books it; one at a time per tenant",
             "Worker (or the monolith)"
           ]
         },
@@ -127,7 +127,7 @@
           "cells": [
             "`finding-score-recompute`",
             "Scores every finding from its CVE's exploitability (CVSS, EPSS, CISA listing, the threats that cite it) and the exposure and criticality of its supporting asset, then the posture of each supporting asset and the daily count of findings by severity. It also refreshes what the CRQ reads of the findings, and keeps a year of score history by default (recompute.score_history_retention_days). See [configuration](/reference/opencrq/configuration/).",
-            "When the data it read changes, every day at `recompute.daily_at`",
+            "When the data it read changes, every day at `recompute.daily_at`; one at a time per tenant",
             "Worker (or the monolith)"
           ]
         },
@@ -172,7 +172,7 @@
           "cells": [
             "`opencti-mirror-rebuild`",
             "Turns what the OpenCTI live stream delivered into OpenCRQ's threats, with their techniques, targets and attributions: it rebuilds each threat the stream created, changed, merged or renamed, and removes the ones deleted in OpenCTI. It runs after the stream writes, in bounded batches until the backlog is drained.",
-            "When the data it read changes",
+            "When the data it read changes; one at a time per tenant",
             "Worker (or the monolith)"
           ]
         },
@@ -181,7 +181,7 @@
           "cells": [
             "`primary-asset-reach-recompute`",
             "Lists, for each primary asset, every supporting asset it depends on, directly or through up to five levels of dependencies between supporting assets, which dashboards and the findings of a risk scenario read. It reruns when a link, a primary asset or its risk scope changes.",
-            "When the data it read changes",
+            "When the data it read changes; one at a time per tenant",
             "Worker (or the monolith)"
           ]
         },
@@ -190,7 +190,7 @@
           "cells": [
             "`proven-posture-record`",
             "Records each day, for every control and for the tenant and each risk scope, the prevention and detection success rates and the proof coverage that OpenAEV's results establish, which the control's success rate history shows. It runs only when the OpenAEV connector is configured, replays the past of a new risk scope from stored results, and keeps a year of history.",
-            "When the data it read changes, every day at `recompute.daily_at`",
+            "When the data it read changes, every day at `recompute.daily_at`; one at a time per tenant",
             "Worker (or the monolith)"
           ]
         },
@@ -207,8 +207,8 @@
           "key": "threat-activity-recompute",
           "cells": [
             "`threat-activity-recompute`",
-            "Recomputes each threat's last activity date, activity score and status (active, declining, dormant or unknown) from the dates its intelligence carries. It reruns after threat intelligence is imported, and the daily run lets the statuses age with time.",
-            "When the data it read changes, every day at `recompute.daily_at`",
+            "Recomputes each threat's last observed and last authored dates and its activity score from the dates its intelligence carries; the threat pages read the last observed date to show a threat as **Active**, **Dormant** or **Not dated**. It reruns after threat intelligence is imported, and the daily run lets the scores age with time.",
+            "When the data it read changes, every day at `recompute.daily_at`; one at a time per tenant",
             "Worker (or the monolith)"
           ]
         },
@@ -235,7 +235,7 @@
           "cells": [
             "`threat-list-projection-recompute`",
             "Refreshes what the Threats list shows of each threat: its score against each attack outcome and its counts. It reruns after threat intelligence is imported, and for every threat when the source confidence gate or the attack outcome catalogue changes.",
-            "When the data it read changes",
+            "When the data it read changes; one at a time per tenant",
             "Worker (or the monolith)"
           ]
         },
@@ -244,7 +244,7 @@
           "cells": [
             "`threat-outcome-counter-recompute`",
             "Rescores the attack outcome probabilities of every threat when a new release brings a new version of OpenCRQ's outcome model: it sends each threat back to its source, the OpenCTI mirror for a streamed threat and the threat-bundle-outcome-rescore job for an uploaded one. An imported threat is scored as it arrives.",
-            "When the data it read changes, every day at `recompute.daily_at`",
+            "When the data it read changes, every day at `recompute.daily_at`; one at a time per tenant",
             "Worker (or the monolith)"
           ]
         }
@@ -270,7 +270,7 @@
           "key": "deployment-integrations",
           "cells": [
             "`deployment-integrations`",
-            "",
+            "At startup, for each tenant given an OpenCTI or an OpenAEV connection in the environment (`CONNECTORS__OPENCTI__<tenant-uuid>__*`, `CONNECTORS__OPENAEV__<tenant-uuid>__*`) and not configured yet, creates the service account the connector runs as and binds it; for OpenCTI it also creates or updates the Live Stream OpenCRQ reads, and binds it. A binding an administrator made is kept. See [connectors](/reference/opencrq/connectors/).",
             "Worker (or the monolith)"
           ]
         },
@@ -350,7 +350,7 @@
           "key": "xtm-admin-bearer",
           "cells": [
             "`xtm-admin-bearer`",
-            "",
+            "At startup, when `APP__ADMIN__TOKEN` is set and the initial tenant (`INITIAL_TENANT__ID`) exists, makes that token accepted on the API as the service account `Deployment admin token` of the initial tenant, in its **Admin** group. See [configuration](/reference/opencrq/configuration/).",
             "HTTP (or the monolith)"
           ]
         },

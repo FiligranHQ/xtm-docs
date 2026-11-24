@@ -16,7 +16,7 @@
           "key": "enterprise-edition-status",
           "cells": [
             "`enterprise-edition-status`",
-            "The Settings card reporting which edition the platform runs and what its XTM One contract covers.",
+            "The Settings card reporting which edition the platform runs and what its XTM One contract covers. It also hides the **Go to details** link of the notice that shows while the registration with XTM One fails.",
             "Front end (2 files), back end (0 files)"
           ]
         },

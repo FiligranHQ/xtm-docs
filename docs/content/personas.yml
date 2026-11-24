@@ -146,7 +146,7 @@ personas:
       Translates cyber threats into business risk: scopes what the business could lose, prices
       each risk in money, and argues which controls to fund. Speaks the language of the board
       more than the language of the SOC.
-    knows: [risk management frameworks (FAIR, ISO 27005), the business and its assets, budgets]
+    knows: [risk management frameworks (ISO 27005), the business and its assets, budgets]
     explain: [how the platform quantifies a risk, where its numbers come from (threats from OpenCTI, control results from OpenAEV), how to present them]
     wants: The method and its assumptions, then the steps; numbers explained.
     examples: [price the loss of the booking platform to Velvet Harbor, compare the risk before and after deploying multi-factor authentication]

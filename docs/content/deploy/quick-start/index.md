@@ -1,6 +1,6 @@
 ---
 title: Run the XTM platform locally
-description: Start the whole XTM platform, XTM One, OpenCTI, OpenAEV and XTM Composer,
+description: Start the whole XTM platform, XTM One, OpenCTI, OpenAEV, OpenCRQ and XTM Composer,
   on one machine with Docker Compose.
 doc_type: tutorial
 products:
@@ -57,7 +57,7 @@ Every module starts, with the shared services they use, and each platform answer
    It prints nothing: the stack's configuration is complete.
    :::
 
-   On a machine with 16 GB of RAM, give Elasticsearch 2 GB instead of 4: set `ELASTIC_MEMORY_SIZE=2G` in `.env`. If another program uses one of the ports above, change `OPENCTI_PORT`, `OPENAEV_PORT`, `OPENCRQ_PORT` or `XTM_ONE_PORT` in `.env`; the ports of the shared services move in `docker-compose.override.yml`, as [Network and ports](/deploy/plan/network/#ports-published-on-the-host) shows.
+   On a machine with 16 GB of RAM, give Elasticsearch 2 GB instead of 4: set `ELASTIC_MEMORY_SIZE=2G` in `.env`. If another program uses one of the ports above, change `OPENCTI_PORT` or `XTM_ONE_PORT` in `.env`. The ports of OpenAEV, OpenCRQ and the shared services move in `docker-compose.override.yml`, with `OPENAEV_PORT` and `OPENCRQ_PORT` set to match, as [Network and ports](/deploy/plan/network/#ports-published-on-the-host) shows.
 
 3. Start the platform.
 
@@ -74,7 +74,7 @@ Every module starts, with the shared services they use, and each platform answer
    The four platforms say `(healthy)` in their status. Run it again until they do.
    :::
 
-4. Sign in at the addresses the second step printed, with the admin email and password of each platform. They are in `.env` too: `OPENCTI_ADMIN_PASSWORD`, `OPENAEV_ADMIN_PASSWORD` and `XTM_ONE_ADMIN_PASSWORD`. OpenCRQ has no password: **Sign in with XTM One**, as the admin of XTM One. It starts with no tenant: create the first one, put its identifier, the UUID in its URL, in `OPENCRQ_TENANT_ID` in `.env`, then run `docker compose up -d` again so that its OpenCTI and OpenAEV connectors feed it.
+4. Sign in at the addresses the second step printed, with the admin email and password of each platform. They are in `.env` too: `OPENCTI_ADMIN_PASSWORD`, `OPENAEV_ADMIN_PASSWORD` and `XTM_ONE_ADMIN_PASSWORD`. OpenCRQ has no password: **Sign in with XTM One**, as the admin of XTM One. You land in its first tenant, `Default`, which OpenCRQ creates at its first start and xtm-docker already connects to OpenCTI and OpenAEV.
 :::
 
 ## Stop and start over

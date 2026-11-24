@@ -23,7 +23,7 @@ Once no step of :menu[Get started] is left to do, its last screen tells you that
 
 :::steps
 1. On the **Scenarios** step, select **Next**. Once Get started is finished, it opens the last screen; until then, it returns to the overview of the steps, where the rows still to do show.
-2. Read the card **Your platform is set up**. It counts the scenarios of the **Enterprise** scope whose loss is computed, such as **2 risk scenarios computed**. Above it, the stepper shows every step, each one a link back to its page.
+2. Read the card **Your platform is set up**. It counts the scenarios of the **Enterprise** scope whose loss is computed, such as **5 risk scenarios computed**. Above it, the stepper shows every step, each one a link back to its page.
 3. Select **See your risk scenarios** to open the scenarios of the scope, or choose a row under **What you can do now**.
 :::
 
@@ -40,16 +40,16 @@ The rows of **What you can do now** open the pages of the **Enterprise** scope:
 The screen opens only once Get started is finished: opened earlier, its address sends you to the overview of the steps. Once it is finished, the tenant's home no longer opens Get started on your first visit. The steps stay open: you can come back to any of them to complete what you started, and the platform's pages edit the same scope.
 
 :::example[Grand Meridian's first results]
-Claire Morel has described Grand Meridian Hotels, declared part of its estate, assessed its endpoint controls and answered five financial questions. The **Defenses** and **Finances** steps are only started, but none is left to do. On the **Scenarios** step, the two scenarios she created for the **Enterprise** scope have been priced, and she selects **Next**.
+Claire Morel has described Grand Meridian Hotels, declared part of its estate, assessed its endpoint controls and answered five financial questions. The **Defenses** and **Finances** steps are only started, but none is left to do. On the **Scenarios** step, the five scenarios she created for the **Enterprise** scope have been priced, and she selects **Next**.
 
-The last screen reads **Your platform is set up** and **2 risk scenarios computed**. She selects **See your risk scenarios** to read their estimated annual losses, then comes back to **Treatment plans** to compare multi-factor authentication for the front desks with the loss it avoids.
+The last screen reads **Your platform is set up** and **5 risk scenarios computed**. She selects **See your risk scenarios** to read their estimated annual losses, then comes back to **Treatment plans** to compare multi-factor authentication for the front desks with the loss it avoids.
 :::
 
 ## Check that it works
 
 - **Next** on the **Scenarios** step opens **Your platform is set up**, not the overview of the steps.
 - The count of computed scenarios matches the scenarios of the **Enterprise** scope that show a loss in their list.
-- Opening the tenant's home in a new browser opens the dashboards, not Get started.
+- Opening the tenant's home in a new browser opens **Home**, not Get started.
 
 ## What's next
 

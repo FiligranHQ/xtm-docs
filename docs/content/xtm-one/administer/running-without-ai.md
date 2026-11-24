@@ -46,7 +46,7 @@ After switching AI on for the first time, add a model provider in :menu[Administ
 
 - Sign-in and single sign-on, users, groups, invitations and API keys.
 - :menu[Administration > Settings], branding, :menu[Administration > Audit logs], the health and metrics endpoints.
-- The connections to OpenCTI, OpenAEV and OpenCRQ, their exposure figures, and their MCP servers for AI clients, which call the products without a model.
+- The connections to OpenCTI, OpenAEV and OpenCRQ, and their exposure figures.
 - Integrations, custom tools, variables, relays and browser profiles: you can still configure them, within what your edition allows.
 - Every agent, knowledge base, conversation, run and trace that exists, readable as before, including :menu[Administration > Observability], which carries no lock.
 
@@ -56,6 +56,7 @@ After switching AI on for the first time, add a model provider in :menu[Administ
 - Creating agents, knowledge bases, prompts, skills, templates and MCP servers. :menu[Administration > Settings > AI and models > Models] and **Media** are read only.
 - Indexing documents in knowledge bases: they stay pending, and nothing is sent to an embedding provider.
 - The MCP endpoints that expose agents, and Agent-to-Agent interoperability.
+- The platform MCP servers, `/mcp/opencti`, `/mcp/openaev` and `/mcp/opencrq`, which serve AI clients: they answer `403` until AI is switched on again.
 
 These areas stay in the menu with a lock, so you still see what is configured. Their actions are disabled and say "AI is disabled on this platform. An administrator can enable it in Settings → Platform." instead of failing, and an **AI off** badge tells every user why. On the exposure briefing and the CTEM stage pages, the cards that need AI also give an administrator **Turn AI on**, which opens the **Artificial Intelligence** card.
 

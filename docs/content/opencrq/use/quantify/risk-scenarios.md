@@ -52,7 +52,7 @@ To test the scenario's attackers against your defenses, click **Simulate in Open
 
 ## Read the price on the CRQ tab
 
-The **Overview** tab gives the headline: the **Annual Loss Exposure**, and the three factors it multiplies, the **Threat event frequency (TEF)**, the **Effective susceptibility** (the share of attacks that land an impact) and the **Loss magnitude (LM)**. The **CRQ** tab shows the latest run in full.
+The **Overview** tab gives the headline: the **Annual Loss Exposure**, the mean ALE that the **CRQ** tab shows as **Annualized Loss Expectancy**, and the three factors it multiplies, the **Threat event frequency (TEF)**, the **Effective susceptibility** and the **Loss magnitude (LM)**. The **Effective susceptibility** is the share of an attack's loss that lands: an eviction counts 15 % of the loss magnitude, the response it cost, a noticed impact 75 %, an unnoticed impact 100 %, a blocked attack nothing. The **CRQ** tab shows the latest run in full.
 
 ::screenshot{id=opencrq-risk-scenario-crq alt="The CRQ tab of Data Breach on Guest Records: the attack run outcomes, nearly every attack blocked before the objective, the loss event frequency with its TEF input, the annualized loss expectancy with its p10 to p90 band, and what the run rests on, with its two admitted actors."}
 
@@ -60,14 +60,14 @@ The **Overview** tab gives the headline: the **Annual Loss Exposure**, and the t
 | --- | --- |
 | **Attack run outcomes** | The share of attacks **Blocked before the objective**, **Evicted in time**, ending in an **Impact, noticed** or an **Impact, unnoticed (lower bound)**. The four sum to one |
 | **Loss Event Frequency (LEF)** | How many loss events a year, with the **TEF input** the run drew from |
-| **Annualized Loss Expectancy (ALE)** | The mean annual loss over the simulated years, with the p10 to p90 band that holds eight years in ten. The mean is the figure that adds up across scenarios, the band is not |
+| **Annualized Loss Expectancy (ALE)** | The mean annual loss, with its p10 to p90 band: the range the expected annual loss takes in eight worlds out of ten, as the uncertain inputs vary. It is not the range of a single year's loss. The mean is the figure that adds up across scenarios, the band is not |
 | **What this run rests on** | The run date, the **Worlds drawn**, the calibration and the control catalogue, the **Admitted actors**, the **Estate walked** and the **Target boost**. Two runs that differ here are not comparable |
 | **Actors** | Each class of attacker the run weighed, its **Share**, how often it **Lands an impact**, and its ALE. When no asset of the scope can be attacked without initial access, the card names the attack path the run did not play |
-| **Attacks the run could not score** | The technique and asset pairs no control of yours contests (your gap), and those no control of the catalogue reaches (a modelling gap, absent from every figure) |
-| **Technique values** | What the ALE would drop by if a technique were prevented, or fully detected |
+| **Attacks the run could not score** | The technique and asset family pairs no control of yours contests (your gap), and those no control of the catalogue reaches (a modelling gap, absent from every figure) |
+| **Technique values** | For each technique, what the ALE would drop by if a control stopped it every time (**By preventing it**), if its detection were fully covered (**By detecting it**), and the two added (**Value of interdicting**). Each is a ceiling for that technique alone: the amounts overlap and do not add up across techniques |
 | **Simulation History** | Every run, with its ALE mean, LEF mean and technique coverage |
 
-Every **What it means and how it is computed** button explains its figure, with its caveat. Amounts are in your currency; the interface shows dollars today.
+Every **What it means and how it is computed** button explains its figure, with its caveat. OpenCRQ works in US dollars: every amount you enter and every price it gives is in dollars.
 
 ## See what changed between two runs
 
@@ -96,7 +96,7 @@ A change of **Model**, such as a new calibration or control catalogue, moves the
 
 ## Keep the price current
 
-OpenCRQ prices a scenario again on its own when something its price depends on changes: findings, supporting assets, controls, threats or loss estimates, and once a day for what changes with time alone, such as threat activity. A change of a control's posture or of the scenario's loss estimates also asks for a full run. To price a scenario right away, click **Run CRQ** in its header: the run appears in the **Simulation History**. **Run CRQ** waits while OpenCRQ weighs the scenario's threats, after it is created or when its threats change: its tabs then say **Weighing the threats for this scenario. This page updates on its own once it is done.** The [background processes reference](/reference/opencrq/processes/) lists what runs when.
+OpenCRQ prices a scenario again on its own when something its price depends on changes: findings, supporting assets, controls, threats or loss estimates, and once a day for what changes with time alone, such as threat activity. These automatic runs update the price only. A full run also recomputes the what-ifs: the technique values, the CVE values, the control levers and the treatment plans. **Run CRQ**, a control's posture declared on the risk scope, and a financial profile change that moves the scenario's loss estimates each ask for one. A control's strength or coverage changed for the whole tenant recomputes that control's levers only. A card whose figures are older than the price says **Computed on** a date **before the current ALE**, and offers to recompute them. To price a scenario right away, click **Run CRQ** in its header: the run appears in the **Simulation History**. **Run CRQ** waits while OpenCRQ weighs the scenario's threats, after it is created or when its threats change: its tabs then say **Weighing the threats for this scenario. This page updates on its own once it is done.** The [background processes reference](/reference/opencrq/processes/) lists what runs when.
 
 To change the name, description, owner or primary assets, open **More actions** in the header and choose **Edit**. To delete a scenario, open **More actions** on its card and choose **Delete**.
 
@@ -112,18 +112,11 @@ On 9 January 2026, the shared night.audit front-desk account exported guest reco
 
 OpenCRQ prices it on 12 January, its TEF in **Auto** mode, read in the TEF catalogue for the scope's country, sector and size. After multi-factor authentication reaches every front-desk account on 2 March, the price falls, and stays there. On 12 April, the **CRQ** tab shows nearly every attack blocked before the objective. **What changed**, on its default **7 days**, compares the run of 2 March with the latest one: one new finding and no change of controls.
 
-When attacks rarely land, the mean can sit above the p90: nearly every simulated year costs little, and a rare one costs tens of millions. The ransomware scenario beside it reads $254K with p10 and p90 both at $0, for that reason. For such a scenario, report the mean and the loss exceedance curve of its **Overview**, not the band.
+When attacks rarely land, the mean can sit above the p90: nearly every world prices an expected loss close to zero, and a rare one tens of millions. The ransomware scenario beside it reads $254K with p10 and p90 both at $0, for that reason. For such a scenario, report the mean and the loss exceedance curve of its **Overview**, not the band.
 :::
 
 :::xtm-one[Ask XTM One to build or explain a scenario]
-With XTM One connected, an AI agent can create a risk scenario, run a CRQ simulation and read its latest run, for example to explain why the ALE of a scenario moved between two runs. Any change it proposes waits for a person to approve it.
-
-XTM One's continuous threat exposure management (CTEM) agents also read two answers OpenCRQ gives through its API only, with no screen of their own:
-
-- how a CVE would be exploited on the scenario's supporting assets: the ATT&CK techniques it opens on each asset, by the asset's exposure, with a confidence;
-- how fresh the evidence behind each supporting asset is: no source reports it, only a person entered it, no source ever dated an observation, its newest observation is older than the re-test delay (30 days unless the agent asks another), it is a machine whose operating system version no source reports, or it is current.
-
-The agent can then tell you which assets of the scenario rest on old or missing evidence before you trust its price.
+With XTM One connected, an AI agent can create a risk scenario, run a CRQ simulation and read its latest run, for example to explain why the ALE of a scenario moved between two runs. When the agent asks before running tools, its changes to a scenario, its loss estimates or the risk tolerance wait for a person to approve them, unless a rule lets them run: see the [tool approvals](/xtm-one/administer/ai-governance/#approve-what-agents-do).
 :::
 
 ## What's next

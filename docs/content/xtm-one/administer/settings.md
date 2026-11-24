@@ -27,7 +27,7 @@ Each tab and each of its sections has its own address, such as `/settings/usage/
 
 :::steps
 
-1. In **Platform**, check the **Instance ID**, then install the license with **Install License**, or connect an Enterprise Edition OpenCTI, OpenAEV or OpenCRQ. Choose the **Default language** under **Platform Language**, then click **Edit** on **Platform Branding** to set the platform's name, logo and colors.
+1. In **Platform**, check the **Instance ID**, then install the license with **Install License**, or connect an Enterprise Edition OpenCTI or OpenAEV. Choose the **Default language** under **Platform Language**, then click **Edit** on **Platform Branding** to set the platform's name, logo and colors.
 2. In **AI and models** > **Models**, click **Add Provider**, validate it, and choose the platform default model. Choose the embedding model before anyone fills a knowledge base: changing the model or its dimensions later indexes every knowledge base again.
 3. In **Access and security**, open **Authentication** and connect your identity provider. See [Configure single sign-on](/xtm-one/administer/sso/). To let it create and deactivate the accounts too, see [Provision accounts from Microsoft Entra](#provision-accounts-from-microsoft-entra).
 4. Still in **Access and security**, open **Security audit** and select **Re-run**. Fix each `Critical` and `Warning` finding, or dismiss the ones you accept on purpose.

@@ -29,11 +29,11 @@ The page holds four cards:
 | **Global profile** | Your **Full name**, **Title** and **Email**, read from your XTM One account and the same in every tenant. Marked **Managed in XTM One**: you cannot change them in OpenCRQ |
 | **Tenant profile** | The **Full name** and **Title** you go by in this tenant only |
 | **Preferences** | **Language**, **Theme**, **Pastel colours** and **Home dashboard** |
-| **XTM One MCP server** | Shown only when the platform is connected to XTM One |
+| **XTM One MCP server** | The address of the Model Context Protocol (MCP) server XTM One exposes for OpenCRQ |
 
 ## Set your name and title
 
-Your name is what other members see where OpenCRQ names a person: as the owner of a risk scenario, a treatment plan or a budget review, for example. Without a name, OpenCRQ shows your email address instead.
+Your global name is what other members see where OpenCRQ names a person: as the owner of a risk scenario, a treatment plan or a budget review, for example. Without a name, a risk scenario shows your email address instead. The name and title of your **Tenant profile** show in the tenant's list of users, under :menu[Settings > Security]. When XTM One or a script names the owner of an asset it writes through OpenCRQ's API, OpenCRQ finds you by that name too.
 
 Your global name and title belong to your XTM One account: OpenCRQ reads your **Full name**, **Title** and **Email** from XTM One each time you sign in. To change them, click **Edit in XTM One** in the **Global profile** card, change them in your XTM One profile, and sign in to OpenCRQ again.
 
@@ -51,11 +51,11 @@ The super administrator, the XTM One administrator who reaches every tenant with
 
 ## Choose your language, theme, colours and home dashboard
 
-The **Preferences** card changes the interface for you only, and each field saves as soon as you change it.
+The **Preferences** card changes the interface for you only. **Theme**, **Pastel colours** and **Home dashboard** save as soon as you change them. A new **Language** saves when you click **Reload** in the **Language change** dialog that follows; **Cancel** keeps the old one.
 
 | Field | Choices | Effect |
 | --- | --- | --- |
-| **Language** | **Automatic**, **English**, **French** | The language of the interface. **Automatic** follows the tenant's **Default language**, set by an administrator, then your browser's language when it is English or French, and English otherwise. A dialog asks to **Reload** the application to apply it |
+| **Language** | **Automatic**, **English**, **French** | The language of the interface. **Automatic** follows the tenant's **Default language**, set by an administrator, then your browser's language when it is English or French, and English otherwise |
 | **Theme** | **Light**, **Dark**, **System** | **System** follows the theme of your operating system |
 | **Pastel colours** | The **Softer tones** switch, off by default | On, severity, status and marking colours take softer tones: the chips of a finding's score history, for example, show a soft plain fill instead of an outline. Off, OpenCRQ draws the standard colours, the same in every Filigran product. The switch follows you in every tenant |
 | **Home dashboard** | **Tenant home**, or one of the five dashboards | The dashboard **Home** opens on. **Tenant home**, with the tenant's choice in parentheses, follows the dashboard an administrator chose for the tenant |
@@ -63,7 +63,7 @@ The **Preferences** card changes the interface for you only, and each field save
 The language changes the interface, not your data: a scenario named in English stays in English. [Track cyber risk in money with dashboards](/opencrq/use/decide/dashboards/) describes the five dashboards and how an administrator sets the tenant's home.
 
 :::xtm-one[Connect your AI client through XTM One]
-When an administrator has connected OpenCRQ to XTM One, the **XTM One MCP server** card shows the address of the Model Context Protocol (MCP) server XTM One exposes for OpenCRQ, with a button to copy it. AI clients such as Cursor or Claude Desktop connect to it with a personal XTM One API key, and work on OpenCRQ's frameworks, controls, assessments and risk scenarios with your own permissions. **Manage in XTM One** opens your XTM One profile, where you create the key and copy a ready-made client configuration. The MCP server is part of the Community Edition.
+The **XTM One MCP server** card shows the address of the MCP server XTM One exposes for OpenCRQ, with a button to copy it. AI clients such as Cursor or Claude Desktop connect to it with a personal XTM One API key, and work on OpenCRQ's frameworks, controls, assessments and risk scenarios with your own permissions. **Manage in XTM One** opens your XTM One profile, where you create the key and copy a ready-made client configuration. The MCP server is part of the Community Edition.
 :::
 
 ## Follow your notifications

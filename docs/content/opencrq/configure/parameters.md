@@ -32,7 +32,7 @@ The **Identifier** is what the deployment settings of the tenant use: the connec
 
 ## The platform pages, before any tenant
 
-Everything in OpenCRQ happens in a tenant. At its first start, a platform that holds no tenant creates one, named **Default**, with a first risk scope **Enterprise** and its **Get started** wizard. Its name and identifier come from the `initial_tenant` keys of the [configuration](/reference/opencrq/configuration/#initial-tenant), and it has no member yet. XTM One's administrator, signed in as the **Super Administrator**, reaches every tenant without being a member, and lands in it.
+Everything in OpenCRQ happens in a tenant. Whenever OpenCRQ starts and holds no tenant, it creates one, named **Default**, with a first risk scope **Enterprise** and its **Get started** wizard: a platform whose tenants were all deleted gets it back at its next restart. Its name and identifier come from the `initial_tenant` keys of the [configuration](/reference/opencrq/configuration/#initial-tenant), and it has no member yet. XTM One's administrator, signed in as the **Super Administrator**, reaches every tenant without being a member, and lands in it.
 
 A person who signs in through XTM One lands in the first of the tenants they belong to. A platform administrator who belongs to none lands on the platform's **Tenants** page, at `/platform/security/tenants`, where one with **Create Tenants** creates more. The platform's pages also hold its **Roles**, **Groups** and **Users**.
 

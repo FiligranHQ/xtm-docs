@@ -62,13 +62,13 @@ Above the steps, the overview counts them: "2 of 8 steps done", followed by "· 
 | **To do** | Nothing is answered yet |
 | **Syncing** | An import runs behind the step: Microsoft Defender for **Assets**, OpenCTI or OpenCRQ Default Threats for **Threats**. The row names the source and what it imported so far, such as "OpenCTI · 42 threats imported", with its progress in percent once the import can tell |
 
-No status is set by hand: each one reads what the tenant holds, wherever you set it. A risk tolerance set from the scope's **Details** checks **Tolerance** as well as the step does.
+No status is set by hand: each one reads what you can see of the tenant, wherever you set it. Threats and assets follow your markings, and the threats streamed from OpenCTI your access in OpenCTI, so two members can see **Assets** or **Threats** at a different status. A risk tolerance set from the scope's **Details** checks **Tolerance** as well as the step does.
 
 | Step | Started when | Done when |
 | --- | --- | --- |
 | **Company** | | The scope has a sector and a country |
-| **Assets** | A kind of asset is declared, or the tenant has an asset | The 12 kinds of the declared estate are answered, **None** included |
-| **Threats** | | The tenant holds a threat, from any source |
+| **Assets** | A kind of asset is declared, or you can see an asset of the tenant | The 12 kinds of the declared estate are answered, **None** included |
+| **Threats** | | You can see a threat of the tenant, from any source |
 | **Defenses** | Some capabilities of the control catalogue are assessed | Every capability is assessed, for the tenant or for the scope |
 | **Finances** | Some questions of the financial profile are answered | Every question is answered |
 | **Tolerance** | | The scope has a risk tolerance |
@@ -82,10 +82,10 @@ Get started is finished once no step reads **To do**: a started step does not ho
 - The button under the steps reads **What you can do now** instead of **Start**. It opens **Your platform is set up**, with **See your risk scenarios** and five next tasks: **Risk scenarios**, **Assets**, **Treatment plans**, **Budget reviews** and **Compliance**.
 - :menu[Get started] moves to the end of the menu, and the tenant's home opens **Home**.
 
-Since the statuses read the tenant's data, a step can go back to **To do**: delete the scope's last primary asset, and **Protect** is to do again. Get started is then unfinished, and comes first in the menu again.
+Since the statuses read the data you can see, a step can go back to **To do**: delete the scope's last primary asset, and **Protect** is to do again. Get started is then unfinished, and comes first in the menu again.
 
 :::example[Pick up where Grand Meridian left off]
-Claire Morel, the risk manager of Grand Meridian Hotels, spent her first hour on Get started. She described the company, declared five kinds of asset, and the OpenCTI connector the administrator set up streams the threats aimed at the hospitality sector. The next morning, she opens :menu[Get started]:
+Claire Morel, the risk manager of Grand Meridian Hotels, spent her first hour on Get started. She described the company, declared five kinds of asset, and the OpenCTI stream she bound brings the threats aimed at the hospitality sector. The next morning, she opens :menu[Get started]:
 
 - The overview reads "2 of 8 steps done · 1 started".
 - **Company** and **Threats** read **Already configured**.

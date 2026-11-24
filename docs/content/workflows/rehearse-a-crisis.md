@@ -34,7 +34,7 @@ No link carries that figure from OpenCRQ to OpenAEV. XTM One carries it to the p
 - **OpenAEV**, any edition. The platform sends email, and the members of the crisis cell have an email address. **Ask AI**, which drafts the article, requires the Enterprise Edition and XTM One.
 - **OpenCRQ**, with the risk scenario the exercise is about already priced. See [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/).
 - **XTM One**, with the Enterprise Edition and AI switched on: agents and presentations are part of it. OpenCRQ and OpenCTI are registered with it, so their integrations exist. See [Connect the modules to each other](/deploy/configure/connect-modules/#register-the-platforms-with-xtm-one).
-- The same email address for each member of the crisis cell in XTM One and in OpenCRQ: the agent reads OpenCRQ as the person who asks, and an account with no match gets no data.
+- An OpenCRQ account for each member of the crisis cell, tied to their XTM One account at their first sign-in to OpenCRQ through XTM One. The agent reads OpenCRQ as the person who asks: OpenCRQ finds that person by their XTM One account, never by email, and a person with no tied account gets no data.
 - The capabilities, by their label in each product's role editor:
   - In OpenAEV, the exercise planner has **Manage assessment** and **Launch assessment**, **Manage teams & persons**, **Manage documents**, **Manage channels**, **Manage challenges**, and **Manage lessons learned** to create the questionnaire's categories.
   - In OpenCRQ, the risk manager needs no capability to read the dashboards.

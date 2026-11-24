@@ -20,7 +20,8 @@ lanes:
     tone: store
     nodes:
       - {id: esmq, label: Elasticsearch and RabbitMQ, icon: Layers, note: Used by OpenCTI and OpenAEV}
-      - {id: base, label: "Redis, S3 storage, PostgreSQL", icon: Server, note: Used by XTM One and the platforms}
+      - {id: base, label: "S3 storage, PostgreSQL", icon: Server, note: "S3 for every platform, PostgreSQL for all but OpenCTI"}
+      - {id: redis, label: Redis, icon: Server, note: Used by XTM One and OpenCTI}
 edges:
   - {from: connectors, to: opencti, label: work for}
   - {from: integrations, to: openaev, label: work for}
@@ -29,5 +30,6 @@ edges:
   - {from: opencti, to: esmq, label: uses}
   - {from: openaev, to: esmq, label: uses}
   - {from: openaev, to: base, label: openaev database, style: dashed}
-  - {from: opencrq, to: base, label: opencrq database, style: dashed}
+  - {from: opencrq, to: base, label: opencrq database and bucket, style: dashed}
   - {from: xtmone, to: base, label: uses}
+  - {from: xtmone, to: redis, label: uses}

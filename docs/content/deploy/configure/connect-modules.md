@@ -1,6 +1,6 @@
 ---
 title: Connect the modules to each other
-description: Register OpenCTI and OpenAEV with XTM One, link OpenCTI and OpenAEV, connect OpenCRQ to both, and give XTM Composer its tokens, with the public and internal URLs each link uses.
+description: Register OpenCTI, OpenAEV and OpenCRQ with XTM One, link OpenCTI and OpenAEV, connect OpenCRQ to both, and give XTM Composer its tokens, with the public and internal URLs each link uses.
 doc_type: how-to
 products:
   - suite
@@ -9,7 +9,7 @@ owner: docs-platform
 last_reviewed: 2026-10-31
 ---
 
-This page connects the modules of the XTM stack: OpenCTI and OpenAEV to XTM One, OpenCTI and OpenAEV to each other, OpenCRQ to both, and XTM Composer to both. xtm-docker wires every link from `.env`, so on a new stack you mostly set one shared secret and check the result. Read it too when you publish the platforms on other URLs, or run a module outside xtm-docker.
+This page connects the modules of the XTM stack: OpenCTI, OpenAEV and OpenCRQ to XTM One, OpenCTI and OpenAEV to each other, OpenCRQ to both, and XTM Composer to both. xtm-docker wires every link from `.env`, so on a new stack you mostly set one shared secret and check the result. Read it too when you publish the platforms on other URLs, or run a module outside xtm-docker.
 
 ::diagram{id=deploy-configure-connect-modules}
 
@@ -24,8 +24,9 @@ This page connects the modules of the XTM stack: OpenCTI and OpenAEV to XTM One,
 | --- | --- | --- | --- |
 | OpenCTI registers with XTM One | `opencti` service | `XTM__XTM_ONE_URL=http://xtm-one:4000` | `XTM__XTM_ONE_TOKEN`, from `PLATFORM_REGISTRATION_TOKEN` |
 | OpenAEV registers with XTM One | `openaev` service | `OPENAEV_XTM_ONE_URL=http://xtm-one:4000` | `OPENAEV_XTM_ONE_TOKEN`, from `PLATFORM_REGISTRATION_TOKEN` |
+| OpenCRQ registers with XTM One | `opencrq` service | `XTM_ONE__URL=http://xtm-one:4000`, and the public URL of OpenCRQ in `XTM_ONE__PLATFORM_URL` | `XTM_ONE__TOKEN`, from `PLATFORM_REGISTRATION_TOKEN` |
 | XTM One accepts the registrations | `xtm-one` and `xtm-one-worker` services | | `PLATFORM_REGISTRATION_TOKEN` |
-| XTM One calls OpenCTI and OpenAEV | `xtm-one` service | `OPENCTI_API_URL=http://opencti:8080`, `OPENAEV_API_URL=http://openaev:8080` | A short-lived token signed for each user |
+| XTM One calls OpenCTI, OpenAEV and OpenCRQ | `xtm-one` service | `OPENCTI_API_URL=http://opencti:8080`, `OPENAEV_API_URL=http://openaev:8080`, `OPENCRQ_API_URL=http://opencrq:3002` | A short-lived token signed for each user |
 | OpenAEV answers OpenCTI | `openaev` service | `openaev.xtm.opencti.api-url=http://opencti:8080/graphql` | `OPENAEV_XTM_OPENCTI_TOKEN`, from `OPENCTI_ADMIN_TOKEN` |
 | OpenCTI links to OpenAEV | `opencti` service | `XTM__OPENAEV_URL` (public) | None: a link in the interface |
 | OpenCRQ reads OpenCTI, for one tenant | `opencrq` service | `CONNECTORS__OPENCTI__<tenant>__URL` | `CONNECTORS__OPENCTI__<tenant>__TOKEN` |
@@ -41,7 +42,7 @@ This version of OpenCTI signs no short-lived token for XTM One. At each registra
 Each platform registers itself with XTM One, then registers again every 5 minutes: the registration is also its heartbeat. Once a platform is registered, its users get the XTM One assistant in its interface, and XTM One can work with its data.
 
 :::steps
-1. Generate the registration token and put it in `.env`. OpenCTI, OpenAEV, `xtm-one` and `xtm-one-worker` all read this one variable, so the value is the same everywhere.
+1. Generate the registration token and put it in `.env`. OpenCTI, OpenAEV, OpenCRQ, `xtm-one` and `xtm-one-worker` all read this one variable, so the value is the same everywhere.
 
    ```bash
    TOKEN=$(openssl rand -hex 32)
@@ -66,7 +67,7 @@ Each platform registers itself with XTM One, then registers again every 5 minute
    docker compose up -d
    ```
 
-   Each platform registers 30 seconds after it starts.
+   OpenCTI and OpenAEV register 30 seconds after they start, OpenCRQ as soon as it starts.
 
    :::verify
    :::only{opencti=">=7.260811"}
@@ -90,6 +91,8 @@ Each platform registers itself with XTM One, then registers again every 5 minute
    The command prints nothing.
    :::
 
+   For OpenCRQ, `docker compose logs opencrq | grep "Registered with XTM One"` prints a line: see [Install OpenCRQ](/deploy/install/opencrq/#start-opencrq).
+
    In XTM One, **My Profile** > **MCP Endpoint** shows each registered platform as `Connected`.
    :::
 :::
@@ -98,8 +101,8 @@ Each platform registers itself with XTM One, then registers again every 5 minute
 
 Each product has two URLs, and the signed calls between them use both.
 
-- The **public URL** is the one users open in their browser. It is also the product's identity: every token a product signs names it as the issuer, and every token sent to a product must be addressed to it. xtm-docker builds it from `*_EXTERNAL_SCHEME`, `*_HOST` and `*_PORT` in `.env`, and passes it as `APP__BASE_URL` to OpenCTI, `OPENAEV_BASE-URL` to OpenAEV, and `BASE_URL` to both XTM One containers.
-- The **internal URL** is only where the other containers connect: `http://opencti:8080`, `http://openaev:8080` and `http://xtm-one:4000`. The public host names therefore do not need to resolve inside Docker, and no link a user sees is on an internal URL.
+- The **public URL** is the one users open in their browser. It is also the product's identity: every token a product signs names it as the issuer, and every token sent to a product must be addressed to it. xtm-docker builds it from `*_EXTERNAL_SCHEME`, `*_HOST` and `*_PORT` in `.env`, and passes it as `APP__BASE_URL` to OpenCTI, `OPENAEV_BASE-URL` to OpenAEV, `XTM_ONE__PLATFORM_URL` to OpenCRQ, and `BASE_URL` to both XTM One containers.
+- The **internal URL** is only where the other containers connect: `http://opencti:8080`, `http://openaev:8080`, `http://opencrq:3002` and `http://xtm-one:4000`. The public host names therefore do not need to resolve inside Docker. OpenCRQ opens OpenCTI objects at the internal URL of its connection, as [Connect the first tenant](/deploy/install/opencrq/#connect-the-first-tenant) describes.
 
 When you publish the platforms on other URLs, change the three variables of each platform together, with the scheme set to `https` over TLS, as described in [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/). Keep these rules:
 
@@ -189,7 +192,7 @@ A connection set this way comes up enabled. At each start, for every tenant it h
 - **OpenAEV.** It creates the service account `OpenAEV (deployment)` in the tenant's **Connectors** group, and binds the OpenAEV connector to it.
 - **OpenCTI.** It creates the Live Stream `OpenCRQ threat feed` in OpenCTI, with the token of the connection, or brings its filter back to what OpenCRQ needs: the Intrusion Sets, Threat Actors, Campaigns and Reports, and the `targets`, `uses` and `attributed-to` relationships between them and what they target or use. It then binds that stream with the service account `OpenCTI (deployment)`.
 
-These steps never replace a choice a tenant administrator made in **Integrations**: an account already bound, a stream already chosen or a connector turned off stay as they are. A variable that names a tenant the platform does not hold is skipped, and a platform that does not answer leaves its connector for the next start. After you create a tenant and add its variables, run `docker compose up -d` so that OpenCRQ starts again and connects it.
+These steps never replace a choice a tenant administrator made in **Integrations**: an account already bound, a stream already chosen or a connector turned off stay as they are. A variable that names a tenant the platform does not hold is skipped, and a platform that does not answer leaves its connector for the next start. xtm-docker sets these variables for the tenant of `OPENCRQ_TENANT_ID`, by default the tenant OpenCRQ creates at its first start, which is therefore connected from that start. For a tenant created later, in the Enterprise Edition, add its variables and run `docker compose up -d` so that OpenCRQ starts again and connects it.
 
 To create or update its stream, the user of the OpenCTI token needs **Manage data sharing** or **Bypass all capabilities**: the admin token of OpenCTI holds the second. With another token, OpenCRQ changes nothing in OpenCTI, and a connector nobody configured stays idle, its page saying which capability the token lacks. Grant the capability in OpenCTI and restart OpenCRQ, or let a tenant administrator choose a stream with **Configure**: see [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/). OpenCRQ finds its stream again by a marker in the stream's description, so a stream renamed in OpenCTI still counts; an edit to its filter is replaced at the next start.
 

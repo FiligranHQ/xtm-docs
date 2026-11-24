@@ -29,7 +29,7 @@ The three product servers, called the platform MCP servers, are available in the
 All of them need AI to be switched on. An administrator can turn the platform MCP servers off with **Platform MCP Servers**, and turn the XTM One server on with **Platform Tools MCP Server**, both in :menu[Administration > Settings > Integrations > MCP Endpoint]. The XTM One server is off by default because it changes the platform's own configuration.
 
 :::xtm-one[Your rights, not XTM One's]
-XTM One never stores the products' API tokens for these servers. For each call it signs a short-lived token for your user, matched by email in OpenCTI, OpenAEV or OpenCRQ. Your capabilities, data markings and audit trail apply there exactly as if you did it yourself. On `/mcp/xtm`, you see and change what you could in the XTM One interface: company-managed objects stay read-only unless you are an administrator.
+XTM One never stores the products' API tokens for these servers. For each call it signs a short-lived token for your user, matched by email in OpenCTI and OpenAEV. OpenCRQ matches it to the account tied to your XTM One account, never to an email address. Your capabilities, data markings and audit trail apply there exactly as if you did it yourself. On `/mcp/xtm`, you see and change what you could in the XTM One interface: company-managed objects stay read-only unless you are an administrator.
 :::
 
 ## Find your endpoints

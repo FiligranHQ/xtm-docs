@@ -21,19 +21,19 @@ At the end of this journey, OpenCTI, OpenAEV, OpenCRQ and XTM One run on one hos
 ## Who takes part
 
 - **Platform engineers** plan the stack, prepare the host, install the modules, connect them, set the configuration of XTM One, monitor it and upgrade the stack (steps 1 to 9).
-- **Administrators** sign in first with the admin accounts of `.env`, add the language model and the license in XTM One (step 4), create the owner account of OpenCRQ (step 5), then hand access to the teams.
+- **Administrators** sign in first with the admin accounts of `.env`, add the language model and the license in XTM One (step 4), sign in to OpenCRQ through XTM One as its super administrator (step 5), then hand access to the teams.
 
 ## Why it spans several products
 
 The products are built to run as one stack, with XTM One at its center:
 
 - **Shared services.** OpenCTI, OpenAEV, XTM One and OpenCRQ keep their data in one set of backing services: Elasticsearch, RabbitMQ, Redis, S3 storage (RustFS) and PostgreSQL with pgvector. Each module keeps to its own index prefix, bucket and database, so one instance of each service is enough.
-- **Registration.** OpenCTI, OpenAEV and OpenCRQ register with XTM One with one shared secret, `PLATFORM_REGISTRATION_TOKEN`, then register again every 5 minutes as a heartbeat. Once registered, their users get **Ask Ariane**, and XTM One agents work with their data.
+- **Registration.** OpenCTI, OpenAEV and OpenCRQ register with XTM One with one shared secret, `PLATFORM_REGISTRATION_TOKEN`, then register again every 5 minutes as a heartbeat. Once registered, XTM One agents work with their data, and their users get **Ask Ariane**, which OpenCRQ offers in its Enterprise Edition only.
 - **Calls as a person.** XTM One calls each platform as the person who asks, and the platform applies that person's rights. The tokens of these calls name the public URL of their issuer, so the public URLs you set are also the identities of the products.
-- **People matched by email.** XTM One finds a person in each platform by email: the administrator's email must be the same in the four products.
-- **One license.** A Filigran license installed in XTM One travels back to each platform in its registration answer, and decides the edition of OpenCRQ. A platform with an Enterprise Edition license of its own also gives XTM One its Enterprise Edition.
+- **People matched across products.** XTM One finds a person in OpenCTI and OpenAEV by email: the administrator's email must be the same in XTM One, OpenCTI and OpenAEV. OpenCRQ finds the account tied to the person's XTM One account at their sign-in through XTM One, never by email.
+- **One license.** A Filigran license installed in XTM One travels back, in the registration answer, to each platform it names as a sub-license. It decides the edition of OpenCRQ, which holds no license of its own. An OpenCTI or OpenAEV with an Enterprise Edition license of its own also gives XTM One its Enterprise Edition.
 
-Installed apart, each product needs its own services and its own license, OpenCRQ does not start without XTM One, and no assistant reads across the products. What each part is and which service it uses is in [The XTM stack: modules and shared services](/deploy/plan/architecture/); how a request carries a person's identity is in [XTM One in OpenCTI](/xtm-one/use/in-opencti/).
+Installed apart, each product needs its own services, OpenCTI and OpenAEV need a license each, OpenCRQ does not start without XTM One, and no assistant reads across the products. What each part is and which service it uses is in [The XTM stack: modules and shared services](/deploy/plan/architecture/); how a request carries a person's identity is in [XTM One in OpenCTI](/xtm-one/use/in-opencti/).
 
 ## What you need
 
@@ -49,15 +49,15 @@ The story: Example CERT runs the XTM platform for the hotel chains it serves. It
 
 ### Plan the stack
 
-xtm-docker starts the whole stack, and no module is optional ([step 1](/deploy/plan/architecture/)). XTM One runs as `xtm-one`, the interface and its API, and `xtm-one-worker`, the background work. OpenCTI and OpenAEV run with their default integrations, and XTM Composer manages the integrations of both. Elasticsearch, RabbitMQ, Redis, S3 storage and PostgreSQL serve them all. OpenCRQ is not in xtm-docker yet: it joins the same PostgreSQL and S3 storage later, through the override file.
+xtm-docker starts the whole stack, and no module is optional ([step 1](/deploy/plan/architecture/)). XTM One runs as `xtm-one`, the interface and its API, and `xtm-one-worker`, the background work. OpenCTI and OpenAEV run with their default integrations, and XTM Composer manages the integrations of both. Elasticsearch, RabbitMQ, Redis, S3 storage and PostgreSQL serve them all. OpenCRQ starts with them, with its own database in the same PostgreSQL and its own bucket in the same S3 storage.
 
 ### Prepare the host
 
-The engineer checks the versions of Docker and Docker Compose, the processor and the memory, and raises `vm.max_map_count` for Elasticsearch ([step 2](/deploy/plan/requirements/)). xtm-docker already sets what the shared services need, such as `max_connections=200` on PostgreSQL for OpenAEV and XTM One together.
+The engineer checks the versions of Docker and Docker Compose, the processor and the memory, and raises `vm.max_map_count` for Elasticsearch ([step 2](/deploy/plan/requirements/)). xtm-docker already sets what the shared services need, such as `max_connections=200` on PostgreSQL for OpenAEV, XTM One and OpenCRQ together.
 
 ### Install the stack on one host
 
-In a clone of xtm-docker, `.env` gets fresh secrets for every password, key and token, and a copy goes to the team's secret store ([step 3](/deploy/install/docker-compose/)). `OPENCTI_ADMIN_EMAIL`, `OPENAEV_ADMIN_EMAIL` and `XTM_ONE_ADMIN_EMAIL` all read `admin@example.com`. Each platform's public URL is built from its `*_EXTERNAL_SCHEME`, `*_HOST` and `*_PORT`, here `https`, its host name and `443`. `docker-compose.override.yml` publishes OpenCTI on `127.0.0.1:8080`, OpenAEV on `127.0.0.1:8081` and XTM One on `127.0.0.1:8090` for the proxy, keeps Elasticsearch and Redis on the host itself, and pins the versions: OpenCTI `7.261030.1`, OpenAEV `3.261029.0`, XTM One `1.261110.2`.
+In a clone of xtm-docker, `.env` gets fresh secrets for every password, key and token, and a copy goes to the team's secret store ([step 3](/deploy/install/docker-compose/)). `OPENCTI_ADMIN_EMAIL`, `OPENAEV_ADMIN_EMAIL` and `XTM_ONE_ADMIN_EMAIL` all read `admin@example.com`. Each platform's public URL is built from its `*_EXTERNAL_SCHEME`, `*_HOST` and `*_PORT`, here `https`, its host name and `443`. `docker-compose.override.yml` publishes OpenCTI on `127.0.0.1:8080`, OpenAEV on `127.0.0.1:8081`, XTM One on `127.0.0.1:8090` and OpenCRQ on `127.0.0.1:8082` for the proxy, keeps Elasticsearch and Redis on the host itself, and pins the versions: OpenCTI `7.261119.0`, OpenAEV `3.261118.0`, XTM One `1.261119.1`, OpenCRQ `0.261123.0`.
 
 ### Make XTM One usable
 
@@ -65,7 +65,7 @@ Behind the proxy, XTM One must know which address the proxy reaches it from: `FO
 
 ### Add OpenCRQ
 
-The override file gets three services: `opencrq-db-init`, which creates the `opencrq` role and database in the shared PostgreSQL, `opencrq-bucket`, which creates its bucket, and `opencrq`, published on `127.0.0.1:8082` ([step 5](/deploy/install/opencrq/)). `XTM_ONE__TOKEN` takes `PLATFORM_REGISTRATION_TOKEN`, and `OPENCRQ_API_URL=http://opencrq:3002` on both XTM One containers lets XTM One call it inside the stack. The log reads `Registered with XTM One`. The administrator creates the owner account of OpenCRQ with `admin@example.com` before the proxy publishes it.
+OpenCRQ starts with the stack, after two one-shot services ([step 5](/deploy/install/opencrq/)): `opencrq-db-init`, which creates the `opencrq` database in the shared PostgreSQL, where OpenCRQ connects as `POSTGRES_USER` like OpenAEV, and `opencrq-bucket-init`, which creates its bucket in the S3 storage. `XTM_ONE__TOKEN` takes `PLATFORM_REGISTRATION_TOKEN`, and `OPENCRQ_API_URL=http://opencrq:3002` on `xtm-one` lets XTM One call it inside the stack. The log reads `Registered with XTM One`. At its first start, OpenCRQ creates its first tenant, `Default`, which the OpenCTI and OpenAEV connectors of xtm-docker feed. OpenCRQ has no account to create: once the proxy publishes it, the administrator clicks **Sign in with XTM One** as `admin@example.com`, XTM One's administrator, and becomes its super administrator.
 
 ### Connect the platforms around XTM One
 
@@ -92,6 +92,6 @@ Each step opens its page; the first one starts the journey, and every page of it
 ## Where to go next
 
 - [Sign in the first time and keep an emergency account](/deploy/configure/first-access/), before you turn on single sign-on.
-- [Configure OpenCRQ](/deploy/configure/opencrq/), to connect each tenant to OpenCTI and OpenAEV.
+- [Configure OpenCRQ](/deploy/configure/opencrq/), to connect another tenant to OpenCTI and OpenAEV.
 - [Back up and restore](/deploy/operate/backup/), to keep the volumes and `.env` together.
 - [Deploy integrations across the platform with XTM Composer](/workflows/composer-rollout/), to run the integrations of OpenCTI and OpenAEV from their interface.

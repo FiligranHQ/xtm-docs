@@ -3,7 +3,7 @@ lanes:
   - label: Sources of Enterprise Edition
     tone: external
     nodes:
-      - {id: platform, label: EE platform, icon: LogoOpenCTI, note: "OpenCTI, OpenAEV or OpenCRQ", href: /deploy/configure/connect-modules/}
+      - {id: platform, label: EE platform, icon: LogoOpenCTI, note: "OpenCTI or OpenAEV", href: /deploy/configure/connect-modules/}
       - {id: license, label: XTM One license, icon: KeyRound, note: "Administration > Settings > Platform"}
   - label: Edition
     tone: core

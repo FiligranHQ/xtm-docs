@@ -16,7 +16,7 @@ A service account is the identity an integration uses in a tenant of OpenCRQ: th
 
 - **It belongs to one tenant.** It reads and writes that tenant's data like a member, and never sees another tenant. A token carries its tenant: a request made with it needs no `x-tenant-id` header.
 - **Its groups add capabilities.** Like a person, it gets the capabilities of the roles of its groups. The creation panel puts a new account in the tenant's **Connectors** group, which has no role: it can work on data, and cannot manage the tenant's security.
-- **OpenCRQ's own connectors write as it, without a token.** The OpenCTI, OpenAEV, Microsoft Defender, Drata and CVE connectors run inside OpenCRQ: their **Configure integration** panel, and the panel of the same source in the steps of **Get started**, ask for a **Service account**, and what they import is recorded as that account's work. A connector without an account does not run its scheduled syncs. **OpenCRQ Default Threats** is the exception: it reads a public file, asks for no account, and writes as the platform.
+- **OpenCRQ's own connectors write as it, without a token.** The OpenCTI, OpenAEV, Microsoft Defender, Drata and CVE connectors run inside OpenCRQ: their **Configure integration** panel, and the panel of the same source in the steps of **Get started**, ask for a **Service account**, and what they import is recorded as that account's work. A connector without an account does not run its scheduled syncs. When the deployment configuration gives a tenant an OpenCTI or OpenAEV connection, OpenCRQ creates the account `OpenCTI (deployment)` or `OpenAEV (deployment)` at start-up and binds the connector to it, unless an administrator already chose an account. **OpenCRQ Default Threats** is the exception: it reads a public file, asks for no account, and writes as the platform.
 - **A script signs in with a token.** It sends `Authorization: Bearer` and the token to the [OpenCRQ API](/reference/opencrq/api/). Tokens start with `flgrn_ocrq_tkn_`.
 - **Its work is traced.** A run of a background job it started shows **Service account** under **Triggered by** in :menu[Settings > Jobs], and a file it stored shows its name under **Uploaded By** in :menu[Settings > File Storage]. The tags and groups it sets on an asset through the API count as a push from XTM One: such a tag shows **XTM One** as its **Source** in :menu[Settings > Taxonomies > Tags], and a push replaces only what an earlier push set, never the tags and groups people set by hand. See [Manage the tags of your assets](/opencrq/configure/risk-taxonomies/#manage-the-tags-of-your-assets).
 
@@ -30,12 +30,12 @@ A service account is the identity an integration uses in a tenant of OpenCRQ: th
 
 1. Open :menu[Settings > Security > Service accounts] and click **Create**.
 2. In the **Create a new service account** panel, enter a **Name** that says which integration uses it, and a **Description**.
-3. Under **Groups**, keep **Connectors**, which is chosen for you. Add a group whose role grants **Manage Security** only if the integration must manage members, groups or integrations, or read or change the settings of :menu[Settings > Engine]: OpenCRQ refuses these calls to an account without it.
+3. Under **Groups**, keep **Connectors**, which is chosen for you. Add a group whose role grants **Manage Security** only if the integration must manage groups, roles or integrations, or read or change the settings of :menu[Settings > Engine]: OpenCRQ refuses these calls to an account without it. Adding members to the tenant, and a few writes such as assessing a control, need a signed-in person, whatever the account's groups.
 4. Click **Save**. The account appears in the list as **Active**.
 
    ::screenshot{id=opencrq-service-accounts-list alt="The Service accounts list of the Grand Meridian Hotels tenant: the OpenCTI connector account, Active, in the Connectors group."}
 
-5. To let a connector write as it, open **Integrations**, open the connector, click **Configure**, choose the account under **Service account** in the **Configure integration** panel, and click **Save**. See [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/) for the OpenCTI connector.
+5. To let a connector write as it, open **Integrations**, open the connector, and click **Configure**. In the **Configure integration** panel, choose **Use an existing service account**, pick the account under **Service account**, and click **Save**. For a connector bound to no account, the panel starts on **Create a new service account**, which creates one for you in the **Connectors** group. See [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/) for the OpenCTI connector.
 
 :::
 
@@ -70,9 +70,12 @@ A token generated before 0.261120.0 starts with `ogrc_`, and OpenCRQ refuses it,
 Grand Meridian's finance team loads the annualized loss of each risk scenario into its budget workbook every Monday. Claire Morel creates a service account **Name** `Weekly risk export` in the **Connectors** group, and generates a token **Token name** `Finance workbook`, **Expiry** **90 days**. The finance script keeps it in the variable `OPENCRQ_EXPORT_TOKEN` of its scheduler and calls:
 
 ```bash
-curl -s https://crq.example.com/trpc/riskScenarios.getRiskScenariosOverview \
-  -H "Authorization: Bearer ${OPENCRQ_EXPORT_TOKEN}"
+curl -s -G https://crq.example.com/trpc/riskScenarios.getRiskScenariosOverview \
+  -H "Authorization: Bearer ${OPENCRQ_EXPORT_TOKEN}" \
+  --data-urlencode 'input={}'
 ```
+
+The procedure takes an object, even empty: without `input`, OpenCRQ answers `400 Bad Request`.
 
 The answer lists the scenarios of Grand Meridian France and Spain with their latest run. **Last used** shows the Monday of each export, and three months later the token expires: Claire generates the next one before it does.
 :::

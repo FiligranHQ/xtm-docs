@@ -2,7 +2,7 @@
   "name": "loss-drivers",
   "version": "0.261123.0",
   "source": "OpenCRQ-Platform/opencrq@d61ebb5 (module/src/modules/loss-drivers/data/loss-drivers-data.ts)",
-  "intro": "The loss drivers a risk scenario prices, by loss category, the reporting level above them. Each driver says how much the attacker's dwell time changes its size (**Dwell sensitivity**) and the business quantity its amount scales with (**Scales with**), as the interface shows them. Every tenant gets this catalog at boot.",
+  "intro": "The loss drivers a risk scenario prices, by loss category, the level that groups them. Each driver shows, as the interface does, how sensitive the catalog holds it to the attacker's dwell time (**Dwell sensitivity**) and the business quantity its amount grows with (**Scaling variable**): both describe the driver, and neither enters a computation. **Range** says whether OpenCRQ derives the driver's range from the risk scope's financial profile, for the drivers a scenario's outcome and assets recommend, or whether only a range entered by hand prices it. Every tenant gets this catalog at boot.",
   "sections": [
     {
       "title": "Response & Investigation",
@@ -11,7 +11,8 @@
         "Loss driver",
         "What it covers",
         "Dwell sensitivity",
-        "Scales with"
+        "Scaling variable",
+        "Range"
       ],
       "rows": [
         {
@@ -20,7 +21,8 @@
             "**Forensics & incident management**",
             "External DFIR fees: scoping, containment, eradication, reconstruction and negotiation support.",
             "Strong",
-            "Systems in scope"
+            "Systems in scope",
+            "Derived from the financial profile"
           ]
         },
         {
@@ -29,7 +31,8 @@
             "**Incident legal counsel**",
             "Outside counsel under privilege, up to the point where claims are asserted.",
             "Weak",
-            "Counsel hours"
+            "Counsel hours",
+            "Derived from the financial profile"
           ]
         },
         {
@@ -38,7 +41,8 @@
             "**Crisis communications & PR**",
             "External communications support; the cost tracks the public-visibility tier of the incident.",
             "None",
-            "Public severity tier"
+            "Public severity tier",
+            "Derived from the financial profile"
           ]
         },
         {
@@ -47,7 +51,8 @@
             "**Internal response surge labor**",
             "Incremental internal response cost: overtime, backfill and diverted staff, never counted again as lost productivity.",
             "Strong",
-            "Response headcount-days"
+            "Response headcount-days",
+            "Derived from the financial profile"
           ]
         }
       ]
@@ -59,7 +64,8 @@
         "Loss driver",
         "What it covers",
         "Dwell sensitivity",
-        "Scales with"
+        "Scaling variable",
+        "Range"
       ],
       "rows": [
         {
@@ -68,7 +74,8 @@
             "**System & data restoration**",
             "Rebuild, reimage, restore, recreate data and revalidate, including the espionage-eviction rebuild.",
             "Strong",
-            "Systems in scope"
+            "Systems in scope",
+            "Derived from the financial profile"
           ]
         },
         {
@@ -77,7 +84,8 @@
             "**Hardware & equipment replacement**",
             "Capital cost of physically destroyed or untrustable equipment; absorbs all replacement capex whenever it is active.",
             "Strong",
-            "Destroyed device count"
+            "Destroyed device count",
+            "Entered by hand only"
           ]
         }
       ]
@@ -89,7 +97,8 @@
         "Loss driver",
         "What it covers",
         "Dwell sensitivity",
-        "Scales with"
+        "Scaling variable",
+        "Range"
       ],
       "rows": [
         {
@@ -98,7 +107,8 @@
             "**Lost margin from downtime**",
             "Contribution margin on revenue lost during the outage, net of recapture, stopping at restoration.",
             "None",
-            "Outage days"
+            "Outage days",
+            "Derived from the financial profile"
           ]
         },
         {
@@ -107,7 +117,8 @@
             "**Incremental operating cost during disruption**",
             "Extra expense to operate degraded: manual processing, temporary staffing and expediting.",
             "None",
-            "Outage days"
+            "Outage days",
+            "Derived from the financial profile"
           ]
         }
       ]
@@ -119,7 +130,8 @@
         "Loss driver",
         "What it covers",
         "Dwell sensitivity",
-        "Scales with"
+        "Scaling variable",
+        "Range"
       ],
       "rows": [
         {
@@ -128,7 +140,8 @@
             "**Extortion payment**",
             "Amount actually paid for decryption, suppression or cessation, including transaction costs; never substituted with restoration.",
             "None",
-            "Revenue band"
+            "Revenue band",
+            "Derived from the financial profile"
           ]
         }
       ]
@@ -140,7 +153,8 @@
         "Loss driver",
         "What it covers",
         "Dwell sensitivity",
-        "Scales with"
+        "Scaling variable",
+        "Range"
       ],
       "rows": [
         {
@@ -149,7 +163,8 @@
             "**Stolen funds, net of recovery**",
             "Funds fraudulently transferred and not recovered; carries the principal the organization is out of pocket, absorbed or restituted.",
             "Strong",
-            "Payment flow value"
+            "Payment flow value",
+            "Derived from the financial profile"
           ]
         }
       ]
@@ -161,7 +176,8 @@
         "Loss driver",
         "What it covers",
         "Dwell sensitivity",
-        "Scales with"
+        "Scaling variable",
+        "Range"
       ],
       "rows": [
         {
@@ -170,7 +186,8 @@
             "**Notification & call handling**",
             "Determining and executing the notification of affected individuals, plus the call-centre surge.",
             "None",
-            "Affected record count"
+            "Affected record count",
+            "Derived from the financial profile"
           ]
         },
         {
@@ -179,7 +196,8 @@
             "**Identity & credit protection**",
             "Monitoring and restoration offered to affected individuals, where the exposed data reaches adversary hands.",
             "None",
-            "Affected record count"
+            "Affected record count",
+            "Derived from the financial profile"
           ]
         }
       ]
@@ -191,7 +209,8 @@
         "Loss driver",
         "What it covers",
         "Dwell sensitivity",
-        "Scales with"
+        "Scaling variable",
+        "Range"
       ],
       "rows": [
         {
@@ -200,7 +219,8 @@
             "**Litigation & proceedings defense**",
             "Defense-side fees once claims are asserted.",
             "None",
-            "Claim and jurisdiction count"
+            "Claim and jurisdiction count",
+            "Derived from the financial profile"
           ]
         },
         {
@@ -209,7 +229,8 @@
             "**Settlements & damages**",
             "Amounts paid to claimants, beyond-principal only on funds categories, including litigated business damages.",
             "None",
-            "Affected record count"
+            "Affected record count",
+            "Derived from the financial profile"
           ]
         },
         {
@@ -218,7 +239,8 @@
             "**Regulatory fines**",
             "Statutory penalties imposed by regulators, bounded by the applicable statutory caps.",
             "None",
-            "Regulated revenue"
+            "Regulated revenue",
+            "Derived from the financial profile"
           ]
         },
         {
@@ -227,7 +249,8 @@
             "**Payment-card ecosystem assessments**",
             "Card-brand program assessments through acquirers: reissuance, fraud recovery, forensic investigation and non-compliance. All card economics flow here.",
             "None",
-            "Affected record count"
+            "Affected record count",
+            "Derived from the financial profile"
           ]
         },
         {
@@ -236,7 +259,8 @@
             "**Contractual penalties & service credits**",
             "Service credits, delivery-failure penalties and unlitigated liquidated damages under security-breach clauses; litigated damages sit in settlements.",
             "None",
-            "Contracted revenue"
+            "Contracted revenue",
+            "Derived from the financial profile"
           ]
         }
       ]
@@ -248,7 +272,8 @@
         "Loss driver",
         "What it covers",
         "Dwell sensitivity",
-        "Scales with"
+        "Scaling variable",
+        "Range"
       ],
       "rows": [
         {
@@ -257,7 +282,8 @@
             "**Customer attrition & win-back**",
             "Margin on customers lost after restoration, plus win-back spend. All reputation cash lives here, starting where lost downtime margin stops.",
             "None",
-            "Recurring revenue margin"
+            "Recurring revenue margin",
+            "Derived from the financial profile"
           ]
         },
         {
@@ -266,7 +292,8 @@
             "**Competitive-advantage erosion**",
             "Future margin lost because strategic assets are in adversary hands; a stolen-IP mechanism, distinct from eroded trust.",
             "Strong",
-            "R&D investment"
+            "R&D investment",
+            "Derived from the financial profile"
           ]
         }
       ]

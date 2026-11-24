@@ -17,10 +17,10 @@ A tenant holds everything OpenCRQ knows about one organization: its risk scopes,
 
 ## Before you start
 
-- More than one tenant requires the Enterprise Edition. OpenCRQ is in Enterprise Edition while XTM One grants it an XTM license that covers this instance, when OpenCRQ registers with XTM One (the `xtm_one` keys of the [configuration](/reference/opencrq/configuration/#xtm-one)).
+- More than one tenant requires the Enterprise Edition. OpenCRQ is in Enterprise Edition while XTM One grants it an XTM license that covers this instance, when OpenCRQ registers with XTM One (the `xtm_one` keys of the [configuration](/reference/opencrq/configuration/#xtm-one)). Each answer of XTM One grants it for 7 days, and a restart starts in the Community Edition until the next registration succeeds: see [Configure OpenCRQ](/deploy/configure/opencrq/#xtm-one).
 - Your platform role has **Create Tenants**, and **Platform Administration Access** to open the **Platform** pages of :menu[Settings > Security]. XTM One's administrator, who signs in to OpenCRQ as its super administrator, holds both, and so does the **Platform administrator** role, which OpenCRQ creates at its first boot with the **Platform administrators** group. See [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
 
-A Community Edition platform serves one tenant. OpenCRQ creates it at its first boot, when the platform holds no tenant: its name is **Default** and its identifier `01a043da-ff47-72c2-aaa4-7da56d85c83e`, unless the deployment sets `INITIAL_TENANT__NAME` and `INITIAL_TENANT__ID` before that boot (the `initial_tenant` keys of the [configuration](/reference/opencrq/configuration/#initial-tenant)). Setting the identifier first lets the platform engineer write the tenant's connection keys in the same deployment. See [Install OpenCRQ](/deploy/install/opencrq/). Creating a second tenant is refused with "Multiple tenants require an Enterprise Edition license". A platform that returns to the Community Edition keeps every tenant and its data, but each person then reaches only one: the oldest of the tenants they belong to.
+A Community Edition platform serves one tenant. OpenCRQ creates it at its first boot, when the platform holds no tenant: its name is **Default** and its identifier `01a043da-ff47-72c2-aaa4-7da56d85c83e`, unless the deployment sets `INITIAL_TENANT__NAME` and `INITIAL_TENANT__ID` before that boot (the `initial_tenant` keys of the [configuration](/reference/opencrq/configuration/#initial-tenant)). Setting the identifier first lets the platform engineer write the tenant's connection keys in the same deployment. See [Install OpenCRQ](/deploy/install/opencrq/). Creating a second tenant is refused with "Multiple tenants require an Enterprise Edition license". A platform that returns to the Community Edition keeps every tenant and its data, but each person then reaches only one: of the tenants they reach, the one whose **Identifier** comes first in alphabetical order. For the tenants OpenCRQ created, that is the oldest; an identifier set with `INITIAL_TENANT__ID` takes its place by its own value.
 
 ## Create a tenant
 
@@ -32,7 +32,7 @@ A Community Edition platform serves one tenant. OpenCRQ creates it at its first 
 
 :::
 
-A new tenant starts with its two groups, **Admin** and **Connectors**, its own copy of the reference catalogues (countries, sectors, attack outcomes and loss drivers), and **Automatic** as its **Default language**. It also gets a first risk scope, **Enterprise**, and a **Get started** wizard, first in its menu until it is finished, whose steps are **Company**, **Assets**, **Threats**, **Defenses**, **Finances**, **Tolerance**, **Protect** and **Scenarios**. It has no integration yet: even the **OpenCRQ Default Threats** set starts switched off, and loading it is a choice of the wizard's **Threats** step. The tenant OpenCRQ creates at its first boot starts the same way. While the wizard is unfinished, a person who opens the tenant's home for the first time in a browser lands on **Get started**.
+A new tenant starts with its two groups, **Admin** and **Connectors**, its own copy of the reference catalogues (countries, sectors, attack outcomes and loss drivers), and **Automatic** as its **Default language**. It also gets a first risk scope, **Enterprise**, and a **Get started** wizard, first in its menu until it is finished, whose steps are **Company**, **Assets**, **Threats**, **Defenses**, **Finances**, **Tolerance**, **Protect** and **Scenarios**. It has no integration yet: even the **OpenCRQ Default Threats** set starts switched off, and loading it is a choice of the wizard's **Threats** step. The tenant OpenCRQ creates at its first boot starts the same way. At each start, OpenCRQ then connects the OpenCTI and OpenAEV integrations the deployment sets for a tenant: see [Connect a tenant to its sources](#connect-a-tenant-to-its-sources). While the wizard is unfinished, a person who opens the tenant's home for the first time in a browser lands on **Get started**.
 
 Its only member is the person who created it, in its **Admin** group, unless that person is the super administrator: they reach every tenant without being a member of any, so a tenant they create starts with no member. The tenant OpenCRQ creates at its first boot starts with no member either.
 
@@ -51,15 +51,15 @@ Renaming works in both editions: on a Community Edition platform, it gives the *
 
 :::
 
-OpenCRQ confirms with "Tenant renamed successfully.", and the new name shows on the **Tenants** page, in the **Tenant** selector and in the tenant's :menu[Settings > Parameters]. The tenant keeps its **Identifier**, so its connection keys in the deployment configuration stay valid. You need **Create Tenants** and must reach the tenant: be its member, or be the super administrator.
+OpenCRQ confirms with "Tenant renamed successfully.", and the new name shows on the **Tenants** page, in the tenant switcher of the sidebar and in the tenant's :menu[Settings > Parameters]. The tenant keeps its **Identifier**, so its connection keys in the deployment configuration stay valid. You need **Create Tenants** and must reach the tenant: be its member, or be the super administrator.
 
 :::example[Name the tenant of a new platform]
-Example CERT installs OpenCRQ in Community Edition to price the risk of Grand Meridian Hotels. At its first boot, OpenCRQ creates the tenant **Default**. XTM One's administrator signs in, opens the **Tenants** page, chooses **Rename** on the **Default** card, enters **Name** `Grand Meridian Hotels` and clicks **Save**. The header and the tenant's :menu[Settings > Parameters] now read Grand Meridian Hotels, and its identifier, `01a043da-ff47-72c2-aaa4-7da56d85c83e`, is unchanged.
+Example CERT installs OpenCRQ in Community Edition to price the risk of Grand Meridian Hotels. At its first boot, OpenCRQ creates the tenant **Default**. XTM One's administrator signs in, opens the **Tenants** page, chooses **Rename** on the **Default** card, enters **Name** `Grand Meridian Hotels` and clicks **Save**. The tenant's :menu[Settings > Parameters] now reads Grand Meridian Hotels, and its identifier, `01a043da-ff47-72c2-aaa4-7da56d85c83e`, is unchanged.
 :::
 
 ## Switch between tenants
 
-When you belong to more than one tenant, the header shows a **Tenant** selector: choose a tenant to open its home. With a single tenant, the header shows its name. A person is added to each tenant on its own, by an administrator of that tenant, and can give themselves a **Full name** and a **Title** of their own in each, in the **Tenant profile** of their profile page.
+When you reach more than one tenant, the first row of the sidebar is the tenant switcher: it shows the name of the tenant you are in, and opens the list of your tenants. Choose one to open its home. With a single tenant, the sidebar shows no switcher and no tenant name. A person is added to each tenant on its own, by an administrator of that tenant, and can give themselves a **Full name** and a **Title** of their own in each, in the **Tenant profile** of their profile page.
 
 ## Set the default language of a tenant
 
@@ -90,7 +90,7 @@ CONNECTORS__OPENCTI__019a3c5e-8f21-7c4d-9b6a-2e7f1d0c4a83__URL: https://cti.exam
 CONNECTORS__OPENCTI__019a3c5e-8f21-7c4d-9b6a-2e7f1d0c4a83__TOKEN: ${SEASIDE_OPENCTI_TOKEN}
 ```
 
-After a restart, Nina configures the OpenCTI integration of her tenant with the Live Stream Example CERT shares with Seaside Resorts. Grand Meridian Hotels keeps its own stream and its own figures, and neither chain appears in the other's **Tenant** selector.
+After a restart, OpenCRQ connects the OpenCTI integration of Seaside Resorts by itself: it creates the service account `OpenCTI (deployment)` and binds the connector to the Live Stream `OpenCRQ threat feed`, which it creates in Example CERT's OpenCTI when it is not there yet. The user of the token needs **Manage data sharing** in OpenCTI for that. Nina can switch to the stream Example CERT shares with Seaside Resorts in the connector's **Configure integration** panel. Grand Meridian Hotels keeps its own stream and its own figures. Nina belongs to Seaside Resorts alone: her sidebar shows no tenant switcher.
 :::
 
 ## Delete a tenant
@@ -99,7 +99,7 @@ Open the **Tenants** page, open the tenant's actions menu, choose **Delete**, an
 
 ## Check that it works
 
-Open the new tenant from the **Tenant** selector: its :menu[Settings > Parameters] shows its **Name** and **Identifier**. Its **Users** list in :menu[Settings > Security] shows you in the **Admin** group, or, when you are the super administrator, tagged **Super Administrator**, and then the people you add.
+Open the new tenant from the tenant switcher of the sidebar, or from its card on the **Tenants** page: its :menu[Settings > Parameters] shows its **Name** and **Identifier**. Its **Users** list in :menu[Settings > Security] shows you in the **Admin** group, or, when you are the super administrator, tagged **Super Administrator**, and then the people you add.
 
 ## What's next
 

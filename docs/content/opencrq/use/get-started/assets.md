@@ -18,7 +18,7 @@ last_reviewed: 2026-11-20
 
 ## The asset sources
 
-Under **Asset sources**, the step reads "Use as many as you need, they add up." Beside it, the count of every asset in the tenant and **See all assets**, which opens :menu[Assets].
+Under **Asset sources**, the step reads "Use as many as you need, they add up." Beside it, the count of the assets you can see in the tenant and **See all assets**, which opens :menu[Assets].
 
 ::screenshot{id=opencrq-get-started-assets alt="The Assets step of Get started for Grand Meridian Hotels: under Asset sources, the Declared estate tile with no kind declared, the Microsoft Defender tile Unavailable, and the Manual creation tile Active with 6 assets."}
 
@@ -30,7 +30,7 @@ Under **Asset sources**, the step reads "Use as many as you need, they add up." 
 
 The sources work together. The attack run walks the assets imported or created, then completes them up to what you declared.
 
-The step is started once you answered one kind, or once the tenant has an asset: the stepper then counts the kinds answered out of 12. It is done once you answered the 12 kinds, **None** included. Assets alone never complete it.
+The step is started once you answered one kind, or once you can see an asset of the tenant: the stepper then counts the kinds answered out of 12. It is done once you answered the 12 kinds, **None** included. Assets alone never complete it.
 
 ## Declare your estate
 
@@ -53,7 +53,7 @@ A figure that is not valid says why, such as **Enter a number.** or **The minimu
 
 Select **Configure** on the **Microsoft Defender** tile. The **Microsoft Defender** panel opens:
 
-- When Microsoft Defender is not set up for the tenant, the panel lists the three variables a platform administrator sets in the platform's environment before restarting it. **Copy** copies them, and **See the documentation** opens [Give OpenCRQ the credentials](/opencrq/use/sources/microsoft-defender/#give-opencrq-the-credentials).
+- When Microsoft Defender is not set up for the tenant, the panel lists the three variables a platform administrator sets in the platform's environment before restarting it. **Copy** copies them, and **See the documentation** opens the platform's configuration on GitHub. The steps are in [Give OpenCRQ the credentials](/opencrq/use/sources/microsoft-defender/#give-opencrq-the-credentials).
 - When it is set up and you have **Manage Security**, choose the account the connector runs as under **Service account**, and the **Schedule**, then select **Save**:
   - **Create a new service account**, the default, creates the account with the integration, in the Connectors group. Its **Service account name** is filled in with "Microsoft Defender connector", which you can change.
   - **Use an existing service account** runs the connector as an account the tenant already has, chosen in the **Service account** list.
@@ -72,7 +72,7 @@ Grand Meridian Hotels has no Microsoft Defender yet. Claire Morel selects **Decl
 - **Web application** on **1 to 10**, with **Yes**: the booking site faces the Internet.
 - **AI target** on **None**.
 
-She selects **Save**: the tile reads 5 of 12 kinds declared, **Active**, and its button reads **Edit**. The attack run now walks at least 1,001 workstations, each simulated year drawing between 1,001 and 5,000. It counts an internet-facing server even before any device is imported. The step stays started until she answers the 7 other kinds.
+She selects **Save**: the tile reads 5 of 12 kinds declared, **Active**, and its button reads **Edit**. The attack run now walks at least 1,001 workstations, each simulated world drawing its own count between 1,001 and 5,000 and keeping it for every year it plays. It counts an internet-facing server even before any device is imported. The step stays started until she answers the 7 other kinds.
 :::
 
 ## Check that it works

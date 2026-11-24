@@ -32,7 +32,7 @@ The step is started once one control is assessed, and done once the 51 are. Any 
 
 ## Assess your controls yourself
 
-The panel writes the tenant's assessment of each control: it applies to every risk scope, except where a scope declares its own. It is the assessment the **Controls** page shows, without its **Comment**. To declare a scope's own posture, see [Declare a control for a risk scope](/opencrq/use/defenses/controls/#declare-a-control-for-a-risk-scope).
+The panel writes the tenant's assessment of each control: it applies to every risk scope, except where a scope declares its own. It is the assessment the **Controls** page shows. The panel has no **Comment**, and a choice made in it clears the comment of that control. To declare a scope's own posture, see [Declare a control for a risk scope](/opencrq/use/defenses/controls/#declare-a-control-for-a-risk-scope).
 
 :::steps
 1. On the **Assess yourself** tile, select **Assess**. The panel opens on the controls grouped by domain, from **Endpoints and servers** to **AI**, with the first domain open. Each domain reads how many of its controls are assessed, such as **0 of 6 assessed**, and each control not yet assessed reads **Not assessed**.
@@ -70,9 +70,9 @@ Each run sets the strength and the coverage of the controls that Drata controls 
 
 ## Check that it works
 
-- The status under **Defense sources** counts the controls assessed, and the **Assess yourself** tile those you assessed by hand.
+- The count under **Defense sources** gives the controls the tenant assessed, and the **Assess yourself** tile those you assessed by hand.
 - **See all controls** lists the controls you assessed with their strength, coverage and effectiveness.
-- The stepper shows **Defenses** started, then a check once the 51 controls are assessed.
+- The stepper shows **Defenses** started, then a check once each of the 51 controls is assessed for the tenant or declared by the **Enterprise** scope.
 
 ## What's next
 

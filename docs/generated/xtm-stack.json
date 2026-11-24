@@ -48,12 +48,7 @@
             "connector-opencti",
             "connector-mitre"
           ],
-          "needs": [
-            "redis",
-            "elasticsearch",
-            "minio",
-            "rabbitmq"
-          ]
+          "needs": []
         },
         {
           "id": "composer",
@@ -64,11 +59,7 @@
           ],
           "needs": [
             "rsa-key-generator",
-            "redis",
-            "elasticsearch",
-            "minio",
-            "rabbitmq",
-            "pgsql"
+            "rabbitmq"
           ]
         }
       ],
@@ -103,12 +94,7 @@
             "injector-nmap",
             "injector-nuclei"
           ],
-          "needs": [
-            "pgsql",
-            "minio",
-            "rabbitmq",
-            "elasticsearch"
-          ]
+          "needs": []
         },
         {
           "id": "composer",
@@ -119,11 +105,7 @@
           ],
           "needs": [
             "rsa-key-generator",
-            "redis",
-            "elasticsearch",
-            "minio",
-            "rabbitmq",
-            "pgsql"
+            "rabbitmq"
           ]
         }
       ],
@@ -150,9 +132,7 @@
         "opencrq-db-init",
         "pgsql",
         "opencrq-bucket-init",
-        "minio",
-        "xtm-one-db-init",
-        "redis"
+        "minio"
       ],
       "url": "http://localhost:8082"
     }

@@ -1,4 +1,4 @@
-title: An attack outcome that hits a business resource recommends the loss drivers that pairing opens
+title: An attack outcome that hits a business resource recommends the loss drivers that pairing opens, and only those get a derived range
 lanes:
   - label: The scenario
     tone: product
@@ -11,7 +11,7 @@ lanes:
   - label: Recommended
     tone: product
     nodes:
-      - {id: drivers, label: Loss drivers, icon: ListChecks, note: The lines this pairing opens}
+      - {id: drivers, label: Loss drivers, icon: ListChecks, note: Ranges derived from the financial profile}
 edges:
   - {from: outcome, to: drivers, label: with}
   - {from: resource, to: drivers, label: opens}

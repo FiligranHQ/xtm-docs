@@ -16,7 +16,7 @@ The official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/Filig
 ## Before you start
 
 - A stack installed from xtm-docker, as [Install with Docker Compose](/deploy/install/docker-compose/) describes. Run the commands of this page from its folder.
-- For OpenCRQ, the admin of XTM One, who signs in to it with XTM One and creates its first tenant: see [Install OpenCRQ](/deploy/install/opencrq/).
+- For OpenCRQ, the admin of XTM One, who signs in to it with XTM One and lands in its first tenant, `Default`, which OpenCRQ creates at its first start: see [Install OpenCRQ](/deploy/install/opencrq/).
 - A host sized for the whole stack: 16 GB of RAM at least, 32 GB recommended for production, and 50 GB of free disk. [Sizing](/deploy/plan/sizing/) says how much each module needs.
 - A backup of the volumes and of `.env`: see [Back up and restore](/deploy/operate/backup/).
 
@@ -89,8 +89,8 @@ The data of the modules that already ran stays in their volumes, and a platform 
 | Volume | Shared by |
 | --- | --- |
 | `esdata` | OpenCTI and OpenAEV |
-| `pgsqlshareddata` | OpenAEV and XTM One |
-| `s3data` | OpenCTI, OpenAEV and XTM One |
+| `pgsqlshareddata` | OpenAEV, XTM One and OpenCRQ |
+| `s3data` | OpenCTI, OpenAEV, XTM One and OpenCRQ |
 | `redisdata` | OpenCTI and XTM One |
 | `amqpdata` | OpenCTI and OpenAEV |
 | `rsakeys` | XTM Composer |

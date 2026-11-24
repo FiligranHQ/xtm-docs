@@ -49,11 +49,11 @@ A template adds one asset per scope: its card stays **Added** even after you ren
 
 ## Link the assets that support it
 
-Once the scope has a primary asset, **2. Link the assets that support it** draws a graph of your primary assets and the supporting assets they run on. The supporting assets not linked yet show too.
+Once the scope has a primary asset, **2. Link the assets that support it** draws a graph of your primary assets and the supporting assets they run on. A primary asset with no supporting asset linked yet shows too, on its own.
 
 :::steps
 1. Under **2. Link the assets that support it**, choose the primary asset to link, when the scope has more than one.
-2. Select **Link assets**. The **Manage dependencies of primary asset** panel opens on every supporting asset, with its **Roles**, **Category**, **Source**, **Exposure** and **Criticality**. A search and filters narrow the list.
+2. Select **Link assets**. The **Manage dependencies of primary asset** panel opens on every supporting asset, with its **Roles**, **Category** and **Source**, and the **Inherited criteria** its roles pass on: availability, integrity, confidentiality and traceability. A search and filters narrow the list.
 3. For each asset that supports the primary asset, pick its role, such as the asset that stores the data or the one that performs the service. Removing its last role unlinks it.
 4. Select the save button, which counts your changes.
 :::

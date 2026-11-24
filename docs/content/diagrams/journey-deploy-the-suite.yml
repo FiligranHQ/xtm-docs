@@ -1,4 +1,4 @@
-title: The stack is planned, installed on one host, completed with OpenCRQ, connected around XTM One, then watched and upgraded
+title: The stack is planned, installed on one host with OpenCRQ, connected around XTM One, then watched and upgraded
 lanes:
   - label: Plan
     tone: external
@@ -9,7 +9,7 @@ lanes:
     nodes:
       - {id: stack, label: Stack running, icon: Boxes, note: "xtm-docker, one host", href: /deploy/install/docker-compose/}
       - {id: xtmone, label: XTM One usable, icon: LogoXTMOne, note: "Proxy, model, license", href: /deploy/install/xtm-one/}
-      - {id: opencrq, label: OpenCRQ added, icon: LogoOpenCRQ, note: "Override file", href: /deploy/install/opencrq/}
+      - {id: opencrq, label: OpenCRQ signed in, icon: LogoOpenCRQ, note: "Through XTM One", href: /deploy/install/opencrq/}
   - label: Connect
     tone: core
     nodes:

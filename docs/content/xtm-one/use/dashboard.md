@@ -87,7 +87,7 @@ Hover a column to read every figure. A stage with no connected product gives a l
 
 Click a column to open the stage's page. Its header gives the **Stage score** and the score in your **Organization** context, with **Back to Command Center**. **History** draws the scores over **30 days** or **90 days**. The **AI assessment** is the stage analyst agent's reading of the stage. When AI can run, it is written again on your visit once it is more than 7 days old, marked **Out of date** meanwhile. Opening the dashboard does the same for every covered stage. **Refresh** writes it now, and **Follow up in chat** continues it in a conversation.
 
-The last column, **Governance & Risk**, is the risk side of exposure, quantified by OpenCRQ. It gives the two scores of the risk posture, their change, and the posture target of the organization profile, or "No posture target yet". **Open in OpenCRQ** opens OpenCRQ once a platform is registered. Click the column to open the **Governance & Risk** page: see [Follow your exposure posture against its target](/xtm-one/use/governance/).
+The last column, **Governance & Risk**, sets your exposure posture against its target. It gives the two scores of the posture, measured and in your organization context, their change, and the posture target of the organization profile, or "No posture target yet". Once an OpenCRQ platform is registered, **Open in OpenCRQ** opens it, for the risk priced in money. Click the column to open the **Governance & Risk** page: see [Follow your exposure posture against its target](/xtm-one/use/governance/).
 
 ## Read your briefing
 

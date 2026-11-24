@@ -28,7 +28,7 @@ Every answer is written by a language model and can be wrong. Check a figure an 
 ## Ask Ariane, the assistant
 
 :::note
-Ask Ariane requires the Enterprise Edition of OpenCRQ, which comes from the XTM license XTM One returns for your platform. Without it, the **Ask Ariane** button does not show.
+Ask Ariane requires the Enterprise Edition of OpenCRQ, which comes from the XTM license XTM One returns for your platform. In the Community Edition, the **Ask Ariane** button shows with an **EE** chip, and opens **Ask Ariane is an Enterprise Edition feature** instead of the chat. An administrator who can manage the platform also gets **Install the license in XTM One**. The button shows only once OpenCRQ is configured with XTM One.
 :::
 
 **Ask Ariane**, in the top bar, opens a chat with an XTM One agent about the risk data of your tenant. The panel opens at the side of the page, where you can widen it, or floating. It suggests a few questions to start from: **Summarize our compliance posture**, **Which controls have the biggest maturity gaps?**, **Help me draft a new risk scenario** and **Explain the financial impact of this risk**.
@@ -60,15 +60,16 @@ An agent never holds an OpenCRQ account of its own. Each call carries your ident
 
 :::steps
 1. When you send a message, OpenCRQ signs a short-lived token that names your email address, and passes your message to XTM One with it.
-2. XTM One runs the agent. When the agent needs data, XTM One calls the OpenCRQ API with a token it signs for the same email.
-3. OpenCRQ checks the signature against the keys XTM One publishes, finds the account with that email, and applies its tenants and capabilities.
+2. XTM One runs the agent as the XTM One account with that email. When the agent needs data, XTM One calls the OpenCRQ API with a token it signs for that XTM One account.
+3. OpenCRQ checks the signature against the keys XTM One publishes, finds the account tied to that XTM One account, and applies its tenants and capabilities.
 :::
 
 The consequences:
 
 - **An agent sees what you see**, in the tenants you belong to.
-- **An agent changes only what you could change.** Its tools read and change risk scopes, primary and supporting assets, risk scenarios and their loss estimates, controls and their postures, and the engine settings; they run a simulation; they read treatment plans, budget reviews, findings and threats; and, for an administrator, they manage users, groups, roles, invitations and tenants. A tool your capabilities do not allow fails as you would.
-- **Your email must be the same in both products.** An account with no match in OpenCRQ gets no data. OpenCRQ's super administrator is XTM One's administrator, who signs in to OpenCRQ through XTM One: see [Install OpenCRQ](/deploy/install/opencrq/#sign-in-and-create-the-first-tenant).
+- **An agent changes only what you could change.** The built-in assistants that answer **Ask Ariane** have every OpenCRQ tool of XTM One. These tools read and change risk scopes, primary and supporting assets and their evidence, risk scenarios, their loss estimates and threat event frequency, financial profiles and risk tolerance, controls and their postures, compliance assessments and their answers, and the engine settings; they run a simulation; they read treatment plans, budget reviews, findings and threats; and, for an administrator, they manage users, groups, roles and tenants. A tool your capabilities do not allow fails as you would.
+- **The MCP server has fewer tools.** Your own AI client, through `/mcp/opencrq`, gets no tenant or user administration, no service accounts, no engine or threat relevance settings, and no connectors. See [Tools of the OpenCRQ server](/develop/apis/mcp/#tools-of-the-opencrq-server).
+- **Your OpenCRQ account must be tied to your XTM One account.** OpenCRQ ties them the first time you sign in to OpenCRQ through XTM One, and matches an agent's calls to that account, never to an email address. A person whose XTM One account is tied to no OpenCRQ account gets no data. OpenCRQ's super administrator is XTM One's administrator, who signs in to OpenCRQ through XTM One: see [Sign in to OpenCRQ](/deploy/install/opencrq/#sign-in-to-opencrq).
 - **What leaves OpenCRQ** is your message, the address of the page, the files you attach, and what the agent reads through the API. XTM One sends them to the language models its administrator configured.
 
 ## CTEM Command Center
@@ -77,9 +78,9 @@ The consequences:
 
 ## Use OpenCRQ from your own AI client
 
-XTM One exposes OpenCRQ to any client of the Model Context Protocol (MCP), such as Cursor, Claude Desktop or an agent your team builds. The client works with frameworks, controls, assessments and risk scenarios, as you. It works in the Community Edition, and nothing is installed in OpenCRQ: the server exists as soon as the platform is registered.
+XTM One exposes OpenCRQ to any client of the Model Context Protocol (MCP), such as Cursor, Claude Desktop or an agent your team builds. The client works with frameworks, controls, assessments and risk scenarios, as you. It works in the Community Edition, and nothing is installed in OpenCRQ: the server answers as soon as the platform is registered, while AI is switched on in XTM One.
 
-On your profile, the **XTM One MCP server** card gives the address of XTM One, with **Copy MCP endpoint URL**. XTM One serves the OpenCRQ tools at that address followed by `/mcp/opencrq`: the card shows `/mcp/opengrc`, which XTM One does not answer, so write `/mcp/opencrq` in the client. The client authenticates with a personal API key you create in XTM One, passed as a bearer token. **Manage in XTM One** opens the MCP page of your XTM One profile: the connection status and a client configuration to copy.
+On your profile, the **XTM One MCP server** card gives the address where XTM One serves the OpenCRQ tools, ending with `/mcp/opencrq`, with **Copy MCP endpoint URL**: paste it in the client. The client authenticates with a personal API key you create in XTM One, passed as a bearer token. **Manage in XTM One** opens the MCP page of your XTM One profile: the connection status and a client configuration to copy.
 
 ::screenshot{id=opencrq-xtm-one-mcp-card alt="The XTM One MCP server card of the OpenCRQ profile, with the MCP endpoint URL of XTM One, its copy button and Manage in XTM One."}
 
@@ -106,9 +107,9 @@ Asked "Which risk scenarios cost us more than $100K a year?", Cursor calls the O
 
 This part is for administrators: what XTM One requires of OpenCRQ, and who decides what agents do.
 
-**XTM One is required.** OpenCRQ does not start without the address of XTM One, the registration token and its own public URL. It registers when it starts and every 5 minutes. When XTM One stops answering, OpenCRQ keeps working, warns every user, and **Ask Ariane** is unavailable until XTM One answers again. A platform engineer sets the connection: see [Configure OpenCRQ](/deploy/configure/opencrq/#xtm-one).
+**XTM One is required.** OpenCRQ does not start without the address of XTM One, the registration token and its own public URL. It registers when it starts and every 5 minutes. When XTM One stops answering, OpenCRQ keeps working, warns every user, and **Ask Ariane** is unavailable until XTM One answers again. An Enterprise Edition that XTM One's license granted lasts 7 days after its last answer, and ends sooner if OpenCRQ restarts: OpenCRQ then runs the Community Edition until XTM One answers again. A platform engineer sets the connection: see [Configure OpenCRQ](/deploy/configure/opencrq/#xtm-one).
 
-**The edition follows the XTM license.** OpenCRQ holds no license of its own. At each registration, XTM One returns the XTM license that covers the platform, if any, and OpenCRQ verifies it: the Enterprise Edition brings **Ask Ariane** and more than one tenant. A platform with no such license runs the Community Edition, with the CTEM Command Center and the MCP server.
+**The edition follows the XTM license.** OpenCRQ takes its license from XTM One, and none can be installed in OpenCRQ: a Filigran license an earlier version installed keeps working until it expires. At each registration, XTM One returns the XTM license that covers the platform, if any, and OpenCRQ verifies it: the Enterprise Edition brings **Ask Ariane** and more than one tenant. A platform with no such license runs the Community Edition, with the CTEM Command Center and the MCP server.
 
 **In XTM One**, its administrators decide which agents answer the tasks of OpenCRQ, in which order, whether tools ask for approval, and how many agent runs each person may spend. [XTM One in OpenCTI](/xtm-one/use/in-opencti/#govern-ai-on-the-platform) describes these settings for OpenCTI; they work the same way for every registered platform.
 

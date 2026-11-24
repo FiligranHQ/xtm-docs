@@ -76,7 +76,7 @@ XTM One binds its built-in agents to the intents the modules declare. These bind
 | Intent | What the product asks | Built-in agent | Vertical |
 | --- | --- | --- | --- |
 | `global.assistant` | The assistant behind the in-product chat | **CTEM Assistant** and **XTM-One Assistant**, then the assistant of each product | all |
-| `global.summarize`, `global.explain`, `global.fix_spelling`, `global.change_tone`... | Rewrite a text | **OpenCTI Assistant**, **OpenAEV Assistant**, **OpenCRQ Assistant** | `cti`, `aev`, `crq` |
+| `global.summarize`, `global.explain`, `global.fix_spelling`, `global.change_tone`... | Rewrite a text | **OpenCTI Assistant**, **OpenAEV Assistant** | `cti`, `aev` |
 | `cti.nlq_search` | Turn a question into OpenCTI search filters | **OpenCTI NLQ** | `cti` |
 | `cti.container_summary`, `cti.container_report`, `cti.entity_activity`... | Summarize a report, a grouping or a case, or an entity's activity | **OpenCTI Entity Insights** | `cti` |
 | `cti.stix_harvester` | Extract a STIX 2.1 bundle from a document | **CTI STIX Harvester (Filigran AI)**, then **CTI STIX Harvester** | `cti` |
@@ -84,7 +84,9 @@ XTM One binds its built-in agents to the intents the modules declare. These bind
 | `cti.ttp_harvester` | Extract techniques from documents | **CTI TTP Harvester (Filigran AI)** | `aev` |
 | `aev.attack_path_orchestrator` | Drive an autonomous attack path in OpenAEV | **OpenAEV Attack Path Orchestrator** | `aev` |
 | `aev.phishing_email_html_generator`, `aev.detection_rules_generator`... | Write a phishing lure or detection rules for an exercise | The AEV generators | `aev` |
-| `crq.risk_scenario_generator`, `crq.control_gap_analysis`, `crq.assessment_summary` | Draft risk scenarios, analyze control gaps, summarize an assessment | **OpenCRQ Assistant** | `crq` |
+| `global.assistant` | **Ask Ariane**, the assistant of OpenCRQ | **OpenCRQ Assistant** | `grc` |
+
+OpenCRQ registers with the vertical `crq`. It declares the text tasks, `crq.control_gap_analysis` and `crq.risk_scenario_generator`, but its screens ask only for `global.assistant`, for **Ask Ariane**. In this version, XTM One binds the built-in **OpenCRQ Assistant** to the vertical `grc`: for `global.assistant`, the text tasks, and its own intents `grc.control_gap_analysis`, `grc.risk_scenario_generator` and `grc.assessment_summary`.
 
 The **Intents** page of your platform is the reference: it shows what the connected products declared and what is bound today, and **Export CSV** downloads it as filtered and sorted, with the description of each intent. The **CTEM Assistant** has the highest priority on `global.assistant`, and hands the conversation to the assistant of the product.
 

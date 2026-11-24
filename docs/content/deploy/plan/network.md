@@ -21,7 +21,7 @@ This page lists the network side of the XTM stack as [FiligranHQ/xtm-docker](htt
 | `OPENCTI_PORT`, `8080` by default | `opencti` | 8080 | OpenCTI web interface and GraphQL API | `opencti` | `.env` |
 | 8081 | `openaev` | 8080 | OpenAEV web interface and API | `openaev` | `docker-compose.yml`, with `OPENAEV_PORT` in `.env` |
 | `XTM_ONE_PORT`, `8090` by default | `xtm-one` | 4000 | XTM One web interface and API | Always | `.env` |
-| 8082 | `opencrq` | 3002 | OpenCRQ web interface and API | Always | `docker-compose.yml`, with `OPENCRQ_PORT` in `.env` |
+| 8082 | `opencrq` | 3002 | OpenCRQ web interface and API | Always | `modules/opencrq.yml`, with `OPENCRQ_PORT` in `.env` for the public URL |
 | 9200 | `elasticsearch` | 9200 | Elasticsearch HTTP API | `opencti` or `openaev` | `docker-compose.yml` |
 | 5672 | `rabbitmq` | 5672 | RabbitMQ, Advanced Message Queuing Protocol (AMQP) | `opencti` or `openaev` | `docker-compose.yml` |
 | 15672 | `rabbitmq` | 15672 | RabbitMQ management interface and API | `opencti` or `openaev` | `docker-compose.yml` |
@@ -59,7 +59,7 @@ Every service is on one Docker network, `<COMPOSE_PROJECT_NAME>_default`: `xtm_d
 | --- | --- |
 | `http://opencti:8080` | The OpenCTI worker and connectors, XTM Composer, XTM One, OpenAEV (on `/graphql`), and OpenCRQ once a tenant is connected to it |
 | `http://openaev:8080` | The OpenAEV collectors and injectors, XTM Composer, XTM One, OpenCTI, and OpenCRQ once a tenant is connected to it |
-| `http://xtm-one:4000` | OpenCTI, OpenAEV |
+| `http://xtm-one:4000` | OpenCTI, OpenAEV, OpenCRQ |
 | `http://opencrq:3002` | XTM One |
 | `elasticsearch:9200` | OpenCTI, OpenAEV |
 | `rabbitmq:5672` | OpenCTI, OpenAEV, and the integrations and workers they give the address to |
@@ -91,7 +91,7 @@ The containers XTM Composer starts join the same network: xtm-docker sets `OPENC
 
 OpenCTI connectors and OpenAEV injectors also connect to RabbitMQ, with the host name, port and credentials their platform gives them when they register: `rabbitmq` and `5672` in xtm-docker. If an integration runs where that name does not resolve, it cannot reach the queue.
 
-OpenCRQ reaches OpenCTI and OpenAEV with the address and token you set for each of its tenants on the `opencrq` service, as [Connect the first tenant](/deploy/install/opencrq/#connect-the-first-tenant) shows. It does not only read through that link: at each start, it creates in OpenCTI the Live Stream `OpenCRQ threat feed`, or brings it up to date. See [Link OpenCRQ to OpenCTI and OpenAEV](/deploy/configure/connect-modules/#link-opencrq-to-opencti-and-openaev) for what its token needs.
+OpenCRQ reaches OpenCTI and OpenAEV with the address and token set for each of its tenants on the `opencrq` service. xtm-docker sets them for its first tenant, `Default`; [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant) lists the variables. It does not only read through that link: at each start, it creates in OpenCTI the Live Stream `OpenCRQ threat feed`, or brings it up to date. See [Link OpenCRQ to OpenCTI and OpenAEV](/deploy/configure/connect-modules/#link-opencrq-to-opencti-and-openaev) for what its token needs.
 
 XTM Composer controls Docker on the host through its socket. Treat access to the `xtm-composer` container like access to the host.
 
@@ -121,6 +121,7 @@ To publish the platforms over TLS behind a reverse proxy, set the scheme to `htt
 | XTM Composer | The registry of each integration image it deploys | See [Pull integrations from a private registry](/deploy/integrations/private-registry/) |
 | OpenCRQ | The public CVE sources: `services.nvd.nist.gov` (NIST NVD), `api.first.org` (FIRST EPSS) and `www.cisa.gov` (CISA KEV) | A tenant administrator, who turns each source on in **Integrations**: see [How CVE sources weigh your vulnerabilities](/opencrq/use/sources/vulnerability-sources/#turn-them-on) |
 | OpenCRQ | `raw.githubusercontent.com`, for the default threats it loads | `CONNECTORS__DEFAULT_THREATS__DATASET_URL` points it to a mirror, or, empty, turns the default threats off. See the [OpenCRQ configuration](/reference/opencrq/configuration/#connectors) |
+| OpenCRQ | `telemetry.ocrq.filigran.io`, for the anonymous usage telemetry | On by default. `TELEMETRY__USAGE__ENABLED=false` on the `opencrq` service turns it off |
 | OpenCRQ | `login.microsoftonline.com` and `graph.microsoft.com` for Microsoft Defender, `public-api.drata.com` by default for Drata, for a tenant connected to them | The variables of each tenant: see [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant) |
 
 Each integration also connects to the systems it works with. Its own documentation says which.

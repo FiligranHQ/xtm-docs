@@ -15,9 +15,9 @@ A treatment plan is the set of controls you would fund for one risk scope, each 
 ## Before you start
 
 - Any member of the tenant can create, edit and delete treatment plans: no capability is needed.
-- The risk scope needs risk scenarios that OpenCRQ has priced at least once: a plan is read against the scope's scenarios, and a scenario with no simulation has no figure to compare. See [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/).
+- The risk scope needs complete risk scenarios: a plan is read against the scope's scenarios. Saving the plan prices the ones never simulated. See [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/).
 - The scope's controls are declared, with their current strength and coverage. See [Set how strong your controls are and read how they held](/opencrq/use/defenses/controls/).
-- OpenCRQ shows every amount in dollars today; the choice of currency is coming.
+- OpenCRQ works in US dollars: enter every cost in dollars, and read every figure in dollars.
 
 ## How a plan is priced
 
@@ -28,7 +28,7 @@ A plan moves controls of its scope from their current posture to a target, on on
 | **Strength** | **Not deployed**, **Basic**, **Intermediate**, **Master** |
 | **Coverage** | **None**, **Partial**, **Broad**, **Full** |
 
-When you save the plan's moves, OpenCRQ simulates each ready scenario of the scope twice on the same simulated years: at the posture the scope holds today, and with the plan's targets in place. The difference is the scenario's **ALE reduction**, the Annualized Loss Expectancy (ALE) the plan removes. The plan's **Annual ALE reduction** is the sum over the scope's scenarios.
+When you save the plan's moves, OpenCRQ simulates the scope's scenarios twice on the same draws of the uncertain inputs: at the posture the scope holds today, and with the plan's targets in place. A **Stale** or **Not simulated** scenario is priced in the same run. An **Incomplete** scenario, or one with **No mapped asset**, is left out until you complete it. The difference is the scenario's **ALE reduction**, the Annualized Loss Expectancy (ALE) the plan removes. The plan's **Annual ALE reduction** is the sum over the scope's scenarios.
 
 What the plan costs comes from two fields you enter: a **One-off cost** and an **Annual recurring cost**. Their sum is the **First-year cost**. The **One-year return** compares the two:
 
@@ -85,7 +85,7 @@ The plan's page stacks four cards:
 - **Identity**: the **Scope**, **Owner**, **Start date**, **Due date** and **Rationale**.
 - **Cost and return**: the **One-year return**, green when positive and red when negative, the **Annual ALE reduction**, and the **First-year cost**. **Enter the cost** or **Edit the cost** opens the edit drawer.
 - **Moves of the plan**: one row per control and dimension the plan moves, with its **Current** level and its **Target**. A row opens the control.
-- **Per scenario**: for each scenario of the scope, its **ALE** today and with the plan (an arrow between the two), the **ALE reduction** with the share of the scenario's loss it removes, and the date of the **Last simulation**. Hover the reduction to read its spread: the p10, the mean and the p90 of the simulated years. A row opens the scenario.
+- **Per scenario**: for each scenario of the scope, its **ALE** today and with the plan (an arrow between the two), the **ALE reduction** with the share of the scenario's loss it removes, and the date of the **Last simulation**. Hover the reduction to read its spread: its mean, and the p10 and p90 of the reduction as the uncertain inputs vary. A row opens the scenario.
 
 The figures stay on the page while they age, with a chip that says why:
 
@@ -97,7 +97,7 @@ The figures stay on the page while they age, with a chip that says why:
 
 **Re-simulate scenarios**, at the top of the **Per scenario** card, shows only when a scenario needs it, and turns into a spinner while the simulations run.
 
-When the scope's posture reaches a plan's targets, for example once the controls are deployed and declared, the plan has nothing left to remove: its **Annual ALE reduction** falls to $0 and its return to −100%. The loss it removed shows in the scope's own figures and in the [dashboards' trends](/opencrq/use/decide/dashboards/).
+When the scope's posture reaches a plan's targets, for example once the controls are deployed and declared, the plan has nothing left to remove: its **Annual ALE reduction** falls to $0 and its return to −100%. A target is a commitment, not a floor: if the posture goes past it, the plan prices a step back to the target, and its reduction turns negative. The loss it removed shows in the scope's own figures and in the [dashboards' trends](/opencrq/use/decide/dashboards/).
 
 ## Compare the plans
 

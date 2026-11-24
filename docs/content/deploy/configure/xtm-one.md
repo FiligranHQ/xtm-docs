@@ -179,7 +179,7 @@ services:
 | `MAX_CONCURRENT_RUNS` | `10` | The assignment runs in parallel |
 | `DB_POOL_SIZE`, `DB_MAX_OVERFLOW` | `15`, `10` | The PostgreSQL connections of each process |
 
-Every process opens its own pools: `DB_POOL_SIZE` plus `DB_MAX_OVERFLOW` connections, and up to 10 more for the traces of agent runs, so 35 with the defaults. Count every web process and every worker replica against `max_connections` of PostgreSQL, which xtm-docker sets to `200` for XTM One and OpenAEV together, OpenAEV taking up to 20. With the defaults, XTM One takes up to 105: 35 for each of its 2 web processes and its worker.
+Every process opens its own pools: `DB_POOL_SIZE` plus `DB_MAX_OVERFLOW` connections, and up to 10 more for the traces of agent runs, so 35 with the defaults. Count every web process and every worker replica against `max_connections` of PostgreSQL, which xtm-docker sets to `200` for XTM One, OpenAEV and OpenCRQ together, OpenAEV taking up to 20 and OpenCRQ about 50 at peak. With the defaults, XTM One takes up to 105: 35 for each of its 2 web processes and its worker.
 
 To add worker replicas, set `deploy.replicas` on `xtm-one-worker` in `docker-compose.override.yml`, and count each one in the connections.
 

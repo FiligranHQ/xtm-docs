@@ -16,7 +16,7 @@ Your compliance program already tracks, in Drata, which security controls are in
 - **Two frameworks**: ISO 27001:2022 and SOC 2. Other frameworks of the account, ISO 27001:2013 included, are not imported. Each comes with its readiness as Drata reports it, and its requirements, each with its code, category, whether it is in scope and whether it is ready. An archived requirement is left out.
 - **The Drata controls of the account**, each with its code and name, whether it is ready, monitored, backed by evidence and by a policy, and the requirements it serves.
 
-Each run replaces the whole mirror with what Drata says at that moment. Nothing else is written: the connector creates no asset and no finding.
+Each run replaces the whole mirror with what Drata says at that moment. The connector writes nothing else: no asset and no finding. A change to the mirror then makes OpenCRQ derive again the strength and coverage of the controls Drata controls are mapped to, as the next section describes.
 
 ## Where it shows, and what it changes
 
@@ -26,7 +26,7 @@ Each run replaces the whole mirror with what Drata says at that moment. Nothing 
 
 ## Before you start
 
-- In OpenCRQ, your role has the **Manage Security** capability, and a service account exists for the connector: see [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/).
+- In OpenCRQ, your role has the **Manage Security** capability.
 - In Drata, an API key with read scopes on frameworks and controls. If the key restricts source IP addresses, allow the address OpenCRQ's deployment calls out from.
 - The deployment of OpenCRQ carries that key for your tenant, keyed by the tenant's id, the first segment of the address of OpenCRQ once you are signed in to that tenant:
 
@@ -36,14 +36,14 @@ Each run replaces the whole mirror with what Drata says at that moment. Nothing 
   | `CONNECTORS__DRATA__<tenant-uuid>__URL` | No | The API of your Drata region: `https://public-api.drata.com` by default, `https://public-api.eu.drata.com` for an account hosted in the EU, `https://public-api.apac.drata.com` in APAC. A key used on the wrong region is rejected |
   | `CONNECTORS__DRATA__<tenant-uuid>__WORKSPACE_ID` | No | The Drata workspace to read, `1` by default. An account without several workspaces always uses `1` |
 
-  Until the key is set, the **Drata** card stays on the **Available** tab of :menu[Integrations] and its page reads **Unavailable**. See the [configuration reference](/reference/opencrq/configuration/#connectors).
+  Set the key whenever you set the URL or the workspace: either one without the key stops OpenCRQ at start. With no entry for the tenant, the **Drata** card stays on the **Available** tab of :menu[Integrations] and its page reads **Unavailable**. See the [configuration reference](/reference/opencrq/configuration/#connectors).
 
 ## Turn the connector on
 
 :::steps
 1. Open :menu[Integrations], stay on the **Deployed** tab, and click the **Drata** card, under **Compliance**. Its state reads **Not configured**.
 2. Click **Configure**.
-3. Choose the account in **Service account**.
+3. Under **Service account**, keep **Create a new service account**, named `Drata connector` by default, or choose **Use an existing service account**. The new account is created with the integration, in the **Connectors** group; a tenant with no account to reuse offers it alone.
 4. Under **Schedule**, keep **Every day** in **Frequency**, at `06:00` in the `UTC` **Time zone**, or change them. **Every 6 hours** is the most often it runs; **Every week** asks for a **Day**, and **Manual only** runs it only when you ask. **Next run** shows when the schedule runs next.
 
    ::screenshot{id=opencrq-drata-configure alt="The Configure integration panel of the Drata connector: the Service account, and a schedule of every day at 06:00 in the UTC time zone, with the next run on Apr 13, 2026, 06:00 AM (UTC)."}
@@ -56,17 +56,17 @@ A run stops after 10 minutes, and a failed run is tried again, up to 3 attempts.
 :::example[Bring Grand Meridian's ISO 27001 readiness into its controls]
 Grand Meridian Hotels runs its ISO 27001:2022 program in Drata, on an account hosted in the EU. Before the budget review "Security budget 2026", the risk manager wants the controls of Grand Meridian to start from what Drata shows as ready.
 
-The Drata administrator creates an API key with read access to frameworks and controls. The platform engineer sets the entry of Grand Meridian's tenant, `abd0465d-51cd-5234-85b8-cb1cc781124c`, with the EU API:
+The Drata administrator creates an API key with read access to frameworks and controls. The platform engineer sets the entry of Grand Meridian's tenant, `01a043da-ff47-72c2-aaa4-7da56d85c83e`, with the EU API:
 
 ```yaml
 services:
   opencrq:
     environment:
-      - CONNECTORS__DRATA__abd0465d-51cd-5234-85b8-cb1cc781124c__API_KEY=${GRAND_MERIDIAN_DRATA_API_KEY}
-      - CONNECTORS__DRATA__abd0465d-51cd-5234-85b8-cb1cc781124c__URL=https://public-api.eu.drata.com
+      - CONNECTORS__DRATA__01a043da-ff47-72c2-aaa4-7da56d85c83e__API_KEY=${GRAND_MERIDIAN_DRATA_API_KEY}
+      - CONNECTORS__DRATA__01a043da-ff47-72c2-aaa4-7da56d85c83e__URL=https://public-api.eu.drata.com
 ```
 
-The workspace stays `1`, the default. In OpenCRQ, the administrator creates the service account `Drata connector`, then in **Configure integration** chooses it, keeps **Every day** at `06:00` `UTC`, saves and clicks **Sync now**.
+The workspace stays `1`, the default. In OpenCRQ, the administrator opens **Configure integration**, keeps the new service account `Drata connector` and **Every day** at `06:00` `UTC`, saves and clicks **Sync now**.
 
 ISO 27001:2022 appears in :menu[Compliance] with **Drata** as its source. On the page of each mapped control, **Drata evidence** lists the Drata controls behind it, and the controls left automatic take the strength and coverage that evidence gives. Each morning at 06:00 UTC, a Drata control that turned ready raises the control it supports, and the scenarios it protects are priced again.
 :::

@@ -34,7 +34,7 @@ Every new tenant, the **Default** tenant included, comes with Get started and a 
 
 :::steps
 1. Open :menu[Get started]. It comes first in the menu while the steps are unfinished. Until then, the tenant's home also opens it the first time you visit the tenant in a browser.
-2. Select **Start**, or the **Company** row. The step opens under the stepper of the eight steps, with **Why this step?** beside the form.
+2. Select **Start**, or the **Company** row. The step opens under the stepper of the eight steps, with **Why this step?** above the form.
 3. Check the **Name**. Keep **Enterprise** if the scope covers your whole company.
 4. Choose the **Sector** and the **Country**.
 5. Enter the **Employee Count**.
@@ -55,7 +55,7 @@ Claire Morel, the risk manager of Grand Meridian Hotels, opens :menu[Get started
 - She keeps **Name** on **Enterprise**: the scope covers the whole chain, and she creates the France and Spain scopes later.
 - **Sector** **Hospitality** and **Country** **France**, where the head office runs the booking platform.
 - **Employee Count** 5800: 4,200 people in France and 1,600 in Spain. The chain falls in the class of 5,000 employees or more.
-- She leaves **Revenue band** to the **Finances** step. There, the annual revenue of $830 million sets it to $100M to $1B.
+- She leaves **Revenue band** to the **Finances** step. There, the annual revenue of $830 million sets it to **$100M-$1B**.
 
 The **Company** step now shows its check in the stepper, and she selects **Next**.
 :::
@@ -63,7 +63,7 @@ The **Company** step now shows its check in the stepper, and she selects **Next*
 ## Check that it works
 
 - The stepper shows a check on **Company** once both **Sector** and **Country** are set.
-- On the overview of the steps, the **Company** row reads **Already configured**. The other rows read **Started**, **To do** or **Coming soon**.
+- On the overview of the steps, the **Company** row reads **Already configured**. The other rows read **Started**, **To do** or **Syncing**.
 - In the risk scope, :menu[Threat Event Frequency] shows the country, the sector and the size in its **Profile**.
 
 ## What's next

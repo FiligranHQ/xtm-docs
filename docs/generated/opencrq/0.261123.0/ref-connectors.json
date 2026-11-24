@@ -2,7 +2,7 @@
   "name": "connectors",
   "version": "0.261123.0",
   "source": "OpenCRQ-Platform/opencrq@d61ebb5 (module/src/modules/connectors/inventory.ts)",
-  "intro": "The connectors of OpenCRQ, as **Administration > Integrations** lists them: what each brings, how it reads (a pull on a schedule, or a live stream), what it writes, the schedule it runs on until someone sets another, the shortest interval it accepts, and the settings that turn it on for a tenant. A connector reads for one tenant at a time: its credentials are set per tenant, in the environment (the [configuration](/reference/opencrq/configuration/#connectors)); its schedule, and for OpenCTI the Live Stream, are set on its page.",
+  "intro": "The connectors of OpenCRQ, as **Integrations** lists them: what each brings, how it reads (a pull on a schedule, or a live stream), the kinds of data it feeds (its **Scope**), the schedule it runs on until someone sets another, the shortest interval it accepts, the settings the platform reads for it, and what a tenant needs before it runs. A connector reads for one tenant at a time: its credentials are set per tenant, in the environment (the [configuration](/reference/opencrq/configuration/#connectors)). Credentials are not enough: every connector but **OpenCRQ Default Threats** runs only once a service account is bound to it in the tenant. Its schedule, and for OpenCTI the Live Stream, are set on its page with **Configure**.",
   "sections": [
     {
       "title": "Connectors",
@@ -10,10 +10,11 @@
         "Connector",
         "What it brings",
         "Kind",
-        "Writes",
+        "Scope",
         "Default schedule",
         "Shortest interval",
-        "Settings"
+        "Platform settings",
+        "In the tenant"
       ],
       "rows": [
         {
@@ -25,7 +26,8 @@
             "CVEs",
             "Every day at 06:00 UTC",
             "12 hours",
-            "None"
+            "None",
+            "A service account, chosen with **Configure**."
           ]
         },
         {
@@ -37,7 +39,8 @@
             "CVEs",
             "Every day at 06:00 UTC",
             "6 hours",
-            "`CONNECTORS__NIST__<tenant-uuid>__API_KEY` (optional)"
+            "`CONNECTORS__NIST__<tenant-uuid>__API_KEY` (optional)",
+            "A service account, chosen with **Configure**."
           ]
         },
         {
@@ -49,7 +52,8 @@
             "CVEs",
             "Every day at 06:00 UTC",
             "6 hours",
-            "None"
+            "None",
+            "A service account, chosen with **Configure**."
           ]
         },
         {
@@ -61,7 +65,8 @@
             "Supporting assets, Findings",
             "Every 6 hours",
             "1 hour",
-            "`CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__AZURE_TENANT_ID`, `CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_ID`, `CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_SECRET`"
+            "`CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__AZURE_TENANT_ID`, `CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_ID`, `CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_SECRET`",
+            "A service account, chosen with **Configure**."
           ]
         },
         {
@@ -73,7 +78,8 @@
             "Findings",
             "Every hour",
             "1 hour",
-            "`CONNECTORS__OPENAEV__<tenant-uuid>__URL`, `CONNECTORS__OPENAEV__<tenant-uuid>__TOKEN`"
+            "`CONNECTORS__OPENAEV__<tenant-uuid>__URL`, `CONNECTORS__OPENAEV__<tenant-uuid>__TOKEN`",
+            "A service account, bound at boot to `OpenAEV (deployment)` once its credentials are set, or chosen with **Configure**."
           ]
         },
         {
@@ -85,7 +91,8 @@
             "Capability assessments",
             "Every day at 06:00 UTC",
             "6 hours",
-            "`CONNECTORS__DRATA__<tenant-uuid>__URL` (optional), `CONNECTORS__DRATA__<tenant-uuid>__API_KEY`, `CONNECTORS__DRATA__<tenant-uuid>__WORKSPACE_ID` (optional)"
+            "`CONNECTORS__DRATA__<tenant-uuid>__URL` (optional), `CONNECTORS__DRATA__<tenant-uuid>__API_KEY`, `CONNECTORS__DRATA__<tenant-uuid>__WORKSPACE_ID` (optional)",
+            "A service account, chosen with **Configure**."
           ]
         },
         {
@@ -97,7 +104,8 @@
             "Threat intelligence",
             "Continuous",
             "",
-            "`CONNECTORS__OPENCTI__<tenant-uuid>__URL`, `CONNECTORS__OPENCTI__<tenant-uuid>__TOKEN`"
+            "`CONNECTORS__OPENCTI__<tenant-uuid>__URL`, `CONNECTORS__OPENCTI__<tenant-uuid>__TOKEN`",
+            "A service account and a Live Stream, bound at boot to `OpenCTI (deployment)` and a stream OpenCRQ manages once its credentials are set, or chosen with **Configure**."
           ]
         },
         {
@@ -109,7 +117,8 @@
             "Threat intelligence",
             "Every day at 06:00 UTC",
             "1 hour",
-            "`CONNECTORS__DEFAULT_THREATS__DATASET_URL` (optional)"
+            "`CONNECTORS__DEFAULT_THREATS__DATASET_URL` (optional)",
+            "No service account: it runs as the platform once it is switched on, in the **Threats** step of **Get started** or with its **Enabled** switch under **Configure**. A new tenant starts with it off."
           ]
         }
       ]

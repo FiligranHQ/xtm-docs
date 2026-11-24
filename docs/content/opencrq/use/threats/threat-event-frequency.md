@@ -10,7 +10,7 @@ owner: docs-opencrq
 last_reviewed: 2026-11-20
 ---
 
-The **Threat Event Frequency** (TEF) of a risk scenario is how many attack attempts it faces in a year, successful or not, as a range: a minimum, a most likely value and a maximum. OpenCRQ draws from that range in every simulated year, so the frequency scales the whole price. By default, a scenario takes its frequency from OpenCRQ's catalogue, read for its risk scope's country, sector and size. This page shows how to read that frequency, and how to set your own when your incident data or your threat intelligence says otherwise. [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) explains where the frequency enters the price.
+The **Threat Event Frequency** (TEF) of a risk scenario is how many attack attempts it faces in a year, successful or not, as a range: a minimum, a most likely value and a maximum. OpenCRQ draws from that range in every simulated world, so the frequency scales the whole price. By default, a scenario takes its frequency from OpenCRQ's catalogue, read for its risk scope's country, sector and size. This page shows how to read that frequency, and how to set your own when your incident data or your threat intelligence says otherwise. [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) explains where the frequency enters the price.
 
 ## Before you start
 
@@ -30,7 +30,7 @@ Some rows do not measure their country, sector or size for themselves: their fig
 
 :::steps
 
-1. In the sidebar, under **Risk scopes**, open your risk scope and click :menu[Threat Event Frequency]. The line under the title names the catalogue in force: its version, its date and its sources.
+1. In the sidebar, open your risk scope, listed by name above **All risk scopes**, and click :menu[Threat Event Frequency]. The line under the title names the catalogue in force: its version, its date and its sources.
 
 2. Read **Profile**. **Attack attempts per year** is the sum of the most likely values of every attack outcome, with how often that is in plain words. **Range** goes from the sum of the outcomes' minimums to the sum of their maximums, on a scale from 0.01 to 100 a year. Beside them, **Country**, **Sector** and **Size** show what the catalogue read for the scope.
 
@@ -104,7 +104,7 @@ The card reads 51.9 times the catalogue. The next run prices the scenario from a
 :::
 
 :::xtm-one[Ask XTM One about a frequency]
-With XTM One connected, an AI agent can read a scenario's frequency, in either mode, and set a manual range, for example from the campaigns OpenCTI reports against your sector. The change waits for a person to approve it.
+With XTM One connected, an AI agent can read a scenario's frequency, in either mode, and set a manual range, for example from the campaigns OpenCTI reports against your sector. When an XTM One administrator makes such tools ask first, the change waits for your approval in **Ask Ariane**: see [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
 :::
 
 ## What's next

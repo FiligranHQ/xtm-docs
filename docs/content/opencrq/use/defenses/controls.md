@@ -9,7 +9,7 @@ owner: docs-opencrq
 last_reviewed: 2026-11-04
 ---
 
-Every attack OpenCRQ simulates meets your controls on its way to your primary assets: your email security, your EDR, your identity platform, your backups. How far it gets depends on what you declare for each control: its **strength** and its **coverage**. This page declares them, for the whole tenant or for one risk scope, and reads how they held when OpenAEV tested them. A control you never declare counts as not deployed, so the price of a scenario is only as good as these declarations. For the model behind the price, read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).
+Every attack OpenCRQ simulates meets your controls on its way to your primary assets: your email security, your EDR, your identity platform, your backups. How far it gets depends on what you declare for each control: its **strength** and its **coverage**. This page declares them, for the whole tenant or for one risk scope, and reads how they held when OpenAEV tested them. A control nobody declares, and that no published compliance assessment or Drata feeds, counts as not deployed, so the price of a scenario is only as good as these declarations. For the model behind the price, read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).
 
 ## Before you start
 
@@ -28,9 +28,9 @@ Each control has two axes. You answer each with a level, from L0 to L3.
 
 You do not declare whether a control works when an attack comes: OpenAEV's tests answer that, technique by technique, and lower what you declared where they show less (see [Read how a control held](#read-how-a-control-held)).
 
-A control not declared anywhere has no strength and no coverage: the attack run prices it as absent.
+A control not declared anywhere, and fed by no source, has no strength and no coverage: the attack run prices it as absent.
 
-The **Effectiveness** of a control sums the two axes in one figure: the strength, times the coverage (**Partial** counts 0.4, **Broad** 0.7, **Full** 1). It reads **Marginal** up to 30%, **Moderate** up to 55%, **Solid** up to 80%, **Strong** above; **Not deployed** at **Not deployed** strength, **Inactive** when the coverage is **None**. It helps compare controls at a glance; the attack run reads the two axes themselves, technique by technique, as audited by the tests.
+The **Effectiveness** of a control sums the two axes in one figure: the strength (**Basic** counts 0.55, **Intermediate** 0.84, **Master** 1), times the coverage (**Partial** counts 0.4, **Broad** 0.7, **Full** 1). It reads **Marginal** up to 30%, **Moderate** up to 55%, **Solid** up to 80%, **Strong** above; **Not deployed** at **Not deployed** strength, **Inactive** when the coverage is **None**. It helps compare controls at a glance; the attack run reads the two axes themselves, technique by technique, as audited by the tests.
 
 ## Declare a control for a risk scope
 
@@ -43,14 +43,14 @@ The tenant's declaration applies to every risk scope; a scope can declare its ow
 
 2. Select a control. Its **Overview** gives its definition, the asset families it protects, its **Assessment** and the effectiveness over time.
 3. Select **Edit assessment**.
-4. For each axis, select a level. Each axis shows the tenant's value beside it; **Revert to the tenant value** drops the scope's own declaration of that axis.
+4. For each axis, select a level. An axis the scope does not declare reads **Inherited from the tenant**, with the tenant's level selected; on an axis the scope declares, **Revert to the tenant value** drops that declaration.
 5. Write a **Comment**: what is deployed, where, since when. It stays in the control's **Events**.
 6. Check the **Effectiveness** line at the bottom, which shows the value before and after your change, then select **Save**.
 
    ::screenshot{id=opencrq-controls-assessment alt="The assessment of the identity platform for Grand Meridian France: strength Intermediate, coverage Full, effectiveness Strong at 84%."}
 :::
 
-To declare for the whole tenant, open :menu[Defenses > Controls] instead. There, each axis also offers **Auto**, which takes the value from the control's sources: the published compliance assessments and Drata. **Auto** is only available when a source feeds the axis, and shows what it reads today. Switching an axis between **Auto** and a value you choose asks for a **Justification**.
+To declare for the whole tenant, open :menu[Controls] in the sidebar, outside any risk scope, instead. There, each axis also offers **Auto**, which takes the value from the control's sources: the published compliance assessments and Drata. **Auto** is only available when a source feeds the axis, and shows what it reads today. Switching an axis between **Auto** and a value you choose asks for a **Justification**.
 
 ## Read how a control held
 

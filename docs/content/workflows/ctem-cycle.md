@@ -13,7 +13,7 @@ owner: docs-platform
 last_reviewed: 2026-11-09
 ---
 
-At the end of this journey, the board sees where the organization stands in money each quarter, and what the next dollar of security budget should buy. Continuous threat exposure management (CTEM) is a cycle of five stages: scope what matters, discover what threatens it, prioritize, validate, and mobilize the people who fix it. OpenCRQ scopes the business and prices each risk, OpenCTI brings in the threats, OpenAEV tests the controls against real attacks, and XTM One follows the five stages on one screen. The risk manager drives it, with the validation engineer who runs the tests. The steps below are the pages to follow, in order.
+At the end of this journey, the board sees where the organization stands in money each quarter, and what the next dollar of security budget should buy. Continuous threat exposure management (CTEM) is a cycle of five stages: scope what matters, discover what threatens it, prioritize, validate, and mobilize the people who fix it. OpenCRQ scopes the business, prices each risk and ranks the work by the loss it removes. OpenCTI brings in the threats, OpenAEV tests the controls against real attacks, and XTM One scores the exposure posture from what OpenCTI and OpenAEV report. The risk manager drives it, with the validation engineer who runs the tests. The steps below are the pages to follow, in order.
 
 ::diagram{id=journey-ctem-cycle}
 
@@ -31,8 +31,10 @@ Each stage of the cycle lives where its data is:
 
 - **Scope and prioritize** in OpenCRQ, which knows what the business would lose and turns each risk into an annualized loss expectancy (ALE): the loss to expect in a year, from how often attacks come, how often one lands, and what it costs.
 - **Discover** from OpenCTI, which brings the threat actors and campaigns that target your sector and countries, with their techniques and CVEs; and from Microsoft Defender and OpenAEV, which bring the estate and its flaws.
-- **Validate** with OpenAEV, whose simulations replace a declared control strength by a measured one.
-- **Mobilize** in OpenCRQ again, where treatment plans compare what each option costs with the loss it removes; XTM One scores the five stages and tells each person what to fix first.
+- **Validate** with OpenAEV, whose simulations audit what you declared for each control: where a control held less often than declared, OpenCRQ lowers it, in proportion to the share of the scope's hosts the tests ran on.
+- **Mobilize** in OpenCRQ again, where treatment plans compare what each option costs with the loss it removes.
+
+XTM One's **CTEM Command Center** scores the five stages from what OpenCTI and OpenAEV report. Its **Governance & Risk** card opens OpenCRQ, where the risk is priced in money.
 
 A risk register alone prices assumptions; a list of findings alone does not say which to fix first. In the cycle, threats and test results move the price, and the price orders the work. The model behind it is in [Risk scopes, primary assets and supporting assets](/opencrq/concepts/risk-scopes-and-assets/) and [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).
 
@@ -58,11 +60,11 @@ A live stream of OpenCTI brings the intrusion sets, threat actors and campaigns 
 
 ### Prioritize in money
 
-The risk manager creates the scenarios the board worries about, and OpenCRQ prices them: Ransomware on the Booking Platform reads $254K a year, Data Breach on Guest Records $33K ([step 6](/opencrq/use/quantify/risk-scenarios/)). Grand Meridian France carries $287K of the group's $512K on the **CISO** dashboard of [Track cyber risk in money with dashboards](/opencrq/use/decide/dashboards/). Ransomware comes first: the order of the work follows the money, not the count of findings.
+The risk manager creates the scenarios the board worries about, and OpenCRQ prices them: Ransomware on the Booking Platform reads $254K a year, Data Breach on Guest Records $33K ([step 6](/opencrq/use/quantify/risk-scenarios/)). Grand Meridian France carries $287K of the group's $512K on the **CISO** dashboard of [Track cyber risk in money with dashboards](/opencrq/use/decide/dashboards/). Ransomware comes first: in OpenCRQ, the order of the work follows the money, not the count of findings.
 
 ### Validate the controls against real attacks
 
-A price rests on how well the controls hold. Declared, a control is an assumption ([step 7](/opencrq/use/defenses/controls/)); tested, it is a measure. The validation engineer replays the techniques of the threats that weigh most on the front desks ([step 8](/openaev/use/simulations/)), and OpenCRQ reads each finished simulation: a technique the EDR did not prevent becomes a finding, and the tests lower what a control was declared to do where it failed ([step 9](/opencrq/use/sources/openaev/)). When the weekly simulation shows Web Protocols (T1071.001) detected but not prevented, the scenarios are priced again; when the SOC closes the gap, the next simulation prices them again.
+A price rests on how well the controls hold. Declared, a control is an assumption ([step 7](/opencrq/use/defenses/controls/)); tested, it is a measure. The validation engineer replays the techniques of the threats that weigh most on the front desks ([step 8](/openaev/use/simulations/)), and OpenCRQ reads each finished simulation: a technique the EDR did not prevent, or did not detect, becomes a finding, and the tests lower what a control was declared to do where it failed ([step 9](/opencrq/use/sources/openaev/)). When the weekly simulation shows Web Protocols (T1071.001) detected but not prevented, the scenarios are priced again; when the SOC closes the gap, the next simulation prices them again.
 
 ### Mobilize on the plan that removes the most loss
 
@@ -76,7 +78,7 @@ The risk manager prices one treatment plan per option, with the controls it move
 
 The remote access plan is the one to fund. MFA for the front desks already brought Data Breach on Guest Records down from $97K to $33K a year by 2 March, which is why its own reduction now reads $0. Once a plan is delivered, its controls are declared at their new level: the scenarios are priced again, and the next cycle starts from there. At the end of the fiscal year, [Review a year's security budget against the loss it avoided](/opencrq/use/decide/budget-reviews/) sets the spend against the loss it avoided.
 
-On the home dashboard of XTM One, the **CTEM Command Center** scores **Scoping**, **Discovery**, **Prioritization**, **Validation** and **Remediation** and averages them into one exposure posture, and its **Exposure briefing** tells each person what to fix first ([step 11](/xtm-one/use/dashboard/)).
+On the home dashboard of XTM One, the **CTEM Command Center** scores **Scoping**, **Discovery**, **Prioritization**, **Validation** and **Remediation** from what OpenCTI and OpenAEV report, and weighs them into one exposure posture, and its **Exposure briefing** tells each person what to fix first ([step 11](/xtm-one/use/dashboard/)).
 
 ## The steps
 

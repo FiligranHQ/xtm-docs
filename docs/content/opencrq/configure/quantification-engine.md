@@ -10,7 +10,7 @@ owner: docs-opencrq
 last_reviewed: 2026-11-04
 ---
 
-Every price OpenCRQ gives rests on a few assumptions: which threat intelligence is reliable enough to read, how fast an actor's weight fades when it goes quiet, how a threat with no dated activity ranks, how many simulated years a price draws, how much stacked controls add, and what an asset that declares nothing counts as. **Settings > Engine** holds them for the whole tenant. This page explains each assumption, its default and what moves when you change it. Read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) first if the attack run is new to you.
+Every price and score OpenCRQ gives rests on a few assumptions: which threat intelligence is reliable enough to read, how fast an actor's weight fades when it goes quiet, how a threat with no dated activity ranks, how many worlds a price draws, how much stacked controls add to a finding's score, and what an asset that declares nothing counts as. **Settings > Engine** holds them for the whole tenant. This page explains each assumption, its default and what moves when you change it. Read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) first if the attack run is new to you.
 
 ## Before you start
 
@@ -21,7 +21,7 @@ Every price OpenCRQ gives rests on a few assumptions: which threat intelligence 
 
 **Threat Relevance** decides which intelligence about threat actors OpenCRQ reads and how much each actor weighs. OpenCRQ's internal model gives each threat a probability of leading to each attack outcome, from what its intelligence says of it: its description, motivations and goals, malware, techniques and reports. For each scenario, OpenCRQ admits the actors whose probability for the scenario's attack outcome is above 50 %, weighs each one more when it targets the risk scope's country (×2.5), its sector (×4) or both (×10), then weighs the ATT&CK techniques of the scenario by the actors that use them. The confidence gate and the half-lives act on that mixture of attackers.
 
-**Confidence gate.** Each relationship that OpenCTI streams, such as "Ember Tide targets the hospitality sector" or "Velvet Harbor uses Phishing", carries the confidence its producer gave it. OpenCRQ reads a relationship only when its confidence reaches the gate. A relationship below it is kept, not read: lowering the gate brings it back without importing anything again. The attack outcome probabilities of OpenCRQ's model do not depend on the gate.
+**Confidence gate.** Each relationship that OpenCTI streams, such as "Ember Tide targets the hospitality sector" or "Velvet Harbor uses Phishing", carries the confidence its producer gave it. OpenCRQ reads a relationship only when its confidence reaches the gate. A relationship whose producer states no confidence, such as every relationship of a MITRE ATT&CK bundle, counts as 60. A relationship below the gate is kept, not read: lowering the gate brings it back without importing anything again. The attack outcome probabilities of OpenCRQ's model do not depend on the gate.
 
 | Level | Reads |
 | --- | --- |
@@ -32,7 +32,7 @@ Every price OpenCRQ gives rests on a few assumptions: which threat intelligence 
 | **doubtful (20)** | Relationships at 20 or more |
 | **improbable (0)** | Every relationship |
 
-A gate too high leaves scenarios with no admitted actor, and a scenario no admitted actor pursues stays unpriced: its **Relevant Threats** panel then says that no threat passes the gate and links back to this setting. A gate too low lets weak claims shape your prices.
+A gate too high drops the targeting claims and the techniques that do not reach it. The admitted actors stay the same, but their country and sector weights and their techniques come only from the relationships that pass, which can leave a scenario with few or no techniques to weigh. A gate above **probably true (60)** drops every relationship that states no confidence. A gate too low lets weak claims shape your prices.
 
 **Activity half-lives.** An actor weighs less as its last known activity ages: after one half-life, its weight is halved. OpenCRQ dates that activity from two kinds of anchor:
 
@@ -43,7 +43,7 @@ A gate too high leaves scenarios with no admitted actor, and a scenario no admit
 
 An authored date says less about when the actor was active, so it decays more slowly. Each half-life is a whole number of days from 7 to 3,650, and the observed one cannot exceed the authored one.
 
-**Threats Without a Dated Activity.** A scenario's **Relevant Threats** ranks the admitted actors by their relevance and their activity. An actor whose intelligence carries no observed activity date still needs an activity to rank on: **Assumed activity age (days)** scores it as if it had a single activity that many days old. The default is `365`, a whole number of days from 7 to 3,650. A lower value ranks undated threats higher, next to the recently active ones; a higher value pushes them down. The setting moves the ranking and the threat score it shows, not the attacker mixture a scenario is priced with.
+**Threats Without a Dated Activity.** A scenario's **Relevant Threats** ranks the admitted actors by their relevance and their activity. An actor whose intelligence carries no observed activity date still needs an activity to rank on: **Assumed activity age (days)** scores it as if it had a single activity that many days old. The default is `365`, a whole number of days from 7 to 3,650. A lower value ranks undated threats higher, next to the recently active ones; a higher value pushes them down. The setting moves the ranking and the threat score it shows, not the attacker mixture a scenario is priced with: there, an actor with no dated activity counts one eighth of an actor active today, whatever the settings.
 
 :::steps
 1. Open :menu[Settings > Engine]. **Threat Relevance** opens first; **CRQ Indicators** is the other entry of the menu on the right.
@@ -62,10 +62,10 @@ An authored date says less about when the actor was active, so it decays more sl
 
 | Section and field | What it changes | Default and values |
 | --- | --- | --- |
-| **Monte Carlo** > **Iterations** | How many simulated years each price draws. More years make the distribution steadier and each run slower | `1000`; a whole number up to 2,000, above which OpenCRQ refuses the value |
+| **Monte Carlo** > **Iterations** | How many worlds each price draws, each a draw of the uncertain inputs, with ten simulated years in each. The CRQ tab of a scenario shows the count as **Worlds drawn**. More worlds make the figures steadier and each run slower | `1000`; a whole number up to 2,000, above which OpenCRQ refuses the value |
 | **Exposure Weights** > **Internet facing**, **Internal** | The multipliers the finding score applies by exposure, to how reachable a flaw is and how much an asset matters for each technique | `1` and `0.4`; any number above 0 |
 | **Unknown exposure** > **Counts as** | The exposure of an asset that declares none: on its TTP tab, in the finding score, and in the simulation at initial access and along the paths | **Internal**, or **Internet-facing** |
-| **Control aggregation** > **Diminishing returns factor (γ)** | How several controls on the same technique combine. The strongest counts fully, and each additional one is discounted by γ. At `1` every control counts fully; at `0` only the strongest counts | `0.7`, from 0 to 1 |
+| **Control aggregation** > **Diminishing returns factor (γ)** | How stacked controls weigh in each finding score. The strongest counts fully, the second is discounted by γ, the third by γ², and so on. At `1` every control counts fully; at `0` only the strongest counts. The price itself credits every control on a technique at its full efficacy | `0.7`, from 0 to 1 |
 | **Phishing simulations** > **People caught (%)**, **Campaign measured on** | The share of your people your last phishing simulation caught, which replaces the default rate for phishing at initial access | Empty: the engine reads 7 %, the share of recipients who enter credentials or enable a macro on a phishing email before any awareness training. Both fields are set together or cleared together with **Clear the declaration**; the date cannot be after today (UTC) |
 | **Validity of a test result** > **Result stays valid for (days)** | When a control's test result stops counting as a validation of the control, and when a declared phishing simulation gives way to the default rate | Empty: a result counts however old it is |
 | **Unknown criticality** > **Counts as** | The criticality of an asset that declares none, in the finding score and in the weight of the assets an attacker moves through | **Low**; **Medium**, **High** or **Very High** |
@@ -91,7 +91,7 @@ After the multi-factor rollout of March 2026, Grand Meridian's security team ran
 - **Campaign measured on**: `2026-03-16`.
 - **Result stays valid for (days)**: `365`.
 
-Every other field keeps its default. The engine now reads 4 % instead of 7 % wherever an attack starts with phishing, until 16 March 2027, when the campaign expires and the default applies again. A control whose last test is more than a year old counts on what its declaration claims, not on that test.
+Every other field keeps its default. Wherever an attack starts with phishing, the engine now reads 4 % of people caught under the awareness training declared today, in place of its default of 7 % before training, lowered by that same training. The declaration counts until 16 March 2027 included: from 17 March, the campaign has expired and the default applies again. A control whose last test is more than a year old counts on what its declaration claims, not on that test.
 :::
 
 ## What happens after you save
@@ -101,7 +101,7 @@ OpenCRQ keeps its figures current without a manual recompute: the background job
 To see the effect on one scenario at once, open it and run its simulation: [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/).
 
 :::xtm-one[Change the settings with XTM One]
-XTM One agents read and update both pages, the threat relevance settings and the CRQ indicator settings, as the person who asks them: that person needs **Manage Security** in the tenant. Ask Ariane, the assistant, needs the Enterprise Edition; an XTM One administrator can make the update tools wait for your approval before they run. See [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
+XTM One agents read and update most settings of both pages, the threat relevance settings and the CRQ indicator settings, as the person who asks them: that person needs **Manage Security** in the tenant. Set **Assumed activity age (days)** and the phishing declaration (**People caught (%)**, **Campaign measured on**) on these pages. Ask Ariane, the assistant, needs the Enterprise Edition; an XTM One administrator can make the update tools wait for your approval before they run. See [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
 :::
 
 ## What's next

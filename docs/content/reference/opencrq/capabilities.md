@@ -13,4 +13,4 @@ generator: reference:opencrq:capabilities
 
 ::diagram{id=reference-opencrq-capabilities}
 
-Every member of a tenant works on its data: risk scopes, scenarios, assets, plans. A capability adds what only some should do: manage who belongs to the tenant and what they may do (**Manage Security**, which also opens **Integrations** and **Jobs**), or administer the platform itself.
+Every member of a tenant works on its data: risk scopes, scenarios, assets, plans. A capability adds what only some should do: manage who belongs to the tenant and what they may do (**Manage Security**, which also opens **Integrations**, :menu[Settings > Engine] and :menu[Settings > Jobs]), or administer the platform itself. **Platform Administration Access** also opens :menu[Settings > Security] and :menu[Settings > Jobs] in the tenants you open.

@@ -22,10 +22,12 @@ lanes:
 edges:
   - {from: tef, to: door, label: campaigns}
   - {from: door, to: paths, label: got in}
+  - {from: tef, to: paths, label: no way in, style: dashed}
   - {from: paths, to: blocked}
   - {from: paths, to: evicted}
   - {from: paths, to: detected}
   - {from: paths, to: undetected}
   - {from: drivers, to: ale, label: amounts, style: dashed}
+  - {from: evicted, to: ale}
   - {from: detected, to: ale}
   - {from: undetected, to: ale}

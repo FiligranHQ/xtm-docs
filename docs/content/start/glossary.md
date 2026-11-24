@@ -107,7 +107,7 @@ This glossary gives the words you meet across the XTM platform and its modules, 
 
 | Term | Meaning |
 | --- | --- |
-| Annualized loss expectancy | In OpenCRQ, the loss in your currency that a risk scenario can be expected to cause over a year. See [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) |
+| Annualized loss expectancy | In OpenCRQ, the loss in US dollars that a risk scenario can be expected to cause over a year. See [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) |
 | Atomic testing | In OpenAEV, one inject run on its own, outside a scenario. See [Atomic testing](/openaev/use/atomic-testing/) |
 | Expectation | In OpenAEV, what should happen after an inject, such as the attack being detected or prevented, which collectors or people fill in. See [Injects and expectations](/openaev/concepts/injects-expectations/) |
 | Inject | In OpenAEV, one action of a simulation, delivered at its time to people or systems: an email, a media article, an attack technique on endpoints. See [Injects and expectations](/openaev/concepts/injects-expectations/) |

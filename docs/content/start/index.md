@@ -10,7 +10,7 @@ products:
 sidebar_position: 0
 ---
 
-XTM One is at the center of the XTM platform. Its AI agents work across the products around it: OpenCTI, where you know the threats that matter to you, OpenAEV, where you test how exposed you are to them, and OpenCRQ, where you price that risk in money. XTM Composer, between OpenCTI and OpenAEV, runs their integrations. XTM Hub, above them all, is the community entry point: ready-made content and integrations for every product. Each product works on its own; around XTM One they share data, content and decisions.
+XTM One is at the center of the XTM platform. Its AI agents work across the products around it: OpenCTI, where you know the threats that matter to you, OpenAEV, where you test how exposed you are to them, and OpenCRQ, where you price that risk in money. XTM Composer, between OpenCTI and OpenAEV, runs their integrations. XTM Hub, above them all, is the community entry point: ready-made content and integrations for every product. OpenCTI and OpenAEV each work on their own, and OpenCRQ runs with XTM One, which signs people in to it. Around XTM One, they share data, content and decisions.
 
 The loop works like this: threats tracked in OpenCTI become scenarios in OpenAEV, simulation results update security coverage in OpenCTI, OpenCRQ turns both into the loss each risk can cause, and XTM One agents read, summarize and act at each step, under the governance you define.
 

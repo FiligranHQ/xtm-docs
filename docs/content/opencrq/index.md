@@ -11,14 +11,14 @@ sidebar_position: 0
 ---
 
 :::product-hero{eyebrow="Cyber risk quantification" title="Put a price on each cyber risk, and fund what lowers it most" primary-label="Start here" primary-to="#start-here" secondary-label="Install OpenCRQ" secondary-to="/deploy/install/opencrq/" shot=opencrq-risk-scenarios-list alt="The Risk Scenarios of Grand Meridian France as cards: Ransomware on the Booking Platform at $254K a year, down $9K, and Data Breach on Guest Records at $33K, down $64K, each with its p10 to p90 band and a line of past prices."}
-OpenCRQ turns each line of your risk register, such as ransomware on the booking platform or a breach of customer records, into an annualized loss in your currency, with the chance of losing more. The price is not a score someone typed: OpenCRQ simulates the attacks that the threats targeting you would run against your assets and your controls, and keeps the figure current as they change. Then you compare what a control costs with the loss it removes.
+OpenCRQ turns each line of your risk register, such as ransomware on the booking platform or a breach of customer records, into an annualized loss in US dollars, with the chance of losing more. The price is not a score someone typed: OpenCRQ simulates the attacks that the threats targeting you would run against your assets and your controls, and keeps the figure current as they change. Then you compare what a control costs with the loss it removes.
 :::
 
 OpenCRQ comes in two editions. The Community Edition, under the Apache 2.0 license, prices risk in one tenant. The Enterprise Edition, which OpenCRQ takes from XTM One's Filigran license, adds several tenants in one platform and the XTM One assistant.
 
 ## Start here
 
-The first time you open a new tenant, OpenCRQ shows **Get started**, first in the menu: eight steps, **Company**, **Assets**, **Threats**, **Defenses**, **Finances**, **Tolerance**, **Protect** and **Scenarios**, that take you to a first quantified risk scenario in a few minutes. The menu shows how many are done. Once you finish them, **Get started** moves to the end of the menu, after **Settings**.
+The first time you open a new tenant, OpenCRQ shows **Get started**, first in the menu: eight steps, **Company**, **Assets**, **Threats**, **Defenses**, **Finances**, **Tolerance**, **Protect** and **Scenarios**, that take you to a first quantified risk scenario in a few minutes. The menu shows how many are done. Once no step reads **To do**, even with some only started, **Get started** moves to the end of the menu, after **Settings**.
 
 Then pick your role: each tab gives your goal and the pages to read first, in order.
 
@@ -71,11 +71,11 @@ To find a scenario, an asset, a threat, a risk scope or a control by its name, t
 
 ## How OpenCRQ prices a risk
 
-You describe what you protect and what a loss would cost; the rest of the XTM platform measures who attacks and how well your defenses hold. OpenCRQ plays the attacks over thousands of simulated years, against your assets and your controls, and counts what lands. The result is a price that moves for a reason you can trace: a threat becomes active, a control is rolled out, a test shows a defense failing.
+You describe what you protect and what a loss would cost; the rest of the XTM platform measures who attacks and how well your defenses hold. OpenCRQ prices the attacks against your assets and your controls, and counts what lands, over a thousand worlds by default: each world is a draw of the uncertain inputs. The result is a price that moves for a reason you can trace: a threat becomes active, a control is rolled out, a test shows a defense failing.
 
 ::diagram{id=opencrq-overview}
 
-[How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) explains the model in full: the frequency of attacks, the attack run, the loss drivers and why the mean and the band say different things.
+[How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/) explains the model in full: the frequency of attacks, the attack run, the loss drivers, and the distribution a price comes from, its mean and the chance of losing more.
 
 ## Decide what to fund
 
@@ -94,7 +94,7 @@ A treatment plan is a set of controls you would fund: OpenCRQ prices your scenar
 ::::
 
 :::xtm-one[Ask about your risk in plain words]
-With XTM One, an AI agent reads your scenarios, explains why a price moved between two runs, and drafts a scenario or a plan that a person approves. See [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
+With XTM One, an AI agent reads your scenarios, explains why a price moved between two runs, and creates or updates a scenario for you. An XTM One administrator decides which of these changes wait for a person's approval. See [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
 :::
 
 ## Browse OpenCRQ

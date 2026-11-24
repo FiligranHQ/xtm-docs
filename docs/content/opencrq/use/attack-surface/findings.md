@@ -14,11 +14,11 @@ A **finding** is a flaw an integration reports on one of your supporting assets:
 ## Before you start
 
 - You are a member of the tenant: every member can read findings, attach a CVE and set one aside. A service account cannot change a finding's state.
-- A finding on a marked asset, such as one OpenAEV marks TLP:RED, shows only to the members whose groups are cleared for all of the asset's markings. An unmarked finding shows to every member. An administrator sets the clearance: see [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
+- A finding on a marked asset shows only to the members whose groups are cleared for all of the asset's markings. An unmarked finding shows to every member. An administrator sets the clearance: see [Give people access with users, groups and roles](/opencrq/administer/users-and-roles/).
 - At least one integration brings findings in, connected by an administrator with **Manage Security**:
   - [OpenAEV](/opencrq/use/sources/openaev/): the CVEs it found on each asset, and the result of each simulated technique, per security platform.
   - [Microsoft Defender](/opencrq/use/sources/microsoft-defender/): the CVEs on each device.
-- For the scores, the [CVE sources](/opencrq/use/sources/vulnerability-sources/) give each CVE its CVSS vector (NIST), its exploitation probability (FIRST EPSS) and whether it is known to be exploited (CISA KEV). OpenCTI adds the threats that cite a CVE.
+- For the scores, the [CVE sources](/opencrq/use/sources/vulnerability-sources/) give each CVE its CVSS vector (NIST), its exploitation probability (FIRST EPSS) and whether it is known to be exploited (CISA KEV). The tenant's threats, such as those OpenCTI streams, tell which CVEs they cite.
 
 ## Where findings come from
 
@@ -64,7 +64,7 @@ The **Score** tab breaks the score in two parts, each out of 100, and the score 
 
 - **Exploitability** is how likely the flaw gets used. It averages two factors and multiplies the result by the controls the attack meets on the way:
   - **Reachability**: the asset's exposure (internet-facing weighs 1, internal 0.4, as an administrator with **Manage Security** sets them under :menu[Settings > Engine > CRQ Indicators]) times how the CVSS vector says the flaw is reached.
-  - **Threat intelligence**: the strongest signal wins. A listing in CISA KEV sets it at 0.9; a threat from OpenCTI that cites the CVE and is active, observed in the last 90 days, sets 0.35; otherwise the EPSS probability, never below 0.05. Two independent signals lift it a third of the way toward 1.
+  - **Threat intelligence**: each signal sets a floor, and the highest wins. A listing in CISA KEV sets 0.9; a threat of the tenant that cites the CVE and is active, observed in the last 90 days, sets 0.35; the EPSS probability sets its own value. When two or more of these signals speak, the factor rises a third of the way toward 1. A high attack complexity in the CVSS vector then scales it down to about 57%, and on CVSS 4.0, present attack requirements scale it down again. It never falls below 0.05.
   - **Controls**: the posture of the controls that prevent or detect the techniques exploiting the flaw. The weakest path decides.
 - **Impact** is what the flaw would damage: the asset's criticality times the CVSS impact, reduced by the controls that stand on the impact techniques.
 
@@ -74,7 +74,7 @@ The finding score helps you choose what to fix first; it is not the price. The a
 
 The other tabs explain the score's inputs:
 
-- **Attack** lists the **Threats citing this CVE**, with a link to each one in OpenCTI, and the ATT&CK techniques that exploit it. Each threat's badge says how long ago it was last observed: red under 14 days, yellow under 90 days, blue beyond, and **Not dated** when no source dated it. Only a threat observed in the last 90 days counts as active.
+- **Attack** lists the **Threats citing this CVE**, each linking to its page in OpenCRQ's threat center, and the ATT&CK techniques that exploit it. When OpenCTI is connected, the card's link **Open CVE-2024-3400 in OpenCTI**, for example, opens the vulnerability there. Each threat's badge says how long ago it was last observed: red under 14 days, yellow under 90 days, blue beyond, and **Not dated** when no source dated it. Only a threat observed in the last 90 days counts as active.
 - **Controls** lists the **Controls standing on this finding**.
 - **Remediation** shows what the vendor published. When the CVE is in the CISA KEV catalog, a banner gives the action CISA requires and its deadline, as CISA published them.
 - **Activity** shows the finding's state over time and its sources; **Events** the history of its score.
@@ -86,11 +86,11 @@ When you know of a vulnerability no integration reports:
 :::steps
 1. Open the asset from :menu[Assets], then its **Findings** tab.
 2. Select **Create**. The **Attach a CVE** panel opens.
-3. In **CVE ID**, type at least three characters of the identifier and pick the CVE from the list. Only CVEs the tenant already knows are listed, from its CVE sources or from the threats OpenCTI streams, and not those already on the asset.
+3. In **CVE ID**, which starts with `CVE-`, type the rest of the identifier from its start, such as `2024-3400`, and pick the CVE from the list. The list shows the first 20 matches, only CVEs the tenant already knows, from its CVE sources or from its threats, and not those already on the asset.
 4. Select **Create**.
 :::
 
-The finding is marked **Set by user** as its source. Only a finding attached by hand can be deleted, from its page with **Delete**: one an integration reports comes back at its next synchronization.
+The finding is marked **Set by user** as its source. Only a finding attached by hand can be deleted: on its page, open **More actions**, the ⋮ menu beside **Set aside** or **Mark applicable**, and select **Delete**. One an integration reports comes back at its next synchronization.
 
 ## Set a finding aside
 
