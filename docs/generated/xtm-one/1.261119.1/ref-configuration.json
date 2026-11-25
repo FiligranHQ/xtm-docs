@@ -2995,7 +2995,7 @@
             "`TOOL_APPROVALS_PLATFORM_DEFAULT`",
             "",
             "`require`",
-            "Seeds `platform_registrations.approval_policy` the first time a Suite platform (OpenCTI / OpenAEV / OpenGRC) registers, and only then."
+            "The choice of Administration > Settings > Access and security > Tool approvals, **Approval for connected platforms**, that XTM One records for an OpenCTI, OpenAEV or OpenCRQ the first time it registers: `require` (the default), its tools that change data wait for a person while the platform cannot show an approval prompt; `skip`, they run. It never changes the choice of a platform already registered, which an administrator changes in that screen."
           ]
         },
         {
@@ -4763,6 +4763,33 @@
             "",
             "",
             "Read from the environment by `backend/app/agents/seed.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "OPENCTI_API_URL",
+          "cells": [
+            "`OPENCTI_API_URL`",
+            "",
+            "",
+            "Where XTM One calls OpenCTI and fetches its signing keys, when it reaches OpenCTI at another address than the public URL OpenCTI registered with, as inside a Docker network (`http://opencti:8080`). Unset, XTM One calls the registered URL. Every link people get stays on the public URL. A change applies at the platform's next registration, within 5 minutes."
+          ]
+        },
+        {
+          "key": "OPENAEV_API_URL",
+          "cells": [
+            "`OPENAEV_API_URL`",
+            "",
+            "",
+            "Where XTM One calls OpenAEV, fetches its signing keys and sends its callbacks, when it reaches OpenAEV at another address than the public URL OpenAEV registered with, as inside a Docker network (`http://openaev:8080`). Unset, XTM One calls the registered URL. Every link people get stays on the public URL. A change applies at the platform's next registration, within 5 minutes."
+          ]
+        },
+        {
+          "key": "OPENCRQ_API_URL",
+          "cells": [
+            "`OPENCRQ_API_URL`",
+            "",
+            "",
+            "Where XTM One calls OpenCRQ and fetches its signing keys, when it reaches OpenCRQ at another address than the public URL OpenCRQ registered with, as inside a Docker network (`http://opencrq:3002`). Unset, XTM One calls the registered URL. Every link people get stays on the public URL. A change applies at the platform's next registration, within 5 minutes. `OPENGRC_API_URL`, its name before OpenGRC became OpenCRQ, is still read, with a warning in the logs, until 31 December 2026."
           ]
         },
         {

@@ -168,7 +168,7 @@ OpenCTI reads one setting: `XTM__OPENAEV_URL`, the public URL of OpenAEV. The Op
 
 xtm-docker also sets `XTM__OPENAEV_API_URL=http://openaev:8080` and `XTM__OPENAEV_TOKEN=${OPENAEV_ADMIN_TOKEN}` on `opencti`. OpenCTI reads neither: it makes no call to OpenAEV, so no certificate setting applies to this link. The coverage data comes from OpenAEV, through the connector of the other tab.
 
-`xtm:opengrc_url` (`XTM__OPENGRC_URL`), the URL of an OpenGRC platform, is passed to the interface, but no screen uses it yet.
+`xtm:opengrc_url` (`XTM__OPENGRC_URL`) is the URL of OpenCRQ, under its former name, OpenGRC. OpenCTI passes it to the interface, but no screen uses it yet. A later release renames it after OpenCRQ, still reads this name as a deprecated fallback, and adds OpenCRQ to the product switcher.
 :::
 ::::
 

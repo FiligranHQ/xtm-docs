@@ -742,7 +742,7 @@
     },
     {
       "title": "OpenCRQ server",
-      "text": "`/mcp/opencrq` on XTM One: 85 tools on the frameworks, controls, assessments, risk scenarios, assets and findings of OpenCRQ. A read-only API key calls the 57 marked Read.",
+      "text": "`/mcp/opencrq` on XTM One: 85 tools on the frameworks, controls, assessments, risk scenarios, assets and findings of OpenCRQ. A read-only API key calls the 57 marked Read. An organization, as these tools name it (`organization_id`), is what OpenCRQ shows as a risk scope.",
       "columns": [
         "Tool",
         "Group",

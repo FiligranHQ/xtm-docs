@@ -51,7 +51,7 @@ So the model sees the prompt, the tool descriptions and the tool results, never 
 
 ## How the XTM platform connects
 
-OpenCTI, OpenAEV and OpenCRQ **register** with XTM One. Each presents the registration token set in `PLATFORM_REGISTRATION_TOKEN` on both sides, and registers again regularly: that registration is also its heartbeat. Once a platform is registered:
+OpenCTI, OpenAEV and OpenCRQ **register** with XTM One. Each presents the registration token set in `PLATFORM_REGISTRATION_TOKEN` on XTM One, which each holds under its own variable: `XTM__XTM_ONE_TOKEN` in OpenCTI, `OPENAEV_XTM_ONE_TOKEN` in OpenAEV, `XTM_ONE__TOKEN` in OpenCRQ. Each registers again regularly: that registration is also its heartbeat. Once a platform is registered:
 
 - Its assistant and its AI features send their requests to XTM One agents, which work with that platform as the person who asked. See [XTM One in OpenCTI](/xtm-one/use/in-opencti/), [XTM One in OpenAEV](/xtm-one/use/in-openaev/) and [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
 - Agents reach it through its integration tools, and AI clients through its MCP server, such as `/mcp/opencti`: see [Use XTM One's own MCP servers from other clients](/xtm-one/build/platform-mcp-servers/).

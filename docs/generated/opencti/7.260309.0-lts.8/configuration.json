@@ -4579,7 +4579,7 @@
       ],
       "default": "",
       "theme": "XTM Suite",
-      "description": "URL of an OpenGRC platform. The platform exposes it to the interface in its settings, but no screen uses it in this version (to confirm)."
+      "description": "URL of the OpenCRQ platform (OpenGRC is the former name of OpenCRQ). The platform passes it to the interface in its settings, but no screen of this version uses it. A later release renames it after OpenCRQ, still reads this name as a deprecated fallback, and adds OpenCRQ to the product switcher."
     },
     {
       "key": "xtm:xtm_one_token",
