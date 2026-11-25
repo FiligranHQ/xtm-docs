@@ -14,6 +14,7 @@ lanes:
       - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "http://xtm-one:4000"}
   - label: Shared services
     tone: store
+    column: 3            # under XTM One: both serve OpenCRQ
     nodes:
       - {id: pgsql, label: PostgreSQL, icon: Layers, note: "opencrq database"}
       - {id: s3, label: S3 storage, icon: Boxes, note: "opencrq bucket"}

@@ -11,7 +11,7 @@ sidebar_position: 0
 ---
 
 :::product-hero{eyebrow="One deployment for the whole platform" title="Deploy the whole XTM platform" primary-label="Run it locally" primary-to="/deploy/quick-start/" secondary-label="Deploy with an AI agent" secondary-to="/deploy/quick-start/with-an-ai-agent/" diagram=deploy-overview}
-XTM is deployed as one stack around XTM One: OpenCTI, OpenAEV and XTM Composer always run with it and share Elasticsearch, Redis, RabbitMQ, S3 storage and PostgreSQL. No module is optional. These pages follow the life of a deployment, from a first try on your machine to production, operations and upgrades.
+XTM is deployed as one stack around XTM One: OpenCTI, OpenAEV, OpenCRQ and XTM Composer always run with it and share Elasticsearch, Redis, RabbitMQ, S3 storage and PostgreSQL. No module is optional. These pages follow the life of a deployment, from a first try on your machine to production, operations and upgrades.
 :::
 
 ## Start here
