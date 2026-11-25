@@ -4745,6 +4745,144 @@
           ]
         }
       ]
+    },
+    {
+      "title": "Read elsewhere in the code",
+      "text": "The variables the code reads from the environment where it uses them, outside its settings: each says where.",
+      "columns": [
+        "Variable",
+        "Required",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "XTM_ONE_DOCS_DIR",
+          "cells": [
+            "`XTM_ONE_DOCS_DIR`",
+            "",
+            "",
+            "Read from the environment by `backend/app/agents/seed.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "XTM_ONE_LAUNCH_ID",
+          "cells": [
+            "`XTM_ONE_LAUNCH_ID`",
+            "",
+            "",
+            "Read from the environment by `backend/app/core/launch_marker.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "SSL_CERT_FILE",
+          "cells": [
+            "`SSL_CERT_FILE`",
+            "",
+            "",
+            "Read from the environment by `backend/app/core/pinned_request.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "SSL_CERT_DIR",
+          "cells": [
+            "`SSL_CERT_DIR`",
+            "",
+            "",
+            "Read from the environment by `backend/app/core/pinned_request.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "CUSTOM_TOOL_DOCKER",
+          "cells": [
+            "`CUSTOM_TOOL_DOCKER`",
+            "",
+            "",
+            "Read from the environment by `backend/app/core/security_controls.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "WORKSPACE_DIR",
+          "cells": [
+            "`WORKSPACE_DIR`",
+            "",
+            "",
+            "Read from the environment by `backend/app/services/code_interpreter.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "KUBERNETES_SERVICE_HOST",
+          "cells": [
+            "`KUBERNETES_SERVICE_HOST`",
+            "",
+            "",
+            "Read from the environment by `backend/app/services/sandbox_workspace/kube.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "KUBERNETES_SERVICE_PORT",
+          "cells": [
+            "`KUBERNETES_SERVICE_PORT`",
+            "",
+            "`443`",
+            "Read from the environment by `backend/app/services/sandbox_workspace/kube.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "AZURE_CLIENT_ID",
+          "cells": [
+            "`AZURE_CLIENT_ID`",
+            "",
+            "",
+            "Read from the environment by `backend/app/services/vault/azure.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "AZURE_TENANT_ID",
+          "cells": [
+            "`AZURE_TENANT_ID`",
+            "",
+            "",
+            "Read from the environment by `backend/app/services/vault/azure.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "AZURE_FEDERATED_TOKEN_FILE",
+          "cells": [
+            "`AZURE_FEDERATED_TOKEN_FILE`",
+            "",
+            "",
+            "Read from the environment by `backend/app/services/vault/azure.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "AZURE_AUTHORITY_HOST",
+          "cells": [
+            "`AZURE_AUTHORITY_HOST`",
+            "",
+            "`https://login.microsoftonline.com`",
+            "Read from the environment by `backend/app/services/vault/azure.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "IDENTITY_ENDPOINT",
+          "cells": [
+            "`IDENTITY_ENDPOINT`",
+            "",
+            "",
+            "Read from the environment by `backend/app/services/vault/azure.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        },
+        {
+          "key": "IDENTITY_HEADER",
+          "cells": [
+            "`IDENTITY_HEADER`",
+            "",
+            "",
+            "Read from the environment by `backend/app/services/vault/azure.py`, not by the settings of `backend/app/core/config.py`."
+          ]
+        }
+      ]
     }
   ]
 }

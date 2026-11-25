@@ -1413,7 +1413,7 @@
             "`get_opencrq_asset_posture`",
             "Findings, threats, risk treatment, proven posture, dashboard",
             "Read",
-            "Get an OpenCRQ supporting asset's posture score (0-100, higher is stronger), its CVE findings by exploitability band, its worst finding, and its findings {_ASSET_FINDINGS_PAGE} per page."
+            "Get an OpenCRQ supporting asset's posture score (0-100, higher is stronger), its CVE findings by exploitability band, its worst finding, and its findings 10 per page."
           ]
         },
         {
@@ -1467,7 +1467,7 @@
             "`list_opencrq_treatment_plans`",
             "Findings, threats, risk treatment, proven posture, dashboard",
             "Read",
-            "List the OpenCRQ risk treatment plans (planned control upgrades) with their status, the annualized loss (ALE) reduction their simulation prices, year-1 cost and return, {_PAGE_SIZE} at a time."
+            "List the OpenCRQ risk treatment plans (planned control upgrades) with their status, the annualized loss (ALE) reduction their simulation prices, year-1 cost and return, 20 at a time."
           ]
         },
         {
@@ -1476,7 +1476,7 @@
             "`get_opencrq_treatment_plan`",
             "Findings, threats, risk treatment, proven posture, dashboard",
             "Read",
-            "Get an OpenCRQ risk treatment plan: owner, period, cost, the control moves it plans (strength and coverage targets), and the simulated ALE reduction per risk scenario, {_PAGE_SIZE} scenarios at a time."
+            "Get an OpenCRQ risk treatment plan: owner, period, cost, the control moves it plans (strength and coverage targets), and the simulated ALE reduction per risk scenario, 20 scenarios at a time."
           ]
         },
         {
@@ -1485,7 +1485,7 @@
             "`list_opencrq_budget_reviews`",
             "Findings, threats, risk treatment, proven posture, dashboard",
             "Read",
-            "List the OpenCRQ budget reviews (security spend over a period) with what was spent, the loss per year its controls avoided and the return, {_PAGE_SIZE} at a time."
+            "List the OpenCRQ budget reviews (security spend over a period) with what was spent, the loss per year its controls avoided and the return, 20 at a time."
           ]
         },
         {
@@ -1503,7 +1503,7 @@
             "`get_opencrq_control_validation`",
             "Findings, threats, risk treatment, proven posture, dashboard",
             "Read",
-            "Get the proven posture of an OpenCRQ control: which ATT&CK techniques attack simulations showed it prevents or detects, which ones contradicted it, and the simulation evidence, {_EVIDENCE_PAGE} at a time."
+            "Get the proven posture of an OpenCRQ control: which ATT&CK techniques attack simulations showed it prevents or detects, which ones contradicted it, and the simulation evidence, 15 at a time."
           ]
         },
         {
@@ -1512,7 +1512,7 @@
             "`get_opencrq_risk_dashboard`",
             "Findings, threats, risk treatment, proven posture, dashboard",
             "Read",
-            "Get the OpenCRQ risk dashboard of a tenant or organization: total priced exposure, risk scenarios by annualized loss (ALE) with their trend ({_SCENARIOS_PAGE} at a time), scenarios outside their risk tolerance, the control upgrades that re…"
+            "Get the OpenCRQ risk dashboard of a tenant or organization: total priced exposure, risk scenarios by annualized loss (ALE) with their trend (10 at a time), scenarios outside their risk tolerance, the control upgrades that reduce exposure m…"
           ]
         }
       ]
