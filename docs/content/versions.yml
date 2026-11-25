@@ -31,9 +31,9 @@ composer:
   latest:
     version: 3.261121.0
     tag: 3.261121.0
-# No OpenCRQ release yet: the image of one main commit (sha-<commit>, private on Docker
-# Hub; stack.ts builds it from that commit when it cannot be pulled). `commit` is that commit
-# whole: xtm-atlas reads the code at it (atlas/src/sources.ts ensureSourceAt).
+# OpenCRQ documents its latest release. Before its first one, it documented the image of a main
+# commit (tag sha-<commit>, with `commit`, that commit whole, where xtm-atlas reads the code:
+# atlas/src/sources.ts ensureSourceAt); the engine then says it is a development build.
 opencrq:
   latest:
     version: 0.261123.0

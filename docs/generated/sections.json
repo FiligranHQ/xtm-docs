@@ -86,8 +86,8 @@
     ]
   },
   "deploy": {
-    "done": 60,
-    "total": 60,
+    "done": 59,
+    "total": 59,
     "groups": [
       {
         "id": "quick-start",
@@ -266,18 +266,6 @@
             ],
             "status": "migrated",
             "live": "https://docs.opencti.io/latest/reference/fips/",
-            "more": 0,
-            "more_done": 0,
-            "group": "install"
-          },
-          {
-            "target": "/deploy/install/opencrq/",
-            "title": "Install OpenCRQ",
-            "doc_type": "how-to",
-            "products": [
-              "opencrq"
-            ],
-            "status": "migrated",
             "more": 0,
             "more_done": 0,
             "group": "install"

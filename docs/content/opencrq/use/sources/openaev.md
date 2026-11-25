@@ -91,6 +91,8 @@ services:
 After the restart, the **OpenAEV** card reads **Never synced**, bound to `OpenAEV (deployment)`. The administrator opens it and clicks **Sync now**.
 
 The first run imports the workstations OpenAEV knows, the CVEs it found or updated on them in the last 7 days, and the simulations finished in the last 7 days. Each technique the EDR did not prevent, or did not detect, becomes a finding on the workstation it reached. On those techniques, the EDR's **Engine efficacy** falls below its declaration, by as much as the tests fell short and in proportion to the share of the scope's hosts they ran on. The scenarios that reach the front desks are priced again on that efficacy. Every hour after that, a new simulation of the same scenario updates the findings.
+
+This is OpenAEV with its default settings, as the xtm-docker commit these pages describe runs it. The main branch of xtm-docker turns on OpenAEV's snapshot export: there, the role takes **Access observation snapshots** instead of **Access findings**, and the first run reads the whole export, not the last 7 days (see [Read the snapshot export of OpenAEV](#read-the-snapshot-export-of-openaev)).
 :::
 
 ## Check that it works
