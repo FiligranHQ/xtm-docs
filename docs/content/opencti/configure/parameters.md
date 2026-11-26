@@ -12,7 +12,7 @@ migrated_from:
   - opencti:/administration/parameters/
 ---
 
-The **Parameters** page holds the settings that apply to the whole OpenCTI platform: its name, its look, the banners every user sees and the themes they can pick. It also tells you which version and edition run, which services the platform depends on and which managers are on. This page walks through it card by card, then covers the interface customizations that live in the configuration instead: custom labels, a script snippet and the demo mode.
+The **Parameters** page holds the settings that apply to the whole OpenCTI instance: its name, its look, the banners every user sees and the themes they can pick. It also tells you which version and edition run, which services the platform depends on and which managers are on. This page walks through it card by card, then covers the interface customizations that live in the configuration instead: custom labels, a script snippet and the demo mode.
 
 ## Before you start
 
@@ -36,7 +36,7 @@ The **OpenCTI platform** card gives the **Platform identifier**, with a copy but
 
 **AI Powered** reads **Disabled** for one of two reasons, given in its tooltip: the Enterprise Edition is off, or AI is turned off on the platform (**AI is not enabled**). AI is turned on in the **Enterprise Edition** card of :menu[Settings > Filigran Experience]; the provider and its token are set in the [AI configuration](/reference/opencti/configuration/#ai-service).
 
-On a Community platform, the **OpenCTI platform** card has the **Manage your Enterprise Edition license** button, which starts the [Enterprise Edition](/start/editions/). Once the Enterprise Edition is on, two more cards show the license:
+On a Community instance, the **OpenCTI platform** card has the **Manage your Enterprise Edition license** button, which starts the [Enterprise Edition](/start/editions/). Once the Enterprise Edition is on, two more cards show the license:
 
 - **Enterprise Edition**: the **Organization** the license was issued to, its **Creator** and its **Scope**. **Global** means the license works on every platform of your organization; **Current instance** means it is tied to this platform's **Platform identifier** and does not validate elsewhere.
 - **License**: the **Start date**, the **Expiration date** and the **License type**. A warning appears when the license expires in less than three months.

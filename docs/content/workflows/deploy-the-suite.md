@@ -23,17 +23,17 @@ At the end of this journey, OpenCTI, OpenAEV, OpenCRQ and XTM One run on one hos
 - **Platform engineers** plan the stack, prepare the host, install the modules, connect them, set the configuration of XTM One, monitor it and upgrade the stack (steps 1 to 9).
 - **Administrators** sign in first with the admin accounts of `.env`, add the language model and the license in XTM One (step 4), sign in to OpenCRQ through XTM One as its super administrator (step 5), then hand access to the teams.
 
-## Why it spans several products
+## Why it spans several modules
 
-The products are built to run as one stack, with XTM One at its center:
+The modules are built to run as one stack, with XTM One at its center:
 
 - **Shared services.** OpenCTI, OpenAEV, XTM One and OpenCRQ keep their data in one set of backing services: Elasticsearch, RabbitMQ, Redis, S3 storage (RustFS) and PostgreSQL with pgvector. Each module keeps to its own index prefix, bucket and database, so one instance of each service is enough.
 - **Registration.** OpenCTI, OpenAEV and OpenCRQ register with XTM One with one shared secret, `PLATFORM_REGISTRATION_TOKEN`, then register again every 5 minutes as a heartbeat. Once registered, XTM One agents work with their data, and their users get **Ask Ariane**, which OpenCRQ offers in its Enterprise Edition only.
-- **Calls as a person.** XTM One calls each platform as the person who asks, and the platform applies that person's rights. The tokens of these calls name the public URL of their issuer, so the public URLs you set are also the identities of the products.
-- **People matched across products.** XTM One finds a person in OpenCTI and OpenAEV by email: the administrator's email must be the same in XTM One, OpenCTI and OpenAEV. OpenCRQ finds the account tied to the person's XTM One account at their sign-in through XTM One, never by email.
+- **Calls as a person.** XTM One calls each platform as the person who asks, and the platform applies that person's rights. The tokens of these calls name the public URL of their issuer, so the public URLs you set are also the identities of the modules.
+- **People matched across modules.** XTM One finds a person in OpenCTI and OpenAEV by email: the administrator's email must be the same in XTM One, OpenCTI and OpenAEV. OpenCRQ finds the account tied to the person's XTM One account at their sign-in through XTM One, never by email.
 - **One license.** A Filigran license installed in XTM One travels back, in the registration answer, to each platform it names as a sub-license. It decides the edition of OpenCRQ, which holds no license of its own. An OpenCTI or OpenAEV with an Enterprise Edition license of its own also gives XTM One its Enterprise Edition.
 
-Installed apart, each product needs its own services, OpenCTI and OpenAEV need a license each, OpenCRQ does not start without XTM One, and no assistant reads across the products. What each part is and which service it uses is in [The XTM stack: modules and shared services](/deploy/plan/architecture/); how a request carries a person's identity is in [XTM One in OpenCTI](/xtm-one/use/in-opencti/).
+Installed apart, each module needs its own services, OpenCTI and OpenAEV need a license each, OpenCRQ does not start without XTM One, and no assistant reads across the modules. What each part is and which service it uses is in [The XTM stack: modules and shared services](/deploy/plan/architecture/); how a request carries a person's identity is in [XTM One in OpenCTI](/xtm-one/use/in-opencti/).
 
 ## What you need
 
@@ -41,7 +41,7 @@ Installed apart, each product needs its own services, OpenCTI and OpenAEV need a
 - A host name per platform, and a reverse proxy that serves them over HTTPS: see [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/).
 - A Filigran license certificate for the Enterprise Edition, and the API key of a language model provider or the address of a model on your network.
 - A mail relay for OpenCTI, OpenAEV and XTM One.
-- On the host, a shell account that runs `sudo` and Docker. In the products, the admin accounts that `.env` creates are the first administrators: no role is needed before them.
+- On the host, a shell account that runs `sudo` and Docker. In the modules, the admin accounts that `.env` creates are the first administrators: no role is needed before them.
 
 ## How it unfolds
 
@@ -73,7 +73,7 @@ OpenCRQ starts with the stack, after two one-shot services ([its setup](/deploy/
 
 ### Finish the configuration of XTM One
 
-Neither xtm-docker nor the product's Compose file passes XTM One a mail server: until `SMTP_HOSTNAME` is set on both containers, XTM One sends no invitation and writes the link of a password reset in its log ([step 7](/deploy/configure/xtm-one/)). The same page sets the security headers of its pages and the size of its processes. `XTM_ONE_SECRET_KEY` never changes once XTM One has started: it encrypts the credentials XTM One stores.
+Neither xtm-docker nor the module's Compose file passes XTM One a mail server: until `SMTP_HOSTNAME` is set on both containers, XTM One sends no invitation and writes the link of a password reset in its log ([step 7](/deploy/configure/xtm-one/)). The same page sets the security headers of its pages and the size of its processes. `XTM_ONE_SECRET_KEY` never changes once XTM One has started: it encrypts the credentials XTM One stores.
 
 ### Watch it
 

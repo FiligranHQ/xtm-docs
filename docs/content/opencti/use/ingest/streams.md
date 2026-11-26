@@ -1,6 +1,6 @@
 ---
-title: Import from another OpenCTI platform
-description: Consume the live stream of another OpenCTI platform, so that its knowledge, its updates and optionally its deletions reach your platform in real time.
+title: Import from another OpenCTI instance
+description: Consume the live stream of another OpenCTI instance, so that its knowledge, its updates and optionally its deletions reach your instance in real time.
 sidebar_position: 2
 doc_type: how-to
 products:
@@ -12,7 +12,7 @@ migrated_from:
   - opencti:/usage/import/internal-streams/
 ---
 
-An OpenCTI stream connects your platform to a live stream of another OpenCTI platform: every creation, update and, if you choose, deletion published on the remote stream is replayed on yours, as it happens. Use it to receive intelligence from a partner or a parent organization, or to replicate one platform to another. For how imported data reaches the knowledge base, read [How intelligence gets into OpenCTI](/opencti/use/ingest/).
+An OpenCTI stream connects your instance to a live stream of another OpenCTI instance: every creation, update and, if you choose, deletion published on the remote stream is replayed on yours, as it happens. Use it to receive intelligence from a partner or a parent organization, or to replicate one instance to another. For how imported data reaches the knowledge base, read [How intelligence gets into OpenCTI](/opencti/use/ingest/).
 
 ## Before you start
 
@@ -51,7 +51,7 @@ Then fill it in:
 :::
 
 :::example[Receive the hospitality stream of the national CERT]
-Example CERT runs its own OpenCTI platform and shares a live stream named "Hospitality sector" with its members. It gave your team a token of a user who can read that stream.
+Example CERT runs its own OpenCTI instance and shares a live stream named "Hospitality sector" with its members. It gave your team a token of a user who can read that stream.
 
 - **Name**: `Example CERT - Hospitality sector`
 - **Remote OpenCTI URL**: `https://cti.example-cert.example`, without `/graphql` or any other path

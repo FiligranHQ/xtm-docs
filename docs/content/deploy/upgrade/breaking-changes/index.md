@@ -15,7 +15,7 @@ migrated_from:
   - openaev:/deployment/breaking-changes/
 ---
 
-This page lists, per product and version, the changes that need an action when you upgrade: a setting to add, a script to update, a module to upgrade at the same time. Read the entries between your current version and the one you upgrade to, newest first, before you follow [Upgrade](/deploy/upgrade/).
+This page lists, per module and version, the changes that need an action when you upgrade: a setting to add, a script to update, a module to upgrade at the same time. Read the entries between your current version and the one you upgrade to, newest first, before you follow [Upgrade](/deploy/upgrade/).
 
 ::diagram{id=deploy-upgrade-breaking-changes}
 
@@ -163,7 +163,7 @@ A script that authenticates with an API key keeps `POST /api/v1/chat/conversatio
 
 ### XTM One 1.261110.2
 
-**On/off switches of `.env` reach the containers.** This concerns the Docker Compose file of the product, which runs XTM One on its own host. xtm-docker and Kubernetes deployments are unchanged. Before, that file passed a fixed list of variables, so most on/off switches of `.env.sample` did nothing in `.env`. It now passes them all to `platform`, `worker` and `worker-preview`: `DISABLE_CUSTOM_TOOLS`, `MCP_DCR_ENABLED`, `PROMETHEUS_ENABLED`, `ASSIGNMENT_QUEUE_ENABLED` and the others. Only `DEBUG`, `A2A_ALLOW_INSECURE_LOOPBACK` and `TRUST_PROXY_HEADERS` stay out.
+**On/off switches of `.env` reach the containers.** This concerns the Docker Compose file of the module, which runs XTM One on its own host. xtm-docker and Kubernetes deployments are unchanged. Before, that file passed a fixed list of variables, so most on/off switches of `.env.sample` did nothing in `.env`. It now passes them all to `platform`, `worker` and `worker-preview`: `DISABLE_CUSTOM_TOOLS`, `MCP_DCR_ENABLED`, `PROMETHEUS_ENABLED`, `ASSIGNMENT_QUEUE_ENABLED` and the others. Only `DEBUG`, `A2A_ALLOW_INSECURE_LOOPBACK` and `TRUST_PROXY_HEADERS` stay out.
 
 A switch your `.env` sets applies at the next `docker compose up -d`. A switch that is also in **Administration** > **Settings** > **Access and security** of XTM One then shows read-only there: the variable wins until you remove it. A blank value counts as unset, and no longer stops the startup. Before you upgrade, list the switches your `.env` sets, and remove those you do not want applied:
 
@@ -181,7 +181,7 @@ grep -E '^[A-Z_]+=(true|false)' .env
 - Send its callbacks in `sign_in_redirect_uris`, on the origin of its own `platform_url`. The answer gives its client ID in `sign_in_client_id`.
 - Sending `[]` removes the client, and so does unregistering or purging the platform. A platform whose registration is not active signs nobody in.
 
-Such a sign-in shows no consent page, and the audit log records it with `"consent": false`. Its token answer has no `refresh_token`. Its `access_token` is bound to the client, and no Model Context Protocol (MCP) endpoint accepts it: rely on the ID token only. An administrator who impersonates someone is never signed in to a product as them. MCP clients have nothing to change.
+Such a sign-in shows no consent page, and the audit log records it with `"consent": false`. Its token answer has no `refresh_token`. Its `access_token` is bound to the client, and no Model Context Protocol (MCP) endpoint accepts it: rely on the ID token only. An administrator who impersonates someone is never signed in to a module as them. MCP clients have nothing to change.
 
 **Slack senders identified by their own member ID.** No action is needed. Before, the Slack bot identified a sender by the channel they wrote in, and could answer a member as another account. The migration `s5811slackid01` removes the identities that name a channel (`slack:C…`, `slack:G…`, `slack:D…`) from the users' linked identities. The member IDs an administrator linked (`slack:U…`, `slack:W…`) stay. XTM One links a member again on their next message whose email matches an account. A member whose email matches none is unidentified, or anonymous where the bot allows it. See [How the bot knows who is talking](/xtm-one/administer/channels/#how-the-bot-knows-who-is-talking).
 

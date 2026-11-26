@@ -26,14 +26,14 @@ OpenCTI publishes part of its knowledge base itself, with no connector to deploy
 
 | | Live stream | CSV feed | TAXII collection |
 | --- | --- | --- | --- |
-| Typical consumer | The stream connector of a SIEM, an EDR or a SOAR, another OpenCTI platform | A firewall, a proxy, a script | Any TAXII 2.1 client, such as an EDR or a sharing platform |
+| Typical consumer | The stream connector of a SIEM, an EDR or a SOAR, another OpenCTI instance | A firewall, a proxy, a script | Any TAXII 2.1 client, such as an EDR or a sharing platform |
 | What it receives | STIX 2.1 events, as server-sent events, within seconds of each change | A CSV file with the columns you choose, computed at each download | STIX 2.1 objects, page by page |
 | Removals | A `delete` event when an object is deleted or stops matching the filters | An object leaves the file at the next download | Not signaled: the object is no longer returned |
 | Related objects | Sent along: author, markings, relationships | Columns can read first-degree neighbors | Not resolved: the client fetches them |
 | Volume per request | Continuous, from a start point the consumer chooses | 5,000 objects at most | 500 objects per page |
 | URL | `/stream/<id>` | `/feeds/<id>` | `/taxii2/root/collections/<id>/objects/` |
 
-A live stream keeps a tool in step with the knowledge base, removals included, which suits a SIEM or an EDR that alerts on or blocks indicators. A CSV feed suits a device that replaces its whole list at each download. A TAXII collection suits tools that only speak TAXII. Between two OpenCTI platforms, use a live stream: the receiving platform consumes it as described in [Import from another OpenCTI platform](/opencti/use/ingest/streams/).
+A live stream keeps a tool in step with the knowledge base, removals included, which suits a SIEM or an EDR that alerts on or blocks indicators. A CSV feed suits a device that replaces its whole list at each download. A TAXII collection suits tools that only speak TAXII. Between two OpenCTI instances, use a live stream: the receiving instance consumes it as described in [Import from another OpenCTI instance](/opencti/use/ingest/streams/).
 
 ## What every feed shares
 
@@ -268,6 +268,6 @@ Copy the URL of the feed from its row and open it with a user who should read it
 ## What's next
 
 - [Indicator decay](/opencti/configure/decay/), to set how scores drop, and so when indicators leave your feeds.
-- [Import from another OpenCTI platform](/opencti/use/ingest/streams/), to consume a live stream on another platform.
+- [Import from another OpenCTI instance](/opencti/use/ingest/streams/), to consume a live stream on another instance.
 - [Export knowledge to a file](/opencti/use/share/export/), to send a file once rather than a feed.
 - [HTTP endpoints](/reference/opencti/http-endpoints/): the exact paths of feeds, TAXII collections and streams, and how each authenticates.

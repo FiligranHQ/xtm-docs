@@ -21,7 +21,7 @@ OpenCTI sends anonymous usage telemetry to Filigran: counts and on/off flags tha
 - No personal data: no user names, email addresses or IP addresses.
 - No configuration values: connectors are reported by name or catalog identity, never with their settings or the host of their registry.
 
-Filigran uses the data, aggregated and anonymized, to improve the product and the user experience, and for internal and external statistics.
+Filigran uses the data, aggregated and anonymized, to improve OpenCTI and its user experience, and for internal and external statistics.
 
 ## How it is sent
 

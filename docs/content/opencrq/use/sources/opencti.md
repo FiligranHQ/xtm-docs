@@ -40,7 +40,7 @@ The credentials are not stored in OpenCRQ's database: the deployment sets them p
 
 | Variable | What it holds |
 | --- | --- |
-| `CONNECTORS__OPENCTI__<tenant-uuid>__URL` | The base URL of the OpenCTI platform |
+| `CONNECTORS__OPENCTI__<tenant-uuid>__URL` | The base URL of the OpenCTI instance |
 | `CONNECTORS__OPENCTI__<tenant-uuid>__TOKEN` | The API token of the OpenCTI user for OpenCRQ. Pass it through a secret store |
 
 After a restart with both set, the **OpenCTI** card moves to the **Deployed** tab of :menu[Integrations], and OpenCRQ sets up its stream. See the [configuration reference](/reference/opencrq/configuration/#connectors) for every connector's variables.
@@ -142,7 +142,7 @@ A stream with origin filters also shows **This stream replays no history**: only
 Once the connector is configured, the panel shows an **Enabled** switch. Turning it off stops reading the stream and keeps its position.
 
 :::example[Feed Grand Meridian the threats Example CERT tracks]
-Grand Meridian Hotels prices the risk that Velvet Harbor and Ember Tide put on its hotels. Its OpenCTI platform, at `https://opencti.example.com`, holds what Example CERT shares about both intrusion sets.
+Grand Meridian Hotels prices the risk that Velvet Harbor and Ember Tide put on its hotels. Its OpenCTI instance, at `https://opencti.example.com`, holds what Example CERT shares about both intrusion sets.
 
 In OpenCTI, the administrator creates the stream with the mutation above and these values: **Name** `Threats for risk quantification`, **Description** `Intrusion sets, threat actors and campaigns with what they use and target, read by OpenCRQ for Grand Meridian Hotels.`, not public, started, and the four-group filter of this page. A user `OpenCRQ reader` with **Access data sharing**, cleared for every marking Example CERT uses, holds the token. Example CERT does not grant it **Manage data sharing**, so OpenCRQ does not create a stream of its own.
 

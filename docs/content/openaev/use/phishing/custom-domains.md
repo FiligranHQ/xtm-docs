@@ -11,7 +11,7 @@ migrated_from:
   - openaev:/usage/build/components/phishing/custom-domains/
 ---
 
-By default, the link of a phishing email points at the address of your OpenAEV platform. A custom domain lets the link and the address bar show a hostname you own instead, such as `reservations.grand-meridian.example`, so the lure looks real and the testing platform stays out of sight. This page registers the hostname, proves you own it in DNS, sets up its certificate, and links it to a landing page. The domain changes the link only: the sender of the email is set on the [email template](/openaev/use/phishing/email-templates/).
+By default, the link of a phishing email points at the address of your OpenAEV instance. A custom domain lets the link and the address bar show a hostname you own instead, such as `reservations.grand-meridian.example`, so the lure looks real and the testing platform stays out of sight. This page registers the hostname, proves you own it in DNS, sets up its certificate, and links it to a landing page. The domain changes the link only: the sender of the email is set on the [email template](/openaev/use/phishing/email-templates/).
 
 :::warning
 Register only hostnames your organization owns and has authorized for awareness exercises.
@@ -93,7 +93,7 @@ The emails sent from then on carry links such as `https://reservations.grand-mer
 Deleting a custom domain does not delete its landing pages: they go back to the **Platform default domain**. Delete a domain once the exercises that use it are over, since the links already sent still point at it.
 
 :::example[Serve the summit booking portal on a Grand Meridian hostname]
-Grand Meridian Hotels serves its phishing pages on `reservations.grand-meridian.example`, behind a Caddy edge. Its OpenAEV platform answers at `https://aev.grand-meridian.example` (`openaev.base-url`), and the Caddy edge reaches it at `openaev:8080`.
+Grand Meridian Hotels serves its phishing pages on `reservations.grand-meridian.example`, behind a Caddy edge. Its OpenAEV instance answers at `https://aev.grand-meridian.example` (`openaev.base-url`), and the Caddy edge reaches it at `openaev:8080`.
 
 The administrator adds the domain, then publishes the records the **Configure DNS** panel gives:
 

@@ -20,7 +20,7 @@ At the end of this journey, your SOC asks an XTM One AI agent a question in the 
 - **The AI agent builder** (Sophie Laurent) turns Slack on for the **Night shift triage** agent and restricts it to the SOC's channel.
 - **The SOC analysts** (Paul Garnier, on the night shift) ask the agent from `#soc-night`, and answer in XTM One the approvals Slack cannot show.
 
-## Why it spans several products
+## Why it spans several modules
 
 The question is asked in Slack; the answer is in OpenCTI and OpenAEV; XTM One connects them.
 
@@ -28,7 +28,7 @@ The question is asked in Slack; the answer is in OpenCTI and OpenAEV; XTM One co
 - **OpenCTI** knows the threat: whether 203.0.113.10 is an Indicator of Velvet Harbor, and in which intrusion it was seen. See [XTM One in OpenCTI](/xtm-one/use/in-opencti/).
 - **OpenAEV** knows the defenses: what the last simulation of Velvet Harbor's techniques on the front-desk workstations prevented and detected. See [XTM One in OpenAEV](/xtm-one/use/in-openaev/).
 
-What passes between them: Slack sends the message and the sender's email to XTM One. XTM One matches the email to an account, and the agent calls OpenCTI and OpenAEV with a token signed for that same email, so each product applies that analyst's own capabilities, markings and grants. The answer goes back to the Slack thread. An approval never passes through Slack: it is answered in XTM One. Without the agent, the analyst would open both products in the middle of the night and cross-check by hand.
+What passes between them: Slack sends the message and the sender's email to XTM One. XTM One matches the email to an account, and the agent calls OpenCTI and OpenAEV with a token signed for that same email, so each module applies that analyst's own capabilities, markings and grants. The answer goes back to the Slack thread. An approval never passes through Slack: it is answered in XTM One. Without the agent, the analyst would open both modules in the middle of the night and cross-check by hand.
 
 ## What you need
 

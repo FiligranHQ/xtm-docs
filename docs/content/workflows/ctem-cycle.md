@@ -25,7 +25,7 @@ At the end of this journey, the board sees where the organization stands in mone
 - **CISOs and executives** read the result: the ranking in money, the plan to fund, and the exposure posture of XTM One (step 11).
 - The CTI team keeps the intelligence current in OpenCTI, and the SOC closes the gaps the tests reveal.
 
-## Why it spans several products
+## Why it spans several modules
 
 Each stage of the cycle lives where its data is:
 

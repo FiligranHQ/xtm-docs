@@ -18,12 +18,12 @@ The home dashboard of XTM One, the **CTEM Command Center**, opens from :menu[Hom
 
 | Platform state | The dashboard shows |
 | --- | --- |
-| No OpenCTI or OpenAEV platform connected yet | A welcome page with **Connect OpenCTI** and **Connect OpenAEV**. An administrator connects them once, with a registration token: see [Set up the platform in Settings](/xtm-one/administer/settings/) |
+| No OpenCTI or OpenAEV instance connected yet | A welcome page with **Connect OpenCTI** and **Connect OpenAEV**. An administrator connects them once, with a registration token: see [Set up the platform in Settings](/xtm-one/administer/settings/) |
 | Community Edition, a platform connected | A one-time presentation of what the Enterprise Edition adds, then the command center with its figures, without AI: see [When AI cannot run](#when-ai-cannot-run) |
 | Enterprise Edition, a platform connected | The full command center |
 | AI switched off by an administrator | A page that says so: see [Run XTM One with AI switched off](/xtm-one/administer/running-without-ai/) |
 
-The top of the command center says which edition the platform runs, and each part says which connected product its figures come from. A part whose product is not connected shows no figure, and a button to connect it, such as **Connect OpenAEV**.
+The top of the command center says which edition the platform runs, and each part says which connected module its figures come from. A part whose module is not connected shows no figure, and a button to connect it, such as **Connect OpenAEV**.
 
 Above it, notices say what waits for a person, and go away once it is done:
 
@@ -58,12 +58,12 @@ The **Posture overview** at the top gives the exposure posture out of 100, acros
 
 Click the posture, in its ring or in the row, to read **How the Exposure Posture is computed**. The posture is two weighted averages of the five stage scores, one per reading:
 
-- **Measured** reads the data of the connected products alone.
+- **Measured** reads the data of the connected modules alone.
 - **In your context** weighs each measured score by how much of the organization context is filled in: 40%, plus 60% of the share filled in. For **Prioritization**, it also counts the known-exploited vulnerabilities of your tech stack.
 
-Each average is renormalized over the stages that have a score, so a stage with no connected product never lowers it. The weights depend on the vertical. Without an organization context, the dialog says to add it in Settings. Both scores read on one scale: under 40 is critical, then at risk, fair, good, and strong from 90. In a narrow overview, the score becomes a chip that opens the same dialog.
+Each average is renormalized over the stages that have a score, so a stage with no connected module never lowers it. The weights depend on the vertical. Without an organization context, the dialog says to add it in Settings. Both scores read on one scale: under 40 is critical, then at risk, fair, good, and strong from 90. In a narrow overview, the score becomes a chip that opens the same dialog.
 
-The exposure data is collected once a day. **Last synced** says when, and when the next sync comes; **Syncing...** shows while the posture is computed again. **Force sync** fetches it again now, for you. **Start chatting** opens the chat. Under it, the pills of OpenCTI, OpenAEV, OpenCRQ and the XTM Hub give each product's edition, health and version; click one to open the product. OpenCRQ shows **Soon** until an OpenCRQ platform registers.
+The exposure data is collected once a day. **Last synced** says when, and when the next sync comes; **Syncing...** shows while the posture is computed again. **Force sync** fetches it again now, for you. **Start chatting** opens the chat. Under it, the pills of OpenCTI, OpenAEV, OpenCRQ and the XTM Hub give the edition, health and version of each; click one to open it. OpenCRQ shows **Soon** until an OpenCRQ instance registers.
 
 ## Set the context of the dashboard
 
@@ -83,11 +83,11 @@ When some widgets keep a period of their own, a chip says how many: hover it to 
 - the stage's key figure as a bar, with its change: breadth of the scope, detection coverage, critical exposures, attacks prevented, or fixes closed;
 - a trend line over 30 days, and a dot when a recommended action for the stage waits.
 
-Hover a column to read every figure. A stage with no connected product gives a link such as **Connect OpenCTI**, or says **No data**. A stage with too little data says **Not enough data to score**. A stage measured without an organization context offers **Add organization context**. A spinner shows while the posture or the stage's assessment is computed again. **Export CSV** downloads the posture, the stages and their figures as a CSV file, once the posture is computed from a connected platform. When the known-exploited count of your tech stack is computed, the file also gives **Known-exploited in your tech stack** and **Tech stack products affected**.
+Hover a column to read every figure. A stage with no connected module gives a link such as **Connect OpenCTI**, or says **No data**. A stage with too little data says **Not enough data to score**. A stage measured without an organization context offers **Add organization context**. A spinner shows while the posture or the stage's assessment is computed again. **Export CSV** downloads the posture, the stages and their figures as a CSV file, once the posture is computed from a connected instance. When the known-exploited count of your tech stack is computed, the file also gives **Known-exploited in your tech stack** and **Tech stack products affected**.
 
 Click a column to open the stage's page. Its header gives the **Stage score** and the score in your **Organization** context, with **Back to Command Center**. **History** draws the scores over **30 days** or **90 days**. The **AI assessment** is the stage analyst agent's reading of the stage. When AI can run, it is written again on your visit once it is more than 7 days old, marked **Out of date** meanwhile. Opening the dashboard does the same for every covered stage. **Refresh** writes it now, and **Follow up in chat** continues it in a conversation.
 
-The last column, **Governance & Risk**, sets your exposure posture against its target. It gives the two scores of the posture, measured and in your organization context, their change, and the posture target of the organization profile, or "No posture target yet". Once an OpenCRQ platform is registered, **Open in OpenCRQ** opens it, for the risk priced in money. Click the column to open the **Governance & Risk** page: see [Follow your exposure posture against its target](/xtm-one/use/governance/).
+The last column, **Governance & Risk**, sets your exposure posture against its target. It gives the two scores of the posture, measured and in your organization context, their change, and the posture target of the organization profile, or "No posture target yet". Once an OpenCRQ instance is registered, **Open in OpenCRQ** opens it, for the risk priced in money. Click the column to open the **Governance & Risk** page: see [Follow your exposure posture against its target](/xtm-one/use/governance/).
 
 ## Read your briefing
 
@@ -107,8 +107,8 @@ While the organization profile was never saved, your briefing says **This briefi
 **Act now** ranks what to do, the most urgent first, and marks the first row **Do first**. Under its title, each row says why it is there, and gives its priority. The queue holds:
 
 - the work items waiting for you, and the runs waiting for your approval;
-- what the connected products found, one row per stage: known-exploited exposures to triage, failed OpenAEV expectations, a stage with a connected product but no data, a gap in detection coverage;
-- the products to connect and, for administrators, **Wire in your security stack**.
+- what the connected modules found, one row per stage: known-exploited exposures to triage, failed OpenAEV expectations, a stage with a connected module but no data, a gap in detection coverage;
+- the modules to connect and, for administrators, **Wire in your security stack**.
 
 A bar above the rows splits the queue by source, each with its count: **Posture**, Blind spots (the stages to connect), **Setup**, and Waiting for you. A dot of its source's color leads each row. **Refreshing...** shows in the header while the posture or the stage assessments are computed again. When failed expectations of several types share the same count, their row names the types in one phrase.
 
@@ -116,7 +116,7 @@ The button of a row opens what to act on: the waiting work items, the executions
 
 When the organization profile names a **Tech stack** that OpenCTI knows as software, the known-exploited row counts only the known-exploited vulnerabilities of that software. Its reason then names the products of your tech stack it affects, up to three, in the order of the profile. Otherwise, it counts every known-exploited vulnerability in OpenCTI.
 
-**Ask AI**, on the rows of what the connected products found and on the setup rows, opens the chat with the row in the composer. The message gives the row's title, why it is there, its stage, and asks the agent for step-by-step guidance. Read it, then send it yourself. **Ask AI** is not offered when AI cannot run.
+**Ask AI**, on the rows of what the connected modules found and on the setup rows, opens the chat with the row in the composer. The message gives the row's title, why it is there, its stage, and asks the agent for step-by-step guidance. Read it, then send it yourself. **Ask AI** is not offered when AI cannot run.
 
 While none of these rows is tailored to the organization profile, **These actions are generic** says they come from module-wide figures. An administrator gets **Set up organization context**, or **Review organization context** once a profile exists. It opens :menu[Administration > Settings > Organization] in edit mode, as **Set up now** does. Anyone else reads that an administrator can set it up.
 
@@ -153,7 +153,7 @@ In **Cyber**, while **Known-exploited** is not tailored to your tech stack, **Th
 
 | Lane | What it holds |
 | --- | --- |
-| **Modules** | The events of the connected products, such as a sync or a registration |
+| **Modules** | The events of the connected modules, such as a sync or a registration |
 | **Automations** | The runs of the agents' assignments, and the digests |
 | **Fleets** | The runs of the fleets, only when a fleet ran in the period |
 | **Outcomes** | What a run produced: the actions it took, a digest published |
@@ -211,4 +211,4 @@ She clicks **Customize**, moves **Act now** above **Exposure briefing** and remo
 
 - [Review what agents did](/xtm-one/use/work-history/), behind **All executions**.
 - [Get answers from an agent in the chat](/xtm-one/use/chat/), behind **Start chatting** and **Follow up in chat**.
-- [XTM One in OpenCTI](/xtm-one/use/in-opencti/) and [XTM One in OpenAEV](/xtm-one/use/in-openaev/), for the products the posture is computed from.
+- [XTM One in OpenCTI](/xtm-one/use/in-opencti/) and [XTM One in OpenAEV](/xtm-one/use/in-openaev/), for the modules the posture is computed from.

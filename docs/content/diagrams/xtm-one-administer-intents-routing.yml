@@ -1,6 +1,6 @@
-title: A connected product asks for an intent, and the binding of highest priority for its vertical decides which agent answers
+title: A connected module asks for an intent, and the binding of highest priority for its vertical decides which agent answers
 lanes:
-  - label: Connected product
+  - label: Connected module
     tone: external
     nodes:
       - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Declares intents, vertical cti"}

@@ -22,7 +22,7 @@ An integration connects XTM One to a service your team works in, such as Jira, S
 - For an OAuth service, an administrator may already have registered the OAuth app of your organization in :menu[Administration > Settings > Integrations > OAuth Defaults]: you then only sign in. Otherwise, you need the client ID and secret of your own OAuth app, or an API key.
 - Talking to an agent from Slack or Microsoft Teams is a different connection, a channel bot set up by an administrator: see [Talk to agents from your messaging apps](/xtm-one/administer/channels/). An integration gives an agent the tools of the service.
 
-## The integrations of the registered products
+## The integrations of the registered modules
 
 When an administrator registers OpenCTI, OpenAEV or OpenCRQ with XTM One, the registration creates a company-managed integration named after the platform, for example **Grand Meridian OpenCTI**. Its **Authentication Mode** is **Managed by the platform**: it stores no credential, and every call carries a short-lived token signed for the person the agent works for. An agent bound to it reads and writes in OpenCTI with that person's rights, never more.
 
@@ -35,7 +35,7 @@ With Live writes on, agents also get the tools that validate a draft and that cr
 
 In a run no person is watching, such as an assignment or the background build of a CTEM cycle, XTM One does not send OpenCTI a request the person's role cannot pass. The tool answers that the request was not sent, and the run goes on, so the OpenCTI audit log records no refused access in that person's name. In a chat, the request goes to OpenCTI, since the person asked for it.
 
-What XTM One does in each product is in [XTM One in OpenCTI](/xtm-one/use/in-opencti/), [XTM One in OpenAEV](/xtm-one/use/in-openaev/) and [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
+What XTM One does in each module is in [XTM One in OpenCTI](/xtm-one/use/in-opencti/), [XTM One in OpenAEV](/xtm-one/use/in-openaev/) and [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
 
 ## The built-in web search
 

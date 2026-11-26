@@ -39,7 +39,7 @@ What surprises people:
 - **Hiding entity types is not a restriction.** [Hidden entity types](/opencti/configure/parameters/) only declutter the interface; the API still serves them.
 
 :::example[Let a hotel chain see only what you release to it]
-Example CERT runs one OpenCTI platform for the hotel chains it serves. The CTI team of Grand Meridian Hotels must read the intelligence the CERT releases to it, and nothing about the other chains.
+Example CERT runs one OpenCTI instance for the hotel chains it serves. The CTI team of Grand Meridian Hotels must read the intelligence the CERT releases to it, and nothing about the other chains.
 
 - In [Set platform security policies](/opencti/administer/policies/), the **Platform organization** of the **Platform main organization** card is Example CERT. The CERT's own analysts belong to it: they see everything their markings allow.
 - The Grand Meridian analysts get **Organizations**: Grand Meridian Hotels, and **Groups**: CTI analysts, a group allowed markings up to TLP:AMBER.

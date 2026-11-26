@@ -24,9 +24,9 @@ At the end of this journey, your teams start from what Filigran and the communit
 - **Security validation engineers** deploy the scenario, adapt its targets and its lure, and run it on a small team first (steps 6 and 7).
 - Anyone who works with XTM One asks an agent for the next item to deploy (step 9).
 
-## Why it spans several products
+## Why it spans several modules
 
-XTM Hub publishes content for each product, and each kind lands in its own screen: dashboards, playbooks, custom views, feeds and connectors in OpenCTI, scenarios and threat arsenal actions in OpenAEV. A deployment runs in the product, as the person who clicks, with that person's rights, so the content lands where that person works and nowhere else. An OpenAEV tenant connects to XTM Hub on its own: content deployed there reaches only that tenant.
+XTM Hub publishes content for each module, and each kind lands in its own screen: dashboards, playbooks, custom views, feeds and connectors in OpenCTI, scenarios and threat arsenal actions in OpenAEV. A deployment runs in the module, as the person who clicks, with that person's rights, so the content lands where that person works and nowhere else. An OpenAEV tenant connects to XTM Hub on its own: content deployed there reaches only that tenant.
 
 The library is a starting point, not a finished setup. Its content refers to labels, statuses, users, asset groups and senders of the platform it was built on, and only your platform knows yours. What the library offers and what to check before you rely on it is in the [XTM Hub content library](/opencti/configure/xtm-hub/content-library/).
 

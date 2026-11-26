@@ -97,7 +97,7 @@ New users of the tenant open OpenAEV in French, in the light theme, on the Velve
 :::
 
 :::xtm-one[The name XTM One shows]
-When OpenAEV is registered with XTM One, XTM One names it with the **Platform name** of the default tenant. Rename the default tenant's platform to tell your OpenAEV platforms apart in XTM One.
+When OpenAEV is registered with XTM One, XTM One names it with the **Platform name** of the default tenant. Rename the default tenant's platform to tell your OpenAEV instances apart in XTM One.
 :::
 
 ## What's next

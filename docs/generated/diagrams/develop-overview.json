@@ -1,4 +1,4 @@
-{"hash": "3866d6dbad597ca1",
+{"hash": "9153fe0e78f8af92",
 "full": {
   "width": 1077, "height": 294,
   "lanes": [
@@ -9,7 +9,7 @@
   "nodes": {
     "script": {"x":28,"y":52,"w":220,"h":58,"note":["curl, Python, an AI agent"]},
     "integration": {"x":28,"y":208,"w":220,"h":58,"note":["Connector, collector, injector"]},
-    "change": {"x":28,"y":130,"w":220,"h":58,"note":["A change to a product"]},
+    "change": {"x":28,"y":130,"w":220,"h":58,"note":["A change to a module"]},
     "mcp": {"x":427,"y":52,"w":233,"h":58,"note":["XTM One"]},
     "graphql": {"x":427,"y":130,"w":233,"h":58,"note":["OpenCTI"]},
     "rest": {"x":427,"y":208,"w":233,"h":58,"note":["OpenAEV and XTM One"]},

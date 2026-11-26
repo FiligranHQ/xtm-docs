@@ -10,7 +10,7 @@ personas: [developer]
 owner: docs-platform
 last_reviewed: 2026-11-09
 sidebar_position: 3
-no_screenshot: "This page installs command-line tools on a workstation: there is no product screen to show."
+no_screenshot: "This page installs command-line tools on a workstation: there is no module screen to show."
 migrated_from:
   - openaev:/development/environment-macos/
 ---
@@ -22,7 +22,7 @@ This page installs on macOS the tools you need to run OpenCTI or OpenAEV from so
 ## Before you start
 
 - A recent macOS, with administrator rights, and Homebrew installed.
-- Enough memory to give the Linux virtual machine of the container engine 8 GB: the development services run in it, and Elasticsearch alone starts with a 2 GB Java heap in both products.
+- Enough memory to give the Linux virtual machine of the container engine 8 GB: the development services run in it, and Elasticsearch alone starts with a 2 GB Java heap in both modules.
 - The versions below come from the code of OpenCTI 7.261030 and OpenAEV 3.261029. Contributions go to the default branches, `master` for OpenCTI and `main` for OpenAEV.
 
 | Tool | OpenCTI | OpenAEV | Where the code sets it |

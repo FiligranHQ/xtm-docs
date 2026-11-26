@@ -21,7 +21,7 @@ At the end of this journey, your endpoint detection and response (EDR) tool runs
 - **The AI agent builder** gives the night shift's agent the team's method for detection rules, as a skill, at the step [Write the missing rule with an agent](/xtm-one/build/skills/).
 - **The SOC analysts** of the night shift ask the agent for the rule, review it and deploy it.
 
-## Why it spans several products
+## Why it spans several modules
 
 OpenAEV measures what your defenses catch. It runs each action on your endpoints, through an OpenAEV agent or through your EDR, and its collectors read your security tools to mark each action detected or prevented, or not. Scheduled, the same scenario shows the trend run after run. See [How a scenario becomes a simulation](/openaev/concepts/scenarios-simulations/) and [How an attack becomes injects and expectations](/openaev/concepts/injects-expectations/).
 

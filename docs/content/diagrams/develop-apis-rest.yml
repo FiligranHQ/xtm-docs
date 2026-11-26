@@ -1,4 +1,4 @@
-title: A script calls the REST API of OpenAEV or XTM One with a token of its user, and each product checks that user's rights
+title: A script calls the REST API of OpenAEV or XTM One with a token of its user, and each module checks that user's rights
 lanes:
   - label: Your code
     tone: external

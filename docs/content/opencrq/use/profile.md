@@ -57,7 +57,7 @@ The **Preferences** card changes the interface for you only. **Theme**, **Pastel
 | --- | --- | --- |
 | **Language** | **Automatic**, **English**, **French** | The language of the interface. **Automatic** follows the tenant's **Default language**, set by an administrator, then your browser's language when it is English or French, and English otherwise |
 | **Theme** | **Light**, **Dark**, **System** | **System** follows the theme of your operating system |
-| **Pastel colours** | The **Softer tones** switch, off by default | On, severity, status and marking colours take softer tones: the chips of a finding's score history, for example, show a soft plain fill instead of an outline. Off, OpenCRQ draws the standard colours, the same in every Filigran product. The switch follows you in every tenant |
+| **Pastel colours** | The **Softer tones** switch, off by default | On, severity, status and marking colours take softer tones: the chips of a finding's score history, for example, show a soft plain fill instead of an outline. Off, OpenCRQ draws the standard colours, the same in every Filigran module. The switch follows you in every tenant |
 | **Home dashboard** | **Tenant home**, or one of the five dashboards | The dashboard **Home** opens on. **Tenant home**, with the tenant's choice in parentheses, follows the dashboard an administrator chose for the tenant |
 
 The language changes the interface, not your data: a scenario named in English stays in English. [Track cyber risk in money with dashboards](/opencrq/use/decide/dashboards/) describes the five dashboards and how an administrator sets the tenant's home.

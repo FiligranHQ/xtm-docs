@@ -10,7 +10,7 @@ last_reviewed: 2026-11-09
 sidebar_position: 71
 ---
 
-At the end of this journey, AI in your platform is under control: only your people sign in, each team reaches only the agents and secrets meant for it, prompts are screened for injection, a tool that changes something waits for a person, each AI feature of OpenCTI, OpenAEV and OpenCRQ is answered by the agent you chose, one switch stops every agent, and you can show what AI costs and who did what. An XTM One administrator drives it; the CISO and the auditors read the result. Every setting lives in XTM One, and applies to the AI of every registered product. The steps below are the pages to follow, in order.
+At the end of this journey, AI in your platform is under control: only your people sign in, each team reaches only the agents and secrets meant for it, prompts are screened for injection, a tool that changes something waits for a person, each AI feature of OpenCTI, OpenAEV and OpenCRQ is answered by the agent you chose, one switch stops every agent, and you can show what AI costs and who did what. An XTM One administrator drives it; the CISO and the auditors read the result. Every setting lives in XTM One, and applies to the AI of every registered module. The steps below are the pages to follow, in order.
 
 ::diagram{id=journey-govern-ai}
 
@@ -22,15 +22,15 @@ At the end of this journey, AI in your platform is under control: only your peop
 - **The SOC analyst** (Paul Garnier, on the night shift) answers the approvals of the runs made for him, and can stop his own activity.
 - **The CISO and the auditors** read what AI costs per team and who changed what, in the chat with Platform Insights and in :menu[Administration > Audit logs].
 
-## Why it spans several products
+## Why it spans several modules
 
-Once OpenCTI, OpenAEV and OpenCRQ are registered with XTM One, their AI runs in XTM One: each AI feature asks XTM One for an intent, such as `cti.container_summary` for the summary of a report, and an XTM One agent answers. The rules you set in XTM One therefore apply to the AI of every product.
+Once OpenCTI, OpenAEV and OpenCRQ are registered with XTM One, their AI runs in XTM One: each AI feature asks XTM One for an intent, such as `cti.container_summary` for the summary of a report, and an XTM One agent answers. The rules you set in XTM One therefore apply to the AI of every module.
 
-- **What they send to XTM One.** At each registration, every product declares its intents and its vertical (`cti`, `aev`, `crq`). OpenCTI and OpenAEV also send their license, and a registered platform in Enterprise Edition puts XTM One in Enterprise Edition. OpenCRQ sends no license: its edition follows the XTM license XTM One returns. See [What each edition of XTM One brings](/xtm-one/administer/editions/).
+- **What they send to XTM One.** At each registration, every module declares its intents and its vertical (`cti`, `aev`, `crq`). OpenCTI and OpenAEV also send their license, and a registered platform in Enterprise Edition puts XTM One in Enterprise Edition. OpenCRQ sends no license: its edition follows the XTM license XTM One returns. See [What each edition of XTM One brings](/xtm-one/administer/editions/).
 - **What XTM One decides for them.** Which agent answers each intent, per vertical; which tools ask before they run, with a switch per connected platform for the tools that change it; how many agent runs each person may spend; and, with the emergency stop of the whole platform, whether any AI runs at all, the autonomous attack paths XTM One drives for OpenAEV included.
-- **What stays in each product.** An agent reaches a product with a token signed for the person it works for, so it never exceeds that person's capabilities, markings or grants there. And each product keeps its own consent: **Ask Ariane** stays off in OpenCTI and OpenAEV until the Filigran AI Terms are accepted. See [What an agent can reach, and with which rights](/xtm-one/use/in-opencti/#what-an-agent-can-reach-and-with-which-rights).
+- **What stays in each module.** An agent reaches a module with a token signed for the person it works for, so it never exceeds that person's capabilities, markings or grants there. And each module keeps its own consent: **Ask Ariane** stays off in OpenCTI and OpenAEV until the Filigran AI Terms are accepted. See [What an agent can reach, and with which rights](/xtm-one/use/in-opencti/#what-an-agent-can-reach-and-with-which-rights).
 
-Set in each product alone, the same rules would drift apart, and none of them could stop an agent that runs in XTM One.
+Set in each module alone, the same rules would drift apart, and none of them could stop an agent that runs in XTM One.
 
 ## What you need
 
@@ -56,13 +56,13 @@ XTM One has two roles and no finer permissions: sharing decides what a person re
 
 ### Make risky tools wait for a person
 
-Tool approvals are off until you turn them on. Sophie sets **Night shift triage** to **Ask**; in :menu[Administration > Settings > Access and security > Tool approvals], Hélène checks that the reads of OpenCTI and OpenAEV run without asking while the creation of a Jira ticket asks first, and makes `code_interpreter` ask too. At 02:40, Paul approves in :menu[Work > Operations] the ticket the agent proposes; its OpenCTI searches never stopped. **Approval for connected platforms** decides, for each registered product, whether its tools that change data ask. See [Approve what agents do](/xtm-one/administer/ai-governance/).
+Tool approvals are off until you turn them on. Sophie sets **Night shift triage** to **Ask**; in :menu[Administration > Settings > Access and security > Tool approvals], Hélène checks that the reads of OpenCTI and OpenAEV run without asking while the creation of a Jira ticket asks first, and makes `code_interpreter` ask too. At 02:40, Paul approves in :menu[Work > Operations] the ticket the agent proposes; its OpenCTI searches never stopped. **Approval for connected platforms** decides, for each registered module, whether its tools that change data ask. See [Approve what agents do](/xtm-one/administer/ai-governance/).
 
 ### Screen what reaches the agents
 
 Some OpenCTI reports quote the fake booking request word for word: a text written to manipulate its reader, which **Velvet Harbor watcher** reads. Hélène connects **Nova Prompt Safety**, company-managed, keeps the community rules on **Log** for a week, then switches to **Block** those whose matches were all attacks, and screens the results of the web fetch tool. Each match is a `security_alert` entry in **Audit logs**. See [Protect agents from prompt injection](/xtm-one/administer/prompt-safety/).
 
-### Decide which agent answers in each product
+### Decide which agent answers in each module
 
 The **Summarize** of OpenCTI's reports is bound, built in, to **OpenCTI Entity Insights**. Hélène binds **Velvet Harbor watcher**, shared with **CTI team**, to `cti.container_summary` for the `cti` vertical, above the built-in agent. When Camille Roux summarizes a Velvet Harbor report in OpenCTI, the watcher answers; OpenAEV and OpenCRQ, on other verticals, are unchanged. See [Choose which agent answers](/xtm-one/administer/intents/).
 
@@ -88,5 +88,5 @@ Each step opens its page; the first one starts the journey, and every page of it
 
 - [Build an AI agent your team can trust](/workflows/build-an-agent/): the agents this journey governs, built with only the tools they need.
 - [Let the night shift ask agents from Slack](/workflows/answer-from-slack/): where approvals cannot be shown, and what a bot may run without asking.
-- [XTM One in OpenCTI](/xtm-one/use/in-opencti/#govern-ai-on-the-platform), [in OpenAEV](/xtm-one/use/in-openaev/) and [in OpenCRQ](/xtm-one/use/in-opencrq/): what each product shows of these settings.
+- [XTM One in OpenCTI](/xtm-one/use/in-opencti/#govern-ai-on-the-platform), [in OpenAEV](/xtm-one/use/in-openaev/) and [in OpenCRQ](/xtm-one/use/in-opencrq/): what each module shows of these settings.
 - [Run XTM One with AI switched off](/xtm-one/administer/running-without-ai/): keep AI off without cancelling anything.

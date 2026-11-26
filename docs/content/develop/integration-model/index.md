@@ -1,6 +1,6 @@
 ---
 title: Integration model
-description: How the XTM products connect to other systems through connectors, collectors, injectors and executors, and what every integration shares, OpenCTI first.
+description: How the XTM modules connect to other systems through connectors, collectors, injectors and executors, and what every integration shares, OpenCTI first.
 doc_type: explanation
 products:
   - opencti
@@ -11,13 +11,13 @@ owner: docs-develop
 last_reviewed: 2026-11-01
 ---
 
-An integration is a program that connects an XTM product to another system: a threat feed, a SIEM, a sandbox, an endpoint security tool. OpenCTI has connectors; OpenAEV has collectors, injectors and executors. This page explains what the four kinds share and where they differ, so you can pick the kind to build, the library to build it with, and how it will be deployed.
+An integration is a program that connects an XTM module to another system: a threat feed, a SIEM, a sandbox, an endpoint security tool. OpenCTI has connectors; OpenAEV has collectors, injectors and executors. This page explains what the four kinds share and where they differ, so you can pick the kind to build, the library to build it with, and how it will be deployed.
 
 ::diagram{id=develop-integration-model}
 
 ## The four kinds
 
-| Kind | Product | Direction | What it does | Library | Source repository |
+| Kind | Module | Direction | What it does | Library | Source repository |
 | --- | --- | --- | --- | --- | --- |
 | [Connector](/develop/integration-model/connectors/) | OpenCTI | In and out | Imports, enriches, analyzes, streams or exports threat intelligence as STIX 2.1 | [pycti](/develop/build/python-client/), and `connectors-sdk` on top of it | [OpenCTI-Platform/connectors](https://github.com/OpenCTI-Platform/connectors) |
 | [Collector](/develop/integration-model/collectors/) | OpenAEV | In | Reads detection and prevention results, or reference data, from a security tool or a source | `pyoaev` | [OpenAEV-Platform/collectors](https://github.com/OpenAEV-Platform/collectors) |

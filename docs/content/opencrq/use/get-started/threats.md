@@ -72,7 +72,7 @@ The tile reads **Syncing**, with the percent of the stream's history replayed, t
 "Bundle analyzed successfully." confirms the import, and the tile counts the threats of the bundle. "Bundle analysis failed. Please check the file and try again." means the file is not a bundle OpenCRQ can read. Without file storage, the button is not available, and the tile reads "File storage must be configured on the platform to import a bundle."
 
 :::example[Give Grand Meridian the threats Example CERT tracks]
-Grand Meridian Hotels already follows Velvet Harbor and Ember Tide in its OpenCTI platform, at `https://opencti.example.com`. The platform engineer has set the tenant's two variables. Grand Meridian keeps the management of streams to its CTI team, so the token's user lacks **Manage data sharing**, and OpenCRQ bound no stream at its start.
+Grand Meridian Hotels already follows Velvet Harbor and Ember Tide in its OpenCTI instance, at `https://opencti.example.com`. The platform engineer has set the tenant's two variables. Grand Meridian keeps the management of streams to its CTI team, so the token's user lacks **Manage data sharing**, and OpenCRQ bound no stream at its start.
 
 In the **Threats** step, Claire Morel selects **Configure** on the **OpenCTI** tile:
 

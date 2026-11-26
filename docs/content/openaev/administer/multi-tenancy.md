@@ -1,6 +1,6 @@
 ---
 title: Give each organization its own tenant
-description: Create a tenant for each organization you serve on one OpenAEV platform, give people access to it, connect its integrations, and delete or reactivate it.
+description: Create a tenant for each organization you serve on one OpenAEV instance, give people access to it, connect its integrations, and delete or reactivate it.
 doc_type: how-to
 products:
   - openaev
@@ -92,7 +92,7 @@ A platform started in [safe mode](/openaev/administer/run-modes/) runs no purge:
 :::
 
 :::example[Open a tenant for Grand Meridian Hotels]
-Example CERT runs one OpenAEV platform for the hotel chains it serves. Its administrator gives the default tenant to its first member chain, then creates a tenant for each other chain, and one, **Example CERT**, for its own analysts. The default tenant gets:
+Example CERT runs one OpenAEV instance for the hotel chains it serves. Its administrator gives the default tenant to its first member chain, then creates a tenant for each other chain, and one, **Example CERT**, for its own analysts. The default tenant gets:
 
 | Field | Value |
 | --- | --- |

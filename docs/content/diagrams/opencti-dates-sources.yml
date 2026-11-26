@@ -1,4 +1,4 @@
-title: Some dates come from the source, some from your platform, and imports move each by its own rule
+title: Some dates come from the source, some from your instance, and imports move each by its own rule
 lanes:
   - label: Source
     tone: external

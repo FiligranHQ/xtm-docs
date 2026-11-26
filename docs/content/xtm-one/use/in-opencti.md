@@ -140,7 +140,7 @@ The consequences:
 
 - **An agent sees what you see.** Knowledge under a marking you lack, or shared with another organization, stays out of its answers.
 - **An agent changes only what you could change**, and the history records the change under your name.
-- **Your email must be the same in both products.** An account with no match in OpenCTI gets no knowledge, and every call fails.
+- **Your email must be the same in both modules.** An account with no match in OpenCTI gets no knowledge, and every call fails.
 - **What leaves OpenCTI** is your question, the address of the page, the draft you are in, the files you attach, and what the agent reads through the API. XTM One sends them to the language models its administrator configured.
 
 A playbook step has nobody in front of it, so it acts as the account in its **Run as** setting, a service account or the person who builds the playbook. Left empty, it acts as the platform's initial administrator: set it. See [Automate with playbooks](/opencti/use/automate/playbooks/).

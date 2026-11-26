@@ -1,4 +1,4 @@
-title: An assistant calls a tool of an MCP server of XTM One, and the product runs it with the rights of the key's user
+title: An assistant calls a tool of an MCP server of XTM One, and the module runs it with the rights of the key's user
 lanes:
   - label: Client
     tone: external
@@ -10,7 +10,7 @@ lanes:
       - {id: cti, label: /mcp/opencti, icon: LogoXTMOne, note: OpenCTI tools}
       - {id: aev, label: /mcp/openaev, icon: LogoXTMOne, note: OpenAEV tools}
       - {id: crq, label: /mcp/opencrq, icon: LogoXTMOne, note: OpenCRQ tools}
-  - label: Products
+  - label: Modules
     tone: product
     nodes:
       - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: As the user}

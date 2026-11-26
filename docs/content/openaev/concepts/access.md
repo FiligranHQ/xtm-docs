@@ -77,7 +77,7 @@ The Security menu opens on **This tenant**. With the Enterprise Edition and a pl
 Some actions need two capabilities. To write a media pressure article in a scenario, a user needs **Manage assessment** and **Access channels**; without the second, the form says which capability is missing.
 
 :::example[Work out what Grand Meridian's people can do]
-Example CERT runs one OpenAEV platform for its member hotel chains, with a tenant for each. In the **Grand Meridian Hotels** tenant:
+Example CERT runs one OpenAEV instance for its member hotel chains, with a tenant for each. In the **Grand Meridian Hotels** tenant:
 
 - Hélène Marchetti, the CISO, is in **Observer**. She reads the results of every simulation, but cannot change or launch anything.
 - The security engineer of Grand Meridian is in **Manager**. He builds the scenario that replays Velvet Harbor against the front-desk workstations, launches it and reads its expectations.

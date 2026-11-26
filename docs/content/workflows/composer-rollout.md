@@ -25,7 +25,7 @@ At the end of this journey, the teams deploy the integrations they need from the
 - The **CTI team lead** deploys the OpenCTI connectors (step 3).
 - The **SOC manager** and the validation engineer deploy the OpenAEV collectors and injectors their scenarios need (steps 4 and 5).
 
-## Why it spans several products
+## Why it spans several modules
 
 An XTM deployment talks to many systems: threat feeds for OpenCTI, the EDR and SIEM that OpenAEV reads, the tools its injects drive. Run by hand, each integration is one more service to configure, update and watch, by the one person who has access to the host.
 

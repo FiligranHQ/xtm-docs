@@ -9,7 +9,7 @@ owner: docs-opencrq
 last_reviewed: 2026-11-04
 ---
 
-A control declared strong is an assumption until an attack tests it. The OpenAEV connector imports the outcome of the simulations OpenAEV ran on your assets: which technique was prevented or detected, by which kind of security platform, and which CVEs OpenAEV found. OpenCRQ lands them as findings on your assets and audits your controls with them, technique by technique: where a control held less often than you declared, the price of a scenario reads it weaker. This page connects an OpenAEV platform to a tenant and says what comes in. For the model behind the price, read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).
+A control declared strong is an assumption until an attack tests it. The OpenAEV connector imports the outcome of the simulations OpenAEV ran on your assets: which technique was prevented or detected, by which kind of security platform, and which CVEs OpenAEV found. OpenCRQ lands them as findings on your assets and audits your controls with them, technique by technique: where a control held less often than you declared, the price of a scenario reads it weaker. This page connects an OpenAEV instance to a tenant and says what comes in. For the model behind the price, read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).
 
 ## What the connector imports
 
@@ -52,7 +52,7 @@ When OpenAEV serves its snapshot export, the connector reads it instead, at the 
 
   | Variable | What it holds |
   | --- | --- |
-  | `CONNECTORS__OPENAEV__<tenant-uuid>__URL` | The base URL of the OpenAEV platform |
+  | `CONNECTORS__OPENAEV__<tenant-uuid>__URL` | The base URL of the OpenAEV instance |
   | `CONNECTORS__OPENAEV__<tenant-uuid>__TOKEN` | The API token of the OpenAEV user. Pass it through a secret store |
 
   The tenant's id is the first segment of the address of OpenCRQ once you are signed in to that tenant. Set both together, with a valid URL: with one alone, OpenCRQ does not start. Until the deployment carries them, the connector page shows **Unavailable** and says **Add this connector to your deployment configuration to use it.** See the [configuration reference](/reference/opencrq/configuration/#connectors).
@@ -76,7 +76,7 @@ To change the account or the schedule:
 :::
 
 :::example[Price the front desks on the latest phishing simulation]
-Grand Meridian's validation team simulates Velvet Harbor's phishing and credential theft on the front-desk workstations of its French hotels, in an OpenAEV platform at `https://openaev.example.com`. The risk manager wants the data breach on guest records priced on what those results show, not on declared strengths alone.
+Grand Meridian's validation team simulates Velvet Harbor's phishing and credential theft on the front-desk workstations of its French hotels, in an OpenAEV instance at `https://openaev.example.com`. The risk manager wants the data breach on guest records priced on what those results show, not on declared strengths alone.
 
 In OpenAEV, the administrator gives a user `OpenCRQ reader` a role with **Access assets**, **Access findings** and **Access assessment**, and generates its token. The platform engineer sets the entry of Grand Meridian's tenant, `01a043da-ff47-72c2-aaa4-7da56d85c83e`:
 

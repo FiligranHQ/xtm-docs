@@ -53,7 +53,7 @@ Each platform registers itself with XTM One, then registers again every 5 minute
    A platform outside xtm-docker, or a second XTM One, must use the exact same value. XTM One refuses every registration while the token is not set, and the published default `xtm-default-registration-token` cannot register a new platform. After 10 failed attempts in a minute, XTM One refuses a client with HTTP 429 until the minute ends.
    :::
 
-2. Give XTM One the admin email of the platforms. XTM One matches users by email between the products, so `XTM_ONE_ADMIN_EMAIL` must be the admin email of OpenCTI and OpenAEV.
+2. Give XTM One the admin email of the platforms. XTM One matches users by email between the modules, so `XTM_ONE_ADMIN_EMAIL` must be the admin email of OpenCTI and OpenAEV.
 
    ```bash
    grep -E '^(OPENCTI|OPENAEV|XTM_ONE)_ADMIN_EMAIL=' .env
@@ -99,9 +99,9 @@ Each platform registers itself with XTM One, then registers again every 5 minute
 
 ## Public and internal URLs
 
-Each product has two URLs, and the signed calls between them use both.
+Each module has two URLs, and the signed calls between them use both.
 
-- The **public URL** is the one users open in their browser. It is also the product's identity: every token a product signs names it as the issuer, and every token sent to a product must be addressed to it. xtm-docker builds it from `*_EXTERNAL_SCHEME`, `*_HOST` and `*_PORT` in `.env`, and passes it as `APP__BASE_URL` to OpenCTI, `OPENAEV_BASE-URL` to OpenAEV, `XTM_ONE__PLATFORM_URL` to OpenCRQ, and `BASE_URL` to both XTM One containers.
+- The **public URL** is the one users open in their browser. It is also the module's identity: every token a module signs names it as the issuer, and every token sent to a module must be addressed to it. xtm-docker builds it from `*_EXTERNAL_SCHEME`, `*_HOST` and `*_PORT` in `.env`, and passes it as `APP__BASE_URL` to OpenCTI, `OPENAEV_BASE-URL` to OpenAEV, `XTM_ONE__PLATFORM_URL` to OpenCRQ, and `BASE_URL` to both XTM One containers.
 - The **internal URL** is only where the other containers connect: `http://opencti:8080`, `http://openaev:8080`, `http://opencrq:3002` and `http://xtm-one:4000`. The public host names therefore do not need to resolve inside Docker. OpenCRQ opens OpenCTI objects at the internal URL of its connection, as [Connect the first tenant](/deploy/configure/opencrq/#connect-the-first-tenant) describes.
 
 When you publish the platforms on other URLs, change the three variables of each platform together, with the scheme set to `https` over TLS, as described in [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/). Keep these rules:
@@ -121,7 +121,7 @@ When you publish the platforms on other URLs, change the three variables of each
   :::
   ::::
 
-- Keep the clocks of the hosts synchronized with NTP. Each product signs its tokens for 10 minutes, and XTM One refuses a token from a clock more than 60 seconds ahead.
+- Keep the clocks of the hosts synchronized with NTP. Each module signs its tokens for 10 minutes, and XTM One refuses a token from a clock more than 60 seconds ahead.
 
   :::only{opencti="<7.260811"}
   This version of OpenCTI signs the tokens of its calls to the XTM One assistant for one hour, with no issuer nor audience, and has no setting for that lifetime.

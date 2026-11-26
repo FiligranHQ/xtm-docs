@@ -31,7 +31,7 @@ XTM One is the AI layer of the XTM platform: AI agents that read what OpenCTI kn
 <!-- shot: xtm-one-getting-started-sign-in -->
 :::
 
-You land on **Home**, the home dashboard. When no OpenCTI or OpenAEV platform is connected yet, it shows how to connect one instead: an administrator does that once for everyone.
+You land on **Home**, the home dashboard. When no OpenCTI or OpenAEV instance is connected yet, it shows how to connect one instead: an administrator does that once for everyone.
 
 ## Step 2: Find your way around
 

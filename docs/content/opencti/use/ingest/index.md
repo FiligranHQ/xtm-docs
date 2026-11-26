@@ -19,7 +19,7 @@ OpenCTI fills its knowledge base in two ways: automatically, from connectors and
 | Method | Use it when | Page |
 | --- | --- | --- |
 | Connector | A vendor, an open source feed or a tool has a dedicated integration in the catalog | [Import with connectors](/opencti/use/ingest/connectors/) |
-| OpenCTI stream | Another OpenCTI platform shares a live stream with you | [Import from another OpenCTI platform](/opencti/use/ingest/streams/) |
+| OpenCTI stream | Another OpenCTI instance shares a live stream with you | [Import from another OpenCTI instance](/opencti/use/ingest/streams/) |
 | TAXII feed | A Trusted Automated Exchange of Intelligence Information (TAXII) 2.1 server publishes a collection you can poll | [Import from a TAXII server](/opencti/use/ingest/taxii-feed/) |
 | TAXII Push | A partner or a tool sends STIX 2.1 objects to you instead of you fetching them | [Let partners push intelligence to you](/opencti/use/ingest/taxii-push/) |
 | RSS feed | A blog or a news site publishes articles you want as reports | [Turn RSS articles into reports](/opencti/use/ingest/rss-feed/) |

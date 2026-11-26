@@ -151,7 +151,7 @@ docker compose logs opencrq | grep -E "Registered with XTM One|Sign-in with XTM 
 
 The migrations create the `unaccent` extension. The owner of the database can create it, but a managed service that allows extensions one by one refuses any it does not list, and OpenCRQ then stops at its first start: on Azure Database for PostgreSQL, add `unaccent` to the `azure.extensions` server parameter first.
 
-Count the connections against PostgreSQL's `max_connections`, shared with the other products of the instance. With the default `split` profile, OpenCRQ runs two processes, each with its own pool of `POSTGRES__POOL_MAX` connections; the worker also keeps 5 connections for the job runtime and one per channel of database notifications it listens to. Plan about 50 connections with the defaults.
+Count the connections against PostgreSQL's `max_connections`, shared with the other modules of the instance. With the default `split` profile, OpenCRQ runs two processes, each with its own pool of `POSTGRES__POOL_MAX` connections; the worker also keeps 5 connections for the job runtime and one per channel of database notifications it listens to. Plan about 50 connections with the defaults.
 
 Give PostgreSQL at least 1 GB of shared memory (`shm_size: 1gb` in Docker Compose, a memory `emptyDir` on Kubernetes). With the 64 MB a container gets by default, a large query fails with `could not resize shared memory segment`, and the background job that ran it fails with it.
 
@@ -192,7 +192,7 @@ Keep these rules:
 
 ## Connectors of each tenant
 
-The credentials of a connector are set per tenant, never in the interface: two tenants can read two different OpenCTI platforms. A variable takes the identifier of the tenant, shown as **Identifier** in :menu[Settings > Parameters]: `CONNECTORS__<NAME>__<tenant identifier>__<FIELD>`.
+The credentials of a connector are set per tenant, never in the interface: two tenants can read two different OpenCTI instances. A variable takes the identifier of the tenant, shown as **Identifier** in :menu[Settings > Parameters]: `CONNECTORS__<NAME>__<tenant identifier>__<FIELD>`.
 
 At its first start, on a platform without any tenant, OpenCRQ creates one, so that you can write its connector variables before that start:
 

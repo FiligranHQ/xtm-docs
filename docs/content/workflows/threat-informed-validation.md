@@ -24,9 +24,9 @@ At the end of this journey, you know whether your defenses stop a threat your in
 - **CTI analysts** keep the threat current in OpenCTI: the techniques they link to it are what OpenAEV tests.
 - The risk manager reads the price of the gaps in OpenCRQ (step 8), and the CISO receives the summary XTM One writes (step 9).
 
-## Why it spans several products
+## Why it spans several modules
 
-Each product answers one part of the question "would we stop it today?":
+Each module answers one part of the question "would we stop it today?":
 
 - **OpenCTI** knows the threat: the intrusion set, the report, the attack patterns and vulnerabilities it uses. A security coverage turns that knowledge into a request to test, and holds the scores next to the intelligence that raised the question.
 - **OpenAEV** tests it: one inject per technique, run by its agents on your own endpoints, on a schedule, and scored on prevention and detection by what your security tools saw.

@@ -88,7 +88,7 @@ rm -force -Recurse "C:\Program Files (x86)\Filigran\OAEV Caldera"
 ```
 
 :::example[A Caldera lab for Grand Meridian's purple team]
-Grand Meridian's purple team already runs Caldera at `https://caldera.grand-meridian.example` for its own operations, and the platform runs OpenAEV without an Enterprise Edition license. The platform engineer adds the Caldera executor to the configuration of a new OpenAEV platform before its first start, which turns it into a deployed executor:
+Grand Meridian's purple team already runs Caldera at `https://caldera.grand-meridian.example` for its own operations, and the platform runs OpenAEV without an Enterprise Edition license. The platform engineer adds the Caldera executor to the configuration of a new OpenAEV instance before its first start, which turns it into a deployed executor:
 
 ```bash
 EXECUTOR_CALDERA_ENABLE=true

@@ -1,7 +1,7 @@
-# The XTM suite and what flows between its parts. One source for the visuals that show it:
-# the suite map (::suite-map) and each product's connections (::connections{product=...}).
+# The XTM platform and what flows between its parts. One source for the visuals that show it:
+# the suite map (::suite-map) and each module's connections (::connections{product=...}).
 # `short` is the label the suite map writes on a link.
-# The map: XTM Hub on top (the community entry point), XTM One at the center, OpenCTI and OpenAEV
+# The map: XTM Hub on top (the community portal), XTM One at the center, OpenCTI and OpenAEV
 # with XTM Composer between them, OpenCRQ below.
 # A flow says what the receiving side gets, in the words of its interface; check it in the code.
 # The roles and the short labels are filigran.io's (https://filigran.io/xtm-platform): eXtended Threat Management,
@@ -12,7 +12,7 @@ products:
   opencti: {label: OpenCTI, icon: LogoOpenCTI, role: Cyber threat intelligence, href: /opencti/}
   openaev: {label: OpenAEV, icon: LogoOpenAEV, role: Adversarial exposure validation, href: /openaev/}
   opencrq: {label: OpenCRQ, icon: LogoOpenCRQ, role: Cyber risk quantification, href: /opencrq/}
-  xtm-hub: {label: XTM Hub, icon: LogoFiligran, role: Community entry point, href: "https://hub.filigran.io"}
+  xtm-hub: {label: XTM Hub, icon: LogoFiligran, role: Community portal, href: "https://hub.filigran.io"}
   composer: {label: XTM Composer, icon: Puzzle, role: Integrations of OpenCTI and OpenAEV, href: /deploy/}
   microsoft: {label: Microsoft Defender, icon: Laptop, role: Through the Graph API}
   drata: {label: Drata, icon: ClipboardCheck, role: Compliance automation}

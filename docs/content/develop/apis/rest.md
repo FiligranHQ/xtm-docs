@@ -14,11 +14,11 @@ migrated_from:
   - openaev:/reference/apis/rest-api/
 ---
 
-Two products of the XTM platform have a REST API: OpenAEV, under `/api`, and XTM One, under `/api/v1`. Their interfaces call the same endpoints, so a script can do what a person does on screen, with the rights of the user whose token it sends. This page gets a token for each, sends a first request, and covers what both APIs share: the API reference, pagination, tenants and errors. OpenCTI has a GraphQL API instead: see [Query OpenCTI with GraphQL](/develop/apis/graphql/). OpenCRQ exposes its procedures through its own API: see the [OpenCRQ API reference](/reference/opencrq/api/).
+Two modules of the XTM platform have a REST API: OpenAEV, under `/api`, and XTM One, under `/api/v1`. Their interfaces call the same endpoints, so a script can do what a person does on screen, with the rights of the user whose token it sends. This page gets a token for each, sends a first request, and covers what both APIs share: the API reference, pagination, tenants and errors. OpenCTI has a GraphQL API instead: see [Query OpenCTI with GraphQL](/develop/apis/graphql/). OpenCRQ exposes its procedures through its own API: see the [OpenCRQ API reference](/reference/opencrq/api/).
 
 ::diagram{id=develop-apis-rest}
 
-| Product | Base path | Credential | API reference |
+| Module | Base path | Credential | API reference |
 | --- | --- | --- | --- |
 | OpenAEV | `/api`, and `/api/tenants/{tenantId}` for one tenant | The API token of a user, from **Profile** > **API access** | Swagger UI at `/swagger-ui/index.html`, OpenAPI document at `/api-docs` |
 | XTM One | `/api/v1` | A personal API key (`fcp-...`), from **My Profile** > **API Keys** | `/api/reference`, OpenAPI document at `/api/openapi.json` |
@@ -142,5 +142,5 @@ XTM One answers an error with a JSON body whose `detail` says why.
 ## What's next
 
 - [APIs and integration options](/develop/apis/), to choose between the APIs, the streams and the MCP servers.
-- [MCP servers](/develop/apis/mcp/), to let an AI client call the products.
+- [MCP servers](/develop/apis/mcp/), to let an AI client call the modules.
 - [Filters](/develop/apis/filters/), the filter group format of OpenAEV searches.

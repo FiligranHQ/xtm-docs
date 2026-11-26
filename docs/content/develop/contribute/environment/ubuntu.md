@@ -10,7 +10,7 @@ personas: [developer]
 owner: docs-platform
 last_reviewed: 2026-11-01
 sidebar_position: 1
-no_screenshot: "This page installs command-line tools on a workstation: there is no product screen to show."
+no_screenshot: "This page installs command-line tools on a workstation: there is no module screen to show."
 migrated_from:
   - opencti:/development/environment_ubuntu/
   - openaev:/development/environment-ubuntu/

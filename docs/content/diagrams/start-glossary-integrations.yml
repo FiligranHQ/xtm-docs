@@ -1,4 +1,4 @@
-title: Every kind of integration connects one product of the platform to other systems
+title: Every kind of integration connects one module of the XTM platform to other systems
 lanes:
   - label: Deploys them
     tone: product
@@ -11,7 +11,7 @@ lanes:
       - {id: collectors, label: Collectors, icon: Search, note: Read security tool results}
       - {id: injectors, label: Injectors, icon: Crosshair, note: Run injects}
       - {id: executors, label: Executors, icon: Laptop, note: Act on endpoints}
-  - label: Products
+  - label: Modules
     tone: product
     nodes:
       - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Cyber threat intelligence}

@@ -63,7 +63,7 @@ With no accepted risk, the card says "No accepted risk with an expiry in the pri
 
 ## Read the SLA adherence
 
-**SLA adherence** is marked **Soon**: it will measure the remediation service level agreements (SLAs) from OpenCRQ. Without OpenCRQ, the card says "SLA adherence needs OpenCRQ". Once an OpenCRQ platform is registered, it says "OpenCRQ is connected: SLA adherence arrives with its remediation SLAs", with a button that opens OpenCRQ.
+**SLA adherence** is marked **Soon**: it will measure the remediation service level agreements (SLAs) from OpenCRQ. Without OpenCRQ, the card says "SLA adherence needs OpenCRQ". Once an OpenCRQ instance is registered, it says "OpenCRQ is connected: SLA adherence arrives with its remediation SLAs", with a button that opens OpenCRQ.
 
 ## Set the posture target
 

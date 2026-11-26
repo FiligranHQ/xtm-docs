@@ -39,6 +39,6 @@ A request you make every week is a good candidate for an assignment: ask the age
 
 ## What needs the Enterprise Edition
 
-The chat, the agents and everything they do need the Enterprise Edition and AI switched on. On the Community Edition, these areas stay in the navigation with a lock, and the dashboard still shows the exposure posture of the connected products; :menu[Work > Operations] and :menu[Work > Files] stay readable. :menu[Work > Value] needs the Enterprise Edition too, and stays open when AI is switched off. See [What each edition of XTM One brings](/xtm-one/administer/editions/).
+The chat, the agents and everything they do need the Enterprise Edition and AI switched on. On the Community Edition, these areas stay in the navigation with a lock, and the dashboard still shows the exposure posture of the connected modules; :menu[Work > Operations] and :menu[Work > Files] stay readable. :menu[Work > Value] needs the Enterprise Edition too, and stays open when AI is switched off. See [What each edition of XTM One brings](/xtm-one/administer/editions/).
 
-XTM One agents also work inside the other products of the XTM platform: see [XTM One in OpenCTI](/xtm-one/use/in-opencti/), [XTM One in OpenAEV](/xtm-one/use/in-openaev/) and [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).
+XTM One agents also work inside the other modules of the XTM platform: see [XTM One in OpenCTI](/xtm-one/use/in-opencti/), [XTM One in OpenAEV](/xtm-one/use/in-openaev/) and [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/).

@@ -1,4 +1,4 @@
-title: A tenant parameter left empty takes the platform value, then the product default
+title: A tenant parameter left empty takes the platform value, then the module default
 lanes:
   - label: What a user sees
     tone: external
@@ -12,7 +12,7 @@ lanes:
     tone: core
     nodes:
       - {id: platform, label: Platform value, icon: Server, note: "Name, theme, language"}
-      - {id: default, label: Product default, icon: Info, note: "OpenAEV name, dark theme, automatic language"}
+      - {id: default, label: Module default, icon: Info, note: "OpenAEV name, dark theme, automatic language"}
 edges:
   - {from: user, to: tenant, label: else}
   - {from: tenant, to: platform, label: else}

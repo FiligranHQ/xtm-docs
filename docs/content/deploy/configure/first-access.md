@@ -46,7 +46,7 @@ OpenCRQ keeps no password and has no sign-in form: XTM One signs its users in, a
 | `APP__ADMIN__TOKEN` | What OpenCRQ does |
 | --- | --- |
 | Unset | Both uses below are off. `/api/xtm/peer-tokens` answers `404` |
-| A UUID version 4 | A request with `Authorization: Bearer` and this token acts as the service account `Deployment admin token`, which OpenCRQ creates in the **Admin** group of the initial tenant, the tenant of `INITIAL_TENANT__ID`. The token also opens `/api/xtm/peer-tokens`, where a deployment manager gives another XTM product a service account and a token in that tenant, and `/api/xtm/peer-tokens/revoke` |
+| A UUID version 4 | A request with `Authorization: Bearer` and this token acts as the service account `Deployment admin token`, which OpenCRQ creates in the **Admin** group of the initial tenant, the tenant of `INITIAL_TENANT__ID`. The token also opens `/api/xtm/peer-tokens`, where a deployment manager gives another XTM module a service account and a token in that tenant, and `/api/xtm/peer-tokens/revoke` |
 | Another value | OpenCRQ does not start, and names the key |
 
 OpenCRQ applies it at every start, like the other platforms: it creates or updates the `Deployment admin token` account, and keeps no copy of the token, so a new value replaces the old one at the next start. The initial tenant is the one OpenCRQ creates at its first start, as [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant) describes. If it does not exist when OpenCRQ starts, for example after it was deleted, OpenCRQ refuses the token on the API.

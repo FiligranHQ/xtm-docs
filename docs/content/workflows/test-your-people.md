@@ -21,7 +21,7 @@ At the end of this journey, your staff have received a copy of the lure an attac
 - **The SOC manager** reads the results beside the planner, and counts the reports the security operations center (SOC) received during the exercise: OpenAEV does not record them.
 - **The staff** who receive the lure, such as the front-desk teams, do not know about the exercise until the page they land on tells them.
 
-## Why it spans several products
+## Why it spans several modules
 
 A lure that works is one your staff have already met. OpenCTI knows it: the report that describes the campaign, and the sightings of what reached your organization. See [Explore entities](/opencti/use/explore/entities/).
 

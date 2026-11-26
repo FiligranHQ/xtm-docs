@@ -1,6 +1,6 @@
 ---
 title: Reference
-description: Exact settings, fields, components and keys of each XTM product,
+description: Exact settings, fields, components and keys of each XTM module and of XTM Composer,
   generated from the source code of each release.
 doc_type: landing
 hide_table_of_contents: true
@@ -21,7 +21,7 @@ The guides explain how to do things; the reference lists what exists: every conf
 
 ## Find what you look for
 
-A reference page answers one question: what is the exact name, and what does it accept? Start from what you look for, then pick your product.
+A reference page answers one question: what is the exact name, and what does it accept? Start from what you look for, then pick your module, or XTM Composer.
 
 | You look for | XTM One | OpenCTI | OpenAEV | OpenCRQ | XTM Composer |
 | --- | --- | --- | --- | --- | --- |
@@ -30,7 +30,7 @@ A reference page answers one question: what is the exact name, and what does it 
 | An API operation or an endpoint | [API](/reference/xtm-one/api/) | [GraphQL schema](/reference/opencti/graphql-schema/), [HTTP endpoints](/reference/opencti/http-endpoints/) | [OpenAPI](/reference/openaev/openapi/) | [API](/reference/opencrq/api/) | |
 | A tool an AI assistant may call | [MCP tools](/reference/xtm-one/mcp-tools/) | | | | |
 | A key to filter on | | [Filter keys](/reference/opencti/filter-keys/) | [Filter keys](/reference/openaev/filter-keys/) | | |
-| What the product ships with | | [Data model](/reference/opencti/data-model/), [vocabularies](/reference/opencti/vocabularies/), [inference rules](/reference/opencti/inference-rules/), [decay rules](/reference/opencti/decay-rules/), [playbook components](/reference/opencti/playbook-components/) | [Inject types](/reference/openaev/inject-types/) | [Attack outcomes](/reference/opencrq/attack-outcomes/), [business resources](/reference/opencrq/business-resources/), [controls](/reference/opencrq/controls/), [loss drivers](/reference/opencrq/loss-drivers/), [connectors](/reference/opencrq/connectors/) | |
+| What the module ships with | | [Data model](/reference/opencti/data-model/), [vocabularies](/reference/opencti/vocabularies/), [inference rules](/reference/opencti/inference-rules/), [decay rules](/reference/opencti/decay-rules/), [playbook components](/reference/opencti/playbook-components/) | [Inject types](/reference/openaev/inject-types/) | [Attack outcomes](/reference/opencrq/attack-outcomes/), [business resources](/reference/opencrq/business-resources/), [controls](/reference/opencrq/controls/), [loss drivers](/reference/opencrq/loss-drivers/), [connectors](/reference/opencrq/connectors/) | |
 | What runs in the background and what it reports | | [Managers](/reference/opencti/managers/), [metrics](/reference/opencti/metrics/), [audit events](/reference/opencti/audit-events/), [errors](/reference/opencti/errors/) | | [Background processes](/reference/opencrq/processes/) | |
 | A feature still in development | | [Feature flags](/reference/opencti/feature-flags/) | | [Feature flags](/reference/opencrq/feature-flags/) | |
 
@@ -38,16 +38,16 @@ A reference page answers one question: what is the exact name, and what does it 
 
 ::::tabs
 :::tab[Platform engineers]
-You set a deployment up and need the exact key. Open the configuration page of the product, filter on a word, and copy the environment variable into your `.env`. The guides of [Deploy](/deploy/) link to the section of each key they mention.
+You set a deployment up and need the exact key. Open the configuration page of the module, filter on a word, and copy the environment variable into your `.env`. The guides of [Deploy](/deploy/) link to the section of each key they mention.
 :::
 :::tab[Administrators]
-You build a role and need to know what each capability opens. The capabilities page of the product lists them by the label the role editor shows.
+You build a role and need to know what each capability opens. The capabilities page of the module lists them by the label the role editor shows.
 :::
 :::tab[Developers]
 You write a query, a filter or an integration. The schema, the endpoints and the filter keys give the exact names and types; [Develop](/develop/) explains how to call them.
 :::
 :::tab[AI agents]
-An agent that deploys, configures or queries a product reads these pages as Markdown: every page has a Markdown twin, and [llms.txt](/llms.txt) lists them all.
+An agent that deploys, configures or queries a module reads these pages as Markdown: every page has a Markdown twin, and [llms.txt](/llms.txt) lists them all.
 :::
 ::::
 

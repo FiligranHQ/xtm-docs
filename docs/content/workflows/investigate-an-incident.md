@@ -25,9 +25,9 @@ At the end of this journey, an intrusion is understood and closed: you know what
 - **Risk managers** read the new price of the breach and keep it in the risk register (step 6).
 - CTI analysts attribute the incident to its intrusion set in OpenCTI, and the CISO receives the summary.
 
-## Why it spans several products
+## Why it spans several modules
 
-An investigation answers four questions, and each product answers one:
+An investigation answers four questions, and each module answers one:
 
 - **What happened?** OpenCTI holds the incident, the sightings of the attacker's indicators at the victim, the event the lure used and the people it targeted, next to the reports on the threat. The case gathers them with the tasks of the response, so the next analyst who opens the intrusion set finds it.
 - **Would it work again?** OpenAEV replays the techniques of the threat on your own endpoints and scores what your security tools prevented and detected, once the response is done and on a schedule after.

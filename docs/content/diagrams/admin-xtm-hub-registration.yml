@@ -1,4 +1,4 @@
-title: A connected OpenCTI platform checks its link with the XTM Hub every hour and alerts its administrators when the link is lost
+title: A connected OpenCTI instance checks its link with the XTM Hub every hour and alerts its administrators when the link is lost
 lanes:
   - label: OpenCTI
     tone: product

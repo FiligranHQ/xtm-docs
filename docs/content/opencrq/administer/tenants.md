@@ -11,7 +11,7 @@ owner: docs-opencrq
 last_reviewed: 2026-11-20
 ---
 
-A tenant holds everything OpenCRQ knows about one organization: its risk scopes, scenarios, assets, controls, plans and budget reviews, its members, groups and roles, its service accounts, its integrations and its jobs. Nothing crosses from one tenant to another. With several tenants, one OpenCRQ platform serves several organizations, such as a CERT pricing the risk of each of its members, or a group whose subsidiaries keep their figures apart. This page creates tenants, connects each to its sources, renames one, and deletes one.
+A tenant holds everything OpenCRQ knows about one organization: its risk scopes, scenarios, assets, controls, plans and budget reviews, its members, groups and roles, its service accounts, its integrations and its jobs. Nothing crosses from one tenant to another. With several tenants, one OpenCRQ instance serves several organizations, such as a CERT pricing the risk of each of its members, or a group whose subsidiaries keep their figures apart. This page creates tenants, connects each to its sources, renames one, and deletes one.
 
 ::diagram{id=opencrq-tenants}
 

@@ -50,7 +50,7 @@ A few labels go with the counts. They are the names of the security platforms th
 - No personal data: no user names, email addresses, nor the IP addresses of users.
 - No secrets and no configuration values, beyond the on and off flags above.
 
-Filigran uses the data, aggregated, to improve the product and the user experience, and for internal and external statistics.
+Filigran uses the data, aggregated, to improve OpenAEV and its user experience, and for internal and external statistics.
 
 ## See whether it is on
 
@@ -61,7 +61,7 @@ Open :menu[Settings > Parameters]. In the **Tools** card, the **Telemetry manage
 No setting turns usage telemetry off. To stop it, block the platform's outbound access to `telemetry.oaev.filigran.io`, at your firewall or by DNS, then restart the platform: its start-up check fails, and it sends nothing until the next restart. Blocking without a restart only makes the sendings fail. A platform without internet access never sends telemetry.
 
 :::example[Tag Example CERT's platform, then stop its telemetry]
-Example CERT runs one OpenAEV platform for its member hotel chains. The platform engineer first tags it, so that Filigran can tell it apart from a test platform:
+Example CERT runs one OpenAEV instance for its member hotel chains. The platform engineer first tags it, so that Filigran can tell it apart from a test platform:
 
 ```yaml
 services:

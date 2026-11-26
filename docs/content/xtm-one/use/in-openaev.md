@@ -49,7 +49,7 @@ The panel also carries what the XTM One chat offers around a conversation:
 - **Your quota.** The count and the limit of your XTM One agent runs for the current period, as the XTM One chat shows them.
 - **Rating an answer.** A thumbs up or down, with a comment of up to 2,000 characters. It is the same rating as in XTM One: rating again replaces it, and the managers of the agent read it.
 
-Next to **Ask Ariane**, **CTEM Command Center** opens XTM One in a new tab, on the exposure posture across the products of the XTM platform.
+Next to **Ask Ariane**, **CTEM Command Center** opens XTM One in a new tab, on the exposure posture across the modules of the XTM platform.
 
 ### Approve what the assistant does
 
@@ -104,7 +104,7 @@ An agent never holds an OpenAEV token of its own. Each request carries your iden
 The consequences:
 
 - **An agent sees what you see**, in your tenant, and changes only what your capabilities allow, such as **Manage assessment** to create a scenario or **Launch assessment** to launch it.
-- **Your email must be the same in both products.** An account with no match in OpenAEV gets no data.
+- **Your email must be the same in both modules.** An account with no match in OpenAEV gets no data.
 - **What leaves OpenAEV** is your request, the address of the page, the files you attach, and what the agent reads through the API. XTM One sends them to the language models its administrator configured.
 
 ## Use OpenAEV from your own AI client
@@ -161,4 +161,4 @@ Without XTM One, an administrator connects a language model for **Ask AI** with 
 - [Build a scenario that replays an attack](/openaev/use/scenarios/build/), with the techniques XTM One suggests.
 - [Let AI run a penetration test](/openaev/use/attack-chaining/autonomous/), the autonomous attack.
 - [Connect the modules to each other](/deploy/configure/connect-modules/), to register OpenAEV with XTM One.
-- [XTM One in OpenCTI](/xtm-one/use/in-opencti/) and [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/), the same assistant in the other products.
+- [XTM One in OpenCTI](/xtm-one/use/in-opencti/) and [XTM One in OpenCRQ](/xtm-one/use/in-opencrq/), the same assistant in the other modules.

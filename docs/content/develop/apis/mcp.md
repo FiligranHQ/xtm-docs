@@ -13,7 +13,7 @@ last_reviewed: 2026-11-09
 sidebar_position: 6
 ---
 
-The modules of the XTM platform reach Model Context Protocol (MCP) clients through XTM One. XTM One serves one MCP server per registered product, OpenCTI, OpenAEV and OpenCRQ, and its own servers for its agents and its configuration. A client such as Claude, Cursor, VS Code or an agent you write calls their tools with the identity of a user, and each product applies that user's rights. This page is the reference of these servers in XTM One 1.261119: endpoints, protocol, authentication, answers and tools. To connect a client step by step, see [Use XTM One's own MCP servers from other clients](/xtm-one/build/platform-mcp-servers/).
+The modules of the XTM platform reach Model Context Protocol (MCP) clients through XTM One. XTM One serves one MCP server per registered module, OpenCTI, OpenAEV and OpenCRQ, and its own servers for its agents and its configuration. A client such as Claude, Cursor, VS Code or an agent you write calls their tools with the identity of a user, and each module applies that user's rights. This page is the reference of these servers in XTM One 1.261119: endpoints, protocol, authentication, answers and tools. To connect a client step by step, see [Use XTM One's own MCP servers from other clients](/xtm-one/build/platform-mcp-servers/).
 
 ::diagram{id=develop-apis-mcp}
 
@@ -30,7 +30,7 @@ Every endpoint is on the address of XTM One, such as `https://xtm-one.example.co
 | `/mcp/global` | | The agents an administrator exposes in :menu[Administration > Settings > Integrations > MCP Endpoint]; one tool per agent | AI is on | Enterprise |
 | `/mcp/xtm` | | XTM One itself: agents, assignments, runs and their traces, knowledge bases, prompts, skills, custom tools, integrations, MCP servers, variables | An administrator turns it on | Enterprise |
 
-The server name carries the platform name of your branding in place of XTM One. The three product servers, the platform MCP servers, call the APIs of the products and no language model. A product registered under its former identifier, `openbas` for OpenAEV or `opengrc` for OpenCRQ, is served at `/mcp/openaev` and `/mcp/opencrq` all the same.
+The server name carries the platform name of your branding in place of XTM One. The three module servers, the platform MCP servers, call the APIs of the modules and no language model. A module registered under its former identifier, `openbas` for OpenAEV or `opengrc` for OpenCRQ, is served at `/mcp/openaev` and `/mcp/opencrq` all the same.
 
 An administrator turns the platform MCP servers off with **Platform MCP Servers**, and `/mcp/xtm` on with **Platform Tools MCP Server**, in :menu[Administration > Settings > Integrations > MCP Endpoint]. With AI switched off, every endpoint refuses.
 
@@ -58,12 +58,12 @@ A call to a tool the server does not list is a JSON-RPC error `-32602`, `Unknown
 
 A request without a valid credential answers `401` with a `WWW-Authenticate` header that points to the protected resource metadata (RFC 9728), from which an OAuth client finds the sign-in by itself.
 
-A product server never holds a token of the product. For each call, XTM One signs a short-lived token for the user, matched by email in OpenCTI and OpenAEV. OpenCRQ matches it to the account tied to the user's XTM One account (the token's `sub`), never to an email address. The product applies that account's capabilities, markings and audit trail. Changes made through `/mcp/opencti` go straight to the knowledge, not to a draft.
+A module server never holds a token of the module. For each call, XTM One signs a short-lived token for the user, matched by email in OpenCTI and OpenAEV. OpenCRQ matches it to the account tied to the user's XTM One account (the token's `sub`), never to an email address. The module applies that account's capabilities, markings and audit trail. Changes made through `/mcp/opencti` go straight to the knowledge, not to a draft.
 
 | API key setting | Effect on the MCP servers |
 | --- | --- |
 | **Read-only** | `initialize`, `tools/list`, and `tools/call` on the tools marked read below. On `/mcp/user`, every tool runs an agent, so a read-only key calls none |
-| **Limit to specific agents** | The key reaches the `/mcp/user` tools of those agents only; the product servers and `/mcp/xtm` refuse it |
+| **Limit to specific agents** | The key reaches the `/mcp/user` tools of those agents only; the module servers and `/mcp/xtm` refuse it |
 
 A web page is accepted only from the address of XTM One or an origin of `CORS_ORIGINS`. Desktop, command-line and hosted clients send no `Origin` and are not concerned.
 
@@ -75,7 +75,7 @@ A web page is accepted only from the address of XTM One or an origin of `CORS_OR
 | `400` | A malformed request, an unsupported protocol version, or a batch outside `2025-03-26` |
 | `401` | No key, or an invalid, expired or revoked one |
 | `403` | AI is switched off, the server is turned off, the key does not cover the endpoint, the edition does not include it, or a web origin is not allowed. The `detail` says which |
-| `404` | The product of the endpoint is not registered with XTM One |
+| `404` | The module of the endpoint is not registered with XTM One |
 | `429` | The key or its user reached a rate limit or a quota |
 
 ## Tools of the OpenCTI server

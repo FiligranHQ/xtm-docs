@@ -9,7 +9,7 @@ lanes:
     nodes:
       - {id: bot, label: Channel bot, icon: ShieldCheck, note: "Whitelists, mention, anonymous", href: /xtm-one/administer/channels/}
       - {id: agent, label: Agent, icon: Bot, note: "Receive and Publish", href: /xtm-one/build/agents/}
-  - label: Suite
+  - label: Modules
     tone: product
     nodes:
       - {id: products, label: OpenCTI and OpenAEV, icon: LogoXTMOne, note: Read through integrations}

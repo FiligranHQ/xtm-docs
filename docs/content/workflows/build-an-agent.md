@@ -20,7 +20,7 @@ At the end of this journey, your team has an AI agent it can rely on: it quotes 
 - **The CTI analysts** (Camille Roux and the CTI team) use the agent once it is shared, read the weekly brief in the work history, and rate its answers.
 - **The administrator** (Hélène Marchetti, the CISO, administrator of XTM One) registered OpenCTI with XTM One, and sets the one budget the builder cannot: a limit above the platform's.
 
-## Why it spans several products
+## Why it spans several modules
 
 The agent lives in XTM One; the knowledge it summarizes lives in OpenCTI.
 
@@ -33,7 +33,7 @@ What passes between them: OpenCTI's reports go to the agent, read with the tools
 
 - **XTM One in Enterprise Edition, with AI switched on.** Agents, the chat, knowledge bases, skills, assignments and webhook triggers are AI areas, and connecting a new integration requires the Enterprise Edition. Sharing and the work history are not: **Operations** stays readable with AI off. The Enterprise Edition comes from a registered OpenCTI in Enterprise Edition or from an XTM One license; the included allowance of a connected platform, 30 agentic executions a day, is sized for trying the agent, not for a team. See [What each edition of XTM One brings](/xtm-one/administer/editions/).
 - **OpenCTI registered with XTM One.** A platform engineer sets the registration: see [Connect the modules to each other](/deploy/configure/connect-modules/#register-the-platforms-with-xtm-one).
-- **The same email in both products** for everyone the agent works for. An XTM One account with no match in OpenCTI gets no knowledge.
+- **The same email in both modules** for everyone the agent works for. An XTM One account with no match in OpenCTI gets no knowledge.
 - **In XTM One**, the **User** role is enough to build, test and share your own agent, knowledge base and skill. The **Administrator** role makes a resource company-managed, and raises a run budget above the platform's. The platform budget itself is set by a platform engineer in the deployment.
 - **In OpenCTI**, the **Access knowledge** capability for each analyst who chats with the agent, and for the builder: the agent's scheduled runs act as its owner.
 

@@ -1,11 +1,11 @@
-title: Your code reaches the XTM products through their APIs, or runs beside them as an integration
+title: Your code reaches the XTM modules through their APIs, or runs beside them as an integration
 lanes:
   - label: What you write
     tone: external
     nodes:
       - {id: script, label: Script or app, icon: Code2, note: "curl, Python, an AI agent", href: /develop/apis/}
       - {id: integration, label: Integration, icon: Puzzle, note: "Connector, collector, injector", href: /develop/integration-model/}
-      - {id: change, label: Contribution, icon: GitBranch, note: A change to a product, href: /develop/contribute/build-from-source/}
+      - {id: change, label: Contribution, icon: GitBranch, note: A change to a module, href: /develop/contribute/build-from-source/}
   - label: How it gets in
     tone: product
     nodes:
@@ -15,7 +15,7 @@ lanes:
   - label: Where it lands
     tone: store
     nodes:
-      - {id: products, label: The XTM products, icon: Layers, note: With the rights of its user}
+      - {id: products, label: The XTM modules, icon: Layers, note: With the rights of its user}
 edges:
   - {from: script, to: mcp}
   - {from: script, to: graphql, label: calls}

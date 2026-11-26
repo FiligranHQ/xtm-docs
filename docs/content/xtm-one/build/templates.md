@@ -27,7 +27,7 @@ A template is the design the presentations and reports of your agents wear: a pa
 - **Automations use the default.** An assignment, or a chat where the agent cannot ask, uses the platform's default presentation template: the built-in **XTM One Brand Deck**, unless an administrator chose another company template.
 - **Only the design travels.** A template restyles a deck through its palette, fonts, logos and footer pattern; it can never inject styling or scripts into the pages that render it.
 
-The **XTM One Brand Deck** ships with every platform: the product's purple palette on dark surfaces, the XTM One logo, and the logos, diagrams and screenshots of the XTM platform as assets. Built-in templates carry the **Built-in** badge and are read-only, because every upgrade rewrites them. To start from it, open it and click **Duplicate** (under **More actions** when the window is narrower than 1280 pixels, with **Export** and **Delete template**): the copy is yours.
+The **XTM One Brand Deck** ships with every platform: XTM One's purple palette on dark surfaces, the XTM One logo, and the logos, diagrams and screenshots of the XTM platform as assets. Built-in templates carry the **Built-in** badge and are read-only, because every upgrade rewrites them. To start from it, open it and click **Duplicate** (under **More actions** when the window is narrower than 1280 pixels, with **Export** and **Delete template**): the copy is yours.
 
 ## How reports use a template
 

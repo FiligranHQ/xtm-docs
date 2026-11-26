@@ -11,7 +11,7 @@ migrated_from:
   - openaev:/usage/inject-chaining/
 ---
 
-A real attack branches: the attacker moves on only when the first stage worked. Logical chains reproduce that in a simulation, by making an inject run only when the execution or an expectation of its parent ended the way you set. The second half of this page exports injects, with their content and expectations, to import them into another scenario, simulation, atomic test or OpenAEV platform. For a full graph of actions with shared outputs and execution boundaries, use [attack chaining](/openaev/use/attack-chaining/), an Enterprise Edition feature.
+A real attack branches: the attacker moves on only when the first stage worked. Logical chains reproduce that in a simulation, by making an inject run only when the execution or an expectation of its parent ended the way you set. The second half of this page exports injects, with their content and expectations, to import them into another scenario, simulation, atomic test or OpenAEV instance. For a full graph of actions with shared outputs and execution boundaries, use [attack chaining](/openaev/use/attack-chaining/), an Enterprise Edition feature.
 
 ::diagram{id=openaev-injects-chaining-conditions}
 

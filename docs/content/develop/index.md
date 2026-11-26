@@ -1,7 +1,7 @@
 ---
 title: Integrate and extend
 description: Build connectors, injectors and collectors, use the GraphQL, REST
-  and MCP APIs, and contribute to the XTM products.
+  and MCP APIs, and contribute to the XTM modules.
 doc_type: landing
 hide_table_of_contents: true
 sidebar_label: Overview
@@ -13,8 +13,8 @@ products:
 sidebar_position: 0
 ---
 
-:::product-hero{eyebrow="For developers and integrators" title="Connect your tools and your code to the XTM products" primary-label="Start here" primary-to="#start-here" secondary-label="Choose an API" secondary-to="/develop/apis/" diagram=develop-overview}
-Everything the interfaces do, your code can do: read and write knowledge in OpenCTI, script the simulations of OpenAEV, talk to the agents of XTM One. These pages explain the integration model the products share, how to build an integration, how to call each API, and how to contribute to the products.
+:::product-hero{eyebrow="For developers and integrators" title="Connect your tools and your code to the XTM modules" primary-label="Start here" primary-to="#start-here" secondary-label="Choose an API" secondary-to="/develop/apis/" diagram=develop-overview}
+Everything the interfaces do, your code can do: read and write knowledge in OpenCTI, script the simulations of OpenAEV, talk to the agents of XTM One. These pages explain the integration model the modules share, how to build an integration, how to call each API, and how to contribute to the modules.
 :::
 
 ## Start here
@@ -31,7 +31,7 @@ You read or change data from your own code, at the pace of your script.
 4. [Script OpenAEV and XTM One with their REST APIs](/develop/apis/rest/): a token of your user, the endpoints, the errors.
 :::
 :::tab[An AI agent or assistant]
-You let an assistant or your own agent work with the products.
+You let an assistant or your own agent work with the modules.
 
 1. [MCP servers](/develop/apis/mcp/): the Model Context Protocol servers XTM One exposes for OpenCTI, OpenAEV, OpenCRQ and itself, and every tool they offer.
 2. [XTM One chat API](/develop/apis/chat/): send a message to an agent over HTTP and read its answer as it comes.
@@ -47,7 +47,7 @@ You bring a source, a security tool or an attack technique to the platforms.
 5. [Integration manifest](/develop/build/manifest/): what the catalog shows and XTM Composer deploys from.
 :::
 :::tab[A contribution]
-You change a product or its documentation, and open a pull request.
+You change a module or its documentation, and open a pull request.
 
 1. [Build and run from source](/develop/contribute/build-from-source/): OpenCTI or OpenAEV from a clone, with the checks of the CI.
 2. [Add or change a translation in OpenCTI or OpenAEV](/develop/contribute/translations/): a new text of the interface, in every language.

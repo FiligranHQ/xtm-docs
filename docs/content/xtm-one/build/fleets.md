@@ -86,7 +86,7 @@ A fleet is opt-in: opening it, even a built-in one, switches nothing on. The fle
 :::steps
 1. On the fleet's page, click **Enable fleet**. When some automations are already on, the button reads **Enable N more**.
 2. In **Run as**, keep yourself, or, as an administrator, pick another user, such as a service account. The automations use that user's connected modules, model and memory.
-3. Untick the automations to leave off. An automation marked **Needs OpenCTI**, or another product, needs a module the user has not connected: connect it from **Open Integrations**, run as another user, or leave the automation out.
+3. Untick the automations to leave off. An automation marked **Needs OpenCTI**, or another module, needs one the user has not connected: connect it from **Open Integrations**, run as another user, or leave the automation out.
 4. Check the estimate, from the fleet's documented triggers, of how many runs a month it takes, and click **Enable N automations**.
 :::
 

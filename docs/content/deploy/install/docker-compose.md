@@ -123,7 +123,7 @@ All the configuration is in `.env`, except the ports, the image versions and the
    OPENCRQ_PORT=443
    ```
 
-   These URLs are also the identity each product signs its requests to the others with. Inside the stack, the containers reach each other on their service names (`http://opencti:8080`, `http://openaev:8080`, `http://xtm-one:4000`, `http://opencrq:3002`), so the public host names do not need to resolve inside Docker.
+   These URLs are also the identity each module signs its requests to the others with. Inside the stack, the containers reach each other on their service names (`http://opencti:8080`, `http://openaev:8080`, `http://xtm-one:4000`, `http://opencrq:3002`), so the public host names do not need to resolve inside Docker.
 
 6. Publish the platforms on local ports for the reverse proxy. `docker-compose.yml` publishes OpenCTI on `OPENCTI_PORT` and XTM One on `XTM_ONE_PORT`, so with the values above Docker would take port 443 that the proxy needs. It also publishes Elasticsearch and Redis, which run without authentication, on every interface. This command creates `docker-compose.override.yml`, which binds every published port to the host itself, with OpenCTI on 8080, OpenAEV on 8081 and XTM One on 8090. `ports: !override` replaces the ports of `docker-compose.yml` instead of adding to them:
 

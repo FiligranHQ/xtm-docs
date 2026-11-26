@@ -40,7 +40,7 @@ The **Policies** screen holds the three login messages of OpenAEV: a message sho
 The consent is asked again at every visit of the login page: OpenAEV keeps no record of who accepted it.
 
 :::example[Ask the hotel chains to accept the platform rules]
-Example CERT hosts the simulations of several hotel chains on one OpenAEV platform, and every user must accept its rules before logging in.
+Example CERT hosts the simulations of several hotel chains on one OpenAEV instance, and every user must accept its rules before logging in.
 
 | Field | Value |
 | --- | --- |

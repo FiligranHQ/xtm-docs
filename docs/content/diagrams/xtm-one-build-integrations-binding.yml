@@ -4,7 +4,7 @@ lanes:
     tone: external
     nodes:
       - {id: saas, label: Your tools, icon: Puzzle, note: "Jira, Slack, Microsoft 365"}
-      - {id: suite, label: Registered products, icon: LogoOpenCTI, note: "OpenCTI, OpenAEV, OpenCRQ"}
+      - {id: suite, label: Registered modules, icon: LogoOpenCTI, note: "OpenCTI, OpenAEV, OpenCRQ"}
   - label: Integrations
     tone: core
     nodes:

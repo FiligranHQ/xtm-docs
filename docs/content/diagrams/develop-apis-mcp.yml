@@ -9,7 +9,7 @@ lanes:
     nodes:
       - {id: platform, label: Platform servers, icon: LogoXTMOne, note: "/mcp/opencti, /mcp/openaev, /mcp/opencrq"}
       - {id: own, label: XTM One servers, icon: Bot, note: "/mcp/xtm, /mcp/user"}
-  - label: The products
+  - label: The modules
     tone: product
     nodes:
       - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: GraphQL API}

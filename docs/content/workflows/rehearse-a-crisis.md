@@ -21,7 +21,7 @@ At the end of this journey, your crisis cell has lived the night of an intrusion
 - **The AI agent builder** creates the XTM One agent that briefs the cell and shares it with the cell, at the step [Brief the cell with an agent](/xtm-one/build/agents/).
 - **The crisis cell**, led by the CISO (chief information security officer), plays: it receives the emails, answers the challenge, reads the article, asks the agent, and fills in the questionnaire.
 
-## Why it spans several products
+## Why it spans several modules
 
 A crisis exercise trains people, not machines, so OpenAEV plays it to them: each inject reaches the players of a team by email at its time, and each expectation scores how they react. See [How a scenario becomes a simulation](/openaev/concepts/scenarios-simulations/).
 
@@ -35,7 +35,7 @@ No link carries that figure from OpenCRQ to OpenAEV. XTM One carries it to the p
 - **OpenCRQ**, with the risk scenario the exercise is about already priced. See [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/).
 - **XTM One**, with the Enterprise Edition and AI switched on: agents and presentations are part of it. OpenCRQ and OpenCTI are registered with it, so their integrations exist. See [Connect the modules to each other](/deploy/configure/connect-modules/#register-the-platforms-with-xtm-one).
 - An OpenCRQ account for each member of the crisis cell, tied to their XTM One account at their first sign-in to OpenCRQ through XTM One. The agent reads OpenCRQ as the person who asks: OpenCRQ finds that person by their XTM One account, never by email, and a person with no tied account gets no data.
-- The capabilities, by their label in each product's role editor:
+- The capabilities, by their label in each module's role editor:
   - In OpenAEV, the exercise planner has **Manage assessment** and **Launch assessment**, **Manage teams & persons**, **Manage documents**, **Manage channels**, **Manage challenges**, and **Manage lessons learned** to create the questionnaire's categories.
   - In OpenCRQ, the risk manager needs no capability to read the dashboards.
   - In XTM One, any user creates an agent and shares it; only an administrator makes it a **Company-managed agent**.

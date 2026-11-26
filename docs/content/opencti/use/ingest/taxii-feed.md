@@ -1,6 +1,6 @@
 ---
 title: Import from a TAXII server
-description: Poll a TAXII 2.1 collection, from an information sharing community or another OpenCTI platform, and import its STIX objects on a schedule.
+description: Poll a TAXII 2.1 collection, from an information sharing community or another OpenCTI instance, and import its STIX objects on a schedule.
 sidebar_position: 3
 doc_type: how-to
 products:
@@ -12,7 +12,7 @@ migrated_from:
   - opencti:/usage/import/taxii-feed/
 ---
 
-A TAXII feed polls a collection on a Trusted Automated Exchange of Intelligence Information (TAXII) 2.1 server and imports the STIX objects published since its last run. Use it for the collections of an Information Sharing and Analysis Center (ISAC), a vendor or another OpenCTI platform. For how imported data reaches the knowledge base, read [How intelligence gets into OpenCTI](/opencti/use/ingest/).
+A TAXII feed polls a collection on a Trusted Automated Exchange of Intelligence Information (TAXII) 2.1 server and imports the STIX objects published since its last run. Use it for the collections of an Information Sharing and Analysis Center (ISAC), a vendor or another OpenCTI instance. For how imported data reaches the knowledge base, read [How intelligence gets into OpenCTI](/opencti/use/ingest/).
 
 ## Before you start
 
@@ -27,7 +27,7 @@ OpenCTI needs the API root, not the discovery URL or the collections URL. Many p
 | You were given | Enter |
 | --- | --- |
 | `https://tip.example/tipapi/tip21/collections` | `https://tip.example/tipapi/tip21` |
-| A collection of another OpenCTI platform | `https://<platform>/taxii2/root`, with the collection ID shown in its **TAXII collections** list |
+| A collection of another OpenCTI instance | `https://<platform>/taxii2/root`, with the collection ID shown in its **TAXII collections** list |
 
 ## Create the feed
 
@@ -50,7 +50,7 @@ Then fill it in:
 3. Enter the **TAXII server URL**: the API root.
 4. Keep **TAXII version** on **TAXII 2.1**, the only version supported.
 5. Enter the collection ID in **TAXII Collection**.
-6. Choose the **Authentication type** and enter the credentials: **Basic user / password**, **Bearer token** or **Client certificate**, or **None** for a public collection. For a collection of another OpenCTI platform, use **Bearer token** with the token of a user who can read the collection.
+6. Choose the **Authentication type** and enter the credentials: **Basic user / password**, **Bearer token** or **Client certificate**, or **None** for a public collection. For a collection of another OpenCTI instance, use **Bearer token** with the token of a user who can read the collection.
 7. Keep **Automatically create a service account** on and set its confidence level, or turn it off and choose an existing account.
 8. Set the import start date to the oldest object to fetch. Leave it empty to import the whole collection.
 9. Turn on **Copy confidence level to OpenCTI scores for indicators** to set the score of each imported indicator from its STIX confidence.

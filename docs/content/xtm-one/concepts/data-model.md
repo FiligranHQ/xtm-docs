@@ -48,7 +48,7 @@ How to build each one is in [What agents are made of](/xtm-one/concepts/agents/)
 
 | Record | Created when | Where to find it |
 | --- | --- | --- |
-| Conversation | Someone chats with an agent, in XTM One, in a messaging app or from another product | :menu[Chat], and the agent's **Chats** tab |
+| Conversation | Someone chats with an agent, in XTM One, in a messaging app or from another module | :menu[Chat], and the agent's **Chats** tab |
 | Workspace | Someone groups conversations on one topic, with the work items and shared state their agents build there | :menu[Work > Operations], tab **Workspaces** |
 | Run | An assignment fires, a person starts one, or a run hands work to another agent | :menu[Work > Operations], tab **Executions**; each run has its own page |
 | Background task | An agent delegates a task to another agent during a conversation or a run | :menu[Work > Operations], tab **Background Tasks** |

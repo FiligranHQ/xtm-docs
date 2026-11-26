@@ -1,7 +1,7 @@
 # Versions the documentation describes. The engine builds the whole site once per
 # version: the latest at /, each supported LTS line under /lts/<line>/. Guides are written
 # once; :::only blocks and generated reference pages differ per version.
-# Source: OpenCTI product life cycle (LTS every 6 months, supported 1 year).
+# Source: OpenCTI module life cycle (LTS every 6 months, supported 1 year).
 opencti:
   latest:
     version: 7.261119.0
@@ -15,8 +15,8 @@ opencti:
       version: 7.260309.0-lts.8
       tag: 7.260309.0-lts.8
       supported_until: 2027-04
-# The suite stack (capture/stack/xtm.compose.yml) runs the latest OpenCTI
-# with these versions, for the screens that span products (CTEM journeys).
+# The XTM platform stack (capture/stack/xtm.compose.yml) runs the latest OpenCTI
+# with these versions, for the screens that span modules (CTEM journeys).
 openaev:
   latest:
     version: 3.261118.0

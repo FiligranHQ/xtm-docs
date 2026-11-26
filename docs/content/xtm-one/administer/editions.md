@@ -10,7 +10,7 @@ migrated_from:
   - xtm-one:/administration/editions-and-licensing/
 ---
 
-XTM One is one platform with two editions, and every deployment contains all of it. The edition decides one thing: whether AI is licensed. In the **Community Edition**, the platform runs without AI: sign-in, users, settings, the connections to OpenCTI, OpenAEV and OpenCRQ and their MCP servers work, while agents, chat and automations are listed but locked. In the **Enterprise Edition**, every capability is available. A deployment is in Enterprise Edition as soon as an OpenCTI or OpenAEV platform in Enterprise Edition is connected to it, or an XTM One license is installed; no redeployment is needed. OpenCRQ is never a source: it takes its own edition from the XTM One license. Whether AI actually runs is a separate switch an administrator holds: see [Run XTM One with AI switched off](/xtm-one/administer/running-without-ai/).
+XTM One is one platform with two editions, and every deployment contains all of it. The edition decides one thing: whether AI is licensed. In the **Community Edition**, the platform runs without AI: sign-in, users, settings, the connections to OpenCTI, OpenAEV and OpenCRQ and their MCP servers work, while agents, chat and automations are listed but locked. In the **Enterprise Edition**, every capability is available. A deployment is in Enterprise Edition as soon as an OpenCTI or OpenAEV instance in Enterprise Edition is connected to it, or an XTM One license is installed; no redeployment is needed. OpenCRQ is never a source: it takes its own edition from the XTM One license. Whether AI actually runs is a separate switch an administrator holds: see [Run XTM One with AI switched off](/xtm-one/administer/running-without-ai/).
 
 ::diagram{id=xtm-one-editions-activation}
 
@@ -43,7 +43,7 @@ In the Community Edition, the locked areas stay in the menu with a lock, and hov
 
 Two ways, neither needs a redeployment:
 
-- **Connect a platform in Enterprise Edition.** Register an OpenCTI or OpenAEV platform that holds its own Enterprise Edition license: XTM One is in Enterprise Edition as soon as the registration is accepted. OpenCRQ sends no license when it registers, so registering it does not change the edition of XTM One. See [Connect the modules to each other](/deploy/configure/connect-modules/).
+- **Connect a platform in Enterprise Edition.** Register an OpenCTI or OpenAEV instance that holds its own Enterprise Edition license: XTM One is in Enterprise Edition as soon as the registration is accepted. OpenCRQ sends no license when it registers, so registering it does not change the edition of XTM One. See [Connect the modules to each other](/deploy/configure/connect-modules/).
 - **Install an XTM One license.** In :menu[Administration > Settings > Platform], the card **Enterprise License** shows the **Instance ID** that Filigran needs to issue the license. Click **Install License**, paste the license's PEM certificate and confirm. You can set it in `ENTERPRISE_LICENSE` instead, on the platform and on the worker, then restart: the variable wins over a license pasted in the interface. See the [XTM One configuration](/reference/xtm-one/configuration/#platform-mode).
 
 A license is refused when it was not issued by Filigran for XTM One, for another instance, or has ended. After its end date, a standard license keeps working for a 90-day grace period, and the card warns **License expires within 3 months** beforehand; a trial license stops at its end date.
@@ -53,13 +53,13 @@ A license is refused when it was not issued by Filigran for XTM One, for another
 A license carries two things, and never switches a capability on or off:
 
 - **Agentic capacity**: how many agentic executions the deployment may run per day, per month and per year. One agentic execution is one complete request: a chat turn, an assignment run, a background task, however many agents and tools it involves. The card shows it under **Agentic capacity**; a period the license sets no ceiling for reads **Unlimited**.
-- **Sub-Licenses**: the OpenCTI, OpenAEV and OpenCRQ platforms the license also puts in Enterprise Edition, by instance or **Global** for every platform of that product. Each gets its Enterprise Edition from XTM One when it registers.
+- **Sub-Licenses**: the OpenCTI, OpenAEV and OpenCRQ instances the license also puts in Enterprise Edition, by instance or **Global** for every instance of that module. Each gets its Enterprise Edition from XTM One when it registers.
 
 ::screenshot{id=xtm-one-editions-license-card alt="The Enterprise License card with its Enterprise Edition badge: the organization Filigran, a Standard license that expires on Dec 1, 2026, read from an environment variable, an agentic capacity of 50k a year, and OpenCTI, OpenAEV and OpenCRQ as Global sub-licenses."}
 
 ### The included allowance
 
-When the Enterprise Edition comes from a connected platform and no XTM One license is installed, the deployment runs under an included allowance of 30 agentic executions per day, 100 per month and 300 per year, shared by all its users. It is sized to discover and try the agents, not for production. Installing a license replaces it with the license's capacity.
+When the Enterprise Edition comes from a connected instance and no XTM One license is installed, the deployment runs under an included allowance of 30 agentic executions per day, 100 per month and 300 per year, shared by all its users. It is sized to discover and try the agents, not for production. Installing a license replaces it with the license's capacity.
 
 :menu[Administration > Settings > Usage and quotas > Quotas] shows which ceilings apply and where they come from, and lets you give users a default share and set overrides per group or per user within those ceilings.
 

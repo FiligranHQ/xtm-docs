@@ -74,7 +74,7 @@ The consequences:
 
 ## CTEM Command Center
 
-**CTEM Command Center**, the radar icon of the top bar, opens XTM One in a new tab, on the exposure posture across the products of the XTM platform. It works in the Community Edition, as soon as OpenCRQ is configured with XTM One.
+**CTEM Command Center**, the radar icon of the top bar, opens XTM One in a new tab, on the exposure posture across the modules of the XTM platform. It works in the Community Edition, as soon as OpenCRQ is configured with XTM One.
 
 ## Use OpenCRQ from your own AI client
 

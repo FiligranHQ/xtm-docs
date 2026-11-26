@@ -1,4 +1,4 @@
-title: One OpenAEV platform holds several tenants, each with its own data, people and integrations
+title: One OpenAEV instance holds several tenants, each with its own data, people and integrations
 lanes:
   - label: Platform
     tone: core

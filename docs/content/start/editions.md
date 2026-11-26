@@ -1,6 +1,6 @@
 ---
 title: Editions and licensing
-description: What the Community and Enterprise Editions of the XTM products include, how a Filigran license turns the Enterprise Edition on, and what happens when it expires.
+description: What the Community and Enterprise Editions of the XTM modules include, how a Filigran license turns the Enterprise Edition on, and what happens when it expires.
 doc_type: explanation
 products:
   - opencti
@@ -21,10 +21,10 @@ OpenCTI and OpenAEV each come in two editions. The Community Edition is free and
 
 ## One code base, two licenses
 
-The products follow the open core model. The source code of the Enterprise Edition features is public, in the same GitHub repository as the rest of the platform, but under another license:
+The modules follow the open core model. The source code of the Enterprise Edition features is public, in the same GitHub repository as the rest of the platform, but under another license:
 
 - the Community Edition is under the Apache License, Version 2.0;
-- the Enterprise Edition is under the Enterprise Edition License of the product, in the `LICENSE` file of its repository.
+- the Enterprise Edition is under the Enterprise Edition License of the module, in the `LICENSE` file of its repository.
 
 Each source file says in its header which license it falls under; a file without such a header belongs to the Community Edition.
 
@@ -81,7 +81,7 @@ The [audit log](/openaev/administer/audit-log/) of logins and changes needs it t
 
 An administrator applies the license from that card: its button opens the **OpenAEV Enterprise Edition (EE) license agreement** dialog, where you paste the license and click **Enable**. A license can also be set in `openaev.application-license`, in the [openaev block](/reference/openaev/configuration/#openaev) of the configuration reference: it replaces the one entered in the card, and the card then offers neither to change it nor to disable it. Once a license applies, the card reads **Activated** and shows its **License source**, **Organisation**, **Scope**, **Start date**, **Expiration date** and **License type**. It reads **Expired** once the license has ended, and **Disable Enterprise Edition** turns the edition off without losing data.
 
-**With the Filigran license of your deployment.** The license installed on XTM One, signed by Filigran for the XTM platform, also works as the license of OpenAEV when its OpenAEV sub-license is global or names this platform. The **Platform identifier** it names is in the **OpenAEV platform** card of :menu[Settings > Parameters]. Enter the license in the card or set it in the configuration, as above: the **License source** then reads **Filigran license**, instead of **OpenAEV license**.
+**With the Filigran license of your deployment.** The license installed on XTM One, signed by Filigran for the XTM platform, also works as the license of OpenAEV when its OpenAEV sub-license is global or names this instance. The **Platform identifier** it names is in the **OpenAEV platform** card of :menu[Settings > Parameters]. Enter the license in the card or set it in the configuration, as above: the **License source** then reads **Filigran license**, instead of **OpenAEV license**.
 
 **Through XTM One.** OpenAEV can also take its Enterprise Edition from XTM One, without a license of its own. When OpenAEV is registered with XTM One and the Filigran license installed there covers this platform, XTM One returns it each time OpenAEV registers, every 5 minutes, and OpenAEV verifies its signature itself. The **License source** then reads **Filigran license (through XTM One)**, and the card notes that the Filigran license of the connected XTM One grants the edition. It has no **Disable Enterprise Edition**: OpenAEV holds no license to disable. A valid license entered in OpenAEV or set in its configuration takes precedence. How OpenAEV registers with XTM One is in [Connect the modules](/deploy/configure/connect-modules/#register-the-platforms-with-xtm-one).
 

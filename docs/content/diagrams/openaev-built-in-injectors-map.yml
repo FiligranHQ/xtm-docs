@@ -17,7 +17,7 @@ lanes:
     nodes:
       - {id: players, label: Players, icon: Users, note: Of the target teams}
       - {id: endpoints, label: Endpoints, icon: Laptop, note: Through an executor}
-      - {id: cti, label: OpenCTI platform, icon: LogoOpenCTI, note: The CERT's tool}
+      - {id: cti, label: OpenCTI instance, icon: LogoOpenCTI, note: The CERT's tool}
 edges:
   - {from: email, to: players, label: emails}
   - {from: player, to: players, label: publishes}

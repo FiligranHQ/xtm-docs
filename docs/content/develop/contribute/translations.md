@@ -10,7 +10,7 @@ personas: [developer]
 owner: docs-platform
 last_reviewed: 2026-11-09
 sidebar_position: 5
-no_screenshot: "This page edits translation files and runs scripts in a terminal: there is no product screen to show."
+no_screenshot: "This page edits translation files and runs scripts in a terminal: there is no module screen to show."
 migrated_from:
   - openaev:/development/translations/
 ---
@@ -39,7 +39,7 @@ The key is the English text: `en.json` maps `"Add tags"` to `"Add tags"`, and `f
 ## Add a text
 
 :::steps
-1. Wrap the text in the translation function of the product: `t_i18n('Replay on the front desks')` in OpenCTI, `t('Replay on the front desks')` in OpenAEV.
+1. Wrap the text in the translation function of the module: `t_i18n('Replay on the front desks')` in OpenCTI, `t('Replay on the front desks')` in OpenAEV.
 2. Add the new keys to `en.json`:
 
    ```bash
@@ -53,7 +53,7 @@ The key is the English text: `en.json` maps `"Add tags"` to `"Add tags"`, and `f
    | Files read | `.jsx` and `.tsx` of the front end, and the `label: '...'` of the back end | `.js`, `.jsx` and `.tsx` of the front end |
    | Calls found | `t_i18n('...')` and `t_i18n("...")`, with or without options | `t('...')` with single quotes and no other argument |
 
-   Add the others to `en.json` by hand: in OpenAEV, a call with placeholder values, double quotes, an escaped quote, or in a `.ts` file; in both products, a text passed as a property that a component translates later, such as `label: 'Seen'`.
+   Add the others to `en.json` by hand: in OpenAEV, a call with placeholder values, double quotes, an escaped quote, or in a `.ts` file; in both modules, a text passed as a property that a component translates later, such as `label: 'Seen'`.
 
 3. Translate the new keys into the other languages, with your DeepL key in `SUBSCRIPTION_KEY`:
 
@@ -78,7 +78,7 @@ To change an existing translation, edit its value in the language file and run t
 
 A pull request fails when its check fails.
 
-| Product | Job and command | Fails when |
+| Module | Job and command | Fails when |
 | --- | --- | --- |
 | OpenCTI | **Frontend verify translation**, `yarn verify-translation` | A `t_i18n('...')` of the front end, or a `label: '...'` of the back end, has no key in the matching `en.json` |
 | OpenAEV | **Frontend Quality & Unit Tests**, `yarn i18n-checker` | See the table below |

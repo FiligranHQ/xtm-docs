@@ -1,4 +1,4 @@
-title: One OpenCRQ platform, one tenant per organization, each with its own people, data and connections
+title: One OpenCRQ instance, one tenant per organization, each with its own people, data and connections
 lanes:
   - label: Platform
     tone: core

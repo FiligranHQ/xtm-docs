@@ -8,7 +8,7 @@ owner: docs-xtm-one
 last_reviewed: 2026-11-16
 ---
 
-Before you quote the value of your AI agents to a committee, you need to know where each number comes from. XTM One computes every figure of the **Value** page from the runs it recorded and from a catalog of minutes and hourly rates. No figure comes from a language model, and reading one never starts a run. This page explains the model, the label each input carries, what is counted and what is not, and how to replace the catalog's defaults with your own numbers. In the product, the same explanation is the **How value is computed** page.
+Before you quote the value of your AI agents to a committee, you need to know where each number comes from. XTM One computes every figure of the **Value** page from the runs it recorded and from a catalog of minutes and hourly rates. No figure comes from a language model, and reading one never starts a run. This page explains the model, the label each input carries, what is counted and what is not, and how to replace the catalog's defaults with your own numbers. In XTM One, the same explanation is the **How value is computed** page.
 
 ::screenshot{id=xtm-one-value-methodology alt="The How value is computed page: the four formulas of The model, each followed by a worked example in numbers, then the inputs from Units to Setup cost, with the index of the sections on the left."}
 

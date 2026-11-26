@@ -155,7 +155,7 @@ OpenCTI applies these values with its own HTTP agents, and clears the proxy vari
 
 ## Set how OpenAEV agents check certificates and proxies
 
-Two settings of the OpenAEV platform do not act on the platform: OpenAEV writes them into the installation commands of its agents and into the commands its agents run. They decide how the agents on your endpoints reach the platform.
+Two settings of the OpenAEV instance do not act on the instance: OpenAEV writes them into the installation commands of its agents and into the commands its agents run. They decide how the agents on your endpoints reach the instance.
 
 | Variable on `openaev` | Default | When `true` |
 | --- | --- | --- |

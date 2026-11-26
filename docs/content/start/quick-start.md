@@ -18,7 +18,7 @@ XTM One, the AI layer at the center of the platform, OpenAEV, OpenCRQ and XTM Co
 ::diagram{id=start-quick-start}
 
 :::note
-The deployment starts the latest release of each product, whatever version of this documentation you read. Long-term support (LTS) versions need a license and their own image tags: see [Release lifecycle](/deploy/upgrade/lifecycle/).
+The deployment starts the latest release of each module, whatever version of this documentation you read. Long-term support (LTS) versions need a license and their own image tags: see [Release lifecycle](/deploy/upgrade/lifecycle/).
 :::
 
 ## What you need

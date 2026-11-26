@@ -11,7 +11,7 @@ migrated_from:
   - xtm-one:/usage/resources/platform-tools-mcp-server/
 ---
 
-XTM One is also a Model Context Protocol (MCP) server. From an MCP client you already use, such as Claude, Cursor, VS Code or Codex, you can search and update the OpenCTI knowledge, the OpenAEV scenarios or the OpenCRQ risk registered with XTM One, and read the traces of your agents and fix their configuration in XTM One itself. Every call runs as you, with your permissions in each product. This page finds your endpoints, connects a client, and says what each server can and cannot do. To give XTM One agents the tools of another MCP server, see [Connect an MCP server](/xtm-one/build/mcp-servers/).
+XTM One is also a Model Context Protocol (MCP) server. From an MCP client you already use, such as Claude, Cursor, VS Code or Codex, you can search and update the OpenCTI knowledge, the OpenAEV scenarios or the OpenCRQ risk registered with XTM One, and read the traces of your agents and fix their configuration in XTM One itself. Every call runs as you, with your permissions in each module. This page finds your endpoints, connects a client, and says what each server can and cannot do. To give XTM One agents the tools of another MCP server, see [Connect an MCP server](/xtm-one/build/mcp-servers/).
 
 ::diagram{id=xtm-one-build-platform-mcp-servers-endpoints}
 
@@ -24,19 +24,19 @@ XTM One is also a Model Context Protocol (MCP) server. From an MCP client you al
 | `/mcp/opencrq` | OpenCRQ: frameworks and requirements, control capabilities, assessments, risk scenarios, financial summaries, assets, vulnerabilities, treatment plans | As soon as an OpenCRQ is registered |
 | `/mcp/xtm` | XTM One itself: agent traces, agents, assignments, runs, knowledge bases, prompts, skills, custom tools, integrations, MCP servers, variables | Once an administrator enables it; requires the Enterprise Edition |
 
-The three product servers, called the platform MCP servers, are available in the Community Edition: they call the products' APIs and no language model. Each takes the full address of your instance, for example `https://xtm-one.grand-meridian.example/mcp/opencti`, and uses the MCP Streamable HTTP transport.
+The three module servers, called the platform MCP servers, are available in the Community Edition: they call the modules' APIs and no language model. Each takes the full address of your instance, for example `https://xtm-one.grand-meridian.example/mcp/opencti`, and uses the MCP Streamable HTTP transport.
 
 All of them need AI to be switched on. An administrator can turn the platform MCP servers off with **Platform MCP Servers**, and turn the XTM One server on with **Platform Tools MCP Server**, both in :menu[Administration > Settings > Integrations > MCP Endpoint]. The XTM One server is off by default because it changes the platform's own configuration.
 
 :::xtm-one[Your rights, not XTM One's]
-XTM One never stores the products' API tokens for these servers. For each call it signs a short-lived token for your user, matched by email in OpenCTI and OpenAEV. OpenCRQ matches it to the account tied to your XTM One account, never to an email address. Your capabilities, data markings and audit trail apply there exactly as if you did it yourself. On `/mcp/xtm`, you see and change what you could in the XTM One interface: company-managed objects stay read-only unless you are an administrator.
+XTM One never stores the modules' API tokens for these servers. For each call it signs a short-lived token for your user, matched by email in OpenCTI and OpenAEV. OpenCRQ matches it to the account tied to your XTM One account, never to an email address. Your capabilities, data markings and audit trail apply there exactly as if you did it yourself. On `/mcp/xtm`, you see and change what you could in the XTM One interface: company-managed objects stay read-only unless you are an administrator.
 :::
 
 ## Find your endpoints
 
 Open your profile from the user menu (**My Profile**), then the **MCP Endpoint** tab.
 
-- The **Platform MCP Servers** card lists one server per product, **Connected** or **Registered** with its address and a copy button, and **Config** to copy a client configuration. A product not registered with XTM One shows **Not connected**.
+- The **Platform MCP Servers** card lists one server per module, **Connected** or **Registered** with its address and a copy button, and **Config** to copy a client configuration. A module not registered with XTM One shows **Not connected**.
 - The **Platform Tools MCP Server** card, once an administrator has enabled it, shows the address of `/mcp/xtm` and the packages under **Install in your client**.
 
 ::screenshot{id=xtm-one-build-platform-mcp-servers-profile alt="The Platform MCP Servers card of the MCP Endpoint tab, 3 connected: OpenCTI with 28 tools and OpenAEV with 52, each Connected with its version, its address under /mcp/, a copy button and Config."}
@@ -109,7 +109,7 @@ On `/mcp/xtm`, reading the traces of every agent at once is for administrators; 
 | --- | --- | --- |
 | `401` | No key, or an invalid or revoked one | Check the `Authorization` header and that the key is active. A package whose key you revoked must be downloaded again. |
 | `403` | AI is switched off, the server is turned off, or `/mcp/xtm` lacks the Enterprise Edition | The message says which. Ask an administrator. |
-| `404` | The product is not registered with XTM One | Register the OpenCTI, OpenAEV or OpenCRQ instance first. |
+| `404` | The module is not registered with XTM One | Register the OpenCTI, OpenAEV or OpenCRQ instance first. |
 | A tool is missing | It is outside the allow-list on purpose, or you have nothing it applies to | Administration tools are never exposed. On `/mcp/xtm`, the knowledge search appears only when you can read a knowledge base. |
 
 A web-based client is accepted only from XTM One's own address or an address an administrator allows (`CORS_ORIGINS`, see the [configuration reference](/reference/xtm-one/configuration/)). Desktop and command-line clients are not concerned.

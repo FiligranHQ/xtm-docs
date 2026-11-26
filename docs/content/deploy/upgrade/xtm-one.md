@@ -138,7 +138,7 @@ A release that renames a variable keeps reading the old name for a while, and lo
 
 ## Leave the published registration token
 
-An XTM One whose `PLATFORM_REGISTRATION_TOKEN` is `xtm-default-registration-token` runs with a published value, and so does one installed with the product's Compose file and an empty `PLATFORM_REGISTRATION_TOKEN`, which falls back to it. That value keeps the registered platforms connected, but registers no new one and changes no registered address, and XTM One sends the platforms no license certificate: a platform whose Enterprise Edition comes from the license of XTM One cannot prove it. In xtm-docker, an empty token refuses every registration instead, and the secrets script of [Install with Docker Compose](/deploy/install/docker-compose/) sets one of your own.
+An XTM One whose `PLATFORM_REGISTRATION_TOKEN` is `xtm-default-registration-token` runs with a published value, and so does one installed with the module's Compose file and an empty `PLATFORM_REGISTRATION_TOKEN`, which falls back to it. That value keeps the registered platforms connected, but registers no new one and changes no registered address, and XTM One sends the platforms no license certificate: a platform whose Enterprise Edition comes from the license of XTM One cannot prove it. In xtm-docker, an empty token refuses every registration instead, and the secrets script of [Install with Docker Compose](/deploy/install/docker-compose/) sets one of your own.
 
 :::steps
 1. Generate a token: `openssl rand -hex 32`.

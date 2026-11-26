@@ -1,6 +1,6 @@
-title: The home dashboard scores each stage of the exposure lifecycle from the connected products and averages them into one posture
+title: The home dashboard scores each stage of the exposure lifecycle from the connected modules and averages them into one posture
 lanes:
-  - label: Connected products
+  - label: Connected modules
     tone: external
     nodes:
       - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Threats and detection}

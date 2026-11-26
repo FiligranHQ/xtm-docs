@@ -106,7 +106,7 @@ When connectivity has been lost for 24 hours since the last successful check, Op
 | `smtp:email_max_cc_size` | `SMTP__EMAIL_MAX_CC_SIZE` | `500` | Maximum number of administrators in blind copy. Beyond it, only the first ones receive the email |
 
 :::example[Connect a production and a staging platform]
-Example CERT runs two OpenCTI platforms: production at `https://opencti.example.com` and staging at `https://opencti-staging.example.com`. Both should deploy XTM Hub dashboards for testing and use, under the XTM Hub organization "Example CERT". Staging is shut down every night, so its connectivity emails would only be noise. Production emails should reach the shared mailbox of the platform team.
+Example CERT runs two OpenCTI instances: production at `https://opencti.example.com` and staging at `https://opencti-staging.example.com`. Both should deploy XTM Hub dashboards for testing and use, under the XTM Hub organization "Example CERT". Staging is shut down every night, so its connectivity emails would only be noise. Production emails should reach the shared mailbox of the platform team.
 
 1. On each platform, open :menu[Settings > Filigran Experience], click the connect button of the **XTM Hub** card, then **Continue**.
 2. In the XTM Hub tab, log in and choose the organization **Example CERT**.
@@ -128,7 +128,7 @@ services:
       XTM__XTMHUB_TO_EMAIL: "cti-platform@example.com"
 ```
 
-Both cards then read connected, with the date and the administrator who connected them, and both platforms appear in the Example CERT organization on the XTM Hub. When staging is down for more than 24 hours, it goes to **Connectivity lost** without emailing anyone. When production loses the connection for 24 hours, the platform team's mailbox gets the email, and every administrator gets a blind copy.
+Both cards then read connected, with the date and the administrator who connected them, and both instances appear in the Example CERT organization on the XTM Hub. When staging is down for more than 24 hours, it goes to **Connectivity lost** without emailing anyone. When production loses the connection for 24 hours, the platform team's mailbox gets the email, and every administrator gets a blind copy.
 :::
 
 ## Disconnect the platform

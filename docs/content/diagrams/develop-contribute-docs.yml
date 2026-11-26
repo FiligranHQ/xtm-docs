@@ -1,11 +1,11 @@
-title: A page is Markdown in docs/, checked against the product code by the factory, illustrated by screens xtm-capture takes, and built by the engine for every version
+title: A page is Markdown in docs/, checked against the module code by the factory, illustrated by screens xtm-capture takes, and built by the engine for every version
 lanes:
   - label: You write
     tone: external
     nodes:
       - {id: page, label: Page, icon: FileText, note: "docs/, Markdown"}
       - {id: spec, label: Screen spec, icon: Camera, note: capture/shots.yml}
-  - label: From the product code
+  - label: From the module code
     tone: product
     nodes:
       - {id: atlas, label: xtm-atlas, icon: Search, note: "Labels, keys, routes"}

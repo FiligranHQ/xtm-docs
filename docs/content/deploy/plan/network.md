@@ -106,7 +106,7 @@ Browsers, and the links one platform shows to another, use the public URL of eac
 | XTM One | `XTM_ONE_EXTERNAL_SCHEME`, `XTM_ONE_HOST`, `XTM_ONE_PORT` | `http://localhost:8090` | `BASE_URL` and `FRONTEND_URL`, on `xtm-one` and `xtm-one-worker` |
 | OpenCRQ | `OPENCRQ_EXTERNAL_SCHEME`, `OPENCRQ_HOST`, `OPENCRQ_PORT` | `http://localhost:8082` | `XTM_ONE__PLATFORM_URL`, on `opencrq` |
 
-The public URL is also the identity each product signs its requests to the others with. XTM One also accepts tokens addressed to its internal URL: xtm-docker sets `XTM_AUTH_ACCEPTED_AUDIENCES=http://xtm-one:4000`.
+The public URL is also the identity each module signs its requests to the others with. XTM One also accepts tokens addressed to its internal URL: xtm-docker sets `XTM_AUTH_ACCEPTED_AUDIENCES=http://xtm-one:4000`.
 
 To publish the platforms over TLS behind a reverse proxy, set the scheme to `https` together with the host and the port, for example `OPENCTI_EXTERNAL_SCHEME=https`, `OPENCTI_HOST=opencti.example.com` and `OPENCTI_PORT=443`. See [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/).
 

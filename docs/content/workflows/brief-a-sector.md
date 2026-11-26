@@ -23,7 +23,7 @@ At the end of this journey, the members of the sector you serve receive, every m
 - An OpenCTI administrator sets up the mail server and the templates the brief is generated from.
 - The security contacts of the member organizations receive the brief by email, in blind copy.
 
-## Why it spans several products
+## Why it spans several modules
 
 **OpenCTI** holds everything the brief says, and keeps each fact tied to its source: the sector and its members, the threats that target it, the incidents and sightings at its members, and the reports they come from. The brief is one more report, so its content stays linked to the knowledge, and the next brief starts from it. OpenCTI then fills a template with the report and its objects, leaves out what is marked above the limit you set, and sends the document to a list of addresses.
 

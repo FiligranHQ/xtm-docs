@@ -13,7 +13,7 @@ migrated_from:
   - openaev:/deployment/platform/overview/
 ---
 
-The XTM platform runs as one stack. XTM One is at its center. OpenCTI, OpenAEV, OpenCRQ, their default integrations and XTM Composer always start with it, and all of them share one set of backing services: Elasticsearch, RabbitMQ, Redis, S3 storage and PostgreSQL. This page explains what each part is, which shared service each module uses and how the modules talk to each other, as the official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker), defines them. How each product works inside is on its own architecture page.
+The XTM platform runs as one stack. XTM One is at its center. OpenCTI, OpenAEV, OpenCRQ, their default integrations and XTM Composer always start with it, and all of them share one set of backing services: Elasticsearch, RabbitMQ, Redis, S3 storage and PostgreSQL. This page explains what each part is, which shared service each module uses and how the modules talk to each other, as the official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker), defines them. How each module works inside is on its own architecture page.
 
 ## What the stack is made of
 

@@ -15,7 +15,7 @@ migrated_from:
   - "opencti:/administration/Part 3 - How to Share Data With Organizations/"
 ---
 
-Organization segregation lets one OpenCTI platform serve several organizations, such as business units, ISAC members or customers, each seeing only the knowledge you share with it. This page takes you from planning to a running setup, then covers delegated user management and manual and automated sharing. Read [How OpenCTI decides who sees what](/opencti/administer/segregation/) first: segregation filters one shared knowledge base, it does not create separate copies.
+Organization segregation lets one OpenCTI instance serve several organizations, such as business units, ISAC members or customers, each seeing only the knowledge you share with it. This page takes you from planning to a running setup, then covers delegated user management and manual and automated sharing. Read [How OpenCTI decides who sees what](/opencti/administer/segregation/) first: segregation filters one shared knowledge base, it does not create separate copies.
 
 ## Before you start
 

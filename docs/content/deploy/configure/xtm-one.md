@@ -168,7 +168,7 @@ Any other variable goes in `docker-compose.override.yml`, under the `environment
 | Variable | Default | What to know |
 | --- | --- | --- |
 | `SECRET_KEY` | Required | Signs the sessions and the tokens XTM One sends, and encrypts the credentials it stores: provider keys, integration secrets, OAuth tokens. Never change it once XTM One has started. Changed or lost, every stored credential becomes unreadable and every session ends, with no way back but the old value |
-| `ADMIN_EMAIL` | `admin@filigran.io` in the product | The administrator account. At every start, XTM One creates it or makes it an active administrator again |
+| `ADMIN_EMAIL` | `admin@filigran.io` in the module | The administrator account. At every start, XTM One creates it or makes it an active administrator again |
 | `ADMIN_PASSWORD` | Required | The password of that account, applied again at every start. At most 72 bytes: a longer value stops the platform |
 | `ADMIN_TOKEN` | None | An API key for that account, for automation: it starts with `fcp-` and has 32 characters or more |
 
@@ -178,7 +178,7 @@ Because the administrator's password follows `.env` at every start, `.env` gives
 
 | Variable | Default | What to know |
 | --- | --- | --- |
-| `BASE_URL` | `http://localhost:4000` in the product | The public URL people open. It builds the links of emails and of single sign-on, and it is the issuer of every token XTM One signs for OpenCTI, OpenAEV and OpenCRQ: set the same value on both containers, as xtm-docker does |
+| `BASE_URL` | `http://localhost:4000` in the module | The public URL people open. It builds the links of emails and of single sign-on, and it is the issuer of every token XTM One signs for OpenCTI, OpenAEV and OpenCRQ: set the same value on both containers, as xtm-docker does |
 | `FRONTEND_URL` | Same as `BASE_URL` | Where the browser comes back after a single sign-on. Mail clients load the images of XTM One's emails from it, under `/email-assets/` |
 | `FORWARDED_ALLOW_IPS` | `127.0.0.1` | The proxies XTM One trusts, on `xtm-one`: an address, a CIDR network or a comma-separated list. It reads the client address from `X-Forwarded-For` and the scheme from `X-Forwarded-Proto` only on requests from them |
 | `TRUST_PROXY_HEADERS` | `false` | Trusts the forwarded headers from any peer, and takes the leftmost `X-Forwarded-For` value, which a client can write. Leave it off and use `FORWARDED_ALLOW_IPS` |
@@ -224,7 +224,7 @@ XTM One is in the Enterprise Edition with its own license, or when a registered 
 
 | Variable | Default | What it sets |
 | --- | --- | --- |
-| `PLATFORM_REGISTRATION_TOKEN` | None | The secret every platform registers with. Unset, XTM One refuses every registration. The published default of the product's Compose file, `xtm-default-registration-token`, keeps registered platforms connected but registers no new one, and XTM One then sends the platforms no license certificate. After 10 failed attempts in a minute, a client is refused with HTTP 429 until the minute ends |
+| `PLATFORM_REGISTRATION_TOKEN` | None | The secret every platform registers with. Unset, XTM One refuses every registration. The published default of the module's Compose file, `xtm-default-registration-token`, keeps registered platforms connected but registers no new one, and XTM One then sends the platforms no license certificate. After 10 failed attempts in a minute, a client is refused with HTTP 429 until the minute ends |
 | `OPENCTI_API_URL`, `OPENAEV_API_URL`, `OPENCRQ_API_URL` | The URL each platform registers with | Where XTM One calls each platform, fetches its signing keys and, for OpenAEV, sends its callbacks. Every link people get stays on the registered public URL. A change applies at the platform's next registration, within 5 minutes |
 | `XTM_AUTH_ACCEPTED_AUDIENCES` | None | The URLs the platforms reach XTM One on when they differ from `BASE_URL`, comma-separated. A platform version that addresses its tokens to that URL is refused unless it is listed |
 
@@ -232,7 +232,7 @@ XTM One is in the Enterprise Edition with its own license, or when a registered 
 
 ## Mail
 
-XTM One sends invitations, password resets and announcements of model changes by email. Neither xtm-docker nor the product's Compose file passes it a mail server: until you set `SMTP_HOSTNAME`, XTM One sends nothing, and writes the link of a password reset in its log instead.
+XTM One sends invitations, password resets and announcements of model changes by email. Neither xtm-docker nor the module's Compose file passes it a mail server: until you set `SMTP_HOSTNAME`, XTM One sends nothing, and writes the link of a password reset in its log instead.
 
 | Variable | Default | What it sets |
 | --- | --- | --- |
@@ -306,7 +306,7 @@ When XTM One runs its sandbox on OpenSandbox, the checks and services an agent r
 | --- | --- | --- |
 | `SANDBOX_REGISTRY_MIRROR_URL` | None | The mirror, such as `http://registry-mirror:8080`. Its host joins the egress of the command and service containers, on top of `OPENSANDBOX_NETWORK_ALLOW`, and npm, Yarn, corepack, pip and uv install from its `/npm/` and `/pypi/simple/` paths. The code interpreter and custom tools never use it. An address that is not `http` or `https`, or that holds a user, a password, a query or a fragment, stops XTM One at start |
 
-The product ships a mirror, `backend/sandbox/registry-mirror/nginx.conf`, for an unprivileged nginx (`nginxinc/nginx-unprivileged`) with the file mounted as `/etc/nginx/nginx.conf`, on port 8080. It answers only `GET` and `HEAD` on the packages of npm and PyPI and refuses every other path with `403`, so no one can publish or sign in through it. It drops the `Authorization` and `Cookie` headers, holds no credential, and rewrites the download links of the registries to itself. Its container needs DNS and egress to `registry.npmjs.org`, `pypi.org` and `files.pythonhosted.org`. It resolves them through the Kubernetes DNS, `kube-dns.kube-system.svc.cluster.local`: elsewhere, change its `resolver` line to the resolver of your network.
+The module ships a mirror, `backend/sandbox/registry-mirror/nginx.conf`, for an unprivileged nginx (`nginxinc/nginx-unprivileged`) with the file mounted as `/etc/nginx/nginx.conf`, on port 8080. It answers only `GET` and `HEAD` on the packages of npm and PyPI and refuses every other path with `403`, so no one can publish or sign in through it. It drops the `Authorization` and `Cookie` headers, holds no credential, and rewrites the download links of the registries to itself. Its container needs DNS and egress to `registry.npmjs.org`, `pypi.org` and `files.pythonhosted.org`. It resolves them through the Kubernetes DNS, `kube-dns.kube-system.svc.cluster.local`: elsewhere, change its `resolver` line to the resolver of your network.
 
 Keep the three registries out of `OPENSANDBOX_NETWORK_ALLOW`, so that the mirror stays the only way to them. With xtm-docker, add the variable to `docker-compose.override.yml`:
 

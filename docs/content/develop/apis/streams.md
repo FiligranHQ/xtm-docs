@@ -13,7 +13,7 @@ migrated_from:
   - opencti:/reference/streaming/
 ---
 
-OpenCTI sends every change of its knowledge base as a stream of events, over server-sent events (SSE): a long HTTP response that the platform keeps writing to. A consumer, such as the stream connector of a SIEM or another OpenCTI platform, stays connected and applies each creation, update, deletion and merge as it happens, and resumes where it stopped after a cut. This page is the reference of the protocol: the endpoints, the events and their fields, the parameters, the rules a live stream follows to keep a consumer consistent, and the settings a platform engineer tunes. To create a live stream and watch its consumers in the interface, see [Share knowledge with your security tools](/opencti/use/share/feeds/#create-a-live-stream). Every event below was received from OpenCTI 7.261030 on the demo data, and trimmed.
+OpenCTI sends every change of its knowledge base as a stream of events, over server-sent events (SSE): a long HTTP response that the platform keeps writing to. A consumer, such as the stream connector of a SIEM or another OpenCTI instance, stays connected and applies each creation, update, deletion and merge as it happens, and resumes where it stopped after a cut. This page is the reference of the protocol: the endpoints, the events and their fields, the parameters, the rules a live stream follows to keep a consumer consistent, and the settings a platform engineer tunes. To create a live stream and watch its consumers in the interface, see [Share knowledge with your security tools](/opencti/use/share/feeds/#create-a-live-stream). Every event below was received from OpenCTI 7.261030 on the demo data, and trimmed.
 
 ::diagram{id=develop-apis-streams}
 
@@ -232,7 +232,7 @@ A live stream does more than filter the raw stream. These rules keep the copy of
 
 ## Write a consumer
 
-The stream connectors of the [connector catalog](/opencti/use/ingest/connectors/) already consume live streams for SIEMs, EDRs and SOARs, and another OpenCTI platform consumes them as described in [Import from another OpenCTI platform](/opencti/use/ingest/streams/). For your own tool, a consumer needs four things: read the events, act on the `event` name, record the last ID, and reconnect from it.
+The stream connectors of the [connector catalog](/opencti/use/ingest/connectors/) already consume live streams for SIEMs, EDRs and SOARs, and another OpenCTI instance consumes them as described in [Import from another OpenCTI instance](/opencti/use/ingest/streams/). For your own tool, a consumer needs four things: read the events, act on the `event` name, record the last ID, and reconnect from it.
 
 :::example[Keep a blocklist in step with the SIEM stream]
 The SOC of Example CERT feeds an in-house blocklist service from the live stream `Hospitality indicators for the SIEM`, which publishes the indicators labelled `hotel-sector` with a score of 60 or more. This consumer, in Python with the standard library only, upserts or removes each indicator by its STIX ID, records the last event ID in `last-event-id.txt`, and resumes from it after a cut:
@@ -341,5 +341,5 @@ services:
 
 - [Share knowledge with your security tools](/opencti/use/share/feeds/): create a live stream, choose its filters and watch its consumers.
 - [Filters](/develop/apis/filters/): the filter format, and the keys that work on events.
-- [Import from another OpenCTI platform](/opencti/use/ingest/streams/): consume a live stream on another OpenCTI platform.
+- [Import from another OpenCTI instance](/opencti/use/ingest/streams/): consume a live stream on another OpenCTI instance.
 - [HTTP endpoints](/reference/opencti/http-endpoints/): every endpoint of the platform and how it authenticates.

@@ -1,4 +1,4 @@
-title: Your MCP client reaches the registered products and XTM One itself through XTM One's endpoints, always as you
+title: Your MCP client reaches the registered modules and XTM One itself through XTM One's endpoints, always as you
 lanes:
   - label: Your client
     tone: external
@@ -9,7 +9,7 @@ lanes:
     nodes:
       - {id: products, label: Platform MCP servers, icon: Server, note: "/mcp/opencti, /mcp/openaev, /mcp/opencrq"}
       - {id: xtm, label: Platform tools server, icon: LogoXTMOne, note: /mcp/xtm}
-  - label: Products
+  - label: Modules
     tone: product
     nodes:
       - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Knowledge}

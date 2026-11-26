@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot OpenAEV
-description: Fix the common problems of an OpenAEV platform, from a refused tenant or login to injects that do not run, and find the page that covers each part.
+description: Fix the common problems of an OpenAEV instance, from a refused tenant or login to injects that do not run, and find the page that covers each part.
 doc_type: how-to
 products:
   - openaev

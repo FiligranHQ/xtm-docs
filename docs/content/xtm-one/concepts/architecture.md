@@ -11,7 +11,7 @@ migrated_from:
   - xtm-one:/deployment/data-flow/
 ---
 
-XTM One is two services you run, the **platform** and the **worker**, on three stores: PostgreSQL, Redis and an S3-compatible object storage. People, schedules, webhooks and the other products of the XTM platform send it work. To do that work, it calls the AI providers you configure and the tools its AI agents act through. This page explains what each part does, where your data lives, what leaves the deployment when an agent answers, and how OpenCTI, OpenAEV and OpenCRQ connect. It is the model to keep in mind before you [deploy the XTM platform](/deploy/install/docker-compose/) or decide what an agent may reach.
+XTM One is two services you run, the **platform** and the **worker**, on three stores: PostgreSQL, Redis and an S3-compatible object storage. People, schedules, webhooks and the other modules of the XTM platform send it work. To do that work, it calls the AI providers you configure and the tools its AI agents act through. This page explains what each part does, where your data lives, what leaves the deployment when an agent answers, and how OpenCTI, OpenAEV and OpenCRQ connect. It is the model to keep in mind before you [deploy the XTM platform](/deploy/install/docker-compose/) or decide what an agent may reach.
 
 ::diagram{id=xtm-one-architecture-components}
 

@@ -45,14 +45,14 @@ A finding is one flaw on one asset. When two integrations report the same CVE on
 
 OpenCRQ shows where the same CVE lives in OpenCTI and OpenAEV, matched by its identifier:
 
-- On the CVE's page, the header always holds two emblems, OpenCTI then OpenAEV. When the product holds the CVE, its emblem is in colour, and selecting it opens the vulnerability there in a new tab. Hover over it to preview what you will find: the product, the object's type and name, and the facts the product returns, such as its **Findings**, **Affected assets**, **Simulations**, **Last simulation**, **Reports** or **Relationships**.
-- In **Unique findings**, a product mark beside a CVE's identifier shows only when that product holds the CVE. It opens the vulnerability there, with the same preview on hover.
+- On the CVE's page, the header always holds two emblems, OpenCTI then OpenAEV. When the module holds the CVE, its emblem is in colour, and selecting it opens the vulnerability there in a new tab. Hover over it to preview what you will find: the module, the object's type and name, and the facts the module returns, such as its **Findings**, **Affected assets**, **Simulations**, **Last simulation**, **Reports** or **Relationships**.
+- In **Unique findings**, a module mark beside a CVE's identifier shows only when that module holds the CVE. It opens the vulnerability there, with the same preview on hover.
 
   ::screenshot{id=opencrq-findings-cve-counterparts alt="The page of CVE-2024-3400 across the estate of Grand Meridian Hotels, with the OpenCTI and OpenAEV emblems in its header, the OpenCTI one in colour because OpenCTI holds the Vulnerability CVE-2024-3400."}
 
 A greyed emblem opens nothing; hover over it to read why:
 
-- **Not found in OpenCTI** or **Not found in OpenAEV**: the product is connected but does not hold this CVE yet. The emblem turns active once it does.
+- **Not found in OpenCTI** or **Not found in OpenAEV**: the module is connected but does not hold this CVE yet. The emblem turns active once it does.
 - **OpenCTI is not connected** or **OpenAEV is not connected**: the tenant's connector is not set. With **Manage Security**, the emblem opens the connector's page, and its preview ends with **Connect OpenCTI** or **Connect OpenAEV**. Without it, the preview reads **Ask an administrator to connect OpenCTI.** (or OpenAEV).
 - **OpenCTI could not be reached** or **OpenAEV could not be reached**: try again later.
 

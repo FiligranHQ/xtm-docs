@@ -13,7 +13,7 @@ migrated_from:
   - opencti:/usage/security-coverage/
 ---
 
-A security coverage tells the SOC, for one threat, how much of its attack patterns and vulnerabilities the defenses prevent and detect: which ATT&CK techniques of Velvet Harbor your EDR blocks, which ones your SIEM sees, and which ones nothing catches. OpenAEV can test them on your assets on a schedule and send the scores back to OpenCTI, so the coverage stays current as your defenses change; or you enter the results of tests run elsewhere, such as a red team exercise. This page shows how the two products stay in sync, how to create a coverage by hand or automatically, and how to read the scores.
+A security coverage tells the SOC, for one threat, how much of its attack patterns and vulnerabilities the defenses prevent and detect: which ATT&CK techniques of Velvet Harbor your EDR blocks, which ones your SIEM sees, and which ones nothing catches. OpenAEV can test them on your assets on a schedule and send the scores back to OpenCTI, so the coverage stays current as your defenses change; or you enter the results of tests run elsewhere, such as a red team exercise. This page shows how the two modules stay in sync, how to create a coverage by hand or automatically, and how to read the scores.
 
 ## How automated coverage works
 

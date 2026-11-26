@@ -1,7 +1,7 @@
 ---
 title: Put XTM One agents to work on your intelligence
 sidebar_label: AI-assisted intelligence
-description: Let XTM One agents label and summarize each new OpenCTI report inside a playbook, keep a weekly brief running, and review everything they did, in both products.
+description: Let XTM One agents label and summarize each new OpenCTI report inside a playbook, keep a weekly brief running, and review everything they did, in both modules.
 doc_type: journey
 journey: ai-assisted-intelligence
 products:
@@ -12,7 +12,7 @@ owner: docs-platform
 last_reviewed: 2026-11-09
 ---
 
-At the end of this journey, XTM One AI agents do part of your CTI team's reading: inside an OpenCTI playbook, one agent labels each new report that is about your sector and another writes its summary for the team, while an assignment writes a brief every week. Every agent works with the rights of a real account, only the agents an administrator bound can be called, and every run leaves a trace in both products. The CTI team lead drives it, with the AI agent builder who prepares the agents. The steps below are the pages to follow, in order.
+At the end of this journey, XTM One AI agents do part of your CTI team's reading: inside an OpenCTI playbook, one agent labels each new report that is about your sector and another writes its summary for the team, while an assignment writes a brief every week. Every agent works with the rights of a real account, only the agents an administrator bound can be called, and every run leaves a trace in both modules. The CTI team lead drives it, with the AI agent builder who prepares the agents. The steps below are the pages to follow, in order.
 
 ::diagram{id=journey-ai-assisted-intelligence}
 
@@ -23,11 +23,11 @@ At the end of this journey, XTM One AI agents do part of your CTI team's reading
 - **CTI analysts** receive the labelled and assigned reports and the summaries, and rate the weekly brief (step 7).
 - An XTM One administrator registers OpenCTI with XTM One once (step 1).
 
-## Why it spans several products
+## Why it spans several modules
 
 OpenCTI holds the intelligence and decides when work starts: a playbook listens to new reports, filters them and changes them. XTM One holds the agents: their instructions, their tools, their language models and who may use them. A playbook step hands its Structured Threat Information Expression (STIX) bundle to an agent and, for a transformation, carries on only with a valid STIX 2.1 bundle back.
 
-Each side keeps its own control. In XTM One, an intent says which job a product asks for and a binding says which agent answers it: **Transform with AI agent** asks for `cti.stix_transformer`, **Send to AI agent** for `cti.stix_consumer`, and the built-in **CTI STIX Transformer** and **CTI STIX Consumer** answer them by default. In OpenCTI, the **Run as** account of the step gives the agent its rights, never rights of its own. Read [XTM One in OpenCTI](/xtm-one/use/in-opencti/) for everything XTM One does in OpenCTI, and [Choose which agent answers each AI feature](/xtm-one/administer/intents/) for how bindings work.
+Each side keeps its own control. In XTM One, an intent says which job a module asks for and a binding says which agent answers it: **Transform with AI agent** asks for `cti.stix_transformer`, **Send to AI agent** for `cti.stix_consumer`, and the built-in **CTI STIX Transformer** and **CTI STIX Consumer** answer them by default. In OpenCTI, the **Run as** account of the step gives the agent its rights, never rights of its own. Read [XTM One in OpenCTI](/xtm-one/use/in-opencti/) for everything XTM One does in OpenCTI, and [Choose which agent answers each AI feature](/xtm-one/administer/intents/) for how bindings work.
 
 ## What you need
 

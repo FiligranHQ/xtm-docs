@@ -18,7 +18,7 @@ An AI assistant of XTM One builds a slide deck for you from a request in plain w
 ## Before you start
 
 - Presentations need the Enterprise Edition and AI switched on.
-- The assistant you ask carries the **Presentation Generation** tool. On XTM One, the **CTEM Assistant** (the General Assistant), the **XTM-One Assistant** and the assistant of each product (**OpenCTI Assistant**, **OpenAEV Assistant**, **OpenCRQ Assistant**) carry it from the start.
+- The assistant you ask carries the **Presentation Generation** tool. On XTM One, the **CTEM Assistant** (the General Assistant), the **XTM-One Assistant** and the assistant of each module (**OpenCTI Assistant**, **OpenAEV Assistant**, **OpenCRQ Assistant**) carry it from the start.
 
 ## Create a deck
 

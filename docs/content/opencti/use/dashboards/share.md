@@ -18,7 +18,7 @@ A dashboard can reach people beyond the users who already see it on your platfor
 | --- | --- | --- |
 | Colleagues and executives with an account | **Manage access restriction** on the dashboard, see [Build dashboards](/opencti/use/dashboards/#share-it-with-your-team-and-leadership) | The live dashboard, with the data their own access allows |
 | People without an account: partner hotels, a board, a screen in the operations room | A [public dashboard](#public-dashboards) | A read-only link, with the data you choose to expose |
-| Another OpenCTI platform, or a backup | A [JSON export](#export-and-import) | The widgets and their settings, not the data |
+| Another OpenCTI instance, or a backup | A [JSON export](#export-and-import) | The widgets and their settings, not the data |
 | Another team, from a ready-made design | The [XTM Hub](#dashboards-from-the-xtm-hub) | A dashboard built by Filigran or the community |
 
 ## Public dashboards

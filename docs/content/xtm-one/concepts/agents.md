@@ -53,6 +53,6 @@ The **Agents** list and the lists of knowledge bases, prompts, skills, MCP serve
 ## Where to start
 
 1. Put the documents the agent needs in a [knowledge base](/xtm-one/build/knowledge-bases/).
-2. Check that the services it reads are [integrations](/xtm-one/build/integrations/): the registered products already are.
+2. Check that the services it reads are [integrations](/xtm-one/build/integrations/): the registered modules already are.
 3. [Create the agent](/xtm-one/build/agents/), test it in the chat, and [share it](/xtm-one/build/sharing/) with the team that uses it.
 4. Give it recurring work with an [assignment](/xtm-one/build/agents/#give-it-recurring-work-with-an-assignment): a prompt it runs on a schedule, on a webhook call or on an event.

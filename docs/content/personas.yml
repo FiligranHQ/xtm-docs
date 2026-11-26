@@ -1,4 +1,4 @@
-# The readers of the XTM documentation. A persona is a person, not a product role: the same SOC
+# The readers of the XTM documentation. A persona is a person, not a module role: the same SOC
 # analyst looks up context in OpenCTI and checks detection expectations in OpenAEV. Every page
 # names its personas in frontmatter (`personas:`, the main one first); writers and agents write
 # for the main one (factory/STYLE.md, "Write for a persona"); the site shows them on the page and
@@ -6,7 +6,7 @@
 #
 # Sources: the OpenCTI user personas of the product team (Notion, "OpenCTI Users Persona":
 # Barbara, Erwan, Jamila, John, Anaïs, Sylvain, Lionel, Samantha) and the job titles customer
-# success and sales meet. A persona of another product without a named person yet keeps its role.
+# success and sales meet. A persona of another module without a named person yet keeps its role.
 #
 # Fields:
 #   label        what the site shows ("For CTI analysts")
@@ -20,7 +20,7 @@
 #                set Velvet Harbor targeting the hospitality sector, the CERT "Example CERT" that
 #                serves hotel chains, reports published in January 2026; values that the demo data
 #                has, capture/seed/opencti/demo.yml: 203.0.113.10 is Velvet Harbor's C2)
-#   products     per product: what they do with it, and the spaces (path prefixes) written for them
+#   products     per module: what they do with it, and the spaces (path prefixes) written for them
 
 personas:
   - id: cti-analyst
@@ -164,7 +164,7 @@ personas:
       Decides and funds: wants to know what matters for the risk of the company and what the
       teams achieve, without details. Very little time.
     knows: [the business, its risks, budgets]
-    explain: [what each product brings to the risk and to the teams, what the dashboards and reports say]
+    explain: [what each module brings to the risk and to the teams, what the dashboards and reports say]
     wants: The answer in the first paragraph, an overview, no procedure.
     examples: [see on one dashboard the threats targeting the hospitality sector this quarter, decide which control to fund from the quantified risks]
     products:
@@ -192,11 +192,11 @@ personas:
     label: administrators
     titles: [platform administrator, connector owner, security architect]
     who: >-
-      Runs a product for the others: who signs in and how, who sees what, which data comes in,
+      Runs a module for the others: who signs in and how, who sees what, which data comes in,
       how the platform is customized and kept healthy. Technical, responsible for security and
       compliance; often the owner of the connectors too.
     knows: [identity providers (SAML, OpenID Connect, LDAP), access control models, the company's security policy]
-    explain: [the access model of the product and its consequences, every option and its default, what to check after a change, how to secure it]
+    explain: [the access model of the module and its consequences, every option and its default, what to check after a change, how to secure it]
     wants: >-
       The model, then exact steps; every setting with its effect; secure choices first; what
       breaks if it is wrong.
@@ -212,10 +212,10 @@ personas:
     titles: [AI engineer, automation engineer, CTI engineer]
     who: >-
       Designs the AI agents of XTM One: their instructions, their tools, the data they reach,
-      and how they plug into the products' automations. Technical, careful about what an agent
+      and how they plug into the modules' automations. Technical, careful about what an agent
       may do.
-    knows: [large language models and their limits, prompts, the automations of the products]
-    explain: [how an agent is built and governed in XTM One, what it can reach in each product, how to test it]
+    knows: [large language models and their limits, prompts, the automations of the modules]
+    explain: [how an agent is built and governed in XTM One, what it can reach in each module, how to test it]
     wants: The building blocks, then a complete agent, then how to watch it.
     examples: [build an agent that drafts a summary of every new Velvet Harbor report, give an agent read-only access to OpenCTI]
     products:
@@ -233,29 +233,29 @@ personas:
     wants: Copy-paste-ready configuration, exact versions and defaults, commands, what to monitor.
     examples: [deploy OpenCTI with Docker Compose behind a reverse proxy at https://cti.example.com, scale the workers for a feed of 10 million indicators, expose health probes to Kubernetes]
     products:
-      suite: {does: 'Deploys, configures, scales and upgrades every product.', spaces: [/deploy/]}
+      suite: {does: 'Deploys, configures, scales and upgrades every module.', spaces: [/deploy/]}
 
   - id: developer
     label: developers
     titles: [integration developer, connector developer, software engineer]
     who: >-
-      Extends the products: writes connectors and integrations, scripts the APIs, builds on the
+      Extends the modules: writes connectors and integrations, scripts the APIs, builds on the
       data model. Wants precision more than prose.
     knows: [programming (Python, TypeScript), APIs (GraphQL, REST), STIX bundles]
     explain: [the APIs and the data model with real requests and responses, the integration frameworks, how to test and publish an integration]
     wants: Runnable code, exact types and fields, the reference one click away.
     examples: [write a connector that imports a hotel-sector feed, query the reports on Velvet Harbor with the GraphQL API]
     products:
-      suite: {does: 'Writes integrations and uses the APIs of every product.', spaces: [/develop/, /reference/]}
+      suite: {does: 'Writes integrations and uses the APIs of every module.', spaces: [/develop/, /reference/]}
 
   - id: evaluator
     label: evaluators
     titles: [solution architect evaluating the platform, CTI team assessing a platform, buyer]
     who: >-
-      Discovers the platform: what each product does, how they fit, whether it answers their
+      Discovers the platform: what each module does, how they fit, whether it answers their
       needs, how fast they can try it. Some technical background; no time for detail yet.
     knows: [their own needs and current tools]
-    explain: [what each product is for and how the products work together, how to try them]
+    explain: [what each module is for and how the modules work together, how to try them]
     wants: Short overviews, diagrams, a quick start.
     examples: [try OpenCTI with the demo data in ten minutes, see how a threat known in OpenCTI becomes an OpenAEV simulation]
     products:

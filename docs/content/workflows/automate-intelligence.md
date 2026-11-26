@@ -23,7 +23,7 @@ At the end of this journey, every new report on the sector your team follows rea
 - **AI agent builders** provide the XTM One agents that a playbook step calls, and an XTM One administrator binds them to the playbook steps (before the AI part of step 3).
 - The OpenCTI administrator gives the right to build playbooks to the few people who design the team's automation, and creates the service account the AI steps run as.
 
-## Why it spans several products
+## Why it spans several modules
 
 A playbook moves a Structured Threat Information Expression (STIX) 2.1 bundle from one component to the next: it starts on an event, filters, enriches or changes the data, and ends by saving it with **Send for ingestion** or by telling people. Everything it decides must be written as filters and actions: a label, an entity type, a status, an assignee.
 

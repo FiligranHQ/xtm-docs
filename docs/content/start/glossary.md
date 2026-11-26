@@ -1,6 +1,6 @@
 ---
 title: Glossary
-description: The terms of the XTM platform and of its products, each in one sentence with a link to the page that explains it, from integration and AI agent to container, draft and decay.
+description: The terms of the XTM platform and of its modules, each in one sentence with a link to the page that explains it, from integration and AI agent to container, draft and decay.
 doc_type: reference
 products:
   - suite
@@ -11,7 +11,7 @@ sidebar_position: 3
 no_screenshot: A glossary defines the words of the platform and describes no screen of its own.
 ---
 
-This glossary gives the words you meet across the XTM platform and its modules, each in one sentence, with a link to the page that explains it. Some words mean different things in different products, such as an organization in OpenCTI and a tenant in OpenAEV: the glossary says which product a word belongs to. The terms are grouped by subject, then listed alphabetically.
+This glossary gives the words you meet across the XTM platform and its modules, each in one sentence, with a link to the page that explains it. Some words mean different things in different modules, such as an organization in OpenCTI and a tenant in OpenAEV: the glossary says which module a word belongs to. The terms are grouped by subject, then listed alphabetically.
 
 ::diagram{id=start-glossary-integrations}
 
@@ -19,17 +19,22 @@ This glossary gives the words you meet across the XTM platform and its modules, 
 
 | Term | Meaning |
 | --- | --- |
-| AI agent | An agent of XTM One: it reads what the products know, decides what matters and acts, such as summarizing or drafting, under the governance you define. You talk to it, run it in a flow, or call it from OpenCTI and OpenAEV. See [XTM One](/xtm-one/). Not to be confused with an OpenAEV agent |
-| Community Edition | The free, open source edition of a product, under the Apache License 2.0. See [Editions and licensing](/start/editions/) |
-| CTEM | Continuous threat exposure management: the cycle of knowing your threats, testing your exposure to them and fixing what matters most, which the products run together. See [Run a CTEM cycle across the platform](/workflows/ctem-cycle/) |
+| AI agent | An agent of XTM One: it reads what the modules know, decides what matters and acts, such as summarizing or drafting, under the governance you define. You talk to it, run it in a flow, or call it from OpenCTI and OpenAEV. See [XTM One](/xtm-one/). Not to be confused with an OpenAEV agent |
+| Ask Ariane | The assistant of OpenCTI, OpenAEV and OpenCRQ, opened from their top bar. An AI agent of XTM One answers it: by default the **CTEM Assistant**, which hands a question about one module to the assistant of that module, such as the **OpenCTI Assistant**. Some screens call it **Use Ariane** (OpenAEV) or **Agentic AI (Ariane Assistant)** (the XTM Hub settings of OpenCTI). See [XTM One in OpenCTI](/xtm-one/use/in-opencti/) |
+| Community Edition | The free, open source edition of a module, under the Apache License 2.0. See [Editions and licensing](/start/editions/) |
+| CTEM | Continuous threat exposure management: the cycle of knowing your threats, testing your exposure to them and fixing what matters most, which the modules run together. See [Run a CTEM cycle across the platform](/workflows/ctem-cycle/) |
+| CTEM Assistant | The default AI agent of XTM One: it answers as the **General Assistant** in the chat, and routes each request to the right specialist agent, such as the **OpenCTI Assistant**, the **OpenAEV Assistant** or the **OpenCRQ Assistant**. See [Get answers from an agent in the chat](/xtm-one/use/chat/) |
 | Enterprise Edition | The edition that adds features such as playbooks, segregation, single sign-on and audit, turned on by a license from Filigran. See [Editions and licensing](/start/editions/) |
+| Instance | One deployed module, such as your OpenCTI instance. XTM One's screens call the instances registered with it its platforms. See [Connect the modules to each other](/deploy/configure/connect-modules/) |
 | LTS | Long-term support: a release line that receives only critical and security fixes for one year, for organizations that cannot upgrade often. It needs an LTS license. See [Release lifecycle](/deploy/upgrade/lifecycle/) |
-| OpenAEV | The exposure validation product: it runs realistic attack scenarios against your environment and measures how your defenses respond. See [OpenAEV](/openaev/) |
-| OpenCRQ | The cyber risk quantification product: it prices each cyber risk in money, as the loss it can be expected to cause over a year. See [OpenCRQ](/opencrq/) |
-| OpenCTI | The threat intelligence product: it stores what you know about threats as a knowledge graph, and shares it with your teams and tools. See [OpenCTI](/opencti/) |
-| XTM Hub | Filigran's portal for ready-made content, such as dashboards, playbooks and feeds, with free trials, the roadmap and the Academy. See [Connect to XTM Hub](/opencti/configure/xtm-hub/) |
-| XTM One | The AI product at the center of the platform, whose AI agents work across OpenCTI, OpenAEV and OpenCRQ. Name its features by what they do, not "Copilot". See [XTM One](/xtm-one/) |
-| xtm-docker | The official Docker Compose deployment of the platform, which starts the whole stack: XTM One, OpenCTI, OpenAEV, XTM Composer and the shared services. See [Run the XTM platform locally](/deploy/quick-start/) |
+| Module | One of the four applications of the XTM platform: XTM One, OpenCTI, OpenAEV and OpenCRQ. XTM Composer is a component, and XTM Hub a portal: neither is a module. See [The XTM stack: modules and shared services](/deploy/plan/architecture/) |
+| OpenAEV | The adversarial exposure validation module: it runs realistic attack scenarios against your environment and measures how your defenses respond. See [OpenAEV](/openaev/) |
+| OpenCRQ | The cyber risk quantification module: it prices each cyber risk in money, as the loss it can be expected to cause over a year. See [OpenCRQ](/opencrq/) |
+| OpenCTI | The cyber threat intelligence module: it stores what you know about threats as a knowledge graph, and shares it with your teams and tools. See [OpenCTI](/opencti/) |
+| XTM Hub | Filigran's community portal for ready-made content, such as dashboards, playbooks and feeds, with free trials, the roadmap and the Academy. See [Connect to XTM Hub](/opencti/configure/xtm-hub/) |
+| XTM One | The AI layer at the center of the XTM platform, Agentic Threat Management: the module whose AI agents work across OpenCTI, OpenAEV and OpenCRQ. Name its features by what they do, not "Copilot". See [XTM One](/xtm-one/) |
+| XTM platform | The whole offering of Filigran for eXtended Threat Management: its four modules, XTM Composer and XTM Hub. See [The XTM stack: modules and shared services](/deploy/plan/architecture/) |
+| xtm-docker | The official Docker Compose deployment of the XTM platform, which starts the whole stack: XTM One, OpenCTI, OpenAEV, OpenCRQ, XTM Composer and the shared services. See [Run the XTM platform locally](/deploy/quick-start/) |
 
 ## Integrations
 
@@ -40,9 +45,9 @@ This glossary gives the words you meet across the XTM platform and its modules, 
 | Connector | An OpenCTI integration that imports, enriches, streams or exports data. See [Import with connectors](/opencti/use/ingest/connectors/) |
 | Executor | An OpenAEV integration that runs the actions of injects on endpoints: the OpenAEV agent, or a third-party agent such as CrowdStrike Falcon driven through its vendor's API. See [How OpenAEV works](/openaev/concepts/architecture/) |
 | Injector | An OpenAEV integration that delivers injects to people and systems, such as an email, an HTTP request or an action on endpoints. See [How OpenAEV works](/openaev/concepts/architecture/) |
-| Integration | Any component that connects a product to another system. Connectors, collectors, injectors and executors are kinds of integration. See [How integrations run](/deploy/integrations/how-they-run/) |
+| Integration | Any component that connects a module to another system. Connectors, collectors, injectors and executors are kinds of integration. See [How integrations run](/deploy/integrations/how-they-run/) |
 | OpenAEV agent | The program OpenAEV installs on your endpoints: it fetches the jobs of a simulation and starts an implant that runs each one. See [OpenAEV agents](/openaev/use/agents/) |
-| XTM Composer | The component that deploys the integrations you pick in the catalog of OpenCTI or OpenAEV, runs them as containers and reports their status. Some screens of the products name it **Integration Manager**. See [XTM Composer](/deploy/integrations/composer/) |
+| XTM Composer | The component that deploys the integrations you pick in the catalog of OpenCTI or OpenAEV, runs them as containers and reports their status. Some screens of the modules name it **Integration Manager**. See [XTM Composer](/deploy/integrations/composer/) |
 
 ## OpenCTI knowledge
 
@@ -101,7 +106,7 @@ This glossary gives the words you meet across the XTM platform and its modules, 
 | Role | A named set of capabilities that decides what its users can do. See [Grant rights with roles](/opencti/administer/roles/) |
 | Service account | A user for a machine, such as a connector or a script, that authenticates with an API token only. See [Create accounts for integrations](/opencti/administer/service-accounts/) |
 | Single sign-on | Signing in through your identity provider, with OpenID Connect, SAML or LDAP. See [Configure single sign-on](/opencti/administer/sso/) |
-| Tenant (OpenAEV) | A separate space of an OpenAEV platform in multi-tenancy, an Enterprise Edition feature; an integration that serves one tenant names it in `OPENAEV_TENANT_ID`. Not an OpenCTI organization. See [Multi-tenancy](/openaev/administer/multi-tenancy/) |
+| Tenant (OpenAEV) | A separate space of an OpenAEV instance in multi-tenancy, an Enterprise Edition feature; an integration that serves one tenant names it in `OPENAEV_TENANT_ID`. Not an OpenCTI organization. See [Multi-tenancy](/openaev/administer/multi-tenancy/) |
 
 ## OpenAEV and OpenCRQ
 
@@ -119,7 +124,7 @@ This glossary gives the words you meet across the XTM platform and its modules, 
 | --- | --- |
 | Manager | A background process of the OpenCTI platform, such as the rules, history, notification or retention manager. See [How OpenCTI works](/opencti/concepts/architecture/) |
 | Observability metrics | The OpenTelemetry metrics a platform exposes to your own monitoring system, such as Prometheus. Not usage telemetry. See [Metrics](/deploy/operate/metrics/) |
-| Platform identifier | The unique identifier of an OpenCTI platform, which support, the XTM Hub and licenses tied to one platform ask for. See [Set the platform parameters](/opencti/configure/parameters/) |
+| Platform identifier | The unique identifier of an OpenCTI instance, which support, the XTM Hub and licenses tied to one instance ask for. See [Set the platform parameters](/opencti/configure/parameters/) |
 | Shared services | The databases, queue and storage the modules of the stack use: Elasticsearch, Redis, RabbitMQ, S3 storage and PostgreSQL. See [The XTM stack](/deploy/plan/architecture/) |
 | Usage telemetry | The anonymous usage data a platform sends to Filigran, without intelligence or personal data. Not observability metrics. See [Usage telemetry and privacy](/opencti/configure/telemetry/) |
 | Worker | A process that writes the data connectors send into the OpenCTI knowledge base. See [How OpenCTI works](/opencti/concepts/architecture/) |
