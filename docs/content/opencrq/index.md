@@ -28,6 +28,8 @@ You keep the risk register in money: what each scenario costs a year, what it re
 
 1. [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/): the model behind every figure, from attack frequency to annualized loss.
 2. [Risk scopes, primary assets and supporting assets](/opencrq/concepts/risk-scopes-and-assets/): describe what a loss would hit, and the systems an attacker goes through.
+3. [How OpenCRQ merges an asset several sources report](/opencrq/concepts/asset-consolidation/): which value wins, and when two reports are one asset.
+4. [How OpenCRQ works](/opencrq/concepts/architecture/): its processes, ports, storage and the services it calls.
 3. [Set what an attack costs with the financial profile](/opencrq/use/quantify/loss-drivers/): answer the questions that give each loss its amount.
 4. [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/): create a scenario, read its price and follow it over time.
 :::
@@ -53,6 +55,7 @@ You give people access and connect OpenCRQ to the sources that feed it. People s
 2. [Let integrations sign in with service accounts](/opencrq/administer/service-accounts/): the accounts connectors and scripts write as.
 3. [Connect OpenCTI with a Live Stream](/opencrq/use/sources/opencti/): the first connector to set, since threats drive every price.
 4. [Follow the background jobs and run one again](/opencrq/administer/background-jobs/): what OpenCRQ computes on its own, and how to see it is done.
+5. [Check or stop the usage telemetry sent to Filigran](/opencrq/administer/telemetry/): what anonymous counts leave the instance, and how to turn them off.
 :::
 :::tab[Platform engineers]
 You deploy the XTM platform, which always runs OpenCRQ with the other modules, and keep OpenCRQ healthy and up to date.

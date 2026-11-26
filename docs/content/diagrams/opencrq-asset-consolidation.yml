@@ -1,0 +1,26 @@
+title: Each source keeps its own record of an asset, and OpenCRQ picks every value of the one asset from them
+lanes:
+  - label: Sources
+    tone: external
+    nodes:
+      - {id: defender, label: Microsoft Defender, icon: ShieldCheck, note: Devices and accounts}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: Its asset inventory}
+      - {id: person, label: A person, icon: Users, note: Edit or Create}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: match, label: Match the asset, icon: Search, note: Once per new record}
+      - {id: records, label: One record per source, icon: Layers, note: What each source reports}
+      - {id: rules, label: Pick each value, icon: ListChecks, note: One rule per field}
+  - label: Supporting asset
+    tone: store
+    nodes:
+      - {id: asset, label: Booking database server, icon: Server, note: What screens and prices read}
+edges:
+  - {from: defender, to: match, label: reports a device}
+  - {from: openaev, to: match, label: reports an endpoint}
+  - {from: match, to: records, label: files under one asset}
+  - {from: person, to: records, label: types properties}
+  - {from: records, to: rules, label: read after each sync}
+  - {from: person, to: rules, label: pins a value}
+  - {from: rules, to: asset, label: sets its values}

@@ -53,6 +53,8 @@ An integration sets the fields of the assets it imports, and updates them at eac
 
 To hand the asset back to its integrations, select **Resync with connectors** beside **Edit**, then **Resync**. The button shows only when a value was set by hand and an integration still observes the asset. Every field value you set by hand goes back to what the integrations report, and the next synchronization can update it again. Tags you added by hand stay.
 
+Which source's value an asset shows when several report it, and when two reports become one asset, is in [How OpenCRQ merges an asset several sources report](/opencrq/concepts/asset-consolidation/).
+
 ## Find the assets of a group
 
 An asset group is a named set of assets, such as the servers of the head office. OpenCRQ does not create groups from its own screens: they come from your other tools.

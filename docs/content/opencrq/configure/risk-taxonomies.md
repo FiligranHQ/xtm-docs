@@ -66,7 +66,7 @@ The board hears one sentence per line: the ransomware risk costs $254K a year in
 
 ## Manage the tags of your assets
 
-A tag labels assets, such as all the assets of the booking platform. Tags come from three sources: a person who tags an asset (**Manual**), a push from XTM One (**XTM One**), and a connector that reports the tags of its own tool, such as OpenAEV. OpenCRQ counts as an XTM One push every tag written through its API with a service account's token. A person's tags and a push's tags never replace each other: each only replaces its own. The same idea often arrives under several names; merge them into one.
+A tag labels assets, such as all the assets of the booking platform. Tags come from three sources: a person who tags an asset (**Manual**), a push from XTM One (**XTM One**), and a connector that reports the tags of its own tool, such as OpenAEV. OpenCRQ counts as an XTM One push every tag written through its API with a service account's token. A person's tags and a push's tags never replace each other: each only replaces its own. The same idea often arrives under several names; merge them into one. What happens to a connector's tags when it renames one, or when two sources share it, is in [How OpenCRQ merges an asset several sources report](/opencrq/concepts/asset-consolidation/#tags-and-groups).
 
 :::steps
 1. Open :menu[Settings > Taxonomies > Tags]. Each tag shows its **Source** (**Manual**, **XTM One** or the connector), the names connectors report it under, the **Merged tags** it holds and its number of **Assets**. Search with **Search tags...** and filter with **Filter by source**.

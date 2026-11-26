@@ -1,0 +1,31 @@
+title: A process manager runs the HTTP process and the worker, which share PostgreSQL and S3 storage and reach XTM One and the connected sources
+lanes:
+  - label: Callers
+    tone: external
+    nodes:
+      - {id: browsers, label: Browsers, icon: Laptop, note: Interface and API on 3002}
+      - {id: monitoring, label: Your monitoring, icon: Gauge, note: "Health on 8444, metrics on 14269"}
+  - label: OpenCRQ container
+    tone: product
+    nodes:
+      - {id: pm, label: Process manager, icon: Activity, note: Starts and watches the processes}
+      - {id: http, label: HTTP process, icon: LogoOpenCRQ, note: "Interface, API, sign-in"}
+      - {id: worker, label: Worker process, icon: Cpu, note: "Jobs, connectors, recomputes"}
+  - label: Stores
+    tone: store
+    nodes:
+      - {id: stores, label: PostgreSQL and S3, icon: Layers, note: "All data, job queue, uploaded files"}
+  - label: Outside
+    tone: external
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "Registration, sign-in, Ask Ariane"}
+      - {id: sources, label: Connected sources, icon: Puzzle, note: "OpenCTI, OpenAEV, CVE feeds, Defender, Drata"}
+edges:
+  - {from: browsers, to: http, label: interface and API}
+  - {from: monitoring, to: pm, label: probe and scrape}
+  - {from: pm, to: http, label: supervises, style: dashed}
+  - {from: pm, to: worker, label: supervises, style: dashed}
+  - {from: http, to: stores, label: read and write}
+  - {from: worker, to: stores, label: jobs and results}
+  - {from: http, to: xtmone, label: register and sign in}
+  - {from: worker, to: sources, label: sync and stream}

@@ -32,7 +32,7 @@ Computer accounts, whose name ends in `$`, and service identities such as SYSTEM
 
 **Primary users.** The person each workstation is assigned to, from Intune first, then from the registered owner in Entra ID. Without these sources, the run succeeds and no workstation gets a primary user.
 
-A machine that OpenAEV also reports becomes one asset: see [Import OpenAEV results](/opencrq/use/sources/openaev/).
+A machine that OpenAEV also reports becomes one asset when OpenCRQ recognizes it in both reports: see [How OpenCRQ recognizes one asset in two reports](/opencrq/concepts/asset-consolidation/#how-opencrq-recognizes-one-asset-in-two-reports) and [Import OpenAEV results](/opencrq/use/sources/openaev/).
 
 ## Before you start
 

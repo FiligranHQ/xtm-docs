@@ -2224,8 +2224,8 @@
     ]
   },
   "opencrq": {
-    "done": 38,
-    "total": 38,
+    "done": 41,
+    "total": 41,
     "groups": [
       {
         "id": "concepts",
@@ -2246,6 +2246,30 @@
           {
             "target": "/opencrq/concepts/risk-scopes-and-assets/",
             "title": "Risk scopes, primary assets and supporting assets",
+            "doc_type": "explanation",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencrq/concepts/asset-consolidation/",
+            "title": "How OpenCRQ merges an asset several sources report",
+            "doc_type": "explanation",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencrq/concepts/architecture/",
+            "title": "How OpenCRQ works: processes, ports, storage and connections",
             "doc_type": "explanation",
             "products": [
               "opencrq"
@@ -2593,6 +2617,18 @@
           {
             "target": "/opencrq/administer/background-jobs/",
             "title": "Follow the background jobs and run one again",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencrq/administer/telemetry/",
+            "title": "Check or stop the usage telemetry sent to Filigran",
             "doc_type": "how-to",
             "products": [
               "opencrq"

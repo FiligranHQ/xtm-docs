@@ -43,7 +43,7 @@ The panel also records what a business impact analysis says of the asset: a **Re
 
 ## Supporting assets and the estate
 
-Supporting assets live in the tenant's library, under :menu[Assets], shared by every risk scope. You declare them or import them, for example from Microsoft Defender. A detection and prevention source that OpenAEV imports, such as an EDR or a SIEM, gets the **Security platform** category. The code your organization builds and ships goes under **Source code**: a **Code repository**, a **CI/CD pipeline**, a **Package registry** or a **Software package**. The attack run reads three things about each one:
+Supporting assets live in the tenant's library, under :menu[Assets], shared by every risk scope. You declare them or import them, for example from Microsoft Defender. Your detection and prevention tools, such as an EDR or a SIEM, go under the **Security platform** category: you declare them, as OpenAEV's connector does not import them. The code your organization builds and ships goes under **Source code**: a **Code repository**, a **CI/CD pipeline**, a **Package registry** or a **Software package**. The attack run reads three things about each one:
 
 - its category (web application, server, workstation, user account, network device, source code, point of sale...), which decides the techniques an attacker can play on it: a user account opens phishing and stolen credentials, a workstation drive-by compromise, and a code repository the theft of credentials left in code, and of the code itself;
 - its exposure: an internet-facing asset opens initial access by exploiting a public service or an external remote service;
