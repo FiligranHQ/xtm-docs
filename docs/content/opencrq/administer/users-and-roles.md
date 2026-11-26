@@ -7,7 +7,7 @@ products:
   - opencrq
 personas: [admin]
 owner: docs-opencrq
-last_reviewed: 2026-11-23
+last_reviewed: 2026-11-26
 ---
 
 In OpenCRQ, a person works in a tenant: the risk scopes, scenarios, assets, plans and reviews of one organization. You add people to a tenant from XTM One's directory, and give the few of them who run it the right to manage its security through a group and a role. Groups also hold the markings their members may read, such as the Traffic Light Protocol (TLP) level TLP:AMBER. Platform administrators get their own groups and roles, which create tenants and name the other administrators. This page does both, and shows how to check what each person can do.
@@ -78,14 +78,14 @@ OpenCRQ does not stop you from removing the last person who has **Manage Securit
 
 A marking restricts who reads an object, as in OpenCTI and OpenAEV: a TLP level such as TLP:AMBER, or a marking your organization defines. OpenCRQ names each marking by the Structured Threat Information Expression (STIX) id OpenCTI gives it, so a marking set in OpenCTI or OpenAEV is the same marking here. The clearance of a group lists the markings its members may read.
 
-- **Assets and threats carry markings.** A supporting asset carries the markings its source gives it, and its findings follow it. An asset imported from OpenAEV carries none: every member reads it (see [Import OpenAEV results](/opencrq/use/sources/openaev/#what-the-connector-imports)). A threat carries the markings of its STIX object. A risk scenario carries none in this version: every member reads every scenario.
+- **Assets and threats carry markings.** A supporting asset carries the markings its source gives it, and its findings follow it. An asset imported from OpenAEV carries the markings OpenAEV gives it when OpenAEV enforces markings, that is when its `MARKING` preview feature is on; with markings off in OpenAEV, its default, the asset carries none and every member reads it (see [Import OpenAEV results](/opencrq/use/sources/openaev/#what-the-connector-imports)). A threat carries the markings of its STIX object. A risk scenario carries none in this version: every member reads every scenario.
 - **A person reads a marked object only when cleared for all its markings.** An unmarked object shows to every member. OpenCRQ answers for a hidden object as if it did not exist, and nobody changes an object they cannot read. The super administrator reads every asset and every imported threat.
 - **A clearance adds up across groups, and covers the lower levels.** A person holds the markings of all their groups. A marking also clears the markings of its type ranked below it: TLP:AMBER clears TLP:CLEAR, TLP:GREEN and TLP:AMBER, but not TLP:AMBER+STRICT or TLP:RED. A member of no cleared group reads only unmarked objects.
 - **A marking the tenant does not define** clears nobody on an asset: the asset shows to the super administrator alone. On a threat imported from a STIX file or from **OpenCRQ Default Threats**, it restricts nothing until you create the marking.
 - **Threats from OpenCTI follow OpenCTI.** A threat the OpenCTI Live Stream brings shows to a person when OpenCTI lets them read it: their markings, their organization and the threat's authorized members decide there, not their OpenCRQ groups. See [Follow the threats that target your scopes](/opencrq/use/threats/threat-center/).
 - **Jobs and service accounts read everything.** Markings narrow what a person reads, in the interface, through the API or through an XTM One agent. Background jobs and service accounts read every object of the tenant, so the prices and threat scores they compute count objects a person cannot see. Give a service account's token only to an integration that may read the whole tenant.
 
-Each tenant starts with the five TLP 2.0 markings: TLP:CLEAR, TLP:GREEN, TLP:AMBER, TLP:AMBER+STRICT and TLP:RED. Its **Admin** group is cleared for all five, in the tenants created before the upgrade too. **Connectors** and the groups you create are cleared for none. When the OpenCTI connector starts, OpenCRQ adds the markings its OpenCTI user can read, then each marking its stream brings. A marking deleted in OpenCTI stays in OpenCRQ.
+Each tenant starts with the five TLP 2.0 markings: TLP:CLEAR, TLP:GREEN, TLP:AMBER, TLP:AMBER+STRICT and TLP:RED. Its **Admin** group is cleared for all five, in the tenants created before the upgrade too. **Connectors** and the groups you create are cleared for none. When the OpenCTI connector starts, OpenCRQ adds the markings its OpenCTI user can read, then each marking its stream brings. When OpenAEV enforces markings, the OpenAEV connector adds the markings its OpenAEV user is cleared for, each time it reads the inventory. A marking deleted in OpenCTI stays in OpenCRQ.
 
 ### Clear a group for a marking
 

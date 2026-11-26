@@ -1,9 +1,10 @@
 ---
 title: Harden the deployment
-description: Close the shared services of the XTM stack to the network, protect the health keys, and tighten the OpenCTI settings, from rate limiting to sessions and logs.
+description: Close the shared services of the XTM stack to the network, protect the health keys, limit who gets an OpenCRQ account, and tighten the OpenCTI settings, from rate limiting to sessions and logs.
 doc_type: how-to
 products:
   - opencti
+  - opencrq
   - suite
 personas: [platform-engineer]
 owner: docs-platform
@@ -13,7 +14,7 @@ migrated_from:
   - opencti:/deployment/advanced/security-configuration/
 ---
 
-The XTM stack starts with settings that make a first deployment easy, not with the strictest ones. This page lists what to tighten before production: the shared services the Docker deployment publishes, the health keys, and the security settings of OpenCTI, each with its key, its default and the value to choose.
+The XTM stack starts with settings that make a first deployment easy, not with the strictest ones. This page lists what to tighten before production: the shared services the Docker deployment publishes, the health keys, who can create an account in XTM One, and the security settings of OpenCTI, each with its key, its default and the value to choose.
 
 ::diagram{id=deploy-operate-harden}
 
@@ -62,6 +63,12 @@ The health endpoints answer only with their key. See [Check that the platforms a
 
 - OpenCTI refuses every call while its key is empty or `ChangeMe`. Keep a random `OPENCTI_HEALTHCHECK_ACCESS_KEY`, and do not set it to `public` on a network you do not trust.
 - OpenAEV accepts its default key, `ChangeMe`, and xtm-docker falls back to it when `OPENAEV_HEALTHCHECK_KEY` is missing from `.env`. Set a random value.
+
+## Limit who gets an OpenCRQ account
+
+OpenCRQ signs its users in through XTM One, and gives an account to any XTM One user at their first sign-in, even one who is a member of no tenant: they then read **You don't have access to OpenCRQ yet** until an administrator adds them. Who can sign in to OpenCRQ is therefore who can get an XTM One account.
+
+In XTM One, keep **Local Registration** off, or limit new accounts to your domains with **Allowed email domains**, and do the same for the **On-the-fly user creation** of each single sign-on method. See [Decide who gets an account](/xtm-one/administer/sso/#decide-who-gets-an-account) in XTM One.
 
 ## Tighten OpenCTI
 

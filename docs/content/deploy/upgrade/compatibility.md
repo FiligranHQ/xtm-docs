@@ -7,6 +7,7 @@ products:
   - opencti
   - openaev
   - xtm-one
+  - opencrq
   - composer
 personas: [platform-engineer]
 owner: docs-platform
@@ -43,6 +44,7 @@ The OpenCTI LTS lines, [7.260811-lts and 7.260309-lts](/deploy/upgrade/lifecycle
 | XTM Composer 3.261021.1 or earlier, after a rollback from 3.261120.0 | Nothing more: 3.261120.0 keeps the `opencti-manager`, `opencti-connector-id` and `opencti-platform` labels and `OPENCTI_CONFIG_HASH` next to its `xtm-*` keys, so an older XTM Composer still recognizes the integrations | [XTM Composer architecture](/deploy/integrations/architecture/) |
 | XTM Composer 3.261120.0 or earlier on Kubernetes or Docker Swarm, after a rollback from 3.261121.0 | Integration names that are valid Kubernetes names, 63 characters at most. 3.261121.0 shortens longer names and adds a hash; an older XTM Composer removes those Deployments and services, then fails to create them under the full name | [Troubleshoot XTM Composer](/deploy/integrations/troubleshoot/#an-integration-starts-then-fails) |
 | XTM One 1.261112.0 or later, behind a reverse proxy | A proxy that serves HTTP/2 to browsers, buffers no response under `/api/` and keeps a read timeout above 15 seconds: the chat streams over HTTP | [XTM One 1.261112.0](/deploy/upgrade/breaking-changes/#xtm-one-1-261112-0) |
+| OpenCRQ 0.261123.0 | XTM One 1.261110.0 or later, upgraded before OpenCRQ. XTM One must return the XTM license at registration (1.261001.0 and later): an older one leaves OpenCRQ in the Community Edition, and OpenCRQ logs a warning when that XTM One reports the Enterprise Edition. It must also create the sign-in client of OpenCRQ at registration (1.261109.0 and later) and send the `xtm_super_admin` claim (1.261110.0 and later): without the client nobody can sign in, and without the claim nobody is super administrator | [Configure OpenCRQ](/deploy/configure/opencrq/#xtm-one) |
 | xtm-docker with public and internal URLs that differ | XTM One, OpenCTI and OpenAEV releases that include [xtm-one#4883](https://github.com/XTM-One-Platform/xtm-one/pull/4883), [opencti#18585](https://github.com/OpenCTI-Platform/opencti/pull/18585) and [openaev#8143](https://github.com/OpenAEV-Platform/openaev/pull/8143) | [xtm-docker README](https://github.com/FiligranHQ/xtm-docker#readme) |
 
 ## Shared services

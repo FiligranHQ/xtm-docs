@@ -5,6 +5,7 @@ doc_type: reference
 products:
   - opencti
   - openaev
+  - opencrq
 personas: [platform-engineer]
 owner: docs-platform
 last_reviewed: 2026-10-31
@@ -39,17 +40,17 @@ It prints `-Xms2G -Xmx2G` for `ELASTIC_MEMORY_SIZE=2G`.
 
 ## Each component, for production
 
-The minimum for each component on its own machine or container, as the OpenCTI and OpenAEV documentation give them. A service shared by several modules holds the data of all of them.
+The minimum for each component on its own machine or container, as the OpenCTI and OpenAEV documentation give them, and for OpenCRQ from the defaults of its image. A service shared by several modules holds the data of all of them.
 
 ### Shared services
 
 | Service | Needed by | CPU | RAM | Disk type | Disk space |
 | --- | --- | --- | --- | --- | --- |
 | Elasticsearch or OpenSearch | OpenCTI, OpenAEV | 2 cores | 8 GB or more | SSD | 16 GB or more |
-| PostgreSQL | OpenAEV | 2 cores | 8 GB or more | SSD | 16 GB or more |
+| PostgreSQL | OpenAEV, OpenCRQ, XTM One | 2 cores | 8 GB or more | SSD | 16 GB or more |
 | Redis | OpenCTI | 1 core | 1 GB or more | SSD | 16 GB or more |
 | RabbitMQ | OpenCTI, OpenAEV | 1 core | 512 MB or more | Standard | 2 GB or more |
-| S3 storage | OpenCTI, OpenAEV | 1 core | 128 MB or more | SSD | 16 GB or more |
+| S3 storage | OpenCTI, OpenAEV, OpenCRQ | 1 core | 128 MB or more | SSD | 16 GB or more |
 
 ### Platforms and integrations
 
@@ -70,6 +71,13 @@ The platforms, workers and integrations keep no data on disk: their state is in 
 | OpenAEV platform | 2 cores | 8 GB or more |
 | Each injector | 1 core | 128 MB or more |
 | Each collector | 1 core | 128 MB or more |
+:::
+:::tab[OpenCRQ]
+| Component | CPU | RAM |
+| --- | --- | --- |
+| OpenCRQ, the `opencrq` container | Not documented | About 5 GB |
+
+The container runs two Node.js processes, the worker with a heap of 4,096 MB and the HTTP server with a heap of 512 MB, and a small process that supervises them. At peak, OpenCRQ opens about 50 PostgreSQL connections: count them in `max_connections`. See [Configure OpenCRQ](/deploy/configure/opencrq/#database).
 :::
 ::::
 

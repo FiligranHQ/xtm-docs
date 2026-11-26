@@ -28,6 +28,8 @@ This page lists the network side of the XTM stack as [FiligranHQ/xtm-docker](htt
 | 6379 | `redis` | 6379 | Redis | Always | `docker-compose.yml` |
 | 9000 | `minio` | 9000 | S3 API of RustFS | Always | `docker-compose.yml` |
 | Not published | `pgsql` | 5432 | PostgreSQL | Always | |
+| Not published | `opencrq` | 8444 | OpenCRQ health check, which the healthcheck of the container calls | Always | `HEALTHCHECK_HTTP_SERVER__PORT` in `modules/opencrq.yml` |
+| Not published | `opencrq` | 14269 | OpenCRQ Prometheus endpoint, off by default | When you turn it on | The Prometheus variables of the `opencrq` service: see [Observability metrics](/deploy/operate/metrics/) |
 
 The host port of OpenAEV is written in `docker-compose.yml` (`"8081:8080"`). To move it, replace the mapping in `docker-compose.override.yml`, as [Change the stack without editing docker-compose.yml](/deploy/install/docker-compose/#change-the-stack-without-editing-docker-compose-yml) describes, and set `OPENAEV_PORT` to the same value: `OPENAEV_PORT` builds the public URL of OpenAEV, not the port mapping. For port 8082:
 
@@ -65,7 +67,7 @@ Every service is on one Docker network, `<COMPOSE_PROJECT_NAME>_default`: `xtm_d
 | `rabbitmq:5672` | OpenCTI, OpenAEV, and the integrations and workers they give the address to |
 | `rabbitmq:15672` | OpenCTI and OpenAEV, on the RabbitMQ management API |
 | `redis:6379` | OpenCTI, XTM One and its worker |
-| `minio:9000` | OpenCTI, OpenAEV, XTM One and its worker, OpenCRQ and the `opencrq-bucket-init` job |
+| `minio:9000` | OpenCTI, OpenAEV, XTM One and its worker, OpenCRQ and the `opencrq-bucket-init` job. Only the backend of OpenCRQ reaches it: its files go to browsers through the OpenCRQ API |
 | `pgsql:5432` | OpenAEV (database `openaev`), XTM One and its worker (database `xtm_one`), the `xtm-one-db-init` job, OpenCRQ (database `opencrq`) and the `opencrq-db-init` job |
 
 The containers XTM Composer starts join the same network: xtm-docker sets `OPENCTI__DAEMON__DOCKER__NETWORK_MODE` and `OPENAEV__DAEMON__DOCKER__NETWORK_MODE` to `${COMPOSE_PROJECT_NAME}_default`. An integration you run yourself must join it too, to reach its platform and RabbitMQ: see [Run an integration without XTM Composer](/deploy/integrations/manual/).
@@ -108,6 +110,8 @@ Browsers, and the links one platform shows to another, use the public URL of eac
 
 The public URL is also the identity each module signs its requests to the others with. XTM One also accepts tokens addressed to its internal URL: xtm-docker sets `XTM_AUTH_ACCEPTED_AUDIENCES=http://xtm-one:4000`.
 
+To sign a user in to OpenCRQ, the browser goes to the public URL of XTM One, its `BASE_URL`, while OpenCRQ exchanges the code for the user's token and reads the signing keys of XTM One at `XTM_ONE__URL`, `http://xtm-one:4000` in xtm-docker.
+
 To publish the platforms over TLS behind a reverse proxy, set the scheme to `https` together with the host and the port, for example `OPENCTI_EXTERNAL_SCHEME=https`, `OPENCTI_HOST=opencti.example.com` and `OPENCTI_PORT=443`. See [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/).
 
 ## Outbound connections
@@ -119,10 +123,12 @@ To publish the platforms over TLS behind a reverse proxy, set the scheme to `htt
 | OpenAEV | Your IMAP server, when `OPENAEV_MAIL_IMAP_ENABLED=true` | `IMAP_HOST` and `IMAP_PORT`, `993` in `.env.sample` |
 | Docker on the host | Docker Hub, and `docker.elastic.co` for Elasticsearch, to download the images | The `image` of each service |
 | XTM Composer | The registry of each integration image it deploys | See [Pull integrations from a private registry](/deploy/integrations/private-registry/) |
-| OpenCRQ | The public CVE sources: `services.nvd.nist.gov` (NIST NVD), `api.first.org` (FIRST EPSS) and `www.cisa.gov` (CISA KEV) | A tenant administrator, who turns each source on in **Integrations**: see [How CVE sources weigh your vulnerabilities](/opencrq/use/sources/vulnerability-sources/#turn-them-on) |
+| OpenCRQ | The public CVE sources: `services.nvd.nist.gov` (NIST NVD), `cveawg.mitre.org` (the CVE records of MITRE, which the NIST NVD sync reads for the vendor's remediation), `api.first.org` (FIRST EPSS) and `www.cisa.gov` (CISA KEV). A blocked `cveawg.mitre.org` fails no run: the CVEs only get no vendor remediation | A tenant administrator, who turns each source on in **Integrations**: see [How CVE sources weigh your vulnerabilities](/opencrq/use/sources/vulnerability-sources/#turn-them-on) |
 | OpenCRQ | `raw.githubusercontent.com`, for the default threats it loads | `CONNECTORS__DEFAULT_THREATS__DATASET_URL` points it to a mirror, or, empty, turns the default threats off. See the [OpenCRQ configuration](/reference/opencrq/configuration/#connectors) |
 | OpenCRQ | `telemetry.ocrq.filigran.io`, for the anonymous usage telemetry | On by default. `TELEMETRY__USAGE__ENABLED=false` on the `opencrq` service turns it off |
-| OpenCRQ | `login.microsoftonline.com` and `graph.microsoft.com` for Microsoft Defender, `public-api.drata.com` by default for Drata, for a tenant connected to them | The variables of each tenant: see [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant) |
+| OpenCRQ | `login.microsoftonline.com` and `graph.microsoft.com` for Microsoft Defender, `public-api.drata.com` by default for Drata, or the regional API of the Drata account, such as `public-api.eu.drata.com`, for a tenant connected to them | The variables of each tenant: see [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant) |
+| OpenCRQ | An OpenCTI or an OpenAEV outside the stack, for a tenant connected to it | `CONNECTORS__OPENCTI__<tenant>__URL`, `CONNECTORS__OPENAEV__<tenant>__URL` |
+| OpenCRQ | Your OpenTelemetry collector, over gRPC (port 4317 in the usual examples), and your Pyroscope server, over HTTP (port 4040), when you turn them on | The observability variables of the `opencrq` service: see [Observability metrics](/deploy/operate/metrics/) |
 
 Each integration also connects to the systems it works with. Its own documentation says which.
 

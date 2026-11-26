@@ -113,6 +113,7 @@ When the sign-in does not work:
 | --- | --- |
 | **XTM One is unavailable**, with **Try again** | XTM One does not answer OpenCRQ, or has given it no sign-in client yet. There is no other way in. Check that XTM One is healthy, that `PLATFORM_REGISTRATION_TOKEN` is not the published default (XTM One then creates no sign-in client), and the reverse proxy step of [Finish the setup after the install](#finish-the-setup-after-the-install). Then click **Try again** |
 | **You are not signed in**, with the reason | XTM One refused or interrupted the sign-in, or it was cancelled. Click **Sign in with XTM One** again |
+| **You are not signed in**, with **Your XTM One account cannot be matched to an account here. Ask an administrator.** | Another OpenCRQ account already holds the email of this XTM One user, whatever its case, and is not linked to them. The log of `opencrq` says `Sign-in with XTM One refused: email of another account`, with the XTM One subject (`sub`) of the user it refused. An XTM One user deleted and created again comes back with a new subject: OpenCRQ refuses them the same way, and nothing in its interface ties their old account to the new one |
 | **You don't have access to OpenCRQ yet** | You signed in with another XTM One account than its administrator. Click **Sign out**, sign out of XTM One too, and sign in again with the account of `XTM_ONE_ADMIN_EMAIL` |
 
 ## Connect the first tenant
@@ -121,7 +122,7 @@ xtm-docker connects the tenant of `OPENCRQ_TENANT_ID` to the stack's OpenCTI and
 
 A tenant's identifier is in its :menu[Settings > Parameters], under **Identifier**. If you set `INITIAL_TENANT__ID` on the `opencrq` service, set `OPENCRQ_TENANT_ID` in `.env` to the same value: OpenCRQ skips a connection that names a tenant it does not hold. To connect another tenant, created in the Enterprise Edition, set the variables [Connectors of each tenant](#connectors-of-each-tenant) lists for its identifier, then run `docker compose up -d`.
 
-The links OpenCRQ shows to OpenCTI objects open at the URL of the tenant's connection, `http://opencti:8080` in xtm-docker, which only the containers of the stack reach. The product switcher of OpenCRQ opens the public URLs of OpenCTI and OpenAEV, which xtm-docker gives it as `XTM__OPENCTI_URL` and `XTM__OPENAEV_URL`.
+The links OpenCRQ shows to OpenCTI objects open at the URL of the tenant's connection, `http://opencti:8080` in xtm-docker, which only the containers of the stack reach. The **Filigran products** menu, next to the OpenCRQ logo, opens that same URL for OpenCTI and for OpenAEV when the tenant is connected to them, and their product pages on filigran.io otherwise. xtm-docker also gives OpenCRQ the public URLs of OpenCTI and OpenAEV, as `XTM__OPENCTI_URL` and `XTM__OPENAEV_URL`, but the menu does not read them: only the `xtm.products` API returns them.
 
 :::example[Bring OpenCRQ into service in Example CERT's stack]
 Example CERT runs the XTM stack for its member hotel chains, with OpenCTI at `https://opencti.example.com`, XTM One at `https://xtm-one.example.com` and OpenCRQ at `https://opencrq.example.com`, for Grand Meridian Hotels and the other members. Once the stack runs, its platform engineer checks OpenCRQ:
@@ -187,8 +188,36 @@ Keep these rules:
 
 - **Your own registration token.** Set it before the first start: OpenCRQ registers with XTM One with this token, and the registration brings both the sign-in through XTM One and the XTM license. XTM One refuses to register a new platform with its published default token, `xtm-default-registration-token`, with HTTP 401: it keeps only the heartbeat of a platform registered earlier, and withholds the XTM license from it.
 - **Public and internal URLs.** OpenCRQ reads XTM One's public identity from `/xtm/auth/metadata` on `XTM_ONE__URL`, once an hour, and uses it for the tokens and for the links users follow to XTM One. When `XTM_ONE__PLATFORM_URL` does not resolve inside Docker, set `OPENCRQ_API_URL` on the XTM One services to the internal address of OpenCRQ, as xtm-docker does ([What xtm-docker runs for OpenCRQ](#what-xtm-docker-runs-for-opencrq)).
-- **The edition.** The Enterprise Edition of OpenCRQ comes from the XTM license that XTM One returns at registration, which OpenCRQ verifies, or, until it expires, from a Filigran license installed on the platform before 17 November 2026. Each verified answer of XTM One grants it for 7 days, in memory: after a restart, a platform without an installed license is in the Community Edition until the next registration succeeds. The Enterprise Edition brings more than one tenant and the Ask Ariane assistant.
-- **When XTM One is down.** OpenCRQ keeps serving and its health check stays healthy. Every user sees a message saying XTM One is not answering, its registration is refused, or its answer cannot be read, and Ask Ariane is unavailable until a registration succeeds.
+- **The edition.** The Enterprise Edition of OpenCRQ comes from the XTM license that XTM One returns at registration, which OpenCRQ verifies, or, until it expires, from a Filigran license installed on the platform before 17 November 2026. It brings more than one tenant and the Ask Ariane assistant: see [The edition](#the-edition).
+- **When XTM One is down.** OpenCRQ keeps serving and its health check stays healthy, but Ask Ariane is unavailable and every user sees why: see [When XTM One is down](#when-xtm-one-is-down).
+
+### The edition
+
+OpenCRQ checks the XTM license again at every registration, every 5 minutes, against the certificate authority of Filigran built into its image:
+
+- A license that verifies grants the Enterprise Edition for 7 days, in memory, never past the end of the license. Each later verified answer renews it.
+- A readable answer whose license does not verify, or that carries no license, ends the Enterprise Edition granted by XTM One at once. OpenCRQ logs why in a warning, such as `XTM One returned an XTM license that does not entitle this platform, so it stays in Community Edition`.
+- An outage, a refused registration or an unreadable answer changes nothing: the grant runs until its 7 days are over.
+
+| License type | Entitles OpenCRQ until |
+| --- | --- |
+| `standard`, `lts`, `nfr` | 90 days after its expiry date |
+| `trial` | Its expiry date |
+| `ci` | 45 minutes after the creation of the OpenCRQ instance |
+
+At start, the features that depend on the edition wait up to 5 seconds for the first answer of XTM One, then serve the Community Edition until that answer lands. The grant lives in memory: after a restart, a platform without an installed license is in the Community Edition until a registration succeeds.
+
+### When XTM One is down
+
+OpenCRQ keeps serving, and its health check stays healthy. Every user sees a message that names the cause, followed by what it takes away: Ask Ariane, and for a platform XTM One entitled, the end date of its Enterprise Edition.
+
+| Message | The registration got | Usual cause |
+| --- | --- | --- |
+| **XTM One cannot be reached.** | A network error, no answer within 30 seconds, or an HTTP status other than 2xx, 401 and 403 | XTM One is stopped, or `XTM_ONE__URL` does not reach it |
+| **This platform's registration with XTM One is refused.** | HTTP 401 or 403 | A token that differs from `PLATFORM_REGISTRATION_TOKEN` on XTM One, or a proxy in front of XTM One |
+| **This platform's registration with XTM One got an answer that cannot be read.** | A 2xx answer that is not a registration | A wrong `XTM_ONE__URL`, a captive portal, or a version of XTM One that OpenCRQ does not read |
+
+The message shows when the first registration since the start fails, or when the attempts keep failing 10 minutes after the last success: one lost heartbeat shows nothing. It clears once a registration succeeds. None of the three ends a granted Enterprise Edition: the grant runs until its 7 days are over.
 
 ## Connectors of each tenant
 
@@ -216,7 +245,7 @@ The OpenCTI and OpenAEV connectors come up enabled once their variables are set.
 
 ## Telemetry
 
-The `TELEMETRY__*` variables form two groups. `TELEMETRY__USAGE__*` sets the anonymous usage telemetry OpenCRQ sends to Filigran. `TELEMETRY__OBSERVABILITY__*` sets the observability metrics, traces, logs and profiles it sends to your own tools: see [Observability metrics](/deploy/operate/metrics/).
+The `TELEMETRY__*` variables form two groups. `TELEMETRY__USAGE__*` sets the anonymous usage telemetry OpenCRQ sends to Filigran: what it sends, and how to check or stop it, is in [Check or stop the usage telemetry sent to Filigran](/opencrq/administer/telemetry/). `TELEMETRY__OBSERVABILITY__*` sets the observability metrics, traces, logs and profiles it sends to your own tools: see [Observability metrics](/deploy/operate/metrics/).
 
 OpenCRQ accepts no other `TELEMETRY__*` variable. An unknown one stops the platform at start with `Unrecognized key` and the name of the key under `telemetry`, rather than leaving a transport off without a word. The names of earlier builds count as unknown, so rename them:
 

@@ -6,7 +6,7 @@ doc_type: how-to
 products: [opencrq, openaev]
 personas: [admin, validation-engineer, risk-manager]
 owner: docs-opencrq
-last_reviewed: 2026-11-04
+last_reviewed: 2026-11-26
 ---
 
 A control declared strong is an assumption until an attack tests it. The OpenAEV connector imports the outcome of the simulations OpenAEV ran on your assets: which technique was prevented or detected, by which kind of security platform, and which CVEs OpenAEV found. OpenCRQ lands them as findings on your assets and audits your controls with them, technique by technique: where a control held less often than you declared, the price of a scenario reads it weaker. This page connects an OpenAEV instance to a tenant and says what comes in. For the model behind the price, read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).
@@ -23,7 +23,7 @@ Two things are not imported:
 - **The posture score** of an asset. OpenCRQ computes the **OpenAEV Posture** of an asset's page from what the sync stored: how many of its OpenAEV findings held at their latest test, and how many found it exposed. It never asks OpenAEV live, and the tile stays empty until an OpenAEV test reports on the asset.
 - **Credentials of AI targets**: their token and configuration are never read into OpenCRQ.
 
-A machine that OpenAEV and Microsoft Defender both report becomes one asset in OpenCRQ: the OpenAEV agent of a Defender executor carries the Defender device id. See [Import assets from Microsoft Defender](/opencrq/use/sources/microsoft-defender/).
+A machine that OpenAEV and Microsoft Defender both report becomes one asset in OpenCRQ when it recognizes it in both reports, such as through the Defender device id the OpenAEV agent of a Defender executor carries: see [How OpenCRQ recognizes one asset in two reports](/opencrq/concepts/asset-consolidation/#how-opencrq-recognizes-one-asset-in-two-reports) and [Import assets from Microsoft Defender](/opencrq/use/sources/microsoft-defender/).
 
 ## How often it runs
 
@@ -33,11 +33,11 @@ The connector is a job of the tenant, run **Every hour** by default. You can set
 2. reads the CVE findings updated since the last completed run, never more than 7 days back,
 3. reads the simulations finished since the last completed run, the oldest first, never more than 7 days back. The first run therefore reads the CVE findings and the simulations of the last 7 days, not older ones,
 4. retires what a newer simulation of the same scenario no longer reports on an asset it played: the finding is dismissed as **No longer reported by OpenAEV**, and comes back by itself if OpenAEV reports it again,
-5. fetches, within a budget of 500 calls, the description of the assets OpenAEV serves one by one, such as web applications and identities. A large estate is described over several runs.
+5. fetches the description of the assets OpenAEV serves one by one, such as web applications and identities, within a budget of 500 calls per run: see [Limits on a large estate](#limits-on-a-large-estate).
 
 A run stops after 30 minutes and the next one resumes where it stopped. A run that fails is tried again, up to 3 attempts. A result on an asset the inventory did not return is dropped, not imported on an asset created on the spot.
 
-When OpenAEV serves its snapshot export, the connector reads it instead, at the same schedule: see [Read the snapshot export of OpenAEV](#read-the-snapshot-export-of-openaev).
+When OpenAEV serves its snapshot export, the connector reads it instead, at the same schedule. OpenAEV serves it only with a preview feature on, which it leaves off by default and xtm-docker turns on: see [Read the snapshot export of OpenAEV](#read-the-snapshot-export-of-openaev).
 
 ## Before you start
 
@@ -92,7 +92,7 @@ After the restart, the **OpenAEV** card reads **Never synced**, bound to `OpenAE
 
 The first run imports the workstations OpenAEV knows, the CVEs it found or updated on them in the last 7 days, and the simulations finished in the last 7 days. Each technique the EDR did not prevent, or did not detect, becomes a finding on the workstation it reached. On those techniques, the EDR's **Engine efficacy** falls below its declaration, by as much as the tests fell short and in proportion to the share of the scope's hosts they ran on. The scenarios that reach the front desks are priced again on that efficacy. Every hour after that, a new simulation of the same scenario updates the findings.
 
-This is OpenAEV with its default settings, as the xtm-docker commit these pages describe runs it. The main branch of xtm-docker turns on OpenAEV's snapshot export: there, the role takes **Access observation snapshots** instead of **Access findings**, and the first run reads the whole export, not the last 7 days (see [Read the snapshot export of OpenAEV](#read-the-snapshot-export-of-openaev)).
+This is OpenAEV with its default settings. xtm-docker turns on OpenAEV's snapshot export: there, the role takes **Access observation snapshots** instead of **Access findings**, and the first run reads the whole export, not the last 7 days (see [Read the snapshot export of OpenAEV](#read-the-snapshot-export-of-openaev)).
 :::
 
 ## Check that it works
@@ -109,20 +109,43 @@ If no result arrives while the inventory does, check that the user's role has **
 
 ## Read the snapshot export of OpenAEV
 
-When OpenAEV's `BULK_SNAPSHOT_EXPORT` preview feature is on (`openaev.enabled-dev-features=BULK_SNAPSHOT_EXPORT` in OpenAEV's configuration), OpenAEV serves a snapshot export of its results and CVEs. The connector then reads that export instead of the simulations and the findings. Nothing is set in OpenCRQ: each run asks OpenAEV for the export first, so turning the feature on or off in OpenAEV takes effect at the next run.
+When OpenAEV's `BULK_SNAPSHOT_EXPORT` preview feature is on (`openaev.enabled-dev-features=BULK_SNAPSHOT_EXPORT` in OpenAEV's configuration), OpenAEV serves a snapshot export of its results and CVEs. OpenAEV leaves it off by default; xtm-docker turns it on. The connector then reads that export instead of the simulations and the findings. Nothing is set in OpenCRQ: each run asks OpenAEV for the export first, so turning the feature on or off in OpenAEV takes effect at the next run.
+
+A `404` on the snapshot routes means the feature is off: the run reads the simulations and the findings, as in [How often it runs](#how-often-it-runs), and the log says `OpenAEV answers 404 on the snapshot routes, its BULK_SNAPSHOT_EXPORT preview feature is off: reading exercises and findings instead`. A `403` is not taken for a feature that is off: see the capability below.
+
+While a run is in progress, the **Current step** of its row in the **Works** tab says which way it reads: a run that reads the simulations and the findings starts with `OpenAEV snapshot export is off, reading exercises and findings`, and a run that reads the export shows `Reading OpenAEV attack observations of tenant …` when it reaches the results.
 
 The role of the OpenAEV user then needs:
 
-- **Access observation snapshots**, to read the export. OpenAEV shows this capability in its role screen only while the feature is on. Without it, the run fails at once, without a new attempt, and says `OpenAEV refused the snapshot request: the account lacks the ACCESS_SNAPSHOT_OBSERVATION capability`.
+- **Access observation snapshots**, to read the export. OpenAEV shows this capability in its role screen only while the feature is on. Without it, OpenAEV answers `403`: the run fails at once, without a new attempt and without falling back to the simulations and the findings, and says `OpenAEV refused the snapshot request: the account lacks the ACCESS_SNAPSHOT_OBSERVATION capability`.
 - **Access assets** and **Access assessment**, as in [Before you start](#before-you-start). **Access findings** is not used.
 
 Each run then:
 
-1. rebuilds the inventory once a day, not at every run. With it, the connector imports the asset groups of OpenAEV with their members, and the attack paths of its simulations: see [Find the assets of a group](/opencrq/use/attack-surface/assets/#find-the-assets-of-a-group) and [Read access relations and events](/opencrq/use/attack-surface/assets/#read-access-relations-and-events),
+1. rebuilds the inventory once a day, not at every run. With it, the connector imports the asset groups of OpenAEV with their members, and the attack paths of its simulations: see [Find the assets of a group](/opencrq/use/attack-surface/assets/#find-the-assets-of-a-group) and [Read access relations and events](/opencrq/use/attack-surface/assets/#read-access-relations-and-events). A run also rebuilds it when the export names an asset the connector does not have on file; an observation whose asset is still unknown afterwards is skipped,
 2. reads the results and the CVEs that changed since the previous run, from where it stopped, with no 7-day window,
-3. reads the whole export again every 7 days, and retires then the assets, scenarios and techniques OpenAEV deleted.
+3. reads the whole export again every 7 days. That full read retires the assets, scenarios and techniques OpenAEV deleted only when, at its end, OpenAEV reports its snapshot ready. Otherwise nothing is removed, and the connector reads the whole export again a day later.
 
 The first run, and the first run after **Reset state**, read the whole export: results and CVEs older than 7 days arrive too. On a large estate, this takes several runs.
+
+## What goes stale, and when
+
+A result or a CVE that OpenAEV no longer reports is not deleted: its finding is dismissed as **No longer reported by OpenAEV**, and comes back by itself if OpenAEV reports it again. What dismisses it depends on what changed in OpenAEV, and on whether the connector reads the [snapshot export](#read-the-snapshot-export-of-openaev):
+
+| What changed in OpenAEV | Snapshot export off | Snapshot export on |
+| --- | --- | --- |
+| A scenario was played again | Once the new simulation has finished, the results it no longer reports on the assets it played are dismissed | The same: only a finished simulation that started later replaces the results of an earlier one, and a replay still running retires nothing |
+| A CVE is no longer found on an asset | A run that brings at least one CVE for an asset dismisses the CVEs of that asset it did not bring. An asset that brings no CVE at all keeps the ones it had | The same between two full reads. A full read that ends with the snapshot ready dismisses every CVE it did not bring |
+| An asset was deleted | Its CVEs are dismissed by the next complete inventory, at every run. Its results stay | Its CVEs are dismissed by the next complete inventory, once a day; its results, by the next full read that ends with the snapshot ready |
+| A scenario was deleted | Its results stay | Its results are dismissed by the next full read that ends with the snapshot ready |
+
+An inventory is complete when it read every page, listed at least one asset, and listed as many assets as OpenAEV counted. The connector then asks OpenAEV by id for each asset it no longer listed, and dismisses only the CVEs of those OpenAEV no longer finds. When the count changed while the inventory was read, the log says `OpenAEV asset inventory changed while it was read: no asset is unregistered in this run`, and no CVE is dismissed for a missing asset in that run.
+
+## Limits on a large estate
+
+- **The inventory reads at most 1,000 pages of 100 assets** per OpenAEV tenant. Past 100,000 assets it is truncated, the log says `OpenAEV asset inventory truncated: pagination reached max pages`, and the results and CVEs of the assets left out are dropped. A truncated inventory dismisses nothing for a missing asset.
+- **The descriptions of the assets OpenAEV serves one by one** are fetched 8 calls at a time, within 500 calls per run, shared evenly among the OpenAEV tenants, what one tenant leaves going to the next. The assets never described come first, then the ones described longest ago; an asset described less than 24 hours ago waits. With one OpenAEV tenant, N such assets take about N/500 runs to be described.
+- **A run stops after 30 minutes**, and the next run resumes where it stopped: the first sync of a large estate takes several runs.
 
 ## What's next
 

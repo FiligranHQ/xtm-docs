@@ -6,7 +6,7 @@ doc_type: how-to
 products: [opencrq, opencti]
 personas: [admin, risk-manager, cti-lead]
 owner: docs-opencrq
-last_reviewed: 2026-11-20
+last_reviewed: 2026-11-26
 ---
 
 OpenCRQ prices a risk scenario from the threat actors that target your sector and your country and pursue the scenario's outcome. The OpenCTI connector subscribes to an OpenCTI Live Stream and keeps those threats current: a threat created, edited, renamed, merged or deleted in OpenCTI changes the same way in OpenCRQ, and the scenarios it reaches are priced again. Once the deployment gives OpenCRQ the URL of your OpenCTI and a token, OpenCRQ creates its own stream there at start and binds it to your tenant. This page sets that up, shows how to bind a stream of your own instead, and checks what arrives. To see where threats weigh in the price, read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).
@@ -29,7 +29,7 @@ The connector asks OpenCTI for the relationships its rules engine inferred too. 
 ## Before you start
 
 - In OpenCTI, a user for OpenCRQ, with the **Access data sharing** capability and read access to every marking definition applied to the threats, their relationships and the identities that authored them. OpenCTI leaves out of the stream a relationship whose source or target this user cannot read, and OpenCRQ cannot tell that gap from a narrow filter.
-- For OpenCRQ to create its Live Stream itself, the same user also has **Manage data sharing**, or **Bypass all capabilities**. Without either, you create the stream and bind it yourself.
+- For OpenCRQ to create its Live Stream itself, the same user also has **Manage data sharing** (`TAXIIAPI_SETCOLLECTIONS`), or **Bypass all capabilities** (`BYPASS`). Without either, you create the stream and bind it yourself.
 - For a person to open their threats, CVEs and assets in OpenCTI from OpenCRQ, they have an OpenCTI account under the same email address as in OpenCRQ: see [Open the same object in OpenCTI](#open-the-same-object-in-opencti).
 - The deployment of OpenCRQ carries the OpenCTI URL and that user's token for your tenant. Set both together, with a valid URL: with one alone, OpenCRQ does not start. Until the deployment carries them, the connector page shows **Unavailable** and says **Add this connector to your deployment configuration to use it.** See [Give OpenCRQ the URL and the token](#give-opencrq-the-url-and-the-token).
 - To bind a stream yourself, turn the connector on or off, reconnect it or reset it, your role in OpenCRQ has the **Manage Security** capability. To create a stream of your own, you have **Manage data sharing** in OpenCTI.
