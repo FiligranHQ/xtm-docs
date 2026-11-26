@@ -3,8 +3,8 @@ lanes:
   - label: Platforms
     tone: product
     nodes:
-      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Node.js without containers}
-      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: Java 21 without containers}
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Elasticsearch, RabbitMQ, Redis, S3"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "Elasticsearch, RabbitMQ, S3, PostgreSQL"}
   - label: At the center
     tone: core
     nodes:

@@ -10,7 +10,7 @@ products:
 sidebar_position: 0
 ---
 
-:::product-hero{eyebrow="Cyber risk quantification" title="Put a price on each cyber risk, and fund what lowers it most" primary-label="Start here" primary-to="#start-here" secondary-label="Install OpenCRQ" secondary-to="/deploy/install/opencrq/" shot=opencrq-risk-scenarios-list alt="The Risk Scenarios of Grand Meridian France as cards: Ransomware on the Booking Platform at $254K a year, down $9K, and Data Breach on Guest Records at $33K, down $64K, each with its p10 to p90 band and a line of past prices."}
+:::product-hero{eyebrow="Cyber risk quantification" title="Put a price on each cyber risk, and fund what lowers it most" primary-label="Start here" primary-to="#start-here" secondary-label="Deploy the XTM platform" secondary-to="/deploy/install/docker-compose/" shot=opencrq-risk-scenarios-list alt="The Risk Scenarios of Grand Meridian France as cards: Ransomware on the Booking Platform at $254K a year, down $9K, and Data Breach on Guest Records at $33K, down $64K, each with its p10 to p90 band and a line of past prices."}
 OpenCRQ turns each line of your risk register, such as ransomware on the booking platform or a breach of customer records, into an annualized loss in US dollars, with the chance of losing more. The price is not a score someone typed: OpenCRQ simulates the attacks that the threats targeting you would run against your assets and your controls, and keeps the figure current as they change. Then you compare what a control costs with the loss it removes.
 :::
 
@@ -55,10 +55,10 @@ You give people access and connect OpenCRQ to the sources that feed it. People s
 4. [Follow the background jobs and run one again](/opencrq/administer/background-jobs/): what OpenCRQ computes on its own, and how to see it is done.
 :::
 :::tab[Platform engineers]
-You deploy OpenCRQ beside the XTM platform and keep it running.
+You deploy the XTM platform, which always runs OpenCRQ with the other modules, and keep OpenCRQ healthy and up to date.
 
-1. [Install OpenCRQ](/deploy/install/opencrq/): its service, its database and file storage, its first tenant, and its sign-in through XTM One.
-2. [Configure OpenCRQ](/deploy/configure/opencrq/): the settings a deployment sets, and the connectors of each tenant.
+1. [Install with Docker Compose](/deploy/install/docker-compose/): the whole XTM platform, OpenCRQ with every other module, behind your reverse proxy.
+2. [Configure OpenCRQ](/deploy/configure/opencrq/): finish its setup and sign in to its first tenant through XTM One, then the settings a deployment sets and the connectors of each tenant.
 3. [OpenCRQ configuration](/reference/opencrq/configuration/): every key, its variable and its default.
 :::
 ::::

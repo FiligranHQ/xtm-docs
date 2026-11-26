@@ -39,9 +39,9 @@ Every platform applies these values again **at every start**: it creates the adm
 
 ### OpenCRQ
 
-OpenCRQ keeps no password and has no sign-in form: XTM One signs its users in, and the account of `XTM_ONE_ADMIN_EMAIL` is its super administrator. See [Sign in to OpenCRQ](/deploy/install/opencrq/#sign-in-to-opencrq).
+OpenCRQ keeps no password and has no sign-in form: XTM One signs its users in, and the account of `XTM_ONE_ADMIN_EMAIL` is its super administrator. See [Sign in to OpenCRQ](/deploy/configure/opencrq/#sign-in-to-opencrq).
 
-`APP__ADMIN__TOKEN` on the `opencrq` service is an optional token for the API, the counterpart of the admin tokens of OpenCTI and OpenAEV. It signs nobody in to the interface.
+`APP__ADMIN__TOKEN` on the `opencrq` service is a token for the API, the counterpart of the admin tokens of OpenCTI and OpenAEV. It signs nobody in to the interface. xtm-docker sets it from `OPENCRQ_ADMIN_TOKEN` of `.env`, which `init-env.sh` draws as a UUID version 4.
 
 | `APP__ADMIN__TOKEN` | What OpenCRQ does |
 | --- | --- |

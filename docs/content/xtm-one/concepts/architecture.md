@@ -11,7 +11,7 @@ migrated_from:
   - xtm-one:/deployment/data-flow/
 ---
 
-XTM One is two services you run, the **platform** and the **worker**, on three stores: PostgreSQL, Redis and an S3-compatible object storage. People, schedules, webhooks and the other products of the XTM platform send it work. To do that work, it calls the AI providers you configure and the tools its AI agents act through. This page explains what each part does, where your data lives, what leaves the deployment when an agent answers, and how OpenCTI, OpenAEV and OpenCRQ connect. It is the model to keep in mind before you [install XTM One](/deploy/install/xtm-one/) or decide what an agent may reach.
+XTM One is two services you run, the **platform** and the **worker**, on three stores: PostgreSQL, Redis and an S3-compatible object storage. People, schedules, webhooks and the other products of the XTM platform send it work. To do that work, it calls the AI providers you configure and the tools its AI agents act through. This page explains what each part does, where your data lives, what leaves the deployment when an agent answers, and how OpenCTI, OpenAEV and OpenCRQ connect. It is the model to keep in mind before you [deploy the XTM platform](/deploy/install/docker-compose/) or decide what an agent may reach.
 
 ::diagram{id=xtm-one-architecture-components}
 
@@ -61,7 +61,7 @@ How to register the platforms is in [Connect the modules to each other](/deploy/
 
 ## Who runs it
 
-Filigran can host XTM One for you, or you run it on your own infrastructure, connected or air-gapped. Hosted by Filigran, you reach it by a URL, configure models, sign-in and agents from the screens, and Filigran handles the infrastructure, upgrades and backups. Self-hosted, you run the two services and the three stores, behind a reverse proxy that terminates HTTPS: see [Install XTM One](/deploy/install/xtm-one/).
+Filigran can host XTM One for you, or you run it on your own infrastructure, connected or air-gapped. Hosted by Filigran, you reach it by a URL, configure models, sign-in and agents from the screens, and Filigran handles the infrastructure, upgrades and backups. Self-hosted, you run the two services and the three stores, behind a reverse proxy that terminates HTTPS, with the rest of the XTM platform: see [Install with Docker Compose](/deploy/install/docker-compose/).
 
 :::example[The weekly Velvet Harbor brief, from trigger to Slack]
 At Grand Meridian Hotels, XTM One runs at https://xtm-one.grand-meridian.example, with OpenCTI registered. Every Monday at 08:00, Europe/Paris, the assignment **Weekly Velvet Harbor brief** of the agent **Velvet Harbor watcher** comes due:
@@ -78,5 +78,5 @@ Camille Roux reads it on Monday morning. If she wants to know which reports it u
 ## What's next
 
 - [How XTM One keeps what agents know and do](/xtm-one/concepts/data-model/): the objects behind the screens.
-- [Install XTM One](/deploy/install/xtm-one/) and [Configure XTM One](/deploy/configure/xtm-one/).
+- [Install with Docker Compose](/deploy/install/docker-compose/) and [Configure XTM One](/deploy/configure/xtm-one/).
 - [XTM One configuration](/reference/xtm-one/configuration/): every environment variable.

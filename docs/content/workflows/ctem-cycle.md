@@ -40,7 +40,7 @@ A risk register alone prices assumptions; a list of findings alone does not say 
 
 ## What you need
 
-- **OpenCRQ**, registered with XTM One, with a tenant for your organization. See [Install OpenCRQ](/deploy/install/opencrq/) and [Connect the modules to each other](/deploy/configure/connect-modules/).
+- **OpenCRQ**, registered with XTM One, with a tenant for your organization. See [Finish the setup of OpenCRQ](/deploy/configure/opencrq/#finish-the-setup-after-the-install) and [Connect the modules to each other](/deploy/configure/connect-modules/).
 - **OpenCTI**, with the intelligence on the threats to your sector, and a user OpenCRQ reads it as.
 - **OpenAEV**, with OpenAEV agents on the endpoints to test and a collector that reads your EDR. [Check your defenses against the threats you track](/workflows/threat-informed-validation/) prepares it.
 - **XTM One**, with OpenCTI and OpenAEV registered, for the **CTEM Command Center**.

@@ -10,7 +10,7 @@ products:
 sidebar_position: 0
 ---
 
-:::product-hero{eyebrow="Threat intelligence platform" title="Turn scattered intelligence into a knowledge graph your teams act on" primary-label="Start here" primary-to="#start-here" secondary-label="Deploy OpenCTI" secondary-to="/deploy/" shot=opencti-report-overview alt="An OpenCTI report: its description, report type and publication date, the distribution of the entities it contains, and its reliability, confidence and processing status."}
+:::product-hero{eyebrow="Threat intelligence platform" title="Turn scattered intelligence into a knowledge graph your teams act on" primary-label="Start here" primary-to="#start-here" secondary-label="Deploy the XTM platform" secondary-to="/deploy/install/docker-compose/" shot=opencti-report-overview alt="An OpenCTI report: its description, report type and publication date, the distribution of the entities it contains, and its reliability, confidence and processing status."}
 OpenCTI stores what you know about threats as Structured Threat Information Expression (STIX) 2.1 objects and the relationships between them: reports, threat actors, malware, indicators, vulnerabilities, sightings. Feeds and connectors bring the data in; analysts explore, enrich and qualify it; playbooks, dashboards and feeds put it to work.
 :::
 
@@ -60,11 +60,11 @@ You decide who signs in, who sees what, and what each team may change.
 4. [Grant rights with roles](/opencti/administer/roles/): let analysts create without deleting, and keep administration to a few.
 :::
 :::tab[Platform engineers]
-You deploy OpenCTI, keep it healthy and keep it up to date.
+You deploy the XTM platform, which always runs OpenCTI with the other modules, and keep OpenCTI healthy and up to date.
 
 1. [How OpenCTI works](/opencti/concepts/architecture/): the platform, the workers, the managers and the connectors, and what each one needs.
 2. [Requirements](/deploy/plan/requirements/): what the host must provide, and the versions of the databases, queues and storage OpenCTI supports.
-3. [Install with Docker Compose](/deploy/install/docker-compose/): a running platform behind your reverse proxy.
+3. [Install with Docker Compose](/deploy/install/docker-compose/): the whole XTM platform, OpenCTI with every other module, behind your reverse proxy.
 4. [Upgrade](/deploy/upgrade/): move to a new release and what to check before.
 :::
 :::tab[CISOs and executives]

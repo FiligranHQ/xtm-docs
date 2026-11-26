@@ -1,5 +1,5 @@
 {
-  "source": "FiligranHQ/xtm-docker@b9c11dc",
+  "source": "FiligranHQ/xtm-docker@24cd380",
   "modules": [
     {
       "id": "xtm-one",
@@ -11,7 +11,18 @@
         "xtm-one",
         "xtm-one-worker"
       ],
-      "extras": [],
+      "extras": [
+        {
+          "id": "opensandbox",
+          "label": "OpenSandbox",
+          "summary": "Runs the code of custom tools, of the code interpreter and of the checks of a repository workspace, one container per run.",
+          "profile": "opensandbox",
+          "services": [
+            "opensandbox"
+          ],
+          "needs": []
+        }
+      ],
       "needs": [
         "xtm-one-db-init",
         "pgsql",
@@ -186,7 +197,7 @@
   "init": {
     "rsa-key-generator": "Generates the RSA key XTM Composer encrypts the integrations' configurations with.",
     "xtm-one-db-init": "Creates the XTM One database and its role in PostgreSQL.",
-    "opencrq-db-init": "Creates the OpenCRQ database in PostgreSQL.",
+    "opencrq-db-init": "Creates the OpenCRQ database and its role in PostgreSQL.",
     "opencrq-bucket-init": "Creates the OpenCRQ bucket in the S3 storage, which OpenCRQ does not create in production."
   },
   "services": {
@@ -248,6 +259,11 @@
       "depends_on": [
         "xtm-one"
       ]
+    },
+    "opensandbox": {
+      "image": "opensandbox/server:${OPENSANDBOX_SERVER_IMAGE_TAG:-v0.2.1}",
+      "ports": [],
+      "depends_on": []
     },
     "opencti": {
       "image": "opencti/platform:latest",

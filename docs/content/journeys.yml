@@ -174,10 +174,9 @@
     - {url: /deploy/plan/architecture/, label: Plan the architecture}
     - {url: /deploy/plan/requirements/, label: Check the requirements}
     - {url: /deploy/install/docker-compose/, label: Install with Docker Compose}
-    - {url: /deploy/install/xtm-one/, label: Install XTM One}
-    - {url: /deploy/install/opencrq/, label: Install OpenCRQ}
+    - {url: /deploy/configure/xtm-one/, label: Finish the setup of XTM One}
+    - {url: /deploy/configure/opencrq/, label: Finish the setup of OpenCRQ}
     - {url: /deploy/configure/connect-modules/, label: Connect the modules}
-    - {url: /deploy/configure/xtm-one/, label: Configure XTM One}
     - {url: /deploy/operate/xtm-one/, label: Monitor XTM One}
     - {url: /deploy/upgrade/, label: Upgrade}
 

@@ -20,7 +20,7 @@ The code interpreter runs Python for an AI agent: parse a log export, compute st
 - On XTM One, the code interpreter is off by default. An administrator turns it on in :menu[Administration > Settings > Access and security], under **Security options**, by switching off **Disable the code interpreter**. The variable `DISABLE_CODE_INTERPRETER`, when set, wins and locks the switch: see the **Security switches** section of the [configuration reference](/reference/xtm-one/configuration/).
 - The agent carries the **Code Interpreter** built-in tool, chosen in the **Built-in Tools** card of its configuration. With the General Assistant, switch it on for the conversation in **Session tools**.
 - Code runs count toward your agentic quota.
-- To run a repository's checks and start its services, see [Run the repository's checks](#run-the-repository-s-checks): the sandbox must run on OpenSandbox, with `CUSTOM_TOOL_SANDBOX=opensandbox`, as set up in [Run XTM One on its own host](/deploy/install/xtm-one/#run-xtm-one-on-its-own-host).
+- To run a repository's checks and start its services, see [Run the repository's checks](#run-the-repository-s-checks): the sandbox must run on OpenSandbox, with `CUSTOM_TOOL_SANDBOX=opensandbox` ([Run code in OpenSandbox](/deploy/configure/xtm-one/#run-code-in-opensandbox)).
 
 ## What persists, and what does not
 

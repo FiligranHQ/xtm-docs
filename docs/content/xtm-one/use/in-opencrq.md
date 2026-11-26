@@ -69,7 +69,7 @@ The consequences:
 - **An agent sees what you see**, in the tenants you belong to.
 - **An agent changes only what you could change.** The built-in assistants that answer **Ask Ariane** have every OpenCRQ tool of XTM One. These tools read and change risk scopes, primary and supporting assets and their evidence, risk scenarios, their loss estimates and threat event frequency, financial profiles and risk tolerance, controls and their postures, compliance assessments and their answers, and the engine settings; they run a simulation; they read treatment plans, budget reviews, findings and threats; and, for an administrator, they manage users, groups, roles and tenants. A tool your capabilities do not allow fails as you would.
 - **The MCP server has fewer tools.** Your own AI client, through `/mcp/opencrq`, gets no tenant or user administration, no service accounts, no engine or threat relevance settings, and no connectors. See [Tools of the OpenCRQ server](/develop/apis/mcp/#tools-of-the-opencrq-server).
-- **Your OpenCRQ account must be tied to your XTM One account.** OpenCRQ ties them the first time you sign in to OpenCRQ through XTM One, and matches an agent's calls to that account, never to an email address. A person whose XTM One account is tied to no OpenCRQ account gets no data. OpenCRQ's super administrator is XTM One's administrator, who signs in to OpenCRQ through XTM One: see [Sign in to OpenCRQ](/deploy/install/opencrq/#sign-in-to-opencrq).
+- **Your OpenCRQ account must be tied to your XTM One account.** OpenCRQ ties them the first time you sign in to OpenCRQ through XTM One, and matches an agent's calls to that account, never to an email address. A person whose XTM One account is tied to no OpenCRQ account gets no data. OpenCRQ's super administrator is XTM One's administrator, who signs in to OpenCRQ through XTM One: see [Sign in to OpenCRQ](/deploy/configure/opencrq/#sign-in-to-opencrq).
 - **What leaves OpenCRQ** is your message, the address of the page, the files you attach, and what the agent reads through the API. XTM One sends them to the language models its administrator configured.
 
 ## CTEM Command Center
@@ -116,6 +116,6 @@ This part is for administrators: what XTM One requires of OpenCRQ, and who decid
 ## What's next
 
 - [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/), to judge what an agent says about a price.
-- [Install OpenCRQ](/deploy/install/opencrq/), with its registration with XTM One.
+- [Finish the setup of OpenCRQ](/deploy/configure/opencrq/#finish-the-setup-after-the-install), with its registration with XTM One.
 - [XTM One in OpenCTI](/xtm-one/use/in-opencti/), the same AI in the threat intelligence platform.
 - [XTM One](/xtm-one/), to build and govern the agents.

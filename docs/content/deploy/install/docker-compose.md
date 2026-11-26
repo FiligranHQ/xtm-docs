@@ -10,9 +10,11 @@ last_reviewed: 2026-10-31
 migrated_from:
   - opencti:/deployment/installation/
   - openaev:/deployment/installation/
+  - openaev:/deployment/platform/installation/
+  - xtm-one:/deployment/installation/
 ---
 
-This page installs the XTM stack for production on one host with the official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker). At the end, the whole stack, XTM One, OpenCTI, OpenAEV, OpenCRQ, XTM Composer and their default integrations, runs with strong secrets, the public addresses of your users, data kept in Docker volumes and versions that change only when you decide. To try the platform first, follow [Run the XTM platform locally](/deploy/quick-start/): it uses the same files with fewer steps.
+This page installs the XTM stack for production on one host with the official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker). At the end, the whole stack, XTM One, OpenCTI, OpenAEV, OpenCRQ, XTM Composer and their default integrations, runs with strong secrets, the public addresses of your users, data kept in Docker volumes and versions that change only when you decide. Every install of the XTM platform runs all its modules together: there is no install of one module on its own. To try the platform first, follow [Run the XTM platform locally](/deploy/quick-start/): it uses the same files with fewer steps.
 
 ::diagram{id=deploy-install-docker-compose}
 
@@ -180,7 +182,7 @@ All the configuration is in `.env`, except the ports, the image versions and the
    docker compose config --quiet && echo "configuration OK"
    docker compose config --services
    ```
-   It prints `configuration OK`, then the 32 services of the stack: XTM One with its worker and `xtm-one-db-init`, OpenCTI with its worker and ten connectors, OpenAEV with four collectors and two injectors, OpenCRQ with `opencrq-db-init` and `opencrq-bucket-init`, XTM Composer with `rsa-key-generator`, and the five shared services.
+   It prints `configuration OK`, then the 32 services of the stack: XTM One with its worker and `xtm-one-db-init`, OpenCTI with its worker and ten connectors, OpenAEV with four collectors and two injectors, OpenCRQ with `opencrq-db-init` and `opencrq-bucket-init`, XTM Composer with `rsa-key-generator`, and the five shared services. `opensandbox`, which runs the code of XTM One's agents, starts only with its profile: see [Run code in OpenSandbox](/deploy/configure/xtm-one/#run-code-in-opensandbox).
    :::
 :::
 
@@ -213,8 +215,19 @@ All the configuration is in `.env`, except the ports, the image versions and the
    ```
    :::
 
-3. Put the reverse proxy in front of the platforms, as [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/) describes, then sign in at each public URL with the admin email and password of `.env`. OpenCRQ has no password of its own: XTM One's administrator signs in to it through XTM One and lands in its first tenant, `Default`, which OpenCRQ creates at its first start. See [Install OpenCRQ](/deploy/install/opencrq/).
+3. Put the reverse proxy in front of the platforms, as [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/) describes, then sign in at each public URL with the admin email and password of `.env`. OpenCRQ has no password of its own: XTM One's administrator signs in to it through XTM One and lands in its first tenant, `Default`, which OpenCRQ creates at its first start. Then [finish the setup of each module](#finish-the-setup-of-each-module).
 :::
+
+## Finish the setup of each module
+
+The stack runs every module from its first start. Each one has a few steps left before people use it:
+
+| Module | What is left | Where |
+| --- | --- | --- |
+| OpenCTI and OpenAEV | Sign in with the admin email and password of `.env`, and keep a break-glass account before you turn on single sign-on | [Sign in the first time and keep an emergency account](/deploy/configure/first-access/) |
+| XTM One | Trust the reverse proxy, let it stream the chat, connect a language model and give it its edition | [Finish the setup of XTM One](/deploy/configure/xtm-one/#finish-the-setup-after-the-install) |
+| OpenCRQ | Check its public URL and its registration with XTM One, then sign in to its first tenant through XTM One | [Finish the setup of OpenCRQ](/deploy/configure/opencrq/#finish-the-setup-after-the-install) |
+| Every module | Check that the modules registered with XTM One and reach each other | [Connect the modules to each other](/deploy/configure/connect-modules/) |
 
 ## Change the stack without editing docker-compose.yml
 
@@ -314,7 +327,8 @@ Back them up together with `.env`: see [Back up and restore](/deploy/operate/bac
 ## What's next
 
 - [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/), to publish the platforms over HTTPS.
-- [Connect the modules to each other](/deploy/configure/connect-modules/), to check the links between XTM One, OpenCTI, OpenAEV and XTM Composer.
+- [Configure XTM One](/deploy/configure/xtm-one/) and [Configure OpenCRQ](/deploy/configure/opencrq/), to finish their setup.
+- [Connect the modules to each other](/deploy/configure/connect-modules/), to check the links between XTM One, OpenCTI, OpenAEV, OpenCRQ and XTM Composer.
 - [Sign in the first time and keep an emergency account](/deploy/configure/first-access/), before you turn on single sign-on.
 - [Start the whole stack on an existing deployment](/deploy/install/modules/), for a deployment that ran only some modules.
 - [Install offline or with FIPS 140-3](/deploy/install/air-gapped/), for a host without internet access.

@@ -10,7 +10,7 @@ products:
 sidebar_position: 0
 ---
 
-:::product-hero{eyebrow="Adversarial exposure validation" title="Replay the attacks that target you, and see what your defenses stop" primary-label="Start here" primary-to="#start-here" secondary-label="Install OpenAEV" secondary-to="/deploy/install/docker-compose/" shot=openaev-injects-list alt="The injects of the Velvet Harbor replay scenario on its timeline: a fake booking request emailed at the start, then a PowerShell loader at 15 minutes, a search for local guest records at 30 and an HTTPS beacon at 45, each with its domain, its platform and its tag."}
+:::product-hero{eyebrow="Adversarial exposure validation" title="Replay the attacks that target you, and see what your defenses stop" primary-label="Start here" primary-to="#start-here" secondary-label="Deploy the XTM platform" secondary-to="/deploy/install/docker-compose/" shot=openaev-injects-list alt="The injects of the Velvet Harbor replay scenario on its timeline: a fake booking request emailed at the start, then a PowerShell loader at 15 minutes, a search for local guest records at 30 and an HTTPS beacon at 45, each with its domain, its platform and its tag."}
 OpenAEV plays a real attack, the one a threat group ran last month or the one your threat intelligence expects, against your own endpoints and your own people. An agent runs the attacker's commands, emails and fake press articles reach your teams, and your security tools report what they saw. Every action is scored: prevented, detected, answered in time. Run the same scenario every week and the scores show whether your defenses get better or worse.
 :::
 
@@ -55,10 +55,10 @@ You give people access, connect the security tools and set the platform up for y
 4. [Give each organization its own tenant](/openaev/administer/multi-tenancy/): separate subsidiaries or customers on one platform.
 :::
 :::tab[Platform engineers]
-You deploy OpenAEV beside the XTM platform and keep it running.
+You deploy the XTM platform, which always runs OpenAEV with the other modules, and keep OpenAEV healthy and up to date.
 
 1. [How OpenAEV works](/openaev/concepts/architecture/): the platform, the agents, the collectors and the injectors, and what each one needs.
-2. [Install with Docker Compose](/deploy/install/docker-compose/): a running platform behind your reverse proxy.
+2. [Install with Docker Compose](/deploy/install/docker-compose/): the whole XTM platform, OpenAEV with every other module, behind your reverse proxy.
 3. [Connect the modules to each other](/deploy/configure/connect-modules/): OpenAEV with OpenCTI, OpenCRQ and XTM One.
 4. [OpenAEV configuration](/reference/openaev/configuration/): every key, its variable and its default.
 :::

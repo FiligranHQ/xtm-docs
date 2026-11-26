@@ -1,6 +1,6 @@
 ---
 title: Upgrade XTM One
-description: "Move XTM One to a new version, in an XTM stack or on its own host: serve it over HTTP/2 for 1.261112.0, follow its migrations, rename retired variables, and roll back from a backup."
+description: "Move XTM One to a new version in the XTM stack: serve it over HTTP/2 for 1.261112.0, follow its migrations, rename retired variables, and roll back from a backup."
 doc_type: how-to
 products:
   - xtm-one
@@ -127,30 +127,6 @@ A script that opens the chat WebSocket, `/api/v1/chat/conversations/{id}/ws`, st
 If the start fails in a migration, the log names it. Do not run migrations by hand and do not start the previous version on the migrated database: [roll back](#roll-back), and keep the log for Filigran support.
 
 On a very large database, two settings bound the migrations, both in seconds: `MIGRATION_LOCK_TIMEOUT_SECONDS` (`300`), the longest a statement waits for a lock, and `MIGRATION_STATEMENT_TIMEOUT_SECONDS` (`1800`), the longest a statement runs. Past either, the migration is tried again, then the start fails with a message that names the setting. Raise the one it names on `xtm-one`, in `docker-compose.override.yml`.
-
-## Upgrade XTM One on its own host
-
-With the Docker Compose file of the product, as in [Run XTM One on its own host](/deploy/install/xtm-one/#run-xtm-one-on-its-own-host):
-
-:::steps
-1. Back up the database of the `postgres` service and the `minio-data` volume. The service knows its own database and user:
-
-   ```bash
-   docker compose exec -T postgres sh -c 'pg_dump -U "$POSTGRES_USER" -Fc "$POSTGRES_DB"' > xtm_one.dump
-   ```
-
-2. Download the `docker-compose.yml` and `.env.sample` of the new version, compare `.env.sample` with your `.env`, and set the new tag on `platform`, `worker` and `worker-preview` in `docker-compose.override.yml`. From 1.261110.2, the on/off switches your `.env` sets reach the containers: read [XTM One 1.261110.2](/deploy/upgrade/breaking-changes/#xtm-one-1-261110-2) first.
-3. Download the images and restart.
-
-   ```bash
-   docker compose pull
-   docker compose up -d
-   ```
-
-   :::verify
-   `curl -sS http://127.0.0.1:4000/api/health/ready` ends with `"status":"ok"`.
-   :::
-:::
 
 ## Renamed variables
 

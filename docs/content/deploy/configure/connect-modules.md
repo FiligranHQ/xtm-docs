@@ -91,7 +91,7 @@ Each platform registers itself with XTM One, then registers again every 5 minute
    The command prints nothing.
    :::
 
-   For OpenCRQ, `docker compose logs opencrq | grep "Registered with XTM One"` prints a line: see [Install OpenCRQ](/deploy/install/opencrq/#start-opencrq).
+   For OpenCRQ, `docker compose logs opencrq | grep "Registered with XTM One"` prints a line: see [Finish the setup of OpenCRQ](/deploy/configure/opencrq/#finish-the-setup-after-the-install).
 
    In XTM One, **My Profile** > **MCP Endpoint** shows each registered platform as `Connected`.
    :::
@@ -102,7 +102,7 @@ Each platform registers itself with XTM One, then registers again every 5 minute
 Each product has two URLs, and the signed calls between them use both.
 
 - The **public URL** is the one users open in their browser. It is also the product's identity: every token a product signs names it as the issuer, and every token sent to a product must be addressed to it. xtm-docker builds it from `*_EXTERNAL_SCHEME`, `*_HOST` and `*_PORT` in `.env`, and passes it as `APP__BASE_URL` to OpenCTI, `OPENAEV_BASE-URL` to OpenAEV, `XTM_ONE__PLATFORM_URL` to OpenCRQ, and `BASE_URL` to both XTM One containers.
-- The **internal URL** is only where the other containers connect: `http://opencti:8080`, `http://openaev:8080`, `http://opencrq:3002` and `http://xtm-one:4000`. The public host names therefore do not need to resolve inside Docker. OpenCRQ opens OpenCTI objects at the internal URL of its connection, as [Connect the first tenant](/deploy/install/opencrq/#connect-the-first-tenant) describes.
+- The **internal URL** is only where the other containers connect: `http://opencti:8080`, `http://openaev:8080`, `http://opencrq:3002` and `http://xtm-one:4000`. The public host names therefore do not need to resolve inside Docker. OpenCRQ opens OpenCTI objects at the internal URL of its connection, as [Connect the first tenant](/deploy/configure/opencrq/#connect-the-first-tenant) describes.
 
 When you publish the platforms on other URLs, change the three variables of each platform together, with the scheme set to `https` over TLS, as described in [Publish the platforms over HTTPS](/deploy/install/reverse-proxy/). Keep these rules:
 
@@ -168,7 +168,9 @@ OpenCTI reads one setting: `XTM__OPENAEV_URL`, the public URL of OpenAEV. The Op
 
 xtm-docker also sets `XTM__OPENAEV_API_URL=http://openaev:8080` and `XTM__OPENAEV_TOKEN=${OPENAEV_ADMIN_TOKEN}` on `opencti`. OpenCTI reads neither: it makes no call to OpenAEV, so no certificate setting applies to this link. The coverage data comes from OpenAEV, through the connector of the other tab.
 
-`xtm:opengrc_url` (`XTM__OPENGRC_URL`) is the URL of OpenCRQ, under its former name, OpenGRC. OpenCTI passes it to the interface, but no screen uses it yet. A later release renames it after OpenCRQ, still reads this name as a deprecated fallback, and adds OpenCRQ to the product switcher.
+`xtm:opengrc_url` (`XTM__OPENGRC_URL`) is the URL of OpenCRQ, under its former name, OpenGRC. OpenCTI passes it to the interface, but no screen uses it yet. A later release renames it after OpenCRQ, still reads this name as a deprecated fallback, and adds OpenCRQ to the product switcher. xtm-docker sets both names to the public URL of OpenCRQ: `XTM__OPENGRC_URL`, the one OpenCTI 7.261119.0 reads, and `XTM__OPENCRQ_URL`, the one later releases read first.
+
+xtm-docker also sets `APP__GRAPHQL__PLAYGROUND__FORCE_DISABLED_INTROSPECTION=false` on `opencti`. OpenAEV sends a GraphQL introspection query before it registers its coverage connector, and OpenCTI refuses introspection by default since 7.261109.0: without this setting, the connector of the other tab does not register. See [Query OpenCTI with GraphQL](/develop/apis/graphql/).
 :::
 ::::
 
@@ -185,12 +187,14 @@ The list holds `OpenAEV Coverage - 2cffad3a-0001-4078-b0e2-ef74274022c3`, the de
 
 ## Link OpenCRQ to OpenCTI and OpenAEV
 
-OpenCRQ reads the threats of OpenCTI and the simulation results of OpenAEV, for each of its tenants separately. The connection of a tenant is two variables per platform on the `opencrq` service, keyed by the tenant's identifier, which its **Settings** > **Parameters** page in OpenCRQ shows under **Identifier**: see [Connect the first tenant](/deploy/install/opencrq/#connect-the-first-tenant), and every connector in [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant).
+OpenCRQ reads the threats of OpenCTI and the simulation results of OpenAEV, for each of its tenants separately. The connection of a tenant is two variables per platform on the `opencrq` service, keyed by the tenant's identifier, which its **Settings** > **Parameters** page in OpenCRQ shows under **Identifier**: see [Connect the first tenant](/deploy/configure/opencrq/#connect-the-first-tenant), and every connector in [Connectors of each tenant](/deploy/configure/opencrq/#connectors-of-each-tenant).
 
 A connection set this way comes up enabled. At each start, for every tenant it holds with these variables, OpenCRQ does the following:
 
 - **OpenAEV.** It creates the service account `OpenAEV (deployment)` in the tenant's **Connectors** group, and binds the OpenAEV connector to it.
 - **OpenCTI.** It creates the Live Stream `OpenCRQ threat feed` in OpenCTI, with the token of the connection, or brings its filter back to what OpenCRQ needs: the Intrusion Sets, Threat Actors, Campaigns and Reports, and the `targets`, `uses` and `attributed-to` relationships between them and what they target or use. It then binds that stream with the service account `OpenCTI (deployment)`.
+
+xtm-docker also prepares the other direction, from OpenAEV to OpenCRQ, for an OpenAEV release that reads it: on `openaev`, `OPENAEV_XTM_OPENCRQ_URL` (the public URL of OpenCRQ), `OPENAEV_XTM_OPENCRQ_TOKEN` (`OPENCRQ_ADMIN_TOKEN`) and `openaev.xtm.opencrq.api-url` (`http://opencrq:3002/trpc`, in `SPRING_APPLICATION_JSON`). OpenAEV 3.261118.0 reads none of them. The same `SPRING_APPLICATION_JSON` turns on `BULK_SNAPSHOT_EXPORT`, the preview feature of OpenAEV that the OpenAEV connector of OpenCRQ reads the simulation results from: see [Read the snapshot export of OpenAEV](/opencrq/use/sources/openaev/#read-the-snapshot-export-of-openaev).
 
 These steps never replace a choice a tenant administrator made in **Integrations**: an account already bound, a stream already chosen or a connector turned off stay as they are. A variable that names a tenant the platform does not hold is skipped, and a platform that does not answer leaves its connector for the next start. xtm-docker sets these variables for the tenant of `OPENCRQ_TENANT_ID`, by default the tenant OpenCRQ creates at its first start, which is therefore connected from that start. For a tenant created later, in the Enterprise Edition, add its variables and run `docker compose up -d` so that OpenCRQ starts again and connects it.
 

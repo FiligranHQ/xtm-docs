@@ -221,23 +221,13 @@ git checkout -- .
 git pull
 ```
 
-## Other deployments
+## Docker Swarm
 
-::::tabs
-:::tab[Docker Swarm]
 Set the new image tags in your stack file, then force each service to restart on its new image:
 
 ```bash
 docker service update --force <service_name>
 ```
-:::
-:::tab[Manual installation]
-Replace the application files with those of the new release, then start the platform: it migrates its databases as it starts. See [Install without containers](/deploy/install/manual/).
-
-- OpenCTI, from the `opencti-platform/opencti-graphql` folder: `yarn install`, `yarn build`, then `yarn serv`
-- OpenAEV: `java -jar openaev-api.jar`
-:::
-::::
 
 ## What's next
 

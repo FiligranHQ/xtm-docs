@@ -129,7 +129,7 @@ OpenCRQ quantifies cyber risk in money, from the threats of OpenCTI and the vali
 | --- | --- |
 | `OPENCRQ_EXTERNAL_SCHEME`, `OPENCRQ_HOST`, `OPENCRQ_PORT` | The public URL of OpenCRQ, also its identity towards XTM One. The host publishes it on port 8082 whatever `OPENCRQ_PORT` says |
 
-See [Install OpenCRQ](/deploy/install/opencrq/) for the first start and its first administrator.
+See [Finish the setup of OpenCRQ](/deploy/configure/opencrq/#finish-the-setup-after-the-install) for the first start and its first administrator.
 
 ## What's next
 

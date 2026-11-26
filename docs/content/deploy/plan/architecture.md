@@ -39,7 +39,7 @@ The exposure validation platform, as the `openaev` service. Its default collecto
 
 ### OpenCRQ
 
-The cyber risk quantification platform, as the `opencrq` service. Its image is `filigran/opencrq`: see [Install OpenCRQ](/deploy/install/opencrq/). Before it starts, the `opencrq-db-init` job creates its `opencrq` database, which it uses as the PostgreSQL superuser, and the `opencrq-bucket-init` job creates its bucket. It reads threats from OpenCTI and validation results from OpenAEV, and registers with XTM One, without which it does not start.
+The cyber risk quantification platform, as the `opencrq` service. Its image is `filigran/opencrq`: see [What xtm-docker runs for OpenCRQ](/deploy/configure/opencrq/#what-xtm-docker-runs-for-opencrq). Before it starts, the `opencrq-db-init` job creates its PostgreSQL role, which is not a superuser, and the `opencrq` database that role owns, and the `opencrq-bucket-init` job creates its bucket. It reads threats from OpenCTI and validation results from OpenAEV, and registers with XTM One, without which it does not start.
 
 ### XTM Composer
 

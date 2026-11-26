@@ -364,19 +364,21 @@ On your own S3 service, create the bucket first, and keep `opencrq-bucket-init` 
 
 OpenAEV, OpenCRQ and XTM One share the `pgsql` instance, each with its own database: `openaev`, `opencrq` and `xtm_one`.
 
-- OpenAEV and OpenCRQ connect with the superuser of the instance, `POSTGRES_USER` and `POSTGRES_PASSWORD` of `.env`. At every start, the `opencrq-db-init` service creates the `opencrq` database if it is missing.
+- OpenAEV connects with the superuser of the instance, `POSTGRES_USER` and `POSTGRES_PASSWORD` of `.env`.
 - XTM One connects with its own role, `XTM_ONE_POSTGRES_USER` and `XTM_ONE_POSTGRES_PASSWORD`, which must differ from the superuser. At every start, the `xtm-one-db-init` service creates that role, the `xtm_one` database and the `vector` extension (pgvector) that XTM One needs. Only a superuser can create that extension.
+- OpenCRQ connects with its own role too, `OPENCRQ_POSTGRES_USER` (`opencrq`) and `OPENCRQ_POSTGRES_PASSWORD`, which must differ from the superuser and from the XTM One role. At every start, the `opencrq-db-init` service creates that role, sets its password from `.env`, and creates the `opencrq` database it owns. The only extension OpenCRQ creates, `uuid-ossp`, is a trusted one: the role needs no superuser right. Set `OPENCRQ_POSTGRES_USER` once: changed after the first start, the `opencrq` database and its tables stay owned by the old role.
 - `infra/postgresql.yml` starts PostgreSQL with `max_connections=200`: OpenAEV opens up to 20 connections, XTM One up to 35 per process, over its web processes and its worker, and OpenCRQ about 50 at peak. Keep at least this value on your own server.
 - It also gives the container 1 GB of shared memory (`shm_size`): parallel queries pass their rows through it, and the aggregates of OpenCRQ fail past the 64 MB a container gets by default.
 
 To use your own PostgreSQL server:
 
 :::steps
-1. On your server, connect with `psql` as a superuser and create the databases, the XTM One role and the extension. Use the values of `XTM_ONE_POSTGRES_USER` (`xtmone` in `.env.sample`) and `XTM_ONE_POSTGRES_PASSWORD` from `.env`.
+1. On your server, connect with `psql` as a superuser and create the databases, the roles of XTM One and OpenCRQ, and the extension. Use the values of `XTM_ONE_POSTGRES_USER` (`xtmone` in `.env.sample`), `XTM_ONE_POSTGRES_PASSWORD`, `OPENCRQ_POSTGRES_USER` (`opencrq`) and `OPENCRQ_POSTGRES_PASSWORD` from `.env`.
 
    ```sql
    CREATE DATABASE openaev;
-   CREATE DATABASE opencrq;
+   CREATE ROLE opencrq LOGIN PASSWORD 'the value of OPENCRQ_POSTGRES_PASSWORD';
+   CREATE DATABASE opencrq OWNER opencrq;
    CREATE ROLE xtmone LOGIN PASSWORD 'the value of XTM_ONE_POSTGRES_PASSWORD';
    CREATE DATABASE xtm_one OWNER xtmone;
    \connect xtm_one
@@ -397,7 +399,7 @@ To use your own PostgreSQL server:
    - DATABASE_URL=postgresql+asyncpg://${XTM_ONE_POSTGRES_USER}:${XTM_ONE_POSTGRES_PASSWORD}@postgres.example.com:5432/xtm_one
    ```
 
-4. Point OpenCRQ to it, in the `opencrq` service of `docker-compose.override.yml`. It connects as `POSTGRES_USER`, like OpenAEV:
+4. Point OpenCRQ to it, in the `opencrq` service of `docker-compose.override.yml`. It keeps connecting as `OPENCRQ_POSTGRES_USER`:
 
    ```yaml
    - POSTGRES__HOST=postgres.example.com

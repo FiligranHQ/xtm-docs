@@ -86,7 +86,9 @@ You can combine them: the default integrations run as Compose services while XTM
 | `connector-opencti` | Loads the OpenCTI datasets: marking definitions, identities, locations |
 | `connector-mitre` | Loads MITRE ATT&CK |
 
-The `connector-opencti` and `connector-mitre` services set `CONNECTOR_AUTO_CREATE_SERVICE_ACCOUNT=true`. At start, each one creates a service account named `[C] <connector name>` in the `Connectors` group, then runs with its token instead of the admin token.
+The import, analysis and dataset connectors (`connector-import-*`, `connector-analysis`, `connector-opencti`, `connector-mitre`) set `CONNECTOR_AUTO_CREATE_SERVICE_ACCOUNT=true`, with a confidence level of 100. At start, each one creates a service account named `[C] <connector name>` in the `Connectors` group, then runs with its token instead of the admin token.
+
+The three export connectors keep a token of their own: an export connector acts as the user who asked for the export, and only an account with **Bypass all capabilities** can do so. Give each one the token of a service account in a group that has it, such as Administrators, in `CONNECTOR_EXPORT_FILE_STIX_TOKEN`, `CONNECTOR_EXPORT_FILE_CSV_TOKEN` and `CONNECTOR_EXPORT_FILE_TXT_TOKEN` of `.env`. Left empty, as in `.env.sample`, they use the admin token.
 :::
 :::tab[OpenAEV collectors and injectors]
 | Service | Kind | What it does |

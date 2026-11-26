@@ -77,7 +77,6 @@ OpenCTI 7.261119.0, released in November 2026, is the latest release that this d
 
 | Change | What to know | Page |
 | --- | --- | --- |
-| Node.js 22.18.0 | The minimum version for a manual installation | [Requirements](/deploy/plan/requirements/) |
 | Session signing key | Derived from the encryption key and shared by every node; `app:session_secret` is gone, with nothing to set instead | [OpenCTI configuration](/reference/opencti/configuration/) |
 | Health checks in the background | The health endpoint returns the last check of the dependencies, with `&details=true` for each of them | [Check that the platforms are healthy](/deploy/operate/health-probes/) |
 | Keep-alive behind a load balancer | `app:keep_alive_timeout`, 65 seconds by default, longer than the idle timeout of most load balancers | [Check that the platforms are healthy](/deploy/operate/health-probes/) |
@@ -102,7 +101,7 @@ Before you upgrade, read [Breaking changes](/deploy/upgrade/breaking-changes/) a
 
 ## The other products
 
-This documentation describes OpenAEV 3.261118.0, XTM One 1.261119.1 and OpenCRQ 0.261123.0 with OpenCTI 7.261119.0. OpenCRQ 0.261120.0 is the first public release of the cyber risk quantification product: it prices each risk of your register in money, from the threats you track in OpenCTI and the results of your OpenAEV simulations. Start with [OpenCRQ](/opencrq/), then [Install OpenCRQ](/deploy/install/opencrq/). Since 1.261112.0, XTM One streams its chat over HTTP instead of a WebSocket: the reverse proxy in front of it must serve HTTP/2 to browsers, without buffering `/api/` and with a read timeout above 15 seconds. See [XTM One 1.261112.0](/deploy/upgrade/breaking-changes/#xtm-one-1-261112-0). What each OpenAEV release changes is in the [OpenAEV release notes](https://github.com/OpenAEV-Platform/openaev/releases) on GitHub; which versions work together is in the [compatibility matrix](/deploy/upgrade/compatibility/).
+This documentation describes OpenAEV 3.261118.0, XTM One 1.261119.1 and OpenCRQ 0.261123.0 with OpenCTI 7.261119.0. OpenCRQ 0.261120.0 is the first public release of the cyber risk quantification product: it prices each risk of your register in money, from the threats you track in OpenCTI and the results of your OpenAEV simulations. Start with [OpenCRQ](/opencrq/), then [Finish the setup of OpenCRQ](/deploy/configure/opencrq/#finish-the-setup-after-the-install). Since 1.261112.0, XTM One streams its chat over HTTP instead of a WebSocket: the reverse proxy in front of it must serve HTTP/2 to browsers, without buffering `/api/` and with a read timeout above 15 seconds. See [XTM One 1.261112.0](/deploy/upgrade/breaking-changes/#xtm-one-1-261112-0). What each OpenAEV release changes is in the [OpenAEV release notes](https://github.com/OpenAEV-Platform/openaev/releases) on GitHub; which versions work together is in the [compatibility matrix](/deploy/upgrade/compatibility/).
 ::::
 
 ::::only{opencti="<7.261119"}

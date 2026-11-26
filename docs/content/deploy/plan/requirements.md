@@ -1,6 +1,6 @@
 ---
 title: Requirements
-description: What the host, the shared services and the runtimes must provide to run OpenCTI, OpenAEV and XTM One, with the versions each module supports.
+description: What the host and the shared services must provide to run OpenCTI, OpenAEV, OpenCRQ and XTM One, with the versions each module supports.
 doc_type: reference
 products:
   - opencti
@@ -11,7 +11,7 @@ last_reviewed: 2026-10-31
 sidebar_position: 3
 ---
 
-This page lists what a deployment of the XTM stack needs before you install it: the host for the Docker deployment, the versions of the shared services each module supports, the settings they need and the runtimes of an installation without containers. For the amount of CPU, memory and disk, see [Sizing](/deploy/plan/sizing/).
+This page lists what a deployment of the XTM stack needs before you install it: the host for the Docker deployment, the versions of the shared services each module supports and the settings they need. For the amount of CPU, memory and disk, see [Sizing](/deploy/plan/sizing/).
 
 ::diagram{id=deploy-plan-requirements}
 
@@ -77,28 +77,6 @@ xtm-docker already sets these. Set them yourself when you run the services anoth
 | RabbitMQ | `max_message_size = 536870912` and `consumer_timeout = 86400000` in `rabbitmq.conf` | Filigran recommends them for OpenCTI on a new installation |
 | PostgreSQL | `max_connections=200` | OpenAEV opens up to 20 connections, XTM One up to 35 per process over its two web workers and its worker, and OpenCRQ about 50 at peak: more than the default of 100 |
 | PostgreSQL | The `vector` extension in the `xtm_one` database, created by a superuser | pgvector is not a trusted extension, and the XTM One role is not a superuser. In xtm-docker, `xtm-one-db-init` creates it |
-
-## Runtimes, for an installation without containers
-
-| Component | Runtime |
-| --- | --- |
-| OpenCTI platform | Node.js, version below, with corepack |
-| OpenCTI workers and connectors | Python 3 and pip |
-| OpenAEV platform | Java 21 |
-
-The release packages of OpenCTI exist for Linux with glibc (Ubuntu, Debian) and with musl (Alpine). See [Install without containers](/deploy/install/manual/).
-
-:::only{opencti=">=7.261030"}
-OpenCTI needs Node.js 22.18.0 or later.
-:::
-
-:::only{opencti=">=7.260811 <7.261030"}
-OpenCTI needs Node.js 22.0.0 or later.
-:::
-
-:::only{opencti="<7.260811"}
-OpenCTI needs Node.js 20.0.0 or later.
-:::
 
 ## What's next
 
