@@ -18,7 +18,7 @@ OpenCTI, OpenAEV and OpenCRQ expose observability metrics for your own monitorin
 ::diagram{id=deploy-operate-metrics}
 
 :::note[Not usage telemetry]
-These metrics stay in your infrastructure. The anonymous usage data the platforms send to Filigran is something else: see [Usage telemetry and privacy](/opencti/configure/telemetry/), and the [telemetry of OpenCRQ](/deploy/configure/opencrq/#telemetry).
+These metrics stay in your infrastructure. The anonymous usage data the platforms send to Filigran is something else: see [Usage telemetry and privacy](/opencti/configure/telemetry/), and [the usage telemetry of OpenCRQ](/opencrq/administer/telemetry/).
 :::
 
 ## Turn the metrics on
@@ -109,7 +109,7 @@ OpenCRQ serves its metrics to Prometheus, pushes them to an OTLP collector, or b
 | Environment variable | Default | What it does |
 | --- | --- | --- |
 | `TELEMETRY__OBSERVABILITY__PROMETHEUS__ENABLED` | `false` | Turns the Prometheus endpoint on, served at `/metrics` |
-| `TELEMETRY__OBSERVABILITY__PROMETHEUS__PORT` | `14269` | Port of the endpoint. On the port of the health check, `8444`, the endpoint stays off |
+| `TELEMETRY__OBSERVABILITY__PROMETHEUS__PORT` | `14269` | Port of the endpoint. On the port of the health check, `HEALTHCHECK_HTTP_SERVER__PORT` (`8444` in xtm-docker), the endpoint stays off |
 | `TELEMETRY__OBSERVABILITY__PROMETHEUS__HOST` | `0.0.0.0` | Address the endpoint listens on. `127.0.0.1` keeps it inside the container |
 | `TELEMETRY__OBSERVABILITY__OTLP__METRICS__ENABLED` | `false` | Turns the push to an OTLP collector on |
 | `TELEMETRY__OBSERVABILITY__OTLP__METRICS__EXPORTER` | None | URL of the collector, over gRPC, such as `http://otel-collector:4317`. Required when the push is on |
@@ -138,7 +138,7 @@ OpenCRQ serves its metrics to Prometheus, pushes them to an OTLP collector, or b
    :::
 :::
 
-The port is not published on the host, and the endpoint asks for no credentials: keep it on the Docker network of the stack. Its metrics show the version of OpenCRQ and the address and name of its database.
+The port is not published on the host, and the endpoint asks for no credentials: keep it on the Docker network of the stack. Anyone who reaches it reads the version of OpenCRQ, the address, port and name of its database, the processes and how many of each run, the SQLSTATE codes and the kinds of SQL operation of its queries, the name of every API procedure (`trpc_procedure`) and the kinds of background job (`job_kind`). No table name and no SQL text.
 
 Scrape `opencrq:14269` every 15 seconds or more. Within 5 seconds of a collection (`TELEMETRY__OBSERVABILITY__PROMETHEUS__MIN_INTERVAL_MS`), the endpoint serves the same document again.
 
@@ -292,31 +292,135 @@ services:
 After `docker compose up -d opencrq`, the collector receives the traces and the logs of the `opencrq-example-cert` service, with one `process.name` for each process.
 :::
 
+## Find OpenCTI's settings in OpenCRQ
+
+OpenCRQ's observability settings do the work of OpenCTI's under other names, with three differences on purpose:
+
+- One root, `TELEMETRY__`: `TELEMETRY__OBSERVABILITY__*` for your monitoring and `TELEMETRY__USAGE__*` for the usage telemetry ([Telemetry](/deploy/configure/opencrq/#telemetry)), where OpenCTI has `APP__TELEMETRY__*` and `TELEMETRY_MANAGER__*`.
+- One `ENABLED` switch for each transport of the metrics, the Prometheus endpoint and the OTLP push. OpenCTI has one switch for both, and turns each on by its port or its URL.
+- A log export to the OTLP collector, which OpenCTI does not have.
+
+| OpenCRQ | OpenCTI | What differs |
+| --- | --- | --- |
+| `TELEMETRY__OBSERVABILITY__PROMETHEUS__ENABLED` | `APP__TELEMETRY__METRICS__ENABLED` | OpenCTI's switch turns both transports on |
+| `TELEMETRY__OBSERVABILITY__PROMETHEUS__PORT` | `APP__TELEMETRY__METRICS__EXPORTER_PROMETHEUS` | Nothing: same default, `14269` |
+| `TELEMETRY__OBSERVABILITY__PROMETHEUS__HOST` | `APP__TELEMETRY__METRICS__EXPORTER_PROMETHEUS_HOST`, from OpenCTI 7.261119 | Nothing: same default, `0.0.0.0` |
+| `TELEMETRY__OBSERVABILITY__PROMETHEUS__COLLECT_TIMEOUT_MS`, `TELEMETRY__OBSERVABILITY__PROMETHEUS__ROUND_DEADLINE_MS`, `TELEMETRY__OBSERVABILITY__PROMETHEUS__MIN_INTERVAL_MS`, `TELEMETRY__OBSERVABILITY__PROMETHEUS__MAX_REPLY_BYTES`, `TELEMETRY__OBSERVABILITY__PROMETHEUS__PUBLIC_PORT` | None | OpenCTI serves the metrics of its own process, with nothing to collect from others |
+| `TELEMETRY__OBSERVABILITY__OTLP__METRICS__ENABLED` | `APP__TELEMETRY__METRICS__ENABLED` | OpenCTI's switch turns both transports on |
+| `TELEMETRY__OBSERVABILITY__OTLP__METRICS__EXPORTER` | `APP__TELEMETRY__METRICS__EXPORTER_OTLP` | OpenCRQ pushes over gRPC every 60 seconds, OpenCTI over HTTP every second |
+| `TELEMETRY__OBSERVABILITY__OTLP__TRACES__ENABLED` | `APP__TELEMETRY__TRACING__ENABLED` | Nothing |
+| `TELEMETRY__OBSERVABILITY__OTLP__TRACES__EXPORTER` | `APP__TELEMETRY__TRACING__EXPORTER_OTLP` | OpenCRQ sends over gRPC, to an address such as `http://otel-collector:4317`; OpenCTI over HTTP, to the full URL ending in `/v1/traces`. OpenCRQ has no Zipkin export |
+| `TELEMETRY__OBSERVABILITY__OTLP__LOGS__ENABLED`, `TELEMETRY__OBSERVABILITY__OTLP__LOGS__EXPORTER` | None | OpenCTI does not export its logs |
+| `TELEMETRY__OBSERVABILITY__PYROSCOPE__ENABLED` | `APP__TELEMETRY__PYROSCOPE__ENABLED` | Nothing |
+| `TELEMETRY__OBSERVABILITY__PYROSCOPE__SERVER_ADDRESS` | `APP__TELEMETRY__PYROSCOPE__EXPORTER` | Nothing |
+| `TELEMETRY__OBSERVABILITY__SERVICE_NAME` | `APP__TELEMETRY__PYROSCOPE__IDENTIFIER`, for Pyroscope | OpenCRQ's name also goes on its traces, logs and metrics. OpenCTI's traces always carry `opencti-platform` |
+
 ## OpenCRQ metrics
 
-Every series carries the labels `process_name`, `service_name` and `service_version`. With the default `split` profile, `process_name` is `http`, `worker` or `pm`. The OTLP push sends the same metrics under their dotted names, such as `db.client.connection.count`.
+Every series carries the labels `process_name`, `service_name` and `service_version`. With the default `split` profile, `process_name` is `http`, `worker` or `pm`, the process manager, which sends the supervision metrics and the Node.js metrics of its own process. With the `monolith` profile, it is `main` or `pm`, and `main` sends what `http` and `worker` send.
 
-To read a container as a whole, add up a counter or a count across its processes, with `sum by (instance)`. Never add up a ratio or a delay, such as `nodejs_eventloop_utilization` or `nodejs_eventloop_delay_p99`: take its `max` or its `avg`.
+The endpoint names a family after its OpenTelemetry name, with `_` for each dot and `_total` after a counter; it never adds the unit, which the table gives. The OTLP push sends the dotted names, such as `db.client.connection.count`, every 60 seconds, with one more attribute, `service.instance.id`: the name and the process ID of the process, such as `worker-412`, new at every restart. The scraped series never carry it.
 
-| Metrics | Type | What they measure |
+To read a container as a whole, add up a counter or a count across its processes, with `sum by (instance)`, and keep `instance` in the grouping when Prometheus scrapes several containers, or their series are added together. Never add up a ratio or a delay, such as `nodejs_eventloop_utilization` or `nodejs_eventloop_delay_mean`: take its `max` or its `avg`. A percentile, such as `nodejs_eventloop_delay_p99`, cannot be combined across processes: take the worst one, with `max`.
+
+| Metrics | Type | Processes | What they measure |
+| --- | --- | --- | --- |
+| `opencrq_pm_processes` | Gauge | `pm` | Supervised processes in each state of their lifecycle, attribute `state`: `FORKING`, `BOOTING`, `STARTING`, `RUNNING`, `STOPPING`, `STOPPED`, `EXITED` or `ERROR` |
+| `opencrq_pm_collection_ok`, `opencrq_pm_collection_duration`, `opencrq_pm_collection_failures_total` | Gauge, histogram, counter | `pm` | For each process the endpoint collects (`supervised_process`, `pm` included): whether its last collection succeeded (`1`) or not (`0`), how long it took, in seconds, and its failures by `reason`: `timeout`, `error`, `not_connected`, `not_running`, `oversized`, `invalid`, `empty` or `send_error`. Only while the Prometheus endpoint runs: see [How the endpoint collects the processes](#how-the-endpoint-collects-the-processes) |
+| `db_client_connection_count`, `db_client_connection_limit`, `db_client_connection_pending_requests` | Gauge | `http`, `worker` | The connections of each database pool, `used` or `idle` (attribute `db_client_connection_state`), the limit of the pool and the callers waiting for one |
+| `db_client_connection_wait_time`, `db_client_connection_use_time`, `db_client_connection_timeouts_total` | Histogram, counter | `http`, `worker` | The time to get a connection and the time it was held, in seconds, and the requests that timed out |
+| `opencrq_db_client_connection_reconnection_attempts_total` | Counter | `http`, `worker` | Attempts to connect to the database again after an error of the pool |
+| `db_client_operation_duration` | Histogram | `http`, `worker` | Duration of the database queries, in seconds, by `db_operation_name`: `SELECT`, `INSERT`, `UPDATE`, `DELETE` or `_OTHER`. Also by `server_address`, `server_port`, `db_namespace` (the database), `db_system_name` and, when the PostgreSQL instrumentation reports it, `error_type`: a SQLSTATE of the classes `08`, `22`, `23`, `25`, `28`, `3D`, `40`, `42`, `53`, `55`, `57`, `58` or `XX`, any other as `_OTHER` |
+| `opencrq_trpc_server_duration` | Histogram | `http` | Duration of the API calls, in seconds, by `trpc_type` (`query` or `mutation`) and `error_type` (a tRPC error code, such as `NOT_FOUND`, or `_OTHER`). No procedure, on purpose: it is on the counter below. Subscriptions are not measured |
+| `opencrq_trpc_server_calls_total` | Counter | `http` | The API calls, by procedure (`trpc_procedure`), `trpc_type` and `error_type` |
+| `opencrq_recompute_asks_total` | Counter | `http`, `worker` | Requests to run a background job again, by `job_kind`, `path`, `already_existed` (`true` when the request joined a job already queued) and `reason`. The `path` is `dispatcher` (the dispatcher of background jobs), `followup` (asked by the platform after its own work), `manual` (asked from the interface) or `sweep` (a backfill). On the `dispatcher` path only, `reason` says why: `change` (the job's data changed), `reconnect` (catching up after a reconnection), `daily` (the daily run) or `followup` (its data changed during its last run). `manual` asks and some `followup` asks come from `http` |
+| `opencrq_recompute_unattributed_reads_total` | Counter | `worker` | Runs of a background job whose reads could not be tied to tables, so that any change of data asks for it again, by `job_kind`. An engineering signal |
+| `opencrq_recompute_feeding_cycles_total` | Counter | `worker` | Kinds of background job whose reads and writes feed each other, by `job_kind` and `cycle` (the kinds joined by ` -> `). They still run, and the log says `Recompute jobs feed each other: their reads and writes form a cycle`. An engineering signal |
+| `opencrq_opencti_mirror_rebuild_actors_total` | Counter | `worker` | Threats of the OpenCTI stream that a rebuild settled, by `outcome`: `rebuilt`, `retracted` (deleted in OpenCTI) or `failed` |
+| `opencrq_events_doorbells_total`, `opencrq_events_doorbell_procedures` | Counter, histogram | `http` | The data changes that make the open screens reload, by `resolution` (`named`, the queries it makes stale are known, or `all`), and how many queries each `named` one makes stale |
+| `opencrq_events_query_index_explains_total`, `opencrq_events_query_index_procedures` | Counter, gauge | `http` | The `EXPLAIN` statements run to learn which tables each query reads, by `outcome` (`ok` or `refused`), and the queries the index knows, by `state`: `observed`, `declared`, `widened` or `without_reads`. An engineering signal |
+| `nodejs_eventloop_utilization`, `nodejs_eventloop_delay_max`, `nodejs_eventloop_delay_mean`, `nodejs_eventloop_delay_p99` | Gauge | Every process | Load of the event loop, a ratio, and its delay, in seconds |
+| `nodejs_eventloop_time_total` | Counter | Every process | Time the event loop spent `active` or `idle` (attribute `nodejs_eventloop_state`), in seconds |
+| `v8js_gc_duration`, `v8js_memory_heap_used` | Histogram, gauge | Every process | Garbage collection time, in seconds, every kind of collection in one series, and the heap used, in bytes, one series for each heap space (`v8js_heap_space_name`): add them up |
+| `process_cpu_time_total`, `process_cpu_utilization`, `process_memory_usage` | Counter, gauge | Every process | CPU time, in seconds, and share of the CPU, by `cpu_mode` (`user` or `system`), and memory of each process, in bytes |
+
+The series of a pool carry its name, `db_client_connection_pool_name`: `host:port/database`, such as `pgsql:5432/opencrq` in xtm-docker. Each of `http` and `worker` has two pools: the main one, of `POSTGRES__POOL_MAX` connections, and the one of the background jobs' leases, `pgsql:5432/opencrq#control`, of 5 connections.
+
+A family appears only once it has something to report: a family that counts failures after the first one, such as `db_client_connection_timeouts_total`, and the wait and use times of a pool after its first connection. Write the panels and alerts so that a missing series counts as zero. `or vector(0)` gives a series without labels: it fills a total, not a series by process or by instance.
+
+### Histogram buckets
+
+A panel or a `histogram_quantile` on `le` reads these bounds. A quantile never goes above the highest one.
+
+| Histogram | Bounds |
+| --- | --- |
+| `db_client_operation_duration`, `db_client_connection_wait_time` | 0.005, 0.025, 0.1, 0.5, 2, 10 and 60 seconds |
+| `db_client_connection_use_time` | The same, then 300 and 1800 seconds |
+| `opencrq_trpc_server_duration` | 0.05, 0.25, 1, 5, 30 and 120 seconds |
+| `v8js_gc_duration` | 0.001, 0.01, 0.1, 1, 5 and 10 seconds |
+| `opencrq_pm_collection_duration` | 0.05, 0.25, 1, 2.5 and 4.5 seconds |
+| `opencrq_events_doorbell_procedures` | 0, 1, 2, 5, 10, 20, 50 and 100 queries |
+
+### Left out on purpose
+
+OpenCRQ drops these families before either transport, so do not look for them:
+
+- The event loop delays other than the maximum, the mean and the p99: `nodejs.eventloop.delay.min`, `nodejs.eventloop.delay.stddev`, `nodejs.eventloop.delay.p50` and `nodejs.eventloop.delay.p90`.
+- `v8js.memory.heap.space.*`, three families on the heap spaces `v8js_memory_heap_used` already reports, and `v8js.resource.active`, whose series would grow with what the process holds.
+- The HTTP and system metrics of the instrumentations: `http.server.*`, `http.client.*` and `system.*`.
+- The pool metrics of the PostgreSQL instrumentation, `db.client.connection.*`, including `db.client.connection.max`, the former name of the limit: OpenCRQ measures its pools itself, under the names of the table.
+
+`v8js.memory.heap.limit` is never sent. OpenCRQ ships no dashboard and no alert rule.
+
+### Show OpenCRQ on OpenCTI's runtime dashboards
+
+OpenCTI exports its Node.js metrics with the package `opentelemetry-node-metrics` 3.0.0, under other names than OpenCRQ's. These recording rules write OpenCRQ's under OpenCTI's names, so that a panel built on OpenCTI's Node.js metrics shows OpenCRQ unchanged, as long as it selects no `job` of its own: the recorded series keep `job="opencrq"`. OpenCTI has no pool, query or supervision metrics, so only the Node.js metrics need a rule.
+
+| OpenCRQ | OpenCTI | Rule |
 | --- | --- | --- |
-| `opencrq_pm_processes` | Gauge | Processes in each state of their lifecycle, attribute `state`, such as `RUNNING`, `STOPPED` or `ERROR` |
-| `opencrq_pm_collection_ok`, `opencrq_pm_collection_failures_total` | Gauge, counter | Whether the endpoint collected the metrics of each process (`supervised_process`), and its failures by `reason`, such as `timeout`. Prometheus endpoint only |
-| `db_client_connection_count`, `db_client_connection_limit`, `db_client_connection_pending_requests` | Gauge | The database connections of each process, `used` or `idle` (attribute `db_client_connection_state`), the limit of its pool and the callers waiting for one |
-| `db_client_connection_wait_time`, `db_client_connection_use_time`, `db_client_connection_timeouts_total` | Histogram, counter | The time to get a connection and to use it, in seconds, and the requests that timed out |
-| `db_client_operation_duration` | Histogram | Duration of the database queries, by `db_operation_name`: `SELECT`, `INSERT`, `UPDATE`, `DELETE` or `_OTHER` |
-| `opencrq_db_client_connection_reconnection_attempts_total` | Counter | Attempts to connect to the database again after an error of the pool |
-| `opencrq_trpc_server_duration`, `opencrq_trpc_server_calls_total` | Histogram, counter | Duration of the API calls, in seconds, and the calls by procedure (`trpc_procedure`) and error (`error_type`) |
-| `opencrq_recompute_asks_total` | Counter | Requests to run a background job again after a change of its data, by `job_kind` and `reason` |
-| `opencrq_opencti_mirror_rebuild_actors_total` | Counter | Threats of the OpenCTI stream that a rebuild settled, by `outcome`: `rebuilt`, `retracted` (deleted in OpenCTI) or `failed` |
-| `opencrq_events_doorbells_total`, `opencrq_events_doorbell_procedures` | Counter, histogram | The data changes that make the open screens reload, and how many queries each one makes stale |
-| `nodejs_eventloop_utilization`, `nodejs_eventloop_delay_max`, `nodejs_eventloop_delay_mean`, `nodejs_eventloop_delay_p99` | Gauge | Load and delay of the event loop of each process |
-| `v8js_gc_duration`, `v8js_memory_heap_used` | Histogram, gauge | Garbage collection time, and the heap used, one series for each heap space (`v8js_heap_space_name`): add them up |
-| `process_cpu_time_total`, `process_cpu_utilization`, `process_memory_usage` | Counter, gauge | CPU time by `cpu_mode`, `user` or `system`, and memory of each process, in bytes |
+| `nodejs_eventloop_delay_max`, `nodejs_eventloop_delay_mean`, `nodejs_eventloop_delay_p99` | `nodejs_eventloop_lag_max_seconds`, `nodejs_eventloop_lag_mean_seconds`, `nodejs_eventloop_lag_p99_seconds` | Rename. The p99 is the worst process's, not a percentile of the container |
+| `v8js_gc_duration` | `nodejs_gc_duration_seconds` | Rename. No `kind` label: the four kinds of collection are one series. OpenCTI's bounds are 0.001, 0.01, 0.1, 1, 2 and 5 seconds, so a panel on `le="2"` stays empty |
+| `v8js_memory_heap_used` | `nodejs_heap_space_size_used_bytes` | Rename of the metric and of its label, `space`, whose values lose their `_space` suffix |
+| `v8js_memory_heap_used`, added up over the spaces | `nodejs_heap_size_used_bytes` | Close, not equal: OpenCTI's is the heap used that Node.js reports for the whole process |
+| `process_memory_usage` | `process_resident_memory_bytes` | Rename |
+| `process_cpu_time_total`, `user`, `system` or both | `process_cpu_user_seconds_total`, `process_cpu_system_seconds_total`, `process_cpu_seconds_total` | Rename, and a sum for the total |
+| `nodejs_eventloop_utilization` | None: a ratio, where OpenCTI measures a lag | Point the panel at `nodejs_eventloop_lag_mean_seconds` |
+| `process_cpu_utilization` | None | Point the panel at `rate(process_cpu_seconds_total[5m])` |
+| `nodejs_eventloop_time_total` | None | Query it under its own name |
 
-A family that counts failures appears only after the first one, such as `db_client_connection_timeouts_total`: write the panels and alerts so that a missing series counts as zero.
+Every rule selects `job="opencrq"`. OpenCTI serves `process_cpu_seconds_total`, `process_cpu_user_seconds_total`, `process_cpu_system_seconds_total` and `process_resident_memory_bytes` too, and without the selector the series of both modules would be added together. Change it when your job has another name; never remove it.
 
-The Node.js metrics of OpenCRQ do not take the names of OpenCTI's, such as `process_resident_memory_bytes` for `process_memory_usage`. A dashboard built for OpenCTI needs recording rules that rename them to show OpenCRQ.
+```yaml
+groups:
+  - name: opencrq-opencti-runtime
+    rules:
+      - record: nodejs_eventloop_lag_max_seconds
+        expr: max without (process_name) (nodejs_eventloop_delay_max{job="opencrq"})
+      - record: nodejs_eventloop_lag_mean_seconds
+        expr: avg without (process_name) (nodejs_eventloop_delay_mean{job="opencrq"})
+      - record: nodejs_eventloop_lag_p99_seconds
+        expr: max without (process_name) (nodejs_eventloop_delay_p99{job="opencrq"})
+      - record: process_resident_memory_bytes
+        expr: sum without (process_name) (process_memory_usage{job="opencrq"})
+      - record: nodejs_heap_size_used_bytes
+        expr: sum without (process_name, v8js_heap_space_name) (v8js_memory_heap_used{job="opencrq"})
+      - record: nodejs_heap_space_size_used_bytes
+        expr: sum without (process_name, v8js_heap_space_name) (label_replace(v8js_memory_heap_used{job="opencrq"}, "space", "$1", "v8js_heap_space_name", "(.*)_space"))
+      - record: process_cpu_user_seconds_total
+        expr: sum without (process_name, cpu_mode) (process_cpu_time_total{job="opencrq", cpu_mode="user"})
+      - record: process_cpu_system_seconds_total
+        expr: sum without (process_name, cpu_mode) (process_cpu_time_total{job="opencrq", cpu_mode="system"})
+      - record: process_cpu_seconds_total
+        expr: sum without (process_name, cpu_mode) (process_cpu_time_total{job="opencrq"})
+      - record: nodejs_gc_duration_seconds_bucket
+        expr: sum without (process_name) (v8js_gc_duration_bucket{job="opencrq"})
+      - record: nodejs_gc_duration_seconds_sum
+        expr: sum without (process_name) (v8js_gc_duration_sum{job="opencrq"})
+      - record: nodejs_gc_duration_seconds_count
+        expr: sum without (process_name) (v8js_gc_duration_count{job="opencrq"})
+```
+
+The mean is exact only when every process measured as many delays. The heap space rule gives a `space` label to the spaces whose name ends in `_space`, which V8 gives all of them today. A panel on another runtime metric of OpenCTI, such as `nodejs_eventloop_lag_seconds`, stays empty.
 
 ### Alerts worth setting
 
@@ -332,13 +436,13 @@ and ignoring (db_client_connection_state) (
 )
 ```
 
-Raise `POSTGRES__POOL_MAX`, and `max_connections` on PostgreSQL with it: see [Database](/deploy/configure/opencrq/#database).
+On the main pool, raise `POSTGRES__POOL_MAX`, and `max_connections` on PostgreSQL with it: see [Database](/deploy/configure/opencrq/#database). The alert can also fire on the `#control` pool, at its limit of 5, which `POSTGRES__POOL_MAX` does not change.
 
 A threat that fails its rebuild fails again at every run, and the run still succeeds. Alert when `increase(opencrq_opencti_mirror_rebuild_actors_total{outcome="failed"}[1h]) > 0` stays true over several hours. The log line `OpenCTI actor rebuild failed, its rows stay marked` gives the STIX ID of the threat.
 
 ### How the endpoint collects the processes
 
-At each scrape, the process manager asks every process for its metrics and merges them into one document. A process that answers too late, or sends too much, is left out of that document and counted in `opencrq_pm_collection_failures_total`.
+At each scrape, the process manager asks every process for its metrics and merges them into one document. A process that answers too late, or sends too much, is left out of that document and counted in `opencrq_pm_collection_failures_total`. The scrape is neither delayed nor broken: it gets the metrics of the processes that answered in time.
 
 | Environment variable | Default | What it sets |
 | --- | --- | --- |
@@ -348,7 +452,9 @@ At each scrape, the process manager asks every process for its metrics and merge
 | `TELEMETRY__OBSERVABILITY__PROMETHEUS__MAX_REPLY_BYTES` | `2097152` | The largest share of one process, in bytes. A larger one is refused, with the reason `oversized` |
 | `TELEMETRY__OBSERVABILITY__PROMETHEUS__PUBLIC_PORT` | None | The port the endpoint is published on, when it differs. Written in the logs only |
 
-The endpoint stays off, with an error in the logs, when it cannot start or when its port is the port of the health check: `Metrics scrape port is already the healthcheck port; metrics endpoint disabled`. The rest of the platform keeps running. When Prometheus cannot connect, look for these lines first.
+The process manager records the outcome of a collection after it has taken its own metrics, so the collection families show each outcome one scrape late, and are missing from the first scrape after a start. They exist only while the Prometheus endpoint runs; with the OTLP push on too, the process manager pushes them as well.
+
+The endpoint stays off, with an error in the logs, when it cannot start, when its port is the port of the health check (`Metrics scrape port is already the healthcheck port; metrics endpoint disabled`), or when a process of the profile takes the process manager's own name (`Process profile names a child after the process manager's own reserved name; metrics endpoint disabled`). The rest of the platform keeps running. When Prometheus cannot connect, look for these lines first.
 
 ## What's next
 
