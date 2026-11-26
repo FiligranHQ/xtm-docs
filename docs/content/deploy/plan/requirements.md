@@ -7,7 +7,7 @@ products:
   - openaev
 personas: [platform-engineer]
 owner: docs-platform
-last_reviewed: 2026-10-31
+last_reviewed: 2026-11-26
 sidebar_position: 3
 ---
 
@@ -77,6 +77,7 @@ xtm-docker already sets these. Set them yourself when you run the services anoth
 | RabbitMQ | `max_message_size = 536870912` and `consumer_timeout = 86400000` in `rabbitmq.conf` | Filigran recommends them for OpenCTI on a new installation |
 | PostgreSQL | `max_connections=200` | OpenAEV opens up to 20 connections, XTM One up to 35 per process over its two web workers and its worker, and OpenCRQ about 50 at peak: more than the default of 100 |
 | PostgreSQL | The `vector` extension in the `xtm_one` database, created by a superuser | pgvector is not a trusted extension, and the XTM One role is not a superuser. In xtm-docker, `xtm-one-db-init` creates it |
+| PostgreSQL in a container | At least 1 GB of shared memory: `shm_size: 1gb` in Docker Compose, a memory `emptyDir` on Kubernetes | Parallel queries pass their rows through `/dev/shm`: with the 64 MB a container gets by default, the large queries of OpenCRQ fail with `could not resize shared memory segment`. See [Configure OpenCRQ](/deploy/configure/opencrq/#database) |
 
 ## What's next
 

@@ -6,7 +6,7 @@ doc_type: how-to
 products: [opencrq]
 personas: [admin, platform-engineer, risk-manager]
 owner: docs-opencrq
-last_reviewed: 2026-11-04
+last_reviewed: 2026-11-26
 ---
 
 The attack run of OpenCRQ only uses the techniques your estate exposes, so the price of a scenario is as good as the inventory behind it. The Microsoft Defender connector imports that inventory from Microsoft Defender for Endpoint, Microsoft Entra ID and Intune, through the Microsoft Graph API: your devices with the CVEs Defender finds on them, the accounts of your directory, and who uses which workstation. It rates each one's criticality and exposure from what Defender knows, and keeps them in step on a schedule. This page registers the application in Microsoft Entra ID, gives its credentials to OpenCRQ and turns the connector on. For how assets weigh in the price, read [How OpenCRQ quantifies risk](/opencrq/concepts/how-risk-is-quantified/).
@@ -18,7 +18,7 @@ The connector writes **supporting assets** and **findings**. Each run reads ever
 **Devices.** Every device in Defender's retention window, with or without a vulnerability, since Defender keeps matching new CVEs against the last software inventory of a device that went offline. Each comes with its name, its IP and MAC addresses from its latest snapshot, its operating system release and full version, its vendor, model and subtype (switch, router, smartphone...), which refines its subcategory. A device with no name is kept and shown under a name built from its vendor, model and address.
 
 - **Exposure** follows Defender's internet-facing flag: internet facing, internal, or unknown when Defender does not say.
-- **Criticality** is the highest that applies: very high for a domain controller, a certificate services, federation services or Entra Connect server; high for a hypervisor or a backup server; or the asset value set in Defender (very high, high or low). The role names no rule rates are written in the run's log.
+- **Criticality** is the highest that applies: very high for a domain controller, a certificate services, federation services or Entra Connect server; high for a hypervisor or a backup server; the asset value set in Defender (very high, high or low); or one band below its primary user's (see **Primary users**): high under a very high account, medium under a high one, nothing under medium or below, as [The criticality a device takes from its user](/opencrq/concepts/asset-consolidation/#the-criticality-a-device-takes-from-its-user) explains. A criticality set by hand on the device outranks them all. The role names no rule rates are written in the run's log.
 
 **Software vulnerabilities.** One finding per device and CVE, with the CVSS score Defender gives, whether an exploit is available, and the software that carries it. A CVE Defender stops reporting on a device is dismissed as **No longer reported by Microsoft Defender**. CVE details then come from the [public CVE sources](/opencrq/use/sources/vulnerability-sources/).
 
