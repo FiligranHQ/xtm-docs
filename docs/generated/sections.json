@@ -2655,8 +2655,8 @@
     ]
   },
   "xtm-one": {
-    "done": 72,
-    "total": 72,
+    "done": 73,
+    "total": 73,
     "groups": [
       {
         "id": "concepts",
@@ -3450,6 +3450,18 @@
           {
             "target": "/xtm-one/administer/organization-profile/",
             "title": "Set up the organization profile agents read",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/xtm-hub/",
+            "title": "Connect XTM One to the XTM Hub",
             "doc_type": "how-to",
             "products": [
               "xtm-one"

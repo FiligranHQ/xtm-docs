@@ -245,7 +245,7 @@ Shortening a retention, or giving days to a category kept **Never**, deletes fil
 
 ### Platform
 
-The platform's identity and license: the **Instance ID** that a license is generated for, the registration on the XTM Hub, the license itself (**Install License**, or `ENTERPRISE_LICENSE`, which then wins), the **Default language** of the interface for the users who have not chosen one (**Platform Language**), the **Default Presentation Template** applied to the decks agents generate, the **Brand asset source**, and **Platform Branding**: **Identity** (platform name, login message), **In-App Colors**, **Browser & PWA** and **Media Assets** (logo and favicon).
+The platform's identity and license: the **Instance ID** that a license is generated for, the registration on the XTM Hub (see [Connect XTM One to the XTM Hub](/xtm-one/administer/xtm-hub/)), the license itself (**Install License**, or `ENTERPRISE_LICENSE`, which then wins), the **Default language** of the interface for the users who have not chosen one (**Platform Language**), the **Default Presentation Template** applied to the decks agents generate, the **Brand asset source**, and **Platform Branding**: **Identity** (platform name, login message), **In-App Colors**, **Browser & PWA** and **Media Assets** (logo and favicon).
 
 **Brand asset source** reads your company's brand packs from a GitHub folder. See [Brand the decks and reports agents produce](/xtm-one/build/templates/).
 

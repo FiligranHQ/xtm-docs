@@ -94,7 +94,7 @@ A group that keeps people off a model provider (an exclusion on its **Access**) 
 
 ### Let the XTM Hub decide
 
-When people reach XTM One through the XTM Hub, the XTM Hub can decide who may sign in through OIDC and who is an administrator. Set `XTM_HUB_ADMIN_GROUP` to the role that means administrator in the XTM Hub claim, and set `PLATFORM_ID`. It then wins over **Automatically admin users**: the XTM Hub also demotes. The bootstrap account of `ADMIN_EMAIL` (`admin@filigran.io` when unset) is never demoted, and local sign-in stays available if the gate is wrong. See [XTM Hub sign-in gate](/reference/xtm-one/configuration/#xtm-hub-sign-in-gate).
+When people reach XTM One through the XTM Hub, the XTM Hub can decide who may sign in through OIDC and who is an administrator. Set `XTM_HUB_ADMIN_GROUP` to the role that means administrator in the XTM Hub claim, and set `PLATFORM_ID`. It then wins over **Automatically admin users**: the XTM Hub also demotes. The bootstrap account of `ADMIN_EMAIL` (`admin@filigran.io` when unset) is never demoted, and local sign-in stays available if the gate is wrong. The gate does not depend on the registration of the platform on the XTM Hub, a separate step: see [Connect XTM One to the XTM Hub](/xtm-one/administer/xtm-hub/). See [XTM Hub sign-in gate](/reference/xtm-one/configuration/#xtm-hub-sign-in-gate).
 
 ## Keep local sign-in as a fallback
 

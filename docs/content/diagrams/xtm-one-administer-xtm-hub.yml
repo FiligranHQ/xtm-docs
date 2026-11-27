@@ -1,0 +1,19 @@
+title: An administrator registers XTM One from the XTM Hub's window, then XTM One checks the registration every hour
+lanes:
+  - label: Your browser
+    tone: external
+    nodes:
+      - {id: admin, label: Administrator, icon: Laptop, note: "Settings > Platform, XTM Hub card"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: platform, label: Registration, icon: LogoXTMOne, note: "Token stored encrypted"}
+  - label: XTM Hub
+    tone: external
+    nodes:
+      - {id: org, label: Hub organization, icon: Users, note: "Your organization's platforms"}
+edges:
+  - {from: admin, to: org, label: "log in, choose organization"}
+  - {from: org, to: admin, label: platform token, style: dashed}
+  - {from: admin, to: platform, label: sends the token}
+  - {from: platform, to: org, label: "confirms, then hourly"}
