@@ -1,0 +1,23 @@
+title: An agent with Platform Insights reads the platform's figures, limited to what the person who asks may see
+lanes:
+  - label: Who asks
+    tone: external
+    nodes:
+      - {id: admin, label: Administrator, icon: ShieldCheck, note: The whole platform}
+      - {id: manager, label: Group manager, icon: Users, note: Their team's usage}
+      - {id: user, label: Anyone else, icon: LogIn, note: Their own slice}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: agent, label: Agent with Platform Insights, icon: Bot, note: Read-only tools}
+      - {id: sources, label: Platform figures, icon: Gauge, note: "Usage, objects, audit log"}
+  - label: Answer
+    tone: product
+    nodes:
+      - {id: answer, label: Chart or table, icon: Activity, note: "With its warnings, CSV"}
+edges:
+  - {from: admin, to: agent, label: asks}
+  - {from: manager, to: agent, label: asks}
+  - {from: user, to: agent, label: asks}
+  - {from: agent, to: sources, label: reads in scope}
+  - {from: agent, to: answer, label: draws}

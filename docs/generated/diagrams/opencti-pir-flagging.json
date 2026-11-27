@@ -1,0 +1,43 @@
+{"hash": "29c4e76f5db73764",
+"full": {
+  "width": 1828, "height": 153,
+  "lanes": [
+    {"x":16,"y":16,"w":282,"h":121,"header":{"x":28,"y":27,"w":145,"h":14}},
+    {"x":472,"y":24,"w":607,"h":106,"header":{"x":484,"y":35,"w":90.1,"h":14}},
+    {"x":1228,"y":24,"w":584,"h":106,"header":{"x":1240,"y":35,"w":62.4,"h":14}}
+  ],
+  "nodes": {
+    "stream": {"x":28,"y":52,"w":258,"h":73,"note":["A relationship is created, updated or","deleted"]},
+    "filters": {"x":484,"y":60,"w":246,"h":58,"note":["Source type, minimum confidence"]},
+    "criteria": {"x":821,"y":60,"w":246,"h":58,"note":["Targeted locations and industries"]},
+    "threats": {"x":1240,"y":60,"w":235,"h":58,"note":["Score: share of criteria matched"]},
+    "activity": {"x":1565,"y":60,"w":235,"h":58,"note":["Entries, exits, score changes"]}
+  },
+  "edges": [
+    {"points":[[286,88.5],[484,88.5]],"label":{"x":331,"y":78,"w":108,"h":20}},
+    {"points":[[730,89],[821,89]],"label":{"x":750,"y":78.5,"w":51,"h":20}},
+    {"points":[[1067,89],[1240,89]],"label":{"x":1112,"y":78,"w":83,"h":20}},
+    {"points":[[1475,89],[1565,89]],"label":{"x":1495,"y":78.5,"w":50,"h":20}}
+  ]
+},
+"mini": {
+  "width": 284, "height": 75,
+  "lanes": [
+    {"x":4,"y":17.5,"w":40,"h":40},
+    {"x":76,"y":17.5,"w":86,"h":40},
+    {"x":194,"y":17.5,"w":86,"h":40}
+  ],
+  "nodes": {
+    "stream": {"x":11,"y":24.5,"w":26,"h":26},
+    "filters": {"x":83,"y":24.5,"w":26,"h":26},
+    "criteria": {"x":129,"y":24.5,"w":26,"h":26},
+    "threats": {"x":201,"y":24.5,"w":26,"h":26},
+    "activity": {"x":247,"y":24.5,"w":26,"h":26}
+  },
+  "edges": [
+    {"points":[[37,37.5],[83,37.5]]},
+    {"points":[[109,37.5],[129,37.5]]},
+    {"points":[[155,37.5],[201,37.5]]},
+    {"points":[[227,37.5],[247,37.5]]}
+  ]
+}}

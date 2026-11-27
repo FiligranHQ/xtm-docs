@@ -1,0 +1,23 @@
+title: At its first start, OpenCTI 7.260224.0 copies the authentications of the configuration into the database, and you then manage the providers in the UI, signed in with local authentication
+lanes:
+  - label: Configuration
+    tone: external
+    nodes:
+      - {id: config, label: Configuration file, icon: FileText, note: "Or environment variables, kept until you remove them"}
+      - {id: secrets, label: Secrets registry, icon: KeyRound, note: "An environment variable or CyberArk"}
+  - label: OpenCTI 7.260224.0
+    tone: product
+    nodes:
+      - {id: migration, label: Migration at first start, icon: Workflow, note: "LDAP, SAML, OpenID Connect and the others"}
+      - {id: local, label: Local authentication, icon: LogIn, note: An administrator whose password you know}
+      - {id: ui, label: Authentications, icon: LogoOpenCTI, note: "Settings > Security > Authentications"}
+  - label: Database
+    tone: store
+    nodes:
+      - {id: providers, label: Login providers, icon: Server, note: Secret fields encrypted}
+edges:
+  - {from: config, to: migration, label: read at start}
+  - {from: migration, to: providers, label: stores}
+  - {from: local, to: ui, label: sign in first}
+  - {from: ui, to: providers, label: manage providers, both: true}
+  - {from: secrets, to: ui, label: use external secret, style: dashed}

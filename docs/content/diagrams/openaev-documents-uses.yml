@@ -1,0 +1,28 @@
+title: A document is uploaded once to OpenAEV, then reused by the emails, articles, challenges and channels of an exercise, and by the payloads that drop files on endpoints
+lanes:
+  - label: You
+    tone: external
+    nodes:
+      - {id: file, label: A file, icon: FileText, note: "PDF, image, video"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: documents, label: Documents, icon: LogoOpenAEV, note: "Components > Documents"}
+  - label: Exercises
+    tone: product
+    nodes:
+      - {id: injects, label: Injects, icon: MessageSquare, note: Attached to the email}
+      - {id: articles, label: Articles, icon: BookOpen, note: Image or video}
+      - {id: challenges, label: Challenges, icon: Crosshair, note: Evidence to analyze}
+      - {id: channels, label: Channels, icon: Layers, note: Logos}
+  - label: Endpoints
+    tone: external
+    nodes:
+      - {id: payloads, label: Payloads, icon: Laptop, note: File drop}
+edges:
+  - {from: file, to: documents, label: upload once}
+  - {from: documents, to: injects, label: attach}
+  - {from: documents, to: articles, label: illustrate}
+  - {from: documents, to: challenges, label: provide}
+  - {from: documents, to: channels, label: brand}
+  - {from: documents, to: payloads, label: drop}

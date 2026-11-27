@@ -1,0 +1,17 @@
+title: How OpenCRQ sends usage telemetry to Filigran
+lanes:
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: opencrq, label: OpenCRQ, icon: LogoOpenCRQ, note: Reads its counts every hour}
+  - label: Start-up check
+    tone: product
+    nodes:
+      - {id: probe, label: Reachability test, icon: Activity, note: "Once, at start; off if it fails"}
+  - label: Filigran
+    tone: external
+    nodes:
+      - {id: filigran, label: telemetry.ocrq.filigran.io, icon: LogoFiligran, note: OTLP over HTTPS}
+edges:
+  - {from: opencrq, to: probe, label: "at start, unless disabled"}
+  - {from: probe, to: filigran, label: every 6 hours}

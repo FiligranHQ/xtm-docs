@@ -1,0 +1,21 @@
+title: An output parser turns the raw output of an action into typed values that become findings and feed the next steps of a chain
+lanes:
+  - label: Endpoint
+    tone: external
+    nodes:
+      - {id: implant, label: Implant, icon: Laptop, note: Runs the command}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: raw, label: Raw output, icon: Terminal, note: Standard output}
+      - {id: rule, label: Parsing rule, icon: Search, note: "Regex, groups, type"}
+  - label: Results
+    tone: store
+    nodes:
+      - {id: findings, label: Findings, icon: KeyRound, note: When Create finding(s) is on}
+      - {id: values, label: Outputs, icon: GitBranch, note: For events and arguments}
+edges:
+  - {from: implant, to: raw, label: sends back}
+  - {from: raw, to: rule, label: each match}
+  - {from: rule, to: findings, label: valid values}
+  - {from: rule, to: values, label: valid values}

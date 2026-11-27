@@ -1,0 +1,21 @@
+title: An injector registers contracts, and an inject fills in the fields of one contract, with the expectations it offers
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: injector, label: Injector, icon: Puzzle, note: "Email, Manual, Phishing..."}
+      - {id: contract, label: Contract, icon: FileText, note: "Fields, platforms, expectations"}
+  - label: Scenario
+    tone: product
+    nodes:
+      - {id: inject, label: Inject, icon: PlayCircle, note: Fields filled in}
+      - {id: expectation, label: Expectations, icon: ClipboardCheck, note: "Manual, detection, prevention..."}
+  - label: Targets
+    tone: external
+    nodes:
+      - {id: targets, label: Targets, icon: Users, note: "Teams, players, endpoints"}
+edges:
+  - {from: injector, to: contract, label: registers}
+  - {from: contract, to: inject, label: gives its form}
+  - {from: inject, to: expectation, label: expects}
+  - {from: inject, to: targets, label: reaches}

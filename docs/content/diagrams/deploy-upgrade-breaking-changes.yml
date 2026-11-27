@@ -1,0 +1,26 @@
+title: Before you upgrade, read the breaking changes of each part between your version and the new one, newest first, and do what each asks
+lanes:
+  - label: You run
+    tone: external
+    nodes:
+      - {id: current, label: Your current version, icon: Clock, note: The entries after it apply}
+  - label: Breaking changes
+    tone: product
+    nodes:
+      - {id: docker, label: XTM Docker deployment, icon: Boxes, note: "Split compose, shared PostgreSQL"}
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "From 5.12 to 7.260401.0"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "From 2.0.0 to 2.3.4"}
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "From 1.261110.2 to 1.261112.0"}
+  - label: Then
+    tone: external
+    nodes:
+      - {id: upgrade, label: Upgrade, icon: Rocket, note: Follow the procedure, href: /deploy/upgrade/}
+edges:
+  - {from: current, to: docker, label: read}
+  - {from: current, to: opencti, label: read newest first}
+  - {from: current, to: openaev, label: read newest first}
+  - {from: current, to: xtmone, label: read newest first}
+  - {from: docker, to: upgrade, label: act}
+  - {from: opencti, to: upgrade, label: act}
+  - {from: openaev, to: upgrade, label: act}
+  - {from: xtmone, to: upgrade, label: act}

@@ -1,0 +1,17 @@
+title: How OpenAEV sends usage telemetry to Filigran
+lanes:
+  - label: Platform
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenAEV, note: Collects counts every hour}
+  - label: Start-up check
+    tone: product
+    nodes:
+      - {id: probe, label: Reachability test, icon: Activity, note: "Once, at start; off if it fails"}
+  - label: Filigran
+    tone: external
+    nodes:
+      - {id: filigran, label: telemetry.oaev.filigran.io, icon: LogoFiligran, note: OTLP over HTTPS}
+edges:
+  - {from: platform, to: probe, label: at start}
+  - {from: probe, to: filigran, label: every 6 hours}

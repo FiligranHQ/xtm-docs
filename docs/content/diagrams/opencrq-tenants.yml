@@ -1,0 +1,22 @@
+title: One OpenCRQ instance, one tenant per organization, each with its own people, data and connections
+lanes:
+  - label: Platform
+    tone: core
+    nodes:
+      - {id: admins, label: Platform administrators, icon: Users, note: Create Tenants}
+      - {id: license, label: XTM One, icon: LogoXTMOne, note: 'Signs people in, grants the XTM license'}
+  - label: Tenants
+    tone: product
+    nodes:
+      - {id: gm, label: Grand Meridian Hotels, icon: LogoOpenCRQ, note: 'Members, groups, risk data'}
+      - {id: sr, label: Seaside Resorts, icon: LogoOpenCRQ, note: 'Members, groups, risk data'}
+  - label: Sources
+    tone: external
+    nodes:
+      - {id: octi, label: OpenCTI, icon: LogoOpenCTI, note: One connection per tenant}
+edges:
+  - {from: admins, to: gm, label: creates}
+  - {from: admins, to: sr, label: creates}
+  - {from: license, to: sr, label: allows a second, style: dashed}
+  - {from: octi, to: gm, label: streams threats}
+  - {from: octi, to: sr, label: streams threats}

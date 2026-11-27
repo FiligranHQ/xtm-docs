@@ -1,0 +1,32 @@
+title: The platform hands an inject to an injector or an agent, it acts on your environment, and collectors read what your security tools saw to score the expectations
+lanes:
+  - label: Plans
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenAEV, note: Runs the simulation}
+  - label: Executes
+    tone: external
+    nodes:
+      - {id: injector, label: Injector, icon: Crosshair, note: "Email, HTTP, Caldera and more"}
+      - {id: agent, label: Agent, icon: Laptop, note: Starts an implant per inject}
+  - label: Your environment
+    tone: external
+    nodes:
+      - {id: targets, label: Targets, icon: Network, note: "People, systems, endpoints"}
+      - {id: tools, label: Security tools, icon: ShieldCheck, note: "SIEM, EDR, XDR, gateways"}
+  - label: Measures
+    tone: external
+    nodes:
+      - {id: collector, label: Collector, icon: Search, note: Matches alerts to injects}
+  - label: Scores
+    tone: product
+    nodes:
+      - {id: expectations, label: Expectations, icon: ClipboardCheck, note: "Detected, prevented or not"}
+edges:
+  - {from: platform, to: injector, label: inject}
+  - {from: platform, to: agent, label: job, style: dashed}
+  - {from: injector, to: targets, label: acts on}
+  - {from: agent, to: targets, label: runs actions}
+  - {from: targets, to: tools, label: seen by}
+  - {from: tools, to: collector, label: alerts and logs}
+  - {from: collector, to: expectations, label: results}

@@ -1,0 +1,29 @@
+title: In an autonomous run, the orchestrator in XTM One decides each step, and OpenAEV runs it inside the scope and sends back what it found
+lanes:
+  - label: You
+    tone: external
+    nodes:
+      - {id: objective, label: Objective and scope, icon: Crosshair, note: Set at launch}
+      - {id: steer, label: Directives and answers, icon: MessageSquare, note: While it runs}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: orchestrator, label: Autonomous orchestrator, icon: LogoXTMOne, note: Plans and decides}
+      - {id: agents, label: Specialist agents, icon: Bot, note: "Payloads, recon..."}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: simulation, label: Chained simulation, icon: LogoOpenAEV, note: Runs the steps in scope}
+      - {id: timeline, label: Decision timeline, icon: Activity, note: "Decisions, proofs, gaps"}
+  - label: Your environment
+    tone: external
+    nodes:
+      - {id: endpoints, label: Endpoints in scope, icon: Laptop, note: OpenAEV agents}
+edges:
+  - {from: objective, to: orchestrator, label: launch}
+  - {from: steer, to: orchestrator, label: steers}
+  - {from: orchestrator, to: agents, label: consults}
+  - {from: orchestrator, to: simulation, label: adds and runs steps}
+  - {from: simulation, to: endpoints, label: actions}
+  - {from: simulation, to: orchestrator, label: "outputs, findings", style: dashed}
+  - {from: orchestrator, to: timeline, label: records}

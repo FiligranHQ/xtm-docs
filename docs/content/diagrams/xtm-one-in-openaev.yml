@@ -1,0 +1,23 @@
+title: OpenAEV relays each AI request to the XTM One agent bound to the task, with a short-lived token for you, and the agent and the MCP server work with OpenAEV as you
+lanes:
+  - label: Where you ask
+    tone: external
+    nodes:
+      - {id: features, label: AI in OpenAEV, icon: Sparkles, note: "Ask Ariane, Ask AI, assistant"}
+      - {id: clients, label: AI clients, icon: Laptop, note: "Cursor, Claude Desktop"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "Signs a token for you"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: agents, label: Agents, icon: Bot, note: "One per task of OpenAEV"}
+      - {id: mcp, label: MCP server, icon: Server, note: /mcp/openaev}
+edges:
+  - {from: features, to: openaev, label: your request}
+  - {from: openaev, to: agents, label: request and token}
+  - {from: agents, to: features, label: asks your approval, style: dashed}
+  - {from: agents, to: openaev, label: acts as you, style: dashed}
+  - {from: clients, to: mcp, label: personal API key}
+  - {from: mcp, to: openaev, label: calls as you, style: dashed}

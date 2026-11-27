@@ -1,0 +1,25 @@
+title: A reference is replaced by the variable's value at run time, only for the person the work runs as
+lanes:
+  - label: Stored once
+    tone: core
+    nodes:
+      - {id: variable, label: Variable, icon: Code2, note: "Plain or Secret", href: /xtm-one/build/variables/}
+      - {id: vault, label: Secret vault, icon: KeyRound, note: Read at each run, href: /xtm-one/administer/secret-vaults/}
+  - label: Referenced in
+    tone: product
+    nodes:
+      - {id: text, label: Agent text, icon: FileText, note: "Persona, prompt, skill"}
+      - {id: tool, label: Custom tool, icon: Wrench, note: Its code, href: /xtm-one/build/tools/}
+  - label: At run time
+    tone: product
+    nodes:
+      - {id: person, label: Run-as person, icon: Users, note: Must see the variable}
+      - {id: model, label: Model and tools, icon: Sparkles, note: Get the value}
+      - {id: stored, label: Traces and history, icon: History, note: "Hold [secret]"}
+edges:
+  - {from: vault, to: variable, label: secret from, style: dashed}
+  - {from: variable, to: text, label: reference}
+  - {from: variable, to: tool, label: reference}
+  - {from: text, to: person, label: resolved for}
+  - {from: person, to: model, label: value}
+  - {from: model, to: stored, label: masked}

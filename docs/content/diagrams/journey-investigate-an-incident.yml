@@ -1,0 +1,28 @@
+title: The night's intrusion is worked as a case in OpenCTI, replayed in OpenAEV, priced again in OpenCRQ, and summarized for the CISO by XTM One
+lanes:
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: lure, label: Lure and incident, icon: LogoOpenCTI, note: "Summit, sightings", href: /opencti/use/explore/events/}
+      - {id: people, label: People involved, icon: Users, note: "Paul Garnier", href: /opencti/use/explore/entities/}
+      - {id: case, label: Case worked, icon: ClipboardCheck, note: "Evidence and tasks", href: /opencti/use/analyze/cases/}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: replay, label: Attack replayed, icon: LogoOpenAEV, note: "Velvet Harbor techniques", href: /openaev/use/scenarios/from-opencti/}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: price, label: Breach priced again, icon: LogoOpenCRQ, note: "Data Breach on Guest Records", href: /opencrq/use/quantify/risk-scenarios/}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: summary, label: CISO summary, icon: LogoXTMOne, note: "Ask Ariane", href: /xtm-one/use/in-opencti/}
+edges:
+  - {from: lure, to: case, label: incident}
+  - {from: people, to: case, label: who it reached}
+  - {from: case, to: replay, label: security coverage}
+  - {from: replay, to: case, label: scores, style: dashed}
+  - {from: replay, to: price, label: results per technique}
+  - {from: case, to: summary, label: the case}
+  - {from: price, to: summary, label: annual loss, style: dashed}

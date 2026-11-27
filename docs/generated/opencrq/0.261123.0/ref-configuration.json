@@ -1,0 +1,1306 @@
+{
+  "name": "configuration",
+  "version": "0.261123.0",
+  "source": "OpenCRQ-Platform/opencrq@d61ebb5 (back/src/config-schema.ts)",
+  "intro": "Every key OpenCRQ reads at boot, from its configuration schema, grouped by block, by its environment variable: the key in upper case with `__` between the levels (`JOBS__MAX_CONCURRENT` is `jobs.max_concurrent` in a configuration file). A variable with `<tenant-uuid>` is set per tenant: `CONNECTORS__OPENCTI__<tenant-uuid>__URL`. **Required** says what a block needs when it is set; a whole block the platform does not use (file storage, a connector) can be left out. **When `<group>` is set** names an optional group inside a block (a connector of one tenant, the XTM One administrator of the platform seed): set all of its required keys, or none.",
+  "filter": "Filter keys, variables, descriptions",
+  "sections": [
+    {
+      "title": "healthcheck_http_server",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "healthcheck_http_server.port",
+          "cells": [
+            "`HEALTHCHECK_HTTP_SERVER__PORT`",
+            "number",
+            "",
+            "Yes",
+            "Internal listening port for healthchecks."
+          ]
+        },
+        {
+          "key": "healthcheck_http_server.public_port",
+          "cells": [
+            "`HEALTHCHECK_HTTP_SERVER__PUBLIC_PORT`",
+            "number",
+            "",
+            "No",
+            "The port the host publishes the healthcheck on, for information: OpenCRQ only writes it in its startup log when it differs from `HEALTHCHECK_HTTP_SERVER__PORT`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "postgres",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "postgres.database",
+          "cells": [
+            "`POSTGRES__DATABASE`",
+            "string",
+            "",
+            "Yes",
+            "Name of the target database."
+          ]
+        },
+        {
+          "key": "postgres.user",
+          "cells": [
+            "`POSTGRES__USER`",
+            "string",
+            "",
+            "Yes",
+            "User for DB authentication and Postgres container initialization."
+          ]
+        },
+        {
+          "key": "postgres.host",
+          "cells": [
+            "`POSTGRES__HOST`",
+            "string",
+            "",
+            "Yes",
+            "Hostname or IP of the PostgreSQL service. Used by the App to connect."
+          ]
+        },
+        {
+          "key": "postgres.port",
+          "cells": [
+            "`POSTGRES__PORT`",
+            "number",
+            "",
+            "Yes",
+            "Listening port of the PostgreSQL service."
+          ]
+        },
+        {
+          "key": "postgres.password",
+          "cells": [
+            "`POSTGRES__PASSWORD`",
+            "string",
+            "",
+            "Yes",
+            "Password for DB authentication."
+          ]
+        },
+        {
+          "key": "postgres.pool_max",
+          "cells": [
+            "`POSTGRES__POOL_MAX`",
+            "number, at least 10",
+            "`20`",
+            "No",
+            "Maximum number of PostgreSQL connections in the shared pool of one application process. Increase on high-volume environments. What must stay under PostgreSQL's own `max_connections` is the sum over every process, and a process opens connections this pool does not count: a control pool of 5 on every process that runs jobs, reserved for the job runtime's own claims, lease renewals and log writes so they never queue behind a handler's reads, and one long-lived client per `LISTEN` channel the process subscribes to."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "http_server",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "http_server.host",
+          "cells": [
+            "`HTTP_SERVER__HOST`",
+            "string",
+            "",
+            "Yes",
+            "Defines the internal listening interface of the container."
+          ]
+        },
+        {
+          "key": "http_server.port",
+          "cells": [
+            "`HTTP_SERVER__PORT`",
+            "number",
+            "",
+            "Yes",
+            "Internal listening port of the application."
+          ]
+        },
+        {
+          "key": "http_server.public_port",
+          "cells": [
+            "`HTTP_SERVER__PUBLIC_PORT`",
+            "number",
+            "",
+            "No",
+            "The port the host publishes the application on, for information: OpenCRQ only writes it in its startup log when it differs from `HTTP_SERVER__PORT`."
+          ]
+        },
+        {
+          "key": "http_server.max_response_items",
+          "cells": [
+            "`HTTP_SERVER__MAX_RESPONSE_ITEMS`",
+            "integer, at least 1",
+            "`20000`",
+            "No",
+            "Largest number of items an API call may return. Over it the call is refused with `PAYLOAD_TOO_LARGE` instead of serializing a list that would exhaust the process's memory; the procedure then needs a paginated input."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "front_path",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "front_path",
+          "cells": [
+            "`FRONT_PATH`",
+            "string",
+            "",
+            "No",
+            "Folder of the built web interface the HTTP server serves. Unset, the server serves `../front/dist` from its working directory, the layout of a development checkout; the image sets it."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "platform",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "platform.reset_on_version_change",
+          "cells": [
+            "`PLATFORM__RESET_ON_VERSION_CHANGE`",
+            "boolean",
+            "`false`",
+            "No",
+            "When `true`, the database is fully reset (`DROP SCHEMA public CASCADE` inside a transaction) on boot if `APP_VERSION` differs from the last stored version. Requires `APP_VERSION` env var to be set. The platform then re-runs migrations and seeds from scratch. The instance identifier stored in `platform_metadata` is captured before the drop and restored after migrations: the XTM license sub-licenses the platform by it, so regenerating it would silently downgrade the platform to Community Edition."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "platform_seed",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "platform_seed.enabled",
+          "cells": [
+            "`PLATFORM_SEED__ENABLED`",
+            "boolean",
+            "",
+            "Yes",
+            "Master switch for the platform seed. Must stay `false` in production."
+          ]
+        },
+        {
+          "key": "platform_seed.admin.email",
+          "cells": [
+            "`PLATFORM_SEED__ADMIN__EMAIL`",
+            "string",
+            "",
+            "When `platform_seed.enabled` is true",
+            "Email of the bootstrap platform admin user."
+          ]
+        },
+        {
+          "key": "platform_seed.admin.password",
+          "cells": [
+            "`PLATFORM_SEED__ADMIN__PASSWORD`",
+            "string",
+            "",
+            "When `platform_seed.enabled` is true",
+            "The password every seeded user gets in XTM One, where the seed creates them when `PLATFORM_SEED__XTM_ONE_ADMIN__EMAIL` is set. OpenCRQ stores it nowhere: its users have no OpenCRQ password and sign in through XTM One. Pass through a secret store (Vault, K8s Secret, SOPS, CI secret) — never a `ConfigMap` or committed JSON file."
+          ]
+        },
+        {
+          "key": "platform_seed.large_estate.enabled",
+          "cells": [
+            "`PLATFORM_SEED__LARGE_ESTATE__ENABLED`",
+            "boolean",
+            "`false`",
+            "No",
+            "Adds a park of several hundred thousand assets, their findings and one closed risk scope mapping part of them, on top of the ordinary demo data. For performance work only: it writes over a million rows and takes minutes."
+          ]
+        },
+        {
+          "key": "platform_seed.large_estate.assets",
+          "cells": [
+            "`PLATFORM_SEED__LARGE_ESTATE__ASSETS`",
+            "integer, at least 1",
+            "`100000`",
+            "No",
+            "How many supporting assets the profile generates, in dependency chains three levels deep. Read only when the profile is enabled."
+          ]
+        },
+        {
+          "key": "platform_seed.large_estate.findings",
+          "cells": [
+            "`PLATFORM_SEED__LARGE_ESTATE__FINDINGS`",
+            "integer, at least 0",
+            "`300000`",
+            "No",
+            "How many findings it hangs on them, over the CVEs the ordinary seed wrote. Read only when the profile is enabled."
+          ]
+        },
+        {
+          "key": "platform_seed.large_estate.mapped_assets",
+          "cells": [
+            "`PLATFORM_SEED__LARGE_ESTATE__MAPPED_ASSETS`",
+            "integer, at least 0",
+            "`30000`",
+            "No",
+            "How many of those assets the closed risk scope is measured over. At least three, one per primary asset the profile writes, or the seed refuses the profile."
+          ]
+        },
+        {
+          "key": "platform_seed.xtm_one_admin.email",
+          "cells": [
+            "`PLATFORM_SEED__XTM_ONE_ADMIN__EMAIL`",
+            "string",
+            "",
+            "When `platform_seed.xtm_one_admin` is set",
+            "Email of an administrator of the XTM One in `XTM_ONE__URL`, which the platform seed signs in as to create the seeded users there: each one a local XTM One account with the `PLATFORM_SEED__ADMIN__PASSWORD` password (the seeded platform administrator as an XTM One administrator), its OpenCRQ account tied to that XTM One user, so the seeded users sign in through XTM One. An XTM One account that already holds the email is reused. Optional, even with the seed enabled: unset, the seed creates its users in OpenCRQ only, none of them can sign in, and the log warns so; the demo data stays reachable with a service account token or by XTM One's own administrator, who reaches every tenant. Set it on a demo or test platform whose people must sign in as the seeded users. The account must sign in without a second factor, which the seed cannot give; a refusal from XTM One, or no answer within 5 seconds, fails the seed and the platform boots without it."
+          ]
+        },
+        {
+          "key": "platform_seed.xtm_one_admin.password",
+          "cells": [
+            "`PLATFORM_SEED__XTM_ONE_ADMIN__PASSWORD`",
+            "string",
+            "",
+            "When `platform_seed.xtm_one_admin` is set",
+            "That XTM One administrator's password, required once its email is set. Pass it through a secret store, like `PLATFORM_SEED__ADMIN__PASSWORD`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "initial_tenant",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "initial_tenant.id",
+          "cells": [
+            "`INITIAL_TENANT__ID`",
+            "UUID",
+            "`01a043da-ff47-72c2-aaa4-7da56d85c83e`",
+            "No",
+            "Identifier (a UUID) of the tenant OpenCRQ creates at boot when the platform holds no tenant yet. Set it before the first boot to write the tenant's `CONNECTORS__<NAME>__<tenant id>__…` keys in the same deployment. Once a tenant exists, changing it creates no other tenant, but OpenCRQ still reads it at every start: `APP__ADMIN__TOKEN` acts as a service account of this tenant, and the accounts its provisioning API creates belong to it. When no tenant has this identifier, the bearer stays off."
+          ]
+        },
+        {
+          "key": "initial_tenant.name",
+          "cells": [
+            "`INITIAL_TENANT__NAME`",
+            "string, not empty",
+            "`Default`",
+            "No",
+            "Name of the tenant OpenCRQ creates at boot when the platform holds no tenant yet. Like a tenant created from the platform, it gets a first risk scope **Enterprise** and a Get started wizard; it can be renamed afterwards from the Tenants page."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "telemetry",
+      "text": "`TELEMETRY__USAGE__*` is the anonymous usage telemetry sent to Filigran, `TELEMETRY__OBSERVABILITY__*` the monitoring data sent to your own tools. The block is strict: a `TELEMETRY__*` variable the platform does not know, such as `TELEMETRY__TRACES__ENABLED` of earlier builds, stops the platform at boot with `Unrecognized key`. A transport switched off (its `ENABLED` at `false`) does not read its other settings, so an empty endpoint beside it still boots.",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "telemetry.usage.enabled",
+          "cells": [
+            "`TELEMETRY__USAGE__ENABLED`",
+            "boolean",
+            "`true`",
+            "No",
+            "Turns the anonymous usage telemetry sent to Filigran on or off. With `false`, the platform makes no connection to Filigran's collector, and its startup log says `Anonymous usage telemetry is disabled by TELEMETRY__USAGE__ENABLED=false, nothing is sent`."
+          ]
+        },
+        {
+          "key": "telemetry.usage.tags",
+          "cells": [
+            "`TELEMETRY__USAGE__TAGS`",
+            "string",
+            "Empty",
+            "No",
+            "Comma-separated deployment tags (e.g. `saas,eu-west`) attached to anonymous usage telemetry as the `filigran.telemetry.tags` resource attribute. Normalized (trimmed, lowercased, deduplicated, sorted) before export. Empty by default: no tags attribute is exported."
+          ]
+        },
+        {
+          "key": "telemetry.observability.service_name",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__SERVICE_NAME`",
+            "string, not empty",
+            "`opencrq-platform`",
+            "No",
+            "Service name (`service.name`) of every OTLP signal and of the Prometheus endpoint, and the Pyroscope application name."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.traces.enabled",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__TRACES__ENABLED`",
+            "boolean",
+            "`false`",
+            "No",
+            "Enable or disable OpenTelemetry traces."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.traces.exporter",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__TRACES__EXPORTER`",
+            "string, not empty",
+            "",
+            "When `telemetry.observability.otlp.traces.enabled` is true",
+            "OTLP endpoint for exporting traces (e.g., `http://otel-collector:4317`)."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.metrics.enabled",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__METRICS__ENABLED`",
+            "boolean",
+            "`false`",
+            "No",
+            "Enable or disable the OTLP metrics push transport."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.metrics.exporter",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__METRICS__EXPORTER`",
+            "string, not empty",
+            "",
+            "When `telemetry.observability.otlp.metrics.enabled` is true",
+            "OTLP endpoint for exporting metrics (e.g., `http://otel-collector:4317`)."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.logs.enabled",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__LOGS__ENABLED`",
+            "boolean",
+            "`false`",
+            "No",
+            "Enable or disable OpenTelemetry logs."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.logs.exporter",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__LOGS__EXPORTER`",
+            "string, not empty",
+            "",
+            "When `telemetry.observability.otlp.logs.enabled` is true",
+            "OTLP endpoint for exporting logs (e.g., `http://otel-collector:4317`)."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.enabled",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__ENABLED`",
+            "boolean",
+            "`false`",
+            "No",
+            "Enable or disable the Prometheus scrape endpoint."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.port",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__PORT`",
+            "integer, 1 to 65535",
+            "`14269`",
+            "No",
+            "Port the Prometheus scrape endpoint listens on."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.public_port",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__PUBLIC_PORT`",
+            "integer, 1 to 65535",
+            "",
+            "No",
+            "Port the scrape endpoint is advertised on, when it is published under a different one."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.host",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__HOST`",
+            "string, not empty",
+            "`0.0.0.0`",
+            "No",
+            "Bind address of the scrape endpoint. Binding it to loopback makes it unreachable from outside the container while the application keeps serving."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.collect_timeout_ms",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__COLLECT_TIMEOUT_MS`",
+            "integer, at least 1",
+            "`2500`",
+            "No",
+            "Per-process bound on one collection. A process exceeding it is reported as a collection outcome rather than delaying the response."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.round_deadline_ms",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__ROUND_DEADLINE_MS`",
+            "integer, at least 1",
+            "`4500`",
+            "No",
+            "Bound on a whole collection round. Must be strictly above the per-process timeout, and is deliberately not a multiple of it so the two bounds stay distinguishable."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.min_interval_ms",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__MIN_INTERVAL_MS`",
+            "integer, at least 1",
+            "`5000`",
+            "No",
+            "Minimum interval between two collections. Requests arriving inside it are served the cached document, failures included."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.max_reply_bytes",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__MAX_REPLY_BYTES`",
+            "integer, at least 1",
+            "`2097152`",
+            "No",
+            "Maximum size of one process's contribution. A larger one is refused and reported as a collection outcome."
+          ]
+        },
+        {
+          "key": "telemetry.observability.pyroscope.enabled",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PYROSCOPE__ENABLED`",
+            "boolean",
+            "`false`",
+            "No",
+            "Enable or disable Pyroscope profiling."
+          ]
+        },
+        {
+          "key": "telemetry.observability.pyroscope.server_address",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PYROSCOPE__SERVER_ADDRESS`",
+            "string, not empty",
+            "",
+            "When `telemetry.observability.pyroscope.enabled` is true",
+            "URL used by the App agent to send profiles (e.g. `http://pyroscope:4040` in the dev/prod Compose files)."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "jobs",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "jobs.enabled",
+          "cells": [
+            "`JOBS__ENABLED`",
+            "boolean",
+            "`true`",
+            "No",
+            "Master switch for the job runtime. Unset, the runtime runs: the image's `config/default.json` sets it to `true`. Set it to `false` to stop it: nothing then claims queued jobs, and the integrations page keeps its no-worker banner."
+          ]
+        },
+        {
+          "key": "jobs.max_concurrent",
+          "cells": [
+            "`JOBS__MAX_CONCURRENT`",
+            "number",
+            "`4`",
+            "No",
+            "Jobs a single runtime process executes at once."
+          ]
+        },
+        {
+          "key": "jobs.polling_fallback_ms",
+          "cells": [
+            "`JOBS__POLLING_FALLBACK_MS`",
+            "number",
+            "`30000`",
+            "No",
+            "How often the runtime polls for work when no `LISTEN/NOTIFY` wake-up arrives."
+          ]
+        },
+        {
+          "key": "jobs.heartbeat_interval_ms",
+          "cells": [
+            "`JOBS__HEARTBEAT_INTERVAL_MS`",
+            "integer, 1 to 300000",
+            "`10000`",
+            "No",
+            "How often each runtime process refreshes its registry row. The beat is unconditional: it does not depend on the process holding work, so an idle worker is never mistaken for an absent one."
+          ]
+        },
+        {
+          "key": "jobs.heartbeat_stale_after_ms",
+          "cells": [
+            "`JOBS__HEARTBEAT_STALE_AFTER_MS`",
+            "integer, at least 1",
+            "`30000`",
+            "No",
+            "How long a heartbeat stays credible. Past it, the platform reads as having no worker and the banner appears. It must exceed `JOBS__HEARTBEAT_INTERVAL_MS`: a value at or below the interval is refused when the config is parsed at boot. Keep it a comfortable multiple of the interval: barely above it, ordinary scheduling jitter raises the banner."
+          ]
+        },
+        {
+          "key": "jobs.log_retention_runs",
+          "cells": [
+            "`JOBS__LOG_RETENTION_RUNS`",
+            "integer, at least 1",
+            "`3`",
+            "No",
+            "Runs of one job kind whose captured log lines are kept, per tenant. A run that ends deletes the lines of the older ones, and a connector's Logs tab renders exactly what this keeps."
+          ]
+        },
+        {
+          "key": "jobs.log_retention_lines",
+          "cells": [
+            "`JOBS__LOG_RETENTION_LINES`",
+            "integer, at least 1",
+            "`500`",
+            "No",
+            "Captured lines kept for the OpenCTI stream session, which never ends and so is bounded by count rather than by run."
+          ]
+        },
+        {
+          "key": "jobs.run_retention_days",
+          "cells": [
+            "`JOBS__RUN_RETENTION_DAYS`",
+            "integer, at least 1",
+            "`30`",
+            "No",
+            "Days a finished run (`succeeded`, `cancelled`, `dlq`) is kept before the daily `jobs-retention` job purges its `jobs` row, taking its errors and captured log lines with it by cascade. The last finished run of each job kind is kept whatever its age, so a kind that runs rarely does not read as never ran."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "recompute",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "recompute.debounce_factor",
+          "cells": [
+            "`RECOMPUTE__DEBOUNCE_FACTOR`",
+            "number, above 0",
+            "`1`",
+            "No",
+            "Multiplier on the last run's duration in the throttle delay, so a recompute that costs a minute is not asked for every five seconds."
+          ]
+        },
+        {
+          "key": "recompute.debounce_floor_ms",
+          "cells": [
+            "`RECOMPUTE__DEBOUNCE_FLOOR_MS`",
+            "integer, at least 1",
+            "`500`",
+            "No",
+            "Shortest delay between the first event of a burst and the run it books. It is also the fastest cadence a continuously written table can drive a job at: the events arriving inside the delay fold into the run already booked, they never postpone it."
+          ]
+        },
+        {
+          "key": "recompute.debounce_cap_ms",
+          "cells": [
+            "`RECOMPUTE__DEBOUNCE_CAP_MS`",
+            "integer, at least 1",
+            "`300000`",
+            "No",
+            "Longest that delay can grow to, whatever the last run cost."
+          ]
+        },
+        {
+          "key": "recompute.reconnect_min_interval_ms",
+          "cells": [
+            "`RECOMPUTE__RECONNECT_MIN_INTERVAL_MS`",
+            "integer, at least 1",
+            "`600000`",
+            "No",
+            "When the platform reconnects to the database notifications that trigger recomputations, it asks every recomputation again for every tenant; two such catch-ups closer than this interval, in ms, count as one."
+          ]
+        },
+        {
+          "key": "recompute.daily_at",
+          "cells": [
+            "`RECOMPUTE__DAILY_AT`",
+            "string",
+            "`03:00`",
+            "No",
+            "`HH:MM` on a 24-hour UTC clock, the hour from which each tenant's full recompute is due. The day boundary it exists to catch is UTC too. Tenants are spread deterministically across the hour that follows it, so a single instant does not put every tenant at once against a `JOBS__MAX_CONCURRENT` shared by all job kinds."
+          ]
+        },
+        {
+          "key": "recompute.score_history_retention_days",
+          "cells": [
+            "`RECOMPUTE__SCORE_HISTORY_RETENTION_DAYS`",
+            "integer, at least 1",
+            "`365`",
+            "No",
+            "Days of finding score history kept, trimmed at the end of each run. Twelve months, the longest window a finding's score history offers on its page. A finding always keeps the line in force when the window opens, however old it is, so one whose score has not moved in a year still counts in every past figure."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "events",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "events.doorbell_window_ms",
+          "cells": [
+            "`EVENTS__DOORBELL_WINDOW_MS`",
+            "integer, 1 to 2147483647",
+            "`100`",
+            "No",
+            "Window, in ms, in which the data changes a user makes are grouped into one signal telling the tenant's open pages to refresh."
+          ]
+        },
+        {
+          "key": "events.job_doorbell_window_ms",
+          "cells": [
+            "`EVENTS__JOB_DOORBELL_WINDOW_MS`",
+            "integer, 1 to 2147483647",
+            "`30000`",
+            "No",
+            "The same window for the changes background jobs write, much coarser, so a bulk import does not refresh every open page during its whole run."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "connectors",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "connectors.nist.<tenant-uuid>.api_key",
+          "cells": [
+            "`CONNECTORS__NIST__<tenant-uuid>__API_KEY`",
+            "string",
+            "",
+            "No",
+            "NVD API key for that tenant. Pass through a secret store. A tenant with no entry (or no `API_KEY`) syncs in degraded (lower rate-limited) mode."
+          ]
+        },
+        {
+          "key": "connectors.microsoft_graph.<tenant-uuid>.azure_tenant_id",
+          "cells": [
+            "`CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__AZURE_TENANT_ID`",
+            "string",
+            "",
+            "When `connectors.microsoft_graph.<tenant-uuid>` is set",
+            "Azure AD tenant ID used to build that tenant's OAuth2 token endpoint (`login.microsoftonline.com/{tenant}/...`)."
+          ]
+        },
+        {
+          "key": "connectors.microsoft_graph.<tenant-uuid>.client_id",
+          "cells": [
+            "`CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_ID`",
+            "string",
+            "",
+            "When `connectors.microsoft_graph.<tenant-uuid>` is set",
+            "Client (application) ID of that tenant's Azure AD app registration."
+          ]
+        },
+        {
+          "key": "connectors.microsoft_graph.<tenant-uuid>.client_secret",
+          "cells": [
+            "`CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_SECRET`",
+            "string",
+            "",
+            "When `connectors.microsoft_graph.<tenant-uuid>` is set",
+            "Client secret of that tenant's Azure AD app registration. Pass through a secret store."
+          ]
+        },
+        {
+          "key": "connectors.openaev.<tenant-uuid>.url",
+          "cells": [
+            "`CONNECTORS__OPENAEV__<tenant-uuid>__URL`",
+            "URL",
+            "",
+            "When `connectors.openaev.<tenant-uuid>` is set",
+            "Base URL of that tenant's OpenAEV instance (e.g. `https://openaev.mycompany.com`)."
+          ]
+        },
+        {
+          "key": "connectors.openaev.<tenant-uuid>.token",
+          "cells": [
+            "`CONNECTORS__OPENAEV__<tenant-uuid>__TOKEN`",
+            "string",
+            "",
+            "When `connectors.openaev.<tenant-uuid>` is set",
+            "API token used to authenticate against that tenant's OpenAEV API. Pass through a secret store."
+          ]
+        },
+        {
+          "key": "connectors.opencti.<tenant-uuid>.url",
+          "cells": [
+            "`CONNECTORS__OPENCTI__<tenant-uuid>__URL`",
+            "URL",
+            "",
+            "When `connectors.opencti.<tenant-uuid>` is set",
+            "Base URL of that tenant's OpenCTI instance (e.g. `https://opencti.mycompany.com`)."
+          ]
+        },
+        {
+          "key": "connectors.opencti.<tenant-uuid>.token",
+          "cells": [
+            "`CONNECTORS__OPENCTI__<tenant-uuid>__TOKEN`",
+            "string",
+            "",
+            "When `connectors.opencti.<tenant-uuid>` is set",
+            "API token used to authenticate against that tenant's OpenCTI Live Stream/GraphQL API. Pass through a secret store."
+          ]
+        },
+        {
+          "key": "connectors.default_threats.dataset_url",
+          "cells": [
+            "`CONNECTORS__DEFAULT_THREATS__DATASET_URL`",
+            "URL, or empty",
+            "`https://raw.githubusercontent.com/OpenCRQ-Platform/datasets/main/data/`",
+            "No",
+            "Folder the OpenCRQ Default Threats connector reads its file (`default-threats-v1.json`) from, for every tenant: a STIX bundle of threat groups and campaigns derived from MITRE ATT&CK, which gives a tenant without a threat feed of its own the threats its risk scenarios need. A tenant created from the platform, and the initial tenant, start with the connector switched off: someone with Manage Security switches it on from the Threats step of Get started or in its **Configure integration** panel, where it can also be switched off again. A tenant created before 0.261120.0 keeps it on. It syncs every day at 06:00 UTC by default, and an unchanged file costs one conditional request. Unset, it reads OpenCRQ's dataset repository, `https://raw.githubusercontent.com/OpenCRQ-Platform/datasets/main/data/`. Set it to a mirror of that folder on a platform without internet access, or to an empty string to turn the connector off for every tenant. One value for the platform, not keyed by tenant; restart OpenCRQ after a change."
+          ]
+        },
+        {
+          "key": "connectors.drata.<tenant-uuid>.url",
+          "cells": [
+            "`CONNECTORS__DRATA__<tenant-uuid>__URL`",
+            "URL",
+            "`https://public-api.drata.com`",
+            "No",
+            "Drata API base URL for that tenant. EU-hosted accounts must set `https://public-api.eu.drata.com` (the key is rejected with a 401 on the wrong regional instance), APAC ones `https://public-api.apac.drata.com`."
+          ]
+        },
+        {
+          "key": "connectors.drata.<tenant-uuid>.api_key",
+          "cells": [
+            "`CONNECTORS__DRATA__<tenant-uuid>__API_KEY`",
+            "string",
+            "",
+            "When `connectors.drata.<tenant-uuid>` is set",
+            "That tenant's Drata API key with read scopes on Frameworks and Controls. Pass through a secret store. If the key restricts source IPs, allowlist this deployment's egress IP."
+          ]
+        },
+        {
+          "key": "connectors.drata.<tenant-uuid>.workspace_id",
+          "cells": [
+            "`CONNECTORS__DRATA__<tenant-uuid>__WORKSPACE_ID`",
+            "number",
+            "`1`",
+            "No",
+            "Drata workspace to read for that tenant. Accounts without Multiple Product Support always use workspace `1`."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "app",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "app.admin.token",
+          "cells": [
+            "`APP__ADMIN__TOKEN`",
+            "UUID",
+            "",
+            "No",
+            "The deployment's bootstrap admin token, a UUID version 4, the counterpart of OpenCTI's `APP__ADMIN__TOKEN` and OpenAEV's `OPENAEV_ADMIN_TOKEN`. Set, it does two things. It authenticates the provisioning API a deployment manager calls to give a sibling product an account here: `POST /api/xtm/peer-tokens` (`consumer`, `name`, `email`, `token_name`) creates or updates the service account keyed by `email` in the initial tenant, in its Connectors group, revokes its tokens of that name and returns a new one that does not expire; `POST /api/xtm/peer-tokens/revoke` (`email`, `token_name`) revokes them. And it works as a bearer on the whole API (`Authorization: Bearer` and the token): it acts as the service account **Deployment admin token**, created at each start in the Admin group of the initial tenant (`INITIAL_TENANT__ID`), so it holds every capability of that group. When the initial tenant does not exist, the bearer stays off. Unset (the default), both are off and the provisioning API answers 404. A value that is not a UUID v4 stops the platform at boot. Pass it through a secret store, and set it only when a deployment manager or a single-token deployment needs it."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "xtm",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "xtm.opencti_url",
+          "cells": [
+            "`XTM__OPENCTI_URL`",
+            "URL",
+            "",
+            "No",
+            "URL of the OpenCTI platform of this deployment, the address people open in a browser. Only the API reads it: the `xtm.products` procedure answers it, and without it the URL of the tenant's OpenCTI connection (`CONNECTORS__OPENCTI__<tenant-uuid>__URL`). No screen uses it: **OpenCTI** in the product menu under the logo (**Filigran products**) opens the URL of the tenant's OpenCTI connection, and without one, OpenCTI's product page on filigran.io (**Get OpenCTI now**). A URL only: the connection itself is the `connectors.opencti` keys."
+          ]
+        },
+        {
+          "key": "xtm.openaev_url",
+          "cells": [
+            "`XTM__OPENAEV_URL`",
+            "URL",
+            "",
+            "No",
+            "URL of the OpenAEV platform of this deployment, the address people open in a browser. Only the API reads it: the `xtm.products` procedure answers it, and without it the URL of the tenant's OpenAEV connection (`CONNECTORS__OPENAEV__<tenant-uuid>__URL`). No screen uses it: **OpenAEV** in the product menu under the logo (**Filigran products**) opens the URL of the tenant's OpenAEV connection, and without one, OpenAEV's product page on filigran.io (**Get OpenAEV now**). A URL only: the connection itself is the `connectors.openaev` keys."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "xtm_one",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "xtm_one.enabled",
+          "cells": [
+            "`XTM_ONE__ENABLED`",
+            "only `true`",
+            "",
+            "No",
+            "XTM One can no longer be turned off. Leave it unset, or set it to `true`; any other value stops the platform at boot."
+          ]
+        },
+        {
+          "key": "xtm_one.url",
+          "cells": [
+            "`XTM_ONE__URL`",
+            "string, not empty",
+            "",
+            "Yes",
+            "URL this OpenCRQ backend reaches XTM One on (e.g. `https://xtm-one.mycompany.com`, or an internal address such as `http://xtm-one:4000`)."
+          ]
+        },
+        {
+          "key": "xtm_one.token",
+          "cells": [
+            "`XTM_ONE__TOKEN`",
+            "string, not empty",
+            "",
+            "Yes",
+            "Shared platform registration token (`PLATFORM_REGISTRATION_TOKEN` on the XTM One side). Pass through a secret store. Set a token of your own on both sides: XTM One refuses to register a platform that presents its published default token."
+          ]
+        },
+        {
+          "key": "xtm_one.platform_url",
+          "cells": [
+            "`XTM_ONE__PLATFORM_URL`",
+            "string, not empty",
+            "",
+            "Yes",
+            "Public base URL of this OpenCRQ instance — used as the JWT issuer, the JWKS audience, and the `platform_url` sent at registration."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "file_storage",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "file_storage.endpoint",
+          "cells": [
+            "`FILE_STORAGE__ENDPOINT`",
+            "string",
+            "",
+            "Yes",
+            "S3 API endpoint of the object store (e.g. `http://rustfs:9000` inside the Compose network). Enables the feature when set together with the access/secret key."
+          ]
+        },
+        {
+          "key": "file_storage.access_key",
+          "cells": [
+            "`FILE_STORAGE__ACCESS_KEY`",
+            "string",
+            "",
+            "Yes",
+            "Access key for the object store. Pass through a secret store (Vault, K8s Secret, SOPS, CI secret)."
+          ]
+        },
+        {
+          "key": "file_storage.secret_key",
+          "cells": [
+            "`FILE_STORAGE__SECRET_KEY`",
+            "string",
+            "",
+            "Yes",
+            "Secret key for the object store. Pass through a secret store — never a `ConfigMap` or committed JSON file."
+          ]
+        },
+        {
+          "key": "file_storage.bucket",
+          "cells": [
+            "`FILE_STORAGE__BUCKET`",
+            "string",
+            "`opencrq`",
+            "No",
+            "Bucket that holds all tenant files."
+          ]
+        },
+        {
+          "key": "file_storage.region",
+          "cells": [
+            "`FILE_STORAGE__REGION`",
+            "string",
+            "`eu-west-3`",
+            "No",
+            "S3 region. Arbitrary for RustFS/MinIO but required by the S3 client."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "feature_flags",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "feature_flags",
+          "cells": [
+            "`FEATURE_FLAGS`",
+            "list of \"*\" | \"enterprise-edition-status\" | \"technique-coverage-changes\"",
+            "`[]`",
+            "No",
+            "Comma-separated list of enabled flags (e.g. `FEATURE_FLAGS=*`). Each value must be a name declared in the registry, or `*`. The indexed form `FEATURE_FLAGS__0`, `FEATURE_FLAGS__1`, … also works; in a JSON config file this is the `feature_flags` array."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "process_manager",
+      "columns": [
+        "Environment variable",
+        "Type",
+        "Default",
+        "Required",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "process_manager.profile",
+          "cells": [
+            "`PROCESS_MANAGER__PROFILE`",
+            "string",
+            "`split`",
+            "No",
+            "`split` runs the HTTP server and the background worker as separate processes, each with its own database connection pool. `monolith` runs everything in a single process and is only intended for local development — never use it on an environment with real data volume."
+          ]
+        },
+        {
+          "key": "process_manager.heartbeat_timeout",
+          "cells": [
+            "`PROCESS_MANAGER__HEARTBEAT_TIMEOUT`",
+            "number",
+            "`60000`",
+            "No",
+            "Time, in ms, without a heartbeat from one of its processes after which the platform answers unhealthy on the healthcheck port."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.postgres.database",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__POSTGRES__DATABASE`",
+            "string",
+            "",
+            "No",
+            "Overrides `postgres.database` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.postgres.user",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__POSTGRES__USER`",
+            "string",
+            "",
+            "No",
+            "Overrides `postgres.user` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.postgres.host",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__POSTGRES__HOST`",
+            "string",
+            "",
+            "No",
+            "Overrides `postgres.host` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.postgres.port",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__POSTGRES__PORT`",
+            "number",
+            "",
+            "No",
+            "Overrides `postgres.port` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.postgres.password",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__POSTGRES__PASSWORD`",
+            "string",
+            "",
+            "No",
+            "Overrides `postgres.password` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.postgres.pool_max",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__POSTGRES__POOL_MAX`",
+            "number, at least 10",
+            "`20`",
+            "No",
+            "Overrides `postgres.pool_max` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.http_server.host",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__HTTP_SERVER__HOST`",
+            "string",
+            "",
+            "No",
+            "Overrides `http_server.host` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.http_server.port",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__HTTP_SERVER__PORT`",
+            "number",
+            "",
+            "No",
+            "Overrides `http_server.port` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.http_server.public_port",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__HTTP_SERVER__PUBLIC_PORT`",
+            "number",
+            "",
+            "No",
+            "Overrides `http_server.public_port` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.http_server.max_response_items",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__HTTP_SERVER__MAX_RESPONSE_ITEMS`",
+            "integer, at least 1",
+            "`20000`",
+            "No",
+            "Overrides `http_server.max_response_items` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.front_path",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__FRONT_PATH`",
+            "string",
+            "",
+            "No",
+            "Overrides `front_path` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.jobs.enabled",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__JOBS__ENABLED`",
+            "boolean",
+            "",
+            "When `process_manager.<profile>.<process>.jobs` is set",
+            "Overrides `jobs.enabled` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.jobs.max_concurrent",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__JOBS__MAX_CONCURRENT`",
+            "number",
+            "`4`",
+            "No",
+            "Overrides `jobs.max_concurrent` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.jobs.polling_fallback_ms",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__JOBS__POLLING_FALLBACK_MS`",
+            "number",
+            "`30000`",
+            "No",
+            "Overrides `jobs.polling_fallback_ms` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.jobs.heartbeat_interval_ms",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__JOBS__HEARTBEAT_INTERVAL_MS`",
+            "integer, 1 to 300000",
+            "`10000`",
+            "No",
+            "Overrides `jobs.heartbeat_interval_ms` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.jobs.heartbeat_stale_after_ms",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__JOBS__HEARTBEAT_STALE_AFTER_MS`",
+            "integer, at least 1",
+            "`30000`",
+            "No",
+            "Overrides `jobs.heartbeat_stale_after_ms` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.jobs.log_retention_runs",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__JOBS__LOG_RETENTION_RUNS`",
+            "integer, at least 1",
+            "`3`",
+            "No",
+            "Overrides `jobs.log_retention_runs` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.jobs.log_retention_lines",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__JOBS__LOG_RETENTION_LINES`",
+            "integer, at least 1",
+            "`500`",
+            "No",
+            "Overrides `jobs.log_retention_lines` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.jobs.run_retention_days",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__JOBS__RUN_RETENTION_DAYS`",
+            "integer, at least 1",
+            "`30`",
+            "No",
+            "Overrides `jobs.run_retention_days` for this process of the profile."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.script",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__SCRIPT`",
+            "string",
+            "",
+            "Yes",
+            "Shipped: monolith: main `index.mjs`; split: http `index-http.mjs`, worker `index-worker.mjs`."
+          ]
+        },
+        {
+          "key": "process_manager.<profile>.<process>.memory",
+          "cells": [
+            "`PROCESS_MANAGER__<profile>__<process>__MEMORY`",
+            "number",
+            "",
+            "Yes",
+            "Shipped: monolith: main `2048`; split: http `512`, worker `4096`."
+          ]
+        }
+      ]
+    }
+  ]
+}

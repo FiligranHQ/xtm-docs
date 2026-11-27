@@ -1,0 +1,22 @@
+title: A linked argument reads every value of its type from the whole run, or only the values the event before it kept
+lanes:
+  - label: Where values come from
+    tone: external
+    nodes:
+      - {id: variables, label: Scope variables, icon: FileText, note: Set before the run}
+      - {id: earlier, label: Earlier actions, icon: Terminal, note: Their outputs}
+  - label: The run's values
+    tone: store
+    nodes:
+      - {id: global, label: Global pool, icon: Layers, note: Every value of the run}
+      - {id: local, label: Local pool, icon: GitBranch, note: Values the event kept}
+  - label: The action
+    tone: product
+    nodes:
+      - {id: argument, label: Linked argument, icon: Terminal, note: "Limit to Local Scope: one run per value"}
+edges:
+  - {from: variables, to: global, label: seed}
+  - {from: earlier, to: global, label: outputs}
+  - {from: global, to: local, label: filtered by the event}
+  - {from: global, to: argument, label: switch off}
+  - {from: local, to: argument, label: switch on}

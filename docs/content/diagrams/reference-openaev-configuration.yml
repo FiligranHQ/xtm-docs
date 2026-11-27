@@ -1,0 +1,19 @@
+title: Each key takes its environment variable, else the value application.properties ships, else the default of the code
+lanes:
+  - label: You set
+    tone: external
+    nodes:
+      - {id: env, label: Environment variable, icon: Terminal, note: "OPENAEV_BASE-URL, in Docker"}
+  - label: The release ships
+    tone: store
+    nodes:
+      - {id: file, label: application.properties, icon: FileText, note: "Inside the image"}
+      - {id: code, label: Default of the code, icon: Code2, note: The other keys}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenAEV, note: "Reads every key at startup"}
+edges:
+  - {from: env, to: platform, label: first}
+  - {from: file, to: platform, label: then}
+  - {from: code, to: platform, label: last, style: dashed}

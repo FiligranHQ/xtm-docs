@@ -1,0 +1,23 @@
+title: Each agent reports traces, each agent gets one status, and the statuses of the active agents make the status of the inject
+lanes:
+  - label: Traces
+    tone: external
+    nodes:
+      - {id: prereq, label: Prerequisites, icon: ListChecks, note: Check and install}
+      - {id: command, label: Attack command, icon: Terminal, note: The action itself}
+      - {id: cleanup, label: Cleanup, icon: Wrench, note: Removes what it left}
+  - label: Per agent
+    tone: product
+    nodes:
+      - {id: agent, label: Agent status, icon: Laptop, note: "Executed, Cleanup failed, Timeout..."}
+      - {id: skipped, label: Not counted, icon: Info, note: "Agent inactive, Asset agentless"}
+  - label: Inject
+    tone: product
+    nodes:
+      - {id: inject, label: Inject status, icon: Gauge, note: "Executed, Partial or Error"}
+edges:
+  - {from: prereq, to: agent, label: prerequisite failed}
+  - {from: command, to: agent, label: decides first}
+  - {from: cleanup, to: agent, label: cleanup failed}
+  - {from: agent, to: inject, label: counted}
+  - {from: skipped, to: inject, label: left out, style: dashed}

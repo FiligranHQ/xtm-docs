@@ -1,0 +1,164 @@
+{
+  "name": "feature-flags",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/config/conf.js, opencti-platform/opencti-graphql/src/**/*.{ts,js,graphql}, opencti-platform/opencti-front/src/**/*.{ts,tsx,js,jsx})",
+  "intro": "The 10 feature flags of OpenCTI 7.261119.0: features still in development, hidden until `app:enabled_dev_features` lists them (see the [configuration reference](/reference/opencti/configuration/)). Reserved to development and not supported: a flagged feature can change or disappear in any release, so leave flags off in production; the guides describe the platform without them, and a feature is documented when a release removes its flag.",
+  "filter": "Filter flags, API fields and screens",
+  "sections": [
+    {
+      "title": "Feature flags",
+      "columns": [
+        "Flag",
+        "Hides",
+        "Checked in",
+        "Gates"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_RESTRICTION_CAN_USE",
+          "cells": [
+            "`ACCESS_RESTRICTION_CAN_USE`",
+            "Adds a **Use** access right between view and edit on restricted entities and organizations, and limits the author and authorized-member pickers to the identities the user can use.",
+            "Back end (1 file), front (2 files)",
+            "Parts of `AuthorizedMembersField`, `CreatedByField`"
+          ]
+        },
+        {
+          "key": "CONFIG_PRESET",
+          "cells": [
+            "`CONFIG_PRESET`",
+            "Configuration presets, to export and import bundles of platform configuration, and the bootstrap wizard that offers one to the first administrator of a new platform.",
+            "Back end (6 files), front (5 files)",
+            "Queries `configPresetExportableItems`, `configPresetExportableTypes`, `configPresetImportPreview`, `configPresetImportRunning`, `configPresetImportSession`<br>Mutations `configPresetExport`, `configPresetImport`, `configPresetImportSessionBackToSelection`, `configPresetImportSessionClear`, `configPresetImportSessionSave`, `configPresetImportUpload`, `configPresetPartialImport`, `configPresetPartialImportPreview`<br>API fields `bootstrap_wizard_skipped` of `MeUser`<br>Attributes `bootstrap_wizard_skipped`, `platform_bootstrap_status`<br>Configuration `app:bootstrap_wizard:enabled`<br>Parts of `ConfigPresetBootstrapWizard`, `Experience`, `ThemeImporter`, `useConfigPresetExportAccess`, `useConfigPresetPartialImportAccess`"
+          ]
+        },
+        {
+          "key": "DATA_SANITY_MANAGER",
+          "cells": [
+            "`DATA_SANITY_MANAGER`",
+            "The **Health** screen in **Data > Health**, listing the operations of the data sanity manager (the manager itself runs without the flag).",
+            "Front (2 files)",
+            "Screens `/dashboard/data/health`, `/dashboard/data/health/operations`"
+          ]
+        },
+        {
+          "key": "DECOUPLING_VERSIONS",
+          "cells": [
+            "`DECOUPLING_VERSIONS`",
+            "Connector versions decoupled from the platform version, with the connector catalog synchronized from XTM Hub (or a custom catalog endpoint) and update notices on deployed connectors.",
+            "Back end (2 files), front (2 files)",
+            "Configuration `xtm:xtmhub_url`, `catalog_manager:custom_catalog_refresh_endpoint_uri`<br>Parts of `Connector`, `IntegrationsDeployed`"
+          ]
+        },
+        {
+          "key": "ENGINE_MONITORING",
+          "cells": [
+            "`ENGINE_MONITORING`",
+            "A background check of the search engine every minute that logs its cluster health, node and thread pool statistics.",
+            "Back end (1 file)",
+            "Back end behaviour in `engine-monitoring`"
+          ]
+        },
+        {
+          "key": "ENTITIES_WORKFLOW",
+          "cells": [
+            "`ENTITIES_WORKFLOW`",
+            "The extended workflow engine for every entity type (transitions, bypass, status cleanup); without it, only drafts use it and other types keep the classic status workflow.",
+            "Back end (9 files), front (9 files)",
+            "Queries `workflowMassTransitions`, `workflowStatuses`<br>Attributes `x_opencti_closing_reason`<br>Manager `workflowStatusCleanupManager` (`workflow_status_cleanup_manager:enabled`, `workflow_status_cleanup_manager:interval`, `workflow_status_cleanup_manager:lock_key`)<br>Parts of `ProcessingStatusOverview`, `StatusField`, `StixDomainObjectOverview`, `TransitionForm`, `WorkflowBypassStatus`, `WorkflowStatus`, `WorkflowTransitions`, `sub_types/Root`, `workflowFeatureFlag`"
+          ]
+        },
+        {
+          "key": "INGESTION_DEDUPLICATION",
+          "cells": [
+            "`INGESTION_DEDUPLICATION`",
+            "Skip the import of entities unchanged since the last import by the same user",
+            "Back end (5 files), front (2 files)",
+            "Queries `ingestionDeduplicationAllowedTypes`, `ingestionDeduplicationDefaultExcludedFields`, `ingestionDeduplicationDefaultTtl`, `ingestionDeduplicationFields`, `ingestionDeduplicationRules`, `ingestionDeduplicationUserUsages`<br>Mutations `ingestionDeduplicationRuleAdd`, `ingestionDeduplicationRuleDelete`, `ingestionDeduplicationRuleFieldPatch`<br>Attributes `excluded_fields`, `target_type`, `ttl`, `user_id`<br>Parts of `ConnectorDeduplication`, `UserEdition`"
+          ]
+        },
+        {
+          "key": "INGESTION_HEALTH",
+          "cells": [
+            "`INGESTION_HEALTH`",
+            "The ingestion health of connectors and feeds, computed by the ingestion health manager, with health alerts on deployed connectors in **Integrations** and a health email notifier.",
+            "Back end (1 file), front (1 file)",
+            "Parts of `Settings`"
+          ]
+        },
+        {
+          "key": "LOCAL_AUTH_LOCKOUT",
+          "cells": [
+            "`LOCAL_AUTH_LOCKOUT`",
+            "Local authentication lockout policy feature flag",
+            "Back end (7 files), front (2 files)",
+            "Attributes `local_auth_lockout_admin_max_attempts`, `local_auth_lockout_duration`, `local_auth_lockout_enabled`, `local_auth_lockout_final_action`, `local_auth_lockout_max_attempts`, `local_auth_lockout_window`, `lock_duration`, `lock_source`, `lock_type`, `max_attempts`<br>Parts of `EmailTemplateAttributesSidebar`, `LocalStrategyForm`"
+          ]
+        },
+        {
+          "key": "SESSION_PRESENCE",
+          "cells": [
+            "`SESSION_PRESENCE`",
+            "Logout a session once its last browser tab is closed, until its Phase 2 (shared presence) and Phase 3 (hardening)",
+            "Back end (3 files), front (1 file)",
+            "Attributes `platform_session_presence_enabled`, `reason`<br>Parts of `AuthenticationGlobalSettings`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Turn a flag on",
+      "text": "A flag turns its feature on for the whole platform; no flag is set per user or per organization.",
+      "columns": [
+        "Setting",
+        "Example",
+        "Effect"
+      ],
+      "rows": [
+        {
+          "key": "app:enabled_dev_features",
+          "cells": [
+            "`app:enabled_dev_features`",
+            "`[]`",
+            "The list of flags to turn on, in the platform configuration file. Read once when the platform starts: restart it after a change. The front reads the same list from the platform settings."
+          ]
+        },
+        {
+          "key": "APP__ENABLED_DEV_FEATURES",
+          "cells": [
+            "`APP__ENABLED_DEV_FEATURES`",
+            "`'[\"ACCESS_RESTRICTION_CAN_USE\",\"CONFIG_PRESET\"]'`",
+            "The same list as an environment variable, written as a JSON array."
+          ]
+        },
+        {
+          "key": "all",
+          "cells": [
+            "`*`",
+            "`'[\"*\"]'`",
+            "Turns every flag on, in the back end and the front, including the flags of features not listed here."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Flags the platform sets by itself",
+      "text": "The platform adds these to the flags the front reads, from what it detects itself; listing one in `app:enabled_dev_features` also turns it on in the front, but not in the back end.",
+      "columns": [
+        "Flag",
+        "Turns on",
+        "Checked in"
+      ],
+      "rows": [
+        {
+          "key": "RUNTIME_SORTING",
+          "cells": [
+            "`RUNTIME_SORTING`",
+            "Sorting lists on fields computed at query time, turned on by the platform when the search engine is Elasticsearch 7.12 or later. The `*` value of `app:enabled_dev_features` also turns it on in the front.",
+            "Front"
+          ]
+        }
+      ]
+    }
+  ]
+}

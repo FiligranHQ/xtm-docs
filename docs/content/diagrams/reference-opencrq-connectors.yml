@@ -1,0 +1,18 @@
+title: Each connector reads one source for one tenant, on a schedule or as a live stream
+lanes:
+  - label: Sources
+    tone: external
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Live Stream of threats}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: 'Test results, assets, CVEs'}
+      - {id: cve, label: CVE sources, icon: Bug, note: "NIST NVD, FIRST EPSS, CISA KEV"}
+      - {id: others, label: Defender and Drata, icon: Laptop, note: 'Assets, vulnerabilities, compliance'}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: tenant, label: Tenant, icon: LogoOpenCRQ, note: Credentials and a service account}
+edges:
+  - {from: opencti, to: tenant, label: live stream}
+  - {from: openaev, to: tenant, label: every hour}
+  - {from: cve, to: tenant, label: every day}
+  - {from: others, to: tenant, label: scheduled pull}

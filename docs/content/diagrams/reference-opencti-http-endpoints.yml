@@ -1,0 +1,26 @@
+title: A request passes the rate limiter and its authentication before the endpoint that serves it, while health and metrics listen on ports of their own
+lanes:
+  - label: Clients
+    tone: external
+    nodes:
+      - {id: browser, label: Browser, icon: Laptop, note: Interface and session}
+      - {id: script, label: Scripts and readers, icon: Code2, note: "API, TAXII, streams, feeds"}
+      - {id: probe, label: Monitoring, icon: Gauge, note: Probes and Prometheus}
+  - label: Entry
+    tone: product
+    nodes:
+      - {id: limiter, label: Rate limiter, icon: ShieldCheck, note: Every request under the base path}
+      - {id: auth, label: Authentication, icon: KeyRound, note: "Token, Basic login or session"}
+  - label: Endpoints
+    tone: product
+    nodes:
+      - {id: graphql, label: /graphql, icon: LogoOpenCTI, note: "Queries, mutations, uploads"}
+      - {id: sharing, label: "TAXII, streams, feeds", icon: Network, note: A public one needs no token}
+      - {id: ports, label: Own ports, icon: Activity, note: "/health/liveness, /metrics"}
+edges:
+  - {from: browser, to: limiter, label: request}
+  - {from: script, to: limiter, label: request}
+  - {from: limiter, to: auth, label: then}
+  - {from: auth, to: graphql, label: per operation}
+  - {from: auth, to: sharing, label: capability}
+  - {from: probe, to: ports, label: when configured}

@@ -1,0 +1,25 @@
+title: An atomic test runs one action of the Threat Arsenal on the targets you pick, once or on a schedule, and each run replaces the results of the previous one
+lanes:
+  - label: Pick
+    tone: product
+    nodes:
+      - {id: action, label: Threat Arsenal action, icon: Crosshair, note: "By technique, platform, domain"}
+  - label: Aim
+    tone: product
+    nodes:
+      - {id: test, label: Atomic test, icon: LogoOpenAEV, note: "Targets and expectations"}
+  - label: Run
+    tone: external
+    nodes:
+      - {id: endpoints, label: Targets, icon: Laptop, note: "Endpoints, asset groups, teams"}
+      - {id: tools, label: Security tools, icon: ShieldCheck, note: "EDR, SIEM, gateways"}
+  - label: Score
+    tone: product
+    nodes:
+      - {id: results, label: Results, icon: Gauge, note: "Prevention, detection, findings"}
+edges:
+  - {from: action, to: test, label: create}
+  - {from: test, to: endpoints, label: Launch now or schedule}
+  - {from: endpoints, to: tools, label: seen by}
+  - {from: tools, to: results, label: collectors}
+  - {from: results, to: test, label: Relaunch now, style: dashed}

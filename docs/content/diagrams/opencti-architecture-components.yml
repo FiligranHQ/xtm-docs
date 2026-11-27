@@ -1,0 +1,28 @@
+title: OpenCTI is a stateless platform and its workers, used by people and connectors, with four services behind them that keep the data
+lanes:
+  - label: Clients
+    tone: external
+    nodes:
+      - {id: users, label: Users, icon: Laptop, note: Web interface and API scripts}
+      - {id: connectors, label: Connectors, icon: Puzzle, note: "Register through the API; import, enrich, export, stream", href: /opencti/use/ingest/connectors/}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenCTI, note: "Interface, GraphQL API, managers"}
+      - {id: workers, label: Workers, icon: Cpu, note: Write queued data}
+  - label: Services that keep the data
+    tone: store
+    nodes:
+      - {id: elasticsearch, label: Elasticsearch, icon: Search, note: Knowledge and search}
+      - {id: rabbitmq, label: RabbitMQ, icon: Layers, note: Queues for workers and connectors}
+      - {id: redis, label: Redis, icon: Activity, note: "Streams, locks, sessions"}
+      - {id: s3, label: S3 storage, icon: Boxes, note: "Files, imports, exports"}
+edges:
+  - {from: users, to: platform, label: interface and API}
+  - {from: connectors, to: rabbitmq, label: push bundles}
+  - {from: platform, to: elasticsearch, label: read and write}
+  - {from: platform, to: rabbitmq, label: "feeds, requests"}
+  - {from: rabbitmq, to: workers, label: consume}
+  - {from: workers, to: platform, label: write through API}
+  - {from: platform, to: redis, label: events and locks}
+  - {from: platform, to: s3, label: files}

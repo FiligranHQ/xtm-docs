@@ -1,0 +1,21 @@
+title: A new report starts an OpenCTI playbook that filters, changes, saves and announces it, and hands to XTM One agents what filters cannot decide
+lanes:
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: listen, label: New report heard, icon: LogoOpenCTI, note: "Listen knowledge events", href: /opencti/use/automate/playbooks/}
+      - {id: triage, label: Report triaged, icon: Workflow, note: "In progress, assigned", href: /opencti/use/automate/playbooks/create/}
+      - {id: saved, label: Saved and announced, icon: Users, note: "Ingestion and notifier", href: /opencti/use/automate/playbooks/create/}
+      - {id: traces, label: Runs checked, icon: Activity, note: "Execution traces", href: /opencti/use/automate/playbooks/monitor/}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: transform, label: Report classified, icon: LogoXTMOne, note: "Transform with AI agent", href: /xtm-one/use/in-opencti/}
+      - {id: consume, label: Follow-up taken over, icon: Bot, note: "Send to AI agent", href: /xtm-one/use/in-opencti/}
+edges:
+  - {from: listen, to: transform, label: STIX bundle}
+  - {from: transform, to: triage, label: labelled bundle}
+  - {from: listen, to: triage, label: matching report}
+  - {from: triage, to: saved, label: changed bundle}
+  - {from: triage, to: consume, label: bundle, style: dashed}
+  - {from: saved, to: traces, label: each run}

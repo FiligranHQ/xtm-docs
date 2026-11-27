@@ -1,0 +1,21 @@
+title: A flag listed in app:enabled_dev_features turns its feature in development on for the whole platform, in the back end and the front
+lanes:
+  - label: Turned on by
+    tone: external
+    nodes:
+      - {id: config, label: app:enabled_dev_features, icon: Wrench, note: "Or APP__ENABLED_DEV_FEATURES, read at start"}
+      - {id: elastic, label: Elasticsearch 7.12 or later, icon: Search, note: Sets RUNTIME_SORTING}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: backend, label: Back end, icon: LogoOpenCTI, note: Checks each flag in the code}
+      - {id: front, label: Front, icon: Laptop, note: Reads the list from the settings}
+  - label: Gated
+    nodes:
+      - {id: feature, label: Feature in development, icon: Lightbulb, note: "Unsupported, leave off in production"}
+edges:
+  - {from: config, to: backend, label: list of flags}
+  - {from: elastic, to: backend, label: platform adds, style: dashed}
+  - {from: backend, to: front, label: platform settings}
+  - {from: backend, to: feature, label: gates}
+  - {from: front, to: feature, label: gates screens}

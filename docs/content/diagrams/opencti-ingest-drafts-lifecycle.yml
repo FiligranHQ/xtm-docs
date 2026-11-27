@@ -1,0 +1,24 @@
+title: Changes from analysts, imports and forms collect in a draft and reach the knowledge base only when the draft is approved
+lanes:
+  - label: Changes come from
+    tone: external
+    nodes:
+      - {id: analyst, label: Analysts, icon: Laptop, note: Work in draft mode}
+      - {id: import, label: Imports and forms, icon: FileText, note: Draft by default}
+  - label: Draft
+    tone: product
+    nodes:
+      - {id: draft, label: Open draft, icon: ClipboardCheck, note: Separate from the knowledge base}
+  - label: Approval
+    tone: product
+    nodes:
+      - {id: approve, label: Approve draft, icon: ShieldCheck, note: A person decides}
+  - label: Knowledge
+    tone: store
+    nodes:
+      - {id: base, label: Knowledge base, icon: Server, note: Receives the changes}
+edges:
+  - {from: analyst, to: draft, label: "create, update, delete"}
+  - {from: import, to: draft, label: objects found}
+  - {from: draft, to: approve, label: review}
+  - {from: approve, to: base, label: ingestion}

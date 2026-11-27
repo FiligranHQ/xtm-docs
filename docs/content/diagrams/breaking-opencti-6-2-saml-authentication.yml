@@ -1,0 +1,19 @@
+title: From OpenCTI 6.2, SAML expects signed responses and assertions by default, so the identity provider signs both, and a parameter is set to false only for what it cannot sign
+lanes:
+  - label: OpenCTI before 6.2
+    tone: product
+    nodes:
+      - {id: before, label: Signatures not required, icon: LogoOpenCTI, note: "want_assertions_signed and want_authn_response_signed default to false"}
+  - label: OpenCTI 6.2 and later
+    tone: product
+    nodes:
+      - {id: after, label: Signatures required, icon: LogoOpenCTI, note: "Both parameters default to true"}
+  - label: If sign-in fails
+    tone: external
+    nodes:
+      - {id: idp, label: Identity provider signs both, icon: KeyRound, note: Responses and assertions}
+      - {id: fix, label: False for unsigned parts, icon: Wrench, note: "Only the parameter of what the provider cannot sign; from 7.260224.0, a switch of the provider"}
+edges:
+  - {from: before, to: after, label: upgrade}
+  - {from: after, to: idp, label: sign-in fails}
+  - {from: after, to: fix, label: "if it cannot sign", style: dashed}

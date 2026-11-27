@@ -1,0 +1,28 @@
+title: A playbook starts at an entry point, passes its bundle through transform and sharing steps, and ends by saving it or telling someone
+lanes:
+  - label: Entry points
+    nodes:
+      - {id: events, label: Listen to events, icon: Activity, note: Knowledge or PIR events}
+      - {id: schedule, label: Query regularly, icon: Clock, note: Knowledge on a schedule}
+      - {id: manual, label: Manual enrollment, icon: LogIn, note: A user enrolls an entity}
+  - label: Transform and enrich
+    tone: product
+    nodes:
+      - {id: transform, label: Transform and enrich, icon: Wrench, note: "Match, manipulate, enrich, AI"}
+  - label: Share and control access
+    tone: product
+    nodes:
+      - {id: share, label: Share and restrict, icon: Users, note: "Organizations, access restrictions"}
+  - label: End steps
+    tone: store
+    nodes:
+      - {id: ingest, label: Send for ingestion, icon: Server, note: Saves the changes}
+      - {id: notify, label: Notify or hand over, icon: MessageSquare, note: "Notifier, email, AI agent"}
+edges:
+  - {from: events, to: transform, label: bundle}
+  - {from: schedule, to: transform, label: bundle}
+  - {from: manual, to: transform, label: bundle}
+  - {from: transform, to: share, label: out}
+  - {from: transform, to: notify, label: out}
+  - {from: transform, to: ingest, label: out}
+  - {from: share, to: ingest, label: out}

@@ -1,0 +1,29 @@
+title: An orchestrator calls the health endpoint of each platform, and OpenCTI and OpenAEV answer 200 only when the services they check answer
+lanes:
+  - label: Callers
+    tone: external
+    nodes:
+      - {id: orch, label: Orchestrator, icon: Gauge, note: "Docker Compose, Kubernetes or a load balancer"}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Port 8080, key APP__HEALTH_ACCESS_KEY"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "Port 8080, key OPENAEV_HEALTHCHECK_KEY"}
+  - label: At the center
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "Port 4000, no key, 200 when up"}
+  - label: Checked dependencies
+    tone: store
+    nodes:
+      - {id: esredis, label: Elasticsearch and Redis, icon: Server, note: Checked by OpenCTI}
+      - {id: mqs3, label: RabbitMQ and S3 storage, icon: ArrowLeftRight, note: Checked by both}
+      - {id: pg, label: PostgreSQL, icon: Server, note: Checked by OpenAEV}
+edges:
+  - {from: orch, to: opencti, label: /health with key}
+  - {from: orch, to: openaev, label: /api/health with key}
+  - {from: orch, to: xtmone, label: /api/health}
+  - {from: opencti, to: esredis, label: checks}
+  - {from: opencti, to: mqs3, label: checks}
+  - {from: openaev, to: mqs3, label: checks}
+  - {from: openaev, to: pg, label: checks}

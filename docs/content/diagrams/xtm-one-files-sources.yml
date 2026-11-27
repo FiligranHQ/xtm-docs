@@ -1,0 +1,23 @@
+title: Files lists in one place every file you gave agents and every file they produced, wherever it was made
+lanes:
+  - label: Where files come from
+    tone: external
+    nodes:
+      - {id: conversations, label: Conversations, icon: MessageSquare, note: "Uploads, answers, web pages"}
+      - {id: runs, label: Assignment runs, icon: PlayCircle, note: Outputs of runs}
+      - {id: other, label: Other, icon: Boxes, note: "Datasets, tool tests"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: files, label: Work > Files, icon: Search, note: What you may download}
+  - label: What you do
+    tone: product
+    nodes:
+      - {id: download, label: Download, icon: ArrowUpRight, note: The file itself}
+      - {id: context, label: Open its context, icon: ExternalLink, note: Conversation or run}
+edges:
+  - {from: conversations, to: files}
+  - {from: runs, to: files}
+  - {from: other, to: files}
+  - {from: files, to: download}
+  - {from: files, to: context}

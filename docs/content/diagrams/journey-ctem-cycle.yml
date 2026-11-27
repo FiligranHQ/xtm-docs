@@ -1,0 +1,29 @@
+title: A CTEM cycle scopes the business and prices each risk in OpenCRQ, brings the threats from OpenCTI, tests the controls with OpenAEV, funds the best plan in OpenCRQ, and XTM One scores the stages from OpenCTI and OpenAEV
+lanes:
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: scope, label: Business in scope, icon: LogoOpenCRQ, note: "Booking platform, guest records"}
+      - {id: price, label: Risks priced, icon: Scale, note: "Annual loss in money"}
+      - {id: plan, label: Plan funded, icon: ListChecks, note: "Best return first"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: threats, label: Threats that target it, icon: LogoOpenCTI, note: "Velvet Harbor, Ember Tide"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: tests, label: Controls tested, icon: LogoOpenAEV, note: "Prevented or not"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: posture, label: Exposure posture, icon: LogoXTMOne, note: "Five stages, one score"}
+edges:
+  - {from: scope, to: price, label: what can be lost}
+  - {from: threats, to: price, label: who attacks}
+  - {from: price, to: tests, label: controls to test}
+  - {from: tests, to: price, label: lowers what failed, style: dashed}
+  - {from: price, to: plan, label: loss to remove}
+  - {from: plan, to: scope, label: next cycle, style: dashed}
+  - {from: tests, to: posture, label: stage scores}
+  - {from: threats, to: posture, label: stage scores}

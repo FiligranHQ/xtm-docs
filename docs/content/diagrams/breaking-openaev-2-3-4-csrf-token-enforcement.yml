@@ -1,0 +1,23 @@
+title: From OpenAEV 2.3.4, API calls from signed-in sessions carry a CSRF token, so upgrade every component that calls the API in the same window as the platform
+lanes:
+  - label: Upgraded with the platform
+    tone: external
+    nodes:
+      - {id: interface, label: OpenAEV interface, icon: Laptop, note: Signed-in web session}
+      - {id: integrations, label: Injectors and collectors, icon: Puzzle, note: Released for 2.3.4 or later}
+      - {id: agents, label: OpenAEV agents, icon: Cpu, note: Released for 2.3.4 or later}
+      - {id: custom, label: Your integrations, icon: Code2, note: Updated for 2.3.4 or later}
+  - label: OpenAEV 2.3.4 and later
+    tone: product
+    nodes:
+      - {id: platform, label: OpenAEV API, icon: LogoOpenAEV, note: Expects a valid CSRF token}
+  - label: Left on older versions
+    tone: external
+    nodes:
+      - {id: older, label: Older components, icon: TriangleAlert, note: Mixed versions}
+edges:
+  - {from: interface, to: platform, label: with CSRF token}
+  - {from: integrations, to: platform, label: API calls}
+  - {from: agents, to: platform, label: API calls}
+  - {from: custom, to: platform, label: API calls}
+  - {from: platform, to: older, label: 401 or 403 errors, style: dashed}

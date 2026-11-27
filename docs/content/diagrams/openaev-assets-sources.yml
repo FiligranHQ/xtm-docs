@@ -1,0 +1,27 @@
+title: Assets come from agents, from the form and from CSV files, and asset groups gather them by hand or by rule for the injects
+lanes:
+  - label: Sources
+    tone: external
+    nodes:
+      - {id: agent, label: OpenAEV agent, icon: Laptop, note: Registers its host, href: /openaev/use/agents/}
+      - {id: form, label: Create, icon: FileText, note: Any category}
+      - {id: csv, label: Import, icon: ArrowUpRight, note: Hosts from a CSV file}
+  - label: Assets
+    tone: product
+    nodes:
+      - {id: assets, label: Assets, icon: Server, note: "Host, web app, cloud, identity, AI"}
+  - label: Asset groups
+    tone: product
+    nodes:
+      - {id: groups, label: Asset groups, icon: Boxes, note: "By hand, and by rule"}
+  - label: Simulations
+    tone: product
+    nodes:
+      - {id: injects, label: Injects, icon: Crosshair, note: Run on each member}
+edges:
+  - {from: agent, to: assets, label: registers}
+  - {from: form, to: assets, label: describes}
+  - {from: csv, to: assets, label: imports}
+  - {from: assets, to: groups, label: match the rule}
+  - {from: assets, to: injects, label: targeted, style: dashed}
+  - {from: groups, to: injects, label: targeted}

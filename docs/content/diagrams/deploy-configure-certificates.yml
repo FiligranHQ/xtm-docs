@@ -1,0 +1,27 @@
+title: Each platform trusts your internal certificate authority on its outgoing HTTPS calls, and OpenCTI sends them through your proxy except to the hosts in NO_PROXY
+lanes:
+  - label: Your CA
+    tone: external
+    nodes:
+      - {id: ca, label: Internal CA, icon: ShieldCheck, note: "./certs/internal-ca.pem"}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: NODE_EXTRA_CA_CERTS}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "OPENAEV_EXTRA-TRUSTED-CERTS-DIR"}
+  - label: Proxy
+    tone: external
+    nodes:
+      - {id: proxy, label: Your proxy, icon: Network, note: "HTTP_PROXY, HTTPS_PROXY"}
+  - label: Destinations
+    tone: external
+    nodes:
+      - {id: services, label: Your services, icon: Server, note: "Identity providers, integrated tools"}
+      - {id: stack, label: Services of the stack, icon: Boxes, note: "In NO_PROXY: opencti, openaev, redis..."}
+edges:
+  - {from: ca, to: opencti, label: trusted}
+  - {from: ca, to: openaev, label: trusted}
+  - {from: opencti, to: proxy, label: outgoing requests}
+  - {from: proxy, to: services, label: HTTPS}
+  - {from: openaev, to: services, label: HTTPS}
+  - {from: opencti, to: stack, label: direct, style: dashed}

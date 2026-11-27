@@ -1,0 +1,17 @@
+title: Each OpenAEV tenant registers in OpenCTI as an enrichment connector, receives the security coverages to test, and pushes back the results of its simulations
+lanes:
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: coverage, label: Security coverage, icon: LogoOpenCTI, note: "Automated using enrichment"}
+      - {id: connector, label: OpenAEV Coverage connector, icon: Puzzle, note: "One per OpenAEV tenant"}
+  - label: OpenAEV tenant
+    tone: product
+    nodes:
+      - {id: platform, label: OpenAEV, icon: LogoOpenAEV, note: "URL and token of OpenCTI"}
+      - {id: scenario, label: Scenario and simulations, icon: PlayCircle, note: "Built from the coverage"}
+edges:
+  - {from: platform, to: connector, label: registers and pings}
+  - {from: coverage, to: platform, label: STIX bundle}
+  - {from: platform, to: scenario, label: builds}
+  - {from: scenario, to: coverage, label: results, style: dashed}

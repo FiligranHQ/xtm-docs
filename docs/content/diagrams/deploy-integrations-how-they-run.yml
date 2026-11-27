@@ -1,0 +1,28 @@
+title: How an integration exchanges data with its platform
+lanes:
+  - label: Integrations
+    tone: external
+    nodes:
+      - id: connector
+        label: Connector
+        icon: Puzzle
+        note: OpenCTI import, enrichment, stream, export
+      - id: aev-integration
+        label: Collector, injector
+        icon: Puzzle
+        note: OpenAEV, external ones
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: API at OPENCTI_URL}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: API at OPENAEV_URL}
+  - label: Queues
+    tone: store
+    nodes:
+      - {id: rabbitmq, label: RabbitMQ, icon: Server, note: One queue per integration}
+edges:
+  - {from: connector, to: opencti, label: register with token}
+  - {from: aev-integration, to: openaev, label: register with token}
+  - {from: connector, to: rabbitmq, label: push and listen}
+  - {from: aev-integration, to: rabbitmq, label: injectors listen, style: dashed}
+  - {from: opencti, to: rabbitmq, label: workers consume, style: dashed}

@@ -1,0 +1,39 @@
+{"hash": "2dd7cfbdc23ff0bd",
+"full": {
+  "width": 1556, "height": 183,
+  "lanes": [
+    {"x":16,"y":16,"w":688,"h":151,"header":{"x":28,"y":27,"w":78,"h":14}},
+    {"x":828,"y":24,"w":304,"h":136,"header":{"x":840,"y":35,"w":86.5,"h":14}},
+    {"x":1305,"y":39,"w":235,"h":106,"header":{"x":1317,"y":50,"w":124.1,"h":14}}
+  ],
+  "nodes": {
+    "settings": {"x":28,"y":52,"w":267,"h":103,"note":["CONNECTOR_METRICS_NAMESPACE","and","CONNECTOR_METRICS_SUBSYSTEM,","empty by default"]},
+    "connector": {"x":425,"y":74.5,"w":267,"h":58,"note":["For OpenCTI 6.8"]},
+    "metrics": {"x":840,"y":60,"w":280,"h":88,"note":["bundle_send becomes","bundles_sent_total, run_count becomes","runs_total"]},
+    "dashboards": {"x":1317,"y":75,"w":211,"h":58,"note":["Grafana, recording rules"]}
+  },
+  "edges": [
+    {"points":[[295,103.5],[425,103.5]],"label":{"x":315,"y":93,"w":90,"h":20}},
+    {"points":[[692,103.5],[840,103.5]],"label":{"x":737,"y":93,"w":58,"h":20}},
+    {"points":[[1120,104],[1317,104]],"label":{"x":1165,"y":93,"w":107,"h":20}}
+  ]
+},
+"mini": {
+  "width": 238, "height": 75,
+  "lanes": [
+    {"x":4,"y":17.5,"w":86,"h":40},
+    {"x":122,"y":17.5,"w":40,"h":40},
+    {"x":194,"y":17.5,"w":40,"h":40}
+  ],
+  "nodes": {
+    "settings": {"x":11,"y":24.5,"w":26,"h":26},
+    "connector": {"x":57,"y":24.5,"w":26,"h":26},
+    "metrics": {"x":129,"y":24.5,"w":26,"h":26},
+    "dashboards": {"x":201,"y":24.5,"w":26,"h":26}
+  },
+  "edges": [
+    {"points":[[37,37.5],[57,37.5]]},
+    {"points":[[83,37.5],[129,37.5]]},
+    {"points":[[155,37.5],[201,37.5]]}
+  ]
+}}

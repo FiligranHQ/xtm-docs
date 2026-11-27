@@ -1,0 +1,31 @@
+title: A connector's data goes through a RabbitMQ queue to a worker, which writes it through the platform API into Elasticsearch, and each change becomes a live stream event
+lanes:
+  - label: Source
+    tone: external
+    nodes:
+      - {id: connector, label: Connector, icon: Puzzle, note: Converts data to STIX 2.1}
+  - label: Queue
+    tone: store
+    nodes:
+      - {id: rabbitmq, label: RabbitMQ, icon: Layers, note: Push queue of the connector}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: worker, label: Worker, icon: Cpu, note: Takes messages from the queue}
+      - {id: platform, label: Platform API, icon: LogoOpenCTI, note: "Checks, merges and writes"}
+  - label: Stored
+    tone: store
+    nodes:
+      - {id: elasticsearch, label: Elasticsearch, icon: Search, note: Knowledge indices}
+      - {id: redis, label: Redis, icon: Activity, note: Live stream}
+  - label: Reacts
+    tone: external
+    nodes:
+      - {id: consumers, label: Stream readers, icon: Workflow, note: "Managers, stream connectors, live streams"}
+edges:
+  - {from: connector, to: rabbitmq, label: STIX bundle}
+  - {from: rabbitmq, to: worker, label: consume}
+  - {from: worker, to: platform, label: API call}
+  - {from: platform, to: elasticsearch, label: write}
+  - {from: platform, to: redis, label: change event}
+  - {from: redis, to: consumers, label: read events}

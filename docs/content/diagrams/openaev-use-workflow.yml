@@ -1,0 +1,32 @@
+title: A validation prepares the targets and the attack once, then builds, runs, reads and follows each scenario
+lanes:
+  - label: Prepare
+    tone: external
+    nodes:
+      - {id: targets, label: Targets, icon: Laptop, note: "Assets, agents, teams", href: /openaev/use/targets/}
+      - {id: arsenal, label: Threat Arsenal, icon: Crosshair, note: Actions and payloads, href: /openaev/use/threat-arsenal/}
+  - label: Build
+    tone: product
+    nodes:
+      - {id: scenario, label: Scenario, icon: Workflow, note: Injects and expectations, href: /openaev/concepts/scenarios-simulations/}
+  - label: Run
+    tone: product
+    nodes:
+      - {id: simulation, label: Simulation, icon: PlayCircle, note: One run of the scenario, href: /openaev/use/simulations/}
+      - {id: atomic, label: Atomic test, icon: Activity, note: One inject alone, href: /openaev/use/atomic-testing/}
+  - label: Read
+    tone: product
+    nodes:
+      - {id: results, label: Expectations, icon: ClipboardCheck, note: "Prevented, detected, answered", href: /openaev/concepts/injects-expectations/}
+  - label: Follow
+    tone: product
+    nodes:
+      - {id: dashboards, label: Dashboards, icon: Gauge, note: Trend over runs, href: /openaev/use/dashboards/}
+edges:
+  - {from: targets, to: scenario, label: targeted by}
+  - {from: arsenal, to: scenario, label: injects}
+  - {from: scenario, to: simulation, label: launch}
+  - {from: arsenal, to: atomic, label: test alone, style: dashed}
+  - {from: simulation, to: results, label: scored}
+  - {from: atomic, to: results, label: scored}
+  - {from: results, to: dashboards, label: aggregated}

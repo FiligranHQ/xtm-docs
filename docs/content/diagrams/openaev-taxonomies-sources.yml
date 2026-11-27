@@ -1,0 +1,24 @@
+title: The taxonomies of a tenant come from collectors and from your own entries, and classify what you build
+lanes:
+  - label: Sources
+    tone: external
+    nodes:
+      - {id: mitre, label: MITRE ATT&CK collector, icon: Puzzle, note: Attack patterns and phases}
+      - {id: admin, label: Administrator, icon: Users, note: "Tags, custom entries, CVEs"}
+  - label: Taxonomies
+    tone: product
+    nodes:
+      - {id: tags, label: Tags, icon: ListChecks, note: Filter and route}
+      - {id: patterns, label: Attack patterns, icon: Crosshair, note: Techniques by kill chain phase}
+      - {id: vulns, label: Vulnerabilities, icon: Bug, note: CVE identifiers}
+  - label: Used by
+    tone: core
+    nodes:
+      - {id: build, label: Scenarios and actions, icon: Workflow, note: "Injects, threat arsenal, assets"}
+edges:
+  - {from: mitre, to: patterns, label: imports}
+  - {from: admin, to: tags, label: creates}
+  - {from: admin, to: vulns, label: adds}
+  - {from: tags, to: build, label: classify}
+  - {from: patterns, to: build, label: classify}
+  - {from: vulns, to: build, label: classify}

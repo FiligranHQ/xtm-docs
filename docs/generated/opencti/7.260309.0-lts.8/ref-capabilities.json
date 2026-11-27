@@ -1,0 +1,614 @@
+{
+  "name": "capabilities",
+  "version": "7.260309.0-lts.8",
+  "source": "OpenCTI-Platform/opencti@22c7908 (opencti-platform/opencti-graphql/src/database/data-initialization.js)",
+  "intro": "The 55 capabilities a role can grant in OpenCTI 7.260309.0-lts.8, in the order of the role editor, with the top-level capabilities that have none under them gathered in the last table. A capability includes the capabilities it is indented under, not the ones indented under it: checking it in a role checks its parents. Create roles and give them to groups as [Roles and capabilities](/opencti/administer/roles/) explains.",
+  "filter": "Filter capabilities and API names",
+  "sections": [
+    {
+      "title": "Access knowledge",
+      "columns": [
+        "Capability",
+        "Allows",
+        "Name in the API"
+      ],
+      "rows": [
+        {
+          "key": "KNOWLEDGE",
+          "cells": [
+            "Access knowledge",
+            "Read the knowledge the user's markings and organizations allow",
+            "`KNOWLEDGE`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "KNOWLEDGE_KNPARTICIPATE",
+          "cells": [
+            "Access to collaborative creation",
+            "Create notes and opinions, and change their own",
+            "`KNOWLEDGE_KNPARTICIPATE`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNFRONTENDEXPORT",
+          "cells": [
+            "Can use web interface export functions (PDF, PNG, etc.)",
+            "Download widgets, graphs and views as images or PDF",
+            "`KNOWLEDGE_KNFRONTENDEXPORT`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE",
+          "cells": [
+            "Create / Update knowledge",
+            "Create entities and relationships and change existing ones",
+            "`KNOWLEDGE_KNUPDATE`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNORGARESTRICT",
+          "cells": [
+            "Restrict organization access",
+            "Share entities and relationships with organizations",
+            "`KNOWLEDGE_KNUPDATE_KNORGARESTRICT`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNDELETE",
+          "cells": [
+            "Delete knowledge",
+            "Delete entities and relationships. Also needed to validate a draft",
+            "`KNOWLEDGE_KNUPDATE_KNDELETE`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNMERGE",
+          "cells": [
+            "Merge knowledge",
+            "Merge entities",
+            "`KNOWLEDGE_KNUPDATE_KNMERGE`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNMANAGEAUTHMEMBERS",
+          "cells": [
+            "Manage authorized members",
+            "Restrict an object to some users, groups or organizations. See [Authorized members](/opencti/administer/sharing/)",
+            "`KNOWLEDGE_KNUPDATE_KNMANAGEAUTHMEMBERS`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNBYPASSREFERENCE",
+          "cells": [
+            "Bypass enforced reference",
+            "Skip the external reference that an entity type requires on changes",
+            "`KNOWLEDGE_KNUPDATE_KNBYPASSREFERENCE`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNBYPASSFIELDS",
+          "cells": [
+            "Bypass mandatory fields",
+            "Skip the custom mandatory fields of entity types",
+            "`KNOWLEDGE_KNUPDATE_KNBYPASSFIELDS`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNUPLOAD",
+          "cells": [
+            "Upload knowledge files",
+            "Upload files to entities",
+            "`KNOWLEDGE_KNUPLOAD`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNASKIMPORT",
+          "cells": [
+            "Import knowledge",
+            "Start the import of an uploaded file",
+            "`KNOWLEDGE_KNASKIMPORT`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNGETEXPORT",
+          "cells": [
+            "Download knowledge export",
+            "Download the exports of entities",
+            "`KNOWLEDGE_KNGETEXPORT`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNGETEXPORT_KNASKEXPORT",
+          "cells": [
+            "Generate knowledge export",
+            "Start the export of an entity",
+            "`KNOWLEDGE_KNGETEXPORT_KNASKEXPORT`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNENRICHMENT",
+          "cells": [
+            "Ask for knowledge enrichment",
+            "Start an enrichment of an entity",
+            "`KNOWLEDGE_KNENRICHMENT`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNDISSEMINATION",
+          "cells": [
+            "Disseminate files by email",
+            "Send a file to a dissemination list",
+            "`KNOWLEDGE_KNDISSEMINATION`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Access dashboards",
+      "columns": [
+        "Capability",
+        "Allows",
+        "Name in the API"
+      ],
+      "rows": [
+        {
+          "key": "EXPLORE",
+          "cells": [
+            "Access dashboards",
+            "Open the custom dashboards shared with the user",
+            "`EXPLORE`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "EXPLORE_EXUPDATE",
+          "cells": [
+            "Create / Update dashboards",
+            "Create and change custom dashboards",
+            "`EXPLORE_EXUPDATE`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "EXPLORE_EXUPDATE_EXDELETE",
+          "cells": [
+            "Delete dashboards",
+            "Delete custom dashboards",
+            "`EXPLORE_EXUPDATE_EXDELETE`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "EXPLORE_EXUPDATE_PUBLISH",
+          "cells": [
+            "Manage public dashboards",
+            "Publish dashboards to people without an account",
+            "`EXPLORE_EXUPDATE_PUBLISH`"
+          ],
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "title": "Access investigations",
+      "columns": [
+        "Capability",
+        "Allows",
+        "Name in the API"
+      ],
+      "rows": [
+        {
+          "key": "INVESTIGATION",
+          "cells": [
+            "Access investigations",
+            "Open the investigations shared with the user",
+            "`INVESTIGATION`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "INVESTIGATION_INUPDATE",
+          "cells": [
+            "Create / Update investigations",
+            "Create and change investigations",
+            "`INVESTIGATION_INUPDATE`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "INVESTIGATION_INUPDATE_INDELETE",
+          "cells": [
+            "Delete investigations",
+            "Delete investigations",
+            "`INVESTIGATION_INUPDATE_INDELETE`"
+          ],
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "title": "Access connectors",
+      "columns": [
+        "Capability",
+        "Allows",
+        "Name in the API"
+      ],
+      "rows": [
+        {
+          "key": "MODULES",
+          "cells": [
+            "Access connectors",
+            "See the connectors and their state",
+            "`MODULES`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "MODULES_MODMANAGE",
+          "cells": [
+            "Manage connector state",
+            "Reset the state of a connector, start or stop it, and delete it",
+            "`MODULES_MODMANAGE`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "API usage with authorization header",
+      "columns": [
+        "Capability",
+        "Allows",
+        "Name in the API"
+      ],
+      "rows": [
+        {
+          "key": "APIACCESS",
+          "cells": [
+            "API usage with authorization header",
+            "Parent of the two ways to call the API with an `Authorization` header. Without one of them, a user can only use the web interface",
+            "`APIACCESS`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "APIACCESS_USETOKEN",
+          "cells": [
+            "Allow token usage",
+            "Authenticate to the API with an API token",
+            "`APIACCESS_USETOKEN`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "APIACCESS_USEBASICAUTH",
+          "cells": [
+            "Allow basic auth usage",
+            "Authenticate to the API with a login and a password (basic authentication)",
+            "`APIACCESS_USEBASICAUTH`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Access data sharing",
+      "columns": [
+        "Capability",
+        "Allows",
+        "Name in the API"
+      ],
+      "rows": [
+        {
+          "key": "TAXIIAPI",
+          "cells": [
+            "Access data sharing",
+            "Use TAXII collections, CSV feeds and live streams",
+            "`TAXIIAPI`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "TAXIIAPI_SETCOLLECTIONS",
+          "cells": [
+            "Manage data sharing",
+            "Create and change TAXII collections, CSV feeds and live streams",
+            "`TAXIIAPI_SETCOLLECTIONS`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Access ingestion",
+      "columns": [
+        "Capability",
+        "Allows",
+        "Name in the API"
+      ],
+      "rows": [
+        {
+          "key": "INGESTION",
+          "cells": [
+            "Access ingestion",
+            "See the ingestion feeds: remote OpenCTI streams, TAXII, RSS, CSV and JSON feeds",
+            "`INGESTION`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "INGESTION_SETINGESTIONS",
+          "cells": [
+            "Manage ingestion",
+            "Create, change and delete these feeds",
+            "`INGESTION_SETINGESTIONS`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Use Playbooks",
+      "columns": [
+        "Capability",
+        "Allows",
+        "Name in the API"
+      ],
+      "rows": [
+        {
+          "key": "AUTOMATION",
+          "cells": [
+            "Use Playbooks",
+            "Enroll entities in playbooks",
+            "`AUTOMATION`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "AUTOMATION_AUTMANAGE",
+          "cells": [
+            "Manage Playbooks",
+            "Create, change and run playbooks",
+            "`AUTOMATION_AUTMANAGE`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Access PIR",
+      "columns": [
+        "Capability",
+        "Allows",
+        "Name in the API"
+      ],
+      "rows": [
+        {
+          "key": "PIRAPI",
+          "cells": [
+            "Access PIR",
+            "Open the priority intelligence requirements (PIR) shared with the user",
+            "`PIRAPI`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "PIRAPI_PIRUPDATE",
+          "cells": [
+            "Create / Update / Delete PIR",
+            "Manage PIRs and who can access them",
+            "`PIRAPI_PIRUPDATE`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Access to admin functionalities",
+      "columns": [
+        "Capability",
+        "Allows",
+        "Name in the API"
+      ],
+      "rows": [
+        {
+          "key": "SETTINGS",
+          "cells": [
+            "Access to admin functionalities",
+            "Open the settings",
+            "`SETTINGS`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "SETTINGS_SETPARAMETERS",
+          "cells": [
+            "Manage parameters",
+            "Change the platform parameters",
+            "`SETTINGS_SETPARAMETERS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SETACCESSES",
+          "cells": [
+            "Manage credentials",
+            "Manage users, groups, roles, organizations, sessions, policies, email templates and the SMTP configuration",
+            "`SETTINGS_SETACCESSES`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SETAUTH",
+          "cells": [
+            "Manage authentication",
+            "Manage login providers and the platform-wide login policies in **Authentications**",
+            "`SETTINGS_SETAUTH`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SETMARKINGS",
+          "cells": [
+            "Manage marking definitions",
+            "Create, change and delete marking definitions",
+            "`SETTINGS_SETMARKINGS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SETDISSEMINATION",
+          "cells": [
+            "Manage dissemination lists",
+            "Create, change and delete dissemination lists",
+            "`SETTINGS_SETDISSEMINATION`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SETCUSTOMIZATION",
+          "cells": [
+            "Manage customization",
+            "Customize entity types, attributes and the interface",
+            "`SETTINGS_SETCUSTOMIZATION`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SETLABELS",
+          "cells": [
+            "Manage labels",
+            "Create, change and delete labels",
+            "`SETTINGS_SETLABELS`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SETVOCABULARIES",
+          "cells": [
+            "Manage vocabularies",
+            "Create, change and delete vocabularies",
+            "`SETTINGS_SETVOCABULARIES`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SETCASETEMPLATES",
+          "cells": [
+            "Manage case templates",
+            "Create, change and delete case templates",
+            "`SETTINGS_SETCASETEMPLATES`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SETSTATUSTEMPLATES",
+          "cells": [
+            "Manage status templates",
+            "Create, change and delete status templates",
+            "`SETTINGS_SETSTATUSTEMPLATES`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SETKILLCHAINPHASES",
+          "cells": [
+            "Manage kill chain phases",
+            "Create, change and delete kill chain phases",
+            "`SETTINGS_SETKILLCHAINPHASES`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SETMANAGEXTMHUB",
+          "cells": [
+            "Manage XTM Hub",
+            "Register the platform with the XTM Hub",
+            "`SETTINGS_SETMANAGEXTMHUB`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SECURITYACTIVITY",
+          "cells": [
+            "Access security activity",
+            "Read the activity log",
+            "`SETTINGS_SECURITYACTIVITY`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_FILEINDEXING",
+          "cells": [
+            "Access to file indexing",
+            "Manage file indexing",
+            "`SETTINGS_FILEINDEXING`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "SETTINGS_SUPPORT",
+          "cells": [
+            "Access to support data",
+            "Generate and download support packages",
+            "`SETTINGS_SUPPORT`"
+          ],
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "title": "Other capabilities",
+      "columns": [
+        "Capability",
+        "Allows",
+        "Name in the API"
+      ],
+      "rows": [
+        {
+          "key": "BYPASS",
+          "cells": [
+            "Bypass all capabilities",
+            "Every capability, all data whatever its markings and organizations, and a maximum confidence level of 100. Give it to very few people",
+            "`BYPASS`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "CONNECTORAPI",
+          "cells": [
+            "Connectors API usage: register, ping, export push ...",
+            "What connectors need to register, report their state and push files",
+            "`CONNECTORAPI`"
+          ],
+          "depth": 0
+        },
+        {
+          "key": "CSVMAPPERS",
+          "cells": [
+            "Manage data mappers",
+            "Create, change and delete CSV and JSON mappers",
+            "`CSVMAPPERS`"
+          ],
+          "depth": 0
+        }
+      ]
+    }
+  ]
+}

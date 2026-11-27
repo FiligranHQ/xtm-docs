@@ -1,0 +1,27 @@
+title: An agent is made of shared resources, starts work from its assignments and from people, and every piece of work leaves a record
+lanes:
+  - label: What agents are made of
+    tone: product
+    nodes:
+      - {id: knowledge, label: Knowledge, icon: BookOpen, note: "Knowledge bases, memory", href: /xtm-one/build/knowledge-bases/}
+      - {id: instructions, label: Instructions, icon: FileText, note: "Prompts, skills, templates", href: /xtm-one/build/skills/}
+      - {id: tools, label: Tools and integrations, icon: Puzzle, note: "Integrations, MCP servers, tools", href: /xtm-one/build/integrations/}
+  - label: The agent
+    tone: core
+    nodes:
+      - {id: agent, label: Agent, icon: Bot, note: "Instructions, model, budget", href: /xtm-one/build/agents/}
+      - {id: assignment, label: Assignments, icon: Clock, note: "Trigger and task, inside the agent", href: /xtm-one/use/work-items/}
+  - label: What work leaves behind
+    tone: store
+    nodes:
+      - {id: conversation, label: Conversations, icon: MessageSquare, note: "Chats, grouped in workspaces", href: /xtm-one/use/chat/}
+      - {id: run, label: Runs, icon: History, note: "Operations > Executions", href: /xtm-one/use/work-history/}
+      - {id: items, label: Work items, icon: ListChecks, note: "Tracked across runs"}
+edges:
+  - {from: knowledge, to: agent, label: linked}
+  - {from: instructions, to: agent, label: linked}
+  - {from: tools, to: agent, label: linked}
+  - {from: agent, to: assignment, label: contains}
+  - {from: agent, to: conversation, label: answers in}
+  - {from: assignment, to: run, label: creates}
+  - {from: run, to: items, label: open and close, style: dashed}

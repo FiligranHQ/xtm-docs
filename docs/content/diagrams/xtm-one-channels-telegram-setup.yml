@@ -1,0 +1,17 @@
+title: A Telegram bot made with BotFather delivers its updates to XTM One once setWebhook registers the URL and the secret
+lanes:
+  - label: Telegram
+    tone: external
+    nodes:
+      - {id: botfather, label: BotFather, icon: Bot, note: "/newbot gives the token"}
+      - {id: botapi, label: Bot API, icon: Network, note: setWebhook}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: card, label: Telegram card, icon: KeyRound, note: "Token, webhook secret"}
+      - {id: agent, label: Agent, icon: Bot, note: Receive on}
+edges:
+  - {from: botfather, to: card, label: token}
+  - {from: card, to: botapi, label: "URL and secret", style: dashed}
+  - {from: botapi, to: card, label: updates}
+  - {from: card, to: agent, label: routed}

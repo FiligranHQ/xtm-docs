@@ -1,0 +1,24 @@
+title: The inject emails each player a link to the challenges page, the player submits a flag, and OpenAEV scores their expectation from the flags and the attempts left
+lanes:
+  - label: Components
+    tone: product
+    nodes:
+      - {id: challenge, label: Challenge, icon: Crosshair, note: "Content, documents, flags"}
+  - label: Scenario
+    tone: product
+    nodes:
+      - {id: inject, label: Publish challenges, icon: Clock, note: Scheduled inject}
+  - label: Players
+    tone: external
+    nodes:
+      - {id: player, label: Each player, icon: Users, note: Email with a link}
+      - {id: page, label: Challenges page, icon: Laptop, note: Submits a flag}
+  - label: Results
+    tone: product
+    nodes:
+      - {id: expectation, label: Expectation, icon: ClipboardCheck, note: "Met, or failed after the last attempt"}
+edges:
+  - {from: challenge, to: inject, label: selected}
+  - {from: inject, to: player, label: emails}
+  - {from: player, to: page, label: opens}
+  - {from: page, to: expectation, label: checked against the flags}

@@ -1,0 +1,23 @@
+title: XTM One reads its environment once at start, on the platform and on the worker; the Settings screens store the rest in its database
+lanes:
+  - label: What you edit
+    tone: external
+    nodes:
+      - {id: env, label: .env, icon: FileText, note: "XTM_ONE_* values of xtm-docker"}
+      - {id: override, label: docker-compose.override.yml, icon: Code2, note: "Every other variable"}
+      - {id: settings, label: Settings screens, icon: Wrench, note: "AI Models, Security, Parameters"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: platform, label: xtm-one, icon: LogoXTMOne, note: "Reads its environment at start"}
+      - {id: worker, label: xtm-one-worker, icon: Workflow, note: "Same URL, secret and license"}
+  - label: Stored
+    tone: store
+    nodes:
+      - {id: db, label: xtm_one database, icon: Layers, note: "Providers, options, encrypted keys"}
+edges:
+  - {from: env, to: platform, label: docker compose up -d}
+  - {from: override, to: platform, label: docker compose up -d}
+  - {from: env, to: worker, label: same values}
+  - {from: settings, to: db, label: saved}
+  - {from: db, to: platform, label: unless a variable locks, style: dashed}

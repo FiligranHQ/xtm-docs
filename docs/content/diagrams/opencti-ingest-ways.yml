@@ -1,0 +1,34 @@
+title: Connectors, feeds, live streams and TAXII pushes all turn their data into STIX bundles that wait in a queue until workers write them into OpenCTI
+lanes:
+  - label: Sources
+    tone: external
+    nodes:
+      - {id: vendors, label: Vendors and tools, icon: Server, note: APIs a connector reads}
+      - {id: urls, label: Feed URLs, icon: Network, note: "TAXII, RSS, CSV, JSON"}
+      - {id: remote, label: Another OpenCTI, icon: LogoOpenCTI, note: Live stream}
+      - {id: clients, label: TAXII clients, icon: ArrowUpRight, note: Push STIX 2.1}
+  - label: Import
+    tone: product
+    nodes:
+      - {id: connectors, label: Connectors, icon: Puzzle, note: Run beside the platform}
+      - {id: manager, label: Ingestion manager, icon: Clock, note: Polls the feeds}
+      - {id: sync, label: Sync manager, icon: ArrowLeftRight, note: Follows the stream}
+      - {id: push, label: TAXII Push endpoint, icon: LogIn, note: Accepts objects}
+  - label: Queue
+    tone: store
+    nodes:
+      - {id: queue, label: Queue, icon: Layers, note: One per connector or feed}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: workers, label: Workers, icon: Cpu, note: Write as the service account}
+edges:
+  - {from: vendors, to: connectors, label: fetch}
+  - {from: urls, to: manager, label: poll}
+  - {from: remote, to: sync, label: events}
+  - {from: clients, to: push, label: POST objects}
+  - {from: connectors, to: queue, label: STIX bundle}
+  - {from: manager, to: queue, label: STIX bundle}
+  - {from: sync, to: queue}
+  - {from: push, to: queue}
+  - {from: queue, to: workers, label: consume}

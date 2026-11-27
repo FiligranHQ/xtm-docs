@@ -1,0 +1,22 @@
+title: OpenAEV imports the active agents of your SentinelOne accounts, sites or groups, then asks Remote Ops to run your script, which starts the implant
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: executor, label: SentinelOne executor, icon: LogoOpenAEV, note: Runs inside the platform}
+      - {id: assets, label: Endpoints, icon: Server, note: "One per active agent"}
+  - label: SentinelOne
+    tone: external
+    nodes:
+      - {id: api, label: SentinelOne API, icon: ShieldCheck, note: "Agents, Remote Ops"}
+      - {id: script, label: Remote Ops script, icon: Code2, note: Decodes the command}
+  - label: Endpoint
+    tone: external
+    nodes:
+      - {id: implant, label: Implant, icon: Cpu, note: "Runs as SYSTEM or root"}
+edges:
+  - {from: executor, to: api, label: list agents}
+  - {from: executor, to: assets, label: imports}
+  - {from: api, to: script, label: runs}
+  - {from: script, to: implant, label: starts}
+  - {from: implant, to: assets, label: results, style: dashed}

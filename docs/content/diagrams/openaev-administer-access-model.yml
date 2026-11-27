@@ -1,0 +1,25 @@
+title: A user acts in a tenant through the roles of their groups, once they are a member of that tenant
+lanes:
+  - label: People
+    tone: external
+    nodes:
+      - {id: user, label: User, icon: Users, note: "One account, several tenants"}
+  - label: Platform scope
+    tone: core
+    nodes:
+      - {id: pgroup, label: Platform group, icon: Users, note: Counts in every tenant}
+      - {id: prole, label: Platform role, icon: KeyRound, note: "Tenants, platform settings"}
+  - label: Tenant scope
+    tone: product
+    nodes:
+      - {id: member, label: Tenant membership, icon: LogIn, note: Required to open a tenant}
+      - {id: tgroup, label: Tenant group, icon: Users, note: Counts in its tenant only}
+      - {id: trole, label: Tenant role, icon: KeyRound, note: "Scenarios, assets, settings"}
+      - {id: grant, label: Grant, icon: ShieldCheck, note: One scenario or simulation}
+edges:
+  - {from: user, to: pgroup, label: member of}
+  - {from: user, to: member, label: attached to}
+  - {from: user, to: tgroup, label: member of}
+  - {from: pgroup, to: prole, label: holds}
+  - {from: tgroup, to: trole, label: holds}
+  - {from: tgroup, to: grant, label: receives}

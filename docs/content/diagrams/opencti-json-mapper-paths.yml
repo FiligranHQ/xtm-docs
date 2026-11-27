@@ -1,0 +1,23 @@
+title: A JSON mapper finds items with a path, names them with an identifier, then links them
+lanes:
+  - label: JSON file
+    tone: external
+    nodes:
+      - {id: threats, label: "$.threats[*]", icon: FileText, note: One item per threat}
+      - {id: addresses, label: "$.threats[*].addresses[*]", icon: FileText, note: One item per address}
+  - label: Representations
+    tone: product
+    nodes:
+      - {id: set, label: Intrusion Set, icon: Crosshair, note: "Identifier $.name"}
+      - {id: ip, label: IPv4 address, icon: Network, note: "Identifier $.ip"}
+      - {id: rel, label: Relationship, icon: GitBranch, note: Matches identifiers}
+  - label: OpenCTI
+    tone: store
+    nodes:
+      - {id: bundle, label: STIX bundle, icon: Boxes, note: Objects and links}
+edges:
+  - {from: threats, to: set, label: entity path}
+  - {from: addresses, to: ip, label: entity path}
+  - {from: set, to: rel, label: to}
+  - {from: ip, to: rel, label: from}
+  - {from: rel, to: bundle, label: creates}

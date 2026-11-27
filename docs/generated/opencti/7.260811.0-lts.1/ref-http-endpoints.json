@@ -1,0 +1,600 @@
+{
+  "name": "http-endpoints",
+  "version": "7.260811.0-lts.1",
+  "source": "OpenCTI-Platform/opencti@c9f5ea5 (opencti-platform/opencti-graphql/src/http, graphql/sseMiddleware.js and every file that adds a route)",
+  "intro": "The 48 HTTP endpoints OpenCTI 7.260811.0-lts.1 serves, the GraphQL API included. Paths are relative to the base path (`app:base_path`, empty by default), except `/metrics` on the Prometheus port, and use the Express syntax: `:id` is one segment, `*file` the rest of the path. *Token or session* means an `Authorization: Bearer` header (an API token, or a JWT signed by OpenCTI or a trusted XTM platform), a Basic login or the cookie of a browser session; a rate limiter (`app:rate_protection`) applies to every request on the platform port, except WebSocket connections and the IPs and user agents its skip lists name. Share data through these endpoints as [Feeds, TAXII collections and streams](/opencti/use/share/feeds/) explains; probe the platform as [Health probes](/deploy/operate/health-probes/) explains.",
+  "filter": "Filter endpoints and paths",
+  "sections": [
+    {
+      "title": "GraphQL API",
+      "columns": [
+        "Method",
+        "Path",
+        "What it serves",
+        "Authentication",
+        "Capability or condition"
+      ],
+      "rows": [
+        {
+          "key": "POST /graphql",
+          "cells": [
+            "POST",
+            "`/graphql`",
+            "The GraphQL API: queries and mutations, and file uploads as multipart requests. Each operation checks its own capability; a few, such as login, need no authentication.",
+            "Optional token or session",
+            "Client IP in the allow list of the platform settings, when one is set (login operations stay reachable)"
+          ]
+        },
+        {
+          "key": "WebSocket /graphql",
+          "cells": [
+            "WebSocket",
+            "`/graphql`",
+            "GraphQL subscriptions (`graphql-ws` protocol).",
+            "Session",
+            ""
+          ]
+        },
+        {
+          "key": "GET /schema",
+          "cells": [
+            "GET",
+            "`/schema`",
+            "The GraphQL schema in SDL with the platform version, as JSON (cached one hour).",
+            "Token or session",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Authentication",
+      "columns": [
+        "Method",
+        "Path",
+        "What it serves",
+        "Authentication",
+        "Capability or condition"
+      ],
+      "rows": [
+        {
+          "key": "GET /auth/:provider",
+          "cells": [
+            "GET",
+            "`/auth/:provider`",
+            "Starts the login with an SSO provider (OpenID Connect, SAML, OAuth) configured on the platform, by its identifier.",
+            "Public (login flow)",
+            ""
+          ]
+        },
+        {
+          "key": "Any /auth/:provider/callback",
+          "cells": [
+            "Any",
+            "`/auth/:provider/callback`",
+            "Return address of an SSO provider: opens the session, checks the IP allow list, then redirects to the page the user came from.",
+            "Public (login flow)",
+            ""
+          ]
+        },
+        {
+          "key": "GET /auth/cert",
+          "cells": [
+            "GET",
+            "`/auth/cert`",
+            "Login with a client certificate (HTTPS with client certificate authentication enabled).",
+            "Public (login flow)",
+            ""
+          ]
+        },
+        {
+          "key": "GET /auth/headers",
+          "cells": [
+            "GET",
+            "`/auth/headers`",
+            "Login from the HTTP headers a trusted reverse proxy sets.",
+            "Public (login flow)",
+            ""
+          ]
+        },
+        {
+          "key": "GET /logout",
+          "cells": [
+            "GET",
+            "`/logout`",
+            "Closes the session, logs the logout, and logs out of the SSO provider too when it is set to log out remotely.",
+            "Session",
+            ""
+          ]
+        },
+        {
+          "key": "GET /xtm/auth/jwks",
+          "cells": [
+            "GET",
+            "`/xtm/auth/jwks`",
+            "The public keys (JWKS) the other XTM platforms use to verify the tokens OpenCTI signs for them.",
+            "Public",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Files",
+      "columns": [
+        "Method",
+        "Path",
+        "What it serves",
+        "Authentication",
+        "Capability or condition"
+      ],
+      "rows": [
+        {
+          "key": "GET /*/{uuid}/*embedded/*",
+          "cells": [
+            "GET",
+            "`/*/{uuid}/*embedded/*`",
+            "An image or file embedded in the content of an entity, by the entity id and the file name.",
+            "Token or session",
+            ""
+          ]
+        },
+        {
+          "key": "GET /storage/encrypted/*file",
+          "cells": [
+            "GET",
+            "`/storage/encrypted/*file`",
+            "Downloads a stored file inside a ZIP archive encrypted with the artifact password (`app:artifact_zip_password`).",
+            "Token or session",
+            ""
+          ]
+        },
+        {
+          "key": "GET /storage/get/*file",
+          "cells": [
+            "GET",
+            "`/storage/get/*file`",
+            "Downloads a stored file (import, export, attachment) and logs the download.",
+            "Token or session",
+            ""
+          ]
+        },
+        {
+          "key": "GET /storage/html/*file",
+          "cells": [
+            "GET",
+            "`/storage/html/*file`",
+            "Renders a stored Markdown file as HTML.",
+            "Token or session",
+            ""
+          ]
+        },
+        {
+          "key": "GET /storage/view/*file",
+          "cells": [
+            "GET",
+            "`/storage/view/*file`",
+            "Shows a stored file in the browser (sandboxed) and logs the read.",
+            "Token or session",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "TAXII 2.1 server",
+      "text": "The TAXII collections defined in Data sharing, and the TAXII ingestions that receive pushed objects; a request without authentication reaches a collection only when it is public.",
+      "columns": [
+        "Method",
+        "Path",
+        "What it serves",
+        "Authentication",
+        "Capability or condition"
+      ],
+      "rows": [
+        {
+          "key": "GET /taxii2/",
+          "cells": [
+            "GET",
+            "`/taxii2/`",
+            "TAXII discovery: the server title and its API root.",
+            "Token or session",
+            "Capability `TAXIIAPI`"
+          ]
+        },
+        {
+          "key": "GET /taxii2/root/",
+          "cells": [
+            "GET",
+            "`/taxii2/root/`",
+            "The API root: title, supported versions and maximum content length.",
+            "Token or session",
+            "Capability `TAXIIAPI`"
+          ]
+        },
+        {
+          "key": "GET /taxii2/root/collections/",
+          "cells": [
+            "GET",
+            "`/taxii2/root/collections/`",
+            "The TAXII collections the user can read.",
+            "Token or session",
+            "Capability `TAXIIAPI`"
+          ]
+        },
+        {
+          "key": "GET /taxii2/root/collections/:id/",
+          "cells": [
+            "GET",
+            "`/taxii2/root/collections/:id/`",
+            "One collection.",
+            "Token or session, none when the TAXII collection is public",
+            "Capability `TAXIIAPI`"
+          ]
+        },
+        {
+          "key": "GET /taxii2/root/collections/:id/manifest/",
+          "cells": [
+            "GET",
+            "`/taxii2/root/collections/:id/manifest/`",
+            "The manifest of the objects of a collection (`added_after`, `limit`, `next`, `match` parameters).",
+            "Token or session, none when the TAXII collection is public",
+            "Capability `TAXIIAPI`"
+          ]
+        },
+        {
+          "key": "GET /taxii2/root/collections/:id/objects/",
+          "cells": [
+            "GET",
+            "`/taxii2/root/collections/:id/objects/`",
+            "The STIX objects of a collection, as an envelope (`added_after`, `limit`, `next`, `match` parameters).",
+            "Token or session, none when the TAXII collection is public",
+            "Capability `TAXIIAPI`"
+          ]
+        },
+        {
+          "key": "POST /taxii2/root/collections/:id/objects/",
+          "cells": [
+            "POST",
+            "`/taxii2/root/collections/:id/objects/`",
+            "Pushes STIX objects into a TAXII ingestion of the platform (content type `application/taxii+json;version=2.1`); answers a status to follow.",
+            "Token or session",
+            "Capability `TAXIIAPI`"
+          ]
+        },
+        {
+          "key": "DELETE /taxii2/root/collections/:id/objects/:object_id/",
+          "cells": [
+            "DELETE",
+            "`/taxii2/root/collections/:id/objects/:object_id/`",
+            "Not supported: always answers an *Unsupported operation* error.",
+            "Public",
+            ""
+          ]
+        },
+        {
+          "key": "GET /taxii2/root/collections/:id/objects/:object_id/",
+          "cells": [
+            "GET",
+            "`/taxii2/root/collections/:id/objects/:object_id/`",
+            "One STIX object of a collection.",
+            "Token or session, none when the TAXII collection is public",
+            "Capability `TAXIIAPI`"
+          ]
+        },
+        {
+          "key": "GET /taxii2/root/collections/:id/objects/:object_id/versions/",
+          "cells": [
+            "GET",
+            "`/taxii2/root/collections/:id/objects/:object_id/versions/`",
+            "The versions of one object of a collection.",
+            "Token or session, none when the TAXII collection is public",
+            "Capability `TAXIIAPI`"
+          ]
+        },
+        {
+          "key": "GET /taxii2/root/status/:status_id/",
+          "cells": [
+            "GET",
+            "`/taxii2/root/status/:status_id/`",
+            "The processing status of objects pushed into a collection.",
+            "Token or session",
+            "Capability `TAXIIAPI`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Live streams",
+      "text": "Server-sent events (`text/event-stream`): the raw stream of the platform, the global stream `live` and the live streams defined in Data sharing.",
+      "columns": [
+        "Method",
+        "Path",
+        "What it serves",
+        "Authentication",
+        "Capability or condition"
+      ],
+      "rows": [
+        {
+          "key": "GET /stream",
+          "cells": [
+            "GET",
+            "`/stream`",
+            "The raw stream of every event of the platform (resume with the `from` parameter or the `Last-Event-ID` header).",
+            "Token or session",
+            "Capability `BYPASS`"
+          ]
+        },
+        {
+          "key": "GET /stream/:id",
+          "cells": [
+            "GET",
+            "`/stream/:id`",
+            "A live stream by its id, starting from a date or event id (`from`, `recover`, `no-dependencies` parameters); `live` is the global stream.",
+            "Token or session, none when the live stream is public",
+            "Capability `TAXIIAPI` and membership when the stream restricts its members, unless the stream is public; capability `BYPASS` for the global stream `live`"
+          ]
+        },
+        {
+          "key": "POST /stream/connection/:id",
+          "cells": [
+            "POST",
+            "`/stream/connection/:id`",
+            "Kept for compatibility: checks that a stream connection belongs to the user.",
+            "Token or session",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "CSV feeds",
+      "columns": [
+        "Method",
+        "Path",
+        "What it serves",
+        "Authentication",
+        "Capability or condition"
+      ],
+      "rows": [
+        {
+          "key": "GET /feeds/:id",
+          "cells": [
+            "GET",
+            "`/feeds/:id`",
+            "A CSV feed: the elements matching its filters over its rolling period.",
+            "Token or session, none when the feed is public",
+            "Capability `TAXIIAPI`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "AI chatbot",
+      "columns": [
+        "Method",
+        "Path",
+        "What it serves",
+        "Authentication",
+        "Capability or condition"
+      ],
+      "rows": [
+        {
+          "key": "POST /chatbot",
+          "cells": [
+            "POST",
+            "`/chatbot`",
+            "The chatbot of the platform, through the former proxy used when no XTM One token is configured.",
+            "Token or session",
+            "Enterprise Edition license; AI terms accepted in the platform settings"
+          ]
+        },
+        {
+          "key": "POST /chatbot/agent",
+          "cells": [
+            "POST",
+            "`/chatbot/agent`",
+            "Calls an XTM One agent and waits for its answer; with files (multipart), returns a STIX bundle.",
+            "Token or session",
+            "Enterprise Edition license; AI terms accepted in the platform settings"
+          ]
+        },
+        {
+          "key": "POST /chatbot/agent/stream",
+          "cells": [
+            "POST",
+            "`/chatbot/agent/stream`",
+            "Calls an XTM One agent and streams its answer (AI insights), cached for `ai:agents_refresh_timeout` minutes.",
+            "Token or session",
+            "Enterprise Edition license; AI terms accepted in the platform settings"
+          ]
+        },
+        {
+          "key": "GET /chatbot/agents",
+          "cells": [
+            "GET",
+            "`/chatbot/agents`",
+            "The XTM One agents available for an intent.",
+            "Token or session",
+            "Enterprise Edition license; AI terms accepted in the platform settings"
+          ]
+        },
+        {
+          "key": "GET /chatbot/config",
+          "cells": [
+            "GET",
+            "`/chatbot/config`",
+            "Whether XTM One is configured, and its address, for the interface.",
+            "Token or session",
+            ""
+          ]
+        },
+        {
+          "key": "GET /chatbot/files/:fileId/download",
+          "cells": [
+            "GET",
+            "`/chatbot/files/:fileId/download`",
+            "Streams an agent-generated file from XTM One back to the browser.",
+            "Token or session",
+            "Enterprise Edition license; AI terms accepted in the platform settings"
+          ]
+        },
+        {
+          "key": "POST /chatbot/messages",
+          "cells": [
+            "POST",
+            "`/chatbot/messages`",
+            "Proxies to XTM One Platform Chat API (streaming SSE).",
+            "Token or session",
+            "Enterprise Edition license; AI terms accepted in the platform settings"
+          ]
+        },
+        {
+          "key": "POST /chatbot/messages/steer",
+          "cells": [
+            "POST",
+            "`/chatbot/messages/steer`",
+            "Mid-run steering.",
+            "Token or session",
+            "Enterprise Edition license; AI terms accepted in the platform settings"
+          ]
+        },
+        {
+          "key": "GET /chatbot/sessions",
+          "cells": [
+            "GET",
+            "`/chatbot/sessions`",
+            "Lists the user's past conversations for the chatbot history menu.",
+            "Token or session",
+            "Enterprise Edition license; AI terms accepted in the platform settings"
+          ]
+        },
+        {
+          "key": "POST /chatbot/sessions",
+          "cells": [
+            "POST",
+            "`/chatbot/sessions`",
+            "Proxies to XTM One Platform Chat API to create/resume a conversation.",
+            "Token or session",
+            "Enterprise Edition license; AI terms accepted in the platform settings"
+          ]
+        },
+        {
+          "key": "DELETE /chatbot/sessions/:conversationId",
+          "cells": [
+            "DELETE",
+            "`/chatbot/sessions/:conversationId`",
+            "Removes a conversation from the chatbot history menu (archived upstream).",
+            "Token or session",
+            "Enterprise Edition license; AI terms accepted in the platform settings"
+          ]
+        },
+        {
+          "key": "POST /chatbot/upload",
+          "cells": [
+            "POST",
+            "`/chatbot/upload`",
+            "Uploads files to an existing XTM One conversation and returns file_ids.",
+            "Token or session",
+            "Enterprise Edition license; AI terms accepted in the platform settings"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Health and metrics",
+      "text": "`/health` answers on the platform port. The other endpoints of this table listen on a port of their own: `/metrics` once `app:telemetry:metrics:enabled` is `true` (its port, `app:telemetry:metrics:exporter_prometheus`, is 14269 by default), and the liveness probe, where the version has one, once `app:liveness_port` is set.",
+      "columns": [
+        "Method",
+        "Path",
+        "What it serves",
+        "Authentication",
+        "Capability or condition"
+      ],
+      "rows": [
+        {
+          "key": "GET /health",
+          "cells": [
+            "GET",
+            "`/health`",
+            "Health of the platform and of its dependencies: `200` when healthy, `503` otherwise.",
+            "Access key (`health_access_key` query parameter), none when `app:health_access_key` is `public`",
+            ""
+          ]
+        },
+        {
+          "key": "GET /health/liveness :app:liveness_port",
+          "cells": [
+            "GET",
+            "`/health/liveness` on the port `app:liveness_port`",
+            "Liveness probe: answers as soon as the process runs, before the platform is initialized.",
+            "Public",
+            ""
+          ]
+        },
+        {
+          "key": "GET /metrics :app:telemetry:metrics:exporter_prometheus",
+          "cells": [
+            "GET",
+            "`/metrics` on the port `app:telemetry:metrics:exporter_prometheus`",
+            "Prometheus metrics, served by the OpenTelemetry Prometheus exporter at its default path.",
+            "Public",
+            "`app:telemetry:metrics:enabled` is `true`; `app:telemetry:metrics:exporter_prometheus` is set"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Web interface and static files",
+      "columns": [
+        "Method",
+        "Path",
+        "What it serves",
+        "Authentication",
+        "Capability or condition"
+      ],
+      "rows": [
+        {
+          "key": "GET /assets",
+          "cells": [
+            "GET",
+            "`/assets`",
+            "Static files of the web interface (scripts, styles, images).",
+            "Public",
+            "`app:enabled_ui` is `true`"
+          ]
+        },
+        {
+          "key": "GET /maps/world.pmtiles",
+          "cells": [
+            "GET",
+            "`/maps/world.pmtiles`",
+            "The map tiles of the dashboards: the uploaded custom file, else the bundled one (range requests).",
+            "Public",
+            "`app:enabled_ui` is `true`"
+          ]
+        },
+        {
+          "key": "GET /robots.txt",
+          "cells": [
+            "GET",
+            "`/robots.txt`",
+            "Tells crawlers not to index any path.",
+            "Public",
+            ""
+          ]
+        },
+        {
+          "key": "GET *any",
+          "cells": [
+            "GET",
+            "`*any`",
+            "The web interface (`index.html`) for every other path.",
+            "Public",
+            ""
+          ]
+        }
+      ]
+    }
+  ]
+}
