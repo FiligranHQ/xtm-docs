@@ -44,7 +44,7 @@ Each OpenAEV user has one API token. Open the profile from the account menu at t
 
 ::screenshot{id=openaev-profile-api-access alt="The API access section of the OpenAEV profile: the Token key, the RENEW button, an example request to /api/exercises that passes the token in its Authorization header, and API specifications."}
 
-### Send a first request
+### Send a first request to OpenAEV
 
 Send the token in the `Authorization` header, with the `Bearer` scheme. A request with a token is stateless: OpenAEV keeps no session for it.
 
@@ -100,7 +100,7 @@ curl -s "$OPENAEV_URL/api/tenants/$GRAND_MERIDIAN_TENANT_ID/scenarios" \
 The scenario appears in the tenant's list, owned by the user of the token, ready for its injects.
 :::
 
-### Read the errors
+### Read the errors of OpenAEV
 
 | Code | Meaning |
 | --- | --- |
@@ -120,7 +120,7 @@ In XTM One, open **My Profile** from the user menu, then the **API Keys** tab, a
 
 A read-only key sends only `GET`, `HEAD` and `OPTIONS` requests: any other method is refused, even a `POST` that only searches. A key limited to agents reaches only the routes of those agents and their conversations. Its own **Requests per minute** and **Quota** count on top of the quotas of its user.
 
-### Send a first request
+### Send a first request to XTM One
 
 ```bash
 curl -s "$XTM_ONE_URL/api/v1/agents" \
@@ -129,7 +129,7 @@ curl -s "$XTM_ONE_URL/api/v1/agents" \
 
 The answer lists the agents the key's user can see: their own, those shared with them or their groups, and those of the company. The [XTM One API reference](/reference/xtm-one/api/) lists every route; your platform serves them with their fields at `/api/reference`, generated from the code of your version. To talk to an agent with an API key, create a conversation with `POST /api/v1/chat/conversations`, then send each message with `POST /api/v1/chat/conversations/{conversation_id}/messages`, which answers once the agent has replied. The routes under `/api/v1/web/chat`, which stream the answer as server-sent events to the chat screen, take a signed-in session only and refuse an API key with `403`: see [XTM One chat API](/develop/apis/chat/).
 
-### Read the errors
+### Read the errors of XTM One
 
 XTM One answers an error with a JSON body whose `detail` says why.
 

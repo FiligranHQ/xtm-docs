@@ -46,7 +46,7 @@ When XTM Composer serves OpenAEV alone, the key messages of this table appear at
 | `No credentials key provided!` | No key configured | Set `MANAGER__CREDENTIALS_KEY_FILEPATH` to the path of the key in the container, or `MANAGER__CREDENTIALS_KEY` |
 | `Failed to read credentials key file` | The file is not at that path | Check the volume that mounts the key and the path. In xtm-docker, the key is in the `rsakeys` volume, made by `rsa-key-generator` |
 | `Invalid private key format. Expected PKCS#8 PEM format` | The key is PKCS#1 (`BEGIN RSA PRIVATE KEY`), as older `openssl genrsa` versions write | Convert it, as below |
-| `Invalid daemon configuration` | `DAEMON__SELECTOR` has another value | Use `docker`, `podman`, `kubernetes`, `swarm` or `portainer` |
+| `Invalid daemon configuration` | `OPENCTI__DAEMON__SELECTOR` or `OPENAEV__DAEMON__SELECTOR` has another value | Use `docker`, `podman`, `kubernetes`, `swarm` or `portainer` |
 | `Missing swarm configuration`, `Missing portainer configuration` | The block of the selector is absent | Add the `daemon.swarm` or `daemon.portainer` block: see [Configure XTM Composer](/deploy/integrations/configure-composer/#the-container-engine) |
 | `Invalid portainer type configuration` | `daemon.portainer.env_type` is not `docker` | Set it to `docker`: XTM Composer deploys through Portainer on Docker environments only |
 | `Invalid log level`, `Invalid log format` | A logger value is misspelled | `trace`, `debug`, `info`, `warn` or `error`; `json` or `pretty` |
@@ -107,7 +107,7 @@ OpenAEV shows its own messages when you deploy from **Integrations** > **Catalog
 | `Kubernetes creation api error`, `Error creating swarm service` | The engine refused the workload, for the reason in the `error` field. XTM Composer 3.261120.0 and earlier named it after the instance as is, so the engine refused a name longer than 63 characters, as many OpenAEV integrations have | Upgrade XTM Composer to 3.261121.0 or later, which shortens such names. Otherwise, fix what the `error` field names |
 | `Cannot pull the workload image, deployment canceled` | The engine cannot pull the image in the `image` field, for the reason in the `error` field. XTM Composer deploys nothing and tries again at its next pass | See [The image cannot be pulled](#the-image-cannot-be-pulled) |
 | `Cannot pull the workload image, refresh canceled` | The same, after a change of the configuration of the integration. The previous container keeps running, with the previous configuration | See [The image cannot be pulled](#the-image-cannot-be-pulled). XTM Composer applies the change once the pull works |
-| `Error creating container` | Docker refused the container, for the reason in the `error` field, such as a network that does not exist | Set `DAEMON__DOCKER__NETWORK_MODE` to a network that `docker network ls` lists, such as `xtm_default` in xtm-docker |
+| `Error creating container` | Docker refused the container, for the reason in the `error` field, such as a network that does not exist | Set `OPENCTI__DAEMON__DOCKER__NETWORK_MODE` or `OPENAEV__DAEMON__DOCKER__NETWORK_MODE` to a network that `docker network ls` lists, such as `xtm_default` in xtm-docker |
 | `Cannot query the Docker API` | XTM Composer cannot use the Docker socket | Mount `/var/run/docker.sock` in its container, and check that the Docker daemon runs |
 | `Portainer error fetching containers`, `Error deploying the container` (Portainer) | Portainer refused the request: wrong `api`, `api_key`, `env_id` or `api_version`. The `error` field gives the answer of Portainer | Test the same request from where XTM Composer runs, as below |
 | `No Podman API socket found` | No Podman socket exists at the paths it checks | Enable the socket, then mount it at `/run/podman/podman.sock`: see [Install XTM Composer](/deploy/integrations/install-composer/) |
@@ -182,7 +182,7 @@ On Docker Swarm, the service follows the same rule: `docker service logs <name>`
 
 The usual causes:
 
-- The integration cannot reach the platform. It uses the URL XTM Composer uses, `OPENCTI__URL` or `OPENAEV__URL`, so it must run on a network where that URL resolves: set `DAEMON__DOCKER__NETWORK_MODE` to the network of the platform, `xtm_default` in xtm-docker.
+- The integration cannot reach the platform. It uses the URL XTM Composer uses, `OPENCTI__URL` or `OPENAEV__URL`, so it must run on a network where that URL resolves: set `OPENCTI__DAEMON__DOCKER__NETWORK_MODE` or `OPENAEV__DAEMON__DOCKER__NETWORK_MODE` to the network of the platform, `xtm_default` in xtm-docker.
 - The integration cannot reach RabbitMQ at the address the platform gives it. See [Networking](/deploy/integrations/manual/#networking).
 - A required setting of the integration is empty or wrong. Fix it with **Update**.
 

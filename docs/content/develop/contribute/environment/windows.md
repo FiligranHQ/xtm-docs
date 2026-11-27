@@ -99,7 +99,7 @@ OpenAEV builds with Maven and Node.js, which run natively on Windows. The reposi
    winget install Git.Git
    ```
 
-2. Install [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/) with the WSL 2 backend. Elasticsearch needs the `.wslconfig` setting of the previous section.
+2. Install [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/) with the WSL 2 backend. Elasticsearch needs the `.wslconfig` setting of [Set up WSL 2 for OpenCTI](#set-up-wsl-2-for-opencti).
 
 3. Install [nvm-windows](https://github.com/coreybutler/nvm-windows/releases), then Node.js 24 and Corepack:
 

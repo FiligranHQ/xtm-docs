@@ -3,11 +3,11 @@ lanes:
   - label: Before
     tone: external
     nodes:
-      - {id: backup, label: "1. Stop and back up", icon: History, note: "docker compose stop, then the volumes"}
+      - {id: backup, label: "1. Stop, back up", icon: History, note: "docker compose stop, then the volumes"}
   - label: Upgrade
     tone: product
     nodes:
-      - {id: files, label: "2. Get the new files", icon: GitBranch, note: "git pull, then clean .env"}
+      - {id: files, label: "2. Get new files", icon: GitBranch, note: "git pull, then clean .env"}
       - {id: start, label: "3. Pull and start", icon: Rocket, note: "The platforms migrate their data"}
   - label: After
     tone: product

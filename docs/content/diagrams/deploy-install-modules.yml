@@ -12,7 +12,7 @@ lanes:
     tone: product
     nodes:
       - {id: kept, label: Modules that ran, icon: Boxes, note: Recreated when their configuration changed}
-      - {id: new, label: Modules that did not run, icon: Boxes, note: "Created: OpenCTI, OpenAEV, XTM Composer..."}
+      - {id: new, label: New modules, icon: Boxes, note: "Created: OpenCTI, OpenAEV, XTM Composer..."}
   - label: Data
     tone: store
     nodes:

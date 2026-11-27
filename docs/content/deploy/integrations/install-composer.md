@@ -136,7 +136,7 @@ XTM Composer drives Podman through its API socket, rootful or rootless, with the
    sudo loginctl enable-linger "$USER"
    ```
 
-2. Create the key and the configuration as in the Docker tab, steps 1 to 3, with three changes. Write `podman` instead of `docker` in the two `DAEMON__SELECTOR` lines, and `PODMAN` instead of `DOCKER` in the two `NETWORK_MODE` lines. Check the network with `podman network inspect`.
+2. Create the key and the configuration as in the Docker tab, steps 1 to 3, with three changes. Write `podman` instead of `docker` in the `OPENCTI__DAEMON__SELECTOR` and `OPENAEV__DAEMON__SELECTOR` lines, and `PODMAN` instead of `DOCKER` in the two `NETWORK_MODE` lines. Check the network with `podman network inspect`.
 
 3. Start XTM Composer with the socket mounted at `/run/podman/podman.sock`, where it finds it without configuration. For a rootless Podman, run this as the same user and mount `/run/user/$(id -u)/podman/podman.sock` instead.
 

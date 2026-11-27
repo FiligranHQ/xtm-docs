@@ -7,7 +7,7 @@ lanes:
   - label: Services
     tone: external
     nodes:
-      - {id: services, label: Services that call the platforms, icon: Puzzle, note: "Worker, connectors, collectors, injectors, XTM Composer"}
+      - {id: services, label: Services calling the platforms, icon: Puzzle, note: "Worker, connectors, collectors, injectors, XTM Composer"}
   - label: Platforms
     tone: product
     nodes:

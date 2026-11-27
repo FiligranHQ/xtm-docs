@@ -184,7 +184,7 @@ Elasticsearch snapshots are incremental: each one stores only what changed since
 
 ## Restore the stack
 
-This restores a backup on an empty deployment: a new machine, or the same one after `docker compose down -v`.
+The restore puts a backup back on an empty deployment: a new machine, or the same one after `docker compose down -v`.
 
 :::warning[On an empty deployment only]
 Restore before the platforms ever start on the new deployment. A platform that starts on empty stores creates its own data, and the restore then fails or mixes the two.

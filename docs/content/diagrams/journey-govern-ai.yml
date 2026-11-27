@@ -11,11 +11,11 @@ lanes:
   - label: OpenCTI
     tone: product
     nodes:
-      - {id: opencti, label: Ask Ariane and AI Insights, icon: LogoOpenCTI, note: "Vertical cti", href: /xtm-one/use/in-opencti/}
+      - {id: opencti, label: "Ask Ariane, AI Insights", icon: LogoOpenCTI, note: "Vertical cti", href: /xtm-one/use/in-opencti/}
   - label: OpenAEV
     tone: product
     nodes:
-      - {id: openaev, label: AI features and attack paths, icon: LogoOpenAEV, note: "Vertical aev", href: /xtm-one/use/in-openaev/}
+      - {id: openaev, label: "AI features, attack paths", icon: LogoOpenAEV, note: "Vertical aev", href: /xtm-one/use/in-openaev/}
   - label: OpenCRQ
     tone: product
     nodes:

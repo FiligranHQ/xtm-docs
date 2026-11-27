@@ -195,7 +195,7 @@ An administrator can add providers in **Settings** > **AI and models** > **Model
 | Variable | Default | What it sets |
 | --- | --- | --- |
 | `LLM_PROVIDER_<NAME>_API_KEY` | None | The key of a provider. `<NAME>` is `OPENAI`, `ANTHROPIC`, `GEMINI`, `MISTRAL`, `AZURE_OPENAI`, `BEDROCK`, `OPENROUTER`, `OLLAMA`, `LITELLM`, `CUSTOM_OPENAI` or `FILIGRAN_GATEWAY`. The provider shows an **Env** badge and cannot be deleted from the screen: remove the variable and restart to remove it |
-| `LLM_PROVIDER_<NAME>_MODELS` | None | The models offered, comma-separated. Unset, XTM One leaves the list stored for the provider as it is. A provider with no list chats on its built-in model only while no other provider lists one. `FILIGRAN_GATEWAY` is the exception: see below |
+| `LLM_PROVIDER_<NAME>_MODELS` | None | The models offered, comma-separated. Unset, XTM One leaves the list stored for the provider as it is. A provider with no list chats on its built-in model only while no other provider lists one. `FILIGRAN_GATEWAY` is the exception: unset while no other provider offers a chat model, XTM One asks the gateway for its models at each start |
 | `LLM_PROVIDER_MODELS_EDITABLE` | `false` | `false`: the list of the variable is the catalog, rewritten at each start. `true`: it is a baseline that administrators can curate in **Models** |
 | `MODELS_ENV_PROVIDING_ONLY` | `false` | `true` refuses every change to providers from the screen and the API |
 | `DEFAULT_MODEL` | The first model configured | The default model of the agents, applied again at each start while a provider offers it |

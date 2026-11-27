@@ -61,11 +61,6 @@ You change a module or its documentation, and open a pull request.
 ::::split
 :::column
 The ways into OpenCTI differ in who drives the exchange. Your code pulls with the GraphQL API; a consumer listens to a live stream that sends every change, deletions included; a device downloads a feed on a schedule. Choosing the right one saves you polling, and saves your tools stale data.
-
-:::cards{cols=2}
-  ::card[What each way in is for, and how to pick one.]{icon=BookOpen title="APIs and integration options" href="/develop/apis/"}
-  ::card[Every change of the knowledge base, as it happens.]{icon=Activity title="Data streaming" href="/develop/apis/streams/"}
-:::
 :::
 :::column
 ::diagram{id=develop-apis}

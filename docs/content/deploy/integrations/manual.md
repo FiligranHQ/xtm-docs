@@ -75,7 +75,7 @@ This example runs the MITRE ATT&CK connector of OpenCTI in its own Compose proje
    chmod 600 .env
    ```
 
-   Replace `your-integration-token` with the token of the previous section.
+   Replace `your-integration-token` with the token of [Create a token](#create-a-token).
 
 2. Write `docker-compose.yml`. The `default` network is the one of the XTM stack, `xtm_default` with the default `COMPOSE_PROJECT_NAME=xtm`, so the integration reaches `opencti` and `rabbitmq` by name.
 

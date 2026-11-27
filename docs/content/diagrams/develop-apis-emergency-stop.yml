@@ -3,7 +3,7 @@ lanes:
   - label: Callers
     tone: external
     nodes:
-      - {id: user, label: A user or a script, icon: Terminal, note: "Session or fcp- API key"}
+      - {id: user, label: User or script, icon: Terminal, note: "Session or fcp- API key"}
       - {id: hook, label: Runbook or monitoring, icon: Activity, note: "xes- emergency token"}
   - label: /api/v1/panic
     tone: core

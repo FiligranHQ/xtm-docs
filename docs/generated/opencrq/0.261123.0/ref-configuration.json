@@ -341,6 +341,7 @@
     },
     {
       "title": "telemetry",
+      "text": "`TELEMETRY__USAGE__*` is the anonymous usage telemetry sent to Filigran, `TELEMETRY__OBSERVABILITY__*` the monitoring data sent to your own tools. The block is strict: a `TELEMETRY__*` variable the platform does not know, such as `TELEMETRY__TRACES__ENABLED` of earlier builds, stops the platform at boot with `Unrecognized key`. A transport switched off (its `ENABLED` at `false`) does not read its other settings, so an empty endpoint beside it still boots.",
       "columns": [
         "Environment variable",
         "Type",
@@ -350,13 +351,193 @@
       ],
       "rows": [
         {
-          "key": "telemetry",
+          "key": "telemetry.usage.enabled",
           "cells": [
-            "`TELEMETRY`",
-            "group of settings",
+            "`TELEMETRY__USAGE__ENABLED`",
+            "boolean",
+            "`true`",
+            "No",
+            "Turns the anonymous usage telemetry sent to Filigran on or off. With `false`, the platform makes no connection to Filigran's collector, and its startup log says `Anonymous usage telemetry is disabled by TELEMETRY__USAGE__ENABLED=false, nothing is sent`."
+          ]
+        },
+        {
+          "key": "telemetry.usage.tags",
+          "cells": [
+            "`TELEMETRY__USAGE__TAGS`",
+            "string",
+            "Empty",
+            "No",
+            "Comma-separated deployment tags (e.g. `saas,eu-west`) attached to anonymous usage telemetry as the `filigran.telemetry.tags` resource attribute. Normalized (trimmed, lowercased, deduplicated, sorted) before export. Empty by default: no tags attribute is exported."
+          ]
+        },
+        {
+          "key": "telemetry.observability.service_name",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__SERVICE_NAME`",
+            "string, not empty",
+            "`opencrq-platform`",
+            "No",
+            "Service name (`service.name`) of every OTLP signal and of the Prometheus endpoint, and the Pyroscope application name."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.traces.enabled",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__TRACES__ENABLED`",
+            "boolean",
+            "`false`",
+            "No",
+            "Enable or disable OpenTelemetry traces."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.traces.exporter",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__TRACES__EXPORTER`",
+            "string, not empty",
+            "",
+            "When `telemetry.observability.otlp.traces.enabled` is true",
+            "OTLP endpoint for exporting traces (e.g., `http://otel-collector:4317`)."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.metrics.enabled",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__METRICS__ENABLED`",
+            "boolean",
+            "`false`",
+            "No",
+            "Enable or disable the OTLP metrics push transport."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.metrics.exporter",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__METRICS__EXPORTER`",
+            "string, not empty",
+            "",
+            "When `telemetry.observability.otlp.metrics.enabled` is true",
+            "OTLP endpoint for exporting metrics (e.g., `http://otel-collector:4317`)."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.logs.enabled",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__LOGS__ENABLED`",
+            "boolean",
+            "`false`",
+            "No",
+            "Enable or disable OpenTelemetry logs."
+          ]
+        },
+        {
+          "key": "telemetry.observability.otlp.logs.exporter",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__OTLP__LOGS__EXPORTER`",
+            "string, not empty",
+            "",
+            "When `telemetry.observability.otlp.logs.enabled` is true",
+            "OTLP endpoint for exporting logs (e.g., `http://otel-collector:4317`)."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.enabled",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__ENABLED`",
+            "boolean",
+            "`false`",
+            "No",
+            "Enable or disable the Prometheus scrape endpoint."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.port",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__PORT`",
+            "integer, 1 to 65535",
+            "`14269`",
+            "No",
+            "Port the Prometheus scrape endpoint listens on."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.public_port",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__PUBLIC_PORT`",
+            "integer, 1 to 65535",
             "",
             "No",
-            "Two groups of settings. `TELEMETRY__USAGE__*` is the anonymous usage telemetry sent to Filigran. `TELEMETRY__USAGE__ENABLED` (default `true`) turns it off with `false`: the platform then never contacts Filigran's collector. `TELEMETRY__USAGE__TAGS` (empty by default) takes comma-separated deployment tags, such as `saas,eu-west`, exported as the `filigran.telemetry.tags` resource attribute. `TELEMETRY__OBSERVABILITY__*` is the monitoring data sent to your own tools, its variables named after that prefix. `SERVICE_NAME` (default `opencrq-platform`) is the service name of every OTLP signal and of the Prometheus endpoint, and the Pyroscope application name. `OTLP__TRACES__`, `OTLP__METRICS__` and `OTLP__LOGS__` each take `ENABLED` (default `false`) and `EXPORTER`, the OTLP endpoint (such as `http://otel-collector:4317`), required once the signal is on: traces are turned on with `TELEMETRY__OBSERVABILITY__OTLP__TRACES__ENABLED`. `PROMETHEUS__ENABLED` (default `false`) opens the scrape endpoint, with `PORT` (`14269`), `HOST` (`0.0.0.0`), `PUBLIC_PORT`, `COLLECT_TIMEOUT_MS` (`2500`), `ROUND_DEADLINE_MS` (`4500`, strictly above the timeout), `MIN_INTERVAL_MS` (`5000`) and `MAX_REPLY_BYTES` (`2097152`). `PYROSCOPE__ENABLED` (default `false`) sends profiles to `PYROSCOPE__SERVER_ADDRESS`, required once it is on. A transport switched off does not read its other settings. The block is strict: a `TELEMETRY__*` variable the platform does not know, such as `TELEMETRY__TRACES__ENABLED` of earlier builds, stops the platform at boot with `Unrecognized key`."
+            "Port the scrape endpoint is advertised on, when it is published under a different one."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.host",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__HOST`",
+            "string, not empty",
+            "`0.0.0.0`",
+            "No",
+            "Bind address of the scrape endpoint. Binding it to loopback makes it unreachable from outside the container while the application keeps serving."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.collect_timeout_ms",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__COLLECT_TIMEOUT_MS`",
+            "integer, at least 1",
+            "`2500`",
+            "No",
+            "Per-process bound on one collection. A process exceeding it is reported as a collection outcome rather than delaying the response."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.round_deadline_ms",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__ROUND_DEADLINE_MS`",
+            "integer, at least 1",
+            "`4500`",
+            "No",
+            "Bound on a whole collection round. Must be strictly above the per-process timeout, and is deliberately not a multiple of it so the two bounds stay distinguishable."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.min_interval_ms",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__MIN_INTERVAL_MS`",
+            "integer, at least 1",
+            "`5000`",
+            "No",
+            "Minimum interval between two collections. Requests arriving inside it are served the cached document, failures included."
+          ]
+        },
+        {
+          "key": "telemetry.observability.prometheus.max_reply_bytes",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PROMETHEUS__MAX_REPLY_BYTES`",
+            "integer, at least 1",
+            "`2097152`",
+            "No",
+            "Maximum size of one process's contribution. A larger one is refused and reported as a collection outcome."
+          ]
+        },
+        {
+          "key": "telemetry.observability.pyroscope.enabled",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PYROSCOPE__ENABLED`",
+            "boolean",
+            "`false`",
+            "No",
+            "Enable or disable Pyroscope profiling."
+          ]
+        },
+        {
+          "key": "telemetry.observability.pyroscope.server_address",
+          "cells": [
+            "`TELEMETRY__OBSERVABILITY__PYROSCOPE__SERVER_ADDRESS`",
+            "string, not empty",
+            "",
+            "When `telemetry.observability.pyroscope.enabled` is true",
+            "URL used by the App agent to send profiles (e.g. `http://pyroscope:4040` in the dev/prod Compose files)."
           ]
         }
       ]

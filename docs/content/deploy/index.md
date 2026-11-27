@@ -70,11 +70,6 @@ You move to a new release without surprise.
 ::::split
 :::column
 Connectors, collectors, injectors and executors are programs that run beside the platforms. XTM Composer, part of the stack, deploys them as containers: you pick an integration in the OpenCTI or OpenAEV interface, fill in its settings, and follow its status and logs there.
-
-:::cards{cols=2}
-  ::card[What runs beside the platforms, and how each part reaches them.]{icon=Puzzle title="How integrations run" href="/deploy/integrations/how-they-run/"}
-  ::card[From the catalog to a running integration.]{icon=Rocket title="Deploy a first integration" href="/deploy/integrations/quick-start/"}
-:::
 :::
 :::column
 ::screenshot{id=opencti-ingest-connectors-catalog alt="The connector catalog of OpenCTI, where an administrator picks an integration that XTM Composer deploys."}

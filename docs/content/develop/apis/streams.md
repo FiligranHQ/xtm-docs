@@ -83,9 +83,9 @@ The `data` of `create`, `update`, `delete` and `merge` events holds:
 | `type` | The type of change the platform recorded: `create`, `update`, `delete` or `merge` |
 | `scope` | `external` for knowledge. Internal objects are not sent |
 | `message` | A sentence for people, such as ``creates a Indicator `guest-wifi-velvet.example` `` |
-| `origin` | Who made the change, or why the stream sent the event (see below) |
+| `origin` | Who made the change, or why the stream sent the event ([The origin of an event](#the-origin-of-an-event)) |
 | `data` | The object as STIX 2.1, with the OpenCTI properties in the extension `extension-definition--ea279b3e-5c71-4632-ac08-831c66a786ba`: internal `id`, `type`, `created_at`, `updated_at`, `score`, `labels_ids`, `created_by_ref_id`... |
-| `context` | The details of an update or a merge: see below |
+| `context` | The details of an update or a merge: [Updates](#updates), [Merges](#merges) |
 | `event_id` | The ID the platform gave the change when it made it |
 
 :::warning

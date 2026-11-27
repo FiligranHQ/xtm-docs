@@ -47,7 +47,7 @@ Sophie reads what an agent is made of: the persona decides, the blocks enable. *
 
 ### Give it what it must know
 
-She creates the knowledge base **Grand Meridian security policies** with the incident response policy and the crisis communication playbook, turns on **Read-only content** so no agent changes them, and checks with **Test Search** that the question "When must a guest data breach be escalated to the crisis cell?" finds the escalation section. See [Give it your documents](/xtm-one/build/knowledge-bases/).
+Sophie creates the knowledge base **Grand Meridian security policies** with the incident response policy and the crisis communication playbook, turns on **Read-only content** so no agent changes them, and checks with **Test Search** that the question "When must a guest data breach be escalated to the crisis cell?" finds the escalation section. See [Give it your documents](/xtm-one/build/knowledge-bases/).
 
 She then checks the integrations: the registered OpenCTI is there already, **Managed by the platform**, with its read tools and its write tools listed apart. See [Connect it to OpenCTI](/xtm-one/build/integrations/).
 
@@ -61,7 +61,7 @@ In the chat, she asks "What is new on Velvet Harbor since 1 April 2026?". The an
 
 ### Hand it to the team
 
-She shares the agent with the **CTI team** group, **Read only**: Camille finds it in her **Agents** list and chats with it, and reads OpenCTI with her own rights, not Sophie's: a platform-managed integration lends no credential. See [Share it with the team](/xtm-one/build/sharing/).
+Sophie shares the agent with the **CTI team** group, **Read only**: Camille finds it in her **Agents** list and chats with it, and reads OpenCTI with her own rights, not Sophie's: a platform-managed integration lends no credential. See [Share it with the team](/xtm-one/build/sharing/).
 
 Then the agent gets its work. The assignment **Weekly Velvet Harbor brief** runs every Monday at 06:00 UTC, before the team's meeting. A second assignment, **SOAR case to CTI brief**, has a webhook trigger: the SOAR posts each case where the EDR blocked a PowerShell loader on a front-desk workstation, with the secret kept in its credential store. Both run as Sophie, the agent's owner, so they read OpenCTI with her rights. See [Start it from another tool](/xtm-one/use/webhook-triggers/).
 
