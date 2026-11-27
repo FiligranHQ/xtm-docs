@@ -173,7 +173,7 @@ The option appears only when the conversation's agent answers on that app and th
 While an agent works on a long request, a small game appears under the conversation, or in a corner of the window that shows the agent's reasoning; **Take control** opens it. Your answer comes first: a banner tells you when it is ready. An administrator can turn the game off with `ARCADE_ENABLED`, see the [configuration reference](/reference/xtm-one/configuration/).
 
 :::example[Get the context of a night-shift alert in two voices]
-At 02:40 on 12 April 2026, Paul Garnier, SOC analyst on the night shift at Grand Meridian Hotels, sees an EDR alert on a front-desk workstation of the Paris hotel: `powershell.exe` started by `outlook.exe`. He opens :menu[Chat], chooses **Night shift triage**, clicks **New conversation**, attaches the alert export `edr-alert-PAR-FD-03.json` with the paperclip, and writes:
+At 02:40 on 12 April 2026, Paul Garnier, SOC analyst on the night shift at Grand Meridian Hotels, sees an EDR alert on a front-desk workstation of the Paris hotel: `powershell.exe` started by `outlook.exe`. He opens :menu[Chat], chooses the agent `Night shift triage`, clicks **New conversation**, attaches the alert export `edr-alert-PAR-FD-03.json` with the paperclip, and writes:
 
 > Does this match what Velvet Harbor did in January? @velvet-harbor-watcher add what the CTI team knows about their loader.
 

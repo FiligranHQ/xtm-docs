@@ -63,7 +63,7 @@ The registered OpenCTI integration is managed by the platform: every call carrie
 :::steps
 1. On the agent's page, open **Configuration**, then **Tooling**.
 2. In the **Integrations** card, click **Edit**. **OpenCTI - Cyber Threat Intelligence Platform** is marked as bound.
-3. Click **All tools** under it. The **Tool Scope — OpenCTI - Cyber Threat Intelligence Platform** dialog lists every tool of the integration.
+3. Click **All tools** under it. The **Tool Scope: OpenCTI - Cyber Threat Intelligence Platform** dialog lists every tool of the integration.
 4. Click **None**, then type `search_opencti` in **Search tools…** and click **Select matching**. Do the same with `get_opencti` and `list_opencti`, so only the tools that search, get and list stay selected.
 5. Click **Apply**, then **Save** in the card. The button under the integration now reads the number of tools selected.
 :::

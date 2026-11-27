@@ -79,7 +79,7 @@ Whitelist entries are phone numbers for direct conversations and group identifie
 
 WhatsApp gives a phone number, not an email, so XTM One cannot match a sender to an account by itself. Without a match, the sender is served anonymously when **Allow anonymous users** is on, and otherwise reads that their account could not be identified.
 
-To let a colleague use an agent with their own access, an administrator links their WhatsApp number to their XTM One account once, through the API, with an API key from :menu[My Profile] > **API Keys**. The number is written as WhatsApp sends it: country code and number, digits only. The same call links a Telegram user ID (`telegram`) or a Discord user ID (`discord`).
+To let a colleague use an agent with their own access, an administrator links their WhatsApp number to their XTM One account once, through the API, with an API key from the **API Keys** tab of **My Profile** (the user menu, at the top right). The number is written as WhatsApp sends it: country code and number, digits only. The same call links a Telegram user ID (`telegram`) or a Discord user ID (`discord`).
 
 ```bash
 curl -X POST "https://xtm-one.grand-meridian.example/api/v1/users/$PAUL_USER_ID/channel-identities" \

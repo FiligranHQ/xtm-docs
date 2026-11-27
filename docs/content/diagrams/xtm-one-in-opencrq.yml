@@ -18,6 +18,6 @@ edges:
   - {from: panel, to: opencrq, label: your message}
   - {from: opencrq, to: agents, label: message and token}
   - {from: agents, to: panel, label: asks your approval, style: dashed}
-  - {from: agents, to: opencrq, label: reads and writes as you, style: dashed}
+  - {from: agents, to: opencrq, label: acts as you, style: dashed}
   - {from: clients, to: mcp, label: personal API key}
   - {from: mcp, to: opencrq, label: calls as you, style: dashed}

@@ -14,4 +14,4 @@ edges:
   - {from: env, to: platform, label: at startup}
   - {from: screens, to: db, label: saved}
   - {from: db, to: platform, label: read when used}
-  - {from: env, to: db, label: "wins and locks the field", style: dashed}
+  - {from: env, to: db, label: overrides and locks, style: dashed}

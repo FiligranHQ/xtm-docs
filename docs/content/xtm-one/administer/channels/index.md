@@ -72,7 +72,7 @@ They are separate on purpose: an agent can post a daily summary to a channel wit
 
 Several agents can share one bot. For each message, XTM One looks for the agent in this order:
 
-1. In a direct message, the agent the sender chose for that app in :menu[My Profile] > **Channels & Bots** > **External Channels**.
+1. In a direct message, the agent the sender chose for that app in **My Profile** (the user menu), on the **Channels & Bots** tab, under **External Channels**.
 2. An agent the sender can use (their own, shared with their group, or company-managed) with **Receive** on for that app and allowed in that channel.
 3. Any enabled agent with **Receive** on for that app and allowed in that channel: an agent an administrator set up answers everyone.
 4. The General Assistant, when it is turned on for that app. Otherwise the message gets no answer.

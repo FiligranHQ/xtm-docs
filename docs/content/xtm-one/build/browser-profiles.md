@@ -57,7 +57,7 @@ On the agent's page, open **Configuration**, then the **Tooling** section. With 
 - A run opens a profile only for a person who may use it: its owner, the people and groups it is shared with, or everyone for a company-wide profile. An administrator's role does not widen that, and a run that acts for nobody opens none. See [Share agents and resources](/xtm-one/build/sharing/).
 - When the agent's session closes, or after five idle minutes, XTM One saves the refreshed session if it still opens the application.
 
-Every time an agent opens a profile, the audit log records it with the agent and the person it acted for. Your own General Assistant uses the profiles you choose under :menu[My profile > General Assistant Tools], once its **Browser** tool is on.
+Every time an agent opens a profile, the audit log records it with the agent and the person it acted for. Your own General Assistant uses the profiles you choose under **General Assistant Tools** in **My Profile** (the user menu), once its **Browser** tool is on.
 
 :::example[Let the night shift agent read the booking back office]
 Paul Garnier, on the SOC night shift, checks whether a guest record was viewed from an unusual account, as Velvet Harbor did on 9 January 2026. Sophie Laurent, the AI engineer, gives **Night shift triage** read access to the booking back office:

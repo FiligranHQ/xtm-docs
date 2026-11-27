@@ -29,7 +29,7 @@ A tool is an action an agent can take beyond writing text: fetch a web page, run
 | **Design** | Find a [template](/xtm-one/build/templates/) and read its layouts and assets, write one from a conversation, and read the exact palette and typefaces of a PDF, a PowerPoint file or an HTML page. |
 | **Code Interpreter** | Run Python in a sandbox for calculations and charts. Off by default on XTM One: an administrator turns off **Disable the code interpreter** in :menu[Administration > Settings > Access and security > Security options]. |
 | **Threat Intelligence** | Check the structure and references of a STIX 2.1 bundle before it is imported, compare two bundles, analyse a timeline, and run statistical tests and FIMI metrics, each result with its formula. |
-| **STIX Extraction** | Turn threat reports, attached or pasted, into one STIX 2.1 bundle in OpenCTI's ontology. Each entity, relationship, indicator and ATT&CK technique is tied to the sentence that states it. Off by default, and not part of **Threat Intelligence**: see below. |
+| **STIX Extraction** | Turn threat reports, attached or pasted, into one STIX 2.1 bundle in OpenCTI's ontology. Each entity, relationship, indicator and ATT&CK technique is tied to the sentence that states it. Off by default, and not part of **Threat Intelligence**. |
 | **Coordination** | Coordinate agents across runs: a shared work queue, a key-value store, a large working corpus. |
 | **Traces** | Read the agent's own traces, to review how its runs went. It also reads other agents' traces: for an administrator, those of any agent they can see; for anyone else, those of the agents listed in its **Trace supervision allow-list**, which shows under the card while you edit it. |
 | **User Administration** | Administer accounts and groups as :menu[Administration > Users and groups] does: list and read accounts, disable them and enable them again, add and remove group members, and work the deactivation review. Only an administrator adds it to an agent, and its functions are offered only when the agent acts for an administrator. |
@@ -101,7 +101,7 @@ The tool's page has four tabs:
 
 - **Overview**: its description, language, timeout, parameters and **Agents Using**.
 - **Configuration**: everything above, plus the sharing and **Hide from chat**, which keeps the tool out of the chat's tool picker while agents can still use it.
-- **Tests**: the tests the tool declares, and their last run (see below).
+- **Tests**: the tests the tool declares, and their last run (see [Declare the tests a tool must pass](#declare-the-tests-a-tool-must-pass)).
 - **Activity**: the runs of the agents that use it, in a table (**Run**, **Status**, **Type**, **Agent**, **Started**, **Duration**). Filter them by status on the toolbar or search them, and click a row to open the run.
 
 ### Declare the tests a tool must pass

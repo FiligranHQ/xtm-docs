@@ -198,8 +198,8 @@ The link works the other way too: once OpenCTI is registered, people start from 
 
 OpenCTI's decay lowers the score of an indicator over time, and revokes the indicator at the revoke score of its decay rule: see [Age indicators with decay rules](/opencti/configure/decay/). Some indicators reach it while their observable is still malicious. Two built-in agents of XTM One check every indicator about to be revoked:
 
-- **Indicator Decay Guardian** lists the indicators that are not revoked and that decay revokes within 48 hours, enriches their observables with the threat intelligence integrations it is given, and applies the verdicts. It never decides on its own.
-- **Indicator Decay Judge** decides, from the enrichment evidence alone, whether each observable is still malicious, with a confidence from 0 to 100. It runs on the routing model of XTM One and has no tools.
+- `Indicator Decay Guardian` lists the indicators that are not revoked and that decay revokes within 48 hours, enriches their observables with the threat intelligence integrations it is given, and applies the verdicts. It never decides on its own.
+- `Indicator Decay Judge` decides, from the enrichment evidence alone, whether each observable is still malicious, with a confidence from 0 to 100. It runs on the routing model of XTM One and has no tools.
 
 | Verdict of the judge | What changes in OpenCTI |
 | --- | --- |
@@ -213,7 +213,7 @@ An XTM One administrator sets it up:
 
 :::steps
 1. Set the **Routing Model** in **Administration** > **Settings** > **AI and models** > **Models**. Without one, the judge runs on the default model.
-2. Open the agent **Indicator Decay Guardian**, its **Configuration** tab, and bind the threat intelligence integrations it queries, such as VirusTotal, GreyNoise, AbuseIPDB, Shodan or urlscan.io. It enriches with these integrations, not with the enrichment connectors of OpenCTI.
+2. Open the agent `Indicator Decay Guardian`, its **Configuration** tab, and bind the threat intelligence integrations it queries, such as VirusTotal, GreyNoise, AbuseIPDB, Shodan or urlscan.io. It enriches with these integrations, not with the enrichment connectors of OpenCTI.
 3. Run the assignment **Re-check indicators about to decay**, listed on the **Overview** tab of the agent. It runs as you, with your OpenCTI rights, and changes the score of shared indicators.
 4. To run it every hour, open the assignment **Hourly indicator decay re-check**, choose the account it acts as in **Run As**, then turn it on. It is off on a new installation, and stays as you leave it.
 :::

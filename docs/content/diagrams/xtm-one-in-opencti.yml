@@ -24,6 +24,6 @@ edges:
   - {from: playbooks, to: opencti, label: as Run as}
   - {from: opencti, to: agents, label: task and token}
   - {from: agents, to: models, label: prompts}
-  - {from: agents, to: opencti, label: reads and writes as you, style: dashed}
+  - {from: agents, to: opencti, label: acts as you, style: dashed}
   - {from: clients, to: mcp, label: personal API key}
   - {from: mcp, to: opencti, label: calls as you, style: dashed}

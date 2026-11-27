@@ -10,7 +10,7 @@ migrated_from:
   - xtm-one:/usage/resources/runners/
 ---
 
-A runner lets an AI agent act on a real computer: take a genuine full-desktop screenshot as audit evidence, run a command, read and write files, or drive a browser you already signed in to. The runner comes inside **XTM One Desktop**, the native XTM One app for Windows, macOS and Linux, which also gives you your chats in a window of their own. On servers and virtual machines, the headless runner does the same work without a window. This page enrolls a machine, sets what agents may do on it, and gives an agent the machines it may reach.
+A runner lets an AI agent act on a real computer: take a genuine full-desktop screenshot as audit evidence, run a command, read and write files, or drive a browser you already signed in to. The runner comes inside XTM One Desktop, the native XTM One app for Windows, macOS and Linux, which also gives you your chats in a window of their own. On servers and virtual machines, the headless runner does the same work without a window. This page enrolls a machine, sets what agents may do on it, and gives an agent the machines it may reach.
 
 ::diagram{id=xtm-one-build-runners-machine}
 
@@ -19,13 +19,13 @@ A runner connects out to XTM One and pulls the commands sent to its machine. XTM
 ## Before you start
 
 - Runners are on by default. A platform engineer can remove them with `RUNNERS_ENABLED=false`, or cap the machines per user and the commands running at once on one machine: see the [Runners and XTM One Desktop section of the configuration reference](/reference/xtm-one/configuration/#runners-and-xtm-one-desktop).
-- Everything starts on the **XTM One Desktop** page: open the user menu and choose **Get XTM One Desktop** (**My machines** inside the app).
+- Everything starts on the XTM One Desktop page: open the user menu and choose **Get XTM One Desktop** (**My machines** inside the app).
 - The agent that will use the machine needs the **Computer Use (Runners)** built-in tool, and agents need the Enterprise Edition with AI switched on.
 
 ## Enroll a machine
 
 :::steps
-1. On the **XTM One Desktop** page, under **Connect a machine**, click **New enrollment key**.
+1. On the XTM One Desktop page, under **Connect a machine**, click **New enrollment key**.
 
    ::screenshot{id=xtm-one-build-runners-desktop alt="The Connect a machine form of the XTM One Desktop page with the key name SOC jump host: the Desktop (recommended), Locked down and Custom permissions, and the Shell commands need approval and Reusable fleet key switches."}
 2. Enter a **Key name**, and choose the permissions the machine starts with:
@@ -45,7 +45,7 @@ On macOS, the system asks for **Screen Recording** and **Accessibility** permiss
 
 ## Decide what agents may do on the machine
 
-Each machine has its own permissions, on its card of the **XTM One Desktop** page (**Edit permissions**).
+Each machine has its own permissions, on its card of the XTM One Desktop page (**Edit permissions**).
 
 <!-- shot: xtm-one-build-runners-permissions -->
 
@@ -55,7 +55,7 @@ Each machine has its own permissions, on its card of the **XTM One Desktop** pag
 - For shell commands, in **Restricted** mode:
   - **Allowed shell commands**: a command that matches one of them runs at once. With approval off, only these commands run at all.
   - **Blocked shell commands**: a command containing one of these words is always refused. The block list wins over the allow list.
-  - **Require approval for shell commands**: any other command waits for a person, in the chat when it was asked from XTM One Desktop, otherwise on the **XTM One Desktop** page. **Approve & always allow** and **Reject & always block** add the command to the matching list, so it never asks again.
+  - **Require approval for shell commands**: any other command waits for a person, in the chat when it was asked from XTM One Desktop, otherwise on the XTM One Desktop page. **Approve & always allow** and **Reject & always block** add the command to the matching list, so it never asks again.
 - **Allowed paths**: file operations stay under these folders. Empty means no path restriction.
 
 Revoking a machine (**Revoke runner**) cuts it off at once: its credential stops working, its queued commands end and its connection closes. Revoke a machine as soon as it is decommissioned. Uninstalling the app does not revoke it.
@@ -83,14 +83,14 @@ Background jobs need a runner of version 1.261103.10467 or later. An older runne
 
 To stop a shell command from the chat, click **Stop** on its card while it runs, or while its background job runs. A background job asks first (**Stop this job?**). The machine ends the command and every process it started, and the output printed until then stays readable. The card then reads **Stopped by you**, or the name of the person who stopped it, and the agent is told not to run the command again. You can stop a command that runs for you, or any command on a machine you manage.
 
-To see every job a machine holds, expand the machine's card on the **XTM One Desktop** page and read **Background jobs**. Running jobs come first, each with its command, its state (**Running**, **Stopped**, **Exited** with the exit code), the size of its output and when it started. Click **Stop** on a running job to end it.
+To see every job a machine holds, expand the machine's card on the XTM One Desktop page and read **Background jobs**. Running jobs come first, each with its command, its state (**Running**, **Stopped**, **Exited** with the exit code), the size of its output and when it started. Click **Stop** on a running job to end it.
 
 The list is asked to the machine itself when the card opens, and again when you click **Refresh**: it is not refreshed on its own, and each read is a command recorded on the machine. When the machine is offline, busy, has **Shell Commands** off or does not answer within 10 seconds, the section says so instead. Only people who manage the machine see this section.
 
 :::example[Let the triage agent check the SOC jump host]
 At night, Paul Garnier often asks **Night shift triage** whether the SOC jump host `soc-jump-01` saw the logins named in an alert. Sophie Laurent enrolls the server and gives the agent access to it, and to nothing else.
 
-On the **XTM One Desktop** page, **New enrollment key**:
+On the XTM One Desktop page, **New enrollment key**:
 
 - **Key name**: `SOC jump host`
 - **Custom**, mode **Restricted**, capabilities **Shell Commands** and **File Operations**

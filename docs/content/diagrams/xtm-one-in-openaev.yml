@@ -18,6 +18,6 @@ edges:
   - {from: features, to: openaev, label: your request}
   - {from: openaev, to: agents, label: request and token}
   - {from: agents, to: features, label: asks your approval, style: dashed}
-  - {from: agents, to: openaev, label: reads and writes as you, style: dashed}
+  - {from: agents, to: openaev, label: acts as you, style: dashed}
   - {from: clients, to: mcp, label: personal API key}
   - {from: mcp, to: openaev, label: calls as you, style: dashed}

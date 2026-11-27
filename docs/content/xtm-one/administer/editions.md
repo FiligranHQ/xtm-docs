@@ -35,7 +35,7 @@ XTM One is one platform with two editions, and every deployment contains all of 
 | The exposure briefing and the AI assessments of each CTEM stage | No | Yes |
 | Agentic capacity | None | The included allowance, or the license's capacity |
 
-There is nothing in between: the Enterprise Edition from a connected platform and the Enterprise Edition from a license unlock the same capabilities. They differ only in their capacity, described below.
+There is nothing in between: the Enterprise Edition from a connected platform and the Enterprise Edition from a license unlock the same capabilities. They differ only in their capacity, described in [What a license carries](#what-a-license-carries) and [The included allowance](#the-included-allowance).
 
 In the Community Edition, the locked areas stay in the menu with a lock, and hovering one says why. A creation button opens **Activate Enterprise Edition to unlock AI**, which lists the two ways to activate it with **Start free trial** and **Contact sales**. **Fleets** opens on a notice that fleets need the agentic AI license: the fleets are kept, and listed again once the Enterprise Edition is back. **Value** opens on "Value is part of Enterprise Edition." with the same two buttons. Both stay open when the Enterprise Edition is active and an administrator switches AI off. Everything else that exists stays readable, and nothing you prepare, such as users, groups, AI providers or platform connections, is lost when the edition changes.
 

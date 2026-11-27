@@ -135,7 +135,7 @@ An inbound **OAuth A2A** integration carries one credential, issued by XTM One: 
 2. Enter a **Name**, choose **Inbound: a partner tasks our agents**, and click **Create integration**.
 3. On its **Configuration** tab, click **Generate credential** in the **Partner credential** card. Copy the client ID and the secret at once, or both with **Copy both**: the secret is never shown again.
 4. Bind the integration to each agent the partner should reach, as in [Bind it to an agent](#bind-it-to-an-agent).
-5. Send the partner the client ID, the secret, the agent's address from the **Agent card URLs** card, and the **Token URL** of the **Partner credential** card. The token URL shows once a bound agent publishes its card. A partner on XTM One pastes it into its **Partner token endpoint** field.
+5. Send the partner the client ID, the secret, the agent's address from the **Agent card URLs** card, and the **Token URL** of the **Partner credential** card. The token URL shows once a bound agent publishes its card. A partner on XTM One pastes it into the Partner token endpoint field of its outbound OAuth A2A integration.
 :::
 
 The **Partner reachability** card then reads **Ready. This partner has not connected yet.**, or names what still blocks the partner: no credential, no agent bound, or a bound agent with no published card.

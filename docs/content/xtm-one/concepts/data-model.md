@@ -68,10 +68,10 @@ Two kinds of relationships hold the model together, and they decide how far an e
 Some values are inherited rather than set: an agent's temperature left empty uses the provider's default, an agent's limit of tool-calling rounds left empty uses the platform's. An empty field usually means "inherit", not "off". Who may see and change each object is the subject of [Who sees what: containers, scopes and nesting](/xtm-one/concepts/scopes/).
 
 :::example[One agent, seen from four screens]
-Sophie Laurent builds the agent **Velvet Harbor watcher** for the CTI team of Grand Meridian Hotels.
+Sophie Laurent builds the agent `Velvet Harbor watcher` for the CTI team of Grand Meridian Hotels.
 
-- In **Configuration**, she links the OpenCTI integration, the knowledge base **Grand Meridian security policies** and the prompt **Summarize a report for executives**. These three are resources: the agent **Crisis briefer** links the same knowledge base.
-- In the agent's assignments, she adds **Weekly Velvet Harbor brief**, triggered **Scheduled** every Monday at 08:00, Europe/Paris. It is nested in the agent.
+- In **Configuration**, she links the OpenCTI integration, the knowledge base `Grand Meridian security policies` and the prompt `Summarize a report for executives`. These three are resources: the agent `Crisis briefer` links the same knowledge base.
+- In the agent's assignments, she adds `Weekly Velvet Harbor brief`, triggered **Scheduled** every Monday at 08:00, Europe/Paris. It is nested in the agent.
 - On Monday 13 April 2026, the assignment fires. A run appears in :menu[Work > Operations], tab **Executions**, with the reports the agent read and the brief it wrote.
 - Camille Roux asks the agent a follow-up question in :menu[Chat]. That conversation shows in her chat history and in the agent's **Chats** tab.
 

@@ -57,7 +57,7 @@ A local server runs with the permissions of the platform: run only servers you t
 A server that authenticates with OAuth needs one more step: open its **Configuration** tab and click **Authorize** in the **OAuth Connection** card, sign in at the provider, and come back to the server page, which shows **OAuth connected**.
 
 :::warning
-By default, the OAuth token belongs to the server, not to each user. Everyone who uses the server calls it with the account that authorized it, as they would share its API key. Authorize with a service account that has only the rights your agents need, or let each person use their own account (next section). On a company-managed server with one shared account, only an administrator can authorize.
+By default, the OAuth token belongs to the server, not to each user. Everyone who uses the server calls it with the account that authorized it, as they would share its API key. Authorize with a service account that has only the rights your agents need, or let each person use their own account: see [Let each person use their own account](#let-each-person-use-their-own-account). On a company-managed server with one shared account, only an administrator can authorize.
 :::
 
 If the provider requires a client registered in advance, register `https://xtm-one.grand-meridian.example/api/oauth/callback` (your platform's address followed by `/api/oauth/callback`) as its redirect URI, then enter the **Client ID** and **Client Secret** it issued.

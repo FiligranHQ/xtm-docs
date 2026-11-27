@@ -43,7 +43,7 @@ Connecting Microsoft Teams lets your users ask an agent a question in a team cha
 ## Connect the bot in XTM One
 
 :::steps
-1. Open :menu[Administration > Settings > Integrations > Channels & Bots] and click **Configure** on the **Microsoft Teams** card.
+1. Open :menu[Administration > Settings > Integrations > Channels & Bots] and click **Configure** on the Microsoft Teams card.
 2. Paste the application ID in **App ID / Client ID**.
 3. Paste the client secret in **App Password / Client Secret**.
 4. Paste the directory ID in **Tenant ID**.
@@ -122,7 +122,7 @@ Those follow-ups arrive as Microsoft Graph notifications at `BASE_URL/api/channe
 | Files sent in a chat are not read | Check `supportsFiles` in the manifest for personal chats, and the admin consent of the Graph permissions for channels. |
 
 :::example[Paul asks "Night shift triage" in the SOC team's night channel]
-Hélène Marchetti registers **XTM One Teams bot** in the Grand Meridian Hotels Entra ID tenant, grants admin consent to the six application permissions, and creates a client secret valid for 12 months, its expiry date in the SOC calendar. On the **Microsoft Teams** card of `https://xtm-one.grand-meridian.example` she fills **App ID / Client ID**, **App Password / Client Secret** and **Tenant ID**, then clicks **Save Channel**. The Azure Bot's messaging endpoint is `https://xtm-one.grand-meridian.example/api/channels/teams/messages`. She installs the package, with `validDomains` set to `xtm-one.grand-meridian.example`, in the **SOC** team.
+Hélène Marchetti registers **XTM One Teams bot** in the Grand Meridian Hotels Entra ID tenant, grants admin consent to the six application permissions, and creates a client secret valid for 12 months, its expiry date in the SOC calendar. On the Microsoft Teams card of `https://xtm-one.grand-meridian.example` she fills **App ID / Client ID**, **App Password / Client Secret** and **Tenant ID**, then clicks **Save Channel**. The Azure Bot's messaging endpoint is `https://xtm-one.grand-meridian.example/api/channels/teams/messages`. She installs the package, with `validDomains` set to `xtm-one.grand-meridian.example`, in the **SOC** team.
 
 Sophie Laurent turns on **Teams** for the "Night shift triage" agent, with **Receive** restricted to the **Night shift** channel of the **SOC** team and **Only when mentioned** on. Paul Garnier writes "@XTM One what do we know about the PowerShell loader Velvet Harbor used in January?" The agent answers in the thread as Paul: Teams gives XTM One his email.
 :::

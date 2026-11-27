@@ -20,6 +20,6 @@ edges:
   - {from: assistant, to: cti, label: tools/call}
   - {from: assistant, to: aev}
   - {from: assistant, to: crq}
-  - {from: cti, to: opencti, label: token signed for the user}
+  - {from: cti, to: opencti, label: user-signed token}
   - {from: aev, to: openaev}
   - {from: crq, to: opencrq}

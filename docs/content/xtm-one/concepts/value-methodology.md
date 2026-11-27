@@ -87,7 +87,7 @@ Each deliverable made in a conversation is listed only to the person who made it
 - Nobody is identifiable. A user never sees another person's name, email or deliverable titles. For a user, a fleet, agent, unit of work or week backed by fewer people than the threshold is summed into an **Other** row. The threshold is 5 people by default. Your own figures and the organization total are never folded, and an administrator sees every row. The exports and the agents' tools apply the same rule.
 - The breakdown by person is for administrators only. It is off by default, and every read of it is written to the audit log.
 
-An administrator sets the three rules in :menu[Settings > Organization > Rates by role], on the **Value visibility and privacy** card, with **Edit**:
+An administrator sets the three rules in :menu[Administration > Settings > Organization > Rates by role], on the **Value visibility and privacy** card, with **Edit**:
 
 | Setting | Default | Effect |
 | --- | --- | --- |
@@ -103,8 +103,8 @@ When the deployment hides cost data, **AI cost**, **Net value**, **ROI** and **P
 
 | Default | Where an administrator changes it | What a change moves |
 | --- | --- | --- |
-| **Units of work** | :menu[Settings > Organization > Units of work] | The value of every past and future run of that unit |
-| **Rates by role** | :menu[Settings > Organization > Rates by role] | The value of every unit valued at that role |
+| **Units of work** | :menu[Administration > Settings > Organization > Units of work] | The value of every past and future run of that unit |
+| **Rates by role** | :menu[Administration > Settings > Organization > Rates by role] | The value of every unit valued at that role |
 | **Outcomes** | On an agent or a fleet | What its runs count from now on |
 
 For an administrator, **Units of work** and **Rates by role** link to their settings; anyone else reads "Your administrator changes these defaults." A customized value survives a reseed or an upgrade, and **Reset to default** removes it. Every change is audited.

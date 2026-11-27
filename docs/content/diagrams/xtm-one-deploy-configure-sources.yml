@@ -20,4 +20,4 @@ edges:
   - {from: override, to: platform, label: docker compose up -d}
   - {from: env, to: worker, label: same values}
   - {from: settings, to: db, label: saved}
-  - {from: db, to: platform, label: unless a variable locks it, style: dashed}
+  - {from: db, to: platform, label: unless a variable locks, style: dashed}

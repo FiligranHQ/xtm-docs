@@ -14,7 +14,7 @@ lanes:
     nodes:
       - {id: lent, label: Lent resources, icon: Puzzle, note: "Integrations, MCP servers, tools, variables"}
 edges:
-  - {from: owner, to: shared, label: Share with people and groups}
+  - {from: owner, to: shared, label: share with people}
   - {from: owner, to: company, label: an administrator promotes}
   - {from: shared, to: lent, label: run with them}
   - {from: company, to: lent, label: run with them}

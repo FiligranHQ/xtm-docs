@@ -2,7 +2,7 @@
   "name": "configuration",
   "version": "1.261119.1",
   "source": "XTM-One-Platform/xtm-one@cd3a70e: backend/app/core/config.py, docs/docs/deployment/configuration.md",
-  "intro": "Every environment variable XTM One reads at startup, on the platform and on the worker. Authentication, integrations and most security options are set from the **Settings** screens instead, and stored in the database.",
+  "intro": "Every environment variable XTM One reads, on the platform and on the worker: set the same values on both. Sign-in and many security options are set in **Administration** > **Settings** instead, integrations in **Tools & Integrations**, and both are stored in the database.",
   "filter": "Filter by variable or description",
   "sections": [
     {
@@ -2954,7 +2954,7 @@
     },
     {
       "title": "Advanced tuning",
-      "text": "The other variables the code reads: limits, intervals and retries whose defaults suit most deployments. Change one only when a log or the support asks for it.",
+      "text": "The other variables the settings of the code read, which XTM One's own configuration guide does not list: mostly limits, timeouts, intervals and retries whose defaults suit most deployments. A page of this documentation that needs one names it; change the others only when a log or the support asks for it.",
       "columns": [
         "Variable",
         "Required",

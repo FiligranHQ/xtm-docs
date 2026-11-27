@@ -105,7 +105,7 @@ The bindings an administrator creates apply to everyone. A user's own binding ap
 - The person's own rights in the connected module do not allow what the feature does.
 
 :::example[Let the Velvet Harbor watcher summarize OpenCTI reports]
-Sophie Laurent built "Velvet Harbor watcher", which drafts summaries of the reports on Velvet Harbor for the CTI team, in the style the team's briefings use. She wants the **Summarize** action of OpenCTI's reports to use it instead of the built-in agent.
+Sophie Laurent built "Velvet Harbor watcher", which drafts summaries of the reports on Velvet Harbor for the CTI team, in the style the team's briefings use. She wants the **Container summary** tab of OpenCTI's AI Insights, on a report, to come from it instead of the built-in agent.
 
 1. She shares the agent with the group **CTI team**, **Read only**, and tags it `opencti`.
 2. Hélène Marchetti opens :menu[Orchestration > Intents], searches `cti.container_summary` and clicks its row: **OpenCTI Entity Insights** is bound, **builtin**, for `cti`.

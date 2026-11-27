@@ -66,12 +66,7 @@ You see what AI does for the teams and keep it within bounds.
 
 ::::split
 :::column
-An agent does not wait to be asked. An assignment runs it on a schedule, on a webhook from another tool or on an event of an integration, and its result lands where your team reads it: a brief in your inbox every Monday, a message in the SOC's channel, a file in OpenCTI. Several agents can hand work to each other, and the Agentic Flow shows them working together.
-
-:::cards{cols=2}
-  ::card[Schedules, webhooks and events.]{icon=Clock title="Assignments" href="/xtm-one/build/agents/"}
-  ::card[Every run, its tools and its cost.]{icon=History title="Work history" href="/xtm-one/use/work-history/"}
-:::
+An agent does not wait to be asked. [An assignment](/xtm-one/build/agents/#give-it-recurring-work-with-an-assignment) runs it on a schedule, on a webhook from another tool or on an event of an integration, and its result lands where your team reads it: a brief in your inbox every Monday, a message in the SOC's channel, a file in OpenCTI. Several agents can hand work to each other, and [the Agentic Flow](/xtm-one/use/agentic-flow/) shows them working together. [The work history](/xtm-one/use/work-history/) keeps every run, its tools and its cost.
 :::
 :::column
 ::diagram{id=xtm-one-overview}

@@ -23,7 +23,7 @@ There are two modes. Choosing one only sets the starting values; every setting s
 | **Personal delegate** | Yours | "When someone mentions me or messages me on Teams, let my agent answer." "Let my agent answer the emails it can, and flag the ones I must answer." | **Ask me first**, the AI label, a 2-minute grace period, 60 minutes of silence after you write, 10 replies per conversation and hour |
 | **AI user** | A dedicated account everyone knows is an AI, with its own mailbox and calendar | An AI colleague that answers direct messages and follows channels, or runs a shared mailbox | **Send automatically**, no label, no grace period, 30 replies per conversation and hour |
 
-Agent accounts are in :menu[My Profile] > **Agent Accounts**. Each user manages their own; administrators see every account with **All accounts**.
+Agent accounts are in **My Profile**, from your user menu at the top right, on the **Agent Accounts** tab. Each user manages their own; administrators see every account with **All accounts**.
 
 ## Before you start
 
@@ -38,10 +38,10 @@ One platform account is operated by one enabled agent account at a time. A Micro
 ## Create an account
 
 :::steps
-1. Open :menu[My Profile] > **Agent Accounts** and click **New account**.
+1. Open **My Profile** from your user menu, at the top right, then the **Agent Accounts** tab, and click **New account**.
 2. Choose **Personal delegate** or **AI user**.
 3. In **General**, set **Name**, pick the **Platform** (**Microsoft Teams** or **Microsoft Outlook**; it cannot change later), the **Account (integration)** signed in as the account, and the **Agent** that answers. Under the integration, the editor shows who it is signed in as, and warns when another agent account already operates that account.
-4. Review **Rules**, **Replies** and, if needed, **Schedule**, as described below.
+4. Review **Rules**, **Replies** and, if needed, **Schedule**, as [Rules](#rules) and [Replies](#replies) describe.
 5. In **Test**, type a message and a sender to see what the account would do with it. Nothing is sent.
 6. Click **Create**.
 
@@ -172,7 +172,7 @@ The account card says how many conversations it cannot hear (**Not listening to 
 - Every created, changed, deleted, approved and rejected account or reply is recorded in the audit log.
 
 :::example[Paul asks the SOC's AI colleague in the Teams night channel]
-Grand Meridian Hotels gives its night shift an AI colleague in Teams: the service account `soc-night-assistant@grand-meridian.example`, shown in Teams as **SOC Night Assistant**. Sophie Laurent connects a Microsoft integration signed in as that account, named `[SOC Night Assistant] Microsoft`, then in :menu[My Profile] > **Agent Accounts** clicks **New account** and chooses **AI user**:
+Grand Meridian Hotels gives its night shift an AI colleague in Teams: the service account `soc-night-assistant@grand-meridian.example`, shown in Teams as **SOC Night Assistant**. Sophie Laurent connects a Microsoft integration signed in as that account, named `[SOC Night Assistant] Microsoft`, then in **My Profile**, on the **Agent Accounts** tab, clicks **New account** and chooses **AI user**:
 
 - **General**: **Name** `SOC Night Assistant`, **Platform** **Microsoft Teams**, **Account (integration)** `[SOC Night Assistant] Microsoft` (the editor shows **Signed in as** the service account), **Agent** "Night shift triage".
 - **Rules**: first **Public channels, non-confidential only** on the SOC team's **Night shift** channel, with the "Grand Meridian security policies" knowledge base switched off and **Use the agent's memory** off; then the default direct messages and mentions rules.

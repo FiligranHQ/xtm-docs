@@ -18,7 +18,7 @@ A variable is a named value you store once in XTM One and reference wherever an 
 ## Before you start
 
 - Creating a variable requires the Enterprise Edition. Variables are not an AI feature: they keep working with AI switched off.
-- Variables are off by default on XTM One. An administrator turns off **Disable custom variables** in :menu[Settings > Access and security], or sets `DISABLE_CUSTOM_VARIABLES` to `false` (see the [configuration reference](/reference/xtm-one/configuration/)). The variable, when set, wins and locks the switch. While variables are off, the **Variables** tab of :menu[Tools & Integrations > Connections] and the **Variable** button of the editors are hidden.
+- Variables are off by default on XTM One. An administrator turns off **Disable custom variables** in :menu[Administration > Settings > Access and security], or sets `DISABLE_CUSTOM_VARIABLES` to `false` (see the [configuration reference](/reference/xtm-one/configuration/)). The variable, when set, wins and locks the switch. While variables are off, the **Variables** tab of :menu[Tools & Integrations > Connections] and the **Variable** button of the editors are hidden.
 - To read a secret from a vault instead of storing it, an administrator must have granted you that vault: see [Secret vaults](/xtm-one/administer/secret-vaults/).
 
 ## Create a variable

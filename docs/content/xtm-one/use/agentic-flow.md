@@ -53,7 +53,7 @@ The toolbar above the graph narrows and arranges the map. The map keeps your lay
 | Control | What it does |
 | --- | --- |
 | **Mine**, **Company**, **Shared**, **All** | Keeps the agents you own, those published to the whole company, those shared with you directly or through a group, or every agent you can see. Each shows how many agents it holds. The General Assistant is always drawn. The segment is not kept from one visit to the next: unless its address names one, the map opens on **Mine** when you own an agent, otherwise on the first of **Company**, **Shared** and **All** that holds one |
-| **Filters** | Keeps an **Agent type** (**Built-in**, **Company-managed**, **Personal**), the **Enabled** or **Disabled** agents, and the agents **With open work items** or **With runs in flight**. Its badge counts the filters on; **Clear filters** removes them. **Show the built-in catalogue under Company** decides whether **Company** draws the built-in agents XTM One provides beside your organization's own: see below |
+| **Filters** | Keeps an **Agent type** (**Built-in**, **Company-managed**, **Personal**), the **Enabled** or **Disabled** agents, and the agents **With open work items** or **With runs in flight**. Its badge counts the filters on; **Clear filters** removes them. **Show the built-in catalogue under Company** decides whether **Company** draws the built-in agents XTM One provides beside your organization's own |
 | **Layout** | Arranges the agents: **Force** (the default), **Top down**, **Left to right**, **Radial** or **Org chart** |
 | **Forces** | Sets how the agents spread: **Repulsion**, **Link distance** and **Node spacing** |
 | **Fleets** | Shows when an agent belongs to a fleet you can open, and is on: the agents of a fleet are drawn as one node, which opens the fleet when you click it. Turn it off to draw every agent |
@@ -101,7 +101,7 @@ Click **Schedule** above the map. This view answers "what will start, and when?"
 
 - **The counters**: **Scheduled** (assignments on a schedule), **One-off** (scheduled actions waiting), **Next trigger** (a countdown to the next scheduled run), **In flight** (queued or running), **Next 24h** (expected triggers) and **Event-driven** (assignments that start on a webhook or an integration event).
 - **Upcoming** places what will run on a timeline: choose **Next hour**, **Next 24h** or **Next 7d**.
-- **The inventory** lists the **One-off** actions people scheduled from a chat, then the assignments by kind: **Recurring**, **Event-driven** and **Manual**. Click a row to open the assignment, or the one-off action with **Cancel** and **Reschedule**.
+- **The inventory**: the **One-off** actions people scheduled from a chat, then the assignments by kind: **Recurring**, **Event-driven** and **Manual**. Click a row to open the assignment, or the one-off action with **Cancel** and **Reschedule**.
 
 An agent's **Coming up** card, on its page, opens this view narrowed to that agent; **Show every agent** widens it again. How one-off actions are scheduled is in [Let an agent act later, at a time you choose](/xtm-one/use/work-items/); how an assignment starts on an event, in [Start an agent from another tool with a webhook](/xtm-one/use/webhook-triggers/).
 

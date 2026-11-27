@@ -72,7 +72,7 @@ The page says how the run ended:
 - **Cancelled**: the run was cancelled, with the reason, such as who cancelled it.
 - **Error**: the run failed, with its cause.
 
-A run that met obstacles, such as tool errors or retries, has a **Frictions** card: what it struggled with, how many times, and what carries each fix, or **Undisposed** while nothing does. **Evidence** unfolds what was recorded.
+A run that met obstacles, such as tool errors or retries, has a card titled **Frictions** with their count, such as **Frictions (2)**: what it struggled with, how many times, and what carries each fix, or **Undisposed** while nothing does. **Evidence** unfolds what was recorded.
 
 Once a run has completed or failed, the **Result** card asks **Was this result useful?** with a thumbs up and a thumbs down. A thumbs down lets you say what went wrong; when administrators have defined feedback criteria, you can also score each one. Rating again replaces your rating. The people who manage the agent read every rating in its **Feedback** tab.
 

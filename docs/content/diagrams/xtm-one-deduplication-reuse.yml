@@ -20,6 +20,6 @@ lanes:
 edges:
   - {from: link, to: shared, label: no copy}
   - {from: duplicate, to: copy, label: new object}
-  - {from: webhook, to: once, label: same key in 5 minutes}
+  - {from: webhook, to: once, label: "same key, 5 minutes"}
   - {from: document, to: once, label: same content}
   - {from: event, to: once, label: already seen}
