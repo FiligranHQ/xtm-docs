@@ -1594,8 +1594,8 @@
     ]
   },
   "openaev": {
-    "done": 75,
-    "total": 75,
+    "done": 77,
+    "total": 77,
     "groups": [
       {
         "id": "concepts",
@@ -1636,6 +1636,30 @@
             ],
             "status": "migrated",
             "live": "https://docs.openaev.io/latest/usage/get-started/foundations/injects-and-expectations/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/openaev/concepts/data-model/",
+            "title": "How OpenAEV keeps what you test and what it finds",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/openaev/concepts/deduplication/",
+            "title": "How OpenAEV recognizes what it already has",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
             "more": 0,
             "more_done": 0,
             "group": "concepts"
