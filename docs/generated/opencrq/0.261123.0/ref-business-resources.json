@@ -1,0 +1,395 @@
+{
+  "name": "business-resources",
+  "version": "0.261123.0",
+  "source": "OpenCRQ-Platform/opencrq@d61ebb5 (module/src/modules/business-value-categories/data, module/src/modules/loss-drivers/data/loss-activation-matrix.ts)",
+  "intro": "The business resources a primary asset holds, and for each attack outcome the loss drivers OpenCRQ recommends when the outcome hits a resource: 35 pairings of an outcome with a resource. A pairing absent here is one the model holds to be unrealistic. OpenCRQ derives a range from the financial profile only for the drivers the pairings of a scenario recommend: its outcome with the resources its primary assets hold. Any other driver of the catalog can still be priced, with a range entered by hand.",
+  "sections": [
+    {
+      "title": "Business resources",
+      "columns": [
+        "Resource",
+        "What it is"
+      ],
+      "rows": [
+        {
+          "key": "490a7802-6b15-404d-8e7e-570aeb574fd7",
+          "cells": [
+            "**Operations and services**",
+            "The processes and services your organisation runs for itself: production, logistics, internal support, back office."
+          ]
+        },
+        {
+          "key": "b86cf783-2b4f-46d8-acf6-475953e7be0b",
+          "cells": [
+            "**Services delivered to others under commitments**",
+            "Services and products other organisations or customers rely on under contract, SLA or delivery commitment: SaaS, managed services, contracted deliveries, platforms clients run their business on."
+          ]
+        },
+        {
+          "key": "9edddde6-084e-4551-9495-40eab09eddba",
+          "cells": [
+            "**Physical assets and facilities**",
+            "Equipment, plants, buildings, OT and ICS, vehicles: anything an attack can physically destroy or render untrustworthy."
+          ]
+        },
+        {
+          "key": "3e9bf712-cdb6-49fa-8c6e-bde349f5bff0",
+          "cells": [
+            "**Personal data**",
+            "Any data identifying people: customers, employees, patients, users, including special categories such as health or biometrics and non-card financial identifiers."
+          ]
+        },
+        {
+          "key": "ea007521-34aa-4422-ad95-f9372d69ff59",
+          "cells": [
+            "**Payment card data**",
+            "Cardholder and payment data an attacker can use to carry out fraud: PANs, track and chip data, card verification values, payment credentials. Tick it alone, it covers the personal data it contains."
+          ]
+        },
+        {
+          "key": "424598b4-73d2-48d6-87d1-3e76aafc0df7",
+          "cells": [
+            "**Proprietary information**",
+            "Your own competitive information: trade secrets, R&D, source code, formulas, pricing, M&A plans, negotiation positions, models and their weights."
+          ]
+        },
+        {
+          "key": "520e9b3d-bcc6-44ad-98f1-ae9a2766edd4",
+          "cells": [
+            "**Data entrusted by others**",
+            "Other organisations' confidential data you hold under contract or NDA: B2B customer data, professional-services files, partner designs, government-client data, licensed corpora."
+          ]
+        },
+        {
+          "key": "fa53f2e6-80d6-423a-998f-443ac8113c40",
+          "cells": [
+            "**Own funds and payment authority**",
+            "Your organisation's money and the authority to move it: bank balances, treasury, payment runs, payroll, the mandates and approvals that release funds, crypto assets."
+          ]
+        },
+        {
+          "key": "70fe8059-c443-4ead-99d6-16bc51ee55f7",
+          "cells": [
+            "**Funds and assets held for others**",
+            "Money and assets you hold or move for clients: client accounts, escrow, portfolios under management, securities in custody, payment float."
+          ]
+        },
+        {
+          "key": "3b91333c-5471-44a4-a7f7-e8e675d29eab",
+          "cells": [
+            "**Regulated function or data**",
+            "A function or a data set a regulator with fining power supervises: essential or important entities under NIS2, DORA, CER, telecom, energy or health regulators, export-controlled or defence technical data. Tick it together with the resource it regulates."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Recommended loss drivers: Ransomware",
+      "columns": [
+        "When it hits",
+        "Recommended loss drivers"
+      ],
+      "rows": [
+        {
+          "key": "a22b9a0c-4c77-45c1-a1b6-f8ec5531bc27:490a7802-6b15-404d-8e7e-570aeb574fd7",
+          "cells": [
+            "**Operations and services**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Lost margin from downtime, Incremental operating cost during disruption, Extortion payment"
+          ]
+        },
+        {
+          "key": "a22b9a0c-4c77-45c1-a1b6-f8ec5531bc27:b86cf783-2b4f-46d8-acf6-475953e7be0b",
+          "cells": [
+            "**Services delivered to others under commitments**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Lost margin from downtime, Incremental operating cost during disruption, Extortion payment, Contractual penalties & service credits, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "a22b9a0c-4c77-45c1-a1b6-f8ec5531bc27:9edddde6-084e-4551-9495-40eab09eddba",
+          "cells": [
+            "**Physical assets and facilities**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Lost margin from downtime, Incremental operating cost during disruption, Extortion payment, Contractual penalties & service credits, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "a22b9a0c-4c77-45c1-a1b6-f8ec5531bc27:3e9bf712-cdb6-49fa-8c6e-bde349f5bff0",
+          "cells": [
+            "**Personal data**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Extortion payment, Notification & call handling, Identity & credit protection, Litigation & proceedings defense, Settlements & damages, Regulatory fines, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "a22b9a0c-4c77-45c1-a1b6-f8ec5531bc27:ea007521-34aa-4422-ad95-f9372d69ff59",
+          "cells": [
+            "**Payment card data**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Extortion payment, Notification & call handling, Identity & credit protection, Litigation & proceedings defense, Settlements & damages, Regulatory fines, Payment-card ecosystem assessments, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "a22b9a0c-4c77-45c1-a1b6-f8ec5531bc27:520e9b3d-bcc6-44ad-98f1-ae9a2766edd4",
+          "cells": [
+            "**Data entrusted by others**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Extortion payment, Litigation & proceedings defense, Settlements & damages, Contractual penalties & service credits, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "a22b9a0c-4c77-45c1-a1b6-f8ec5531bc27:3b91333c-5471-44a4-a7f7-e8e675d29eab",
+          "cells": [
+            "**Regulated function or data**",
+            "Regulatory fines"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Recommended loss drivers: Data Theft Extortion",
+      "columns": [
+        "When it hits",
+        "Recommended loss drivers"
+      ],
+      "rows": [
+        {
+          "key": "d98a602a-cdd7-40ab-85bd-44fd8c834021:3e9bf712-cdb6-49fa-8c6e-bde349f5bff0",
+          "cells": [
+            "**Personal data**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Extortion payment, Notification & call handling, Identity & credit protection, Litigation & proceedings defense, Settlements & damages, Regulatory fines, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "d98a602a-cdd7-40ab-85bd-44fd8c834021:ea007521-34aa-4422-ad95-f9372d69ff59",
+          "cells": [
+            "**Payment card data**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Extortion payment, Notification & call handling, Identity & credit protection, Litigation & proceedings defense, Settlements & damages, Regulatory fines, Payment-card ecosystem assessments, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "d98a602a-cdd7-40ab-85bd-44fd8c834021:424598b4-73d2-48d6-87d1-3e76aafc0df7",
+          "cells": [
+            "**Proprietary information**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Extortion payment, Competitive-advantage erosion"
+          ]
+        },
+        {
+          "key": "d98a602a-cdd7-40ab-85bd-44fd8c834021:520e9b3d-bcc6-44ad-98f1-ae9a2766edd4",
+          "cells": [
+            "**Data entrusted by others**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Extortion payment, Litigation & proceedings defense, Settlements & damages, Contractual penalties & service credits, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "d98a602a-cdd7-40ab-85bd-44fd8c834021:3b91333c-5471-44a4-a7f7-e8e675d29eab",
+          "cells": [
+            "**Regulated function or data**",
+            "Regulatory fines"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Recommended loss drivers: Data Breach & Resale",
+      "columns": [
+        "When it hits",
+        "Recommended loss drivers"
+      ],
+      "rows": [
+        {
+          "key": "9fc07642-7648-4178-a469-951c7f6bba9e:3e9bf712-cdb6-49fa-8c6e-bde349f5bff0",
+          "cells": [
+            "**Personal data**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Notification & call handling, Identity & credit protection, Litigation & proceedings defense, Settlements & damages, Regulatory fines, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "9fc07642-7648-4178-a469-951c7f6bba9e:ea007521-34aa-4422-ad95-f9372d69ff59",
+          "cells": [
+            "**Payment card data**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Notification & call handling, Identity & credit protection, Litigation & proceedings defense, Settlements & damages, Regulatory fines, Payment-card ecosystem assessments, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "9fc07642-7648-4178-a469-951c7f6bba9e:424598b4-73d2-48d6-87d1-3e76aafc0df7",
+          "cells": [
+            "**Proprietary information**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Competitive-advantage erosion"
+          ]
+        },
+        {
+          "key": "9fc07642-7648-4178-a469-951c7f6bba9e:520e9b3d-bcc6-44ad-98f1-ae9a2766edd4",
+          "cells": [
+            "**Data entrusted by others**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Litigation & proceedings defense, Settlements & damages, Contractual penalties & service credits, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "9fc07642-7648-4178-a469-951c7f6bba9e:3b91333c-5471-44a4-a7f7-e8e675d29eab",
+          "cells": [
+            "**Regulated function or data**",
+            "Regulatory fines"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Recommended loss drivers: Financial Fraud & Funds Theft",
+      "columns": [
+        "When it hits",
+        "Recommended loss drivers"
+      ],
+      "rows": [
+        {
+          "key": "f00427ea-1d38-4918-a7ff-03fee32f6374:fa53f2e6-80d6-423a-998f-443ac8113c40",
+          "cells": [
+            "**Own funds and payment authority**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Stolen funds, net of recovery, Litigation & proceedings defense, Settlements & damages, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "f00427ea-1d38-4918-a7ff-03fee32f6374:70fe8059-c443-4ead-99d6-16bc51ee55f7",
+          "cells": [
+            "**Funds and assets held for others**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Stolen funds, net of recovery, Litigation & proceedings defense, Settlements & damages, Regulatory fines, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "f00427ea-1d38-4918-a7ff-03fee32f6374:3b91333c-5471-44a4-a7f7-e8e675d29eab",
+          "cells": [
+            "**Regulated function or data**",
+            "Regulatory fines"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Recommended loss drivers: Espionage",
+      "columns": [
+        "When it hits",
+        "Recommended loss drivers"
+      ],
+      "rows": [
+        {
+          "key": "4756f512-edab-4393-98ee-c442619e3c99:3e9bf712-cdb6-49fa-8c6e-bde349f5bff0",
+          "cells": [
+            "**Personal data**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Notification & call handling, Identity & credit protection, Litigation & proceedings defense, Settlements & damages, Regulatory fines, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "4756f512-edab-4393-98ee-c442619e3c99:424598b4-73d2-48d6-87d1-3e76aafc0df7",
+          "cells": [
+            "**Proprietary information**",
+            "Forensics & incident management, Incident legal counsel, Internal response surge labor, System & data restoration, Competitive-advantage erosion"
+          ]
+        },
+        {
+          "key": "4756f512-edab-4393-98ee-c442619e3c99:520e9b3d-bcc6-44ad-98f1-ae9a2766edd4",
+          "cells": [
+            "**Data entrusted by others**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Litigation & proceedings defense, Settlements & damages, Contractual penalties & service credits, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "4756f512-edab-4393-98ee-c442619e3c99:3b91333c-5471-44a4-a7f7-e8e675d29eab",
+          "cells": [
+            "**Regulated function or data**",
+            "Regulatory fines"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Recommended loss drivers: Service Disruption",
+      "columns": [
+        "When it hits",
+        "Recommended loss drivers"
+      ],
+      "rows": [
+        {
+          "key": "b56965c3-5a76-4215-83af-cfcd69e33686:490a7802-6b15-404d-8e7e-570aeb574fd7",
+          "cells": [
+            "**Operations and services**",
+            "Forensics & incident management, Incident legal counsel, Internal response surge labor, Lost margin from downtime, Incremental operating cost during disruption"
+          ]
+        },
+        {
+          "key": "b56965c3-5a76-4215-83af-cfcd69e33686:b86cf783-2b4f-46d8-acf6-475953e7be0b",
+          "cells": [
+            "**Services delivered to others under commitments**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Lost margin from downtime, Incremental operating cost during disruption, Contractual penalties & service credits, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "b56965c3-5a76-4215-83af-cfcd69e33686:9edddde6-084e-4551-9495-40eab09eddba",
+          "cells": [
+            "**Physical assets and facilities**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, Lost margin from downtime, Incremental operating cost during disruption, Contractual penalties & service credits, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "b56965c3-5a76-4215-83af-cfcd69e33686:3e9bf712-cdb6-49fa-8c6e-bde349f5bff0",
+          "cells": [
+            "**Personal data**",
+            "Forensics & incident management, Incident legal counsel, Internal response surge labor, Notification & call handling, Regulatory fines"
+          ]
+        },
+        {
+          "key": "b56965c3-5a76-4215-83af-cfcd69e33686:3b91333c-5471-44a4-a7f7-e8e675d29eab",
+          "cells": [
+            "**Regulated function or data**",
+            "Regulatory fines"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Recommended loss drivers: Destructive Attack",
+      "columns": [
+        "When it hits",
+        "Recommended loss drivers"
+      ],
+      "rows": [
+        {
+          "key": "e87138d3-a68b-4428-85df-b7387b308ecf:490a7802-6b15-404d-8e7e-570aeb574fd7",
+          "cells": [
+            "**Operations and services**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Lost margin from downtime, Incremental operating cost during disruption"
+          ]
+        },
+        {
+          "key": "e87138d3-a68b-4428-85df-b7387b308ecf:b86cf783-2b4f-46d8-acf6-475953e7be0b",
+          "cells": [
+            "**Services delivered to others under commitments**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Hardware & equipment replacement, Lost margin from downtime, Incremental operating cost during disruption, Contractual penalties & service credits, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "e87138d3-a68b-4428-85df-b7387b308ecf:9edddde6-084e-4551-9495-40eab09eddba",
+          "cells": [
+            "**Physical assets and facilities**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Hardware & equipment replacement, Lost margin from downtime, Incremental operating cost during disruption, Contractual penalties & service credits, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "e87138d3-a68b-4428-85df-b7387b308ecf:3e9bf712-cdb6-49fa-8c6e-bde349f5bff0",
+          "cells": [
+            "**Personal data**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Notification & call handling, Litigation & proceedings defense, Settlements & damages, Regulatory fines, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "e87138d3-a68b-4428-85df-b7387b308ecf:520e9b3d-bcc6-44ad-98f1-ae9a2766edd4",
+          "cells": [
+            "**Data entrusted by others**",
+            "Forensics & incident management, Incident legal counsel, Crisis communications & PR, Internal response surge labor, System & data restoration, Litigation & proceedings defense, Settlements & damages, Customer attrition & win-back"
+          ]
+        },
+        {
+          "key": "e87138d3-a68b-4428-85df-b7387b308ecf:3b91333c-5471-44a4-a7f7-e8e675d29eab",
+          "cells": [
+            "**Regulated function or data**",
+            "Regulatory fines"
+          ]
+        }
+      ]
+    }
+  ]
+}

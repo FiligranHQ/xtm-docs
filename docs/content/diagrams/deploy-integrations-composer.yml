@@ -1,0 +1,30 @@
+title: You deploy an integration from the catalog of a platform, and XTM Composer starts it as a container on your engine and reports its status and logs back
+lanes:
+  - label: You
+    tone: external
+    nodes:
+      - {id: you, label: Catalog and form, icon: Users, note: "Deploy, Create, Start"}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Connectors}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "Collectors, injectors, executors"}
+  - label: XTM Composer
+    tone: external
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Workflow, note: The Integration Manager}
+  - label: Container engine
+    tone: external
+    nodes:
+      - {id: engine, label: Container engine, icon: Boxes, note: "Docker, Podman, Kubernetes, Swarm, Portainer"}
+  - label: Integrations
+    tone: external
+    nodes:
+      - {id: containers, label: Integration containers, icon: Puzzle, note: Started and stopped from the interface}
+edges:
+  - {from: you, to: opencti, label: deploy}
+  - {from: you, to: openaev, label: deploy}
+  - {from: composer, to: opencti, label: "instances, status, logs", both: true}
+  - {from: composer, to: openaev, label: "instances, status, logs", both: true}
+  - {from: composer, to: engine, label: start container}
+  - {from: engine, to: containers, label: run}

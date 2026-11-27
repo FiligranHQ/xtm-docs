@@ -1,0 +1,119 @@
+{
+  "name": "feature-flags",
+  "version": "7.260811.0-lts.1",
+  "source": "OpenCTI-Platform/opencti@c9f5ea5 (opencti-platform/opencti-graphql/src/config/conf.js, opencti-platform/opencti-graphql/src/**/*.{ts,js,graphql}, opencti-platform/opencti-front/src/**/*.{ts,tsx,js,jsx})",
+  "intro": "The 5 feature flags of OpenCTI 7.260811.0-lts.1: features still in development, hidden until the platform lists them in `app:enabled_dev_features` (see the [configuration reference](/reference/opencti/configuration/)). Reserved to development and not supported: a flagged feature can change or disappear in any release, so leave flags off in production; the guides describe the platform without them, and a feature is documented when a release removes its flag.",
+  "filter": "Filter flags, API fields and screens",
+  "sections": [
+    {
+      "title": "Feature flags",
+      "columns": [
+        "Flag",
+        "Hides",
+        "Checked in",
+        "Gates"
+      ],
+      "rows": [
+        {
+          "key": "ACCESS_RESTRICTION_CAN_USE",
+          "cells": [
+            "`ACCESS_RESTRICTION_CAN_USE`",
+            "Adds a **Use** access right between view and edit on restricted entities and organizations, and limits the author and authorized-member pickers to the identities the user can use.",
+            "Back end (1 file), front (2 files)",
+            "Parts of `AuthorizedMembersField`, `CreatedByField`"
+          ]
+        },
+        {
+          "key": "CUSTOM_FIELDS",
+          "cells": [
+            "`CUSTOM_FIELDS`",
+            "Custom fields, defined in **Settings > Taxonomies > Custom fields** and added to entity types, with their values in entity forms, overviews, filters and playbooks (7.260811; public from 7.261109).",
+            "Back end (6 files), front (3 files)",
+            "Queries `customFieldDefinition`, `customFieldDefinitions`, `customFieldDefinitionsForEntityType`<br>Mutations `customFieldDefinitionAdd`, `customFieldDefinitionAddEntityType`, `customFieldDefinitionDelete`, `customFieldDefinitionFieldPatch`, `customFieldDefinitionRemoveEntityType`, `customFieldDefinitionUpdateEntityType`<br>API fields `customFieldValues` of `CaseIncident`<br>Attributes `custom_field_values`<br>Screens `/dashboard/settings/vocabularies/custom_fields`"
+          ]
+        },
+        {
+          "key": "DATA_SANITY_MANAGER",
+          "cells": [
+            "`DATA_SANITY_MANAGER`",
+            "The **Health** screen in **Data > Health**, listing the operations of the data sanity manager (the manager itself runs without the flag).",
+            "Front (2 files)",
+            "Screens `/dashboard/data/health`, `/dashboard/data/health/operations`"
+          ]
+        },
+        {
+          "key": "ENGINE_MONITORING",
+          "cells": [
+            "`ENGINE_MONITORING`",
+            "A background check of the search engine every minute that logs its cluster health, node and thread pool statistics.",
+            "Back end (1 file)",
+            "Back end behaviour in `engine-monitoring`"
+          ]
+        },
+        {
+          "key": "INGESTION_FEED_LOGS",
+          "cells": [
+            "`INGESTION_FEED_LOGS`",
+            "A **Logs** tab on TAXII feeds, listing the entries of their ingestion runs.",
+            "Back end (1 file), front (1 file)",
+            "Queries `ingestionTaxiiLogs`<br>API fields `ingestionLogs` of `IngestionTaxii`<br>Parts of `FeedDetail`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Turn a flag on",
+      "text": "A flag turns its feature on for the whole platform; no flag is set per user or per organization.",
+      "columns": [
+        "Setting",
+        "Example",
+        "Effect"
+      ],
+      "rows": [
+        {
+          "key": "app:enabled_dev_features",
+          "cells": [
+            "`app:enabled_dev_features`",
+            "`[]`",
+            "The list of flags to turn on, in the platform configuration file. Read once when the platform starts: restart it after a change. The front reads the same list from the platform settings."
+          ]
+        },
+        {
+          "key": "APP__ENABLED_DEV_FEATURES",
+          "cells": [
+            "`APP__ENABLED_DEV_FEATURES`",
+            "`'[\"ACCESS_RESTRICTION_CAN_USE\",\"CUSTOM_FIELDS\"]'`",
+            "The same list as an environment variable, written as a JSON array."
+          ]
+        },
+        {
+          "key": "all",
+          "cells": [
+            "`*`",
+            "`'[\"*\"]'`",
+            "Turns every flag on, in the back end and the front, including the flags of features not listed here."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Flags the platform sets by itself",
+      "text": "The platform adds these to the flags the front reads; `app:enabled_dev_features` does not set them.",
+      "columns": [
+        "Flag",
+        "Turns on",
+        "Checked in"
+      ],
+      "rows": [
+        {
+          "key": "RUNTIME_SORTING",
+          "cells": [
+            "`RUNTIME_SORTING`",
+            "Sorting lists on fields computed at query time, turned on by the platform when the search engine is Elasticsearch 7.12 or later. The `*` value of `app:enabled_dev_features` also turns it on in the front.",
+            "Front"
+          ]
+        }
+      ]
+    }
+  ]
+}

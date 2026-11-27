@@ -1,0 +1,51 @@
+# The XTM platform and what flows between its parts. One source for the visuals that show it:
+# the suite map (::suite-map) and each module's connections (::connections{product=...}).
+# `short` is the label the suite map writes on a link.
+# The map: XTM Hub on top (the community portal), XTM One at the center, OpenCTI and OpenAEV
+# with XTM Composer between them, OpenCRQ below.
+# A flow says what the receiving side gets, in the words of its interface; check it in the code.
+# The roles and the short labels are filigran.io's (https://filigran.io/xtm-platform): eXtended Threat Management,
+# orchestrated by agentic AI.
+
+products:
+  xtm-one: {label: XTM One, icon: LogoXTMOne, role: Agentic Threat Management, href: /xtm-one/}
+  opencti: {label: OpenCTI, icon: LogoOpenCTI, role: Cyber threat intelligence, href: /opencti/}
+  openaev: {label: OpenAEV, icon: LogoOpenAEV, role: Adversarial exposure validation, href: /openaev/}
+  opencrq: {label: OpenCRQ, icon: LogoOpenCRQ, role: Cyber risk quantification, href: /opencrq/}
+  xtm-hub: {label: XTM Hub, icon: LogoFiligran, role: Community portal, href: "https://hub.filigran.io"}
+  composer: {label: XTM Composer, icon: Puzzle, role: Integrations of OpenCTI and OpenAEV, href: /deploy/}
+  microsoft: {label: Microsoft Defender, icon: Laptop, role: Through the Graph API}
+  drata: {label: Drata, icon: ClipboardCheck, role: Compliance automation}
+  cve: {label: CVE sources, icon: Bug, role: "NIST, FIRST EPSS, CISA KEV"}
+
+flows:
+  - from: opencti
+    to: openaev
+    short: threat data & payloads
+    what: Threats and the techniques they use become simulation scenarios.
+  - from: openaev
+    to: opencti
+    what: Simulation results update the security coverage of those threats.
+  - from: opencti
+    to: opencrq
+    short: threat landscape
+    what: Threat actors, the sectors and countries they target, their techniques and CVEs, from an OpenCTI Live Stream.
+  - from: openaev
+    to: opencrq
+    short: security posture
+    what: Detection and prevention results per ATT&CK technique and security platform, as findings on your assets and a posture score per control.
+  - from: microsoft
+    to: opencrq
+    what: Devices, identities and their logons, and software vulnerabilities, to build the attack surface.
+  - from: drata
+    to: opencrq
+    what: Frameworks and control evidence, for compliance assessments.
+  - from: cve
+    to: opencrq
+    what: CVE details, exploitation probability (EPSS) and known exploitation (KEV).
+  - from: xtm-one
+    to: opencrq
+    what: Agents that read and act on your risk scopes from the chat panel, each gated action approved by a person. XTM One also unlocks the Enterprise Edition.
+  - from: opencrq
+    to: xtm-one
+    what: Risk priced in money, by scenario and scope, for the CTEM Command Center.

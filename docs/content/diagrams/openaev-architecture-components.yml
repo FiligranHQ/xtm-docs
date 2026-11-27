@@ -1,0 +1,30 @@
+title: OpenAEV is a platform that agents and integrations talk to, with four shared services behind it
+lanes:
+  - label: Endpoints
+    tone: external
+    nodes:
+      - {id: agents, label: Agents, icon: Laptop, note: OpenAEV or third-party agents, href: /openaev/use/agents/}
+  - label: Integrations
+    tone: external
+    nodes:
+      - {id: injectors, label: Injectors, icon: Crosshair, note: Run injects on other systems, href: /openaev/use/injectors/}
+      - {id: collectors, label: Collectors, icon: ShieldCheck, note: Read results from security tools, href: /openaev/use/collectors/}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenAEV, note: "Interface, API, built-in integrations"}
+  - label: Shared services
+    tone: store
+    nodes:
+      - {id: postgresql, label: PostgreSQL, icon: Server, note: Main database and sessions}
+      - {id: elasticsearch, label: Elasticsearch, icon: Search, note: Search indices}
+      - {id: rabbitmq, label: RabbitMQ, icon: Layers, note: Queues for injectors}
+      - {id: s3, label: S3 storage, icon: Boxes, note: Files}
+edges:
+  - {from: agents, to: platform, label: fetch jobs}
+  - {from: injectors, to: platform, label: API}
+  - {from: collectors, to: platform, label: API}
+  - {from: platform, to: postgresql, label: read and write}
+  - {from: platform, to: elasticsearch, label: index}
+  - {from: platform, to: rabbitmq, label: queue injects}
+  - {from: platform, to: s3, label: files}

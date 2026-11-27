@@ -1,0 +1,875 @@
+{
+  "name": "metrics",
+  "version": "7.260811.0-lts.1",
+  "source": "OpenCTI-Platform/opencti@c9f5ea5 (opencti-platform/opencti-graphql/src/config/tracing.ts, opencti-platform/opencti-graphql/src/telemetry/TelemetryMeterManager.ts)",
+  "intro": "The 6 OpenTelemetry metrics OpenCTI 7.260811.0-lts.1 exposes to monitor a deployment, with the attributes each data point carries. Turn them on and collect them as [Metrics](/deploy/operate/metrics/) explains.",
+  "filter": "Filter metrics and attributes",
+  "sections": [
+    {
+      "title": "Observability metrics",
+      "text": "The platform exports these metrics when `app:telemetry:metrics:enabled` is `true`, to an OTLP endpoint (`app:telemetry:metrics:exporter_otlp`) or on a Prometheus port (`app:telemetry:metrics:exporter_prometheus`). It also exports the Node.js runtime metrics of the `opentelemetry-node-metrics` library, with no prefix: their names come from the library, not from the OpenCTI code.",
+      "columns": [
+        "Metric",
+        "Kind",
+        "Unit",
+        "Description",
+        "Attributes"
+      ],
+      "rows": [
+        {
+          "key": "opencti_api_direct_bulk",
+          "cells": [
+            "`opencti_api_direct_bulk`",
+            "Gauge",
+            "Not set",
+            "Size of bulks for direct absorption",
+            "`type`"
+          ]
+        },
+        {
+          "key": "opencti_api_errors",
+          "cells": [
+            "`opencti_api_errors`",
+            "Counter",
+            "Not set",
+            "Counts total number of errors",
+            "`name`, `operation`, `status`, `type`, `user_agent`"
+          ]
+        },
+        {
+          "key": "opencti_api_latency",
+          "cells": [
+            "`opencti_api_latency`",
+            "Histogram",
+            "milliseconds (not declared)",
+            "Latency computing per query",
+            "`name`, `operation`, `status`, `type`, `user_agent`"
+          ]
+        },
+        {
+          "key": "opencti_api_requests",
+          "cells": [
+            "`opencti_api_requests`",
+            "Counter",
+            "Not set",
+            "Counts total number of requests",
+            "`name`, `operation`, `status`, `type`, `user_agent`"
+          ]
+        },
+        {
+          "key": "opencti_api_side_bulk",
+          "cells": [
+            "`opencti_api_side_bulk`",
+            "Gauge",
+            "Not set",
+            "Size of bulk for absorption impacts",
+            "`type`"
+          ]
+        },
+        {
+          "key": "opencti_sent_email",
+          "cells": [
+            "`opencti_sent_email`",
+            "Counter",
+            "Not set",
+            "Counts total number of email sent",
+            "`category`, `identifier`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Usage telemetry sent to Filigran",
+      "text": "These gauges are not observability metrics: the telemetry manager sends them to Filigran on its own meter provider, never to the exporters above. [Usage telemetry and privacy](/opencti/configure/telemetry/) explains what is sent and how to stop it.",
+      "columns": [
+        "Metric",
+        "Kind",
+        "Unit",
+        "Description",
+        "Attributes"
+      ],
+      "rows": [
+        {
+          "key": "usage:opencti_active_connectors_by_identity",
+          "cells": [
+            "`opencti_active_connectors_by_identity`",
+            "Gauge",
+            "`count`",
+            "Active connectors broken down by catalog identity (slug, managed, type)",
+            "Set at run time, one data point per item"
+          ]
+        },
+        {
+          "key": "usage:opencti_active_connectors_count",
+          "cells": [
+            "`opencti_active_connectors_count`",
+            "Gauge",
+            "`count`",
+            "Number of active connectors",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_active_drafts_count",
+          "cells": [
+            "`opencti_active_drafts_count`",
+            "Gauge",
+            "`count`",
+            "Number of active drafts",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_active_workbenches_count",
+          "cells": [
+            "`opencti_active_workbenches_count`",
+            "Gauge",
+            "`count`",
+            "Number of active workbenches",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_ai_insight_request_count",
+          "cells": [
+            "`opencti_ai_insight_request_count`",
+            "Gauge",
+            "`count`",
+            "AI Insights requests broken down by cache state (hit, miss)",
+            "Set at run time, one data point per item"
+          ]
+        },
+        {
+          "key": "usage:opencti_ask_ai_query_count",
+          "cells": [
+            "`opencti_ask_ai_query_count`",
+            "Gauge",
+            "`count`",
+            "Ask AI queries broken down by feature",
+            "Set at run time, one data point per item"
+          ]
+        },
+        {
+          "key": "usage:opencti_call_dissemination",
+          "cells": [
+            "`opencti_call_dissemination`",
+            "Gauge",
+            "`count`",
+            "Dissemination feature usage",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_call_nlq",
+          "cells": [
+            "`opencti_call_nlq`",
+            "Gauge",
+            "`count`",
+            "NLQ feature usage",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_capabilities_in_draft_tab_loaded_count",
+          "cells": [
+            "`opencti_capabilities_in_draft_tab_loaded_count`",
+            "Gauge",
+            "`count`",
+            "Number of times the capabilities in draft tab is loaded",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_chatbot_message_count",
+          "cells": [
+            "`opencti_chatbot_message_count`",
+            "Gauge",
+            "`count`",
+            "Number of chatbot messages sent (legacy and XTM One combined)",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_connector_deployed_count",
+          "cells": [
+            "`opencti_connector_deployed_count`",
+            "Gauge",
+            "`count`",
+            "Number of connectors deployed via composer",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_custom_view_created_count",
+          "cells": [
+            "`opencti_custom_view_created_count`",
+            "Gauge",
+            "`count`",
+            "Number of custom views created",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_custom_view_enabled_count",
+          "cells": [
+            "`opencti_custom_view_enabled_count`",
+            "Gauge",
+            "`count`",
+            "Number of custom views enabled",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_data_shares_by_type",
+          "cells": [
+            "`opencti_data_shares_by_type`",
+            "Gauge",
+            "`count`",
+            "Data sharing surfaces broken down by type and public state",
+            "Set at run time, one data point per item"
+          ]
+        },
+        {
+          "key": "usage:opencti_decay_rule_creation_count",
+          "cells": [
+            "`opencti_decay_rule_creation_count`",
+            "Gauge",
+            "`count`",
+            "Number of decay rules created",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_draft_creation_count",
+          "cells": [
+            "`opencti_draft_creation_count`",
+            "Gauge",
+            "`count`",
+            "Number of draft creation",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_draft_validation_count",
+          "cells": [
+            "`opencti_draft_validation_count`",
+            "Gauge",
+            "`count`",
+            "Number of draft validation",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_email_template_created_count",
+          "cells": [
+            "`opencti_email_template_created_count`",
+            "Gauge",
+            "`count`",
+            "Number of email templates created",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_export_generated_count",
+          "cells": [
+            "`opencti_export_generated_count`",
+            "Gauge",
+            "`count`",
+            "Number of export generations requested",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_forgot_password_count",
+          "cells": [
+            "`opencti_forgot_password_count`",
+            "Gauge",
+            "`count`",
+            "Number of clicks on Forgot Password",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_form_intake_created_count",
+          "cells": [
+            "`opencti_form_intake_created_count`",
+            "Gauge",
+            "`count`",
+            "Number of form intakes created",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_form_intake_deleted_count",
+          "cells": [
+            "`opencti_form_intake_deleted_count`",
+            "Gauge",
+            "`count`",
+            "Number of form intakes deleted",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_form_intake_submitted_count",
+          "cells": [
+            "`opencti_form_intake_submitted_count`",
+            "Gauge",
+            "`count`",
+            "Number of form intakes submitted",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_form_intake_updated_count",
+          "cells": [
+            "`opencti_form_intake_updated_count`",
+            "Gauge",
+            "`count`",
+            "Number of form intakes updated",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_groups_count",
+          "cells": [
+            "`opencti_groups_count`",
+            "Gauge",
+            "`count`",
+            "Number of groups",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_indexed_files_count",
+          "cells": [
+            "`opencti_indexed_files_count`",
+            "Gauge",
+            "`count`",
+            "Number of indexed files",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_inference_rules_active_count",
+          "cells": [
+            "`opencti_inference_rules_active_count`",
+            "Gauge",
+            "`count`",
+            "Number of activated inference rules",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_ingesters_by_type",
+          "cells": [
+            "`opencti_ingesters_by_type`",
+            "Gauge",
+            "`count`",
+            "Built-in ingesters broken down by type and running state",
+            "Set at run time, one data point per item"
+          ]
+        },
+        {
+          "key": "usage:opencti_ingestion_objects_processed_count",
+          "cells": [
+            "`opencti_ingestion_objects_processed_count`",
+            "Gauge",
+            "`count`",
+            "Number of objects processed by completed works",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_activity_enabled",
+          "cells": [
+            "`opencti_is_activity_enabled`",
+            "Gauge",
+            "`boolean`",
+            "Whether activity is enabled on the platform (has activity listeners)",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_activity_retention_rule_active",
+          "cells": [
+            "`opencti_is_activity_retention_rule_active`",
+            "Gauge",
+            "`boolean`",
+            "Whether the activity retention rule is active on the platform",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_ai_enabled",
+          "cells": [
+            "`opencti_is_ai_enabled`",
+            "Gauge",
+            "`boolean`",
+            "Built-in LLM configuration state with provider type dimension",
+            "Set at run time, one data point per item"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_chatbot_cgu_accepted",
+          "cells": [
+            "`opencti_is_chatbot_cgu_accepted`",
+            "Gauge",
+            "`boolean`",
+            "Filigran chatbot AI CGU accepted",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_enterprise_edition",
+          "cells": [
+            "`opencti_is_enterprise_edition`",
+            "Gauge",
+            "`boolean`",
+            "Enterprise Edition is activated",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_file_indexing_enabled",
+          "cells": [
+            "`opencti_is_file_indexing_enabled`",
+            "Gauge",
+            "`boolean`",
+            "File indexing manager is running",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_history_retention_rule_active",
+          "cells": [
+            "`opencti_is_history_retention_rule_active`",
+            "Gauge",
+            "`boolean`",
+            "Whether the history retention rule is active on the platform",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_organization_segregation_enabled",
+          "cells": [
+            "`opencti_is_organization_segregation_enabled`",
+            "Gauge",
+            "`boolean`",
+            "Organization segregation is configured",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_sso_authzero_strategy_enabled",
+          "cells": [
+            "`opencti_is_sso_authzero_strategy_enabled`",
+            "Gauge",
+            "`boolean`",
+            "AuthZeroStrategy is configured and enabled",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_sso_cert_strategy_enabled",
+          "cells": [
+            "`opencti_is_sso_cert_strategy_enabled`",
+            "Gauge",
+            "`boolean`",
+            "CertStrategy is configured and enabled",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_sso_facebook_strategy_enabled",
+          "cells": [
+            "`opencti_is_sso_facebook_strategy_enabled`",
+            "Gauge",
+            "`boolean`",
+            "FacebookStrategy is configured and enabled",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_sso_github_strategy_enabled",
+          "cells": [
+            "`opencti_is_sso_github_strategy_enabled`",
+            "Gauge",
+            "`boolean`",
+            "GithubStrategy is configured and enabled",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_sso_google_strategy_enabled",
+          "cells": [
+            "`opencti_is_sso_google_strategy_enabled`",
+            "Gauge",
+            "`boolean`",
+            "GoogleStrategy is configured and enabled",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_sso_header_strategy_enabled",
+          "cells": [
+            "`opencti_is_sso_header_strategy_enabled`",
+            "Gauge",
+            "`boolean`",
+            "HeaderStrategy is configured and enabled",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_sso_ldap_strategy_enabled",
+          "cells": [
+            "`opencti_is_sso_ldap_strategy_enabled`",
+            "Gauge",
+            "`boolean`",
+            "LDAPStrategy is configured and enabled",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_sso_local_strategy_enabled",
+          "cells": [
+            "`opencti_is_sso_local_strategy_enabled`",
+            "Gauge",
+            "`boolean`",
+            "LocalStrategy is configured and enabled",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_sso_openid_strategy_enabled",
+          "cells": [
+            "`opencti_is_sso_openid_strategy_enabled`",
+            "Gauge",
+            "`boolean`",
+            "OpenidStrategy is configured and enabled",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_sso_saml_strategy_enabled",
+          "cells": [
+            "`opencti_is_sso_saml_strategy_enabled`",
+            "Gauge",
+            "`boolean`",
+            "SAMLStrategy is configured and enabled",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_xtm_hub_registered",
+          "cells": [
+            "`opencti_is_xtm_hub_registered`",
+            "Gauge",
+            "`boolean`",
+            "Platform is registered on XTM Hub",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_is_xtm_one_configured",
+          "cells": [
+            "`opencti_is_xtm_one_configured`",
+            "Gauge",
+            "`boolean`",
+            "XTM One is configured (url and token)",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_knowledge_objects_by_type",
+          "cells": [
+            "`opencti_knowledge_objects_by_type`",
+            "Gauge",
+            "`count`",
+            "Knowledge graph scale broken down by curated entity type",
+            "Set at run time, one data point per item"
+          ]
+        },
+        {
+          "key": "usage:opencti_notification_sent_count",
+          "cells": [
+            "`opencti_notification_sent_count`",
+            "Gauge",
+            "`count`",
+            "Notifications sent broken down by channel (email, webhook, ui)",
+            "Set at run time, one data point per item"
+          ]
+        },
+        {
+          "key": "usage:opencti_notifiers_count",
+          "cells": [
+            "`opencti_notifiers_count`",
+            "Gauge",
+            "`count`",
+            "Notifiers broken down by connector (email, webhook, ui, other)",
+            "Set at run time, one data point per item"
+          ]
+        },
+        {
+          "key": "usage:opencti_organizations_count",
+          "cells": [
+            "`opencti_organizations_count`",
+            "Gauge",
+            "`count`",
+            "Number of organizations",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_pir_count",
+          "cells": [
+            "`opencti_pir_count`",
+            "Gauge",
+            "`count`",
+            "Number of PIRs",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_playbook_ai_agent_run_count",
+          "cells": [
+            "`opencti_playbook_ai_agent_run_count`",
+            "Gauge",
+            "`count`",
+            "Number of playbook AI agent component runs",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_playbook_execution_count",
+          "cells": [
+            "`opencti_playbook_execution_count`",
+            "Gauge",
+            "`count`",
+            "Number of playbook executions started",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_playbooks_count",
+          "cells": [
+            "`opencti_playbooks_count`",
+            "Gauge",
+            "`count`",
+            "Playbooks broken down by running state",
+            "Set at run time, one data point per item"
+          ]
+        },
+        {
+          "key": "usage:opencti_request_access_creation_count",
+          "cells": [
+            "`opencti_request_access_creation_count`",
+            "Gauge",
+            "`count`",
+            "Number of RFI of request access type that are created",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_roles_count",
+          "cells": [
+            "`opencti_roles_count`",
+            "Gauge",
+            "`count`",
+            "Number of roles",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_roles_with_capability_in_draft_count",
+          "cells": [
+            "`opencti_roles_with_capability_in_draft_count`",
+            "Gauge",
+            "`count`",
+            "Number of roles with capability in draft",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_security_coverages_count",
+          "cells": [
+            "`opencti_security_coverages_count`",
+            "Gauge",
+            "`count`",
+            "Number of security coverages",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_service_account_into_user_count",
+          "cells": [
+            "`opencti_service_account_into_user_count`",
+            "Gauge",
+            "`count`",
+            "Number of Service Account turned into User",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_shared_saved_filters_count",
+          "cells": [
+            "`opencti_shared_saved_filters_count`",
+            "Gauge",
+            "`count`",
+            "Number of saved filters shared with at least one other member (non-creator)",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_shared_saved_filters_permission_changes",
+          "cells": [
+            "`opencti_shared_saved_filters_permission_changes`",
+            "Gauge",
+            "`count`",
+            "Number of access restriction updates on shared saved filters",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_synchronizers_count",
+          "cells": [
+            "`opencti_synchronizers_count`",
+            "Gauge",
+            "`count`",
+            "Number of OpenCTI synchronizers",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_total_instances_count",
+          "cells": [
+            "`opencti_total_instances_count`",
+            "Gauge",
+            "`count`",
+            "Cluster number of instances",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_total_service_account_count",
+          "cells": [
+            "`opencti_total_service_account_count`",
+            "Gauge",
+            "`count`",
+            "Number of service account",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_total_users_count",
+          "cells": [
+            "`opencti_total_users_count`",
+            "Gauge",
+            "`count`",
+            "Number of users",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_triggers_by_type",
+          "cells": [
+            "`opencti_triggers_by_type`",
+            "Gauge",
+            "`count`",
+            "Notification triggers broken down by type (live, digest)",
+            "Set at run time, one data point per item"
+          ]
+        },
+        {
+          "key": "usage:opencti_user_background_task_count",
+          "cells": [
+            "`opencti_user_background_task_count`",
+            "Gauge",
+            "`count`",
+            "Number of background tasks on User scope",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_user_email_send_count",
+          "cells": [
+            "`opencti_user_email_send_count`",
+            "Gauge",
+            "`count`",
+            "Number of emails sent from the platform",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_user_into_service_account_count",
+          "cells": [
+            "`opencti_user_into_service_account_count`",
+            "Gauge",
+            "`count`",
+            "Number of User turned into Service Account",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_user_login_count",
+          "cells": [
+            "`opencti_user_login_count`",
+            "Gauge",
+            "`count`",
+            "Number of user that logs-in into application",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_workbench_draft_convertion_count",
+          "cells": [
+            "`opencti_workbench_draft_convertion_count`",
+            "Gauge",
+            "`count`",
+            "Number of workbench to draft convertion",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_workbench_upload_count",
+          "cells": [
+            "`opencti_workbench_upload_count`",
+            "Gauge",
+            "`count`",
+            "Number of workbench upload - creation and updates",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_workbench_validation_count",
+          "cells": [
+            "`opencti_workbench_validation_count`",
+            "Gauge",
+            "`count`",
+            "Number of workbench validation",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_workflow_publish_count",
+          "cells": [
+            "`opencti_workflow_publish_count`",
+            "Gauge",
+            "`count`",
+            "Number of workflow definitions published",
+            "None"
+          ]
+        },
+        {
+          "key": "usage:opencti_xtm_agent_call_count",
+          "cells": [
+            "`opencti_xtm_agent_call_count`",
+            "Gauge",
+            "`count`",
+            "Direct XTM One agent calls broken down by channel (direct, direct_files)",
+            "Set at run time, one data point per item"
+          ]
+        }
+      ]
+    }
+  ]
+}

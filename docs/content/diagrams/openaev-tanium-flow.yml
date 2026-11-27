@@ -1,0 +1,22 @@
+title: OpenAEV imports the endpoints of your Tanium computer groups, then deploys an OpenAEV package, which starts the implant
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: executor, label: Tanium executor, icon: LogoOpenAEV, note: Runs inside the platform}
+      - {id: assets, label: Endpoints, icon: Server, note: One per Tanium endpoint}
+  - label: Tanium
+    tone: external
+    nodes:
+      - {id: api, label: Tanium Gateway, icon: ShieldCheck, note: "Computer groups, actions"}
+      - {id: package, label: OpenAEV package, icon: Boxes, note: Decodes the command}
+  - label: Endpoint
+    tone: external
+    nodes:
+      - {id: implant, label: Implant, icon: Cpu, note: Detached process}
+edges:
+  - {from: executor, to: api, label: list endpoints}
+  - {from: executor, to: assets, label: imports}
+  - {from: api, to: package, label: deploys}
+  - {from: package, to: implant, label: starts}
+  - {from: implant, to: assets, label: results, style: dashed}

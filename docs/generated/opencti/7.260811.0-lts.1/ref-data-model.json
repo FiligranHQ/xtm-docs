@@ -1,0 +1,1078 @@
+{
+  "name": "data-model",
+  "version": "7.260811.0-lts.1",
+  "source": "OpenCTI-Platform/opencti@c9f5ea5 (opencti-platform/opencti-graphql/src/database/stix.ts and the 82 files of opencti-platform/opencti-graphql/src/schema and opencti-platform/opencti-graphql/src/modules that register types, attributes or modules; opencti-platform/opencti-front/src/private/components/nav/LeftBar.jsx; opencti-platform/opencti-front/lang/front/en.json)",
+  "intro": "The 83 entity and observable types of OpenCTI 7.260811.0-lts.1, grouped as the navigation menu groups them, with the attributes each type adds to its family (_required_: the API refuses a creation without it) and the relationships it can start; any type can also start `related-to` and `revoked-by`. [Data model](/opencti/concepts/data-model/) explains how these types form the knowledge graph.",
+  "filter": "Filter types, attributes and relationships",
+  "sections": [
+    {
+      "title": "Analyses",
+      "text": "The types of the Analyses menu, in its order.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "Report",
+          "cells": [
+            "Report",
+            "`Report`",
+            "`report`",
+            "Entity attributes, plus `authorized_members_activation_date` (date), `content` (string), `content_mapping` (string), `description` (string), `name` (string, required), `published` (date, required), `report_types` (vocabulary list), `restricted_members` (object list), `x_opencti_reliability` (vocabulary)",
+            "–"
+          ]
+        },
+        {
+          "key": "Grouping",
+          "cells": [
+            "Grouping",
+            "`Grouping`",
+            "`grouping`",
+            "Entity attributes, plus `authorized_members_activation_date` (date), `content` (string), `content_mapping` (string), `context` (vocabulary, required), `description` (string), `name` (string, required), `restricted_members` (object list)",
+            "`derived-from`"
+          ]
+        },
+        {
+          "key": "Malware-Analysis",
+          "cells": [
+            "Malware Analysis",
+            "`Malware-Analysis`",
+            "`malware-analysis`",
+            "Entity attributes, plus `analysis_definition_version` (string), `analysis_ended` (date), `analysis_engine_version` (string), `analysis_started` (date), `configuration_version` (string), `modules` (string list), `product` (string, required), `result` (vocabulary), `result_name` (string, required), `submitted` (date), `version` (string)",
+            "`analysis-of`, `characterizes`, `derived-from`, `dynamic-analysis-of`, `static-analysis-of`"
+          ]
+        },
+        {
+          "key": "Security-Coverage",
+          "cells": [
+            "Security Coverages",
+            "`Security-Coverage`",
+            "`security-coverage`",
+            "Entity attributes, plus `auto_enrichment_disable` (boolean), `coverage_information` (object list), `coverage_last_result` (date), `coverage_valid_from` (date), `coverage_valid_to` (date), `created_at` (date), `creator_id` (reference list), `description` (string), `duration` (string), `external_uri` (string), `name` (string, required), `periodicity` (string), `platforms_affinity` (string list), `type_affinity` (string), `updated_at` (date)",
+            "`has-covered`"
+          ]
+        },
+        {
+          "key": "Note",
+          "cells": [
+            "Note",
+            "`Note`",
+            "`note`",
+            "Entity attributes, plus `attribute_abstract` (string), `authors` (string list), `content` (string, required), `content_mapping` (string), `created` (date, required), `likelihood` (number), `note_types` (vocabulary list)",
+            "–"
+          ]
+        },
+        {
+          "key": "External-Reference",
+          "cells": [
+            "External reference",
+            "`External-Reference`",
+            "`external-reference`",
+            "Stix-Meta-Object attributes, plus `description` (string), `external_id` (string), `fileId` (string), `hash` (string), `source_name` (string, required), `url` (string)",
+            "–"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cases",
+      "text": "The types of the Cases menu, in its order.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "Case-Incident",
+          "cells": [
+            "Incident response",
+            "`Case-Incident`",
+            "`case-incident`",
+            "Case attributes, plus `authorized_members_activation_date` (date), `priority` (vocabulary), `response_types` (vocabulary list), `restricted_members` (object list), `severity` (vocabulary)",
+            "–"
+          ]
+        },
+        {
+          "key": "Case-Rfi",
+          "cells": [
+            "Request for information",
+            "`Case-Rfi`",
+            "`case-rfi`",
+            "Case attributes, plus `authorized_members_activation_date` (date), `information_types` (vocabulary list), `name` (string, required), `priority` (vocabulary), `restricted_members` (object list), `severity` (vocabulary), `x_opencti_request_access` (JSON)",
+            "–"
+          ]
+        },
+        {
+          "key": "Case-Rft",
+          "cells": [
+            "Request for takedown",
+            "`Case-Rft`",
+            "`case-rft`",
+            "Case attributes, plus `authorized_members_activation_date` (date), `name` (string, required), `priority` (vocabulary), `restricted_members` (object list), `severity` (vocabulary), `takedown_types` (vocabulary list)",
+            "–"
+          ]
+        },
+        {
+          "key": "Task",
+          "cells": [
+            "Tasks",
+            "`Task`",
+            "`task`",
+            "Entity attributes, plus `content_mapping` (string), `description` (string), `due_date` (date), `name` (string, required), `x_opencti_workflow_id` (reference)",
+            "–"
+          ]
+        },
+        {
+          "key": "Feedback",
+          "cells": [
+            "Feedback",
+            "`Feedback`",
+            "`feedback`",
+            "Case attributes, plus `authorized_members_activation_date` (date), `content` (string), `rating` (number, required), `restricted_members` (object list)",
+            "–"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Events",
+      "text": "The types of the Events menu, in its order.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "Incident",
+          "cells": [
+            "Incident",
+            "`Incident`",
+            "`incident`",
+            "Entity attributes, plus `aliases` (string list), `description` (string), `first_seen` (date), `incident_type` (vocabulary), `last_seen` (date), `name` (string, required), `objective` (string), `severity` (vocabulary), `source` (string)",
+            "`attributed-to`, `compromises`, `derived-from`, `originates-from`, `targets`, `uses`"
+          ]
+        },
+        {
+          "key": "stix-sighting-relationship",
+          "cells": [
+            "Sightings",
+            "`stix-sighting-relationship`",
+            "`sighting`",
+            "`attribute_count` (number, required), `connections` (object list), `description` (string), `entity_type` (string), `first_seen` (date), `last_seen` (date), `x_opencti_negative` (boolean), `x_opencti_workflow_id` (reference)",
+            "–"
+          ]
+        },
+        {
+          "key": "Observed-Data",
+          "cells": [
+            "Observed Data",
+            "`Observed-Data`",
+            "`observed-data`",
+            "Entity attributes, plus `content` (string), `content_mapping` (string), `first_observed` (date, required), `last_observed` (date, required), `number_observed` (number, required)",
+            "–"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Observations",
+      "text": "The types of the Observations menu, in its order.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "Artifact",
+          "cells": [
+            "Artifact",
+            "`Artifact`",
+            "`artifact`",
+            "Observable attributes, plus `decryption_key` (string), `encryption_algorithm` (string), `hashes` (object), `mime_type` (string), `payload_bin` (string), `url` (string), `x_opencti_additional_names` (string list)",
+            "`communicates-with`, `derived-from`, `interpreted-by`, `uses`"
+          ]
+        },
+        {
+          "key": "Indicator",
+          "cells": [
+            "Indicator",
+            "`Indicator`",
+            "`indicator`",
+            "Entity attributes, plus `decay_applied_rule` (object), `decay_base_score` (number), `decay_base_score_date` (date), `decay_exclusion_applied_rule` (object), `decay_history` (object list), `decay_next_reaction_date` (date), `description` (string), `indicator_types` (vocabulary list), `name` (string, required), `pattern` (string, required), `pattern_type` (vocabulary, required), `pattern_version` (string), `revoked` (boolean), `valid_from` (date), `valid_until` (date), `x_mitre_platforms` (string list), `x_opencti_detection` (boolean), `x_opencti_main_observable_type` (string, required), `x_opencti_reliability` (vocabulary), `x_opencti_score` (number)",
+            "`based-on`, `derived-from`, `indicates`"
+          ]
+        },
+        {
+          "key": "Infrastructure",
+          "cells": [
+            "Infrastructure",
+            "`Infrastructure`",
+            "`infrastructure`",
+            "Entity attributes, plus `aliases` (string list), `description` (string), `first_seen` (date), `infrastructure_types` (vocabulary list), `last_seen` (date), `name` (string, required)",
+            "`belongs-to`, `communicates-with`, `consists-of`, `controls`, `delivers`, `derived-from`, `detects`, `has`, `hosts`, `located-at`, `supports`, `technology`, `technology-from`, `technology-to`, `uses`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Observables",
+      "text": "The observable types listed together under Observations > Observables.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "AI-Prompt",
+          "cells": [
+            "AI Prompt",
+            "`AI-Prompt`",
+            "`ai-prompt`",
+            "Observable attributes, plus `value` (string, required)",
+            "`targets`"
+          ]
+        },
+        {
+          "key": "Autonomous-System",
+          "cells": [
+            "Autonomous System",
+            "`Autonomous-System`",
+            "`autonomous-system`",
+            "Observable attributes, plus `name` (string), `number` (number, required), `rir` (string)",
+            "–"
+          ]
+        },
+        {
+          "key": "Bank-Account",
+          "cells": [
+            "Bank account",
+            "`Bank-Account`",
+            "`bank-account`",
+            "Observable attributes, plus `account_number` (string), `bic` (string), `iban` (string, required)",
+            "`transferred-to`"
+          ]
+        },
+        {
+          "key": "Credential",
+          "cells": [
+            "Credential",
+            "`Credential`",
+            "`credential`",
+            "Observable attributes, plus `value` (string, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Cryptocurrency-Wallet",
+          "cells": [
+            "Cryptocurrency wallet",
+            "`Cryptocurrency-Wallet`",
+            "`cryptocurrency-wallet`",
+            "Observable attributes, plus `value` (string, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Cryptographic-Key",
+          "cells": [
+            "Cryptographic key",
+            "`Cryptographic-Key`",
+            "`cryptographic-key`",
+            "Observable attributes, plus `value` (string, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Directory",
+          "cells": [
+            "Directory",
+            "`Directory`",
+            "`directory`",
+            "Observable attributes, plus `atime` (date), `ctime` (date), `mtime` (date), `path` (string, required), `path_enc` (string)",
+            "–"
+          ]
+        },
+        {
+          "key": "Domain-Name",
+          "cells": [
+            "Domain name",
+            "`Domain-Name`",
+            "`domain-name`",
+            "Observable attributes, plus `value` (string)",
+            "`belongs-to`, `derived-from`, `resolves-to`, `uses`"
+          ]
+        },
+        {
+          "key": "Email-Addr",
+          "cells": [
+            "Email address",
+            "`Email-Addr`",
+            "`email-addr`",
+            "Observable attributes, plus `display_name` (string), `value` (string, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Email-Message",
+          "cells": [
+            "Email message",
+            "`Email-Message`",
+            "`email-message`",
+            "Observable attributes, plus `attribute_date` (date), `body` (string), `content_type` (string), `is_multipart` (boolean), `message_id` (string), `received_lines` (string list), `subject` (string)",
+            "–"
+          ]
+        },
+        {
+          "key": "Email-Mime-Part-Type",
+          "cells": [
+            "Email message - MIME Part",
+            "`Email-Mime-Part-Type`",
+            "`email-mime-part-type`",
+            "Observable attributes, plus `body` (string), `content_disposition` (string), `content_type` (string)",
+            "–"
+          ]
+        },
+        {
+          "key": "StixFile",
+          "cells": [
+            "File",
+            "`StixFile`",
+            "`file`",
+            "Observable attributes, plus `atime` (date), `ctime` (date), `extensions` (string), `hashes` (object), `magic_number_hex` (string), `mime_type` (string), `mtime` (date), `name` (string), `name_enc` (string), `size` (number), `x_opencti_additional_names` (string list)",
+            "`communicates-with`, `demonstrates`, `derived-from`, `downloads`, `drops`, `interpreted-by`, `targets`, `uses`"
+          ]
+        },
+        {
+          "key": "Hostname",
+          "cells": [
+            "Hostname",
+            "`Hostname`",
+            "`hostname`",
+            "Observable attributes, plus `value` (string, required)",
+            "`communicates-with`, `derived-from`, `drops`, `resolves-to`, `uses`"
+          ]
+        },
+        {
+          "key": "ICCID",
+          "cells": [
+            "ICCID",
+            "`ICCID`",
+            "`iccid`",
+            "Observable attributes, plus `value` (string, required)",
+            "`has`, `resolves-to`, `uses`"
+          ]
+        },
+        {
+          "key": "IMEI",
+          "cells": [
+            "IMEI",
+            "`IMEI`",
+            "`imei`",
+            "Observable attributes, plus `value` (string, required)",
+            "`has`, `uses`"
+          ]
+        },
+        {
+          "key": "IMSI",
+          "cells": [
+            "IMSI",
+            "`IMSI`",
+            "`imsi`",
+            "Observable attributes, plus `value` (string, required)",
+            "`has`, `uses`"
+          ]
+        },
+        {
+          "key": "IPv4-Addr",
+          "cells": [
+            "IPv4 address",
+            "`IPv4-Addr`",
+            "`ipv4-addr`",
+            "Observable attributes, plus `value` (string, required)",
+            "`belongs-to`, `communicates-with`, `derived-from`, `located-at`, `resolves-to`"
+          ]
+        },
+        {
+          "key": "IPv6-Addr",
+          "cells": [
+            "IPv6 address",
+            "`IPv6-Addr`",
+            "`ipv6-addr`",
+            "Observable attributes, plus `value` (string, required)",
+            "`belongs-to`, `derived-from`, `located-at`, `resolves-to`"
+          ]
+        },
+        {
+          "key": "Mac-Addr",
+          "cells": [
+            "MAC address",
+            "`Mac-Addr`",
+            "`mac-addr`",
+            "Observable attributes, plus `value` (string, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Media-Content",
+          "cells": [
+            "Media content",
+            "`Media-Content`",
+            "`media-content`",
+            "Observable attributes, plus `content` (string), `media_category` (string), `publication_date` (date), `title` (string), `url` (string, required)",
+            "`authored-by`, `derived-from`, `uses`"
+          ]
+        },
+        {
+          "key": "Mutex",
+          "cells": [
+            "Mutex",
+            "`Mutex`",
+            "`mutex`",
+            "Observable attributes, plus `name` (string, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Network-Traffic",
+          "cells": [
+            "Network traffic",
+            "`Network-Traffic`",
+            "`network-traffic`",
+            "Observable attributes, plus `dst_byte_count` (number), `dst_packets` (number), `dst_port` (number), `end` (date), `extensions` (string), `is_active` (boolean), `protocols` (string list), `src_byte_count` (number), `src_packets` (number), `src_port` (number), `start` (date)",
+            "–"
+          ]
+        },
+        {
+          "key": "Payment-Card",
+          "cells": [
+            "Payment card",
+            "`Payment-Card`",
+            "`payment-card`",
+            "Observable attributes, plus `card_number` (string, required), `cvv` (number), `expiration_date` (date), `holder_name` (string)",
+            "–"
+          ]
+        },
+        {
+          "key": "Persona",
+          "cells": [
+            "Persona",
+            "`Persona`",
+            "`persona`",
+            "Observable attributes, plus `persona_name` (string, required), `persona_type` (string, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Phone-Number",
+          "cells": [
+            "Phone number",
+            "`Phone-Number`",
+            "`phone-number`",
+            "Observable attributes, plus `value` (string, required)",
+            "`resolves-to`, `uses`"
+          ]
+        },
+        {
+          "key": "Process",
+          "cells": [
+            "Process",
+            "`Process`",
+            "`process`",
+            "Observable attributes, plus `aslr_enabled` (boolean), `command_line` (string), `created_time` (date), `cwd` (string), `dep_enabled` (boolean), `descriptions` (string list), `display_name` (string), `environment_variables` (string list), `extensions` (string), `group_name` (string), `integrity_level` (vocabulary), `is_hidden` (boolean), `owner_sid` (string), `pid` (number), `priority` (vocabulary), `service_name` (string), `service_status` (vocabulary), `service_type` (vocabulary), `start_type` (vocabulary), `window_title` (string)",
+            "–"
+          ]
+        },
+        {
+          "key": "Software",
+          "cells": [
+            "Software",
+            "`Software`",
+            "`software`",
+            "Observable attributes, plus `cpe` (string), `languages` (string list), `name` (string), `swid` (string), `vendor` (string), `version` (string), `x_opencti_product` (string)",
+            "`derived-from`, `has`, `remediates`"
+          ]
+        },
+        {
+          "key": "SSH-Key",
+          "cells": [
+            "SSH Key",
+            "`SSH-Key`",
+            "`ssh-key`",
+            "Observable attributes, plus `comment` (string), `created` (date), `expiration_date` (date), `fingerprint_md5` (string), `fingerprint_sha256` (string, required), `key_length` (string), `key_type` (vocabulary), `public_key` (string)",
+            "–"
+          ]
+        },
+        {
+          "key": "Text",
+          "cells": [
+            "Text",
+            "`Text`",
+            "`text`",
+            "Observable attributes, plus `value` (string, required)",
+            "`derived-from`, `uses`"
+          ]
+        },
+        {
+          "key": "Tracking-Number",
+          "cells": [
+            "Tracking number",
+            "`Tracking-Number`",
+            "`tracking-number`",
+            "Observable attributes, plus `value` (string, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Url",
+          "cells": [
+            "URL",
+            "`Url`",
+            "`url`",
+            "Observable attributes, plus `value` (string)",
+            "`derived-from`, `uses`"
+          ]
+        },
+        {
+          "key": "User-Account",
+          "cells": [
+            "User account",
+            "`User-Account`",
+            "`user-account`",
+            "Observable attributes, plus `account_created` (date), `account_expires` (date), `account_first_login` (date), `account_last_login` (date), `account_login` (string), `account_type` (vocabulary), `can_escalate_privs` (boolean), `credential` (string), `credential_last_changed` (date), `display_name` (string), `extensions` (string), `is_disabled` (boolean), `is_privileged` (boolean), `is_service_account` (boolean), `user_id` (reference)",
+            "`derived-from`, `publishes`"
+          ]
+        },
+        {
+          "key": "User-Agent",
+          "cells": [
+            "User agent",
+            "`User-Agent`",
+            "`user-agent`",
+            "Observable attributes, plus `value` (string, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Windows-Registry-Key",
+          "cells": [
+            "Windows Registry Key",
+            "`Windows-Registry-Key`",
+            "`windows-registry-key`",
+            "Observable attributes, plus `attribute_key` (string), `modified_time` (date), `number_of_subkeys` (number)",
+            "–"
+          ]
+        },
+        {
+          "key": "Windows-Registry-Value-Type",
+          "cells": [
+            "Windows Registry Key Value",
+            "`Windows-Registry-Value-Type`",
+            "`windows-registry-value-type`",
+            "Observable attributes, plus `data` (string), `data_type` (string), `name` (string)",
+            "–"
+          ]
+        },
+        {
+          "key": "X509-Certificate",
+          "cells": [
+            "X509 certificate",
+            "`X509-Certificate`",
+            "`x509-certificate`",
+            "Observable attributes, plus `authority_key_identifier` (string), `basic_constraints` (string), `certificate_policies` (string), `crl_distribution_points` (string), `extended_key_usage` (string), `hashes` (object), `inhibit_any_policy` (string), `is_self_signed` (boolean), `issuer` (string), `issuer_alternative_name` (string), `key_usage` (string), `name_constraints` (string), `policy_constraints` (string), `policy_mappings` (string), `private_key_usage_period_not_after` (date), `private_key_usage_period_not_before` (date), `serial_number` (string), `signature_algorithm` (string), `subject` (string), `subject_alternative_name` (string), `subject_directory_attributes` (string), `subject_key_identifier` (string), `subject_public_key_algorithm` (string), `subject_public_key_exponent` (number), `subject_public_key_modulus` (string), `validity_not_after` (date), `validity_not_before` (date), `version` (string)",
+            "–"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Threats",
+      "text": "The types of the Threats menu, in its order.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "Threat-Actor-Group",
+          "cells": [
+            "Threat Actor Group",
+            "`Threat-Actor-Group`",
+            "`threat-actor`",
+            "Entity attributes, plus `aliases` (string list), `description` (string), `first_seen` (date), `goals` (string list), `last_seen` (date), `name` (string, required), `personal_motivations` (vocabulary list), `primary_motivation` (vocabulary), `resource_level` (vocabulary), `roles` (vocabulary list), `secondary_motivations` (vocabulary list), `sophistication` (vocabulary), `threat_actor_types` (vocabulary list)",
+            "`attributed-to`, `compromises`, `cooperates-with`, `derived-from`, `hosts`, `impersonates`, `located-at`, `owns`, `part-of`, `participates-in`, `targets`, `uses`"
+          ]
+        },
+        {
+          "key": "Threat-Actor-Individual",
+          "cells": [
+            "Threat Actor Individual",
+            "`Threat-Actor-Individual`",
+            "`threat-actor`",
+            "Entity attributes, plus `aliases` (string list), `confidence` (number), `date_of_birth` (date), `description` (string), `eye_color` (vocabulary), `first_seen` (date), `gender` (vocabulary), `goals` (string list), `hair_color` (vocabulary), `height` (object list), `job_title` (string), `lang` (string), `last_seen` (date), `marital_status` (vocabulary), `name` (string, required), `personal_motivations` (vocabulary list), `primary_motivation` (vocabulary), `resource_level` (vocabulary), `revoked` (boolean), `roles` (vocabulary list), `secondary_motivations` (vocabulary list), `sophistication` (vocabulary), `threat_actor_types` (vocabulary list), `weight` (object list)",
+            "`attributed-to`, `citizen-of`, `compromises`, `cooperates-with`, `derived-from`, `employed-by`, `hosts`, `impersonates`, `known-as`, `located-at`, `national-of`, `owns`, `part-of`, `participates-in`, `reports-to`, `resides-in`, `supports`, `targets`, `uses`"
+          ]
+        },
+        {
+          "key": "Intrusion-Set",
+          "cells": [
+            "Intrusion Set",
+            "`Intrusion-Set`",
+            "`intrusion-set`",
+            "Entity attributes, plus `aliases` (string list), `description` (string), `first_seen` (date), `goals` (string list), `last_seen` (date), `name` (string, required), `primary_motivation` (vocabulary), `resource_level` (vocabulary), `secondary_motivations` (vocabulary list)",
+            "`attributed-to`, `compromises`, `derived-from`, `hosts`, `originates-from`, `owns`, `part-of`, `targets`, `uses`"
+          ]
+        },
+        {
+          "key": "Campaign",
+          "cells": [
+            "Campaign",
+            "`Campaign`",
+            "`campaign`",
+            "Entity attributes, plus `aliases` (string list), `description` (string), `first_seen` (date), `last_seen` (date), `name` (string, required), `objective` (string)",
+            "`attributed-to`, `compromises`, `derived-from`, `originates-from`, `targets`, `uses`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Arsenal",
+      "text": "The types of the Arsenal menu, in its order.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "Malware",
+          "cells": [
+            "Malware",
+            "`Malware`",
+            "`malware`",
+            "Entity attributes, plus `aliases` (string list), `architecture_execution_envs` (vocabulary list), `capabilities` (vocabulary list), `description` (string), `first_seen` (date), `implementation_languages` (vocabulary list), `is_family` (boolean, required), `last_seen` (date), `malware_types` (vocabulary list), `name` (string, required)",
+            "`authored-by`, `beacons-to`, `communicates-with`, `controls`, `derived-from`, `downloads`, `drops`, `exfiltrates-to`, `exploits`, `originates-from`, `targets`, `uses`, `variant-of`"
+          ]
+        },
+        {
+          "key": "Channel",
+          "cells": [
+            "Channel",
+            "`Channel`",
+            "`channel`",
+            "Entity attributes, plus `aliases` (string list), `channel_types` (vocabulary list), `description` (string), `name` (string, required)",
+            "`amplifies`, `belongs-to`, `delivers`, `derived-from`, `drops`, `publishes`, `targets`, `uses`"
+          ]
+        },
+        {
+          "key": "Tool",
+          "cells": [
+            "Tool",
+            "`Tool`",
+            "`tool`",
+            "Entity attributes, plus `aliases` (string list), `description` (string), `name` (string, required), `tool_types` (vocabulary list), `tool_version` (string)",
+            "`delivers`, `derived-from`, `drops`, `has`, `targets`, `uses`"
+          ]
+        },
+        {
+          "key": "Vulnerability",
+          "cells": [
+            "Vulnerability",
+            "`Vulnerability`",
+            "`vulnerability`",
+            "Entity attributes, plus `description` (string), `name` (string, required), `x_opencti_aliases` (string list), `x_opencti_cisa_kev` (boolean), `x_opencti_cvss_attack_complexity` (string), `x_opencti_cvss_attack_vector` (string), `x_opencti_cvss_availability_impact` (string), `x_opencti_cvss_base_score` (number), `x_opencti_cvss_base_severity` (enum), `x_opencti_cvss_confidentiality_impact` (string), `x_opencti_cvss_exploit_code_maturity` (string), `x_opencti_cvss_integrity_impact` (string), `x_opencti_cvss_privileges_required` (string), `x_opencti_cvss_remediation_level` (string), `x_opencti_cvss_report_confidence` (string), `x_opencti_cvss_scope` (string), `x_opencti_cvss_temporal_score` (number), `x_opencti_cvss_user_interaction` (string), `x_opencti_cvss_v2_access_complexity` (string), `x_opencti_cvss_v2_access_vector` (string), `x_opencti_cvss_v2_authentication` (string), `x_opencti_cvss_v2_availability_impact` (string), `x_opencti_cvss_v2_base_score` (number), `x_opencti_cvss_v2_confidentiality_impact` (string), `x_opencti_cvss_v2_exploitability` (string), `x_opencti_cvss_v2_integrity_impact` (string), `x_opencti_cvss_v2_remediation_level` (string), `x_opencti_cvss_v2_report_confidence` (string), `x_opencti_cvss_v2_temporal_score` (number), `x_opencti_cvss_v2_vector_string` (string), `x_opencti_cvss_v4_attack_complexity` (string), `x_opencti_cvss_v4_attack_requirements` (string), `x_opencti_cvss_v4_attack_vector` (string), `x_opencti_cvss_v4_availability_impact_s` (string), `x_opencti_cvss_v4_availability_impact_v` (string), `x_opencti_cvss_v4_base_score` (number), `x_opencti_cvss_v4_base_severity` (enum), `x_opencti_cvss_v4_confidentiality_impact_s` (string), `x_opencti_cvss_v4_confidentiality_impact_v` (string), `x_opencti_cvss_v4_exploit_maturity` (string), `x_opencti_cvss_v4_integrity_impact_s` (string), `x_opencti_cvss_v4_integrity_impact_v` (string), `x_opencti_cvss_v4_privileges_required` (string), `x_opencti_cvss_v4_user_interaction` (string), `x_opencti_cvss_v4_vector_string` (string), `x_opencti_cvss_vector_string` (string), `x_opencti_cwe` (string list), `x_opencti_epss_percentile` (number), `x_opencti_epss_score` (number), `x_opencti_first_seen_active` (date), `x_opencti_score` (number)",
+            "`derived-from`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Techniques",
+      "text": "The types of the Techniques menu, in its order.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "Attack-Pattern",
+          "cells": [
+            "Attack Pattern",
+            "`Attack-Pattern`",
+            "`attack-pattern`",
+            "Entity attributes, plus `aliases` (string list), `description` (string), `name` (string, required), `x_mitre_detection` (string), `x_mitre_id` (string), `x_mitre_permissions_required` (vocabulary list), `x_mitre_platforms` (vocabulary list)",
+            "`delivers`, `derived-from`, `subtechnique-of`, `targets`, `uses`"
+          ]
+        },
+        {
+          "key": "Narrative",
+          "cells": [
+            "Narrative",
+            "`Narrative`",
+            "`narrative`",
+            "Entity attributes, plus `aliases` (string list), `description` (string), `name` (string, required), `narrative_types` (string list)",
+            "`derived-from`, `subnarrative-of`"
+          ]
+        },
+        {
+          "key": "Course-Of-Action",
+          "cells": [
+            "Course of action",
+            "`Course-Of-Action`",
+            "`course-of-action`",
+            "Entity attributes, plus `description` (string), `name` (string, required), `x_mitre_id` (string), `x_opencti_aliases` (string list), `x_opencti_log_sources` (string list), `x_opencti_threat_hunting` (string)",
+            "`derived-from`, `investigates`, `mitigates`, `remediates`"
+          ]
+        },
+        {
+          "key": "Data-Component",
+          "cells": [
+            "Data Component",
+            "`Data-Component`",
+            "`data-component`",
+            "Entity attributes, plus `description` (string), `name` (string, required)",
+            "`derived-from`, `detects`"
+          ]
+        },
+        {
+          "key": "Data-Source",
+          "cells": [
+            "Data Source",
+            "`Data-Source`",
+            "`data-source`",
+            "Entity attributes, plus `collection_layers` (vocabulary list), `description` (string), `name` (string, required), `x_mitre_platforms` (vocabulary list)",
+            "`derived-from`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Entities",
+      "text": "The types of the Entities menu, in its order.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "Sector",
+          "cells": [
+            "Sector",
+            "`Sector`",
+            "`identity`",
+            "Identity attributes, plus `x_opencti_aliases` (string list)",
+            "`derived-from`, `located-at`, `part-of`"
+          ]
+        },
+        {
+          "key": "Event",
+          "cells": [
+            "Event",
+            "`Event`",
+            "`event`",
+            "Entity attributes, plus `aliases` (string list), `description` (string), `event_types` (vocabulary list), `name` (string, required), `start_time` (date), `stop_time` (date)",
+            "`derived-from`, `located-at`"
+          ]
+        },
+        {
+          "key": "Organization",
+          "cells": [
+            "Organization",
+            "`Organization`",
+            "`identity`",
+            "Identity attributes, plus `authorized_authorities` (string list), `authorized_members_activation_date` (date), `default_dashboard` (string), `default_hidden_types` (string list), `grantable_groups` (string list), `restricted_members` (object list), `x_opencti_aliases` (string list), `x_opencti_organization_type` (vocabulary), `x_opencti_reliability` (vocabulary), `x_opencti_score` (number)",
+            "`derived-from`, `has`, `located-at`, `owns`, `part-of`, `publishes`, `should-cover`, `uses`"
+          ]
+        },
+        {
+          "key": "SecurityPlatform",
+          "cells": [
+            "Security platform",
+            "`SecurityPlatform`",
+            "`identity`",
+            "Identity attributes, plus `description` (string), `name` (string, required), `security_platform_type` (vocabulary)",
+            "`should-cover`"
+          ]
+        },
+        {
+          "key": "System",
+          "cells": [
+            "System",
+            "`System`",
+            "`identity`",
+            "Identity attributes, plus `x_opencti_aliases` (string list), `x_opencti_reliability` (vocabulary)",
+            "`belongs-to`, `derived-from`, `has`, `located-at`, `uses`"
+          ]
+        },
+        {
+          "key": "Individual",
+          "cells": [
+            "Individual",
+            "`Individual`",
+            "`identity`",
+            "Identity attributes, plus `x_opencti_aliases` (string list), `x_opencti_firstname` (string), `x_opencti_lastname` (string), `x_opencti_reliability` (vocabulary)",
+            "`derived-from`, `located-at`, `part-of`, `publishes`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Locations",
+      "text": "The types of the Locations menu, in its order.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "Region",
+          "cells": [
+            "Region",
+            "`Region`",
+            "`location`",
+            "Location attributes, plus `x_opencti_aliases` (string list)",
+            "`derived-from`, `located-at`"
+          ]
+        },
+        {
+          "key": "Country",
+          "cells": [
+            "Country",
+            "`Country`",
+            "`location`",
+            "Location attributes, plus `x_opencti_aliases` (string list)",
+            "`derived-from`, `located-at`"
+          ]
+        },
+        {
+          "key": "Administrative-Area",
+          "cells": [
+            "Area",
+            "`Administrative-Area`",
+            "`location`",
+            "Location attributes, plus `description` (string), `latitude` (number), `longitude` (number), `name` (string, required), `x_opencti_aliases` (string list), `x_opencti_location_type` (string)",
+            "`derived-from`, `located-at`"
+          ]
+        },
+        {
+          "key": "City",
+          "cells": [
+            "City",
+            "`City`",
+            "`location`",
+            "Location attributes, plus `x_opencti_aliases` (string list)",
+            "`derived-from`, `located-at`"
+          ]
+        },
+        {
+          "key": "Position",
+          "cells": [
+            "Position",
+            "`Position`",
+            "`location`",
+            "Location attributes, plus `postal_code` (string), `street_address` (string), `x_opencti_aliases` (string list)",
+            "`derived-from`, `located-at`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Other domain objects",
+      "text": "Domain object types the navigation menu does not list: they appear inside other objects or in their own screens.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "Language",
+          "cells": [
+            "Language",
+            "`Language`",
+            "`language`",
+            "Entity attributes, plus `aliases` (string list), `name` (string, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Opinion",
+          "cells": [
+            "Opinion",
+            "`Opinion`",
+            "`opinion`",
+            "Entity attributes, plus `authors` (string list), `content` (string), `content_mapping` (string), `explanation` (string), `opinion` (vocabulary, required)",
+            "–"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Meta objects",
+      "text": "Objects that qualify other objects (labels, markings, kill chain phases): they cannot start relationships, other objects point to them.",
+      "columns": [
+        "Name",
+        "Type",
+        "STIX type",
+        "Attributes",
+        "Relationships it can start"
+      ],
+      "rows": [
+        {
+          "key": "Kill-Chain-Phase",
+          "cells": [
+            "Kill Chain phase",
+            "`Kill-Chain-Phase`",
+            "`kill-chain-phase`",
+            "Stix-Meta-Object attributes, plus `kill_chain_name` (string, required), `phase_name` (string, required), `x_opencti_order` (number, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Label",
+          "cells": [
+            "Label",
+            "`Label`",
+            "`label`",
+            "Stix-Meta-Object attributes, plus `color` (string, required), `value` (string, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Marking-Definition",
+          "cells": [
+            "Marking definition",
+            "`Marking-Definition`",
+            "`marking-definition`",
+            "Stix-Meta-Object attributes, plus `definition` (string, required), `definition_type` (string, required), `draft_change` (object), `x_opencti_color` (string), `x_opencti_order` (number, required)",
+            "–"
+          ]
+        },
+        {
+          "key": "Vocabulary",
+          "cells": [
+            "Vocabulary",
+            "`Vocabulary`",
+            "`vocabulary`",
+            "Stix-Meta-Object attributes, plus `aliases` (string list), `builtIn` (boolean), `category` (string, required), `description` (string), `is_hidden` (boolean), `name` (string, required), `order` (number)",
+            "–"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Inherited attributes",
+      "text": "Each type also has the attributes of the levels it belongs to: every entity and observable has those of `Basic-Object`, `Stix-Object` and `Stix-Core-Object`, then those of its family (an incident response has the `Stix-Domain-Object` and `Case` attributes). References to other objects (author, markings, labels, contained objects, kill chain phases) are relationships, not attributes, and are not listed.",
+      "columns": [
+        "Level",
+        "Type",
+        "Attributes"
+      ],
+      "rows": [
+        {
+          "key": "family:Basic-Object",
+          "cells": [
+            "Basic-Object",
+            "`Basic-Object`",
+            "`base_type` (string), `created_at` (date), `creator_id` (reference list), `draft_change` (object), `draft_ids` (reference list), `entity_type` (string), `id` (reference), `internal_id` (reference), `metrics` (object list), `parent_types` (string list), `refreshed_at` (date), `updated_at` (date)"
+          ]
+        },
+        {
+          "key": "family:Stix-Object",
+          "cells": [
+            "Stix-Object",
+            "`Stix-Object`",
+            "`x_opencti_files` (object list), `x_opencti_stix_ids` (string list)"
+          ]
+        },
+        {
+          "key": "family:Stix-Core-Object",
+          "cells": [
+            "Entity and observable",
+            "`Stix-Core-Object`",
+            "`opinions_metrics` (object)"
+          ]
+        },
+        {
+          "key": "family:Stix-Domain-Object",
+          "cells": [
+            "Entity",
+            "`Stix-Domain-Object`",
+            "`confidence` (number), `created` (date), `lang` (string), `modified` (date), `pir_information` (object list), `revoked` (boolean), `x_opencti_files` (object list), `x_opencti_graph_data` (string), `x_opencti_modified_at` (date), `x_opencti_workflow_id` (reference)"
+          ]
+        },
+        {
+          "key": "family:Identity",
+          "cells": [
+            "Identity",
+            "`Identity`",
+            "`contact_information` (string), `description` (string), `identity_class` (string), `name` (string, required), `roles` (string list)"
+          ]
+        },
+        {
+          "key": "family:Location",
+          "cells": [
+            "Location",
+            "`Location`",
+            "`description` (string), `latitude` (number), `longitude` (number), `name` (string, required), `precision` (number), `x_opencti_location_type` (string)"
+          ]
+        },
+        {
+          "key": "family:Case",
+          "cells": [
+            "Case",
+            "`Case`",
+            "`caseTemplate` (reference), `content` (string), `content_mapping` (string), `description` (string), `name` (string, required)"
+          ]
+        },
+        {
+          "key": "family:Stix-Cyber-Observable",
+          "cells": [
+            "Observable",
+            "`Stix-Cyber-Observable`",
+            "`x_opencti_description` (string), `x_opencti_modified_at` (date), `x_opencti_score` (number)"
+          ]
+        },
+        {
+          "key": "family:Stix-Meta-Object",
+          "cells": [
+            "Stix-Meta-Object",
+            "`Stix-Meta-Object`",
+            "`created` (date), `modified` (date)"
+          ]
+        }
+      ]
+    }
+  ]
+}

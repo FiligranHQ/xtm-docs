@@ -1,0 +1,22 @@
+title: How the threats of an OpenCTI Live Stream reach the risk scenarios of OpenCRQ
+lanes:
+  - label: OpenCTI
+    tone: external
+    nodes:
+      - {id: knowledge, label: Knowledge base, icon: LogoOpenCTI, note: Threats and what they target}
+      - {id: stream, label: Live Stream, icon: Activity, note: "Filtered, read with a token"}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: connector, label: OpenCTI connector, icon: Puzzle, note: One per tenant}
+      - {id: threats, label: Threats, icon: Crosshair, note: "Techniques, sectors, countries, CVEs"}
+  - label: Pricing
+    tone: core
+    nodes:
+      - {id: scenarios, label: Risk scenarios, icon: Gauge, note: "Actors admitted by sector, country, outcome"}
+edges:
+  - {from: knowledge, to: stream, label: matches the filter}
+  - {from: stream, to: connector, label: "replay, then live"}
+  - {from: connector, to: stream, label: created at start, style: dashed}
+  - {from: connector, to: threats, label: mirrors}
+  - {from: threats, to: scenarios, label: priced again}

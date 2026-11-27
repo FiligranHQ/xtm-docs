@@ -1,0 +1,23 @@
+title: OpenCTI shows an object to a user only when every check on the object lets the user through
+lanes:
+  - label: Who asks
+    tone: external
+    nodes:
+      - {id: user, label: User, icon: LogIn, note: Groups and organizations}
+  - label: OpenCTI checks
+    tone: product
+    nodes:
+      - {id: markings, label: Markings, icon: ShieldCheck, note: Clearance of the groups}
+      - {id: organizations, label: Organization sharing, icon: Network, note: Enterprise Edition}
+      - {id: members, label: Authorized members, icon: KeyRound, note: 'Per object, replaces sharing'}
+  - label: Knowledge
+    tone: store
+    nodes:
+      - {id: object, label: Object, icon: FileText, note: One copy for everyone}
+edges:
+  - {from: user, to: markings, label: allowed markings}
+  - {from: user, to: organizations, label: member of}
+  - {from: user, to: members, label: listed on}
+  - {from: markings, to: object, label: all its markings}
+  - {from: organizations, to: object, label: shared with}
+  - {from: members, to: object, label: when activated, style: dashed}

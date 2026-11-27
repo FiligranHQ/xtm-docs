@@ -1,0 +1,28 @@
+title: A threat known in OpenCTI becomes OpenAEV tests on your endpoints, the scores come back as security coverage, OpenCRQ prices what was missed, and XTM One sums it up
+lanes:
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: threat, label: The threat, icon: LogoOpenCTI, note: "Velvet Harbor report"}
+      - {id: coverage, label: Security coverage, icon: Gauge, note: "Scores per technique"}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: scenario, label: Weekly scenario, icon: LogoOpenAEV, note: "Front-desk workstations"}
+      - {id: results, label: Prevented and detected, icon: ShieldCheck, note: "Meridian EDR alerts"}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: price, label: Gap priced, icon: LogoOpenCRQ, note: "Data Breach on Guest Records"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: brief, label: Readout for the CISO, icon: LogoXTMOne, note: "Ask Ariane"}
+edges:
+  - {from: threat, to: coverage, label: techniques to test}
+  - {from: coverage, to: scenario, label: coverage request}
+  - {from: scenario, to: results, label: injects}
+  - {from: results, to: coverage, label: scores, style: dashed}
+  - {from: results, to: price, label: missed techniques}
+  - {from: price, to: brief, label: annual loss}
+  - {from: coverage, to: brief, label: coverage, style: dashed}

@@ -1,0 +1,20 @@
+title: An indicator keeps the decay rule chosen at its creation until it is revoked
+lanes:
+  - label: Creation
+    nodes:
+      - {id: source, label: Source, icon: Puzzle, note: "Feed, connector or analyst"}
+      - {id: rule, label: Decay rule chosen, icon: ListChecks, note: "Stored with the indicator"}
+  - label: Lifetime
+    tone: product
+    nodes:
+      - {id: manager, label: Decay manager, icon: Clock, note: "Lowers the score at each reaction point"}
+      - {id: update, label: Score update, icon: Wrench, note: "Restarts the decay"}
+  - label: End
+    tone: store
+    nodes:
+      - {id: revoked, label: Revoked, icon: ShieldCheck, note: "Revoke score reached, detection off"}
+edges:
+  - {from: source, to: rule, label: indicator created}
+  - {from: rule, to: manager, label: valid from}
+  - {from: update, to: manager, label: new base score, style: dashed}
+  - {from: manager, to: revoked, label: valid until}

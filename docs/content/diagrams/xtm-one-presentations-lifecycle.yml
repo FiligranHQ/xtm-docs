@@ -1,0 +1,25 @@
+title: A deck is written by an assistant in a conversation, changed by hand or by asking, then presented, shared and exported
+lanes:
+  - label: Ask
+    tone: external
+    nodes:
+      - {id: chat, label: Conversation, icon: MessageSquare, note: Brief and numbers}
+      - {id: template, label: Template, icon: Layers, note: "Fonts, colors, logos"}
+  - label: Deck
+    tone: core
+    nodes:
+      - {id: deck, label: Presentation, icon: FileText, note: Live card in the chat}
+      - {id: edit, label: Edit slides or Studio, icon: Wrench, note: By hand or by asking}
+  - label: Use
+    tone: product
+    nodes:
+      - {id: present, label: Present, icon: PlayCircle, note: Speaker view}
+      - {id: share, label: Share, icon: Users, note: "View, edit, public link"}
+      - {id: export, label: Export, icon: ArrowUpRight, note: "PDF, PowerPoint"}
+edges:
+  - {from: chat, to: deck, label: assistant writes}
+  - {from: template, to: deck, label: styles}
+  - {from: deck, to: edit, label: change, both: true}
+  - {from: deck, to: present}
+  - {from: deck, to: share}
+  - {from: deck, to: export}

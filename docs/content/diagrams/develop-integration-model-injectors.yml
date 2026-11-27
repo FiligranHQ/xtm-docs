@@ -1,0 +1,25 @@
+title: An external injector registers over the API, takes its injects from its own RabbitMQ queue and reports each result over the API
+lanes:
+  - label: Injector
+    tone: external
+    nodes:
+      - {id: injector, label: Your injector, icon: Crosshair, note: Container or Python process}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: api, label: REST API, icon: LogoOpenAEV, note: "/api/injectors, /api/injects"}
+      - {id: scheduler, label: Inject execution, icon: Clock, note: Runs each inject when due}
+  - label: Queues
+    tone: store
+    nodes:
+      - {id: queue, label: Injector queue, icon: Layers, note: "openaev_injector_<id>"}
+  - label: Targets
+    tone: external
+    nodes:
+      - {id: target, label: Target system, icon: Network, note: "Mailbox, API, network"}
+edges:
+  - {from: injector, to: api, label: register with contracts}
+  - {from: scheduler, to: queue, label: publish inject}
+  - {from: queue, to: injector, label: consume}
+  - {from: injector, to: target, label: act}
+  - {from: injector, to: api, label: report status, style: dashed}

@@ -1,0 +1,23 @@
+title: A prompt is written once in the library, then inserted in chat messages or attached to agents
+lanes:
+  - label: Library
+    tone: core
+    nodes:
+      - {id: prompt, label: Prompt, icon: FileText, note: "Content, versions", href: /xtm-one/build/prompts/}
+      - {id: variable, label: Variable, icon: Code2, note: Value resolved at use, href: /xtm-one/build/variables/}
+  - label: Reused in
+    tone: product
+    nodes:
+      - {id: chat, label: Chat message, icon: MessageSquare, note: Insert prompt template}
+      - {id: agent, label: Agent, icon: Bot, note: Prompts card, href: /xtm-one/build/agents/}
+  - label: Reaches the model
+    tone: product
+    nodes:
+      - {id: message, label: Your message, icon: MessageSquare, note: Edited before sending}
+      - {id: system, label: System prompt, icon: Sparkles, note: Every chat and run}
+edges:
+  - {from: variable, to: prompt, label: referenced}
+  - {from: prompt, to: chat, label: inserted}
+  - {from: prompt, to: agent, label: attached}
+  - {from: chat, to: message, label: copied text}
+  - {from: agent, to: system, label: live link}

@@ -1,0 +1,20 @@
+title: A playbook passes a STIX bundle from step to step and saves it only at Send for ingestion
+lanes:
+  - label: Starts on
+    nodes:
+      - {id: entry, label: Entry point, icon: LogIn, note: "An event, a schedule or a user"}
+  - label: Processes
+    tone: product
+    nodes:
+      - {id: transform, label: Transform or enrich, icon: Wrench, note: Changes the bundle}
+      - {id: condition, label: Match knowledge, icon: Workflow, note: A condition with two outputs}
+  - label: Ends with
+    tone: store
+    nodes:
+      - {id: ingest, label: Send for ingestion, icon: Server, note: Saves the changes}
+      - {id: notify, label: Send to notifier, icon: MessageSquare, note: Saves nothing}
+edges:
+  - {from: entry, to: transform, label: bundle}
+  - {from: transform, to: condition, label: out}
+  - {from: condition, to: ingest, label: out}
+  - {from: condition, to: notify, label: no-match, style: dashed}

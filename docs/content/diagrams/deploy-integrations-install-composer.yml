@@ -1,0 +1,30 @@
+title: Every installation gives XTM Composer an RSA key and a stable identifier, a URL and token for each platform it serves, and access to one container engine
+lanes:
+  - label: What you give it
+    tone: external
+    nodes:
+      - {id: key, label: RSA private key, icon: KeyRound, note: "4096 bits, PKCS#8 PEM"}
+      - {id: id, label: Identifier, icon: FileText, note: "MANAGER__ID, same at every restart"}
+  - label: XTM Composer
+    tone: external
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Workflow, note: "filigran/xtm-composer"}
+  - label: Container engine
+    tone: external
+    nodes:
+      - {id: docker, label: Docker, icon: Boxes, note: "/var/run/docker.sock"}
+      - {id: podman, label: Podman, icon: Boxes, note: "/run/podman/podman.sock"}
+      - {id: kubernetes, label: Kubernetes, icon: Boxes, note: A Deployment per integration}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "OPENCTI__URL, OPENCTI__TOKEN"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "OPENAEV__URL, OPENAEV__TOKEN"}
+edges:
+  - {from: key, to: composer, label: mounted file}
+  - {from: id, to: composer, label: environment}
+  - {from: composer, to: docker, label: socket}
+  - {from: composer, to: podman, label: API socket}
+  - {from: composer, to: kubernetes, label: service account}
+  - {from: composer, to: opencti, label: register with token}
+  - {from: composer, to: openaev, label: register with token}

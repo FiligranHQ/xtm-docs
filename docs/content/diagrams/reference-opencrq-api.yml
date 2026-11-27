@@ -1,0 +1,23 @@
+title: A client calls a procedure over HTTP, as a user or a service account, in a tenant
+lanes:
+  - label: Client
+    tone: external
+    nodes:
+      - {id: client, label: Script or integration, icon: Laptop, note: "Service account token"}
+      - {id: agent, label: XTM One agent, icon: LogoXTMOne, note: Calls procedures by name}
+  - label: OpenCRQ API
+    tone: product
+    nodes:
+      - {id: queries, label: Queries, icon: Search, note: "GET /trpc/<procedure>"}
+      - {id: mutations, label: Mutations, icon: Wrench, note: "POST /trpc/<procedure>"}
+  - label: Access
+    tone: product
+    nodes:
+      - {id: tenant, label: Tenant, icon: Layers, note: "The token's, or x-tenant-id"}
+edges:
+  - {from: client, to: queries, label: Bearer token}
+  - {from: client, to: mutations, label: Bearer token}
+  - {from: agent, to: queries, label: by name}
+  - {from: agent, to: mutations, label: by name}
+  - {from: queries, to: tenant, label: scoped to}
+  - {from: mutations, to: tenant, label: scoped to}

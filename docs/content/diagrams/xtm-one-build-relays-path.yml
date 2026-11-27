@@ -1,0 +1,19 @@
+title: A relay inside your network connects out to XTM One and carries the requests of the resources routed through its group
+lanes:
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: resource, label: Routed resource, icon: Puzzle, note: "Integration, remote MCP server"}
+      - {id: group, label: Relay group, icon: Network, note: "Paris datacenter"}
+  - label: Your network
+    tone: store
+    nodes:
+      - {id: relay, label: Relays, icon: Server, note: "Linux, Windows, Docker, Kubernetes"}
+  - label: Internal services
+    tone: external
+    nodes:
+      - {id: service, label: Internal service, icon: Server, note: Allowed destinations only}
+edges:
+  - {from: resource, to: group, label: Route through}
+  - {from: relay, to: group, label: connects out over HTTPS}
+  - {from: relay, to: service, label: carries the request}

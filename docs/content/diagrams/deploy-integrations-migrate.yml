@@ -1,0 +1,25 @@
+title: Moving an integration under XTM Composer gives it a new managed instance in OpenCTI, or a takeover that keeps its identifier in OpenAEV, then you remove the old container
+lanes:
+  - label: Before
+    tone: external
+    nodes:
+      - {id: old, label: Integration you run, icon: Puzzle, note: "Compose service or Python program, removed after"}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Deploy: a new instance, from the beginning"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "Migrate: keeps its identifier"}
+  - label: XTM Composer
+    tone: external
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Workflow, note: Registered with the platform}
+  - label: After
+    tone: external
+    nodes:
+      - {id: managed, label: Managed instance, icon: Puzzle, note: "Start, stop, update, logs"}
+edges:
+  - {from: old, to: opencti, label: its settings}
+  - {from: old, to: openaev, label: its settings}
+  - {from: opencti, to: composer, label: new instance}
+  - {from: openaev, to: composer, label: takeover}
+  - {from: composer, to: managed, label: runs}

@@ -1,0 +1,27 @@
+title: Code reaches OpenCTI through the GraphQL API to read and write, and through live streams and feeds to receive what changes
+lanes:
+  - label: Your code
+    tone: external
+    nodes:
+      - {id: script, label: Script or app, icon: Code2, note: "curl, Python, TypeScript"}
+      - {id: connector, label: Connector, icon: Puzzle, note: Python client}
+      - {id: consumer, label: Stream consumer, icon: ShieldCheck, note: "SIEM, EDR, SOAR"}
+      - {id: device, label: Feed reader, icon: Network, note: "Firewall, TAXII client"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: graphql, label: GraphQL API, icon: LogoOpenCTI, note: /graphql}
+      - {id: stream, label: Live streams, icon: Activity, note: /stream}
+      - {id: feeds, label: CSV and TAXII feeds, icon: FileText, note: "/feeds, /taxii2"}
+  - label: Storage
+    tone: store
+    nodes:
+      - {id: base, label: Knowledge base, icon: Server, note: Filtered by user rights}
+edges:
+  - {from: script, to: graphql, label: queries and mutations}
+  - {from: connector, to: graphql, label: queries and mutations}
+  - {from: graphql, to: base, label: reads and writes, both: true}
+  - {from: base, to: stream, label: every change}
+  - {from: base, to: feeds, label: on request}
+  - {from: stream, to: consumer, label: pushes events}
+  - {from: feeds, to: device, label: downloaded, style: dashed}

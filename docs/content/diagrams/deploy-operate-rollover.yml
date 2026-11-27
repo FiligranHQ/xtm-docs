@@ -1,0 +1,25 @@
+title: OpenCTI writes through an alias that the lifecycle policy moves to a new index generation, and reads every generation with a wildcard
+lanes:
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: platform, label: OpenCTI, icon: LogoOpenCTI, note: Writes and reads its indices}
+  - label: Names
+    tone: store
+    nodes:
+      - {id: alias, label: opencti_history, icon: ArrowRight, note: Write alias}
+      - {id: wildcard, label: "opencti_history-*", icon: Search, note: Reads all generations}
+      - {id: policy, label: opencti-ilm-policy, icon: History, note: "50 GB primary shard or 75,000,000 documents"}
+  - label: Index generations
+    tone: store
+    nodes:
+      - {id: gen1, label: opencti_history-000001, icon: Layers, note: Created at the first start}
+      - {id: gen2, label: opencti_history-000002, icon: Layers, note: Created at rollover}
+edges:
+  - {from: platform, to: alias, label: writes}
+  - {from: platform, to: wildcard, label: reads}
+  - {from: alias, to: gen1, label: before rollover, style: dashed}
+  - {from: alias, to: gen2, label: after rollover}
+  - {from: wildcard, to: gen1}
+  - {from: wildcard, to: gen2}
+  - {from: policy, to: gen2, label: creates}

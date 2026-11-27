@@ -1,0 +1,59 @@
+{"hash": "af95916e5cd2d97c",
+"full": {
+  "width": 760, "height": 528,
+  "lanes": [
+    {"x":16,"y":16,"w":241,"h":496,"header":{"x":28,"y":27,"w":162.7,"h":14}},
+    {"x":451,"y":16,"w":293,"h":496,"header":{"x":463,"y":27,"w":148,"h":14}}
+  ],
+  "nodes": {
+    "old-images": {"x":28,"y":52,"w":217,"h":58,"note":["openbas/*"]},
+    "old-vars": {"x":28,"y":130,"w":217,"h":58,"note":["OPENBAS_* variables"]},
+    "old-bucket": {"x":28,"y":208,"w":217,"h":58,"note":["openbas"]},
+    "old-queues": {"x":28,"y":286,"w":217,"h":58,"note":["Prefix openbas"]},
+    "old-indices": {"x":28,"y":364,"w":217,"h":58,"note":["Prefix openbas"]},
+    "old-agents": {"x":28,"y":442,"w":217,"h":58,"note":["OpenBAS agent"]},
+    "new-images": {"x":463,"y":52,"w":269,"h":58,"note":["openaev/*, such as openaev/platform"]},
+    "new-vars": {"x":463,"y":130,"w":269,"h":58,"note":["OPENAEV_* variables"]},
+    "new-bucket": {"x":463,"y":208,"w":269,"h":58,"note":["openaev, or MINIO_BUCKET=openbas"]},
+    "new-queues": {"x":463,"y":286,"w":269,"h":58,"note":["Prefix openaev"]},
+    "new-indices": {"x":463,"y":364,"w":269,"h":58,"note":["Prefix openaev"]},
+    "new-agents": {"x":463,"y":442,"w":269,"h":58,"note":["OpenAEV agent"]}
+  },
+  "edges": [
+    {"points":[[245,81],[463,81]],"label":{"x":300,"y":70,"w":108,"h":20}},
+    {"points":[[245,159],[463,159]],"label":{"x":296,"y":148,"w":116,"h":20}},
+    {"points":[[245,237],[463,237]],"label":{"x":312,"y":226,"w":84,"h":20}},
+    {"points":[[245,315],[463,315]],"label":{"x":290,"y":304,"w":128,"h":20}},
+    {"points":[[245,393],[463,393]],"label":{"x":301.5,"y":382,"w":105,"h":20}},
+    {"points":[[245,471],[463,471]],"label":{"x":291,"y":460,"w":126,"h":20}}
+  ]
+},
+"mini": {
+  "width": 186.9, "height": 278,
+  "lanes": [
+    {"x":37.4,"y":4,"w":40,"h":270},
+    {"x":109.4,"y":4,"w":40,"h":270}
+  ],
+  "nodes": {
+    "old-images": {"x":44.4,"y":11,"w":26,"h":26},
+    "old-vars": {"x":44.4,"y":57,"w":26,"h":26},
+    "old-bucket": {"x":44.4,"y":103,"w":26,"h":26},
+    "old-queues": {"x":44.4,"y":149,"w":26,"h":26},
+    "old-indices": {"x":44.4,"y":195,"w":26,"h":26},
+    "old-agents": {"x":44.4,"y":241,"w":26,"h":26},
+    "new-images": {"x":116.4,"y":11,"w":26,"h":26},
+    "new-vars": {"x":116.4,"y":57,"w":26,"h":26},
+    "new-bucket": {"x":116.4,"y":103,"w":26,"h":26},
+    "new-queues": {"x":116.4,"y":149,"w":26,"h":26},
+    "new-indices": {"x":116.4,"y":195,"w":26,"h":26},
+    "new-agents": {"x":116.4,"y":241,"w":26,"h":26}
+  },
+  "edges": [
+    {"points":[[70.4,24],[116.4,24]]},
+    {"points":[[70.4,70],[116.4,70]]},
+    {"points":[[70.4,116],[116.4,116]]},
+    {"points":[[70.4,162],[116.4,162]]},
+    {"points":[[70.4,208],[116.4,208]]},
+    {"points":[[70.4,254],[116.4,254]]}
+  ]
+}}

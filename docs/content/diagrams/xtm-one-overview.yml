@@ -1,0 +1,30 @@
+title: An assignment or a person starts an agent, the agent reads the modules of the XTM platform through its integrations, and its result reaches your team
+lanes:
+  - label: What starts it
+    tone: external
+    nodes:
+      - {id: schedule, label: Schedule, icon: Clock, note: "Every Monday at 08:00"}
+      - {id: event, label: Webhook or event, icon: Workflow, note: "An alert, a new report"}
+      - {id: person, label: A person, icon: MessageSquare, note: "Chat, Slack, Teams"}
+  - label: XTM One
+    tone: product
+    nodes:
+      - {id: agent, label: Agent, icon: Bot, note: "Instructions, knowledge, skills"}
+  - label: What it reads and changes
+    tone: store
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Threats and reports}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: Simulation results}
+      - {id: opencrq, label: OpenCRQ, icon: LogoOpenCRQ, note: Risk in money}
+  - label: Its result
+    tone: external
+    nodes:
+      - {id: result, label: 'Brief, rule or answer', icon: FileText, note: "Where your team reads it"}
+edges:
+  - {from: schedule, to: agent, label: runs}
+  - {from: event, to: agent, label: triggers}
+  - {from: person, to: agent, label: asks}
+  - {from: agent, to: opencti, label: reads}
+  - {from: agent, to: openaev, label: reads}
+  - {from: agent, to: opencrq, label: reads}
+  - {from: agent, to: result, label: delivers}

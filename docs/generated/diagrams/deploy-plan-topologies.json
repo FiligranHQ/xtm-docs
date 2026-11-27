@@ -1,0 +1,47 @@
+{"hash": "f0df01eddbce0e6f",
+"full": {
+  "width": 721, "height": 387,
+  "lanes": [
+    {"x":16,"y":16,"w":231,"h":340,"header":{"x":28,"y":27,"w":64.7,"h":14}},
+    {"x":435,"y":16,"w":270,"h":355,"header":{"x":447,"y":27,"w":68.3,"h":14}}
+  ],
+  "nodes": {
+    "try": {"x":28,"y":52,"w":207,"h":58,"note":["Small deployments too"]},
+    "prod": {"x":28,"y":130,"w":207,"h":58,"note":["Data outlives one machine"]},
+    "ha": {"x":28,"y":208,"w":207,"h":58,"note":["And higher throughput"]},
+    "k8s": {"x":28,"y":286,"w":207,"h":58,"note":["Your teams run it"]},
+    "onehost": {"x":447,"y":52,"w":246,"h":58,"note":["xtm-docker with Docker Compose"]},
+    "separate": {"x":447,"y":130,"w":246,"h":58,"note":["Clusters or managed services"]},
+    "cluster": {"x":447,"y":208,"w":246,"h":73,"note":["Several platforms behind a load","balancer"]},
+    "kube": {"x":447,"y":301,"w":246,"h":58,"note":["No installation guide yet"]}
+  },
+  "edges": [
+    {"points":[[235,81],[447,81]],"label":{"x":280,"y":70,"w":122,"h":20}},
+    {"points":[[235,159],[447,159]],"label":{"x":287,"y":148,"w":108,"h":20}},
+    {"points":[[235,237],[447,237]],"label":{"x":288.5,"y":226,"w":105,"h":20}},
+    {"points":[[235,315],[414,315],[414,330],[447,330]],"label":{"x":300,"y":304,"w":82,"h":20}}
+  ]
+},
+"mini": {
+  "width": 186.9, "height": 186,
+  "lanes": [
+    {"x":37.4,"y":4,"w":40,"h":178},
+    {"x":109.4,"y":4,"w":40,"h":178}
+  ],
+  "nodes": {
+    "try": {"x":44.4,"y":11,"w":26,"h":26},
+    "prod": {"x":44.4,"y":57,"w":26,"h":26},
+    "ha": {"x":44.4,"y":103,"w":26,"h":26},
+    "k8s": {"x":44.4,"y":149,"w":26,"h":26},
+    "onehost": {"x":116.4,"y":11,"w":26,"h":26},
+    "separate": {"x":116.4,"y":57,"w":26,"h":26},
+    "cluster": {"x":116.4,"y":103,"w":26,"h":26},
+    "kube": {"x":116.4,"y":149,"w":26,"h":26}
+  },
+  "edges": [
+    {"points":[[70.4,24],[116.4,24]]},
+    {"points":[[70.4,70],[116.4,70]]},
+    {"points":[[70.4,116],[116.4,116]]},
+    {"points":[[70.4,162],[116.4,162]]}
+  ]
+}}

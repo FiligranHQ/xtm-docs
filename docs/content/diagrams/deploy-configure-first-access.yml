@@ -1,0 +1,26 @@
+title: At every start, each platform resets its bootstrap admin to the values of .env, and the services that call the platforms read the same tokens
+lanes:
+  - label: Host
+    tone: external
+    nodes:
+      - {id: env, label: .env, icon: FileText, note: "OPENCTI_, OPENAEV_, XTM_ONE_ADMIN_*"}
+  - label: Services
+    tone: external
+    nodes:
+      - {id: services, label: Services that call the platforms, icon: Puzzle, note: "Worker, connectors, collectors, injectors, XTM Composer"}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Email, password, token"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "Email, password, token"}
+  - label: At the center
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "Email, password"}
+edges:
+  - {from: env, to: opencti, label: every start}
+  - {from: env, to: openaev, label: every start}
+  - {from: env, to: xtmone, label: every start}
+  - {from: env, to: services, label: admin tokens}
+  - {from: services, to: opencti, label: calls, style: dashed}
+  - {from: services, to: openaev, label: calls, style: dashed}

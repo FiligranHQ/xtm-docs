@@ -1,0 +1,29 @@
+title: With the platforms stopped, each store is backed up its own way into one backup folder, which then moves off the machine
+lanes:
+  - label: Stores
+    tone: store
+    nodes:
+      - {id: es, label: Elasticsearch, icon: Server, note: "Volume esdata"}
+      - {id: pg, label: PostgreSQL, icon: Server, note: "openaev and xtm_one databases"}
+      - {id: volumes, label: Other volumes, icon: Boxes, note: "s3data, redisdata, amqpdata, rsakeys"}
+      - {id: secrets, label: Secrets, icon: KeyRound, note: ".env and docker-compose.override.yml"}
+  - label: Backup folder
+    tone: external
+    nodes:
+      - {id: snapshot, label: es-snapshots.tar.gz, icon: Layers, note: "Repository xtm-backup"}
+      - {id: dumps, label: Database dumps, icon: FileText, note: "openaev.dump, xtm_one.dump"}
+      - {id: archives, label: Volume archives, icon: Boxes, note: "One .tar.gz per volume"}
+      - {id: copies, label: File copies, icon: Copy, note: "Same names in backup/"}
+  - label: Off the machine
+    tone: external
+    nodes:
+      - {id: offsite, label: Outside storage, icon: History, note: "Restore on an empty deployment"}
+edges:
+  - {from: es, to: snapshot, label: snapshot}
+  - {from: pg, to: dumps, label: pg_dump}
+  - {from: volumes, to: archives, label: copy while stopped}
+  - {from: secrets, to: copies, label: copy}
+  - {from: snapshot, to: offsite}
+  - {from: dumps, to: offsite}
+  - {from: archives, to: offsite}
+  - {from: copies, to: offsite}

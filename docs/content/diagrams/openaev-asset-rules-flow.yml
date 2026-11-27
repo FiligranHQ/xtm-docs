@@ -1,0 +1,24 @@
+title: A tag on a scenario brings the asset groups of its rule to the scenario's injects that can target asset groups
+lanes:
+  - label: Scenario
+    tone: product
+    nodes:
+      - {id: tag, label: Tag, icon: FileText, note: "velvet-harbor, opencti..."}
+  - label: Settings
+    tone: product
+    nodes:
+      - {id: rule, label: Default asset rule, icon: Wrench, note: One tag to asset groups}
+  - label: Targets
+    tone: external
+    nodes:
+      - {id: groups, label: Asset groups, icon: Boxes, note: Front-desk workstations}
+  - label: Injects
+    tone: product
+    nodes:
+      - {id: newinject, label: New inject, icon: Crosshair, note: Gets the groups}
+      - {id: oldinject, label: Existing injects, icon: Crosshair, note: If you answer Yes}
+edges:
+  - {from: tag, to: rule, label: matches}
+  - {from: rule, to: groups, label: names}
+  - {from: groups, to: newinject, label: added}
+  - {from: groups, to: oldinject, label: added on request, style: dashed}

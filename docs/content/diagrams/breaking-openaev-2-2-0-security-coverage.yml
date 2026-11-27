@@ -1,0 +1,18 @@
+title: OpenAEV 2.2.0 connects only to OpenCTI 7, while OpenAEV 2.2.1 and later connect to OpenCTI 6 and 7, so upgrade to 2.2.1 rather than 2.2.0
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: aev-old, label: Earlier than 2.2.0, icon: LogoOpenAEV, note: OpenCTI 6 only}
+      - {id: aev-220, label: OpenAEV 2.2.0, icon: LogoOpenAEV, note: OpenCTI 7 only}
+      - {id: aev-221, label: OpenAEV 2.2.1 and later, icon: LogoOpenAEV, note: Works with both}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: cti-6, label: OpenCTI 6, icon: LogoOpenCTI, note: Earlier API}
+      - {id: cti-7, label: OpenCTI 7, icon: LogoOpenCTI, note: Changed API}
+edges:
+  - {from: aev-old, to: cti-6, label: works, both: true}
+  - {from: aev-220, to: cti-7, label: works, both: true}
+  - {from: aev-221, to: cti-6, label: works, both: true}
+  - {from: aev-221, to: cti-7, label: works, both: true}

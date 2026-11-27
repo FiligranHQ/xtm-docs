@@ -1,0 +1,19 @@
+title: A template's categories and questions are applied to the exercise, each category targets teams, and the questionnaire sent after the simulation brings every player's answers back to the Lessons learned tab
+lanes:
+  - label: Settings
+    tone: product
+    nodes:
+      - {id: template, label: Template, icon: ListChecks, note: Categories and questions}
+  - label: Simulation
+    tone: product
+    nodes:
+      - {id: questionnaire, label: Questionnaire, icon: ClipboardCheck, note: Categories target teams}
+      - {id: results, label: Lessons learned tab, icon: Gauge, note: "Answers, objectives"}
+  - label: Players
+    tone: external
+    nodes:
+      - {id: player, label: Each player, icon: Users, note: "Evaluation, comments"}
+edges:
+  - {from: template, to: questionnaire, label: apply}
+  - {from: questionnaire, to: player, label: send by email}
+  - {from: player, to: results, label: submit once}

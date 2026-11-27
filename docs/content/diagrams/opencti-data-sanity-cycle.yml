@@ -1,0 +1,24 @@
+title: How the data sanity manager repairs data after an upgrade
+lanes:
+  - label: Upgrade
+    tone: external
+    nodes:
+      - {id: upgrade, label: New version, icon: Rocket, note: Brings new operations}
+  - label: Manager
+    tone: product
+    nodes:
+      - {id: manager, label: Data sanity manager, icon: Wrench, note: 'Every 10 minutes, one node'}
+  - label: Data
+    tone: store
+    nodes:
+      - {id: knowledge, label: Knowledge, icon: Server, note: Repaired once per operation}
+  - label: Control
+    tone: external
+    nodes:
+      - {id: health, label: Health screen, icon: Activity, note: Data > Health > Operations}
+      - {id: api, label: GraphQL API, icon: Code2, note: 'Estimate, schedule, stop'}
+edges:
+  - {from: upgrade, to: manager, label: operations to run}
+  - {from: manager, to: knowledge, label: 'estimate, then repair'}
+  - {from: health, to: manager, label: schedule a run}
+  - {from: api, to: manager, label: 'dry run, run'}

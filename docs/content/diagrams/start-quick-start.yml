@@ -1,0 +1,26 @@
+title: One .env starts the whole stack, OpenCTI with XTM One beside it, two connectors fill OpenCTI with MITRE ATT&CK and reference data, and you sign in at localhost:8080
+lanes:
+  - label: You
+    tone: external
+    nodes:
+      - {id: env, label: .env, icon: FileText, note: "Fresh secrets, ELASTIC_MEMORY_SIZE=2G"}
+      - {id: browser, label: Browser, icon: Laptop, note: "http://localhost:8080"}
+  - label: Data connectors
+    tone: external
+    nodes:
+      - {id: datasets, label: OpenCTI Datasets, icon: Puzzle, note: "Countries, regions, sectors"}
+      - {id: mitre, label: MITRE ATT&CK, icon: Puzzle, note: Techniques and threat groups}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Platform and three workers}
+  - label: The rest of the stack
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "With OpenAEV and XTM Composer"}
+edges:
+  - {from: env, to: opencti, label: docker compose up -d}
+  - {from: env, to: xtmone, label: starts too}
+  - {from: datasets, to: opencti, label: send bundles}
+  - {from: mitre, to: opencti, label: send bundles}
+  - {from: browser, to: opencti, label: sign in}

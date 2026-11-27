@@ -1,0 +1,27 @@
+title: XTM One tells how it runs through its health endpoints, its metrics, its logs and its security audit
+lanes:
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: platform, label: xtm-one, icon: LogoXTMOne, note: "Port 4000"}
+      - {id: worker, label: xtm-one-worker, icon: Workflow, note: "No HTTP port"}
+  - label: Signals
+    tone: product
+    nodes:
+      - {id: health, label: Health endpoints, icon: Activity, note: "/api/health, /api/health/ready"}
+      - {id: metrics, label: Metrics, icon: Gauge, note: "/metrics, with a bearer token"}
+      - {id: logs, label: Logs, icon: Terminal, note: "JSON lines on stdout"}
+      - {id: audit, label: Security audit, icon: ShieldCheck, note: "Settings > Security"}
+  - label: Your tools
+    tone: external
+    nodes:
+      - {id: orchestrator, label: Orchestrator, icon: Server, note: "Docker, Kubernetes, load balancer"}
+      - {id: monitoring, label: Monitoring, icon: Search, note: "Prometheus, log aggregator"}
+edges:
+  - {from: platform, to: health, label: answers}
+  - {from: platform, to: metrics, label: exposes}
+  - {from: platform, to: logs, label: writes}
+  - {from: worker, to: logs, label: writes}
+  - {from: health, to: orchestrator, label: probes}
+  - {from: metrics, to: monitoring, label: scrape}
+  - {from: logs, to: monitoring, label: collect}

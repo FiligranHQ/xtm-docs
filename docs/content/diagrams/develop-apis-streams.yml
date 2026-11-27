@@ -1,0 +1,28 @@
+title: Every change goes into one Redis stream, which the raw stream relays as is and each live stream filters and completes before sending it over server-sent events
+lanes:
+  - label: Changes
+    tone: external
+    nodes:
+      - {id: writers, label: "API, connectors, interface", icon: Users, note: "Create, update, delete, merge"}
+  - label: Storage
+    tone: store
+    nodes:
+      - {id: redis, label: Redis stream, icon: History, note: "Last 2,000,000 events"}
+      - {id: elastic, label: Knowledge base, icon: Server, note: Current state}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: raw, label: Raw stream, icon: Activity, note: /stream}
+      - {id: live, label: Live stream, icon: Activity, note: "/stream/{id}"}
+  - label: Consumers
+    tone: external
+    nodes:
+      - {id: backup, label: Backup or replica, icon: Boxes, note: Every event}
+      - {id: siem, label: Stream connector, icon: ShieldCheck, note: Filtered events}
+edges:
+  - {from: writers, to: redis, label: one event each}
+  - {from: redis, to: raw, label: as is}
+  - {from: redis, to: live, label: filtered}
+  - {from: elastic, to: live, label: "dependencies, recover", style: dashed}
+  - {from: raw, to: backup, label: SSE}
+  - {from: live, to: siem, label: SSE}

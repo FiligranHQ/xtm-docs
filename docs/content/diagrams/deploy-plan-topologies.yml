@@ -1,0 +1,21 @@
+title: Choose the topology from what you need, from one host with xtm-docker to separate shared services, a cluster or Kubernetes
+lanes:
+  - label: You need
+    tone: external
+    nodes:
+      - {id: try, label: Try or develop, icon: PlayCircle, note: Small deployments too}
+      - {id: prod, label: Production, icon: ShieldCheck, note: Data outlives one machine}
+      - {id: ha, label: High availability, icon: Gauge, note: And higher throughput}
+      - {id: k8s, label: Kubernetes, icon: Boxes, note: Your teams run it}
+  - label: Topology
+    tone: product
+    nodes:
+      - {id: onehost, label: One host, icon: Server, note: xtm-docker with Docker Compose, href: /deploy/install/docker-compose/}
+      - {id: separate, label: Separate shared services, icon: Layers, note: Clusters or managed services, href: /deploy/configure/shared-services/}
+      - {id: cluster, label: Cluster, icon: Network, note: Several platforms behind a load balancer, href: /deploy/operate/scale/}
+      - {id: kube, label: Kubernetes, icon: Boxes, note: No installation guide yet}
+edges:
+  - {from: try, to: onehost, label: everything runs once}
+  - {from: prod, to: separate, label: move the data out}
+  - {from: ha, to: cluster, label: scale horizontally}
+  - {from: k8s, to: kube, label: same images}

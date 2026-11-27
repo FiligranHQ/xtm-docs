@@ -1,0 +1,19 @@
+title: A player email carries a short-lived token that OpenAEV swaps for a cookie before it opens the page
+lanes:
+  - label: Email
+    tone: external
+    nodes:
+      - {id: mail, label: Player email, icon: MessageSquare, note: "/url/access?token=..."}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: check, label: Token check, icon: ShieldCheck, note: "Hash, expiry, revocation"}
+      - {id: cookie, label: Cookie, icon: KeyRound, note: "HttpOnly, SameSite Strict"}
+  - label: Player page
+    tone: external
+    nodes:
+      - {id: page, label: Article or challenge, icon: FileText, note: URL without the token}
+edges:
+  - {from: mail, to: check, label: player clicks}
+  - {from: check, to: cookie, label: sets}
+  - {from: cookie, to: page, label: redirects}

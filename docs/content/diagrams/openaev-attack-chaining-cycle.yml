@@ -1,0 +1,26 @@
+title: A chained scenario runs an action, records what it found, and lets events decide which actions run next, inside the scope you set
+lanes:
+  - label: Scope
+    tone: product
+    nodes:
+      - {id: allow, label: Allow and deny lists, icon: ListChecks, note: What the run may touch, href: /openaev/use/attack-chaining/scope/}
+      - {id: limits, label: Time out and rate limit, icon: Clock, note: How long and how fast}
+  - label: Logic
+    tone: product
+    nodes:
+      - {id: action, label: Action, icon: Terminal, note: A Threat Arsenal action, href: /openaev/use/attack-chaining/actions/}
+      - {id: event, label: Event, icon: GitBranch, note: Conditions on outputs, href: /openaev/use/attack-chaining/logic/}
+      - {id: next, label: Next actions, icon: Terminal, note: Gated by the event}
+  - label: Run
+    tone: store
+    nodes:
+      - {id: outputs, label: Outputs, icon: Layers, note: "Ports, hosts, accounts..."}
+      - {id: path, label: Attack path, icon: Network, note: "Endpoints, findings", href: /openaev/use/attack-chaining/attack-path-map/}
+edges:
+  - {from: allow, to: action, label: first targets}
+  - {from: action, to: outputs, label: records}
+  - {from: outputs, to: event, label: evaluated by}
+  - {from: event, to: next, label: triggers}
+  - {from: next, to: outputs, label: adds to}
+  - {from: limits, to: next, label: bounds, style: dashed}
+  - {from: outputs, to: path, label: drawn as}

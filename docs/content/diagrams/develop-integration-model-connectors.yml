@@ -1,0 +1,26 @@
+title: What each kind of OpenCTI connector receives and sends
+lanes:
+  - label: Connectors
+    tone: external
+    nodes:
+      - {id: external, label: External import, icon: Puzzle, note: Runs on its own schedule}
+      - {id: triggered, label: 'Enrichment, file import, export', icon: Puzzle, note: Runs on a request}
+      - {id: stream, label: Stream, icon: Puzzle, note: Follows a live stream}
+  - label: Queues
+    tone: store
+    nodes:
+      - {id: push, label: push_ queue, icon: Server, note: Bundles to import}
+      - {id: listen, label: listen_ queue, icon: Server, note: Jobs for the connector}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: worker, label: Workers, icon: Cpu, note: Write bundles as a user}
+      - {id: platform, label: Platform, icon: LogoOpenCTI, note: GraphQL API and streams}
+edges:
+  - {from: external, to: push, label: send bundles}
+  - {from: triggered, to: push, label: send results}
+  - {from: push, to: worker, label: consume}
+  - {from: worker, to: platform, label: write}
+  - {from: platform, to: listen, label: post jobs}
+  - {from: listen, to: triggered, label: deliver jobs}
+  - {from: platform, to: stream, label: live events}

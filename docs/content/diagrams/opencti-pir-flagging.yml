@@ -1,0 +1,21 @@
+title: The PIR manager flags threats from the targets relationships it reads in the stream
+lanes:
+  - label: Knowledge changes
+    tone: store
+    nodes:
+      - {id: stream, label: Platform stream, icon: Activity, note: "A relationship is created, updated or deleted"}
+  - label: PIR manager
+    tone: product
+    nodes:
+      - {id: filters, label: Check filters, icon: ListChecks, note: "Source type, minimum confidence"}
+      - {id: criteria, label: Match criteria, icon: Crosshair, note: "Targeted locations and industries"}
+  - label: Your PIR
+    tone: product
+    nodes:
+      - {id: threats, label: Flagged threats, icon: Gauge, note: "Score: share of criteria matched"}
+      - {id: activity, label: Activities, icon: History, note: "Entries, exits, score changes"}
+edges:
+  - {from: stream, to: filters, label: relationship event}
+  - {from: filters, to: criteria, label: passes}
+  - {from: criteria, to: threats, label: flag or unflag}
+  - {from: threats, to: activity, label: logged}

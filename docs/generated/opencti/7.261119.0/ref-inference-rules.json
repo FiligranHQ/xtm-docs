@@ -1,0 +1,318 @@
+{
+  "name": "inference-rules",
+  "version": "7.261119.0",
+  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/domain/rules.ts, opencti-platform/opencti-graphql/src/rules/*/*Definition.ts)",
+  "intro": "The 27 inference rules of the rules engine in OpenCTI 7.261119.0, grouped by category as on the Rules engine page, each with the **IF** / **THEN** pattern it applies. **Relation propagation testing rule** (`related_related`) only runs in development mode and is not listed. Turn rules on or off as [Rules engine](/opencti/configure/rules/) explains; how analysts read what they create is in [Inferences and reasoning](/opencti/use/enrich/inferences/).",
+  "filter": "Filter rules, relationships and identifiers",
+  "sections": [
+    {
+      "title": "Alerting",
+      "columns": [
+        "Rule",
+        "Description",
+        "What it infers",
+        "Identifier"
+      ],
+      "rows": [
+        {
+          "key": "sighting_incident",
+          "cells": [
+            "Raise incident based on sighting",
+            "Infer an incident when a sighting is created for a valid indicator.",
+            "If **Indicator A** *has* **revoked = false**, and **Indicator A** *sighted in/at* **Entity C**,<br>then create **Incident D**, and create **Indicator A** *related to* **Incident D**, and create **Incident D** *targets* **Entity C**.",
+            "`sighting_incident`"
+          ]
+        },
+        {
+          "key": "observe_sighting",
+          "cells": [
+            "Sightings of observables via observed data",
+            "Infer sightings based on observed data and indicators.",
+            "If **Observed Data A** *created by* **Identity B**, and **Observed Data A** *contains* **Observable C**, and **Indicator D** *based on* **Observable C**,<br>then create **Indicator D** *sighted in/at* **Identity B**.",
+            "`observe_sighting`"
+          ]
+        },
+        {
+          "key": "sighting_indicator",
+          "cells": [
+            "Sightings propagation from indicator",
+            "Propagate sightings of indicators to observables.",
+            "If **Indicator A** *sighted in/at* **Entity B**, and **Indicator A** *based on* **Observable C**,<br>then create **Observable C** *sighted in/at* **Entity B**.",
+            "`sighting_indicator`"
+          ]
+        },
+        {
+          "key": "sighting_observable",
+          "cells": [
+            "Sightings propagation from observable",
+            "Propagate sightings of observables to indicators.",
+            "If **Observable A** *sighted in/at* **Entity B**, and **Indicator C** *based on* **Observable A**,<br>then create **Indicator C** *sighted in/at* **Entity B**.",
+            "`sighting_observable`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Correlation",
+      "columns": [
+        "Rule",
+        "Description",
+        "What it infers",
+        "Identifier"
+      ],
+      "rows": [
+        {
+          "key": "infrastructure_observable_related",
+          "cells": [
+            "Observable related to entity via infrastructure",
+            "If an entity uses an infrastructure and the infrastructure consists of an observable, then the observable is related to the entity.",
+            "If **Entity A** *uses* **Infrastructure B**, and **Infrastructure B** *consists of* **Observable C**,<br>then create **Observable C** *related to* **Entity A**.",
+            "`infrastructure_observable_related`"
+          ]
+        },
+        {
+          "key": "observable_related",
+          "cells": [
+            "Relation propagation via an observable",
+            "Propagate relation between 2 objects via a common observable.",
+            "If **Observable A** *related to* **Entity B**, and **Observable A** *related to* **Entity C**,<br>then create **Entity B** *related to* **Entity C**.",
+            "`observable_related`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Parent-child propagation",
+      "columns": [
+        "Rule",
+        "Description",
+        "What it infers",
+        "Identifier"
+      ],
+      "rows": [
+        {
+          "key": "attribution_attribution",
+          "cells": [
+            "Attribution propagation",
+            "Propagate attributions across parents or children.",
+            "If **Entity A** *attributed to* **Entity B**, and **Entity B** *attributed to* **Entity C**,<br>then create **Entity A** *attributed to* **Entity C**.",
+            "`attribution_attribution`"
+          ]
+        },
+        {
+          "key": "part_part",
+          "cells": [
+            "Belonging propagation",
+            "Propagate belonging across parents or children.",
+            "If **Entity A** *part of* **Entity B**, and **Entity B** *part of* **Entity C**,<br>then create **Entity A** *part of* **Entity C**.",
+            "`part_part`"
+          ]
+        },
+        {
+          "key": "belongs_to_attributed",
+          "cells": [
+            "Belongs-to propagation via attribution",
+            "If an entity belongs to another entity and that entity is attributed to a third entity, then the first entity also belongs to the third entity.",
+            "If **Entity A** *belongs to* **Entity B**, and **Entity B** *attributed to* **Entity C**,<br>then create **Entity A** *belongs to* **Entity C**.",
+            "`belongs_to_attributed`"
+          ]
+        },
+        {
+          "key": "attribution_indicator_indicates",
+          "cells": [
+            "Indicator propagation via attribution",
+            "If an entity is attributed to another entity and an indicator indicates the first entity, then the indicator also indicates the second entity.",
+            "If **Entity A** *attributed to* **Entity B**, and **Indicator C** *indicates* **Entity A**,<br>then create **Indicator C** *indicates* **Entity B**.",
+            "`attribution_indicator_indicates`"
+          ]
+        },
+        {
+          "key": "location_location",
+          "cells": [
+            "Location propagation",
+            "Propagate locations across parents or children.",
+            "If **Location A** *located at* **Location B**, and **Location B** *located at* **Location C**,<br>then create **Location A** *located at* **Location C**.",
+            "`location_location`"
+          ]
+        },
+        {
+          "key": "attribution_observable_related",
+          "cells": [
+            "Observable relation propagation via attribution",
+            "If an entity is attributed to another entity and an observable is related to the first entity, then the observable is also related to the second entity.",
+            "If **Entity A** *attributed to* **Entity B**, and **Observable C** *related to* **Entity A**,<br>then create **Observable C** *related to* **Entity B**.",
+            "`attribution_observable_related`"
+          ]
+        },
+        {
+          "key": "participate-to_parts",
+          "cells": [
+            "Organization propagation via participation",
+            "Propagate an organization from a child to its parent via participation.",
+            "If **User A** *participates to* **Organization B**, and **Organization B** *part of* **Organization C**,<br>then create **User A** *participates to* **organization C**.",
+            "`participate-to_parts`"
+          ]
+        },
+        {
+          "key": "parent_technique_use",
+          "cells": [
+            "Usage propagation of parent techniques",
+            "Propagate a usage from a subtechnique to its parent.",
+            "If **Entity A** *uses* **Entity B**, and **Entity B** *subtechnique of* **Entity C**,<br>then create **Entity A** *uses* **Entity C**.",
+            "`parent_technique_use`"
+          ]
+        },
+        {
+          "key": "attribution_use",
+          "cells": [
+            "Usage propagation via attribution",
+            "Propagate a usage from a child to its parent via attribution.",
+            "If **Entity A** *uses* **Entity B**, and **Entity A** *attributed to* **Entity C**,<br>then create **Entity C** *uses* **Entity B**.",
+            "`attribution_use`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Report propagation",
+      "columns": [
+        "Rule",
+        "Description",
+        "What it infers",
+        "Identifier"
+      ],
+      "rows": [
+        {
+          "key": "report_ref_identity_part_of",
+          "cells": [
+            "Identities propagation in reports",
+            "Propagate the parents of an identity in a report.",
+            "If **Report A** *contains* **Identity B**, and **Identity B** *part of* **Identity C** (**Relation D**),<br>then create **Report A** *contains* **Identity C**, and create **Report A** *contains* **Relation D**.",
+            "`report_ref_identity_part_of`"
+          ]
+        },
+        {
+          "key": "report_ref_observable_based_on",
+          "cells": [
+            "Indicators propagation in reports",
+            "Propagate indicators of an observable in a report.",
+            "If **Report A** *contains* **Observable B**, and **Indicator C** *based on* **Observable B** (**Relation D**),<br>then create **Report A** *contains* **Indicator C**, and create **Report A** *contains* **Relation D**.",
+            "`report_ref_observable_based_on`"
+          ]
+        },
+        {
+          "key": "report_ref_location_located_at",
+          "cells": [
+            "Locations propagation in reports",
+            "Propagate the parents of a location in a report.",
+            "If **Report A** *contains* **Location B**, and **Location B** *located at* **Location C** (**Relation D**),<br>then create **Report A** *contains* **Location C**, and create **Report A** *contains* **Relation D**.",
+            "`report_ref_location_located_at`"
+          ]
+        },
+        {
+          "key": "report_ref_indicator_based_on",
+          "cells": [
+            "Observables propagation in reports",
+            "Propagate observables of an indicator in a report.",
+            "If **Report A** *contains* **Indicator B**, and **Indicator B** *based on* **Observable C** (**Relation D**),<br>then create **Report A** *contains* **Observable C**, and create **Report A** *contains* **Relation D**.",
+            "`report_ref_indicator_based_on`"
+          ]
+        },
+        {
+          "key": "report_ref_observable_belongs_to",
+          "cells": [
+            "Observables propagation in reports via belongs-to",
+            "Propagate observables that an observable belongs to in a report.",
+            "If **Report A** *contains* **Observable B**, and **Observable B** *belongs to* **Observable C** (**Relation D**),<br>then create **Report A** *contains* **Observable C**, and create **Report A** *contains* **Relation D**.",
+            "`report_ref_observable_belongs_to`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Victimology",
+      "columns": [
+        "Rule",
+        "Description",
+        "What it infers",
+        "Identifier"
+      ],
+      "rows": [
+        {
+          "key": "indicate_sighted",
+          "cells": [
+            "Inference of targeting via a sighting",
+            "Infer the targeting of an entity through a sighting of a specific indicator.",
+            "If **Indicator A** *indicates* **Entity B**, and **Indicator A** *sighted in/at* **Entity C**,<br>then create **Entity B** *targets* **Entity C**.",
+            "`indicate_sighted`"
+          ]
+        },
+        {
+          "key": "attribution_targets",
+          "cells": [
+            "Targeting propagation via attribution",
+            "Propagate a targeting from a child to its parent via attribution.",
+            "If **Entity A** *targets* **Entity B**, and **Entity A** *attributed to* **Entity C**,<br>then create **Entity C** *targets* **Entity B**.",
+            "`attribution_targets`"
+          ]
+        },
+        {
+          "key": "part-of_targets",
+          "cells": [
+            "Targeting propagation via belonging",
+            "Propagate a targeting from a child to its parent via belonging.",
+            "If **Entity A** *targets* **Identity B**, and **Identity B** *part of* **Identity C**,<br>then create **Entity A** *targets* **Identity C**.",
+            "`part-of_targets`"
+          ]
+        },
+        {
+          "key": "location_targets",
+          "cells": [
+            "Targeting propagation via location",
+            "Propagate a targeting from a child to its parent via location.",
+            "If **Entity A** *targets* **Entity B**, and **Entity B** *located at* **Location C**,<br>then create **Entity A** *targets* **Location C**.",
+            "`location_targets`"
+          ]
+        },
+        {
+          "key": "localization_of_targets",
+          "cells": [
+            "Targeting propagation when located",
+            "Propagate targeting when the target relationship is located somewhere.",
+            "If **Entity A** *targets* **Entity B**, and **Relation C** *located at* **Location D**,<br>then create **Entity A** *targets* **Location D**.",
+            "`localization_of_targets`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Vulnerability propagation",
+      "columns": [
+        "Rule",
+        "Description",
+        "What it infers",
+        "Identifier"
+      ],
+      "rows": [
+        {
+          "key": "vulnerability_software_to_infra",
+          "cells": [
+            "Software Vulnerability propagation to Infrastructure",
+            "Propagate Vulnerability to Infrastructure that consists of the Software.",
+            "If **Infrastructure A** *consists of* **Software B**, and **Software B** *has* **Vulnerability C**,<br>then create **Infrastructure A** *has* **Vulnerability C**.",
+            "`vulnerability_software_to_infra`"
+          ]
+        },
+        {
+          "key": "vulnerability_software_to_system",
+          "cells": [
+            "Vulnerability propagation via software usage",
+            "Propagate a vulnerability from a software to the systems using it.",
+            "If **System A** *uses* **Software B**, and **Software B** *has* **Vulnerability C**,<br>then create **System A** *has* **Vulnerability C**.",
+            "`vulnerability_software_to_system`"
+          ]
+        }
+      ]
+    }
+  ]
+}
