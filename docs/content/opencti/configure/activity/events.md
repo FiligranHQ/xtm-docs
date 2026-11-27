@@ -34,7 +34,7 @@ Open :menu[Settings > Activity > Events]. You need an Enterprise Edition license
 | `authentication` | `login`, `logout`, `forgot` | Audit | A user logs in, fails to log in (status error), is refused because of their IP address, logs out, or goes through a password reset |
 | `read` | `read` | Extended | A user opens an entity, a relationship, a dashboard or an investigation. Counted once an hour per user and element |
 | `read` | `unauthorized` | Audit | A user tries to read something their capabilities do not allow |
-| `mutation` | `create`, `update`, `delete` | Audit, or extended for personal objects | A user creates, changes or deletes a platform object: see below |
+| `mutation` | `create`, `update`, `delete` | Audit, or extended for personal objects | A user creates, changes or deletes a platform object: [Audit events](#audit-events) and [Extended events](#extended-events) say which |
 | `mutation` | `unauthorized` | Audit | A user tries a change their capabilities do not allow |
 | `file` | `read`, `download` | Extended | A user opens or downloads a file |
 | `file` | `create`, `delete` | Extended | A user uploads a file, a new version of a file, or an analyst workbench, or deletes one |

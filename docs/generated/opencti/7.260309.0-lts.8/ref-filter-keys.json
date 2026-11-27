@@ -208,7 +208,7 @@
     },
     {
       "title": "Special keys of the filter menu",
-      "text": "Keys the filter menu offers that are not a plain attribute: the platform resolves them into other filters. \"Applies to\" names the entity types whose filter menu shows the key.",
+      "text": "Keys the filter menu offers that are not a plain attribute: the platform turns them into other filters or fields, or tests them on the event itself in stream, trigger and playbook filters. \"Applies to\" names the entity types, or the kind of filter, whose filter menu shows the key.",
       "columns": [
         "Key",
         "Applies to",
@@ -436,7 +436,7 @@
     },
     {
       "title": "Special keys of the API",
-      "text": "Keys with their own handling that the filter menu does not offer as such: the screens set them (relationship lists, logs, bulk search...) and an API filter group can use them. Operators marked \"Not restricted\" are not limited by a definition: the API applies the one given.",
+      "text": "Keys with their own handling, which the API converts before searching. Those with a label (`creator_id`, `entity_type`, `fromId`...) also appear in the filter menu of the types they apply to; the others are set by the screens (relationship lists, logs, bulk search...) and by API filter groups. Operators marked \"Not restricted\" are not limited by a definition: the API passes the one given on, except for `x_opencti_workflow_id` (`eq`, `not_eq`, `nil`, `not_nil` only) and for `connections` and `last_pir_score_date`, whose operators go in their sub-filters.",
       "columns": [
         "Key",
         "Applies to",

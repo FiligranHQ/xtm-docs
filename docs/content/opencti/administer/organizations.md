@@ -20,7 +20,7 @@ Organization segregation lets one OpenCTI instance serve several organizations, 
 ## Before you start
 
 - Your platform has an Enterprise Edition license for segregation itself: the platform main organization, **Share with an organization**, the sharing playbook step and organization administrators. Organizations as entities, and the default dashboard and hidden entity types of their members, work without it. See [Editions and licensing](/start/editions/).
-- Your role has the **Manage credentials** capability. The platform main organization is a [protected sensitive configuration](/opencti/administer/sensitive-configuration/) by default: your role also needs **Allow modification of sensitive configuration**.
+- Your role has the **Manage credentials** capability. The platform main organization is a [protected sensitive configuration](/opencti/administer/sensitive-configuration/) by default: one of your roles also needs the setting **Allow modification of sensitive configuration** turned on, at the top of its **Capabilities** tab.
 - Every user belongs to at least one organization. Once segregation is on, a user without an organization cannot log in, unless they have **Bypass all capabilities** or are a [service account](/opencti/administer/service-accounts/).
 
 ## Plan organizations, groups and roles

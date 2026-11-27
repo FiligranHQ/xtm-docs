@@ -122,7 +122,7 @@ In **Global files**, click **Show the imports**, the icon at the end of the file
 - **Navigate to draft** opens the draft a run filled;
 - **Delete this work** removes a run from the list. What it imported stays.
 
-The actions menu (⋮) of the file offers **Download** and **Delete**. In an entity's **Data** tab, the icons of a file launch an import of it, download it or delete it, and its runs are listed below it.
+The actions menu (⋮) of the file offers **Download** and **Delete**. In an entity's **Data** tab, the icons of a file launch an import of it, download it or delete it, and its runs are listed under the file.
 
 ::::only{opencti=">=7.260811"}
 :::xtm-one[Read documents with an AI agent]

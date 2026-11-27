@@ -18,7 +18,7 @@ The **Policies** screen holds the security settings that apply to the whole plat
 
 - Your role has the **Manage credentials** capability, to open the screen and change the platform main organization, the user policy and user visibility.
 - To change the banner and the messages, your role also needs **Manage parameters**.
-- To set or change the platform main organization, your role also needs **Allow modification of sensitive configuration**. See [Protect sensitive configuration](/opencti/administer/sensitive-configuration/).
+- To set or change the platform main organization, one of your roles also needs the setting **Allow modification of sensitive configuration** turned on, at the top of its **Capabilities** tab. See [Protect sensitive configuration](/opencti/administer/sensitive-configuration/).
 
 Open :menu[Settings > Security > Policies]. Every field is saved as soon as you change it or leave it; the platform main organization asks for a confirmation.
 

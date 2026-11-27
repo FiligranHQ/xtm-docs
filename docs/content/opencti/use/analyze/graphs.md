@@ -78,7 +78,7 @@ You brief the SOC on the report "Velvet Harbor targets hotel booking systems" an
 
 1. Open the report in :menu[Analyses > Reports], then its **Knowledge** tab, **Graph** view.
 2. In the toolbar, pick **Layered layout (by entity category)**: Velvet Harbor sits on the left with the threats, Velvet Loader and Harbor Stealer in the arsenal, the three attack patterns next, then the hospitality sector with the victims and France and Europe with the locations.
-3. Click **Harbor Stealer**, `Shift`-click **Hospitality**, then click **Highlight shortest path between the two selected nodes**. The path goes through Velvet Harbor.
+3. Click the Harbor Stealer node, `Shift`-click the Hospitality node, then click **Highlight shortest path between the two selected nodes**. The path goes through Velvet Harbor.
 4. Look at the link between Velvet Harbor and Harbor Stealer: it is dotted, because a single source reported it, with a confidence of 30. The link to Velvet Loader is plain.
 5. Click **Group by type** next to **Attack Pattern** in the legend to fold the three techniques into one node, then press `Shift` + `E` to export the image for the briefing.
 

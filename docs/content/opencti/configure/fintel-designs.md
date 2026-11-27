@@ -92,7 +92,7 @@ To see the design with real data before anyone exports, open a fintel template:
 
 ## Apply a design to a PDF export
 
-This is what analysts do. They need the **Upload knowledge files**, **Download knowledge export** and **Generate knowledge export** capabilities.
+Analysts apply a design when they export a container. They need the **Upload knowledge files**, **Download knowledge export** and **Generate knowledge export** capabilities.
 
 ::::only{opencti=">=7.261030"}
 :::steps

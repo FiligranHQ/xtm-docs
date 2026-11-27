@@ -17,7 +17,7 @@ The rules engine derives new knowledge from what is already in OpenCTI. Each inf
 ## Before you start
 
 - Your role has the **Manage customization** capability.
-- To switch a rule, your role also needs **Allow modification of sensitive configuration**: rules are a protected setting by default, marked **Danger Zone**, unless the platform turns that protection off. See [Sensitive configuration](/opencti/administer/sensitive-configuration/).
+- To switch a rule, one of your roles also needs the setting **Allow modification of sensitive configuration** turned on, at the top of its **Capabilities** tab: rules are a protected setting by default, marked **Danger Zone**, unless the platform turns that protection off. See [Sensitive configuration](/opencti/administer/sensitive-configuration/).
 - The rule engine manager is running. It is on by default (`rule_engine:enabled` in the [configuration reference](/reference/opencti/configuration/)); when it is off, the page says so and shows no rules.
 
 ## Enable or disable a rule

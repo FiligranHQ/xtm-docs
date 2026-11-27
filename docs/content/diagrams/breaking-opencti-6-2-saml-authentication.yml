@@ -11,8 +11,8 @@ lanes:
   - label: If sign-in fails
     tone: external
     nodes:
-      - {id: idp, label: Sign both in the identity provider, icon: KeyRound, note: Responses and assertions}
-      - {id: fix, label: "Only what it cannot sign: false", icon: Wrench, note: "From 7.260224.0, a switch of the provider"}
+      - {id: idp, label: Identity provider signs both, icon: KeyRound, note: Responses and assertions}
+      - {id: fix, label: False for unsigned parts, icon: Wrench, note: "Only the parameter of what the provider cannot sign; from 7.260224.0, a switch of the provider"}
 edges:
   - {from: before, to: after, label: upgrade}
   - {from: after, to: idp, label: sign-in fails}

@@ -16,7 +16,7 @@ OpenCTI creates two sample notifiers when the platform is first installed, in :m
 
 | Notifier | Use it with | Posts |
 | --- | --- | --- |
-| Sample of Microsoft Teams message for live trigger | Live triggers | One card per event, with the operation, the date, the event message and a **See in OpenCTI** button |
+| Sample of Microsoft Teams message for live trigger | Live triggers | One card per event, with the operation, the date, the event message and a `See in OpenCTI` button |
 | Sample of Microsoft Teams message for digest trigger | Digests | One adaptive card with the name and date of the digest, then one linked line per event |
 
 Both are set to `POST` to `https://YOUR_DOMAIN.webhook.office.com/YOUR_ENDPOINT`.

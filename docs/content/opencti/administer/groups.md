@@ -26,7 +26,7 @@ A group is how users get their rights in OpenCTI: its roles say what members can
 2. In the **Create a group** panel, enter a **Name**, a **Description** and the **Max Confidence Level** of members, from 0 to 100 (100 by default), then click **Create**.
 3. Open the group and click **Update**. The **Update a group** panel has five tabs: **Overview**, **Roles**, **Markings**, **Members** and **Confidences**. Every change is saved as you make it.
 4. In **Roles**, check the roles to give to members.
-5. In **Markings**, check the **Allowed marking definitions** members can see, and set the other marking options described below.
+5. In **Markings**, check the **Allowed marking definitions** members can see, and set the other marking options described in [Group options](#group-options).
 
    ::screenshot{id=opencti-groups-edit-markings alt="The Markings tab of the Update a group panel for CTI analysts: TLP:CLEAR, TLP:GREEN and TLP:AMBER checked under Allowed marking definitions, the Default marking definitions selector, and TLP:GREEN chosen for TLP under Maximum shareable marking definitions."}
 

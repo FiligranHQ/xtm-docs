@@ -78,7 +78,7 @@ Analysts want, on the page of every intrusion set, where it strikes and what it 
 | `Malware used` | **Number** | **Knowledge graph** | **Relationship type** = uses, **Target type** = Malware |
 | `Indicators` | **List** | **Entities** | **Entity type** = Indicator |
 
-Choose Velvet Harbor in the preview selector: the map shows France and Spain, the number counts its three malware, and the list shows the indicators that point to it, such as `booking-velvetharbor.example`. Enable the view: every intrusion set now has a **Targeting** tab with its own data.
+Choose Velvet Harbor in the preview selector: the map shows France and Spain, the number counts its three malware, and the list shows the indicators that point to it, such as `booking-velvetharbor.example`. Enable the view: every intrusion set now has a Targeting tab with its own data.
 :::
 
 ## Enable, set as default, duplicate or delete

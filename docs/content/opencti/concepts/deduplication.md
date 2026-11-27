@@ -29,7 +29,7 @@ OpenCTI never stores the same object twice. When you, a connector or a feed crea
 
 Every object has several identifiers, and a match on any of them is a match:
 
-- **The standard ID**, shown as **Standard STIX ID**. The platform computes it from the ID contributing properties of the type, listed below. The same properties always give the same ID, on every OpenCTI instance.
+- **The standard ID**, shown as **Standard STIX ID**. The platform computes it from the ID contributing properties of the type, listed in [Properties that identify entities](#properties-that-identify-entities) and [Properties that identify observables](#properties-that-identify-observables). The same properties always give the same ID, on every OpenCTI instance.
 - **Other STIX IDs**, shown as **Other STIX IDs**: the IDs the object had in the sources it came from, and its former standard IDs.
 - **One ID per alias**, for types with aliases: the ID the object would have if the alias were its name.
 - **One ID per hash**, for files, artifacts and X.509 certificates.

@@ -43,7 +43,7 @@ Attribution carries knowledge upward. When the inference rules **Usage propagati
 :::
 
 :::example[List the intrusion sets that target the hospitality sector]
-Example CERT serves hotel chains. In :menu[Threats > Intrusion sets], add the filter **In regards of**, operator **Equals**, **Relationship type** `targets`, **Entity** **Hospitality**. The **Velvet Harbor** card remains, known as FIN99 and Harbor Mantis, with Velvet Loader, Harbor Stealer and HarborGate backdoor as used malware. Bookmark it. Repeat in :menu[Threats > Campaigns]: Operation Night Desk and Operation Checkout Rush target the sector too.
+Example CERT serves hotel chains. In :menu[Threats > Intrusion sets], add the filter **In regards of**, operator **Equals**, **Relationship type** `targets`, **Entity** Hospitality. The Velvet Harbor card remains, known as FIN99 and Harbor Mantis, with Velvet Loader, Harbor Stealer and HarborGate backdoor as used malware. Bookmark it. Repeat in :menu[Threats > Campaigns]: Operation Night Desk and Operation Checkout Rush target the sector too.
 :::
 
 To be alerted when a new threat targets your sector, instead of checking the list, create a [priority intelligence requirement](/opencti/use/analyze/pir/).
@@ -77,7 +77,7 @@ Intrusion sets and threat actor groups also have a **Score**, from 0 to 100, whi
 :::
 
 :::example[Profile Velvet Harbor]
-Open **Velvet Harbor**. **Details** gives an activity from March 4 to December 18, 2025, the resource level **organization** and the primary motivation **financial-gain**. Its two goals are to steal payment card data and to resell guest records. **Basic information** shows the author Example CERT, the marking TLP:AMBER and a confidence level of 75.
+Open Velvet Harbor. **Details** gives an activity from March 4 to December 18, 2025, the resource level **organization** and the primary motivation **financial-gain**. Its two goals are to steal payment card data and to resell guest records. **Basic information** shows the author Example CERT, the marking TLP:AMBER and a confidence level of 75.
 
 In **Knowledge**, **Victimology** lists the Hospitality sector, France, Spain and Grand Meridian Hotels, down to the hotel chain's booking database server, its night auditor Paul Garnier and the European Hospitality Summit its lures posed as. **Malware** lists Velvet Loader, Harbor Stealer and HarborGate backdoor. **Attack patterns** places Phishing, Spearphishing Attachment, Valid Accounts, PowerShell and Web Protocols on the matrix. You can now brief the hotel chains: phishing of front-desk staff, then their accounts used against the booking platform.
 :::
@@ -117,7 +117,7 @@ In **Knowledge** > **Attribution**, Velvet Harbor is attributed to Harbor Syndic
 ::screenshot{id=opencti-threats-intrusion-set-attack-patterns alt="The Attack patterns entry of an intrusion set in Matrix view, showing only the techniques it uses: Phishing with its sub-technique Spearphishing Attachment, Valid Accounts, PowerShell and Web Protocols."}
 
 :::example[See how Velvet Harbor changed its entry point]
-A hotel chain asks whether blocking booking attachments is still enough. In **Velvet Harbor** > **Knowledge**, the **Timeline** on **Functional date** dates Spearphishing Attachment March 4, 2025, Valid Accounts October 1 and PowerShell October 15. The relationship to Spearphishing Attachment has a **Stop time** of September 30. Answer: since October, Velvet Harbor logs in with stolen front-desk accounts; add multi-factor authentication to the booking platform.
+A hotel chain asks whether blocking booking attachments is still enough. In Velvet Harbor > **Knowledge**, the **Timeline** on **Functional date** dates Spearphishing Attachment March 4, 2025, Valid Accounts October 1 and PowerShell October 15. The relationship to Spearphishing Attachment has a **Stop time** of September 30. Answer: since October, Velvet Harbor logs in with stolen front-desk accounts; add multi-factor authentication to the booking platform.
 :::
 
 **Courses of action view** lists the mitigations of each technique, to hand to defenders. Every view and option is described in [Attack patterns](/opencti/use/explore/#attack-patterns).

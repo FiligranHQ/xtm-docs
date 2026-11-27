@@ -146,7 +146,7 @@
           ]
         }
       ],
-      "text": "XTM Composer reads `config/default.yaml`, then `config/<COMPOSER_ENV>.yaml` when it exists, then the environment: a variable is the key in upper case with `__` between levels. The `openaev` block takes the same keys as the `opencti` block below (variables `OPENAEV__...`)."
+      "text": "XTM Composer reads `config/default.yaml`, then `config/<COMPOSER_ENV>.yaml` (or `.toml`; `COMPOSER_ENV` is `production` when unset) when it exists, then the environment: a variable is the key in upper case with `__` between levels. The `openaev` block takes the same keys as the `opencti` block below (variables `OPENAEV__...`)."
     },
     {
       "title": "OpenCTI connection",

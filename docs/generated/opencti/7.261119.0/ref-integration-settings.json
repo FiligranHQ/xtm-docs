@@ -2,7 +2,7 @@
   "name": "integration-settings",
   "version": "7.261119.0",
   "source": "OpenCTI-Platform/opencti@7df98f9 (client-python/pycti/api/opencti_api_client.py, client-python/pycti/connector/opencti_connector_helper.py, client-python/pycti/utils/opencti_stix2.py, opencti-worker/src/worker.py); FiligranHQ/xtm-composer@832c5b1 (config/default.yaml, src/config/settings.rs, src/orchestrator/podman/mod.rs)",
-  "intro": "The settings OpenCTI 7.261119.0's integrations read: the 66 every connector shares through pycti, the 22 of the worker, the 4 variables pycti reads for both, and the 100 of XTM Composer. [Run an integration without XTM Composer](/deploy/integrations/manual/) and [Configure XTM Composer](/deploy/integrations/configure-composer/) explain how to set them.",
+  "intro": "The settings OpenCTI 7.261119.0's integrations read: the 66 every connector shares through pycti, the 22 of the worker, pycti's own environment variables for both (4), and the 100 of XTM Composer. [Run an integration without XTM Composer](/deploy/integrations/manual/) and [Configure XTM Composer](/deploy/integrations/configure-composer/) explain how to set them.",
   "filter": "Filter settings and variables",
   "sections": [
     {
@@ -66,7 +66,7 @@
           ]
         }
       ],
-      "text": "Every connector built on pycti reads these settings through its connector helper: the environment variable first, then the key of the connector's `config.yml`, then the default. A connector adds its own settings, listed in its README."
+      "text": "Every connector built on pycti reads these settings through its connector helper: the environment variable first, then the key of the configuration the connector gives it (its `config.yml`, usually), then the default; a variable set but empty gives the default. A connector adds its own settings, listed in its README."
     },
     {
       "title": "Connectors: connector settings",
@@ -805,7 +805,7 @@
           ]
         }
       ],
-      "text": "The worker reads these settings from its environment first, then from the `config.yml` next to `worker.py`, then the default."
+      "text": "The worker reads these settings from its environment first, then from the `config.yml` next to `worker.py`, then the default; a variable set but empty gives the default."
     },
     {
       "title": "Worker: worker settings",
@@ -1165,7 +1165,7 @@
           ]
         }
       ],
-      "text": "XTM Composer reads `config/default.yaml`, then `config/<COMPOSER_ENV>.yaml` when it exists, then the environment: a variable is the key in upper case with `__` between levels. The `openaev` block takes the same keys as the `opencti` block below (variables `OPENAEV__...`)."
+      "text": "XTM Composer reads `config/default.yaml`, then `config/<COMPOSER_ENV>.yaml` (or `.toml`; `COMPOSER_ENV` is `production` when unset) when it exists, then the environment: a variable is the key in upper case with `__` between levels. The `openaev` block takes the same keys as the `opencti` block below (variables `OPENAEV__...`)."
     },
     {
       "title": "XTM Composer: OpenCTI connection",

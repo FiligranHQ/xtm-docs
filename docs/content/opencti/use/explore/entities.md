@@ -37,7 +37,7 @@ The **Sectors** list is a tree: subsectors appear under their parent, and the se
 :::steps
 
 1. Open :menu[Entities > Sectors], or the entry of the victim you follow, and search its name.
-2. Open it, then the **Knowledge** tab. Its **Overview** summarizes what is known about the victim (see below).
+2. Open it, then the **Knowledge** tab. Its **Overview** summarizes what is known about the victim.
 3. In the side menu, open **All threats** to list everything that targets it, or one entry, such as **Intrusion sets** or **Campaigns**, to list one kind. The number beside an entry counts its relationships.
 4. Switch the list to **Relationships view** to see how sure and how recent each targeting is. **Start time** and **Stop time** say when it happened, as the source states it; **Platform creation date** says when it reached OpenCTI. See [Lists of linked objects](/opencti/use/explore/#lists-of-linked-objects).
 5. Click a line to open the relationship and check its sources: see [The page of a relationship](/opencti/use/explore/#the-page-of-a-relationship).

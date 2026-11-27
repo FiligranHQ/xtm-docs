@@ -2,7 +2,7 @@
   "name": "capabilities",
   "version": "7.261119.0",
   "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/database/data-initialization.js)",
-  "intro": "The 47 capabilities a role can grant in OpenCTI 7.261119.0, in the order of the role editor. A capability includes every capability indented under it. Create roles and give them to groups as [Roles and capabilities](/opencti/administer/roles/) explains.",
+  "intro": "The 58 capabilities a role can grant in OpenCTI 7.261119.0, in the order of the role editor, with the top-level capabilities that have none under them gathered in the last table. A capability includes the capabilities it is indented under, not the ones indented under it: checking it in a role checks its parents. Create roles and give them to groups as [Roles and capabilities](/opencti/administer/roles/) explains.",
   "filter": "Filter capabilities and API names",
   "sections": [
     {
@@ -21,6 +21,96 @@
             "`KNOWLEDGE`"
           ],
           "depth": 0
+        },
+        {
+          "key": "KNOWLEDGE_KNPARTICIPATE",
+          "cells": [
+            "Access to collaborative creation",
+            "Create notes and opinions, and change their own",
+            "`KNOWLEDGE_KNPARTICIPATE`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNFRONTENDEXPORT",
+          "cells": [
+            "Can use web interface export functions (PDF, PNG, etc.)",
+            "Download widgets, graphs and views as images or PDF",
+            "`KNOWLEDGE_KNFRONTENDEXPORT`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNFORMINTAKE",
+          "cells": [
+            "Create knowledge via Form Intake",
+            "Create knowledge by submitting forms, without changing existing objects",
+            "`KNOWLEDGE_KNFORMINTAKE`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE",
+          "cells": [
+            "Create / Update knowledge",
+            "Create entities and relationships and change existing ones",
+            "`KNOWLEDGE_KNUPDATE`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNORGARESTRICT",
+          "cells": [
+            "Restrict organization access",
+            "Share entities and relationships with organizations",
+            "`KNOWLEDGE_KNUPDATE_KNORGARESTRICT`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNDELETE",
+          "cells": [
+            "Delete knowledge",
+            "Delete entities and relationships. Also needed to validate a draft",
+            "`KNOWLEDGE_KNUPDATE_KNDELETE`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNMERGE",
+          "cells": [
+            "Merge knowledge",
+            "Merge entities",
+            "`KNOWLEDGE_KNUPDATE_KNMERGE`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNMANAGEAUTHMEMBERS",
+          "cells": [
+            "Manage authorized members",
+            "Restrict an object to some users, groups or organizations. See [Authorized members](/opencti/administer/sharing/)",
+            "`KNOWLEDGE_KNUPDATE_KNMANAGEAUTHMEMBERS`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNBYPASSREFERENCE",
+          "cells": [
+            "Bypass enforced reference",
+            "Skip the external reference that an entity type requires on changes",
+            "`KNOWLEDGE_KNUPDATE_KNBYPASSREFERENCE`"
+          ],
+          "depth": 2
+        },
+        {
+          "key": "KNOWLEDGE_KNUPDATE_KNBYPASSFIELDS",
+          "cells": [
+            "Bypass mandatory fields",
+            "Skip the custom mandatory fields of entity types",
+            "`KNOWLEDGE_KNUPDATE_KNBYPASSFIELDS`"
+          ],
+          "depth": 2
         },
         {
           "key": "KNOWLEDGE_KNUPLOAD",
@@ -73,6 +163,15 @@
             "Disseminate files by email",
             "Send a file to a dissemination list",
             "`KNOWLEDGE_KNDISSEMINATION`"
+          ],
+          "depth": 1
+        },
+        {
+          "key": "KNOWLEDGE_KNSHAREFILTERS",
+          "cells": [
+            "Share filters",
+            "Share saved filters with other users, and change or delete saved filters created by others",
+            "`KNOWLEDGE_KNSHAREFILTERS`"
           ],
           "depth": 1
         }

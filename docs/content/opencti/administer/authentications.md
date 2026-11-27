@@ -80,7 +80,7 @@ Grand Meridian Hotels signs its staff in with Microsoft Entra ID, and OpenCTI is
 - **Protocol & Scopes**: **Use proxy** on, since `HTTPS_PROXY=http://proxy.example.com:3128` is set on the platform. **Logout remote** on, with **Logout callback URL** `https://opencti.example.com/`, so that logging out of OpenCTI on a shared front-desk workstation also ends the Entra session.
 - **Groups** tab: see [the mapping example](#map-groups-and-organizations).
 
-The login page then shows a **Log in with Microsoft Entra ID** button, and the first login of each employee creates their account.
+The login page then shows a `Log in with Microsoft Entra ID` button, and the first login of each employee creates their account.
 :::
 
 ## Add a SAML provider

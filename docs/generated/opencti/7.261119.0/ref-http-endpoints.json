@@ -2,7 +2,7 @@
   "name": "http-endpoints",
   "version": "7.261119.0",
   "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/http, graphql/sseMiddleware.js and every file that adds a route)",
-  "intro": "The 58 HTTP endpoints OpenCTI 7.261119.0 serves, the GraphQL API included. Paths are relative to the base path (`app:base_path`, empty by default) and use the Express syntax: `:id` is one segment, `*file` the rest of the path. *Token or session* means an `Authorization: Bearer <API token>` header, a Basic login or the cookie of a browser session; a rate limiter applies to every request. Share data through these endpoints as [Feeds, TAXII collections and streams](/opencti/use/share/feeds/) explains; probe the platform as [Health probes](/deploy/operate/health-probes/) explains.",
+  "intro": "The 58 HTTP endpoints OpenCTI 7.261119.0 serves, the GraphQL API included. Paths are relative to the base path (`app:base_path`, empty by default), except `/metrics` on the Prometheus port, and use the Express syntax: `:id` is one segment, `*file` the rest of the path. *Token or session* means an `Authorization: Bearer` header (an API token, or a JWT signed by OpenCTI or a trusted XTM platform), a Basic login or the cookie of a browser session; a rate limiter (`app:rate_protection`) applies to every request on the platform port, except WebSocket connections and the IPs and user agents its skip lists name. Share data through these endpoints as [Feeds, TAXII collections and streams](/opencti/use/share/feeds/) explains; probe the platform as [Health probes](/deploy/operate/health-probes/) explains.",
   "filter": "Filter endpoints and paths",
   "sections": [
     {
@@ -193,7 +193,7 @@
     },
     {
       "title": "TAXII 2.1 server",
-      "text": "The TAXII collections defined in Data sharing; a request without authentication reaches a collection only when it is public.",
+      "text": "The TAXII collections defined in Data sharing, and the TAXII ingestions that receive pushed objects; a request without authentication reaches a collection only when it is public.",
       "columns": [
         "Method",
         "Path",
@@ -316,7 +316,7 @@
     },
     {
       "title": "Live streams",
-      "text": "Server-sent events (`text/event-stream`) of the live streams defined in Data sharing.",
+      "text": "Server-sent events (`text/event-stream`): the raw stream of the platform, the global stream `live` and the live streams defined in Data sharing.",
       "columns": [
         "Method",
         "Path",
@@ -593,7 +593,7 @@
     },
     {
       "title": "Health and metrics",
-      "text": "The liveness probe and the Prometheus exporter listen on a port of their own, only when that port is configured.",
+      "text": "`/health` answers on the platform port. The other endpoints of this table listen on a port of their own: `/metrics` once `app:telemetry:metrics:enabled` is `true` (its port, `app:telemetry:metrics:exporter_prometheus`, is 14269 by default), and the liveness probe, where the version has one, once `app:liveness_port` is set.",
       "columns": [
         "Method",
         "Path",

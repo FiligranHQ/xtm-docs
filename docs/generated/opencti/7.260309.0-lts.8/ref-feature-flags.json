@@ -2,7 +2,7 @@
   "name": "feature-flags",
   "version": "7.260309.0-lts.8",
   "source": "OpenCTI-Platform/opencti@22c7908 (opencti-platform/opencti-graphql/src/config/conf.js, opencti-platform/opencti-graphql/src/**/*.{ts,js,graphql}, opencti-platform/opencti-front/src/**/*.{ts,tsx,js,jsx})",
-  "intro": "The 3 feature flags of OpenCTI 7.260309.0-lts.8: features still in development, hidden until the platform lists them in `app:enabled_dev_features` (see the [configuration reference](/reference/opencti/configuration/)). Reserved to development and not supported: a flagged feature can change or disappear in any release, so leave flags off in production; the guides describe the platform without them, and a feature is documented when a release removes its flag.",
+  "intro": "The 3 feature flags of OpenCTI 7.260309.0-lts.8: features still in development, hidden until `app:enabled_dev_features` lists them (see the [configuration reference](/reference/opencti/configuration/)). Reserved to development and not supported: a flagged feature can change or disappear in any release, so leave flags off in production; the guides describe the platform without them, and a feature is documented when a release removes its flag.",
   "filter": "Filter flags, API fields and screens",
   "sections": [
     {
@@ -80,7 +80,7 @@
     },
     {
       "title": "Flags the platform sets by itself",
-      "text": "The platform adds these to the flags the front reads; `app:enabled_dev_features` does not set them.",
+      "text": "The platform adds these to the flags the front reads, from what it detects itself; listing one in `app:enabled_dev_features` also turns it on in the front, but not in the back end.",
       "columns": [
         "Flag",
         "Turns on",

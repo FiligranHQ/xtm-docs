@@ -59,7 +59,7 @@ Turning off both `logs_files` and `logs_console` stops the audit log, not the ac
 :::example[Log the work of external contractors in detail]
 Example CERT lets the contractors of its partner Harbor Security work on its platform, and its security team must keep a trace of everything they read and download, in its log pipeline as well as in OpenCTI.
 
-1. In :menu[Settings > Activity > Configuration], choose **Harbor contractors** in **Add a group**. Every current and future member of the group is listened to, such as Sam Reyes.
+1. In :menu[Settings > Activity > Configuration], choose the Harbor contractors group in **Add a group**. Every current and future member of the group is listened to, such as Sam Reyes.
 2. Add the analysts of the team who handle sensitive cases one by one in **Add a user**, rather than their whole group.
 3. Write the extended events to the console and to the `audit.log` file too, keep 30 daily files on a mounted volume, and record the client address the reverse proxy sets, then restart the platform. With Docker Compose:
 

@@ -1,21 +1,21 @@
-{"hash": "6ad1432ecf8b7800",
+{"hash": "21e44840a28a3d14",
 "full": {
-  "width": 1176, "height": 236,
+  "width": 1178, "height": 251,
   "lanes": [
     {"x":16,"y":16,"w":304,"h":136,"header":{"x":28,"y":27,"w":136.3,"h":14}},
     {"x":444,"y":31,"w":258,"h":106,"header":{"x":456,"y":42,"w":157.5,"h":14}},
-    {"x":861,"y":21,"w":299,"h":199,"header":{"x":873,"y":32,"w":113.9,"h":14}}
+    {"x":861,"y":21,"w":301,"h":214,"header":{"x":873,"y":32,"w":113.9,"h":14}}
   ],
   "nodes": {
     "before": {"x":28,"y":52,"w":280,"h":88,"note":["want_assertions_signed and","want_authn_response_signed default to","false"]},
     "after": {"x":456,"y":67,"w":234,"h":58,"note":["Both parameters default to true"]},
-    "idp": {"x":873,"y":57,"w":275,"h":58,"note":["Responses and assertions"]},
-    "fix": {"x":873,"y":135,"w":275,"h":73,"note":["From 7.260224.0, a switch of the","provider"]}
+    "idp": {"x":873,"y":57,"w":277,"h":58,"note":["Responses and assertions"]},
+    "fix": {"x":873,"y":135,"w":277,"h":88,"note":["Only the parameter of what the provider","cannot sign; from 7.260224.0, a switch","of the provider"]}
   },
   "edges": [
     {"points":[[308,96],[456,96]],"label":{"x":353,"y":85,"w":58,"h":20}},
     {"points":[[690,86.3],[873,86.3]],"label":{"x":744,"y":75,"w":75,"h":20}},
-    {"points":[[690,105.7],[719,105.7],[719,172],[873,172]],"label":{"x":735,"y":161,"w":93,"h":20}}
+    {"points":[[690,105.7],[719,105.7],[719,179],[873,179]],"label":{"x":735,"y":168,"w":93,"h":20}}
   ]
 },
 "mini": {

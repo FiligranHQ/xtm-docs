@@ -4,7 +4,7 @@ lanes:
     tone: external
     nodes:
       - {id: users, label: Users, icon: Laptop, note: Web interface and API scripts}
-      - {id: connectors, label: Connectors, icon: Puzzle, note: "Import, enrich, export, stream", href: /opencti/use/ingest/connectors/}
+      - {id: connectors, label: Connectors, icon: Puzzle, note: "Register through the API; import, enrich, export, stream", href: /opencti/use/ingest/connectors/}
   - label: OpenCTI
     tone: product
     nodes:
@@ -19,7 +19,6 @@ lanes:
       - {id: s3, label: S3 storage, icon: Boxes, note: "Files, imports, exports"}
 edges:
   - {from: users, to: platform, label: interface and API}
-  - {from: connectors, to: platform, label: register and read}
   - {from: connectors, to: rabbitmq, label: push bundles}
   - {from: platform, to: elasticsearch, label: read and write}
   - {from: platform, to: rabbitmq, label: "feeds, requests"}

@@ -67,9 +67,9 @@ Velvet Harbor gets in through phishing, and your detection team asks what to wat
 
 **Details** of an attack pattern ends with how to answer it: **Detection** gives the detection advice of the framework, **Courses of action** the mitigations, **Data components** the data that reveals it. Open them for more:
 
-- **A course of action** gives its **External ID**, such as `M1017`, the **Log sources** and **Threat hunting techniques** to apply, and **Mitigated attack patterns**, the techniques it answers.
-- **A data component** names its **Data source** and the **Attack patterns** it detects.
-- **A data source** lists its **Data components**, the **Platforms** it covers and its **Layers**: where the data is collected, such as **host**, **network**, **cloud-control-plane**, **container** or **OSINT**.
+- A course of action gives its **External ID**, such as `M1017`, the **Log sources** and **Threat hunting techniques** to apply, and **Mitigated attack patterns**, the techniques it answers.
+- A data component names its **Data source** and the **Attack patterns** it detects.
+- A data source lists its **Data components**, the **Platforms** it covers and its **Layers**: where the data is collected, such as **host**, **network**, **cloud-control-plane**, **container** or **OSINT**.
 
 Together they tell your detection team which logs to collect to see a technique. To list the mitigations of every technique of a threat at once, use the **Courses of action view** of the threat's **Attack patterns**. To check which of those techniques your security tools should cover, see [Match threats with your security platforms](/opencti/use/explore/entities/#match-threats-with-your-security-platforms).
 

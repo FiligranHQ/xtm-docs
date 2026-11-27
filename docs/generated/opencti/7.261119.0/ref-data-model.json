@@ -2,7 +2,7 @@
   "name": "data-model",
   "version": "7.261119.0",
   "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/database/stix.ts and the 88 files of opencti-platform/opencti-graphql/src/schema and opencti-platform/opencti-graphql/src/modules that register types, attributes or modules; opencti-platform/opencti-front/src/private/components/nav/useNavMenu.tsx; opencti-platform/opencti-front/lang/front/en.json)",
-  "intro": "The 84 entity and observable types of OpenCTI 7.261119.0, grouped as the navigation menu groups them, with the attributes each type adds to its family (_required_: the API refuses a creation without it) and the relationships it can start; any type can also start `related-to` and `revoked-by`. [Data model](/opencti/concepts/data-model/) explains how these types form the knowledge graph.",
+  "intro": "The 84 types of OpenCTI 7.261119.0 (entities, observables, sightings and meta objects), grouped as the navigation menu groups them, with the attributes each type adds to its family (_required_: the API refuses a creation without it, unless it fills a default, such as a label's color) and the relationships it can start; any type can also start `related-to` and `revoked-by`. [Data model](/opencti/concepts/data-model/) explains how these types form the knowledge graph.",
   "filter": "Filter types, attributes and relationships",
   "sections": [
     {
@@ -950,7 +950,7 @@
     },
     {
       "title": "Meta objects",
-      "text": "Objects that qualify other objects (labels, markings, kill chain phases): they cannot start relationships, other objects point to them.",
+      "text": "Objects that qualify other objects (labels, markings, kill chain phases, vocabularies): apart from `related-to` and `revoked-by` they start no relationship; other objects point to them or, for a vocabulary, hold one of its values.",
       "columns": [
         "Name",
         "Type",
@@ -1003,7 +1003,7 @@
     },
     {
       "title": "Inherited attributes",
-      "text": "Each type also has the attributes of the levels it belongs to: every entity and observable has those of `Basic-Object`, `Stix-Object` and `Stix-Core-Object`, then those of its family (an incident response has the `Stix-Domain-Object` and `Case` attributes). References to other objects (author, markings, labels, contained objects, kill chain phases) are relationships, not attributes, and are not listed.",
+      "text": "Each type also has the attributes of the levels it belongs to: every entity and observable has those of `Basic-Object`, `Stix-Object` and `Stix-Core-Object`, then those of its family (an incident response has the `Stix-Domain-Object` and `Case` attributes). References held as relationships (author, markings, labels, contained objects, kill chain phases) are not listed; the few held as an attribute, such as the status or the creators, are listed as references.",
       "columns": [
         "Level",
         "Type",

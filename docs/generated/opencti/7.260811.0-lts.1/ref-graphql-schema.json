@@ -2,7 +2,7 @@
   "name": "graphql-schema",
   "version": "7.260811.0-lts.1",
   "source": "OpenCTI-Platform/opencti@c9f5ea5 (opencti-platform/opencti-graphql/config/schema/opencti.graphql and 70 module schemas in opencti-platform/opencti-graphql/src)",
-  "intro": "The public GraphQL API of OpenCTI 7.260811.0-lts.1: its 419 queries, 485 mutations (and the 290 mutations of the objects they return), 28 subscriptions and the input types the mutations take, each with the capability it requires. How to call the API, authenticate and explore the schema is in [GraphQL API](/develop/apis/graphql/); the capabilities are explained in [Roles and capabilities](/opencti/administer/roles/).",
+  "intro": "The public GraphQL API of OpenCTI 7.260811.0-lts.1: its 419 queries, 485 mutations (and the 290 mutations of the objects they return), 28 subscriptions and the input types the mutations take, each with the access it requires: a capability, any authenticated user, or none for a public one. How to call the API, authenticate and explore the schema is in [GraphQL API](/develop/apis/graphql/); the capabilities are explained in [Roles and capabilities](/opencti/administer/roles/).",
   "filter": "Filter queries, mutations, types and capabilities",
   "sections": [
     {

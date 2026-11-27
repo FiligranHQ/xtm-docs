@@ -44,8 +44,8 @@ A merge cannot be undone: the other entities are deleted and their relationships
 :::example[Fold Velvet Harbour into Velvet Harbor]
 A partner's feed reports the intrusion set as `Velvet Harbour`, with the alias `Harbour Mantis`, while your own reports use `Velvet Harbor`. Both now exist in :menu[Threats > Intrusion sets].
 
-1. In the lines view of the list, check **Velvet Harbor** and **Velvet Harbour**, then click **Merge**.
-2. Under **Selected entities**, choose **Velvet Harbor** as the main entity: its description and its author, Example CERT, are the ones to keep.
+1. In the lines view of the list, check Velvet Harbor and Velvet Harbour, then click **Merge**.
+2. Under **Selected entities**, choose Velvet Harbor as the main entity: its description and its author, Example CERT, are the ones to keep.
 3. Check that **Merged entity** shows the name `Velvet Harbor` and the author Example CERT, then click **Merge**.
 
 Velvet Harbour disappears from the list. Velvet Harbor gains `Velvet Harbour` and `Harbour Mantis` as aliases, the relationships and the `TLP:GREEN` marking of Velvet Harbour, and the next bundle of the partner that refers to Velvet Harbour lands on Velvet Harbor, since its STIX identifier was kept. `Velvet Harbor Group`, a third duplicate, can join the same merge or a second round.

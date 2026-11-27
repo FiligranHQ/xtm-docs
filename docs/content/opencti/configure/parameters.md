@@ -56,7 +56,7 @@ The **Configuration** card holds:
 :::
 
 :::only{opencti="<7.261030"}
-- **Default theme**, **Language** and **Hidden entity types**, described in the next section.
+- **Default theme**, **Language** and **Hidden entity types**, described in [Change the appearance](#change-the-appearance).
 
 The **Third-party analytics** card (Enterprise Edition) takes a **Google Analytics (v4)** measurement ID such as `G-XXXXXXXXXX`. To show a consent message at login, set it in [Set platform security policies](/opencti/administer/policies/).
 :::
@@ -69,7 +69,7 @@ The **Appearance** card sets defaults for every user. Users can override the the
 - **Default theme**: one of the themes of the **Themes** card.
 - **Language**: **Automatic** follows the browser.
 - **Date format in tables** and **Time in tables**: how dates appear in lists.
-- **Hidden entity types**: see below.
+- **Hidden entity types**: entity types removed from menus and creation forms, without restricting access.
 - **Remove Filigran logos** (Enterprise Edition): hides the Filigran logos of the interface.
 :::
 

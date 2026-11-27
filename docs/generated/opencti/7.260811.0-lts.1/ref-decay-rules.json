@@ -2,11 +2,11 @@
   "name": "decay-rules",
   "version": "7.260811.0-lts.1",
   "source": "OpenCTI-Platform/opencti@c9f5ea5 (opencti-platform/opencti-graphql/src/modules/decayRule/decayRule-domain.ts)",
-  "intro": "The 4 built-in decay rules OpenCTI 7.260811.0-lts.1 creates on first start. All are active, and none can be changed or deleted. To decay some indicators differently, create a rule with a higher order as [Decay rules](/opencti/configure/decay/) explains.",
+  "intro": "The 4 built-in decay rules OpenCTI 7.260811.0-lts.1 creates on first start. All are active, and none can be changed or deleted. To decay some indicators differently, create a rule with a higher order and activate it, as [Decay rules](/opencti/configure/decay/) explains.",
   "sections": [
     {
       "title": "Built-in decay rules",
-      "text": "Among the active rules that match an indicator when it is created, the one with the highest order applies. An indicator is revoked once its score falls to the revoke score; the reaction points are the scores at which OpenCTI updates the score stored on the indicator.",
+      "text": "When an indicator is created, or imported again with another score, the active rule with the highest order among those that match it applies, unless a decay exclusion rule matches it. An indicator is revoked once its score falls to the revoke score; the reaction points are the scores at which OpenCTI updates the score stored on the indicator.",
       "columns": [
         "Rule",
         "Applies to",

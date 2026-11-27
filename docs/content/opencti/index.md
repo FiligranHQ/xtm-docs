@@ -83,7 +83,7 @@ You see what threatens the business and what the teams achieve, without the proc
 A playbook processes intelligence as it arrives: it filters, enriches and changes data, then saves it, shares it or tells the right people. No code, and every run is traced.
 
 :::cards{cols=2}
-  ::card[How data flows through a playbook.]{icon=BookOpen title=Playbooks href="/opencti/use/automate/playbooks/"}
+  ::card[Which component filters, enriches, saves or notifies.]{icon=BookOpen title="Choose a playbook component" href="/opencti/use/automate/playbooks/choose-a-component/"}
   ::card[From an empty canvas to a running playbook.]{icon=ListChecks title="Create a playbook" href="/opencti/use/automate/playbooks/create/"}
 :::
 :::
