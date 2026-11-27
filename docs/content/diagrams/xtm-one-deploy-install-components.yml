@@ -1,0 +1,30 @@
+title: XTM One runs as a platform and a worker on the shared services of the stack, behind the reverse proxy, and calls the language models you connect
+lanes:
+  - label: Users and platforms
+    tone: external
+    nodes:
+      - {id: browser, label: Browser, icon: Laptop, note: "https://xtm-one.example.com"}
+      - {id: platforms, label: OpenCTI and OpenAEV, icon: Network, note: "register on http://xtm-one:4000"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: platform, label: xtm-one, icon: LogoXTMOne, note: "Interface, API, chat, port 4000"}
+      - {id: worker, label: xtm-one-worker, icon: Workflow, note: "Assignments, schedules, indexing"}
+  - label: Shared services
+    tone: store
+    nodes:
+      - {id: pgsql, label: PostgreSQL, icon: Layers, note: "xtm_one database, pgvector"}
+      - {id: redis, label: Redis, icon: Cpu, note: "Jobs, live chat, locks"}
+      - {id: s3, label: S3 storage, icon: Boxes, note: "xtm-one-files bucket"}
+  - label: Models
+    tone: external
+    nodes:
+      - {id: llm, label: Language models, icon: Bot, note: "A provider or a local endpoint"}
+edges:
+  - {from: browser, to: platform, label: through the reverse proxy}
+  - {from: platforms, to: platform, label: register every 5 minutes}
+  - {from: platform, to: pgsql, label: its data}
+  - {from: worker, to: redis, label: background jobs}
+  - {from: worker, to: s3, label: files}
+  - {from: platform, to: llm, label: prompts}
+  - {from: worker, to: llm, label: prompts, style: dashed}

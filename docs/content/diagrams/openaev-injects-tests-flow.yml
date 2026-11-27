@@ -1,0 +1,23 @@
+title: A test sends an email or SMS inject to you alone, and its result waits in the Tests tab until you replay it
+lanes:
+  - label: Scenario or simulation
+    tone: product
+    nodes:
+      - {id: inject, label: Email or SMS inject, icon: MessageSquare, note: In the Injects tab}
+  - label: Test
+    tone: product
+    nodes:
+      - {id: test, label: Test, icon: Bug, note: Sent at once}
+  - label: You
+    tone: external
+    nodes:
+      - {id: inbox, label: Your mailbox or phone, icon: Laptop, note: Only you receive it}
+  - label: Result
+    tone: product
+    nodes:
+      - {id: tab, label: Tests tab, icon: ListChecks, note: Latest test per inject}
+edges:
+  - {from: inject, to: test, label: Test}
+  - {from: test, to: inbox, label: delivers}
+  - {from: test, to: tab, label: records status}
+  - {from: tab, to: test, label: Replay test, style: dashed}

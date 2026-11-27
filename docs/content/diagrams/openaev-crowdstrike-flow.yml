@@ -1,0 +1,22 @@
+title: OpenAEV imports the hosts of your Falcon host groups, then asks Real Time Response to run your script, which starts the implant on the host
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: executor, label: CrowdStrike executor, icon: LogoOpenAEV, note: Runs inside the platform}
+      - {id: assets, label: Endpoints, icon: Server, note: One per host}
+  - label: CrowdStrike Falcon
+    tone: external
+    nodes:
+      - {id: api, label: Falcon API, icon: ShieldCheck, note: "Host groups, Real Time Response"}
+      - {id: script, label: Response script, icon: Code2, note: Decodes the command}
+  - label: Host
+    tone: external
+    nodes:
+      - {id: implant, label: Implant, icon: Cpu, note: "Runs as SYSTEM or root"}
+edges:
+  - {from: executor, to: api, label: list hosts}
+  - {from: executor, to: assets, label: imports}
+  - {from: api, to: script, label: runscript}
+  - {from: script, to: implant, label: starts}
+  - {from: implant, to: assets, label: results, style: dashed}

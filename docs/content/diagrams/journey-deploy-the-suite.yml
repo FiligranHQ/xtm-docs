@@ -1,0 +1,29 @@
+title: The stack is planned, installed on one host with OpenCRQ, connected around XTM One, then watched and upgraded
+lanes:
+  - label: Plan
+    tone: external
+    nodes:
+      - {id: plan, label: Architecture and host, icon: Layers, note: "Modules, shared services", href: /deploy/plan/architecture/}
+  - label: Install
+    tone: product
+    nodes:
+      - {id: stack, label: Stack running, icon: Boxes, note: "xtm-docker, one host", href: /deploy/install/docker-compose/}
+      - {id: xtmone, label: XTM One usable, icon: LogoXTMOne, note: "Proxy, model, license", href: /deploy/configure/xtm-one/#finish-the-setup-after-the-install}
+      - {id: opencrq, label: OpenCRQ signed in, icon: LogoOpenCRQ, note: "Through XTM One", href: /deploy/configure/opencrq/#sign-in-to-opencrq}
+  - label: Connect
+    tone: core
+    nodes:
+      - {id: connect, label: Platforms registered, icon: Network, note: "One registration token", href: /deploy/configure/connect-modules/}
+  - label: Operate
+    tone: store
+    nodes:
+      - {id: watch, label: Stack watched, icon: Gauge, note: "Health, metrics, audit", href: /deploy/operate/xtm-one/}
+      - {id: upgrade, label: Stack upgraded, icon: History, note: "Backup, then new images", href: /deploy/upgrade/}
+edges:
+  - {from: plan, to: stack, label: modules and host}
+  - {from: stack, to: xtmone, label: public URL}
+  - {from: stack, to: opencrq, label: database and bucket}
+  - {from: xtmone, to: connect, label: registrations}
+  - {from: opencrq, to: connect, label: registration}
+  - {from: connect, to: watch, label: one license}
+  - {from: watch, to: upgrade, label: maintenance window}

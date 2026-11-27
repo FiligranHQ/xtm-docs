@@ -1,0 +1,27 @@
+title: OpenCTI, OpenAEV and OpenCRQ register with XTM One, OpenAEV answers security coverage requests from OpenCTI, OpenCRQ reads both, and XTM Composer runs the integrations of OpenCTI and OpenAEV
+lanes:
+  - label: Integrations
+    tone: external
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Boxes, note: Deploys integrations in Docker, href: /deploy/integrations/composer/}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "http://opencti:8080"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "http://openaev:8080"}
+      - {id: opencrq, label: OpenCRQ, icon: LogoOpenCRQ, note: "http://opencrq:3002"}
+  - label: At the center
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "http://xtm-one:4000"}
+edges:
+  - {from: composer, to: opencti, label: OpenCTI admin token}
+  - {from: composer, to: openaev, label: OpenAEV admin token}
+  - {from: openaev, to: opencti, label: security coverage}
+  - {from: opencti, to: xtmone, label: registration token}
+  - {from: openaev, to: xtmone, label: registration token}
+  - {from: opencrq, to: xtmone, label: registration token}
+  - {from: opencrq, to: opencti, label: reads threats}
+  - {from: opencrq, to: openaev, label: reads results}
+  - {from: xtmone, to: opencti, label: calls as the user, style: dashed}
+  - {from: xtmone, to: openaev, label: calls as the user, style: dashed}

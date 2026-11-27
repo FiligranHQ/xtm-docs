@@ -1,0 +1,28 @@
+title: An agent that asks before running tools stops on any tool no rule lets run, until a person decides
+lanes:
+  - label: Agent run
+    tone: core
+    nodes:
+      - {id: agent, label: Agent, icon: Bot, note: "Ask before running tools"}
+  - label: The gate
+    tone: core
+    nodes:
+      - {id: rules, label: Tool rules, icon: ListChecks, note: "Reads run without asking"}
+      - {id: personal, label: Your approvals, icon: ThumbsUp, note: "Yes, always"}
+  - label: Decision
+    tone: product
+    nodes:
+      - {id: reviewer, label: Reviewer, icon: Users, note: "Run page or Operations"}
+  - label: Result
+    tone: store
+    nodes:
+      - {id: runs, label: Tool runs, icon: PlayCircle, note: "Recorded with its reason"}
+      - {id: declined, label: Declined, icon: ThumbsDown, note: "Agent proposes another way"}
+edges:
+  - {from: agent, to: rules, label: tool call}
+  - {from: rules, to: runs, label: allowed by a rule}
+  - {from: rules, to: personal, label: asks first}
+  - {from: personal, to: runs, label: covered}
+  - {from: personal, to: reviewer, label: not covered}
+  - {from: reviewer, to: runs, label: Yes}
+  - {from: reviewer, to: declined, label: No, style: dashed}

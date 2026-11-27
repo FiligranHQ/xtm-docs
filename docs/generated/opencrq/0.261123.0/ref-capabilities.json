@@ -1,0 +1,62 @@
+{
+  "name": "capabilities",
+  "version": "0.261123.0",
+  "source": "OpenCRQ-Platform/opencrq@d61ebb5 (module/src/modules/capabilities, module/src/modules/platform-capabilities)",
+  "intro": "The capabilities a role grants in OpenCRQ, as the role editors name them. A tenant role grants its capabilities in its tenant only; a platform role grants the platform's. A capability reaches a person through a group: a group holds roles; a user belongs to groups of its tenants and to platform groups, a service account to groups of its own tenant only, so it never holds a platform capability. The super administrator XTM One designates holds every capability, in every tenant and on the platform, without a group. A new platform starts with these platform roles, each in a group with no member yet: **Platform administrator** (every platform capability), in **Platform administrators**; **User manager** (**Manage Users** and **Platform Administration Access**), in **User managers**. Each new tenant gets an **Admin** role and group with every tenant capability.",
+  "sections": [
+    {
+      "title": "Tenant capabilities",
+      "text": "Granted by the roles of a tenant (the tenant's **Settings > Security > Roles**).",
+      "columns": [
+        "Capability",
+        "What it allows",
+        "Id"
+      ],
+      "rows": [
+        {
+          "key": "MANAGE_SECURITY",
+          "cells": [
+            "**Manage Security**",
+            "Manage users, groups, roles and their capabilities.",
+            "`6e8014f5-6f48-442d-8e47-a5d8f7f45411`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Platform capabilities",
+      "text": "Granted by the roles of the platform (the platform's **Settings > Security > Roles**).",
+      "columns": [
+        "Capability",
+        "What it allows",
+        "Id"
+      ],
+      "rows": [
+        {
+          "key": "Create Tenants",
+          "cells": [
+            "**Create Tenants**",
+            "Create and manage tenants.",
+            "`05194e11-45cd-475e-b961-192ff8adcb66`"
+          ]
+        },
+        {
+          "key": "Manage Users",
+          "cells": [
+            "**Manage Users**",
+            "Create and manage platform users.",
+            "`ff8a89e0-c05c-429e-acbb-93c9fb9d018a`"
+          ]
+        },
+        {
+          "key": "Platform Administration Access",
+          "cells": [
+            "**Platform Administration Access**",
+            "Access to the platform administration section.",
+            "`4bdaf17e-97cd-4a28-abb9-f590f2eb2037`"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+title: How OpenCRQ prices a risk scenario, from attack frequency to annualized loss
+lanes:
+  - label: Inputs
+    nodes:
+      - {id: tef, label: Threat Event Frequency, icon: Clock, note: Campaigns per year}
+      - {id: drivers, label: Loss drivers, icon: Scale, note: What an impact costs}
+  - label: Attack run
+    tone: product
+    nodes:
+      - {id: door, label: Initial access, icon: LogIn, note: Techniques that fit your estate}
+      - {id: paths, label: Paths after it, icon: Workflow, note: Against your controls}
+  - label: Outcome
+    nodes:
+      - {id: blocked, label: Blocked, icon: ShieldCheck, note: No loss}
+      - {id: evicted, label: Evicted, icon: Activity, note: A response cost}
+      - {id: detected, label: Impact detected, icon: TriangleAlert, note: A reduced loss}
+      - {id: undetected, label: Impact undetected, icon: Bug, note: The full loss}
+  - label: Result
+    tone: core
+    nodes:
+      - {id: ale, label: Annualized loss expectancy, icon: Gauge, note: Mean and exceedance curve}
+edges:
+  - {from: tef, to: door, label: campaigns}
+  - {from: door, to: paths, label: got in}
+  - {from: tef, to: paths, label: no way in, style: dashed}
+  - {from: paths, to: blocked}
+  - {from: paths, to: evicted}
+  - {from: paths, to: detected}
+  - {from: paths, to: undetected}
+  - {from: drivers, to: ale, label: amounts, style: dashed}
+  - {from: evicted, to: ale}
+  - {from: detected, to: ale}
+  - {from: undetected, to: ale}

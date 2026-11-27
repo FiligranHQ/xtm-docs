@@ -1,0 +1,221 @@
+{
+  "name": "managers",
+  "version": "7.260309.0-lts.8",
+  "source": "OpenCTI-Platform/opencti@22c7908 (opencti-platform/opencti-graphql/src/manager/activityManager.ts, opencti-platform/opencti-graphql/src/manager/clusterManager.ts, opencti-platform/opencti-graphql/src/manager/exclusionListCacheBuildManager.ts, opencti-platform/opencti-graphql/src/manager/exclusionListCacheSyncManager.ts, opencti-platform/opencti-graphql/src/manager/expiredManager.js, opencti-platform/opencti-graphql/src/manager/fileIndexManager.ts, opencti-platform/opencti-graphql/src/manager/garbageCollectionManager.ts, opencti-platform/opencti-graphql/src/manager/historyManager.ts, opencti-platform/opencti-graphql/src/manager/hubRegistrationManager.ts, opencti-platform/opencti-graphql/src/manager/indicatorDecayManager.ts, opencti-platform/opencti-graphql/src/manager/ingestionManager.ts, opencti-platform/opencti-graphql/src/manager/managerModule.ts, opencti-platform/opencti-graphql/src/manager/notificationManager.ts, opencti-platform/opencti-graphql/src/manager/pirManager.ts, opencti-platform/opencti-graphql/src/manager/playbookManager/playbookManager.ts, opencti-platform/opencti-graphql/src/manager/publisherManager.ts, opencti-platform/opencti-graphql/src/manager/retentionManager.ts, opencti-platform/opencti-graphql/src/manager/ruleManager.ts, opencti-platform/opencti-graphql/src/manager/syncManager.js, opencti-platform/opencti-graphql/src/manager/taskManager.js, opencti-platform/opencti-graphql/src/manager/telemetryManager.ts, opencti-platform/opencti-graphql/src/manager/xtmOneRegistrationManager.ts, opencti-platform/opencti-graphql/src/managers.ts, opencti-platform/opencti-front/lang/front/en.json)",
+  "intro": "The 20 background managers of OpenCTI 7.260309.0-lts.8, with how each one runs and the configuration keys that turn it on and tune it. In the code, 9 use the common manager registration (`registerManager`) and 11 still the older pattern, started one by one with their status listed by the cluster manager; [How OpenCTI works](/opencti/concepts/architecture/#managers) explains what managers are and [Parameters](/opencti/configure/parameters/#check-dependencies-and-managers) how to check them.",
+  "filter": "Filter managers and configuration keys",
+  "sections": [
+    {
+      "title": "Managers",
+      "columns": [
+        "Manager",
+        "What it does",
+        "Runs",
+        "Configuration",
+        "Edition"
+      ],
+      "rows": [
+        {
+          "key": "ACTIVITY_MANAGER",
+          "cells": [
+            "Activity manager<br>`ACTIVITY_MANAGER`",
+            "Logs user actions (logins, settings changes and, when configured, reads and changes) in the activity log and raises the activity alerts. See [Activity](/opencti/configure/activity/).",
+            "On every event of the activity stream",
+            "On: `activity_manager:enabled` (default `true`)<br>Tuning: `activity_manager:lock_key`",
+            "Enterprise Edition"
+          ]
+        },
+        {
+          "key": "TASK_MANAGER",
+          "cells": [
+            "Background task manager<br>`TASK_MANAGER`",
+            "Runs background tasks, the changes applied to a list or a search result and the rules applied to existing data. See [Background tasks](/opencti/use/automate/background-tasks/).",
+            "Every 10 seconds (`task_scheduler:interval`)",
+            "On: `task_scheduler:enabled` (default `true`)<br>Tuning: `task_scheduler:interval`, `task_scheduler:lock_key`, `task_scheduler:max_concurrency`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "EXCLUSION_LIST_CACHE_BUILD_MANAGER",
+          "cells": [
+            "Exclusion list cache build manager<br>`EXCLUSION_LIST_CACHE_BUILD_MANAGER`",
+            "Rebuilds the shared cache of the exclusion lists in Redis when a list changes. See [Exclusion lists](/opencti/configure/exclusion-lists/).",
+            "Every 10 seconds (`exclusion_list_cache_build_manager:interval`)",
+            "On: `exclusion_list_cache_build_manager:enabled` (default `true`)<br>Tuning: `exclusion_list_cache_build_manager:interval`, `exclusion_list_cache_build_manager:lock_key`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "EXCLUSION_LIST_CACHE_SYNC_MANAGER",
+          "cells": [
+            "Exclusion list cache sync manager<br>`EXCLUSION_LIST_CACHE_SYNC_MANAGER`",
+            "Refreshes the copy of the exclusion list cache each platform keeps in memory when the shared cache changes.",
+            "Every 10 seconds (`exclusion_list_cache_sync_manager:interval`)",
+            "Always on<br>Tuning: `exclusion_list_cache_sync_manager:interval`, `exclusion_list_cache_sync_manager:lock_key`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "EXPIRATION_SCHEDULER",
+          "cells": [
+            "Expiration scheduler<br>`EXPIRATION_SCHEDULER`",
+            "Revokes the elements whose validity date has passed (indicators also lose their detection flag and score) and sets expired user accounts to expired.",
+            "Every 5 minutes (`expiration_scheduler:interval`)",
+            "On: `expiration_scheduler:enabled` (default `true`)<br>Tuning: `expiration_scheduler:interval`, `expiration_scheduler:lock_key`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "FILE_INDEX_MANAGER",
+          "cells": [
+            "File index manager<br>`FILE_INDEX_MANAGER`",
+            "Extracts and indexes the text of uploaded files so users can search inside them; it starts only when the search engine has an attachment processor. See [File indexing](/opencti/configure/file-indexing/).",
+            "Every minute (`file_index_manager:interval`)<br>On every event of the live stream",
+            "On: `file_index_manager:enabled` (default `true`)<br>Tuning: `file_index_manager:interval`, `file_index_manager:lock_key`, `file_index_manager:stream_lock_key`",
+            "Enterprise Edition"
+          ]
+        },
+        {
+          "key": "HISTORY_MANAGER",
+          "cells": [
+            "History manager<br>`HISTORY_MANAGER`",
+            "Records the changes users and connectors make to each entity, for the history of the entity.",
+            "On every event of the live stream",
+            "On: `history_manager:enabled` (default `true`)<br>Tuning: `history_manager:include_inferences`, `history_manager:lock_key`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "INDICATOR_DECAY_MANAGER",
+          "cells": [
+            "Indicator decay manager<br>`INDICATOR_DECAY_MANAGER`",
+            "Lowers the score of indicators as their decay rule says, and revokes them at the revoke score. See [Decay rules](/opencti/configure/decay/).",
+            "Every minute (`indicator_decay_manager:interval`)",
+            "On: `indicator_decay_manager:enabled` (default `true`)<br>Tuning: `indicator_decay_manager:batch_size`, `indicator_decay_manager:interval`, `indicator_decay_manager:lock_key`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "INGESTION_MANAGER",
+          "cells": [
+            "Ingestion manager<br>`INGESTION_MANAGER`",
+            "Fetches the RSS, TAXII, CSV and JSON feeds defined in the platform and queues their data for the workers. See [Ingest data](/opencti/use/ingest/).",
+            "Every 30 seconds (`ingestion_manager:interval`)",
+            "On: `ingestion_manager:enabled` (default `true`)<br>Tuning: `ingestion_manager:csv_feed:min_interval_minutes`, `ingestion_manager:interval`, `ingestion_manager:lock_key`, `ingestion_manager:rss_feed:min_interval_minutes`, `ingestion_manager:rss_feed:user_agent`, `ingestion_manager:taxii_feed:limit_per_request`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "NOTIFICATION_MANAGER",
+          "cells": [
+            "Notification generation manager<br>`NOTIFICATION_MANAGER`",
+            "Matches changes against users' live triggers and builds the digests of the regular triggers. See [Notifications](/opencti/use/automate/notifications/).",
+            "On every event of the live stream<br>Every minute",
+            "On: `notification_manager:enabled` (default `true`)<br>Tuning: `notification_manager:lock_digest_key`, `notification_manager:lock_live_key`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "PUBLISHER_MANAGER",
+          "cells": [
+            "Notification publishing manager<br>`PUBLISHER_MANAGER`",
+            "Sends the notifications through their notifiers: the interface, email or a webhook.",
+            "On every event of the notification stream",
+            "On: `publisher_manager:enabled` (default `true`)<br>Tuning: `publisher_manager:buffering_seconds`, `publisher_manager:enable_buffering`, `publisher_manager:lock_key`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "PIR_MANAGER",
+          "cells": [
+            "PIR manager<br>`PIR_MANAGER`",
+            "Matches the changes of the live stream against each Priority Intelligence Requirement. See [PIR](/opencti/use/analyze/pir/).",
+            "Every 30 seconds (`pir_manager:interval`)",
+            "On: `pir_manager:enabled` (default `true`)<br>Needs a value: `pir_manager:lock_key` (default `pir_manager_lock`)<br>Tuning: `pir_manager:interval`, `pir_manager:max_concurrency`, `pir_manager:stream_batch_size`",
+            "Enterprise Edition"
+          ]
+        },
+        {
+          "key": "PLAYBOOK_MANAGER",
+          "cells": [
+            "Playbook manager<br>`PLAYBOOK_MANAGER`",
+            "Runs playbooks, the live ones on changes and the scheduled ones on their schedule. See [Playbooks](/opencti/use/automate/playbooks/).",
+            "On every event of the live stream<br>Every minute",
+            "On: `playbook_manager:enabled` (default `true`)<br>Tuning: `playbook_manager:cron_max_size`, `playbook_manager:lock_cron_key`, `playbook_manager:lock_key`, `playbook_manager:log_max_size`, `playbook_manager:realtime_priority`",
+            "Enterprise Edition"
+          ]
+        },
+        {
+          "key": "RETENTION_MANAGER",
+          "cells": [
+            "Retention manager<br>`RETENTION_MANAGER`",
+            "Deletes the data that matches the retention rules. See [Retention](/opencti/configure/retention/).",
+            "Every 30 seconds (`retention_manager:interval`), counted from the end of the previous run",
+            "On: `retention_manager:enabled` (default `true`)<br>Tuning: `retention_manager:batch_size`, `retention_manager:interval`, `retention_manager:lock_key`, `retention_manager:max_deletion_concurrency`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "RULE_ENGINE",
+          "cells": [
+            "Rules engine<br>`RULE_ENGINE`",
+            "Applies the inference rules turned on in the rules engine settings, and removes what they inferred when they are turned off. See [Rules](/opencti/configure/rules/).",
+            "On every event of the live stream",
+            "On: `rule_engine:enabled` (default `true`)<br>Tuning: `rule_engine:lock_key`, `rule_engine:max_explanations_per_rule`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "SYNC_MANAGER",
+          "cells": [
+            "Synchronization manager<br>`SYNC_MANAGER`",
+            "Runs the synchronizers, which read the live stream of a remote OpenCTI platform and import its data. See [Live streams](/opencti/use/ingest/streams/).",
+            "Every 10 seconds (`sync_manager:interval`)",
+            "On: `sync_manager:enabled` (default `true`)<br>Tuning: `sync_manager:interval`, `sync_manager:lock_key`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "TELEMETRY_MANAGER",
+          "cells": [
+            "Telemetry manager<br>`TELEMETRY_MANAGER`",
+            "Collects [usage telemetry](/opencti/configure/telemetry/) and sends it to Filigran.",
+            "Continuously on the platform that holds its lock, one pass every 30 minutes (outside development mode)",
+            "Always on<br>Tuning: `telemetry_manager:console_debug`, `telemetry_manager:interval`, `telemetry_manager:lock_key`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "GARBAGE_COLLECTION_MANAGER",
+          "cells": [
+            "Trash manager<br>`GARBAGE_COLLECTION_MANAGER`",
+            "Permanently deletes the elements kept in the [trash](/opencti/use/delete-restore/) longer than the retention period, and deletes the stored files of stream events that have left the Redis stream.",
+            "Every minute (`garbage_collection_manager:interval`)",
+            "On: `app:trash:enabled` (default `true`), `garbage_collection_manager:enabled` (default `true`)<br>Tuning: `garbage_collection_manager:batch_size`, `garbage_collection_manager:deleted_retention_days`, `garbage_collection_manager:interval`, `garbage_collection_manager:lock_key`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "HUB_REGISTRATION_MANAGER",
+          "cells": [
+            "XTM Hub registration manager<br>`HUB_REGISTRATION_MANAGER`",
+            "Checks the platform's registration with [XTM Hub](/opencti/configure/xtm-hub/), fetches its news feed and deletes news older than the cleanup period.",
+            "Every hour (`hub_registration_manager:interval`)",
+            "On: `hub_registration_manager:enabled` (default `true`)<br>Tuning: `hub_registration_manager:interval`, `hub_registration_manager:lock_key`",
+            "All editions"
+          ]
+        },
+        {
+          "key": "XTM_ONE_REGISTRATION_MANAGER",
+          "cells": [
+            "XTM One registration manager<br>`XTM_ONE_REGISTRATION_MANAGER`",
+            "Registers the platform with XTM One and repeats the registration as a heartbeat. See [Connect the modules](/deploy/configure/connect-modules/).",
+            "Every 5 minutes",
+            "Needs a value: `xtm:xtm_one_token`, `xtm:xtm_one_url` (default `https://common.xtm1.filigran.io`)",
+            "All editions"
+          ]
+        }
+      ]
+    }
+  ]
+}

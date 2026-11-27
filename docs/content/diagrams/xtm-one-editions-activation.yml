@@ -1,0 +1,25 @@
+title: A connected Enterprise Edition platform or an XTM One license makes the deployment Enterprise Edition; without either it is Community Edition
+lanes:
+  - label: Sources of Enterprise Edition
+    tone: external
+    nodes:
+      - {id: platform, label: EE platform, icon: LogoOpenCTI, note: "OpenCTI or OpenAEV", href: /deploy/configure/connect-modules/}
+      - {id: license, label: XTM One license, icon: KeyRound, note: "Administration > Settings > Platform"}
+  - label: Edition
+    tone: core
+    nodes:
+      - {id: ee, label: Enterprise Edition, icon: Gem, note: "Every capability, under a quota"}
+      - {id: ce, label: Community Edition, icon: Boxes, note: Neither source}
+  - label: What runs
+    tone: product
+    nodes:
+      - {id: ai, label: AI capabilities, icon: Sparkles, note: "Agents, chat, automations"}
+      - {id: base, label: The platform, icon: Users, note: "Sign-in, settings, connections"}
+      - {id: switch, label: AI switch, icon: Gauge, note: Administrator's choice, href: /xtm-one/administer/running-without-ai/}
+edges:
+  - {from: platform, to: ee, label: included allowance}
+  - {from: license, to: ee, label: its own capacity}
+  - {from: ee, to: ai, label: licensed}
+  - {from: ee, to: base, label: always}
+  - {from: ce, to: base, label: always}
+  - {from: switch, to: ai, label: on or off, style: dashed}

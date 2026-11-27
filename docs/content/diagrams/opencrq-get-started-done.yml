@@ -1,0 +1,22 @@
+title: How Get started ends, from its last step to your first risk scenarios
+lanes:
+  - label: Get started
+    tone: product
+    nodes:
+      - {id: steps, label: Eight steps, icon: ListChecks, note: Each one done or started}
+      - {id: next, label: Next on Scenarios, icon: Workflow, note: The last step}
+  - label: Where Next leads
+    tone: core
+    nodes:
+      - {id: done, label: Your platform is set up, icon: Check, note: Scenarios computed for Enterprise}
+      - {id: overview, label: Overview of the steps, icon: ListChecks, note: While a step is still To do}
+  - label: What you can do now
+    nodes:
+      - {id: scenarios, label: Risk scenarios, icon: Gauge, note: Estimated annual losses, href: /opencrq/use/quantify/risk-scenarios/}
+      - {id: plans, label: Treatment plans, icon: ListChecks, note: A measure's cost against the loss it avoids, href: /opencrq/use/decide/treatment-plans/}
+edges:
+  - {from: steps, to: next}
+  - {from: next, to: done, label: no step left to do}
+  - {from: next, to: overview, label: a step still to do, style: dashed}
+  - {from: done, to: scenarios, label: See your risk scenarios}
+  - {from: done, to: plans}

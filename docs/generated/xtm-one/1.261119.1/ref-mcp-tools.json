@@ -1,0 +1,1521 @@
+{
+  "name": "mcp-tools",
+  "version": "1.261119.1",
+  "source": "XTM-One-Platform/xtm-one@cd3a70e: backend/app/api/v1/mcp_platform.py, backend/app/integrations/providers",
+  "intro": "Every tool of the Model Context Protocol (MCP) servers XTM One exposes for OpenCTI, OpenAEV and OpenCRQ: 164 tools. An assistant or an agent of your own calls them with an API key of a user, and works with that user's rights in each product: see [MCP servers](/develop/apis/mcp/) for the endpoints, the protocol and the authentication. A tool marked Write changes data; a read-only key cannot call it.",
+  "filter": "Filter by tool or by what it does",
+  "sections": [
+    {
+      "title": "OpenCTI server",
+      "text": "`/mcp/opencti` on XTM One: 29 tools on the knowledge of OpenCTI: entities, observables, indicators, relationships, containers, notes, labels and markings. A read-only API key calls the 11 marked Read.",
+      "columns": [
+        "Tool",
+        "Group",
+        "Access",
+        "What it does"
+      ],
+      "rows": [
+        {
+          "key": "search_opencti",
+          "cells": [
+            "`search_opencti`",
+            "Read / search",
+            "Read",
+            "Search for entities in OpenCTI by keyword."
+          ]
+        },
+        {
+          "key": "get_opencti_entity",
+          "cells": [
+            "`get_opencti_entity`",
+            "Read / search",
+            "Read",
+            "Get full details of a specific entity by its OpenCTI ID or STIX ID."
+          ]
+        },
+        {
+          "key": "get_opencti_relationship",
+          "cells": [
+            "`get_opencti_relationship`",
+            "Read / search",
+            "Read",
+            "Get full details of a specific STIX core relationship by its OpenCTI ID or STIX ID."
+          ]
+        },
+        {
+          "key": "list_opencti_entities",
+          "cells": [
+            "`list_opencti_entities`",
+            "Read / search",
+            "Read",
+            "List STIX domain objects from OpenCTI with optional type filter, search, and ordering."
+          ]
+        },
+        {
+          "key": "list_opencti_observables",
+          "cells": [
+            "`list_opencti_observables`",
+            "Read / search",
+            "Read",
+            "List STIX cyber observables from OpenCTI with optional type filter and search."
+          ]
+        },
+        {
+          "key": "list_opencti_relationships",
+          "cells": [
+            "`list_opencti_relationships`",
+            "Read / search",
+            "Read",
+            "List STIX core relationships of a specific entity."
+          ]
+        },
+        {
+          "key": "get_opencti_container_full",
+          "cells": [
+            "`get_opencti_container_full`",
+            "Read / search",
+            "Read",
+            ""
+          ]
+        },
+        {
+          "key": "get_opencti_entity_stats",
+          "cells": [
+            "`get_opencti_entity_stats`",
+            "Read / search",
+            "Read",
+            "Get time-series statistics for a STIX entity over time."
+          ]
+        },
+        {
+          "key": "get_opencti_top_related",
+          "cells": [
+            "`get_opencti_top_related`",
+            "Read / search",
+            "Read",
+            "Get top-N related entities by type for a STIX entity."
+          ]
+        },
+        {
+          "key": "get_opencti_entity_history",
+          "cells": [
+            "`get_opencti_entity_history`",
+            "Read / search",
+            "Read",
+            "Get the modification history (audit log) for a STIX entity."
+          ]
+        },
+        {
+          "key": "validate_nlq_filter",
+          "cells": [
+            "`validate_nlq_filter`",
+            "Read / search",
+            "Read",
+            "Validate NLQ filter"
+          ]
+        },
+        {
+          "key": "create_opencti_entity",
+          "cells": [
+            "`create_opencti_entity`",
+            "Create",
+            "Write",
+            "Create a STIX domain object (entity) in OpenCTI."
+          ]
+        },
+        {
+          "key": "create_opencti_relationship",
+          "cells": [
+            "`create_opencti_relationship`",
+            "Create",
+            "Write",
+            "Create a STIX core relationship between two entities in OpenCTI."
+          ]
+        },
+        {
+          "key": "create_opencti_observable",
+          "cells": [
+            "`create_opencti_observable`",
+            "Create",
+            "Write",
+            "Create a STIX cyber observable (IOC) in OpenCTI."
+          ]
+        },
+        {
+          "key": "create_opencti_indicator",
+          "cells": [
+            "`create_opencti_indicator`",
+            "Create",
+            "Write",
+            "Create an indicator in OpenCTI."
+          ]
+        },
+        {
+          "key": "create_opencti_container",
+          "cells": [
+            "`create_opencti_container`",
+            "Create",
+            "Write",
+            "Create a container in OpenCTI: Report, Case-Incident, Case-Rfi (Request for Information), Case-Rft (Request for Takedown), or Grouping."
+          ]
+        },
+        {
+          "key": "create_opencti_note",
+          "cells": [
+            "`create_opencti_note`",
+            "Create",
+            "Write",
+            "Create an analyst note in OpenCTI attached to one or more entities."
+          ]
+        },
+        {
+          "key": "update_opencti_field",
+          "cells": [
+            "`update_opencti_field`",
+            "Update",
+            "Write",
+            "Update a field on a STIX domain object in OpenCTI."
+          ]
+        },
+        {
+          "key": "update_opencti_relationship_field",
+          "cells": [
+            "`update_opencti_relationship_field`",
+            "Update",
+            "Write",
+            "Update a field on a STIX core relationship in OpenCTI."
+          ]
+        },
+        {
+          "key": "delete_opencti_entity",
+          "cells": [
+            "`delete_opencti_entity`",
+            "Delete",
+            "Write",
+            "Delete any STIX core object (domain object or cyber observable) from OpenCTI by its ID."
+          ]
+        },
+        {
+          "key": "delete_opencti_relationship",
+          "cells": [
+            "`delete_opencti_relationship`",
+            "Delete",
+            "Write",
+            "Delete a STIX core relationship from OpenCTI by its ID."
+          ]
+        },
+        {
+          "key": "add_opencti_label",
+          "cells": [
+            "`add_opencti_label`",
+            "Labels & markings",
+            "Write",
+            "Add a label to an entity, observable, relationship or sighting in OpenCTI and return the full updated entity or relationship."
+          ]
+        },
+        {
+          "key": "remove_opencti_label",
+          "cells": [
+            "`remove_opencti_label`",
+            "Labels & markings",
+            "Write",
+            "Remove a label from an entity, observable, relationship or sighting in OpenCTI."
+          ]
+        },
+        {
+          "key": "add_opencti_marking",
+          "cells": [
+            "`add_opencti_marking`",
+            "Labels & markings",
+            "Write",
+            "Add a marking definition (TLP, PAP, etc.) to an entity, observable, relationship or sighting in OpenCTI."
+          ]
+        },
+        {
+          "key": "remove_opencti_marking",
+          "cells": [
+            "`remove_opencti_marking`",
+            "Labels & markings",
+            "Write",
+            "Remove a marking definition from an entity, observable, relationship or sighting in OpenCTI."
+          ]
+        },
+        {
+          "key": "list_opencti_markings",
+          "cells": [
+            "`list_opencti_markings`",
+            "Labels & markings",
+            "Write",
+            "List OpenCTI marking definitions (TLP, PAP, statements; read-only) with their internal id and STIX id. add_opencti_marking and the ingestion feed tools take the internal id, the STIX id or the name (TLP:CLEAR)."
+          ]
+        },
+        {
+          "key": "add_opencti_to_container",
+          "cells": [
+            "`add_opencti_to_container`",
+            "Containers",
+            "Write",
+            "Add one or more entities or relationships to an OpenCTI container (Report, Case, Grouping, Note, etc.)."
+          ]
+        },
+        {
+          "key": "remove_opencti_from_container",
+          "cells": [
+            "`remove_opencti_from_container`",
+            "Containers",
+            "Write",
+            "Remove one or more entities or relationships from an OpenCTI container (Report, Case, Grouping, Note, etc.)."
+          ]
+        },
+        {
+          "key": "promote_opencti_observable",
+          "cells": [
+            "`promote_opencti_observable`",
+            "Advanced",
+            "Write",
+            "Promote an existing STIX Cyber Observable to a STIX Indicator."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "OpenAEV server",
+      "text": "`/mcp/openaev` on XTM One: 50 tools on the scenarios, simulations, injects, payloads, atomic tests, expectations, findings and assets of OpenAEV. A read-only API key calls the 24 marked Read.",
+      "columns": [
+        "Tool",
+        "Group",
+        "Access",
+        "What it does"
+      ],
+      "rows": [
+        {
+          "key": "search_openaev_assets",
+          "cells": [
+            "`search_openaev_assets`",
+            "Search / read",
+            "Read",
+            "Search for assets (endpoints) in OpenAEV by name, hostname, or IP address."
+          ]
+        },
+        {
+          "key": "get_openaev_asset",
+          "cells": [
+            "`get_openaev_asset`",
+            "Search / read",
+            "Read",
+            "Get full details of a specific asset (endpoint) by its OpenAEV ID."
+          ]
+        },
+        {
+          "key": "search_openaev_asset_groups",
+          "cells": [
+            "`search_openaev_asset_groups`",
+            "Search / read",
+            "Read",
+            "Search for asset groups in OpenAEV by name."
+          ]
+        },
+        {
+          "key": "get_openaev_asset_group",
+          "cells": [
+            "`get_openaev_asset_group`",
+            "Search / read",
+            "Read",
+            "Get an asset group by ID: its dynamic filter, tags and its members, static and dynamic, paged (name, id, type, hostname)."
+          ]
+        },
+        {
+          "key": "search_openaev_teams",
+          "cells": [
+            "`search_openaev_teams`",
+            "Search / read",
+            "Read",
+            "Search for teams in OpenAEV by name."
+          ]
+        },
+        {
+          "key": "get_openaev_team",
+          "cells": [
+            "`get_openaev_team`",
+            "Search / read",
+            "Read",
+            "Get full details of a specific team by ID."
+          ]
+        },
+        {
+          "key": "search_openaev_players",
+          "cells": [
+            "`search_openaev_players`",
+            "Search / read",
+            "Read",
+            "Search for players (users/people) in OpenAEV by email, first name, or last name."
+          ]
+        },
+        {
+          "key": "search_openaev_attack_patterns",
+          "cells": [
+            "`search_openaev_attack_patterns`",
+            "Search / read",
+            "Read",
+            "Search MITRE ATT&CK attack patterns in OpenAEV."
+          ]
+        },
+        {
+          "key": "get_openaev_attack_pattern",
+          "cells": [
+            "`get_openaev_attack_pattern`",
+            "Search / read",
+            "Read",
+            "Get full details of a specific MITRE ATT&CK attack pattern by ID."
+          ]
+        },
+        {
+          "key": "search_openaev_scenarios",
+          "cells": [
+            "`search_openaev_scenarios`",
+            "Search / read",
+            "Read",
+            "Search for adversary simulation scenarios in OpenAEV or list all scenarios."
+          ]
+        },
+        {
+          "key": "get_openaev_scenario",
+          "cells": [
+            "`get_openaev_scenario`",
+            "Search / read",
+            "Read",
+            "Get full details of a specific scenario by ID."
+          ]
+        },
+        {
+          "key": "search_openaev_exercises",
+          "cells": [
+            "`search_openaev_exercises`",
+            "Search / read",
+            "Read",
+            "Search for exercises (simulations) in OpenAEV or list all."
+          ]
+        },
+        {
+          "key": "get_openaev_exercise",
+          "cells": [
+            "`get_openaev_exercise`",
+            "Search / read",
+            "Read",
+            "Get full details of a specific exercise/simulation by ID."
+          ]
+        },
+        {
+          "key": "search_openaev_payloads",
+          "cells": [
+            "`search_openaev_payloads`",
+            "Search / read",
+            "Read",
+            "Search for payloads in OpenAEV or list all."
+          ]
+        },
+        {
+          "key": "get_openaev_payload",
+          "cells": [
+            "`get_openaev_payload`",
+            "Search / read",
+            "Read",
+            "Get full details of a payload by ID."
+          ]
+        },
+        {
+          "key": "search_openaev_injector_contracts",
+          "cells": [
+            "`search_openaev_injector_contracts`",
+            "Search / read",
+            "Read",
+            "Search for injector contracts in OpenAEV."
+          ]
+        },
+        {
+          "key": "get_openaev_injector_contract",
+          "cells": [
+            "`get_openaev_injector_contract`",
+            "Search / read",
+            "Read",
+            "Get full details of an injector contract by ID, with its input fields (inject_content keys, types, mandatory flags, defaults, choices, linked fields and visibility conditions): build inject content from them, never from the injector's sour…"
+          ]
+        },
+        {
+          "key": "search_openaev_findings",
+          "cells": [
+            "`search_openaev_findings`",
+            "Search / read",
+            "Read",
+            "Search for security findings in OpenAEV (detected issues on assets - credentials, open ports, CVEs, kerberoastable accounts, shares...)."
+          ]
+        },
+        {
+          "key": "get_openaev_vulnerability",
+          "cells": [
+            "`get_openaev_vulnerability`",
+            "Search / read",
+            "Read",
+            "Look up a vulnerability in OpenAEV by its CVE ID (e.g., CVE-2024-1234)."
+          ]
+        },
+        {
+          "key": "full_text_search_openaev",
+          "cells": [
+            "`full_text_search_openaev`",
+            "Search / read",
+            "Read",
+            "Full-text search across all OpenAEV entity types."
+          ]
+        },
+        {
+          "key": "list_openaev_kill_chain_phases",
+          "cells": [
+            "`list_openaev_kill_chain_phases`",
+            "Search / read",
+            "Read",
+            "List all kill chain phases in OpenAEV (MITRE ATT&CK, Lockheed Martin, etc.)."
+          ]
+        },
+        {
+          "key": "list_openaev_tags",
+          "cells": [
+            "`list_openaev_tags`",
+            "Search / read",
+            "Read",
+            "List all tags available in OpenAEV for categorizing entities."
+          ]
+        },
+        {
+          "key": "list_openaev_domains",
+          "cells": [
+            "`list_openaev_domains`",
+            "Search / read",
+            "Read",
+            "List all security domains available in OpenAEV."
+          ]
+        },
+        {
+          "key": "create_openaev_scenario",
+          "cells": [
+            "`create_openaev_scenario`",
+            "Create / mutate",
+            "Write",
+            "Create a new adversary simulation scenario in OpenAEV."
+          ]
+        },
+        {
+          "key": "update_openaev_scenario",
+          "cells": [
+            "`update_openaev_scenario`",
+            "Create / mutate",
+            "Write",
+            "Update an existing scenario (name, description, category, severity, etc.)."
+          ]
+        },
+        {
+          "key": "delete_openaev_scenario",
+          "cells": [
+            "`delete_openaev_scenario`",
+            "Create / mutate",
+            "Write",
+            "Delete a scenario from OpenAEV."
+          ]
+        },
+        {
+          "key": "create_openaev_payload",
+          "cells": [
+            "`create_openaev_payload`",
+            "Create / mutate",
+            "Write",
+            "Create a payload for use in injects and atomic tests."
+          ]
+        },
+        {
+          "key": "add_openaev_inject_to_scenario",
+          "cells": [
+            "`add_openaev_inject_to_scenario`",
+            "Create / mutate",
+            "Write",
+            "Add an inject (action step) to a scenario."
+          ]
+        },
+        {
+          "key": "create_openaev_atomic_testing",
+          "cells": [
+            "`create_openaev_atomic_testing`",
+            "Create / mutate",
+            "Write",
+            "Create an atomic test in OpenAEV."
+          ]
+        },
+        {
+          "key": "manage_openaev_simulation",
+          "cells": [
+            "`manage_openaev_simulation`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV simulations (exercises - the actual runs)."
+          ]
+        },
+        {
+          "key": "manage_openaev_scenario",
+          "cells": [
+            "`manage_openaev_scenario`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV scenario lifecycle (create/update/delete are separate create_openaev_scenario / update_openaev_scenario / delete_openaev_scenario tools)."
+          ]
+        },
+        {
+          "key": "manage_openaev_inject",
+          "cells": [
+            "`manage_openaev_inject`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV injects (the individual attack actions). scope: 'scenario' or 'simulation' (parent_id = scenario_id or exercise_id) or 'global' (by inject_id)."
+          ]
+        },
+        {
+          "key": "manage_openaev_expectation",
+          "cells": [
+            "`manage_openaev_expectation`",
+            "Business domain managers",
+            "Write",
+            "Read and interpret OpenAEV EXPECTATIONS - the scored verdicts on whether the security controls did their job."
+          ]
+        },
+        {
+          "key": "manage_openaev_atomic_testing",
+          "cells": [
+            "`manage_openaev_atomic_testing`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV atomic tests (one-off inject executions)."
+          ]
+        },
+        {
+          "key": "manage_openaev_payload",
+          "cells": [
+            "`manage_openaev_payload`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV payloads directly (the raw payload record)."
+          ]
+        },
+        {
+          "key": "manage_openaev_threat_arsenal",
+          "cells": [
+            "`manage_openaev_threat_arsenal`",
+            "Business domain managers",
+            "Write",
+            "Manage the OpenAEV Threat Arsenal - the catalogue of ACTIONS (an injector contract plus its payload) that simulations and atomic tests execute."
+          ]
+        },
+        {
+          "key": "manage_openaev_finding",
+          "cells": [
+            "`manage_openaev_finding`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV findings."
+          ]
+        },
+        {
+          "key": "manage_openaev_vulnerability",
+          "cells": [
+            "`manage_openaev_vulnerability`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV vulnerabilities."
+          ]
+        },
+        {
+          "key": "manage_openaev_asset",
+          "cells": [
+            "`manage_openaev_asset`",
+            "Business domain managers",
+            "Write",
+            "Update or delete an OpenAEV asset (endpoint)."
+          ]
+        },
+        {
+          "key": "manage_openaev_asset_group",
+          "cells": [
+            "`manage_openaev_asset_group`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV asset groups."
+          ]
+        },
+        {
+          "key": "manage_openaev_document",
+          "cells": [
+            "`manage_openaev_document`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV documents."
+          ]
+        },
+        {
+          "key": "manage_openaev_channel",
+          "cells": [
+            "`manage_openaev_channel`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV media channels (used by media-pressure articles)."
+          ]
+        },
+        {
+          "key": "manage_openaev_article",
+          "cells": [
+            "`manage_openaev_article`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV media-pressure articles on a scenario or simulation. scope: 'simulation' (exercise) or 'scenario'; parent_id is the exercise_id or scenario_id."
+          ]
+        },
+        {
+          "key": "manage_openaev_challenge",
+          "cells": [
+            "`manage_openaev_challenge`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV challenges (capture-the-flag style)."
+          ]
+        },
+        {
+          "key": "manage_openaev_lessons",
+          "cells": [
+            "`manage_openaev_lessons`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV lessons learned."
+          ]
+        },
+        {
+          "key": "manage_openaev_reporting",
+          "cells": [
+            "`manage_openaev_reporting`",
+            "Business domain managers",
+            "Write",
+            "Manage OpenAEV reporting: reusable report TEMPLATES plus the generations (rendered PDF/HTML reports) produced from them."
+          ]
+        },
+        {
+          "key": "manage_openaev_phishing",
+          "cells": [
+            "`manage_openaev_phishing`",
+            "Phishing components",
+            "Write",
+            "Manage OpenAEV phishing components (admin + phishing capability required). resource='landing_page' manages reusable credential-capture / lure pages; resource='email_template' manages reusable lure emails."
+          ]
+        },
+        {
+          "key": "query_openaev_analytics",
+          "cells": [
+            "`query_openaev_analytics`",
+            "Analytics + preview read surfaces",
+            "Read",
+            "Run an AD-HOC analytics query against OpenAEV without needing a saved dashboard widget: you supply the widget configuration inline and get the computed aggregate back."
+          ]
+        },
+        {
+          "key": "manage_openaev_dashboard",
+          "cells": [
+            "`manage_openaev_dashboard`",
+            "Analytics + preview read surfaces",
+            "Write",
+            "Manage OpenAEV custom dashboards and run their saved widgets."
+          ]
+        },
+        {
+          "key": "manage_openaev_variable",
+          "cells": [
+            "`manage_openaev_variable`",
+            "Analytics + preview read surfaces",
+            "Write",
+            "Manage OpenAEV variables on a scenario or simulation. scope: 'scenario' or 'exercise'/'simulation'; parent_id is the scenario_id or exercise_id."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "OpenCRQ server",
+      "text": "`/mcp/opencrq` on XTM One: 85 tools on the frameworks, controls, assessments, risk scenarios, assets and findings of OpenCRQ. A read-only API key calls the 57 marked Read. An organization, as these tools name it (`organization_id`), is what OpenCRQ shows as a risk scope.",
+      "columns": [
+        "Tool",
+        "Group",
+        "Access",
+        "What it does"
+      ],
+      "rows": [
+        {
+          "key": "list_opencrq_tenants",
+          "cells": [
+            "`list_opencrq_tenants`",
+            "Tenancy / catalog",
+            "Read",
+            "List the OpenCRQ tenants accessible to the current user."
+          ]
+        },
+        {
+          "key": "list_opencrq_organizations",
+          "cells": [
+            "`list_opencrq_organizations`",
+            "Tenancy / catalog",
+            "Read",
+            "List the organizations of an OpenCRQ tenant."
+          ]
+        },
+        {
+          "key": "list_opencrq_frameworks",
+          "cells": [
+            "`list_opencrq_frameworks`",
+            "Tenancy / catalog",
+            "Read",
+            "List the compliance frameworks of an OpenCRQ tenant from both sources, each labelled: the assessment catalog (frameworks a compliance assessment is run against, e.g. NIST CSF) and the Drata mirror (frameworks synced from Drata, e.g. ISO 27…"
+          ]
+        },
+        {
+          "key": "get_opencrq_framework",
+          "cells": [
+            "`get_opencrq_framework`",
+            "Tenancy / catalog",
+            "Read",
+            "Get a Drata-mirror framework's details: readiness and requirement counts."
+          ]
+        },
+        {
+          "key": "list_opencrq_framework_requirements",
+          "cells": [
+            "`list_opencrq_framework_requirements`",
+            "Tenancy / catalog",
+            "Read",
+            "List the requirements of a Drata-mirror framework with their code, category, scope, readiness and number of mapped Drata controls, 100 at a time."
+          ]
+        },
+        {
+          "key": "list_opencrq_drata_controls",
+          "cells": [
+            "`list_opencrq_drata_controls`",
+            "Tenancy / catalog",
+            "Read",
+            "List the Drata controls mirrored in OpenCRQ, either those mapped to a Drata framework's requirements or those of one requirement, with their readiness, monitoring, evidence and policy flags, 100 at a time."
+          ]
+        },
+        {
+          "key": "list_opencrq_control_capabilities",
+          "cells": [
+            "`list_opencrq_control_capabilities`",
+            "Controls",
+            "Read",
+            "List the control capabilities of an OpenCRQ tenant with their assessment: strength and coverage (each L0 to L3, with its auto or manual mode), when and by whom the capability was last assessed, or 'not assessed'."
+          ]
+        },
+        {
+          "key": "get_opencrq_control_capability",
+          "cells": [
+            "`get_opencrq_control_capability`",
+            "Controls",
+            "Read",
+            "Get an OpenCRQ control capability's detail: its assessment and what feeds each axis, its functions (prevent, detect), the meaning of each strength rung, the MITRE ATT&CK techniques it acts on, and the risk scenarios that share those techni…"
+          ]
+        },
+        {
+          "key": "update_opencrq_control_capability_assessment",
+          "cells": [
+            "`update_opencrq_control_capability_assessment`",
+            "Controls",
+            "Write",
+            "Declare the assessment of an OpenCRQ control capability: strength and coverage (each L0 to L3), with a comment."
+          ]
+        },
+        {
+          "key": "manage_opencrq_scope_control_posture",
+          "cells": [
+            "`manage_opencrq_scope_control_posture`",
+            "Controls",
+            "Write",
+            "Declare or clear an OpenCRQ control capability's posture on one organization (a scope), overriding the tenant's assessment there only."
+          ]
+        },
+        {
+          "key": "manage_opencrq_capability_techniques",
+          "cells": [
+            "`manage_opencrq_capability_techniques`",
+            "Controls",
+            "Write",
+            "Change which MITRE ATT&CK techniques an OpenCRQ control capability covers for this tenant, on one function (prevent or detect), as overrides of the catalogue's recommendation. action=add covers a technique the capability does not cover on…"
+          ]
+        },
+        {
+          "key": "get_opencrq_control_capability_history",
+          "cells": [
+            "`get_opencrq_control_capability_history`",
+            "Controls",
+            "Read",
+            "Get the assessment history of an OpenCRQ control capability, newest first: when its strength or coverage moved, from and to which values, who or which connector moved it, and the sources behind a derived value."
+          ]
+        },
+        {
+          "key": "list_opencrq_compliance_assessments",
+          "cells": [
+            "`list_opencrq_compliance_assessments`",
+            "Assessments",
+            "Read",
+            "List the compliance assessments of an OpenCRQ tenant with their framework, draft or published status, how many requirements are answered on a level (0-5) or marked not applicable, and the mean level, 20 at a time."
+          ]
+        },
+        {
+          "key": "get_opencrq_compliance_assessment",
+          "cells": [
+            "`get_opencrq_compliance_assessment`",
+            "Assessments",
+            "Read",
+            "Get an OpenCRQ compliance assessment's detail."
+          ]
+        },
+        {
+          "key": "create_opencrq_compliance_assessment",
+          "cells": [
+            "`create_opencrq_compliance_assessment`",
+            "Assessments",
+            "Write",
+            "Create a new draft compliance assessment of an OpenCRQ tenant against an assessment-catalog framework."
+          ]
+        },
+        {
+          "key": "manage_opencrq_compliance_assessment",
+          "cells": [
+            "`manage_opencrq_compliance_assessment`",
+            "Assessments",
+            "Write",
+            "Rename a draft OpenCRQ compliance assessment, publish it (its answers can no longer change and feed the control capabilities) or reopen a published one as a draft."
+          ]
+        },
+        {
+          "key": "update_opencrq_requirement_answer",
+          "cells": [
+            "`update_opencrq_requirement_answer`",
+            "Assessments",
+            "Write",
+            "Answer one requirement of a draft OpenCRQ compliance assessment: a level from 0 to 5, or not applicable, with an optional comment, or clear=true to make it unanswered again; owner_id and due_date assign the requirement."
+          ]
+        },
+        {
+          "key": "list_opencrq_risk_scenarios",
+          "cells": [
+            "`list_opencrq_risk_scenarios`",
+            "Risk",
+            "Read",
+            "List OpenCRQ risk scenarios with their organization, attack outcome, targeted primary assets, latest simulation (ALE mean with P10 / P90) and readiness for a simulation."
+          ]
+        },
+        {
+          "key": "get_opencrq_risk_scenario",
+          "cells": [
+            "`get_opencrq_risk_scenario`",
+            "Risk",
+            "Read",
+            "Get an OpenCRQ risk scenario's full detail including the mitigating control capabilities with their strength and coverage (useful for gap and coverage analysis)."
+          ]
+        },
+        {
+          "key": "create_opencrq_risk_scenario",
+          "cells": [
+            "`create_opencrq_risk_scenario`",
+            "Risk",
+            "Write",
+            "Create a new risk scenario in OpenCRQ."
+          ]
+        },
+        {
+          "key": "update_opencrq_risk_scenario",
+          "cells": [
+            "`update_opencrq_risk_scenario`",
+            "Risk",
+            "Write",
+            "Update an OpenCRQ risk scenario (name, description, targeted primary assets, owner)."
+          ]
+        },
+        {
+          "key": "delete_opencrq_risk_scenarios",
+          "cells": [
+            "`delete_opencrq_risk_scenarios`",
+            "Risk",
+            "Write",
+            "Delete one or more OpenCRQ risk scenarios (bulk)."
+          ]
+        },
+        {
+          "key": "update_opencrq_risk_tolerance",
+          "cells": [
+            "`update_opencrq_risk_tolerance`",
+            "Risk",
+            "Write",
+            "Set an OpenCRQ risk tolerance: the highest probability the organisation accepts of a year's loss exceeding an amount (for example a 5% chance of losing more than 2,500,000 in a year)."
+          ]
+        },
+        {
+          "key": "get_opencrq_scenario_exposure",
+          "cells": [
+            "`get_opencrq_scenario_exposure`",
+            "Risk",
+            "Read",
+            "Get the exposure analysis of an OpenCRQ risk scenario: the supporting assets derived from its primary assets (via the dependency graph): how many there are and the 30 with the highest impact on the scenario's loss."
+          ]
+        },
+        {
+          "key": "list_opencrq_attack_outcomes",
+          "cells": [
+            "`list_opencrq_attack_outcomes`",
+            "Risk",
+            "Read",
+            "List the attack outcome taxonomy used by OpenCRQ risk scenarios (e.g. data breach, ransomware, fraud)."
+          ]
+        },
+        {
+          "key": "get_opencrq_attack_outcome",
+          "cells": [
+            "`get_opencrq_attack_outcome`",
+            "Risk",
+            "Read",
+            "Get an OpenCRQ attack outcome's detail including its MITRE ATT&CK techniques."
+          ]
+        },
+        {
+          "key": "get_opencrq_financial_summary",
+          "cells": [
+            "`get_opencrq_financial_summary`",
+            "CRQ",
+            "Read",
+            "Get the cyber risk quantification (CRQ) financial impact summary and per-driver loss estimates of an OpenCRQ risk scenario."
+          ]
+        },
+        {
+          "key": "run_opencrq_crq_simulation",
+          "cells": [
+            "`run_opencrq_crq_simulation`",
+            "CRQ",
+            "Write",
+            "Enqueue a cyber risk quantification (CRQ) Monte Carlo simulation for an OpenCRQ risk scenario."
+          ]
+        },
+        {
+          "key": "get_opencrq_crq_run",
+          "cells": [
+            "`get_opencrq_crq_run`",
+            "CRQ",
+            "Read",
+            "Get a CRQ simulation run of an OpenCRQ risk scenario: pass risk_scenario_id for the latest run, or run_id for a specific run including the value of each technique."
+          ]
+        },
+        {
+          "key": "list_opencrq_crq_run_history",
+          "cells": [
+            "`list_opencrq_crq_run_history`",
+            "CRQ",
+            "Read",
+            "List the past CRQ simulation runs of an OpenCRQ risk scenario with their headline ALE and LEF means."
+          ]
+        },
+        {
+          "key": "get_opencrq_crq_what_if",
+          "cells": [
+            "`get_opencrq_crq_what_if`",
+            "CRQ",
+            "Read",
+            "Get the control upgrade what-if results of an OpenCRQ risk scenario: how much upgrading each control's strength or coverage would reduce the ALE (useful for prioritizing remediation)."
+          ]
+        },
+        {
+          "key": "get_opencrq_tef_input",
+          "cells": [
+            "`get_opencrq_tef_input`",
+            "CRQ",
+            "Read",
+            "Get the threat event frequency (TEF) of an OpenCRQ risk scenario (min / likely / max events per year): the automatic estimate when the scenario is in auto mode, the default, or the values entered by hand when it is in manual mode."
+          ]
+        },
+        {
+          "key": "update_opencrq_tef_input",
+          "cells": [
+            "`update_opencrq_tef_input`",
+            "CRQ",
+            "Write",
+            "Set the threat event frequency (TEF) of an OpenCRQ risk scenario by hand (min <= likely <= max, events per year), which switches it to manual mode so the next CRQ run uses these values, or put it back on the automatic estimate with mode=au…"
+          ]
+        },
+        {
+          "key": "list_opencrq_loss_drivers",
+          "cells": [
+            "`list_opencrq_loss_drivers`",
+            "CRQ",
+            "Read",
+            "List the loss drivers of an OpenCRQ tenant (the financial impact taxonomy used by CRQ estimates) with their loss category."
+          ]
+        },
+        {
+          "key": "get_opencrq_loss_driver",
+          "cells": [
+            "`get_opencrq_loss_driver`",
+            "CRQ",
+            "Read",
+            "Get an OpenCRQ loss driver's detail including its loss category, dwell sensitivity and what it scales with."
+          ]
+        },
+        {
+          "key": "update_opencrq_loss_estimates",
+          "cells": [
+            "`update_opencrq_loss_estimates`",
+            "CRQ",
+            "Write",
+            "Set or clear the per-loss-driver financial estimates of an OpenCRQ risk scenario."
+          ]
+        },
+        {
+          "key": "get_opencrq_financial_profile",
+          "cells": [
+            "`get_opencrq_financial_profile`",
+            "CRQ",
+            "Read",
+            "Get the financial profile of an OpenCRQ risk scope: its answers to the financial questionnaire (revenue and margin, digital dependency, data held, regulatory regime, customers and contracts, funds and IP, extortion, loss history) that Open…"
+          ]
+        },
+        {
+          "key": "update_opencrq_financial_profile",
+          "cells": [
+            "`update_opencrq_financial_profile`",
+            "CRQ",
+            "Write",
+            "Answer or clear questions of an OpenCRQ risk scope's financial profile."
+          ]
+        },
+        {
+          "key": "list_opencrq_primary_assets",
+          "cells": [
+            "`list_opencrq_primary_assets`",
+            "Assets & vulnerabilities",
+            "Read",
+            "List the primary (business) assets of an OpenCRQ organization - the business processes and information targeted by risk scenarios - with their business value categories."
+          ]
+        },
+        {
+          "key": "list_opencrq_business_value_categories",
+          "cells": [
+            "`list_opencrq_business_value_categories`",
+            "Assets & vulnerabilities",
+            "Read",
+            "List the OpenCRQ business value categories (the closed catalogue of what a primary asset is worth to the business, e.g. personal data, payment card data)."
+          ]
+        },
+        {
+          "key": "create_opencrq_primary_asset",
+          "cells": [
+            "`create_opencrq_primary_asset`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Create a primary (business) asset in an OpenCRQ organization, classified into one or more business value categories (list_opencrq_business_value_categories)."
+          ]
+        },
+        {
+          "key": "update_opencrq_primary_asset",
+          "cells": [
+            "`update_opencrq_primary_asset`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Update a primary (business) asset in OpenCRQ (name, description, owner, business value categories)."
+          ]
+        },
+        {
+          "key": "delete_opencrq_primary_assets",
+          "cells": [
+            "`delete_opencrq_primary_assets`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Delete one or more OpenCRQ primary assets (bulk)."
+          ]
+        },
+        {
+          "key": "list_opencrq_supporting_assets",
+          "cells": [
+            "`list_opencrq_supporting_assets`",
+            "Assets & vulnerabilities",
+            "Read",
+            "List the supporting (technical) assets of an OpenCRQ tenant - the systems and services that back the primary assets - page by page, sorted by name."
+          ]
+        },
+        {
+          "key": "get_opencrq_supporting_asset",
+          "cells": [
+            "`get_opencrq_supporting_asset`",
+            "Assets & vulnerabilities",
+            "Read",
+            "Get an OpenCRQ supporting asset's detail including its number of vulnerability findings."
+          ]
+        },
+        {
+          "key": "create_opencrq_supporting_asset",
+          "cells": [
+            "`create_opencrq_supporting_asset`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Create a supporting (technical) asset in OpenCRQ with a category, exposure, and optional criticality, subcategory, url, linked person, owner name, groups, hand-set tags and a property block (hostname, IPs, ... per family). organization_id…"
+          ]
+        },
+        {
+          "key": "update_opencrq_supporting_asset",
+          "cells": [
+            "`update_opencrq_supporting_asset`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Update a supporting (technical) asset in OpenCRQ (name, category, exposure, criticality, description, owner, subcategory, url, linked person, tags, groups, property block)."
+          ]
+        },
+        {
+          "key": "delete_opencrq_supporting_assets",
+          "cells": [
+            "`delete_opencrq_supporting_assets`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Delete one or more OpenCRQ supporting assets (bulk)."
+          ]
+        },
+        {
+          "key": "reset_opencrq_supporting_asset_to_connectors",
+          "cells": [
+            "`reset_opencrq_supporting_asset_to_connectors`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Hand an OpenCRQ supporting asset back to its connectors: every value set by hand on it (name, category, subcategory, exposure, criticality, description, url, linked person and the property block typed by hand) is erased and re-derived from…"
+          ]
+        },
+        {
+          "key": "list_opencrq_asset_dependencies",
+          "cells": [
+            "`list_opencrq_asset_dependencies`",
+            "Assets & vulnerabilities",
+            "Read",
+            "List the dependency links of an OpenCRQ asset: support-to-primary links (which business assets a technical asset supports, and with which roles) and support-to-support links (technical dependency chains)."
+          ]
+        },
+        {
+          "key": "create_opencrq_asset_dependency",
+          "cells": [
+            "`create_opencrq_asset_dependency`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Create a dependency link between OpenCRQ assets: support_to_primary (technical asset supports a business asset, with the roles it plays for it) or support_to_support (provider technical asset -> dependent technical asset)."
+          ]
+        },
+        {
+          "key": "update_opencrq_asset_dependency_roles",
+          "cells": [
+            "`update_opencrq_asset_dependency_roles`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Replace the roles of existing support-to-primary dependency links of OpenCRQ assets; the same roles apply to every listed link, and support-to-support links have none. list_opencrq_asset_dependencies shows each link's id and its current ro…"
+          ]
+        },
+        {
+          "key": "delete_opencrq_asset_dependencies",
+          "cells": [
+            "`delete_opencrq_asset_dependencies`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Delete one or more OpenCRQ asset dependency links (bulk)."
+          ]
+        },
+        {
+          "key": "create_opencrq_asset_evidence",
+          "cells": [
+            "`create_opencrq_asset_evidence`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Attach a CVE as vulnerability evidence to an OpenCRQ supporting asset. cve_record_id is the CVE row UUID from the knowledge base (search_opencrq_cves returns it)."
+          ]
+        },
+        {
+          "key": "update_opencrq_evidence_state",
+          "cells": [
+            "`update_opencrq_evidence_state`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Set the state of an OpenCRQ asset evidence: applicable or dismissed (a dismissal requires a type, a reason code of that type and a written reason)."
+          ]
+        },
+        {
+          "key": "delete_opencrq_asset_evidence",
+          "cells": [
+            "`delete_opencrq_asset_evidence`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Delete an OpenCRQ asset evidence that a person attached by hand (create_opencrq_asset_evidence), with its state history and score."
+          ]
+        },
+        {
+          "key": "reset_opencrq_evidence_state",
+          "cells": [
+            "`reset_opencrq_evidence_state`",
+            "Assets & vulnerabilities",
+            "Write",
+            "Hand an OpenCRQ asset evidence back to its connector, which may override the state a person set on its next pass (a dismissal can come back as applicable)."
+          ]
+        },
+        {
+          "key": "get_opencrq_evidence",
+          "cells": [
+            "`get_opencrq_evidence`",
+            "Assets & vulnerabilities",
+            "Read",
+            "Get an OpenCRQ asset evidence's detail: the CVE or technique, the asset, its current state, its state change history with who or what set each state (origin), and the connectors that report it."
+          ]
+        },
+        {
+          "key": "list_opencrq_cve_evidences",
+          "cells": [
+            "`list_opencrq_cve_evidences`",
+            "Assets & vulnerabilities",
+            "Read",
+            "List the OpenCRQ supporting assets that have evidence for a given CVE, with their applicability state (which assets are affected by this vulnerability), page by page."
+          ]
+        },
+        {
+          "key": "list_opencrq_unique_findings",
+          "cells": [
+            "`list_opencrq_unique_findings`",
+            "Assets & vulnerabilities",
+            "Read",
+            "List the tenant's vulnerability findings in OpenCRQ, one row per CVE or per tested technique, with severity band and score, number of affected assets, CISA KEV, EPSS and reporting sources, page by page."
+          ]
+        },
+        {
+          "key": "search_opencrq_cves",
+          "cells": [
+            "`search_opencrq_cves`",
+            "Assets & vulnerabilities",
+            "Read",
+            "Search the OpenCRQ CVE knowledge base (synced from NIST NVD, FIRST EPSS, and CISA KEV) by CVE ID or keyword."
+          ]
+        },
+        {
+          "key": "list_opencrq_cves",
+          "cells": [
+            "`list_opencrq_cves`",
+            "Assets & vulnerabilities",
+            "Read",
+            "Page through the OpenCRQ CVE knowledge base (synced from NIST NVD, FIRST EPSS, and CISA KEV)."
+          ]
+        },
+        {
+          "key": "get_opencrq_cve",
+          "cells": [
+            "`get_opencrq_cve`",
+            "Assets & vulnerabilities",
+            "Read",
+            "Get a CVE's detail from the OpenCRQ knowledge base (CVSS, EPSS, CISA KEV, description) by CVE identifier."
+          ]
+        },
+        {
+          "key": "list_opencrq_mitre_tactics",
+          "cells": [
+            "`list_opencrq_mitre_tactics`",
+            "MITRE ATT&CK reference data",
+            "Read",
+            "List the MITRE ATT&CK tactics known to OpenCRQ."
+          ]
+        },
+        {
+          "key": "search_opencrq_mitre_techniques",
+          "cells": [
+            "`search_opencrq_mitre_techniques`",
+            "MITRE ATT&CK reference data",
+            "Read",
+            "Search the MITRE ATT&CK techniques known to OpenCRQ by name or ATT&CK ID (e.g. T1566)."
+          ]
+        },
+        {
+          "key": "get_opencrq_mitre_technique",
+          "cells": [
+            "`get_opencrq_mitre_technique`",
+            "MITRE ATT&CK reference data",
+            "Read",
+            "Get a MITRE ATT&CK technique's detail from OpenCRQ: tactics, sub-techniques, and mitigations."
+          ]
+        },
+        {
+          "key": "list_opencrq_mitre_mitigations",
+          "cells": [
+            "`list_opencrq_mitre_mitigations`",
+            "MITRE ATT&CK reference data",
+            "Read",
+            "List or search the MITRE ATT&CK mitigations known to OpenCRQ."
+          ]
+        },
+        {
+          "key": "list_opencrq_jobs",
+          "cells": [
+            "`list_opencrq_jobs`",
+            "Job tracking",
+            "Read",
+            "List the background runs of an OpenCRQ tenant (CRQ simulations, connector and CVE syncs, recomputes), newest first, optionally filtered by kinds (e.g. crq-simulation, cve-epss-sync) and statuses."
+          ]
+        },
+        {
+          "key": "get_opencrq_job",
+          "cells": [
+            "`get_opencrq_job`",
+            "Job tracking",
+            "Read",
+            "Get an OpenCRQ background job's status and its enqueue and start times (use after run_opencrq_crq_simulation to see whether it is queued, running or finished). list_opencrq_jobs also shows progress and errors."
+          ]
+        },
+        {
+          "key": "get_opencrq_findings_summary",
+          "cells": [
+            "`get_opencrq_findings_summary`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "Summarize the open vulnerability findings of an OpenCRQ tenant or organization: count by severity band with what is new, impacted assets, critical, internet-exposed, known exploited and aged findings."
+          ]
+        },
+        {
+          "key": "get_opencrq_top_vulnerabilities",
+          "cells": [
+            "`get_opencrq_top_vulnerabilities`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "Get the five worst vulnerabilities of an OpenCRQ tenant or organization (CVEs, or ATT&CK techniques a simulation did not stop), by finding score, with how many assets each one impacts."
+          ]
+        },
+        {
+          "key": "list_opencrq_findings",
+          "cells": [
+            "`list_opencrq_findings`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "List OpenCRQ vulnerability findings (one vulnerability on one supporting asset), worst score first by default, optionally for one CVE."
+          ]
+        },
+        {
+          "key": "get_opencrq_cve_finding",
+          "cells": [
+            "`get_opencrq_cve_finding`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "Get one CVE as a finding across the OpenCRQ estate: its finding score and band, the worst single asset, the number of affected assets, CISA KEV and EPSS."
+          ]
+        },
+        {
+          "key": "get_opencrq_asset_posture",
+          "cells": [
+            "`get_opencrq_asset_posture`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "Get an OpenCRQ supporting asset's posture score (0-100, higher is stronger), its CVE findings by exploitability band, its worst finding, and its findings 10 per page."
+          ]
+        },
+        {
+          "key": "get_opencrq_technique_test_posture",
+          "cells": [
+            "`get_opencrq_technique_test_posture`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "Get what attack simulations proved on an OpenCRQ tenant or organization: of the latest test results, one per tested asset and ATT&CK technique, how many prevented and detected the attack, now and 30 days ago."
+          ]
+        },
+        {
+          "key": "list_opencrq_threats",
+          "cells": [
+            "`list_opencrq_threats`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "List the OpenCRQ threat catalog (threat actors, intrusion sets, campaigns imported from threat intelligence) with each threat's activity, best-matching attack outcome and CVE / technique counts."
+          ]
+        },
+        {
+          "key": "get_opencrq_threat",
+          "cells": [
+            "`get_opencrq_threat`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "Get one OpenCRQ threat: profile and activity, targeted countries and sectors, exploited CVEs, ATT&CK techniques, and the attack outcomes it fits."
+          ]
+        },
+        {
+          "key": "list_opencrq_scenario_threats",
+          "cells": [
+            "`list_opencrq_scenario_threats`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "List the threats relevant to an OpenCRQ risk scenario, ranked as OpenCRQ ranks them, by threat score (relevance times activity), with what makes each relevant (attack outcome, targeted country, targeted sector) and its activity."
+          ]
+        },
+        {
+          "key": "list_opencrq_cve_threats",
+          "cells": [
+            "`list_opencrq_cve_threats`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "List the threats of the OpenCRQ catalog that cite a CVE, with their activity: tells whether a vulnerability is exploited by active threats."
+          ]
+        },
+        {
+          "key": "list_opencrq_treatment_plans",
+          "cells": [
+            "`list_opencrq_treatment_plans`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "List the OpenCRQ risk treatment plans (planned control upgrades) with their status, the annualized loss (ALE) reduction their simulation prices, year-1 cost and return, 20 at a time."
+          ]
+        },
+        {
+          "key": "get_opencrq_treatment_plan",
+          "cells": [
+            "`get_opencrq_treatment_plan`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "Get an OpenCRQ risk treatment plan: owner, period, cost, the control moves it plans (strength and coverage targets), and the simulated ALE reduction per risk scenario, 20 scenarios at a time."
+          ]
+        },
+        {
+          "key": "list_opencrq_budget_reviews",
+          "cells": [
+            "`list_opencrq_budget_reviews`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "List the OpenCRQ budget reviews (security spend over a period) with what was spent, the loss per year its controls avoided and the return, 20 at a time."
+          ]
+        },
+        {
+          "key": "get_opencrq_budget_review",
+          "cells": [
+            "`get_opencrq_budget_review`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "Get an OpenCRQ budget review: its spend lines (build or run, amount, controls, CSF functions) and the loss avoided per year and return of each line, of the build and run lines, and of the whole."
+          ]
+        },
+        {
+          "key": "get_opencrq_control_validation",
+          "cells": [
+            "`get_opencrq_control_validation`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "Get the proven posture of an OpenCRQ control: which ATT&CK techniques attack simulations showed it prevents or detects, which ones contradicted it, and the simulation evidence, 15 at a time."
+          ]
+        },
+        {
+          "key": "get_opencrq_risk_dashboard",
+          "cells": [
+            "`get_opencrq_risk_dashboard`",
+            "Findings, threats, risk treatment, proven posture, dashboard",
+            "Read",
+            "Get the OpenCRQ risk dashboard of a tenant or organization: total priced exposure, risk scenarios by annualized loss (ALE) with their trend (10 at a time), scenarios outside their risk tolerance, the control upgrades that reduce exposure m…"
+          ]
+        }
+      ]
+    }
+  ]
+}

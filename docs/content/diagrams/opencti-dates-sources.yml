@@ -1,0 +1,23 @@
+title: Some dates come from the source, some from your instance, and imports move each by its own rule
+lanes:
+  - label: Source
+    tone: external
+    nodes:
+      - {id: written, label: Original creation date, icon: FileText, note: When the source wrote it}
+      - {id: threat, label: Threat dates, icon: Crosshair, note: "First seen, start time, valid from"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: write, label: Create or update, icon: LogoOpenCTI, note: "By you, a connector or a feed"}
+  - label: Stored on the object
+    tone: store
+    nodes:
+      - {id: platform, label: Platform creation date, icon: Sparkles, note: Set once}
+      - {id: modified, label: Modification date, icon: History, note: Each real change}
+      - {id: kept, label: Source dates, icon: Clock, note: Kept or widened}
+edges:
+  - {from: written, to: write, label: travels in STIX}
+  - {from: threat, to: write, label: travels in STIX}
+  - {from: write, to: platform, label: first creation}
+  - {from: write, to: modified, label: every change}
+  - {from: write, to: kept, label: confidence decides}

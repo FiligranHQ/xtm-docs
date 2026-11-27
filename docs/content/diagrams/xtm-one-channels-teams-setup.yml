@@ -1,0 +1,19 @@
+title: Teams needs three Microsoft pieces, an app registration, an Azure Bot and an app package, before XTM One receives its messages
+lanes:
+  - label: Microsoft
+    tone: external
+    nodes:
+      - {id: entra, label: App registration, icon: KeyRound, note: "Entra ID, Graph permissions"}
+      - {id: azurebot, label: Azure Bot, icon: Network, note: Messaging endpoint}
+      - {id: package, label: Teams app package, icon: Boxes, note: "Manifest, icons"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: card, label: Microsoft Teams card, icon: ShieldCheck, note: "App ID, secret, tenant"}
+      - {id: agent, label: Agent, icon: Bot, note: Receive on}
+edges:
+  - {from: entra, to: card, label: "IDs, secret"}
+  - {from: entra, to: azurebot, label: used by}
+  - {from: package, to: azurebot, label: installs}
+  - {from: azurebot, to: card, label: messages}
+  - {from: card, to: agent, label: routed}

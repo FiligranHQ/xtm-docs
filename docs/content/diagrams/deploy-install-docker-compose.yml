@@ -1,0 +1,29 @@
+title: You prepare the host, write .env and docker-compose.override.yml, start the stack, whose data stays in Docker volumes, and publish it through a reverse proxy on local ports
+lanes:
+  - label: Prepare
+    tone: external
+    nodes:
+      - {id: host, label: The host, icon: Server, note: "vm.max_map_count, Docker at boot, git clone"}
+  - label: Configure
+    tone: product
+    nodes:
+      - {id: env, label: .env, icon: FileText, note: "Secrets, admins, mail, public URLs"}
+      - {id: override, label: docker-compose.override.yml, icon: Wrench, note: "Local ports, pinned versions, workers"}
+  - label: Start
+    tone: product
+    nodes:
+      - {id: stack, label: The whole XTM platform, icon: Boxes, note: "docker compose pull, then up -d"}
+  - label: Data
+    tone: store
+    nodes:
+      - {id: volumes, label: Docker volumes, icon: Layers, note: "xtm_esdata, xtm_pgsqlshareddata and others"}
+  - label: Publish
+    tone: external
+    nodes:
+      - {id: proxy, label: Reverse proxy, icon: ShieldCheck, note: HTTPS for your users, href: /deploy/install/reverse-proxy/}
+edges:
+  - {from: host, to: env, label: secrets script}
+  - {from: env, to: stack, label: settings and secrets}
+  - {from: override, to: stack, label: merged at each command}
+  - {from: stack, to: volumes, label: keeps its data}
+  - {from: proxy, to: stack, label: "127.0.0.1:8080 to 8090"}

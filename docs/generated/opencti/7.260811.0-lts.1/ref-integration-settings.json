@@ -1,0 +1,2119 @@
+{
+  "name": "integration-settings",
+  "version": "7.260811.0-lts.1",
+  "source": "OpenCTI-Platform/opencti@c9f5ea5 (client-python/pycti/api/opencti_api_client.py, client-python/pycti/connector/opencti_connector_helper.py, opencti-worker/src/worker.py); FiligranHQ/xtm-composer@832c5b1 (config/default.yaml, src/config/settings.rs, src/orchestrator/podman/mod.rs)",
+  "intro": "The settings OpenCTI 7.260811.0-lts.1's integrations read: the 66 every connector shares through pycti, the 22 of the worker, the 1 variables pycti reads for both, and the 100 of XTM Composer. [Run an integration without XTM Composer](/deploy/integrations/manual/) and [Configure XTM Composer](/deploy/integrations/configure-composer/) explain how to set them.",
+  "filter": "Filter settings and variables",
+  "sections": [
+    {
+      "title": "Connectors: OpenCTI connection",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "connectors:OPENCTI_CUSTOM_HEADERS",
+          "cells": [
+            "`opencti.custom_headers`",
+            "`OPENCTI_CUSTOM_HEADERS`",
+            "String",
+            "Not set",
+            "Extra HTTP headers sent with every API call, as `name:value` pairs separated by `;`, for a reverse proxy or gateway in front of the platform that requires them."
+          ]
+        },
+        {
+          "key": "connectors:OPENCTI_JSON_LOGGING",
+          "cells": [
+            "`opencti.json_logging`",
+            "`OPENCTI_JSON_LOGGING`",
+            "Boolean",
+            "`true`",
+            "Whether the connector writes its logs as JSON lines (`true`) or as plain text."
+          ]
+        },
+        {
+          "key": "connectors:OPENCTI_SSL_VERIFY",
+          "cells": [
+            "`opencti.ssl_verify`",
+            "`OPENCTI_SSL_VERIFY`",
+            "Boolean",
+            "`false`",
+            "Whether the connector checks the platform's TLS certificate; turn it on when the platform URL is HTTPS with a certificate the connector trusts."
+          ]
+        },
+        {
+          "key": "connectors:OPENCTI_TOKEN",
+          "cells": [
+            "`opencti.token`",
+            "`OPENCTI_TOKEN`",
+            "String",
+            "Required",
+            "API token of the user the connector acts as; with `CONNECTOR_AUTO_CREATE_SERVICE_ACCOUNT`, only used to create that account. Give each connector its own user, so that its confidence level and markings apply to what it imports."
+          ]
+        },
+        {
+          "key": "connectors:OPENCTI_URL",
+          "cells": [
+            "`opencti.url`",
+            "`OPENCTI_URL`",
+            "String",
+            "Required",
+            "URL of the OpenCTI platform the connector registers with and sends its data to, as the connector reaches it (for example `http://opencti:8080` inside a Docker network)."
+          ]
+        }
+      ],
+      "text": "Every connector built on pycti reads these settings through its connector helper: the environment variable first, then the key of the connector's `config.yml`, then the default. A connector adds its own settings, listed in its README."
+    },
+    {
+      "title": "Connectors: connector settings",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "connectors:CONNECTOR_AUTO_CREATE_SERVICE_ACCOUNT_CONFIDENCE_LEVEL",
+          "cells": [
+            "`connector.auto_create_service_account_confidence_level`",
+            "`CONNECTOR_AUTO_CREATE_SERVICE_ACCOUNT_CONFIDENCE_LEVEL`",
+            "Integer",
+            "`50`",
+            "Maximum confidence level (0 to 100) of the service account the connector creates for itself."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_AUTO_CREATE_SERVICE_ACCOUNT",
+          "cells": [
+            "`connector.auto_create_service_account`",
+            "`CONNECTOR_AUTO_CREATE_SERVICE_ACCOUNT`",
+            "Boolean",
+            "`false`",
+            "Whether the connector creates its own service account at start (`[C] <name>`, in the Connectors group) and uses a fresh token of it; `OPENCTI_TOKEN` must then belong to a user allowed to manage users."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_AUTO_UPDATE",
+          "cells": [
+            "`connector.auto_update`",
+            "`CONNECTOR_AUTO_UPDATE`",
+            "Boolean",
+            "`false`",
+            "For an enrichment connector, whether the platform also sends it the entities in its scope when they are updated, not only when they are created."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_AUTO",
+          "cells": [
+            "`connector.auto`",
+            "`CONNECTOR_AUTO`",
+            "Boolean",
+            "`false`",
+            "For an enrichment connector, whether the platform sends it every new entity in its scope automatically (`true`) or only when a user asks for an enrichment."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_DURATION_PERIOD",
+          "cells": [
+            "`connector.duration_period`",
+            "`CONNECTOR_DURATION_PERIOD`",
+            "String",
+            "Not set",
+            "Interval between two runs of a scheduled connector, as an ISO 8601 duration (`PT1H` runs every hour); `0` runs once and stops."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_ENRICHMENT_RESOLUTION",
+          "cells": [
+            "`connector.enrichment_resolution`",
+            "`CONNECTOR_ENRICHMENT_RESOLUTION`",
+            "String",
+            "`none`",
+            "For an enrichment connector, what the platform sends with the entity to enrich: `none` sends the entity alone, `stix_bundle` also sends the bundle of the objects around it."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_EXPOSE_METRICS",
+          "cells": [
+            "`connector.expose_metrics`",
+            "`CONNECTOR_EXPOSE_METRICS`",
+            "Boolean",
+            "`false`",
+            "Whether the connector exposes Prometheus metrics of its activity on `CONNECTOR_METRICS_PORT`."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_ID",
+          "cells": [
+            "`connector.id`",
+            "`CONNECTOR_ID`",
+            "String",
+            "Required",
+            "Unique identifier of the connector (a UUIDv4): the platform keeps the connector's state, works and queue under it. Generate one per connector instance and keep it across restarts."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LISTEN_PROTOCOL_API_PATH",
+          "cells": [
+            "`connector.listen_protocol_api_path`",
+            "`CONNECTOR_LISTEN_PROTOCOL_API_PATH`",
+            "String",
+            "`/api/callback`",
+            "Path of the HTTP endpoint the connector listens on with the `API` listen protocol."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LISTEN_PROTOCOL_API_PORT",
+          "cells": [
+            "`connector.listen_protocol_api_port`",
+            "`CONNECTOR_LISTEN_PROTOCOL_API_PORT`",
+            "Integer",
+            "`7070`",
+            "Port of the HTTP endpoint the connector listens on with the `API` listen protocol."
+          ]
+        },
+        {
+          "key": "connectors:LISTEN_PROTOCOL_API_SSL_CERT",
+          "cells": [
+            "`connector.listen_protocol_api_ssl_cert`",
+            "`LISTEN_PROTOCOL_API_SSL_CERT`",
+            "String",
+            "Empty",
+            "Certificate (PEM) of the HTTPS endpoint of the `API` listen protocol."
+          ]
+        },
+        {
+          "key": "connectors:LISTEN_PROTOCOL_API_SSL_KEY",
+          "cells": [
+            "`connector.listen_protocol_api_ssl_key`",
+            "`LISTEN_PROTOCOL_API_SSL_KEY`",
+            "String",
+            "Empty",
+            "Private key (PEM) of the HTTPS endpoint of the `API` listen protocol."
+          ]
+        },
+        {
+          "key": "connectors:LISTEN_PROTOCOL_API_SSL_PASSPHRASE",
+          "cells": [
+            "`connector.listen_protocol_api_ssl_passphrase`",
+            "`LISTEN_PROTOCOL_API_SSL_PASSPHRASE`",
+            "String",
+            "Empty",
+            "Passphrase of the private key of the HTTPS endpoint, when the key is encrypted."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LISTEN_PROTOCOL_API_SSL",
+          "cells": [
+            "`connector.listen_protocol_api_ssl`",
+            "`CONNECTOR_LISTEN_PROTOCOL_API_SSL`",
+            "Boolean",
+            "`false`",
+            "Whether the HTTP endpoint of the `API` listen protocol serves HTTPS, with the key and certificate of `LISTEN_PROTOCOL_API_SSL_KEY` and `LISTEN_PROTOCOL_API_SSL_CERT`."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LISTEN_PROTOCOL_API_URI",
+          "cells": [
+            "`connector.listen_protocol_api_uri`",
+            "`CONNECTOR_LISTEN_PROTOCOL_API_URI`",
+            "String",
+            "`http://127.0.0.1:7070`, `https://127.0.0.1:7070` with SSL",
+            "Base URL at which the workers reach the connector's HTTP endpoint with the `API` listen protocol; the connector registers this URL followed by the path. Set it to an address the workers can reach."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LISTEN_PROTOCOL",
+          "cells": [
+            "`connector.listen_protocol`",
+            "`CONNECTOR_LISTEN_PROTOCOL`",
+            "String",
+            "`AMQP`",
+            "How the connector receives the work the platform sends it (enrichments, file imports, exports): `AMQP` from its RabbitMQ queue, or `API` on an HTTP endpoint the worker calls, for a connector that cannot reach RabbitMQ."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LIVE_STREAM_ID",
+          "cells": [
+            "`connector.live_stream_id`",
+            "`CONNECTOR_LIVE_STREAM_ID`",
+            "String",
+            "Not set",
+            "For a stream connector, the live stream it reads (its id in the data sharing settings); unset, it reads the raw stream of all events."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LIVE_STREAM_LISTEN_DELETE",
+          "cells": [
+            "`connector.live_stream_listen_delete`",
+            "`CONNECTOR_LIVE_STREAM_LISTEN_DELETE`",
+            "Boolean",
+            "`true`",
+            "For a stream connector, whether it also receives deletion events."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LIVE_STREAM_NO_DEPENDENCIES",
+          "cells": [
+            "`connector.live_stream_no_dependencies`",
+            "`CONNECTOR_LIVE_STREAM_NO_DEPENDENCIES`",
+            "Boolean",
+            "`true`",
+            "For a stream connector, whether the stream sends the events alone (`true`) or also the objects they depend on."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LIVE_STREAM_RECOVER_ISO_DATE",
+          "cells": [
+            "`connector.live_stream_recover_iso_date`",
+            "`CONNECTOR_LIVE_STREAM_RECOVER_ISO_DATE`",
+            "String",
+            "Not set",
+            "For a stream connector's first run, the date (ISO 8601) until which the stream replays the existing data before sending live events; unset, the date of the first run."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LIVE_STREAM_START_TIMESTAMP",
+          "cells": [
+            "`connector.live_stream_start_timestamp`",
+            "`CONNECTOR_LIVE_STREAM_START_TIMESTAMP`",
+            "String",
+            "Not set",
+            "For a stream connector's first run, the point of the stream to start from, as a stream event timestamp in milliseconds; unset, it starts from the beginning. Ignored once the connector has a saved state."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LIVE_STREAM_WITH_INFERENCES",
+          "cells": [
+            "`connector.live_stream_with_inferences`",
+            "`CONNECTOR_LIVE_STREAM_WITH_INFERENCES`",
+            "Boolean",
+            "`false`",
+            "For a stream connector, whether the stream also sends what the inference rules created."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_LOG_LEVEL",
+          "cells": [
+            "`connector.log_level`",
+            "`CONNECTOR_LOG_LEVEL`",
+            "String",
+            "`ERROR`",
+            "Level of the connector's logs: `debug`, `info`, `warning` or `error`. Set it to `debug` to investigate a connector, then set it back."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_METRICS_NAMESPACE",
+          "cells": [
+            "`connector.metrics_namespace`",
+            "`CONNECTOR_METRICS_NAMESPACE`",
+            "String",
+            "Empty",
+            "Prefix (Prometheus namespace) of the connector's metric names."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_METRICS_PORT",
+          "cells": [
+            "`connector.metrics_port`",
+            "`CONNECTOR_METRICS_PORT`",
+            "Integer",
+            "`9095`",
+            "Port of the connector's Prometheus metrics endpoint."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_METRICS_SUBSYSTEM",
+          "cells": [
+            "`connector.metrics_subsystem`",
+            "`CONNECTOR_METRICS_SUBSYSTEM`",
+            "String",
+            "Empty",
+            "Second prefix (Prometheus subsystem) of the connector's metric names, after the namespace."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_NAME",
+          "cells": [
+            "`connector.name`",
+            "`CONNECTOR_NAME`",
+            "String",
+            "Required",
+            "Name the platform shows for the connector; also the base of its auto-created service account and of its S3 bundle file names."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_ONLY_CONTEXTUAL",
+          "cells": [
+            "`connector.only_contextual`",
+            "`CONNECTOR_ONLY_CONTEXTUAL`",
+            "Boolean",
+            "`false`",
+            "For a file import connector, whether it only runs on files attached to an entity (`true`), never on files imported on their own."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_QUEUE_PROTOCOL",
+          "cells": [
+            "`connector.queue_protocol`",
+            "`CONNECTOR_QUEUE_PROTOCOL`",
+            "String",
+            "`amqp`",
+            "How the connector sends its bundles to the platform: `amqp` through the message queue, or `api` through the platform API when the connector cannot reach RabbitMQ."
+          ]
+        },
+        {
+          "key": "connectors:QUEUE_PROTOCOL",
+          "cells": [
+            "`connector.queue_protocol`",
+            "`QUEUE_PROTOCOL`",
+            "String",
+            "Not set",
+            "Former name of `CONNECTOR_QUEUE_PROTOCOL`, read only when that one is not set; the connector logs that it is deprecated."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_QUEUE_THRESHOLD",
+          "cells": [
+            "`connector.queue_threshold`",
+            "`CONNECTOR_QUEUE_THRESHOLD`",
+            "Integer",
+            "`500`",
+            "Size of the connector's queue on the platform, in megabytes, above which a scheduled connector skips its runs until the workers have caught up; raise it for a connector that sends large batches."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_RUN_AND_TERMINATE",
+          "cells": [
+            "`connector.run_and_terminate`",
+            "`CONNECTOR_RUN_AND_TERMINATE`",
+            "Boolean",
+            "`false`",
+            "Whether the connector runs once and stops, for a connector started by an external scheduler (cron, Kubernetes job) instead of keeping its own schedule."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_SCOPE",
+          "cells": [
+            "`connector.scope`",
+            "`CONNECTOR_SCOPE`",
+            "String",
+            "`not-applicable`",
+            "What the connector handles, comma-separated: entity types for an enrichment connector (`Report,IPv4-Addr`), MIME types for a file import or export connector; the platform offers the connector only for what its scope lists."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_SEND_TO_DIRECTORY_PATH",
+          "cells": [
+            "`connector.send_to_directory_path`",
+            "`CONNECTOR_SEND_TO_DIRECTORY_PATH`",
+            "String",
+            "Not set",
+            "Directory the connector writes its bundles to with `CONNECTOR_SEND_TO_DIRECTORY`."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_SEND_TO_DIRECTORY_RETENTION",
+          "cells": [
+            "`connector.send_to_directory_retention`",
+            "`CONNECTOR_SEND_TO_DIRECTORY_RETENTION`",
+            "Integer",
+            "`7`",
+            "Days the bundle files stay in the directory before the connector deletes them; `0` keeps them."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_SEND_TO_DIRECTORY",
+          "cells": [
+            "`connector.send_to_directory`",
+            "`CONNECTOR_SEND_TO_DIRECTORY`",
+            "Boolean",
+            "`false`",
+            "Whether the connector also writes each bundle as a JSON file to `CONNECTOR_SEND_TO_DIRECTORY_PATH`, to keep the data or move it by other means."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_SEND_TO_QUEUE",
+          "cells": [
+            "`connector.send_to_queue`",
+            "`CONNECTOR_SEND_TO_QUEUE`",
+            "Boolean",
+            "`true`",
+            "Whether the connector sends its bundles to the platform; turn it off to only write them to a directory or to S3."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_SEND_TO_S3_BUCKET",
+          "cells": [
+            "`connector.send_to_s3_bucket`",
+            "`CONNECTOR_SEND_TO_S3_BUCKET`",
+            "String",
+            "Not set",
+            "Bucket the connector uploads its bundles to; unset, the bucket the platform sends at registration."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_SEND_TO_S3_FOLDER",
+          "cells": [
+            "`connector.send_to_s3_folder`",
+            "`CONNECTOR_SEND_TO_S3_FOLDER`",
+            "String",
+            "`connectors`",
+            "Folder (key prefix) of the bucket the connector uploads its bundles to."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_SEND_TO_S3_RETENTION",
+          "cells": [
+            "`connector.send_to_s3_retention`",
+            "`CONNECTOR_SEND_TO_S3_RETENTION`",
+            "Integer",
+            "`7`",
+            "Days the connector's bundles stay in the bucket before the connector deletes them."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_SEND_TO_S3",
+          "cells": [
+            "`connector.send_to_s3`",
+            "`CONNECTOR_SEND_TO_S3`",
+            "Boolean",
+            "`false`",
+            "Whether the connector also uploads each bundle to an S3 bucket, by default the platform's own."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_TYPE",
+          "cells": [
+            "`connector.type`",
+            "`CONNECTOR_TYPE`",
+            "String",
+            "Required",
+            "Kind of connector: `EXTERNAL_IMPORT`, `INTERNAL_IMPORT_FILE`, `INTERNAL_ENRICHMENT`, `INTERNAL_ANALYSIS`, `INTERNAL_EXPORT_FILE` or `STREAM`. Set by the connector's own configuration: do not change it."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_VALIDATE_BEFORE_IMPORT",
+          "cells": [
+            "`connector.validate_before_import`",
+            "`CONNECTOR_VALIDATE_BEFORE_IMPORT`",
+            "Boolean",
+            "`false`",
+            "Whether what the connector sends waits in a workbench or a draft for a user to validate it, instead of being imported directly."
+          ]
+        },
+        {
+          "key": "connectors:CONNECTOR_XTM_ONE_INTENT",
+          "cells": [
+            "`connector.xtm_one_intent`",
+            "`CONNECTOR_XTM_ONE_INTENT`",
+            "String",
+            "Not set",
+            "For a file import connector, the XTM One intent it serves: on an automatic import, the platform picks an XTM One agent for this intent when XTM One is configured."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Connectors: message queue",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "connectors:MQ_HOST",
+          "cells": [
+            "`mq.host`",
+            "`MQ_HOST`",
+            "String",
+            "Sent by the platform",
+            "Host of RabbitMQ as the connector reaches it, when it differs from the address the platform sends at registration (a connector outside the platform's network)."
+          ]
+        },
+        {
+          "key": "connectors:MQ_PASS",
+          "cells": [
+            "`mq.pass`",
+            "`MQ_PASS`",
+            "String",
+            "Sent by the platform",
+            "RabbitMQ password, to replace the one the platform sends."
+          ]
+        },
+        {
+          "key": "connectors:MQ_PORT",
+          "cells": [
+            "`mq.port`",
+            "`MQ_PORT`",
+            "Integer",
+            "Sent by the platform",
+            "Port of RabbitMQ as the connector reaches it, to replace the one the platform sends."
+          ]
+        },
+        {
+          "key": "connectors:MQ_USE_SSL_CA",
+          "cells": [
+            "`mq.use_ssl_ca`",
+            "`MQ_USE_SSL_CA`",
+            "String",
+            "Not set",
+            "CA certificate (path) that signs RabbitMQ's certificate, for a TLS connection."
+          ]
+        },
+        {
+          "key": "connectors:MQ_USE_SSL_CERT",
+          "cells": [
+            "`mq.use_ssl_cert`",
+            "`MQ_USE_SSL_CERT`",
+            "String",
+            "Not set",
+            "Client certificate (path) for a TLS connection to RabbitMQ that requires one."
+          ]
+        },
+        {
+          "key": "connectors:MQ_USE_SSL_KEY",
+          "cells": [
+            "`mq.use_ssl_key`",
+            "`MQ_USE_SSL_KEY`",
+            "String",
+            "Not set",
+            "Private key (path) of the client certificate."
+          ]
+        },
+        {
+          "key": "connectors:MQ_USE_SSL_PASSPHRASE",
+          "cells": [
+            "`mq.use_ssl_passphrase`",
+            "`MQ_USE_SSL_PASSPHRASE`",
+            "String",
+            "Not set",
+            "Passphrase of the client certificate's private key."
+          ]
+        },
+        {
+          "key": "connectors:MQ_USE_SSL_REJECT_UNAUTHORIZED",
+          "cells": [
+            "`mq.use_ssl_reject_unauthorized`",
+            "`MQ_USE_SSL_REJECT_UNAUTHORIZED`",
+            "Boolean",
+            "`false`",
+            "Whether the TLS connection to RabbitMQ rejects a certificate it cannot verify; turn it on in production."
+          ]
+        },
+        {
+          "key": "connectors:MQ_USE_SSL",
+          "cells": [
+            "`mq.use_ssl`",
+            "`MQ_USE_SSL`",
+            "String",
+            "Sent by the platform",
+            "Whether the connection to RabbitMQ uses TLS, to replace what the platform sends."
+          ]
+        },
+        {
+          "key": "connectors:MQ_USER",
+          "cells": [
+            "`mq.user`",
+            "`MQ_USER`",
+            "String",
+            "Sent by the platform",
+            "RabbitMQ user, to replace the one the platform sends."
+          ]
+        },
+        {
+          "key": "connectors:MQ_VHOST",
+          "cells": [
+            "`mq.vhost`",
+            "`MQ_VHOST`",
+            "String",
+            "Sent by the platform",
+            "RabbitMQ virtual host, to replace the one the platform sends."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Connectors: S3 bundle storage",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "connectors:S3_ACCESS_KEY",
+          "cells": [
+            "`s3.access_key`",
+            "`S3_ACCESS_KEY`",
+            "String",
+            "Not set",
+            "Access key for the S3 service, to replace the one the platform sends."
+          ]
+        },
+        {
+          "key": "connectors:S3_BUCKET_REGION",
+          "cells": [
+            "`s3.bucket_region`",
+            "`S3_BUCKET_REGION`",
+            "String",
+            "Not set",
+            "Region of the S3 bucket, to replace the one the platform sends."
+          ]
+        },
+        {
+          "key": "connectors:S3_ENDPOINT",
+          "cells": [
+            "`s3.endpoint`",
+            "`S3_ENDPOINT`",
+            "String",
+            "Not set",
+            "Host of the S3 service the connector uploads its bundles to, to replace the one the platform sends."
+          ]
+        },
+        {
+          "key": "connectors:S3_PORT",
+          "cells": [
+            "`s3.port`",
+            "`S3_PORT`",
+            "Integer",
+            "Not set",
+            "Port of the S3 service, to replace the one the platform sends."
+          ]
+        },
+        {
+          "key": "connectors:S3_SECRET_KEY",
+          "cells": [
+            "`s3.secret_key`",
+            "`S3_SECRET_KEY`",
+            "String",
+            "Not set",
+            "Secret key for the S3 service, to replace the one the platform sends."
+          ]
+        },
+        {
+          "key": "connectors:S3_USE_SSL",
+          "cells": [
+            "`s3.use_ssl`",
+            "`S3_USE_SSL`",
+            "String",
+            "Not set",
+            "Whether the connector reaches the S3 service over HTTPS, to replace what the platform sends."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Worker: OpenCTI connection",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "worker:OPENCTI_CUSTOM_HEADERS",
+          "cells": [
+            "`opencti.custom_headers`",
+            "`OPENCTI_CUSTOM_HEADERS`",
+            "String",
+            "Not set",
+            "Extra HTTP headers sent with every API call, as `name:value` pairs separated by `;`."
+          ]
+        },
+        {
+          "key": "worker:OPENCTI_EXECUTION_POOL_SIZE",
+          "cells": [
+            "`opencti.execution_pool_size`",
+            "`OPENCTI_EXECUTION_POOL_SIZE`",
+            "Integer",
+            "`2`",
+            "Threads that import bundles in parallel in one worker; raise it, or run more workers, when the queues grow and the platform has capacity left."
+          ]
+        },
+        {
+          "key": "worker:OPENCTI_JSON_LOGGING",
+          "cells": [
+            "`opencti.json_logging`",
+            "`OPENCTI_JSON_LOGGING`",
+            "Boolean",
+            "`true`",
+            "Whether the worker writes its logs as JSON lines (`true`) or as plain text."
+          ]
+        },
+        {
+          "key": "worker:OPENCTI_REALTIME_EXECUTION_POOL_SIZE",
+          "cells": [
+            "`opencti.realtime_execution_pool_size`",
+            "`OPENCTI_REALTIME_EXECUTION_POOL_SIZE`",
+            "Integer",
+            "`3`",
+            "Threads kept for the connectors of the `REALTIME` priority group, so that their work does not wait behind the others."
+          ]
+        },
+        {
+          "key": "worker:OPENCTI_REQUESTS_TIMEOUT",
+          "cells": [
+            "`opencti.requests_timeout`",
+            "`OPENCTI_REQUESTS_TIMEOUT`",
+            "Integer",
+            "`300`",
+            "Seconds the worker waits for an answer of the platform API before it gives up on a call."
+          ]
+        },
+        {
+          "key": "worker:OPENCTI_SSL_VERIFY",
+          "cells": [
+            "`opencti.ssl_verify`",
+            "`OPENCTI_SSL_VERIFY`",
+            "Boolean",
+            "`false`",
+            "Whether the worker checks the platform's TLS certificate."
+          ]
+        },
+        {
+          "key": "worker:OPENCTI_TOKEN",
+          "cells": [
+            "`opencti.token`",
+            "`OPENCTI_TOKEN`",
+            "String",
+            "Required",
+            "API token of the user the worker authenticates with."
+          ]
+        },
+        {
+          "key": "worker:OPENCTI_URL",
+          "cells": [
+            "`opencti.url`",
+            "`OPENCTI_URL`",
+            "String",
+            "Required",
+            "URL of the OpenCTI platform the worker writes to, as the worker reaches it."
+          ]
+        }
+      ],
+      "text": "The worker reads these settings from its environment first, then from the `config.yml` next to `worker.py`, then the default."
+    },
+    {
+      "title": "Worker: worker settings",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "worker:WORKER_LISTEN_API_HTTP_PROXY",
+          "cells": [
+            "`worker.listen_api_http_proxy`",
+            "`WORKER_LISTEN_API_HTTP_PROXY`",
+            "String",
+            "Empty",
+            "HTTP proxy the worker goes through to call the connectors' HTTP endpoints (`API` listen protocol)."
+          ]
+        },
+        {
+          "key": "worker:WORKER_LISTEN_API_HTTPS_PROXY",
+          "cells": [
+            "`worker.listen_api_https_proxy`",
+            "`WORKER_LISTEN_API_HTTPS_PROXY`",
+            "String",
+            "Empty",
+            "HTTPS proxy the worker goes through to call the connectors' HTTPS endpoints (`API` listen protocol)."
+          ]
+        },
+        {
+          "key": "worker:WORKER_LISTEN_API_SSL_VERIFY",
+          "cells": [
+            "`worker.listen_api_ssl_verify`",
+            "`WORKER_LISTEN_API_SSL_VERIFY`",
+            "Boolean",
+            "`false`",
+            "Whether the worker checks the TLS certificate of a connector's HTTP endpoint (`API` listen protocol)."
+          ]
+        },
+        {
+          "key": "worker:WORKER_LISTEN_POOL_SIZE",
+          "cells": [
+            "`worker.listen_pool_size`",
+            "`WORKER_LISTEN_POOL_SIZE`",
+            "Integer",
+            "`5`",
+            "Threads that deliver work to the connectors using the `API` listen protocol, by calling their HTTP endpoint."
+          ]
+        },
+        {
+          "key": "worker:WORKER_LOG_LEVEL",
+          "cells": [
+            "`worker.log_level`",
+            "`WORKER_LOG_LEVEL`",
+            "String",
+            "`info`",
+            "Level of the worker's logs: `debug`, `info`, `warning` or `error`."
+          ]
+        },
+        {
+          "key": "worker:WORKER_OBJECTS_MAX_REFS",
+          "cells": [
+            "`worker.objects_max_refs`",
+            "`WORKER_OBJECTS_MAX_REFS`",
+            "Integer",
+            "`0`",
+            "Maximum number of references an object of a bundle may carry; the worker sends an object above it to the dead letter queue instead of importing it. `0` sets no limit; set one to keep huge containers from slowing the import down."
+          ]
+        },
+        {
+          "key": "worker:WORKER_TELEMETRY_ENABLED",
+          "cells": [
+            "`worker.telemetry_enabled`",
+            "`WORKER_TELEMETRY_ENABLED`",
+            "Boolean",
+            "`false`",
+            "Whether the worker exposes Prometheus metrics (bundles processed, processing time, ingestion units) on `WORKER_PROMETHEUS_TELEMETRY_PORT`."
+          ]
+        },
+        {
+          "key": "worker:WORKER_PROMETHEUS_TELEMETRY_HOST",
+          "cells": [
+            "`worker.telemetry_prometheus_host`",
+            "`WORKER_PROMETHEUS_TELEMETRY_HOST`",
+            "String",
+            "`0.0.0.0`",
+            "Address the worker's Prometheus metrics endpoint listens on."
+          ]
+        },
+        {
+          "key": "worker:WORKER_PROMETHEUS_TELEMETRY_PORT",
+          "cells": [
+            "`worker.telemetry_prometheus_port`",
+            "`WORKER_PROMETHEUS_TELEMETRY_PORT`",
+            "Integer",
+            "`14270`",
+            "Port of the worker's Prometheus metrics endpoint."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Worker: message queue",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "worker:MQ_USE_SSL_CA",
+          "cells": [
+            "`mq.use_ssl_ca`",
+            "`MQ_USE_SSL_CA`",
+            "String",
+            "Not set",
+            "CA certificate (path) that signs RabbitMQ's certificate, for a TLS connection."
+          ]
+        },
+        {
+          "key": "worker:MQ_USE_SSL_CERT",
+          "cells": [
+            "`mq.use_ssl_cert`",
+            "`MQ_USE_SSL_CERT`",
+            "String",
+            "Not set",
+            "Client certificate (path) for a TLS connection to RabbitMQ that requires one."
+          ]
+        },
+        {
+          "key": "worker:MQ_USE_SSL_KEY",
+          "cells": [
+            "`mq.use_ssl_key`",
+            "`MQ_USE_SSL_KEY`",
+            "String",
+            "Not set",
+            "Private key (path) of the client certificate."
+          ]
+        },
+        {
+          "key": "worker:MQ_USE_SSL_PASSPHRASE",
+          "cells": [
+            "`mq.use_ssl_passphrase`",
+            "`MQ_USE_SSL_PASSPHRASE`",
+            "String",
+            "Not set",
+            "Passphrase of the client certificate's private key."
+          ]
+        },
+        {
+          "key": "worker:MQ_USE_SSL_REJECT_UNAUTHORIZED",
+          "cells": [
+            "`mq.use_ssl_reject_unauthorized`",
+            "`MQ_USE_SSL_REJECT_UNAUTHORIZED`",
+            "Boolean",
+            "`false`",
+            "Whether the TLS connection to RabbitMQ rejects a certificate it cannot verify; turn it on in production."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Connectors and worker: pycti environment",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "pycti:HTTPS_CA_CERTIFICATES",
+          "cells": [
+            "Environment only",
+            "`HTTPS_CA_CERTIFICATES`",
+            "String",
+            "Not set",
+            "CA certificate of an HTTPS proxy that intercepts traffic, as a PEM content or a file path: pycti adds it to the system certificates and trusts the bundle for its calls to the platform."
+          ]
+        }
+      ],
+      "text": "pycti reads these variables from the environment only, in connectors and the worker alike."
+    },
+    {
+      "title": "XTM Composer: manager",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:manager.credentials_key_filepath",
+          "cells": [
+            "`manager.credentials_key_filepath`",
+            "`MANAGER__CREDENTIALS_KEY_FILEPATH`",
+            "String",
+            "Not set",
+            "Path of the file holding the RSA private key; takes priority over `manager.credentials_key` when both are set."
+          ]
+        },
+        {
+          "key": "composer:manager.credentials_key",
+          "cells": [
+            "`manager.credentials_key`",
+            "`MANAGER__CREDENTIALS_KEY`",
+            "String",
+            "Not set",
+            "RSA private key (PEM, 4096 bits) that decrypts the connectors' secret settings the platform sends; set it, or `manager.credentials_key_filepath`, from a secret."
+          ]
+        },
+        {
+          "key": "composer:manager.debug.show_env_vars",
+          "cells": [
+            "`manager.debug.show_env_vars`",
+            "`MANAGER__DEBUG__SHOW_ENV_VARS`",
+            "Boolean",
+            "`false`",
+            "Whether Composer logs the environment variables of each connector it deploys, with the secret values masked, to check what a connector receives."
+          ]
+        },
+        {
+          "key": "composer:manager.debug.show_sensitive_env_vars",
+          "cells": [
+            "`manager.debug.show_sensitive_env_vars`",
+            "`MANAGER__DEBUG__SHOW_SENSITIVE_ENV_VARS`",
+            "Boolean",
+            "`false`",
+            "With `manager.debug.show_env_vars`, whether the logs show the secret values too; only for a short investigation."
+          ]
+        },
+        {
+          "key": "composer:manager.execute_schedule",
+          "cells": [
+            "`manager.execute_schedule`",
+            "`MANAGER__EXECUTE_SCHEDULE`",
+            "Integer",
+            "`10`",
+            "Seconds between two passes of Composer over the connectors (deploy, start, stop, update to match the platform); also the wait between two attempts to reach Docker or Podman at start."
+          ]
+        },
+        {
+          "key": "composer:manager.id",
+          "cells": [
+            "`manager.id`",
+            "`MANAGER__ID`",
+            "String",
+            "`default-manager-id`",
+            "Unique identifier of this XTM Composer: the platform lists it under this id and assigns it the connectors it manages. Give each Composer its own id."
+          ]
+        },
+        {
+          "key": "composer:manager.image_tag_suffix",
+          "cells": [
+            "`manager.image_tag_suffix`",
+            "`MANAGER__IMAGE_TAG_SUFFIX`",
+            "String",
+            "Not set",
+            "Suffix Composer adds to the tag of every connector image it deploys, `-fips` or `-ubi9`, for the FIPS or Red Hat UBI builds of the connectors (`6.9.0` becomes `6.9.0-fips`, an image without a tag `latest-fips`). Any other value stops Composer at start. The FIPS image of Composer sets `-fips`."
+          ]
+        },
+        {
+          "key": "composer:manager.logger.console",
+          "cells": [
+            "`manager.logger.console`",
+            "`MANAGER__LOGGER__CONSOLE`",
+            "Boolean",
+            "`true`",
+            "In this version, turns on the daily log files of the `logs` folder next to the binary (the code swaps it with `manager.logger.directory`)."
+          ]
+        },
+        {
+          "key": "composer:manager.logger.directory",
+          "cells": [
+            "`manager.logger.directory`",
+            "`MANAGER__LOGGER__DIRECTORY`",
+            "Boolean",
+            "`true`",
+            "In this version, turns on the logs on the standard output (the code swaps it with `manager.logger.console`)."
+          ]
+        },
+        {
+          "key": "composer:manager.logger.format",
+          "cells": [
+            "`manager.logger.format`",
+            "`MANAGER__LOGGER__FORMAT`",
+            "String",
+            "`json`",
+            "Format of the logs on the standard output: `json` or `pretty`; the log files are always JSON."
+          ]
+        },
+        {
+          "key": "composer:manager.logger.level",
+          "cells": [
+            "`manager.logger.level`",
+            "`MANAGER__LOGGER__LEVEL`",
+            "String",
+            "`info`",
+            "Level of Composer's logs: `trace`, `debug`, `info`, `warn` or `error`."
+          ]
+        },
+        {
+          "key": "composer:manager.name",
+          "cells": [
+            "`manager.name`",
+            "`MANAGER__NAME`",
+            "String",
+            "`Filigran connector manager`",
+            "Name the platform shows for this XTM Composer."
+          ]
+        },
+        {
+          "key": "composer:manager.ping_alive_schedule",
+          "cells": [
+            "`manager.ping_alive_schedule`",
+            "`MANAGER__PING_ALIVE_SCHEDULE`",
+            "Integer",
+            "`60`",
+            "Seconds between two signals of life Composer sends to the platform."
+          ]
+        }
+      ],
+      "text": "XTM Composer reads `config/default.yaml`, then `config/<COMPOSER_ENV>.yaml` when it exists, then the environment: a variable is the key in upper case with `__` between levels. The `openaev` block takes the same keys as the `opencti` block below (variables `OPENAEV__...`)."
+    },
+    {
+      "title": "XTM Composer: OpenCTI connection",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.connect_timeout",
+          "cells": [
+            "`opencti.connect_timeout`",
+            "`OPENCTI__CONNECT_TIMEOUT`",
+            "Integer",
+            "`10`",
+            "Seconds Composer waits to open a connection to the platform."
+          ]
+        },
+        {
+          "key": "composer:opencti.enable",
+          "cells": [
+            "`opencti.enable`",
+            "`OPENCTI__ENABLE`",
+            "Boolean",
+            "`true`",
+            "Whether Composer manages the connectors of an OpenCTI platform."
+          ]
+        },
+        {
+          "key": "composer:opencti.http_proxy",
+          "cells": [
+            "`opencti.http_proxy`",
+            "`OPENCTI__HTTP_PROXY`",
+            "String",
+            "Not set",
+            "HTTP proxy URL, with `opencti.with_proxy`; unset, Composer takes `HTTP_PROXY` from its environment."
+          ]
+        },
+        {
+          "key": "composer:opencti.https_proxy_ca",
+          "cells": [
+            "`opencti.https_proxy_ca`",
+            "`OPENCTI__HTTPS_PROXY_CA`",
+            "List of strings",
+            "Not set",
+            "CA certificates of an intercepting proxy, each a file path or an inline PEM: Composer mounts them in each connector and points `SSL_CERT_FILE`, `REQUESTS_CA_BUNDLE`, `NODE_EXTRA_CA_CERTS` and `CURL_CA_BUNDLE` to them."
+          ]
+        },
+        {
+          "key": "composer:opencti.https_proxy_reject_unauthorized",
+          "cells": [
+            "`opencti.https_proxy_reject_unauthorized`",
+            "`OPENCTI__HTTPS_PROXY_REJECT_UNAUTHORIZED`",
+            "Boolean",
+            "`true`",
+            "Whether the connectors reject a proxy certificate they cannot verify; `false` passes `NODE_TLS_REJECT_UNAUTHORIZED=0` to them."
+          ]
+        },
+        {
+          "key": "composer:opencti.https_proxy",
+          "cells": [
+            "`opencti.https_proxy`",
+            "`OPENCTI__HTTPS_PROXY`",
+            "String",
+            "Not set",
+            "HTTPS proxy URL, with `opencti.with_proxy`; unset, Composer takes `HTTPS_PROXY` from its environment."
+          ]
+        },
+        {
+          "key": "composer:opencti.logs_schedule",
+          "cells": [
+            "`opencti.logs_schedule`",
+            "`OPENCTI__LOGS_SCHEDULE`",
+            "Integer",
+            "`10`",
+            "Seconds between two reports of the connectors' logs to the platform, at most."
+          ]
+        },
+        {
+          "key": "composer:opencti.no_proxy",
+          "cells": [
+            "`opencti.no_proxy`",
+            "`OPENCTI__NO_PROXY`",
+            "String",
+            "Not set",
+            "Hosts reached without the proxy, comma-separated, passed to the connectors; unset, Composer takes `NO_PROXY` from its environment."
+          ]
+        },
+        {
+          "key": "composer:opencti.request_timeout",
+          "cells": [
+            "`opencti.request_timeout`",
+            "`OPENCTI__REQUEST_TIMEOUT`",
+            "Integer",
+            "`30`",
+            "Seconds Composer waits for an answer of the platform API."
+          ]
+        },
+        {
+          "key": "composer:opencti.token",
+          "cells": [
+            "`opencti.token`",
+            "`OPENCTI__TOKEN`",
+            "String",
+            "`ChangeMe`",
+            "API token of the user Composer authenticates with on the platform."
+          ]
+        },
+        {
+          "key": "composer:opencti.unsecured_certificate",
+          "cells": [
+            "`opencti.unsecured_certificate`",
+            "`OPENCTI__UNSECURED_CERTIFICATE`",
+            "Boolean",
+            "`false`",
+            "Whether Composer accepts a platform TLS certificate it cannot verify; only for a test platform."
+          ]
+        },
+        {
+          "key": "composer:opencti.url",
+          "cells": [
+            "`opencti.url`",
+            "`OPENCTI__URL`",
+            "String",
+            "`http://host.docker.internal:4000`",
+            "URL of the OpenCTI platform, as Composer reaches it."
+          ]
+        },
+        {
+          "key": "composer:opencti.with_proxy",
+          "cells": [
+            "`opencti.with_proxy`",
+            "`OPENCTI__WITH_PROXY`",
+            "Boolean",
+            "`false`",
+            "Whether Composer goes through a proxy to reach the platform and passes the proxy settings (`HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY` and the CA) to the connectors it deploys; off, it ignores every proxy, even the system's."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "XTM Composer: orchestrator",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.selector",
+          "cells": [
+            "`opencti.daemon.selector`",
+            "`OPENCTI__DAEMON__SELECTOR`",
+            "String",
+            "`kubernetes`",
+            "Orchestrator Composer deploys the connectors on: `kubernetes`, `docker`, `podman`, `swarm` or `portainer`; its block configures it."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "XTM Composer: image registry",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.registry.email",
+          "cells": [
+            "`opencti.daemon.registry.email`",
+            "`OPENCTI__DAEMON__REGISTRY__EMAIL`",
+            "String",
+            "Not set",
+            "Email of the private registry account, when the registry asks for one."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.registry.password",
+          "cells": [
+            "`opencti.daemon.registry.password`",
+            "`OPENCTI__DAEMON__REGISTRY__PASSWORD`",
+            "String",
+            "Not set",
+            "Password of the private registry."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.registry.server",
+          "cells": [
+            "`opencti.daemon.registry.server`",
+            "`OPENCTI__DAEMON__REGISTRY__SERVER`",
+            "String",
+            "Not set",
+            "Registry the connector images are pulled from, instead of Docker Hub (a mirror or a private registry)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.registry.username",
+          "cells": [
+            "`opencti.daemon.registry.username`",
+            "`OPENCTI__DAEMON__REGISTRY__USERNAME`",
+            "String",
+            "Not set",
+            "User of the private registry."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "XTM Composer: Kubernetes",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.kubernetes.base_deployment_json",
+          "cells": [
+            "`opencti.daemon.kubernetes.base_deployment_json`",
+            "`OPENCTI__DAEMON__KUBERNETES__BASE_DEPLOYMENT_JSON`",
+            "String",
+            "Not set",
+            "The same base Deployment as a JSON string, read when `base_deployment` is not set (convenient in an environment variable)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.kubernetes.base_deployment",
+          "cells": [
+            "`opencti.daemon.kubernetes.base_deployment`",
+            "`OPENCTI__DAEMON__KUBERNETES__BASE_DEPLOYMENT`",
+            "`Deployment` object",
+            "Not set",
+            "Kubernetes Deployment every connector's deployment starts from (labels, node selectors, security context...), merged under what Composer sets."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.kubernetes.image_pull_policy",
+          "cells": [
+            "`opencti.daemon.kubernetes.image_pull_policy`",
+            "`OPENCTI__DAEMON__KUBERNETES__IMAGE_PULL_POLICY`",
+            "String",
+            "`IfNotPresent`",
+            "When Kubernetes pulls a connector image: `Always`, `IfNotPresent` or `Never`; another value falls back to `IfNotPresent`."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.kubernetes.image_resources",
+          "cells": [
+            "`opencti.daemon.kubernetes.image_resources`",
+            "`OPENCTI__DAEMON__KUBERNETES__IMAGE_RESOURCES`",
+            "`ResourceRequirements` object",
+            "Not set",
+            "CPU and memory requests and limits of each connector container."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "XTM Composer: Docker",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.docker.cap_add",
+          "cells": [
+            "`opencti.daemon.docker.cap_add`",
+            "`OPENCTI__DAEMON__DOCKER__CAP_ADD`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities added to the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.cap_drop",
+          "cells": [
+            "`opencti.daemon.docker.cap_drop`",
+            "`OPENCTI__DAEMON__DOCKER__CAP_DROP`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities removed from the connector containers (`ALL` to harden them)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.dns_search",
+          "cells": [
+            "`opencti.daemon.docker.dns_search`",
+            "`OPENCTI__DAEMON__DOCKER__DNS_SEARCH`",
+            "List of strings",
+            "Not set",
+            "DNS search domains of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.dns",
+          "cells": [
+            "`opencti.daemon.docker.dns`",
+            "`OPENCTI__DAEMON__DOCKER__DNS`",
+            "List of strings",
+            "Not set",
+            "DNS servers of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.extra_hosts",
+          "cells": [
+            "`opencti.daemon.docker.extra_hosts`",
+            "`OPENCTI__DAEMON__DOCKER__EXTRA_HOSTS`",
+            "List of strings",
+            "Not set",
+            "Extra `host:ip` entries of the connector containers' hosts file."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.ipc_mode",
+          "cells": [
+            "`opencti.daemon.docker.ipc_mode`",
+            "`OPENCTI__DAEMON__DOCKER__IPC_MODE`",
+            "String",
+            "Not set",
+            "IPC namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.network_mode",
+          "cells": [
+            "`opencti.daemon.docker.network_mode`",
+            "`OPENCTI__DAEMON__DOCKER__NETWORK_MODE`",
+            "String",
+            "Not set",
+            "Network the connector containers join, usually the network of the OpenCTI stack so that they reach the platform and RabbitMQ."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.pid_mode",
+          "cells": [
+            "`opencti.daemon.docker.pid_mode`",
+            "`OPENCTI__DAEMON__DOCKER__PID_MODE`",
+            "String",
+            "Not set",
+            "PID namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.privileged",
+          "cells": [
+            "`opencti.daemon.docker.privileged`",
+            "`OPENCTI__DAEMON__DOCKER__PRIVILEGED`",
+            "Boolean",
+            "Not set",
+            "Whether the connector containers run privileged; leave it off unless a connector needs it."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.runtime",
+          "cells": [
+            "`opencti.daemon.docker.runtime`",
+            "`OPENCTI__DAEMON__DOCKER__RUNTIME`",
+            "String",
+            "Not set",
+            "Container runtime of the connector containers (for example `runsc` for gVisor)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.security_opt",
+          "cells": [
+            "`opencti.daemon.docker.security_opt`",
+            "`OPENCTI__DAEMON__DOCKER__SECURITY_OPT`",
+            "List of strings",
+            "Not set",
+            "Security options of the connector containers (SELinux labels, seccomp or AppArmor profiles)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.shm_size",
+          "cells": [
+            "`opencti.daemon.docker.shm_size`",
+            "`OPENCTI__DAEMON__DOCKER__SHM_SIZE`",
+            "Integer",
+            "Not set",
+            "Size of the connector containers' `/dev/shm`, in bytes."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.socket_path",
+          "cells": [
+            "`opencti.daemon.docker.socket_path`",
+            "`OPENCTI__DAEMON__DOCKER__SOCKET_PATH`",
+            "String",
+            "Not set",
+            "Docker API socket (path or `unix://` URL); unset, `/var/run/docker.sock`."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.sysctls",
+          "cells": [
+            "`opencti.daemon.docker.sysctls`",
+            "`OPENCTI__DAEMON__DOCKER__SYSCTLS`",
+            "Map",
+            "Not set",
+            "Kernel parameters of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.ulimits",
+          "cells": [
+            "`opencti.daemon.docker.ulimits`",
+            "`OPENCTI__DAEMON__DOCKER__ULIMITS`",
+            "List of maps",
+            "Not set",
+            "Resource limits of the connector containers, each with a `name`, a `soft` and a `hard` value."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.userns_mode",
+          "cells": [
+            "`opencti.daemon.docker.userns_mode`",
+            "`OPENCTI__DAEMON__DOCKER__USERNS_MODE`",
+            "String",
+            "Not set",
+            "User namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.uts_mode",
+          "cells": [
+            "`opencti.daemon.docker.uts_mode`",
+            "`OPENCTI__DAEMON__DOCKER__UTS_MODE`",
+            "String",
+            "Not set",
+            "UTS namespace mode of the connector containers."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "XTM Composer: Podman",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.podman.cap_add",
+          "cells": [
+            "`opencti.daemon.podman.cap_add`",
+            "`OPENCTI__DAEMON__PODMAN__CAP_ADD`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities added to the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.cap_drop",
+          "cells": [
+            "`opencti.daemon.podman.cap_drop`",
+            "`OPENCTI__DAEMON__PODMAN__CAP_DROP`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities removed from the connector containers (`ALL` to harden them)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.dns_search",
+          "cells": [
+            "`opencti.daemon.podman.dns_search`",
+            "`OPENCTI__DAEMON__PODMAN__DNS_SEARCH`",
+            "List of strings",
+            "Not set",
+            "DNS search domains of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.dns",
+          "cells": [
+            "`opencti.daemon.podman.dns`",
+            "`OPENCTI__DAEMON__PODMAN__DNS`",
+            "List of strings",
+            "Not set",
+            "DNS servers of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.extra_hosts",
+          "cells": [
+            "`opencti.daemon.podman.extra_hosts`",
+            "`OPENCTI__DAEMON__PODMAN__EXTRA_HOSTS`",
+            "List of strings",
+            "Not set",
+            "Extra `host:ip` entries of the connector containers' hosts file."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.ipc_mode",
+          "cells": [
+            "`opencti.daemon.podman.ipc_mode`",
+            "`OPENCTI__DAEMON__PODMAN__IPC_MODE`",
+            "String",
+            "Not set",
+            "IPC namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.network_mode",
+          "cells": [
+            "`opencti.daemon.podman.network_mode`",
+            "`OPENCTI__DAEMON__PODMAN__NETWORK_MODE`",
+            "String",
+            "Not set",
+            "Network the connector containers join, usually the network of the OpenCTI stack so that they reach the platform and RabbitMQ."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.pid_mode",
+          "cells": [
+            "`opencti.daemon.podman.pid_mode`",
+            "`OPENCTI__DAEMON__PODMAN__PID_MODE`",
+            "String",
+            "Not set",
+            "PID namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.privileged",
+          "cells": [
+            "`opencti.daemon.podman.privileged`",
+            "`OPENCTI__DAEMON__PODMAN__PRIVILEGED`",
+            "Boolean",
+            "Not set",
+            "Whether the connector containers run privileged; leave it off unless a connector needs it."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.runtime",
+          "cells": [
+            "`opencti.daemon.podman.runtime`",
+            "`OPENCTI__DAEMON__PODMAN__RUNTIME`",
+            "String",
+            "Not set",
+            "Container runtime of the connector containers (for example `runsc` for gVisor)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.security_opt",
+          "cells": [
+            "`opencti.daemon.podman.security_opt`",
+            "`OPENCTI__DAEMON__PODMAN__SECURITY_OPT`",
+            "List of strings",
+            "Not set",
+            "Security options of the connector containers (SELinux labels, seccomp or AppArmor profiles)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.shm_size",
+          "cells": [
+            "`opencti.daemon.podman.shm_size`",
+            "`OPENCTI__DAEMON__PODMAN__SHM_SIZE`",
+            "Integer",
+            "Not set",
+            "Size of the connector containers' `/dev/shm`, in bytes."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.socket_path",
+          "cells": [
+            "`opencti.daemon.podman.socket_path`",
+            "`OPENCTI__DAEMON__PODMAN__SOCKET_PATH`",
+            "String",
+            "Not set",
+            "Podman API socket (path or `unix://` URL); unset, Composer looks for the rootless socket (`$XDG_RUNTIME_DIR/podman/podman.sock`), then the rootful one."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.sysctls",
+          "cells": [
+            "`opencti.daemon.podman.sysctls`",
+            "`OPENCTI__DAEMON__PODMAN__SYSCTLS`",
+            "Map",
+            "Not set",
+            "Kernel parameters of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.ulimits",
+          "cells": [
+            "`opencti.daemon.podman.ulimits`",
+            "`OPENCTI__DAEMON__PODMAN__ULIMITS`",
+            "List of maps",
+            "Not set",
+            "Resource limits of the connector containers, each with a `name`, a `soft` and a `hard` value."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.userns_mode",
+          "cells": [
+            "`opencti.daemon.podman.userns_mode`",
+            "`OPENCTI__DAEMON__PODMAN__USERNS_MODE`",
+            "String",
+            "Not set",
+            "User namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.uts_mode",
+          "cells": [
+            "`opencti.daemon.podman.uts_mode`",
+            "`OPENCTI__DAEMON__PODMAN__UTS_MODE`",
+            "String",
+            "Not set",
+            "UTS namespace mode of the connector containers."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "XTM Composer: Docker Swarm",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.swarm.cap_add",
+          "cells": [
+            "`opencti.daemon.swarm.cap_add`",
+            "`OPENCTI__DAEMON__SWARM__CAP_ADD`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities added to the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.cap_drop",
+          "cells": [
+            "`opencti.daemon.swarm.cap_drop`",
+            "`OPENCTI__DAEMON__SWARM__CAP_DROP`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities removed from the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.dns_search",
+          "cells": [
+            "`opencti.daemon.swarm.dns_search`",
+            "`OPENCTI__DAEMON__SWARM__DNS_SEARCH`",
+            "List of strings",
+            "Not set",
+            "DNS search domains of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.dns",
+          "cells": [
+            "`opencti.daemon.swarm.dns`",
+            "`OPENCTI__DAEMON__SWARM__DNS`",
+            "List of strings",
+            "Not set",
+            "DNS servers of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.extra_hosts",
+          "cells": [
+            "`opencti.daemon.swarm.extra_hosts`",
+            "`OPENCTI__DAEMON__SWARM__EXTRA_HOSTS`",
+            "List of strings",
+            "Not set",
+            "Extra lines of the connector containers' hosts file, in its own format (`ip host`), unlike the `host:ip` of Docker and Podman."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.hostname",
+          "cells": [
+            "`opencti.daemon.swarm.hostname`",
+            "`OPENCTI__DAEMON__SWARM__HOSTNAME`",
+            "String",
+            "Not set",
+            "Hostname of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.init",
+          "cells": [
+            "`opencti.daemon.swarm.init`",
+            "`OPENCTI__DAEMON__SWARM__INIT`",
+            "Boolean",
+            "Not set",
+            "Whether the connector containers run an init process that reaps child processes."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.network",
+          "cells": [
+            "`opencti.daemon.swarm.network`",
+            "`OPENCTI__DAEMON__SWARM__NETWORK`",
+            "String",
+            "Not set",
+            "Overlay network the connector services attach to."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.placement_constraints",
+          "cells": [
+            "`opencti.daemon.swarm.placement_constraints`",
+            "`OPENCTI__DAEMON__SWARM__PLACEMENT_CONSTRAINTS`",
+            "List of strings",
+            "Not set",
+            "Placement constraints of the connector services (`node.role==worker`)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.placement_preferences",
+          "cells": [
+            "`opencti.daemon.swarm.placement_preferences`",
+            "`OPENCTI__DAEMON__SWARM__PLACEMENT_PREFERENCES`",
+            "List of strings",
+            "Not set",
+            "Spread preferences of the connector services across nodes (`node.labels.zone`)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.read_only",
+          "cells": [
+            "`opencti.daemon.swarm.read_only`",
+            "`OPENCTI__DAEMON__SWARM__READ_ONLY`",
+            "Boolean",
+            "Not set",
+            "Whether the connector containers' root filesystem is read-only."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.resources.cpu_limit",
+          "cells": [
+            "`opencti.daemon.swarm.resources.cpu_limit`",
+            "`OPENCTI__DAEMON__SWARM__RESOURCES__CPU_LIMIT`",
+            "Integer",
+            "Not set",
+            "CPU limit of each connector service, in nano CPUs (`1000000000` is one CPU)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.resources.cpu_reservation",
+          "cells": [
+            "`opencti.daemon.swarm.resources.cpu_reservation`",
+            "`OPENCTI__DAEMON__SWARM__RESOURCES__CPU_RESERVATION`",
+            "Integer",
+            "Not set",
+            "CPU reserved for each connector service, in nano CPUs."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.resources.memory_limit",
+          "cells": [
+            "`opencti.daemon.swarm.resources.memory_limit`",
+            "`OPENCTI__DAEMON__SWARM__RESOURCES__MEMORY_LIMIT`",
+            "Integer",
+            "Not set",
+            "Memory limit of each connector service, in bytes."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.resources.memory_reservation",
+          "cells": [
+            "`opencti.daemon.swarm.resources.memory_reservation`",
+            "`OPENCTI__DAEMON__SWARM__RESOURCES__MEMORY_RESERVATION`",
+            "Integer",
+            "Not set",
+            "Memory reserved for each connector service, in bytes."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.restart_condition",
+          "cells": [
+            "`opencti.daemon.swarm.restart_condition`",
+            "`OPENCTI__DAEMON__SWARM__RESTART_CONDITION`",
+            "String",
+            "Not set",
+            "When Swarm restarts a connector task: `none`, `on-failure` or `any`."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.restart_delay",
+          "cells": [
+            "`opencti.daemon.swarm.restart_delay`",
+            "`OPENCTI__DAEMON__SWARM__RESTART_DELAY`",
+            "Integer",
+            "Not set",
+            "Wait between two restarts of a connector task, in nanoseconds."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.restart_max_attempts",
+          "cells": [
+            "`opencti.daemon.swarm.restart_max_attempts`",
+            "`OPENCTI__DAEMON__SWARM__RESTART_MAX_ATTEMPTS`",
+            "Integer",
+            "Not set",
+            "Maximum restarts of a connector task; `0` sets no limit."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.stop_grace_period",
+          "cells": [
+            "`opencti.daemon.swarm.stop_grace_period`",
+            "`OPENCTI__DAEMON__SWARM__STOP_GRACE_PERIOD`",
+            "Integer",
+            "Not set",
+            "Time a connector container gets to stop before it is killed, in nanoseconds (`10000000000` is 10 seconds)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.sysctls",
+          "cells": [
+            "`opencti.daemon.swarm.sysctls`",
+            "`OPENCTI__DAEMON__SWARM__SYSCTLS`",
+            "Map",
+            "Not set",
+            "Kernel parameters of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.ulimits",
+          "cells": [
+            "`opencti.daemon.swarm.ulimits`",
+            "`OPENCTI__DAEMON__SWARM__ULIMITS`",
+            "List of maps",
+            "Not set",
+            "Resource limits of the connector containers, each with a `name`, a `soft` and a `hard` value."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.user",
+          "cells": [
+            "`opencti.daemon.swarm.user`",
+            "`OPENCTI__DAEMON__SWARM__USER`",
+            "String",
+            "Not set",
+            "User the connector containers run as (`uid:gid`)."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "XTM Composer: Portainer",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.portainer.api_key",
+          "cells": [
+            "`opencti.daemon.portainer.api_key`",
+            "`OPENCTI__DAEMON__PORTAINER__API_KEY`",
+            "String",
+            "`ChangeMe`",
+            "Portainer access token Composer authenticates with."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.api_version",
+          "cells": [
+            "`opencti.daemon.portainer.api_version`",
+            "`OPENCTI__DAEMON__PORTAINER__API_VERSION`",
+            "String",
+            "`v1.44`",
+            "Docker API version Composer calls through Portainer."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.api",
+          "cells": [
+            "`opencti.daemon.portainer.api`",
+            "`OPENCTI__DAEMON__PORTAINER__API`",
+            "String",
+            "`https://host.docker.internal:9443`",
+            "URL of the Portainer API."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.env_id",
+          "cells": [
+            "`opencti.daemon.portainer.env_id`",
+            "`OPENCTI__DAEMON__PORTAINER__ENV_ID`",
+            "String",
+            "`3`",
+            "Id of the Portainer environment the connectors run in."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.env_type",
+          "cells": [
+            "`opencti.daemon.portainer.env_type`",
+            "`OPENCTI__DAEMON__PORTAINER__ENV_TYPE`",
+            "String",
+            "`docker`",
+            "Type of the Portainer environment; only `docker` is supported."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.network_mode",
+          "cells": [
+            "`opencti.daemon.portainer.network_mode`",
+            "`OPENCTI__DAEMON__PORTAINER__NETWORK_MODE`",
+            "String",
+            "Not set",
+            "Network the connector containers join, usually the network of the OpenCTI stack."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.stack",
+          "cells": [
+            "`opencti.daemon.portainer.stack`",
+            "`OPENCTI__DAEMON__PORTAINER__STACK`",
+            "String",
+            "Not set",
+            "Compose project the connector containers are labelled with, to group them with a stack in Portainer."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "XTM Composer: environment",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:COMPOSER_ENV",
+          "cells": [
+            "Environment only",
+            "`COMPOSER_ENV`",
+            "String",
+            "`production`",
+            "Name of a second configuration file Composer reads after `config/default.yaml`: `config/<COMPOSER_ENV>.yaml`, when it exists."
+          ]
+        },
+        {
+          "key": "composer:XDG_RUNTIME_DIR",
+          "cells": [
+            "Environment only",
+            "`XDG_RUNTIME_DIR`",
+            "String",
+            "Not set",
+            "With the `podman` orchestrator and no `socket_path`, where Composer looks for the rootless Podman socket first (`$XDG_RUNTIME_DIR/podman/podman.sock`)."
+          ]
+        }
+      ]
+    }
+  ]
+}

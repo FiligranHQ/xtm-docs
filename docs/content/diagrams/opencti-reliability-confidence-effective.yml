@@ -1,0 +1,21 @@
+title: A user's effective max confidence level comes from their groups, unless the user has their own, and it caps what they create and change
+lanes:
+  - label: Configuration
+    tone: external
+    nodes:
+      - {id: groups, label: Groups, icon: Boxes, note: Highest group level wins}
+      - {id: user, label: User, icon: Laptop, note: Optional level and overrides}
+  - label: Result
+    tone: product
+    nodes:
+      - {id: effective, label: Effective level, icon: Gauge, note: "0 to 100, per entity type"}
+  - label: Applied to
+    tone: store
+    nodes:
+      - {id: create, label: Creation, icon: Sparkles, note: Confidence capped}
+      - {id: update, label: Update and delete, icon: Wrench, note: Only up to that level}
+edges:
+  - {from: groups, to: effective, label: max of groups}
+  - {from: user, to: effective, label: replaces groups, style: dashed}
+  - {from: effective, to: create, label: caps}
+  - {from: effective, to: update, label: allows}

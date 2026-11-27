@@ -1,0 +1,22 @@
+title: An embedded chat that declares it can ask receives the approval prompt, and returns the decision through its backend
+lanes:
+  - label: Browser
+    tone: external
+    nodes:
+      - {id: widget, label: Chat widget, icon: MessageSquare, note: "supports_tool_approval"}
+      - {id: reviewer, label: Reviewer, icon: Users, note: "Approves or rejects"}
+  - label: Your backend
+    tone: product
+    nodes:
+      - {id: proxy, label: Proxy, icon: Network, note: "Forwards the whole body"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: chat, label: Platform chat, icon: Bot, note: "/api/v1/platform/chat"}
+edges:
+  - {from: widget, to: proxy, label: message}
+  - {from: proxy, to: chat, label: forwards}
+  - {from: chat, to: proxy, label: approval_required}
+  - {from: proxy, to: reviewer, label: streams through}
+  - {from: reviewer, to: proxy, label: decision}
+  - {from: proxy, to: chat, label: messages/approve, style: dashed}

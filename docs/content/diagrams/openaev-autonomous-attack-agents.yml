@@ -1,0 +1,22 @@
+title: The tenant's default agents prefill every autonomous attack, and each run can still change its agents and their discovery mode
+lanes:
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: catalog, label: Agents for autonomous attacks, icon: Bot, note: Built-in and your own}
+  - label: OpenAEV settings
+    tone: product
+    nodes:
+      - {id: defaults, label: Tenant defaults, icon: Wrench, note: "Customization > Autonomous attack"}
+  - label: Each run
+    tone: product
+    nodes:
+      - {id: drawer, label: Launch drawer, icon: PlayCircle, note: Agents and modes of this run}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: orchestrator, label: Autonomous orchestrator, icon: LogoXTMOne, note: Always on}
+edges:
+  - {from: catalog, to: defaults, label: listed}
+  - {from: defaults, to: drawer, label: prefill}
+  - {from: drawer, to: orchestrator, label: may consult these}

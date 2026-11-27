@@ -1,0 +1,27 @@
+title: OpenCRQ runs in the XTM stack, keeps its data in its own database and bucket of the shared services, and registers with XTM One, through which its users sign in
+lanes:
+  - label: Users
+    tone: external
+    nodes:
+      - {id: browser, label: Browser, icon: Laptop, note: "https://opencrq.example.com"}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: opencrq, label: opencrq, icon: LogoOpenCRQ, note: "HTTP and worker processes"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "http://xtm-one:4000"}
+  - label: Shared services
+    tone: store
+    column: 3            # under XTM One: both serve OpenCRQ
+    nodes:
+      - {id: pgsql, label: PostgreSQL, icon: Layers, note: "opencrq database"}
+      - {id: s3, label: S3 storage, icon: Boxes, note: "opencrq bucket"}
+edges:
+  - {from: browser, to: opencrq, label: through the reverse proxy}
+  - {from: browser, to: xtmone, label: signs in, style: dashed}
+  - {from: opencrq, to: xtmone, label: registers every 5 minutes}
+  - {from: xtmone, to: opencrq, label: calls as the user, style: dashed}
+  - {from: opencrq, to: pgsql, label: its data}
+  - {from: opencrq, to: s3, label: uploaded files}

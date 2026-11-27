@@ -1,0 +1,18 @@
+title: Content deployed from the XTM Hub library opens in OpenCTI and lands in the matching screen
+lanes:
+  - label: XTM Hub
+    tone: external
+    nodes:
+      - {id: library, label: Content library, icon: BookOpen, note: 'Dashboards, playbooks, feeds'}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: Deploy link, icon: LogoOpenCTI, note: Downloads and imports}
+  - label: Lands in
+    tone: store
+    nodes:
+      - {id: screens, label: Matching screen, icon: Layers, note: Ready to check}
+edges:
+  - {from: library, to: opencti, label: deploy}
+  - {from: opencti, to: screens, label: imports}
+  - {from: opencti, to: library, label: Import from Hub, style: dashed}

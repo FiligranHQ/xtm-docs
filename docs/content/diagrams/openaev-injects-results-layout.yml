@@ -1,0 +1,23 @@
+title: The result of an inject shows its scores first, then each target with its expectations, its execution and its terminal output
+lanes:
+  - label: Header
+    tone: product
+    nodes:
+      - {id: hero, label: Status and scores, icon: Gauge, note: One tile per expectation type}
+  - label: Overview tab
+    tone: product
+    nodes:
+      - {id: targets, label: Targets, icon: Users, note: "Asset groups, teams, assets, persons, agents"}
+      - {id: detail, label: Results by target, icon: ClipboardCheck, note: "Expectations, Execution, Terminal view"}
+  - label: Other tabs
+    tone: product
+    nodes:
+      - {id: execution, label: Execution details, icon: History, note: Traces of the whole inject}
+      - {id: findings, label: Findings, icon: Search, note: What the output revealed}
+      - {id: remediations, label: Remediations, icon: ShieldCheck, note: Detection rules per platform}
+edges:
+  - {from: hero, to: targets, label: pick a target}
+  - {from: targets, to: detail, label: shows}
+  - {from: hero, to: execution, label: tab}
+  - {from: hero, to: findings, label: tab}
+  - {from: hero, to: remediations, label: tab}

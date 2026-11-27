@@ -1,0 +1,23 @@
+title: Each symptom shows first in the logs of XTM Composer, OpenAEV adds its own messages in its catalog, and an integration that starts then fails gives its cause in its own logs
+lanes:
+  - label: Symptom
+    tone: external
+    nodes:
+      - {id: stops, label: Stops at start, icon: TriangleAlert, note: "Key, selector, logger values"}
+      - {id: noreg, label: Does not register, icon: TriangleAlert, note: "Platform URL, token, enable"}
+      - {id: nodeploy, label: Not deployed or updated, icon: TriangleAlert, note: "Key, image, network, socket"}
+      - {id: fails, label: Starts then fails, icon: TriangleAlert, note: "Platform or RabbitMQ unreachable, a setting"}
+  - label: Where to look
+    tone: external
+    nodes:
+      - {id: composerlogs, label: Logs of XTM Composer, icon: Terminal, note: "docker compose logs -f xtm-composer"}
+      - {id: catalog, label: OpenAEV catalog, icon: LogoOpenAEV, note: "Integrations > Catalog"}
+      - {id: intlogs, label: Logs of the integration, icon: FileText, note: "Logs tab, or docker logs"}
+edges:
+  - {from: stops, to: composerlogs, label: at start}
+  - {from: noreg, to: composerlogs, label: Fail to fetch version}
+  - {from: noreg, to: catalog, label: with OpenAEV, style: dashed}
+  - {from: nodeploy, to: composerlogs, label: Cannot pull the workload image}
+  - {from: nodeploy, to: intlogs, label: image cannot be pulled, style: dashed}
+  - {from: fails, to: composerlogs, label: Reboot loop detected}
+  - {from: fails, to: intlogs, label: the cause}

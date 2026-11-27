@@ -1,0 +1,20 @@
+title: A text wrapped in the translation function becomes a key of en.json, DeepL fills the other languages, and the CI checks every file
+lanes:
+  - label: Your change
+    tone: external
+    nodes:
+      - {id: code, label: Component, icon: Code2, note: "t('...') or t_i18n('...')"}
+  - label: Translation files
+    tone: product
+    nodes:
+      - {id: english, label: en.json, icon: FileText, note: "The reference"}
+      - {id: others, label: Eight languages, icon: Layers, note: "de, es, fr, it, ja, ko, ru, zh"}
+  - label: Checks
+    tone: store
+    nodes:
+      - {id: ci, label: CI job, icon: ClipboardCheck, note: "Keys, placeholders, terms"}
+edges:
+  - {from: code, to: english, label: extract-translation}
+  - {from: english, to: others, label: "auto-translation:all"}
+  - {from: code, to: ci, label: pull request}
+  - {from: others, to: ci, label: checked}

@@ -1,0 +1,23 @@
+title: OpenCTI 5.12 converts its stored filters to the recursive filter group on its own, while you convert the filters of your code and build the view filters again
+lanes:
+  - label: Filters before 5.12
+    tone: external
+    nodes:
+      - {id: stored, label: Stored filters, icon: Server, note: Saved in the database}
+      - {id: code, label: Your code, icon: Code2, note: "Connectors, GraphQL queries, Python scripts"}
+      - {id: views, label: View filters, icon: Laptop, note: "In the URL and local storage, lost"}
+  - label: Conversion
+    tone: core
+    nodes:
+      - {id: auto, label: First start of 5.12, icon: Workflow, note: Migrates them on its own}
+      - {id: manual, label: Your conversion, icon: Wrench, note: "Rename keys, filterMode to mode, split null values, wrap in a group"}
+  - label: OpenCTI 5.12 and later
+    tone: product
+    nodes:
+      - {id: group, label: FilterGroup, icon: LogoOpenCTI, note: "mode, filters, nested filterGroups"}
+edges:
+  - {from: stored, to: auto, label: at first start}
+  - {from: auto, to: group, label: converted}
+  - {from: code, to: manual, label: convert by hand}
+  - {from: manual, to: group, label: new format}
+  - {from: views, to: group, label: build again, style: dashed}

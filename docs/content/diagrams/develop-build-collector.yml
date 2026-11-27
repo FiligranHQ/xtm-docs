@@ -1,0 +1,20 @@
+title: The Meridian SOC collector, from the pending expectations to the verdicts
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: api, label: REST API, icon: LogoOpenAEV, note: Expectations and traces}
+      - {id: platform, label: Security platform, icon: ShieldCheck, note: Meridian SOC}
+  - label: Collector
+    tone: external
+    nodes:
+      - {id: main, label: main.py, icon: Search, note: "Register, then one run a minute"}
+  - label: Grand Meridian Hotels
+    tone: external
+    nodes:
+      - {id: alerts, label: Alerts API, icon: Server, note: alerts.example.com}
+edges:
+  - {from: main, to: platform, label: upsert once}
+  - {from: api, to: main, label: pending expectations}
+  - {from: main, to: alerts, label: alerts by parent process}
+  - {from: main, to: api, label: verdicts and traces}

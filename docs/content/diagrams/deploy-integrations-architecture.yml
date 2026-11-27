@@ -1,0 +1,25 @@
+title: XTM Composer between the platforms and the container engine
+lanes:
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: GraphQL API}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: REST API}
+  - label: XTM Composer
+    tone: external
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Workflow, note: Reconciles every 10 seconds}
+  - label: Container engine
+    tone: external
+    nodes:
+      - {id: engine, label: Orchestrator, icon: Boxes, note: "Docker, Podman, Kubernetes, Swarm, Portainer"}
+  - label: Integrations
+    tone: external
+    nodes:
+      - {id: containers, label: Integration containers, icon: Puzzle, note: One per instance}
+edges:
+  - {from: composer, to: opencti, label: pull instances, both: true}
+  - {from: composer, to: openaev, label: pull instances, both: true}
+  - {from: composer, to: engine, label: "deploy, start, stop"}
+  - {from: engine, to: containers, label: run}
+  - {from: containers, to: opencti, label: register, style: dashed}

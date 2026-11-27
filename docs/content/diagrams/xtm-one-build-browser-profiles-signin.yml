@@ -1,0 +1,26 @@
+title: XTM One signs the profile in once and keeps the session; the agent's browser opens the application signed in, never seeing the credentials
+lanes:
+  - label: Profile
+    tone: core
+    nodes:
+      - {id: profile, label: Browser profile, icon: KeyRound, note: "URLs, credentials", href: /xtm-one/build/browser-profiles/}
+      - {id: vault, label: Secret vault, icon: ShieldCheck, note: Optional, href: /xtm-one/administer/secret-vaults/}
+  - label: XTM One browser
+    tone: product
+    nodes:
+      - {id: signin, label: Sign-in, icon: LogIn, note: "SSO, TOTP, MFA"}
+      - {id: session, label: Saved session, icon: Clock, note: Kept alive}
+  - label: Agent
+    tone: product
+    nodes:
+      - {id: agent, label: Browser tool, icon: Bot, note: Bound profiles only}
+  - label: Application
+    tone: external
+    nodes:
+      - {id: app, label: Web application, icon: Laptop, note: Signed in}
+edges:
+  - {from: vault, to: profile, label: credentials, style: dashed}
+  - {from: profile, to: signin, label: signs in}
+  - {from: signin, to: session, label: saves}
+  - {from: session, to: agent, label: opened by}
+  - {from: agent, to: app, label: "reads, acts"}

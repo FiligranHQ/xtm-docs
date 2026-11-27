@@ -1,0 +1,25 @@
+title: An import connector reads the file into a draft, and nothing reaches the knowledge base until someone approves it
+lanes:
+  - label: You upload
+    tone: external
+    nodes:
+      - {id: file, label: File, icon: FileText, note: "STIX, MISP, document, CSV"}
+  - label: OpenCTI reads
+    tone: product
+    nodes:
+      - {id: connector, label: Import connector, icon: Puzzle, note: Or a CSV mapper}
+  - label: You review
+    tone: product
+    nodes:
+      - {id: draft, label: Draft, icon: ClipboardCheck, note: Default validation mode}
+      - {id: workbench, label: Analyst workbench, icon: Wrench, note: One file only}
+  - label: Knowledge
+    tone: store
+    nodes:
+      - {id: base, label: Knowledge base, icon: Server, note: Shared with everyone}
+edges:
+  - {from: file, to: connector, label: upload}
+  - {from: connector, to: draft, label: objects found}
+  - {from: connector, to: workbench, label: objects found, style: dashed}
+  - {from: draft, to: base, label: Approve draft}
+  - {from: workbench, to: base, label: Validate, style: dashed}

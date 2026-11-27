@@ -1,0 +1,28 @@
+title: Each module needs its own set of shared services, and only S3 storage serves all three
+lanes:
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Elasticsearch, RabbitMQ, Redis, S3"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "Elasticsearch, RabbitMQ, S3, PostgreSQL"}
+  - label: At the center
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: linux/amd64 images only}
+  - label: Shared services
+    tone: store
+    nodes:
+      - {id: esmq, label: Elasticsearch and RabbitMQ, icon: Layers, note: "xtm-docker runs 8.19.18 and 4.3"}
+      - {id: redis, label: Redis, icon: Server, note: "xtm-docker runs 8.8.0"}
+      - {id: s3, label: S3-compatible storage, icon: Boxes, note: "RustFS in xtm-docker"}
+      - {id: pg, label: PostgreSQL, icon: Server, note: "17, with pgvector"}
+edges:
+  - {from: opencti, to: esmq}
+  - {from: openaev, to: esmq}
+  - {from: opencti, to: redis, label: 7.1 or later}
+  - {from: xtmone, to: redis}
+  - {from: opencti, to: s3}
+  - {from: openaev, to: s3}
+  - {from: xtmone, to: s3}
+  - {from: openaev, to: pg, label: 17 or later}
+  - {from: xtmone, to: pg, label: with pgvector}

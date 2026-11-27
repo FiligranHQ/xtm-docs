@@ -1,0 +1,22 @@
+title: An executor runs inside the platform, imports the endpoints of a vendor, and has the vendor start the implant on each target
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: factory, label: Integration factory, icon: Boxes, note: Catalog entry and form}
+      - {id: integration, label: Executor integration, icon: Workflow, note: Started per deployment}
+      - {id: context, label: Executor context, icon: Cpu, note: Launches the implants}
+  - label: Vendor
+    tone: external
+    nodes:
+      - {id: vendor, label: EDR API, icon: Server, note: "Hosts, groups, scripts"}
+  - label: Endpoints
+    tone: external
+    nodes:
+      - {id: implant, label: Implant, icon: Laptop, note: Runs the payload}
+edges:
+  - {from: factory, to: integration, label: spawns}
+  - {from: integration, to: vendor, label: import endpoints}
+  - {from: context, to: vendor, label: run command}
+  - {from: vendor, to: implant, label: starts}
+  - {from: implant, to: context, label: report to the API, style: dashed}

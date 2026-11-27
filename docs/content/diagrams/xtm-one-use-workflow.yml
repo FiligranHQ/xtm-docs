@@ -1,0 +1,32 @@
+title: Working with agents in XTM One goes from asking, to letting them work on their own, to reviewing and reusing what they produced
+lanes:
+  - label: Start
+    tone: external
+    nodes:
+      - {id: start, label: Sign in, icon: LogIn, note: "Profile, keys", href: /xtm-one/use/getting-started/}
+      - {id: catalog, label: AI Catalog, icon: Sparkles, note: Ready-made agents, href: /xtm-one/use/ai-catalog/}
+  - label: Ask
+    tone: core
+    nodes:
+      - {id: chat, label: Chat, icon: MessageSquare, note: "Agents, files, mentions", href: /xtm-one/use/chat/}
+      - {id: workspace, label: Workspaces, icon: Layers, note: One topic together, href: /xtm-one/use/workspaces/}
+  - label: Let them work
+    tone: core
+    nodes:
+      - {id: auto, label: Scheduled and triggered, icon: Clock, note: "Later, webhooks", href: /xtm-one/use/work-items/}
+      - {id: flow, label: Agentic Flow, icon: Workflow, note: Handovers, href: /xtm-one/use/agentic-flow/}
+  - label: Review and reuse
+    tone: product
+    nodes:
+      - {id: ops, label: Operations, icon: History, note: Runs and work items, href: /xtm-one/use/work-history/}
+      - {id: outputs, label: Files and decks, icon: FileText, note: What they produced, href: /xtm-one/use/files/}
+      - {id: dashboard, label: Dashboard, icon: Gauge, note: Exposure posture, href: /xtm-one/use/dashboard/}
+edges:
+  - {from: start, to: chat}
+  - {from: catalog, to: chat, label: add agents}
+  - {from: chat, to: workspace, label: file in, both: true}
+  - {from: chat, to: auto, label: "\"do it later\""}
+  - {from: auto, to: ops, label: runs}
+  - {from: flow, to: ops, label: delegations}
+  - {from: chat, to: outputs, label: produces}
+  - {from: ops, to: dashboard, label: summed up}

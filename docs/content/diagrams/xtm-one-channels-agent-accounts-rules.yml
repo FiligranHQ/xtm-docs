@@ -1,0 +1,17 @@
+title: An agent account hears what a real account hears, its first matching rule decides, and the reply goes out as the response mode says
+lanes:
+  - label: Microsoft 365
+    tone: external
+    nodes:
+      - {id: account, label: Teams or Outlook account, icon: Users, note: "Yours, or an AI user"}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: rules, label: Rules, icon: ListChecks, note: First match decides}
+      - {id: agent, label: Agent, icon: Bot, note: "Within the rule's access"}
+      - {id: mode, label: Response mode, icon: ClipboardCheck, note: "Send, ask me, shadow"}
+edges:
+  - {from: account, to: rules, label: messages}
+  - {from: rules, to: agent, label: Answer}
+  - {from: agent, to: mode, label: draft}
+  - {from: mode, to: account, label: posted, style: dashed}

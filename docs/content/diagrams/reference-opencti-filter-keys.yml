@@ -1,0 +1,23 @@
+title: The filter menu, the API and the stream filters all build the same filter group, whose filters each pair a key with an operator and values
+lanes:
+  - label: Built by
+    tone: external
+    nodes:
+      - {id: menu, label: Filter menu, icon: Search, note: Offers keys and operators}
+      - {id: api, label: API client, icon: Code2, note: Filters argument of a list}
+      - {id: streams, label: "Streams, triggers, playbooks", icon: Workflow, note: Also has_changed}
+  - label: Filter group
+    tone: product
+    nodes:
+      - {id: group, label: Filter group, icon: Layers, note: "Mode and or or, nested groups"}
+      - {id: filter, label: Filter, icon: ListChecks, note: "Key, values, operator, mode"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenCTI, note: "Resolves special keys, matches data"}
+edges:
+  - {from: menu, to: group, label: builds}
+  - {from: api, to: group, label: sends}
+  - {from: streams, to: group, label: store}
+  - {from: group, to: filter, label: contains}
+  - {from: filter, to: platform, label: applied}

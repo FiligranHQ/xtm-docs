@@ -1,0 +1,26 @@
+title: Where integrations sit in the platform
+lanes:
+  - label: Your tools
+    tone: external
+    nodes:
+      - {id: feeds, label: Feeds and tools, icon: Network, note: 'Vendors, SIEM, EDR, sandboxes'}
+      - {id: endpoints, label: Endpoints, icon: Laptop, note: Where OpenAEV agents run}
+  - label: Integrations
+    nodes:
+      - {id: connector, label: Connectors, icon: Puzzle, note: 'Import, enrich, stream, export'}
+      - {id: aev, label: 'Collectors, injectors', icon: Puzzle, note: 'Results in, actions out'}
+      - {id: executor, label: Executors, icon: Puzzle, note: Deploy OpenAEV agents}
+  - label: Platforms
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: STIX 2.1 knowledge}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: Simulations and results}
+      - {id: composer, label: XTM Composer, icon: Boxes, note: Runs integrations from the catalog}
+edges:
+  - {from: feeds, to: connector, label: data, both: true}
+  - {from: connector, to: opencti, label: STIX bundles, both: true}
+  - {from: feeds, to: aev, label: results and actions, both: true}
+  - {from: aev, to: openaev, label: register and report, both: true}
+  - {from: endpoints, to: executor, label: agents}
+  - {from: executor, to: openaev, label: register}
+  - {from: composer, to: connector, label: deploys, style: dashed}

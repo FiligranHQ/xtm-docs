@@ -1,0 +1,23 @@
+title: OpenCRQ relays the Ask Ariane chat to XTM One, whose agents and MCP server work with OpenCRQ as the person who asked, after their approval when a tool requires it
+lanes:
+  - label: Where you ask
+    tone: external
+    nodes:
+      - {id: panel, label: Ask Ariane, icon: Sparkles, note: "Enterprise Edition"}
+      - {id: clients, label: AI clients, icon: Laptop, note: "Cursor, Claude Desktop"}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: opencrq, label: OpenCRQ, icon: LogoOpenCRQ, note: Signs a token for you}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: agents, label: Agents, icon: Bot, note: "Assistant of OpenCRQ"}
+      - {id: mcp, label: MCP server, icon: Server, note: /mcp/opencrq}
+edges:
+  - {from: panel, to: opencrq, label: your message}
+  - {from: opencrq, to: agents, label: message and token}
+  - {from: agents, to: panel, label: asks your approval, style: dashed}
+  - {from: agents, to: opencrq, label: reads and writes as you, style: dashed}
+  - {from: clients, to: mcp, label: personal API key}
+  - {from: mcp, to: opencrq, label: calls as you, style: dashed}

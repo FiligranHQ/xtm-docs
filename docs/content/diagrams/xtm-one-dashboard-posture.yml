@@ -1,0 +1,23 @@
+title: The home dashboard scores each stage of the exposure lifecycle from the connected modules and averages them into one posture
+lanes:
+  - label: Connected modules
+    tone: external
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: Threats and detection}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: Validation results}
+  - label: Exposure lifecycle
+    tone: core
+    nodes:
+      - {id: stages, label: Five stage scores, icon: ListChecks, note: "Scoping to Remediation"}
+      - {id: analysts, label: Stage analysts, icon: Bot, note: AI assessment per stage}
+  - label: Home dashboard
+    tone: product
+    nodes:
+      - {id: posture, label: Exposure posture, icon: Gauge, note: "Measured and in your context, out of 100"}
+      - {id: briefing, label: Exposure briefing, icon: FileText, note: "Daily, per person"}
+edges:
+  - {from: opencti, to: stages, label: daily sync}
+  - {from: openaev, to: stages, label: daily sync}
+  - {from: stages, to: posture, label: weighted}
+  - {from: analysts, to: stages, label: assess, style: dashed}
+  - {from: stages, to: briefing, label: summed up, style: dashed}

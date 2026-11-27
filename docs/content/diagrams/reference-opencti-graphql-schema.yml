@@ -1,0 +1,23 @@
+title: A client reads with queries, changes with mutations and follows changes with subscriptions, and each field checks the access it requires
+lanes:
+  - label: Client
+    tone: external
+    nodes:
+      - {id: client, label: Client, icon: Laptop, note: "Interface, pycti, scripts"}
+  - label: GraphQL API
+    tone: product
+    nodes:
+      - {id: queries, label: Queries, icon: Search, note: What a client can read}
+      - {id: mutations, label: Mutations, icon: Wrench, note: What a client can change}
+      - {id: subscriptions, label: Subscriptions, icon: Activity, note: Live changes over WebSocket}
+  - label: Access
+    tone: product
+    nodes:
+      - {id: access, label: Access check, icon: ShieldCheck, note: Authentication or a capability of the user}
+edges:
+  - {from: client, to: queries, label: POST /graphql}
+  - {from: client, to: mutations, label: POST /graphql}
+  - {from: client, to: subscriptions, label: WebSocket /graphql}
+  - {from: queries, to: access, label: requires}
+  - {from: mutations, to: access, label: requires}
+  - {from: subscriptions, to: access, label: requires}

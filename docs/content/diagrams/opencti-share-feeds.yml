@@ -1,0 +1,25 @@
+title: OpenCTI publishes a filtered part of its knowledge as a live stream, a CSV feed or a TAXII collection, each read by a different kind of consumer
+lanes:
+  - label: OpenCTI
+    tone: store
+    nodes:
+      - {id: base, label: Knowledge base, icon: Server, note: Filtered per feed}
+  - label: Data sharing
+    tone: product
+    nodes:
+      - {id: stream, label: Live stream, icon: Activity, note: "Creations, updates, deletions"}
+      - {id: csv, label: CSV feed, icon: FileText, note: Rolling time window}
+      - {id: taxii, label: TAXII collection, icon: Layers, note: STIX 2.1 objects}
+  - label: Consumers
+    tone: external
+    nodes:
+      - {id: octi, label: Stream connector, icon: Puzzle, note: "SIEM, EDR, other OpenCTI"}
+      - {id: tool, label: Security device, icon: ShieldCheck, note: "Firewall, proxy, script"}
+      - {id: client, label: TAXII client, icon: ArrowLeftRight, note: Polls and paginates}
+edges:
+  - {from: base, to: stream, label: events}
+  - {from: base, to: csv, label: on request}
+  - {from: base, to: taxii, label: on request}
+  - {from: stream, to: octi, label: listens}
+  - {from: csv, to: tool, label: downloads}
+  - {from: taxii, to: client, label: polls}

@@ -1,0 +1,22 @@
+title: A sector CERT reads what targets its members in OpenCTI, writes the monthly brief, sends it to their security contacts, and has XTM One summarize it
+lanes:
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: picture, label: Sector threat picture, icon: LogoOpenCTI, note: "Hospitality sector", href: /opencti/use/explore/entities/}
+      - {id: brief, label: Monthly brief written, icon: FileText, note: "A report of the CERT", href: /opencti/use/explore/analysis/}
+      - {id: send, label: Brief sent, icon: Users, note: "Dissemination list", href: /opencti/use/share/dissemination-lists/}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: summary, label: Brief summarized, icon: LogoXTMOne, note: "AI Insights, Ask Ariane", href: /xtm-one/use/in-opencti/}
+  - label: Members
+    tone: external
+    nodes:
+      - {id: members, label: Member hotels, icon: ShieldCheck, note: "Security contacts, blind copy"}
+edges:
+  - {from: picture, to: brief, label: threats and incidents}
+  - {from: brief, to: send, label: PDF under TLP}
+  - {from: send, to: members, label: email}
+  - {from: brief, to: summary, label: the report}
+  - {from: summary, to: send, label: short version, style: dashed}

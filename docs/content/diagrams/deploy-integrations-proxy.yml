@@ -1,0 +1,25 @@
+title: XTM Composer gives each integration it creates the proxy and its certificate authority, and both XTM Composer and the integrations reach the hosts of NO_PROXY directly
+lanes:
+  - label: XTM Composer
+    tone: external
+    nodes:
+      - {id: composer, label: XTM Composer, icon: Workflow, note: "OPENCTI__WITH_PROXY=true"}
+  - label: Integrations
+    tone: external
+    nodes:
+      - {id: containers, label: Integration containers, icon: Puzzle, note: "HTTP_PROXY, HTTPS_PROXY, NO_PROXY"}
+  - label: Proxy
+    tone: external
+    nodes:
+      - {id: proxy, label: Your proxy, icon: Network, note: "http://proxy.example.com:8080"}
+  - label: In NO_PROXY
+    tone: product
+    nodes:
+      - {id: platform, label: OpenCTI or OpenAEV, icon: Layers, note: "opencti, openaev"}
+      - {id: rabbitmq, label: RabbitMQ, icon: Server, note: rabbitmq}
+edges:
+  - {from: composer, to: containers, label: proxy and CA}
+  - {from: composer, to: platform, label: direct, style: dashed}
+  - {from: containers, to: proxy, label: other traffic}
+  - {from: containers, to: platform, label: direct}
+  - {from: containers, to: rabbitmq, label: direct}

@@ -1,0 +1,18 @@
+title: The filter menus, the API and the dashboard widgets send filters whose keys come from the schema of the object they search
+lanes:
+  - label: Built by
+    tone: external
+    nodes:
+      - {id: menu, label: Filter menu, icon: Search, note: Lists and their columns}
+      - {id: api, label: API client, icon: Code2, note: filterGroup of a search}
+      - {id: widget, label: Dashboard widget, icon: Gauge, note: Filters of a series}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: schema, label: Schema, icon: ListChecks, note: "Keys, values, operators"}
+      - {id: platform, label: Platform, icon: LogoOpenAEV, note: Database or search engine}
+edges:
+  - {from: menu, to: schema, label: reads}
+  - {from: api, to: platform, label: sends filters}
+  - {from: widget, to: platform, label: sends filters}
+  - {from: schema, to: platform, label: "describes the keys of"}

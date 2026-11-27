@@ -1,0 +1,20 @@
+title: A container points to objects it does not own, so one intrusion set or one relationship can be in a report and a case at once
+lanes:
+  - label: Containers
+    tone: product
+    nodes:
+      - {id: report, label: Report, icon: FileText, note: Velvet Harbor targets hotel booking systems}
+      - {id: case, label: Incident response, icon: ClipboardCheck, note: Booking system intrusion at a hotel chain}
+  - label: Knowledge
+    tone: product
+    nodes:
+      - {id: intrusionset, label: Intrusion Set, icon: Crosshair, note: Velvet Harbor}
+      - {id: relationship, label: Relationship, icon: ArrowLeftRight, note: Velvet Harbor uses Velvet Loader}
+      - {id: malware, label: Malware, icon: Bug, note: Velvet Loader}
+      - {id: domain, label: Domain name, icon: Network, note: booking-velvetharbor.example}
+edges:
+  - {from: report, to: intrusionset, label: contains}
+  - {from: report, to: relationship, label: contains}
+  - {from: report, to: malware, label: contains}
+  - {from: case, to: intrusionset, label: contains}
+  - {from: case, to: domain, label: contains}

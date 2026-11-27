@@ -1,0 +1,30 @@
+title: An inject acts on its targets, results come back from your tools and your people, and each expectation compares its score with its success score
+lanes:
+  - label: Inject
+    tone: product
+    nodes:
+      - {id: inject, label: Inject, icon: Crosshair, note: "Type, targets, time"}
+  - label: Targets
+    tone: external
+    nodes:
+      - {id: assets, label: Assets, icon: Laptop, note: "Hosts and their agents"}
+      - {id: people, label: Persons, icon: Users, note: Enabled in each team}
+  - label: Results
+    tone: external
+    nodes:
+      - {id: collectors, label: Collectors, icon: ShieldCheck, note: "Alerts of EDR, SIEM, gateways"}
+      - {id: findings, label: Findings, icon: Search, note: CVEs found on the target}
+      - {id: answers, label: Answers, icon: MessageSquare, note: "Manual score, flag, article read"}
+  - label: Score
+    tone: product
+    nodes:
+      - {id: expectations, label: Expectations, icon: ClipboardCheck, note: "Success once the score is reached"}
+edges:
+  - {from: inject, to: assets, label: acts on}
+  - {from: inject, to: people, label: reaches}
+  - {from: assets, to: collectors, label: seen by your tools}
+  - {from: assets, to: findings, label: scanned}
+  - {from: people, to: answers, label: react}
+  - {from: collectors, to: expectations, label: "prevention, detection"}
+  - {from: findings, to: expectations, label: vulnerability}
+  - {from: answers, to: expectations, label: human response}
