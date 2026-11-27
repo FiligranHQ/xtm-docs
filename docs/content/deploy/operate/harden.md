@@ -59,14 +59,14 @@ RabbitMQ (5672, and 15672 for its management interface) and S3 storage (9000) ar
 
 ## Protect the health keys
 
-The health endpoints answer only with their key. See [Check that the platforms are healthy](/deploy/operate/health-probes/).
+The health endpoints of OpenCTI and OpenAEV answer only with their key; those of XTM One and OpenCRQ need none. See [Check that the platforms are healthy](/deploy/operate/health-probes/).
 
 - OpenCTI refuses every call while its key is empty or `ChangeMe`. Keep a random `OPENCTI_HEALTHCHECK_ACCESS_KEY`, and do not set it to `public` on a network you do not trust.
 - OpenAEV accepts its default key, `ChangeMe`, and xtm-docker falls back to it when `OPENAEV_HEALTHCHECK_KEY` is missing from `.env`. Set a random value.
 
 ## Limit who gets an OpenCRQ account
 
-OpenCRQ signs its users in through XTM One, and gives an account to any XTM One user at their first sign-in, even one who is a member of no tenant: they then read **You don't have access to OpenCRQ yet** until an administrator adds them. Who can sign in to OpenCRQ is therefore who can get an XTM One account.
+OpenCRQ signs its users in through XTM One, and gives an account to an XTM One user at their first sign-in, unless another account already holds their email, even one who is a member of no tenant: they then read **You don't have access to OpenCRQ yet** until an administrator adds them. Who can sign in to OpenCRQ is therefore who can get an XTM One account.
 
 In XTM One, keep **Local Registration** off, or limit new accounts to your domains with **Allowed email domains**, and do the same for the **On-the-fly user creation** of each single sign-on method. See [Decide who gets an account](/xtm-one/administer/sso/#decide-who-gets-an-account) in XTM One.
 
@@ -243,7 +243,7 @@ Behind a reverse proxy, OpenCTI does not need certificates. When it serves HTTPS
 
 ### Sessions
 
-`app:session_timeout` ends a session after this many milliseconds. The default, `1200000`, is 20 minutes: set it to what your security policy requires. See [Cookies](/opencti/administer/cookies/).
+`app:session_timeout` ends a session that stays idle this many milliseconds: each request starts the count again. The default, `1200000`, is 20 minutes: set it to what your security policy requires. See [Cookies](/opencti/administer/cookies/).
 
 ### Public dashboards
 
@@ -271,7 +271,7 @@ To keep feeds from reaching internal addresses, a server-side request forgery (S
 
 | Key | Default | What it does |
 | --- | --- | --- |
-| `app:app_logs:logs_redacted_inputs` | `password`, `secret`, `token`, `api_tokens`, `authentication_value`, `enterprise_license` | GraphQL input fields whose value is hidden in the logs. Add the fields of your own sensitive data, and keep the default ones |
+| `app:app_logs:logs_redacted_inputs` | `password`, `secret`, `token`, `api_tokens`, `authentication_value`, `enterprise_license` | GraphQL input fields whose value is hidden in the logs. The default ones are always hidden: add the fields of your own sensitive data |
 | `app:audit_logs:trace_request_headers` | `user-agent`, `x-forwarded-for` | HTTP headers written to the audit logs with each event |
 | `app:app_logs:extended_error_message` | `false` | Adds the input data to error logs, and the GraphQL query and its variables to the logs of API calls. Keep it `false`: the logs would then hold sensitive data |
 | `app:performance_logger` | `false` | Logs every API call with its duration and size. Keep it `false` outside a performance analysis: it writes a lot of logs |
@@ -288,11 +288,11 @@ Unset, it follows `app:graphql:secure_by_default`: the playground is off when th
 
 Set it to `false` if your users do not need it. Without the playground, the [GraphQL schema reference](/reference/opencti/graphql-schema/) still documents every query and mutation.
 
-`app:graphql:playground:force_disabled_introspection` is `true` by default: OpenCTI refuses introspection queries, which return the whole schema, even with the playground on. Set it to `false` to let signed-in users introspect the API, as some GraphQL tools require. Without the playground, or with the interface turned off, introspection stays refused.
+`app:graphql:playground:force_disabled_introspection` is `true` by default, but xtm-docker sets it to `false`, for OpenAEV's Coverage connector: signed-in users can then introspect the API, which returns the whole schema. Set it to `true` to refuse introspection even with the playground on, once your OpenAEV no longer needs it. Without the playground, or with the interface turned off, introspection stays refused.
 
 ### Artifact archives
 
-OpenCTI stores potentially malicious files, the artifacts, in encrypted ZIP archives. The password of these archives is `app:artifact_zip_password`, `infected` by default, the usual value for malware samples. Change it if your policy requires another one.
+OpenCTI protects potentially malicious files, the artifacts, with a password: it opens with it the ZIP archives you import, and puts a file you download as an artifact in an encrypted ZIP archive. The password is `app:artifact_zip_password`, `infected` by default, the usual value for malware samples. Change it if your policy requires another one.
 
 ## What's next
 

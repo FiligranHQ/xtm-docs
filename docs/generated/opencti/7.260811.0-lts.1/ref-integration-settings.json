@@ -1,8 +1,8 @@
 {
   "name": "integration-settings",
   "version": "7.260811.0-lts.1",
-  "source": "OpenCTI-Platform/opencti@c9f5ea5 (client-python/pycti/api/opencti_api_client.py, client-python/pycti/connector/opencti_connector_helper.py, opencti-worker/src/worker.py); FiligranHQ/xtm-composer@832c5b1 (config/default.yaml, src/config/settings.rs, src/orchestrator/podman/mod.rs)",
-  "intro": "The settings OpenCTI 7.260811.0-lts.1's integrations read: the 66 every connector shares through pycti, the 22 of the worker, the 1 variables pycti reads for both, and the 100 of XTM Composer. [Run an integration without XTM Composer](/deploy/integrations/manual/) and [Configure XTM Composer](/deploy/integrations/configure-composer/) explain how to set them.",
+  "source": "OpenCTI-Platform/opencti@c9f5ea5 (client-python/pycti/api/opencti_api_client.py, client-python/pycti/connector/opencti_connector_helper.py, opencti-worker/src/worker.py); FiligranHQ/xtm-composer@39ac611 (config/default.yaml, src/config/settings.rs, src/orchestrator/podman/mod.rs)",
+  "intro": "The settings OpenCTI 7.260811.0-lts.1's integrations read: the 66 every connector shares through pycti, the 22 of the worker, the 1 variables pycti reads for both, and the 102 of XTM Composer. [Run an integration without XTM Composer](/deploy/integrations/manual/) and [Configure XTM Composer](/deploy/integrations/configure-composer/) explain how to set them.",
   "filter": "Filter settings and variables",
   "sections": [
     {
@@ -1072,6 +1072,26 @@
             "String",
             "Not set",
             "Suffix Composer adds to the tag of every connector image it deploys, `-fips` or `-ubi9`, for the FIPS or Red Hat UBI builds of the connectors (`6.9.0` becomes `6.9.0-fips`, an image without a tag `latest-fips`). Any other value stops Composer at start. The FIPS image of Composer sets `-fips`."
+          ]
+        },
+        {
+          "key": "composer:manager.image_update_interval",
+          "cells": [
+            "`manager.image_update_interval`",
+            "`MANAGER__IMAGE_UPDATE_INTERVAL`",
+            "Integer",
+            "`600`",
+            "Seconds between two registry lookups of the image of a running connector on a moving tag (`latest`, `rolling` or no tag): Composer redeploys it when the tag points to a new image. The first lookup happens at once; `0` turns the lookups off."
+          ]
+        },
+        {
+          "key": "composer:manager.image",
+          "cells": [
+            "`manager.image`",
+            "`MANAGER__IMAGE`",
+            "String",
+            "Not set",
+            "Image Composer itself runs from, such as `filigran/xtm-composer:3.261127.0`, which it reports to OpenAEV with its version at registration and at each ping. Unset or blank, no image is reported."
           ]
         },
         {

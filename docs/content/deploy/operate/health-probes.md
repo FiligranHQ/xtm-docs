@@ -22,8 +22,9 @@ Each platform of the XTM stack has an HTTP endpoint that says whether it can ser
 | XTM One | `/api/health`, on its port (`4000` in the container, `XTM_ONE_PORT` on the host) | None | The application is up |
 | OpenCTI | `/health?health_access_key=<key>`, on its port (`8080` in the container, `OPENCTI_PORT` on the host) | `APP__HEALTH_ACCESS_KEY`, from `OPENCTI_HEALTHCHECK_ACCESS_KEY` in `.env` | Elasticsearch, S3 storage, RabbitMQ and Redis all answer |
 | OpenAEV | `/api/health?health_access_key=<key>`, on its port (`8080` in the container, `8081` on the host) | `OPENAEV_HEALTHCHECK_KEY` in `.env` | PostgreSQL, RabbitMQ and S3 storage answer |
+| OpenCRQ | Any path, such as `/health`, on the health check port (`HEALTHCHECK_HTTP_SERVER__PORT`, `8444` in xtm-docker, not published on the host) | None | Every process of the platform runs; it answers `503` while one is starting, stopped or silent |
 
-The healthchecks of `docker-compose.yml` call these same endpoints, and `docker compose ps` shows their result. The workers, connectors, collectors and injectors of a platform, and XTM Composer, wait for it to be healthy before they start.
+The healthchecks of `docker-compose.yml` call these same endpoints, and `docker compose ps` shows their result. The workers, connectors, collectors and injectors of a platform wait for it to be healthy before they start, and XTM Composer waits for OpenCTI and OpenAEV.
 
 ## Check the platforms by hand
 
@@ -69,7 +70,8 @@ Each call checks the four dependencies, with a timeout of 15 seconds each.
 | --- | --- |
 | `200` `{"status":"success"}` | PostgreSQL, RabbitMQ and S3 storage are up |
 | `503` | One of them is down, or has not been checked for three intervals |
-| `401` | The key is missing or wrong |
+| `401` | The key is wrong or empty |
+| `400` | The `health_access_key` parameter is missing |
 
 OpenAEV checks its dependencies in the background, every `openaev.healthcheck.connectivity-probe-interval` (default `PT10S`, ten seconds), and the endpoint returns the last result. Elasticsearch is checked too, but its failure does not turn the answer into `503`: OpenAEV can still serve requests without it. Add `&details=true` to also get the storage used in PostgreSQL, Elasticsearch and S3.
 

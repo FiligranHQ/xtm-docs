@@ -44,17 +44,20 @@ XTM Composer always manages both OpenCTI and OpenAEV.
    git pull
    ```
 
-2. Remove the lines that no longer do anything from `.env`: `COMPOSE_PROFILES`, which listed the modules to start, and `XTM_COMPOSER_OPENCTI_ENABLE` and `XTM_COMPOSER_OPENAEV_ENABLE`, which turned XTM Composer off for one platform.
+2. Remove the lines that no longer do anything from `.env`: `XTM_COMPOSER_OPENCTI_ENABLE` and `XTM_COMPOSER_OPENAEV_ENABLE`, which turned XTM Composer off for one platform, and the module names of `COMPOSE_PROFILES`, which listed the modules to start. Keep `COMPOSE_PROFILES=opensandbox` if you run OpenSandbox.
 
    ```bash
-   sed -i.bak -E '/^(COMPOSE_PROFILES|XTM_COMPOSER_OPENCTI_ENABLE|XTM_COMPOSER_OPENAEV_ENABLE)=/d' .env
+   sed -i.bak -E '/^(XTM_COMPOSER_OPENCTI_ENABLE|XTM_COMPOSER_OPENAEV_ENABLE)=/d; s/^COMPOSE_PROFILES=.*opensandbox.*/COMPOSE_PROFILES=opensandbox/; /^COMPOSE_PROFILES=/{/=opensandbox$/!d;}' .env
    ```
 
-3. Check that the modules you did not run have your own secrets, not the values of `.env.sample`. OpenCTI does not start with the sample values.
+3. Check that the modules you did not run have your own secrets, not the values of `.env.sample`, and that `.env` has every variable of the current `.env.sample`. OpenCTI does not start with the sample values, and OpenCRQ does not start without `OPENCRQ_POSTGRES_PASSWORD`.
 
    ```bash
-   grep -E '^(OPENCTI|OPENAEV)_(ADMIN_(PASSWORD|TOKEN|ENCRYPTION_KEY|ENCRYPTION_SALT)|ENCRYPTION_KEY|HEALTHCHECK_(ACCESS_)?KEY)=' .env
+   grep -E '^(OPENCTI|OPENAEV|OPENCRQ|XTM_ONE)_.*(PASSWORD|TOKEN|KEY|SALT)=|^PLATFORM_REGISTRATION_TOKEN=' .env
+   comm -23 <(grep -oE '^[A-Z0-9_]+=' .env.sample | sort) <(grep -oE '^[A-Z0-9_]+=' .env | sort)
    ```
+
+   The second command prints the variables of `.env.sample` that `.env` lacks: copy them from `.env.sample` and give them a value.
 
    A value such as `changeme`, `ChangeMe_UUIDv4`, `00000000-0000-0000-0000-000000000000` or an empty one needs a fresh one: a UUID for the admin tokens and health check keys, a 32-byte base64 key for `OPENCTI_ENCRYPTION_KEY` (`openssl rand -base64 32`), and a long random string for the others (`openssl rand -hex 24`). Set the admin email and the public URL of each new platform too, as [Configure the stack](/deploy/install/docker-compose/#configure-the-stack) describes.
 

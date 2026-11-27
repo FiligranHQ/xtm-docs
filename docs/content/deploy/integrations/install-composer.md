@@ -25,16 +25,18 @@ This page installs XTM Composer next to OpenCTI, OpenAEV or both, on the contain
 - An API token for each platform. xtm-docker uses the admin token of each platform (`OPENCTI_ADMIN_TOKEN`, `OPENAEV_ADMIN_TOKEN`).
 - The container engine that will run the integrations: Docker, Podman or Kubernetes. For Docker Swarm and Portainer, install with Docker below, then set the selector in [Configure XTM Composer](/deploy/integrations/configure-composer/#the-container-engine).
 - OpenSSL, to generate the key, and Python 3, to generate an identifier.
+- HTTPS access from XTM Composer itself, not only from the container engine, to the registry of the integration images: Docker Hub is `registry-1.docker.io` and `auth.docker.io`. XTM Composer reads there the image a moving tag (`latest`, `rolling`, or no tag) points to, to redeploy the integrations on such a tag when it changes. Without that access, they keep the image they run and XTM Composer logs a warning. `MANAGER__IMAGE_UPDATE_INTERVAL=0` turns the lookups off. Behind a proxy, see [Run integrations behind a proxy](/deploy/integrations/proxy/).
 
 ## What every installation has
 
 | Part | Value |
 | --- | --- |
-| Image | `filigran/xtm-composer`, for `linux/amd64` and `linux/arm64`. Tags: `latest`, each release such as `3.261121.0`, and a FIPS build tagged `latest-fips` or `<release>-fips`. The FIPS build deploys the `-fips` images of the integrations: see `manager.image_tag_suffix` in [Configure XTM Composer](/deploy/integrations/configure-composer/#xtm-composer-itself) |
+| Image | `filigran/xtm-composer`, for `linux/amd64` and `linux/arm64`. Tags: `latest`, each release such as `3.261127.0`, and a FIPS build tagged `latest-fips` or `<release>-fips`. The FIPS build deploys the `-fips` images of the integrations: see `manager.image_tag_suffix` in [Configure XTM Composer](/deploy/integrations/configure-composer/#xtm-composer-itself) |
 | RSA private key | 4096 bits, PKCS#8 PEM (`-----BEGIN PRIVATE KEY-----`), given with `MANAGER__CREDENTIALS_KEY_FILEPATH` or `MANAGER__CREDENTIALS_KEY` |
 | Identifier | `MANAGER__ID`, the same at every restart. xtm-docker uses a UUID |
+| Its own image, optional | `MANAGER__IMAGE`, the image you start XTM Composer from, such as `filigran/xtm-composer:3.261127.0`. XTM Composer sends it to OpenAEV with its version. The released images set it to their own reference, such as `filigran/xtm-composer:3.261127.0`, also when you pull `latest`. Set it only to override that value, behind a registry mirror for example |
 | Platforms | `OPENCTI__ENABLE`, `OPENCTI__URL`, `OPENCTI__TOKEN`, and the same with `OPENAEV__`. OpenCTI is enabled by default, OpenAEV is not |
-| Container engine | `OPENCTI__DAEMON__SELECTOR` and `OPENAEV__DAEMON__SELECTOR`: `docker`, `podman`, `kubernetes`, `swarm` or `portainer`. The default is `kubernetes` |
+| Container engine | `OPENCTI__DAEMON__SELECTOR` and `OPENAEV__DAEMON__SELECTOR`: `docker`, `podman`, `kubernetes`, `swarm` or `portainer`. XTM Composer's own default is `kubernetes`; xtm-docker sets `docker` |
 
 Generate the key with `openssl genpkey`: it writes PKCS#8. Older OpenSSL versions of `openssl genrsa` write PKCS#1 (`BEGIN RSA PRIVATE KEY`), which XTM Composer refuses.
 
@@ -115,7 +117,7 @@ XTM Composer drives the Docker daemon through its socket and starts the integrat
    ```bash
    docker logs xtm-composer 2>&1 | grep -E 'Successfully loaded RSA private key|Manager registered'
    ```
-   It shows the key loaded and one `Manager registered` line per platform. Registration is retried every minute.
+   It shows the key loaded and one `Manager registered` line per platform. While the platform does not answer, XTM Composer tries again every minute. It registers again when the platform restarts on a new version or stops answering its ping.
    :::
 ::::
 :::::
@@ -271,7 +273,7 @@ Run `./target/release/xtm-composer` from the repository folder: it reads `config
 
 ## Check that it works
 
-Open the catalog of each platform: :menu[Integrations], **Available** tab (:menu[Data > Ingestion > Connector catalog] before 7.260811) in OpenCTI, **Integrations** > **Catalog** in OpenAEV. It no longer says that deploying requires the Integration Manager. Deploy an integration and start it, as in [Deploy a first integration with XTM Composer](/deploy/integrations/quick-start/#step-4-deploy-a-first-integration).
+Open the catalog of each platform: :menu[Integrations], **Available** tab (:menu[Data > Ingestion > Connector catalog] before 7.260811) in OpenCTI, **Integrations**, **Available** tab, in OpenAEV. It no longer says that deploying requires the Integration Manager. Deploy an integration and start it, as in [Deploy a first integration with XTM Composer](/deploy/integrations/quick-start/#step-4-deploy-a-first-integration).
 
 ## What's next
 

@@ -24,7 +24,7 @@ The [default integrations of xtm-docker](/deploy/integrations/how-they-run/#the-
 
 - XTM Composer running and registered with the platform: see [Deploy a first integration with XTM Composer](/deploy/integrations/quick-start/).
 - An Enterprise Edition license on the platform.
-- In OpenCTI, the **Manage ingestion** capability. In OpenAEV, the permission to manage the platform settings.
+- In OpenCTI, **Manage ingestion** and **Connectors API usage: register, ping, export push ...** to deploy the connector, and **Manage connector state** to start it. In OpenAEV, the permission to manage the platform settings.
 - The current configuration of the integration: its environment variables in your Compose file, or its `config.yml`. You need its settings and credentials again.
 
 ## Move the integration
@@ -52,7 +52,7 @@ OpenCTI creates a new connector instance. The state of the old one, such as its 
 OpenAEV registers the collector or injector again under XTM Composer, and keeps its identifier.
 
 ::::steps
-1. Open **Integrations** > **Collectors** or **Injectors**, or the detail page of the collector or injector. A **Migrate** button shows when the integration is external, has no managed instance yet, has an entry in the catalog, and XTM Composer runs. On the detail page, it also needs the permission to manage the platform settings. Without Enterprise Edition, the button asks for a license.
+1. Open **Integrations**, **Deployed** tab, or the detail page of the collector or injector. A **Migrate** button shows when the integration is external, has no managed instance yet, has an entry in the catalog, and XTM Composer runs. On the detail page, it also needs the permission to manage the platform settings. Without Enterprise Edition, the button asks for a license.
 2. Click **Migrate**. A drawer opens with the same form as a new deployment.
 3. Fill the settings with the values of your current configuration, then click **Migrate**.
 
@@ -62,6 +62,8 @@ OpenAEV registers the collector or injector again under XTM Composer, and keeps 
 
 4. Stop and remove the old container, as described in [Remove the old container](#remove-the-old-container). If a service provider runs your OpenAEV, ask them to do it.
 ::::
+
+The managed instance runs the image of the catalog on the `rolling` tag, whatever version your old container ran. While the instance runs, XTM Composer checks the tag every 10 minutes (`MANAGER__IMAGE_UPDATE_INTERVAL`) and redeploys the instance when the tag points to a new build: see [How integrations get new images](/deploy/integrations/how-they-run/#how-integrations-get-new-images).
 :::::
 ::::::
 

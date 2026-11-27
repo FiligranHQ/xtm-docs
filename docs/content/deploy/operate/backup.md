@@ -24,16 +24,16 @@ The data of the stack lives in six Docker volumes and one file. Their names star
 | S3 storage (RustFS) | Volume `s3data` | The files of OpenCTI, OpenAEV, OpenCRQ and XTM One | A copy of the volume |
 | Redis | Volume `redisdata` | Cache, sessions and live events | A copy of the volume |
 | RabbitMQ | Volume `amqpdata` | The queues and the messages waiting in them | A copy of the volume |
-| XTM Composer key | Volume `rsakeys` | The RSA key XTM Composer encrypts the integrations' configurations with | A copy of the volume |
+| XTM Composer key | Volume `rsakeys` | The private RSA key XTM Composer decrypts the integrations' secrets with: OpenCTI and OpenAEV encrypt them with its public key | A copy of the volume |
 | Secrets | File `.env` | Passwords, tokens and the encryption keys of the platforms | A copy of the file |
 
 :::warning[Back up the secrets with the data]
-The platforms encrypt part of their data with keys from `.env`, such as `OPENCTI_ENCRYPTION_KEY`, `OPENAEV_ADMIN_ENCRYPTION_KEY` and `XTM_ONE_SECRET_KEY`, and XTM Composer with the key in `rsakeys`. Data restored without the same keys cannot be read. Keep the backup as safe as the secrets it holds.
+The platforms encrypt part of their data with keys from `.env`, such as `OPENCTI_ENCRYPTION_KEY`, `OPENAEV_ADMIN_ENCRYPTION_KEY` and `XTM_ONE_SECRET_KEY`, and the secrets of the integrations for the key in `rsakeys`: with another key, XTM Composer cannot read them and deploys none. Data restored without the same keys cannot be read. Keep the backup as safe as the secrets it holds.
 :::
 
 ### Why everything is backed up together
 
-A platform keeps one piece of information in several stores. OpenCTI writes an imported file to S3 storage and indexes it in Elasticsearch; OpenAEV and XTM One keep their records in PostgreSQL and their files in S3 storage. Stores backed up at different times disagree after a restore: a record points to a file that is missing, or the other way round. So the procedure below stops everything that writes, the platforms, their workers and the integrations, then backs up every store at the same point in time.
+A platform keeps one piece of information in several stores. OpenCTI writes an imported file to S3 storage and indexes it in Elasticsearch; OpenAEV and XTM One keep their records in PostgreSQL and their files in S3 storage. Stores backed up at different times disagree after a restore: a record points to a file that is missing, or the other way round. So the procedure below stops everything that writes, the platforms, their workers, the integrations of the Compose files and those XTM Composer deployed, then backs up every store at the same point in time.
 
 Elasticsearch does not support restoring from a copy of its data folder, even a stopped one: back it up with a snapshot. The other volumes are copied while their service is stopped.
 
@@ -42,8 +42,6 @@ Elasticsearch does not support restoring from a copy of its data folder, even a 
 - The stack runs and is healthy: see [Check that the platforms are healthy](/deploy/operate/health-probes/).
 - Free disk space for the backup: about the size of the six volumes. `docker system df -v` gives their size.
 - A snapshot repository for Elasticsearch, prepared once as below.
-
-A stack with XTM One alone has no Elasticsearch and no RabbitMQ: skip the steps about Elasticsearch.
 
 ### Prepare the snapshot repository
 
@@ -96,17 +94,18 @@ Run every command from the `xtm-docker` folder.
    docker compose images > backup/images.txt
    ```
 
-2. Stop everything that writes: every service except the stores.
+2. Stop everything that writes: every service except the stores, then the integrations XTM Composer deployed, which it starts again with the stack.
 
    ```bash
    docker compose stop $(docker compose config --services | grep -vxE 'elasticsearch|pgsql|redis|minio|rabbitmq|rsa-key-generator')
+   docker ps -q --filter label=xtm-manager | xargs -r docker stop
    ```
 
    :::verify
    ```bash
    docker compose ps --format '{{.Service}}'
    ```
-   It lists only stores: `elasticsearch`, `pgsql`, `redis`, `minio`, `rabbitmq`, and `rsa-key-generator` if XTM Composer is deployed.
+   It lists only the stores: `elasticsearch`, `pgsql`, `redis`, `minio`, `rabbitmq` and `rsa-key-generator`.
    :::
 
 3. Take an Elasticsearch snapshot of all the indices.
@@ -155,7 +154,7 @@ Run every command from the `xtm-docker` folder.
    done
    ```
 
-   The loop skips a volume your modules do not create, such as `rsakeys` without XTM Composer.
+   The loop skips a volume that does not exist, such as one you removed in `docker-compose.override.yml`.
 
 7. Copy the secrets, the override file and the snapshot repository.
 

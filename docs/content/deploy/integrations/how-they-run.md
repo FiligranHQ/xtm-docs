@@ -67,6 +67,14 @@ The token decides what the integration can do. OpenCTI recommends one user per c
 
 You can combine them: the default integrations run as Compose services while XTM Composer runs the ones you add later.
 
+### How integrations get new images
+
+An image on a moving tag (`latest`, `rolling`, or no tag) changes when its publisher pushes a new build under the same tag. An image on a version, such as `opencti/connector-mitre:7.261030.1`, or on a `@sha256:` digest, stays the one you deployed. Who fetches the new build depends on how the integration runs:
+
+- XTM Composer redeploys an integration on a moving tag when the tag points to a new image. While the integration runs, XTM Composer reads the digest of its tag in the registry, then again every 10 minutes by default (`manager.image_update_interval`, `0` turns it off). It pulls the new image before it redeploys: when the pull fails, the running integration stays. The OpenAEV catalog deploys every integration on `rolling`, so they follow each new build. The OpenCTI catalog gives images on a version, which XTM Composer never looks up. See [Configure XTM Composer](/deploy/integrations/configure-composer/#xtm-composer-itself).
+- The default integrations of xtm-docker run on `latest`, but Docker Compose never pulls on its own: `docker compose pull`, then `docker compose up -d`, updates them with their platform.
+- An integration you run by hand keeps its image until you pull and start it again.
+
 ## The default integrations of xtm-docker
 
 [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker) always starts these integrations with the stack: they are defined next to their platform, in `modules/opencti.yml` and `modules/openaev.yml`. Each one runs as a Compose service with `restart: always`, starts once its platform is healthy, and uses the admin token of its platform (`OPENCTI_ADMIN_TOKEN` or `OPENAEV_ADMIN_TOKEN` in `.env`). Its ID is in `.env` too.

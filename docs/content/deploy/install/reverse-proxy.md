@@ -17,7 +17,7 @@ This page puts a reverse proxy in front of the XTM stack, so that users reach ea
 
 ## Before you start
 
-- The stack installed as [Install with Docker Compose](/deploy/install/docker-compose/) describes, with the public URLs set (step 6) and the platforms published on local ports (step 7): OpenCTI on `127.0.0.1:8080`, OpenAEV on `127.0.0.1:8081`, XTM One on `127.0.0.1:8090`.
+- The stack installed as [Install with Docker Compose](/deploy/install/docker-compose/) describes, with the public URLs set (step 5) and the platforms published on local ports (step 6): OpenCTI on `127.0.0.1:8080`, OpenAEV on `127.0.0.1:8081`, XTM One on `127.0.0.1:8090`.
 - A DNS record for each host name, such as `opencti.example.com`, `openaev.example.com` and `xtm-one.example.com`, pointing to the proxy.
 - A TLS certificate and its key for each host name, or one certificate that covers them all.
 - Nginx on the Docker host.
@@ -27,7 +27,7 @@ This page puts a reverse proxy in front of the XTM stack, so that users reach ea
 | Need | Why |
 | --- | --- |
 | The public URL in `.env` | Each platform builds its links and signs its requests to the others with `*_EXTERNAL_SCHEME`, `*_HOST` and `*_PORT`. With TLS, set the scheme to `https` and the port to `443`. |
-| WebSockets forwarded | OpenCTI serves its GraphQL subscriptions over a WebSocket on `/graphql`, and OpenAEV uses WebSockets too. In XTM One, the XTM One Desktop app, the runners and the relays connect over a WebSocket, and fall back to slower HTTP long-polling without it; the chat does not use one. The proxy must pass the `Upgrade` and `Connection` headers. |
+| WebSockets forwarded | OpenCTI serves its GraphQL subscriptions over a WebSocket on `/graphql`; OpenAEV streams its updates as server-sent events on `/api/stream`, which the proxy must not buffer. In XTM One, the XTM One Desktop app, the runners and the relays connect over a WebSocket, and fall back to slower HTTP long-polling without it; the chat does not use one. The proxy must pass the `Upgrade` and `Connection` headers. |
 | HTTP/2 to browsers, for XTM One | The XTM One chat streams its answers as server-sent events. Every open tab of XTM One holds its activity stream, and a chat tab also the stream of its conversation and, while an answer is written, the stream of that message. A browser opens at most 6 HTTP/1.1 connections per host: over HTTP/1.1, a few open tabs use them all and XTM One stops loading. HTTP/2 carries every stream on one connection. The proxy still reaches XTM One over HTTP/1.1. |
 | No buffering | Responses that stream, such as subscriptions and the answers of AI agents, must reach the browser as they come. A proxy that buffers the XTM One chat shows each answer only once it is complete. |
 | A read timeout above 15 seconds | An XTM One stream with nothing to send writes a keep-alive every 15 seconds: a shorter read timeout cuts it. Nginx waits 60 seconds by default; [Finish the setup of XTM One](/deploy/configure/xtm-one/#finish-the-setup-after-the-install) raises it for the long answers of AI agents. |
@@ -151,7 +151,7 @@ This page puts a reverse proxy in front of the XTM stack, so that users reach ea
 :::
 
 :::warning[Proxy on another host]
-OpenCTI takes the client address from `X-Forwarded-For` only when the proxy reaches it from a loopback, link-local or private address. From any other address, OpenCTI sees every request as coming from the proxy: the activity and audit logs record the proxy's address, and the IP-based protections, such as rate limiting, apply to the proxy instead of to each user. The session cookie is not affected: OpenCTI marks it secure from `X-Forwarded-Proto` whatever the proxy's address.
+OpenCTI takes the client address from `X-Forwarded-For` only when the proxy reaches it from a loopback, link-local or private address. From any other address, OpenCTI sees every request as coming from the proxy: the activity and audit logs record the proxy's address, and the IP-based protections, such as rate limiting, apply to the proxy instead of to each user. The session cookie is not affected: once `APP__HTTPS_CERT__COOKIE_SECURE=true`, OpenCTI trusts `X-Forwarded-Proto` from any proxy to send its secure cookie.
 :::
 
 :::only{opencti=">=7.260811"}

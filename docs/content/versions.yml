@@ -29,8 +29,8 @@ xtm-one:
 # describes its latest one (its configuration reference, docs/generated/composer/<version>/).
 composer:
   latest:
-    version: 3.261121.0
-    tag: 3.261121.0
+    version: 3.261127.0
+    tag: 3.261127.0
 # OpenCRQ documents its latest release. Before its first one, it documented the image of a main
 # commit (tag sha-<commit>, with `commit`, that commit whole, where xtm-atlas reads the code:
 # atlas/src/sources.ts ensureSourceAt); the engine then says it is a development build.

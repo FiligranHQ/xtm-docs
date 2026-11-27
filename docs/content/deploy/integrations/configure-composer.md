@@ -9,7 +9,7 @@ products:
 personas: [platform-engineer]
 edition: ee
 owner: docs-platform
-last_reviewed: 2026-11-01
+last_reviewed: 2026-11-27
 migrated_from:
   - opencti:/deployment/integration-manager/configuration/
   - openaev:/deployment/ecosystem/integration-manager/configuration/
@@ -50,10 +50,12 @@ Lists, such as `extra_hosts` or `cap_add`, go in the YAML file. A YAML file does
 | `manager.execute_schedule` | `MANAGER__EXECUTE_SCHEDULE` | `10` | Seconds between two reconciliations |
 | `manager.ping_alive_schedule` | `MANAGER__PING_ALIVE_SCHEDULE` | `60` | Seconds between two pings to each platform |
 | `manager.image_tag_suffix` | `MANAGER__IMAGE_TAG_SUFFIX` | None, and `-fips` in the FIPS image of XTM Composer | `-fips` or `-ubi9`, to run the FIPS or Red Hat Universal Base Image (UBI) builds of the integrations. Another value stops XTM Composer at start |
+| `manager.image_update_interval` | `MANAGER__IMAGE_UPDATE_INTERVAL` | `600` | Seconds between two registry lookups of each integration on a moving tag, which XTM Composer redeploys when the tag points to a new image. `0` turns the lookups off |
+| `manager.image` | `MANAGER__IMAGE` | None | The image XTM Composer runs from, such as `filigran/xtm-composer:3.261127.0`. XTM Composer reports it to OpenAEV with its version, at registration and at each ping |
 | `manager.logger.level` | `MANAGER__LOGGER__LEVEL` | `info` | `trace`, `debug`, `info`, `warn` or `error` |
 | `manager.logger.format` | `MANAGER__LOGGER__FORMAT` | `json` | `json` or `pretty` |
 
-One of `credentials_key_filepath` and `credentials_key` is required: XTM Composer stops at start without a key. When it serves OpenAEV alone, it reads the key only at its first registration, and logs the error then.
+One of `credentials_key_filepath` and `credentials_key` is required: XTM Composer stops at start without a key, whatever platform it serves.
 
 XTM Composer adds `manager.image_tag_suffix` to the tag of every integration image it deploys, for both platforms and on every container engine:
 
@@ -62,6 +64,14 @@ XTM Composer adds `manager.image_tag_suffix` to the tag of every integration ima
 - With a private registry, the suffix goes after the tag: `registry.example.com/opencti/connector-mitre:6.9.0-fips`.
 
 Every integration you deploy needs an image with that tag. OpenAEV publishes no FIPS images, as [Install offline or with FIPS 140-3](/deploy/install/air-gapped/) says. When the image cannot be pulled, XTM Composer deploys nothing and logs the reason on the integration in the platform: see [Troubleshoot XTM Composer](/deploy/integrations/troubleshoot/). An empty value turns the suffix off, in the FIPS image too: `MANAGER__IMAGE_TAG_SUFFIX=""`.
+
+### Follow new images on a moving tag
+
+An integration whose image has the tag `latest`, `rolling` or no tag runs whatever image its publisher pushed last under that tag. The suffix does not count: `rolling-fips` moves too. The OpenAEV catalog names every image on `rolling`; the OpenCTI catalog names a version, which never moves.
+
+For a running integration on a moving tag, XTM Composer asks the registry which image the tag points to: at once, then every `manager.image_update_interval` seconds. When it changed, XTM Composer redeploys the integration on the new image; when that image cannot be pulled, the integration keeps running the previous one. xtm-docker sets neither key, so it looks up every 10 minutes and reports no image.
+
+XTM Composer sends these requests itself, not through the container engine. Its container or pod needs HTTPS access to the registry: `registry-1.docker.io` and `auth.docker.io` for Docker Hub, or the registry of `daemon.registry` with its credentials. A registry served over plain HTTP cannot be looked up. The requests follow the `HTTPS_PROXY` and `NO_PROXY` variables of the XTM Composer process, not the proxy keys of the platforms. When XTM Composer cannot reach the registry, set `MANAGER__IMAGE_UPDATE_INTERVAL=0`: XTM Composer then stops looking for new images. See [when the tag points to a new image](/deploy/integrations/architecture/#when-the-tag-points-to-a-new-image).
 
 Keep `manager.logger.directory` and `manager.logger.console` at their default, `true`: XTM Composer then writes its logs to its standard output and to daily files in a `logs` folder next to its executable.
 

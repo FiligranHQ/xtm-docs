@@ -6,7 +6,7 @@ products:
   - suite
 personas: [platform-engineer]
 owner: docs-platform
-last_reviewed: 2026-10-31
+last_reviewed: 2026-11-27
 sidebar_position: 6
 ---
 
@@ -122,7 +122,8 @@ To publish the platforms over TLS behind a reverse proxy, set the scheme to `htt
 | OpenAEV | Your mail server | `SMTP_HOST` and `SMTP_PORT` |
 | OpenAEV | Your IMAP server, when `OPENAEV_MAIL_IMAP_ENABLED=true` | `IMAP_HOST` and `IMAP_PORT`, `993` in `.env.sample` |
 | Docker on the host | Docker Hub, and `docker.elastic.co` for Elasticsearch, to download the images | The `image` of each service |
-| XTM Composer | The registry of each integration image it deploys | See [Pull integrations from a private registry](/deploy/integrations/private-registry/) |
+| Docker on the host, asked by XTM Composer | The registry of each integration image XTM Composer deploys, to pull it | See [Pull integrations from a private registry](/deploy/integrations/private-registry/) |
+| XTM Composer, from its own container | The registry of each integration on a moving tag (`latest`, `rolling` or no tag), over HTTPS: `registry-1.docker.io` and `auth.docker.io` for Docker Hub. For each running integration, as soon as it sees it and then every 600 seconds, it reads which image the tag points to, and redeploys the integration when that image changed. A registry served over plain HTTP cannot be read this way | `MANAGER__IMAGE_UPDATE_INTERVAL`, `600` by default, which xtm-docker does not set. `0` turns these requests off. Behind a proxy, `HTTPS_PROXY` and `NO_PROXY` of the `xtm-composer` container apply: see [Reach the registry](/deploy/integrations/proxy/#reach-the-registry) |
 | OpenCRQ | The public CVE sources: `services.nvd.nist.gov` (NIST NVD), `cveawg.mitre.org` (the CVE records of MITRE, which the NIST NVD sync reads for the vendor's remediation), `api.first.org` (FIRST EPSS) and `www.cisa.gov` (CISA KEV). A blocked `cveawg.mitre.org` fails no run: the CVEs only get no vendor remediation | A tenant administrator, who turns each source on in **Integrations**: see [How CVE sources weigh your vulnerabilities](/opencrq/use/sources/vulnerability-sources/#turn-them-on) |
 | OpenCRQ | `raw.githubusercontent.com`, for the default threats it loads | `CONNECTORS__DEFAULT_THREATS__DATASET_URL` points it to a mirror, or, empty, turns the default threats off. See the [OpenCRQ configuration](/reference/opencrq/configuration/#connectors) |
 | OpenCRQ | `telemetry.ocrq.filigran.io`, for the anonymous usage telemetry | On by default. `TELEMETRY__USAGE__ENABLED=false` on the `opencrq` service turns it off |

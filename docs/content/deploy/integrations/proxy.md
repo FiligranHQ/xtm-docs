@@ -8,13 +8,13 @@ products:
   - openaev
 personas: [platform-engineer]
 owner: docs-platform
-last_reviewed: 2026-10-31
+last_reviewed: 2026-11-27
 migrated_from:
   - opencti:/deployment/integration-manager/proxy-configuration/
   - openaev:/deployment/ecosystem/integration-manager/proxy-configuration/
 ---
 
-This page sends XTM Composer and the integrations it deploys through your proxy. The settings belong to each platform block, `opencti` or `openaev`, so OpenCTI and OpenAEV integrations can use different proxies. Install XTM Composer first: see [Install XTM Composer](/deploy/integrations/install-composer/).
+This page sends XTM Composer and the integrations it deploys through your proxy. The settings belong to each platform block, `opencti` or `openaev`, so OpenCTI and OpenAEV integrations can use different proxies. The requests of XTM Composer to the image registry follow the proxy variables of its own environment instead: see [Reach the registry](#reach-the-registry). Install XTM Composer first: see [Install XTM Composer](/deploy/integrations/install-composer/).
 
 ::diagram{id=deploy-integrations-proxy}
 
@@ -42,9 +42,9 @@ This page sends XTM Composer and the integrations it deploys through your proxy.
 
 | Key | Environment variable | Default | Effect |
 | --- | --- | --- | --- |
-| `opencti.with_proxy` | `OPENCTI__WITH_PROXY` | `false` | `true` turns the proxy on for this platform. With `false`, XTM Composer ignores every proxy, including the `HTTP_PROXY` variables of its own environment |
-| `opencti.http_proxy` | `OPENCTI__HTTP_PROXY` | | The proxy for HTTP. Without it, XTM Composer uses `HTTP_PROXY` from its own environment |
-| `opencti.https_proxy` | `OPENCTI__HTTPS_PROXY` | | The proxy for HTTPS. Without it, XTM Composer uses `HTTPS_PROXY` from its own environment |
+| `opencti.with_proxy` | `OPENCTI__WITH_PROXY` | `false` | `true` turns the proxy on for this platform. With `false`, XTM Composer reaches the platform without a proxy and adds no proxy variable to its integrations, not even the `HTTP_PROXY` variables of its own environment. OpenCTI still gives its integrations the proxy of its own configuration, when it has one: see [Trust your certificate authority and proxy](/deploy/configure/certificates/) |
+| `opencti.http_proxy` | `OPENCTI__HTTP_PROXY` | | The proxy for HTTP. Without it, the integrations get `HTTP_PROXY` from the environment of XTM Composer, and so do its own requests to the platform unless `https_proxy` is set |
+| `opencti.https_proxy` | `OPENCTI__HTTPS_PROXY` | | The proxy for HTTPS. Without it, the integrations get `HTTPS_PROXY` from the environment of XTM Composer, and so do its own requests to the platform unless `http_proxy` is set |
 | `opencti.no_proxy` | `OPENCTI__NO_PROXY` | | Comma-separated hosts, domains or CIDR ranges reached without the proxy, such as `opencti,.example.com,10.0.0.0/8`. Without it, `NO_PROXY` from the environment of XTM Composer. It applies to the integrations and to the requests of XTM Composer to the platform |
 
 With the proxy on, XTM Composer sends its own requests to the platform through it, except to the hosts of `no_proxy`, and gives each integration container `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY`. When you set `no_proxy` but neither `http_proxy` nor `https_proxy`, XTM Composer takes the proxy for its own requests from `HTTP_PROXY` and `HTTPS_PROXY` of its environment, else from `ALL_PROXY`.
@@ -67,13 +67,15 @@ A proxy that decrypts HTTPS presents certificates signed by its own authority. G
    OPENCTI__HTTPS_PROXY_CA=["/certs/proxy-ca.pem"]
    ```
 
-2. On Docker, Podman, Docker Swarm or Portainer, let the container engine see the bundle XTM Composer writes. XTM Composer writes the certificates to `/tmp/xtm-composer-proxy-ca/` and asks the engine to mount that file in each integration. The engine looks for it on the host, so when XTM Composer runs in a container, mount the same host folder at the same path:
+2. On Docker, Podman, Docker Swarm or Portainer, let the container engine see the bundle XTM Composer writes. XTM Composer writes the certificates to `/tmp/xtm-composer-proxy-ca/` and asks the engine to mount that file in each integration. The engine looks for it on the host that runs the integration, so when XTM Composer runs in a container, mount the same host folder at the same path:
 
    ```text
    -v /tmp/xtm-composer-proxy-ca:/tmp/xtm-composer-proxy-ca
    ```
 
-   On Kubernetes, nothing to add: XTM Composer puts the bundle in a Secret named after the integration's Deployment, `<deployment>-proxy-ca` cut to 63 characters, and mounts it from there. From XTM Composer 3.261121.0, when the integration's name is not a valid Kubernetes name, such as one longer than 63 characters, the Deployment name ends with 8 characters of a hash, and so does the Secret: see the naming rule in [XTM Composer architecture](/deploy/integrations/architecture/).
+   On Docker Swarm with several nodes, or with Portainer on another host, the file must also exist at that path on the host of each integration: share the folder, or keep the integrations on the host of XTM Composer.
+
+   On Kubernetes, nothing to add: XTM Composer puts the bundle in a Secret named after the integration's Deployment, `<deployment>-proxy-ca` cut to 63 characters, and mounts it from there. From XTM Composer 3.261121.0, when the integration's name is not a valid Kubernetes name, such as one longer than 63 characters, the Deployment name ends with 8 characters of a hash. The Secret stays `<deployment>-proxy-ca` cut to 63 characters: for a name longer than 63 characters, it has the name of the Deployment. See the naming rule in [XTM Composer architecture](/deploy/integrations/architecture/).
 
 3. Restart XTM Composer, then recreate the integrations as in the previous procedure.
 :::
@@ -84,13 +86,36 @@ Each integration then finds the bundle at `/etc/ssl/certs/xtm-proxy-ca.crt`, and
 These settings are only for the proxy. The certificate of the platform itself is configured on the platform: see [Trust your certificate authority and proxy](/deploy/configure/certificates/). To make XTM Composer accept an invalid platform certificate while you test, set `OPENCTI__UNSECURED_CERTIFICATE=true`.
 :::
 
+## Reach the registry
+
+From XTM Composer 3.261127.0, XTM Composer itself asks the image registry which image a moving tag (`latest`, `rolling` or no tag) points to, and redeploys the integrations on that tag when it changes. The OpenAEV catalog deploys its integrations on `rolling`. See [Follow new images in your registry](/deploy/integrations/private-registry/#follow-new-images-in-your-registry).
+
+These requests do not use the settings of the platform blocks: `with_proxy`, `http_proxy`, `https_proxy`, `no_proxy`, `https_proxy_ca` and `unsecured_certificate` apply only to the requests to the platform and to the integrations. The requests to the registry go through the proxy of the `HTTPS_PROXY` variable of the environment of XTM Composer, except to the hosts of its `NO_PROXY` variable. They trust the certificate authorities of the system XTM Composer runs on.
+
+:::steps
+1. Add the proxy variables to the environment of XTM Composer, next to those of the platform blocks.
+
+   ```text
+   HTTPS_PROXY=http://proxy.example.com:8080
+   NO_PROXY=localhost,127.0.0.1,opencti,openaev,rabbitmq
+   ```
+
+   For images from Docker Hub, the proxy must let through `registry-1.docker.io` and `auth.docker.io`. For your own registry, its host: see [Pull integrations from a private registry](/deploy/integrations/private-registry/).
+
+2. Restart XTM Composer.
+:::
+
+A proxy that intercepts TLS breaks these requests unless the system of XTM Composer trusts its authority: `https_proxy_ca` does not apply to them. When a request fails, the integration keeps running on its image, and XTM Composer logs the warning `Cannot read the digest of the workload image in its registry, the running workload is kept`, with the error. To stop these requests, set `MANAGER__IMAGE_UPDATE_INTERVAL=0`: XTM Composer then no longer redeploys an integration because its tag moved.
+
 ## Check that it works
 
-Check the proxy XTM Composer uses for its own requests, in its logs at start:
+Check the proxy XTM Composer uses for its own requests, in its logs at start. From the xtm-docker folder:
 
 ```bash
-docker logs xtm-composer 2>&1 | grep -E 'Using HTTPS? proxy'
+docker compose logs xtm-composer 2>&1 | grep -E 'Using HTTPS? proxy'
 ```
+
+Elsewhere, use the name of the XTM Composer container.
 
 :::verify
 A line `Using HTTP proxy` or `Using HTTPS proxy` per platform, with its `no_proxy` list and its `source`: `explicit` for the URL of the platform block, `environment` for a URL read from the environment. When the block sets no proxy URL and no `no_proxy`, XTM Composer uses the proxy variables of its environment and logs no such line.

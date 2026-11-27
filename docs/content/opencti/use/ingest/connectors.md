@@ -29,7 +29,7 @@ Connectors bring intelligence into OpenCTI from vendors, open source projects an
 **Create knowledge via Form Intake** also shows the forms and lets you fill them in, without **Create / Update knowledge**.
 :::
 
-Without XTM Composer, a banner says that deploying requires the **Integration Manager**, and the deployment form is read-only. Without an Enterprise Edition license, **Deploy** carries the Enterprise Edition badge.
+With an Enterprise Edition license but no XTM Composer registered, a banner, which you can dismiss, says that deploying requires the **Integration Manager**, and the deployment form is read-only. Without an Enterprise Edition license, **Deploy** carries the Enterprise Edition badge.
 
 ## What each kind of connector does
 
@@ -92,9 +92,9 @@ A connector that XTM Composer cannot deploy can still run: an administrator star
 
 :::steps
 
-1. On the connector's card or page, click **Deploy**. For a community connector, **Deploy a Community Connector** first asks you to acknowledge that Filigran does not support it.
+1. On the connector's card or page, click **Deploy**. For a community connector, clicking **Create** at the end of the form opens **Deploy a Community Connector**, which asks you to acknowledge that Filigran does not support it.
 2. In **Deploy a new connector**, enter a **Display name** that says what the connector brings, such as the source and its scope. The **Instance name** follows from it.
-3. Choose the account the connector writes as. Keep **Automatically create a service account** to get a new account named after the connector, with the prefix `[C]`, and set its confidence level: the form proposes the level the catalog recommends for this connector. Otherwise, choose an existing account in **Service account responsible for data creation**.
+3. Choose the account the connector writes as. Keep **Automatically create a service account** to get a new account named after the connector, with the prefix `[C]`. Its confidence level is the one the catalog recommends for this connector; turn on **Edit confidence level** to change it. Otherwise, choose an existing account in **Service account responsible for data creation**.
 4. Fill in the required options under **Configuration**, such as an API key. Open **Advanced options** for the others, such as how often the connector runs or the date from which it imports.
 5. Click **Create**. The connector is created stopped.
 6. Open it from the **Deployed** tab and click **Start**.
@@ -163,7 +163,7 @@ The health shows in three places:
 
 ::screenshot{id=opencti-ingest-connectors-health alt="On the page of the Hospitality threat feed connector, a red banner says the connector is not working, with No heartbeat received, and an orange one says it is degraded, with User is not a service account."}
 
-When a health stays critical, degraded or back to normal for 5 minutes, the platform records an `ingestion_health` event in the activity log. An administrator can receive these events by email through an [activity trigger](/opencti/configure/activity/triggers/) that uses the **Ingestion health default mailer** notifier. The [ingestion health manager](/opencti/concepts/architecture/#the-ingestion-health-manager) explains how the checks run.
+When a health stays critical, degraded or back to normal for the notification delay, 5 minutes by default and editable in the ingestion health settings, the platform records an `ingestion_health` event in the activity log. An administrator can receive these events by email through an [activity trigger](/opencti/configure/activity/triggers/) that uses the **Ingestion health default mailer** notifier. The [ingestion health manager](/opencti/concepts/architecture/#the-ingestion-health-manager) explains how the checks run.
 
 :::example[Find why the hospitality feed went quiet]
 On Monday morning, your analysts notice that no new report on the hospitality sector arrived over the weekend.
@@ -236,7 +236,12 @@ A work that never ends usually means the connector stopped in the middle of a ru
 
 ### Logs
 
-A connector deployed with XTM Composer also has a **Logs** tab with its recent output. Other connectors write their logs where they run: ask the administrator who runs them.
+A connector deployed with XTM Composer also has a **Logs** tab with its recent output: the last 100 lines of its container. Other connectors write their logs where they run: ask the administrator who runs them.
+
+XTM Composer adds its own lines, which start with `[XTM Composer]`, so that a crash stays visible after the connector restarts:
+
+- When the container restarted, or ended with an error, a line at the end says how the previous run ended, such as `[XTM Composer] The previous container ended: reason OOMKilled, exit code 137, at 2026-01-12T03:14:08Z`. `OOMKilled` means the connector ran out of memory: ask the administrator to give it more. On Docker, Podman and Portainer, the line shows only while the container is not running; on Docker Swarm, never.
+- On Kubernetes, when the pod was replaced, for example after you update its options, the tab first shows up to 50 lines of the previous pod, under `[XTM Composer] Last lines of the previous pod:`, then those of the current one, under `[XTM Composer] Logs of the current pod:`. XTM Composer keeps these lines in memory: after it restarts, the tab shows the current pod only. When the container restarted inside its pod, the lines come from its previous run, under `container`. On Docker and Podman, a container XTM Composer recreates starts without them; Docker Swarm and Portainer never show them.
 
 ## Act on a connector
 
@@ -248,7 +253,7 @@ Open the connector page. A connector deployed with XTM Composer has a **Start** 
 | **Update** | Opens **Update a connector**, to change its **Display name** and its options. The change takes a few minutes to apply | Connectors deployed with XTM Composer |
 | **Reset the connector state** | Forgets the state, so the connector imports again from its start date, and purges its queue. The confirmation shows the number of messages that will be lost | All connectors |
 | **Clear all works** | Removes the history of imports from the works. The imported data stays | All connectors |
-| **Delete** | Removes the connector from the platform. A connector deployed with XTM Composer must be stopped first | All but built-in connectors |
+| **Delete** | Removes the connector from the platform. A connector deployed with XTM Composer must be stopped first; one run by hand, once it no longer reports | All but built-in connectors |
 
 **Delete** on a single work removes that work from the list, not its data.
 
@@ -285,7 +290,7 @@ Two platform settings shape how connectors run. An administrator sets them in th
 
 | Setting | Effect | Default |
 | --- | --- | --- |
-| `app:composer_token_expiration` (`APP__COMPOSER_TOKEN_EXPIRATION`) | How long, in seconds, the API token of a connector deployed with XTM Composer stays valid between two reads of the connector's configuration by XTM Composer. Each read renews it. When it lapses, the platform revokes the token, named **Composer managed token** on the connector's account, and issues a new one at the next read | `604800` (7 days) |
+| `app:composer_token_expiration` (`APP__COMPOSER_TOKEN_EXPIRATION`) | How long, in seconds, the API token of a connector deployed with XTM Composer stays valid between two reads of the connector's configuration by XTM Composer. Each read renews it. At the first read after it lapsed, the platform revokes the token, named **Composer managed token** on the connector's account, and issues a new one | `604800` (7 days) |
 | `app:task_scheduler:max_queues_breakdown` (`APP__TASK_SCHEDULER__MAX_QUEUES_BREAKDOWN`) | Number of queues that background tasks, such as bulk edits from a list, are spread over for the workers | `4` |
 
 The other settings of the queues and workers are in the [engines, schedules and managers settings](/reference/opencti/configuration/#engines-schedules-and-managers), and those of XTM Composer in the [XTM Suite settings](/reference/opencti/configuration/#xtm-suite).

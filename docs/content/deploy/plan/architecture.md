@@ -6,7 +6,7 @@ products:
   - suite
 personas: [platform-engineer, evaluator]
 owner: docs-platform
-last_reviewed: 2026-10-31
+last_reviewed: 2026-11-27
 sidebar_position: 1
 migrated_from:
   - opencti:/deployment/overview/
@@ -43,7 +43,7 @@ The cyber risk quantification platform, as the `opencrq` service. Its image is `
 
 ### XTM Composer
 
-XTM Composer deploys and runs integrations from the interface of OpenCTI and OpenAEV. It manages the integrations of both platforms, and starts once they are healthy. It starts integration containers through the Docker socket of the host, on the network of the stack. Before it starts, the `rsa-key-generator` job creates the RSA key it encrypts the integrations' configurations with. See [XTM Composer](/deploy/integrations/composer/).
+XTM Composer deploys and runs integrations from the interface of OpenCTI and OpenAEV. It manages the integrations of both platforms, and starts once they are healthy. It starts integration containers through the Docker socket of the host, on the network of the stack. For an integration on a moving tag (`latest`, `rolling` or no tag), it asks the registry which image the tag points to, every 10 minutes by default, and redeploys the integration on a new image. Before it starts, the `rsa-key-generator` job creates its RSA private key: XTM Composer gives the public key to OpenCTI and OpenAEV, which encrypt the secrets of the integrations with it, and decrypts them before it starts a container. See [XTM Composer](/deploy/integrations/composer/).
 
 ## The shared services
 
@@ -72,7 +72,7 @@ One instance of each service is enough because each module keeps to its own data
 
 Two rules surprise people:
 
-- XTM Composer uses no shared service. It talks to the APIs of OpenCTI and OpenAEV, and to Docker.
+- XTM Composer uses no shared service. It talks to the APIs of OpenCTI and OpenAEV, to Docker, and over HTTPS to the registry of each integration on a moving tag, such as the `rolling` images of the OpenAEV catalog.
 - By default, OpenCTI connectors and OpenAEV injectors connect to RabbitMQ, although nothing in their configuration names it. They use the connection details their platform gives them when they register, so they must be able to reach RabbitMQ under the host name the platform knows it by.
 
 ## How the modules connect

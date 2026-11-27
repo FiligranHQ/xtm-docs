@@ -14,7 +14,7 @@ migrated_from:
   - xtm-one:/deployment/installation/
 ---
 
-This page installs the XTM stack for production on one host with the official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker). At the end, the whole stack, XTM One, OpenCTI, OpenAEV, OpenCRQ, XTM Composer and their default integrations, runs with strong secrets, the public addresses of your users, data kept in Docker volumes and versions that change only when you decide. Every install of the XTM platform runs all its modules together: there is no install of one module on its own. To try the platform first, follow [Run the XTM platform locally](/deploy/quick-start/): it uses the same files with fewer steps.
+This page installs the XTM stack for production on one host with the official Docker deployment, [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker). At the end, the whole stack, XTM One, OpenCTI, OpenAEV, OpenCRQ, XTM Composer and their default integrations, runs with strong secrets, the public addresses of your users, data kept in Docker volumes and versions that change only when you decide. Every install from xtm-docker runs all the modules together: it has no setting that leaves one out. To try the platform first, follow [Run the XTM platform locally](/deploy/quick-start/): it uses the same files with fewer steps.
 
 ::diagram{id=deploy-install-docker-compose}
 
@@ -47,7 +47,7 @@ This page installs the XTM stack for production on one host with the official Do
    It prints `vm.max_map_count = 262144`.
    :::
 
-2. Make Docker start with the host. Every service of the stack has `restart: always`, except `xtm-one-db-init`, which runs once at each start, so the stack comes back when Docker does.
+2. Make Docker start with the host. Every service of the stack has `restart: always`, except the three setup jobs `xtm-one-db-init`, `opencrq-db-init` and `opencrq-bucket-init`, which run once at each start, so the stack comes back when Docker does.
 
    ```bash
    sudo systemctl enable --now docker
@@ -65,7 +65,7 @@ This page installs the XTM stack for production on one host with the official Do
 
 `docker-compose.yml` includes one file per shared service, under `infra/`, and one file per module, under `modules/`: `xtm-one.yml`, `opencti.yml`, `openaev.yml`, `opencrq.yml` and `xtm-composer.yml`. Every service they list starts, and XTM Composer manages both OpenCTI and OpenAEV.
 
-All the configuration is in `.env`, except the ports, the image versions and the number of workers, which these Compose files set. Change those in `docker-compose.override.yml`, never in the files of xtm-docker: see [Change the stack without editing docker-compose.yml](#change-the-stack-without-editing-docker-compose-yml).
+The secrets, addresses, mail and memory settings are in `.env`. The Compose files set the rest: the ports, the image versions, the number of workers, and every other setting of the services, such as the log level of OpenCTI or the settings of the connectors. Change those in `docker-compose.override.yml`, never in the files of xtm-docker: see [Change the stack without editing docker-compose.yml](#change-the-stack-without-editing-docker-compose-yml).
 
 :::steps
 1. Create `.env` with fresh secrets.
@@ -74,7 +74,7 @@ All the configuration is in `.env`, except the ports, the image versions and the
    docker compose -f init.yml run --rm init
    ```
 
-   A temporary container copies `.env.sample` and gives every password, key and token a random value: a UUID for the admin tokens and health check keys, a 32-byte base64 key for `OPENCTI_ENCRYPTION_KEY`, and a random string for the others. It names the users of PostgreSQL and RabbitMQ, sends mail to `localhost` until step 3, makes `.env` readable by its owner alone, and never overwrites an existing `.env`. It prints the admin password of each platform.
+   A temporary container copies `.env.sample` and gives the passwords, keys and admin tokens of the stack a random value: a UUID for the admin tokens and health check keys, a 32-byte base64 key for `OPENCTI_ENCRYPTION_KEY`, and a random string for the others. It leaves the mail passwords, the tokens of the export connectors and the NVD API key empty. It names the users of PostgreSQL and RabbitMQ, sends mail to `localhost` until step 3, makes `.env` readable by its owner alone, and never overwrites an existing `.env`. It prints the admin password of each platform.
 
    `.env` now holds every secret of the stack, including the encryption keys of OpenCTI and OpenAEV. Keep a copy in your secret store: you need the same values to restore the stack.
 
@@ -307,7 +307,7 @@ Every image ends with the version you set.
 
 ## Where the data is
 
-The data of the stack lives in Docker volumes, named after `COMPOSE_PROJECT_NAME` (`xtm` in `.env.sample`). They survive `docker compose down` and a restart of the host, and only `docker compose down -v` deletes them.
+The data of the stack lives in Docker volumes, named after `COMPOSE_PROJECT_NAME` (`xtm` in `.env.sample`). They survive `docker compose down` and a restart of the host. `docker compose down -v` deletes them, and so do `docker volume rm` and `docker volume prune --all` while the stack is down.
 
 | Volume | Holds |
 | --- | --- |

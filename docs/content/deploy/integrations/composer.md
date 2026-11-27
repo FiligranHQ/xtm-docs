@@ -8,7 +8,7 @@ products:
   - openaev
 personas: [platform-engineer, admin]
 owner: docs-platform
-last_reviewed: 2026-11-21
+last_reviewed: 2026-11-27
 edition: ee
 migrated_from:
   - opencti:/deployment/integration-manager/
@@ -26,17 +26,20 @@ In the interface of both platforms, XTM Composer appears as the **Integration Ma
 | Platform | What XTM Composer deploys | Where you deploy from |
 | --- | --- | --- |
 | OpenCTI | Connectors | :menu[Integrations], **Available** tab (:menu[Data > Ingestion > Connector catalog] before 7.260811) |
-| OpenAEV | External collectors, injectors and executors | **Integrations** > **Catalog** |
+| OpenAEV | External collectors, injectors and executors | **Integrations**, **Available** tab |
 
 One XTM Composer can serve OpenCTI, OpenAEV or both: each platform has its own block in its configuration (`opencti` and `openaev`), switched on or off with `enable`. The integrations built into a platform, such as the email injector of OpenAEV, do not need it. See [How integrations run](/deploy/integrations/how-they-run/).
 
 XTM Composer runs the image the catalog names for each integration. To run the FIPS 140-3 or Red Hat Universal Base Image 9 builds of the integrations instead, `manager.image_tag_suffix` adds `-fips` or `-ubi9` to the tag of every image it deploys. The FIPS image of XTM Composer sets `-fips`. See [Configure XTM Composer](/deploy/integrations/configure-composer/).
+
+An image on a moving tag (`latest`, `rolling` or no tag) changes when its publisher pushes a new build. XTM Composer checks the registry every 10 minutes by default and redeploys the integration when its tag points to a new image. The OpenAEV catalog names every image on `rolling`, so OpenAEV integrations stay current. The OpenCTI catalog names a version, so OpenCTI connectors stay on it. See [when the tag points to a new image](/deploy/integrations/architecture/#when-the-tag-points-to-a-new-image).
 
 ## What it needs
 
 - An **Enterprise Edition** license on the platform. Without it, the catalog is read-only. You can enter the license from the **Deploy** action of a catalog card, from the detail view of an integration, or from the platform settings.
 - OpenCTI 6.8.17 or later. Every OpenCTI version documented here qualifies.
 - A container engine XTM Composer can drive: Docker, Podman, Kubernetes, Docker Swarm, or Docker environments in Portainer.
+- For integrations on a moving tag, HTTPS access from XTM Composer itself to their registry, not only from the container engine. For Docker Hub, that is `registry-1.docker.io` and `auth.docker.io`.
 - A 4096-bit RSA private key, which XTM Composer keeps and whose public key it gives to the platform. The platform encrypts the secrets of each integration with it.
 - An API token for each platform it serves.
 
@@ -65,13 +68,13 @@ OpenCTI refuses an instance name or a service account name that is already used 
 ::::
 ::::tab[OpenAEV]
 :::steps
-1. Open **Integrations** > **Catalog** and find the collector, injector or executor.
-2. Click **Deploy** and fill the form: a unique **Instance name**, the log level and the settings of the integration. **Advanced options** shows the optional ones.
+1. Open **Integrations**, **Available** tab, and find the collector, injector or executor.
+2. Click **Deploy** and fill the form: a **Display name**, pre-filled with the title of the integration, the log level and the settings of the integration. **Advanced options** shows the optional ones.
 3. Click **Create**. OpenAEV opens the new instance. It is not started yet.
 4. Click **Start**. The **Logs** tab shows what the integration writes.
 :::
 
-The deployed instances are listed in **Integrations** > **Collectors**, **Injectors** and **Executors**.
+The deployed instances are listed in **Integrations**, **Deployed** tab.
 ::::
 :::::
 
@@ -80,6 +83,7 @@ The deployed instances are listed in **Integrations** > **Collectors**, **Inject
 - Only the instances XTM Composer manages can be started and stopped from the interface, and only they show their logs there.
 - You can update the configuration of a managed instance with **Update**. XTM Composer applies it within a few seconds by recreating the container, or by updating the Deployment on Kubernetes.
 - When the image of an integration cannot be pulled, XTM Composer deploys nothing, or keeps the container that runs with its previous configuration, and says so in the **Logs** tab: `[XTM Composer] Connector not deployed` or `[XTM Composer] Connector not updated, the previous deployment is kept`, with the image and the error. It tries again at each pass. See [Troubleshoot XTM Composer](/deploy/integrations/troubleshoot/).
+- When the container of an instance crashed or restarted, the **Logs** tab ends with how it ended, such as `[XTM Composer] The previous container ended: reason OOMKilled, exit code 137, at 2026-11-26T10:00:00Z`. On Kubernetes, the tab also keeps the last lines of the previous container or pod. See [what the logs show](/deploy/integrations/architecture/#what-the-logs-show).
 - On Kubernetes and Docker Swarm, the Deployment or the service of an instance takes a name of 63 characters at most. An instance name that is longer, frequent in OpenAEV, or holds accented letters is converted and ends with 8 characters of a hash. See [how XTM Composer names containers](/deploy/integrations/architecture/#how-it-marks-its-containers).
 - Secrets such as API keys are encrypted when you save them and never shown again.
 - An integration you deployed by hand can be taken over by XTM Composer: see [Migrate to XTM Composer](/deploy/integrations/migrate/).

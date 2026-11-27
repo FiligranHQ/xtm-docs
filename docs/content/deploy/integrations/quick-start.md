@@ -60,16 +60,16 @@ It uses [FiligranHQ/xtm-docker](https://github.com/FiligranHQ/xtm-docker), where
    ```
 
    :::verify
-   One line says `Successfully loaded RSA private key (PKCS#8 format)`, and one `Manager registered` line appears for each platform, OpenCTI and OpenAEV. Registration is retried every minute: if a line is missing, wait a minute and run the command again, then see [Troubleshoot XTM Composer](/deploy/integrations/troubleshoot/).
+   One line says `Successfully loaded RSA private key (PKCS#8 format)`, and one `Manager registered` line appears for each platform, OpenCTI and OpenAEV. While a platform does not answer, XTM Composer tries again every minute: if a line is missing, wait a minute and run the command again, then see [Troubleshoot XTM Composer](/deploy/integrations/troubleshoot/).
    :::
 ::::
 
 ## Step 3: Check the platforms see it
 
-Sign in to each platform and open its catalog: :menu[Integrations], **Available** tab (:menu[Data > Ingestion > Connector catalog] before 7.260811) in OpenCTI, **Integrations** > **Catalog** in OpenAEV.
+Sign in to each platform and open its catalog: :menu[Integrations], **Available** tab (:menu[Data > Ingestion > Connector catalog] before 7.260811) in OpenCTI; in OpenAEV, **Integrations** in the administration menu, **Available** tab.
 
 :::verify
-The catalog no longer says that deploying requires the installation of the Integration Manager. If it says that deployment requires an Enterprise Edition license, enter your license first.
+The catalog no longer says that deploying requires the installation of the Integration Manager. If the **Deploy** button carries an Enterprise Edition chip, enter your license first: without it the platform shows no warning about XTM Composer either.
 :::
 
 ## Step 4: Deploy a first integration
@@ -78,11 +78,11 @@ The catalog no longer says that deploying requires the installation of the Integ
 1. In the catalog, click **Deploy** on an integration whose settings you have, for example one that needs no API key.
 2. Fill the form and click **Create**. The instance opens, stopped.
    - In OpenCTI: a **Display name**, from which OpenCTI derives the **Instance name**, and the account the connector writes as, with **Automatically create a service account** or an existing **Service account responsible for data creation**.
-   - In OpenAEV: a unique **Instance name**.
+   - In OpenAEV: a **Display name**; the **Instance name** shows the integration's catalog name and cannot be changed.
 3. Click **Start**.
 
    :::verify
-   On the host, XTM Composer has created a container for the instance, named after the instance name in lower case, with the label `xtm-manager` it puts on every container it manages:
+   On the host, XTM Composer has created a container for the instance, named in lower case after the instance name in OpenCTI and after the integration's title and its ID in OpenAEV, with `-` for every character other than a letter or a digit, and with the label `xtm-manager` it puts on every container it manages:
 
    ```bash
    docker ps --filter label=xtm-manager --format '{{.Names}} {{.Status}}'

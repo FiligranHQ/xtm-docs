@@ -592,7 +592,7 @@ services:
 
 Each service carries its own provider settings, client certificate included: Redis reads none of the Elasticsearch ones. `ELASTICSEARCH__CREDENTIALS_PROVIDER__HTTPS_CERT__CA` and its Redis counterpart stay unset: `NODE_EXTRA_CA_CERTS` makes OpenCTI trust the internal CA that signed the provider's certificate. Redis takes its field targets from the variable without `CYBERARK`, which serves any provider; both forms work.
 
-At startup, the logs of `opencti` show `Remote credentials successfully fetched` once for the source `elasticsearch` and once for the source `redis`. When the provider cannot be reached, they show `Remote credentials data fail to fetch, fallback`. Then, as when the provider returns no secret, OpenCTI connects with the `ELASTICSEARCH__USERNAME` and `ELASTICSEARCH__PASSWORD` of its configuration, if any. The secrets of single sign-on providers use the same mechanism under another prefix: see [Authentication](/opencti/administer/authentications/).
+At startup, the logs of `opencti` show `Remote credentials successfully fetched` once for the source `elasticsearch`, and once per Redis connection for the source `redis`: at least five times at startup, more when the managers start. When the provider cannot be reached, they show `Remote credentials data fail to fetch, fallback`. Then, as when the provider returns no secret, OpenCTI connects with the `ELASTICSEARCH__USERNAME` and `ELASTICSEARCH__PASSWORD` of its configuration, if any. The secrets of single sign-on providers use the same mechanism under another prefix: see [Authentication](/opencti/administer/authentications/).
 
 ## Check that it works
 

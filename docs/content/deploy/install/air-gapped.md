@@ -78,7 +78,8 @@ Once the images are on the host, the stack starts from them. Some features read 
 | Feature | What it needs | Where to set it up |
 | --- | --- | --- |
 | Integrations deployed by XTM Composer | Pulls the image of each integration from a registry | [Pull integrations from a private registry](/deploy/integrations/private-registry/) |
-| Integrations that read public sources, such as the NVD CVE collector | Access to their source | [Run integrations behind a proxy](/deploy/integrations/proxy/) |
+| Integrations that read public sources, such as those xtm-docker starts with the stack: the MITRE ATT&CK and OpenCTI Datasets connectors, the MITRE ATT&CK, OpenAEV Datasets, Atomic Red Team and NVD CVE collectors | Access to their source | [Run integrations behind a proxy](/deploy/integrations/proxy/) |
+| The agents and AI features of XTM One | A language model, which the providers host on the internet | A model served on your network: [Connect a language model](/deploy/configure/xtm-one/#connect-a-language-model) |
 | AI document extraction in OpenCTI | The Import Document AI connector calls a service hosted by Filigran by default | [Extract intelligence from documents on premises](/deploy/configure/ai-extraction/) |
 | Certificates of internal services | Your internal certificate authority | [Trust your certificate authority and proxy](/deploy/configure/certificates/) |
 
@@ -100,7 +101,7 @@ The FIPS 140-3 images of OpenCTI are built on Alpine Linux with the OpenSSL FIPS
 2. Switch every OpenCTI image to its `-fips` tag in `docker-compose.override.yml`. The Import External Reference connector has no FIPS image and keeps its tag. Run this command again each time you run the pinning commands: they write the tags without `-fips`.
 
    ```bash
-   OPENCTI_VERSION=7.261030.1
+   OPENCTI_VERSION=7.261119.0
    sed -i.bak -E \
      -e "s#image: (opencti/[a-z0-9-]+):${OPENCTI_VERSION}\$#image: \1:${OPENCTI_VERSION}-fips#" \
      -e "s#(connector-import-external-reference):${OPENCTI_VERSION}-fips#\1:${OPENCTI_VERSION}#" \
@@ -118,7 +119,7 @@ The FIPS 140-3 images of OpenCTI are built on Alpine Linux with the OpenSSL FIPS
 
    ```yaml
      xtm-composer:
-       image: filigran/xtm-composer:3.261120.0-fips
+       image: filigran/xtm-composer:3.261127.0-fips
    ```
 
    The FIPS image of XTM Composer sets `manager.image_tag_suffix` (`MANAGER__IMAGE_TAG_SUFFIX`) to `-fips`: it adds `-fips` to the tag of every integration it deploys. `opencti/connector-mitre:7.261030.1` runs as `opencti/connector-mitre:7.261030.1-fips`, and an image without a tag as `latest-fips`. A tag that already ends with `-fips`, or an image pinned by digest, stays as it is. On a host without internet access, the registry XTM Composer pulls from must hold these `-fips` tags: see [Pull integrations from a private registry](/deploy/integrations/private-registry/).
@@ -127,7 +128,7 @@ The FIPS 140-3 images of OpenCTI are built on Alpine Linux with the OpenSSL FIPS
    ```bash
    docker compose config --images | grep xtm-composer
    ```
-   It prints `filigran/xtm-composer:3.261120.0-fips`. Once the stack runs, `docker compose logs xtm-composer | grep 'Starting XTM composer'` shows `fips` set to `true` and `image_tag_suffix` set to `-fips`.
+   It prints `filigran/xtm-composer:3.261127.0-fips`. Once the stack runs, `docker compose logs xtm-composer | grep 'Starting XTM composer'` shows `fips` set to `true` and `image_tag_suffix` set to `-fips`.
    :::
 
    :::warning[Integrations without a FIPS image]
@@ -157,7 +158,7 @@ The FIPS images cover OpenCTI. For a compliant stack, the shared services must u
 | RabbitMQ | No FIPS images, but [custom cipher suites](https://www.rabbitmq.com/docs/ssl#cipher-suites); since RabbitMQ 3.12.5, its Erlang build (26.1 and later) [supports FIPS mode on OpenSSL 3](https://www.rabbitmq.com/docs/which-erlang). Or use a Stunnel TLS endpoint. |
 | S3 object storage | Prefer an endpoint that is already validated, such as the [AWS S3 FIPS endpoints](https://aws.amazon.com/compliance/fips/). xtm-docker runs RustFS: check its builds against your FIPS requirements before you rely on them. The last MinIO FIPS images, on [Quay.io](https://quay.io/repository/minio/minio?tab=tags) with tags ending in `.fips`, are no longer maintained: check them against your requirements first. |
 
-The Elasticsearch of xtm-docker, 8.19.18, is in the FIPS 140-3 range, but runs with security off: enable FIPS mode as the Elastic guide describes.
+The Elasticsearch of xtm-docker, 8.19.23, is in the FIPS 140-3 range, but runs with security off: enable FIPS mode as the Elastic guide describes.
 
 :::tip[AWS native services]
 OpenCTI works with AWS native services, available in the [FedRAMP Moderate and FedRAMP High scopes](https://aws.amazon.com/compliance/services-in-scope/FedRAMP/): Amazon OpenSearch Service, Amazon ElastiCache for Redis, Amazon MQ for RabbitMQ and Amazon S3.

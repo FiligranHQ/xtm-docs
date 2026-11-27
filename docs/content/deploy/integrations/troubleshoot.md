@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot XTM Composer
-description: Find why XTM Composer does not start, does not register with OpenCTI or OpenAEV, or does not deploy an integration, from the messages it logs.
+description: Find why XTM Composer does not start, does not register with OpenCTI or OpenAEV, or does not deploy or update an integration, from the messages it logs.
 doc_type: how-to
 products:
   - composer
@@ -8,7 +8,7 @@ products:
   - openaev
 personas: [platform-engineer]
 owner: docs-platform
-last_reviewed: 2026-10-31
+last_reviewed: 2026-11-27
 migrated_from:
   - opencti:/deployment/integration-manager/troubleshooting/
   - openaev:/deployment/ecosystem/integration-manager/troubleshooting/
@@ -35,18 +35,20 @@ A healthy start logs, in this order:
 2. `Successfully loaded RSA private key (PKCS#8 format)`.
 3. `Manager registered`, once for each platform it serves.
 
-Then, every few seconds for each integration, `Nothing to execute` when all is in place, or the action it takes: `Deploying the container`, `Starting`, `Stopping`, `Refreshing`.
+Then, every few seconds for each integration, `Nothing to execute` when all is in place, or the action it takes: `Deploying the container`, `Starting`, `Stopping`, `Refreshing`. `New image pushed under the workload tag, redeploying` means that an integration on a moving tag gets the new image of its tag: see [An integration is not updated to the new image of its tag](#an-integration-is-not-updated-to-the-new-image-of-its-tag).
 
 ## XTM Composer stops at start
 
-When XTM Composer serves OpenAEV alone, the key messages of this table appear at its first registration instead of at start, and XTM Composer keeps running without registering.
+XTM Composer reads its key at start, whatever platform it serves: with a missing or invalid key, it writes one of these messages and stops.
+
+The messages `Invalid daemon configuration`, `Missing swarm configuration`, `Missing portainer configuration` and `Invalid portainer type configuration` stop the orchestration of the platform whose block is wrong: XTM Composer still registers with that platform but deploys nothing for it, and stops altogether only when no other platform is served.
 
 | Message | Cause | Fix |
 | --- | --- | --- |
 | `No credentials key provided!` | No key configured | Set `MANAGER__CREDENTIALS_KEY_FILEPATH` to the path of the key in the container, or `MANAGER__CREDENTIALS_KEY` |
 | `Failed to read credentials key file` | The file is not at that path | Check the volume that mounts the key and the path. In xtm-docker, the key is in the `rsakeys` volume, made by `rsa-key-generator` |
 | `Invalid private key format. Expected PKCS#8 PEM format` | The key is PKCS#1 (`BEGIN RSA PRIVATE KEY`), as older `openssl genrsa` versions write | Convert it, as below |
-| `Invalid daemon configuration` | `DAEMON__SELECTOR` has another value | Use `docker`, `podman`, `kubernetes`, `swarm` or `portainer` |
+| `Invalid daemon configuration` | `OPENCTI__DAEMON__SELECTOR` or `OPENAEV__DAEMON__SELECTOR` has another value | Use `docker`, `podman`, `kubernetes`, `swarm` or `portainer` |
 | `Missing swarm configuration`, `Missing portainer configuration` | The block of the selector is absent | Add the `daemon.swarm` or `daemon.portainer` block: see [Configure XTM Composer](/deploy/integrations/configure-composer/#the-container-engine) |
 | `Invalid portainer type configuration` | `daemon.portainer.env_type` is not `docker` | Set it to `docker`: XTM Composer deploys through Portainer on Docker environments only |
 | `Invalid log level`, `Invalid log format` | A logger value is misspelled | `trace`, `debug`, `info`, `warn` or `error`; `json` or `pretty` |
@@ -107,9 +109,12 @@ OpenAEV shows its own messages when you deploy from **Integrations** > **Catalog
 | `Kubernetes creation api error`, `Error creating swarm service` | The engine refused the workload, for the reason in the `error` field. XTM Composer 3.261120.0 and earlier named it after the instance as is, so the engine refused a name longer than 63 characters, as many OpenAEV integrations have | Upgrade XTM Composer to 3.261121.0 or later, which shortens such names. Otherwise, fix what the `error` field names |
 | `Cannot pull the workload image, deployment canceled` | The engine cannot pull the image in the `image` field, for the reason in the `error` field. XTM Composer deploys nothing and tries again at its next pass | See [The image cannot be pulled](#the-image-cannot-be-pulled) |
 | `Cannot pull the workload image, refresh canceled` | The same, after a change of the configuration of the integration. The previous container keeps running, with the previous configuration | See [The image cannot be pulled](#the-image-cannot-be-pulled). XTM Composer applies the change once the pull works |
-| `Error creating container` | Docker refused the container, for the reason in the `error` field, such as a network that does not exist | Set `DAEMON__DOCKER__NETWORK_MODE` to a network that `docker network ls` lists, such as `xtm_default` in xtm-docker |
+| `Cannot read the digest of the workload image in its registry, the running workload is kept` | XTM Composer cannot ask the registry which image the moving tag of the integration points to, for the reason in the `error` field. The integration keeps running its image | See [An integration is not updated to the new image of its tag](#an-integration-is-not-updated-to-the-new-image-of-its-tag) |
+| `Error creating container` | Docker refused the container, for the reason in the `error` field, such as a network that does not exist | Set `OPENCTI__DAEMON__DOCKER__NETWORK_MODE` or `OPENAEV__DAEMON__DOCKER__NETWORK_MODE` to a network that `docker network ls` lists, such as `xtm_default` in xtm-docker |
 | `Cannot query the Docker API` | XTM Composer cannot use the Docker socket | Mount `/var/run/docker.sock` in its container, and check that the Docker daemon runs |
-| `Portainer error fetching containers`, `Error deploying the container` (Portainer) | Portainer refused the request: wrong `api`, `api_key`, `env_id` or `api_version`. The `error` field gives the answer of Portainer | Test the same request from where XTM Composer runs, as below |
+| `Portainer error fetching containers` | XTM Composer cannot reach Portainer | Check `api` and the network, and test the same request from where XTM Composer runs, as below |
+| `Cannot pull the workload image, deployment canceled` (Portainer) | Portainer refuses the key or the environment ID, with its answer in the `error` field. XTM Composer then stops serving that platform until it restarts | Fix `api_key`, `env_id` or `api_version`, test the request as below, then restart XTM Composer |
+| `Error deploying the container` (Portainer) | Portainer refused the container. The `error` field gives the answer of Portainer | Fix what the `error` field names |
 | `No Podman API socket found` | No Podman socket exists at the paths it checks | Enable the socket, then mount it at `/run/podman/podman.sock`: see [Install XTM Composer](/deploy/integrations/install-composer/) |
 
 With the `portainer` selector, XTM Composer calls the Docker API that Portainer exposes for the environment, with the API key in the `X-API-KEY` header. It does not check the certificate of Portainer. Run the same call with the values of your `daemon.portainer` block:
@@ -138,7 +143,7 @@ Both commands answer `yes`. Otherwise, apply the role of [Install XTM Composer](
 With Docker, Podman, Docker Swarm and Portainer, XTM Composer pulls the image of the integration before it deploys or updates it. When the pull fails, it changes nothing, and writes the reason in the **Logs** tab of the integration in the platform:
 
 - `[XTM Composer] Connector not deployed: the image "<image>" cannot be pulled: <error>`: nothing runs. An integration the platform showed as started is set to stopped.
-- `[XTM Composer] Connector not updated, the previous deployment is kept: the image "<image>" cannot be pulled: <error>`: the previous container keeps running.
+- `[XTM Composer] Connector not updated, the previous deployment is kept: the image "<image>" cannot be pulled: <error>`: the previous container keeps running. Since XTM Composer 3.261127.0, this also happens when the moving tag of the integration points to a new image that cannot be pulled.
 
 XTM Composer 3.261021.1 and earlier logged `Error fetching container image` with Docker, and removed the running container before a failed update.
 
@@ -161,9 +166,28 @@ The usual causes:
 - The registry refuses the credentials, or XTM Composer pulls from Docker Hub when your images are in a private registry. Each platform pulls with the registry of its own block: since XTM Composer 3.261120.0, an OpenAEV integration on Kubernetes, Docker Swarm or Portainer no longer uses `OPENCTI__DAEMON__REGISTRY__*`. On Kubernetes, the pull secret is named after the server and the platform, such as `registry-example-com-openaev`. See [Pull integrations from a private registry](/deploy/integrations/private-registry/).
 - A proxy blocks the registry. See [Run integrations behind a proxy](/deploy/integrations/proxy/).
 
+### An integration is not updated to the new image of its tag
+
+Since XTM Composer 3.261127.0, an integration whose image is on a moving tag, `latest`, `rolling` or no tag, follows that tag. XTM Composer asks the registry which image the tag points to, at once and then every `MANAGER__IMAGE_UPDATE_INTERVAL` seconds, 600 by default. When the tag points to another image than the one that runs, XTM Composer pulls it, then redeploys the integration. It logs `New image pushed under the workload tag, redeploying`, and the **Logs** tab of the integration shows `[XTM Composer] Image updated: <old digest> -> <new digest>`. See [when the tag points to a new image](/deploy/integrations/architecture/#when-the-tag-points-to-a-new-image).
+
+When an integration keeps its image though a new one was pushed under its tag:
+
+- Its image is on a version, such as `opencti/connector-mitre:7.261030.1`, or on a `@sha256:` digest. XTM Composer never looks it up: the OpenCTI catalog gives images on a version, the OpenAEV catalog on `rolling`.
+- `MANAGER__IMAGE_UPDATE_INTERVAL` is `0`, which turns the lookups off.
+- The integration is not in a state to look it up. XTM Composer looks only while the integration runs, its configuration is applied, its last pull worked, every secret decrypts and the engine gives the digest of the running image.
+- XTM Composer logs `Cannot read the digest of the workload image in its registry, the running workload is kept`. XTM Composer itself sends the request, not the container engine: a `HEAD` on the manifest of the tag, over HTTPS, within 15 seconds for each request, so up to 45 seconds when the registry asks for a token. Its container or pod needs HTTPS access to the registry: `registry-1.docker.io` and `auth.docker.io` for Docker Hub, or the registry of `daemon.registry`, which must accept its credentials. A registry served over plain HTTP cannot be looked up. Behind a proxy, the request follows the `HTTPS_PROXY` and `NO_PROXY` variables of XTM Composer, not the `https_proxy` key of the `opencti` and `openaev` blocks, and trusts the certificate authorities of its system only. See [Reach the registry](/deploy/integrations/proxy/#reach-the-registry) and [Follow new images in your registry](/deploy/integrations/private-registry/#follow-new-images-in-your-registry).
+- The **Logs** tab shows `[XTM Composer] Connector not updated, the previous deployment is kept: ...`: the new image cannot be pulled, and the previous container keeps running. See [The image cannot be pulled](#the-image-cannot-be-pulled).
+
+On Kubernetes, XTM Composer updates the Deployment to the image followed by `@` and the new digest, and sets the annotation `xtm-image-digest` on its pods, so that the pod rolls whatever the `imagePullPolicy`. An image such as `openaev/collector-mitre-attack:rolling@sha256:...` in the Deployment is the expected result, not a manual change.
+
 ## An integration starts, then fails
 
 XTM Composer reports `Reboot loop detected` when a container has restarted more than three times and has been up for less than five minutes. The cause is in the logs of the integration itself: its **Logs** tab in the platform, or the container.
+
+Since XTM Composer 3.261127.0, the **Logs** tab also keeps what a restart or a replacement would hide:
+
+- `[XTM Composer] The previous container ended: reason <reason>, exit code <code>, at <time>`, when the container restarted at least once or its exit code is not 0. `OOMKilled` means the container used more memory than it may: on Kubernetes, raise the memory limit of `image_resources`, see [Configure XTM Composer](/deploy/integrations/configure-composer/#the-container-engine). On Kubernetes, the reason comes from the last state of the container. With Docker, Podman and Portainer, XTM Composer reads it only while the container is stopped, since Docker forgets it when the container starts again. Docker Swarm gives none. A clean stop that is not followed by a restart is not reported.
+- Up to the last 50 lines of the previous container or pod, under `[XTM Composer] Last lines of the previous container:` (or `pod:`), before `[XTM Composer] Logs of the current container:` (or `pod:`). XTM Composer keeps them in memory from its own start and shows them on Kubernetes, when the container restarts or the pod is replaced. With Docker and Podman, recreating the container drops them. Docker Swarm and Portainer show none.
 
 ```bash
 docker ps -a --filter label=opencti-manager --format '{{.Names}} {{.Status}}'
@@ -182,14 +206,14 @@ On Docker Swarm, the service follows the same rule: `docker service logs <name>`
 
 The usual causes:
 
-- The integration cannot reach the platform. It uses the URL XTM Composer uses, `OPENCTI__URL` or `OPENAEV__URL`, so it must run on a network where that URL resolves: set `DAEMON__DOCKER__NETWORK_MODE` to the network of the platform, `xtm_default` in xtm-docker.
+- The integration cannot reach the platform. It uses the URL XTM Composer uses, `OPENCTI__URL` or `OPENAEV__URL`, so it must run on a network where that URL resolves: set `OPENCTI__DAEMON__DOCKER__NETWORK_MODE` or `OPENAEV__DAEMON__DOCKER__NETWORK_MODE` to the network of the platform, `xtm_default` in xtm-docker.
 - The integration cannot reach RabbitMQ at the address the platform gives it. See [Networking](/deploy/integrations/manual/#networking).
 - A required setting of the integration is empty or wrong. Fix it with **Update**.
 
 ## Logs do not show in the platform
 
 - Only the instances XTM Composer manages show logs in the interface.
-- XTM Composer sends the last 100 lines of the integration every `logs_schedule` seconds, 10 by default: wait a few seconds.
+- XTM Composer sends the last 100 lines of the integration every `logs_schedule` seconds, 10 by default: wait a few seconds. On Kubernetes, after a restart or a replaced pod, up to 50 lines of the previous container or pod come first: see [An integration starts, then fails](#an-integration-starts-then-fails).
 - On Kubernetes, XTM Composer reads the container of the integration, in the pod where that container runs before a pod still waiting or left over from an update, the newest first. The restart count and the start time come from the same pod. When it cannot read any pod, the **Logs** tab shows `[XTM Composer] Cannot read the connector logs:` with the answer of Kubernetes. A `forbidden` answer means the role must allow reading `pods/log`.
 
 ## The configuration file is not read

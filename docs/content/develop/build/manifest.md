@@ -7,7 +7,7 @@ products:
   - composer
 personas: [developer, platform-engineer]
 owner: docs-develop
-last_reviewed: 2026-11-01
+last_reviewed: 2026-11-27
 ---
 
 The manifest describes a connector to the OpenCTI catalog: its name and description on the catalog card, the Docker image XTM Composer deploys, and the settings the deployment form asks for. A connector ships it as two files in its `__metadata__/` folder; a catalog gathers the manifests of many connectors in one JSON file that OpenCTI loads. This page lists every field as OpenCTI 7.261030 reads it, then builds the catalog of the [hospitality threat feed connector](/develop/build/connector/).
@@ -29,24 +29,24 @@ The [OpenCTI-Platform/connectors](https://github.com/OpenCTI-Platform/connectors
 
 | Field | Type | What OpenCTI does with it |
 | --- | --- | --- |
-| `title` | String | The name on the card and the default display name of a deployment |
+| `title` | String | The name on the card. A deployment's display name starts from the default of `CONNECTOR_NAME`, not from the title |
 | `slug` | String, lowercase words joined by `-` | The identifier of the connector across versions. A deployed connector follows the latest compatible version of its slug |
 | `description` | String | The description on the connector's page in the catalog |
 | `short_description` | String | The text of the card |
-| `logo` | `data:` URL, URL or `null` | The logo of the card. The catalog build fills it from `logo.*` |
+| `logo` | `data:` URL of an image, or `null` | The logo of the card. Any other value, a plain URL included, makes OpenCTI refuse the whole catalog. The catalog build fills it from `logo.*` |
 | `use_cases` | Strings | Facets of the catalog, such as `Market Vertical & Mission-Specific Intelligence` or `Vulnerability & Exploit Awareness` |
 | `solution_categories` | Strings | Facets of the catalog, such as `Threat Intelligence Feed` or `Enrichment & Reputation` |
-| `license_type` | `Free`, `Commercial` or `null` | Shown on the card |
+| `license_type` | `Free`, `Commercial` or `null` | A facet of the catalog, to filter free and commercial connectors |
 | `contact` | String | Who supports the connector |
 | `verified`, `last_verified_date` | Boolean, date or `null` | Whether Filigran verified the connector, and when. Deploying a connector that is not verified asks the administrator to acknowledge that Filigran does not support it |
 | `playbook_supported` | Boolean | Whether the connector can run as a playbook step. Match it with `playbook_compatible=True` in the connector code |
-| `max_confidence_level` | Integer, 0 to 100 | The confidence level the deployment form proposes for the service account it creates. 100 when absent |
+| `max_confidence_level` | Integer, 0 to 100 | The confidence level the deployment form proposes for the service account it creates. Required in this format: only the `"manifest_schema_version": "1"` format sets 100 when it is absent |
 | `support_version` | Semantic version range, such as `>=7.261030.0` | The platform versions the connector works with. The catalog marks the connector incompatible on other versions |
 | `subscription_link` | URL or `null` | Where to subscribe to the data source |
 | `source_code` | URL | Where the code lives |
 | `manager_supported` | Boolean | `true`: the card has a **Deploy** button and XTM Composer can run the connector. With a `config_schema`, `container_image` and `container_type` are required, or OpenCTI refuses the whole catalog; without one, OpenCTI logs a warning |
 | `container_image` | String, without tag | The Docker image XTM Composer pulls |
-| `container_version` | String | The image tag, `rolling` or a version. XTM Composer runs `container_image:container_version`, plus its `manager.image_tag_suffix` when set (`1.0.0-fips`); pycti reports it as the connector's version |
+| `container_version` | String | The image tag, `rolling` or a version. XTM Composer runs `container_image:container_version`, behind its registry `server` when one is set, and with its `manager.image_tag_suffix` after the tag when set (`1.0.0-fips`); pycti reports it as the connector's version. On `rolling` or `latest`, XTM Composer 3.261127.0 and later redeploys the connector when you push a new image under that tag. A version stays the image deployed |
 | `container_type` | Connector type | `EXTERNAL_IMPORT`, `INTERNAL_ENRICHMENT`, `INTERNAL_IMPORT_FILE`, `INTERNAL_EXPORT_FILE`, `INTERNAL_ANALYSIS` or `STREAM` |
 | `config_schema` | JSON Schema | Filled from `connector_config_schema.json` by the catalog build |
 
@@ -83,16 +83,16 @@ A JSON Schema (draft 2020-12) of type `object`. Each property is a setting, name
 
 | Keyword | Effect in the deployment form and in XTM Composer |
 | --- | --- |
-| `type` | `string`, `integer`, `boolean`, `array` (of strings) or `dict` |
+| `type` | `string`, `integer`, `number`, `boolean` or `array` (of strings): the form shows any other type as unsupported |
 | `description` | The help text of the field |
 | `default` | The value the form proposes. A field left empty takes it |
 | `enum` | A choice list |
 | `format: password` | A secret: the form hides it, OpenCTI stores it encrypted with the public key of XTM Composer, never returns it, and keeps the stored value when an update leaves the field empty. Mark every key and password this way |
-| `required` | The fields the form asks for first; the others are under the optional settings |
+| `required` | The fields the form asks for first; the others are under **Advanced options** |
 | `deprecated: true` | Hidden from the form |
-| `additionalProperties` | Keep `true`: a deployment can carry settings the schema does not list |
+| `additionalProperties` | No effect on a deployment: OpenCTI keeps only the settings the schema lists |
 
-OpenCTI validates every deployment against the schema and shows the errors in the form. A few settings never appear in the form, because the platform and XTM Composer set them: `OPENCTI_URL`, `OPENCTI_TOKEN`, `CONNECTOR_TYPE` and `CONNECTOR_RUN_AND_TERMINATE`. `CONNECTOR_ID` comes from the deployment, and the default of `CONNECTOR_NAME` becomes the default display name. `OPENCTI_TOKEN` is a token of the deployment's service account, which OpenCTI creates and encrypts for XTM Composer.
+OpenCTI validates every deployment against the schema and refuses an invalid one with a message that names the field, such as `Missing required field`. A few settings never appear in the form: `OPENCTI_URL`, which XTM Composer sets, `OPENCTI_TOKEN` and `CONNECTOR_TYPE`, which the platform sets, and `CONNECTOR_RUN_AND_TERMINATE`, which nothing sets: the connector runs with its own default. `CONNECTOR_ID` comes from the deployment, and the default of `CONNECTOR_NAME` becomes the default display name. `OPENCTI_TOKEN` is a token of the deployment's service account, which OpenCTI creates and encrypts for XTM Composer.
 
 The schema of the hospitality threat feed connector:
 
@@ -161,7 +161,7 @@ The schema of the hospitality threat feed connector:
 
 ## Build a catalog
 
-A catalog is a JSON object with an `id`, a `name`, a `description`, a `version` and the list of manifests in `contracts`. This script builds one from every `__metadata__/` folder under the current directory, and runs the checks OpenCTI runs when it loads the catalog. It is stricter on one point: OpenCTI only logs a warning for a `manager_supported` connector without `config_schema`, while the script stops, because the deployment form needs the schema:
+A catalog is a JSON object with an `id`, a `name`, a `description`, a `version` and the list of manifests in `contracts`. This script builds one from every `__metadata__/` folder under the current directory and runs some of the checks OpenCTI runs when it loads the catalog: OpenCTI also refuses a `logo` that is not a `data:` URL and a `config_schema` with a `format` other than `password`, `uri`, `duration`, `email`, `date-time` or `date`. The script is stricter on one point: OpenCTI only logs a warning for a `manager_supported` connector without `config_schema`, while the script stops, because the deployment form needs the schema:
 
 ```python
 """Builds a custom OpenCTI catalog from the __metadata__ folder of each connector."""
@@ -232,6 +232,8 @@ OpenCTI also reads a newer catalog format, marked with `"manifest_schema_version
 List your catalogs in `app:custom_catalogs` (`APP__CUSTOM_CATALOGS`) of the platform, as a JSON array of file paths the platform can read or `http(s)://` URLs. The catalog manager loads them next to the built-in catalog; their connectors appear in :menu[Integrations], **Available** tab, and XTM Composer deploys the ones with `manager_supported: true`. [XTM Composer](/deploy/integrations/composer/#add-your-own-connectors-to-the-opencti-catalog) shows the Docker Compose block. Filigran may remove this setting in a later version.
 
 Push the image to a registry XTM Composer can pull from: [Pull integrations from a private registry](/deploy/integrations/private-registry/) covers a registry that needs credentials. An XTM Composer that sets `manager.image_tag_suffix`, as its FIPS image does with `-fips`, pulls the suffixed tag, such as `connector-hospitality-feed:1.0.0-fips`: push that tag too, or it deploys nothing and logs the failed pull on the connector. See [Configure XTM Composer](/deploy/integrations/configure-composer/#xtm-composer-itself) for the values it accepts.
+
+The example's `container_version`, `1.0.0`, pins the image: a deployed connector runs it until the catalog names another version. With `rolling`, each image you push under that tag reaches the deployed connectors. XTM Composer asks your registry which image the tag points to, once the connector runs and then every 600 seconds by default, then pulls the new image and redeploys. The XTM Composer container itself must reach your registry over HTTPS: see [Follow new images in your registry](/deploy/integrations/private-registry/#follow-new-images-in-your-registry).
 
 ## What's next
 

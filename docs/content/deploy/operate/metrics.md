@@ -188,6 +188,7 @@ services:
       - APP__TELEMETRY__TRACING__ENABLED=true
       - APP__TELEMETRY__TRACING__EXPORTER_OTLP=http://otel-collector.example.com:4318/v1/traces
       - APP__TELEMETRY__PYROSCOPE__ENABLED=true
+      - APP__APP_LOGS__LOGS_LEVEL=info
       - APP__TELEMETRY__PYROSCOPE__EXPORTER=http://pyroscope.example.com:4040
       - APP__TELEMETRY__PYROSCOPE__IDENTIFIER=opencti-example-cert
 ```
@@ -442,7 +443,7 @@ A threat that fails its rebuild fails again at every run, and the run still succ
 
 ### How the endpoint collects the processes
 
-At each scrape, the process manager asks every process for its metrics and merges them into one document. A process that answers too late, or sends too much, is left out of that document and counted in `opencrq_pm_collection_failures_total`. The scrape is neither delayed nor broken: it gets the metrics of the processes that answered in time.
+At each scrape, the process manager asks every process for its metrics and merges them into one document. A process that answers too late, or sends too much, is left out of that document and counted in `opencrq_pm_collection_failures_total`. The scrape is not broken: it waits at most `COLLECT_TIMEOUT_MS` for each process and `ROUND_DEADLINE_MS` in all, then gets the metrics of the processes that answered in time.
 
 | Environment variable | Default | What it sets |
 | --- | --- | --- |

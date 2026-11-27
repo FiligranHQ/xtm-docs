@@ -19,11 +19,11 @@ An injector is the integration that delivers an inject: it sends the email to th
 
 | Kind | Where it runs | Examples | What you do |
 | --- | --- | --- | --- |
-| Built in | Inside the platform, always present | Email, Media pressure, Challenges, Manual, Phishing, OpenAEV Implant | Nothing, besides the mail server the email and phishing injectors use. See [Built-in injectors and their injects](/openaev/use/injectors/built-in/) |
+| Built in | Inside the platform, always present | Email, Media pressure, Challenges, Manual, Phishing, OpenAEV Implant | Nothing, besides the platform's mail server: the email and phishing injectors send through it, and so do the media pressure and challenge injectors when they notify the players. See [Built-in injectors and their injects](/openaev/use/injectors/built-in/) |
 | From the catalog, in the platform | Inside the platform, once deployed | OpenCTI, OVHCloud SMS Platform | Deploy it from :menu[Integrations], with its settings. It requires an Enterprise Edition license |
 | External | As its own container or Python program | Nmap, Nuclei, HTTP query, Shodan, NetExec | Run it with XTM Composer from :menu[Integrations], or yourself |
 
-The catalog, in :menu[Integrations], **Available** tab, lists the external injectors the platform knows: reconnaissance (Censys, Nmap, Shodan), vulnerability scanning (Nuclei), attack simulation (HTTP query, Amazon Web Services, NetExec, Stratus Red Team), communication (Microsoft Teams, Slack, email through Microsoft 365, Google Workspace or SMTP) and AI security (AI Red Team).
+The catalog, in :menu[Integrations], **Available** tab, lists the external injectors the platform knows: reconnaissance (Censys, Nmap, Shodan), vulnerability scanning (Nuclei), attack simulation (HTTP query, Amazon Web Service, NetExec, Stratus Red Team), communication (Microsoft Teams, Slack, email through Microsoft 365, Google Workspace or SMTP) and AI security (AI Red Team).
 
 ## How an injector gets its injects
 
@@ -40,9 +40,9 @@ Some contracts run on endpoints: the attack actions of the Threat Arsenal, run b
 
 ## See your injectors and their inject types
 
-Open :menu[Integrations], **Deployed** tab. Each injector shows whether it is started and when the platform last heard from it: a built-in injector shows **Runs inside the platform**. Open an injector to see its contracts, with their **Kill chains**, **Payload domains** and **Attack patterns**. An injector deployed by XTM Composer also has a **Logs** tab.
+Open :menu[Integrations], **Deployed** tab. Each injector shows whether it is started and when the platform last heard from it; on a built-in injector, the health dot reads **Runs inside the platform** when you hover it. Open an injector to see its contracts, with their **Kill chains**, **Domains** and **Attack patterns**. An injector deployed by XTM Composer also has a **Logs** tab, with the last lines of its container and the lines XTM Composer adds, which start with `[XTM Composer]`: how the previous container ended after a crash or a restart, the last lines of the previous container after a redeployment, and `[XTM Composer] Image updated:` with the old and the new image digests when XTM Composer redeploys the injector on a new image of its `rolling` tag.
 
-Some injectors accept contracts of your own, built from one of theirs: their contract list then has a button to **Create a new injector contract**, in two steps, **Select the template** and **Create the injector contract**.
+Some injectors accept contracts of your own, built from one of theirs: their contract list then has a **Create** button, which opens **Create a new action** in two steps, **Select the template** and **Create the action**.
 
 :::example[What Grand Meridian's Velvet Harbor scenario uses]
 The scenario that replays Velvet Harbor against Grand Meridian Hotels uses four injectors:

@@ -50,6 +50,8 @@ A connector speaks STIX 2.1. An import or enrichment connector does not write ob
 
 XTM Composer reads what it deploys from the catalog: the image, its version, and the settings to ask for in the form. A connector that should be deployable from the interface therefore ships a manifest next to its code. [Community resources](/develop/integration-model/resources/) lists where the catalogs, the repositories and the SDKs live.
 
+The tag of the image decides whether a deployed integration follows what you publish. On a moving tag, `latest`, `rolling` or no tag at all, XTM Composer reads the digest the tag points to in the registry, then again every 10 minutes by default, and redeploys a started integration whose configuration did not change when you push a new image under that tag. It keeps the running image when the registry cannot be read, when its last pull failed, or when a secret of its configuration cannot be decrypted. A version tag, such as `6.9.0`, or a digest is never looked up: the integration keeps its image until its configuration changes. The OpenAEV catalog names `rolling` for its integrations. [How integrations run](/deploy/integrations/how-they-run/) details the update from the deployment side.
+
 ## What's next
 
 - [Connectors](/develop/integration-model/connectors/), the connector types of OpenCTI.
