@@ -3768,8 +3768,8 @@
     ]
   },
   "develop": {
-    "done": 27,
-    "total": 27,
+    "done": 28,
+    "total": 28,
     "groups": [
       {
         "id": "contribute",
@@ -4135,6 +4135,18 @@
               "opencti",
               "openaev",
               "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "apis"
+          },
+          {
+            "target": "/develop/apis/docs-mcp/",
+            "title": "Connect your AI assistant to the documentation",
+            "doc_type": "how-to",
+            "products": [
+              "suite"
             ],
             "status": "migrated",
             "more": 0,

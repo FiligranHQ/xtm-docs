@@ -1,0 +1,23 @@
+title: Your assistant calls the documentation's MCP server, which reads the published pages at the version you run
+lanes:
+  - label: Your assistant
+    tone: external
+    nodes:
+      - {id: assistant, label: AI assistant, icon: Laptop, note: "Claude, ChatGPT, Cursor, VS Code"}
+      - {id: xtmone, label: XTM One agent, icon: LogoXTMOne, note: Your own XTM One}
+  - label: filigran.io/docs
+    tone: core
+    nodes:
+      - {id: mcp, label: MCP server, icon: Server, note: "search, read, look up"}
+  - label: The documentation
+    tone: product
+    nodes:
+      - {id: latest, label: Latest, icon: BookOpen, note: Every product}
+      - {id: lts, label: OpenCTI LTS lines, icon: BookOpen, note: /lts/<line>/}
+      - {id: earlier, label: Earlier versions, icon: BookOpen, note: /v/<product>/<version>/}
+edges:
+  - {from: assistant, to: mcp, label: no sign-in}
+  - {from: xtmone, to: mcp, label: no sign-in}
+  - {from: mcp, to: latest, label: reads}
+  - {from: mcp, to: lts, label: reads}
+  - {from: mcp, to: earlier, label: reads}
