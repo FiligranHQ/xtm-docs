@@ -1,0 +1,29 @@
+title: A risk scope holds the primary assets and the scenarios OpenCRQ prices, from the threats, assets and controls the whole tenant shares
+lanes:
+  - label: Shared by the tenant
+    tone: store
+    nodes:
+      - {id: threats, label: Threats, icon: Crosshair, note: "OpenCTI, default threats, STIX imports", href: /opencrq/use/threats/threat-center/}
+      - {id: assets, label: Supporting assets, icon: Server, note: With their findings, href: /opencrq/use/attack-surface/assets/}
+      - {id: controls, label: Controls, icon: ShieldCheck, note: "51 controls, declared for the tenant", href: /opencrq/use/defenses/controls/}
+  - label: A risk scope
+    tone: product
+    nodes:
+      - {id: scope, label: Risk scope, icon: Layers, note: "Profile, declared estate, tolerance", href: /opencrq/concepts/risk-scopes-and-assets/}
+      - {id: primary, label: Primary assets, icon: Boxes, note: Their business resources}
+      - {id: scenario, label: Risk scenarios, icon: TriangleAlert, note: "One outcome, on primary assets", href: /opencrq/use/quantify/risk-scenarios/}
+  - label: What prices and decides
+    nodes:
+      - {id: runs, label: Simulations, icon: History, note: "Every run kept, the last one the price"}
+      - {id: plans, label: Treatment plans, icon: ListChecks, note: Controls to fund, href: /opencrq/use/decide/treatment-plans/}
+      - {id: reviews, label: Budget reviews, icon: ClipboardCheck, note: A year's spend, href: /opencrq/use/decide/budget-reviews/}
+edges:
+  - {from: scope, to: primary, label: holds}
+  - {from: assets, to: primary, label: support}
+  - {from: scenario, to: primary, label: aims at}
+  - {from: threats, to: scenario, label: seek its outcome}
+  - {from: controls, to: scenario, label: stand in the way}
+  - {from: scenario, to: runs, label: priced by}
+  - {from: scope, to: plans, label: owns}
+  - {from: scope, to: reviews, label: owns}
+  - {from: plans, to: controls, label: raise, style: dashed}

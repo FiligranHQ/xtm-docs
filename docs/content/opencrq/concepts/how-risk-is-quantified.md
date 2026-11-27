@@ -53,5 +53,6 @@ A **treatment plan** is the set of controls you would fund, each aimed at a post
 
 ## What's next
 
+- [How OpenCRQ's objects connect, from a risk scope to its price](/opencrq/concepts/data-model/): what each building block belongs to, and which prices a change reaches.
 - [OpenCRQ overview](/opencrq/), and how it connects to the XTM platform.
 - [Journeys across the platform](/workflows/), including a full CTEM cycle.

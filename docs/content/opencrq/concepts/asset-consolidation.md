@@ -128,6 +128,7 @@ The asset reads:
 
 ## What's next
 
+- [How OpenCRQ's objects connect, from a risk scope to its price](/opencrq/concepts/data-model/): where a supporting asset sits among the other objects.
 - [Build the attack surface from your assets](/opencrq/use/attack-surface/assets/), to correct an imported asset or hand it back.
 - [Import assets from Microsoft Defender](/opencrq/use/sources/microsoft-defender/) and [Import OpenAEV results](/opencrq/use/sources/openaev/).
 - [Risk scopes, primary assets and supporting assets](/opencrq/concepts/risk-scopes-and-assets/), what the price reads on these assets.

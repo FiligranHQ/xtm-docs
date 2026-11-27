@@ -2224,8 +2224,8 @@
     ]
   },
   "opencrq": {
-    "done": 41,
-    "total": 41,
+    "done": 42,
+    "total": 42,
     "groups": [
       {
         "id": "concepts",
@@ -2258,6 +2258,18 @@
           {
             "target": "/opencrq/concepts/asset-consolidation/",
             "title": "How OpenCRQ merges an asset several sources report",
+            "doc_type": "explanation",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencrq/concepts/data-model/",
+            "title": "How OpenCRQ's objects connect, from a risk scope to its price",
             "doc_type": "explanation",
             "products": [
               "opencrq"

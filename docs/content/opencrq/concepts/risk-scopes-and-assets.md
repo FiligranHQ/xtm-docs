@@ -97,6 +97,7 @@ In the scenario Ransomware on the Booking Platform, the **Targets** tab reads 80
 
 ## What's next
 
+- [How OpenCRQ's objects connect, from a risk scope to its price](/opencrq/concepts/data-model/): the other objects OpenCRQ keeps, and what a change to one reaches.
 - [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/) on these primary assets.
 - [Set what an attack costs with the financial profile](/opencrq/use/quantify/loss-drivers/).
 - [Build the attack surface from your assets](/opencrq/use/attack-surface/assets/).
