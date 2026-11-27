@@ -2781,9 +2781,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Update is only possible on these input keys: {supportedInputKeys}",
+          "key": "FUNCTIONAL_ERROR|Update is only possible on these input keys: connector_trigger_filters",
           "cells": [
-            "Update is only possible on these input keys: {supportedInputKeys}",
+            "Update is only possible on these input keys: connector_trigger_filters",
             "`FUNCTIONAL_ERROR`",
             "`connectorTriggerUpdate` (domain/connector)",
             "`connectorId`"
@@ -4174,9 +4174,9 @@
           ]
         },
         {
-          "key": "UNSUPPORTED_ERROR|You cannot have more than {MAX_DISSEMINATION_LIST_SIZE} e-mail addresses",
+          "key": "UNSUPPORTED_ERROR|You cannot have more than 500 e-mail addresses",
           "cells": [
-            "You cannot have more than {MAX_DISSEMINATION_LIST_SIZE} e-mail addresses",
+            "You cannot have more than 500 e-mail addresses",
             "`UNSUPPORTED_ERROR`",
             "`validationEmails` (modules/disseminationList/disseminationList-domain)",
             ""
@@ -4221,9 +4221,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Too many IDs to resolve (max {MAX_RESOLVE_IDS})",
+          "key": "FUNCTIONAL_ERROR|Too many IDs to resolve (max 100)",
           "cells": [
-            "Too many IDs to resolve (max {MAX_RESOLVE_IDS})",
+            "Too many IDs to resolve (max 100)",
             "`FUNCTIONAL_ERROR`",
             "`resolveIdRepresentatives` (modules/draftWorkspace/draftWorkspace-domain)",
             "`count`"

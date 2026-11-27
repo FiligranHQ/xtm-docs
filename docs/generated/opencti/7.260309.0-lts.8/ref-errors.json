@@ -2665,9 +2665,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Update is only possible on these input keys: {supportedInputKeys}",
+          "key": "FUNCTIONAL_ERROR|Update is only possible on these input keys: connector_trigger_filters",
           "cells": [
-            "Update is only possible on these input keys: {supportedInputKeys}",
+            "Update is only possible on these input keys: connector_trigger_filters",
             "`FUNCTIONAL_ERROR`",
             "`connectorTriggerUpdate` (domain/connector)",
             "`connectorId`"
@@ -3418,9 +3418,9 @@
           ]
         },
         {
-          "key": "UNSUPPORTED_ERROR|You cannot have more than {MAX_DISSEMINATION_LIST_SIZE} e-mail addresses",
+          "key": "UNSUPPORTED_ERROR|You cannot have more than 500 e-mail addresses",
           "cells": [
-            "You cannot have more than {MAX_DISSEMINATION_LIST_SIZE} e-mail addresses",
+            "You cannot have more than 500 e-mail addresses",
             "`UNSUPPORTED_ERROR`",
             "`validationEmails` (modules/disseminationList/disseminationList-domain)",
             ""

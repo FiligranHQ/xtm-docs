@@ -158,9 +158,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Comment exceeds maximum allowed length of {COMMENT_MAX_LENGTH} characters.",
+          "key": "FUNCTIONAL_ERROR|Comment exceeds maximum allowed length of 1000 characters.",
           "cells": [
-            "Comment exceeds maximum allowed length of {COMMENT_MAX_LENGTH} characters.",
+            "Comment exceeds maximum allowed length of 1000 characters.",
             "`FUNCTIONAL_ERROR`",
             "`checkWorkflowActionsValidity` (domain/backgroundTask-common), `executeWorkflowBypass` (modules/workflow/domain/workflow-domain)",
             ""
@@ -2295,9 +2295,9 @@
           ]
         },
         {
-          "key": "UNSUPPORTED_ERROR|Invalid platform bootstrap status, expected one of {PLATFORM_BOOTSTRAP_STATUSES}",
+          "key": "UNSUPPORTED_ERROR|Invalid platform bootstrap status, expected one of pending, completed",
           "cells": [
-            "Invalid platform bootstrap status, expected one of {PLATFORM_BOOTSTRAP_STATUSES}",
+            "Invalid platform bootstrap status, expected one of pending, completed",
             "`UNSUPPORTED_ERROR`",
             "`setPlatformBootstrapStatus` (domain/settings)",
             ""
@@ -2385,9 +2385,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Lockout admin max attempts must be lower than or equal to {LOCAL_AUTH_LOCKOUT_MAX_ATTEMPTS_LIMIT}",
+          "key": "FUNCTIONAL_ERROR|Lockout admin max attempts must be lower than or equal to 100",
           "cells": [
-            "Lockout admin max attempts must be lower than or equal to {LOCAL_AUTH_LOCKOUT_MAX_ATTEMPTS_LIMIT}",
+            "Lockout admin max attempts must be lower than or equal to 100",
             "`FUNCTIONAL_ERROR`",
             "`buildLocalAuthLockoutPatch` (domain/setting-auth)",
             "`local_auth_lockout_admin_max_attempts`"
@@ -2403,9 +2403,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Lockout duration must be lower than or equal to {LOCAL_AUTH_LOCKOUT_DURATION_LIMIT}",
+          "key": "FUNCTIONAL_ERROR|Lockout duration must be lower than or equal to 1440",
           "cells": [
-            "Lockout duration must be lower than or equal to {LOCAL_AUTH_LOCKOUT_DURATION_LIMIT}",
+            "Lockout duration must be lower than or equal to 1440",
             "`FUNCTIONAL_ERROR`",
             "`buildLocalAuthLockoutPatch` (domain/setting-auth)",
             "`local_auth_lockout_duration`"
@@ -2421,9 +2421,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Lockout max attempts must be lower than or equal to {LOCAL_AUTH_LOCKOUT_MAX_ATTEMPTS_LIMIT}",
+          "key": "FUNCTIONAL_ERROR|Lockout max attempts must be lower than or equal to 100",
           "cells": [
-            "Lockout max attempts must be lower than or equal to {LOCAL_AUTH_LOCKOUT_MAX_ATTEMPTS_LIMIT}",
+            "Lockout max attempts must be lower than or equal to 100",
             "`FUNCTIONAL_ERROR`",
             "`buildLocalAuthLockoutPatch` (domain/setting-auth)",
             "`local_auth_lockout_max_attempts`"
@@ -2439,9 +2439,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Lockout window must be lower than or equal to {LOCAL_AUTH_LOCKOUT_WINDOW_LIMIT}",
+          "key": "FUNCTIONAL_ERROR|Lockout window must be lower than or equal to 1440",
           "cells": [
-            "Lockout window must be lower than or equal to {LOCAL_AUTH_LOCKOUT_WINDOW_LIMIT}",
+            "Lockout window must be lower than or equal to 1440",
             "`FUNCTIONAL_ERROR`",
             "`buildLocalAuthLockoutPatch` (domain/setting-auth)",
             "`local_auth_lockout_window`"
@@ -2592,9 +2592,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Password history count must be an integer between 0 and {PASSWORD_HISTORY_MAX_COUNT}",
+          "key": "FUNCTIONAL_ERROR|Password history count must be an integer between 0 and 24",
           "cells": [
-            "Password history count must be an integer between 0 and {PASSWORD_HISTORY_MAX_COUNT}",
+            "Password history count must be an integer between 0 and 24",
             "`FUNCTIONAL_ERROR`",
             "`resolvePasswordHistoryCount` (domain/setting-auth)",
             "`value`"
@@ -3818,9 +3818,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Update is only possible on these input keys: {supportedInputKeys}",
+          "key": "FUNCTIONAL_ERROR|Update is only possible on these input keys: connector_trigger_filters",
           "cells": [
-            "Update is only possible on these input keys: {supportedInputKeys}",
+            "Update is only possible on these input keys: connector_trigger_filters",
             "`FUNCTIONAL_ERROR`",
             "`connectorTriggerUpdate` (modules/connector/connector-domain)",
             "`connectorId`"
@@ -4788,9 +4788,9 @@
           ]
         },
         {
-          "key": "UNSUPPORTED_ERROR|You cannot have more than {MAX_DISSEMINATION_LIST_SIZE} e-mail addresses",
+          "key": "UNSUPPORTED_ERROR|You cannot have more than 500 e-mail addresses",
           "cells": [
-            "You cannot have more than {MAX_DISSEMINATION_LIST_SIZE} e-mail addresses",
+            "You cannot have more than 500 e-mail addresses",
             "`UNSUPPORTED_ERROR`",
             "`validationEmails` (modules/disseminationList/disseminationList-domain)",
             ""
@@ -4835,9 +4835,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Too many IDs to resolve (max {MAX_RESOLVE_IDS})",
+          "key": "FUNCTIONAL_ERROR|Too many IDs to resolve (max 100)",
           "cells": [
-            "Too many IDs to resolve (max {MAX_RESOLVE_IDS})",
+            "Too many IDs to resolve (max 100)",
             "`FUNCTIONAL_ERROR`",
             "`resolveIdRepresentatives` (modules/draftWorkspace/draftWorkspace-domain)",
             "`count`"
@@ -5854,9 +5854,9 @@
           ]
         },
         {
-          "key": "UNSUPPORTED_ERROR|Invalid ingestion health notification delay, expected an integer between 0 and {MAX_HEALTH_NOTIFICATION_DELAY_MS} ms",
+          "key": "UNSUPPORTED_ERROR|Invalid ingestion health notification delay, expected an integer between 0 and 86400000 ms",
           "cells": [
-            "Invalid ingestion health notification delay, expected an integer between 0 and {MAX_HEALTH_NOTIFICATION_DELAY_MS} ms",
+            "Invalid ingestion health notification delay, expected an integer between 0 and 86400000 ms",
             "`UNSUPPORTED_ERROR`",
             "`validateIngestionHealthSettingsInput` (modules/ingestionHealth/ingestionHealth-settings)",
             ""
@@ -6682,9 +6682,9 @@
       ],
       "rows": [
         {
-          "key": "FUNCTIONAL_ERROR|A request access is limited to {REQUEST_ACCESS_ENTITIES_MAX_COUNT} requested entities",
+          "key": "FUNCTIONAL_ERROR|A request access is limited to 500 requested entities",
           "cells": [
-            "A request access is limited to {REQUEST_ACCESS_ENTITIES_MAX_COUNT} requested entities",
+            "A request access is limited to 500 requested entities",
             "`FUNCTIONAL_ERROR`",
             "`assertRequestAccessInputSize` (modules/requestAccess/requestAccess-domain)",
             "`entitiesCount`"
@@ -6754,9 +6754,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|The reason of a request access is limited to {REQUEST_ACCESS_REASON_MAX_LENGTH} characters",
+          "key": "FUNCTIONAL_ERROR|The reason of a request access is limited to 10000 characters",
           "cells": [
-            "The reason of a request access is limited to {REQUEST_ACCESS_REASON_MAX_LENGTH} characters",
+            "The reason of a request access is limited to 10000 characters",
             "`FUNCTIONAL_ERROR`",
             "`assertRequestAccessInputSize` (modules/requestAccess/requestAccess-domain)",
             "`reasonLength`"
@@ -8043,9 +8043,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Request access must be a JSON object of at most {REQUEST_ACCESS_MAX_LENGTH} characters",
+          "key": "FUNCTIONAL_ERROR|Request access must be a JSON object of at most 100000 characters",
           "cells": [
-            "Request access must be a JSON object of at most {REQUEST_ACCESS_MAX_LENGTH} characters",
+            "Request access must be a JSON object of at most 100000 characters",
             "`FUNCTIONAL_ERROR`",
             "`assertExternalRequestAccessCreateAllowed` (modules/workflow/domain/workflow-domain), `assertExternalRequestAccessWriteAllowed` (modules/workflow/domain/workflow-domain)",
             "`id`"
@@ -8216,18 +8216,18 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|A dashboard cannot hold more than {DASHBOARD_PRESETS_MAX_COUNT} presets",
+          "key": "FUNCTIONAL_ERROR|A dashboard cannot hold more than 50 presets",
           "cells": [
-            "A dashboard cannot hold more than {DASHBOARD_PRESETS_MAX_COUNT} presets",
+            "A dashboard cannot hold more than 50 presets",
             "`FUNCTIONAL_ERROR`",
             "`buildDashboardPreset` (modules/workspace/workspace-presets-validation)",
             ""
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|A dashboard cannot hold more than {DASHBOARD_VARIABLES_MAX_COUNT} variables",
+          "key": "FUNCTIONAL_ERROR|A dashboard cannot hold more than 50 variables",
           "cells": [
-            "A dashboard cannot hold more than {DASHBOARD_VARIABLES_MAX_COUNT} variables",
+            "A dashboard cannot hold more than 50 variables",
             "`FUNCTIONAL_ERROR`",
             "`buildDashboardVariable` (modules/workspace/workspace-variables-validation)",
             ""
@@ -8297,9 +8297,9 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|A selection restriction cannot hold more than {DASHBOARD_VARIABLE_SELECTION_MAX_VALUES} values",
+          "key": "FUNCTIONAL_ERROR|A selection restriction cannot hold more than 200 values",
           "cells": [
-            "A selection restriction cannot hold more than {DASHBOARD_VARIABLE_SELECTION_MAX_VALUES} values",
+            "A selection restriction cannot hold more than 200 values",
             "`FUNCTIONAL_ERROR`",
             "`buildRestriction` (modules/workspace/workspace-variables-validation)",
             ""
