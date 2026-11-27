@@ -39,6 +39,8 @@ The process manager reads `PROCESS_MANAGER__PROFILE` and starts each process of 
 
 xtm-docker runs the `split` profile and changes no heap. Keep `monolith` for development, as [HTTP and processes](/deploy/configure/opencrq/#http-and-processes) says. The process manager is a third Node.js process, which supervises and does no work of its own: give the container more memory than the two heaps together.
 
+The HTTP process serves the interface from the folder in `FRONT_PATH`, which the image sets to `/app/public`, where it holds the built interface. Leave it: unset, the server looks for `../front/dist`, the folder of a development checkout.
+
 The processes depend on each other. When one exits, or fails to start, the process manager stops the other one and exits with an error. It gives each process 30 seconds to stop cleanly, then kills it. The container stops with it: xtm-docker restarts it, with `restart: always` on the `opencrq` service. A `docker compose stop` ends the processes the same way.
 
 Both processes connect to PostgreSQL when they start, and take turns behind a lock in the database. The first one applies the migrations and loads the reference data. The second one finds that work done for this start, and does not load the data again.
@@ -47,13 +49,42 @@ Both processes connect to PostgreSQL when they start, and take turns behind a lo
 
 The HTTP process and the worker never call each other. They meet in PostgreSQL:
 
-- **Work goes through the job queue.** When someone clicks **Sync now** or uploads a STIX bundle, the HTTP process adds a job to a table. PostgreSQL notifies the worker, which claims the job and runs it, up to 4 at a time by default (`JOBS__MAX_CONCURRENT`). A worker that misses a notification checks the queue every 30 seconds anyway.
-- **Changes come back as notifications.** A write to a tenant's data makes PostgreSQL send a notification. The worker reads it to book the recomputes that depend on the changed data. The HTTP process reads it to tell the open browsers of that tenant to refresh what they show.
-- **The worker reports it is alive.** It writes a heartbeat in the database every 10 seconds. When no worker has written one for 30 seconds, the **Integrations** page of every tenant shows **No worker is answering. Queued runs will not advance.**
+- **Work goes through the job queue.** When someone clicks **Sync now** or uploads a STIX bundle, the HTTP process adds a job to a table. PostgreSQL notifies the worker, which claims the job and runs it, up to 4 at a time by default (`JOBS__MAX_CONCURRENT`). A worker that misses a notification checks the queue every 30 seconds anyway (`JOBS__POLLING_FALLBACK_MS`, in milliseconds).
+- **Changes come back as notifications.** A write to a tenant's data makes PostgreSQL send a notification. The worker reads it to book the recomputes that depend on the changed data. The HTTP process reads it to tell the open browsers of that tenant to refresh what they show: it groups the changes people make within 100 milliseconds into one refresh (`EVENTS__DOORBELL_WINDOW_MS`), and the changes jobs write within 30 seconds (`EVENTS__JOB_DOORBELL_WINDOW_MS`), so that a long import does not refresh every open page for the whole of its run. Each time the worker starts listening to the notifications, at its start or after it lost them, it may have missed changes: it books every recompute of every tenant. A second catch-up waits until 10 minutes have passed since the previous one (`RECOMPUTE__RECONNECT_MIN_INTERVAL_MS`).
+- **The worker reports it is alive.** It writes a heartbeat in the database every 10 seconds (`JOBS__HEARTBEAT_INTERVAL_MS`), whether it has work or not. When no worker has written one for 30 seconds (`JOBS__HEARTBEAT_STALE_AFTER_MS`, which OpenCRQ refuses at start unless it is longer than the interval), the **Integrations** page of every tenant shows **No worker is answering. Queued runs will not advance.**
 
 Only three things go through the process manager: each process's health, the edition XTM One grants (the HTTP process learns it and the process manager passes it to the worker), and the metrics of each process for the Prometheus endpoint.
 
 What the worker runs, and when, is listed in [Background processes](/reference/opencrq/processes/).
+
+### Give one process its own settings
+
+Every process reads the settings of the whole container, then the ones set for it alone, which win: the same variable with `PROCESS_MANAGER__<profile>__<process>__` in front, the profile and the process in upper case, such as `PROCESS_MANAGER__SPLIT__WORKER__POSTGRES__POOL_MAX`. Use them when one process needs what the other does not, such as a larger pool of database connections for the worker, or its own PostgreSQL account.
+
+| Variable | What it sets for that process |
+| --- | --- |
+| `PROCESS_MANAGER__<profile>__<process>__SCRIPT` | The file the process runs: `index-http.mjs` and `index-worker.mjs` in `split`, `index.mjs` in `monolith`. The image sets it: leave it |
+| `PROCESS_MANAGER__<profile>__<process>__POSTGRES__HOST` | The PostgreSQL host it connects to |
+| `PROCESS_MANAGER__<profile>__<process>__POSTGRES__PORT` | The port of that host |
+| `PROCESS_MANAGER__<profile>__<process>__POSTGRES__DATABASE` | The database |
+| `PROCESS_MANAGER__<profile>__<process>__POSTGRES__USER` | The PostgreSQL user it signs in as |
+| `PROCESS_MANAGER__<profile>__<process>__POSTGRES__PASSWORD` | That user's password. Pass it through a secret store |
+| `PROCESS_MANAGER__<profile>__<process>__POSTGRES__POOL_MAX` | The most connections its pool opens, 10 at least, 20 by default |
+| `PROCESS_MANAGER__<profile>__<process>__HTTP_SERVER__HOST` | The interface it listens on |
+| `PROCESS_MANAGER__<profile>__<process>__HTTP_SERVER__PORT` | The port it listens on |
+| `PROCESS_MANAGER__<profile>__<process>__HTTP_SERVER__PUBLIC_PORT` | The port the host publishes, written in its startup log only |
+| `PROCESS_MANAGER__<profile>__<process>__HTTP_SERVER__MAX_RESPONSE_ITEMS` | The most items one API call returns, 20,000 by default |
+| `PROCESS_MANAGER__<profile>__<process>__FRONT_PATH` | The folder of the built interface it serves |
+| `PROCESS_MANAGER__<profile>__<process>__JOBS__ENABLED` | Whether it runs jobs. Required as soon as one of its `JOBS__` keys is set |
+| `PROCESS_MANAGER__<profile>__<process>__JOBS__MAX_CONCURRENT` | How many jobs it runs at once, 4 by default |
+| `PROCESS_MANAGER__<profile>__<process>__JOBS__POLLING_FALLBACK_MS` | How often it checks the queue without a notification |
+| `PROCESS_MANAGER__<profile>__<process>__JOBS__HEARTBEAT_INTERVAL_MS` | How often it writes its heartbeat |
+| `PROCESS_MANAGER__<profile>__<process>__JOBS__HEARTBEAT_STALE_AFTER_MS` | How old a heartbeat may be before it reads as no worker |
+| `PROCESS_MANAGER__<profile>__<process>__JOBS__LOG_RETENTION_RUNS` | How many runs of a kind keep their log lines |
+| `PROCESS_MANAGER__<profile>__<process>__JOBS__LOG_RETENTION_LINES` | How many lines of the OpenCTI stream it keeps |
+| `PROCESS_MANAGER__<profile>__<process>__JOBS__RUN_RETENTION_DAYS` | How many days a finished run is kept |
+
+The `JOBS__` keys of a process replace the whole `jobs` block for it: a key it leaves out takes its default, not the value of the variable without the prefix. Set them all under the prefix, as the worker's `PROCESS_MANAGER__SPLIT__WORKER__JOBS__ENABLED=true` with `PROCESS_MANAGER__SPLIT__WORKER__JOBS__MAX_CONCURRENT=8`.
 
 ## The health check
 

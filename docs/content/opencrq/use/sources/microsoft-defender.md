@@ -55,7 +55,7 @@ The credentials are not stored in OpenCRQ's database: the deployment sets them p
 | `CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_ID` | The application (client) ID of the app registration |
 | `CONNECTORS__MICROSOFT_GRAPH__<tenant-uuid>__CLIENT_SECRET` | Its client secret. Pass it through a secret store |
 
-With none of them set, the **Microsoft Defender** card stays on the **Available** tab of :menu[Integrations], and its page reads **Unavailable**:
+With none of them set, the Microsoft Defender card stays on the **Available** tab of :menu[Integrations], and its page reads **Unavailable**:
 
 ::screenshot{id=opencrq-defender-connector alt="The Microsoft Defender connector page before its credentials are set: Unavailable, the notice to add it to the deployment configuration, the domain Vulnerability, a scheduled pull whose scope is supporting assets and findings, and a schedule of every 6 hours with no run yet."}
 
@@ -64,7 +64,7 @@ See the [configuration reference](/reference/opencrq/configuration/#connectors).
 ## Turn the connector on
 
 :::steps
-1. Open :menu[Integrations], stay on the **Deployed** tab, and click the **Microsoft Defender** card, under **Vulnerability**. Its state reads **Not configured**.
+1. Open :menu[Integrations], stay on the **Deployed** tab, and click the Microsoft Defender card, under **Vulnerability**. Its state reads **Not configured**.
 2. Click **Configure**.
 3. Under **Service account**, keep **Create a new service account**, named `Microsoft Defender connector` by default, or choose **Use an existing service account**. The new account is created with the integration, in the **Connectors** group; a tenant with no account to reuse offers it alone. The connector writes the assets and findings as this account.
 4. Under **Schedule**, keep **Every 6 hours** in **Frequency**, or choose another: from **Every hour** to **Every week**, or **Manual only**. A run reads the whole estate, which takes minutes on a large tenant: run it more often only if the estate changes faster.

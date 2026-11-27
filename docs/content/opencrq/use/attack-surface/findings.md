@@ -79,6 +79,8 @@ The other tabs explain the score's inputs:
 - **Remediation** shows what the vendor published. When the CVE is in the CISA KEV catalog, a banner gives the action CISA requires and its deadline, as CISA published them.
 - **Activity** shows the finding's state over time and its sources; **Events** the history of its score.
 
+OpenCRQ keeps a year of score history: each `finding-score-recompute` run deletes the changes of score older than 365 days, except the one still in force a year ago, so a score that has not moved for a year keeps its line. A platform engineer changes the period with `RECOMPUTE__SCORE_HISTORY_RETENTION_DAYS`.
+
 ## Attach a CVE by hand
 
 When you know of a vulnerability no integration reports:

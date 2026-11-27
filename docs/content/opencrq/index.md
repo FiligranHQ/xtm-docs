@@ -30,8 +30,8 @@ You keep the risk register in money: what each scenario costs a year, what it re
 2. [Risk scopes, primary assets and supporting assets](/opencrq/concepts/risk-scopes-and-assets/): describe what a loss would hit, and the systems an attacker goes through.
 3. [How OpenCRQ merges an asset several sources report](/opencrq/concepts/asset-consolidation/): which value wins, and when two reports are one asset.
 4. [How OpenCRQ works](/opencrq/concepts/architecture/): its processes, ports, storage and the services it calls.
-3. [Set what an attack costs with the financial profile](/opencrq/use/quantify/loss-drivers/): answer the questions that give each loss its amount.
-4. [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/): create a scenario, read its price and follow it over time.
+5. [Set what an attack costs with the financial profile](/opencrq/use/quantify/loss-drivers/): answer the questions that give each loss its amount.
+6. [Build and price a risk scenario](/opencrq/use/quantify/risk-scenarios/): create a scenario, read its price and follow it over time.
 :::
 :::tab[CISOs and executives]
 You decide what to fund, and show the board what the spend buys.
@@ -84,12 +84,7 @@ You describe what you protect and what a loss would cost; the rest of the XTM pl
 
 ::::split
 :::column
-A treatment plan is a set of controls you would fund: OpenCRQ prices your scenarios again as if it were done, so each plan shows the loss it removes against what it costs, and its return. A budget review does the same afterwards, for what was spent.
-
-:::cards{cols=2}
-  ::card[Compare plans by the loss they remove.]{icon=ListChecks title="Treatment plans" href="/opencrq/use/decide/treatment-plans/"}
-  ::card[What last year's spend avoided.]{icon=ClipboardCheck title="Budget reviews" href="/opencrq/use/decide/budget-reviews/"}
-:::
+A treatment plan is a set of controls you would fund: OpenCRQ prices your scenarios again as if it were done, so each plan shows the loss it removes against what it costs, and its return ([choose the treatment plan that removes the most loss](/opencrq/use/decide/treatment-plans/)). A budget review does the same afterwards, for what was spent ([review a year's security budget against the loss it avoided](/opencrq/use/decide/budget-reviews/)).
 :::
 :::column
 ::screenshot{id=opencrq-treatment-plans-list alt="The three treatment plans of Grand Meridian France as cards, best return first, from Zero-trust remote access at +80.4% to MFA for the front-desk accounts at -100%, under four counters: Active plans, Overdue, Negative return at 2 out of 3, and First-year cost."}

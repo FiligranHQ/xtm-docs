@@ -283,6 +283,18 @@ Each process of a profile takes its own settings under `PROCESS_MANAGER__<profil
 Leave `PLATFORM_SEED__ENABLED` and `PLATFORM__RESET_ON_VERSION_CHANGE` unset in production. The first loads demonstration data; the second deletes the whole database when the version of OpenCRQ changes.
 :::
 
+On a demonstration or test platform, `PLATFORM_SEED__ENABLED=true` loads demonstration data at start: users, risk scopes with their assets and findings, threats, and priced risk scenarios. It loads them only on a platform that has no user yet, and reads these keys:
+
+| Variable | What it sets |
+| --- | --- |
+| `PLATFORM_SEED__ADMIN__EMAIL` | The email of the platform administrator the seed creates. Required |
+| `PLATFORM_SEED__ADMIN__PASSWORD` | The password every seeded user gets in XTM One, when the seed creates them there. OpenCRQ stores it nowhere. Required |
+| `PLATFORM_SEED__XTM_ONE_ADMIN__EMAIL`, `PLATFORM_SEED__XTM_ONE_ADMIN__PASSWORD` | An administrator of the XTM One in `XTM_ONE__URL`, without a second factor, that the seed signs in as to create the seeded users in XTM One, so that people can sign in as them. Unset, the seeded users exist in OpenCRQ only, and none of them can sign in |
+| `PLATFORM_SEED__LARGE_ESTATE__ENABLED` | `true` adds a large estate for performance tests, over a million rows that take minutes to write. `false` by default |
+| `PLATFORM_SEED__LARGE_ESTATE__ASSETS` | How many supporting assets that estate has, `100000` by default |
+| `PLATFORM_SEED__LARGE_ESTATE__FINDINGS` | How many findings it puts on them, `300000` by default |
+| `PLATFORM_SEED__LARGE_ESTATE__MAPPED_ASSETS` | How many of those assets its risk scope covers, `30000` by default, 3 at least |
+
 :::example[Connect Grand Meridian's tenant to OpenCTI and OpenAEV]
 Example CERT runs OpenCRQ for Grand Meridian Hotels, whose tenant identifier is `01a043da-ff47-72c2-aaa4-7da56d85c83e`: OpenCRQ created that tenant at its first start. Its platform engineer connects the tenant to the CERT's OpenCTI, to read the threats against the hospitality sector, to its OpenAEV, to read the simulation results of the hotels, and to the NVD with an API key. The tokens live in `.env`, as `GRAND_MERIDIAN_OPENCTI_TOKEN`, `GRAND_MERIDIAN_OPENAEV_TOKEN` and `NVD_API_KEY`. In `docker-compose.override.yml`, under the `opencrq` service, these variables replace the ones xtm-docker sets for the same tenant with the admin tokens:
 

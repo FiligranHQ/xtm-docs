@@ -16,7 +16,7 @@ Your compliance program already tracks, in Drata, which security controls are in
 - **Two frameworks**: ISO 27001:2022 and SOC 2. Other frameworks of the account, ISO 27001:2013 included, are not imported. Each comes with its readiness as Drata reports it, and its requirements, each with its code, category, whether it is in scope and whether it is ready. An archived requirement is left out.
 - **The Drata controls of the account**, each with its code and name, whether it is ready, monitored, backed by evidence and by a policy, and the requirements it serves.
 
-Each run replaces the whole mirror with what Drata says at that moment. The connector writes nothing else: no asset and no finding. A change to the mirror then makes OpenCRQ derive again the strength and coverage of the controls Drata controls are mapped to, as the next section describes.
+Each run replaces the whole mirror with what Drata says at that moment. The connector writes nothing else: no asset and no finding. A change to the mirror then makes OpenCRQ derive again the strength and coverage of the controls Drata controls are mapped to, as [Where it shows, and what it changes](#where-it-shows-and-what-it-changes) describes.
 
 ## Where it shows, and what it changes
 

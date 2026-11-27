@@ -51,7 +51,7 @@ A figure that is not valid says why, such as **Enter a number.** or **The minimu
 
 ## Import from Microsoft Defender
 
-Select **Configure** on the **Microsoft Defender** tile. The **Microsoft Defender** panel opens:
+Select **Configure** on the Microsoft Defender tile. The Microsoft Defender panel opens:
 
 - When Microsoft Defender is not set up for the tenant, the panel lists the three variables a platform administrator sets in the platform's environment before restarting it. **Copy** copies them, and **See the documentation** opens the platform's configuration on GitHub. The steps are in [Give OpenCRQ the credentials](/opencrq/use/sources/microsoft-defender/#give-opencrq-the-credentials).
 - When it is set up and you have **Manage Security**, choose the account the connector runs as under **Service account**, and the **Schedule**, then select **Save**:

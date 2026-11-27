@@ -23,7 +23,7 @@ A risk scenario is one line of your risk register, priced in money: an attack ou
 
 :::steps
 
-1. In the left navigation, open your risk scope, listed below **Budget Reviews**, click :menu[Risk Scenarios], then **Create**. From the tenant's own :menu[Risk Scenarios], the wizard starts with a **Risk scope** step instead.
+1. In the left navigation, open your risk scope, which the menu lists after **Budget Reviews**, click :menu[Risk Scenarios], then **Create**. From the tenant's own :menu[Risk Scenarios], the wizard starts with a **Risk scope** step instead.
 
 2. On **Outcome**, choose the attack outcome: what the attacker is after. You cannot change it after creation, because the scenario's timing assumptions and threat intelligence derive from it. The [attack outcomes reference](/reference/opencrq/attack-outcomes/) describes the seven. Click **Next**.
 

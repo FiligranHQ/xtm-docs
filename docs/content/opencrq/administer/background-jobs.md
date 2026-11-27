@@ -123,7 +123,7 @@ The price of the ransomware scenario is current. For its quarterly audit, Exampl
 
 ## Check that it works
 
-After a change, open **Runs**: the runs it booked appear as **Queued**, then **Running**, then **Succeeded**, from under a second to a few minutes later depending on how long the last run of each kind took (the `recompute.debounce_*` keys of the [configuration](/reference/opencrq/configuration/#recompute)). A kind whose **Health** stays **Failing** has its reason in the **Errors** of its last run.
+After a change, open **Runs**: the runs it booked appear as **Queued**, then **Running**, then **Succeeded**, from under a second to a few minutes later depending on how long the last run of each kind took. OpenCRQ waits before it books a run, so that a burst of changes makes one run: as long as the last run of that kind in that tenant took, times `RECOMPUTE__DEBOUNCE_FACTOR` (`1` by default), never less than 500 milliseconds (`RECOMPUTE__DEBOUNCE_FLOOR_MS`) and never more than 5 minutes (`RECOMPUTE__DEBOUNCE_CAP_MS`). The changes that arrive while it waits join the run already booked, without delaying it. See the `recompute` keys of the [configuration](/reference/opencrq/configuration/#recompute). A kind whose **Health** stays **Failing** has its reason in the **Errors** of its last run.
 
 ## What's next
 

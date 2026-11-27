@@ -25,7 +25,7 @@ In a new tenant, :menu[Get started] asks the same questions on its **Finances** 
 
 :::steps
 
-1. In the sidebar, open your risk scope, listed below **Budget Reviews**, click :menu[Details], then the **Financial profile** tab. It shows how many answers are given, and each answer with the loss drivers it **Informs**.
+1. In the sidebar, open your risk scope, which the menu lists after **Budget Reviews**, click :menu[Details], then the **Financial profile** tab. It shows how many answers are given, and each answer with the loss drivers it **Informs**.
 
 2. Click **Answer the questionnaire**. The scope's edit panel opens on its **Financial profile** tab.
 
