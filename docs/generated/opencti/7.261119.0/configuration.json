@@ -4116,7 +4116,7 @@
       ],
       "default": "LocalStrategy",
       "theme": "Network and security",
-      "description": "Strategy of the built-in `local` provider (login with email and password). The value itself is not used to choose a strategy; set `providers:local:config:disabled` to `true` to disable local login when providers come from the configuration (to confirm)."
+      "description": "Strategy of the built-in `local` provider (login with email and password); its value is never read. `providers:local:config:disabled` set to `true` turns local login off once, when the platform first records its own sign-in settings (a new platform, or the first start of a version that keeps them in the platform); after that, local login is switched in the platform's settings, and this key changes nothing."
     },
     {
       "key": "publisher_manager:buffering_seconds",
