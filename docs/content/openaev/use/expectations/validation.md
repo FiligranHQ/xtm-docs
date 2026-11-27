@@ -62,7 +62,7 @@ On 14 January 2026, Example CERT runs the **Velvet Harbor replay** simulation fo
 
 The manual expectation `Reported to the SOC` of the email **Fake summit booking request** targets the team **Front desk France**, with **All persons (per team) must validate the expectation** and a success score of 100. Paul Garnier, Camille Roux and Julien Bernard all called the SOC within 20 minutes. In **Validations**, the exercise planner opens it under **Front desk France** and sets the team to **Success**: every person of the team scores 100.
 
-The `PowerShell loader` detection on `fd-barcelona-03` stayed **Pending**: the Barcelona hotel still runs the EDR of a former provider, which raised the alert but has no collector. The SOC analyst opens the inject's result, the asset **fd-barcelona-03**, clicks **Add a result** on **Detection**, chooses **Barcelona legacy EDR**, a platform of the EDR kind created by hand, enters a **Score** of 100 and clicks **Validate**. The detection of that asset reads **Detected**, and the group's detection succeeds.
+The `PowerShell loader` detection on `fd-barcelona-03` stayed **Pending**: the Barcelona hotel still runs the EDR of a former provider, which raised the alert but has no collector. The SOC analyst opens the inject's result, the asset **fd-barcelona-03**, clicks **Add a result** on **Detection**, chooses `Barcelona legacy EDR`, a platform of the EDR kind created by hand, enters a **Score** of 100 and clicks **Validate**. The detection of that asset reads **Detected**, and the group's detection succeeds.
 :::
 
 ## What's next

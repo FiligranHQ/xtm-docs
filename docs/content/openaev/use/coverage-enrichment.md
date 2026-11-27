@@ -78,7 +78,7 @@ After a restart, OpenCTI lists the connector `OpenAEV Coverage - 2cffad3a-0001-4
    ::screenshot{id=opencti-openaev-coverage-connector alt="The page of the connector OpenAEV Coverage - 2cffad3a-0001-4078-b0e2-ef74274022c3 in OpenCTI, Started: an internal enrichment with the scope Security-Coverage and the automatic trigger, last seen on April 12, 2026."}
 
 2. On a threat in OpenCTI, **Add Security coverage** offers **Automated using enrichment**: it stays greyed while no enrichment connector for security coverage is available.
-3. After the first coverage, the scenario appears in :menu[Scenarios] in OpenAEV, and the **Enrichment** panel of the coverage in OpenCTI shows the request as processed.
+3. After the first coverage, the scenario appears in :menu[Scenarios] in OpenAEV, and the **Enrichment connectors** panel of the coverage in OpenCTI shows the request as processed.
 
 If the connector does not show, read the logs of OpenAEV: a failed registration logs `OpenCTI connector registration or ping failed`, with the tenant and the reason. A wrong token or an unreachable address are the usual causes. While a tenant has no registered connector, the results of its simulations wait, and leave once it registers.
 

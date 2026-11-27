@@ -15,7 +15,7 @@ A variable is a placeholder, such as `${user.firstname}` or `${crisis_bridge_url
 
 ## Before you start
 
-- Your role has **Manage assessment**, or your group holds the **Manage+Delete** grant on the scenario or simulation.
+- Your role has **Manage assessment**, or your group has a **Manage+Delete** grant on the scenario or simulation.
 - The scenario plays its injects on a timeline. A chained scenario has no **Configuration** button, and so no variables of its own.
 
 ## How a variable reaches the player

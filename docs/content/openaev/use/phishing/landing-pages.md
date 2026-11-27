@@ -28,7 +28,7 @@ A landing page is the page a person sees after clicking the link of a phishing e
 4. Add a **Description** if you want one: the list shows it.
 5. In **Redirect URL after submit**, enter where the person goes once they submit the form, for example your awareness page. Leave it empty to keep them on the landing page. Only a relative path or an `http` or `https` address is accepted.
 6. In **Serve on domain**, keep **Platform default domain**, or choose one of your verified custom domains. The links of the emails are built on that host.
-7. Choose what OpenAEV keeps of a submission with **Capture submitted data** and **Capture passwords** (see below). Both are on for a new page.
+7. Choose what OpenAEV keeps of a submission with **Capture submitted data** and **Capture passwords** (see [Choose what a submission keeps](#choose-what-a-submission-keeps)). Both are on for a new page.
 8. Under **Landing page content**, write the page in **HTML content**, and its style in **CSS content**. The **Preview** shows it as people will see it; its fullscreen button shows it at full size.
 9. Click **Create**. The page of the landing page opens.
 

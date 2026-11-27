@@ -56,7 +56,7 @@ An answer is correct as soon as it matches one flag. Spaces count: `night.audit 
 
 :::steps
 
-1. Open the **Injects** tab of the scenario or simulation and click **Create**, then choose **Publish challenges**.
+1. Open the **Injects** tab of the scenario or simulation and click **Create**, then choose the inject type **Publish challenges**.
 2. Give the inject a **Title** and set, under **Scheduling**, when the challenge comes out.
 3. Under **Targeted teams**, choose the teams who must answer, or turn on **All teams**.
 4. Under **Challenges to publish**, click **Add challenges**, select one or more challenges, and click **Add**.

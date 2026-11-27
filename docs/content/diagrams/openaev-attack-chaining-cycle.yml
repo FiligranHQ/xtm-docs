@@ -4,7 +4,7 @@ lanes:
     tone: product
     nodes:
       - {id: allow, label: Allow and deny lists, icon: ListChecks, note: What the run may touch, href: /openaev/use/attack-chaining/scope/}
-      - {id: limits, label: Time out and rate limit, icon: Clock, note: How long and how fast}
+      - {id: limits, label: Time and rate limits, icon: Clock, note: How long and how fast}
   - label: Logic
     tone: product
     nodes:

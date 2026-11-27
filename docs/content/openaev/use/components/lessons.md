@@ -15,7 +15,7 @@ The lessons learned questionnaire is the debrief of an exercise, asked to the pe
 
 ## Before you start
 
-- Your role has **Manage assessment**, or your group holds the **Manage+Delete** grant on the scenario or simulation.
+- Your role has **Manage assessment**, or your group has a **Manage+Delete** grant on the scenario or simulation.
 - To create the questionnaire's categories, and to manage templates in :menu[Settings > Customization > Lessons learned], your role has **Manage lessons learned**. To apply a template, **Access lessons learned** is enough.
 - The players are in teams, each with an email address. See [People](/openaev/use/targets/people/).
 

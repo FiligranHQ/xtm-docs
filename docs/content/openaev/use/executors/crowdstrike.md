@@ -87,7 +87,7 @@ In Falcon, create an API client with the **API integrations**, **Hosts**, **Host
    | **Executor Crowdstrike Host Group** | The ID of your host group, or several IDs separated by commas |
    | **Executor Crowdstrike Windows Script Name** and **Executor Crowdstrike Unix Script Name** | The names of your two scripts, `OpenAEV Subprocessor (Windows)` and `OpenAEV Subprocessor (Unix)` by default |
 
-4. Open **Advanced options** and check **Executor Crowdstrike Api Url**: it points to the US-2 cloud, `https://api.us-2.crowdstrike.com`, by default. Enter the API URL of your Falcon cloud. The other options set how often OpenAEV imports the hosts, cleans them and sends commands: their defaults are in the [`executor.crowdstrike` block](/reference/openaev/configuration/#executor-crowdstrike).
+4. Open **Advanced options**: **Executor Crowdstrike Api Url** points to the US-2 cloud, `https://api.us-2.crowdstrike.com`, by default. Enter the API URL of your Falcon cloud. The other options set how often OpenAEV imports the hosts, cleans them and sends commands: their defaults are in the [`executor.crowdstrike` block](/reference/openaev/configuration/#executor-crowdstrike).
 5. Click **Create**.
 6. In the **Deployed** tab, open the executor and click **Start**.
 :::

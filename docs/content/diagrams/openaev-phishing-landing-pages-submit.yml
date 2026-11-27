@@ -13,7 +13,7 @@ lanes:
     tone: product
     nodes:
       - {id: step, label: Credentials not submitted, icon: ClipboardCheck, note: Turns red}
-      - {id: finding, label: Credentials finding, icon: KeyRound, note: "If Capture submitted data is on"}
+      - {id: finding, label: Credentials finding, icon: KeyRound, note: "If Capture submitted data is on; the password only with Capture passwords"}
   - label: Afterwards
     tone: external
     nodes:
@@ -22,5 +22,5 @@ edges:
   - {from: link, to: form, label: opens}
   - {from: form, to: record, label: submit}
   - {from: record, to: step, label: scores}
-  - {from: record, to: finding, label: "user name, password if allowed", style: dashed}
+  - {from: record, to: finding, label: "user name, maybe password", style: dashed}
   - {from: record, to: redirect, label: then}

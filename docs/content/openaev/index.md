@@ -90,12 +90,7 @@ You describe once what you test and what the attacker can do: the assets and age
 
 ::::split
 :::column
-The same scenarios reach people instead of endpoints: emails to the crisis cell, articles in a fake newspaper, documents to read, challenges to solve. Players answer from their own mailbox and from the player interface, and each reaction you expect is scored like a detection. A phishing campaign works the same way, with a lure, a landing page and the results of each person.
-
-:::cards{cols=2}
-  ::card[The press articles and media outlets of an exercise.]{icon=FileText title="Media pressure" href="/openaev/use/components/media-pressure/"}
-  ::card[Lures, landing pages and who clicked.]{icon=Users title="Phishing" href="/openaev/use/phishing/"}
-:::
+The same scenarios reach people instead of endpoints: emails to the crisis cell, articles in a fake newspaper, documents to read, challenges to solve. Players answer from their own mailbox and from the player interface, and each reaction you expect is scored like a detection. A [phishing campaign](/openaev/use/phishing/) works the same way, with a lure, a landing page and the results of each person; the [media pressure](/openaev/use/components/media-pressure/) of an exercise is its press articles and its media outlets.
 :::
 :::column
 ::screenshot{id=openaev-crisis-injects-list alt="The injects of the Velvet Harbor crisis night: the email that calls the crisis cell to the bridge at 40 minutes, the challenge Which account was used? at 50, and the Hotel Business Daily article at 1 hour 30."}
@@ -106,12 +101,7 @@ The same scenarios reach people instead of endpoints: emails to the crisis cell,
 
 ::::split
 :::column
-A chained scenario does not follow a fixed timeline: each action reads what the previous one found, such as a user name, a host or an open port, and the next one aims at it. You set the targets it may reach and the limits it must keep, and the attack path map shows how far it got. With XTM One, an agent can choose the next action itself. Chained scenarios are part of the Enterprise Edition.
-
-:::cards{cols=2}
-  ::card[Actions that follow their own results.]{icon=Workflow title="Chained scenarios" href="/openaev/use/attack-chaining/"}
-  ::card[Let AI run a penetration test.]{icon=Bot title="Autonomous attacks" href="/openaev/use/attack-chaining/autonomous/"}
-:::
+A [chained scenario](/openaev/use/attack-chaining/) does not follow a fixed timeline: each action reads what the previous one found, such as a user name, a host or an open port, and the next one aims at it. You set the targets it may reach and the limits it must keep, and the attack path map shows how far it got. With XTM One, an agent can choose the next action itself and [run an autonomous penetration test](/openaev/use/attack-chaining/autonomous/). Chained scenarios are part of the Enterprise Edition.
 :::
 :::column
 ::diagram{id=openaev-attack-chaining-cycle}

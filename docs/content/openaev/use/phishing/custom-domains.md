@@ -30,7 +30,7 @@ Register only hostnames your organization owns and has authorized for awareness 
 1. Open :menu[Settings > Customization > Custom domains].
 2. Click **Add a custom domain**, enter the hostname in **Domain**, and click **Create**. Enter the bare hostname: no `https://`, path, port or wildcard.
 3. The **Configure DNS** panel opens with the two records to publish. Copy them.
-4. At your DNS provider, publish both records (see below).
+4. At your DNS provider, publish both records (see [The two DNS records](#the-two-dns-records)).
 5. Back in the panel, click **Verify domain**. If the records have not reached DNS yet, wait a few minutes and click again.
 
 :::

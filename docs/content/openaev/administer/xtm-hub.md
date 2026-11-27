@@ -60,7 +60,7 @@ When Filigran runs your platform in its cloud (SaaS), each connection check tell
 In :menu[Settings > Filigran Experience], click **Disconnect XTM Hub** and confirm in XTM Hub. The content you deployed stays in the tenant. You can connect again at any time.
 
 :::example[Connect Grand Meridian's tenant to its XTM Hub organization]
-Grand Meridian Hotels wants the ready-made phishing and ransomware scenarios of XTM Hub in its own tenant of Example CERT's platform. The administrator of the tenant, working in the **Grand Meridian Hotels** tenant, opens :menu[Settings > Filigran Experience] and clicks **Connect to XTM Hub**, then **Continue**. In XTM Hub, she logs in with her Grand Meridian account and chooses the **Grand Meridian Hotels** organization. The card reads **Connected**. A scenario deployed from XTM Hub now lands in the Grand Meridian Hotels tenant only: Example CERT's own tenant, connected to Example CERT's organization, does not see it.
+Grand Meridian Hotels wants the ready-made phishing and ransomware scenarios of XTM Hub in its own tenant of Example CERT's platform. The administrator of the tenant, working in the Grand Meridian Hotels tenant, opens :menu[Settings > Filigran Experience] and clicks **Connect to XTM Hub**, then **Continue**. In XTM Hub, she logs in with her Grand Meridian account and chooses the organization `Grand Meridian Hotels`. The card reads **Connected**. A scenario deployed from XTM Hub now lands in the Grand Meridian Hotels tenant only: Example CERT's own tenant, connected to Example CERT's organization, does not see it.
 
 The platform engineer of Example CERT adds, so that a lost connection does not go unnoticed:
 

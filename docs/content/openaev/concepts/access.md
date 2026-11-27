@@ -12,7 +12,7 @@ migrated_from:
   - openaev:/administration/users-and-rbac/
 ---
 
-OpenAEV decides, for every user, which tenants they can open and what they can do in each of them. It uses role-based access control (RBAC): a user belongs to groups, each group holds roles, and each role is a list of capabilities. Grants then open a single scenario or simulation to a group. You set all of it under :menu[Settings > Security], and the rest of the platform under :menu[Settings]. This page explains the model, the roles a new tenant starts with, and the choices that keep the platform safe. The pages of the **Administer** tab then cover each task.
+OpenAEV decides, for every user, which tenants they can open and what they can do in each of them. It uses role-based access control (RBAC): a user belongs to groups, each group holds roles, and each role is a list of capabilities. Grants then open a single scenario or simulation to a group. You set all of it under :menu[Settings > Security], and the rest of the platform under :menu[Settings]. This page explains the model, the roles a new tenant starts with, and the choices that keep the platform safe. The pages of the Administer tab then cover each task.
 
 ## What administration covers
 

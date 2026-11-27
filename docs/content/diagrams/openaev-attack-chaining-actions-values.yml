@@ -13,10 +13,10 @@ lanes:
   - label: The action
     tone: product
     nodes:
-      - {id: argument, label: Linked argument, icon: Terminal, note: One run per value}
+      - {id: argument, label: Linked argument, icon: Terminal, note: "Limit to Local Scope: one run per value"}
 edges:
   - {from: variables, to: global, label: seed}
   - {from: earlier, to: global, label: outputs}
   - {from: global, to: local, label: filtered by the event}
-  - {from: global, to: argument, label: Limit to Local Scope off}
-  - {from: local, to: argument, label: Limit to Local Scope on}
+  - {from: global, to: argument, label: switch off}
+  - {from: local, to: argument, label: switch on}

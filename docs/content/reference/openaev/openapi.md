@@ -42,7 +42,7 @@ The [configuration reference](/reference/openaev/configuration/#springdoc) lists
 - **The REST API of the platform**: every endpoint of its controllers, under `/api/` and, for the tenant-scoped ones, `/api/tenants/{tenantId}/`. The context of a request that the platform resolves itself from the path or the headers is left out of the parameters.
 - **Its identity**: the title `OpenAEV API`, the version of the platform that serves it, the Apache 2.0 license, and a link to the documentation.
 - **The role each endpoint requires**: the description of an operation ends with **Required role**, and with **Special Requirement** when the endpoint also checks a right on the object, such as being a planner or an observer of the simulation.
-- **One security scheme**: `JSESSIONID`, the session cookie of the browser. The description does not declare the API key, which the API accepts as well: see below.
+- **One security scheme**: `JSESSIONID`, the session cookie of the browser. The description does not declare the API key, which the API accepts as well: see [Try the API from Swagger UI](#try-the-api-from-swagger-ui).
 
 The interface of OpenAEV uses the same description: the TypeScript types of its API calls are generated from it.
 

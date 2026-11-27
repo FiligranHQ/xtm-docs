@@ -26,7 +26,7 @@ An email template is the lure a phishing exercise sends: its subject, its sender
 2. Click **Create**. The editor opens with the form on the left and a **Preview** on the right, which shows the sender and the subject above the body.
 3. Under **Details**, give the template a **Name**: the inject's template list shows it. Add a **Description** if you want one.
 4. Write the **Subject** of the email.
-5. To send from another identity than the platform's, fill in **Sender name override** and **Sender email override** (see below).
+5. To send from another identity than the platform's, fill in **Sender name override** and **Sender email override** (see [Choose the sender](#choose-the-sender)).
 6. Keep **Add tracking pixel** on to measure who opens the email. It is on for a new template.
 7. Under **Email content**, write the **HTML body**, with the `{{phishing_url}}` placeholder where the link goes.
 8. Optionally, write a **Text body**. The preview shows it when the HTML body is empty.

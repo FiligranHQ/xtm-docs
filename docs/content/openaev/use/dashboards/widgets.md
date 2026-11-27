@@ -26,7 +26,7 @@ A widget answers one question on a dashboard: how many detection expectations fa
 1. Open the dashboard and click **Create** in its header. The widget dialog opens on **Visualization**.
 2. Click the visualization that answers your question (see the table below). The dialog moves on to **Dimensions**.
 3. Choose the **Entity type** the widget counts, give the series a **Label (entities)**, and add the filters that narrow it. A visualization with several series, such as a bar chart comparing detected and not detected, takes one series per **Add**. Click **Validate**.
-4. On **Parameters**, enter the **Title**, then the breakdown, the period and the options of the visualization (see below).
+4. On **Parameters**, enter the **Title**, then the breakdown, the period and the options of the visualization (see [Set the parameters](#set-the-parameters)).
 5. Click **Create**. The widget lands at the end of the dashboard, where you can move and resize it.
 :::
 

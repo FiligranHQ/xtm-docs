@@ -15,7 +15,7 @@ Media pressure is what the outside world says about your crisis while your playe
 
 ## Before you start
 
-- Your role has **Manage assessment**, or your group holds the **Manage+Delete** grant on the scenario or simulation.
+- Your role has **Manage assessment**, or your group has a **Manage+Delete** grant on the scenario or simulation.
 - The channel exists. To add images or videos to an article, your role also has **Access documents**.
 - The scenario plays its injects on a timeline: a chained scenario has no **Configuration** button.
 - The platform sends email, and the players are in the teams the inject targets. See [People](/openaev/use/targets/people/).
@@ -54,7 +54,7 @@ With XTM One connected and the Enterprise Edition, **Ask AI** beside **Content**
 
 :::steps
 
-1. Open the **Injects** tab of the scenario or simulation and click **Create**, then choose **Publish a media pressure**.
+1. Open the **Injects** tab of the scenario or simulation and click **Create**, then choose the inject type **Publish a media pressure**.
 2. Give the inject a **Title** and set, under **Scheduling**, when the article comes out after the start of the simulation.
 3. Under **Targeted teams**, choose the teams who learn about the article, or turn on **All teams**.
 4. Under **Media pressure to publish**, click **Add media pressure**, select one or more articles, and click **Add**. The status of these articles turns to **Scheduled**.

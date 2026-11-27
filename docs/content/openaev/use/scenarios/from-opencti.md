@@ -71,7 +71,7 @@ Set the targets before the coverage is created: an inject keeps the asset groups
 3. In OpenCTI, create the automated security coverage on the threat. Within a few seconds, the scenario appears in :menu[Scenarios] in OpenAEV, and **Go to OpenAEV** in OpenCTI opens it.
 4. Open the scenario, then its **Injects** tab, and check the targets of each inject. To change them for this scenario only, edit the inject.
 5. For each placeholder, read its title. With a platform and architecture, such as `[T1566.001] Placeholder - Windows x86_64`, no payload runs the technique there: search the :menu[Threat Arsenal] by the MITRE ATT&CK ID, and add the payload that is missing, from a payload collector such as Atomic Red Team or by hand. See [Threat arsenal](/openaev/use/threat-arsenal/). With the ID alone, OpenAEV does not know the attack pattern: add it in :menu[Settings > Taxonomies > Attack patterns], or let a collector import MITRE ATT&CK.
-6. In OpenCTI, open the coverage, click **Enrichment**, then **Refresh the knowledge using this connector** on the OpenAEV connector. OpenAEV removes the placeholders, builds the injects that are now possible, and keeps the injects it had already built, with their targets.
+6. In OpenCTI, open the coverage, open the menu of actions of its header and choose **Enrichment**, then click **Refresh the knowledge using this connector** on the OpenAEV connector. OpenAEV removes the placeholders, builds the injects that are now possible, and keeps the injects it had already built, with their targets.
 
 :::
 
@@ -110,7 +110,7 @@ With XTM One connected and the Enterprise Edition, **Ask Ariane** in OpenAEV rea
 ## When the scenario does not appear
 
 - **The connector is missing in OpenCTI**: the **Automated using enrichment** choice stays greyed. Check the connection: see [Connect OpenAEV to OpenCTI to test security coverages](/openaev/use/coverage-enrichment/#check-the-connection).
-- **The coverage did not change**: OpenAEV refuses a bundle identical to the last one, and a bundle older than the last it processed. The **Enrichment** panel of the coverage in OpenCTI shows the request and its message.
+- **The coverage did not change**: OpenAEV refuses a bundle identical to the last one, and a bundle older than the last it processed. The **Enrichment connectors** panel of the coverage in OpenCTI shows the request and its message.
 - **The injects have no target**: the coverage has no **Platform(s) affinity**, or the rule of its platform tag lists no asset group.
 
 ## What's next
