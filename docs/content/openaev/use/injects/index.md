@@ -6,7 +6,7 @@ products:
   - openaev
 personas: [validation-engineer, exercise-planner]
 owner: docs-openaev
-last_reviewed: 2026-11-07
+last_reviewed: 2026-11-26
 migrated_from:
   - openaev:/usage/inject-overview/
 ---
@@ -28,12 +28,12 @@ A scenario is the plan, and each simulation launched from it takes a copy of its
 :::steps
 
 1. Open the scenario or the simulation, then its **Injects** tab, and click **Create**. The **Create a new inject** picker opens on the actions of the Threat Arsenal. It lists only the actions whose injector is registered in your tenant: an action without one would fail at launch, so it does not show.
-2. Find the action: type part of its name or a technique in the search bar, or filter by **Domains**, **Platform**, **Status** or **Author**. Switch between **Grid view** and **List view** to compare **Attack patterns** and **Kill chain phase**.
+2. Find the action: type in the search bar part of its name, of its payload's description, or a technique, by its ID (`T1555.003`) or its name (`Credentials from Web Browsers`), or a CVE ID. Or filter by **Domains**, **Platform**, **Status** or **Author**. Switch between **Grid view** and **List view** to compare **Attack patterns** and **Kill chain phase**.
 3. Click the action's card. Its configuration form opens.
 4. Under **General**, give the inject a **Title**, and optionally a **Description** and **Tags**.
 5. Under **Scheduling**, set the **Days**, **Hours** and **Minutes** after the start of the simulation when the inject runs.
 6. Choose the targets. For an action on people, under **Targeted teams**, click **Modify target teams** and pick the teams, or turn on **All teams**. For an action on endpoints, pick the **Assets** or **Asset groups** under **Inject data**. A field marked as required must be filled.
-7. Under **Inject data**, fill in what the action needs: the subject and body of an email, the arguments of a command. Click **Available variables** to insert a variable, such as the first name of each person. An argument that takes a file is a list of the platform's [documents](/openaev/use/components/documents/): pick the file there. The reset button puts back the action's defaults. For a command that runs in `cmd`, an argument value cannot hold a double quote (`"`): see [When a command is refused](#when-a-command-is-refused).
+7. Under **Inject data**, fill in what the action needs: the subject and body of an email, the arguments of a command. Click **Available variables**, then click a variable, such as the first name of each person, to copy it, and paste it in the field. An argument that takes a file is a list of the platform's [documents](/openaev/use/components/documents/): pick the file there. Some actions ask for asset groups or tags as an argument: pick them in their list. Asset groups picked there are a value passed to the action, not targets: OpenAEV computes no expectation on their assets. The reset button puts back the action's defaults. For a command that runs in `cmd`, an argument value cannot hold a double quote (`"`): see [When a command is refused](#when-a-command-is-refused).
 8. Under **Inject expectations**, check the expectations the action proposes, and change or add some. See [Set the expectations of an inject](/openaev/use/expectations/management/).
 9. Under **Inject documents**, attach files when the action sends them.
 10. Click **Create**.
@@ -44,7 +44,7 @@ The inject appears in the list with the status **Enabled**. To add several actio
 
 ## Manage the injects
 
-The **Injects** tab lists the injects with their **Type**, **Title**, **Trigger** delay, **Platform(s)**, **Status** and **Tags**. Change the view with the buttons at its top: **List view**, **Interactive view**, a timeline where you can also chain injects, or **Distribution view**, charts of the injects by type and by team. In a simulation, the **Distribution view** also charts the scores of the expectations as they come in. **Distribution of expected total score by inject type** counts every kind of inject: a team's result for an email, the result of each asset group or directly targeted asset for a command, each counted once.
+The **Injects** tab lists the injects with their **Type**, **Title**, **Domains**, **Trigger** delay, **Platform(s)**, **Status** and **Tags**. Change the view with the buttons at its top: **List view** or **Interactive view**, a timeline where you can also chain injects. A simulation also has **Distribution view**: charts of the injects by type and by team, and of the scores of the expectations as they come in. **Distribution of expected total score by inject type** counts every kind of inject: a team's result for an email, the result of each asset group or directly targeted asset for a command, each counted once.
 
 The menu at the end of a line holds:
 
@@ -57,7 +57,7 @@ The menu at the end of a line holds:
 | **Disable** / **Enable** | A disabled inject stays in the list, editable, and never runs |
 | **Delete** | Deletes the inject |
 
-Tick several injects to act on them together: the toolbar exports them, adds, replaces or removes their assets, asset groups or teams, tests them or deletes them. The **Import injects** button at the top of the list brings injects from an export, with **Import JSON**, or from a spreadsheet, with **XLS import (mapper)**. Both need only the right to manage the scenario or simulation: an XLS mapper is created in the settings, but any editor of the scenario or simulation can pick it. See [Run injects on conditions and move them between scenarios](/openaev/use/injects/chaining/#reuse-injects-elsewhere) and [Import a timeline of injects from a spreadsheet](/openaev/use/scenarios/import/).
+Tick several injects to act on them together: the toolbar exports them, adds, replaces or removes their assets, asset groups or teams, tests them or deletes them. The **Import injects** button at the top of the list brings injects from an export, with **Import JSON**, or from a spreadsheet, with **XLS import (mapper)**. Both need only the right to manage the scenario or simulation: an XLS mapper is created in the settings, but any editor of the scenario or simulation can pick it. An export holds no asset group, so an imported inject comes with its asset group arguments empty: pick them again. See [Run injects on conditions and move them between scenarios](/openaev/use/injects/chaining/#reuse-injects-elsewhere) and [Import a timeline of injects from a spreadsheet](/openaev/use/scenarios/import/).
 
 When the action of an inject changed in the Threat Arsenal after you created it, the header shows **Review expectations**. See [Set the expectations of an inject](/openaev/use/expectations/management/#realign-expectations-with-their-action).
 

@@ -1,8 +1,8 @@
 {
   "name": "inject-types",
-  "version": "3.261118.0",
-  "source": "OpenAEV-Platform/openaev@d61524e (openaev-api/src/main/java/io/openaev/injectors, openaev-framework/src/main/java/io/openaev/injector_contract/fields, openaev-api/src/main/java/io/openaev/expectation/ExpectationBuilderService.java)",
-  "intro": "The 8 injectors OpenAEV 3.261118.0 ships with, the 8 inject types (contracts) their code declares, and the contracts the platform writes for each payload and each phishing landing page. For each contract: the fields of its form, their key in the API, whether they are required, and the expectations it predefines. In the API, the teams of an inject go in `inject_teams` (or `inject_all_teams`), its endpoints in `inject_assets`, its asset groups in `inject_asset_groups` and its documents in `inject_documents`; every other field goes in `inject_content`, under its key.",
+  "version": "3.261126.1",
+  "source": "OpenAEV-Platform/openaev@24bd3e5 (openaev-api/src/main/java/io/openaev/injectors, openaev-framework/src/main/java/io/openaev/injector_contract/fields, openaev-api/src/main/java/io/openaev/expectation/ExpectationBuilderService.java)",
+  "intro": "The 8 injectors OpenAEV 3.261126.1 ships with, the 8 inject types (contracts) their code declares, and the contracts the platform writes for each payload and each phishing landing page. For each contract: the fields of its form, their key in the API, whether they are required, and the expectations it predefines. In the API, the teams of an inject go in `inject_teams` (or `inject_all_teams`), its endpoints in `inject_assets`, its asset groups in `inject_asset_groups` and its documents in `inject_documents`; every other field goes in `inject_content`, under its key.",
   "filter": "Filter injectors, contracts, fields, keys",
   "sections": [
     {

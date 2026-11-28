@@ -17,7 +17,7 @@ An atomic test runs one action, such as a PowerShell payload or a phishing email
 
 ## Before you start
 
-- Your role has **Manage assessment** to create an atomic test, and **Launch assessment** to launch, relaunch or schedule it. **Delete assessment** deletes it.
+- Your role has **Manage assessment** to create an atomic test, and **Launch assessment** to launch, relaunch or stop it. Scheduling it takes both: **Manage assessment** shows **Scheduling**, and **Launch assessment** saves the schedule. **Delete assessment** deletes it.
 - The action exists in the Threat Arsenal: see [Threat arsenal](/openaev/use/threat-arsenal/).
 - The endpoints run an OpenAEV agent or another executor, and a collector reads the security tool to measure. See [OpenAEV agents](/openaev/use/agents/) and [Collectors](/openaev/use/collectors/).
 
@@ -31,19 +31,34 @@ An atomic test runs one action, such as a PowerShell payload or a phishing email
 4. Fill in the targets and the content: the endpoints or asset groups for an action on endpoints, the **Targeted teams** for an email, and the **Inject data** the action needs, such as a command argument.
 5. Under **Inject expectations**, keep the expectations to score, such as prevention and detection.
 6. Click **Create**. The atomic test opens.
-7. Click **Launch now**. The action runs at once.
+7. Click **Launch now**, then **Confirm** in the dialog. The action runs at once.
 
 :::
 
-When the action is not ready, for example when a required field is empty, **Configure** shows instead of **Launch now**: it opens the panel to complete it.
+When the action is not ready, for example when a required field is empty, **Configure** shows instead of **Launch now**: it opens the panel to complete it. In the panel, a required field that takes several values, such as a list to pick from, reads **Required** while nothing is picked. OpenAEV refuses as well to launch or relaunch a test whose required field is empty, such as one created through the API: the error names the empty fields.
 
 ::screenshot{id=openaev-atomic-testing-create alt="The Create a new atomic test page: the actions of the Threat Arsenal to pick from, with the filters by domain and platform."}
+
+## Stop a running atomic test
+
+While the test is **Queued**, **Pending** or **On-going**, you can stop it, for example when you launched it on the wrong endpoints.
+
+:::steps
+
+1. In the header of the atomic test, click **Stop execution**.
+2. Read the warning and click **Stop execution** again to confirm.
+
+:::
+
+The agents no longer receive the jobs still waiting for them, and the test ends with the status **Error**. A command an agent already started is not interrupted: it runs to its end. The **Execution details** tab keeps an **Interrupted** trace that names who stopped it: `Atomic testing stopped by <name>.`, with the user's email when they have no name. A test that ended meanwhile can no longer be stopped: OpenAEV tells you so with an error.
 
 ## Read the result
 
 The **Overview** tab scores the test like a simulation: a gauge per axis, and each target with its results. The test is done when every expectation is answered or has expired: 6 hours by default for detection and prevention. See [Read the results](/openaev/use/simulations/#read-the-results).
 
-::screenshot{id=openaev-atomic-testing-booking-db alt="The atomic test Booking database export on booking-db-01: Prevented and Detected by Meridian EDR, its status Error because the EDR killed the payload as it ran, with its start and end dates and its duration."}
+The header of the test names who ran it, **Launched by**, next to the start date, the end date and the duration of the run.
+
+::screenshot{id=openaev-atomic-testing-booking-db alt="The atomic test Booking database export on booking-db-01: Prevented and Detected by Meridian EDR, its status Error because the EDR killed the payload as it ran, with who launched it, its start and end dates and its duration."}
 
 The **Targets** pane lists what the action aimed at, one tab per kind: **Asset groups**, **Teams**, **Assets**, **Persons**, **Agents**, and **Manual targets**. Click a target to read its expectations in **Results by target**. An action that aims at no target, such as an HTTP request, has nothing to list per target: the **Targets** pane reads **This inject has no target. Its results are in the Execution details tab.** Read its expectations and traces there.
 
@@ -58,14 +73,14 @@ A network scan such as Nmap or Nuclei can aim at addresses typed by hand instead
 
 ## Relaunch it or run it on a schedule
 
-- **Relaunch now** runs it again. The new run replaces the previous one: its results are deleted. Tick **Realign expectations to the current action before relaunching** when the action changed in the Threat Arsenal since the test was created.
-- **Scheduling** opens the same dialog as for a scenario: **Once**, **Hourly**, **Daily**, **Weekly** or **Monthly**, a **Start date** and an **End date (optional)**. The header then reads **Scheduled**, and **Stop** removes the schedule. OpenAEV launches the test a minute before each time, unless the previous run is still waiting to start.
+- **Relaunch now** runs it again. The new run replaces the previous one: its results are deleted, but the findings it produced are kept, no longer linked to the test, and the **Findings** tab lists only what the new run finds. When the action changed in the Threat Arsenal since the test was created, the dialog shows **Realign expectations to the current action before relaunching**, ticked by default. Untick it to keep the expectations you customized.
+- **Scheduling** opens the same dialog as for a scenario: **Once**, **Hourly**, **Daily**, **Weekly** or **Monthly**, a **Start date** and an **End date (optional)**. The header then reads **Scheduled**, and **Stop** removes the schedule. **Scheduled by** names who saved the schedule, and each scheduled run is **Launched by** them. OpenAEV launches the test a minute before each time, unless the previous run is still waiting to start.
 
 To schedule a test through the API, give its recurrence as a Spring cron of six fields, seconds first, read in UTC, such as `0 0 2 * * *`, or as an ISO 8601 period such as `P1D`. OpenAEV refuses another expression, such as a five-field Unix cron, with an error that names these two forms.
 
 Each scheduled run replaces the results of the one before. To keep the history of a technique's results, run it in a scheduled scenario instead: each simulation keeps its own results.
 
-The menu of the header also offers **Update**, **Duplicate**, the JSON export and **Delete**. **Import JSON**, at the top of :menu[Atomic testings], imports an exported test.
+The menu of the header also offers **Update**, **Duplicate**, the JSON export and **Delete**. Deleting a test keeps the findings it produced, no longer linked to it. **Import JSON**, at the top of :menu[Atomic testings], imports an exported test.
 
 :::example[Check every night that Meridian EDR blocks the Velvet Harbor loader]
 After the night of 9 January 2026, the SOC of Grand Meridian Hotels added a Meridian EDR rule against the PowerShell loader Velvet Harbor ran on a front-desk workstation. The validation engineer wants to know the night that rule stops working.

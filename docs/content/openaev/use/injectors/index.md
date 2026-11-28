@@ -21,9 +21,9 @@ An injector is the integration that delivers an inject: it sends the email to th
 | --- | --- | --- | --- |
 | Built in | Inside the platform, always present | Email, Media pressure, Challenges, Manual, Phishing, OpenAEV Implant | Nothing, besides the mail server the email and phishing injectors use. See [Built-in injectors and their injects](/openaev/use/injectors/built-in/) |
 | From the catalog, in the platform | Inside the platform, once deployed | OpenCTI, OVHCloud SMS Platform | Deploy it from :menu[Integrations], with its settings. It requires an Enterprise Edition license |
-| External | As its own container or Python program | Nmap, Nuclei, HTTP query, Shodan, NetExec | Run it with XTM Composer from :menu[Integrations], or yourself |
+| External | As its own container or Python program | Nmap, Nuclei, HTTP query, Shodan, NetExec | Run it with XTM Composer from :menu[Integrations], which requires an Enterprise Edition license, or run it yourself |
 
-The catalog, in :menu[Integrations], **Available** tab, lists the external injectors the platform knows: reconnaissance (Censys, Nmap, Shodan), vulnerability scanning (Nuclei), attack simulation (HTTP query, Amazon Web Services, NetExec, Stratus Red Team), communication (Microsoft Teams, Slack, email through Microsoft 365, Google Workspace or SMTP) and AI security (AI Red Team).
+The catalog, in :menu[Integrations], **Available** tab, lists the external injectors the platform knows: reconnaissance (Censys, DNS Enumeration, Nmap, Shodan), vulnerability scanning (Nuclei), attack simulation (HTTP query, Amazon Web Services, NetExec, Stratus Red Team), communication (Microsoft Teams, Slack, email through Microsoft 365, Google Workspace or SMTP) and AI security (AI Red Team).
 
 ## How an injector gets its injects
 
@@ -40,9 +40,15 @@ Some contracts run on endpoints: the attack actions of the Threat Arsenal, run b
 
 ## See your injectors and their inject types
 
-Open :menu[Integrations], **Deployed** tab. Each injector shows whether it is started and when the platform last heard from it: a built-in injector shows **Runs inside the platform**. Open an injector to see its contracts, with their **Kill chains**, **Payload domains** and **Attack patterns**. An injector deployed by XTM Composer also has a **Logs** tab.
+Open :menu[Integrations], **Active** tab. Each injector card shows its status and, under **Last Seen**, when the platform last heard from it:
 
-Some injectors accept contracts of your own, built from one of theirs: their contract list then has a button to **Create a new injector contract**, in two steps, **Select the template** and **Create the injector contract**.
+- **Running**: the injector runs inside the platform, or it is external and the platform heard from it in the last two minutes. An injector that runs inside the platform shows **Always on** under **Last Seen**.
+- **Not responding**: XTM Composer started the external injector, but the platform has not heard from it for more than two minutes. Check its container and its **Logs** tab.
+- **Stopped**: the injector was stopped from its page, whether XTM Composer or the platform runs it, or the external injector you run yourself has not called the platform for more than two minutes.
+
+Open an injector to see its contracts, with their **Kill chains**, **Domains** and **Attack patterns**. An injector from the catalog also shows, in its **Overview**, the **Commit hash** of the build it reported when it registered and, when XTM Composer runs it, the **Image digest** of its container: the digest tells which build runs behind a moving tag such as `latest`. An injector deployed by XTM Composer also has a **Logs** tab.
+
+Some injectors accept contracts of your own, built from one of theirs: their contract list then has a **Create** button that opens **Create a new action**, in two steps, **Select the template** and **Create the action**.
 
 :::example[What Grand Meridian's Velvet Harbor scenario uses]
 The scenario that replays Velvet Harbor against Grand Meridian Hotels uses four injectors:
@@ -54,10 +60,10 @@ The scenario that replays Velvet Harbor against Grand Meridian Hotels uses four 
 | A scan of the booking database server's exposed services | Nmap | External, run by XTM Composer |
 | The incident case for the CERT, in OpenCTI | OpenCTI | From the catalog |
 
-Only Nmap needs a container: the platform engineer deploys it from the **Available** tab, and it shows as started in the **Deployed** tab. Once it has registered, its scan contracts appear in the inject picker of the scenario.
+Only Nmap needs a container: the platform engineer deploys it from the **Available** tab, and it shows as **Running** in the **Active** tab. Once it has registered, its scan contracts appear in the inject picker of the scenario.
 :::
 
-::screenshot{id=openaev-integrations-injectors-deployed alt="The Deployed tab of Integrations filtered on injectors: the built-in Challenges, Email, Manual, Media pressure, OpenAEV Implant and Phishing injectors, all started."}
+::screenshot{id=openaev-integrations-injectors-deployed alt="The Active tab of Integrations filtered on injectors: the built-in Challenges, Email, Manual, Media pressure, OpenAEV Implant and Phishing injectors, all Running and Always on."}
 
 ## What's next
 

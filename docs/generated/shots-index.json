@@ -3546,30 +3546,30 @@
   "openaev-assets-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/2a338fbb00cfcab62e4544c702ad3a9fde552364deded118a8bce51dc28ab77a.webp",
-        "dark": "/shots/e54bc88499232787713b5d7aafba86b4750b225fbfdd54dad80a0ec818cbd3cd.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/9ea76ec52b8a4cefe707e19a9b97ea1ba144a2f4ca4408a0dcf99fa7eccf789e.webp",
+        "dark": "/shots/ae48c65dfb686856c30c0b5bfed48e43fef157ef508f3e8fd62bff4d9befc7ef.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-asset-detail": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/3bae5843d62b22cae6dee22f41f9458ab1729e0d2a72d03d1e78ba851e8a67e5.webp",
-        "dark": "/shots/6701cc9a50575c623c0b513842544f75ea1e43228091ad485479488cfa1c48d5.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/906c5386cf3fffe90585ff16cfd5310222f5c46f6f5011072e66825263c63999.webp",
+        "dark": "/shots/cd534a1210034e109e7d21b1d73c29f67701e0ff9d92f950e5790e905ee62d11.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-asset-group-create": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/1b4e7c8a75cceb418e56776ab39484be574bbcf0b024f9f48b839a5939bf2b00.webp",
-        "dark": "/shots/5fda05c8704ebfe9d90125900a309529bbf158307ae4f4974027b4490d657519.webp",
-        "captured_at": "2026-11-19"
+        "dark": "/shots/8a0511741a84d2cc8abc1bc48514bbe42e260c136d643ce1a2b038d011cc8099.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
@@ -3577,350 +3577,372 @@
     "product": "openaev",
     "since": "3.261118.0",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/d3810dfbdbb2a989259d0f46744f6d79b27d6ffa0412d51bb2f9aebd754892df.webp",
-        "dark": "/shots/f173cef6227f2f634c227546b990286dbb53fadf13b28070932bfb3f26d06fbf.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/4413022f85116f8b15433f9f6e1ba1398fb8b24219bad544c8d99f47f8604a90.webp",
+        "dark": "/shots/c25ac98d5e692723ddffda7af620f9dbacbc05869e16c6172c19df584ee03d0b.webp",
+        "captured_at": "2026-11-27"
+      }
+    }
+  },
+  "openaev-assets-edit-classification": {
+    "product": "openaev",
+    "since": "3.261126.1",
+    "versions": {
+      "3.261126.1": {
+        "light": "/shots/bda1e593403a3c40ac56add2cd195ba8fa4f656ca52fa026dddfa344b59c8f0d.webp",
+        "dark": "/shots/ebf326d129ed2baf23cae3623a0930e801448b649277177168baa81639794132.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-endpoint-agents": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/dbb88e65912a57adf7856fbeef07f403c16b1dbc88e0d107d2d9a43539fb11ed.webp",
-        "dark": "/shots/7e19a3d882840c9f11d4236f397bad8e14642b57df56e783be00ade510f122d5.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/9e70bd13263331160d54f4c9f427d840a361e91686537e2626a8bd2cdff126bd.webp",
+        "dark": "/shots/62e63a687a5f502d08e8ba23fd06ed5877be8dba71084b609048b5261b91a2c6.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-teams-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/0a773e25ff3691db60d7d8eb52b3d9146c7227b9e4a838eb5d616f0a1cd042e3.webp",
-        "dark": "/shots/69e64dddb9bfb14df992f5a9dac9928be5e0d23148b9010b6fd3f4371427b93f.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/6e55e897d5d776106d856f05000342870bba9cc6f4f592fbbff34f2c75761011.webp",
+        "dark": "/shots/3afbf94d6e408f8df7d434affbffaeebea24ba66b0f2002c20a14035861e22fb.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-person-create": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/c10e6671e2948a9c0b906501f7910cc77dd96b381bf85043c050f3d7896e99b5.webp",
-        "dark": "/shots/c372704deb59c078d5cded8d5589b741cbeb14c3c827d4889b846190d6ac351b.webp",
-        "captured_at": "2026-11-19"
+        "dark": "/shots/f436140dee813abcde4bce801371680fa9a7c46723ed8c9cb324bdfccb42126e.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-asset-rules": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/a4a025c0a2ddfffbdca5310b6090992e9c75196a0582abd9132793ef3e3c1737.webp",
-        "dark": "/shots/b1e1a20ddffb1a17ef79e5ff79a7db51eb2d57895329a2cdcf94ee59134bb3e9.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/c20594729e57307fe109ed7f82c3b78d9b05cbb5ac69b8378e1a539f007fc15f.webp",
+        "dark": "/shots/2dd1eadfec7e7108474e5402504f8414320a8f641ad767f90726cd365d3a00ed.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-threat-arsenal-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/11399d15d11b5de20ec0ab55e7ebdb6b442b7c86be1dfb2d3369926b31c6caf6.webp",
-        "dark": "/shots/4237a3856093a0b9b8e598e0319cbcbf5245e5c5f091249c227830b58b0c4f1a.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/6fddff6a7fa42c2b6b7d51d0055d75626dc267f45afd8607a0933f9885cc7420.webp",
+        "dark": "/shots/a16f2a7cfaf5491c148619d3a5d30448162a06cbe9000fb23e5e03e371ab758d.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-scenarios-create": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/2d505cba60127a2378760cb9c41c5e72dd12b37cdac502814b62258686988196.webp",
-        "dark": "/shots/42e960113ff276550d03895c5da3bdba5b264f1f6fd5358ef06cc2431c4bb3c0.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/f8074cb527d57ab882a3b0bb1191d2bd8a23b1714e99a03ca1e31695646f1190.webp",
+        "dark": "/shots/6a04eaefab5e52f056f4b85e7c652377bebc348bc82bb5feab93ae6a3cdaa141.webp",
+        "captured_at": "2026-11-27"
+      }
+    }
+  },
+  "openaev-scenarios-list": {
+    "product": "openaev",
+    "since": "3.261126.1",
+    "versions": {
+      "3.261126.1": {
+        "light": "/shots/975503152eeaa8f205304fed558c8103fb40e8b4b113da3116dcb0625ca9c17d.webp",
+        "dark": "/shots/2d993189f78bd8ed156c4946f72ee151200e97e9653d3075649115579de611e6.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-scenario-header": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/f6ddc4156fffd2086ae350d1648501f05e4fe8afd12e85b811fd0a8b0dcafafe.webp",
-        "dark": "/shots/4b79ed2b2b3f8dc70b8324a38ddd5efee2393800ff935d09b7f435cfc4203ac9.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/1abd561d4a30402f596b0301c5b89e1fafa626d3a4a6d9ef29758c8429203fe8.webp",
+        "dark": "/shots/aadfe0599e16f6317eaed85654120733d9c13c3f52f4441d4cb98418f6013ae6.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-injects-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/d3072bc0fba87444b36815a32bb016a2dc70ae935a373fe9557ce80f74a1be86.webp",
-        "dark": "/shots/a9caf6c68081fabdf17de69d5beac409a40ea089c2d43a61f420d42eec82e65b.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/512b28495c2340a6f5080025de8381b244aa278e94b7c9733a13299a8f2b9a5d.webp",
+        "dark": "/shots/acd4f19c12c8f3b000af4f7673439c814e5a52cda9d19bd4a0e1e4c63a1e684f.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-profile": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/29c39be16b915938988c7bd6f0fecd85542ddf1db6d347cac307600286e9e8f7.webp",
-        "dark": "/shots/9575523a923af3dd4d857660e4631e1e9592251bdad79abf7bd84fb2a8bed86f.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/e97ddb63a398878d666a7b77364ab4c629cc6b7736cbc1c4ce053871326c0eaf.webp",
+        "dark": "/shots/8f06df2cacbda5fdaac6da35ca13a1290161cd07572c49e50fd64e44805e438b.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-documents-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/67e6e53b3e74e27a58bfcc3e511168b162066d297981d8f127a4ed6a8bf5f0c9.webp",
-        "dark": "/shots/983b6a84f73e422feef41367887ed873810c85d765ae7148349e020846dcb006.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/40c51534a4dcaa16859c420714e01a1cf6980aef2c1c5ac17f131cb29007385f.webp",
+        "dark": "/shots/07d3f304a860ce841ccc1e949cececfa0dcea773425f0aeeedd9d008c36495a2.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-variables-configuration": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/9c0d990547e4b941ae4a2c5144e48e7b5e4f0b3781bd9b9f1d3b12e587e5bcec.webp",
-        "dark": "/shots/af66a2d09aac086c96e09630ec6f7b066df168c13aeb3d197288e364bfe07865.webp",
-        "captured_at": "2026-11-19"
+        "dark": "/shots/8826a12e2c74cd4cf3190fa513c6074a965e851c335fcba055a81f8a7389de45.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-channels-channel": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/f1c7a8af4674ea7b549849d32223598b749eeb08d32ea5f30b8d03d3edf4cb52.webp",
-        "dark": "/shots/395732c14aafabac541edb95b34d17c1f42d4b7e48e1599faaaa7e347f097672.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/3e088074207d5e153128f77ac10418defc2307cef45b5245273e74b04a95a198.webp",
+        "dark": "/shots/266c370f709f6c5bff6ad94cb13b380e73e3044599bd7d2c245642428fd454a5.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-media-pressure-articles": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/d203fed0fba41ba8ffae60c32a994dc1af989e0f7987f3d048f261f8943a0702.webp",
-        "dark": "/shots/4f9bf459bf7fce986a0505d237132ead1802910e4ae33fea4477da49757f993b.webp",
-        "captured_at": "2026-11-19"
+        "dark": "/shots/6e3a4e5fe6fc9ffd7dd4bda2d524d1714e43299f7d6e3ebd00b8b8fae78a82ce.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-challenges-create": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/9867698acc96bf2e4f3834ffb5070af798f4750f241115615222d675625dba1c.webp",
-        "dark": "/shots/a5b64fe495d489d2db41dc0fbf9ff510ecf9004cfccc5a5ea7ea3453b1385b92.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/d0bb81d352eaa775989da7400b721cbc2bda885eb744c85e1929315a727107ed.webp",
+        "dark": "/shots/5392fe61f019b361d038d822b541770627665bd72581e2b74730ef349b2352c9.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-challenges-preview": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/4daf7a1f15c66e15f75c5f3ba59c94a8eb8a8d27b52909d0936f406d3052de9c.webp",
         "dark": "/shots/f14e2d3674ca63a945a52c9a65a55808ff4e112fbf091bc364144c3ca5f7dd32.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-lessons-template": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/870e27d69f5bd574aba2ff38e792c1000f0ac9052be29fa2984cf36eeb54add3.webp",
-        "dark": "/shots/74250a9d9c01da9c9484936c3d4706207692cdbf53d155d5faced7f2a1f567b2.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/a622fdf456218c5ad25d3ffb5f5e062191b085ecbf749c82e4960d2fce1b7ba5.webp",
+        "dark": "/shots/cbb625b9f1c87f1bc2e8fd8aad07c73ac0d2b30c91e9578540a15d17f0c7998a.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-crisis-injects-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/467ba85b7e31723aa004472ceb1cf065f3548766b36c389f140cff778ec33812.webp",
-        "dark": "/shots/cfbdd3efdced6ebd13150e147e510b56af7d16c287d98634235dcb800499d01f.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/b9a3780d2302974779799efc53669ec199edc8db2afeeb843c571b08f1ea9dfd.webp",
+        "dark": "/shots/a4a997d9188d69b0bbb2b324689d52cf96d21e6551b65d2c137c6d1fabc2e871.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-phishing-pages-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/605425186eb624a019cfc26c29c49b8107eabb86db206866ff4700a08311fc88.webp",
-        "dark": "/shots/8022d4773fca08d10a67a05d8eef5f50e3d2eb2d6e7eb4ed3e81c6e0280c9d04.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/0b545b83eceb462e2557ec8bc6efc778a99dcb6c92707143a5c28ffd42af4b24.webp",
+        "dark": "/shots/1978d3305ee3599d527ff79fe5ec5a8a1cfd12781c58e20c675fc487da40a840.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-phishing-landing-page-editor": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/f3bd5f4f85580b764c61f05ac8c32bcd599b49117786d1da7582287510dd8027.webp",
-        "dark": "/shots/929659d0cfced95001457874df732db86d03f9fdbf116df7144e4155749e5da1.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/0988e3ea326b511d8e92d3d4dfe9f7d6972966ee171ace614507ca5d2c57b2e3.webp",
+        "dark": "/shots/14739c701d01c1b2e5d638ff96c7157cf2bcdeb46ef1663201a4ee958db2ccfa.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-phishing-landing-page-detail": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/184159cc4b99c91d47c424860d92f0d0bdcda81a7ed9735a4b80bbeacbfe27fb.webp",
-        "dark": "/shots/1ae450e5a4fc534caefe34028b6445b8f02e20c0cd567202d3579a58266c735b.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/61875f32cbb32a9776cf739256817b9597789de5a72b2510dcc8f400c693b911.webp",
+        "dark": "/shots/6f780036f6c5dacad5cadb0608268a126085928ad3fc0372837a317e5832a522.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-phishing-email-template-editor": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/fddbfc8b63b6cf96b043049b076101ddc34992346ef5b2a86f862f18f9819ee0.webp",
-        "dark": "/shots/43a4f9fab7a852d0157db837df3fbaa88f1c59d285917c220a7ec3784dd155cb.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/0baf51f86035dc10b75afdd546ecab80e6f65d047ab1bc3158441aef0a85b4f1.webp",
+        "dark": "/shots/0d612fd0f8b24c686ca91a328243bc87db3c7e1c5801c201721e68cbcaef5b68.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-threat-arsenal-general": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/4e5470689d8b2f30efc804bea9f01bd09241049a7920e46096be47ecfcaab5b7.webp",
-        "dark": "/shots/ab31f5ae64e6a3c6874276d3a94787197e72cbcccf9e24edff90b5c39c5add33.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/6d22ca46dd625d55da16a08a286fa88524acc14730e275444f9770609cdca265.webp",
+        "dark": "/shots/c93489331a61af0f41cd9761b42b24b73ed320174571da4a775d0959c1eb3d71.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-integrations-executors-available": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/9440559e7b2460f54308ef11524f372d7ac9c5c25371210ba0389b1833d39df0.webp",
-        "dark": "/shots/48d462eaf76c5b7d815375f81ed348216ca30004696fe99952785c3cfe7fc9d1.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/1470293e0563c7b58d32f1d198bf254b7ee710c83ed3abc82a9e835ffbaddc02.webp",
+        "dark": "/shots/262b4d16c15074ed0701e3bbcb578ad3463c435f045d857da9c66254173d8039.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-executor-crowdstrike-form": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/0f8825182b004b52a468a0db470b8c5d4db5867d4547748ab98a637fdb4a1778.webp",
-        "dark": "/shots/9d9739e32e9f1b19e971a3c254077323e3f990f6c2881702f9f1ca436e327ab4.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/cfdfa12468250caf7cc999657c539d67852600b9f58a02d2362f448942619832.webp",
+        "dark": "/shots/7c5b4cb814e2ebb901ec6a50668d2571da4bd935858e974fcd2fbc85e8ebb93e.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-executor-mde-form": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/706033382fcf48d22d4f7ceb3cdc54a5e243091c1cc283ef46c83fcba0881df0.webp",
-        "dark": "/shots/4aee26215da0df4bfde0ee06f38a384f47b9e34befac1902084523df599a67ca.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/5e0d373cddeb2a6313eaf7048c53667d4c1b878f931d5877c24acb52f79bd5f3.webp",
+        "dark": "/shots/57d156733fbbbbe798d5b194ef42d9d32f516cfa793e8ba1df37d93436c7acff.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-executor-sentinelone-form": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/2183293916603d7dd253e6772aa1a21a70f621854578ea4b4977a005d2481499.webp",
-        "dark": "/shots/34e4df256f84cfca1ec8e4e41a1df6206d0c0661d89dbf753480fce11d4ee4f1.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/6c6ada27711fe6c63776da28e971337be849ed83fb21ac234f474d312f8eca8f.webp",
+        "dark": "/shots/60822e62c363c7876ef6379e3707a1c28bba11772fe5a688c32461891bfa1c7c.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-executor-palo-alto-cortex-form": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/0c1faa3ca44f302426a48e58455b24270aa5af14774e3f71e16ea19019e55e69.webp",
-        "dark": "/shots/6782daf16bc5e299517d735f0bd0f2d22340ab2d3bf4816afd506ca8f49a5c43.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/3c25b99f0fe7d06f038433d161cf2b56b53f309c7c11791b8a7e3d0330c58283.webp",
+        "dark": "/shots/51d9c98e20e873ac3e814cb86fd641b7e71ae99f8cbd9bc2af81aafbfbaa7c46.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-executor-tanium-form": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/160c641d3bce278edc424bce4d20d04d76e5a46d2f5dfdc67bbd591ac06874cb.webp",
-        "dark": "/shots/f423f34f75eedd7c99b14d5696596cc47d416a04c8d98f592680b3ff05df4bb5.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/f6e0bb305c2da519a27849117c29483234c53550b4fa215b7a5c7a0eb56cb4d9.webp",
+        "dark": "/shots/4c60d375c5a3631a8c7bdd42c65d98669182a9cf57a63f595aab56988d4b3482.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-executor-caldera-form": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/00ff2db2b8c35baad619cfcf817b1c7df9dc64232ecae418895d9ae74a85f15c.webp",
-        "dark": "/shots/4d636cbd4141265742397bd12f5245dcff2b045b2325a86d429be296d501a501.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/afd89172bd6e1a932d19dbc971f2e8a3b2e6ae80151fecb46e087073cf18553c.webp",
+        "dark": "/shots/b9804c305e3fa8163ed2b5d838fc04adf3f81980e3b570c71d269834c39185a1.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-autonomous-attack-settings": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/561e9319674026ac65d1379dca9c4670c39d43126e304615bf4a21f2e9971310.webp",
-        "dark": "/shots/ca7c3c5c93a731df7d5f5a2c8cc575dd1fec3a44ee8c5a58b7010df3717b264d.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/e593ee7559fc18ec41f086b8d525990ba50d3303daa57b090bac6f9d3d2790ef.webp",
+        "dark": "/shots/4a216f1b39f44b114e194c228142ab1d9f1b0a3a80415a19d83f64eb223e32a3.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-multi-tenancy-tenants": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/ffcb83826c814317f6e0a8b0e573d78e39b3892449cb5fe5bba78447c501b21e.webp",
-        "dark": "/shots/7fd75d50b7338e38240cc5ce18210afdec783f303b2779e59689e1d70277bbb7.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/99a6930a87c8ef3aeb812671f4ebd6102eee169b82ea20aeb15d8812b8f36de6.webp",
+        "dark": "/shots/d94f7dfe50978e71cdb415d9ed4fa1219892f97e426b9afa85f2dc50c663be17.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-attack-chaining-overview": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/203a28b197e6d6f553869bc72e18f1609d4fb3add43685fdee79270445951f87.webp",
-        "dark": "/shots/df299f87d63d291fc555fe3d0501ec9ce2adbc8a024efdd31dbba85f70f8c562.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/8bf7bec05d8d4e09f365a92ace18b6876a199a581d0a667541e20da03597e955.webp",
+        "dark": "/shots/fe3a86226513ea369c04f7ac7bdb3be887839d14c1a99e68a314aea5b42b8c5e.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-attack-chaining-scope": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/eb779836776c0e79c097657e523872b8ec0ec989855af27477a504be2985a306.webp",
-        "dark": "/shots/77f035f8a4dfeb2f26c8991ea27225e65b89ba38241fc823d0486d97c109ff8f.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/e78c72134f6b70116cb8b19d15a254c4cef6e6e26d266fc932cf384d99bb3cc8.webp",
+        "dark": "/shots/52cb446da3c2788e4ba5294f193bba18e885a0c020381e84736842ad11b0a879.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-attack-chaining-logic": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/b816895bb3c68c84af87f799fccf3db0a0ceceaf572115451f83034001953c2d.webp",
-        "dark": "/shots/9680b272690bc09d6b805c88f7a483dddc40f1179e0d0f247855d047e3919c45.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/fad8b129fe3667ed23d08e363fa4e4d603b4ca87679676725f8db55131c45feb.webp",
+        "dark": "/shots/830a12cdbcda99ca8444d64d52f74d96da9581670262f3d998de771a9b64c140.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
@@ -4740,10 +4762,10 @@
   "openaev-lists-filters": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/189eadd88605bd837ec926d226d9dad999c7683ef82c847c9d5eb1c4a26b72e0.webp",
-        "dark": "/shots/6b98f5fdaac7a28964014b61112c7b0abf91a2e307a42a05a547142a505630ac.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/4e68160ff8e681391cb2b14d1fca2416df65725a8e20ea66019ff36d12b1efdc.webp",
+        "dark": "/shots/2249951b5b4021f62d8998dd9f5d4763cb7413262b1d90873206d06ed3316266.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
@@ -4833,10 +4855,10 @@
   "openaev-profile-api-access": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/15682520bfd69a3426b634a00d868f5cf4f88a3edfc2d14b44ade688888e6162.webp",
         "dark": "/shots/37235f1a0db0f36e3bb8dcab6a3299794a755b4ab0b89c2cf5c8ba8105f2b7af.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-27"
       }
     }
   },
@@ -5017,240 +5039,251 @@
   "openaev-simulations-execution": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/d9b324ccbaa79951a9d8043df9c3f57fbc17190140a1fc2a8f53e38f1dc22139.webp",
-        "dark": "/shots/76606f646c6c1132ff43758729cc61a3b248be088313413c122eec14be553df5.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/7b2dac49ee848adefdf596fc7738993e822cdff2ca68b11dc49fd6b667551fce.webp",
+        "dark": "/shots/8a1374ed53653968adc5dafe333d7be293ee8f540feb60dafab8cf596c86ab72.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-simulations-mails": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/3d0ba45b650f4be50b6ccad3d7e46eb433e2f7e6a3c169071e133d57221b4c4b.webp",
-        "dark": "/shots/e4bfc3234e87b30e3766610c513a2a1865d17fd0303516191e550df8a8388a2d.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/6dfeef9b65243f502128d054c3a00e51c8fe20a07da35b173e6dfda91eeeeadd.webp",
+        "dark": "/shots/3a6c0b5cfc8b08c7d9be6e187595d86ecbf0cbfc49b42fada63cb9ff67819b8b.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-atomic-testing-booking-db": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/098b6819220c5773b07b82e889969b012945beac8e0ad6df7350c45149878390.webp",
-        "dark": "/shots/b00b5366eac96c3acbc56511813a354315f460162a77d2a325ab53fee1a7a670.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/8ece2bcdc5a938b9fc77230bdf1faf296d743524ec05b4d2423b5b1c02d2311a.webp",
+        "dark": "/shots/0d9cf6ec5398f174e269d7a1dd28e1314629939afeeed5d431ca60b464147d35.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-injects-results-target": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/16b1b81886fc67f87b31042c2474a5ccbf627da51a183c301145a3eb653e8638.webp",
-        "dark": "/shots/269914c8f1b2ce966a2e8eaea41f6f04d0d9443eeb23c878a837dcb0e6dd7a0d.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/c16b9d3b69084e381a189bb635778df2bb8b46773e820f4fe79d4a33f176b868.webp",
+        "dark": "/shots/0adca8d8bdf6d6b4acaaf535fc854f6ce0bfe10d33a8b0c9eee724ef9834425b.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-expectations-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/b074347ab87e681017dd8903b9696376503ee944a29c28a906644b0227cc2788.webp",
-        "dark": "/shots/6800632274ae9255d0a4c1e6628419e0dbbeeac56764302459f6fb81fed287f5.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/01384082c7e2a65894b37dc51b9c61cdc7770fce3775bd1c0a933020464b8f81.webp",
+        "dark": "/shots/b5f86498922e36b3b2042c45f40201ee4eb89f0e9f40ecfcf9dd23f53bad9bdc.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-expectations-update": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/616cbf44e1f1947f766e7ad058dbe0934b999afa694ec4e02a3b13e2108ac162.webp",
-        "dark": "/shots/d4961ce9f5ca98cabc9f3335628d85534c2e0338fe742e93e1d4c4814ea39c5c.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/ad9e177f4740785311131ed0aafc5350fe6c80095e6255db14faab9e69965cc4.webp",
+        "dark": "/shots/b24aafa88046283e6e8e230a97a643bebadc75b9bbb0074655fb1aeb905ae1c6.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-expectations-drift": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/e83d37f726aac3ff4860438bfbf7accf653f09e905012af0ef97b89dccc075ff.webp",
         "dark": "/shots/e08450527470331812c56c268034b5481b9932b6d675f1236e4097f991c0b37f.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-findings-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/b15cba0291c9a8995ac5c4f276c8a9510e0de094d9ba7871676cf29db770d719.webp",
-        "dark": "/shots/697f5cb12f471a36954560c252a95e79f43c89dc0fa76ad8dc99c683845c3aba.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/978f297a3df1acaebf1e7ce649c24bff69cf51a3f8f301c05bd78d4b3886e094.webp",
+        "dark": "/shots/49128c015f44404bc079a1dd196a8fb804d07bb179b4d43473bc61b08691ce76.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-findings-detail-cve": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/b2cbfdc261809888f103095601377ad56f53ebf75fa4ef17fd230a1dfc7ee574.webp",
-        "dark": "/shots/d12a195939f41ee9b9b54bd8b4dc5db195492397e970ff659d22950e1dad7050.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/1b742c42bc232059f483b534b163930271306fc0088d15bc676ea7cb9146be20.webp",
+        "dark": "/shots/3aaf910a63b521c72a2e1e3349664368853a0efe190d0d0196cb5701f0c775b6.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-output-parsers-output-tab": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/f0cd41aff68c1ef22ad791d72ddb596a8b11287d4a36845b85c4214aaa167a9d.webp",
-        "dark": "/shots/c61ebe180828aa4cdc9509673082d87e7df60e80afc66e07af52facb56c122dd.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/d6c4d8c3c6eb3ad56f2a377b42b23381bb13d911f6d959a965144565a9f8d8fb.webp",
+        "dark": "/shots/e7bdecd13687bbbfed3afc8711b5717ecebd56cebed5889d10636ae788cc0df0.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-injects-test-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/469275dd492ccff3a69bf56269b900ca6665efdab4d153a43a3ce4b8fc40e9ee.webp",
-        "dark": "/shots/4d6e92c0dfa0cbc2d084a2239cc714c579b74e719c4ea884ca50f1de5d96fb03.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/6be7154427f328ae7defc5a04cb8088cc787254ba3025304ad9c0cf683f26e24.webp",
+        "dark": "/shots/c5748c4b4224bedf92f59023e2c574d6a0464b224b6af2e7e9d6370d54aa581e.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-injects-test-detail": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/ef47742c113ddfd4ab983d3339ff8da67f3384b222c6a8d324c188614893dc5c.webp",
-        "dark": "/shots/f788d2b7a32f1d8f014ba7ab07d1c3b1c1d004f15ca92ede912d566a0fff8e77.webp",
-        "captured_at": "2026-11-19"
+        "dark": "/shots/56d6f4e091c6addc52e9622fa8964da5a3216b102c37e10a25df81c5c53578b5.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-injects-chaining-form": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/9e70891957edd25c28074e7377a63194eb0c209307c132c221e9fdfb478ac7c7.webp",
-        "dark": "/shots/e1db5dbac47e4985d56ddcf007fac1d38c561adcfc92ca42ff4efced06d35082.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/2e735b2f2243740189109c03c35aca46053b10d1aab79d69596515c9a090464b.webp",
+        "dark": "/shots/20d39840c7d4f53953ff54726247b483021ba319be2aa681ca20a3a7c381045f.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-injects-chaining-timeline": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/d97cbdd1beecee84014c0b12c04afdafa0c0629442feca60eba80563b8caf5ec.webp",
         "dark": "/shots/7dd750f9e38d8f5846587db323e433115aaba78e415e90c7539f24b08c73adea.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-dashboards-home": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/515230199338b7970c90ab7552c2b2b3d1206b823093f9177dc49e622bdccca3.webp",
-        "dark": "/shots/878e8d344c41cc941242da6898f675d9b432bd56bf74713d1f6ee57eb3551492.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/31dd3c7e5b4790f5ca87913bec53c8b7cf163096287f272c05c0f22cba8a4d27.webp",
+        "dark": "/shots/8c3d574197825b17ba61214805cedac3250f6811c626fd7c034abb258db5191c.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-dashboards-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/cf3690b3d66d17a94d531035e4bb36f487b4e8e921f6e6878e4e59fba766c5f5.webp",
-        "dark": "/shots/8a2775f0ef6e1bb1e38389d9bce248a279b15d9ad360a407df624746d69e5f81.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/0cfb56f8d7622c1e04696b8f736daca4f6645fdb356c6a5c6aeaa3f71ed6b5ca.webp",
+        "dark": "/shots/dd0c640dcd130e3a4bb94b880b0666c2e692509acad4d8e031564cb152e43a4d.webp",
+        "captured_at": "2026-11-27"
+      }
+    }
+  },
+  "openaev-dashboards-delete-usage": {
+    "product": "openaev",
+    "since": "3.261126.1",
+    "versions": {
+      "3.261126.1": {
+        "light": "/shots/79f090a64031508ee57eee375932ee911e42a9072463f529bf8a96935c1eee1c.webp",
+        "dark": "/shots/98517493394e06bbbb34efa91d6e8ba9dbe09f402350f6a6f3f9df957754a07e.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-dashboards-create-parameters": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/9f1eea142071ab9ec50eb23271a78e9740ebda8bad8ff193bd72e6ee56777692.webp",
-        "dark": "/shots/198e4b94c08c5d18a0e311aaa64f959cc1e9c0d1b73419c10594bd745c175dd8.webp",
-        "captured_at": "2026-11-19"
+        "dark": "/shots/01f849dbbb83f972ec2138ef58551db0375a6d119e6ba0f686bafa067742bf37.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-widgets-visualization": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/b85f15d4f3fcea7209fbd7144049a98ee8776d42cdca0d1ffeb753e92eb4a8df.webp",
         "dark": "/shots/cfe3d4fc3945054e139a77fb5688f234065c172bc852dacc830215fdb88d6917.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-reports-modules": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/946c955c8991d3cc5effa94a564e83bcafc9dfd3e733949bb451a563ce577571.webp",
-        "dark": "/shots/fa41168a275499fa0faa06709fd7b9bc65131ef8339f20013899762718731a00.webp",
-        "captured_at": "2026-11-19"
+        "dark": "/shots/91034470f07651b1bf491d3d80bcc0f341a0e381e5ec93cc687fd7725447798b.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-reports-preview": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/d5b32cbc88fe918223705149b1326637e2a8ea9fc6d6c13b40b81f59b8d57c73.webp",
-        "dark": "/shots/d8014199cd0f96006a7db394eb062cc319b4509ffebdb169b3752bb322acd287.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/91118e5d6c80e0c256b7d78e67f3d7f71a586bb02dadf5b65a4d680c534c1c84.webp",
+        "dark": "/shots/4021c1bd630f9d56e39ae3415fb32ac60c6efdafc3a45f0aead432d92cc8bc4b.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-reports-generations": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/60e90871dff2b57c0f6992dd9c31375363d82c1adbe5efdb1342d57497d5859e.webp",
-        "dark": "/shots/d6537040ab4bbb72e70fb36019a3df5b36e754a70c4cb3db0109b0004c397809.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/8f4425b8d29f23fa721d15d8a3837133eb6ce0f6d1ffc43a4691d109f670d098.webp",
+        "dark": "/shots/b3827785bd1628efab2f3708545de625962bcbdf8b93c1248faef24fc4ccc8d3.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-reports-schedules": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/27ee837d3a9a5998ebbc17ca28f502ff86ef44cd5cfae7b8f645e775bf9e3178.webp",
-        "dark": "/shots/d6ef9a54ce3e6e6ccc2097ec2ca828837da87169309085893582701cbbef9e6b.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/f7e7cd957aef6a0da34fb44bc0b87c72cd6299a5419f3c0d1a18912aeeb719bd.webp",
+        "dark": "/shots/9e3fb53420b2275fb1b2d641df55c884504dbd4b3b8fd67f928ff74dd4aa1bba.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-phishing-team-results": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/d555acef74ec459616142cb0cc0e3a98069723ec240621458b7450bca268c46f.webp",
-        "dark": "/shots/dc920ad03ac9bf55025eaed813ea5c30372155881f36c7bd373c0598ca0278f0.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/ca053f7bc73691168483bca7eb22368ce4bbd85045654d2570048b19b7c3b157.webp",
+        "dark": "/shots/8f5f0afc059190d6e3faa41f13cb0ed927d6253de7e6ff544c7e08bd0044d67f.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-phishing-person-results": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/8e6a00cbad56e2315b8beaa082e69f6a21729f04e539dc5263470b99a997950f.webp",
-        "dark": "/shots/2e9eed8df9cc49643cc7655710ff7899dd22081c972aac3ca96738fc33eda672.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/f6ae02b364f6baaf4df9e6866b6b928574ccb5882b0240594241f557f0cfad1c.webp",
+        "dark": "/shots/75bd269fd83932c206236b9b8a09a6146877fc2eacb041ed9c1ef35918e79d36.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
@@ -5258,170 +5291,170 @@
     "product": "openaev",
     "since": "3.261118.0",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/e3559ba25312d46dc59b45aee701d1fbe570a8325828b3fc12c9487e1e4132b2.webp",
-        "dark": "/shots/9a1ccefe51df986747024872b5cd30727e773de891d0d54d71e4a7a7548de6e4.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/e1a6bd3026731b6609bff7e42dff8174f1b82b776fe27644a972baaaa4892461.webp",
+        "dark": "/shots/c3d836a56e51f8b76b3ebda638be9055ed912674475b30e93ed5fd59d9d24245.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-phishing-execution-details": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/cc0bdb42361620486b7ac08aa6ae97dc3c280574610ad72dbc5d790bac870d03.webp",
-        "dark": "/shots/9ab3f42912c65f347fd20c428da5ce9d9a049ab8cc0e290018dcb31455ccaf2b.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/43f4dfcbeaf1ebcffd098c2bce07b70a77e01d1df3efee6ea5c799c1f658e9ba.webp",
+        "dark": "/shots/bdb72569a6147bea9db6d7b3ba522b9edcf6146de9beaf78089cefdf2eeccd32.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-phishing-credentials-finding": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/9ca0dfa544ae8262f8286161e434d80a03f993dec837229057278adbd0b703b2.webp",
-        "dark": "/shots/ebd76da9cd528af86afe3666ac758168a73dc2b583220bfcf8a55668356adf97.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/d326f35ed2b2b9cf5bbbba945ef1b3e9f602eb6a610601613b7114dc80ca4ce8.webp",
+        "dark": "/shots/b6cc71becdaf53a167577dc729eb33a3693f5494ee28459361a5ab5131b7b4aa.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-attack-chaining-autonomous-launch": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/40ec6d5aebe9b245d4bd00e03efef71d4bb5ff51b451508e8cab7a1ead93d61e.webp",
-        "dark": "/shots/fb9f8a94445053aee5d08bec361b59f7041c4c2a6c768bbf56a5e75f133d032a.webp",
-        "captured_at": "2026-11-19"
+        "dark": "/shots/c08af0989711d3c2e1920902381240cfa28528f5fe4d25a26b0189b741ac6abe.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-attack-chaining-action-drawer": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/5f88c8fef22e755aaffbc3683c59df539f25f4f56854b8947135a71c5d71f837.webp",
-        "dark": "/shots/9c8a7bc568a1d57eeccc459185559850167a5c539e47d67b0ada18be006fe0a9.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/336330bbb4a4cdb7cf2ef5b4727280a453473fa80ccf7f195dfb78fbc7e2f4a7.webp",
+        "dark": "/shots/3d4620857b1e6a7abf2cdb6c00db0211f46d4955c19c5c02d1f0ec80c812b08b.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-action-properties-general": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/3c7d4d4d7648cbfaf611a8a00be789144d9bd8d2e996cc0eb512d6db302264e8.webp",
-        "dark": "/shots/f0156ddebb00995b2f87393afbcd114d08578b1db49d3577e088c7856540bae4.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/a9e92720057ae05ba98bbd0b672a5f0704121b635c6eda907008bc1f30e5612c.webp",
+        "dark": "/shots/6a3cfa0066bf489d88790e0040d26543306fe2c60f36d13c807b52d78f141b41.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-action-properties-commands": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/90cdcc1d98033f4b45711ce82b28c1f8f70480937c694b0e7644044810301c1d.webp",
-        "dark": "/shots/d450f5b50fb1627ae4987fc376f6cdc808249ee0ba657fc17e3b97ae72c1c923.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/fae9b4aeae5adf613b718beffc1f796a336dbc15181ad52a38307913e44210f6.webp",
+        "dark": "/shots/bf270abe47df6d19a5ecd80b495c7668a09361d8ca7878eacdcc860c7680812b.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-action-properties-remediation": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/481b5f2f1465b82ae293cd5cb0468236c762e9ba8f92e035007dac94d75f1d9c.webp",
-        "dark": "/shots/f189352d56fcd382cc7138080cf3a3d4603779d1ab23789483a9dc36909508a7.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/f1bceef3887d358f7f01fd9051f5b6bed2b0f14896949101acb83fb81903823b.webp",
+        "dark": "/shots/55adbd7e02cb2d67f79caf1fe28d78955ed939f30398d31145c2cc4499a13627.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-phishing-custom-domains-list": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/484b477949c6c0089f5e510693876a85cfd3a2c24350f2b4243e7a7c62d1377f.webp",
-        "dark": "/shots/e0fbcdd27016156e15715147dde7fb296cc7825a8fcf9ddbb1e009d0986302cc.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/773183b9ca1ffac1eafd20ea0639ab89776633c70e7db76272d67805cd69ec69.webp",
+        "dark": "/shots/71d9a56d4c7a951218b0766a861ec19c46712f648c618f5534f49f1dc6a1638d.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-phishing-custom-domains-dns": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/57a8b83bd48f4596097fd467802c867b79ce7e889946e0645008a2d838d55125.webp",
-        "dark": "/shots/f128ce88fb2af1bfaa509fd5c5670eec41f9a951c41969339b1cdc2d1c162b75.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/fb1af1319f53074f1d8796a00a5ff26e1607268ca944d0f02b2095fafe3ffd54.webp",
+        "dark": "/shots/46a583fd47a439a46e4527e8d0a38aca7ca62c73551c531a4ec8216206ea391e.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-notifications-triggers": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/2e1398645e97f28e03400bdbc4d9b489149a9f73b2e9af75f1d46b7efabecf20.webp",
-        "dark": "/shots/37a4c24bd5151d6c404b6dbdb15964d2512f10ad10b1989db7f4395535d4acd4.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/e4178a84631e528244920dfb61bc9da4b17f14d19be0eb3b12870e07cb304d54.webp",
+        "dark": "/shots/ad1320430aaccf8fc34030ecfc4ce2c63962cda9632cb49fe8cad232379dd80c.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-notifications-alerts": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/1f70afa7beca235964e3ead0e8a1a71839575d86745462d518f5a03e4d27d74a.webp",
-        "dark": "/shots/2c007f100806ad17cdf1ab9f16a003b1a2ea095e1689ea14b50e6641e12244c9.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/f2ba8985d373614e5b98fa3c40eb336505f386cb72ff3d82a067a0169677c8f6.webp",
+        "dark": "/shots/45e1c348a2c14976505c6b48e044a734d0e1445110e87518d2aefefa1858a7bb.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-notifications-notifiers": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/35f3501f57f68e8a970a4bfb0ee95cbe1dc7d250e9da0359d048adc1a54434d8.webp",
-        "dark": "/shots/d54c05e41d69c177e79367132ce4b275ec8c8febcb8bec5814fa497f16056f49.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/914622f7c78e7b678483dbcfe7a6d51b1277005bc0782e33d07048748c870d95.webp",
+        "dark": "/shots/c66f6f7533412328cac797a4ceadf9850ece3e7ebab13be87dc55c07bdaf1a0c.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-scenarios-import-mapper": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/00d427ea3f44b9048f8ddb68b948b9e6fbfeae582dad97a7fa6bc173c691445d.webp",
-        "dark": "/shots/5eb569d73daa849b7f31e415fb47345e464aac51f7e6c1aafaaa0e5a71d5d266.webp",
-        "captured_at": "2026-11-19"
+        "dark": "/shots/ceb73691702aba9e6139bd1ff856c40b5a4815ae35d2476a792cac5d7f02f5e7.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-scenarios-import-dialog": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/14d3e15262cf040146565c568b919ae6f15fe8ebc9f904c244fac2f497669d8b.webp",
         "dark": "/shots/fd333428353110be8d0a2adbb37f6428491a9e27b8b55e5e33dace0d199df6d9.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-scenarios-from-opencti-overview": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/151db59f69d8107aad4933a27e18da40f54cdee380595cef728ff592d011438c.webp",
-        "dark": "/shots/ef5178bf3d1b5b23e92549bdd630286c19de3cd274f3de02f80d2e2463ad5a35.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/e202d341036e4e7fd42303037d98e1227b46708699faa482b9995b6c50139e89.webp",
+        "dark": "/shots/03770f20fd79394859065ca2ea3e104e71a322b3ed3c9cdfe95b35daa05e2837.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-scenarios-from-opencti-injects": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/19b592050bb1528e0f08b1f0a5a002af4924b7f97cc8b7b59fece08c08db1c13.webp",
-        "dark": "/shots/3deb0c9598a06b9f0d09fdb2e739aecd36b56f93efa7dc8822962d0e1d2f8e8a.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/d8b3eea622c9b34a7b6b7b839064149a02d6f34a52470413ed619b550a5963de.webp",
+        "dark": "/shots/d39765246fe267354058b80ff367c6ad22d53c6e212e79cb506d9a3de2087d38.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
@@ -5439,60 +5472,60 @@
   "openaev-attack-chaining-logic-built": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/8be44baca7df6e1b5528344d108a90f096cbb2b2a20e9f414145fd1167d64591.webp",
-        "dark": "/shots/3ce7216531843345da433133bb794f59beb135b8b39f8d15cec7c362fe3c873c.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/25a0d66a38d659c9593b1b5352ab69f860a5cd187c04b6825a4a6c82ed511613.webp",
+        "dark": "/shots/6b12ebcfea2c6d1e26953a7b33387d5d2fc1aa3d1ef49e03826742c325258be5.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-attack-chaining-execution": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/c4fa8e9a76e15aac6e00a94a1bfb5f2bf49f6ec77d7f0faca77e5d921671500e.webp",
-        "dark": "/shots/c824dc46d0cb1105109d2c7ba1eb0790e723bbceeaff1aadfe6c79931124a06d.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/8e7baac07eb4be63e4dd2918281bb5e29e36fc33335df9211549bd814de63125.webp",
+        "dark": "/shots/0ff9541f5a276553ccf7af5de42e1719902dfa20490c548b3ac9025d39deb0e7.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-attack-chaining-attack-path": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/96fa90b51cce9e2f1a1730cd30d3c77b3a5833f7f7dbf584d416903f33899d67.webp",
-        "dark": "/shots/5dc3f06b2c5aca7308cbf8367091e0d9ff7a40b4cc009af26f8082a8af0fb861.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/2456c018a2bfa8e27f1d837c277d00497236195d773f098dca2f46cafc1e4945.webp",
+        "dark": "/shots/5c062b452bd329ac9913ff716afccb1edacb6e503145c8bcb824947bd2ecdd68.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-injects-status-execution": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/ebf54d5c8bdccd4d8b813782094640cfbe870ca6c2cf3491ca4a761d8c6b2400.webp",
-        "dark": "/shots/30fdce454cd50a3bf873704bf4b2e909dca6e97da4be255d98f7ab0fcd3e37f6.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/62e5eca4b93a07896bc7bf95d19ee86859cd6facfcb908651b4cfa6b72ed2acf.webp",
+        "dark": "/shots/a4c71af102b8368af20a4cc9580fb1a32f5cabb62eaa1bf1b8ae04651b4b879e.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-injects-results-execution-details": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/0d52c99c1885fa68e2c9b96f3fdda10574f8b3831b933ecd3e21e286592cd4ee.webp",
-        "dark": "/shots/5ca07f87fb9f8f30074d44c9d6810507dfaeb7b42d924d9c8486d9a2f16a0bea.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/6765be8f1f0762d4725e0f9e6fa88e3f88d0e71fff2beb91b334e4c70419e213.webp",
+        "dark": "/shots/ae9c5e3079e1a07d6ed4a99f0825fcd53e3c64e4d5df7f8d941b12b60d1cba53.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-injects-results-remediations": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/36516db0571fc187a3cdf546177d214c7b9ae5e62abaafcb247acb8b224d2057.webp",
-        "dark": "/shots/1539f0e20855dd247cbe4110c579bd70930d5ba6f16494f54305872b75095309.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/d814025bd65b9f78f5db182fc53b16879d5ffb5e729246dcac999dd2322aff40.webp",
+        "dark": "/shots/3cf09a0295a31bd0245ee280aed649106bd374f29572753ab121219f6fc75881.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
@@ -5519,140 +5552,151 @@
   "openaev-integrations-collectors-deployed": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/faaaf7b78c1a0977f772d075c428c4e2fe50fb4047fd455357f233303ce3efa9.webp",
-        "dark": "/shots/16b0580ae3c1555934458ae1b3a58b053d03063d2bf4775d3955f0997e3805fe.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/498d8114fefd7e7c3c07dd88a27b3464f7f161d129e5a09c40682a39e76fd4ce.webp",
+        "dark": "/shots/4b288ad1f5b976a032ee01ce0aa6f21f1850a512888c21750eb20844cbec0a71.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-agents-executors": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/fec2e25b0544657212a16f9059084eb6cdea563fbd9c788c9983da1d1ce8cfc9.webp",
         "dark": "/shots/439ff7dc4ed193285c610f571b474e880daa67cae6bfdd44cdc41ecd5646264f.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-agents-install-linux-session": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/e5ad812e19ae7aef59d57637dfc8bba79e5de9de418a9ffeee3d7f205ca0fd5b.webp",
         "dark": "/shots/4b91ac97496d564d911f427e0c6ed5cac544d6750c8787c62da598d2537092b9.webp",
-        "captured_at": "2026-11-19"
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-integrations-injectors-deployed": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/0d75573d511e54e1f9a5d0bbd1939334159d5ec6f06e8d905a9a4368b8c79def.webp",
-        "dark": "/shots/fb6b7e9f8ed5c2cebaf5e611de86fe1416bc53018e1613f30de0494fab9fc270.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/cbe8b1adb9205be78214dd656900d5eed2ccc0399c02c8da2798aff873583875.webp",
+        "dark": "/shots/be4522026a025fbf95a6e3aac209270171bd0a2e4b1c8d9b674f5c7551f2c8c7.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-injector-email-contracts": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/e4ccacf46826733fbc201ed54126edc21de2256c98a92ca85a72b8846b69538e.webp",
-        "dark": "/shots/ebc813c90b692246709519aba2b6c8de4f7147d4fd019fe6f7e18652a761f8fb.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/91364596f3ea14313bce4b3a9095d091592425d97297ec41fba83fae0165fac5.webp",
+        "dark": "/shots/a9a078368363208e77590ba88ff5141a66e2476683d4e25afd0dc5c1a82be128.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-atomic-testing-create": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/0997dc11496a89382256255411669432780b1a4b2f4e399e439fba54a3777547.webp",
-        "dark": "/shots/0b8a910f5d9ddb9f974709f69f6edc8a44e5839a209f2963fc4fea5406a2f130.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/a6e15f5281e65d6ac9f785a815e81f639968f0379f3fba4491ca5c50a4f44065.webp",
+        "dark": "/shots/5ecfcb62b91bfc01d378dd98753c190ca7725ddb1b96b51b5b898fba30648ff4.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-expectations-validations": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/c8211016ede448f94e6da79d1beac03555a81061f7817b212fce82db9a5883b4.webp",
-        "dark": "/shots/1be1af71b88d95486262826729b553f10b97c56434e3cf4f3e7a8ea536542a30.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/9035be9abb5ebe4c08bf78b7c4829a35b8a2195ad3a6b021df76d2ebdc04cb4c.webp",
+        "dark": "/shots/b13f2ca3aea6fd92ca6ddeb82fc5516b6593cc1d4aff3c73c34ddb3f6bda6c84.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-policies-login-messages": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/70f8b6398af8d569e4fb7fdcd2e574e36a0fb41fa77333ad48c15b8180846534.webp",
-        "dark": "/shots/0ff6dbe482a5a1b5771c6015ba1dc3a44e8de83a8d00999e801d36c4a3b56070.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/1817d8ed84042d19b6143cba9c81ac654c119cefde38443eb0d565f95f8540ad.webp",
+        "dark": "/shots/4f852e94d92280f60ef7cd7a15554f1ca4cb3b03e63c7da8ecf124c39a2068c8.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-parameters-overview": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/a0d6c067cec9c6b4d84f5118de681cc8795e6e7361144f9a6e3662a9abe05d0e.webp",
-        "dark": "/shots/101e73e9f332dc1233e6654ecaa3e1f0a47c2bcb0fc9c648a12e67e3ca5dc987.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/6517c032501ff7a299aacf4a4254c34ffd9140af37619fdf73bca58fcd2275a4.webp",
+        "dark": "/shots/439093568a5e79cd77a5592a2d110ae5b695fd429c85b2fb8cd49effd5f14d57.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-parameters-theme": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/9b70c76b3fcbb98eb33c716bfed8c08a828b34299d7530abfa5d674604354380.webp",
-        "dark": "/shots/12b4bf6b6399a66a40cec06b58d67cf73b11a80d1ec6b6fc705a1fd1ecaec082.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/02391a6120af7c6f4f8f7db4702a221fa7c0fdc71f8f4030e122fdba64719c4b.webp",
+        "dark": "/shots/81a1a2fe5fe495c388f6dfdcb46b58fec2f09c3c080c3125aabbee4c3011b93a.webp",
+        "captured_at": "2026-11-27"
+      }
+    }
+  },
+  "openaev-parameters-runtime": {
+    "product": "openaev",
+    "since": "3.261126.1",
+    "versions": {
+      "3.261126.1": {
+        "light": "/shots/714ba4cb6932d3d5a3a7d3b9aab1fda2f2637bc2e4af6a0d5720f3f51706718c.webp",
+        "dark": "/shots/e88c9070ec71ac99c689006fee50f7e75109a690c759686bea24ff7a97dfc57a.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-taxonomies-attack-patterns": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/f431dff4e01ab3d9438621265ce5548b1543a91663a3114a6cd768f8adea9c04.webp",
-        "dark": "/shots/9bcb274d75d9d3116829b8c15c7dff4927cc73526c7947ed69673c6c1f3779c0.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/77addc12ec926da8d31707a48c34573ecf169db53b866d31f7baba1c50d30633.webp",
+        "dark": "/shots/08683cf72b667850256e0e408d2d8dc706d5146bae881ccf7d12eba3e9df2bf4.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-taxonomies-vulnerability-create": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
+      "3.261126.1": {
         "light": "/shots/0658a3daba1490e9c70c5fda872f2a1ecbdd07079108315a0888efa0caa07b29.webp",
-        "dark": "/shots/3efa1fad6d596c46c647b134507c61e1d66c2c08f43e64da173042ab9c673fd4.webp",
-        "captured_at": "2026-11-19"
+        "dark": "/shots/fb423e83adb816a07a9f2031b03651591bb2e1aee23e9cd75099a9272fab6042.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-xtm-hub-card": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/9a4eb9e12b9b25abf615f372f1e874bbae92bd68bf04042270bae9720a02768a.webp",
-        "dark": "/shots/36f0423e173c9466dfd91cdc315a421565cca490250ac5c4800fc768bd8fc979.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/286e6c12c4c17cbd5bb9839601b459ba0201dc98ab8132e21aebe3a34878b80c.webp",
+        "dark": "/shots/5323a9a08962dae970e10471d140ff9f9a8631239e5787ef27d5ad4a35b410d6.webp",
+        "captured_at": "2026-11-27"
       }
     }
   },
   "openaev-experience-enterprise-edition-card": {
     "product": "openaev",
     "versions": {
-      "3.261118.0": {
-        "light": "/shots/d371c395bae69305bb346e8eed7172907754216fbb4cee4666f070e5f7013f64.webp",
-        "dark": "/shots/3ab78d3ee34dea6703d1d20ea3ad4070da4b793006708bcd1f986576851068a2.webp",
-        "captured_at": "2026-11-19"
+      "3.261126.1": {
+        "light": "/shots/193a9d24b6165abac8808e6383013ca1c5abfa16a0a41fd7a94f211883cb852d.webp",
+        "dark": "/shots/b8707e0dec7cd92f0515e7ef958055e0a3710b2edffa094cde7eb5dd665b9e7d.webp",
+        "captured_at": "2026-11-27"
       }
     }
   }

@@ -6,7 +6,7 @@ products:
   - openaev
 personas: [admin, platform-engineer]
 owner: docs-openaev
-last_reviewed: 2026-11-07
+last_reviewed: 2026-11-26
 migrated_from:
   - openaev:/administration/introduction/
   - openaev:/administration/users-and-rbac/
@@ -18,8 +18,8 @@ OpenAEV decides, for every user, which tenants they can open and what they can d
 
 | Menu | What you set there | Who sees it |
 | --- | --- | --- |
-| :menu[Settings > Parameters] | The name, theme, language and default dashboards of the tenant, and the version and services of the platform | **Access tenant settings** |
-| :menu[Settings > Security] | Users, groups, roles, organizations, sessions and the login messages of the tenant; with the **Platform** scope, the users, groups and roles of the whole platform and its tenants | Any capability of the security group, **Access tenant settings** or **Access tenants** |
+| :menu[Settings > Parameters] | The name, theme, language and default dashboards of the tenant, and the version, services, execution and agent settings of the platform | **Access tenant settings** |
+| :menu[Settings > Security] | Users, groups, roles, organizations, sessions and the login messages of the tenant; with the **Platform** scope, the users, groups and roles of the whole platform and its tenants | **Access tenant settings**, **Access tenant users, groups and roles**, **Access platform users, groups and roles**, **Access tenants**, **Manage tenant sessions** or **Manage platform sessions** |
 | :menu[Settings > Customization] | Default asset rules, custom domains, notifiers, lessons learned templates and autonomous attack | **Access tenant settings**, or **Access lessons learned** for the templates |
 | :menu[Settings > Taxonomies] | Tags, attack patterns, kill chain phases and vulnerabilities | **Access tenant settings**, or **Access tags** for the tags |
 | :menu[Settings > Data ingestion] | The XLS mappers that import injects into scenarios | **Access tenant settings** |
@@ -44,12 +44,14 @@ Six rules explain most of what you will see:
 
 1. **Membership comes first.** A user opens a tenant only when they are a member of it, whatever their roles, administrators included. Without it, OpenAEV shows **Tenant access denied**.
 2. **Capabilities add up, and include the level below.** A user gets every capability of every role of the groups that count in the tenant they work in: the groups of that tenant and their platform groups. **Delete assessment** includes **Manage assessment**, which includes **Access assessment**. No capability removes another.
-3. **The scope decides where a capability works.** A tenant role grants rights on the content of its tenant: scenarios, assets, the tenant's settings, its users and groups. A platform role grants the platform rights: **Manage tenants**, **Manage platform settings**, and the users, groups and roles of the platform. **Bypass (user has all rights)** in a tenant role gives every tenant right in that tenant only. In a platform role, it gives every right, in every tenant the user belongs to.
-4. **A grant opens one object, a capability opens them all.** A group with **Access assessment** sees every scenario, simulation and atomic testing of the tenant, and a group with **Access threat arsenal** every threat arsenal action. A group without them sees only the objects it has a grant on. A grant on a single threat arsenal action is enough to show the **Threat Arsenal** menu to the group's members.
+3. **The scope decides where a capability works.** A tenant role grants rights on the content of its tenant: scenarios, assets, the tenant's settings, its users and groups. A platform role grants the platform rights: **Manage tenants**, **Manage platform settings**, and the users, groups and roles of the platform. **Bypass (user has all rights)** in a tenant role gives every tenant right in that tenant only. In a platform role, it gives every platform right: tenants, platform settings, and the platform's users, groups, roles and sessions. It gives no right on the content of a tenant: that needs a tenant role, such as **Admin**.
+4. **A grant opens one object, a capability opens them all.** A group with **Access assessment** sees every scenario, simulation and atomic testing of the tenant, and a group with **Access threat arsenal** every threat arsenal action. A group without them sees only the objects it has a grant on. A grant on a single scenario, simulation or atomic testing is enough to show the **Scenarios**, **Simulations** and **Atomic testings** menus to the group's members. Without **Access assessment** and without such a grant, the three menus are hidden, and their pages answer **You dont have the right access. Please contact your administrator.** A grant on a single threat arsenal action is enough to show the **Threat Arsenal** menu.
 5. **You give only what you hold.** In a role, a capability you do not hold shows with a padlock: you can remove it from a role that has it, but never add it back. A role that holds such a capability is locked in the role picker of a group, and the members of a group whose roles you do not fully hold cannot be changed. The API enforces the same rule. A user with **Bypass (user has all rights)** in that scope holds everything, so nothing is locked for them.
-6. **The administrator flag bypasses every check.** The bootstrap admin, set by `OPENAEV_ADMIN_EMAIL`, carries it. It cannot be set in the interface, and single sign-on does not set it: it puts the administrators of your identity provider in the **Admin** group of their tenant. To make someone a platform administrator, give them a platform role with **Bypass (user has all rights)**.
+6. **The administrator flag bypasses every check.** The bootstrap admin, set by `OPENAEV_ADMIN_EMAIL`, carries it. It cannot be set in the interface, and single sign-on does not set it: it puts the administrators of your identity provider in the **Admin** group of their tenant. A platform role with **Bypass (user has all rights)** gives someone every platform right; to also work in the content of a tenant, add them to that tenant's **Admin** group.
 
 Some reference data is readable by every member of a tenant, whatever their roles: teams and persons, organizations, tags, attack patterns, kill chain phases, vulnerabilities, security domains, injectors, XLS mappers and notifiers. The forms of a scenario need them, to pick a team or a tag. Creating, changing or deleting them still needs the capability, such as **Manage teams & persons** or **Manage tags**. Do not count on roles to keep the names, email addresses or phone numbers of the persons of a tenant from its other members.
+
+:menu[Home] checks a capability too, the one of the dashboard it opens. The user's own **Home dashboard**, or else the tenant's, needs **Access tenant settings**. The **Platform default** dashboard, shown when neither is set, needs **Access dashboards**. A user without it reads the same message as above. **Manager** and **Observer** hold **Access dashboards** but not **Access tenant settings**: once you choose a **Home dashboard** for the tenant, their members no longer see a dashboard on :menu[Home]. See [Set the name, look and home page of a tenant](/openaev/administer/parameters/).
 
 ## What a new tenant starts with
 
@@ -58,16 +60,16 @@ Each tenant you create gets three roles, each with a group of the same name. You
 | Group and role | Capabilities | For |
 | --- | --- | --- |
 | **Admin** | **Bypass (user has all rights)**, in this tenant | The administrators of the tenant |
-| **Manager** | Access, manage and delete scenarios, simulations, atomic testings, teams and persons, assets, threat arsenal, findings, dashboards, reportings, documents, channels, phishing, challenges, lessons learned, security platforms and tags; **Launch assessment** | The people who build and run simulations |
+| **Manager** | Access, manage and delete scenarios, simulations, atomic testings, teams and persons, assets, threat arsenal, findings, dashboards, reportings, documents, channels, phishing, challenges, lessons learned, security platforms, tags and credentials; **Launch assessment** and **Revoke threat arsenal** | The people who build and run simulations |
 | **Observer** | Access only, to the same content except teams, persons and tags | The people who read the results |
 
 Neither **Manager** nor **Observer** holds the tenant settings or the tenant's users, groups and roles: only **Admin** manages the tenant itself. The default tenant has the same three groups, one of each: the bootstrap admin is a member of its **Admin** group, with the **Admin** role. A platform **Administrators** group, with a platform **Admin** role, holds the bootstrap admin too. An upgrade renames and deletes no group: a platform installed with an earlier release keeps the **Administrators** group of its default tenant, beside **Admin**, and the bootstrap admin stays in it.
 
 ## Users, groups and roles in a tenant
 
-The Security menu opens on **This tenant**. With the Enterprise Edition and a platform capability, a switch at its top moves to **Platform**, where the same **Users**, **Groups** and **Roles** entries list the platform's own.
+The Security menu opens on **This tenant**. With the Enterprise Edition and **Access platform users, groups and roles** or **Manage platform sessions**, a switch at its top moves to **Platform**, where the same **Users**, **Groups** and **Roles** entries list the platform's own. A user who holds only platform capabilities lands on **Platform** directly.
 
-- **Users.** **Create** asks for an **Email address**, a **Firstname** and a **Lastname**, and optionally the **Organization**, **Tags**, phone numbers and **PGP public key** used by email injects. A new address gets an account, and OpenAEV emails a reset code so the person chooses a password. An address that already has an account is attached to the tenant and keeps its password. **Delete**, in **This tenant**, only detaches the user from the tenant and removes them from its groups; the account stays. In **Platform**, **Delete** removes the account and ends its sessions, and the **Tenants** field of a user sets the tenants it belongs to.
+- **Users.** **Create** asks for an **Email address**, the only required field, and optionally a **Firstname**, a **Lastname**, the **Organization**, **Tags**, phone numbers and **PGP public key** used by email injects. A new address gets an account, and OpenAEV emails a reset code so the person chooses a password. An address that already has an account is attached to the tenant and keeps its password. **Delete**, in **This tenant**, only detaches the user from the tenant and removes them from its groups; the account stays. In **Platform**, **Delete** removes the account and ends its sessions, and the **Tenants** field of a user sets the tenants it belongs to.
 - **Groups.** A group has a name, a description and **Auto assign**: on, every user who joins the tenant joins the group, including users created by single sign-on. Its menu holds **Manage users**, **Manage roles** and **Manage grants**.
 - **Grants.** **Manage grants** opens a tab per kind of object: **Scenarios**, **Simulations**, **Atomic testings** and **Threat Arsenal**. Check **Access** to read the object, **Manage+Delete** to change and delete it, and **Launch** to run it. Each level includes the one before it; threat arsenal actions have no **Launch**.
 - **Roles.** A role has an **Overview** tab, its name and description, and a **Capabilities** tab, a tree where checking a capability checks the ones it includes.
@@ -89,7 +91,7 @@ Example CERT runs one OpenAEV instance for its member hotel chains, with a tenan
 
 | Choice | Why |
 | --- | --- |
-| Keep **Bypass (user has all rights)** to the **Admin** groups, and the platform one to a few named people | In a platform role it opens every tenant the user belongs to, with every right |
+| Keep **Bypass (user has all rights)** to the **Admin** groups, and the platform one to a few named people | In a platform role it gives every platform right: tenants, platform settings, and the platform's users, groups and roles |
 | Keep the bootstrap admin for emergencies | Its password comes from `OPENAEV_ADMIN_PASSWORD` and is applied at every start. See [Sign in the first time and keep an emergency account](/deploy/configure/first-access/) |
 | Turn **Auto assign** on only for a group with a narrow role, such as **Observer** | Every user who joins the tenant gets it, including every single sign-on login |
 | Prefer grants to a broad capability for occasional users | A grant opens one simulation; **Launch assessment** opens them all |

@@ -25,15 +25,15 @@ An action has one of three sources, which decides what you may change:
 | **Injector-provided** | Added by an injector of the platform, such as Nuclei | Domains, attack patterns and tags only |
 | **Collector-provided** | Added by a collector, such as Atomic Red Team | Nothing: the collector owns them |
 
-The list, under :menu[Threat Arsenal], shows each action's **Type**, **Name**, **Domains**, **Platform**, **Tags**, **Status** and **Updated** date. The **Status** says how far OpenAEV trusts the action:
+Under :menu[Threat Arsenal], the header counts the **Active** actions of your arsenal, whatever the filters. The actions are grouped by domain: an action appears under the first of its domains in alphabetical order, and an action without a domain, **To classify**, under **Other**, at the end. Within a domain, the most recently updated come first; to order them by **Name**, use **Sort by** in the **Grid view**, or the column headers in the **List view**. The **Grid view** shows a card per action, with its author, its first ATT&CK technique, its status and its platforms; the **List view** shows the columns **Name**, **Domains**, **Platforms**, **Tags**, **Status** and **Updated**. OpenAEV remembers the view you chose, and loads more actions as you scroll. The **Status** says how far OpenAEV trusts the action:
 
 - **Verified**: OpenAEV tested it and it works as expected.
 - **Unverified**: OpenAEV has not tested it; it may or may not work.
 - **Deprecated**: its source marked it deprecated; it stays for reference, with no guarantee.
 
-Filter the list by **Action type**, **Platform**, **Domains**, **Status** and **Author**, in the sidebar. The author of an action is a person or an organization, never a team: the person who created or duplicated it, or the organization behind the injector or collector that provides it. **No author** isolates the actions without one, such as those the platform creates on its own. Reading **Threat Arsenal** takes **Access threat arsenal**. A user without it still sees :menu[Threat Arsenal] when one of their groups has a grant on a single action, **Access** or **Manage+Delete**, in its **Threat Arsenal** grants: the list then shows only the actions granted to them.
+Filter the list by **Domains**, **Platform**, **Status** and **Author** in the sidebar, and by **Action type**, **Tags** or **Updated at** with **Add filter**. **Matrix** opens the **Attack matrix**, which counts the actions of each ATT&CK technique: click a technique to keep the actions that cover it or one of its sub-techniques. The author of an action is a person or an organization, never a team: the person who created or duplicated it, or the organization behind the injector or collector that provides it. **No author** isolates the actions without one, such as those the platform creates on its own. Reading **Threat Arsenal** takes **Access threat arsenal**. A user without it still sees :menu[Threat Arsenal] when one of their groups has a grant on a single action, **Access** or **Manage+Delete**, in its **Threat Arsenal** grants: the list then shows only the actions granted to them.
 
-::screenshot{id=openaev-threat-arsenal-list alt="The Threat Arsenal list with the three Velvet Harbor actions, booking attachment loader, local guest records collection and HTTPS beacon, Verified, next to the actions the platform ships."}
+::screenshot{id=openaev-threat-arsenal-list alt="The Threat Arsenal in the grid view, filtered on the Endpoint domain in the sidebar: the Active count in the header, and under the Endpoint section the four Velvet Harbor actions, booking attachment loader, local guest records collection, booking database export and booking web front discovery, each with its ATT&CK technique, the Verified status and its platform."}
 
 ## Create an action
 
@@ -45,6 +45,8 @@ Filter the list by **Action type**, **Platform**, **Domains**, **Status** and **
 5. On the **Remediation** tab, write the detection rules a security platform would use to catch the action. This tab requires the Enterprise Edition. See [Action properties](/openaev/use/threat-arsenal/action-properties/#detection-remediation-properties).
 6. Create the action. It appears in the list, with the **Verified** status.
 :::
+
+The **Name** must be free in your tenant: when another action built on a payload, yours or a collector's, already uses it, whatever its letter case and the spaces around it, OpenAEV refuses it with **A payload with this name already exists**. Renaming an action follows the same rule, but keeping its current name always works, even when an imported action shares it.
 
 Creating an action with a payload also makes a new inject type available, when your implant supports it; the OpenAEV Implant does. Every field of every tab is in [Action properties](/openaev/use/threat-arsenal/action-properties/). Creating and editing actions takes **Manage threat arsenal**.
 
@@ -64,7 +66,7 @@ OpenAEV refuses to delete an action that injects still use, in a scenario, a sim
 
 ## Run a test from the list
 
-Select one or more actions with the checkboxes to open the toolbar, then **Run a test**:
+To test one action, click **Run a test** on its card, or in the header of the **Action information** panel that opens when you click the action. To test several, switch to the **List view**, select them with the checkboxes to open the toolbar, then click **Run a test**. Either way, **Run a test** shows only when your role has **Manage assessment**, and offers:
 
 | Option | What it does |
 | --- | --- |
@@ -72,7 +74,7 @@ Select one or more actions with the checkboxes to open the toolbar, then **Run a
 | **Add to existing scenario** | Adds the selected actions as steps to one or more existing scenarios |
 | **Run atomic test** | Runs a single selected action at once, as a one-off simulation |
 
-The toolbar also **Delete**s user-created actions in bulk, **Tag**s several at once, and **Export**s them. A chained scenario reuses actions too, as steps of its logic: see [Choose the actions of a chained scenario](/openaev/use/attack-chaining/actions/).
+The toolbar also **Delete**s the selected actions in bulk, with **Delete threat arsenal**. **Select orphaned actions**, beside the checkbox that selects every action, selects at once the actions left with neither an injector nor a payload, which can no longer run, to purge them. A chained scenario reuses actions too, as steps of its logic: see [Choose the actions of a chained scenario](/openaev/use/attack-chaining/actions/).
 
 ## Import and export actions
 
@@ -82,9 +84,9 @@ Importing a scenario or a simulation also brings the actions of its injects. An 
 
 ## What you see when it worked
 
-- The new action shows in the list, **Verified**, with the type, domains and platforms you set.
+- The new action shows in the list under the first of its domains, **Verified**, with the type, domains and platforms you set.
 - A new inject type matching the action is available when you build an inject.
-- Selecting the action and running an atomic test executes it once and shows its result.
+- **Run a test** on the action, then **Run atomic test**, executes it once and shows its result.
 
 :::example[A credential-search action for the front-desk test]
 The validation team of Grand Meridian builds the step that looks for a saved booking credential on a front-desk workstation, to reuse in the night test against the booking database.
@@ -99,7 +101,7 @@ The validation team of Grand Meridian builds the step that looks for a saved boo
 | **Expectations** | **Prevention**, **Detection** |
 | **Output** | A parser of type **Username** on the output of `cmdkey`, **Create finding(s)** on |
 
-Once created, the team selects it and three others, clicks **Run a test** and **Create a new scenario**, to build the chained scenario that walks from the front desk to the booking database.
+Once created, the action shows under **Endpoint**. The team switches to the **List view**, selects it and three others, clicks **Run a test** and **Create a new scenario**, to build the chained scenario that walks from the front desk to the booking database.
 :::
 
 :::xtm-one[Generate rules and payloads with XTM One]

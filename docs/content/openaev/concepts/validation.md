@@ -6,7 +6,7 @@ products:
   - openaev
 personas: [validation-engineer, soc-manager, exercise-planner]
 owner: docs-openaev
-last_reviewed: 2026-11-07
+last_reviewed: 2026-11-26
 migrated_from:
   - openaev:/usage/evaluate/overview/
 ---
@@ -55,7 +55,7 @@ The same steps serve two kinds of work, often in the same scenario:
 
 Click a bar, a slice or a number to open the list of what it counts: the expectations, findings or simulations behind it.
 
-This dashboard is the **Platform default**. An administrator can open another one on :menu[Home] for the whole platform, and each user can choose their own in their profile: see [Build dashboards of your validation results](/openaev/use/dashboards/).
+This dashboard is the **Platform default**. An administrator can open another one on :menu[Home] for every user of the tenant, and each user can choose their own in their profile: see [Build dashboards of your validation results](/openaev/use/dashboards/). The **Platform default** needs **Access dashboards** in your role, another home dashboard **Access tenant settings**; without it, :menu[Home] shows a message instead of the dashboard. See [How access works in OpenAEV](/openaev/concepts/access/).
 
 :::example[Follow Grand Meridian's defenses against Velvet Harbor]
 After the intrusion of 9 January 2026, the validation engineer of Grand Meridian Hotels replays Velvet Harbor against the front desks of its French and Spanish hotels:
@@ -69,14 +69,14 @@ After the intrusion of 9 January 2026, the validation engineer of Grand Meridian
 
 ## Find what you look for in the lists
 
-Every list of OpenAEV, such as the scenarios, the simulations or the assets, has the same search and filters. **Add filter** offers the attributes of the objects listed; each filter takes an operator, such as **contains**, **starts with** or **is empty**, and its values. Between two filters, the **AND** or **OR** chip switches the logic of the whole list in one click. **Clear filters** removes them all.
+Most lists of OpenAEV, such as the scenarios, the simulations or the assets, have the same search and filters; a few, such as the security platforms and the tags, only have a search field. **Add filter** offers the attributes of the objects listed; each filter takes an operator, such as **contains**, **starts with** or **is empty**, and its values. Between two filters, the **AND** or **OR** chip switches the logic of the whole list in one click. **Clear filters** removes them all.
 
 ::screenshot{id=openaev-lists-filters alt="The Threat Arsenal list with Add filter open on the attributes its actions can be filtered on: action type, author, domains, platforms and status, beside the search field and the quick filters of the left panel."}
 
-Your browser remembers the filters, the search and the page of each list, so you find them again when you come back. They also go into the address of the page, in its `query` parameter: copy the address to share the filtered list with a colleague who has access to the same tenant.
+Your browser remembers the filters, the search and the sort of most lists, so you find them again when you come back, on the first page. They also go into the address of the page, in its `query` parameter: copy the address to share the filtered list with a colleague who has access to the same tenant.
 
 :::xtm-one[AI at each step]
-When OpenAEV is registered with XTM One, AI agents help at several steps. The **Scenario assistant** builds a time-based scenario from a threat report, **Generate with AI** designs a chained scenario from an objective, and **Ask Ariane** in the top bar answers questions on your results and turns them into a report or a deck. See [XTM One in OpenAEV](/xtm-one/use/in-openaev/).
+When OpenAEV is registered with XTM One and runs the Enterprise Edition, AI agents help at several steps. The **Scenario assistant** builds a time-based scenario from a threat report, **Generate with AI** designs a chained scenario from an objective, and **Ask Ariane** in the top bar answers questions on your results and turns them into a report or a deck. See [XTM One in OpenAEV](/xtm-one/use/in-openaev/).
 :::
 
 ## What's next

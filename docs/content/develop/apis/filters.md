@@ -117,7 +117,7 @@ Keys come in three kinds, all in the [filter keys reference](/reference/opencti/
 | --- | --- |
 | `eq`, `not_eq` | With several values, `mode` decides: `or` matches one of them, `and` all of them. `eq` with an empty `values` means "has no value", `not_eq` with an empty `values` "has a value" |
 | `nil`, `not_nil` | The key has no value, or has one. Send `"values": []` |
-| `only_eq_to`, `not_only_eq_to` | For keys with several values, such as labels: the object holds exactly the values given and no other. `objectLabel` `only_eq_to` `hotel-sector` keeps the reports whose only label is `hotel-sector` |
+| `only_eq_to`, `not_only_eq_to` | For keys with several values, such as labels. With `mode` `or`, the default, the object holds a single value, one of those given; with `and`, it holds exactly all the values given and no other. `objectLabel` `only_eq_to` `hotel-sector` keeps the reports whose only label is `hotel-sector` |
 | `gt`, `gte`, `lt`, `lte` | Numbers and dates. A date is an ISO 8601 date, such as `2025-12-01T00:00:00Z`, or a relative date, such as `now-1d` |
 | `within` | Exactly two values, the start and the end. Each is a relative date (`now`, `now-7d`, `now-1M/M`) or a full ISO 8601 date with milliseconds, as `2026-01-01T00:00:00.000Z`. Without the milliseconds, the query fails: `The values for filter with "within" operator are not valid` |
 | `contains`, `starts_with`, `ends_with` and their `not_` forms | Short texts. `contains` looks for the exact sequence of words given |
@@ -207,10 +207,14 @@ Live streams, triggers and playbooks do not query the database: they test each e
 
 `entity_type`, `ids`, `representative`, `description`, `confidence`, `createdBy`, `creator_id`, `objectLabel`, `objectMarking`, `objectAssignee`, `objectParticipant`, `objectAuthorized`, `objects`, `workflow_id`, `revoked`, `priority`, `severity`, `indicator_types`, `pattern`, `pattern_type`, `x_opencti_score`, `x_opencti_detection`, `x_opencti_main_observable_type`, `report_types`, `response_types`, `information_types`, `takedown_types`, `note_types`, `incident_type`, `x_opencti_cisa_kev`, `x_opencti_epss_score`, `x_opencti_epss_percentile`, `x_opencti_cvss_base_score`, `x_opencti_cvss_base_severity`, `x_opencti_ssvc_exploitation`, `x_opencti_ssvc_automatable`, `x_opencti_ssvc_technical_impact`, `pir_score`, `fromId`, `fromTypes`, `toId`, `toTypes`, `connectedToId`, `connectedToId_sideEvents`.
 
+::::only{opencti=">=7.261119"}
+`x_opencti_closing_reason` works there too, and so do the custom fields, by their technical name, such as `x_opencti_cf_member_impact`.
+::::
+
 Saving a live stream, a trigger or a playbook with another key fails with `Stix filtering is not compatible with the provided filter key`, and the error data lists the keys allowed. `regardingOf` and the dynamic keys do not work on events.
 
 ::::only{opencti=">=7.260811"}
-On events, every key also accepts `has_changed` and `not_has_changed`, without values. On an update, `has_changed` matches when the event changed the key; on a creation, when the key has a value. For example, `x_opencti_score` `has_changed` keeps the updates that change the score of an indicator and leaves out a label added to it.
+On events, the keys of attributes and relationships also accept `has_changed` and `not_has_changed`, without values. `objectAuthorized` refuses them, `pir_score` ignores them, and `connectedToId` and `connectedToId_sideEvents` never match with them. On an update, `has_changed` matches when the event changed the key; on a creation, when the key has a value. For example, `x_opencti_score` `has_changed` keeps the updates that change the score of an indicator and leaves out a label added to it.
 ::::
 
 ## OpenAEV filters
@@ -235,7 +239,8 @@ The OpenAEV format differs from the OpenCTI one:
 
 - **No nested groups.** A filter group has `mode` and `filters` only.
 - **`key` is a string.**
-- **The operators** are `eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`, `gt`, `gte`, `lt`, `lte`, `empty` and `not_empty`. `empty` and `not_empty` take the place of `nil` and `not_nil`.
+- **The operators** are `eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`, `ends_with`, `not_ends_with`, `gt`, `gte`, `lt`, `lte`, `empty` and `not_empty`. `empty` and `not_empty` take the place of `nil` and `not_nil`.
+- **`ends_with` and `not_ends_with`** work in the API only: the filter menu of the interface does not offer them. Like `starts_with`, they ignore case, and `not_ends_with` with several values keeps the objects that end with none of them. `asset_name` `ends_with` `.example.com` keeps the assets whose name ends with that domain.
 - **`size`** is 1,000 at most.
 
 The keys are the attributes of the object the endpoint searches, such as `scenario_name` or `scenario_tags`. See [REST API](/develop/apis/rest/) for the endpoints.

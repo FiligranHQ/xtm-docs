@@ -26,7 +26,9 @@ A simulation is one run of an attack or an exercise on your environment: its inj
 
 A simulation without a start date is a **Draft**; with one, it is **Scheduled** and starts on its own. **Start now** starts it at the next full minute.
 
-Before you start it, you can still change it without touching the scenario: its injects on the **Injects** tab, and its teams, variables and media pressure articles in **Configuration**. Teams and documents are shared with the scenario: a change to a team applies to both.
+Its header names who started it: **Scheduled by** while it waits for its start date, then **Launched by**. That is the user who clicked **Start now**, set its start date in **Scheduling**, or clicked **Launch** on the scenario. When a scenario's schedule creates the simulation, it is the user who set that schedule.
+
+Before you start it, you can still change it without touching the scenario: its injects on the **Injects** tab, and its teams, variables and media pressure articles in **Configuration**. The teams of the platform and the documents are shared with the scenario: a change to one of them applies to both. A team created only for the scenario is a copy in the simulation.
 
 ## Follow it while it runs
 
@@ -40,7 +42,7 @@ Before you start it, you can still change it without touching the scenario: its 
 | **Finished** | Every inject ran and every expectation is answered or expired | **Reset** |
 | **Canceled** | Stopped by hand; the results collected so far are kept | **Reset** |
 
-::screenshot{id=openaev-simulations-execution alt="The simulation Velvet Harbor crisis night On-going, with Pause and Stop in its header, its three injects, one team, three persons, a media pressure and a challenge, and under Results the human response still at 0 % with one validation needed."}
+::screenshot{id=openaev-simulations-execution alt="The simulation Velvet Harbor crisis night On-going, with the user who launched it, Pause and Stop in its header, its three injects, one team, three persons, a media pressure and a challenge, and under Results the human response still at 0 % with one validation needed."}
 
 Every action asks for a confirmation. A simulation does not finish when its last inject is sent: it stays **On-going** until each expectation is answered, or expires. By default, a detection, prevention or vulnerability expectation expires after 6 hours, and an expectation of people after 24 hours, set by `openaev.expectation.technical.expiration-time` and `openaev.expectation.human.expiration-time`. See the [configuration reference](/reference/openaev/configuration/#openaev-expectation).
 
@@ -54,7 +56,7 @@ The **Execution** tab follows the run, with a menu on the right:
 ::screenshot{id=openaev-simulations-mails alt="The Mails menu of the Execution tab: the inject Call the crisis cell to the bridge, sent to three persons, with its five mails, the three sent and the two replies of the crisis cell."}
 
 :::warning
-**Reset** deletes the results of the simulation: inject statuses, expectations, findings, lessons learned answers, and its files. **Stop** keeps them. To keep a run's results and run it again, launch a new simulation from the scenario instead.
+**Reset** deletes the results of the simulation: inject statuses, expectations, lessons learned answers, and its files. Its findings stay in :menu[Findings] with their dates, but leave its **Findings** tab until a new run finds them again. **Stop** keeps everything. To keep a run's results and run it again, launch a new simulation from the scenario instead.
 :::
 
 ## Read the results
@@ -66,7 +68,7 @@ The **Overview** tab has four parts:
 - **Kill chain results**: the techniques of the injects on the matrix, colored by their results.
 - **Injects results**: each inject with its targets and its results; click one to open its details, its execution traces and what each security platform saw. See [Inject results](/openaev/use/injects/results/).
 
-Each expectation counts as **Success** when its score reaches the expected score, **Failed** at 0, **Partial** in between, and **Pending** until it is answered. Per axis, the results read:
+Each expectation counts as **Success** when its score reaches the expected score, and **Pending** until it is answered. Below the expected score, an expectation of a team counts as **Failed**. Another one counts as **Failed** at 0 and **Partial** in between. Per axis, the results read:
 
 | Axis | Success | Partial | Failed |
 | --- | --- | --- | --- |
@@ -82,7 +84,7 @@ The other tabs complete the picture:
 - **Injects**, in its **Distribution view**: charts of the injects and their expectations by type and by team. **Distribution of expected total score by inject type** draws the score each inject type gathers over time, technical injects included, each result counted once.
 - **Findings**: what the injects found, such as open ports, credentials or vulnerabilities. See [Findings](/openaev/use/findings/).
 - **Lessons learned**: the players' answers, when enabled. See [Lessons learned](/openaev/use/components/lessons/).
-- **Statistics**: a custom dashboard of the simulation.
+- **Statistics**: the simulation's own dashboard, else the tenant's **Default simulation dashboard**. **Change dashboard** chooses another one; it shows when you can change the simulation and your role has **Access dashboards**. See [Choose where a dashboard opens](/openaev/use/dashboards/#choose-where-a-dashboard-opens).
 
 **View in scenario** opens the scenario, whose overview compares the runs.
 
@@ -108,7 +110,7 @@ With XTM One connected and the Enterprise Edition, **Ask Ariane** in the top bar
 
 - Search by name, or filter on **Scenario**, **Status**, **Severity**, **Start date**, **Kill chain phase**, **Tags** or **Updated at**. A filter on **Scenario** lists the runs of one scenario. The list keeps your filters for your next visit.
 - **Export this list** downloads the simulations shown as a CSV file.
-- Tick simulations, then **Delete** to delete them at once, with **Delete assessment**. Deleting an **On-going** or **Paused** simulation stops it.
+- Tick simulations, then **Delete** to delete them at once, with **Delete assessment**. Deleting an **On-going** or **Paused** simulation stops it. Its findings stay in [Findings](/openaev/use/findings/), no longer linked to it.
 
 ## What's next
 

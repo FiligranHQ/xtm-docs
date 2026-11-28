@@ -1,8 +1,8 @@
 {
   "name": "filter-keys",
-  "version": "3.261118.0",
-  "source": "OpenAEV-Platform/openaev@d61524e (openaev-model/src/main/java/io/openaev/database/model, openaev-model/src/main/java/io/openaev/engine/model, @Queryable)",
-  "intro": "The 410 filter keys OpenAEV 3.261118.0 accepts: in the filter menus of its lists and in the `filterGroup` of its search endpoints (one section per object), and in the filters of the dashboard widgets (one section per kind of document). A filter is `{\"key\", \"operator\", \"mode\", \"values\"}`; the 12 operators are `eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`, `gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`. **Operators** lists those the interface offers for the key; **Also** says whether the key sorts a list (sort) and whether `textSearch` searches it (text search). [Filters](/develop/apis/filters/#openaev-filters) explains the format.",
+  "version": "3.261126.1",
+  "source": "OpenAEV-Platform/openaev@24bd3e5 (openaev-model/src/main/java/io/openaev/database/model, openaev-model/src/main/java/io/openaev/engine/model, @Queryable)",
+  "intro": "The 435 filter keys OpenAEV 3.261126.1 accepts: in the filter menus of its lists and in the `filterGroup` of its search endpoints (one section per object), and in the filters of the dashboard widgets (one section per kind of document). A filter is `{\"key\", \"operator\", \"mode\", \"values\"}`; the 14 operators are `eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`, `ends_with`, `not_ends_with`, `gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`. **Operators** lists those the interface offers for the key; **Also** says whether the key sorts a list (sort) and whether `textSearch` searches it (text search). [Filters](/develop/apis/filters/#openaev-filters) explains the format.",
   "filter": "Filter keys, objects, values",
   "sections": [
     {
@@ -190,7 +190,7 @@
           "cells": [
             "`asset_category`",
             "Category",
-            "One of `HOST`, `CONTAINER_WORKLOAD`, `CLOUD_RESOURCE`, `WEB_APPLICATION`, `NETWORK_DEVICE`, `MOBILE_DEVICE`, `IOT_OT_DEVICE`, `IDENTITY`, `SAAS_APPLICATION`, `AI_TARGET`, `SECURITY_PLATFORM`, `GENERIC_ASSET`",
+            "One of `HOST`, `CONTAINER_WORKLOAD`, `CLOUD_RESOURCE`, `WEB_APPLICATION`, `NETWORK_DEVICE`, `MOBILE_DEVICE`, `IOT_OT_DEVICE`, `IDENTITY`, `SAAS_APPLICATION`, `AI_TARGET`, `SECURITY_PLATFORM`, `SOURCE_CODE`, `GENERIC_ASSET`",
             "`eq`, `not_eq`, `empty`, `not_empty`",
             "sort"
           ]
@@ -296,6 +296,26 @@
           ]
         },
         {
+          "key": "jpa:Asset:asset_last_seen",
+          "cells": [
+            "`asset_last_seen`",
+            "",
+            "Date",
+            "`gt`, `gte`, `lt`, `lte`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:asset_last_seen_source",
+          "cells": [
+            "`asset_last_seen_source`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "sort"
+          ]
+        },
+        {
           "key": "jpa:Asset:asset_linked_person",
           "cells": [
             "`asset_linked_person`",
@@ -350,7 +370,7 @@
           "cells": [
             "`asset_status`",
             "Status",
-            "One of `ACTIVE`, `INACTIVE`, `AGENTLESS`",
+            "One of `ACTIVE`, `INACTIVE`, `AGENTLESS`, `STALE`",
             "`eq`, `not_eq`, `empty`, `not_empty`",
             "sort"
           ]
@@ -360,7 +380,7 @@
           "cells": [
             "`asset_subcategory`",
             "Subcategory",
-            "One of `SERVER`, `WORKSTATION`, `LAPTOP`, `VIRTUAL_MACHINE`, `HYPERVISOR`, `MAINFRAME`, `THIN_CLIENT`, `CONTAINER`, `CONTAINER_IMAGE`, `KUBERNETES_POD`, `KUBERNETES_CLUSTER`, `KUBERNETES_NODE`, `SERVERLESS_FUNCTION`, `COMPUTE`, `STORAGE`, `DATABASE`, `NETWORKING`, `SERVERLESS`, `CONTAINER_REGISTRY`, `KUBERNETES`, `IAM_PRINCIPAL`, `SECRETS_KEY_MGMT`, `MESSAGING_QUEUE`, `ANALYTICS_DATA`, `AI_ML_SERVICE`, `IAC_TEMPLATE`, `CLOUD_OTHER`, `WEBSITE`, `WEB_API`, `SINGLE_PAGE_APP`, `GRAPHQL_API`, `WEB_SERVICE`, `MICROSERVICE`, `ROUTER`, `SWITCH`, `FIREWALL`, `LOAD_BALANCER`, `VPN_GATEWAY`, `WIRELESS_AP`, `PROXY`, `DNS_SERVER`, `DHCP_SERVER`, `SAN_NAS`, `NETWORK_OTHER`, `SMARTPHONE`, `TABLET`, `IOT_SENSOR`, `IP_CAMERA`, `GATEWAY`, `POINT_OF_SALE`, `MEDIA_DEVICE`, `PLC`, `RTU`, `HMI`, `SCADA_HISTORIAN`, `MEDICAL_DEVICE`, `PRINTER_PERIPHERAL`, `BUILDING_MGMT`, `USER_ACCOUNT`, `SERVICE_ACCOUNT`, `GROUP`, `ROLE`, `SHARED_MAILBOX`, `NON_HUMAN_IDENTITY`, `SAAS_APP`, `SAAS_TENANT`, `LLM_MODEL`, `AI_AGENT`, `MCP_SERVER`, `RAG_PIPELINE`, `EDR`, `XDR`, `SIEM`, `SOAR`, `NDR`, `ISPM`, `EMAIL_SECURITY`, `LLM_FIREWALL`, `AI_GATEWAY`, `VULNERABILITY_SCANNER`",
+            "One of `SERVER`, `WORKSTATION`, `LAPTOP`, `VIRTUAL_MACHINE`, `HYPERVISOR`, `MAINFRAME`, `THIN_CLIENT`, `CONTAINER`, `CONTAINER_IMAGE`, `KUBERNETES_POD`, `KUBERNETES_CLUSTER`, `KUBERNETES_NODE`, `SERVERLESS_FUNCTION`, `COMPUTE`, `STORAGE`, `DATABASE`, `NETWORKING`, `SERVERLESS`, `CONTAINER_REGISTRY`, `KUBERNETES`, `IAM_PRINCIPAL`, `SECRETS_KEY_MGMT`, `MESSAGING_QUEUE`, `ANALYTICS_DATA`, `AI_ML_SERVICE`, `IAC_TEMPLATE`, `CLOUD_OTHER`, `WEBSITE`, `WEB_API`, `SINGLE_PAGE_APP`, `GRAPHQL_API`, `WEB_SERVICE`, `MICROSERVICE`, `ROUTER`, `SWITCH`, `FIREWALL`, `LOAD_BALANCER`, `VPN_GATEWAY`, `WIRELESS_AP`, `PROXY`, `DNS_SERVER`, `DHCP_SERVER`, `SAN_NAS`, `NETWORK_OTHER`, `SMARTPHONE`, `TABLET`, `IOT_SENSOR`, `IP_CAMERA`, `GATEWAY`, `POINT_OF_SALE`, `MEDIA_DEVICE`, `PLC`, `RTU`, `HMI`, `SCADA_HISTORIAN`, `MEDICAL_DEVICE`, `PRINTER_PERIPHERAL`, `BUILDING_MGMT`, `USER_ACCOUNT`, `SERVICE_ACCOUNT`, `GROUP`, `ROLE`, `SHARED_MAILBOX`, `NON_HUMAN_IDENTITY`, `SAAS_APP`, `SAAS_TENANT`, `LLM_MODEL`, `AI_AGENT`, `MCP_SERVER`, `RAG_PIPELINE`, `EDR`, `XDR`, `SIEM`, `SOAR`, `NDR`, `ISPM`, `EMAIL_SECURITY`, `LLM_FIREWALL`, `AI_GATEWAY`, `VULNERABILITY_SCANNER`, `CODE_REPOSITORY`, `CI_CD_PIPELINE`, `PACKAGE_REGISTRY`, `SOFTWARE_PACKAGE`, `CODE_OTHER`",
             "`eq`, `not_eq`, `empty`, `not_empty`",
             "sort"
           ]
@@ -401,6 +421,16 @@
             "`endpoint_arch`",
             "Architecture",
             "One of `x86_64`, `arm64`, `Unknown`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
+          "key": "jpa:Asset:endpoint_is_eol",
+          "cells": [
+            "`endpoint_is_eol`",
+            "End of Life status",
+            "Boolean: `true`, `false`",
             "`eq`, `not_eq`, `empty`, `not_empty`",
             "sort"
           ]
@@ -509,6 +539,155 @@
             "Values the platform lists",
             "`contains`, `not_contains`, `empty`, `not_empty`",
             "sort, text search"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Catalog connector injector contract",
+      "text": "Schema: `POST /api/schemas/CatalogConnectorInjectorContract?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:CatalogConnectorInjectorContract:catalog_connector_injector_contract_domains",
+          "cells": [
+            "`catalog_connector_injector_contract_domains`",
+            "",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:CatalogConnectorInjectorContract:catalog_connector_injector_contract_platforms",
+          "cells": [
+            "`catalog_connector_injector_contract_platforms`",
+            "",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Catalog payload",
+      "text": "Schema: `POST /api/schemas/CatalogPayload?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:CatalogPayload:catalog_item_author",
+          "cells": [
+            "`catalog_item_author`",
+            "Author",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:CatalogPayload:catalog_item_domain",
+          "cells": [
+            "`catalog_item_domain`",
+            "Domain",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:CatalogPayload:catalog_item_external_id",
+          "cells": [
+            "`catalog_item_external_id`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:CatalogPayload:catalog_item_platforms",
+          "cells": [
+            "`catalog_item_platforms`",
+            "Platforms",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Catalog scenario",
+      "text": "Schema: `POST /api/schemas/CatalogScenario?filterableOnly=true`.",
+      "columns": [
+        "Key",
+        "Label in the interface",
+        "Value",
+        "Operators",
+        "Also"
+      ],
+      "rows": [
+        {
+          "key": "jpa:CatalogScenario:catalog_item_author",
+          "cells": [
+            "`catalog_item_author`",
+            "Author",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:CatalogScenario:catalog_item_category",
+          "cells": [
+            "`catalog_item_category`",
+            "Category",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:CatalogScenario:catalog_item_external_id",
+          "cells": [
+            "`catalog_item_external_id`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:CatalogScenario:catalog_item_platforms",
+          "cells": [
+            "`catalog_item_platforms`",
+            "Platforms",
+            "List of text",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:CatalogScenario:catalog_item_scenario_type",
+          "cells": [
+            "`catalog_item_scenario_type`",
+            "Type",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
           ]
         }
       ]
@@ -1125,6 +1304,16 @@
           ]
         },
         {
+          "key": "jpa:Finding:finding_status",
+          "cells": [
+            "`finding_status`",
+            "status",
+            "One of `OPEN`, `NOT_REPRODUCED`, `RESOLVED`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            "sort"
+          ]
+        },
+        {
           "key": "jpa:Finding:finding_tags",
           "cells": [
             "`finding_tags`",
@@ -1683,6 +1872,16 @@
             "Number",
             "`gte`, `lte`, `gt`, `lt`, `eq`, `not_eq`, `empty`, `not_empty`",
             "sort"
+          ]
+        },
+        {
+          "key": "jpa:MarkingDefinition:marking_definition_stix_id",
+          "cells": [
+            "`marking_definition_stix_id`",
+            "",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            "text search"
           ]
         },
         {
@@ -2316,6 +2515,16 @@
       ],
       "rows": [
         {
+          "key": "jpa:Scenario:scenario_author",
+          "cells": [
+            "`scenario_author`",
+            "Author",
+            "An identifier, listed by the platform",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
           "key": "jpa:Scenario:scenario_category",
           "cells": [
             "`scenario_category`",
@@ -2333,6 +2542,16 @@
             "Any of `STARTERPACK`",
             "`contains`, `not_contains`, `empty`, `not_empty`",
             "sort, text search"
+          ]
+        },
+        {
+          "key": "jpa:Scenario:scenario_domains",
+          "cells": [
+            "`scenario_domains`",
+            "Domains",
+            "Identifiers, listed by the platform",
+            "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
           ]
         },
         {
@@ -2362,6 +2581,16 @@
             "Platforms",
             "Any of `Linux`, `Windows`, `MacOS`, `Android`, `iOS`, `Container`, `Service`, `Generic`, `Internal`, `Unknown`",
             "`contains`, `not_contains`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "jpa:Scenario:scenario_reachability_assertion",
+          "cells": [
+            "`scenario_reachability_assertion`",
+            "",
+            "Boolean: `true`, `false`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
             ""
           ]
         },
@@ -2804,7 +3033,17 @@
           "cells": [
             "`asset_category`",
             "asset category",
-            "One of `HOST`, `CONTAINER_WORKLOAD`, `CLOUD_RESOURCE`, `WEB_APPLICATION`, `NETWORK_DEVICE`, `MOBILE_DEVICE`, `IOT_OT_DEVICE`, `IDENTITY`, `SAAS_APPLICATION`, `AI_TARGET`, `SECURITY_PLATFORM`, `GENERIC_ASSET`",
+            "One of `HOST`, `CONTAINER_WORKLOAD`, `CLOUD_RESOURCE`, `WEB_APPLICATION`, `NETWORK_DEVICE`, `MOBILE_DEVICE`, `IOT_OT_DEVICE`, `IDENTITY`, `SAAS_APPLICATION`, `AI_TARGET`, `SECURITY_PLATFORM`, `SOURCE_CODE`, `GENERIC_ASSET`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:asset_criticality",
+          "cells": [
+            "`asset_criticality`",
+            "asset criticality",
+            "One of `VERY_HIGH`, `HIGH`, `MEDIUM`, `LOW`, `UNKNOWN`",
             "`eq`, `not_eq`, `empty`, `not_empty`",
             ""
           ]
@@ -2820,12 +3059,32 @@
           ]
         },
         {
+          "key": "es:asset:asset_external_reference",
+          "cells": [
+            "`asset_external_reference`",
+            "asset external reference",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
           "key": "es:asset:asset_hostname",
           "cells": [
             "`asset_hostname`",
             "asset hostname",
             "Text",
             "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:asset_internet_facing",
+          "cells": [
+            "`asset_internet_facing`",
+            "asset internet facing",
+            "Boolean: `true`, `false`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
             ""
           ]
         },
@@ -2864,6 +3123,26 @@
           "cells": [
             "`asset_seen_ip`",
             "asset seen ip",
+            "Text",
+            "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:asset_subcategory",
+          "cells": [
+            "`asset_subcategory`",
+            "asset subcategory",
+            "One of `SERVER`, `WORKSTATION`, `LAPTOP`, `VIRTUAL_MACHINE`, `HYPERVISOR`, `MAINFRAME`, `THIN_CLIENT`, `CONTAINER`, `CONTAINER_IMAGE`, `KUBERNETES_POD`, `KUBERNETES_CLUSTER`, `KUBERNETES_NODE`, `SERVERLESS_FUNCTION`, `COMPUTE`, `STORAGE`, `DATABASE`, `NETWORKING`, `SERVERLESS`, `CONTAINER_REGISTRY`, `KUBERNETES`, `IAM_PRINCIPAL`, `SECRETS_KEY_MGMT`, `MESSAGING_QUEUE`, `ANALYTICS_DATA`, `AI_ML_SERVICE`, `IAC_TEMPLATE`, `CLOUD_OTHER`, `WEBSITE`, `WEB_API`, `SINGLE_PAGE_APP`, `GRAPHQL_API`, `WEB_SERVICE`, `MICROSERVICE`, `ROUTER`, `SWITCH`, `FIREWALL`, `LOAD_BALANCER`, `VPN_GATEWAY`, `WIRELESS_AP`, `PROXY`, `DNS_SERVER`, `DHCP_SERVER`, `SAN_NAS`, `NETWORK_OTHER`, `SMARTPHONE`, `TABLET`, `IOT_SENSOR`, `IP_CAMERA`, `GATEWAY`, `POINT_OF_SALE`, `MEDIA_DEVICE`, `PLC`, `RTU`, `HMI`, `SCADA_HISTORIAN`, `MEDICAL_DEVICE`, `PRINTER_PERIPHERAL`, `BUILDING_MGMT`, `USER_ACCOUNT`, `SERVICE_ACCOUNT`, `GROUP`, `ROLE`, `SHARED_MAILBOX`, `NON_HUMAN_IDENTITY`, `SAAS_APP`, `SAAS_TENANT`, `LLM_MODEL`, `AI_AGENT`, `MCP_SERVER`, `RAG_PIPELINE`, `EDR`, `XDR`, `SIEM`, `SOAR`, `NDR`, `ISPM`, `EMAIL_SECURITY`, `LLM_FIREWALL`, `AI_GATEWAY`, `VULNERABILITY_SCANNER`, `CODE_REPOSITORY`, `CI_CD_PIPELINE`, `PACKAGE_REGISTRY`, `SOFTWARE_PACKAGE`, `CODE_OTHER`",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
+        {
+          "key": "es:asset:asset_url",
+          "cells": [
+            "`asset_url`",
+            "asset url",
             "Text",
             "`eq`, `not_eq`, `contains`, `not_contains`, `starts_with`, `not_starts_with`",
             ""
@@ -3514,6 +3793,16 @@
         "Also"
       ],
       "rows": [
+        {
+          "key": "es:finding:base_asset_groups_side",
+          "cells": [
+            "`base_asset_groups_side`",
+            "asset groups",
+            "A value the platform lists",
+            "`eq`, `not_eq`, `empty`, `not_empty`",
+            ""
+          ]
+        },
         {
           "key": "es:finding:base_created_at",
           "cells": [

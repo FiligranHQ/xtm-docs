@@ -31,11 +31,11 @@ XTM Hub is Filigran's place for ready-made content, trials and resources of the 
 4. Confirm. Back in OpenAEV, a message says **Your OpenAEV platform is successfully connected**.
 :::
 
-::screenshot{id=openaev-xtm-hub-card alt="The XTM Hub card of Filigran Experience, Not connected, with its four links to the free trial, the pre-built content, the roadmap and the Academy, and the Explore XTM Hub and Connect to XTM Hub buttons."}
+::screenshot{id=openaev-xtm-hub-card alt="The XTM Hub card of Filigran Experience, Not connected, with its four tiles, XTM Platform free trial, Pre-built content, XTM Platform Roadmap and Academy, and the Explore XTM Hub and Connect to XTM Hub buttons."}
 
 Keep the dialog open while you work in XTM Hub: closing it stops the connection. The card now reads **Connected**, with the **Connection status**, the **Connection date** and who it was **Connected by**, and offers **Go to the Hub**.
 
-**Connect to XTM Hub** stays greyed out while the platform or your browser cannot reach XTM Hub, and for users without **Manage tenant settings**.
+**Connect to XTM Hub** stays greyed out while your browser cannot reach XTM Hub, when the platform could not reach it at its last start or `openaev.xtm.hub.enable` is `false`, and for users without **Manage tenant settings**. The platform tests XTM Hub only when it starts: once XTM Hub is reachable from it, restart the platform.
 
 ## Keep the connection alive
 

@@ -47,7 +47,7 @@ A person is a user of OpenAEV without a password: they receive injects, and sign
 5. Click **Add players**, select the persons, and click **Add**.
 :::
 
-In **Manage persons**, the **Options** column shows three icons for each member: an email address, a PGP key and a phone number, green when the person has one and orange when not. Check it before a simulation: a person without a phone number cannot receive SMS injects, and one without a PGP key cannot receive encrypted emails.
+In **Manage persons**, the **Options** column shows three icons for each member: an email address, a PGP key and a phone number, green when the person has one and orange when not. Check it before a simulation: a person without a phone number cannot receive SMS injects, and one without a PGP key cannot receive encrypted emails. The members are sorted by **Email address**; click the **Organization** header to sort them by the name of their organization instead, for example to review one subsidiary's front desk at a time.
 
 The list shows each team with the number of its **Persons**. Open a team to see its members, the scenarios and simulations it takes part in, and its results.
 

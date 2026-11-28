@@ -1,7 +1,7 @@
 {
   "name": "configuration",
-  "version": "3.261118.0",
-  "source": "OpenAEV-Platform/openaev@d61524e (openaev-api/src/main/resources/application.properties, the @Value and @ConfigurationProperties of the Java code)",
+  "version": "3.261126.1",
+  "source": "OpenAEV-Platform/openaev@24bd3e5 (openaev-api/src/main/resources/application.properties, the @Value and @ConfigurationProperties of the Java code)",
   "intro": "Every key OpenAEV reads at startup, from `application.properties` and from its code, grouped by block, with its environment variable: the key in upper case with each dot replaced by an underscore (`openaev.base-url` is `OPENAEV_BASE-URL`). **Shipped** says whether `application.properties` sets the key, shows it commented out, or leaves it to the code. A key also read under the former name `openbas.*` keeps that name working.",
   "filter": "Filter keys, variables, descriptions",
   "sections": [
@@ -168,7 +168,7 @@
             "`ENGINE_CONNECT-TIMEOUT-MS`",
             "",
             "Commented out",
-            "Engine client timeouts and connection cap (defaults: 5s connect, 60s socket, 40 connections)."
+            "Connect timeout of the Elasticsearch clients and the engine auto-detection probe, in milliseconds. Does not configure the OpenSearch transport."
           ]
         },
         {
@@ -222,7 +222,7 @@
             "`ENGINE_INDEXING-BATCH-SIZE`",
             "",
             "Commented out",
-            "Maximum number of records fetched per indexing batch from the database"
+            "Maximum number of records fetched per indexing batch."
           ]
         },
         {
@@ -240,7 +240,7 @@
             "`ENGINE_INDEXING-MAX-CONCURRENT-MODELS`",
             "",
             "Commented out",
-            "How many models may run their indexing sync concurrently (default 3). Each sync pass holds a database connection for its whole fetch query; during a full reindex those queries are heavy, so a higher value trades platform responsiveness for reindexing throughput."
+            "Maximum number of models whose indexing runs at the same time. Each indexing round holds a database connection, so a higher value uses more of the connection pool. Values below `1` are treated as `1`."
           ]
         },
         {
@@ -716,7 +716,7 @@
             "`EXECUTOR_OPENAEV_AGENT_AUTO-UPDATE-ENABLED`",
             "`true`",
             "Set",
-            "When `false`, the platform does not queue agent upgrade jobs. Only applies with an active Enterprise Edition license"
+            "Whether OpenAEV agents upgrade when a new version of the platform is deployed; default `true`. When `false`, the platform sends them no upgrade job. Only applies with an Enterprise Edition license: without one, agents always upgrade. A platform administrator can also change it as **Agent auto-update** in the **Execution and agents** card of the parameters, unless the environment variable is set: see [Tune inject execution and agents](/openaev/administer/parameters/#tune-inject-execution-and-agents)."
           ]
         },
         {
@@ -725,7 +725,7 @@
             "`EXECUTOR_OPENAEV_AGENT_MAX-SIMULTANEOUS-JOBS`",
             "`5`",
             "Set",
-            "Maximum number of simultaneous jobs per agent, to avoid overloading the endpoint"
+            "Most jobs an OpenAEV agent receives each time it asks the platform for work, from 1 to 100; default `5`. A platform administrator can also change it as **Jobs per agent poll** in the **Execution and agents** card of the parameters, unless the environment variable is set: see [Tune inject execution and agents](/openaev/administer/parameters/#tune-inject-execution-and-agents)."
           ]
         },
         {
@@ -1225,7 +1225,7 @@
             "`INJECT_EXECUTION_THRESHOLD_MINUTES`",
             "`10`",
             "Set",
-            "Time in minutes OpenAEV waits for Agents to report back after an inject is sent. Agents that did not report get a `TIMEOUT` trace and the inject is set to `ERROR` or `PARTIAL`. Late starts are handled by `openaev.scheduling.inject-staleness-threshold`."
+            "Minutes OpenAEV waits, once an inject is sent, for its agents or its agentless injector to report, from 1 to 1440; default `10`. Agents that did not report by then get a `TIMEOUT` trace. The built-in OpenAEV implant gets the same time limit, read when the platform starts. How late an inject may start is `openaev.scheduling.inject-staleness-threshold` instead. A platform administrator can also change it as **Inject execution threshold** in the **Execution and agents** card of the parameters, unless the environment variable is set: see [Tune inject execution and agents](/openaev/administer/parameters/#tune-inject-execution-and-agents)."
           ]
         }
       ]
@@ -1414,6 +1414,15 @@
             "`INFO`",
             "Set",
             "Debug mode emits on io.openaev.debug at INFO/WARN; the parent io.openaev is pinned to ERROR, so the debug subtree is raised explicitly. Harmless when debug mode is off (those classes emit nothing)."
+          ]
+        },
+        {
+          "key": "logging.level.io.openaev.migration",
+          "cells": [
+            "`LOGGING_LEVEL_IO_OPENAEV_MIGRATION`",
+            "`INFO`",
+            "Set",
+            "Log level of the migrations of large tables run during an upgrade; the platform ships `INFO`, so their progress and their waits on the database write-ahead log show in the logs while the parent `io.openaev` stays at `ERROR`."
           ]
         },
         {
@@ -1730,6 +1739,15 @@
           ]
         },
         {
+          "key": "openaev.build-commit",
+          "cells": [
+            "`OPENAEV_BUILD-COMMIT`",
+            "",
+            "Code only",
+            "Commit of a build that is not a release, filled when the Docker image is built (`OPENAEV_BUILD_COMMIT`, empty on a release image); operators do not set it. Appended to the version the platform registers with XTM One."
+          ]
+        },
+        {
           "key": "openaev.commit",
           "cells": [
             "`OPENAEV_COMMIT`",
@@ -2007,7 +2025,7 @@
             "`OPENAEV_ADMIN_TOKEN`",
             "",
             "Commented out",
-            "API token of the admin user (must be a valid UUIDv4)"
+            "API token of the admin user (must be a valid UUIDv4). Also the only bearer `POST /api/xtm/peer-tokens` and `POST /api/xtm/peer-tokens/revoke` accept: a deployment manager provisions there the service accounts the sibling XTM products read this platform with"
           ]
         }
       ]
@@ -2027,7 +2045,7 @@
             "`OPENAEV_AGENT_QUEUE-THRESHOLD`",
             "`0`",
             "Set",
-            "Max number of pending jobs per agent before marking it overloaded. 0 disables the check."
+            "Pending jobs from which an agent counts as overloaded, from 0 to 10000: new injects skip it, with an `AGENT_OVERLOADED` trace. Default `0`, which turns the check off. A platform administrator can also change it as **Agent queue threshold** in the **Execution and agents** card of the parameters, unless the environment variable is set: see [Tune inject execution and agents](/openaev/administer/parameters/#tune-inject-execution-and-agents)."
           ]
         }
       ]
@@ -2251,7 +2269,7 @@
             "`OPENAEV_CHAINING_MAX-RETRY-COUNT`",
             "`5`",
             "Set",
-            "Maximum number of times an event can be re-queued after a transactional failure."
+            "Maximum number of times a chaining event is re-queued after a failed transaction. Past this number, the event is not re-queued again."
           ]
         }
       ]
@@ -2265,6 +2283,15 @@
         "Description"
       ],
       "rows": [
+        {
+          "key": "openaev.credentials.endpoint-allow-internal-targets",
+          "cells": [
+            "`OPENAEV_CREDENTIALS_ENDPOINT-ALLOW-INTERNAL-TARGETS`",
+            "`false`",
+            "Set",
+            "Lets the custom endpoint of an AWS, Azure or GCP credential, a sovereign or on-premise cloud, point at an internal address: private ranges, loopback and link-local. `false` by default: such an endpoint is not called, and the credential gets a format error status, when it is saved and when it is checked again. A host name that does not resolve is not refused."
+          ]
+        },
         {
           "key": "openaev.credentials.status-validation.cron",
           "cells": [
@@ -2328,6 +2355,15 @@
             "`5`",
             "Set",
             "Polling interval in minutes for the agent inactivity monitor job."
+          ]
+        },
+        {
+          "key": "openaev.cron.config.asset.freshness.interval",
+          "cells": [
+            "`OPENAEV_CRON_CONFIG_ASSET_FRESHNESS_INTERVAL`",
+            "`60`",
+            "Code only",
+            "Interval, in minutes, between two passes of the job that watches the freshness of assets, in every tenant. An asset whose last observation crossed its tenant's threshold since the previous pass becomes stale and raises one asset update event; the status itself is read from the date of the last observation, so a longer interval only delays the event. Default `60`."
           ]
         },
         {
@@ -3448,7 +3484,7 @@
             "`OPENAEV_RETENTION_EXECUTION-TRACES_RETENTION-DAYS`",
             "`0`",
             "Set",
-            "Number of days to keep execution traces (one row per agent execution message). `0` disables the purge job"
+            "Number of days to keep execution traces (one row per agent execution message). The final trace of each agent is kept: the Inject status is computed from it. `0` disables the purge job"
           ]
         }
       ]
@@ -3535,9 +3571,9 @@
           "key": "openaev.tenant.active-tables",
           "cells": [
             "`OPENAEV_TENANT_ACTIVE-TABLES`",
-            "`import_mappers,lessons_templates,mitigations,cwes,collectors,executors,injectors,tags,tag_rules,attackpath_execution,attackpath_finding,secret_references,secrets,connector_instances,autonomous_runs,autonomous_events,autonomous_directives,kill_chain_phases,security_coverages,domains,challenges,asset_groups,channels,notifications,assets,findings,tenant_xtmhub_registrations,notifiers,notification_triggers,notification_events,custom_dashboards,widgets,marking_definitions,documents,custom_domains,collector_types,phishing_email_templates,phishing_landing_pages,attackpath_execution_collector,attackpath_execution_remediation,asset_agent_jobs,payloads,vulnerabilities,phishing_results,reporting_schedules,reportings,reporting_generations,datapacks,teams,attack_patterns,organizations,agents,autonomous_objective_templates,catalog_items,catalog_releases,parameters,payload_identities,workflows,steps,conditions,scope_variables,steps_delay_queue,workflow_scope_rules,workflow_states,injectors_contracts,injector_contract_tags,injectors_contracts_attack_patterns,injectors_contracts_domains,injectors_contracts_vulnerabilities,injectors_injector_contracts,catalog_history,scenario_identities,payload_revocations`",
+            "`*`",
             "Set",
-            "Database tables whose tenant isolation the database itself enforces, on every statement. Each release ships the list its code needs: leave it as shipped and do not override it. A table left out can lose its tenant isolation, and naming a table that isolates itself stops the platform at startup."
+            "Database tables whose tenant isolation the database itself enforces, on every statement. The platform ships `*`: every tenant table, except those that isolate themselves, so a table added by an upgrade is isolated from the start. Leave it as shipped and do not override it: `*` cannot be combined with table names, a table left out of a list can lose its tenant isolation, and naming a table that isolates itself stops the platform at startup."
           ]
         }
       ]
@@ -3740,6 +3776,42 @@
           ]
         },
         {
+          "key": "openaev.xtm.opencrq.2cffad3a-0001-4078-b0e2-ef74274022c3.api-url",
+          "cells": [
+            "`OPENAEV_XTM_OPENCRQ_2CFFAD3A-0001-4078-B0E2-EF74274022C3_API-URL`",
+            "",
+            "Commented out",
+            "API (tRPC) URL of the OpenCRQ platform of the default tenant, when it is not `url` followed by `/trpc`. Commented out in the shipped file."
+          ]
+        },
+        {
+          "key": "openaev.xtm.opencrq.2cffad3a-0001-4078-b0e2-ef74274022c3.enable",
+          "cells": [
+            "`OPENAEV_XTM_OPENCRQ_2CFFAD3A-0001-4078-B0E2-EF74274022C3_ENABLE`",
+            "",
+            "Commented out",
+            "Connection of the default tenant (one entry per tenant id) to OpenCRQ: it is on as soon as `url` and `token` are set, so set it to `false` only to turn a configured connection off. Commented out in the shipped file."
+          ]
+        },
+        {
+          "key": "openaev.xtm.opencrq.2cffad3a-0001-4078-b0e2-ef74274022c3.token",
+          "cells": [
+            "`OPENAEV_XTM_OPENCRQ_2CFFAD3A-0001-4078-B0E2-EF74274022C3_TOKEN`",
+            "",
+            "Commented out",
+            "Token of an OpenCRQ service account (`ogrc_...`) that OpenAEV sends with each call to the OpenCRQ platform of the default tenant; it binds the calls to one OpenCRQ tenant and never leaves the server. Required for the connection. Commented out in the shipped file."
+          ]
+        },
+        {
+          "key": "openaev.xtm.opencrq.2cffad3a-0001-4078-b0e2-ef74274022c3.url",
+          "cells": [
+            "`OPENAEV_XTM_OPENCRQ_2CFFAD3A-0001-4078-B0E2-EF74274022C3_URL`",
+            "",
+            "Commented out",
+            "URL of the OpenCRQ platform of the default tenant, where users open it; its API is reached at this URL followed by `/trpc` unless `api-url` is set. Required for the connection. Commented out in the shipped file."
+          ]
+        },
+        {
           "key": "openaev.xtm.opencti.2cffad3a-0001-4078-b0e2-ef74274022c3.api_url",
           "cells": [
             "`OPENAEV_XTM_OPENCTI_2CFFAD3A-0001-4078-B0E2-EF74274022C3_API_URL`",
@@ -3755,6 +3827,15 @@
             "`false`",
             "Set",
             "Connects the default tenant (one entry per tenant id) to OpenCTI: with `url` and `token` set, the platform registers its security coverage connector there and keeps it alive. `false` in the shipped file."
+          ]
+        },
+        {
+          "key": "openaev.xtm.opencti.2cffad3a-0001-4078-b0e2-ef74274022c3.issuer",
+          "cells": [
+            "`OPENAEV_XTM_OPENCTI_2CFFAD3A-0001-4078-B0E2-EF74274022C3_ISSUER`",
+            "",
+            "Commented out",
+            "Public base URL of the OpenCTI platform of the default tenant, the identity it signs the per-user tokens it forwards to OpenAEV with. Set it only when it differs from `url`, for example when OpenAEV reaches OpenCTI on an internal address; empty, `url` is the expected identity and a token signed by any other is refused."
           ]
         },
         {

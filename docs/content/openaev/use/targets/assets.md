@@ -1,6 +1,6 @@
 ---
 title: Add the assets your simulations target
-description: Let OpenAEV agents register your endpoints, describe your other assets by category, import hosts from a CSV file, and gather assets in asset groups by hand or by rule.
+description: Let OpenAEV agents register your endpoints, describe your other assets by category, reclassify them in bulk, import them from a CSV file, and gather assets in asset groups by hand or by rule.
 doc_type: how-to
 products:
   - openaev
@@ -31,6 +31,9 @@ The **Status** column tells whether the asset can run injects that need an agent
 | **Active** | At least one of its agents contacted OpenAEV in the last hour |
 | **Inactive** | Its agents have been silent for more than an hour: check the agent's service on the endpoint |
 | **Agentless** | No agent runs on it: injects that run commands through an agent cannot act on it, while injects that work from outside, such as a scan, can |
+| **Stale** | Its agents have not reported for longer than your tenant's threshold, whatever their own status: hover the icon next to it for the last contact and the threshold |
+
+**Stale** is off by default. An administrator turns it on for a tenant through the API, with the tenant setting `asset_stale_after_days`, a number of days. OpenAEV checks the assets every hour. Only agents mark an asset as seen, so an asset without an agent never turns **Stale**. A stale asset leaves that status as soon as one of its agents reports again.
 
 The same host can run several agents, for example the OpenAEV agent as a service and as a user session, or an EDR used as executor. Its page lists each one under **Agents**: the account it runs as, its executor, its status, then its **Privilege**, **Deployment**, **Version** and **Last Seen**.
 
@@ -58,10 +61,11 @@ Describe the assets no agent registers: a web application to scan, a cloud resou
    | **Identity** | A user, service account, group or role | **Person**, **Identity provider**, **Principal / email** |
    | **SaaS application** | A software-as-a-service application or tenant | **Vendor** |
    | **AI target** | A language model, AI agent, MCP server or RAG pipeline to test | **Provider**, **Modality**, **Model**, **Endpoint URL**, **API token (optional)**, **System prompt (optional)** |
+   | **Source code** | A code repository, pipeline or package your teams build and ship | **URL**, **Internet-facing** |
    | **Generic asset** | Anything that fits no other category yet | None |
 
-3. Enter the **Name**, and optionally a **Description** and a **Subcategory**, such as **Server** or **Workstation** for a host.
-4. Fill in the fields of the category. On a host, **Platform** starts at Linux and **Architecture** at x86_64: set them to the real ones, because injects that run commands pick their command by platform and architecture. Turn on **End of Life** for a host its vendor no longer supports: it changes nothing in how injects run, but a dashboard list widget can show it as a column, to find the hosts to replace among those a simulation got through.
+3. Enter the **Name**, and optionally a **Description** and a **Subcategory**, such as **Server** or **Workstation** for a host, or **Code repository**, **CI/CD pipeline**, **Package registry** or **Software package** for source code.
+4. Fill in the fields of the category. On a host, **Platform** starts at Linux and **Architecture** at x86_64: set them to the real ones, because injects that run commands pick their command by platform and architecture. Turn on **End of Life** for a host its vendor no longer supports: it changes nothing in how injects run, but a dashboard list widget can show it as a column, to find the hosts to replace among those a simulation got through. The list of assets and the endpoint pickers of injects can filter on it too.
 5. Set the **Criticality**: **Very high**, **High**, **Medium**, **Low** or **Unknown**, the default. It ranks the assets in lists and filters, and asset groups can select by it.
 6. Add **Tags**, then click **Create**.
 :::
@@ -70,9 +74,28 @@ The asset appears in the list with its **Category**, its **Criticality** and, on
 
 To change or delete an asset, open the menu at the end of its line and choose **Update** or **Delete**. Select several lines to delete them together.
 
+When you update an asset, its **Category** field moves it to another category. The form then shows the fields of the new category, required ones included, and clears a **Subcategory** of the old one. An AI target keeps its category, and no other asset can become one.
+
+### Reclassify several assets at once
+
+Fix the category, subcategory, URL, criticality or tags of many assets in one go, such as hosts imported without their real category.
+
+:::steps
+1. In :menu[Assets], select the lines of the assets, or **Select all** to take every asset of the filtered list.
+2. Click **Edit classification** in the toolbar above the list.
+3. Set the fields to change: **Category**, **URL**, **Criticality** and **Tags to add**. **Subcategory** shows once you choose a category. A field you leave empty keeps each asset's own value.
+4. Click **Update**.
+:::
+
+Set at least one field. **Tags to add** adds tags to each asset and removes none. An asset moved to **Web application** without a **URL** asks for one the next time you update it.
+
+::screenshot{id=openaev-assets-edit-classification alt="The Edit classification dialog for two selected front-desk workstations: it counts the selected assets, then shows the Category, URL, Criticality and Tags to add fields, empty so that each asset keeps its values."}
+
 ## Import hosts from a CSV file
 
-To create many hosts at once, click **Import** above the list and choose a CSV file. Each line becomes a **Host**, with the columns `asset_name`, `asset_description`, `asset_hostname`, `asset_ips`, `endpoint_platform`, `endpoint_arch`, `asset_mac_addresses`, `asset_tags` and `endpoint_is_eol`. IP and MAC addresses are JSON lists, and tags a JSON list of names and colors. The simplest way to get the format right is to export a few hosts first with **Export this list**, and edit that file.
+To create many hosts at once, click **Import** above the list and choose a CSV file. Each line becomes an asset, with the columns `asset_name`, `asset_description`, `asset_hostname`, `asset_ips`, `endpoint_platform`, `endpoint_arch`, `asset_mac_addresses`, `asset_tags` and `endpoint_is_eol`. IP and MAC addresses are JSON lists, and tags a JSON list of names and colors.
+
+Three optional columns follow: `asset_category`, `asset_subcategory` and `asset_url`. They take the values of the API, such as `WEB_APPLICATION` and `WEBSITE`. A line without a category becomes a **Host**. The simplest way to get the format right is to export a few hosts first with **Export this list**, and edit that file.
 
 ## Gather assets in an asset group
 

@@ -60,16 +60,16 @@ For example, after a weekly run of `Velvet Harbor replay`, a **Detection** gauge
 | Where | Which dashboard it shows | Who chooses |
 | --- | --- | --- |
 | :menu[Home] | The user's own **Home dashboard**, else the tenant's **Home dashboard**, else the **Platform default** dashboard | Each user in their profile; an administrator for the tenant |
-| **Statistics** tab of a scenario | The scenario's own dashboard, else the tenant's **Default scenario dashboard** | Anyone who can change the scenario; an administrator for the tenant |
-| **Statistics** tab of a simulation | The simulation's own dashboard, else the tenant's **Default simulation dashboard** | Anyone who can change the simulation; an administrator for the tenant |
+| **Statistics** tab of a scenario | The scenario's own dashboard, else the tenant's **Default scenario dashboard** | Anyone who can change the scenario and has **Access dashboards**; an administrator for the tenant |
+| **Statistics** tab of a simulation | The simulation's own dashboard, else the tenant's **Default simulation dashboard** | Anyone who can change the simulation and has **Access dashboards**; an administrator for the tenant |
 
 ::screenshot{id=openaev-dashboards-home alt="The home dashboard of the tenant: the exposure command center with a score of 40 At risk, 1 prevention and 2 detections, the Prevention, Detection, Vulnerability and Human response gauges, and the performance by security domain, 75% for Endpoint."}
 
 - The tenant's three defaults are in :menu[Settings > Parameters]: see [Set the name, look and home page of a tenant](/openaev/administer/parameters/).
 - Your own home dashboard is in your profile: see [Set up your profile](/openaev/use/profile/).
-- To give one scenario or simulation its own dashboard, open its **Statistics** tab, click **Change dashboard** (or **Select a dashboard** when none shows), choose the **Dashboard**, and click **Continue**.
+- To give one scenario or simulation its own dashboard, open its **Statistics** tab, click **Change dashboard** (or **Select a dashboard** when none shows), choose the **Dashboard**, and click **Continue**. The button shows when you can change that scenario or simulation, through **Manage assessment** or a grant on it, and your role has **Access dashboards**.
 
-A simulation created from a scenario starts with the tenant's **Default simulation dashboard**. In the **Statistics** tab, a **Scenario** or **Simulation** parameter takes the current scenario or simulation by itself: one dashboard serves every scenario.
+A simulation created from a scenario starts with the tenant's **Default simulation dashboard**. In a simulation's **Statistics** tab, a **Scenario** or **Simulation** parameter takes that simulation and its scenario by itself. In a scenario's, a **Scenario** parameter takes the scenario, and a **Simulation** parameter starts on its latest ended simulation, which you can change. One dashboard serves every scenario.
 
 ## Share and manage dashboards
 
@@ -82,6 +82,12 @@ The menu of a dashboard holds:
 - **Update**: its name, description and parameters.
 - **Export**: a ZIP file of the dashboard and its widgets, to load on another platform with **Import a custom dashboard** at the top of the list.
 - **Delete**: not offered for the dashboard the tenant uses as its **Home dashboard**. Choose another home dashboard first.
+
+Before you confirm a delete, the dialog says where the dashboard is in use: how many scenarios and simulations show it, such as **Used by 1 scenario**, and **Default scenario dashboard** or **Default simulation dashboard** when the tenant uses it as one. OpenAEV does not refuse the delete for these. The scenarios and simulations that showed the dashboard fall back to the tenant's default in their **Statistics** tab, and a default that named it is left empty. A user whose own **Home dashboard** it was gets the tenant's again.
+
+::screenshot{id=openaev-dashboards-delete-usage alt="The dialog to delete the Technical simulation dashboard: it says the dashboard is in use and lists where, the Default simulation dashboard among them, above the Cancel and Delete buttons."}
+
+Deleted one of the six starter pack dashboards by mistake? An administrator with **Manage tenant settings** and **Manage dashboards** clicks **Restore starter pack dashboards** in the **Starter pack dashboards** card of :menu[Settings > Parameters]. OpenAEV creates again the ones the tenant no longer has, under their original names, and keeps the others as they are. When the **Default scenario dashboard** or the **Default simulation dashboard** is empty, it sets **Technical scenario** or **Technical simulation** back. See [Set the name, look and home page of a tenant](/openaev/administer/parameters/).
 
 :::example[A dashboard of the Velvet Harbor replay for the SOC]
 Grand Meridian Hotels runs `Velvet Harbor replay` every Wednesday. The SOC manager wants to follow what Meridian EDR misses, run after run. The validation engineer creates the dashboard:

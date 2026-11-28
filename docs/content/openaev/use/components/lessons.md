@@ -16,7 +16,7 @@ The lessons learned questionnaire is the debrief of an exercise, asked to the pe
 ## Before you start
 
 - Your role has **Manage assessment**, or your group has a **Manage+Delete** grant on the scenario or simulation.
-- To create the questionnaire's categories, and to manage templates in :menu[Settings > Customization > Lessons learned], your role has **Manage lessons learned**. To apply a template, **Access lessons learned** is enough.
+- To create the questionnaire's categories, and to manage templates in :menu[Settings > Customization > Lessons learned], your role has **Manage lessons learned**. Applying a template needs it too: with **Access lessons learned** alone, the dialog opens but has no **Apply** button.
 - The players are in teams, each with an email address. See [People](/openaev/use/targets/people/).
 
 ## How the questionnaire works
@@ -84,15 +84,19 @@ When the simulation is over:
 
 :::
 
-Each player of the targeted teams receives one email, with a link that opens their questionnaire without signing in. **Reset**, next to **Answers**, deletes every answer received, for example after a dry run with your control team.
+Each player of the targeted teams receives one email, with a link that opens their questionnaire without signing in. A player sees only the categories that target one of their teams.
+
+Signed in, the questionnaire opens only for the players of the simulation, the members of a group with a grant on it, from **Access** up, and a user with the [administrator flag](/openaev/concepts/access/). A user with such a grant, or with the flag, sees every category: that is what you read when you click **Switch to person mode** on the preview.
+
+**Reset**, next to **Answers**, deletes every answer received, for example after a dry run with your control team.
 
 ## Read the answers
 
 The **Lessons learned** tab of the simulation brings together:
 
 - At the top, the **Overall objectives score**, the number of **Simulation logs**, the **Poll replies** received and the **Messages** exchanged.
-- **Objectives**: the goals your control team sets for the exercise, each with a **Title**, a **Description** and a **Priority**, a whole number, 0 or more. Objectives are listed by priority, the lowest number first. Each evaluator scores an objective from 10 to 100. An objective's score is the average of its evaluations, and **Overall objectives score** is the average of the objectives.
-- **Crisis intensity (injects by hour)**: the number of injects the players received, hour by hour, to compare the answers with the pressure they were under.
+- **Objectives**: the goals your control team sets for the exercise, each with a **Title**, a **Description** and a **Priority**, a whole number, 0 or more. Objectives are listed by priority, the lowest number first. Each evaluator scores an objective from 10 to 100. An objective's score is the average of its evaluations, and **Overall objectives score** is the average of every objective's score: an objective nobody evaluated counts as 0.
+- **Crisis intensity (injects by hour)**: despite its title, the number of injects sent each day of the simulation, to compare the answers with the pressure the players were under.
 - **Categories and questions**: under **Results**, each question shows its number of answers, how many of them contain comments, and the average evaluation. Click a question to read every answer with its comments, under the player's name or **Anonymized**.
 
 :::example[Debrief the Grand Meridian crisis night]

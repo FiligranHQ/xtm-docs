@@ -17,13 +17,15 @@ A collector is the integration that reads data from another system for OpenAEV. 
 
 ## How a collector scores detection and prevention
 
-1. **The inject sets what to look for.** When an inject runs on an endpoint, OpenAEV creates its expectations, such as **Detection** and **Prevention**, for each agent that runs it. Each expectation carries signatures: the host name and IP addresses of the endpoint, the time window of the execution, and the name of the implant's process, `oaev-implant-<inject>-agent-<agent>`, which no other process has.
+1. **The inject sets what to look for.** When an inject runs on an endpoint, OpenAEV creates its expectations, such as **Detection** and **Prevention**, for each agent that runs it. Each expectation carries signatures: the IP addresses of the endpoint, the time window of the execution, and the name of the implant's process, `oaev-implant-<inject>-agent-<agent>`, which no other process has. When the payload targets another asset, they add that asset's host name or IP address.
 2. **The collector asks for the expectations it has not filled yet.** At each run, a collector of a security tool reads from the API the pending detection and prevention expectations.
 3. **It searches its tool.** An EDR collector looks for alerts on that host whose parent process is the implant: the alert then belongs to this inject, on this endpoint. A SIEM collector relies on the EDR whose logs it gathers: it confirms in the SIEM what the EDR collector has matched, so the EDR collector must fill the expectation first.
 4. **It fills the expectation.** A match marks the expectation detected, or prevented when the tool blocked the action, with the alert as its evidence. Each collector of a security tool is tied to a security platform, listed in :menu[Security platforms], and the result carries its name.
 5. **What nobody filled expires.** A built-in collector, **Expectations Expiration Manager**, closes the expectations nobody filled before their expiration time: 6 hours by default for detection and prevention, the `openaev.expectation.technical.expiration-time` key of the [`openaev.expectation` block](/reference/openaev/configuration/#openaev-expectation). The attack then counts as **Not Detected**, or **Not Prevented**.
 
 So a collector needs the inject to run through an implant, with the OpenAEV agent or an executor of your EDR, and the tool to keep the process tree of its alerts. How each expectation is scored and shown is in [Expectations](/openaev/use/expectations/).
+
+To read what one tool caught, open its platform in :menu[Security platforms]. Its header gives its **Prevention rate** and **Detection rate**, the share of those expectations it met, each shown only once the platform has results of that type: a SIEM, which detects but does not block, shows no **Prevention rate**. Next come **Expectations tested**, **Missed expectations** and its posture score. **Posture score over time** draws its trend, and **Latest expectations** lists the expectations it failed, newest first: remove the status filter to see every result.
 
 ## The collectors
 
@@ -36,11 +38,13 @@ The catalog, in :menu[Integrations], **Available** tab, lists the collectors the
 | Attack knowledge | MITRE Att&ck, MITRE ATLAS, NVD NIST (vulnerabilities) |
 | Payloads for the Threat Arsenal | Atomic Red Team, OpenAEV Library |
 | Assets, as endpoints without an agent | Microsoft Intune, Microsoft Azure, Amazon Web Service Resources, OVHcloud, XTM One (its AI agents, as AI targets) |
+| Source-code assets | GitHub: the repositories of your organizations and users, their GitHub Actions workflows as CI/CD pipelines, and their GitHub Packages as software packages |
 | Players | Microsoft Entra, Google Workspace |
+| Scenarios | OpenAEV Scenarios, which follows the releases of the OpenAEV scenarios repository |
 
 Two collectors are built into the platform and need nothing: **Expectations Expiration Manager**, above, and **Expectations Vulnerability Manager**, which scores the vulnerability expectations against the findings.
 
-::screenshot{id=openaev-integrations-collectors-deployed alt="The Deployed tab of Integrations filtered on collectors: Meridian EDR, the CrowdStrike Falcon collector, started next to the built-in Expectations Expiration Manager and Expectations Vulnerability Manager."}
+::screenshot{id=openaev-integrations-collectors-deployed alt="The Active tab of Integrations filtered on collectors: Meridian EDR, the CrowdStrike Falcon collector, running next to the built-in Expectations Expiration Manager and Expectations Vulnerability Manager."}
 
 ## Run a collector
 
@@ -55,12 +59,18 @@ In the catalog, the settings of Elastic Security show how it matches alerts. The
 
 The **OVHcloud** collector registers your OVHcloud servers as endpoints without an agent, so simulations can target them. By default it registers the dedicated servers (bare metal). Public Cloud instances, VPS and Hosted Private Cloud (VMware) virtual machines join them when you turn on `COLLECTOR_OVHCLOUD_COLLECT_PUBLIC_CLOUD`, `COLLECTOR_OVHCLOUD_COLLECT_VPS` or `COLLECTOR_OVHCLOUD_COLLECT_HOSTED_PRIVATE_CLOUD`. It reads the OVHcloud API of `COLLECTOR_OVHCLOUD_ENDPOINT` (`ovh-eu` by default, `ovh-ca` or `ovh-us`). It signs in with an application key, secret and consumer key granted GET calls only, or with the client id and secret of an OAuth2 service account. Regions, name patterns and IAM tags narrow what it registers, and it skips suspended, expired, deleted or errored resources. It imports the IAM tags of a resource as OpenAEV tags, and runs every hour (`COLLECTOR_PERIOD`, `PT1H`).
 
-A collector only opens outbound connections, to the OpenAEV URL and to the tool it reads: OpenAEV never connects to it. So it can run next to the tool, for example beside an on-premises SIEM while OpenAEV runs as a service. In :menu[Integrations], **Deployed** tab, each collector shows whether it runs and when the platform last heard from it.
+A collector only opens outbound connections, to the OpenAEV URL and to the tool it reads: OpenAEV never connects to it. So it can run next to the tool, for example beside an on-premises SIEM while OpenAEV runs as a service. In :menu[Integrations], **Active** tab, each collector's card shows its state and, under **Last Seen**, when the platform last heard from it:
+
+| State | When |
+| --- | --- |
+| **Running** | A built-in collector, whose **Last Seen** reads **Always on**. A collector that called the platform within the last 2 minutes |
+| **Not responding** | A collector deployed with XTM Composer and started, that has not called the platform for more than 2 minutes |
+| **Stopped** | A collector stopped in XTM Composer, or a collector you run yourself that has not called the platform for more than 2 minutes |
 
 A collector you **Stop** in :menu[Integrations] no longer counts for the injects that run afterwards, from the moment it is stopping. Their detection and prevention expectations wait only for the other collectors of the tenant. When no other collector answers that type of expectation for the security platforms the inject expects, the expectation fails at once, without waiting 6 hours to expire. It reads **No automated security platform detected**. Before you launch, the **Security System Collector** health check of the scenario or inject warns about such an expectation. A collector you run yourself, without a deployment in :menu[Integrations], always counts.
 
 :::example[Score the Velvet Harbor simulation with Meridian EDR]
-Meridian EDR, the endpoint detection of Grand Meridian Hotels, is CrowdStrike Falcon. The platform engineer deploys the **CrowdStrike** collector from the catalog, with a Falcon API client that reads detections, and it shows as started in the **Deployed** tab.
+Meridian EDR, the endpoint detection of Grand Meridian Hotels, is CrowdStrike Falcon. The platform engineer deploys the **CrowdStrike** collector from the catalog, with a Falcon API client that reads detections, and it shows as **Running** in the **Active** tab.
 
 The validation engineer runs the Velvet Harbor simulation on the front-desk workstations. Its PowerShell (T1059.001) inject runs on `fd-paris-01` at 02:14, through the implant `oaev-implant-<inject>-agent-<agent>`. Falcon raises a detection on `fd-paris-01` whose parent process is that implant, and kills the process. The CrowdStrike collector matches it on its next run: `fd-paris-01` reads **Detected** and **Prevented**, with the Falcon alert as evidence. On `fd-paris-02`, where the policy only detects, it reads **Detected**, and **Not Prevented** once the prevention expectation expires 6 hours later: a gap the SOC closes in the Falcon prevention policy.
 :::
