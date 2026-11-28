@@ -44,7 +44,7 @@ The XTM Platform, the open platform for Agentic CTEM. Each product owns stages o
 
 On **[filigran.io/docs](https://filigran.io/docs/)**: every page, for every documented version, with search, the journeys across the products and the reference of each version. The files here are the sources of those pages; the site is the way to read them.
 
-From your AI assistant: the documentation's MCP server, `https://filigran.io/docs/mcp`, lets Claude, ChatGPT, Cursor, VS Code or XTM One answer from the published pages, for the version you run, with a link to each section. No account, no key: **[connect your assistant](https://filigran.io/docs/develop/apis/docs-mcp/)**. The Markdown here is not the right source for an assistant: its directives are not resolved and its versions are mixed, where the server gives each page as the site publishes it, at one version.
+From your AI assistant: the documentation's MCP server, `https://filigran.io/docs/mcp/`, lets Claude, ChatGPT, Cursor, VS Code or XTM One answer from the published pages, for the version you run, with a link to each section. No account, no key: **[connect your assistant](https://filigran.io/docs/develop/apis/docs-mcp/)**. The Markdown here is not the right source for an assistant: its directives are not resolved and its versions are mixed, where the server gives each page as the site publishes it, at one version.
 
 ## How the repository is organised
 
