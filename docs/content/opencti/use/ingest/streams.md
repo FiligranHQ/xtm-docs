@@ -100,6 +100,10 @@ In :menu[Data > Ingestion > OpenCTI Streams], the stream shows as running with t
 
 If nothing arrives, check that the remote user still has access to the stream and that your platform can reach the remote URL. On the remote platform, your connection shows in the **Consumers** column of its live streams, with how far behind it is: its administrator can tell you whether your platform keeps up, as [Share knowledge with your security tools](/opencti/use/share/feeds/#keep-consumers-in-sync) explains.
 
+::::only{opencti=">=7.261127"}
+A remote platform on your internal network, such as one on a private IP address, works by default: your platform logs a warning, once for that host. When your platform engineer blocks internal destinations (`outbound_requests:block_internal_destinations`), the stream reaches such a platform only if its host is in `outbound_requests:allow_list`: otherwise **Validate**, **Verify** and the running stream fail, and the stream's **Logs** show `Feed execution failed` with an error that starts with `Synchronizer:` and names the host. See [Internal destinations](/opencti/use/ingest/feed-options/#internal-destinations).
+::::
+
 ## What's next
 
 - [Manage a feed](/opencti/use/ingest/#manage-a-feed): update, stop, export or delete the stream.

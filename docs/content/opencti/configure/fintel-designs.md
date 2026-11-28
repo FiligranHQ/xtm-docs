@@ -28,6 +28,10 @@ A design sets four things, and only these: the content, the sections and the mar
 
 Choose a logo and a text color that stay readable on both background colors: the logo is often a white or light version of your brand mark.
 
+:::only{opencti=">=7.261127"}
+The page format follows the widest table of the template. A table of 8 to 11 columns puts the whole document in landscape A4, and a table of 12 columns or more in landscape A3, with smaller text in the table. The footer of every page but the back page gives the **File marking definition levels** chosen at export and the page number, on every format.
+:::
+
 ## Before you start
 
 - Your platform has an Enterprise Edition license.

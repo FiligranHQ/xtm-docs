@@ -144,7 +144,7 @@ A widget built on a saved filter exports the content of that filter, not a refer
 The XTM Hub hosts ready-made dashboards built by Filigran and the community.
 
 - Click **Import from Hub** in :menu[Dashboards > Custom dashboards] to browse them and download a JSON file to import. The button only shows when your platform can reach the XTM Hub.
-- If your platform is [registered with the XTM Hub](/opencti/configure/xtm-hub/), click **Deploy in OpenCTI** on a dashboard in the Hub, choose the platform if you registered several, and OpenCTI creates the dashboard and opens it after a few seconds.
+- If your platform is [registered with the XTM Hub](/opencti/configure/xtm-hub/), deploy a dashboard from the Hub straight to OpenCTI: choose the platform if you registered several, and OpenCTI creates the dashboard and opens it after a few seconds.
 
 ## What's next
 

@@ -1,8 +1,8 @@
 {
   "name": "data-model",
-  "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/database/stix.ts and the 88 files of opencti-platform/opencti-graphql/src/schema and opencti-platform/opencti-graphql/src/modules that register types, attributes or modules; opencti-platform/opencti-front/src/private/components/nav/useNavMenu.tsx; opencti-platform/opencti-front/lang/front/en.json)",
-  "intro": "The 84 types of OpenCTI 7.261119.0 (entities, observables, sightings and meta objects), grouped as the navigation menu groups them, with the attributes each type adds to its family (_required_: the API refuses a creation without it, unless it fills a default, such as a label's color) and the relationships it can start; any type can also start `related-to` and `revoked-by`. [Data model](/opencti/concepts/data-model/) explains how these types form the knowledge graph.",
+  "version": "7.261127.0",
+  "source": "OpenCTI-Platform/opencti@1341db4 (opencti-platform/opencti-graphql/src/database/stix.ts and the 88 files of opencti-platform/opencti-graphql/src/schema and opencti-platform/opencti-graphql/src/modules that register types, attributes or modules; opencti-platform/opencti-front/src/private/components/nav/navSections.tsx; opencti-platform/opencti-front/lang/front/en.json)",
+  "intro": "The 84 types of OpenCTI 7.261127.0 (entities, observables, sightings and meta objects), grouped as the navigation menu groups them, with the attributes each type adds to its family (_required_: the API refuses a creation without it, unless it fills a default, such as a label's color) and the relationships it can start; any type can also start `related-to` and `revoked-by`. [Data model](/opencti/concepts/data-model/) explains how these types form the knowledge graph.",
   "filter": "Filter types, attributes and relationships",
   "sections": [
     {
@@ -504,7 +504,7 @@
             "Software",
             "`Software`",
             "`software`",
-            "Observable attributes, plus `cpe` (string), `languages` (string list), `name` (string), `swid` (string), `vendor` (string), `version` (string), `x_opencti_product` (string)",
+            "Observable attributes, plus `cpe` (string), `languages` (string list), `name` (string), `swid` (string), `vendor` (string), `version` (string), `x_opencti_product` (string), `x_opencti_purl` (string)",
             "`derived-from`, `has`, `remediates`"
           ]
         },
@@ -995,7 +995,7 @@
             "Vocabulary",
             "`Vocabulary`",
             "`vocabulary`",
-            "Stix-Meta-Object attributes, plus `aliases` (string list), `builtIn` (boolean), `category` (string, required), `color` (string), `description` (string), `is_hidden` (boolean), `name` (string, required), `order` (number)",
+            "Stix-Meta-Object attributes, plus `aliases` (string list), `builtIn` (boolean), `category` (string, required), `color` (string), `description` (string), `is_hidden` (boolean), `name` (string, required), `order` (number), `parent_name` (string)",
             "–"
           ]
         }

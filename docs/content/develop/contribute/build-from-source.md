@@ -101,6 +101,10 @@ EOF
 
 Keep the token: the worker and your API calls use it. Every other key and its default is in the [OpenCTI configuration reference](/reference/opencti/configuration/).
 
+:::only{opencti=">=7.261127"}
+At start, the back end looks for known default credentials in its configuration. The development values of `default.json` are some: `guest` for RabbitMQ (`rabbitmq:username`, `rabbitmq:password`) and `ChangeMe` for the S3 storage (`minio:access_key`, `minio:secret_key`). With `app:credentials:secure_by_default` at `false`, its default, the back end logs a warning that names these keys, and starts. Keep it at `false` on your machine: at `true`, the back end refuses to start until they change, in `development.json` and in the development services alike.
+:::
+
 ### Start the development services
 
 :::steps
@@ -165,6 +169,10 @@ To run one part alone, activate the virtual environment with `. ../.python-venv/
 - Back end: `cd opencti-platform/opencti-graphql && yarn start`. In development, the back end also starts `python` child processes, a command the virtual environment provides.
 - Front end: `cd opencti-platform/opencti-front && yarn start`. It listens on port 3000 (`FRONT_END_PORT`) and proxies `/graphql`, `/auth`, `/storage`, `/stream` and the other API paths to `http://localhost:4000` (`BACK_END_URL`).
 - Worker: `cd opencti-worker/src && python worker.py`.
+
+:::only{opencti=">=7.261127"}
+When the back end runs in development and writes to a terminal, as with `yarn start` or `yarn dev` from `opencti-platform/opencti-graphql`, it prints its console logs in a readable format: one colored line per message, with its details as indented JSON below it. Otherwise its console logs are JSON, for a log collector. To choose, set `app:app_logs:logs_console_format` (and `app:audit_logs:logs_console_format` for the audit logs) to `pretty` or `json` in `development.json`.
+:::
 
 :::verify
 The back end logs `[OPENCTI] API ready on port 4000`. Open `http://localhost:3000` and sign in with the email and password of `development.json`.

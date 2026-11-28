@@ -1,8 +1,8 @@
 {
   "name": "filter-keys",
-  "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9 (95 files, including opencti-platform/opencti-graphql/src/domain/filterKeysSchema.ts and opencti-platform/opencti-graphql/src/utils/filtering/filtering-constants.ts)",
-  "intro": "The 23 operators and 557 filter keys a filter group accepts in OpenCTI 7.261119.0, in the API and in the filter menu of the interface. [Filters](/develop/apis/filters/) explains how to write a filter group.",
+  "version": "7.261127.0",
+  "source": "OpenCTI-Platform/opencti@1341db4 (95 files, including opencti-platform/opencti-graphql/src/domain/filterKeysSchema.ts and opencti-platform/opencti-graphql/src/utils/filtering/filtering-constants.ts)",
+  "intro": "The 23 operators and 561 filter keys a filter group accepts in OpenCTI 7.261127.0, in the API and in the filter menu of the interface. [Filters](/develop/apis/filters/) explains how to write a filter group.",
   "filter": "Filter keys, types and operators",
   "sections": [
     {
@@ -1399,6 +1399,24 @@
             "`Grouping`",
             "`eq`, `not_eq`, `nil`, `not_nil`",
             "**Context**. Value: vocabulary value of the vocabulary `grouping_context_ov`."
+          ]
+        },
+        {
+          "key": "attr:coverage_information.coverage_name",
+          "cells": [
+            "`coverage_information.coverage_name`",
+            "`Security-Coverage-Result`, `has-covered`",
+            "`eq`, `not_eq`, `nil`, `not_nil`",
+            "**Coverage name**. Value: vocabulary value of the vocabulary `coverage_ov`."
+          ]
+        },
+        {
+          "key": "attr:coverage_information.coverage_score",
+          "cells": [
+            "`coverage_information.coverage_score`",
+            "`Security-Coverage-Result`, `has-covered`",
+            "`gt`, `gte`, `lt`, `lte`, `eq`, `not_eq`, `nil`, `not_nil`",
+            "**Coverage score**. Value: number."
           ]
         },
         {
@@ -3409,6 +3427,15 @@
           ]
         },
         {
+          "key": "attr:parent_name",
+          "cells": [
+            "`parent_name`",
+            "`Vocabulary`",
+            "`eq`, `not_eq`, `nil`, `not_nil`, `contains`, `not_contains`, `starts_with`, `not_starts_with`, `ends_with`, `not_ends_with`, `search`",
+            "**Parent**. Value: short text."
+          ]
+        },
+        {
           "key": "attr:parentDirectory",
           "cells": [
             "`parentDirectory`",
@@ -5206,6 +5233,15 @@
             "`Software`",
             "`eq`, `not_eq`, `nil`, `not_nil`, `contains`, `not_contains`, `starts_with`, `not_starts_with`, `ends_with`, `not_ends_with`, `search`",
             "**Product name**. Value: short text."
+          ]
+        },
+        {
+          "key": "attr:x_opencti_purl",
+          "cells": [
+            "`x_opencti_purl`",
+            "`Software`",
+            "`eq`, `not_eq`, `nil`, `not_nil`, `contains`, `not_contains`, `starts_with`, `not_starts_with`, `ends_with`, `not_ends_with`, `search`",
+            "**PURL**. Value: short text."
           ]
         },
         {

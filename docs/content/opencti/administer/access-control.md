@@ -107,7 +107,15 @@ Each choice below closes a gap that administrators often find too late:
 **SMTP configuration** does not exist in this version.
 :::
 
+:::only{opencti=">=7.261127"}
+An organization administrator without **Manage credentials** sees **Users** and **Organizations**, limited to the organizations they administer, and **Email templates**. They can read the templates; creating, changing, deleting or test-sending a template still requires **Manage credentials**.
+
+A Security page opened by its URL follows the same rules as the menu: a user whose capabilities do not show the page is sent to the first **Settings** page they can open, or to the home page when there is none. The menu and the URL only decide what the screen shows: the API checks the capability of every request, whatever the screen.
+:::
+
+:::only{opencti="<7.261127"}
 An organization administrator without **Manage credentials** sees only **Users** and **Organizations**, limited to the organizations they administer.
+:::
 
 ## What's next
 

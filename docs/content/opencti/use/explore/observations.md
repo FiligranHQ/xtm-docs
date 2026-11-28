@@ -31,6 +31,12 @@ The page of an IP address, a domain, a URL or a hash tells you in one screen how
 
 ::screenshot{id=opencti-observations-observable-overview alt="The Overview of an IPv4 address: its value and score, the indicators composed with this observable, and its latest relationships with an intrusion set and an infrastructure."}
 
+:::only{opencti=">=7.261127"}
+A **Software** observable shows, besides its name, vendor and version, its **PURL** in **Details**: the package URL of the software, such as `pkg:npm/hotel-booking-widget@2.4.1` for a package of the npm registry. Copy it to look the package up in your software inventory. You fill it in the creation and edition forms of the observable, and STIX 2.1 exports carry it as `purl` in the OpenCTI extension of the observable.
+
+::screenshot{id=opencti-observations-software-purl alt="The Details of the Software observable hotel-booking-widget: its description, its vendor, the version 2.4.1 and the PURL pkg:npm/hotel-booking-widget@2.4.1."}
+:::
+
 Files, domains, URLs, hostnames, artifacts and network traffic also show **Malware analyses**: the results of sandboxes that analyzed them. To add context that the platform does not have yet, click **Enrichment** in the header and pick an enrichment connector: see [Enrich knowledge from external sources](/opencti/use/enrich/connectors/).
 
 :::example[Qualify a domain from a phishing alert]
@@ -114,6 +120,10 @@ An indicator is based on observables, and both link to the threats they indicate
 
 When you create an indicator with **Create Indicator**, **Indicator types** says what a match means, from the indicator type vocabulary: `malicious-activity`, `anomalous-activity`, `compromised`, `anonymization`, `attribution`, `benign` or `unknown`. Your detection team reads it to decide how to treat an alert. **Create observables from this indicator**, off by default, reads the STIX pattern and creates each observable it names, linked to the indicator by `based-on`, with the score, author, markings and labels of the indicator. Turn it on when you want the values themselves in your knowledge, for example to find them in search and link them to an infrastructure.
 
+:::only{opencti=">=7.261127"}
+Only an equality names an observable: a value the pattern excludes, such as `[ipv4-addr:value != '203.0.113.10']`, creates none. A quote escaped in the pattern is kept in the value: `[url:value = 'https://booking-velvetharbor.example/?ref=\'vh\'']` creates the URL `https://booking-velvetharbor.example/?ref='vh'`.
+:::
+
 :::example[List the Velvet Harbor indicators that expire within 30 days]
 Before the indicators of the hospitality campaign leave your detection tools, you want to review them and extend those that are still active. In :menu[Observations > Indicators], add two filters:
 
@@ -123,7 +133,11 @@ Before the indicators of the hospitality campaign leave your detection tools, yo
 The list shows the indicators `203.0.113.10` and `booking-velvetharbor.example` when their validity ends in the next 30 days. Keep the relative dates: saved as a filter, the list stays current every time you open it.
 :::
 
-**Infrastructures.** An infrastructure page shows its **Infrastructure types**, its **First seen** and **Last seen** dates and an **Observables distribution** chart. Its **Knowledge** tab opens on the diamond model, a timeline and the global kill chain, to see which threats use it and what they target. Its **Observables** section lists the addresses and domains it consists of, the list to block when a command and control infrastructure is confirmed.
+**Infrastructures.** An infrastructure page shows its **Infrastructure types**, its **First seen** and **Last seen** dates and an **Observables distribution** chart. Its **Knowledge** tab opens on the diamond model, a timeline and the global kill chain, to see which threats use it and what they target. Its **Observables** section lists the addresses and domains it consists of, communicates with or is related to, the list to block when a command and control infrastructure is confirmed.
+
+:::only{opencti=">=7.261127"}
+The number beside **Observables** counts the observables of that list, each one once.
+:::
 
 ## Create several observables at once
 

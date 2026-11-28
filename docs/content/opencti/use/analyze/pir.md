@@ -61,6 +61,10 @@ A PIR is visible to everyone who has **Access PIR**, and only its creator can ch
 
 After creation, you can change the name and the description only, with **Update**. To change the criteria, create a new PIR.
 
+:::only{opencti=">=7.261127"}
+A script that creates a PIR through the API gets an error when its filters use a key the PIR manager cannot check on the stream of changes, such as `Stix filtering is not compatible with the provided filter key`. The filters the form builds always pass.
+:::
+
 :::example[Follow the threats to European hotels]
 The CISO of a hotel group asks Example CERT for a standing answer to "which threats target hospitality in Europe, and France first of all?". Create the PIR with:
 
@@ -107,7 +111,7 @@ The **Threats** tab sorted by score is the prioritized list of who threatens the
 
 ## Act when a PIR changes
 
-- **Run a playbook.** Choose **Listen PIR events** as the entry point and pick the events: **A new entity enters a selected PIR**, **An entity has left a selected PIR**, **An entity from a selected PIR has been updated** or **An entity is linked to an entity from a selected PIR**. The playbook can then notify the team that owns the PIR or open a case. See [Create a playbook](/opencti/use/automate/playbooks/create/).
+- **Run a playbook.** Start it with the **Listen PIR events** entry point and pick the events: **A new entity enters a selected PIR**, **An entity has left a selected PIR**, **An entity from a selected PIR has been updated** or **An entity is linked to an entity from a selected PIR**. The playbook can then notify the team that owns the PIR or open a case. See [Create a playbook](/opencti/use/automate/playbooks/create/).
 - **Filter on the score.** The **PIR Score** filter works in playbooks, live streams and triggers, so you act only on the threats that matter, for example those scoring 100.
 
 ## What's next

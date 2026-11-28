@@ -41,6 +41,10 @@ Click **Home** in the left navigation. Unless you chose another dashboard, you s
 
 Every widget only counts what you can access, so two people can see different numbers.
 
+:::only{opencti=">=7.261127"}
+**Targeted countries (Last 3 months)** shades each country on a logarithmic scale of its number of `targets` relationships: a country targeted a hundred times no longer flattens all the others into one shade.
+:::
+
 ## Choose your home dashboard
 
 ::::steps

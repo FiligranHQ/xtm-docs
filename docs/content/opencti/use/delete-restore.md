@@ -25,6 +25,15 @@ An entity, relationship or sighting you delete in OpenCTI goes to the trash, whe
 
 - Your role has the **Delete knowledge** capability. It also opens :menu[Data > Trash].
 - The trash is on by default. When an administrator turns it off, every deletion is permanent and the **Trash** menu disappears.
+- The **Trash** menu is not offered while you work in a [draft](/opencti/use/ingest/drafts/).
+
+:::only{opencti=">=7.261127"}
+A bookmarked link to the trash follows the same rules as the menu: without **Delete knowledge**, inside a draft, or when the trash is off, it opens the home dashboard instead.
+:::
+
+:::only{opencti="<7.260811"}
+In this version, **Trash** is an item of its own in the left bar, right below **Data**, rather than an entry of the **Data** menu.
+:::
 
 ## What deleting does
 

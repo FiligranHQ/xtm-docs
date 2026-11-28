@@ -131,6 +131,10 @@ A system can describe one of your own assets, such as the booking platform of a 
 
 The values of **Criticality** and **Internet facing** are fixed; the other lists are vocabularies an administrator can extend in [Taxonomies](/opencti/configure/taxonomies/). Every field is optional.
 
+:::only{opencti=">=7.261127"}
+A system can also be a code asset your teams build and ship: choose the category **Source code**, then **Code repository**, **CI/CD pipeline**, **Package registry**, **Software package** or **Other code asset**. A platform upgraded from an earlier version gets this category and its subcategories too. Renaming a category keeps its subcategories.
+:::
+
 To fill them in:
 
 :::steps

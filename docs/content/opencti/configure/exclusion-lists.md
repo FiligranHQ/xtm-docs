@@ -98,7 +98,7 @@ Every change starts a new synchronization: wait for **Synchronized** before you 
 When a connector, a feed (CSV, JSON, RSS, TAXII), a playbook or a user creates an indicator, OpenCTI extracts the observable values from its STIX pattern. If one of them is in an active list, the indicator is not created and the source receives the error `Indicator of type stix is contained in exclusion list.`
 
 :::note
-Exclusion lists apply to indicators with a STIX pattern only. An observable created on its own, for example by a feed that does not create indicators, is not filtered. Indicators already in the platform stay as they are.
+Exclusion lists apply to indicators with a STIX pattern only. An observable created on its own, for example by a feed that does not create indicators, is not filtered. Indicators already in the platform stay as they are, until someone changes their pattern: a new pattern with a listed value is refused with the same error.
 :::
 
 ## What's next

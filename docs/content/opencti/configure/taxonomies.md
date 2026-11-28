@@ -124,6 +124,10 @@ Rules to know:
 - Built-in values cannot be deleted: in their menu, **Delete** gives way to **This item is built-in**. Their names cannot change, nor can the names of the values of a closed category.
 - A value used by objects cannot be deleted when a field that uses the category is mandatory: **Delete** gives way to **Some fields in usage are mandatory**.
 
+:::only{opencti=">=7.261127"}
+Each value of `system_subcategory_ov` belongs to a value of `system_category_ov`, such as `CODE_REPOSITORY` to `SOURCE_CODE`: the **System subcategory** field of a system offers the subcategories of the **System category** chosen. When you rename a category, its subcategories follow the new name. A subcategory you create belongs to no category, so the field offers it whatever the category, under **Other** when none is chosen. To file it under a category, end its **Description** with that category in parentheses, such as `(category: HOST)`, when you create it: OpenCTI attaches the subcategory to `HOST` and removes the suffix from the description.
+:::
+
 ::::only{opencti=">=7.261117"}
 ### Color the values
 

@@ -64,6 +64,10 @@ Then fill it in:
 
 :::
 
+:::only{opencti=">=7.261127"}
+A feed you take from a full configuration bundle opens this form already filled in, **Verify SSL certificate** included. **Default author** is filled when your platform holds the same author, and **Default marking definitions** keeps the markings your platform has. See [Share feed configurations](/opencti/use/ingest/#share-feed-configurations).
+:::
+
 :::example[Follow the advisories of a security blog]
 Harbor Security, a fictional vendor that tracks threats to hotels, publishes its advisories on a public blog with an RSS 2.0 feed. Your team wants each new advisory as a report, ready to be read and linked.
 
@@ -100,6 +104,10 @@ In :menu[Data > Ingestion > RSS Feeds], the feed shows as running with its last 
 The reports appear in :menu[Analyses > Reports], with the feed's author.
 
 Some sites reject requests that do not come from a browser. If every fetch fails while the URL opens in your browser, an administrator can change the user agent the platform sends: see [Tune feeds and streams](/opencti/use/ingest/feed-options/#rss-feeds).
+
+:::only{opencti=">=7.261127"}
+A feed of a site on your internal network fails when your platform engineer blocks internal destinations: its **Logs** show an error that starts with `RSS feed:` and names the host. See [Internal destinations](/opencti/use/ingest/feed-options/#internal-destinations).
+:::
 
 ## What's next
 

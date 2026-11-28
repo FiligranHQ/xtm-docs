@@ -34,7 +34,7 @@ Triggers only alert: they never change data. To act on events, use a [playbook](
 
 ## Before you start
 
-- Any user can create triggers for themselves.
+- Any user whose role has the **Access knowledge** capability can create triggers for themselves: the **Notification Center** shows only to them.
 - To create triggers for other users, groups or organizations, your role needs the **Manage credentials** capability, or you must be an administrator of the organization.
 - To deliver by email or webhook, a notifier must exist. Two are built in: **User interface** and **Default mailer**. Administrators add others in :menu[Settings > Customization > Notifiers]; see [Notifiers](/opencti/configure/notifiers/).
 
@@ -50,6 +50,10 @@ Click the bell icon in the top bar to open the **Notification Center**. It has t
 
 :::only{opencti="<7.261030"}
 The top bar has two icons: the bell, **Notifications**, opens the alerts you received, and **Triggers** opens your triggers and digests.
+:::
+
+:::only{opencti=">=7.261127"}
+The [global search](/opencti/use/explore/search/) of the top bar finds these pages too: type `triggers` or `digest`, and choose the **Triggers** page of the **Notification Center** in the suggestions that open under the field.
 :::
 
 ::screenshot{id=opencti-notifications-triggers-list alt="The Triggers tab of the Notification Center lists live triggers and digests, with the Create Regular digest and Create Live trigger buttons above the list."}

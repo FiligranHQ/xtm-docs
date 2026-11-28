@@ -14,6 +14,10 @@ migrated_from:
 
 OpenCTI publishes part of its knowledge base itself, with no connector to deploy on its side: as a live stream of events, as a CSV file at a URL, or as a Trusted Automated Exchange of Intelligence Information (TAXII) 2.1 collection. This page helps you choose the right one for each detection tool, filter what it receives, size it, and check that every consumer stays in sync. You find the three in :menu[Data > Data sharing].
 
+:::only{opencti=">=7.261127"}
+The global search finds them too: type `SIEM` for **Live streams**, `blocklist` or `firewall` for **CSV feeds**, `TAXII` for **TAXII collections**.
+:::
+
 ::diagram{id=opencti-share-feeds}
 
 ## Before you start
@@ -158,6 +162,10 @@ A connected consumer also follows the rights of its user. Before each batch of e
 - you turn **Public stream** on or off, or choose another user in **Share data corresponding to permissions associated with this user**.
 :::
 
+:::only{opencti=">=7.261127"}
+A stream read with a browser session, such as one opened with **Open stream**, also ends when that session reaches its maximum lifetime, which a platform engineer sets in `app:session_max_lifetime` (see [End sessions after a fixed time](/opencti/administer/cookies/#end-sessions-after-a-fixed-time)). A consumer that authenticates with an API token is not concerned.
+:::
+
 To cut a consumer off at once, stop or delete its stream.
 
 To check what a stream sends, choose **Open stream** in its actions menu: the browser shows its events.
@@ -264,6 +272,10 @@ Raise a result limit only after you test what your platform serves in one answer
 ## Check that it works
 
 Copy the URL of the feed from its row and open it with a user who should read it: the browser shows the stream's events, the CSV lines or the TAXII objects. For a public feed, open the URL in a private window. If the result is empty, check the filters and the rights of the user whose access applies. Once a tool reads a live stream, its connection shows in the **Consumers** column.
+
+:::only{opencti=">=7.261127"}
+When a feed fails on the platform's side, its answer no longer describes the error: a CSV feed or a TAXII collection answers `An unexpected error occurred`, and a live stream sends an `error` event with the same message. Each answer carries an identifier of the request in its `X-Request-ID` header, and the error repeats it: `request_id` in the answer of a CSV feed and in the `error` event of a live stream, `error_id` in the answer of a TAXII collection. Give it to your platform engineer, who finds the full error under that identifier in the platform logs. An error the consumer can fix, such as a missing right or a wrong parameter, keeps its message.
+:::
 
 ## What's next
 

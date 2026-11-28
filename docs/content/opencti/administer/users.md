@@ -163,6 +163,10 @@ Deleting a user also:
 - deletes the investigations and dashboards where they are the only administrator;
 - turns private the public live streams, TAXII collections and CSV feeds that share data with this user's rights. Give them another user to make them public again.
 
+:::only{opencti=">=7.261127"}
+OpenCTI also removes the user from the administrators of every organization they administered, whoever deletes the account, an organization administrator included.
+:::
+
 ::::only{opencti=">=7.261109"}
 ## Merge two accounts of the same person
 
@@ -296,6 +300,10 @@ A session starts at each login. :menu[Settings > Security > Sessions] lists the 
 Disabling or deleting a user ends their sessions on its own. End them by hand when you suspect a session was stolen, or to make a user log in again.
 
 How long a session lasts is set by `app:session_timeout`, 20 minutes without activity by default. See [Cookies](/opencti/administer/cookies/). To limit how many sessions a user can open at the same time, set **Max concurrent sessions** in [Manage login providers in the UI](/opencti/administer/authentications/#set-platform-wide-login-policies): beyond it, a new login ends the oldest sessions of the user.
+
+:::only{opencti=">=7.261127"}
+To make every user log in again after a fixed time, whatever their activity, set `app:session_max_lifetime` (`APP__SESSION_MAX_LIFETIME`), in milliseconds from the login, `0` (no limit) by default. A session that reaches it ends at the user's next request, and the activity log records a logout. :menu[Settings > Security > Authentications] shows the value under **Maximum session lifetime**, read-only. See [Basic parameters](/reference/opencti/configuration/#basic-parameters).
+:::
 
 ## Who sees which users
 

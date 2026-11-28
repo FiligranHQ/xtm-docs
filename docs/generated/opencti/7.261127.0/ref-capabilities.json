@@ -1,8 +1,8 @@
 {
   "name": "capabilities",
-  "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/database/data-initialization.js)",
-  "intro": "The 58 capabilities a role can grant in OpenCTI 7.261119.0, in the order of the role editor, with the top-level capabilities that have none under them gathered in the last table. A capability includes the capabilities it is indented under, not the ones indented under it: checking it in a role checks its parents. Create roles and give them to groups as [Roles and capabilities](/opencti/administer/roles/) explains.",
+  "version": "7.261127.0",
+  "source": "OpenCTI-Platform/opencti@1341db4 (opencti-platform/opencti-graphql/src/database/data-initialization.js)",
+  "intro": "The 58 capabilities a role can grant in OpenCTI 7.261127.0, in the order of the role editor, with the top-level capabilities that have none under them gathered in the last table. A capability includes the capabilities it is indented under, not the ones indented under it: checking it in a role checks its parents. Create roles and give them to groups as [Roles and capabilities](/opencti/administer/roles/) explains.",
   "filter": "Filter capabilities and API names",
   "sections": [
     {

@@ -18,7 +18,7 @@ migrated_from:
 
 ## Before you start
 
-- Install the `pycti` version of your platform: `pip install pycti==7.261030.1`. The library and the platform are released together, with the same version number.
+- Install the `pycti` version of your platform, such as `pip install pycti==7.261127.0` for OpenCTI 7.261127.0. The library and the platform are released together, with the same version number.
 - Put the platform URL and an API token in `OPENCTI_URL` and `OPENCTI_TOKEN`. Every call runs as the token's user: their capabilities, markings and confidence level apply, as in the interface.
 
 ## Connect
@@ -44,7 +44,15 @@ print(f"Connected to OpenCTI {me['about']['version']} as {me['me']['name']}")
 Connected to OpenCTI 7.261030.1 as admin
 ```
 
-The constructor also takes `ssl_verify` (`False` by default: pass `True`, or the path of a CA bundle, for an HTTPS platform), `proxies`, `custom_headers` and `requests_timeout`, in seconds (300 by default). `log_level="error"` keeps the client quiet; its default, `info`, logs each call.
+The constructor also takes `ssl_verify`, `proxies`, `custom_headers` and `requests_timeout`, in seconds (300 by default). `log_level="error"` keeps the client quiet; its default, `info`, logs each call of the entity methods (`list`, `read`, `create`...), while `query()` logs nothing.
+
+:::only{opencti=">=7.261119"}
+`ssl_verify` takes by default the value of the `OPENCTI_TLS_REJECT_UNAUTHORIZED` environment variable, `False` when it is unset: pass `True`, or the path of a CA bundle, for an HTTPS platform.
+:::
+
+:::only{opencti="<7.261119"}
+`ssl_verify` is `False` by default: pass `True`, or the path of a CA bundle, for an HTTPS platform.
+:::
 
 ## Read with filters
 
@@ -95,7 +103,7 @@ Intrusion set: Velvet Harbor intrusion-set--4e78bb64-59c9-51e3-b1b9-ac8133e1c8e0
 2026-01-09  Night-time exports from a hotel booking platform  (Grand Meridian Hotels)
 ```
 
-`list()` returns 100 objects by default (`first`). `getAll=True` follows the pages for you; `withPagination=True` returns the page information too, for your own paging with `after`.
+`list()` returns one page: 500 objects by default for most types (`intrusion_set`, `indicator`, `identity`...), 100 for others (`report`, `note`, `stix_core_relationship`...). Set it with `first`. `getAll=True` follows the pages for you; `withPagination=True` returns the page information too, for your own paging with `after`.
 
 ## Create objects
 
@@ -148,7 +156,7 @@ Relationship: relationship--fb4d3042-a0dd-5079-9526-4d3ab0ed96e5
 
 ## Import a STIX bundle
 
-`client.stix2.import_bundle_from_json()` writes a whole STIX 2.1 bundle through the API, object by object, referenced objects first. It returns the imported objects, and the objects left out because they have more references than its `objects_max_refs` argument allows (no limit by default). It runs in your process, as the token's user: use it for a few hundred objects. For more, or on a schedule, a connector sends the bundle to the workers instead.
+`client.stix2.import_bundle_from_json()` writes a whole STIX 2.1 bundle through the API, object by object, referenced objects first. It returns two lists: the objects it sent, and the objects it left out, those with more references than its `objects_max_refs` argument allows (no limit by default) and those still failing after its retries. An object the platform refuses outright is logged as an error, but stays in the first list: check the log. It runs in your process, as the token's user: use it for a few hundred objects. For more, or on a schedule, a connector sends the bundle to the workers instead.
 
 This example adds a note to the report "Velvet Harbor targets hotel booking systems":
 
@@ -197,9 +205,25 @@ Imported note note--2d4b50aa-e314-56b9-b221-92e4ceadcf41
 
 The `generate_id` functions of `pycti` (`Note.generate_id`, `Identity.generate_id`, `Indicator.generate_id`...) compute the identifier OpenCTI would give the object, so a bundle sent twice merges instead of duplicating.
 
+An object of the bundle can carry its labels in `labels`, in the `labels` of the OpenCTI extension, in `x_opencti_labels`, or in `x_opencti_tags`, whose entries also give a `color`. Its external references go in `external_references`, in the OpenCTI extension, or in `x_opencti_external_references`.
+
+:::only{opencti=">=7.261127"}
+`pycti` reads every one of these places and adds each label and each external reference once, even when an object holds the same one in two places. A label found in `x_opencti_tags` keeps its color.
+:::
+
+:::only{opencti="<7.261127"}
+`pycti` reads the labels of one place only: `labels` (or the extension's when `labels` is absent), else `x_opencti_labels`, else `x_opencti_tags`. External references are read from `external_references` (or the extension's), else `x_opencti_external_references`. Put all of an object's labels in one place.
+:::
+
 ## Run your own GraphQL query
 
 `client.query(query, variables)` sends any GraphQL query or mutation and returns the JSON response. Use it for a field or an operation the entity classes do not cover. The [GraphQL schema reference](/reference/opencti/graphql-schema/) lists the types and fields.
+
+When the platform answers with an error, `query()` raises a `ValueError` whose argument is a dictionary: the error's `name`, its `error_message`, and the data the platform attached to it.
+
+:::only{opencti=">=7.261127"}
+The dictionary also holds `request_id`, the identifier the platform gives the request in its logs. When the platform hides the details of its internal errors (`app:graphql:show_error_details` set to `false`), `error_message` is generic: give the `request_id` to the platform administrator, who finds the full error in the logs.
+:::
 
 This example pages through the indicators whose name contains "velvet", two at a time, with the cursor of each page:
 

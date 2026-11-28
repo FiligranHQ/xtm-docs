@@ -78,6 +78,29 @@ The next report shows four steps in its run, and opens with the `IN_PROGRESS` st
 
 To see the full bundle on the server side, an administrator can add a temporary **Log data in standard output** step; it writes the bundle to the platform logs at the **Log level** you choose.
 
+## When a playbook does not run on an entity
+
+**Enroll in playbook** lists the running playbooks that can start on the entity when you open it. When **Trigger this playbook now** answers with an error, the playbook or the entity changed in the meantime: someone stopped the playbook, changed its entry point, or removed the label its filters look for. The run buttons of the panel stay disabled after the error: close the panel and open **Enroll in playbook** again before you retry.
+
+:::only{opencti=">=7.261127"}
+The message names the reason:
+
+| Message | Reason | What to do |
+| --- | --- | --- |
+| *Playbook does not exist* | The playbook is stopped or deleted | Ask its author whether it should run again |
+| *Playbook … does not allow manual enrollment* | Its entry point no longer accepts manual enrollment: its `canEnrollManually` switch is off | Use another playbook, or ask its author to turn the switch back on |
+| *Playbook … cannot be run manually (its entry component is …)* | Its entry point was replaced by one that analysts cannot enroll in, such as **Query knowledge on a regular basis** | Use a playbook that starts with **Listen knowledge events** or **Available for manual enrollment / trigger** |
+| *Entity does not match the entry filter of playbook …* | The entity no longer matches the filters of the entry point, for example after its label was removed | Check the entity against the filters of the entry point |
+| *Entity does not exist* | The entity was deleted | None |
+| *Playbook … cannot be run manually: Enterprise Edition is not enabled* | The platform has no Enterprise Edition license anymore | Tell your administrator |
+
+For example, Ana opens **Enroll in playbook** on the report *Night-time exports from a hotel booking platform* while a colleague removes its `hotel-sector` label. Her click on `Triage new hospitality reports` answers *Entity does not match the entry filter of playbook Triage new hospitality reports*: she adds the label back, then enrolls the report again.
+:::
+
+:::only{opencti="<7.261127"}
+The message is always *Playbook does not exist for this entity*, whatever the reason.
+:::
+
 ## What's next
 
 - [Create a playbook](/opencti/use/automate/playbooks/create/) to review the build steps.

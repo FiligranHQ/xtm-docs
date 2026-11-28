@@ -49,6 +49,11 @@ Besides the threats, the side menu places the location among the others:
 
 - **Regions**, **Countries**, **Areas** and **Cities** list the places it is located in and the places located in it: a region lists its countries, a country its cities and the regions it belongs to.
 - **Organizations** lists the organizations located there. Use it to see which of your constituents sit in a targeted country.
+- **Observables** lists the observables located in the place or related to it, such as the IP addresses a source geolocated there.
+
+:::only{opencti=">=7.261127"}
+The number beside **Observables** counts the observables of that list only, each one once, even when two relationships link it to the place.
+:::
 
 :::example[See which threats target France]
 Your hotel group runs most of its hotels in France. Open :menu[Locations > Countries], search `France` and open it. **Overview** centers the map on France and lists, among its latest relationships, the intrusion set **Velvet Harbor** that targets it.

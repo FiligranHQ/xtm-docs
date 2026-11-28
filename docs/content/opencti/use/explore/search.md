@@ -16,17 +16,34 @@ To check an IP address, a domain, a URL or a hash from an alert, paste it into t
 
 ## Before you start
 
-- Your role has the **Access knowledge** capability. The search bar only shows with it.
+- Your role has the **Access knowledge** capability.
 - **Ask AI** and **Files search** need an Enterprise Edition license. **Ask AI** also needs generative AI configured on the platform, and **Files search** needs [file indexing](/opencti/configure/file-indexing/) started.
+
+:::only{opencti="<7.261127"}
+Without **Access knowledge**, the search bar does not show.
+:::
+
+:::only{opencti=">=7.261127"}
+Without **Access knowledge**, the search bar only finds the pages of the platform you can open: see [Open a page of the platform](#open-a-page-of-the-platform).
+:::
 
 ## Check one value
 
-:::steps
-1. Click **Search the platform...** in the top bar and paste the value as you received it. Defanged values such as `hxxp://` or `example[.]com` are refanged before the search.
+::::steps
+1. Click the search bar in the top bar and paste the value as you received it. Defanged values such as `hxxp://` or `example[.]com` are refanged before the search.
+
+   :::only{opencti="<7.261127"}
+   The search bar reads **Search the platform...**.
+   :::
+
+   :::only{opencti=">=7.261127"}
+   The search bar reads **Type / to search**: press `/` on any screen to put the cursor in it, unless you are typing in another field or a dialog is open. To pick another key, or to turn the shortcut off so that the bar reads **Search the platform...**, see [Choose the key that opens the search](/opencti/use/profile/#choose-the-key-that-opens-the-search).
+   :::
+
 2. Press Enter. The **Knowledge search** tab lists the objects that match, the best matches first.
 3. Read each line: **Type** says what the value is in the platform, **Author** who reported it, **Labels** how it was tagged, and **Analyses** in how many reports and cases it appears.
 4. Click the observable or the indicator. Its **Overview** gives the score, the threats it relates to and the latest reports about it: [Explore observations](/opencti/use/explore/observations/#read-what-opencti-knows-about-a-value) explains how to read it.
-:::
+::::
 
 ::screenshot{id=opencti-search-keyword-results alt="Knowledge search results for 203.0.113.10: an indicator and an IPv4 address of that value, both by Example CERT and labeled c2, then two reports that mention the address."}
 
@@ -107,6 +124,29 @@ Three sources reported the same intrusion set under slightly different names, an
 The list keeps three intrusion sets: **Velvet Harbor** by Example CERT, **Velvet Harbour** by Saltmarsh CERT and **Velvet Harbor Group** by Bluefin Labs. Without the filter, the reports, malware, indicators and infrastructure that mention the name follow them. [Merge them](/opencti/use/enrich/merge/) to keep one.
 :::
 
+::::only{opencti=">=7.261127"}
+## Open a page of the platform
+
+The search bar also finds the pages of the platform, such as a list, a tab or a settings page, so you reach them without going through the menus.
+
+:::steps
+1. In the search bar, type a few words of the page you want. From the second character, a list opens under the field.
+2. Each word you type must start a word of the page name, of its place in the menus or of the keywords the page is known by, in any order. Case and accents do not matter, and English words work whatever your language.
+3. Read the list. Its first line, **Search** followed by what you typed, runs a knowledge search. Up to ten pages follow, those whose name matches first. Each page shows its place in the menus, such as :menu[Data > Data sharing], and between quotes the keyword that matched when its name and place do not show it.
+4. Click a page, or highlight it with the arrow keys and press Enter: the page opens and the search bar empties. Ctrl-click or Command-click opens the page in a new tab, and Escape closes the list.
+:::
+
+::screenshot{id=opencti-search-application-pages alt="The top bar search with blocklist typed: under the field, the Search: blocklist line, then the pages Indicators, under Observations, and CSV feeds, under Data > Data sharing, each with the keyword blocklist in quotes."}
+
+The list only holds the pages you can open, as your capabilities, the license and the current draft allow. Without the **Access knowledge** capability, the list has no **Search** line, and Enter does nothing until you highlight a page.
+
+When you press Enter on a keyword instead, the **Knowledge search** tab shows the matching pages in an **Application pages** card above the results: two pages first, then up to ten with **Show more**.
+
+:::example[Find where the blocklist is published]
+A member hotel asks which feed carries your blocklist, and you no longer remember the menu of the feeds. Type `blocklist` in the search bar. Under the **Search** line, the list shows **Indicators**, under :menu[Observations], and **CSV feeds**, under :menu[Data > Data sharing], both with the keyword “blocklist”. Click **CSV feeds**: the list of the CSV feeds the platform publishes opens, and the search bar is empty again.
+:::
+::::
+
 ## Ask a question in plain language
 
 **Ask AI** turns a question into filters. For example, *intrusion sets targeting the hospitality sector in Europe* becomes filters on the type, the targeted sector and the targeted region.
@@ -141,9 +181,17 @@ To choose which XTM One agent translates your question, click **Choose AI agent*
 
 If the tab says **File indexing is not started.**, indexing must be set up first. Users with the **Access to file indexing** capability see a **Configure file indexing** button that leads to its settings; others are asked to contact their administrator. See [Search inside files](/opencti/configure/file-indexing/).
 
+:::only{opencti=">=7.261127"}
+In a draft, where the settings do not open, the button reads **Exit draft and configure file indexing**: it leaves the draft, then opens the file indexing settings.
+:::
+
 ## Search within a list
 
 Every list has its own search box above the lines. It searches only the objects of that list, combines with the list filters, and applies when you export the list. Graphs have a search box too, to find a node: see [Work with graphs](/opencti/use/analyze/graphs/).
+
+:::only{opencti=">=7.261127"}
+When you type in the value field of a filter, such as **Author** or **Labels**, the suggestions list the best matches first, as the keyword search ranks them, grouped by entity type. Before you type, they stay in alphabetical order.
+:::
 
 To search all entities or all relationships with filters, without starting from one menu, open :menu[Data > Entities] or :menu[Data > Relationships]. These two lists cover every type and accept the same filters as the other lists. The [filter key reference](/reference/opencti/filter-keys/) lists every filter key and operator, including the special keys of the filter menu such as **In regards of**.
 

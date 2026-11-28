@@ -285,8 +285,16 @@ Two platform settings shape how connectors run. An administrator sets them in th
 
 | Setting | Effect | Default |
 | --- | --- | --- |
-| `app:composer_token_expiration` (`APP__COMPOSER_TOKEN_EXPIRATION`) | How long, in seconds, the API token of a connector deployed with XTM Composer stays valid between two reads of the connector's configuration by XTM Composer. Each read renews it. When it lapses, the platform revokes the token, named **Composer managed token** on the connector's account, and issues a new one at the next read | `604800` (7 days) |
+| `app:composer_token_expiration` (`APP__COMPOSER_TOKEN_EXPIRATION`) | How long, in seconds, the platform keeps handing the same API token to a connector deployed with XTM Composer when XTM Composer does not read the connector's configuration. Each read renews it. When it lapses, the next read revokes the token on the connector's account and issues a new one | `604800` (7 days) |
 | `app:task_scheduler:max_queues_breakdown` (`APP__TASK_SCHEDULER__MAX_QUEUES_BREAKDOWN`) | Number of queues that background tasks, such as bulk edits from a list, are spread over for the workers | `4` |
+
+:::only{opencti=">=7.261127"}
+Each connector deployed with XTM Composer has a token of its own on the account it writes as, named `Composer managed token (connector: <connector id>)`, even when several connectors write as the same account. The platform also replaces it when XTM Composer's key changes, or when someone revoked it. Deleting the connector, or choosing another account for it in **Update a connector**, revokes its token. The `Composer managed token` that connectors of one account shared in earlier versions is revoked once they have their own. See [Create accounts for integrations](/opencti/administer/service-accounts/).
+:::
+
+:::only{opencti="<7.261127"}
+The connectors deployed with XTM Composer that write as one account share its token, named `Composer managed token`.
+:::
 
 The other settings of the queues and workers are in the [engines, schedules and managers settings](/reference/opencti/configuration/#engines-schedules-and-managers), and those of XTM Composer in the [XTM Suite settings](/reference/opencti/configuration/#xtm-suite).
 

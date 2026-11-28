@@ -59,6 +59,24 @@ Two more fields set how dates appear in lists and tables:
 With **ISO 8601 (YYYY-MM-DD)** and a time, the date carries the offset of your browser's time zone, such as `2026-01-14 09:30+01:00`. When you and the platform both keep the default, each column decides whether it shows the time.
 :::
 
+:::only{opencti=">=7.261127"}
+### Choose the key that opens the search
+
+**Search shortcut**, at the bottom of the **User experience** card, is the key that puts the cursor in the search bar of the top bar, from any page. It is `/` by default, and the search bar then says **Type / to search**. [Search for knowledge](/opencti/use/explore/search/) explains what the search finds.
+
+To change it, click the **Search shortcut** field and press the keys you want: the field records them, and the new shortcut works at once.
+
+- A symbol, such as `/` or `?`, works alone.
+- A letter, a digit, Space or an arrow needs Ctrl, or Command on macOS, such as Ctrl+K.
+- Alt, Option on macOS, is never accepted.
+
+A combination that cannot be used shows **This key combination cannot be used. Try a symbol such as /, or add Ctrl / Command.** under the field. **Reset** brings back `/`, and **Disable** turns the shortcut off: the field then shows **Disabled**.
+
+The shortcut does nothing while a dialog, a panel or a menu is open. A key without Ctrl or Command does nothing while you type in a field, so `/` stays a character in your text. Unlike the other fields of the profile, the shortcut is kept in this browser only: another browser starts with `/`, and so does this one after **Clear local storage**.
+
+::screenshot{id=opencti-profile-search-shortcut alt="The Search shortcut field at the bottom of the User experience card shows the default key /, with the Disable button and the hint Press the keys you want to use to focus the search bar."}
+:::
+
 The **Dashboard settings** card chooses the dashboard your home page opens on and the dates its counters use. [Choose your home dashboard](/opencti/use/explore/insights/#choose-your-home-dashboard) explains both fields.
 
 ## Choose how you are notified
@@ -184,7 +202,11 @@ Your browser keeps the last filters, searches and sorts you used in most views. 
 
 Every view opens again with its default filters, in this browser only. The preferences of your profile are kept: they are stored on the platform, not in the browser.
 
-:::example[Set up Ana Duval's account at Example CERT]
+:::only{opencti=">=7.261127"}
+The **Search shortcut** is the exception: it is kept in the browser, so it goes back to `/`.
+:::
+
+::::example[Set up Ana Duval's account at Example CERT]
 Ana Duval joins the CTI team of Example CERT. She compares the timeline of the Velvet Harbor campaign with partner CERTs in other countries, and a script of hers pulls the new reports on the hospitality sector every Monday. On her profile, she sets:
 
 - **Language**: **Français**, her working language.
@@ -193,8 +215,12 @@ Ana Duval joins the CTI team of Example CERT. She compares the timeline of the V
 - **Enable two-factor authentication**, scanned with the authenticator application of her phone.
 - In **API access**, **Generate Token** with the **Name** `Weekly hospitality report script` and the **Duration** **90 days**.
 
-The interface turns to French while the reports stay as written, every list gives dates the partners read without converting, and each login asks for a code from her phone. Her script calls the API with the token and sees exactly what Ana sees. When **Expires soon** shows next to the token in April 2026, she generates the next one, updates the script and revokes the old token.
+:::only{opencti=">=7.261127"}
+She also clicks the **Search shortcut** field and presses Ctrl+K, the shortcut of the other tools she uses: from any page, Ctrl+K puts the cursor in the search bar, ready for the next IP address a partner asks about.
 :::
+
+The interface turns to French while the reports stay as written, every list gives dates the partners read without converting, and each login asks for a code from her phone. Her script calls the API with the token and sees exactly what Ana sees. When **Expires soon** shows next to the token in April 2026, she generates the next one, updates the script and revokes the old token.
+::::
 
 ## Check that it works
 

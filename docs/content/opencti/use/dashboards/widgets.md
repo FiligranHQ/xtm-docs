@@ -74,6 +74,12 @@ As a rule of thumb:
 - to compare up to five data sets, use **Line**, **Area**, **Vertical Bar** or **Heatmap**. Every data set must count the same thing: in **Knowledge graph**, add relationship data sets, not entity data sets;
 - to split one data set into parts, use **Horizontal Bar** with a second data set, as in [Break down a chart](#break-down-a-chart).
 
+A **Map** colors each targeted country by the number of relationships that target it, the most targeted in the darkest red, and marks the targeted cities with a pin.
+
+:::only{opencti=">=7.261127"}
+The colors follow a logarithmic scale: when one country counts a hundred times more relationships than the others, the other countries still get distinct shades instead of all sharing the lightest one.
+:::
+
 :::only{opencti=">=7.261117"}
 To follow each value of a field over time, such as the reports of each type month by month, break a single data set down by that field instead of adding one data set per value, as in [Follow each value of a field over time](#follow-each-value-of-a-field-over-time).
 :::

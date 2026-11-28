@@ -39,7 +39,7 @@ Extended activity is off by default because it records a lot: every read is an e
 
 ## How it works
 
-Every action a user takes through the interface or the API is handed to the activity listener. The listener drops extended actions of users nobody listens to, writes administration actions to the audit log, and passes everything else to the activity manager. The manager stores the events, shown in :menu[Settings > Activity > Events], and checks them against your activity triggers.
+Every action a user takes through the interface or the API is handed to the activity listener. The listener drops extended actions of users nobody listens to, writes administration actions to the audit log, and passes every event it keeps, administration ones included, to the activity manager. The manager stores the events, shown in :menu[Settings > Activity > Events], and checks them against your activity triggers.
 
 ::diagram{id=opencti-configure-activity-flow}
 

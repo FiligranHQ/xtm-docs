@@ -168,6 +168,12 @@ With tracing on, OpenCTI sends an OpenTelemetry span for each GraphQL operation 
 | `app:telemetry:tracing:exporter_otlp` | `APP__TELEMETRY__TRACING__EXPORTER_OTLP` | empty | Full URL of the OTLP HTTP traces endpoint, such as `http://otel-collector:4318/v1/traces` |
 | `app:telemetry:tracing:exporter_zipkin` | `APP__TELEMETRY__TRACING__EXPORTER_ZIPKIN` | empty | URL of the Zipkin endpoint, such as `http://zipkin:9411/api/v2/spans` |
 
+:::only{opencti=">=7.261127"}
+### Check that the exporters send
+
+With metrics or tracing on, OpenCTI logs each OTLP or Zipkin exporter it starts at `info` level: the Prometheus endpoint starts without a line, so check it with the `wget` command above. The lines are `[OPENCTI] [TELEMETRY] OTLP metrics exporter initialized`, `OTLP tracing exporter initialized` or `Zipkin tracing exporter initialized`, each with its URL stripped of credentials and query string. It logs the failures the OpenTelemetry exporters report, such as a collector that does not answer, at `warn` level, prefixed `[OPENCTI] [TELEMETRY]`. A timeout adds a hint to check the exporter URL and port. Each failure is logged once, then at most once every 5 minutes, with the number of failures skipped since in `otel_suppressed_count`. xtm-docker logs at `error` level: set `APP__APP_LOGS__LOGS_LEVEL` to `warn` to see the failures, or `info` to see the exporters start. See [Troubleshoot the XTM stack](/deploy/operate/troubleshoot/#raise-the-log-level).
+:::
+
 ### Profiles
 
 OpenCTI can send continuous profiling data to a Pyroscope server, to see which functions use the CPU and the memory of the platform.
@@ -190,9 +196,10 @@ services:
       - APP__TELEMETRY__PYROSCOPE__ENABLED=true
       - APP__TELEMETRY__PYROSCOPE__EXPORTER=http://pyroscope.example.com:4040
       - APP__TELEMETRY__PYROSCOPE__IDENTIFIER=opencti-example-cert
+      - APP__APP_LOGS__LOGS_LEVEL=info
 ```
 
-After `docker compose up -d opencti`, `docker compose logs opencti | grep Pyroscope` shows `Pyroscope plugin successfully loaded.`, and the traces of the `opencti-platform` service reach the collector.
+The `info` level shows the start lines that the `error` level of xtm-docker hides. After `docker compose up -d opencti`, `docker compose logs opencti | grep Pyroscope` shows `Pyroscope plugin successfully loaded.`, or `Error loading Pyroscope` when the plugin fails, and the traces of the `opencti-platform` service reach the collector.
 :::
 
 ## OpenCTI metrics
@@ -225,8 +232,8 @@ Authentication and permission errors (`AUTH_REQUIRED`, `AUTH_FAILURE`, `FORBIDDE
 
 | Metric | Attribute | Value |
 | --- | --- | --- |
-| `opencti_sent_email` | `category` | Why the email was sent: `notification`, `user-notification`, `dissemination`, `password-reset`, `password-change` or `hub-registration` |
-| `opencti_sent_email` | `identifier` | ID of what the email comes from: the user (`user-<id>` for `user-notification`), the dissemination list or the triggers of the notification. None for `hub-registration` |
+| `opencti_sent_email` | `category` | Why the email was sent: `notification`, `user-notification`, `dissemination`, `password-reset`, `password-change`, `hub-registration` or `local-auth-lock`, the email to the administrators when a local account is locked after failed logins |
+| `opencti_sent_email` | `identifier` | ID of what the email comes from: the user (`user-<id>` for `user-notification` and `local-auth-lock`, the recipient), the dissemination list or the triggers of the notification. None for `hub-registration` |
 | `opencti_api_direct_bulk`, `opencti_api_side_bulk` | `type` | Entity type of the indexed elements, such as `Report`, `History` or `Activity` |
 
 `opencti_api_direct_bulk` records the size of each bulk request that writes elements to Elasticsearch. `opencti_api_side_bulk` records the size of the bulk request that then updates the entities at both ends of the relationships it wrote. Both count the lines of the request: two for each document.

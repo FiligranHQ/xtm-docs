@@ -48,7 +48,11 @@ A form intake turns the knowledge your team records again and again, such as an 
    ::::
 
 2. Enter a **Name** and a **Description** that tell analysts when to use the form. Keep **Active** on: an inactive form is hidden from analysts.
-3. Choose the **Main Entity Type**, **Report** by default. The form opens from the list of this type, and this entity is created first. The attributes OpenCTI needs to [deduplicate](/opencti/concepts/deduplication/) the type are added as fields for you.
+3. Choose the **Main Entity Type**, **Report** by default. The form opens from the list of this type, and this entity is created first. The attributes OpenCTI needs to [deduplicate](/opencti/concepts/deduplication/) the type, and those your administrator made required in [entity type customization](/opencti/configure/entities/), are added as fields for you.
+
+   ::::only{opencti=">=7.261127"}
+   Each of these fields takes the default value set in entity type customization as its **Default value**: checked or unchecked for a checkbox, a number for a number. A date whose default is the time of creation is not prefilled. A required reference, such as the author or the markings, is not added: add its field with **Add field**.
+   ::::
 4. Add the fields of the main entity with **Add field**. For each one, choose the attribute in **Map to attribute**, write a **Field Label** in your team's words, choose the **Field Type**, set the **Field Width** (full, half or third) and turn on **Required** if analysts must fill it in.
 5. Choose how many main entities a submission creates. By default, one. Turn on **Allow multiple instances of main entity** to accept several, then choose the **Multiple Mode**:
    - **Multiple fields**: analysts add one block of fields per entity;

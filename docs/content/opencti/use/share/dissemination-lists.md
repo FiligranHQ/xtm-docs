@@ -128,6 +128,10 @@ After a restart, every email shows `cti-advisories@example.com` as its recipient
 
 Your copy in blind copy is the proof that the email left: the message **Email sent successfully** also shows when email is turned off in the SMTP configuration, and nothing is sent then. If your copy does not arrive, ask an administrator to check the [SMTP configuration](/opencti/administer/smtp/), and look in the spam folder of a test recipient. A recipient address the mail server rejects is only recorded in the platform logs.
 
+:::only{opencti=">=7.261127"}
+When an administrator has required STARTTLS for a mail server OpenCTI logs in to, and that server does not upgrade the connection to TLS, nothing is sent: **Send** shows an error instead of **Email sent successfully**. Ask the administrator to check the encryption settings of the [SMTP configuration](/opencti/administer/smtp/#configure-the-mail-server).
+:::
+
 ## What's next
 
 - [Export knowledge to a file](/opencti/use/share/export/), to generate the finished intelligence document.

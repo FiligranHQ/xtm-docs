@@ -108,7 +108,13 @@ Open the template from the list. In the menu of its header, **Update** opens **U
 
 A playbook can also send a template, with the **Send email from template** component: see [Create a playbook](/opencti/use/automate/playbooks/create/). Every email sent is recorded in the [activity events](/opencti/configure/activity/events/).
 
+:::only{opencti=">=7.261127"}
+[Organization administrators](/opencti/administer/organizations/#delegate-user-management-to-organization-administrators) see the **Email templates** menu too. They can open and read the templates, and send one from the page of a user they manage. Creating, changing, testing or deleting a template still needs **Manage credentials**: the platform refuses these actions to an organization administrator without it.
+:::
+
+:::only{opencti="<7.261127"}
 Organization administrators can send a template from the page of a user they manage, but only users with **Manage credentials** see the **Email templates** menu and create, change or delete templates.
+:::
 
 ## Rendering limits
 

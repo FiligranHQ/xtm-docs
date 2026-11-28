@@ -241,6 +241,10 @@ Three customizations have no field on this page. They are configuration keys, re
 | `app:script_snippet` | `APP__SCRIPT_SNIPPET` | empty | HTML inserted in every page of the interface, such as an inline `<script>` for a web analytics tool. It runs in the browser of every user, inside their session: only paste code you trust. The content security policy blocks scripts loaded from another host |
 | `demo_mode` | `DEMO_MODE` | `false` | Replaces user names and email addresses with a redacted value in the interface, the history and the activity logs, and hides the buttons that connect the platform to the XTM Hub. Use it for public demonstrations, never on a production platform, where it hides who did what |
 
+:::only{opencti=">=7.261127"}
+The content security policy accepts inline scripts only while `app:script_snippet` holds a value. Leave the key empty when you do not need a snippet: inline scripts then stay blocked in every page.
+:::
+
 The labels to replace are the English texts of the interface, as the [translation files](https://github.com/OpenCTI-Platform/opencti/tree/master/opencti-platform/opencti-front/lang/front) write them. For Google Analytics, prefer the **Google Analytics (v4)** field of the **Configuration** card to a snippet.
 
 :::example[Call reports "advisories" for the member hotel chains]

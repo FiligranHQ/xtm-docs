@@ -55,6 +55,10 @@ Then fill it in:
 
 A query attribute is a variable the feed computes from each answer and sends in the next request. You write it in the URL, the body or a header as `$name`, for example `$offset`.
 
+:::only{opencti=">=7.261127"}
+Keep variables out of the server part of the URL. When the URL, once its variables are replaced, points to another scheme, host or port than the URL you entered, the run fails with "The URI of the feed points to another server once its variables are replaced". The credentials and headers of the feed only go to its own server.
+:::
+
 Take an API that returns 20 vulnerabilities per call and moves forward with a `startIndex` parameter:
 
 ```text
@@ -80,6 +84,10 @@ The same variables work in a `POST` body, for example `{ "page": "$offset" }`, o
 ::screenshot{id=opencti-ingest-json-feed-query-attribute alt="A query attribute reads the count of elements at $.vulnerabilities in the answer, sums it into the offset variable, and exposes it as a query parameter with a default value of 0."}
 
 The **Test** dialog shows the state computed from the first answer: check that it holds the value you expect before you create the feed.
+
+:::only{opencti=">=7.261127"}
+When you export the feed, a query attribute whose **To attribute name** looks like a credential, such as `api_key`, `token` or `password`, loses its **Default value** in the file, as the authentication and the sensitive headers do. After an import, enter it again.
+:::
 
 :::example[Fetch only the threats a partner changed since the last run]
 A partner of Example CERT exposes its threat tracking as a fictional JSON API. Each call returns the threats modified after a date, with the addresses they use, and tells in `meta.last_modified` the date of the most recent change it returned:
@@ -119,6 +127,12 @@ The first run asks for `modified_after=2026-01-01T00:00:00Z` and creates two int
 
 Some APIs, such as Trino, answer with a link to the next page instead of the data. Turn on **Sub pagination**, choose the **Sub pagination verb**, and enter in **Attribute path to get next uri** the JSONPath of that link. Within one run, the feed then follows the links until the answer has no next link. Use it only for those APIs.
 
+:::only{opencti=">=7.261127"}
+A next link on another server, such as a content delivery network, is fetched without the authentication, the client certificate and the headers whose name holds `authorization`, `token`, `key`, `secret`, `password`, `cookie` or `credential`.
+
+If you **Stop** the feed during such a run, it stops before the next page. Nothing from that run is imported and the state does not move, so when you start the feed again, its next run starts from the same first page. The **Logs** tab shows "Feed execution stopped: the feed is no longer running".
+:::
+
 ## Check that it works
 
 ::::only{opencti=">=7.260811"}
@@ -134,6 +148,10 @@ In :menu[Data > Ingestion > JSON Feeds], the feed shows as running with its last
 ::::
 
 If the state stops moving, the path no longer matches the answer. Fix the query attribute, then **Reset state** to start again from the default values.
+
+:::only{opencti=">=7.261127"}
+An API on your internal network fails when your platform engineer blocks internal destinations: the **Logs** show an error that starts with `JSON feed:` and names the host. See [Internal destinations](/opencti/use/ingest/feed-options/#internal-destinations).
+:::
 
 ## What's next
 

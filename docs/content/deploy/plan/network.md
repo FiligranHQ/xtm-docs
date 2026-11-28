@@ -16,22 +16,24 @@ This page lists the network side of the XTM stack as [FiligranHQ/xtm-docker](htt
 
 ## Ports published on the host
 
-| Host port | Service | Container port | What it serves | Starts with | Set in |
-| --- | --- | --- | --- | --- | --- |
-| `OPENCTI_PORT`, `8080` by default | `opencti` | 8080 | OpenCTI web interface and GraphQL API | `opencti` | `.env` |
-| 8081 | `openaev` | 8080 | OpenAEV web interface and API | `openaev` | `docker-compose.yml`, with `OPENAEV_PORT` in `.env` |
-| `XTM_ONE_PORT`, `8090` by default | `xtm-one` | 4000 | XTM One web interface and API | Always | `.env` |
-| 8082 | `opencrq` | 3002 | OpenCRQ web interface and API | Always | `modules/opencrq.yml`, with `OPENCRQ_PORT` in `.env` for the public URL |
-| 9200 | `elasticsearch` | 9200 | Elasticsearch HTTP API | `opencti` or `openaev` | `docker-compose.yml` |
-| 5672 | `rabbitmq` | 5672 | RabbitMQ, Advanced Message Queuing Protocol (AMQP) | `opencti` or `openaev` | `docker-compose.yml` |
-| 15672 | `rabbitmq` | 15672 | RabbitMQ management interface and API | `opencti` or `openaev` | `docker-compose.yml` |
-| 6379 | `redis` | 6379 | Redis | Always | `docker-compose.yml` |
-| 9000 | `minio` | 9000 | S3 API of RustFS | Always | `docker-compose.yml` |
-| Not published | `pgsql` | 5432 | PostgreSQL | Always | |
-| Not published | `opencrq` | 8444 | OpenCRQ health check, which the healthcheck of the container calls | Always | `HEALTHCHECK_HTTP_SERVER__PORT` in `modules/opencrq.yml` |
-| Not published | `opencrq` | 14269 | OpenCRQ Prometheus endpoint, off by default | When you turn it on | The Prometheus variables of the `opencrq` service: see [Observability metrics](/deploy/operate/metrics/) |
+xtm-docker starts the whole stack: every service below runs. Its only profile, `opensandbox`, publishes no port.
 
-The host port of OpenAEV is written in `docker-compose.yml` (`"8081:8080"`). To move it, replace the mapping in `docker-compose.override.yml`, as [Change the stack without editing docker-compose.yml](/deploy/install/docker-compose/#change-the-stack-without-editing-docker-compose-yml) describes, and set `OPENAEV_PORT` to the same value: `OPENAEV_PORT` builds the public URL of OpenAEV, not the port mapping. For port 8082:
+| Host port | Service | Container port | What it serves | Set in |
+| --- | --- | --- | --- | --- |
+| `OPENCTI_PORT`, `8080` by default | `opencti` | 8080 | OpenCTI web interface and GraphQL API | `.env` |
+| 8081 | `openaev` | 8080 | OpenAEV web interface and API | `modules/openaev.yml`, with `OPENAEV_PORT` in `.env` |
+| `XTM_ONE_PORT`, `8090` by default | `xtm-one` | 4000 | XTM One web interface and API | `.env` |
+| 8082 | `opencrq` | 3002 | OpenCRQ web interface and API | `modules/opencrq.yml`, with `OPENCRQ_PORT` in `.env` for the public URL |
+| 9200 | `elasticsearch` | 9200 | Elasticsearch HTTP API | `infra/elasticsearch.yml` |
+| 5672 | `rabbitmq` | 5672 | RabbitMQ, Advanced Message Queuing Protocol (AMQP) | `infra/rabbitmq.yml` |
+| 15672 | `rabbitmq` | 15672 | RabbitMQ management interface and API | `infra/rabbitmq.yml` |
+| 6379 | `redis` | 6379 | Redis | `infra/redis.yml` |
+| 9000 | `minio` | 9000 | S3 API of RustFS | `infra/rustfs.yml` |
+| Not published | `pgsql` | 5432 | PostgreSQL | |
+| Not published | `opencrq` | 8444 | OpenCRQ health check, which the healthcheck of the container calls | `HEALTHCHECK_HTTP_SERVER__PORT` in `modules/opencrq.yml` |
+| Not published | `opencrq` | 14269 | OpenCRQ Prometheus endpoint, off by default | The Prometheus variables of the `opencrq` service: see [Observability metrics](/deploy/operate/metrics/) |
+
+The host port of OpenAEV is written in `modules/openaev.yml` (`"8081:8080"`). To move it, replace the mapping in `docker-compose.override.yml`, as [Change the stack without editing docker-compose.yml](/deploy/install/docker-compose/#change-the-stack-without-editing-docker-compose-yml) describes, and set `OPENAEV_PORT` to the same value: `OPENAEV_PORT` builds the public URL of OpenAEV, not the port mapping. To publish OpenAEV on port 8083, and set `OPENAEV_PORT=8083` in `.env`:
 
 ```yaml
 services:
@@ -103,10 +105,10 @@ Browsers, and the links one platform shows to another, use the public URL of eac
 
 | Platform | Variables | Default | Passed to the platform as |
 | --- | --- | --- | --- |
-| OpenCTI | `OPENCTI_EXTERNAL_SCHEME`, `OPENCTI_HOST`, `OPENCTI_PORT` | `http://localhost:8080` | `APP__BASE_URL`, and `OPENAEV_XTM_OPENCTI_URL` on OpenAEV |
-| OpenAEV | `OPENAEV_EXTERNAL_SCHEME`, `OPENAEV_HOST`, `OPENAEV_PORT` | `http://localhost:8081` | `OPENAEV_BASE-URL`, and `XTM__OPENAEV_URL` on OpenCTI |
+| OpenCTI | `OPENCTI_EXTERNAL_SCHEME`, `OPENCTI_HOST`, `OPENCTI_PORT` | `http://localhost:8080` | `APP__BASE_URL`, `OPENAEV_XTM_OPENCTI_URL` on OpenAEV and `XTM__OPENCTI_URL` on OpenCRQ |
+| OpenAEV | `OPENAEV_EXTERNAL_SCHEME`, `OPENAEV_HOST`, `OPENAEV_PORT` | `http://localhost:8081` | `OPENAEV_BASE-URL`, and `XTM__OPENAEV_URL` on OpenCTI and OpenCRQ |
 | XTM One | `XTM_ONE_EXTERNAL_SCHEME`, `XTM_ONE_HOST`, `XTM_ONE_PORT` | `http://localhost:8090` | `BASE_URL` and `FRONTEND_URL`, on `xtm-one` and `xtm-one-worker` |
-| OpenCRQ | `OPENCRQ_EXTERNAL_SCHEME`, `OPENCRQ_HOST`, `OPENCRQ_PORT` | `http://localhost:8082` | `XTM_ONE__PLATFORM_URL`, on `opencrq` |
+| OpenCRQ | `OPENCRQ_EXTERNAL_SCHEME`, `OPENCRQ_HOST`, `OPENCRQ_PORT` | `http://localhost:8082` | `XTM_ONE__PLATFORM_URL` on `opencrq`, `XTM__OPENCRQ_URL` and `XTM__OPENGRC_URL` on OpenCTI, `OPENAEV_XTM_OPENCRQ_URL` on OpenAEV |
 
 The public URL is also the identity each module signs its requests to the others with. XTM One also accepts tokens addressed to its internal URL: xtm-docker sets `XTM_AUTH_ACCEPTED_AUDIENCES=http://xtm-one:4000`.
 
@@ -118,10 +120,11 @@ To publish the platforms over TLS behind a reverse proxy, set the scheme to `htt
 
 | From | To | Set by |
 | --- | --- | --- |
-| OpenCTI | Your mail server, on port 25 | `SMTP_HOST`. The port is written in `docker-compose.yml` (`SMTP__PORT=25`) |
+| OpenCTI | Your mail server, on port 25 | `SMTP_HOST`. The port is written in `modules/opencti.yml` (`SMTP__PORT=25`) |
+| OpenCTI | The servers your users point it to: CSV, JSON, RSS and TAXII feeds, webhook notifiers, synchronizers | The URL each user enters in OpenCTI |
 | OpenAEV | Your mail server | `SMTP_HOST` and `SMTP_PORT` |
 | OpenAEV | Your IMAP server, when `OPENAEV_MAIL_IMAP_ENABLED=true` | `IMAP_HOST` and `IMAP_PORT`, `993` in `.env.sample` |
-| Docker on the host | Docker Hub, and `docker.elastic.co` for Elasticsearch, to download the images | The `image` of each service |
+| Docker on the host | Docker Hub, to download every image of the stack, Elasticsearch included | The `image` of each service |
 | XTM Composer | The registry of each integration image it deploys | See [Pull integrations from a private registry](/deploy/integrations/private-registry/) |
 | OpenCRQ | The public CVE sources: `services.nvd.nist.gov` (NIST NVD), `cveawg.mitre.org` (the CVE records of MITRE, which the NIST NVD sync reads for the vendor's remediation), `api.first.org` (FIRST EPSS) and `www.cisa.gov` (CISA KEV). A blocked `cveawg.mitre.org` fails no run: the CVEs only get no vendor remediation | A tenant administrator, who turns each source on in **Integrations**: see [How CVE sources weigh your vulnerabilities](/opencrq/use/sources/vulnerability-sources/#turn-them-on) |
 | OpenCRQ | `raw.githubusercontent.com`, for the default threats it loads | `CONNECTORS__DEFAULT_THREATS__DATASET_URL` points it to a mirror, or, empty, turns the default threats off. See the [OpenCRQ configuration](/reference/opencrq/configuration/#connectors) |
@@ -129,6 +132,22 @@ To publish the platforms over TLS behind a reverse proxy, set the scheme to `htt
 | OpenCRQ | `login.microsoftonline.com` and `graph.microsoft.com` for Microsoft Defender, `public-api.drata.com` by default for Drata, or the regional API of the Drata account, such as `public-api.eu.drata.com`, for a tenant connected to them | The variables of each tenant: see [Configure OpenCRQ](/deploy/configure/opencrq/#connectors-of-each-tenant) |
 | OpenCRQ | An OpenCTI or an OpenAEV outside the stack, for a tenant connected to it | `CONNECTORS__OPENCTI__<tenant>__URL`, `CONNECTORS__OPENAEV__<tenant>__URL` |
 | OpenCRQ | Your OpenTelemetry collector, over gRPC (port 4317 in the usual examples), and your Pyroscope server, over HTTP (port 4040), when you turn them on | The observability variables of the `opencrq` service: see [Observability metrics](/deploy/operate/metrics/) |
+
+:::only{opencti=">=7.261127"}
+### Block the destinations on your internal network
+
+OpenCTI checks the address that the feeds, webhooks and synchronizers of its users resolve to, at each connection, redirects included. Behind an HTTP proxy, it checks the addresses it resolves itself, and leaves a host it cannot resolve to the proxy. An address outside the public unicast ranges (loopback, private, link-local and the other reserved ranges) is internal. By default, OpenCTI only logs a warning, once per destination, and xtm-docker keeps that default. To refuse these requests, set on the `opencti` service:
+
+```yaml
+services:
+  opencti:
+    environment:
+      - OUTBOUND_REQUESTS__BLOCK_INTERNAL_DESTINATIONS=true
+      - OUTBOUND_REQUESTS__ALLOW_LIST=10.20.0.0/16,feeds.example.com
+```
+
+A blocked feed, webhook or synchronizer fails with an error that names the host and the setting to change. `OUTBOUND_REQUESTS__ALLOW_LIST` lets internal destinations through: a comma-separated list of CIDR ranges, IP addresses, host names and domains written `*.example.com`. An entry that is none of them stops OpenCTI at start. The links OpenCTI opens itself, to XTM One, OpenAEV, OpenCRQ, XTM Hub and the RabbitMQ management API, are not checked.
+:::
 
 Each integration also connects to the systems it works with. Its own documentation says which.
 

@@ -56,6 +56,10 @@ A connector that reads documents can guess wrong: a word taken for a malware nam
 | :menu[Data > Import], tab **Global files**, button **Import data** | Nothing, unless you choose an **Associated entity** |
 | The **Data** tab of an entity, **Import data** next to **Uploaded files** | That entity |
 
+:::only{opencti=">=7.261127"}
+:menu[Data > Import] shows only the tabs your role opens. **Global files** and **Analyst workbenches** need **Import knowledge** outside drafts. **Drafts** needs **Import knowledge**, or **Create / Update knowledge** outside or inside drafts. :menu[Data > Import] opens on the first tab you can see. With **Import knowledge** only inside drafts, you upload your files with **Import data** in the top bar, not from **Global files**.
+:::
+
 The associated entity changes what the import creates:
 
 - **A container**, such as a report, a grouping or a case: every object found in the file is added to the container when you approve the draft.

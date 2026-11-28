@@ -31,6 +31,12 @@ All of them draw nodes, links and states the same way. The inferred relationship
 - Your role has the **Access knowledge** capability.
 - To add or remove elements, it also needs **Create / Update knowledge**. To export an image, **Can use web interface export functions (PDF, PNG, etc.)**.
 
+:::only{opencti=">=7.261127"}
+
+- In an investigation, the tools that change it (add, expand, link and remove entities) show only when you have the **can edit** access level on the investigation, or more, and your role has **Create / Update investigations** or **Create / Update dashboards**. Without them, you read, filter and arrange the graph, but the positions you drag are not saved. **Edit the selected item** needs **Create / Update knowledge** on every graph.
+
+:::
+
 ::::only{opencti=">=7.261030"}
 
 ## Read the graph
@@ -100,7 +106,7 @@ The less used actions, and those the width of the window leaves no room for, are
 The creation tools of the toolbar change the knowledge, not only the drawing: **Add an entity to this container**, **Create a relationship**, **Create a nested relationship**, **Create a sighting**, **Edit the selected item** and **Remove selected items**. You can also draw a relationship by dragging from one entity to another with the right mouse button.
 
 :::tip
-Press `?` over a graph to list its keyboard shortcuts. The most used: `F` fits the whole graph, `N` adds neighbors to the selection, `P` highlights the shortest path, `H` hides the selection, `G` shows or folds the legend, `Shift` + `M` opens the graph in full screen, and `Esc` clears the selection or leaves full screen.
+Press `?` over a graph to list its keyboard shortcuts. The most used: `F` fits the whole graph, `N` adds neighbors to the selection, `P` highlights the shortest path, `H` hides the selection, `G` shows or folds the legend, `/` puts the cursor in the search field of the graph instead of the global search, `Shift` + `M` opens the graph in full screen, and `Esc` clears the selection or leaves full screen.
 :::
 
 ## Export an image

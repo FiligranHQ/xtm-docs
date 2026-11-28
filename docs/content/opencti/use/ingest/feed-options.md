@@ -74,6 +74,27 @@ The TAXII, RSS, CSV and JSON feeds, the OpenCTI streams and the notifiers follow
 A value that is not a whole number of zero or more falls back to the default, with a warning in the log at start. Lower the limit when you want a feed to fail rather than wander through a chain of redirects; raise it when a source sits behind several redirecting gateways. See [Secure HTTP defaults](/deploy/operate/harden/#secure-http-defaults).
 ::::
 
+::::only{opencti=">=7.261127"}
+## Internal destinations
+
+The URI deny list matches the host a user enters. This check reads the address the host resolves to: the TAXII, RSS, CSV and JSON feeds, the OpenCTI streams and the webhook notifiers check it at each connection, redirects included. An address that is not a public unicast address is internal: loopback, private, link-local, carrier-grade NAT, multicast and the other reserved ranges, in IPv4 and IPv6.
+
+| Key | Environment variable | Default | Effect |
+| --- | --- | --- | --- |
+| `outbound_requests:block_internal_destinations` | `OUTBOUND_REQUESTS__BLOCK_INTERNAL_DESTINATIONS` | `false` | `true` refuses the connections to an internal address that the allow list does not hold. `false` lets them through and logs a warning, once per destination |
+| `outbound_requests:allow_list` | `OUTBOUND_REQUESTS__ALLOW_LIST` | `[]` | Internal destinations let through: CIDR ranges, IP addresses, host names, and domains written `*.example.com`, which also covers `example.com` itself |
+
+The environment variable takes a comma-separated list. An entry that is none of these stops the platform at start. xtm-docker sets neither key, so internal destinations stay allowed, and the platform logs at start that they will be blocked by default in an upcoming version.
+
+A blocked feed fails its run, and its **Logs** show an error that names the feed type and the host:
+
+```text
+CSV feed: the destination feeds.corp.example.com is an internal network address. To allow it, add it to outbound_requests:allow_list (OUTBOUND_REQUESTS__ALLOW_LIST).
+```
+
+Before you turn the block on, look in the platform log for the warnings `Outbound request to an internal destination`: each names a host your users reach today, to add to the allow list. Destinations that the platform configuration sets itself, such as XTM Hub and XTM One, are not checked. See [Block the destinations on your internal network](/deploy/plan/network/#block-the-destinations-on-your-internal-network).
+::::
+
 ## TAXII feeds
 
 | Key | Environment variable | Default | Effect |

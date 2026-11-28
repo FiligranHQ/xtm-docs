@@ -74,6 +74,14 @@ When an object is updated, by hand or because a source sends it again, each date
 - **Start time** of a relationship only moves back and **Stop time** only moves forward. **First seen** and **Last seen** of a sighting, and **First observed** and **Last observed** of observed data, do the same. The period widens to cover what every source reported. When it widens, a sighting adds the incoming **Count** to its own, and observed data adds the incoming **Number observed**.
 - **First seen** and **Last seen** of an entity, such as an Intrusion Set or a Campaign, do not widen: a source allowed to change the entity replaces them with its own values, even later ones. An Infrastructure keeps its values and only takes the source's when it has none.
 
+:::only{opencti=">=7.261127"}
+A source that sends an entity without **First seen** or **Last seen** leaves the stored dates as they are: a feed that gives no dates for Velvet Harbor does not erase the period your analysts recorded. One exception keeps the period valid. When the source moves **First seen** after the stored **Last seen** and sends no **Last seen**, the stored **Last seen** is cleared, and the same goes for a **Last seen** moved before the stored **First seen**. A synchronizer set to **Use perfect synchronization** still copies the dates of its source exactly, empty ones included.
+:::
+
+:::only{opencti="<7.261127"}
+In this version, a source allowed to change an entity that sends it without **First seen** or **Last seen** empties the stored dates.
+:::
+
 :::only{opencti=">=7.261030"}
 Observed data also has a **Number seen**, which counts the times the observation was received: each import adds to it, whether the period widens or not.
 :::

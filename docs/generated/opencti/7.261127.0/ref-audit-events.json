@@ -1,8 +1,8 @@
 {
   "name": "audit-events",
-  "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src: calls to publishUserAction, manager/activityListener.ts)",
-  "intro": "The 241 events OpenCTI 7.261119.0 publishes to its activity, with the message each one writes and the function that publishes it; {braces} mark a value of the event. The activity module records them only when Enterprise Edition is on: administration events for every user, extended events only for the users you listen to, directly or through their group or organization, as [Activity](/opencti/configure/activity/) explains; read them on the [Activity events](/opencti/configure/activity/events/) screen.",
+  "version": "7.261127.0",
+  "source": "OpenCTI-Platform/opencti@1341db4 (opencti-platform/opencti-graphql/src: calls to publishUserAction, manager/activityListener.ts)",
+  "intro": "The 245 events OpenCTI 7.261127.0 publishes to its activity, with the message each one writes and the function that publishes it; {braces} mark a value of the event. The activity module records them only when Enterprise Edition is on: administration events for every user, extended events only for the users you listen to, directly or through their group or organization, as [Activity](/opencti/configure/activity/) explains; read them on the [Activity events](/opencti/configure/activity/events/) screen.",
   "filter": "Filter events, messages and functions",
   "sections": [
     {
@@ -24,10 +24,10 @@
           ]
         },
         {
-          "key": "createApp:authentication.logout:1f135954",
+          "key": "createApp:authentication.logout:8069e4db",
           "cells": [
             "`authentication` · `logout`",
-            "logout (last tab closed) *or* logout",
+            "logout ({…}) *or* logout",
             "`createApp` in `httpPlatform.js`",
             "Administration (always)"
           ]
@@ -114,10 +114,10 @@
           ]
         },
         {
-          "key": "logoutAbandonedSession:authentication.logout:1f135954",
+          "key": "logoutAbandonedSession:authentication.logout:8069e4db",
           "cells": [
             "`authentication` · `logout`",
-            "logout (last tab closed) *or* logout",
+            "logout ({…}) *or* logout",
             "`logoutAbandonedSession` in `session-presence-domain.ts`",
             "Administration (always)"
           ]
@@ -137,6 +137,15 @@
             "`authentication` · `login`",
             "login from provider `{provider}` [(killing {session kill} sessions)]",
             "`sessionAuthenticateUser` in `user-domain.ts`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "endSessionOverMaxLifetime:authentication.logout:8069e4db",
+          "cells": [
+            "`authentication` · `logout`",
+            "logout ({…}) *or* logout",
+            "`endSessionOverMaxLifetime` in `user-domain.ts`",
             "Administration (always)"
           ]
         }
@@ -684,11 +693,11 @@
           ]
         },
         {
-          "key": "addUser:mutation.create:c906bac4",
+          "key": "createUser:mutation.create:c906bac4",
           "cells": [
             "`mutation` · `create`",
             "creates user `{user email}`",
-            "`addUser` in `user-domain.ts`",
+            "`createUser` in `user-domain.ts`",
             "Administration (always)"
           ]
         },
@@ -1039,10 +1048,10 @@
           ]
         },
         {
-          "key": "executeProcessing:mutation.delete:7b1f9fab",
+          "key": "executeProcessing:mutation.delete:c8b4ccca",
           "cells": [
             "`mutation` · `delete`",
-            "Retention rule `{name}` deleted `{deleted count}` `{scope}` entries",
+            "Retention rule `{name}` deleted `{deleted count}` `{scope}` entries[, `{failed count}` failed]",
             "`executeProcessing` in `retentionManager.ts`",
             "Administration (always)"
           ]
@@ -1170,6 +1179,24 @@
             "`mutation` · `create`",
             "creates Custom View `{name}`",
             "`importCustomViewConfiguration` in `customView-domain.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "createCustomView>createInternalObject:mutation.create:ce1c47fd",
+          "cells": [
+            "`mutation` · `create`",
+            "creates Custom View `{name}`",
+            "`createCustomView` in `customView-import.ts`, through `createInternalObject`",
+            "Administration (always)"
+          ]
+        },
+        {
+          "key": "importCustomView>editInternalObject:mutation.update:494eac94",
+          "cells": [
+            "`mutation` · `update`",
+            "updates `{fields}` for Custom View `{name}`",
+            "`importCustomView` in `customView-import.ts`, through `editInternalObject`",
             "Administration (always)"
           ]
         },
@@ -1887,11 +1914,11 @@
           ]
         },
         {
-          "key": "playbookImport:mutation.create:59b38c6c",
+          "key": "playbookAddFromImport:mutation.create:59b38c6c",
           "cells": [
             "`mutation` · `create`",
             "import {name} playbook",
-            "`playbookImport` in `playbook-domain.ts`",
+            "`playbookAddFromImport` in `playbook-domain.ts`",
             "Extended (listened users)"
           ]
         },
@@ -2179,15 +2206,6 @@
           ]
         },
         {
-          "key": "workspaceImportConfiguration:mutation.create:39ec62d8",
-          "cells": [
-            "`mutation` · `create`",
-            "import {name} workspace",
-            "`workspaceImportConfiguration` in `workspace-domain.ts`",
-            "Extended (listened users)"
-          ]
-        },
-        {
           "key": "duplicateWorkspace:mutation.create:7852a731",
           "cells": [
             "`mutation` · `create`",
@@ -2206,11 +2224,29 @@
           ]
         },
         {
+          "key": "patchDashboard:mutation.update:39ec62d8",
+          "cells": [
+            "`mutation` · `update`",
+            "import {name} workspace",
+            "`patchDashboard` in `workspace-import.ts`",
+            "Extended (listened users)"
+          ]
+        },
+        {
+          "key": "createImportedWorkspace:mutation.create:39ec62d8",
+          "cells": [
+            "`mutation` · `create`",
+            "import {name} workspace",
+            "`createImportedWorkspace` in `workspace-import.ts`",
+            "Extended (listened users)"
+          ]
+        },
+        {
           "key": "workspaceImportWidgetConfiguration:mutation.create:6185d00f",
           "cells": [
             "`mutation` · `create`",
             "import widget (id : {imported widget id}) in workspace (id : {workspace id})",
-            "`workspaceImportWidgetConfiguration` in `workspace-domain.ts`",
+            "`workspaceImportWidgetConfiguration` in `workspace-import.ts`",
             "Extended (listened users)"
           ]
         },

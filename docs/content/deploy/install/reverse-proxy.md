@@ -162,6 +162,40 @@ If your proxy reaches OpenCTI from a public address, add that address, or its CI
 No setting adds other addresses: keep the proxy on a private network with OpenCTI.
 :::
 
+::::only{opencti=">=7.261127"}
+## Follow a request from the proxy to OpenCTI
+
+OpenCTI answers every request with an `X-Request-ID` header. It keeps the id the request brings when that id has 1 to 128 letters, digits, dots, underscores or hyphens, and draws a UUID otherwise. It writes the same id, as `request_id`, in the log lines of the request and in its error responses; the errors of the GraphQL API carry it in their `extensions`. Outside the GraphQL API, the message of a platform failure is only `An unexpected error occurred`: the id is what leads to the full error in the OpenCTI log.
+
+Have Nginx send its own id, `$request_id` (32 hexadecimal characters, which OpenCTI keeps), and write it in its access log, so that one id leads from the proxy's log to OpenCTI's.
+
+:::steps
+1. In `/etc/nginx/conf.d/xtm.conf`, add a log format above the server blocks:
+
+   ```nginx
+   log_format xtm '$remote_addr [$time_local] "$request" $status request_id=$request_id';
+   ```
+
+2. In the server block of OpenCTI, add an access log under `client_max_body_size`, and the header under the other `proxy_set_header` lines of `location /`:
+
+   ```nginx
+   access_log /var/log/nginx/opencti.access.log xtm;
+   proxy_set_header X-Request-ID $request_id;
+   ```
+
+3. Check the configuration and load it, as in step 2 of [Configure the proxy](#configure-the-proxy).
+
+   :::verify
+   ```bash
+   set -a; . ./.env; set +a
+   curl -sSI "https://$OPENCTI_HOST/health" | grep -i '^x-request-id'
+   tail -n 1 /var/log/nginx/opencti.access.log
+   ```
+   Run it from the `xtm-docker` folder. The `curl` command prints the `X-Request-ID` header, and the last line of the access log ends with the same id.
+   :::
+:::
+::::
+
 ## Serve a platform under a path
 
 Give each platform its own host name in the XTM stack. Both platforms can be served under a path, such as `https://example.com/opencti`, but the other services of `docker-compose.yml` reach them at the root of their service name (`http://opencti:8080`, `http://openaev:8080`), so every internal URL would have to change too.

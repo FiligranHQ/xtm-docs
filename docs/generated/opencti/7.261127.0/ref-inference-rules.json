@@ -1,8 +1,8 @@
 {
   "name": "inference-rules",
-  "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/domain/rules.ts, opencti-platform/opencti-graphql/src/rules/*/*Definition.ts)",
-  "intro": "The 27 inference rules of the rules engine in OpenCTI 7.261119.0, grouped by category as on the Rules engine page, each with the **IF** / **THEN** pattern it applies. **Relation propagation testing rule** (`related_related`) only runs in development mode and is not listed. Turn rules on or off as [Rules engine](/opencti/configure/rules/) explains; how analysts read what they create is in [Inferences and reasoning](/opencti/use/enrich/inferences/).",
+  "version": "7.261127.0",
+  "source": "OpenCTI-Platform/opencti@1341db4 (opencti-platform/opencti-graphql/src/domain/rules.ts, opencti-platform/opencti-graphql/src/rules/*/*Definition.ts)",
+  "intro": "The 27 inference rules of the rules engine in OpenCTI 7.261127.0, grouped by category as on the Rules engine page, each with the **IF** / **THEN** pattern it applies. **Relation propagation testing rule** (`related_related`) only runs in development mode and is not listed. Turn rules on or off as [Rules engine](/opencti/configure/rules/) explains; how analysts read what they create is in [Inferences and reasoning](/opencti/use/enrich/inferences/).",
   "filter": "Filter rules, relationships and identifiers",
   "sections": [
     {

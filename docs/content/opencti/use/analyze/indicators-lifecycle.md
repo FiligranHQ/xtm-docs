@@ -44,7 +44,7 @@ OpenCTI picks a decay rule when the indicator is created and keeps it for the in
 | Built-in files and artifact | File, artifact | 80 at day 108, revoked at day 376 | Revoked at day 355 | Revoked at day 290 |
 | Built-in default | Anything else | 80 at day 87, 50 at day 227, revoked at day 372 | 50 at day 168, revoked at day 348 | Revoked at day 275 |
 
-The score changes only at the reaction points of the rule, 80 and 50 for most of them, and the indicator is revoked when its score reaches the revoke score, 20. An indicator without a score from its source starts at 50. Your administrator can change the lifetimes or add rules for a source: see [Age indicators with decay rules](/opencti/configure/decay/) and the [decay rule reference](/reference/opencti/decay-rules/).
+The score changes only at the reaction points of the rule, 80 and 50 for most of them, and the indicator is revoked when its score reaches the revoke score, 20. Under a rule your administrator saved without reaction points, the score stays where it started until **Valid until**, when the indicator is revoked. An indicator without a score from its source starts at 50. Your administrator can change the lifetimes or add rules for a source: see [Age indicators with decay rules](/opencti/configure/decay/) and the [decay rule reference](/reference/opencti/decay-rules/).
 
 ## How it works
 
@@ -126,6 +126,10 @@ An indicator under a decay exclusion rule shows its **Lifecycle** button in a wa
 
 :::only{opencti=">=7.261119"}
 An indicator under a decay exclusion rule keeps its score, and has no end date unless the source or the analyst gives a **Valid until** at creation. Without one, its **Valid until** shows `-`, also when a connector sends the field empty.
+:::
+
+:::only{opencti=">=7.261127"}
+When a source sends such an indicator again without a **Valid until**, the indicator keeps the end date it has, even with a new score. The end date goes only when the new **Valid from** falls after it.
 :::
 
 ## What's next

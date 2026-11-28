@@ -1,6 +1,6 @@
 ---
 title: What's new
-description: What OpenCTI 7.261119.0 brings to analysts, team leads, administrators and platform engineers coming from 7.260811 LTS, each change linked to the page that documents it.
+description: What OpenCTI 7.261127.0 brings to analysts, team leads, administrators and platform engineers coming from 7.260811 LTS, each change linked to the page that documents it.
 doc_type: reference
 products:
   - opencti
@@ -9,12 +9,12 @@ products:
   - opencrq
 personas: [admin, cti-analyst, platform-engineer]
 owner: docs-platform
-last_reviewed: 2026-11-01
+last_reviewed: 2026-11-27
 sidebar_position: 4
 ---
 
-::::only{opencti=">=7.261119"}
-OpenCTI 7.261119.0, released in November 2026, is the latest release that this documentation describes. This page lists what it changes if you come from the 7.260811 long-term support (LTS) line, the changes of 7.261030 and 7.261109 included. The changes are grouped by who uses them, each with the page that documents it. It leaves out bug fixes and internal changes: the [OpenCTI release notes](https://github.com/OpenCTI-Platform/opencti/releases) on GitHub list every release since 7.260811.0, one by one.
+::::only{opencti=">=7.261127"}
+OpenCTI 7.261127.0, released in November 2026, is the latest release that this documentation describes. This page lists what it changes if you come from the 7.260811 long-term support (LTS) line, the changes of 7.261030, 7.261109, 7.261119 and 7.261124 included. The changes are grouped by who uses them, each with the page that documents it. It leaves out bug fixes and internal changes: the [OpenCTI release notes](https://github.com/OpenCTI-Platform/opencti/releases) on GitHub list every release since 7.260811.0, one by one.
 
 ::screenshot{id=opencti-graphs-knowledge alt="The new knowledge graph of a report: badges above the nodes, the legend at the bottom left and the toolbar under the graph."}
 
@@ -42,6 +42,9 @@ OpenCTI 7.261119.0, released in November 2026, is the latest release that this d
 | Images in the Content tab | PNG and JPEG files preview in the **Content** tab, a protected PDF asks for its password, and a file of the **Data** tab opens there, with **Open in a new tab** beside it | [Explore knowledge](/opencti/use/explore/) |
 | A history read at a glance | Each event of the history fits on one line, with the full text in a tooltip and the details on a click | [Explore knowledge](/opencti/use/explore/) |
 | Empty numeric fields | **Empty** and **Not empty** in numeric filters, such as the EPSS score of vulnerabilities | [Explore arsenal](/opencti/use/explore/arsenal/) |
+| Pages in the search bar | A few words of a page, such as `playbook`, list the pages of the platform you can open, to reach them without the menus. The **Knowledge search** tab shows them in an **Application pages** card | [Search for knowledge](/opencti/use/explore/search/#open-a-page-of-the-platform) |
+| Your own search key | **Search shortcut**, in the **User experience** card of your profile, sets the key that puts the cursor in the search bar, `/` by default | [Set up your profile](/opencti/use/profile/#choose-the-key-that-opens-the-search) |
+| Code assets | The **Source code** category of systems, with **Code repository**, **CI/CD pipeline**, **Package registry**, **Software package** and **Other code asset**, and a **PURL** on Software observables, such as `pkg:npm/hotel-booking-widget@2.4.1` | [Explore entities](/opencti/use/explore/entities/), [Explore observations](/opencti/use/explore/observations/) |
 
 :::xtm-one[XTM One in this release]
 **Choose AI agent**, beside **Ask AI** in the search bar, picks the XTM One agent that translates your question into filters. Exports generated with **Ask AI (multiple formats supported)** go through XTM One too. See [Search for knowledge](/opencti/use/explore/search/) and [Refine content with AI](/opencti/use/enrich/refine-content/).
@@ -64,7 +67,7 @@ OpenCTI 7.261119.0, released in November 2026, is the latest release that this d
 | A redesigned Parameters page | Default theme, language and date formats for every user, a grid of managers, the versions of the dependencies, and the built-in **Filigran Dark** and **Filigran Light** themes | [Set the platform parameters](/opencti/configure/parameters/) |
 | Your own country boundaries | **Custom country boundaries**, beside the custom map, to color countries in map widgets | [Set the platform parameters](/opencti/configure/parameters/), [Maps](/deploy/configure/maps/) |
 | The Filigran license | The Filigran license of your XTM deployment turns on the Enterprise Edition, entered in OpenCTI (**Filigran license**) or returned by XTM One (**Filigran license (through XTM One)**) | [Editions and licensing](/start/editions/) |
-| Custom fields | New typed fields, such as a selection list of impacts, added to the entity types you choose (Enterprise Edition), with the new **Manage custom fields** capability | [Manage labels, vocabularies and templates](/opencti/configure/taxonomies/#custom-fields), [Customize entity types](/opencti/configure/entities/) |
+| Custom fields | New typed fields, such as a selection list of impacts or a **Decimal** score, added to the entity types you choose (Enterprise Edition), with the new **Manage custom fields** capability. Decay rules can select indicators by them | [Manage labels, vocabularies and templates](/opencti/configure/taxonomies/#custom-fields), [Customize entity types](/opencti/configure/entities/), [Age indicators with decay rules](/opencti/configure/decay/) |
 | Forms without edit rights | **Create knowledge via Form Intake** lets a role fill in forms without **Create / Update knowledge** | [Create knowledge with forms](/opencti/use/ingest/forms/), [Grant rights with roles](/opencti/administer/roles/#capabilities-added-by-an-upgrade) |
 | Merge user accounts | Move what one account created and owns to another account of the same person, through the API | [Manage users](/opencti/administer/users/#merge-two-accounts-of-the-same-person) |
 | Blog posts in the news feed | A **Blogpost** tab with the latest posts of the XTM Hub | [Follow what XTM Hub publishes](/opencti/configure/xtm-hub/news-feed/) |
@@ -72,6 +75,13 @@ OpenCTI 7.261119.0, released in November 2026, is the latest release that this d
 | Markings in notifications | Each notified object carries its markings, to print its TLP in a custom notifier | [Send notifications by email or webhook](/opencti/configure/notifiers/) |
 | Integrations in the news feed | XTM Hub news about new integrations, marked **Integration** | [Follow what XTM Hub publishes](/opencti/configure/xtm-hub/news-feed/) |
 | Usage telemetry that can be stopped | `telemetry_manager:enabled` set to `false` stops what the platform sends to Filigran | [Usage telemetry and privacy](/opencti/configure/telemetry/) |
+| API Basic authentication you can turn off | **Allow API Basic authentication**, on the **Local** login, decides whether the API accepts an email and a password instead of an API token. A new platform starts with it off; an upgraded platform keeps it on | [Manage login providers in the UI](/opencti/administer/authentications/) |
+| A fixed session lifetime | **Maximum session lifetime**, under **Sessions** in the authentication settings, shows how long a session lasts after its login, however active the user is. Your platform engineer sets it | [Manage login providers in the UI](/opencti/administer/authentications/), [Cookies](/opencti/administer/cookies/#end-sessions-after-a-fixed-time) |
+| STARTTLS for email | **Require STARTTLS** in the SMTP configuration: OpenCTI sends nothing unless the mail server upgrades the connection to TLS, so the credentials never cross the network in clear text | [Send emails from OpenCTI](/opencti/administer/smtp/) |
+| Errors of retention policies | An icon beside the **Remaining** count of a policy gives the **Last error** of an element it failed to delete | [Delete old data automatically](/opencti/configure/retention/) |
+| Email templates for organization administrators | Organization administrators see **Email templates**, to read a template and send it to a user they manage. Changing a template still needs **Manage credentials** | [Customize the emails OpenCTI sends](/opencti/configure/email-templates/), [Separate data between organizations](/opencti/administer/organizations/) |
+| Pages opened by their URL | A page opened by its URL follows the rules of its menu entry: a user who does not see the entry lands on another page they can open | [How access control works](/opencti/administer/access-control/) |
+| TLP 2.0 of other producers | A reference to an OASIS TLP 2.0 marking definition resolves to the built-in TLP marking of the same name | [Restrict access with markings](/opencti/administer/markings/) |
 
 ## For platform engineers
 
@@ -96,14 +106,24 @@ OpenCTI 7.261119.0, released in November 2026, is the latest release that this d
 | Secure HTTP defaults | `APP__HTTP__SECURE_BY_DEFAULT` lowers the default request body limit to 10 MB, the default rate protection to 30000 requests per 60 seconds and the redirects followed by outgoing calls to 5. A key you set keeps its value. Off by default, with a warning at start: a later version turns it on | [Harden the deployment](/deploy/operate/harden/) |
 | Redirects of outgoing calls | `APP__HTTP__MAX_REDIRECTS`, 21 by default, caps the redirects that feeds, synchronizers and notifiers follow | [Harden the deployment](/deploy/operate/harden/) |
 | TAXII payload size | The TAXII API root advertises `app:max_payload_body_size` as its `max_content_length`, instead of a fixed 100 MB | [OpenCTI configuration](/reference/opencti/configuration/) |
+| Maximum session lifetime | `APP__SESSION_MAX_LIFETIME`, in milliseconds from the login, ends a session even when its user is active. `0`, the default, sets no limit, and an invalid value stops the start | [Cookies](/opencti/administer/cookies/#end-sessions-after-a-fixed-time) |
+| Default credentials | At each start, OpenCTI reports the admin password, the health check key and the credentials of RabbitMQ, the S3 storage, Elasticsearch and Redis left at a known default value, such as `changeme`. `APP__CREDENTIALS__SECURE_BY_DEFAULT` set to `true` stops the start instead. Off by default, with a warning at start: a later version turns it on | [Configure the shared services](/deploy/configure/shared-services/#replace-the-default-credentials-of-the-services), [Sign in the first time and keep an emergency account](/deploy/configure/first-access/) |
+| Admin password and password policy | At each start, OpenCTI checks `APP__ADMIN__PASSWORD` against the local password policy. `APP__ADMIN__SECURE_BY_DEFAULT` set to `true` stops the start when it fails, and refuses a new policy that the admin password does not meet. Off by default, with a warning at start: a later version turns it on | [Sign in the first time and keep an emergency account](/deploy/configure/first-access/) |
+| Basic authentication and two-factor authentication | `APP__AUTHENTICATION__SECURE_BY_DEFAULT` set to `true` refuses API Basic authentication to the accounts that two-factor authentication applies to. At `false`, the default, the API accepts them and logs a warning | [Query OpenCTI with GraphQL](/develop/apis/graphql/), [Manage login providers in the UI](/opencti/administer/authentications/) |
+| Internal destinations | `OUTBOUND_REQUESTS__BLOCK_INTERNAL_DESTINATIONS` refuses the feeds, webhooks and synchronizers that reach an address of your internal network, except those of `OUTBOUND_REQUESTS__ALLOW_LIST`, checked at each connection, redirects included. Off by default: OpenCTI logs a warning, once per destination | [Network and ports](/deploy/plan/network/#block-the-destinations-on-your-internal-network), [Tune feeds and streams](/opencti/use/ingest/feed-options/#internal-destinations) |
+| STARTTLS for the mail server | For a mail server set in the platform configuration, `SMTP__REQUIRE_TLS` requires STARTTLS when OpenCTI authenticates without SSL/TLS. Unset, it follows `TLS__REJECT_UNAUTHORIZED`. A warning at start announces that a later version requires STARTTLS by default | [Send emails from OpenCTI](/opencti/administer/smtp/) |
+| Error details | `APP__GRAPHQL__SHOW_ERROR_DETAILS` set to `false` answers the failures of the platform with a generic message, the error code and the request id | [Troubleshoot the XTM stack](/deploy/operate/troubleshoot/), [Query OpenCTI with GraphQL](/develop/apis/graphql/) |
+| Usage telemetry in Prometheus | `TELEMETRY_MANAGER__EXPORTER_PROMETHEUS`, a port, also serves the usage telemetry in the Prometheus format, at `/metrics`. Unset by default | [Usage telemetry and privacy](/opencti/configure/telemetry/) |
+| OpenCRQ in the product switcher | The product switcher of OpenCTI has an OpenCRQ entry, which opens the public URL of OpenCRQ set in `XTM__OPENCRQ_URL`. Unset, the entry shows **Get OpenCRQ now** and opens the OpenCRQ page of the Filigran website | [Connect the modules to each other](/deploy/configure/connect-modules/) |
+| The schema for scripts | `schemaAttributes` answers for the type named in `entityType`, with the description, the type, the mandatory status and the default values of each attribute. A `__type` query is answered while introspection is off, unless the secure GraphQL defaults are on | [Query OpenCTI with GraphQL](/develop/apis/graphql/) |
 
 Before you upgrade, read [Breaking changes](/deploy/upgrade/breaking-changes/) and [Upgrade](/deploy/upgrade/).
 
 ## The other modules
 
-This documentation describes OpenAEV 3.261118.0, XTM One 1.261119.1 and OpenCRQ 0.261123.0 with OpenCTI 7.261119.0. OpenCRQ 0.261120.0 is the first public release of the cyber risk quantification module: it prices each risk of your register in money, from the threats you track in OpenCTI and the results of your OpenAEV simulations. Start with [OpenCRQ](/opencrq/), then [Finish the setup of OpenCRQ](/deploy/configure/opencrq/#finish-the-setup-after-the-install). Since 1.261112.0, XTM One streams its chat over HTTP instead of a WebSocket: the reverse proxy in front of it must serve HTTP/2 to browsers, without buffering `/api/` and with a read timeout above 15 seconds. See [XTM One 1.261112.0](/deploy/upgrade/breaking-changes/#xtm-one-1-261112-0). What each OpenAEV release changes is in the [OpenAEV release notes](https://github.com/OpenAEV-Platform/openaev/releases) on GitHub; which versions work together is in the [compatibility matrix](/deploy/upgrade/compatibility/).
+This documentation describes OpenAEV 3.261118.0, XTM One 1.261119.1 and OpenCRQ 0.261123.0 with OpenCTI 7.261127.0. OpenCRQ 0.261120.0 is the first public release of the cyber risk quantification module: it prices each risk of your register in money, from the threats you track in OpenCTI and the results of your OpenAEV simulations. Start with [OpenCRQ](/opencrq/), then [Finish the setup of OpenCRQ](/deploy/configure/opencrq/#finish-the-setup-after-the-install). Since 1.261112.0, XTM One streams its chat over HTTP instead of a WebSocket: the reverse proxy in front of it must serve HTTP/2 to browsers, without buffering `/api/` and with a read timeout above 15 seconds. See [XTM One 1.261112.0](/deploy/upgrade/breaking-changes/#xtm-one-1-261112-0). What each OpenAEV release changes is in the [OpenAEV release notes](https://github.com/OpenAEV-Platform/openaev/releases) on GitHub; which versions work together is in the [compatibility matrix](/deploy/upgrade/compatibility/).
 ::::
 
-::::only{opencti="<7.261119"}
+::::only{opencti="<7.261127"}
 You are reading the documentation of an OpenCTI long-term support (LTS) line. What the latest release brings is on this page in the documentation of the latest version: switch to it with the version picker. The [OpenCTI release notes](https://github.com/OpenCTI-Platform/opencti/releases) on GitHub list every release, and [Release lifecycle](/deploy/upgrade/lifecycle/) explains how to choose between an LTS line and the latest releases.
 ::::

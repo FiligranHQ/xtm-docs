@@ -43,7 +43,19 @@ Each custom notifier is built on one of three connectors:
 The **DELETE** verb of the Generic webhook is stored with a leading space in this version, and the call fails. Use `POST` or `PUT`.
 :::
 
-A notifier works per recipient. When a trigger or a digest has several recipients, for example a group, OpenCTI renders the template and sends once for each of them, with the data that recipient is allowed to see. A mailer then reaches each analyst; a webhook is called once per recipient, so a chat channel would get the same message several times. Attach a webhook notifier to a trigger with a single recipient, such as the user who owns the channel. Not a service account: OpenCTI sends no notification to a service account, whatever the notifier.
+:::only{opencti=">=7.261127"}
+A webhook whose `url` points to your internal network, such as a chat server on a private address, works by default: OpenCTI logs a warning, once for that destination. When your platform engineer blocks internal destinations (`outbound_requests:block_internal_destinations`), the call fails unless the host is in `outbound_requests:allow_list`, and **Test** shows an error that names the host. See [Block the destinations on your internal network](/deploy/plan/network/#block-the-destinations-on-your-internal-network).
+:::
+
+A notifier works per recipient. When a trigger or a digest has several recipients, for example a group, OpenCTI renders the template and sends once for each of them, with the data that recipient is allowed to see. A mailer then reaches each analyst; a webhook is called once per recipient, so a chat channel would get the same message several times. Attach a webhook notifier to a trigger with a single recipient, such as the user who owns the channel.
+
+:::only{opencti=">=7.261127"}
+That recipient can be a service account, through webhook notifiers only: OpenCTI sends a service account no email and no notification in the interface. A service account receives the notifications of a trigger that names it as a recipient; a group or an organization that a trigger targets reaches its human users only.
+:::
+
+:::only{opencti="<7.261127"}
+Not a service account: OpenCTI sends no notification to a service account, whatever the notifier.
+:::
 
 ## Create a notifier
 

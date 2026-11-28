@@ -712,7 +712,8 @@
       "use_when": "a case or report must only be visible to the people working on it.",
       "notes": [
         "For other entity types, share with organizations instead.",
-        "The component reads the database before ingestion. Restrict access to a container created in the same playbook from a second playbook."
+        "The component reads the database before ingestion. Restrict access to a container created in the same playbook from a second playbook.",
+        "From 7.261127, a playbook moved with a configuration bundle names the users of Access restrictions by their standard ID. The import matches them on the target platform and removes the users it cannot find. When no member is left, it refuses the playbook with \"Access restrictions left empty\"."
       ],
       "requires": [],
       "see_also": [],
@@ -839,6 +840,7 @@
       "use_when": "people must be told about what the playbook found.",
       "notes": [
         "To both notify and save, add a second branch from the same parent ending with Send for ingestion.",
+        "From 7.261127, a playbook moved with a configuration bundle names the users of Authorized members by their standard ID. The import matches them on the target platform, removes the users it cannot find and lists them as \"Users not found\".",
         "Besides fixed users, groups and organizations, Targets offers dynamic recipients: Author (organization), the users of the organization that authored the element, Creators, Assignees and Participants, all read from the elements set in Resolve dynamic targets from, and Organizations, the users of every organization in the bundle."
       ],
       "requires": [],
@@ -1018,6 +1020,7 @@
       "summary": "Sends an email built from one of your email templates, to fixed recipients or to people taken from the data.",
       "use_when": "the message needs your own wording and layout.",
       "notes": [
+        "From 7.261127, a playbook moved with a configuration bundle names the users of Targets by their standard ID. The import matches them on the target platform, removes the users it cannot find and lists them as \"Users not found\".",
         "Besides fixed users, groups and organizations, Targets offers dynamic recipients: Author (organization), the users of the organization that authored the element, Creators, Assignees and Participants, all read from the elements set in Resolve dynamic targets from, and Organizations, the users of every organization in the bundle."
       ],
       "requires": [],

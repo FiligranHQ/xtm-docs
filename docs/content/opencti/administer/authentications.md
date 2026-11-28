@@ -256,6 +256,10 @@ Changing the duration moves the expiry date of every local account by the differ
 
 Before you turn local login off, log in through another provider and check the groups and organizations you got. The switch stays locked while no other provider is enabled.
 
+:::only{opencti=">=7.261127"}
+With `app:admin:secure_by_default` set to `true`, OpenCTI refuses a password policy that the password of the platform administrator, `app:admin:password`, does not meet. Saving it fails with `The configured admin password (app:admin:password) does not match this password policy, and app:admin:secure_by_default is enabled: the platform would refuse to start. Change the admin password first`. The same check runs at every start: while the key is `false`, the default, a mismatch only logs a warning; once it is `true`, the platform refuses to start. Neither check applies when `app:admin:externally_managed` is `true`. See [Basic parameters](/reference/opencti/configuration/#basic-parameters).
+:::
+
 **HTTP headers** logs users in from headers that a reverse proxy sets after authenticating them. Turn on **Enable header authentication**, then enter the header names in the **User information mapping** (by default `x-email`, `x-name`, `x-firstname` and `x-lastname`) and in the **Groups** tab. **Logout URI** is saved with the strategy, but this version does not use it: after logout, OpenCTI sends the user back to the page they came from, and the proxy headers can log them in again at the next click on the login button. **Headers audit** lists other headers whose values OpenCTI records in the activity log with every action of these users, for example the `x-request-id` header that your proxy adds: click **Add**, then enter a **Header name**. Only use this strategy behind a proxy that removes these headers from incoming requests: anyone who can send them directly can log in as anyone.
 
 **Client Certificate** logs users in with a certificate chosen in the browser. Turn on **Enable client certificate authentication**. By default it reads the email from `subject.emailAddress`, the name from `subject.CN`, the groups from `subject.OU` and the organizations from `subject.O`. Leave the first and last name expressions empty when your certificates have no such fields. It needs OpenCTI to serve HTTPS itself (`app:https_cert:*`, see [Network and security](/reference/opencti/configuration/#network-and-security)). Otherwise its status stays **Disabled**, with the warning **Client certificate requires the platform to be configured with HTTPS**.
@@ -286,10 +290,45 @@ When Ana Duval's password expires, OpenCTI refuses the one she used last spring,
 :::
 ::::
 
+::::only{opencti=">=7.261127"}
+## Make scripts use API tokens instead of passwords
+
+**Allow API Basic authentication**, in the **Update Local Authentication** panel, decides whether the API accepts an email and a password in the `Authorization: Basic` header of a request. Basic authentication sends the password with every request, and cannot ask for a one-time code. Scripts and integrations should send an API token instead, in an `Authorization: Bearer` header: see [Create accounts for integrations](/opencti/administer/service-accounts/).
+
+::screenshot{id=opencti-authentications-api-basic-auth alt="The Update Local Authentication panel with the Allow API Basic authentication switch under Enable local authentication, and its helper text asking scripts and integrations to use API tokens."}
+
+- A new platform starts with the switch off. A platform upgraded from an earlier version keeps it on until you turn it off.
+- Off, the API refuses Basic authentication to every account, the platform administrator and the users with **Bypass all capabilities** included. It does not check the password: the request is handled as unauthenticated, and the platform log records `Error resolving user by basic auth`, with the reason `API Basic authentication is disabled on this platform, use an API token`.
+- On, an account authenticates this way only if one of its roles has **Allow basic auth usage**.
+
+Two-factor authentication applies to an account when **Enforce two-factor authentication** is on, or when the user turned it on in their profile. While Basic authentication is allowed, the platform setting `app:authentication:secure_by_default` decides what happens to such an account:
+
+| `app:authentication:secure_by_default` | Basic authentication of an account with two-factor authentication |
+| --- | --- |
+| `false`, the default | Accepted. After each successful login, the platform log warns `API Basic authentication used by an account with two-factor authentication`, with the ID of the user, at most once an hour per account |
+| `true` | Refused before the password is checked: the request is handled as unauthenticated, and the platform log gives the reason `Two-factor authentication applies to this account: API Basic authentication cannot ask for it, use an API token` |
+
+The warning names the accounts whose scripts still send a password: move them to a token before you turn the switch off or set the key to `true`.
+
+:::example[Move the scripts of the SOC to API tokens]
+Example CERT upgraded its platform, so **Allow API Basic authentication** is still on, and **Enforce two-factor authentication** is on. The platform log warns `API Basic authentication used by an account with two-factor authentication` for the user of `soc-automation@example.com`, the account of the nightly script that exports the Velvet Harbor indicators.
+
+1. In :menu[Settings > Security > Users], open `soc-automation@example.com`, click **Generate Token**, and name the token `soc-nightly-export`. Check that a role of the account has **Allow token usage**.
+2. Change the script to send `Authorization: Bearer` with that token, read from the `OPENCTI_SOC_TOKEN` variable of its host, instead of the email and password.
+3. Once the warning has not come back for a week, open **Update** on the **Local** row, turn **Allow API Basic authentication** off, and save.
+
+From then on, any script that still sends a password gets an unauthenticated response, and the platform log says why. A platform that must keep Basic authentication for an old tool whose account has no two-factor authentication can leave the switch on, and set `APP__AUTHENTICATION__SECURE_BY_DEFAULT=true` instead: only the accounts with two-factor authentication are then refused. With **Enforce two-factor authentication** on, as here, that is every account.
+:::
+::::
+
 ## Set platform-wide login policies
 
 - **Enforce two-factor authentication** makes every user set up a one-time code application before they can use the platform.
 - **Max concurrent sessions (0 equals no maximum)** limits how many sessions a user can have at the same time. When a login goes over the limit, OpenCTI ends the user's oldest sessions.
+
+:::only{opencti=">=7.261127"}
+**Maximum session lifetime**, under **Sessions**, shows how long a session lasts after its login, however active the user is. You cannot change it here: it is `app:session_max_lifetime` of the platform configuration, in milliseconds, and **Unlimited** stands for `0`, the default. The field writes it in the largest whole unit, such as **12 hours** for `43200000`. When a session reaches it, its next request ends it, and the user must log in again. [Cookies](/opencti/administer/cookies/#end-sessions-after-a-fixed-time) explains how it combines with the inactivity timeout.
+:::
 
 :::only{opencti=">=7.260811"}
 **Enable IP allow list**, in the **IP access allow list** card, rejects logins and requests from addresses outside **Allowed IP addresses (one per line, e.g. 192.168.1.0/24)**. Write single addresses or CIDR ranges, IPv4 or IPv6. At least one address is required.

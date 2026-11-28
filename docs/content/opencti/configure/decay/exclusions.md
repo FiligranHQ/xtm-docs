@@ -76,7 +76,17 @@ For example, with a rule that filters on the creator of a trusted feed, an indic
 
 ## What your detection tools receive
 
-An excluded indicator keeps the score its source or an analyst sets: no reaction point lowers it, and decay never revokes it. Decay computes no **Valid until** for it either. A **Valid until** that its source sets still applies, and the indicator is revoked when that date passes. So an exclusion rule keeps indicators in every feed and stream that selects them until someone revokes them or that date passes. Filter those feeds on the author or the label if some consumers must not get them.
+An excluded indicator keeps the score its source or an analyst sets: no reaction point lowers it.
+
+:::only{opencti=">=7.261127"}
+Decay never revokes it and computes no **Valid until** for it. A **Valid until** that its source sets still applies, and the indicator is revoked when that date passes. When a source sends the indicator again without a **Valid until**, the indicator keeps the date it has, including the one decay gave it before it moved under an exclusion rule. Only a new **Valid from** after that date removes it: the indicator then has no end date.
+:::
+
+:::only{opencti="<7.261127"}
+It still gets a **Valid until**: the one its source sets or, without one, its **Valid from** plus the lifetime of the decay rule that would otherwise apply to it. The indicator is revoked when that date passes.
+:::
+
+So an exclusion rule keeps indicators in every feed and stream that selects them until someone revokes them or their **Valid until** passes. Filter those feeds on the author or the label if some consumers must not get them.
 
 ## See which rule applies to an indicator
 

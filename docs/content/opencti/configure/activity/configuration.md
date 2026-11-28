@@ -56,6 +56,12 @@ Besides the events screen, OpenCTI writes audit events as JSON lines to a daily 
 
 Turning off both `logs_files` and `logs_console` stops the audit log, not the activity: the events screen and the triggers keep working.
 
+:::only{opencti=">=7.261127"}
+The console writes each event as a JSON line, the format a log collector reads. To read the console yourself, set `app:audit_logs:logs_console_format` to `pretty`: each event then starts with a line holding its time, its level and its message, followed by its data as indented JSON. The `audit.log` file stays in JSON lines. Outside the production environment, when the console is a terminal, `pretty` is the default.
+
+A text of more than 8,192 characters in the data of an event, such as a long description sent with an update, is cut and ends with `[truncated]`, on the events screen as in the audit log.
+:::
+
 :::example[Log the work of external contractors in detail]
 Example CERT lets the contractors of its partner Harbor Security work on its platform, and its security team must keep a trace of everything they read and download, in its log pipeline as well as in OpenCTI.
 

@@ -22,7 +22,11 @@ The news feed is not available in this version.
 ## Before you start
 
 - An administrator has [connected the platform to the XTM Hub](/opencti/configure/xtm-hub/).
-- Each user manages their own preferences: no capability is needed.
+- Your role has the **Access knowledge** capability, and you are not working in a draft: the top bar icon that leads to the news only shows then. Each user manages their own preferences: no other capability is needed.
+
+:::only{opencti=">=7.261127"}
+- The page follows the same rule when you open it by its address: without **Access knowledge**, or from a draft, you land on the dashboard.
+:::
 
 ## How news reaches the platform
 
@@ -42,6 +46,10 @@ Items about new integrations read **Integration**. An item of a kind this versio
 2. Read the items of the **News feed** tab: **Type**, **Title**, **Original creation date** and **Tags**.
 3. Click **Open in XTM Hub** on an item to review it and deploy it.
 
+:::
+
+:::only{opencti=">=7.261127"}
+The global search also leads there: type `news` or `hub` in the search bar, and the **News Feed** page shows under **Application pages**.
 :::
 
 ::screenshot{id=opencti-xtm-hub-news-feed alt="The XTM Hub News Feed page with its News feed and Settings tabs, the XTM Hub is disconnected banner with its Connect product to XTM Hub button, and the news table with its Type, Title, Original creation date and Tags columns, empty because the platform is not connected to the XTM Hub."}

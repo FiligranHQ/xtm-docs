@@ -17,7 +17,7 @@ TAXII Push turns the usual direction around: instead of OpenCTI polling a server
 ## Before you start
 
 - Your role has the **Manage ingestion** capability.
-- The users who will push exist on your platform, each with an API token. A service account per partner keeps their data apart: see [Create accounts for integrations](/opencti/administer/service-accounts/).
+- The users who will push exist on your platform, each with an API token and the **Access data sharing** capability: without it, the platform refuses their requests. A service account per partner keeps their data apart: see [Create accounts for integrations](/opencti/administer/service-accounts/).
 
 ## Create the collection
 
@@ -114,10 +114,25 @@ curl -X POST "https://opencti.example.com/taxii2/root/collections/4d1e9b52-7a3c-
   -d '{"objects":[{"type":"indicator","spec_version":"2.1","id":"indicator--6b0f3c1e-2d8a-4e57-9f40-3a1c7e5b9d26","created":"2026-01-15T09:12:00.000Z","modified":"2026-01-15T09:12:00.000Z","name":"frontdesk-booking-confirm.example","pattern":"[domain-name:value = '"'"'frontdesk-booking-confirm.example'"'"']","pattern_type":"stix","valid_from":"2026-01-15T09:12:00.000Z","confidence":85}]}'
 ```
 
-The indicator appears in :menu[Observations > Indicators] with a score of 85, created by `Grand Meridian Hotels push`. A push with the token of another account that lacks the **Manage ingestion** capability gets the answer that the collection does not exist.
+The indicator appears in :menu[Observations > Indicators] with a score of 85, created by `Grand Meridian Hotels push`. A push with the token of another account, which is not in **Accessible for** and lacks the **Manage ingestion** capability, gets the answer that the collection does not exist.
 :::
 
 The platform refuses an empty `objects` array and a missing or wrong `Content-Type`. It answers that the collection does not exist to a user who is neither in **Accessible for** nor has the **Manage ingestion** capability.
+
+::::only{opencti=">=7.261127"}
+The collection and status endpoints answer a refusal with a TAXII error, which holds an `http_status` and a `title` that says what to fix:
+
+| `http_status` | `title` | Cause |
+| --- | --- | --- |
+| 401 | `You must be logged in to do this.` | The request has no valid token |
+| 403 | `You are not allowed to do this.` | The user lacks the **Access data sharing** capability |
+| 400 | `Content-Type in request is missing or invalid` | The `Content-Type` names another media type, or lacks `version=2.1` |
+| 400 | `Objects required` | The `objects` array is empty or missing |
+| 404 | `Collection not found` | The collection does not exist, is stopped, or the user may not push to it |
+| 404 | `Work not found` | The status `id` is unknown to the user who asks |
+
+Every error also carries an `error_id`, the value of the `X-Request-ID` header of the answer. When the platform itself fails, the `title` is only `An unexpected error occurred`, and the error goes to the platform log as `TAXII request failed`, with that ID as its `request_id`. The partner sends you the `error_id`, and your platform engineer finds the full error with it.
+::::
 
 ## What's next
 

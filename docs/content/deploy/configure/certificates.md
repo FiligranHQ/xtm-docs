@@ -23,7 +23,7 @@ This page sets how the platforms of the XTM stack handle TLS certificates and pr
 
 ## Trust your internal certificate authority
 
-Prefer trusting your CA to turning certificate checks off: the platforms keep rejecting every certificate your CA did not sign.
+Prefer trusting your CA to turning certificate checks off: wherever a check is on, the platform keeps rejecting every certificate your CA did not sign. Some checks of OpenCTI are off by default: turn them on once your CA is trusted, as the OpenCTI tab says.
 
 ::::tabs
 :::tab[OpenCTI]
@@ -53,7 +53,7 @@ The connections to the shared services have their own settings. Each takes the p
 Write a list as JSON, for example `'REDIS__CA=["/opt/opencti/certs/internal-ca.pem"]'`. The RabbitMQ and mail server checks are off by default: set them to `true` once the CA is in place.
 :::
 :::tab[OpenAEV]
-OpenAEV adds to the CAs of Java the certificates it finds in the folder named by `OPENAEV_EXTRA-TRUSTED-CERTS-DIR`. Every outgoing HTTPS client of the platform uses them, the Elasticsearch client included.
+OpenAEV adds to the CAs of Java the certificates it finds in the folder named by `OPENAEV_EXTRA-TRUSTED-CERTS-DIR`. Most outgoing HTTPS clients use them: the integrations, the calls to OpenCTI and XTM One, RabbitMQ and the Elasticsearch 9 client. The Elasticsearch 8 client (xtm-docker runs Elasticsearch 8.19), the OpenSearch client and the calls to the AI provider read only the Java trust store: import your CA into it to reach such a server over HTTPS.
 
 xtm-docker already sets `OPENAEV_EXTRA-TRUSTED-CERTS-DIR=/opt/openaev/additional_certs` but mounts nothing there. Add the folder to the `openaev` service in `docker-compose.override.yml`, then run `docker compose up -d`:
 
@@ -84,9 +84,9 @@ It lists `internal-ca.pem`.
 
 - the HTTPS proxy (`HTTPS_PROXY_REJECT_UNAUTHORIZED`), a value also passed to the integrations XTM Composer deploys;
 - RabbitMQ and its management API (`RABBITMQ__USE_SSL_REJECT_UNAUTHORIZED`, `RABBITMQ__MANAGEMENT_SSL_REJECT_UNAUTHORIZED`);
-- the mail server (`SMTP__REJECT_UNAUTHORIZED`);
+- the mail server: the check of its certificate (`SMTP__REJECT_UNAUTHORIZED`) and STARTTLS required before OpenCTI sends its credentials (`SMTP__REQUIRE_TLS`);
 - the remote credentials provider of a service;
-- the other HTTPS calls that set no SSL verification of their own, such as a synchronization with a remote OpenCTI or a feed.
+- the other HTTPS calls that set no SSL verification of their own, such as a synchronization with a remote OpenCTI, or a CSV, RSS or TAXII feed. A JSON feed with no setting of its own checks the certificate whatever this value.
 
 A variable of the list above, when you set it, wins over `TLS__REJECT_UNAUTHORIZED`. Elasticsearch and OpenSearch keep `ELASTICSEARCH__SSL__REJECT_UNAUTHORIZED`, `true` by default.
 
@@ -101,6 +101,8 @@ services:
 ```
 
 After `docker compose up -d`, the warning is gone from the logs of `opencti`, and a connection to a server whose certificate your CA did not sign fails with a certificate error instead of going through.
+
+Check your mail server before you turn it on. When OpenCTI logs in to it (a username, or OAuth2) without `SMTP__USE_SSL=true`, `TLS__REJECT_UNAUTHORIZED=true` also makes it require STARTTLS: a server that does not offer STARTTLS fails, OpenCTI logs `SMTP seems down, email notification may not work` at start, and no email goes out. Set `SMTP__USE_SSL=true` for a server that serves TLS on its port, or `SMTP__REQUIRE_TLS=false` for one that cannot. While STARTTLS is not required, OpenCTI logs at each start that `SMTP credentials may be sent over an unencrypted connection`. A mail server set in :menu[Settings > Security > SMTP configuration], with **Use configuration in interface** on, has its own **Require STARTTLS** switch instead: see the [SMTP configuration](/opencti/administer/smtp/).
 :::
 
 The OpenCTI workers are Python processes with settings of their own. In xtm-docker they call the platform in plain HTTP on the network of the stack, at `http://opencti:8080`; these settings matter when `OPENCTI_URL` is an `https://` address, for workers that run elsewhere. Set them on the `worker` service:

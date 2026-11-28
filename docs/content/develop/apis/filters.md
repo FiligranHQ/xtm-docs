@@ -115,7 +115,7 @@ Keys come in three kinds, all in the [filter keys reference](/reference/opencti/
 
 | Operator | Rule |
 | --- | --- |
-| `eq`, `not_eq` | With several values, `mode` decides: `or` matches one of them, `and` all of them. `eq` with an empty `values` means "has no value", `not_eq` with an empty `values` "has a value" |
+| `eq`, `not_eq` | With several values, `mode` decides: `or` matches one of them, `and` all of them. On stream events, `eq` with an empty `values` means "has no value", `not_eq` with an empty `values` "has a value". In a query, use `nil` and `not_nil` to look for a missing or present value |
 | `nil`, `not_nil` | The key has no value, or has one. Send `"values": []` |
 | `only_eq_to`, `not_only_eq_to` | For keys with several values, such as labels: the object holds exactly the values given and no other. `objectLabel` `only_eq_to` `hotel-sector` keeps the reports whose only label is `hotel-sector` |
 | `gt`, `gte`, `lt`, `lte` | Numbers and dates. A date is an ISO 8601 date, such as `2025-12-01T00:00:00Z`, or a relative date, such as `now-1d` |
@@ -155,13 +155,27 @@ On `stixCoreObjects`, this returns the 9 objects Velvet Harbor uses: 5 attack pa
 
 `regardingOf` reads the IDs that each object stores of its related objects. For performance, some relationships are stored on one side only, and `regardingOf` misses them from the other side:
 
+::::only{opencti="<7.261127"}
 | Relationship | Found from | Missed from |
 | --- | --- | --- |
 | `related-to` from an observable | The observable: the observables related to a malware | The other end: the objects related to an IP address |
 | `located-at` from an IPv4 or IPv6 address, or a city, to a country or a region | The address or the city | The country or the region |
 | `indicates` | The indicator: the indicators of Velvet Harbor (7 on the demo data) | The indicated object: the objects an indicator indicates (none found) |
+| `publishes` from a channel | The published observable or media content: what a channel publishes | The channel: the channels that publish a URL |
 
-To list relationships of these kinds from the side that does not store them, query `stixCoreRelationships` with `fromId` or `toId` instead. The filter menu shows a warning icon on a **In regards of** filter whose values involve one of these cases.
+To list relationships of these kinds from the side that does not store them, query `stixCoreRelationships` with `fromId` or `toId` instead. The filter menu shows a warning icon on a **In regards of** filter whose values involve one of the first three cases.
+::::
+
+::::only{opencti=">=7.261127"}
+| Relationship | Found from | Missed from |
+| --- | --- | --- |
+| `related-to` from an observable | The observable: the observables related to a malware | The other end: the objects related to an IP address |
+| `located-at` from an IPv4 or IPv6 address, or a city, to a country or a region | The address or the city | The country or the region |
+
+`indicates` and `publishes` are stored on one side too: on the indicator, and on the object a channel publishes. When the `relationship_type` sub-filter names them, `regardingOf` also reads the relationships themselves, and finds both sides: the indicators of Velvet Harbor, and the objects an indicator indicates; what a channel publishes, and the channels that publish a URL. Without `relationship_type`, the side that does not store them is still missed.
+
+To list relationships of the kinds of the table from the side that does not store them, query `stixCoreRelationships` with `fromId` or `toId` instead. The filter menu shows a warning icon on a **In regards of** filter whose values involve one of these cases, and still on `indicates` with an indicator.
+::::
 
 ### dynamicRegardingOf
 
@@ -201,16 +215,42 @@ On relationships, `dynamicFrom` and `dynamicTo` apply a filter group to the sour
   {"node":{"relationship_type":"uses","from":{"representative":{"main":"Harbor Stealer"}},"to":{"representative":{"main":"[T1071.001] Web Protocols"}}}}]}}}
 ```
 
+::::only{opencti=">=7.261127"}
+## Keys on lists of scores
+
+`coverage_information`, **Coverage** in the filter menu, filters the Security Coverage Results and the `has-covered` relationships by their scores. It holds a list of elements, each with a `coverage_name` (`prevention`, `detection` or `vulnerability`, from the `coverage_ov` vocabulary) and a `coverage_score`, in percent. Its `values` are sub-filters on these two fields, as for `regardingOf`, and an object matches when one of its elements matches every sub-filter.
+
+- **The filter `operator`** is `eq`, left out here, `nil` (no element) or `not_nil` (at least one). Another one fails with `Unsupported operator on a nested filter key`.
+- **Each sub-filter has its own `operator`**, `eq` when left out, such as `gte` on the score. `search`, `only_eq_to`, `not_only_eq_to`, `match`, `script`, `has_changed` and `not_has_changed` fail with `Unsupported sub-filter operator on a nested filter key`.
+- **A sub-filter without values is left out.** With no value in any sub-filter, the filter keeps every object.
+
+The results with a detection score of 50 or more, the same element holding both:
+
+```json
+{"mode":"and","filters":[
+  {"key":"coverage_information","values":[
+    {"key":"coverage_name","values":["detection"]},
+    {"key":"coverage_score","values":["50"],"operator":"gte"}]}],
+ "filterGroups":[]}
+```
+
+A result scored 80 in prevention and 30 in detection is left out: no single element holds both conditions.
+::::
+
 ## Filters on stream events
 
 Live streams, triggers and playbooks do not query the database: they test each event against the filter, on the STIX object the event carries. Only these keys work there:
 
 `entity_type`, `ids`, `representative`, `description`, `confidence`, `createdBy`, `creator_id`, `objectLabel`, `objectMarking`, `objectAssignee`, `objectParticipant`, `objectAuthorized`, `objects`, `workflow_id`, `revoked`, `priority`, `severity`, `indicator_types`, `pattern`, `pattern_type`, `x_opencti_score`, `x_opencti_detection`, `x_opencti_main_observable_type`, `report_types`, `response_types`, `information_types`, `takedown_types`, `note_types`, `incident_type`, `x_opencti_cisa_kev`, `x_opencti_epss_score`, `x_opencti_epss_percentile`, `x_opencti_cvss_base_score`, `x_opencti_cvss_base_severity`, `x_opencti_ssvc_exploitation`, `x_opencti_ssvc_automatable`, `x_opencti_ssvc_technical_impact`, `pir_score`, `fromId`, `fromTypes`, `toId`, `toTypes`, `connectedToId`, `connectedToId_sideEvents`.
 
+::::only{opencti=">=7.261119"}
+`x_opencti_closing_reason` works there too, and so does each [custom field](/opencti/configure/taxonomies/#custom-fields) of the platform, under its technical name, such as `x_opencti_cf_member_impact`.
+::::
+
 Saving a live stream, a trigger or a playbook with another key fails with `Stix filtering is not compatible with the provided filter key`, and the error data lists the keys allowed. `regardingOf` and the dynamic keys do not work on events.
 
 ::::only{opencti=">=7.260811"}
-On events, every key also accepts `has_changed` and `not_has_changed`, without values. On an update, `has_changed` matches when the event changed the key; on a creation, when the key has a value. For example, `x_opencti_score` `has_changed` keeps the updates that change the score of an indicator and leaves out a label added to it.
+On events, the keys also accept `has_changed` and `not_has_changed`, without values. On an update, `has_changed` matches when the event changed the key; on a creation, when the key has a value. For example, `x_opencti_score` `has_changed` keeps the updates that change the score of an indicator and leaves out a label added to it. There are exceptions: with these operators, `connectedToId` and `connectedToId_sideEvents` never match, and `objectAuthorized` and `pir_score` test their value without looking at the change.
 ::::
 
 ## OpenAEV filters

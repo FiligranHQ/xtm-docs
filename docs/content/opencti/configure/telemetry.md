@@ -41,6 +41,29 @@ The platform tests the destination once, when its telemetry manager starts. If i
 
 Read the files of the `telemetry` folder. To follow the exports as they happen, set `telemetry_manager:console_debug` (`TELEMETRY_MANAGER__CONSOLE_DEBUG`) to `true` and restart: the platform also prints each export to its console log, every 6 hours.
 
+::::only{opencti=">=7.261127"}
+### Scrape it with Prometheus
+
+To watch the usage telemetry in your own monitoring, set `telemetry_manager:exporter_prometheus` (`TELEMETRY_MANAGER__EXPORTER_PROMETHEUS`) to a port and restart the platform. The telemetry manager then also serves its metrics in the Prometheus format, at `/metrics` on that port. Sending to Filigran and the local copy do not change. The key is unset by default, and xtm-docker does not set it: the endpoint is off.
+
+- `telemetry_manager:exporter_prometheus_host` (`TELEMETRY_MANAGER__EXPORTER_PROMETHEUS_HOST`) is the IPv4 address the endpoint listens on, `0.0.0.0` by default: every interface of the container.
+- Only the node that runs the telemetry manager serves the endpoint: in a cluster, one node at a time.
+- Pick a port no other endpoint uses, such as the observability metrics port (`app:telemetry:metrics:exporter_prometheus`, `14269` by default). When the port is taken, the platform logs `[TELEMETRY] Prometheus exporter could not start` and runs without the endpoint.
+- The endpoint asks for no authentication: keep its port inside your monitoring network.
+- With `telemetry_manager:enabled` set to `false`, the telemetry manager does not start, and neither does the endpoint.
+
+With Docker Compose:
+
+```yaml
+services:
+  opencti:
+    environment:
+      TELEMETRY_MANAGER__EXPORTER_PROMETHEUS: "9464"
+```
+
+After the restart, `docker compose exec opencti wget -qO- http://localhost:9464/metrics | grep '^# TYPE opencti_'` lists the metrics. The port is not published on the host: scrape `opencti:9464` from a Prometheus on the Docker network of the stack.
+::::
+
 ## Turn it off
 
 ::::only{opencti=">=7.261030"}

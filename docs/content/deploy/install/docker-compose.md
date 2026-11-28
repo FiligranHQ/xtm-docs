@@ -78,6 +78,10 @@ All the configuration is in `.env`, except the ports, the image versions and the
 
    `.env` now holds every secret of the stack, including the encryption keys of OpenCTI and OpenAEV. Keep a copy in your secret store: you need the same values to restore the stack.
 
+   :::only{opencti=">=7.261127"}
+   Start from the values `init` draws, never from `.env.sample` as it is. At each start, OpenCTI looks for credentials left at a known default value, such as `changeme` for its admin password, RabbitMQ or MinIO, and logs a warning that names each setting. xtm-docker sets `APP__APP_LOGS__LOGS_LEVEL=error`, which hides warnings. With `APP__CREDENTIALS__SECURE_BY_DEFAULT=true` in the `environment` of `opencti`, OpenCTI refuses to start instead, and logs the error.
+   :::
+
 2. Set the admin accounts. Give `OPENCTI_ADMIN_EMAIL`, `OPENAEV_ADMIN_EMAIL` and `XTM_ONE_ADMIN_EMAIL` the address of your administrator. `XTM_ONE_ADMIN_EMAIL` must be the admin email of the platforms XTM One connects to: XTM One finds the user by this address.
 
    ```bash
@@ -162,7 +166,7 @@ All the configuration is in `.env`, except the ports, the image versions and the
    An integration that runs on another host, outside XTM Composer, needs to reach some of these services. See [Run an integration without XTM Composer](/deploy/integrations/manual/) before you close them.
    :::
 
-7. Pin the versions. `docker-compose.yml` uses the `latest` tag, so every `docker compose pull` could upgrade a platform. Write the releases you install in `docker-compose.override.yml` with the commands of [Pin the image versions](#pin-the-image-versions), here the current ones: `OPENCTI_VERSION=7.261119.0`, `OPENAEV_VERSION=3.261118.0`, `XTM_ONE_VERSION=1.261119.1` and `OPENCRQ_VERSION=0.261123.0`.
+7. Pin the versions. `docker-compose.yml` uses the `latest` tag, so every `docker compose pull` could upgrade a platform. Write the releases you install in `docker-compose.override.yml` with the commands of [Pin the image versions](#pin-the-image-versions), here the current ones: `OPENCTI_VERSION=7.261127.0`, `OPENAEV_VERSION=3.261118.0`, `XTM_ONE_VERSION=1.261119.1` and `OPENCRQ_VERSION=0.261123.0`.
 
    The OpenCTI connectors and the OpenAEV collectors and injectors follow the version of their platform. xtm-docker pins RustFS, the S3 storage, to `1.0.4`. XTM Composer, the `alpine/openssl` key generator and the AWS command line interface of `opencrq-bucket-init` keep `latest`. Check which versions work together in [Compatibility between modules](/deploy/upgrade/compatibility/).
 
@@ -278,7 +282,7 @@ Apply the change with `docker compose up -d`: Docker Compose recreates the conta
 These commands pin the OpenCTI, OpenAEV, XTM One and OpenCRQ images of the stack. They write the image of each service, with the versions you set, at the end of `docker-compose.override.yml`. Run them again to change the versions: they replace that part of the file.
 
 ```bash
-OPENCTI_VERSION=7.261119.0
+OPENCTI_VERSION=7.261127.0
 OPENAEV_VERSION=3.261118.0
 XTM_ONE_VERSION=1.261119.1
 OPENCRQ_VERSION=0.261123.0

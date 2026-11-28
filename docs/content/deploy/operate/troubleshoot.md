@@ -39,7 +39,7 @@ In production, keep the platforms at `error` or `warn` level. To investigate, ra
 | Workers | `WORKER_LOG_LEVEL` | `error`, `warning`, `info` (default), `debug` |
 | Connectors | `CONNECTOR_LOG_LEVEL` | `error`, `warning`, `info`, `debug` |
 
-`APP__APP_LOGS__LOGS_CONSOLE=true` writes the platform logs to the console, the default. Workers and connectors write JSON while `OPENCTI_JSON_LOGGING` is `true`, the default for workers.
+`APP__APP_LOGS__LOGS_CONSOLE=true` writes the platform logs to the console, the default. Workers and connectors write JSON while `OPENCTI_JSON_LOGGING` is `true`, the default.
 
 ```yaml
 services:
@@ -85,7 +85,7 @@ Each entry carries metadata, such as the data of an error. OpenCTI cuts it to ke
 Two settings help an investigation, and are off by default because of what they write:
 
 - `app:app_logs:extended_error_message` adds the input data to error logs, and the GraphQL query and its variables to the logs of failed API calls. The logs then hold sensitive data.
-- `app:performance_logger` logs every API call at `info` level, with its duration, size and memory use. It writes a lot of logs.
+- `app:performance_logger` logs every successful API call at `info` level, with its duration, size and memory use. A failed call keeps its own line, at the level of its error. It writes a lot of logs.
 
 For example, to investigate a failing import from the console only:
 
@@ -99,6 +99,44 @@ services:
 ```
 
 Set `APP__APP_LOGS__EXTENDED_ERROR_MESSAGE` back to `false` once you have found the cause. The other log keys are in the [Errors](/reference/opencti/configuration/#errors), [Logging](/reference/opencti/configuration/#logging) and [Audit](/reference/opencti/configuration/#audit) sections of the configuration reference.
+
+:::only{opencti=">=7.261127"}
+The platform logs the errors of a GraphQL API call by what they mean. A refused authentication or access writes no line in these logs. An input error of the caller is logged at `info` level, a functional error, such as `LOCK_ERROR` or `MISSING_REFERENCE_ERROR`, at `warn`, and any other error at `error`. A client that leaves a live stream while the platform processes it writes `[STREAM] Client disconnected during processing` at `info` level, not a processing error. With the `error` level xtm-docker sets, the lock timeouts of API calls, such as those of the workers, no longer show in the platform logs: raise the level to `warn` to see them.
+:::
+
+::::only{opencti=">=7.261127"}
+## Find the error behind a request
+
+When a user or a script reports an error of OpenCTI, its request id leads you to the full error in the platform logs. OpenCTI answers every request with an `X-Request-ID` header, and writes the same id, as `request_id`, in the log line of the error:
+
+- An error of the GraphQL API carries the id in its `extensions`, as `request_id`.
+- An error of the other endpoints, such as a file download or a CSV feed, carries it in its body, as `request_id`. The TAXII endpoints name it `error_id`.
+
+A request that brings its own `X-Request-ID`, such as one your reverse proxy sets, keeps it when it holds 1 to 128 letters, digits, dots, underscores or hyphens; any other value is replaced by a random UUID: see [Follow a request from the proxy to OpenCTI](/deploy/install/reverse-proxy/#follow-a-request-from-the-proxy-to-opencti).
+
+Outside the GraphQL API, a platform failure answers only `An unexpected error occurred`: its cause can name hosts, indices or paths, so it stays in the log. The errors written for the caller, such as a refused access, an invalid input or an element not found, keep their message.
+
+The GraphQL API returns the message of every error by default. `app:graphql:show_error_details` (`APP__GRAPHQL__SHOW_ERROR_DETAILS`, default `true`) set to `false` answers its platform failures the same way: `An unexpected error occurred`, with the error code and the request id only. The errors of the caller keep their message, without the cause of the error. Users and scripts then get that generic message: ask them for the request id.
+
+:::example[Find the error an analyst reports]
+An analyst of Example CERT reports that the GraphQL API answered `An unexpected error occurred`, with the `request_id` `4f1c2a9e-7b3d-4e8a-9c61-0d5f2b8e3a17`. The platform hides the details of its failures from the API:
+
+```yaml
+services:
+  opencti:
+    environment:
+      - APP__GRAPHQL__SHOW_ERROR_DETAILS=false
+```
+
+From the `xtm-docker` folder, find the error with its id:
+
+```bash
+docker compose logs opencti | grep '4f1c2a9e-7b3d-4e8a-9c61-0d5f2b8e3a17'
+```
+
+The JSON line holds the message of the error, its `cause`, and the `operation` and `user_id` of the call.
+:::
+::::
 
 ## The stack does not start
 
@@ -120,7 +158,7 @@ OpenCTI reports the errors of the bundles it could not write in the works of eac
 | Error | Meaning and fix |
 | --- | --- |
 | `MISSING_REFERENCE_ERROR`, `Element(s) not found` | An object refers to another one that does not exist, such as a relationship whose target is missing. It is raised after several retries, in case the missing object arrives in the meantime. It usually comes from a connector that produces inconsistent STIX 2.1 bundles |
-| `Cant upsert inferred entity. Too many entities resolved` | An inference rule produced an entity that matches several existing entities, such as two entities that share a name or an alias, and OpenCTI does not choose which one to update. Data from connectors does not raise it: OpenCTI merges the matching entities. Merge the duplicates in the platform |
+| `Cant upsert inferred entity. Too many entities resolved` | An inference rule produced an entity that matches several existing entities, such as two entities that share a name or an alias, and OpenCTI does not choose which one to update. Data from connectors does not raise it: OpenCTI updates one of the matching entities, and merges them only when the data asks for it (`update: true`) or when its STIX ID points to another of them. Merge the duplicates in the platform |
 | `LOCK_ERROR`, `Execution timeout, too many concurrent call on the same entities` | Several workers changed the same entities at the same time and waited too long for each other. It depends on the throughput of Elasticsearch, the number of workers, the dependencies between the data and the merges. Lower the number of workers, then find the balance between workers, connectors and Elasticsearch sizing. See [Scale](/deploy/operate/scale/) |
 
 ### Data errors

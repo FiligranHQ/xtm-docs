@@ -20,6 +20,10 @@ Start from the domain or the IP address of an alert and see, in a few double-cli
 - An investigation is visible only to its creator until they share it. To share it, open its menu and choose **Manage access restriction**, as for [dashboards](/opencti/use/dashboards/share/).
 - Creating a relationship inside an investigation writes it to the knowledge base, so it also needs **Create / Update knowledge**.
 
+:::only{opencti=">=7.261127"}
+An investigation shared with you as **can view** opens read-only. So does any investigation when your role has neither **Create / Update investigations** nor **Create / Update dashboards**. The graph then offers no tool to add, expand, link or remove entities, and a double-click does not expand. You can still select, filter and export what it holds. The positions you drag stay in your view and are not saved.
+:::
+
 ## Start an investigation
 
 :::steps
@@ -72,6 +76,10 @@ Rolling back also undoes every entity you added or removed since that expansion.
 An enrichment connector, such as VirusTotal, adds what an outside source knows about an entity. Run it from the investigation, then choose which of its results join the graph: the rest stays in the knowledge base without cluttering your graph.
 
 Launching an enrichment needs edit access to the investigation, **Create / Update investigations**, **Ask for knowledge enrichment** and **Create / Update knowledge**. The review buttons of a run, and **Review all**, show only when your role also has **Connectors API usage: register, ping, export push ...** or **Manage connector state**: if you do not see them, ask your administrator.
+
+:::only{opencti=">=7.261127"}
+**Add all to graph**, **Mark as reviewed**, the deletion of a run and **Refresh the knowledge using this connector** also need edit access to the investigation, **Create / Update investigations** and **Ask for knowledge enrichment**. Without them, these actions are hidden, and the **Expand** button of **Enrichment Results** stays disabled.
+:::
 
 :::steps
 

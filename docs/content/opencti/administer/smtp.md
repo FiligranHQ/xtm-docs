@@ -18,7 +18,7 @@ OpenCTI sends notifications, digests, password resets and disseminated files by 
 In this version, the mail server is set only in the configuration of the platform: see the `smtp` keys in the [SMTP Service](/reference/opencti/configuration/#smtp-service) section of the configuration reference.
 :::
 
-:::only{opencti=">=7.260811"}
+:::::only{opencti=">=7.260811"}
 ## Before you start
 
 - Your role has the **Manage credentials** capability.
@@ -36,22 +36,31 @@ The mail server can come from two places: the `smtp` keys of the [platform confi
 
 In the table, **SMTP enabled** is the **Enable email sending** switch of the screen, and **Use configuration in interface** says whether the screen applies.
 
+:::only{opencti=">=7.261127"}
+The **Require STARTTLS** row stays empty while **Use SSL/TLS** is on: the connection is then encrypted from the start.
+:::
+
 ## Configure the mail server
 
-:::steps
+::::steps
 
 1. Open :menu[Settings > Security > SMTP configuration] and click **Update**. The **Update SMTP configuration** panel opens.
 2. Turn on **Enable email sending**, and **Use this configuration instead of the platform config file**. With **Enable email sending** off, OpenCTI sends no email at all and reports no error: password resets, notifications and disseminated files never leave the platform.
 3. Fill **Sender email address**, the `From:` address of every email.
 4. Fill **Hostname** and **Port**. Turn on **Use SSL/TLS** for port 465, and **Reject unauthorized certificates** to refuse servers with an invalid certificate.
+
+   :::only{opencti=">=7.261127"}
+   Without **Use SSL/TLS**, on port 587, turn on **Require STARTTLS**: OpenCTI then sends nothing unless the server upgrades the connection to TLS with STARTTLS, so the credentials never cross the network in clear text. Off, OpenCTI upgrades only when the server offers it, and otherwise sends the credentials unencrypted. Against an attacker on the network, the switch protects the credentials only with **Reject unauthorized certificates** on. The switch is greyed out while **Use SSL/TLS** is on, and starts in the state of `tls:reject_unauthorized`, `false` by default: OpenCTI stores your choice only once you change it, and follows that key until then.
+   :::
+
 5. Choose the **Authentication type**:
    - **Basic**: fill **Username** and **Password**.
    - **OAuth2**: fill **OAuth user** (the mailbox address), **OAuth client ID**, **OAuth client secret**, **OAuth issuer** (the OpenID Connect issuer URL) and **OAuth refresh token**. Set **Refresh token expiration date** to the date your provider revokes the token: it only serves as a reminder.
 6. Click **Save**. The table shows the new settings; the password and the client ID appear masked.
 
-:::
+::::
 
-:::example[Send through the corporate mail relay with STARTTLS]
+::::example[Send through the corporate mail relay with STARTTLS]
 Example CERT sends its notifications through the relay `smtp.example.com`, which accepts authenticated clients on port 587.
 
 - **Enable email sending** and **Use this configuration instead of the platform config file**: on.
@@ -59,10 +68,15 @@ Example CERT sends its notifications through the relay `smtp.example.com`, which
 - **Hostname**: `smtp.example.com`. **Port**: `587`.
 - **Use SSL/TLS**: off. On port 587 the connection starts in clear text, then upgrades to TLS with STARTTLS.
 - **Reject unauthorized certificates**: on, so that OpenCTI refuses a relay whose certificate it cannot verify.
+
+:::only{opencti=">=7.261127"}
+- **Require STARTTLS**: on, so that the password never leaves in clear text if the upgrade to TLS is stripped on the way.
+:::
+
 - **Authentication type**: **Basic**. **Username**: `cti-platform@example.com`. **Password**: the password of that mailbox, from your vault.
 
 After **Save**, click **Test** and send a test email to `soc@example.com`.
-:::
+::::
 
 OpenCTI encrypts the password, the client secret and the refresh token before it stores them. With OAuth2, it gets an access token from the issuer with the refresh token and renews it before it expires. When the provider issues a new refresh token, OpenCTI stores it in place of the old one.
 
@@ -101,7 +115,7 @@ The `From:` address of an email is, in this order:
 3. the **Sender email address** of the [platform parameters](/opencti/configure/parameters/).
 
 The display name is the **Platform title** of Parameters, unless the feature sending the email sets its own.
-:::
+:::::
 
 ## Set the mail server in the configuration file
 
@@ -111,6 +125,17 @@ The `smtp` keys of the [platform configuration](/reference/opencti/configuration
 
 :::only{opencti=">=7.261109"}
 `smtp:reject_unauthorized` (`SMTP__REJECT_UNAUTHORIZED`), when you leave it unset, follows `tls:reject_unauthorized` (`TLS__REJECT_UNAUTHORIZED`), the platform-wide certificate check, `false` by default. A later version turns the platform-wide check on by default: set this key yourself, to `true` once OpenCTI trusts the certificate of your relay, so that the change of default does not change how OpenCTI connects to it. See [Check certificates on every outgoing connection of OpenCTI](/deploy/configure/certificates/#check-certificates-on-every-outgoing-connection-of-opencti).
+:::
+
+:::only{opencti=">=7.261127"}
+`smtp:require_tls` (`SMTP__REQUIRE_TLS`) applies when `smtp:use_ssl` is `false` and OpenCTI authenticates to the server, with a `smtp:username` or with OAuth2. With `true`, OpenCTI sends nothing unless the server upgrades the connection to TLS with STARTTLS, so the credentials never cross the network in clear text. Unset, it follows `tls:reject_unauthorized`, `false` by default. The SMTP configuration screen ignores this key: its **Require STARTTLS** switch decides.
+
+At start, when email sending is on and OpenCTI authenticates to the server, it logs a warning for the configuration that applies:
+
+- `SMTP credentials may be sent over an unencrypted connection: STARTTLS is not required`, when neither SSL/TLS nor STARTTLS is required. The message announces that a later version requires STARTTLS by default: set `SMTP__REQUIRE_TLS` to `true`, or turn on **Require STARTTLS**, to opt in now.
+- `SMTP server certificate is not verified`, when the connection is encrypted but the certificate check is off.
+
+A server that does not offer STARTTLS while it is required fails the check at start, which logs `SMTP seems down, email notification may not work` with the cause, and every email fails.
 :::
 
 :::only{opencti=">=7.260811"}
@@ -172,6 +197,10 @@ services:
 On port 587 the connection upgrades to TLS with STARTTLS, so `SMTP__USE_SSL` stays `false`. After the restart, OpenCTI gets an access token from Entra ID and sends as `cti-platform@example.com`; the platform team puts the refresh token's expiry date in its calendar.
 :::
 ::::
+
+:::only{opencti=">=7.261127"}
+In this example, add `SMTP__REQUIRE_TLS: 'true'` to the `environment` block: OpenCTI then refuses to send the OAuth2 token over a connection that Microsoft 365 did not upgrade with STARTTLS.
+:::
 
 ## What's next
 

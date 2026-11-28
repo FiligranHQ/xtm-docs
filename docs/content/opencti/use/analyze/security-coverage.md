@@ -35,6 +35,10 @@ Three rules to plan with:
 - **A score reflects what ran.** Each score, from 0 to 100, comes from the injects that returned a result. It can be partial when some injects did not run on your assets, or when OpenAEV had no test for a technique.
 - **The threat sets the scope.** OpenAEV tests the attack patterns and vulnerabilities linked to the covered entity when the coverage is sent. When the threat gains new techniques, refresh the coverage, as described in [When a technique shows no score](#when-a-technique-shows-no-score).
 
+:::only{opencti=">=7.261127"}
+The tested entities also follow the threat when it loses some. Remove an entity from the covered report, grouping or incident response, or delete a **uses** or **targets** relationship from the covered entity to an attack pattern or a vulnerability. OpenCTI then deletes the **has covered** relationships of the coverage results to that entity, unless the threat still reaches it through another link. The results themselves stay.
+:::
+
 ## Before you start
 
 - Your role has the **Create / Update knowledge** capability. Deleting a coverage also takes **Delete knowledge**.
@@ -153,14 +157,18 @@ The **Tested entities** chart compares the entities that were tested with those 
 The **Result** tab lists each tested entity with its type, name, labels and markings, its coverage score and the result it comes from. Pick a result in **Security coverage results** when there are several. A score shows how much an entity was involved in the OpenAEV scenario, so it can be partial when some injects did not run, when placeholders were not resolved, or when the platform of the assets does not support an action. Hover the **Info** icon above the list for this reminder.
 ::::
 
+:::only{opencti=">=7.261127"}
+The filters of the **Result** tab narrow the list to what you look for: **Coverage**, to keep the entities under a score, such as a `Detection` score below 50; **Source entity**, to keep one result; **Target entity** and **Target type**, to keep some tested entities; and **Modification date**. **Source entity** and **Target entity** offer only the results and tested entities of this coverage.
+:::
+
 ::::only{opencti="<7.261030"}
 :::only{opencti=">=7.260811"}
 The **Result** tab lists each tested entity with its coverage score. A dash means no result is available yet.
 :::
 ::::
 
-:::only{opencti=">=7.261030"}
-To see the details in OpenAEV, click **Go to OpenAEV** in the header and choose the instance in **Select the OpenAEV instance**.
+:::only{opencti=">=7.261127"}
+To see the details in OpenAEV, click **Go to OpenAEV** in the header: the link of the results opens in a new tab, the OpenAEV scenario for an automated coverage. The button shows once a result carries a link, and the **Source external link** of a manual result counts as one. When the results carry several links, for example from two OpenAEV instances, the button opens **Select the OpenAEV instance** instead: pick a link, named after its result or the host of its address.
 :::
 
 :::only{opencti="<7.261030"}

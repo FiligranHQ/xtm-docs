@@ -75,6 +75,12 @@ Other ways to authenticate exist for other cases:
 | Login and password | `Authorization: Basic` followed by `login:password` in Base64 | Tools that only speak basic authentication. Needs **Allow basic auth usage**. An account that logs in through single sign-on has no local password |
 | Browser session | The session cookie of the interface | The playground, and GraphQL subscriptions over WebSocket on `/graphql` |
 
+:::only{opencti=">=7.261127"}
+Basic authentication also depends on **Allow API Basic authentication**, in the **Update Local Authentication** panel of :menu[Settings > Security > Authentications] (see [Configure the built-in strategies](/opencti/administer/authentications/#configure-the-built-in-strategies)). A new platform starts with it off. A platform upgraded from an earlier version keeps it on until an administrator turns it off. While it is off, every Basic request gets `AUTH_REQUIRED`, the administrator's too. The platform logs the reason: `API Basic authentication is disabled on this platform, use an API token`.
+
+Basic authentication cannot ask for a second factor. With `app:authentication:secure_by_default` (`APP__AUTHENTICATION__SECURE_BY_DEFAULT`) set to `true`, the API refuses it the same way to every account that two-factor authentication applies to. At `false`, the default, which xtm-docker keeps, the API accepts these accounts and logs a warning with the ID of the account, at most once an hour. Both log lines are at `warn` level: the `error` level xtm-docker sets hides them. Give the scripts of these accounts an API token.
+:::
+
 ## Query the reports on Velvet Harbor
 
 Most entity types have a list query named after the type in the plural (`reports`, `indicators`, `intrusionSets`) and a single-item query (`report`, `indicator`, `intrusionSet`). Lists are connections: the items are in `edges[].node`, and `pageInfo` describes the page.
@@ -189,6 +195,33 @@ done
 
 Keep the same `orderBy` and `filters` on every page: the cursor holds the sort values of the last item, and only means something for the same query. To follow changes over time rather than read a full list, listen to a [live stream](/develop/apis/streams/) instead of polling.
 
+:::only{opencti=">=7.261127"}
+## Check what a type accepts
+
+Before a script creates objects, it can ask the platform which attributes a type takes, which ones a creation must set, and which default values apply. `schemaAttributes` answers for the type named in `entityType`, such as `Report`, in any letter case. Without `entityType`, it answers for every type. It needs **Access knowledge**.
+
+```bash
+curl -s "$OPENCTI_URL/graphql" \
+  -H "Authorization: Bearer $OPENCTI_TOKEN" -H "Content-Type: application/json" \
+  -d '{"query": "{ schemaAttributes(entityType: \"Report\") { type attributes { name type label description mandatory multiple defaultValues { id name } } } }"}' | jq
+```
+
+Each attribute of the answer gives:
+
+| Field | Content |
+| --- | --- |
+| `name` | The key to send in the `input` of a mutation, such as `report_types` |
+| `type` | `string`, `date`, `numeric`, `boolean` or `object`. `ref` for a link to other objects: `createdBy`, `objectMarking`, `objectLabel`, `externalReferences` |
+| `label`, `description` | The name the interface shows, and what the attribute holds, such as `Date when the report was published, in ISO 8601.` for `published`. `null` for most attributes of the internal types of the platform |
+| `mandatory` | Whether a creation must set it: the data model requires it, or an administrator made it mandatory in the [settings of the type](/opencti/configure/entities/#make-attributes-mandatory-and-set-default-values). `externalReferences` is mandatory when the type enforces references |
+| `multiple` | Whether it takes a list of values |
+| `defaultValues` | The default values set in the settings of the type, each with its `id` and `name`: the ID and the name of an object for a `ref`, the value itself otherwise. Never set for `objectMarking`, whose default is the default markings of the creator's group |
+
+The answer also lists the custom fields of the type, with their own description, mandatory status and default value. The other fields, `mandatoryType`, `editDefault`, `upsert` and `scale`, describe the data model. A name that matches no type, even an empty one, fails with `Unknown entity type`, rather than an empty list.
+
+At Example CERT, **Report types** is mandatory, with `threat-report` as default value. `report_types` then comes back with `mandatory` at `true` and `threat-report` in `defaultValues`: a report the script creates without a type gets `threat-report`.
+:::
+
 ## Create an indicator
 
 Mutations take an `input` object. Relationships to other objects, such as the author, the markings and the labels, take the IDs of those objects.
@@ -277,7 +310,7 @@ Some request headers change how a mutation runs:
 | Header | Effect |
 | --- | --- |
 | `opencti-draft-id` | Runs the request inside this draft workspace instead of the live knowledge base. See [Prepare changes in a draft](/opencti/use/ingest/drafts/) |
-| `opencti-applicant-id` | Recorded in the origin of the change, as the user the request acts for. Connectors and playbooks set it |
+| `opencti-applicant-id` | Sent by a user with **Bypass all capabilities**, runs the request as this user, with this user's rights. From other users, it is only recorded in the origin of the change. Connectors and playbooks set it |
 
 ## Read the errors
 
@@ -304,12 +337,26 @@ The errors you meet first:
 | `GRAPHQL_VALIDATION_FAILED` | The query does not match the schema, such as `Cannot query field "title" on type "Report"`, or calls one query too many times through aliases | Check the field names in the schema reference. A request can call the same query twice and the same mutation once (`app:graphql:batching_protection:query_default`, `app:graphql:batching_protection:mutation_default`) |
 | `BAD_USER_INPUT_ERROR` | An argument is wrong, such as an unknown filter key, listed in `extensions.data.keys` | Fix the key, using the [filter keys reference](/reference/opencti/filter-keys/) |
 | `VALIDATION_ERROR` | A value breaks a rule, such as `The score should be an integer between 0 and 100`; `extensions.data.field` names the field | Fix the value |
-| `RESOURCE_NOT_FOUND` | An introspection query while introspection is turned off: `GraphQL introspection not authorized!`. Up to 7.260811, a query with `__schema`; from 7.261109.0, `__type` too, such as `__type(name: "Connector")` to test whether a field exists | Read the schema from `/schema` or from the schema reference, or decide from the version (`about { version }`) |
+| `RESOURCE_NOT_FOUND` | A query with `__schema` while introspection is turned off: `GraphQL introspection not authorized!` | Read the schema from `/schema` or from the schema reference, or decide from the version (`about { version }`) |
+
+:::only{opencti="<7.261127"}
+A query that reads one type with `__type`, such as `__type(name: "Connector")`, counts as introspection: while introspection is turned off, it is refused like `__schema`.
+:::
+
+:::only{opencti=">=7.261127"}
+A query that reads one type with `__type`, such as `__type(name: "Connector")` to test whether a field exists, is answered even while introspection is turned off. Such a query needs an authenticated user. A platform with the [secure GraphQL defaults](/deploy/operate/harden/#secure-graphql-defaults) on (`app:graphql:secure_by_default`) refuses it like `__schema`.
+:::
 
 The platform also limits each client, by address and user agent, to 10,000 requests a second by default (`app:rate_protection:max_requests`, `app:rate_protection:time_window`). Beyond it, the answer is HTTP `429` with `{"message":"Too many requests, please try again later."}`. The [errors reference](/reference/opencti/errors/#common-errors-and-what-to-do) lists every message and what to do.
 
 :::only{opencti=">=7.261119"}
 A platform with the [secure HTTP defaults](/deploy/operate/harden/#secure-http-defaults) on allows 30,000 requests per 60 seconds instead, unless its platform engineer sets these two keys. It also refuses a request body over 10 MB unless `app:max_payload_body_size` is set: split a large STIX bundle sent to `stixBundlePush` into smaller ones.
+:::
+
+:::only{opencti=">=7.261127"}
+Each error also carries `extensions.request_id`, the ID the platform gives the request. Every answer, errors or not, returns it in its `X-Request-ID` header. A request that sends its own `X-Request-ID`, of 1 to 128 letters, digits, dots, underscores or hyphens, keeps it: send the ID your script logs. When you report an error to the platform administrator, give this ID: it leads to the full error in the platform logs, as [Find the error behind a request](/deploy/operate/troubleshoot/#find-the-error-behind-a-request) explains.
+
+A platform can hide the details of its own failures from the API: `app:graphql:show_error_details` (`APP__GRAPHQL__SHOW_ERROR_DETAILS`) set to `false`. It is `true` by default, and xtm-docker keeps it. When it is `false`, an error that does not come from the request answers `An unexpected error occurred`, with only `extensions.code` and `extensions.request_id`. The errors of the table above come from the request: they keep their message and `extensions.data`, without the `cause` of the error.
 :::
 
 ## Use the playground
@@ -321,7 +368,7 @@ Two settings of the platform decide what the playground can do. A platform engin
 | Key | Environment variable | Default | Effect |
 | --- | --- | --- | --- |
 | `app:graphql:playground:enabled` | `APP__GRAPHQL__PLAYGROUND__ENABLED` | `true` | Serves the playground and shows its button in the profile |
-| `app:graphql:playground:force_disabled_introspection` | `APP__GRAPHQL__PLAYGROUND__FORCE_DISABLED_INTROSPECTION` | `true` | Refuses introspection queries. The documentation explorer and the autocompletion of the playground need introspection, so they stay empty while it is `true` |
+| `app:graphql:playground:force_disabled_introspection` | `APP__GRAPHQL__PLAYGROUND__FORCE_DISABLED_INTROSPECTION` | `true`; xtm-docker sets `false` | Refuses introspection queries. The documentation explorer and the autocompletion of the playground need introspection, so they stay empty while it is `true` |
 
 :::only{opencti=">=7.261109"}
 When `app:graphql:playground:enabled` is not set, it follows `app:graphql:secure_by_default` (`APP__GRAPHQL__SECURE_BY_DEFAULT`): a platform that turns the secure GraphQL defaults on serves no playground unless the platform engineer sets `APP__GRAPHQL__PLAYGROUND__ENABLED=true`. The same setting makes the WebSocket endpoint accept subscriptions only: send your queries and mutations over HTTP. See [Secure GraphQL defaults](/deploy/operate/harden/#secure-graphql-defaults).

@@ -20,7 +20,11 @@ A playbook does for your team what it would otherwise do by hand, the same way, 
 You find playbooks in :menu[Data > Processing > Automation]. They require an Enterprise Edition license. Building and running them takes the **Manage Playbooks** capability, and the buttons that create or import a playbook also need **Create / Update knowledge**; enrolling an entity in a running playbook takes **Use Playbooks**.
 
 :::only{opencti=">=7.261119"}
-A stopped playbook opens in **Edit mode** for users with **Manage Playbooks**. A running playbook opens in view only, so that nobody changes live automation by accident: turn on the **Edit mode** switch of its header to change it, knowing that each change applies at once. Users without **Manage Playbooks** see playbooks in view only, without the switch.
+A stopped playbook opens in **Edit mode** for users with **Manage Playbooks**. A running playbook opens in view only, so that nobody changes live automation by accident: turn on the **Edit mode** switch of its header to change it, knowing that each change applies at once.
+:::
+
+:::only{opencti=">=7.261127"}
+Users without **Manage Playbooks** do not see **Automation** in the menu, and opening a playbook by its address takes them back to the dashboard. To reach **Automation** from anywhere, type `playbook` in the [search bar](/opencti/use/explore/search/): the page shows among the **Application pages** of the results.
 :::
 
 ## What playbooks do for a team

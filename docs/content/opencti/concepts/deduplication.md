@@ -34,6 +34,10 @@ Every object has several identifiers, and a match on any of them is a match:
 - **One ID per alias**, for types with aliases: the ID the object would have if the alias were its name.
 - **One ID per hash**, for files, artifacts and X.509 certificates.
 
+:::only{opencti=">=7.261127"}
+The built-in Traffic Light Protocol (TLP) markings, TLP:CLEAR, TLP:GREEN, TLP:AMBER, TLP:AMBER+STRICT and TLP:RED, also hold in **Other STIX IDs** the IDs of the OASIS TLP 2.0 marking definitions, which many STIX producers use. A partner's bundle that marks a report with the OASIS ID of TLP:AMBER gets your TLP:AMBER marking. The upgrade adds these IDs to existing platforms, except an ID that another object of your platform already holds.
+:::
+
 Names are compared without case and without spaces around them: "Velvet Harbor" and "velvet harbor " give the same ID. Aliases, MITRE IDs and label values are compared the same way.
 
 Then the platform acts on what it found:
@@ -169,6 +173,14 @@ Three more rules complete the picture:
 - **Nothing is removed.** An upsert adds and replaces; it never empties a field or removes a value. Only a synchronizer set to **Use perfect synchronization** replaces data exactly, removals included. See [Live streams](/opencti/use/ingest/streams/).
 - **Identifiers and creators always accumulate.** Whatever the confidence, the source's STIX ID goes into **Other STIX IDs**, and the user or connector joins the **Creators**.
 - **Dates only widen.** When the confidence allows the change, the original creation date keeps the oldest value, a relationship keeps the earliest start time and the latest stop time, and a sighting keeps the earliest first seen and the latest last seen. See [Meaning of dates](/opencti/concepts/dates/#how-a-new-import-moves-the-dates), which also explains the dates that do not widen.
+
+:::only{opencti=">=7.261127"}
+An incoming entity without **First seen** or **Last seen** keeps the stored ones, unless they would no longer bound the period it brings. See [Meaning of dates](/opencti/concepts/dates/#how-a-new-import-moves-the-dates).
+:::
+
+:::only{opencti="<7.261127"}
+In this version, an incoming entity without **First seen** or **Last seen**, from a source allowed to change it, empties the stored dates.
+:::
 
 :::only{opencti="<7.261030"}
 In this version, one exception to "nothing is removed": a reference that holds a single value, such as the author, can be emptied by an incoming duplicate that comes without it. For the author, that takes a strictly higher confidence; for other single references, such as the parent directory of a file, an equal one.

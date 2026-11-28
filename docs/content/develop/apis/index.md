@@ -14,7 +14,7 @@ migrated_from:
   - opencti:/deployment/integrations/
 ---
 
-OpenCTI offers several ways in for code, and they do not do the same job. The GraphQL API reads and writes anything, at the pace of your script. Live streams push every change to a consumer as it happens. CSV feeds and TAXII collections hand a filtered list to tools that poll. Connectors are programs that run beside the platform. This page explains what each way is for, what they share, and how to pick one for an integration, such as sending Velvet Harbor indicators to a SIEM or importing a hotel-sector feed.
+OpenCTI offers several ways in for code, and they do not do the same job. The GraphQL API reads and writes anything, at the pace of your script. Live streams push each change that matches their filters to a consumer as it happens. CSV feeds and TAXII collections hand a filtered list to tools that poll. Connectors are programs that run beside the platform. This page explains what each way is for, what they share, and how to pick one for an integration, such as sending Velvet Harbor indicators to a SIEM or importing a hotel-sector feed.
 
 ::diagram{id=develop-apis}
 
@@ -47,7 +47,7 @@ A connector can combine these: a stream connector listens to a live stream and w
 
 ## What every way shares
 
-**One identity per integration.** Every request runs as a user: its markings, its organizations and its confidence level decide what it reads and what it may write, and its name shows in the history of what it changes. Give each integration its own user: see [Create accounts for integrations](/opencti/administer/service-accounts/) explains, rather than a person's account.
+**One identity per integration.** Every request runs as a user: its markings, its organizations and its confidence level decide what it reads and what it may write, and its name shows in the history of what it changes. Give each integration its own user rather than a person's account: see [Create accounts for integrations](/opencti/administer/service-accounts/).
 
 **The same credentials.** The GraphQL API, live streams, CSV feeds and TAXII collections accept:
 
@@ -58,9 +58,13 @@ A connector can combine these: a stream connector listens to a live stream and w
 
 Both capabilities sit under **API usage with authorization header** in the role editor. A user creates tokens in the **API access** card of their profile, with a duration from 30 days to unlimited: see [Get an API token](/develop/apis/graphql/#get-an-api-token). On top of that, feeds and live streams need **Access data sharing**, and a feed or a live stream made public needs no credential at all.
 
+:::only{opencti=">=7.261127"}
+Prefer the API token: Basic authentication sends a password with every request. An administrator can turn it off for the whole platform with **Allow API Basic authentication**, and a new platform starts with it off. With `app:authentication:secure_by_default` set to `true`, the platform also refuses it to the accounts that two-factor authentication applies to. See [Send a first request](/develop/apis/graphql/#send-a-first-request).
+:::
+
 **The same filters.** List queries, feeds, live streams, triggers and playbooks select objects with the same filter group format. See [Filters](/develop/apis/filters/).
 
-**The same data model.** What goes out is STIX 2.1, with the OpenCTI properties in an extension; what the API returns follows the same types. The [data model reference](/reference/opencti/data-model/) lists the entity types and their attributes.
+**The same data model.** What live streams and TAXII collections send is STIX 2.1, with the OpenCTI properties in an extension; a CSV feed sends the columns it defines; what the API returns follows the same types. The [data model reference](/reference/opencti/data-model/) lists the entity types and their attributes.
 
 ::::only{opencti=">=7.261030"}
 :::xtm-one[XTM One and the APIs]

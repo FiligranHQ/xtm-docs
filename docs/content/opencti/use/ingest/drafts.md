@@ -41,6 +41,10 @@ Inside a draft you see the whole platform as it is, plus the changes of the draf
 3. **What does not change does not appear.** When an import brings an object that already exists, identical, the draft does not list it. The same object imported by another user appears, because its creators change.
 4. **Approval sends only the changes.** Created objects are ingested whole. For updated objects, only the changes made in the draft are applied, so updates made meanwhile in the knowledge base are kept. Deleted objects are deleted; linked deletions are not applied.
 
+:::only{opencti=">=7.261127"}
+When an import in the draft renames an object the knowledge base already has, such as an Attack Pattern imported with its MITRE ID under a new name, the draft adds the previous name to its aliases. Approval keeps that alias, so a search for the old name still finds the object.
+:::
+
 ## Create a draft and work in it
 
 :::steps

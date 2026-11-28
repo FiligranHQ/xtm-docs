@@ -27,6 +27,10 @@ At each run, the feed downloads the whole file. If the file has not changed sinc
 
 A CSV feed runs at most every 5 minutes, whatever its schedule. Its default **Schedule period** is 1 hour.
 
+:::only{opencti=">=7.261127"}
+A run sends the objects to the workers in bundles of up to 1,000 objects by default. If you **Stop** the feed during a run, the run stops before its next bundle: the bundles already sent are imported, the rest of the file is not. The feed does not record the file as imported, so when you start it again, its next run imports the whole file, even if the file has not changed.
+:::
+
 ## Create the feed
 
 Open the creation form:
@@ -116,6 +120,10 @@ The feed imports through a connector named after it: follow its progress in :men
 ::::
 
 A line the mapper cannot read appears as an error of the work, with the reason. Fix the mapper, then **Reset state** to import the whole file again.
+
+:::only{opencti=">=7.261127"}
+A CSV URL on your internal network, such as a private address, may be refused: when your administrator blocks internal destinations, each fetch fails and **Logs** shows an error that names the host. Ask them to add the host to the allow list, as described in [Tune feeds and streams](/opencti/use/ingest/feed-options/#internal-destinations).
+:::
 
 ## What's next
 

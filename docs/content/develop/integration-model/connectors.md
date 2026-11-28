@@ -123,6 +123,10 @@ The worker writes each object with the confidence level of the user it writes as
 - A new object gets the confidence of the bundle, capped at the user's maximum confidence level. An object without `confidence` gets the user's maximum.
 - An existing object takes the new values only when the new confidence is at least the one it has. With a lower confidence, the worker still fills the fields that are empty and adds the labels and external references, but changes nothing else.
 
+:::only{opencti=">=7.261127"}
+A start or end date your bundle leaves out no longer erases the one the object has. OpenCTI fills a missing `first_seen`, `start_time` or similar date with a placeholder, `1970-01-01T00:00:00.000Z` for a start and `5138-11-16T09:46:40.000Z` for an end. An existing object keeps its stored `first_seen`, `last_seen`, `start_time`, `stop_time`, `valid_from`, `valid_until`, `first_observed` or `last_observed` instead of that placeholder. Two exceptions: a full synchronization (the `synchronized-upsert: true` header, from a user that bypasses capabilities) replaces every value, and the placeholder still applies when the stored date would no longer bound the new period, such as a stored end date before the new start date. [How a new import moves the dates](/opencti/concepts/dates/#how-a-new-import-moves-the-dates) gives the rules for each date.
+:::
+
 So the confidence of the connector's user is the ceiling of everything it imports. With `CONNECTOR_AUTO_CREATE_SERVICE_ACCOUNT=true`, the connector creates its own user at start: `[C] <CONNECTOR_NAME>`, in the `Connectors` group, with the maximum confidence level `CONNECTOR_AUTO_CREATE_SERVICE_ACCOUNT_CONFIDENCE_LEVEL` (50 by default). XTM Composer does the same from the catalog: its form proposes the `max_confidence_level` of the [manifest](/develop/build/manifest/).
 
 ## The settings that depend on the type

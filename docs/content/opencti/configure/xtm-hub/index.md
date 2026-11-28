@@ -33,6 +33,10 @@ A platform in demo mode (`demo_mode`) shows no connect or disconnect button.
 
 When you connect, your browser sends the XTM Hub the URL, title, identifier, edition and version of the platform, and brings back a token. Every hour, and each time you open the **Filigran Experience** page, the platform checks with the XTM Hub that its registration is still valid. If the XTM Hub no longer knows the platform, the platform resets its registration and reads as not connected.
 
+:::only{opencti=">=7.261127"}
+The token authenticates the platform to the XTM Hub. The API returns it only to users with **Manage XTM Hub**; for everyone else the field is empty.
+:::
+
 :::only{opencti=">=7.260811"}
 While connected, the platform also fetches the [news feed](/opencti/configure/xtm-hub/news-feed/) every hour.
 :::
@@ -44,7 +48,7 @@ While connected, the platform also fetches the [news feed](/opencti/configure/xt
 
 1. Open :menu[Settings > Filigran Experience].
 
-   ::screenshot{id=opencti-xtm-hub-card alt="The XTM Hub card of the Filigran Experience page reads Not connected and lists what the XTM Hub offers: a free trial, pre-built content, the roadmap and the Academy."}
+   ::screenshot{id=opencti-xtm-hub-card alt="The XTM Hub card of a platform not connected yet lists what the XTM Hub offers: a free trial, pre-built content, the roadmap and the Academy, with the Explore XTM Hub button."}
 
 2. In the **XTM Hub** card, click **Connect to XTM Hub**. The **Connect your product to XTM Hub** dialog opens.
 3. Click **Continue**. A new browser tab opens on the XTM Hub; your OpenCTI session stays open. If you lose the tab, **Continue to connect** in the dialog brings it back.
@@ -71,7 +75,22 @@ You can also start from the XTM Hub. When it sends you to the platform, a dialog
 
 ## Follow the connection
 
-::::only{opencti=">=7.260811"}
+::::only{opencti=">=7.261127"}
+Once the platform is connected, the **Connection status** of the **XTM Hub** card shows one of two states:
+
+| State | Meaning |
+| --- | --- |
+| **Connected** | The last check succeeded. The card gives the **Connection date**, who connected the platform (**Connected by**) and the **Workspace**, the XTM Hub organization the platform is registered in. **Go to the Hub** opens the XTM Hub |
+| **Connectivity lost** | The XTM Hub stopped confirming the registration. The card gives the **Last successful check** |
+
+A platform that is not connected has no status: the card lists what the XTM Hub offers, and **Explore XTM Hub** opens a page about the XTM Hub.
+
+The **Workspace** row shows once the XTM Hub has returned the organization name at a connection check. OpenCTI runs one right after you connect, then every hour and each time you open the page. An XTM Hub that does not return the name yet leaves the row hidden. A failed check keeps the last name known; disconnecting, or connecting again, clears it until the next check.
+
+To repair a lost connection, click **Connect to XTM Hub** in the card and go through the connection steps again.
+::::
+
+::::only{opencti=">=7.260811 <7.261127"}
 The **Connection status** of the **XTM Hub** card shows one of three states:
 
 | State | Meaning |
@@ -105,7 +124,7 @@ When connectivity has been lost for 24 hours since the last successful check, Op
 | `xtm:xtmhub_to_email` | `XTM__XTMHUB_TO_EMAIL` | `no-reply@filigran.io` | The **To** address of the email. The administrators receive it in blind copy |
 | `smtp:email_max_cc_size` | `SMTP__EMAIL_MAX_CC_SIZE` | `500` | Maximum number of administrators in blind copy. Beyond it, only the first ones receive the email |
 
-:::example[Connect a production and a staging platform]
+::::example[Connect a production and a staging platform]
 Example CERT runs two OpenCTI instances: production at `https://opencti.example.com` and staging at `https://opencti-staging.example.com`. Both should deploy XTM Hub dashboards for testing and use, under the XTM Hub organization "Example CERT". Staging is shut down every night, so its connectivity emails would only be noise. Production emails should reach the shared mailbox of the platform team.
 
 1. On each platform, open :menu[Settings > Filigran Experience], click the connect button of the **XTM Hub** card, then **Continue**.
@@ -129,7 +148,11 @@ services:
 ```
 
 Both cards then read connected, with the date and the administrator who connected them, and both instances appear in the Example CERT organization on the XTM Hub. When staging is down for more than 24 hours, it goes to **Connectivity lost** without emailing anyone. When production loses the connection for 24 hours, the platform team's mailbox gets the email, and every administrator gets a blind copy.
+
+:::only{opencti=">=7.261127"}
+Each card also gives the **Workspace** `Example CERT`, the XTM Hub organization you chose in step 2.
 :::
+::::
 
 ## Disconnect the platform
 

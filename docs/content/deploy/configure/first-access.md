@@ -35,7 +35,24 @@ Every platform applies these values again **at every start**: it creates the adm
 
 - A password changed in the interface lasts until the next restart. Change it in `.env`.
 - Anyone who can read `.env` and restart the stack can take over the admin accounts. Keep `.env` readable by its owner only (`chmod 600 .env`) and out of version control.
-- In xtm-docker, the admin tokens are also the credentials of the services that call the platforms: the OpenCTI worker and connectors, the OpenAEV collectors and injectors, XTM Composer, and the link between OpenCTI and OpenAEV. They all read the same variables of `.env`, so they follow a change of token.
+- In xtm-docker, the admin tokens are also the credentials of the services that call the platforms: the OpenCTI worker and connectors, the OpenAEV collectors and injectors, XTM Composer, and the link between OpenCTI and OpenAEV. They read the admin token variables of `.env`, so they follow a change of token. The three export connectors use `CONNECTOR_EXPORT_FILE_STIX_TOKEN`, `CONNECTOR_EXPORT_FILE_CSV_TOKEN` and `CONNECTOR_EXPORT_FILE_TXT_TOKEN` instead when you set them; empty, as in `.env.sample`, they use `OPENCTI_ADMIN_TOKEN`.
+
+:::only{opencti=">=7.261127"}
+### Checks of the OpenCTI admin password
+
+At every start, OpenCTI also checks the value of `APP__ADMIN__PASSWORD` twice, unless `APP__ADMIN__EXTERNALLY_MANAGED=true`:
+
+| Check | Fails when | Warning in the logs | Setting that stops the start instead |
+| --- | --- | --- | --- |
+| Default value | The password is `changeme`, ignoring case, as in `.env.sample` | `Default credentials are configured, change them`, which names `app:admin:password` | `APP__CREDENTIALS__SECURE_BY_DEFAULT=true` |
+| Password policy | The password fails the **Local password policies** of the **Local** strategy, in :menu[Settings > Security > Authentications] | `The admin password (app:admin:password) does not match the local password policy`, with the rules it fails | `APP__ADMIN__SECURE_BY_DEFAULT=true` |
+
+Both settings are `false` by default: OpenCTI starts and logs the warning, never the password. xtm-docker sets `APP__APP_LOGS__LOGS_LEVEL=error`, which hides warnings. A later version turns both settings on by default. The default policy has no rule, so it accepts any password until an administrator sets one.
+
+With `APP__ADMIN__SECURE_BY_DEFAULT=true`, OpenCTI also refuses to save a password policy that the admin password fails, with the message `The configured admin password (app:admin:password) does not match this password policy`. Change the admin password first, as [Change an admin password](#change-an-admin-password) describes, then the policy.
+
+The default value check also covers the health check key, `OPENCTI_HEALTHCHECK_ACCESS_KEY`, except its exact value `ChangeMe`, which keeps `/health` closed, and the credentials of the shared services: see [Replace the default credentials of the services](/deploy/configure/shared-services/#replace-the-default-credentials-of-the-services).
+:::
 
 ### OpenCRQ
 
@@ -80,6 +97,10 @@ To cut the token off the API at once, choose **Disable** for the `Deployment adm
    ```
 
    Use `OPENAEV_ADMIN_PASSWORD` or `XTM_ONE_ADMIN_PASSWORD` for the other platforms.
+
+   :::only{opencti=">=7.261127"}
+   The new password of OpenCTI must pass its **Local password policies**: see [Checks of the OpenCTI admin password](#checks-of-the-opencti-admin-password). `openssl rand -hex 24` draws lowercase letters and digits only. When the policy also asks for uppercase letters or symbols, add them, such as with `NEW="$(openssl rand -hex 24)-X"`. With `APP__ADMIN__SECURE_BY_DEFAULT=true`, a password the policy refuses stops OpenCTI at step 2, and `docker compose logs opencti` shows `The admin password (app:admin:password) does not match the local password policy`.
+   :::
 
 2. Recreate the container so that it reads the new value.
 

@@ -1,6 +1,6 @@
 {
-  "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9",
+  "version": "7.261127.0",
+  "source": "OpenCTI-Platform/opencti@1341db4",
   "themes": [
     "Basic parameters",
     "Network and security",
@@ -266,8 +266,8 @@
       "declared": true,
       "read": true,
       "files": [
-        "modules/authenticationProvider/providers-configuration.ts",
-        "modules/user/user-domain.ts"
+        "config/default-credentials.ts",
+        "modules/authenticationProvider/providers-configuration.ts"
       ],
       "default": false,
       "theme": "Basic parameters",
@@ -280,11 +280,25 @@
       "declared": true,
       "read": true,
       "files": [
+        "config/default-credentials.ts",
         "modules/authenticationProvider/providers-configuration.ts"
       ],
       "default": "ChangeMe",
       "theme": "Basic parameters",
       "description": "Default password of the admin user"
+    },
+    {
+      "key": "app:admin:secure_by_default",
+      "env": "APP__ADMIN__SECURE_BY_DEFAULT",
+      "type": "boolean",
+      "declared": true,
+      "read": true,
+      "files": [
+        "modules/authenticationProvider/providers-configuration.ts"
+      ],
+      "default": false,
+      "theme": "Basic parameters",
+      "description": "Checks the admin password (`app:admin:password`) against the local password policy at every start. `false` by default for now: a mismatch logs a warning. When `true`, a mismatch stops the start, and the platform refuses a new password policy that the admin password does not meet. Skipped when `app:admin:externally_managed` is `true`."
     },
     {
       "key": "app:admin:token",
@@ -624,6 +638,19 @@
       "description": "Use this variable to force the enablement of your local authentication policy even if disabled in UI"
     },
     {
+      "key": "app:authentication:secure_by_default",
+      "env": "APP__AUTHENTICATION__SECURE_BY_DEFAULT",
+      "type": "boolean",
+      "declared": true,
+      "read": true,
+      "files": [
+        "modules/user/user-basic-auth.ts"
+      ],
+      "default": false,
+      "theme": "Basic parameters",
+      "description": "When `true`, the API refuses Basic authentication to the accounts that two-factor authentication applies to (enforced on the platform, or turned on by the user), before checking the password. `false` by default for now: such a login is accepted, and the platform logs a warning naming the user, at most once an hour per account. Basic authentication as a whole is turned on or off with **Allow API Basic authentication** of the local strategy."
+    },
+    {
       "key": "app:base_path",
       "env": "APP__BASE_PATH",
       "type": "string",
@@ -768,6 +795,19 @@
       "default": 100,
       "theme": "Technical customization",
       "description": "Random jitter to prevent concurrent retry (in milliseconds)"
+    },
+    {
+      "key": "app:credentials:secure_by_default",
+      "env": "APP__CREDENTIALS__SECURE_BY_DEFAULT",
+      "type": "boolean",
+      "declared": true,
+      "read": true,
+      "files": [
+        "config/default-credentials.ts"
+      ],
+      "default": false,
+      "theme": "Network and security",
+      "description": "Checks at every start that no setting still holds a known default credential: `app:admin:password` (unless `app:admin:externally_managed` is `true`), `app:health_access_key` (except the exact `ChangeMe`, which keeps `/health` off), the RabbitMQ user and password, the MinIO keys, the Elasticsearch or OpenSearch user and password (also when written in `elasticsearch:url`), and the Redis user and password (and the Sentinel ones with `redis:mode` set to `sentinel`). The values it looks for are `changeme` in any case, `guest` for RabbitMQ, `minioadmin` for MinIO, `elastic` and `admin` for the search engine, and `default` for the Redis user; a default user name only counts with a default password. Not checked: the MinIO keys with `minio:use_aws_role`, the search engine with `opensearch:region` or with `elasticsearch:api_key` (unless `elasticsearch:engine_client` is `opensearch`), and the fields a remote credentials provider fills (the MinIO keys it returns are checked once resolved). `false` by default for now: the platform logs a warning naming the settings, never their values; a later version turns it on by default. When `true`, the start stops with `Default credentials are configured, change them to start the platform`."
     },
     {
       "key": "app:crypto:master_seed",
@@ -1166,6 +1206,19 @@
       "description": "Default of the GraphQL protections that do not set their own option. When `true`, the GraphQL armor protection is on (`app:graphql:armor_protection:disabled` defaults to `false`), the playground is off (`app:graphql:playground:enabled` defaults to `false`, which also refuses introspection), and the WebSocket endpoint accepts only subscriptions. `false` by default for now, and the platform logs a warning at start; a later version turns it on by default. An explicit value of the other keys always wins."
     },
     {
+      "key": "app:graphql:show_error_details",
+      "env": "APP__GRAPHQL__SHOW_ERROR_DETAILS",
+      "type": "boolean",
+      "declared": true,
+      "read": true,
+      "files": [
+        "graphql/graphql.js"
+      ],
+      "default": true,
+      "theme": "Network and security",
+      "description": "When `false`, the GraphQL API, over HTTP and WebSocket, hides the details of its errors. A failure of the platform (database, search engine, storage, unexpected error) answers `An unexpected error occurred` with its code only. An error caused by the request (authentication, rights, not found, validation, input) keeps its message, its code and its data, without their `cause`. Every error keeps its `request_id`, under which the platform logs the full error. `true` (default) returns the errors as they are, without the stack trace in production. Outside GraphQL (TAXII, CSV feeds, live streams, the other HTTP routes), a failure of the platform answers `An unexpected error occurred` whatever this key."
+    },
+    {
       "key": "app:group_confidence_level:max_confidence_default",
       "env": "APP__GROUP_CONFIDENCE_LEVEL__MAX_CONFIDENCE_DEFAULT",
       "type": "number",
@@ -1185,6 +1238,7 @@
       "declared": true,
       "read": true,
       "files": [
+        "config/default-credentials.ts",
         "http/httpPlatform.js"
       ],
       "default": "ChangeMe",
@@ -1728,6 +1782,7 @@
       "declared": false,
       "read": true,
       "files": [
+        "http/httpConfig.ts",
         "http/httpPlatform.js"
       ],
       "theme": "Technical customization",
@@ -1771,6 +1826,19 @@
       "default": "shared",
       "theme": "Basic parameters",
       "description": "Where user sessions are stored: `shared` stores them in Redis, shared by all the nodes; any other value keeps them in the memory of each node, so a user stays connected only to the node that opened the session."
+    },
+    {
+      "key": "app:session_max_lifetime",
+      "env": "APP__SESSION_MAX_LIFETIME",
+      "type": "number",
+      "declared": true,
+      "read": true,
+      "files": [
+        "database/session.js"
+      ],
+      "default": 0,
+      "theme": "Basic parameters",
+      "description": "Maximum lifetime of a session, in ms, counted from the login: activity never extends it, unlike `app:session_timeout`. When a session reaches it, its next request ends it and the user logs in again; a live stream opened with the session closes. `0` (default), unset or empty sets no limit. Up to `2147483647`; any other value that is not a whole number stops the platform at start. Shown read-only as **Maximum session lifetime** in Settings > Security > Authentications."
     },
     {
       "key": "app:session_presence:grace_period",
@@ -2264,6 +2332,7 @@
       "declared": false,
       "read": true,
       "files": [
+        "config/default-credentials.ts",
         "database/engine.ts"
       ],
       "theme": "ElasticSearch",
@@ -2304,6 +2373,7 @@
       "declared": true,
       "read": true,
       "files": [
+        "config/default-credentials.ts",
         "database/engine.ts"
       ],
       "default": "auto",
@@ -2627,6 +2697,7 @@
       "declared": true,
       "read": true,
       "files": [
+        "config/default-credentials.ts",
         "database/engine.ts"
       ],
       "default": "http://localhost:9200",
@@ -3593,6 +3664,7 @@
       "declared": true,
       "read": true,
       "files": [
+        "config/default-credentials.ts",
         "database/raw-file-storage.ts"
       ],
       "default": false,
@@ -3707,6 +3779,7 @@
       "declared": false,
       "read": true,
       "files": [
+        "config/default-credentials.ts",
         "database/engine.ts"
       ],
       "theme": "ElasticSearch",
@@ -3724,6 +3797,30 @@
       "default": "es",
       "theme": "ElasticSearch",
       "description": "AWS service name used to sign requests to OpenSearch when `opensearch:region` is set: `es` for Amazon OpenSearch Service, `aoss` for OpenSearch Serverless."
+    },
+    {
+      "key": "outbound_requests:allow_list",
+      "env": "OUTBOUND_REQUESTS__ALLOW_LIST",
+      "type": "list",
+      "declared": true,
+      "read": false,
+      "files": [],
+      "default": [],
+      "theme": "Network and security",
+      "description": "Internal destinations that ingestion feeds, webhook notifiers and synchronizers may still reach when `outbound_requests:block_internal_destinations` is `true`; the platform no longer logs them either. Each entry is a CIDR range (`10.0.0.0/8`, `fd00::/8`), an IP address, a host name (`feeds.internal`), or a domain and its subdomains (`*.corp.example`). A host name matches the host of the URL, an IP address or a range the address it resolves to. In the environment variable, a comma-separated list or a JSON array. An entry of another form stops the platform at start with `Invalid entry in outbound_requests:allow_list` or `Invalid CIDR range in outbound_requests:allow_list`."
+    },
+    {
+      "key": "outbound_requests:block_internal_destinations",
+      "env": "OUTBOUND_REQUESTS__BLOCK_INTERNAL_DESTINATIONS",
+      "type": "boolean",
+      "declared": true,
+      "read": true,
+      "files": [
+        "config/conf.js"
+      ],
+      "default": false,
+      "theme": "Network and security",
+      "description": "When `true`, the requests of ingestion feeds (CSV, JSON, RSS, TAXII), webhook notifiers and synchronizers to an internal address fail, unless `outbound_requests:allow_list` lists the destination. Internal is every address that is not global unicast: loopback, private, link-local, unique local, carrier-grade NAT, multicast, documentation and the other reserved ranges, IPv4 and IPv6. The platform checks the address the host name resolves to, at each connection, redirects included; through a proxy, it resolves the name itself and lets a name it cannot resolve go to the proxy. A blocked request fails with `<feature>: the destination <host> is an internal network address`, followed by the key to add it to. The other outgoing requests (XTM One, OpenAEV, OpenCRQ, XTM Hub, RabbitMQ management, custom catalogs, remote credentials provider) are not checked. `false` by default for now: the requests go through, the platform logs each internal destination once with a warning, and logs a warning at start; a later version turns it on by default."
     },
     {
       "key": "pir_manager:enabled",
@@ -4116,7 +4213,7 @@
       ],
       "default": "LocalStrategy",
       "theme": "Network and security",
-      "description": "Strategy of the built-in `local` provider (login with email and password); its value is never read. `providers:local:config:disabled` set to `true` turns local login off once, when the platform first records its own sign-in settings (a new platform, or the first start of a version that keeps them in the platform); after that, local login is switched in the platform's settings, and this key changes nothing."
+      "description": "Strategy of the built-in `local` provider (login with email and password); its value is never read. `providers:local:config:disabled` set to `true` turns local login off, at each start when `app:authentication:force_env` is `true`, otherwise once, when the platform first records its own sign-in settings; after that, local login is switched in the platform's settings. Either way, the platform turns local login back on when no other way to sign in is left."
     },
     {
       "key": "publisher_manager:buffering_seconds",
@@ -4253,6 +4350,7 @@
       "declared": true,
       "read": true,
       "files": [
+        "config/default-credentials.ts",
         "database/rabbitmq.js"
       ],
       "default": "guest",
@@ -4405,6 +4503,7 @@
       "declared": true,
       "read": true,
       "files": [
+        "config/default-credentials.ts",
         "database/rabbitmq.js"
       ],
       "default": "guest",
@@ -4523,6 +4622,7 @@
       "declared": true,
       "read": true,
       "files": [
+        "config/default-credentials.ts",
         "database/redis.ts"
       ],
       "default": "single",
@@ -5051,6 +5151,7 @@
       "declared": true,
       "read": true,
       "files": [
+        "domain/local-auth-lockout-notification.ts",
         "modules/xtm/hub/xtm-hub-email.ts"
       ],
       "default": 500,
@@ -5207,6 +5308,19 @@
       "default": "TLS_REJECT_UNAUTHORIZED",
       "theme": "SMTP Service",
       "description": "Enable TLS certificate check of the SMTP server. Unset, it is `false`, and from 7.261109 it follows `tls:reject_unauthorized`."
+    },
+    {
+      "key": "smtp:require_tls",
+      "env": "SMTP__REQUIRE_TLS",
+      "type": "boolean",
+      "declared": false,
+      "read": true,
+      "files": [
+        "database/smtp.js"
+      ],
+      "default": "TLS_REJECT_UNAUTHORIZED",
+      "theme": "SMTP Service",
+      "description": "From 7.261127: when `smtp:use_ssl` is `false` and the platform authenticates to the server, refuse to send unless the server upgrades the connection with STARTTLS, so that the credentials never cross the network in clear text. Unset, it follows `tls:reject_unauthorized` (`false` by default). With `false` and credentials, the platform logs a warning at start. Ignored when the SMTP configuration screen applies: its **Require STARTTLS** switch decides."
     },
     {
       "key": "smtp:tls_ciphers",
@@ -5403,6 +5517,31 @@
       "description": "Enable/disable the telemetry manager, which collects usage metrics of the platform and exports them to local files and to Filigran (`telemetry.filigran.io`)."
     },
     {
+      "key": "telemetry_manager:exporter_prometheus",
+      "env": "TELEMETRY_MANAGER__EXPORTER_PROMETHEUS",
+      "type": "string",
+      "declared": false,
+      "read": true,
+      "files": [
+        "manager/telemetryManager.ts"
+      ],
+      "theme": "Engines, Schedules and Managers",
+      "description": "Port of a Prometheus endpoint, served at `/metrics`, that exposes the usage telemetry metrics of the telemetry manager. Unset by default: no endpoint. Only the node that runs the telemetry manager serves it. Use a port other than `app:telemetry:metrics:exporter_prometheus`: when the port is taken, the platform logs a warning and runs without the endpoint."
+    },
+    {
+      "key": "telemetry_manager:exporter_prometheus_host",
+      "env": "TELEMETRY_MANAGER__EXPORTER_PROMETHEUS_HOST",
+      "type": "string",
+      "declared": false,
+      "read": true,
+      "files": [
+        "manager/telemetryManager.ts"
+      ],
+      "default": "0.0.0.0",
+      "theme": "Engines, Schedules and Managers",
+      "description": "IPv4 address the usage telemetry Prometheus endpoint (`telemetry_manager:exporter_prometheus`) listens on. The default `0.0.0.0` listens on every interface; set `127.0.0.1` to keep it local to the host."
+    },
+    {
       "key": "telemetry_manager:interval",
       "env": "TELEMETRY_MANAGER__INTERVAL",
       "type": "number",
@@ -5533,6 +5672,19 @@
       "description": "Lifetime, in seconds, of the token the platform signs for a user when it calls XTM One on their behalf (Ask AI chatbot). Values above 600 are capped at 600."
     },
     {
+      "key": "xtm:openaev_tenant_id",
+      "env": "XTM__OPENAEV_TENANT_ID",
+      "type": "string",
+      "declared": true,
+      "read": true,
+      "files": [
+        "modules/xtm/counterpart/openaev/openaev-client.ts"
+      ],
+      "default": "",
+      "theme": "XTM Suite",
+      "description": "Tenant of OpenAEV in which the platform looks for the OpenAEV objects that match its own, for an OpenAEV that serves several tenants. Unset, the default tenant of OpenAEV. Behind the `XTM_COUNTERPARTS` feature flag."
+    },
+    {
       "key": "xtm:openaev_token",
       "env": "XTM__OPENAEV_TOKEN",
       "type": "string",
@@ -5550,11 +5702,52 @@
       "declared": true,
       "read": true,
       "files": [
-        "domain/settings.js"
+        "domain/settings.js",
+        "modules/xtm/counterpart/openaev/openaev-client.ts"
       ],
       "default": "",
       "theme": "XTM Suite",
       "description": "OpenAEV URL"
+    },
+    {
+      "key": "xtm:opencrq_api_url",
+      "env": "XTM__OPENCRQ_API_URL",
+      "type": "string",
+      "declared": true,
+      "read": true,
+      "files": [
+        "modules/xtm/counterpart/opencrq/opencrq-client.ts"
+      ],
+      "default": "",
+      "theme": "XTM Suite",
+      "description": "Address of the OpenCRQ API the platform calls to find the OpenCRQ objects that match its own, when it differs from `xtm:opencrq_url`. Unset, `xtm:opencrq_url` followed by `/trpc`. Behind the `XTM_COUNTERPARTS` feature flag."
+    },
+    {
+      "key": "xtm:opencrq_token",
+      "env": "XTM__OPENCRQ_TOKEN",
+      "type": "string",
+      "declared": true,
+      "read": true,
+      "files": [
+        "modules/xtm/counterpart/opencrq/opencrq-client.ts"
+      ],
+      "default": "",
+      "theme": "XTM Suite",
+      "description": "Token of an OpenCRQ service account, which the platform sends to OpenCRQ to find the OpenCRQ objects that match its own. Unset, the platform does not call OpenCRQ. Behind the `XTM_COUNTERPARTS` feature flag."
+    },
+    {
+      "key": "xtm:opencrq_url",
+      "env": "XTM__OPENCRQ_URL",
+      "type": "string",
+      "declared": true,
+      "read": true,
+      "files": [
+        "domain/settings.js",
+        "modules/xtm/counterpart/opencrq/opencrq-client.ts"
+      ],
+      "default": "",
+      "theme": "XTM Suite",
+      "description": "Public URL of the OpenCRQ platform, read from 7.261124. The OpenCRQ entry of the product switcher opens it and shows **Platform connected**; unset, the entry shows **Get OpenCRQ now** and opens the OpenCRQ page of the Filigran website. Empty, the platform reads the deprecated `xtm:opengrc_url` instead."
     },
     {
       "key": "xtm:opengrc_token",
@@ -5574,11 +5767,12 @@
       "declared": true,
       "read": true,
       "files": [
-        "domain/settings.js"
+        "domain/settings.js",
+        "modules/xtm/counterpart/opencrq/opencrq-client.ts"
       ],
       "default": "",
       "theme": "XTM Suite",
-      "description": "URL of the OpenCRQ platform (OpenGRC is the former name of OpenCRQ). The platform passes it to the interface in its settings, but no screen of this version uses it. A later release renames it after OpenCRQ, still reads this name as a deprecated fallback, and adds OpenCRQ to the product switcher."
+      "description": "URL of the OpenCRQ platform, under its former name, OpenGRC. Up to 7.261119, the platform passes it to the interface in its settings, but no screen uses it. From 7.261124, it is deprecated: the platform reads it only when `xtm:opencrq_url` is empty."
     },
     {
       "key": "xtm:xtm_one_token",
@@ -5587,8 +5781,10 @@
       "declared": true,
       "read": true,
       "files": [
+        "domain/xtm-auth.ts",
         "manager/telemetryManager.ts",
         "manager/xtmOneRegistrationManager.ts",
+        "modules/xtm/counterpart/xtmone/xtmone-client.ts",
         "modules/xtm/one/xtm-one-client.ts"
       ],
       "default": "",
@@ -5607,6 +5803,7 @@
         "manager/telemetryManager.ts",
         "manager/xtmOneRegistrationManager.ts",
         "modules/playbook/components/ai-agent-shared.ts",
+        "modules/xtm/counterpart/xtmone/xtmone-client.ts",
         "modules/xtm/one/xtm-one-client.ts"
       ],
       "default": "https://common.xtm1.filigran.io",

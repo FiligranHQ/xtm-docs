@@ -1,8 +1,8 @@
 {
   "name": "metrics",
-  "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/config/tracing.ts, opencti-platform/opencti-graphql/src/telemetry/TelemetryMeterManager.ts, opencti-platform/opencti-graphql/src/telemetry/platformHealthMetrics.ts)",
-  "intro": "The 14 OpenTelemetry metrics OpenCTI 7.261119.0 exposes to monitor a deployment, with the attributes each data point carries. Turn them on and collect them as [Metrics](/deploy/operate/metrics/) explains.",
+  "version": "7.261127.0",
+  "source": "OpenCTI-Platform/opencti@1341db4 (opencti-platform/opencti-graphql/src/config/tracing.ts, opencti-platform/opencti-graphql/src/telemetry/TelemetryMeterManager.ts, opencti-platform/opencti-graphql/src/telemetry/platformHealthMetrics.ts)",
+  "intro": "The 14 OpenTelemetry metrics OpenCTI 7.261127.0 exposes to monitor a deployment, with the attributes each data point carries. Turn them on and collect them as [Metrics](/deploy/operate/metrics/) explains.",
   "filter": "Filter metrics and attributes",
   "sections": [
     {

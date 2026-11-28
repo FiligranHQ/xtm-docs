@@ -57,7 +57,7 @@ The engineer checks the versions of Docker and Docker Compose, the processor and
 
 ### Install the stack on one host
 
-In a clone of xtm-docker, `.env` gets fresh secrets for every password, key and token, and a copy goes to the team's secret store ([step 3](/deploy/install/docker-compose/)). `OPENCTI_ADMIN_EMAIL`, `OPENAEV_ADMIN_EMAIL` and `XTM_ONE_ADMIN_EMAIL` all read `admin@example.com`. Each platform's public URL is built from its `*_EXTERNAL_SCHEME`, `*_HOST` and `*_PORT`, here `https`, its host name and `443`. `docker-compose.override.yml` publishes OpenCTI on `127.0.0.1:8080`, OpenAEV on `127.0.0.1:8081`, XTM One on `127.0.0.1:8090` and OpenCRQ on `127.0.0.1:8082` for the proxy, keeps Elasticsearch and Redis on the host itself, and pins the versions: OpenCTI `7.261119.0`, OpenAEV `3.261118.0`, XTM One `1.261119.1`, OpenCRQ `0.261123.0`.
+In a clone of xtm-docker, `.env` gets fresh secrets for every password, key and token, and a copy goes to the team's secret store ([step 3](/deploy/install/docker-compose/)). `OPENCTI_ADMIN_EMAIL`, `OPENAEV_ADMIN_EMAIL` and `XTM_ONE_ADMIN_EMAIL` all read `admin@example.com`. Each platform's public URL is built from its `*_EXTERNAL_SCHEME`, `*_HOST` and `*_PORT`, here `https`, its host name and `443`. `docker-compose.override.yml` publishes OpenCTI on `127.0.0.1:8080`, OpenAEV on `127.0.0.1:8081`, XTM One on `127.0.0.1:8090` and OpenCRQ on `127.0.0.1:8082` for the proxy, keeps Elasticsearch and Redis on the host itself, and pins the versions: OpenCTI `7.261127.0`, OpenAEV `3.261118.0`, XTM One `1.261119.1`, OpenCRQ `0.261123.0`.
 
 ### Make XTM One usable
 

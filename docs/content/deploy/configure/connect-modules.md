@@ -168,9 +168,7 @@ OpenCTI reads one setting: `XTM__OPENAEV_URL`, the public URL of OpenAEV. The Op
 
 xtm-docker also sets `XTM__OPENAEV_API_URL=http://openaev:8080` and `XTM__OPENAEV_TOKEN=${OPENAEV_ADMIN_TOKEN}` on `opencti`. OpenCTI reads neither: it makes no call to OpenAEV, so no certificate setting applies to this link. The coverage data comes from OpenAEV, through the connector of the other tab.
 
-`xtm:opengrc_url` (`XTM__OPENGRC_URL`) is the URL of OpenCRQ, under its former name, OpenGRC. OpenCTI passes it to the interface, but no screen uses it yet. A later release renames it after OpenCRQ, still reads this name as a deprecated fallback, and adds OpenCRQ to the product switcher. xtm-docker sets both names to the public URL of OpenCRQ: `XTM__OPENGRC_URL`, the one OpenCTI 7.261119.0 reads, and `XTM__OPENCRQ_URL`, the one later releases read first.
-
-xtm-docker also sets `APP__GRAPHQL__PLAYGROUND__FORCE_DISABLED_INTROSPECTION=false` on `opencti`. OpenAEV sends a GraphQL introspection query before it registers its coverage connector, and OpenCTI refuses introspection by default since 7.261109.0: without this setting, the connector of the other tab does not register. See [Query OpenCTI with GraphQL](/develop/apis/graphql/).
+xtm-docker also sets `APP__GRAPHQL__PLAYGROUND__FORCE_DISABLED_INTROSPECTION=false` on `opencti`. OpenAEV sends a GraphQL `__type` query before it registers its coverage connector. OpenCTI 7.261109.0 to 7.261119.0 refuse that query by default: without this setting, the connector of the other tab does not register. From 7.261127.0, OpenCTI answers it by default. With `APP__GRAPHQL__SECURE_BY_DEFAULT=true`, OpenCTI refuses it again, and OpenAEV then needs both `APP__GRAPHQL__PLAYGROUND__ENABLED=true` and this setting. See [Query OpenCTI with GraphQL](/develop/apis/graphql/).
 :::
 ::::
 
@@ -209,6 +207,16 @@ curl -s "http://localhost:$OPENCTI_PORT/graphql" \
   -d '{"query":"{ streamCollections { edges { node { name stream_live } } } }"}'
 ```
 The list holds `OpenCRQ threat feed`, with `stream_live` set to `true`. In OpenCRQ, the tenant's **Settings** > **Security** > **Service accounts** lists `OpenCTI (deployment)` and `OpenAEV (deployment)`.
+:::
+
+:::only{opencti=">=7.261127"}
+In the other direction, OpenCTI reads one setting: `xtm:opencrq_url` (`XTM__OPENCRQ_URL`), the public URL of OpenCRQ. The OpenCRQ entry of the product switcher in the OpenCTI interface opens it, and shows **Platform connected** while it is set. Unset, the entry shows **Get OpenCRQ now** and opens the OpenCRQ page of the Filigran website. OpenCTI makes no call to OpenCRQ: the link is in the interface only.
+
+When `XTM__OPENCRQ_URL` is empty, OpenCTI reads `xtm:opengrc_url` (`XTM__OPENGRC_URL`) instead: the same URL under the former name of OpenCRQ, OpenGRC, now deprecated. xtm-docker sets both to the public URL of OpenCRQ, for the OpenCTI releases up to 7.261119.0, which read only the former name.
+:::
+
+:::only{opencti="<7.261127"}
+In the other direction, OpenCTI reads `xtm:opengrc_url` (`XTM__OPENGRC_URL`), the URL of OpenCRQ under its former name, OpenGRC. OpenCTI passes it to the interface, but no screen of this version uses it, and it makes no call to OpenCRQ. xtm-docker sets it to the public URL of OpenCRQ, and also sets `XTM__OPENCRQ_URL`, which this version does not read.
 :::
 
 ## Give XTM Composer its tokens

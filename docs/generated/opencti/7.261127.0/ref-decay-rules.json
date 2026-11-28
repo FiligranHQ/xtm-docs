@@ -1,8 +1,8 @@
 {
   "name": "decay-rules",
-  "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/modules/decayRule/decayRule-domain.ts)",
-  "intro": "The 4 built-in decay rules OpenCTI 7.261119.0 creates on first start. All are active, and none can be changed or deleted. To decay some indicators differently, create a rule with a higher order and activate it, as [Decay rules](/opencti/configure/decay/) explains.",
+  "version": "7.261127.0",
+  "source": "OpenCTI-Platform/opencti@1341db4 (opencti-platform/opencti-graphql/src/modules/decayRule/decayRule-domain.ts)",
+  "intro": "The 4 built-in decay rules OpenCTI 7.261127.0 creates on first start. All are active, and none can be changed or deleted. To decay some indicators differently, create a rule with a higher order and activate it, as [Decay rules](/opencti/configure/decay/) explains.",
   "sections": [
     {
       "title": "Built-in decay rules",

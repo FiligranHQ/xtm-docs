@@ -105,6 +105,18 @@ The console prints `Starting XTM composer`, then `Successfully loaded RSA privat
 
 To see more, set `manager.logger.level` to `trace`, and `manager.debug.show_env_vars` to `true` to print the environment variables at start (`show_sensitive_env_vars` also prints the secrets). Run with `RUST_BACKTRACE=1` to get the backtrace of a panic. Log files go to `logs/` next to the binary, `target/debug/logs/` for `cargo run`.
 
+### Change the RSA key
+
+XTM Composer sends its public key to OpenCTI each time it registers, at start. OpenCTI gives each connector it deploys an API token in its `OPENCTI_TOKEN` variable, encrypted with that key. It keeps the encrypted token in Redis for `app:composer_token_expiration` seconds, seven days by default, renewed at each read.
+
+:::only{opencti=">=7.261127"}
+Each connector has its own token, held by the user the connector runs as and named `Composer managed token (connector: <connector id>)`. When you generate a new key and restart XTM Composer, OpenCTI revokes the token of each connector and issues a new one, encrypted with the new key. The token is part of the configuration hash, so XTM Composer then refreshes the container of every connector. Deleting a connector, or making it run as another user, revokes its token.
+:::
+
+:::only{opencti="<7.261127"}
+The connectors that run as one user share its token, named `Composer managed token`, and OpenCTI keeps serving the token it encrypted with the previous key. After you generate a new key, revoke the `Composer managed token` of each connector user in OpenCTI: OpenCTI then issues a new token, encrypted with the new key.
+:::
+
 ## Test it
 
 :::steps

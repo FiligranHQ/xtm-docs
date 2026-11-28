@@ -105,6 +105,10 @@ In :menu[Data > Ingestion > TAXII Feeds], the feed shows as running with its las
 
 A run that receives nothing is normal when the collection has no new object. If every fetch fails, check the API root URL first: a discovery or collections URL returns an error.
 
+::::only{opencti=">=7.261127"}
+A TAXII server on your internal network, such as one on a private IP address, works by default: your platform logs a warning, once for that host. When your platform engineer blocks internal destinations (`outbound_requests:block_internal_destinations`), the feed reaches such a server only if its host is in `outbound_requests:allow_list`. Otherwise each fetch fails, and **Logs** show `Feed fetch failed` with an error that starts with `TAXII feed:` and names the host. See [Internal destinations](/opencti/use/ingest/feed-options/#internal-destinations).
+::::
+
 To limit the number of objects requested per poll on a large collection, an administrator sets `ingestion_manager:taxii_feed:limit_per_request`: see [Tune feeds and streams](/opencti/use/ingest/feed-options/).
 
 ## What's next

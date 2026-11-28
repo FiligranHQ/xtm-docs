@@ -1,8 +1,8 @@
 {
   "name": "graphql-schema",
-  "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/config/schema/opencti.graphql and 78 module schemas in opencti-platform/opencti-graphql/src)",
-  "intro": "The public GraphQL API of OpenCTI 7.261119.0: its 453 queries, 516 mutations (and the 292 mutations of the objects they return), 28 subscriptions and the input types the mutations take, each with the access it requires: a capability, any authenticated user, or none for a public one. How to call the API, authenticate and explore the schema is in [GraphQL API](/develop/apis/graphql/); the capabilities are explained in [Roles and capabilities](/opencti/administer/roles/).",
+  "version": "7.261127.0",
+  "source": "OpenCTI-Platform/opencti@1341db4 (opencti-platform/opencti-graphql/config/schema/opencti.graphql and 79 module schemas in opencti-platform/opencti-graphql/src)",
+  "intro": "The public GraphQL API of OpenCTI 7.261127.0: its 456 queries, 516 mutations (and the 295 mutations of the objects they return), 28 subscriptions and the input types the mutations take, each with the access it requires: a capability, any authenticated user, or none for a public one. How to call the API, authenticate and explore the schema is in [GraphQL API](/develop/apis/graphql/); the capabilities are explained in [Roles and capabilities](/opencti/administer/roles/).",
   "filter": "Filter queries, mutations, types and capabilities",
   "sections": [
     {
@@ -2809,7 +2809,7 @@
           "key": "Query.schemaAttributes",
           "cells": [
             "`schemaAttributes`",
-            "",
+            "`entityType: String`",
             "`[AttributesMap]`",
             "Requires `KNOWLEDGE`."
           ]
@@ -2937,6 +2937,15 @@
             "`smtpConfiguration`",
             "",
             "`SmtpConfiguration`",
+            "Requires `SETTINGS_SETACCESSES`."
+          ]
+        },
+        {
+          "key": "Query.smtpConfigurationDefaults",
+          "cells": [
+            "`smtpConfigurationDefaults`",
+            "",
+            "`SmtpConfigurationDefaults!`",
             "Requires `SETTINGS_SETACCESSES`."
           ]
         },
@@ -4091,6 +4100,24 @@
             "`WorkspaceConnection`",
             "Requires one of `EXPLORE`, `SETTINGS_SETACCESSES`, `INVESTIGATION`."
           ]
+        },
+        {
+          "key": "Query.xtmConnections",
+          "cells": [
+            "`xtmConnections`",
+            "",
+            "`[XtmConnection!]!`",
+            "Any authenticated user. Behind the feature flag `XTM_COUNTERPARTS` (returns an empty value while it is off)."
+          ]
+        },
+        {
+          "key": "Query.xtmCounterpartsOf",
+          "cells": [
+            "`xtmCounterpartsOf`",
+            "`ids: [String!]!`",
+            "`[XtmCounterpartResult!]!`",
+            "Requires `KNOWLEDGE`. Behind the feature flag `XTM_COUNTERPARTS` (returns an empty value while it is off)."
+          ]
         }
       ]
     },
@@ -4864,7 +4891,7 @@
           "key": "Mutation.configPresetPartialImport",
           "cells": [
             "`configPresetPartialImport`",
-            "`file: Upload!`, `type: ID!`, `items: [ID!]!`, `item_modes: [ConfigPresetItemModeInput!]`",
+            "`file: Upload!`, `type: ID!`, `items: [ID!]!`, `item_modes: [ConfigPresetItemModeInput!]`, `credentials: [ConfigPresetItemCredentialsInput!]`, `service_accounts: [ConfigPresetItemServiceAccountInput!]`, `scope: String`",
             "`ConfigPresetPartialImportOutput!`",
             "Requires `BYPASS`. Behind the feature flag `CONFIG_PRESET`."
           ]
@@ -4873,7 +4900,7 @@
           "key": "Mutation.configPresetPartialImportPreview",
           "cells": [
             "`configPresetPartialImportPreview`",
-            "`file: Upload!`, `type: ID!`",
+            "`file: Upload!`, `type: ID!`, `scope: String`",
             "`ConfigPresetPartialImportPreview!`",
             "Requires `BYPASS`. Behind the feature flag `CONFIG_PRESET`."
           ]
@@ -5892,6 +5919,16 @@
           "cells": [
             "`importPush`",
             "`file: Upload!`, `fileMarkings: [String]`, `version: DateTime`, `noTriggerImport: Boolean`, `embedded: Boolean`",
+            "`File`",
+            "Requires `KNOWLEDGE_KNUPLOAD`."
+          ]
+        },
+        {
+          "key": "Mutation.externalReferenceEdit.importPushRef",
+          "depth": 1,
+          "cells": [
+            "`importPushRef`",
+            "`fileRef: FileRefInput!`",
             "`File`",
             "Requires `KNOWLEDGE_KNUPLOAD`."
           ]
@@ -9830,6 +9867,16 @@
           ]
         },
         {
+          "key": "Mutation.stixCyberObservableEdit.importPushRef",
+          "depth": 1,
+          "cells": [
+            "`importPushRef`",
+            "`fileRef: FileRefInput!`",
+            "`File`",
+            "Requires `KNOWLEDGE_KNUPLOAD`."
+          ]
+        },
+        {
           "key": "Mutation.stixCyberObservableEdit.promote",
           "depth": 1,
           "cells": [
@@ -10001,6 +10048,16 @@
           "cells": [
             "`importPush`",
             "`file: Upload!`, `fileMarkings: [String]`, `version: DateTime`, `noTriggerImport: Boolean`, `fromTemplate: Boolean`, `embedded: Boolean`, `fintelTemplateId: String`",
+            "`File`",
+            "Requires `KNOWLEDGE_KNUPLOAD`."
+          ]
+        },
+        {
+          "key": "Mutation.stixDomainObjectEdit.importPushRef",
+          "depth": 1,
+          "cells": [
+            "`importPushRef`",
+            "`fileRef: FileRefInput!`",
             "`File`",
             "Requires `KNOWLEDGE_KNUPLOAD`."
           ]
@@ -12092,7 +12149,7 @@
           "cells": [
             "`ConfigPresetItemCredentialsInput`",
             "`type: ID!`, `key: ID!`, `values: [ConfigPresetCredentialInput!]!`",
-            "`configPresetImport`"
+            "`configPresetImport`, `configPresetPartialImport`"
           ]
         },
         {
@@ -12108,7 +12165,7 @@
           "cells": [
             "`ConfigPresetItemServiceAccountInput`",
             "`type: ID!`, `key: ID!`, `user_id: ID!`",
-            "`configPresetImport`"
+            "`configPresetImport`, `configPresetPartialImport`"
           ]
         },
         {
@@ -12429,6 +12486,14 @@
             "`FeedbackAddInput`",
             "`stix_id: StixId`, `x_opencti_stix_ids: [StixId]`, `name: String!`, `description: String`, `content: String`, `content_mapping: String`, `confidence: Int`, `revoked: Boolean`, `lang: String`, `objects: [String]`, `createdBy: String`, `objectMarking: [String]`, `objectAssignee: [String]`, `objectOrganization: [String]`, `objectLabel: [String]`, `externalReferences: [String]`, `created: DateTime`, `modified: DateTime`, `x_opencti_workflow_id: String`, `x_opencti_modified_at: DateTime`, `file: Upload`, `fileMarkings: [String]`, `files: [Upload]`, `filesMarkings: [[String]]`, `noTriggerImport: [Boolean]`, `embedded: [Boolean]`, `clientMutationId: String`, `update: Boolean`, `rating: Int`, `upsertOperations: [EditInput!]`, `customFieldValues: [CustomFieldValueAddInput!]`",
             "`feedbackAdd`"
+          ]
+        },
+        {
+          "key": "input.FileRefInput",
+          "cells": [
+            "`FileRefInput`",
+            "`sync_id: ID!`, `storage_key: String!`, `name: String!`, `mime_type: String`, `version: DateTime`, `file_markings: [String]`, `no_trigger_import: Boolean`, `embedded: Boolean`",
+            "`externalReferenceEdit.importPushRef`, `stixCyberObservableEdit.importPushRef`, `stixDomainObjectEdit.importPushRef`"
           ]
         },
         {
@@ -12771,7 +12836,7 @@
           "key": "input.LocalAuthConfigInput",
           "cells": [
             "`LocalAuthConfigInput`",
-            "`enabled: Boolean!`, `password_policy_min_length: Int`, `password_policy_max_length: Int`, `password_policy_min_symbols: Int`, `password_policy_min_numbers: Int`, `password_policy_min_words: Int`, `password_policy_min_lowercase: Int`, `password_policy_min_uppercase: Int`, `password_policy_validity_days: Int`, `password_policy_history_count: Int`, `local_auth_lockout_enabled: Boolean`, `local_auth_lockout_max_attempts: Int`, `local_auth_lockout_admin_max_attempts: Int`, `local_auth_lockout_final_action: LocalAuthLockoutFinalAction`, `local_auth_lockout_window: Int`, `local_auth_lockout_duration: Int`",
+            "`enabled: Boolean!`, `password_policy_min_length: Int`, `password_policy_max_length: Int`, `password_policy_min_symbols: Int`, `password_policy_min_numbers: Int`, `password_policy_min_words: Int`, `password_policy_min_lowercase: Int`, `password_policy_min_uppercase: Int`, `password_policy_validity_days: Int`, `password_policy_history_count: Int`, `local_auth_lockout_enabled: Boolean`, `local_auth_lockout_max_attempts: Int`, `local_auth_lockout_admin_max_attempts: Int`, `local_auth_lockout_final_action: LocalAuthLockoutFinalAction`, `local_auth_lockout_window: Int`, `local_auth_lockout_duration: Int`, `api_basic_auth_enabled: Boolean`",
             "`settingsEdit.updateLocalAuth`"
           ]
         },
@@ -13203,7 +13268,7 @@
           "key": "input.SmtpConfigurationAddInput",
           "cells": [
             "`SmtpConfigurationAddInput`",
-            "`smtp_enabled: Boolean`, `use_db_config: Boolean`, `sender_email_address: String`, `hostname: String`, `port: Int`, `use_ssl: Boolean`, `reject_unauthorized: Boolean`, `auth_type: SmtpAuthType`, `username: String`, `password: String`, `oauth_user: String`, `oauth_client_id: String`, `oauth_client_secret: String`, `oauth_issuer: String`, `oauth_access_token: String`, `oauth_refresh_token: String`, `oauth_refresh_token_expires_at: DateTime`",
+            "`smtp_enabled: Boolean`, `use_db_config: Boolean`, `sender_email_address: String`, `hostname: String`, `port: Int`, `use_ssl: Boolean`, `reject_unauthorized: Boolean`, `require_tls: Boolean`, `auth_type: SmtpAuthType`, `username: String`, `password: String`, `oauth_user: String`, `oauth_client_id: String`, `oauth_client_secret: String`, `oauth_issuer: String`, `oauth_access_token: String`, `oauth_refresh_token: String`, `oauth_refresh_token_expires_at: DateTime`",
             "`smtpConfigurationEdit`"
           ]
         },
@@ -13211,7 +13276,7 @@
           "key": "input.SoftwareAddInput",
           "cells": [
             "`SoftwareAddInput`",
-            "`name: String`, `cpe: String`, `swid: String`, `languages: [String]`, `vendor: String`, `version: String`, `x_opencti_product: String`, `file: Upload`, `fileMarkings: [String]`, `files: [Upload]`, `filesMarkings: [[String]]`, `noTriggerImport: [Boolean]`, `embedded: [Boolean]`, `upsertOperations: [EditInput!]`",
+            "`name: String`, `cpe: String`, `swid: String`, `languages: [String]`, `vendor: String`, `version: String`, `x_opencti_product: String`, `x_opencti_purl: String`, `file: Upload`, `fileMarkings: [String]`, `files: [Upload]`, `filesMarkings: [[String]]`, `noTriggerImport: [Boolean]`, `embedded: [Boolean]`, `upsertOperations: [EditInput!]`",
             "`stixCyberObservableAdd`"
           ]
         },
@@ -13563,7 +13628,7 @@
           "key": "input.VocabularyAddInput",
           "cells": [
             "`VocabularyAddInput`",
-            "`stix_id: StixId`, `x_opencti_stix_ids: [StixId]`, `name: String!`, `description: String`, `category: VocabularyCategory!`, `order: Int`, `color: String`, `created: DateTime`, `modified: DateTime`, `aliases: [String!]`, `update: Boolean`",
+            "`stix_id: StixId`, `x_opencti_stix_ids: [StixId]`, `name: String!`, `description: String`, `category: VocabularyCategory!`, `order: Int`, `color: String`, `parent_name: String`, `created: DateTime`, `modified: DateTime`, `aliases: [String!]`, `update: Boolean`",
             "`vocabularyAdd`"
           ]
         },

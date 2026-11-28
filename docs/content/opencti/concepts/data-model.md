@@ -102,6 +102,10 @@ Each type adds its own attributes to the common ones: author, markings, labels, 
 A System, such as a hotel chain's booking platform, also describes the asset it is: **System category** and **System subcategory**, **Internet facing**, **Criticality**, **Environment**, **Platform** and **Asset owner**. All but **Asset owner**, a free text, take their values from vocabularies, and the values of **Criticality** and **Internet facing** are fixed. These fields follow the asset taxonomy of OpenAEV, so a System maps to an OpenAEV or XTM One asset. You can filter on each of them.
 :::
 
+:::only{opencti=">=7.261127"}
+A System can also be a code asset your teams build and ship: the **Source code** category, with the subcategories **Code repository**, **CI/CD pipeline**, **Package registry**, **Software package** and **Other code asset**. A Software observable carries a **PURL**, the package URL that identifies the package in its ecosystem, such as `pkg:npm/lodash@4.17.21`. You can filter on it, and a STIX export writes it as `purl` in the OpenCTI extension of the observable.
+:::
+
 - The [data model reference](/reference/opencti/data-model/) gives, for each type of your version, the attributes it adds, which ones are required and the inherited attributes of each family.
 - :menu[Settings > Customization > Entity types] lets administrators make attributes mandatory or give them default values. See [Entity types](/opencti/configure/entities/).
 - The [GraphQL schema reference](/reference/opencti/graphql-schema/) documents every type and attribute of the API, for scripts and integrations.

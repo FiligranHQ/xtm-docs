@@ -75,6 +75,16 @@ An administrator of several organizations who clicks **Create User** in :menu[Se
 An administrator of several organizations who clicks **Create User** in :menu[Settings > Security > Users] can choose, in **Add a group**, only among the grantable groups of one of the organizations they administer.
 :::
 
+:::only{opencti=">=7.261127"}
+Without other settings capabilities, an organization administrator finds **Users**, **Organizations** and **Email templates** under :menu[Settings > Security]. They can read the email templates, to send one to a user of their organization, but creating or changing a template needs **Manage credentials**.
+
+Deleting a user also removes them from the administrators of every organization they administered, whoever deletes them, an organization administrator included.
+:::
+
+:::only{opencti="<7.261127"}
+Without other settings capabilities, an organization administrator finds **Users** and **Organizations** under :menu[Settings > Security].
+:::
+
 :::example[Let a member hotel manage its own analysts]
 Example CERT owns the platform and serves several hotel chains. Ana Duval leads the CTI team of Grand Meridian Hotels and should onboard the hotel's analysts herself.
 

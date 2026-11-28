@@ -1,8 +1,8 @@
 {
   "name": "errors",
-  "version": "7.261119.0",
-  "source": "OpenCTI-Platform/opencti@7df98f9 (opencti-platform/opencti-graphql/src/config/errors.ts and every call of its constructors)",
-  "intro": "The 974 error messages OpenCTI 7.261119.0 can answer to a user or an API client, by the area of the code that raises them. The GraphQL answer carries the message, the error type in `extensions.code` and the data attached in `extensions.data`; `{name}` marks a part computed at run time. Listed: the 22 error types `ACCESS_REQUIRED`, `ALREADY_DELETED_ERROR`, `AUTH_FAILURE`, `AUTH_REQUIRED`, `BAD_USER_INPUT_ERROR`, `DATABASE_ERROR`, `DRAFT_LOCKED`, `FORBIDDEN_ACCESS`, `FUNCTIONAL_ERROR`, `LOCK_ERROR`, `LTS_REQUIRED_ACTIVATION`, `MISSING_REFERENCE_ERROR`, `OTP_REQUIRED`, `OTP_REQUIRED_ACTIVATION`, `PASSWORD_CHANGE_REQUIRED`, `PASSWORD_CHANGE_THROTTLED`, `PASSWORD_RESET_EXPIRED`, `PASSWORD_REUSED`, `RESOURCE_NOT_FOUND`, `UNSUPPORTED_ERROR`, `VALIDATION_ERROR`, `WORK_NOT_ALIVE`. Left out: the server failures the code classes as technical with a status 500 (`ComplexSearchError`, `ConfigurationError`, `DatabaseError`, `FilesystemError`, `UnknownError`), the code of startup, migrations, background managers and inference rules (a few of their messages also answer the API, such as applying a rule or running a playbook on an entity), messages held entirely in a variable and developer guards (*unexpected*, *not implemented*, schema registration). Read the platform logs as [Troubleshooting](/deploy/operate/troubleshoot/) explains.",
+  "version": "7.261127.0",
+  "source": "OpenCTI-Platform/opencti@1341db4 (opencti-platform/opencti-graphql/src/config/errors.ts and every call of its constructors)",
+  "intro": "The 995 error messages OpenCTI 7.261127.0 can answer to a user or an API client, by the area of the code that raises them. The GraphQL answer carries the message, the error type in `extensions.code` and the data attached in `extensions.data`; `{name}` marks a part computed at run time. Listed: the 22 error types `ACCESS_REQUIRED`, `ALREADY_DELETED_ERROR`, `AUTH_FAILURE`, `AUTH_REQUIRED`, `BAD_USER_INPUT_ERROR`, `DATABASE_ERROR`, `DRAFT_LOCKED`, `FORBIDDEN_ACCESS`, `FUNCTIONAL_ERROR`, `LOCK_ERROR`, `LTS_REQUIRED_ACTIVATION`, `MISSING_REFERENCE_ERROR`, `OTP_REQUIRED`, `OTP_REQUIRED_ACTIVATION`, `PASSWORD_CHANGE_REQUIRED`, `PASSWORD_CHANGE_THROTTLED`, `PASSWORD_RESET_EXPIRED`, `PASSWORD_REUSED`, `RESOURCE_NOT_FOUND`, `UNSUPPORTED_ERROR`, `VALIDATION_ERROR`, `WORK_NOT_ALIVE`. Left out: the server failures the code classes as technical with a status 500 (`ComplexSearchError`, `ConfigurationError`, `DatabaseError`, `FilesystemError`, `UnknownError`), the code of startup, migrations, background managers and inference rules (a few of their messages also answer the API, such as applying a rule or running a playbook on an entity), messages held entirely in a variable and developer guards (*unexpected*, *not implemented*, schema registration). Read the platform logs as [Troubleshooting](/deploy/operate/troubleshoot/) explains.",
   "filter": "Filter messages, error types and functions",
   "sections": [
     {
@@ -135,7 +135,7 @@
           "cells": [
             "Bad login or password",
             "`AUTH_FAILURE`",
-            "`reject` (domain/local-auth-lockout), `verifyMfa` (modules/auth/auth-domain), `login` (modules/user/user-domain) and 3 more",
+            "`reject` (domain/local-auth-lockout), `createApp` (http/httpPlatform), `verifyMfa` (modules/auth/auth-domain) and 4 more",
             ""
           ]
         },
@@ -225,7 +225,7 @@
           "cells": [
             "Execution timeout, too many concurrent call on the same entities",
             "`LOCK_ERROR`",
-            "`loadDraftElement` (database/engine), `createRelationRaw` (database/middleware), `draftInternalDeleteElement` (database/middleware) and 15 more",
+            "`loadDraftElement` (database/engine), `createRelationRaw` (database/middleware), `draftInternalDeleteElement` (database/middleware) and 17 more",
             "`inputIds`, `participantIds`"
           ]
         },
@@ -333,7 +333,7 @@
           "cells": [
             "WIDGET_EXPORT_NOT_FOUND",
             "`FUNCTIONAL_ERROR`",
-            "`exportCustomViewWidget` (modules/customView/customView-domain), `generateWidgetExportConfiguration` (modules/workspace/workspace-domain)",
+            "`exportCustomViewWidget` (modules/customView/customView-domain), `generateWidgetExportConfiguration` (modules/workspace/workspace-export)",
             "`customView`, `widget`, `workspace`"
           ]
         },
@@ -1375,15 +1375,6 @@
           ]
         },
         {
-          "key": "UNSUPPORTED_ERROR|Staged sync file not found",
-          "cells": [
-            "Staged sync file not found",
-            "`UNSUPPORTED_ERROR`",
-            "`resolveConsumedStagedFile` (database/file-storage)",
-            ""
-          ]
-        },
-        {
           "key": "FUNCTIONAL_ERROR|The relationship is not allowed",
           "cells": [
             "The relationship is not allowed",
@@ -1860,6 +1851,15 @@
             "`FUNCTIONAL_ERROR`",
             "`checkWorkflowActionsValidity` (domain/backgroundTask-common)",
             ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Cannot copy referenced sync file",
+          "cells": [
+            "Cannot copy referenced sync file",
+            "`FUNCTIONAL_ERROR`",
+            "`copyImportedSyncFile` (domain/stixCoreObject)",
+            "`syncId`"
           ]
         },
         {
@@ -2628,6 +2628,15 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|The API Basic authentication can only be changed with the local authentication settings",
+          "cells": [
+            "The API Basic authentication can only be changed with the local authentication settings",
+            "`FUNCTIONAL_ERROR`",
+            "`settingsEditField` (domain/settings)",
+            ""
+          ]
+        },
+        {
           "key": "FORBIDDEN_ACCESS|The default dashboard of an organization is reserved to the administrators",
           "cells": [
             "The default dashboard of an organization is reserved to the administrators",
@@ -2769,6 +2778,15 @@
             "`UNSUPPORTED_ERROR`",
             "`patchElementWithRefRelationships` (domain/stixObjectOrStixRelationship)",
             "`relationship_type`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Unknown entity type",
+          "cells": [
+            "Unknown entity type",
+            "`FUNCTIONAL_ERROR`",
+            "`getSchemaAttributes` (domain/attribute)",
+            "`entityType`"
           ]
         },
         {
@@ -3274,10 +3292,10 @@
           ]
         },
         {
-          "key": "UNSUPPORTED_ERROR|Invalid URL format",
+          "key": "FUNCTIONAL_ERROR|Invalid URL format",
           "cells": [
             "Invalid URL format",
-            "`UNSUPPORTED_ERROR`",
+            "`FUNCTIONAL_ERROR`",
             "`handleCatalogLogoViewRequest` (modules/catalog/catalog-http)",
             ""
           ]
@@ -3573,6 +3591,15 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|This configuration type cannot be scoped",
+          "cells": [
+            "This configuration type cannot be scoped",
+            "`FUNCTIONAL_ERROR`",
+            "`scopeBundle` (modules/configPreset/import/configPreset-partial-import)",
+            "`type`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Unknown configuration preset item",
           "cells": [
             "Unknown configuration preset item",
@@ -3746,6 +3773,33 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Managed connector not found",
+          "cells": [
+            "Managed connector not found",
+            "`FUNCTIONAL_ERROR`",
+            "`computeConnectorTokenConfiguration` (modules/connector/connector-domain)",
+            "`connectorId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Managed connector user changed",
+          "cells": [
+            "Managed connector user changed",
+            "`FUNCTIONAL_ERROR`",
+            "`computeConnectorTokenConfiguration` (modules/connector/connector-domain)",
+            "`connectorId`, `currentUserId`, `userId`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Managed connector user not found",
+          "cells": [
+            "Managed connector user not found",
+            "`FUNCTIONAL_ERROR`",
+            "`computeConnectorTokenConfiguration` (modules/connector/connector-domain)",
+            "`connectorId`, `userId`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Missing manager contract snapshot",
           "cells": [
             "Missing manager contract snapshot",
@@ -3779,6 +3833,15 @@
             "`FUNCTIONAL_ERROR`",
             "`migrateConnectorToManaged` (modules/connector/connector-migration)",
             ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|No connector manager registered",
+          "cells": [
+            "No connector manager registered",
+            "`FUNCTIONAL_ERROR`",
+            "`computeConnectorTokenConfiguration` (modules/connector/connector-domain)",
+            "`connectorId`"
           ]
         },
         {
@@ -4277,6 +4340,15 @@
             "Missing target entity type for custom view import",
             "`FUNCTIONAL_ERROR`",
             "`importCustomViewConfiguration` (modules/customView/customView-domain)",
+            ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The filters of the manifest are malformed",
+          "cells": [
+            "The filters of the manifest are malformed",
+            "`FUNCTIONAL_ERROR`",
+            "`prepareManifest` (modules/customView/customView-import)",
             ""
           ]
         }
@@ -5486,6 +5558,15 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|The schema of a form intake is not a valid JSON",
+          "cells": [
+            "The schema of a form intake is not a valid JSON",
+            "`FUNCTIONAL_ERROR`",
+            "`exportFormIntake` (modules/form/form-export)",
+            "`id`, `name`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|The uploads of the form are too large",
           "cells": [
             "The uploads of the form are too large",
@@ -5748,6 +5829,15 @@
             "`FUNCTIONAL_ERROR`",
             "`jsonFeedAddInputFromImport` (modules/ingestion/ingestion-json-domain), `taxiiCollectionAddInputFromImport` (modules/ingestion/ingestion-taxii-collection-domain)",
             "`reason`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|The URI of the feed points to another server once its variables are replaced",
+          "cells": [
+            "The URI of the feed points to another server once its variables are replaced",
+            "`FUNCTIONAL_ERROR`",
+            "`executeJsonQuery` (modules/ingestion/ingestion-json-domain)",
+            "`uri`"
           ]
         },
         {
@@ -6237,6 +6327,24 @@
       ],
       "rows": [
         {
+          "key": "FUNCTIONAL_ERROR|Entity does not exist",
+          "cells": [
+            "Entity does not exist",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPlaybookNotRunnableError` (modules/playbook/playbook-domain)",
+            "`entityId`, `id`, `reason`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Entity does not match the entry filter of playbook {name}",
+          "cells": [
+            "Entity does not match the entry filter of playbook {name}",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPlaybookNotRunnableError` (modules/playbook/playbook-domain)",
+            "`entityId`, `filters`, `id`, `reason`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Invalid import type, must be playbook",
           "cells": [
             "Invalid import type, must be playbook",
@@ -6264,6 +6372,33 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|Playbook {name} cannot be run manually (its entry component is {value})",
+          "cells": [
+            "Playbook {name} cannot be run manually (its entry component is {value})",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPlaybookNotRunnableError` (modules/playbook/playbook-domain)",
+            "`component`, `entityId`, `id`, `reason`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook {name} cannot be run manually: Enterprise Edition is not enabled",
+          "cells": [
+            "Playbook {name} cannot be run manually: Enterprise Edition is not enabled",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPlaybookNotRunnableError` (modules/playbook/playbook-domain)",
+            "`entityId`, `id`, `reason`"
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook {name} does not allow manual enrollment",
+          "cells": [
+            "Playbook {name} does not allow manual enrollment",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPlaybookNotRunnableError` (modules/playbook/playbook-domain)",
+            "`entityId`, `id`, `reason`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Playbook base element no longer accessible",
           "cells": [
             "Playbook base element no longer accessible",
@@ -6273,12 +6408,21 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Playbook definition is not valid JSON",
+          "key": "FUNCTIONAL_ERROR|Playbook definition must hold nodes and links arrays of objects",
           "cells": [
-            "Playbook definition is not valid JSON",
+            "Playbook definition must hold nodes and links arrays of objects",
             "`FUNCTIONAL_ERROR`",
-            "`assertPlaybookDefinitionStringIsValid` (modules/playbook/playbook-domain)",
+            "`parsePlaybookDefinition` (modules/playbook/playbook-utils)",
             ""
+          ]
+        },
+        {
+          "key": "FUNCTIONAL_ERROR|Playbook does not exist",
+          "cells": [
+            "Playbook does not exist",
+            "`FUNCTIONAL_ERROR`",
+            "`buildPlaybookNotRunnableError` (modules/playbook/playbook-domain)",
+            "`entityId`, `id`, `reason`"
           ]
         },
         {
@@ -6408,30 +6552,12 @@
           ]
         },
         {
-          "key": "FUNCTIONAL_ERROR|Playbook node configuration is not valid JSON",
-          "cells": [
-            "Playbook node configuration is not valid JSON",
-            "`FUNCTIONAL_ERROR`",
-            "`assertPlaybookDefinitionStringIsValid` (modules/playbook/playbook-domain), `assertNodeConfigurationIsComplete` (modules/playbook/playbook-utils)",
-            "`component_id`, `node_id`"
-          ]
-        },
-        {
           "key": "FUNCTIONAL_ERROR|Playbook node configuration misses required fields",
           "cells": [
             "Playbook node configuration misses required fields",
             "`FUNCTIONAL_ERROR`",
             "`assertNodeConfigurationIsComplete` (modules/playbook/playbook-utils)",
             "`component_id`, `missing`"
-          ]
-        },
-        {
-          "key": "FUNCTIONAL_ERROR|Playbook node filters are not valid JSON",
-          "cells": [
-            "Playbook node filters are not valid JSON",
-            "`FUNCTIONAL_ERROR`",
-            "`assertPlaybookDefinitionStringIsValid` (modules/playbook/playbook-domain)",
-            "`component_id`, `field`, `node_id`"
           ]
         },
         {
@@ -6792,6 +6918,15 @@
       ],
       "rows": [
         {
+          "key": "FUNCTIONAL_ERROR|Cannot update a field managed by the retention manager",
+          "cells": [
+            "Cannot update a field managed by the retention manager",
+            "`FUNCTIONAL_ERROR`",
+            "`retentionRuleEditField` (modules/retentionRules/retentionRules-domain)",
+            "`keys`"
+          ]
+        },
+        {
           "key": "UNSUPPORTED_ERROR|Retention rule must have valid filters",
           "cells": [
             "Retention rule must have valid filters",
@@ -7074,6 +7209,15 @@
           ]
         },
         {
+          "key": "FORBIDDEN_ACCESS|API Basic authentication is disabled on this platform, use an API token",
+          "cells": [
+            "API Basic authentication is disabled on this platform, use an API token",
+            "`FORBIDDEN_ACCESS`",
+            "`checkApiBasicAuthAllowed` (modules/user/user-basic-auth)",
+            ""
+          ]
+        },
+        {
           "key": "UNSUPPORTED_ERROR|Bookmarks widgets only support filter with key=entity_type.",
           "cells": [
             "Bookmarks widgets only support filter with key=entity_type.",
@@ -7299,6 +7443,15 @@
           ]
         },
         {
+          "key": "FUNCTIONAL_ERROR|The configured admin password (app:admin:password) does not match this password policy, and app:admin:secure_by_default is enabled: the platform would refuse to start. Change the admin password first",
+          "cells": [
+            "The configured admin password (app:admin:password) does not match this password policy, and app:admin:secure_by_default is enabled: the platform would refuse to start. Change the admin password first",
+            "`FUNCTIONAL_ERROR`",
+            "`checkPolicyAcceptsAdminPassword` (modules/user/user-domain)",
+            "`failed_rules`"
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|The current password you have provided is not valid",
           "cells": [
             "The current password you have provided is not valid",
@@ -7312,7 +7465,7 @@
           "cells": [
             "The email you have provided is not valid",
             "`FUNCTIONAL_ERROR`",
-            "`addUser` (modules/user/user-domain), `validateAndNormalizeEmailInput` (modules/user/user-domain)",
+            "`createUser` (modules/user/user-domain), `validateAndNormalizeEmailInput` (modules/user/user-domain)",
             ""
           ]
         },
@@ -7407,6 +7560,15 @@
           ]
         },
         {
+          "key": "FORBIDDEN_ACCESS|Two-factor authentication applies to this account: API Basic authentication cannot ask for it, use an API token",
+          "cells": [
+            "Two-factor authentication applies to this account: API Basic authentication cannot ask for it, use an API token",
+            "`FORBIDDEN_ACCESS`",
+            "`checkApiBasicAuthTwoFactor` (modules/user/user-basic-auth)",
+            ""
+          ]
+        },
+        {
           "key": "FUNCTIONAL_ERROR|Unable to generate a password matching the password policy: {errors}",
           "cells": [
             "Unable to generate a password matching the password policy: {errors}",
@@ -7438,7 +7600,7 @@
           "cells": [
             "User already exists",
             "`FUNCTIONAL_ERROR`",
-            "`addUser` (modules/user/user-domain), `validateAndNormalizeEmailInput` (modules/user/user-domain)",
+            "`createUser` (modules/user/user-domain), `validateAndNormalizeEmailInput` (modules/user/user-domain)",
             "`user_id`"
           ]
         },
@@ -7447,7 +7609,7 @@
           "cells": [
             "User cannot be created without email",
             "`FUNCTIONAL_ERROR`",
-            "`addUser` (modules/user/user-domain)",
+            "`createUser` (modules/user/user-domain)",
             ""
           ]
         },
@@ -8697,7 +8859,7 @@
           "cells": [
             "WORKSPACE_EXPORT_INCOMPATIBLE_TYPE",
             "`FUNCTIONAL_ERROR`",
-            "`generateWidgetExportConfiguration` (modules/workspace/workspace-domain), `generateWorkspaceExportConfiguration` (modules/workspace/workspace-domain)",
+            "`generateWidgetExportConfiguration` (modules/workspace/workspace-export), `generateWorkspaceExportConfiguration` (modules/workspace/workspace-export)",
             "`type`"
           ]
         },
@@ -9349,6 +9511,15 @@
           ]
         },
         {
+          "key": "BAD_USER_INPUT_ERROR|Unknown sub-filter key on a nested filter key",
+          "cells": [
+            "Unknown sub-filter key on a nested filter key",
+            "`BAD_USER_INPUT_ERROR`",
+            "`adaptFilterToGenericNestedFilterKey` (utils/filtering/filtering-completeSpecialFilterKeys)",
+            "`key`, `subFilterKey`"
+          ]
+        },
+        {
           "key": "UNSUPPORTED_ERROR|Unrecognized filter format; expecting FilterGroup",
           "cells": [
             "Unrecognized filter format; expecting FilterGroup",
@@ -9385,12 +9556,30 @@
           ]
         },
         {
+          "key": "BAD_USER_INPUT_ERROR|Unsupported operator on a nested filter key",
+          "cells": [
+            "Unsupported operator on a nested filter key",
+            "`BAD_USER_INPUT_ERROR`",
+            "`adaptFilterToGenericNestedFilterKey` (utils/filtering/filtering-completeSpecialFilterKeys)",
+            "`key`, `operator`"
+          ]
+        },
+        {
           "key": "UNSUPPORTED_ERROR|Unsupported signature encoding version",
           "cells": [
             "Unsupported signature encoding version",
             "`UNSUPPORTED_ERROR`",
             "`verify` (utils/platformCrypto)",
             "`expectedVersion`, `receivedVersion`"
+          ]
+        },
+        {
+          "key": "BAD_USER_INPUT_ERROR|Unsupported sub-filter operator on a nested filter key",
+          "cells": [
+            "Unsupported sub-filter operator on a nested filter key",
+            "`BAD_USER_INPUT_ERROR`",
+            "`adaptFilterToGenericNestedFilterKey` (utils/filtering/filtering-completeSpecialFilterKeys)",
+            "`key`, `operator`, `subFilterKey`"
           ]
         },
         {

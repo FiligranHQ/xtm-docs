@@ -301,6 +301,10 @@ OpenCTI workers and connectors get the host, port, user and `RABBITMQ__USE_SSL` 
 | `MQ_USE_SSL_CERT`, `MQ_USE_SSL_KEY` | | For a broker that asks for a client certificate: the certificate and its private key, as paths or PEM content |
 | `MQ_USE_SSL_PASSPHRASE` | | The passphrase of that private key, when it is encrypted |
 
+:::only{opencti=">=7.261119"}
+When `MQ_USE_SSL_REJECT_UNAUTHORIZED` is unset, its default is the value of `OPENCTI_TLS_REJECT_UNAUTHORIZED`, `false` when that one is unset too: `OPENCTI_TLS_REJECT_UNAUTHORIZED=true` on a worker or connector also turns this check on.
+:::
+
 What to watch on RabbitMQ: the messages ready in the `push_` queues, which grow when the workers cannot keep up (add workers, see [Scale](/deploy/operate/scale/#add-workers)), the disk and memory alarms of the broker, which block every publisher, and its free disk space.
 
 All settings of OpenCTI: [RabbitMQ](/reference/opencti/configuration/#rabbitmq).
@@ -315,7 +319,7 @@ OpenCTI, OpenAEV, OpenCRQ and XTM One store their files in S3. The bundled `mini
 | --- | --- | --- |
 | `MINIO__ENDPOINT`, `MINIO__PORT` | `localhost`, `9000` | Your S3 service, such as `s3.eu-west-3.amazonaws.com` and `443` for AWS. With `s3.amazonaws.com`, the AWS SDK chooses the endpoint of the region itself |
 | `MINIO__USE_SSL` | `false` | `true` for HTTPS |
-| `MINIO__ACCESS_KEY`, `MINIO__SECRET_KEY` | | The credentials of OpenCTI |
+| `MINIO__ACCESS_KEY`, `MINIO__SECRET_KEY` | `ChangeMe`, `ChangeMe` | The credentials of OpenCTI. xtm-docker sets `MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD` of `.env` |
 | `MINIO__SESSION_TOKEN` | | The session token of temporary credentials from AWS Security Token Service (STS), with the access and secret keys. OpenCTI reads it at start and does not renew it: restart it with new credentials before they expire, or prefer `MINIO__USE_AWS_ROLE` |
 | `MINIO__BUCKET_NAME` | `opencti-bucket` | The bucket of OpenCTI |
 | `MINIO__BUCKET_REGION` | `us-east-1` | The region of the bucket on AWS |
@@ -366,7 +370,7 @@ OpenAEV, OpenCRQ and XTM One share the `pgsql` instance, each with its own datab
 
 - OpenAEV connects with the superuser of the instance, `POSTGRES_USER` and `POSTGRES_PASSWORD` of `.env`.
 - XTM One connects with its own role, `XTM_ONE_POSTGRES_USER` and `XTM_ONE_POSTGRES_PASSWORD`, which must differ from the superuser. At every start, the `xtm-one-db-init` service creates that role, the `xtm_one` database and the `vector` extension (pgvector) that XTM One needs. Only a superuser can create that extension.
-- OpenCRQ connects with its own role too, `OPENCRQ_POSTGRES_USER` (`opencrq`) and `OPENCRQ_POSTGRES_PASSWORD`, which must differ from the superuser and from the XTM One role. At every start, the `opencrq-db-init` service creates that role, sets its password from `.env`, and creates the `opencrq` database it owns. The only extension OpenCRQ creates, `uuid-ossp`, is a trusted one: the role needs no superuser right. Set `OPENCRQ_POSTGRES_USER` once: changed after the first start, the `opencrq` database and its tables stay owned by the old role.
+- OpenCRQ connects with its own role too, `OPENCRQ_POSTGRES_USER` (`opencrq`) and `OPENCRQ_POSTGRES_PASSWORD`, which must differ from the superuser and from the XTM One role. At every start, the `opencrq-db-init` service creates that role, sets its password from `.env`, and creates the `opencrq` database it owns. The only extension OpenCRQ creates, `unaccent`, is a trusted one: the role needs no superuser right. Set `OPENCRQ_POSTGRES_USER` once: changed after the first start, the `opencrq` database and its tables stay owned by the old role.
 - `infra/postgresql.yml` starts PostgreSQL with `max_connections=200`: OpenAEV opens up to 20 connections, XTM One up to 35 per process, over its web processes and its worker, and OpenCRQ about 50 at peak. Keep at least this value on your own server.
 - It also gives the container 1 GB of shared memory (`shm_size`): parallel queries pass their rows through it, and the aggregates of OpenCRQ fail past the 64 MB a container gets by default.
 
@@ -474,6 +478,10 @@ services:
 
 `SMTP__USE_SSL=true` opens the connection in TLS, as on port 465. On port 587, keep `SMTP_SSL_ENABLE=false`.
 
+:::only{opencti=">=7.261127"}
+On port 587, also add `SMTP__REQUIRE_TLS=true`: OpenCTI then sends its user name and password only after the server has upgraded the connection with STARTTLS, and sends nothing to a server that does not. Unset, `SMTP__REQUIRE_TLS` follows `TLS__REJECT_UNAUTHORIZED`, `false` by default, and OpenCTI warns at each start that `SMTP credentials may be sent over an unencrypted connection`, a warning that the `error` log level of xtm-docker hides. See [Check certificates on every outgoing connection of OpenCTI](/deploy/configure/certificates/#check-certificates-on-every-outgoing-connection-of-opencti).
+:::
+
 :::only{opencti=">=7.260811"}
 For a provider that no longer accepts passwords, such as Microsoft 365, OpenCTI authenticates with OAuth2: set `SMTP__AUTH_TYPE=oauth2`, then `SMTP__OAUTH_USER` (the mailbox), `SMTP__OAUTH_CLIENT_ID`, `SMTP__OAUTH_CLIENT_SECRET`, `SMTP__OAUTH_ISSUER` (the OpenID Connect issuer URL of the provider) and `SMTP__OAUTH_REFRESH_TOKEN`, instead of `SMTP__USERNAME` and `SMTP__PASSWORD`. OpenCTI exchanges the refresh token for an access token before it sends. Request the refresh token with the scope that allows sending through SMTP: for Microsoft 365, `https://outlook.office.com/SMTP.Send` with `offline_access`; for Google Workspace, `https://mail.google.com/`.
 
@@ -536,6 +544,40 @@ With the API key, add `ELASTICSEARCH__ENGINE_SELECTOR=elk` to the `environment` 
 After `docker compose up -d opencti`, the query of [Check that it works](#check-that-it-works) lists `Search engine`, `RabbitMQ` and `Redis` with the versions of Example CERT's services. The bundled services still start for the other modules: give each one the `disabled` profile once no module uses it, as [Who uses which service](#who-uses-which-service) shows.
 ::::
 
+::::only{opencti=">=7.261127"}
+
+## Replace the default credentials of the services
+
+At each start, OpenCTI checks that the credentials it uses for its shared services are not left at a known default value, ignoring case:
+
+| Service | Settings checked | Reported when |
+| --- | --- | --- |
+| RabbitMQ | `RABBITMQ__USERNAME`, `RABBITMQ__PASSWORD` | The password is `guest` or `changeme`, as with the defaults of OpenCTI |
+| S3 storage | `MINIO__ACCESS_KEY`, `MINIO__SECRET_KEY` | The secret key is `minioadmin` or `changeme`, as with the defaults of OpenCTI. Not checked with `MINIO__USE_AWS_ROLE=true` |
+| Elasticsearch or OpenSearch | `ELASTICSEARCH__USERNAME`, `ELASTICSEARCH__PASSWORD`, or a user and password written in `ELASTICSEARCH__URL` | The password is `changeme` or `admin`. Not checked with `OPENSEARCH__REGION`, nor with `ELASTICSEARCH__API_KEY` unless `ELASTICSEARCH__ENGINE_CLIENT=opensearch` |
+| Redis | `REDIS__USERNAME`, `REDIS__PASSWORD`, and in sentinel mode `REDIS__SENTINEL_USERNAME`, `REDIS__SENTINEL_PASSWORD` | The password is `changeme` |
+
+Only a default password counts: the user name is reported with it when it is a default too, such as `guest`, `elastic` or `default`. A service without a password, as the bundled Redis and Elasticsearch, is not reported. When a [CyberArk provider](#read-the-service-credentials-of-opencti-from-cyberark) fills a password, OpenCTI does not check the configured one; it checks the S3 keys once the provider has returned them. The same check covers the admin password of OpenCTI and its health check key: see [Sign in the first time and keep an emergency account](/deploy/configure/first-access/).
+
+`APP__CREDENTIALS__SECURE_BY_DEFAULT` decides what OpenCTI does with a default value:
+
+- `false`, the default: OpenCTI starts, and logs the warning `Default credentials are configured, change them` with the names of the settings, never their values. A later version refuses to start with them. xtm-docker sets `APP__APP_LOGS__LOGS_LEVEL=error`, which hides this warning.
+- `true`: OpenCTI logs `Default credentials check failed` and stops.
+
+In xtm-docker, OpenCTI takes the RabbitMQ and S3 credentials from `RABBITMQ_DEFAULT_USER`, `RABBITMQ_DEFAULT_PASS`, `MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD` of `.env`. The `init` command of [Install with Docker Compose](/deploy/install/docker-compose/) draws random values for them; `.env.sample` holds `changeme` for both passwords and for the RabbitMQ user. Once `.env` holds your own values, turn the check on, so that a default value can no longer reach production:
+
+```yaml
+services:
+  opencti:
+    environment:
+      - APP__CREDENTIALS__SECURE_BY_DEFAULT=true
+```
+
+:::verify
+`docker compose up -d opencti`, then `docker compose ps` shows `opencti` healthy. When it restarts in a loop instead, `docker compose logs opencti` names the settings to change, after `Default credentials check failed`.
+:::
+::::
+
 ## Read the service credentials of OpenCTI from CyberArk
 
 When your policy forbids passwords in `.env`, OpenCTI can fetch the credentials of Elasticsearch, Redis and S3 storage from the CyberArk Central Credential Provider when it connects to them. Each service has its prefix: `ELASTICSEARCH`, `REDIS`, or `MINIO` for S3 storage.
@@ -592,7 +634,7 @@ services:
 
 Each service carries its own provider settings, client certificate included: Redis reads none of the Elasticsearch ones. `ELASTICSEARCH__CREDENTIALS_PROVIDER__HTTPS_CERT__CA` and its Redis counterpart stay unset: `NODE_EXTRA_CA_CERTS` makes OpenCTI trust the internal CA that signed the provider's certificate. Redis takes its field targets from the variable without `CYBERARK`, which serves any provider; both forms work.
 
-At startup, the logs of `opencti` show `Remote credentials successfully fetched` once for the source `elasticsearch` and once for the source `redis`. When the provider cannot be reached, they show `Remote credentials data fail to fetch, fallback`. Then, as when the provider returns no secret, OpenCTI connects with the `ELASTICSEARCH__USERNAME` and `ELASTICSEARCH__PASSWORD` of its configuration, if any. The secrets of single sign-on providers use the same mechanism under another prefix: see [Authentication](/opencti/administer/authentications/).
+OpenCTI logs `Remote credentials successfully fetched` at the `info` level, once for the source `elasticsearch`, and for the source `redis` at each Redis connection it opens. xtm-docker sets the `error` level: set `APP__APP_LOGS__LOGS_LEVEL=info` to see these lines. When the provider cannot be reached, the logs show `Remote credentials data fail to fetch, fallback`, at the `error` level. Then, as when the provider returns no secret, OpenCTI connects with the `ELASTICSEARCH__USERNAME` and `ELASTICSEARCH__PASSWORD` of its configuration, if any. The secrets of single sign-on providers use the same mechanism under another prefix: see [Authentication](/opencti/administer/authentications/).
 
 ## Check that it works
 

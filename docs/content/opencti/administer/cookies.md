@@ -34,6 +34,31 @@ Both are needed for the platform to work; neither is used for anything but the s
 
 With several platform nodes, keep the shared session manager so every node sees the same sessions: see [Scale](/deploy/operate/scale/).
 
+::::only{opencti=">=7.261127"}
+## End sessions after a fixed time
+
+`app:session_timeout` ends a session after a time without activity, so a user who keeps working stays logged in for days. `app:session_max_lifetime` adds a limit counted from the login, which activity never pushes back:
+
+- Its value is in milliseconds. `0`, the default, sets no limit, and so does an unset or empty value. The highest value is `2147483647`, a little under 25 days.
+- A value that is not a whole number in that range stops the platform at start, with `Invalid app:session_max_lifetime`.
+- When a session reaches the limit, its next request ends it: the interface returns to the login page, and the user logs in again for a new session. A live stream opened with the session closes before its next batch of events. Requests with an API token have no session, and the limit does not apply to them.
+- With the Enterprise Edition, the activity log records the end as `logout (maximum session lifetime reached)`.
+
+:menu[Settings > Security > Authentications] shows the value, read-only, as **Maximum session lifetime** in the **Sessions** card: see [Manage login providers in the UI](/opencti/administer/authentications/#set-platform-wide-login-policies).
+
+:::example[Make hotel staff log in again every working day]
+Grand Meridian Hotels wants each analyst to log in again at least every 12 hours, and to be logged out after 30 minutes away from the screen:
+
+```bash
+APP__SESSION_TIMEOUT=1800000
+APP__SESSION_MAX_LIFETIME=43200000
+APP__HTTPS_CERT__COOKIE_SECURE=true
+```
+
+An analyst who logs in at 8:00 and works all day is sent back to the login page at the first request after 20:00. **Maximum session lifetime** shows **12 hours**.
+:::
+::::
+
 ## Settings
 
 | Key | Default | Effect |
@@ -45,7 +70,11 @@ With several platform nodes, keep the shared session manager so every node sees 
 | `app:https_cert:cookie_secure` | `false` | When `true`, the browser sends the cookies over HTTPS only |
 | `app:https_cert:cookie_samesite` | `lax` | The `SameSite` attribute of the session cookie: `strict`, `lax` or `none`. Browsers accept `none` only with `cookie_secure` set to `true`, and `strict` can break the return from a single sign-on provider |
 
-The four `app:session_*` keys are in [Basic parameters](/reference/opencti/configuration/#basic-parameters), the two `app:https_cert:*` keys in [Network and security](/reference/opencti/configuration/#network-and-security).
+:::only{opencti=">=7.261127"}
+`app:session_max_lifetime`, `0` (no limit) by default, sets how long, in milliseconds, a session lasts after its login, whatever the activity: see [End sessions after a fixed time](#end-sessions-after-a-fixed-time).
+:::
+
+The `app:session_*` keys are in [Basic parameters](/reference/opencti/configuration/#basic-parameters), the two `app:https_cert:*` keys in [Network and security](/reference/opencti/configuration/#network-and-security).
 
 :::warning
 Set `APP__HTTPS_CERT__COOKIE_SECURE=true` whenever users reach OpenCTI over HTTPS, including behind a reverse proxy that terminates TLS. Otherwise the session cookie can travel over an unencrypted connection.
@@ -68,6 +97,10 @@ APP__HTTPS_CERT__COOKIE_SAMESITE=lax
 | An administrator kills the session | Same as expiry, from :menu[Settings > Security > Sessions] or the user page. See [End sessions](/opencti/administer/users/#end-sessions) |
 | The browser closes, with `app:session_cookie` set to `true` | The browser deletes the cookie |
 | 10 seconds pass after an error | The browser deletes `opencti_flash` |
+
+:::only{opencti=">=7.261127"}
+A session that reaches `app:session_max_lifetime` ends like an expired one, at its next request, even when the user is active.
+:::
 
 ## What's next
 

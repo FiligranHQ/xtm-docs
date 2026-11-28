@@ -73,6 +73,14 @@ Every enrichment the connector writes then shows IP reputation connector as its 
 
 The **API Tokens** section of the account lists its tokens with when each was **Last Used**, or **Never used**, and when it **Expires At**. A token that expires within seven days shows **Expires soon**: generate the next one, update the connector, then revoke the old one. **Revoke** a token when the connector that used it is removed, or when it leaked. An expired token is refused, and the connector stops writing.
 
+:::only{opencti=">=7.261127"}
+A connector that XTM Composer deploys gets a token of its own on the account it runs as, named `Composer managed token (connector: <connector id>)`. OpenCTI issues it and hands it to the connector as `OPENCTI_TOKEN`: you never copy it. If you revoke it, OpenCTI issues a new one the next time XTM Composer reads the connector's configuration. Deleting the connector, or making it run as another account, revokes its token. See [XTM Composer architecture](/deploy/integrations/architecture/).
+:::
+
+:::only{opencti="<7.261127"}
+The connectors that XTM Composer deploys under one account share a token named `Composer managed token`, which OpenCTI issues and hands to them as `OPENCTI_TOKEN`: you never copy it.
+:::
+
 ## Accounts created for you
 
 Some integrations create their account themselves, for example a TAXII, RSS or CSV feed set to create its user on the fly. These accounts join only the group set as **Default group for Service accounts** in [Set platform security policies](/opencti/administer/policies/), the Connectors group on a new platform, not the groups granted by default. If no group is set there, OpenCTI refuses to create them.

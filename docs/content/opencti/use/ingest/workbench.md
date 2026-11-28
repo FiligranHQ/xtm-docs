@@ -20,6 +20,10 @@ An analyst workbench holds the objects found in one imported file, outside the k
 - Your role has the **Create / Update knowledge** capability, to validate a workbench or convert it to a draft.
 - An import connector that reads STIX bundles, such as `ImportFileStix`, runs on the platform: validating a workbench sends its content to that connector.
 
+:::only{opencti=">=7.261127"}
+The **Analyst workbenches** tab and the workbenches in it open only for a role with **Import knowledge**. Without it, the tab is hidden, and :menu[Data > Import] opens the first tab your role can open, such as **Drafts**. A link to a workbench sends you there too.
+:::
+
 ## Workbenches and drafts
 
 | | Analyst workbench | Draft workspace |

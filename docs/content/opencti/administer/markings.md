@@ -27,6 +27,22 @@ For each type, an object keeps only the markings of the highest order. When mark
 
 The Structured Threat Information Expression (STIX) 2.1 standard does not allow versioning marking definitions, so a change of definition never changes the markings of existing objects indirectly.
 
+:::only{opencti=">=7.261127"}
+## Recognize the TLP markings of other STIX producers
+
+Many STIX producers mark their objects with the TLP 2.0 marking definitions that OASIS publishes, whose ids differ from those of the built-in TLP markings. OpenCTI keeps each OASIS id as another STIX id of the matching built-in marking, so a reference to it resolves to that marking, and the groups allowed it see the object:
+
+| Built-in marking | OASIS TLP 2.0 id |
+| --- | --- |
+| TLP:CLEAR | `marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487` |
+| TLP:GREEN | `marking-definition--bab4a63c-aed9-4cf5-a766-dfca5abac2bb` |
+| TLP:AMBER | `marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421` |
+| TLP:AMBER+STRICT | `marking-definition--939a9414-2ddd-4d32-a0cd-375ea402b003` |
+| TLP:RED | `marking-definition--e828b379-4e03-4974-9ac4-e53a884c97c1` |
+
+A new platform gives these ids to its TLP markings when it creates them; an upgraded platform adds them at its first start on this version. When another marking definition of the platform already holds one of these ids, for example a copy imported earlier from such a bundle, it keeps that id, and the migration logs a warning that names it.
+:::
+
 ## Create a marking
 
 :::steps
@@ -100,7 +116,7 @@ Markings restrict by clearance. To restrict one object to named users, groups or
 
 The **Restricted entities** list, in :menu[Data > Restriction > Restricted entities], shows every entity restricted this way, with its **Restriction Date**, so that you can review them. Select entities and click **Remove access restriction** in the toolbar: they become visible again to everyone their markings, and their organizations, allow. Only users with **Bypass all capabilities** see :menu[Data > Restriction].
 
-The screen needs an Enterprise Edition license: without it, it shows the **Access restriction** Enterprise Edition notice instead of the list. Markings themselves work without the license. See [Editions and licensing](/start/editions/).
+The **Restricted entities** list needs an Enterprise Edition license: without it, :menu[Data > Restriction] shows only **Restricted drafts**. Markings themselves work without the license. See [Editions and licensing](/start/editions/).
 
 ::screenshot{id=opencti-markings-restricted-entities alt="The Restricted entities list of the Data Restriction screen, with the incident response case Front-desk account compromise at Grand Meridian Hotels, its author, its markings and its Restriction Date."}
 

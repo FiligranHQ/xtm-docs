@@ -42,6 +42,21 @@ Two new settings add a prefix to the metric names, as Prometheus builds them: `<
 | `CONNECTOR_METRICS_NAMESPACE` | `connector.metrics_namespace` |
 | `CONNECTOR_METRICS_SUBSYSTEM` | `connector.metrics_subsystem` |
 
+:::only{opencti=">=7.261127"}
+## Identity of the connector
+
+client-python also exposes an `identity_info` metric, with the same prefix as the others. Its value is always `1`: its labels carry the connector's identity. The other metrics of the connector carry no label of their own: join them with `identity_info` on the labels Prometheus adds to the target, such as `instance`. Join it on the connector ID with the metrics that name the connector, such as those of its RabbitMQ queues.
+
+| Label | Value |
+| --- | --- |
+| `id` | The connector ID, `CONNECTOR_ID` |
+| `name` | The connector name, `CONNECTOR_NAME` |
+| `type` | The connector type, `CONNECTOR_TYPE`, such as `EXTERNAL_IMPORT` |
+| `scope` | The connector scope, `CONNECTOR_SCOPE`, its values separated by commas |
+
+It adds a metric and renames none: your dashboards keep working.
+:::
+
 ## What to do
 
 Replace the old names in your dashboards, alerts and recording rules. If you set a namespace or a subsystem, add the prefix they create.

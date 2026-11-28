@@ -17,7 +17,15 @@ This page explains which events the OpenCTI activity records and when, and the s
 
 ## The events screen
 
-Open :menu[Settings > Activity > Events]. You need an Enterprise Edition license and the **Access security activity** capability. Dashboard widgets with the **Activity & history** perspective open the same list, at `/dashboard/audits`.
+Open :menu[Settings > Activity > Events]. You need an Enterprise Edition license and the **Access security activity** capability.
+
+:::only{opencti=">=7.261127"}
+The former address of this list, `/dashboard/audits`, now opens :menu[Settings > Activity > Events], with the filters, search and sorting written in the address, so that bookmarks keep working.
+:::
+
+:::only{opencti="<7.261127"}
+The same list also answers at `/dashboard/audits`.
+:::
 
 ::screenshot{id=opencti-activity-events alt="The Events screen of Settings, Activity: a list of events with their timestamp, user, event type, event scope and message, under the filter bar and the Include knowledge checkbox."}
 
@@ -44,11 +52,26 @@ Open :menu[Settings > Activity > Events]. You need an Enterprise Edition license
 | `command` | `import`, `export` | Extended | A user asks for a file import or an export |
 | `command` | `send` | Audit | An administrator sends an [email template](/opencti/configure/email-templates/) to a user |
 
+:::only{opencti=">=7.261127"}
+Two more events are audit events, recorded for everyone:
+
+- `authentication` · `logout` with the message `logout (maximum session lifetime reached)`: a session reached the [maximum session lifetime](/opencti/administer/cookies/#end-sessions-after-a-fixed-time) set by `app:session_max_lifetime`, and the platform ended it. An ended session gives one event, even when several of its requests reach the limit at the same time.
+- `ingestion_health`, with the scopes `critical`, `degraded` and `recovered`: the [health of a connector, a feed or a synchronizer](/opencti/use/ingest/connectors/) changed and stayed so. The message names the source and what fails, and the status is error, except for `recovered`.
+:::
+
 ## Audit events
 
 Audit events are recorded for every user as soon as Enterprise Edition is on, and written to the audit log. They cover the creation, update and deletion of the objects that shape the platform: users, groups, roles and authentication settings; platform parameters; customization such as entity settings, custom fields, rules, retention and decay rules; connectors and ingestion feeds; data sharing feeds and streams; and collaboration objects shared with others. For example, creating a user writes ``creates user `jdoe@example.com` `` in the audit log.
 
 The [audit event reference](/reference/opencti/audit-events/) lists each of these events by area, with its type, scope and message, so that you can pick the right ones for a filter or a trigger.
+
+:::only{opencti=">=7.261127"}
+Each run of a [retention policy](/opencti/configure/retention/) that deletes something, or fails to, writes one audit event of type `mutation` and scope `delete`, by the retention manager, such as ``Retention rule `Old activity` deleted `120` `activity` entries, `2` failed``. Its data gives the counts: per entity type for knowledge, with the identifiers of the deleted entries for history and activity.
+:::
+
+:::only{opencti=">=7.260811 <7.261127"}
+Each run of a [retention policy](/opencti/configure/retention/) that deletes history or activity entries writes one audit event of type `mutation` and scope `delete`, by the retention manager, such as ``Retention rule `Old activity` deleted `120` `activity` entries``, with the identifiers of the deleted entries.
+:::
 
 ## Extended events
 
@@ -79,7 +102,13 @@ Each audit event is also written as one JSON line to the audit log file and to t
 }
 ```
 
-`level` is `error` for failed actions. `auth` carries the user and the origin of the request, including the HTTP headers listed in `app:audit_logs:trace_request_headers`. Values of the fields listed in `app:app_logs:logs_redacted_inputs`, such as passwords, are replaced by `*** Redacted ***`. To choose where the log goes, see [Choose what activity is recorded](/opencti/configure/activity/configuration/#send-activity-to-your-log-pipeline).
+`level` is `error` for failed actions. `auth` carries the user and the origin of the request, including the HTTP headers listed in `app:audit_logs:trace_request_headers`. Values of the fields listed in `app:app_logs:logs_redacted_inputs`, such as passwords, are replaced by `*** Redacted ***`.
+
+:::only{opencti=">=7.261127"}
+A text value of `resource.data` longer than 8,192 characters, such as a long description, is cut there and ends with `[truncated]`, so that the event can still be stored. The **Raw data** of the events screen shows the same cut value. The message itself is not cut.
+:::
+
+To choose where the log goes, see [Choose what activity is recorded](/opencti/configure/activity/configuration/#send-activity-to-your-log-pipeline).
 
 ## Watch the platform from your SIEM
 

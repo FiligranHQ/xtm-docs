@@ -160,6 +160,8 @@ A playbook appears in the **Enroll in playbook** list of an entity when it is ru
 
 To offer a playbook on any entity, leave the entry point filters empty and put a **Match knowledge** step right after it.
 
+When the run button of a playbook, **Trigger this playbook now**, shows an error instead of **Playbook successfully completed.**, the playbook or the entity usually changed after the list opened. [When a playbook does not run on an entity](/opencti/use/automate/playbooks/monitor/#when-a-playbook-does-not-run-on-an-entity) explains the message and what to do.
+
 ## Duplicate, export and import
 
 **Duplicate** a playbook to start a variant: in the list, open the row menu and choose **Duplicate**. The same action exists inside an open playbook.
@@ -179,6 +181,10 @@ To offer a playbook on any entity, leave the entry point filters empty and put a
 In a step that shares or unshares with organizations, an organization this platform does not have, or no longer has, shows in **Target organizations** with `- deleted` after its name, and the field says **A selected item no longer exists: remove it and pick another**. Replace it before you start the playbook.
 
 OpenCTI refuses to import or duplicate a playbook with more than one entry point, a step without a parent, or a step whose settings or filters are not valid JSON. Fix the playbook where it comes from, then export it again.
+:::
+
+:::only{opencti=">=7.261127"}
+It also refuses a file without the list of steps and links of the playbook, and a step saved without any settings.
 :::
 
 ### From the XTM Hub

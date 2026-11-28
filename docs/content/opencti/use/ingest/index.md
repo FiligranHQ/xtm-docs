@@ -90,6 +90,10 @@ Open the actions menu (⋮) of a feed to act on it. From version 7.260811, use t
 | **Export** | Downloads the configuration as a JSON file, without credentials. A CSV or JSON feed carries its mapper in the file |
 | **Delete** | Deletes the feed. The data it imported stays |
 
+:::only{opencti=">=7.261127"}
+**Stop** also interrupts a run in progress of a CSV feed, or of a JSON feed with **Sub pagination** on, before its next page. A CSV feed sends no more bundles: those it already sent are still written. A JSON feed sends nothing from that run. In both cases the state stays where it was, so the next run after **Start** fetches the same data again.
+:::
+
 ### Share feed configurations
 
 A feed exported as JSON can be imported on another platform. Credentials are not exported, so you enter them again.

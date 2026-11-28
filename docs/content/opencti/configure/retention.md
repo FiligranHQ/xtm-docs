@@ -111,7 +111,17 @@ Open the menu of a policy in the list:
 
 The list shows, for each policy, the **Last execution** and the **Remaining** count of elements still to delete. The retention manager deletes in batches, so a policy that matches many elements catches up over several runs.
 
-:::only{opencti=">=7.260811"}
+:::only{opencti=">=7.261127"}
+### Find out why a policy does not delete
+
+When a run fails to delete an element, a red error icon appears next to the **Remaining** count of the policy. Hover the icon, or reach it with the keyboard, to read the **Last error**: the identifier of the element, then the error message. The element stays in the **Remaining** count, and the policy tries it again at the next run. The next run of the policy without an error removes the icon. A paused policy does not run, so its icon stays.
+
+The platform logs give the same information at the `warn` level: one `Retention manager error` line per element that failed, then `Retention manager rule executed with errors` with the number of elements deleted and failed. Each run also logs `Retention manager executing rule` at the `info` level, with the number of elements the policy matches.
+
+Each run that deletes something, or fails to, is recorded in the [activity log](/opencti/configure/activity/events/#audit-events), whatever the scope. The message gives the policy name, the number of entries deleted and, when some failed, the number that failed. For a knowledge policy, the event also counts the deleted elements per entity type.
+:::
+
+:::only{opencti=">=7.260811 <7.261127"}
 Deletions of history and activity entries are themselves recorded in the activity log, with the number of entries deleted.
 :::
 

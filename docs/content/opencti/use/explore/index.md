@@ -163,7 +163,17 @@ Reading a report through these views, with the Velvet Harbor example, is in [Exp
 
 #### The side menu
 
-The menu on the right splits the knowledge by type of linked object, with the number of relationships in parentheses: for an intrusion set, **Attribution (1)**, **Victimology (6)**, **Malware (3)**, **Attack patterns (5)** and so on. The number counts relationships, not objects: two campaigns linked by three relationships show **Campaigns (3)**. An entry without a number has nothing yet. **All** lists every relationship in one table. **Related entities** lists the objects linked by a `related-to` relationship, the link you use when you know two objects are connected but not how.
+The menu on the right splits the knowledge by type of linked object, with the number of relationships in parentheses: for an intrusion set, **Attribution (1)**, **Victimology (6)**, **Malware (3)**, **Attack patterns (5)** and so on. The number counts relationships, not objects: two campaigns linked by three relationships show **Campaigns (3)**. An entry without a number has nothing yet.
+
+:::only{opencti=">=7.261127"}
+**Observables** counts objects instead: the distinct observables linked to the object by the relationships its list shows, so the number matches the list you open.
+:::
+
+:::only{opencti="<7.261127"}
+**Observables** counts the observables linked to the object by any type of relationship, so its number can be higher than the list you open.
+:::
+
+**All** lists every relationship in one table. **Related entities** lists the objects linked by a `related-to` relationship, the link you use when you know two objects are connected but not how.
 
 #### The knowledge overview
 
@@ -195,7 +205,13 @@ A wand icon at the end of a line marks an inferred relationship, created by a ru
 
 #### Victimology
 
-**Victimology** shows who the object targets. Three charts count the targeted sectors, regions and countries (**Victimology (sectors)**, **Victimology (regions)**, **Victimology (countries)**), and a map shows the countries. Below, the list of targets adds **Nested view**, which groups the targeted organizations and individuals under their sector. Under each sector, **Direct targeting of this sector** is the relationship to the sector itself; the other lines are its organizations and individuals. An inferred line names its rule when you hover its icon: a threat that targets a hotel chain, part of the hospitality sector, is inferred to target the sector.
+**Victimology** shows who the object targets. Three charts count the targeted sectors, regions and countries (**Victimology (sectors)**, **Victimology (regions)**, **Victimology (countries)**), and a map shows the countries.
+
+:::only{opencti=">=7.261127"}
+The map shades each country on a logarithmic scale of its number of `targets` relationships: a country targeted fifty times no longer flattens all the others into one shade.
+:::
+
+Below, the list of targets adds **Nested view**, which groups the targeted organizations and individuals under their sector. Under each sector, **Direct targeting of this sector** is the relationship to the sector itself; the other lines are its organizations and individuals. An inferred line names its rule when you hover its icon: a threat that targets a hotel chain, part of the hospitality sector, is inferred to target the sector.
 
 #### Attack patterns
 

@@ -59,6 +59,10 @@ Saltmarsh CERT asks for the report **Velvet Harbor targets hotel booking systems
 The file holds the report, its sector, countries, techniques, indicators and malware such as Velvet Loader. The intrusion set Velvet Harbor and the malware Harbor Stealer, both marked TLP:AMBER, are left out, so check that the file still makes sense before you send it.
 :::
 
+:::only{opencti=">=7.261127"}
+In a STIX 2.1 file, the Common Vulnerability Scoring System (CVSS) vectors of a vulnerability are in the OpenCTI extension as `cvss_vector_string`, `cvss_v2_vector_string` and `cvss_v4_vector_string`. The file still holds them under their former keys, `cvss_vector`, `cvss_v2_vector` and `cvss_v4_vector`, for the tools that read those.
+:::
+
 ## Export a list
 
 :::steps
@@ -111,6 +115,10 @@ In reports, groupings and cases, an Enterprise Edition platform can fill a finte
 :::
 
 An HTML document opens in the **Content** tab of the container, where you can edit it. To turn an edited HTML file into a PDF, export it again with the **HTML content files to PDF** connector and choose it in **File to export**. Both built-in connectors need the **Upload knowledge files** capability. From the **Content** tab, you can then [send the document by email](/opencti/use/share/dissemination-lists/).
+
+:::only{opencti=">=7.261127"}
+When you start a PDF export from the **Content** tab, the tab shows it loading while it waits for its connector, and opens the file once the connector has written it.
+:::
 
 :::xtm-one[Write a report with AI]
 On reports, incident response cases and requests for information, the format step also offers **Ask AI (multiple formats supported)** when AI is available on your platform. It writes a text about the container in the tone, language and number of paragraphs you choose, as HTML, Markdown, plain text or JSON, and saves it as a new file or in the main content of the container. See [XTM One in OpenCTI](/xtm-one/use/in-opencti/).

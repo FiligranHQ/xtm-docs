@@ -169,6 +169,10 @@ If the IdP is down or a mapping is wrong, nobody can log in through SSO, adminis
 
 The platform administrator is the account defined by `app:admin:email` and `app:admin:password` (see [Basic parameters](/reference/opencti/configuration/#basic-parameters)). OpenCTI resets its password to `app:admin:password` at every start. Keep local login on until you have logged in through SSO with the right groups and organizations.
 
+:::only{opencti=">=7.261127"}
+At every start, OpenCTI also checks `app:admin:password` against the password policy of the **Local** settings, unless `app:admin:externally_managed` is `true`. A password that fails it logs a warning; with `app:admin:secure_by_default` (`APP__ADMIN__SECURE_BY_DEFAULT`) set to `true`, the platform refuses to start instead, and refuses a new policy that the password does not meet. Choose an emergency password that meets your policy. See [Basic parameters](/reference/opencti/configuration/#basic-parameters).
+:::
+
 Three safety nets protect local login:
 
 - The **Local** settings do not let you turn local login off while no other provider is enabled.

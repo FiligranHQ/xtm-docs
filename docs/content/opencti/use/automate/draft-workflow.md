@@ -65,7 +65,11 @@ Open a transition to set what it requires and what it does. These settings need 
 
 **Conditions.** Add filters under **Conditions** so the transition only shows to the right users or drafts: the user, their group or their organization, or attributes of the draft such as its name. A user who can open a draft but does not match the conditions does not see the transition. For example, show `Approve` to the group of senior analysts only.
 
-**Comment.** Turn on **Enable comment** to prompt users for a comment when they trigger the transition, and **Required** to make it mandatory. The comment stays visible on the draft while it remains in the target status, for example to explain a rejection. It holds up to 1,000 characters, and the assignees and participants of the draft who can open it receive it as an alert in the platform, except the user who triggered the transition.
+**Comment.** Turn on **Enable comment** to prompt users for a comment when they trigger the transition, and **Required** to make it mandatory. The comment stays visible on the draft while it remains in the target status, for example to explain a rejection. It holds up to 1,000 characters, and the assignees and participants of the draft who can open it receive it as an alert in the platform, except the user who triggered the transition. Users whose role has the **Bypass mandatory fields** capability can confirm a transition without its required comment.
+
+:::only{opencti=">=7.261127"}
+Only the capabilities a role grants outside drafts count here: **Bypass mandatory fields** added in the **Capabilities in Draft** tab of a role does not skip a required comment, and the transition form shows the comment as mandatory to those users.
+:::
 
 **Organization sharing.** Turn on **Share with organizations** to share every entity and relationship of the draft with organizations when the transition fires. Choose the organizations, or leave the field empty to let the user pick them, optionally, at that moment. **Unshare from organizations** works the same way in reverse. Use it when the people who review the draft belong to another organization and could not otherwise see its content.
 

@@ -17,7 +17,7 @@ In this tutorial, you write the connector that imports the hospitality threat fe
 
 ## What you need
 
-- An OpenCTI 7.261030 platform, such as the [XTM stack](/start/quick-start/) at `http://localhost:8080`.
+- An OpenCTI 7.261127 platform, such as the [XTM stack](/start/quick-start/) at `http://localhost:8080`.
 - The API token of the user the connector will write as, in the `OPENCTI_TOKEN` variable of your shell. For a test, an administrator's token works; in production, give the connector its own user in the `Connectors` group ([Run an integration without XTM Composer](/deploy/integrations/manual/#create-a-token)).
 - Python 3.10 or later, and Docker for the last step.
 
@@ -49,7 +49,7 @@ Pin the libraries in `src/requirements.txt`, then install them in a virtual envi
 `src/requirements.txt`:
 
 ```text
-pycti==7.261030.1
+pycti==7.261127.0
 requests~=2.33
 ```
 
@@ -130,7 +130,7 @@ class FeedClient:
 
 - **Deterministic identifiers.** Each object gets the identifier OpenCTI would compute itself, from `pycti`'s `generate_id` functions: `IntrusionSet.generate_id(name)`, `Indicator.generate_id(pattern)`, `Report.generate_id(name, published)`. Sent twice, the same object updates the existing one instead of creating a duplicate, and the `Hospitality` sector merges with the one the platform already has.
 - **An author and a marking on every object.** `created_by_ref` points to the `Example CERT` organization, and `object_marking_refs` to TLP:GREEN. Analysts can then filter by source, and markings restrict who sees the data.
-- **A confidence on every object.** The feed rates each item; the worker caps it at the confidence level of the connector's user.
+- **A confidence on every object.** The feed rates each item; when the worker writes it, the platform caps it at the maximum confidence level of the connector's user.
 
 Two OpenCTI properties extend the STIX indicator: `x_opencti_main_observable_type`, the observable type the pattern detects, and `x_opencti_create_observables`, which makes the worker also create the observable.
 
@@ -252,7 +252,7 @@ class Converter:
 - `get_config_variable()` reads the connector's own settings the same way.
 - `helper.get_state()` and `helper.set_state()` read and save a dictionary on the platform. The connector keeps the date of the last item it imported, so a restart does not import everything again.
 - `helper.api.work.initiate_work()` opens a work, the record of one run that the **Works** tab of the connector shows; `send_stix2_bundle(bundle, work_id=...)` attaches the bundle to it; `to_processed()` closes it with a message.
-- `helper.schedule_iso()` runs `process()` at once, then every `CONNECTOR_DURATION_PERIOD`, an ISO 8601 duration. Before each run, it checks the connector's queue: when more than `CONNECTOR_QUEUE_THRESHOLD` megabytes (500) wait for the workers, it skips the run.
+- `helper.schedule_iso()` runs `process()` at once, then every `CONNECTOR_DURATION_PERIOD`, an ISO 8601 duration. Before a run, it checks the connector's queue: when more than `CONNECTOR_QUEUE_THRESHOLD` megabytes (500) wait for the workers, it skips the run. The first run of a connector that keeps running starts without this check.
 
 `src/main.py`:
 
@@ -341,7 +341,37 @@ if __name__ == "__main__":
         sys.exit(1)
 ```
 
-The connector never creates objects through the API. `send_stix2_bundle()` splits the bundle and sends it to the connector's queue, and the workers write it in the background, in the right order, with retries: a connector can send thousands of objects without waiting.
+The connector never creates objects through the API. `send_stix2_bundle()` sends the bundle to the connector's queue: split into one bundle per object over RabbitMQ, or whole through the platform API, where the worker splits it. The workers write it in the background, in the right order, with retries: a connector can send thousands of objects without waiting.
+
+:::only{opencti=">=7.261127"}
+### Report a failed run
+
+When `process()` raises, the helper catches the exception. It logs `Connector run raised an exception` with the traceback, sends the exception to the platform with its next ping, as an error of the run, and schedules the next run as usual; with `CONNECTOR_RUN_AND_TERMINATE=true`, it sends the error, then exits. In this connector, a feed that answers with an HTTP error makes `items_since()` raise before any work opens; an error while sending makes `process()` close the work in error, then raise.
+
+An error has a `code`, a `message` and a `criticity`. For an exception, the message is the name of the exception and its text, and the code and the criticity come from its `code` and `criticity` attributes. Without them, the error gets the code `other.unknown` and the criticity `50`. With Python 3.11 or later, each exception of an `ExceptionGroup` gives its own error. To name the failures of your feed, raise an exception of your own from `client.py`:
+
+```python
+class FeedUnavailable(Exception):
+    code = "hospitality_feed.unavailable"  # a non-empty string
+    criticity = 40                         # an integer
+```
+
+A run can also report errors without raising: `process()` returns a list of dictionaries with `code`, `message` and `criticity`, or calls `self.helper.connector_info.add_error(code, message, criticity)`. The helper logs and drops an error that is not valid, such as a criticity that is not an integer.
+
+An error of criticity 40 or more that `process()` returns or raises fails the run: the **Last run** date of the connector stays at the last run without such an error. An error added with `add_error()` is reported, but does not change the **Last run** date. The errors of a run replace those of the run before. The platform keeps the 20 most critical, one per code, and drops them 10 minutes after the last ping that sent them. The connector's page does not show them: read them through the API, with the **Access connectors** capability:
+
+```graphql
+query {
+  connector(id: "0e5a7f8c-2b4d-4c1e-9f3a-6d8b1c2e4f70") {
+    name
+    connector_info {
+      last_run_datetime
+      errors { code message criticity }
+    }
+  }
+}
+```
+:::
 
 ## Step 5: Run it once
 
@@ -412,7 +442,7 @@ In OpenCTI, open :menu[Integrations] and the **Hospitality threat feed** connect
 
 ::screenshot{id=opencti-ingest-connectors-works alt="The Works tab of the Hospitality threat feed connector lists a completed work with its operations completed out of the total and a button counting its errors."}
 
-The reports are in :menu[Analyses > Reports]. To check from code, list the reports published after January 13, 2026:
+The reports are in :menu[Analyses > Reports]. To check from code, list the reports published after January 13, 2026. The script also reads the URL of the platform from the environment: run `export OPENCTI_URL=http://localhost:8080` first.
 
 `verify.py`:
 
@@ -441,7 +471,7 @@ for report in reports:
 ```
 
 ```text
-2026-01-14 Velvet Harbor phishing kit mimics hotel booking confirmations | author: Example CERT | confidence: 70 | objects: 5
+2026-01-14 Velvet Harbor phishing kit mimics hotel booking confirmations | author: Example CERT | confidence: 70 | objects: 7
 2026-01-15 Velvet Harbor reuses guest Wi-Fi portal infrastructure | author: Example CERT | confidence: 60 | objects: 7
 ```
 
