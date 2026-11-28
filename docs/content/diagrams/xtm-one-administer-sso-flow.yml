@@ -1,0 +1,24 @@
+title: A single sign-on links an identity to an account, or creates one when the rules allow it
+lanes:
+  - label: Identity provider
+    tone: external
+    nodes:
+      - {id: idp, label: Identity provider, icon: KeyRound, note: "Entra ID, Okta, Keycloak..."}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: match, label: Match the identity, icon: Search, note: "SSO subject, then email"}
+      - {id: rules, label: Creation rules, icon: ListChecks, note: "On-the-fly, allowed domains"}
+      - {id: mfa, label: Second factor, icon: ShieldCheck, note: "When the person enrolled"}
+  - label: Result
+    tone: product
+    nodes:
+      - {id: session, label: Session, icon: LogIn, note: "Role and groups set"}
+      - {id: refused, label: Refused, icon: TriangleAlert, note: "Back to the sign-in page"}
+edges:
+  - {from: idp, to: match, label: email and claims}
+  - {from: match, to: mfa, label: account found}
+  - {from: match, to: rules, label: no account}
+  - {from: rules, to: mfa, label: account created}
+  - {from: rules, to: refused, label: not provisioned, style: dashed}
+  - {from: mfa, to: session, label: code accepted}

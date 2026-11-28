@@ -1,0 +1,18 @@
+title: Where to look first when OpenAEV misbehaves
+lanes:
+  - label: Symptom
+    tone: external
+    nodes:
+      - {id: access, label: Access refused, icon: LogIn, note: "Tenant, login, rights"}
+      - {id: idle, label: Nothing runs, icon: PlayCircle, note: "Injects, search, purges"}
+      - {id: slow, label: Slow or failing, icon: TriangleAlert, note: Pages and API}
+  - label: First check
+    tone: product
+    nodes:
+      - {id: membership, label: Tenant and groups, icon: Users, note: Settings > Security}
+      - {id: banner, label: Safe mode banner, icon: Info, note: openaev.run-mode}
+      - {id: logs, label: Logs and debug mode, icon: Terminal, note: docker compose logs}
+edges:
+  - {from: access, to: membership, label: check}
+  - {from: idle, to: banner, label: check}
+  - {from: slow, to: logs, label: check}

@@ -1,0 +1,23 @@
+title: A user's key reaches every route of /api/v1/panic in their scope; the emergency token reaches one route, which stops the whole platform
+lanes:
+  - label: Callers
+    tone: external
+    nodes:
+      - {id: user, label: User or script, icon: Terminal, note: "Session or fcp- API key"}
+      - {id: hook, label: Runbook or monitoring, icon: Activity, note: "xes- emergency token"}
+  - label: /api/v1/panic
+    tone: core
+    nodes:
+      - {id: session, label: Session routes, icon: Code2, note: "stop, reason, resume, status, token"}
+      - {id: emergency, label: POST /emergency, icon: KeyRound, note: No session needed}
+  - label: XTM One
+    tone: product
+    nodes:
+      - {id: self, label: Your activity, icon: Users, note: scope self}
+      - {id: platform, label: Whole platform, icon: LogoXTMOne, note: "scope platform, AI off"}
+edges:
+  - {from: user, to: session, label: Bearer fcp-}
+  - {from: hook, to: emergency, label: Bearer xes-}
+  - {from: session, to: self, label: any user}
+  - {from: session, to: platform, label: administrators}
+  - {from: emergency, to: platform, label: always}

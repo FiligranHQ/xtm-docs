@@ -1,0 +1,31 @@
+title: A scenario uses the targets and the arsenal of its tenant, each launch copies it into a simulation, and every run leaves expectations and findings
+lanes:
+  - label: Shared in the tenant
+    tone: external
+    nodes:
+      - {id: assets, label: Assets and groups, icon: Laptop, note: "Endpoints, security platforms", href: /openaev/use/targets/assets/}
+      - {id: people, label: Teams and persons, icon: Users, note: "Global, or one scenario's", href: /openaev/use/targets/people/}
+      - {id: arsenal, label: Threat Arsenal, icon: Boxes, note: Actions and their payloads, href: /openaev/use/threat-arsenal/}
+  - label: What you test
+    tone: product
+    nodes:
+      - {id: scenario, label: Scenario, icon: Workflow, note: "Injects, variables, articles", href: /openaev/concepts/scenarios-simulations/}
+  - label: Each run
+    tone: product
+    nodes:
+      - {id: simulation, label: Simulation, icon: Activity, note: Copy made at launch}
+      - {id: atomic, label: Atomic testing, icon: Crosshair, note: "One inject, no scenario"}
+  - label: What it leaves
+    tone: store
+    nodes:
+      - {id: expectations, label: Expectations, icon: ClipboardCheck, note: One per target, href: /openaev/concepts/injects-expectations/}
+      - {id: findings, label: Findings, icon: Search, note: What injects found}
+edges:
+  - {from: assets, to: scenario, label: targeted by}
+  - {from: people, to: scenario, label: targeted by}
+  - {from: arsenal, to: scenario, label: its injects run}
+  - {from: scenario, to: simulation, label: copied at launch}
+  - {from: simulation, to: expectations, label: scored by}
+  - {from: atomic, to: expectations, label: scored by}
+  - {from: simulation, to: findings, label: produces}
+  - {from: atomic, to: findings, label: produces}

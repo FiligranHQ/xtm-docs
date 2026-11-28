@@ -1,0 +1,40 @@
+# Versions the documentation describes. The engine builds the whole site once per
+# version: the latest at /, each supported LTS line under /lts/<line>/. Guides are written
+# once; :::only blocks and generated reference pages differ per version.
+# Source: OpenCTI module life cycle (LTS every 6 months, supported 1 year).
+opencti:
+  latest:
+    version: 7.261119.0
+    tag: 7.261119.0
+  lts:
+    - line: 7.260811-lts
+      version: 7.260811.0-lts.1
+      tag: 7.260811.0-lts.1
+      supported_until: 2027-09
+    - line: 7.260309-lts
+      version: 7.260309.0-lts.8
+      tag: 7.260309.0-lts.8
+      supported_until: 2027-04
+# The XTM platform stack (capture/stack/xtm.compose.yml) runs the latest OpenCTI
+# with these versions, for the screens that span modules (CTEM journeys).
+openaev:
+  latest:
+    version: 3.261118.0
+    tag: 3.261118.0
+xtm-one:
+  latest:
+    version: 1.261119.1
+    tag: 1.261119.1
+# XTM Composer runs the integrations of OpenCTI and OpenAEV, on releases of its own: the documentation
+# describes its latest one (its configuration reference, docs/generated/composer/<version>/).
+composer:
+  latest:
+    version: 3.261121.0
+    tag: 3.261121.0
+# OpenCRQ documents its latest release. Before its first one, it documented the image of a main
+# commit (tag sha-<commit>, with `commit`, that commit whole, where xtm-atlas reads the code:
+# atlas/src/sources.ts ensureSourceAt); the engine then says it is a development build.
+opencrq:
+  latest:
+    version: 0.261123.0
+    tag: 0.261123.0

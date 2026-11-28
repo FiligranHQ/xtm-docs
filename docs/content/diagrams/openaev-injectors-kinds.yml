@@ -1,0 +1,29 @@
+title: Built-in injectors run inside the platform, external ones take their injects from RabbitMQ, and the injectors of endpoint actions go through an executor
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: platform, label: Platform, icon: LogoOpenAEV, note: Schedules the injects}
+      - {id: builtin, label: Built-in injectors, icon: Puzzle, note: "Email, media pressure, implant", href: /openaev/use/injectors/built-in/}
+  - label: Queues
+    tone: store
+    nodes:
+      - {id: rabbitmq, label: RabbitMQ, icon: Layers, note: One queue per injector}
+  - label: Integrations
+    tone: external
+    nodes:
+      - {id: external, label: External injectors, icon: Crosshair, note: "Nmap, Nuclei, HTTP query"}
+      - {id: executor, label: Executors, icon: Laptop, note: "OpenAEV agent or EDR", href: /openaev/use/executors/}
+  - label: Targets
+    tone: external
+    nodes:
+      - {id: people, label: People and systems, icon: Users, note: "Players, APIs, networks"}
+      - {id: endpoints, label: Endpoints, icon: Cpu, note: Run the actions}
+edges:
+  - {from: platform, to: builtin, label: runs}
+  - {from: platform, to: rabbitmq, label: queues}
+  - {from: rabbitmq, to: external, label: consumes}
+  - {from: builtin, to: people, label: delivers}
+  - {from: external, to: people, label: delivers}
+  - {from: builtin, to: executor, label: implant jobs}
+  - {from: executor, to: endpoints, label: starts}

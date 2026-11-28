@@ -1,0 +1,27 @@
+title: OpenAEV 2.0.0 renames each OpenBAS name to OpenAEV, migrates most of them on its own, and leaves a few steps to you
+lanes:
+  - label: Before 2.0.0 (OpenBAS)
+    tone: external
+    nodes:
+      - {id: old-images, label: Docker images, icon: Boxes, note: "openbas/*"}
+      - {id: old-vars, label: Configuration, icon: FileText, note: "OPENBAS_* variables"}
+      - {id: old-bucket, label: S3 bucket, icon: Server, note: openbas}
+      - {id: old-queues, label: RabbitMQ queues, icon: Workflow, note: "Prefix openbas"}
+      - {id: old-indices, label: Search indices, icon: Layers, note: "Prefix openbas"}
+      - {id: old-agents, label: Agents as user services, icon: Laptop, note: OpenBAS agent}
+  - label: From 2.0.0 (OpenAEV)
+    tone: product
+    nodes:
+      - {id: new-images, label: Docker images, icon: LogoOpenAEV, note: "openaev/*, such as openaev/platform"}
+      - {id: new-vars, label: Configuration, icon: FileText, note: "OPENAEV_* variables"}
+      - {id: new-bucket, label: S3 bucket, icon: Server, note: "openaev, or MINIO_BUCKET=openbas"}
+      - {id: new-queues, label: RabbitMQ queues, icon: Workflow, note: "Prefix openaev"}
+      - {id: new-indices, label: Search indices, icon: Layers, note: "Prefix openaev"}
+      - {id: new-agents, label: Agents as user services, icon: Laptop, note: OpenAEV agent}
+edges:
+  - {from: old-images, to: new-images, label: pull from openaev}
+  - {from: old-vars, to: new-vars, label: migrated on its own}
+  - {from: old-bucket, to: new-bucket, label: move or keep}
+  - {from: old-queues, to: new-queues, label: finish simulations first}
+  - {from: old-indices, to: new-indices, label: delete old indices}
+  - {from: old-agents, to: new-agents, label: uninstall and reinstall}

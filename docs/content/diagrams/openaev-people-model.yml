@@ -1,0 +1,27 @@
+title: Persons join teams, teams join a scenario with their persons enabled, and the scenario's injects reach the enabled persons
+lanes:
+  - label: Sorted by
+    tone: external
+    nodes:
+      - {id: organization, label: Organization, icon: Layers, note: A company or subsidiary}
+  - label: People
+    tone: external
+    nodes:
+      - {id: persons, label: Persons, icon: Users, note: "Email, mobile, PGP key"}
+      - {id: teams, label: Teams, icon: Network, note: Persons reached together}
+  - label: Scenario
+    tone: product
+    nodes:
+      - {id: configuration, label: Configuration, icon: Wrench, note: Teams and enabled persons}
+      - {id: inject, label: Inject, icon: Crosshair, note: Targeted teams or All teams}
+  - label: Scored
+    tone: product
+    nodes:
+      - {id: expectations, label: Expectations, icon: ClipboardCheck, note: Per team and enabled person}
+edges:
+  - {from: organization, to: persons, label: sorts, style: dashed}
+  - {from: organization, to: teams, label: sorts, style: dashed}
+  - {from: persons, to: teams, label: members}
+  - {from: teams, to: configuration, label: added}
+  - {from: configuration, to: inject, label: targetable}
+  - {from: inject, to: expectations, label: creates}

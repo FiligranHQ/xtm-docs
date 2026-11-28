@@ -1,0 +1,27 @@
+title: Each phishing step starts green; the person's first move on the landing page turns the first two red and a submission all three, while the email's image and a mail gateway's hits leave them green
+lanes:
+  - label: What happens
+    tone: external
+    nodes:
+      - {id: open, label: Email image loaded, icon: MessageSquare, note: Not proof of a reader}
+      - {id: click, label: First move on page, icon: Laptop, note: "Mouse, touch, key, scroll"}
+      - {id: submit, label: Form submitted, icon: KeyRound, note: Credentials typed}
+      - {id: scanner, label: Gateway or scanner, icon: Bot, note: "Within 10 s, a scanner or automation"}
+  - label: Steps of the person
+    tone: product
+    nodes:
+      - {id: s1, label: Email not opened, icon: ClipboardCheck, note: "Red, with step 2"}
+      - {id: s2, label: Link not clicked, icon: ClipboardCheck, note: "Red, with step 1"}
+      - {id: s3, label: Credentials not submitted, icon: ClipboardCheck, note: "Red, with steps 1 and 2"}
+      - {id: ignored, label: Step stays green, icon: ShieldCheck, note: "Annotated, not scored"}
+  - label: Team
+    tone: product
+    nodes:
+      - {id: team, label: Team verdict, icon: Users, note: By its validation rule}
+edges:
+  - {from: open, to: ignored, label: annotated only, style: dashed}
+  - {from: click, to: s1, label: turns red}
+  - {from: click, to: s2, label: turns red}
+  - {from: submit, to: s3, label: turns red}
+  - {from: scanner, to: ignored, label: annotated only, style: dashed}
+  - {from: s3, to: team, label: recomputed}

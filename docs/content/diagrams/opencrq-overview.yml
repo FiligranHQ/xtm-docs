@@ -1,0 +1,31 @@
+title: What OpenCRQ reads, how it prices a risk, and what you decide with the price
+lanes:
+  - label: What it reads
+    tone: external
+    nodes:
+      - {id: opencti, label: Threats, icon: LogoOpenCTI, note: From OpenCTI}
+      - {id: openaev, label: Test results, icon: LogoOpenAEV, note: From OpenAEV}
+      - {id: estate, label: Assets and controls, icon: Layers, note: What you protect it with}
+      - {id: finance, label: Financial profile, icon: Scale, note: "Your revenue, your data"}
+  - label: OpenCRQ
+    tone: product
+    nodes:
+      - {id: run, label: Attack simulation, icon: Workflow, note: How often an attack lands}
+      - {id: losses, label: Loss model, icon: Gem, note: What a landing costs}
+  - label: The price
+    tone: core
+    nodes:
+      - {id: ale, label: Annualized loss, icon: Gauge, note: And the chance of more}
+  - label: What you decide
+    nodes:
+      - {id: plans, label: Treatment plans, icon: ListChecks, note: Loss removed for the cost}
+      - {id: budget, label: Budget reviews, icon: ClipboardCheck, note: Loss avoided by the spend}
+edges:
+  - {from: opencti, to: run}
+  - {from: openaev, to: run}
+  - {from: estate, to: run}
+  - {from: finance, to: losses}
+  - {from: run, to: ale}
+  - {from: losses, to: ale}
+  - {from: ale, to: plans}
+  - {from: ale, to: budget}

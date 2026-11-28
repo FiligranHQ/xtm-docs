@@ -1,0 +1,17 @@
+title: An agent sends a command to a machine; the machine's runner pulls it, checks its permissions and returns the result
+lanes:
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: agent, label: AI agent, icon: Bot, note: "Computer Use (Runners)", href: /xtm-one/build/agents/}
+      - {id: queue, label: Command queue, icon: ListChecks, note: Every command audited}
+  - label: Your machine
+    tone: external
+    nodes:
+      - {id: runner, label: Runner, icon: Laptop, note: "XTM One Desktop or headless"}
+      - {id: policy, label: Permissions, icon: ShieldCheck, note: "Capabilities, lists, approval"}
+edges:
+  - {from: agent, to: queue, label: command for a machine}
+  - {from: runner, to: queue, label: pulls work over HTTPS}
+  - {from: runner, to: policy, label: checked}
+  - {from: runner, to: agent, label: "result, screenshot", style: dashed}

@@ -1,0 +1,23 @@
+title: A tool posts to the assignment's webhook URL with its secret, and XTM One starts the agent on what it received
+lanes:
+  - label: Your tools
+    tone: external
+    nodes:
+      - {id: soar, label: SOAR or SIEM, icon: Server, note: Playbook action}
+      - {id: ticketing, label: Ticketing tool, icon: ClipboardCheck, note: New case}
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: hook, label: Webhook URL, icon: KeyRound, note: Checks the secret}
+      - {id: queue, label: Assignment, icon: ListChecks, note: Up to 10 runs at once}
+      - {id: agent, label: Agent, icon: Bot, note: Works on the body}
+  - label: Results
+    tone: product
+    nodes:
+      - {id: history, label: Operations, icon: History, note: Each run recorded}
+edges:
+  - {from: soar, to: hook, label: POST + secret}
+  - {from: ticketing, to: hook, label: POST + secret}
+  - {from: hook, to: queue, label: accepted}
+  - {from: queue, to: agent, label: starts a run}
+  - {from: agent, to: history, label: recorded}

@@ -1,0 +1,20 @@
+title: An agent built in XTM One learns your policies and a procedure, reads OpenCTI as the person it works for without changing it, is shared with a team, runs on a schedule or a webhook within a budget, and every run is kept
+lanes:
+  - label: XTM One
+    tone: core
+    nodes:
+      - {id: kb, label: Your documents, icon: BookOpen, note: "Grand Meridian security policies", href: /xtm-one/build/knowledge-bases/}
+      - {id: agent, label: Velvet Harbor watcher, icon: Bot, note: "Persona, skill, read-only tools", href: /xtm-one/build/agents/}
+      - {id: team, label: Shared and scheduled, icon: Users, note: "CTI team, Monday brief, webhook", href: /xtm-one/build/sharing/}
+      - {id: budget, label: Run budget, icon: Gauge, note: "A cap on each run", href: /xtm-one/use/run-budgets/}
+      - {id: trace, label: Work history, icon: History, note: "Every run, every tool call", href: /xtm-one/use/work-history/}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: Velvet Harbor reports, icon: LogoOpenCTI, note: "Read with the rights of the person served", href: /xtm-one/use/in-opencti/}
+edges:
+  - {from: kb, to: agent, label: policy passages}
+  - {from: opencti, to: agent, label: "reports, read only"}
+  - {from: agent, to: team, label: tested in the chat}
+  - {from: budget, to: team, label: bounds each run, style: dashed}
+  - {from: team, to: trace, label: runs and results}

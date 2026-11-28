@@ -1,0 +1,24 @@
+title: An agent or an EDR host joins the endpoint it already belongs to, by its own reference first, then by a MAC address the endpoint already has
+lanes:
+  - label: What arrives
+    tone: external
+    nodes:
+      - {id: agent, label: OpenAEV agent, icon: Terminal, note: Registers when it starts, href: /openaev/use/agents/}
+      - {id: edr, label: EDR executor, icon: ShieldCheck, note: Syncs the hosts it manages, href: /openaev/use/executors/}
+  - label: How OpenAEV matches
+    tone: product
+    nodes:
+      - {id: reference, label: Same agent reference, icon: KeyRound, note: The ID it was installed with}
+      - {id: mac, label: Shared MAC address, icon: Network, note: "One is enough; hostname not compared"}
+  - label: The result
+    tone: store
+    nodes:
+      - {id: existing, label: Existing endpoint, icon: Laptop, note: "Addresses merged, agent added or updated"}
+      - {id: new, label: New endpoint, icon: Laptop, note: When nothing matches}
+edges:
+  - {from: agent, to: reference, label: checked first}
+  - {from: edr, to: reference, label: checked first}
+  - {from: reference, to: existing, label: found}
+  - {from: reference, to: mac, label: not found}
+  - {from: mac, to: existing, label: found}
+  - {from: mac, to: new, label: not found}

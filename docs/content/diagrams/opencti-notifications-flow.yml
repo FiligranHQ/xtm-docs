@@ -1,0 +1,22 @@
+title: A knowledge event reaches you through a trigger, a digest and the notifiers
+lanes:
+  - label: Knowledge
+    nodes:
+      - {id: event, label: Knowledge event, icon: Activity, note: "Creation, modification, deletion"}
+  - label: Triggers
+    tone: product
+    nodes:
+      - {id: live, label: Live trigger, icon: Search, note: Matches filters or entities}
+      - {id: digest, label: Regular digest, icon: Clock, note: Groups on a schedule}
+  - label: Notifiers
+    tone: external
+    nodes:
+      - {id: ui, label: User interface, icon: MessageSquare, note: Your alerts list}
+      - {id: mail, label: Email or webhook, icon: ExternalLink, note: Mailers and webhooks}
+edges:
+  - {from: event, to: live, label: matches}
+  - {from: live, to: ui, label: right away}
+  - {from: live, to: mail, label: right away}
+  - {from: live, to: digest, label: collected, style: dashed}
+  - {from: digest, to: ui, label: on schedule}
+  - {from: digest, to: mail, label: on schedule}

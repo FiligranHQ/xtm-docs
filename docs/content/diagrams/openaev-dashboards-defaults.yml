@@ -1,0 +1,23 @@
+title: Home opens the user's dashboard, else the tenant's, else the platform default, and each Statistics tab its own dashboard, else the tenant default
+lanes:
+  - label: Chosen by
+    tone: external
+    nodes:
+      - {id: user, label: Your profile, icon: Users, note: Home dashboard, href: /openaev/use/profile/}
+      - {id: tenant, label: Settings > Parameters, icon: Wrench, note: "Home, scenario, simulation", href: /openaev/administer/parameters/}
+      - {id: own, label: Statistics tab, icon: Gauge, note: Change dashboard}
+  - label: Custom dashboards
+    tone: product
+    nodes:
+      - {id: dashboards, label: Dashboards, icon: Layers, note: "Widgets, parameters, time range"}
+  - label: Shown on
+    tone: product
+    nodes:
+      - {id: home, label: Home, icon: Gauge, note: Else the Platform default}
+      - {id: statistics, label: Scenario and simulation, icon: Activity, note: Statistics tab}
+edges:
+  - {from: user, to: dashboards, label: picks first}
+  - {from: tenant, to: dashboards, label: picks next}
+  - {from: own, to: dashboards, label: picks first}
+  - {from: dashboards, to: home, label: opens}
+  - {from: dashboards, to: statistics, label: opens}

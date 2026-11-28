@@ -1,0 +1,22 @@
+title: At the inject's time, the articles appear on the channel's page, each player gets an email with their own link, and opening it meets their reading expectation
+lanes:
+  - label: Scenario
+    tone: product
+    nodes:
+      - {id: article, label: Article, icon: BookOpen, note: Written in the scenario}
+      - {id: inject, label: Publish a media pressure, icon: Clock, note: Scheduled inject}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: page, label: Channel page, icon: Layers, note: Published from now on}
+      - {id: expectation, label: Reading expectation, icon: ClipboardCheck, note: One per player}
+  - label: Players
+    tone: external
+    nodes:
+      - {id: player, label: Each player, icon: Users, note: Email with a link}
+edges:
+  - {from: article, to: inject, label: selected}
+  - {from: inject, to: page, label: publishes}
+  - {from: inject, to: player, label: emails}
+  - {from: player, to: page, label: opens the link}
+  - {from: page, to: expectation, label: marks read}

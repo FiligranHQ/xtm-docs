@@ -1,0 +1,71 @@
+{
+  "name": "decay-rules",
+  "version": "7.260309.0-lts.8",
+  "source": "OpenCTI-Platform/opencti@22c7908 (opencti-platform/opencti-graphql/src/modules/decayRule/decayRule-domain.ts)",
+  "intro": "The 4 built-in decay rules OpenCTI 7.260309.0-lts.8 creates on first start. All are active, and none can be changed or deleted. To decay some indicators differently, create a rule with a higher order and activate it, as [Decay rules](/opencti/configure/decay/) explains.",
+  "sections": [
+    {
+      "title": "Built-in decay rules",
+      "text": "When an indicator is created, or imported again with another score, the active rule with the highest order among those that match it applies, unless a decay exclusion rule matches it. An indicator is revoked once its score falls to the revoke score; the reaction points are the scores at which OpenCTI updates the score stored on the indicator.",
+      "columns": [
+        "Rule",
+        "Applies to",
+        "Lifetime (in days)",
+        "Decay factor",
+        "Reaction points",
+        "Revoke score",
+        "Order"
+      ],
+      "rows": [
+        {
+          "key": "Built-in domain name",
+          "cells": [
+            "Built-in domain name",
+            "Indicators whose main observable type is Domain name",
+            "300",
+            "0.7",
+            "80, 50",
+            "20",
+            "1"
+          ]
+        },
+        {
+          "key": "Built-in IP and URL",
+          "cells": [
+            "Built-in IP and URL",
+            "Indicators whose main observable type is IPv4 address, IPv6 address or URL",
+            "47",
+            "0.55",
+            "80, 50",
+            "20",
+            "1"
+          ]
+        },
+        {
+          "key": "Built-in files and artifact",
+          "cells": [
+            "Built-in files and artifact",
+            "Indicators whose main observable type is File or Artifact",
+            "460",
+            "0.3",
+            "80",
+            "20",
+            "1"
+          ]
+        },
+        {
+          "key": "Built-in default",
+          "cells": [
+            "Built-in default",
+            "Every indicator no other rule matches",
+            "470",
+            "0.35",
+            "80, 50",
+            "20",
+            "0"
+          ]
+        }
+      ]
+    }
+  ]
+}

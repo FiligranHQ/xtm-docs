@@ -1,0 +1,19 @@
+title: Each loss driver of a scenario takes a range, and the drivers' draws add up to the cost of one loss event
+lanes:
+  - label: The range
+    tone: external
+    nodes:
+      - {id: profile, label: Financial profile, icon: FileText, note: Derives most ranges}
+      - {id: hand, label: Entered by hand, icon: Wrench, note: 'Minimum, most likely, maximum'}
+  - label: Loss drivers
+    tone: product
+    nodes:
+      - {id: driver, label: Loss driver, icon: ListChecks, note: "Forensics, downtime, fines..."}
+  - label: The simulation
+    tone: store
+    nodes:
+      - {id: event, label: One loss event, icon: Scale, note: "The drivers' draws added up"}
+edges:
+  - {from: profile, to: driver, label: derives}
+  - {from: hand, to: driver, label: sets}
+  - {from: driver, to: event, label: adds up in}

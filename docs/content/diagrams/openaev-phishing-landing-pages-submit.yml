@@ -1,0 +1,26 @@
+title: When a person submits the landing page's form, OpenAEV scores the step, keeps what the capture settings allow, and sends them to the redirect URL
+lanes:
+  - label: The person
+    tone: external
+    nodes:
+      - {id: link, label: Link in the email, icon: ExternalLink, note: Their own token}
+      - {id: form, label: Landing page form, icon: Laptop, note: Scripts removed}
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: record, label: Submission, icon: LogoOpenAEV, note: Named fields read}
+  - label: Results
+    tone: product
+    nodes:
+      - {id: step, label: Credentials not submitted, icon: ClipboardCheck, note: Turns red}
+      - {id: finding, label: Credentials finding, icon: KeyRound, note: "If Capture submitted data is on; the password only with Capture passwords"}
+  - label: Afterwards
+    tone: external
+    nodes:
+      - {id: redirect, label: Redirect URL, icon: ArrowRight, note: Or stays on the page}
+edges:
+  - {from: link, to: form, label: opens}
+  - {from: form, to: record, label: submit}
+  - {from: record, to: step, label: scores}
+  - {from: record, to: finding, label: "user name, maybe password", style: dashed}
+  - {from: record, to: redirect, label: then}

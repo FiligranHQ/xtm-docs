@@ -1,0 +1,14 @@
+title: Each tenant connects to an organization of XTM Hub, then deploys its content in one click
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: tenant, label: Tenant, icon: LogoOpenAEV, note: Settings > Filigran Experience}
+  - label: XTM Hub
+    tone: external
+    nodes:
+      - {id: org, label: Hub organization, icon: Users, note: Chosen at connection}
+      - {id: library, label: Content library, icon: BookOpen, note: "Scenarios, threat arsenal actions"}
+edges:
+  - {from: tenant, to: org, label: "connect, then checks"}
+  - {from: library, to: tenant, label: deploy in one click}

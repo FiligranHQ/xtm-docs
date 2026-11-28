@@ -1,0 +1,931 @@
+{
+  "name": "inject-types",
+  "version": "3.261118.0",
+  "source": "OpenAEV-Platform/openaev@d61524e (openaev-api/src/main/java/io/openaev/injectors, openaev-framework/src/main/java/io/openaev/injector_contract/fields, openaev-api/src/main/java/io/openaev/expectation/ExpectationBuilderService.java)",
+  "intro": "The 8 injectors OpenAEV 3.261118.0 ships with, the 8 inject types (contracts) their code declares, and the contracts the platform writes for each payload and each phishing landing page. For each contract: the fields of its form, their key in the API, whether they are required, and the expectations it predefines. In the API, the teams of an inject go in `inject_teams` (or `inject_all_teams`), its endpoints in `inject_assets`, its asset groups in `inject_asset_groups` and its documents in `inject_documents`; every other field goes in `inject_content`, under its key.",
+  "filter": "Filter injectors, contracts, fields, keys",
+  "sections": [
+    {
+      "title": "Built-in injectors",
+      "text": "The injectors the platform ships with. **Runs** says whether it is there from the first start, or once deployed from the catalog of **Integrations** with its settings.",
+      "columns": [
+        "Injector",
+        "Type",
+        "Contracts",
+        "Runs"
+      ],
+      "rows": [
+        {
+          "key": "injector:openaev_challenge",
+          "cells": [
+            "**Challenge**",
+            "`openaev_challenge`",
+            "**Publish challenges**",
+            "From the first start"
+          ]
+        },
+        {
+          "key": "injector:openaev_channel",
+          "cells": [
+            "**Media pressure**",
+            "`openaev_channel`",
+            "**Publish a media pressure**",
+            "From the first start"
+          ]
+        },
+        {
+          "key": "injector:openaev_email",
+          "cells": [
+            "**Email**",
+            "`openaev_email`",
+            "**Send individual mails**, **Send multi-recipients mail**",
+            "From the first start"
+          ]
+        },
+        {
+          "key": "injector:openaev_manual",
+          "cells": [
+            "**Manual**",
+            "`openaev_manual`",
+            "**Manual**",
+            "From the first start"
+          ]
+        },
+        {
+          "key": "injector:openaev_implant",
+          "cells": [
+            "**OpenAEV Implant**",
+            "`openaev_implant`",
+            "One per payload, named after the payload",
+            "From the first start"
+          ]
+        },
+        {
+          "key": "injector:openaev_opencti",
+          "cells": [
+            "**OpenCTI**",
+            "`openaev_opencti`",
+            "**Create a new case**, **Create a new report**",
+            "Once deployed from the catalog, as **OpenCTI**"
+          ]
+        },
+        {
+          "key": "injector:openaev_ovh_sms",
+          "cells": [
+            "**SMS (OVH)**",
+            "`openaev_ovh_sms`",
+            "**Send a SMS**",
+            "Once deployed from the catalog, as **OVHCloud SMS Platform**"
+          ]
+        },
+        {
+          "key": "injector:openaev_phishing",
+          "cells": [
+            "**Phishing**",
+            "`openaev_phishing`",
+            "One per phishing landing page: **Phishing:** and the name of the page",
+            "From the first start"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Challenge: Publish challenges",
+      "text": "Contract `f8e70b27-a69c-4b9f-a2df-e217c36b3981` of the injector `openaev_challenge`. It runs against the platform itself (player interface, animation team). Not offered in atomic testing.",
+      "columns": [
+        "Field",
+        "Key",
+        "Type",
+        "Required",
+        "Default and notes"
+      ],
+      "rows": [
+        {
+          "key": "f8e70b27-a69c-4b9f-a2df-e217c36b3981:challenges",
+          "cells": [
+            "**Challenges**",
+            "`challenges`",
+            "Challenges",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "f8e70b27-a69c-4b9f-a2df-e217c36b3981:expectations",
+          "cells": [
+            "**Expectations**",
+            "`expectations`",
+            "Expectations",
+            "No",
+            "Offers Expect targets to complete the challenge(s) (`CHALLENGE`), added to a new inject; Manual expectation (`MANUAL`)"
+          ]
+        },
+        {
+          "key": "f8e70b27-a69c-4b9f-a2df-e217c36b3981:subject",
+          "cells": [
+            "**Email subject**",
+            "`subject`",
+            "Text",
+            "Yes",
+            "`New challenges published for ${user.email}`"
+          ]
+        },
+        {
+          "key": "f8e70b27-a69c-4b9f-a2df-e217c36b3981:body",
+          "cells": [
+            "**Email body**",
+            "`body`",
+            "Text area",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "f8e70b27-a69c-4b9f-a2df-e217c36b3981:encrypted",
+          "cells": [
+            "**Encrypt this email**",
+            "`encrypted`",
+            "Check box",
+            "No",
+            "Not checked"
+          ]
+        },
+        {
+          "key": "f8e70b27-a69c-4b9f-a2df-e217c36b3981:teams",
+          "cells": [
+            "**Teams**",
+            "`teams`",
+            "Teams",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "f8e70b27-a69c-4b9f-a2df-e217c36b3981:attachments",
+          "cells": [
+            "**Attachments**",
+            "`attachments`",
+            "Documents",
+            "No",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Media pressure: Publish a media pressure",
+      "text": "Contract `fb5e49a2-6366-4492-b69a-f9b9f39a533e` of the injector `openaev_channel`. It runs against the platform itself (player interface, animation team). Not offered in atomic testing. Adds the variables `${articles}` (list of articles published by the injection), `${article.id}` (id of the article in the platform), `${article.name}` (name of the article), `${article.uri}` (http user link to access the article).",
+      "columns": [
+        "Field",
+        "Key",
+        "Type",
+        "Required",
+        "Default and notes"
+      ],
+      "rows": [
+        {
+          "key": "fb5e49a2-6366-4492-b69a-f9b9f39a533e:teams",
+          "cells": [
+            "**Teams**",
+            "`teams`",
+            "Teams",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "fb5e49a2-6366-4492-b69a-f9b9f39a533e:attachments",
+          "cells": [
+            "**Attachments**",
+            "`attachments`",
+            "Documents",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "fb5e49a2-6366-4492-b69a-f9b9f39a533e:articles",
+          "cells": [
+            "**Articles**",
+            "`articles`",
+            "Articles of a channel",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "fb5e49a2-6366-4492-b69a-f9b9f39a533e:expectations",
+          "cells": [
+            "**Expectations**",
+            "`expectations`",
+            "Expectations",
+            "No",
+            "Offers Expect targets to read the article(s) (`ARTICLE`), added to a new inject; Manual expectation (`MANUAL`)"
+          ]
+        },
+        {
+          "key": "fb5e49a2-6366-4492-b69a-f9b9f39a533e:emailing",
+          "cells": [
+            "**Send email**",
+            "`emailing`",
+            "Check box",
+            "No",
+            "Checked"
+          ]
+        },
+        {
+          "key": "fb5e49a2-6366-4492-b69a-f9b9f39a533e:subject",
+          "cells": [
+            "**Email subject**",
+            "`subject`",
+            "Text",
+            "When **Send email** is checked",
+            "`New media pressure entries published for ${user.email}`. Shown when **Send email** is checked"
+          ]
+        },
+        {
+          "key": "fb5e49a2-6366-4492-b69a-f9b9f39a533e:body",
+          "cells": [
+            "**Email body**",
+            "`body`",
+            "Text area",
+            "When **Send email** is checked",
+            "Shown when **Send email** is checked"
+          ]
+        },
+        {
+          "key": "fb5e49a2-6366-4492-b69a-f9b9f39a533e:encrypted",
+          "cells": [
+            "**Encrypt this email**",
+            "`encrypted`",
+            "Check box",
+            "No",
+            "Not checked. Shown when **Send email** is checked"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Email: Send individual mails",
+      "text": "Contract `138ad8f8-32f8-4a22-8114-aaa12322bd09` of the injector `openaev_email`. It runs against a service outside the platform (mail server, SMS gateway, OpenCTI). Offered in atomic testing. Adds the variables `${document_uri}` (http user link to upload the document (only for document expectation)).",
+      "columns": [
+        "Field",
+        "Key",
+        "Type",
+        "Required",
+        "Default and notes"
+      ],
+      "rows": [
+        {
+          "key": "138ad8f8-32f8-4a22-8114-aaa12322bd09:teams",
+          "cells": [
+            "**Teams**",
+            "`teams`",
+            "Teams",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "138ad8f8-32f8-4a22-8114-aaa12322bd09:recipients",
+          "cells": [
+            "**Recipients**",
+            "`recipients`",
+            "Text",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "138ad8f8-32f8-4a22-8114-aaa12322bd09:subject",
+          "cells": [
+            "**Email subject**",
+            "`subject`",
+            "Text",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "138ad8f8-32f8-4a22-8114-aaa12322bd09:body",
+          "cells": [
+            "**Email body**",
+            "`body`",
+            "Text area",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "138ad8f8-32f8-4a22-8114-aaa12322bd09:encrypted",
+          "cells": [
+            "**Encrypt this email**",
+            "`encrypted`",
+            "Check box",
+            "No",
+            "Not checked"
+          ]
+        },
+        {
+          "key": "138ad8f8-32f8-4a22-8114-aaa12322bd09:attachments",
+          "cells": [
+            "**Attachments**",
+            "`attachments`",
+            "Documents",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "138ad8f8-32f8-4a22-8114-aaa12322bd09:expectations",
+          "cells": [
+            "**Expectations**",
+            "`expectations`",
+            "Expectations",
+            "No",
+            "Offers Manual expectation (`MANUAL`)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Email: Send multi-recipients mail",
+      "text": "Contract `2790bd39-37d4-4e39-be7e-53f3ca783f86` of the injector `openaev_email`. It runs against a service outside the platform (mail server, SMS gateway, OpenCTI). Offered in atomic testing. Its templates do not offer `${user.*}`: one message goes to every recipient at once. Adds the variables `${document_uri}` (http user link to upload the document (only for document expectation)).",
+      "columns": [
+        "Field",
+        "Key",
+        "Type",
+        "Required",
+        "Default and notes"
+      ],
+      "rows": [
+        {
+          "key": "2790bd39-37d4-4e39-be7e-53f3ca783f86:teams",
+          "cells": [
+            "**Teams**",
+            "`teams`",
+            "Teams",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "2790bd39-37d4-4e39-be7e-53f3ca783f86:recipients",
+          "cells": [
+            "**Recipients**",
+            "`recipients`",
+            "Text",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "2790bd39-37d4-4e39-be7e-53f3ca783f86:subject",
+          "cells": [
+            "**Email subject**",
+            "`subject`",
+            "Text",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "2790bd39-37d4-4e39-be7e-53f3ca783f86:body",
+          "cells": [
+            "**Email body**",
+            "`body`",
+            "Text area",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "2790bd39-37d4-4e39-be7e-53f3ca783f86:attachments",
+          "cells": [
+            "**Attachments**",
+            "`attachments`",
+            "Documents",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "2790bd39-37d4-4e39-be7e-53f3ca783f86:expectations",
+          "cells": [
+            "**Expectations**",
+            "`expectations`",
+            "Expectations",
+            "No",
+            "Offers Manual expectation (`MANUAL`)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Manual: Manual",
+      "text": "Contract `d02e9132-b9d0-4daa-b3b1-4b9871f8472c` of the injector `openaev_manual`. It runs against the platform itself (player interface, animation team). A manual inject: the animation team carries it out and marks it done. Not offered in atomic testing.",
+      "columns": [
+        "Field",
+        "Key",
+        "Type",
+        "Required",
+        "Default and notes"
+      ],
+      "rows": [
+        {
+          "key": "d02e9132-b9d0-4daa-b3b1-4b9871f8472c:teams",
+          "cells": [
+            "**Teams**",
+            "`teams`",
+            "Teams",
+            "When **Expectations** is set",
+            ""
+          ]
+        },
+        {
+          "key": "d02e9132-b9d0-4daa-b3b1-4b9871f8472c:expectations",
+          "cells": [
+            "**Expectations**",
+            "`expectations`",
+            "Expectations",
+            "No",
+            "Offers Manual expectation (`MANUAL`)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "OpenAEV Implant: actions of the Threat Arsenal",
+      "text": "The platform writes one contract per payload of the Threat Arsenal and per injector that runs payloads, the OpenAEV Implant among them, and rewrites it when the payload changes. Each argument of the payload adds a required field under its key (a targeted-asset argument adds the asset, the property to read and a separator), and a command payload adds the choice of an obfuscator. Its expectations are prevention, detection and vulnerability; those the payload names are predefined. The targets are endpoints of the platforms the payload runs on, through an executor. Offered in atomic testing.",
+      "columns": [
+        "Field",
+        "Key",
+        "Type",
+        "Required",
+        "Default and notes"
+      ],
+      "rows": [
+        {
+          "key": "openaev_implant:assets",
+          "cells": [
+            "**Source assets**",
+            "`assets`",
+            "Endpoints",
+            "One of **Source assets**, **Source asset groups**",
+            ""
+          ]
+        },
+        {
+          "key": "openaev_implant:asset_groups",
+          "cells": [
+            "**Source asset groups**",
+            "`asset_groups`",
+            "Asset groups",
+            "One of **Source assets**, **Source asset groups**",
+            ""
+          ]
+        },
+        {
+          "key": "openaev_implant:obfuscator",
+          "cells": [
+            "**Obfuscators**",
+            "`obfuscator`",
+            "Choice",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "openaev_implant:expectations",
+          "cells": [
+            "**Expectations**",
+            "`expectations`",
+            "Expectations",
+            "No",
+            "Offers none of its own: add them by hand"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "OpenCTI: Create a new case",
+      "text": "Contract `88db2075-ae49-4fe9-a64c-08da2ed07637` of the injector `openaev_opencti`. It runs against a service outside the platform (mail server, SMS gateway, OpenCTI). Offered in atomic testing. Adds the variables `${document_uri}` (http user link to upload the document (only for document expectation)).",
+      "columns": [
+        "Field",
+        "Key",
+        "Type",
+        "Required",
+        "Default and notes"
+      ],
+      "rows": [
+        {
+          "key": "88db2075-ae49-4fe9-a64c-08da2ed07637:name",
+          "cells": [
+            "**Name**",
+            "`name`",
+            "Text",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "88db2075-ae49-4fe9-a64c-08da2ed07637:description",
+          "cells": [
+            "**Description**",
+            "`description`",
+            "Text area",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "88db2075-ae49-4fe9-a64c-08da2ed07637:attachments",
+          "cells": [
+            "**Attachments**",
+            "`attachments`",
+            "Documents",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "88db2075-ae49-4fe9-a64c-08da2ed07637:expectations",
+          "cells": [
+            "**Expectations**",
+            "`expectations`",
+            "Expectations",
+            "No",
+            "Offers none of its own: add them by hand"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "OpenCTI: Create a new report",
+      "text": "Contract `b535f011-3a03-46e7-800a-74f01cd8865e` of the injector `openaev_opencti`. It runs against a service outside the platform (mail server, SMS gateway, OpenCTI). Offered in atomic testing. Adds the variables `${document_uri}` (http user link to upload the document (only for document expectation)).",
+      "columns": [
+        "Field",
+        "Key",
+        "Type",
+        "Required",
+        "Default and notes"
+      ],
+      "rows": [
+        {
+          "key": "b535f011-3a03-46e7-800a-74f01cd8865e:name",
+          "cells": [
+            "**Name**",
+            "`name`",
+            "Text",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "b535f011-3a03-46e7-800a-74f01cd8865e:description",
+          "cells": [
+            "**Description**",
+            "`description`",
+            "Text area",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "b535f011-3a03-46e7-800a-74f01cd8865e:attachments",
+          "cells": [
+            "**Attachments**",
+            "`attachments`",
+            "Documents",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "b535f011-3a03-46e7-800a-74f01cd8865e:expectations",
+          "cells": [
+            "**Expectations**",
+            "`expectations`",
+            "Expectations",
+            "No",
+            "Offers none of its own: add them by hand"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SMS (OVH): Send a SMS",
+      "text": "Contract `e9e902bc-b03d-4223-89e1-fca093ac79dd` of the injector `openaev_ovh_sms`. It runs against a service outside the platform (mail server, SMS gateway, OpenCTI). Offered in atomic testing.",
+      "columns": [
+        "Field",
+        "Key",
+        "Type",
+        "Required",
+        "Default and notes"
+      ],
+      "rows": [
+        {
+          "key": "e9e902bc-b03d-4223-89e1-fca093ac79dd:teams",
+          "cells": [
+            "**Teams**",
+            "`teams`",
+            "Teams",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "e9e902bc-b03d-4223-89e1-fca093ac79dd:message",
+          "cells": [
+            "**Message**",
+            "`message`",
+            "Text area",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "e9e902bc-b03d-4223-89e1-fca093ac79dd:expectations",
+          "cells": [
+            "**Expectations**",
+            "`expectations`",
+            "Expectations",
+            "No",
+            "Offers none of its own: add them by hand"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Phishing: phishing actions",
+      "text": "The platform writes one contract per phishing landing page of the tenant, with the page as its identifier, and removes it with the page. A page that captures submitted data also declares a **Credentials** finding as its output. It runs against a service outside the platform (mail server, SMS gateway, OpenCTI). Offered in atomic testing.",
+      "columns": [
+        "Field",
+        "Key",
+        "Type",
+        "Required",
+        "Default and notes"
+      ],
+      "rows": [
+        {
+          "key": "openaev_phishing:teams",
+          "cells": [
+            "**Teams**",
+            "`teams`",
+            "Teams",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "openaev_phishing:emailTemplate",
+          "cells": [
+            "**Email template**",
+            "`emailTemplate`",
+            "Choice",
+            "Yes",
+            ""
+          ]
+        },
+        {
+          "key": "openaev_phishing:subject",
+          "cells": [
+            "**Subject override**",
+            "`subject`",
+            "Text",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "openaev_phishing:fromName",
+          "cells": [
+            "**Sender name override**",
+            "`fromName`",
+            "Text",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "openaev_phishing:fromEmail",
+          "cells": [
+            "**Sender email override**",
+            "`fromEmail`",
+            "Text",
+            "No",
+            ""
+          ]
+        },
+        {
+          "key": "openaev_phishing:expectations",
+          "cells": [
+            "**Expectations**",
+            "`expectations`",
+            "Expectations",
+            "No",
+            "Offers Prevention (`PREVENTION`), added to a new inject; Detection (`DETECTION`), added to a new inject; Email not opened (`MANUAL`), added to a new inject; Link not clicked (`MANUAL`), added to a new inject; Credentials not submitted (`MANUAL`), added to a new inject"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Expectations",
+      "text": "The expectations the contracts offer, each with a score of 100 to start with. An expectation that nothing validates before it expires fails, except a vulnerability expectation, which succeeds: no finding means the target is not vulnerable. **Expires after** is the default; the keys are read in order, and the first one set wins.",
+      "columns": [
+        "Expectation",
+        "Type",
+        "Offered by",
+        "Expires after",
+        "Configuration keys"
+      ],
+      "rows": [
+        {
+          "key": "expectation:PREVENTION",
+          "cells": [
+            "**Prevention**",
+            "`PREVENTION`",
+            "the phishing actions",
+            "6 hours",
+            "`openaev.expectation.prevention.expiration-time`, then `openaev.expectation.technical.expiration-time`"
+          ]
+        },
+        {
+          "key": "expectation:DETECTION",
+          "cells": [
+            "**Detection**",
+            "`DETECTION`",
+            "the phishing actions",
+            "6 hours",
+            "`openaev.expectation.detection.expiration-time`, then `openaev.expectation.technical.expiration-time`"
+          ]
+        },
+        {
+          "key": "expectation:LOGGING",
+          "cells": [
+            "**Logging**",
+            "`LOGGING`",
+            "Added by hand",
+            "6 hours",
+            "`openaev.expectation.logging.expiration-time`, then `openaev.expectation.technical.expiration-time`"
+          ]
+        },
+        {
+          "key": "expectation:VULNERABILITY",
+          "cells": [
+            "**VULNERABILITY_NAME**",
+            "`VULNERABILITY`",
+            "Added by hand",
+            "6 hours",
+            "`openaev.expectation.vulnerability.expiration-time`, then `openaev.expectation.technical.expiration-time`"
+          ]
+        },
+        {
+          "key": "expectation:CHALLENGE",
+          "cells": [
+            "**Expect targets to complete the challenge(s)**",
+            "`CHALLENGE`",
+            "**Publish challenges**",
+            "24 hours",
+            "`openaev.expectation.challenge.expiration-time`, then `openaev.expectation.human.expiration-time`"
+          ]
+        },
+        {
+          "key": "expectation:ARTICLE",
+          "cells": [
+            "**Expect targets to read the article(s)**",
+            "`ARTICLE`",
+            "**Publish a media pressure**",
+            "24 hours",
+            "`openaev.expectation.article.expiration-time`, then `openaev.expectation.human.expiration-time`"
+          ]
+        },
+        {
+          "key": "expectation:MANUAL",
+          "cells": [
+            "**Manual expectation**",
+            "`MANUAL`",
+            "**Publish challenges**, **Publish a media pressure**, **Send individual mails**, **Send multi-recipients mail**, **Manual**",
+            "24 hours",
+            "`openaev.expectation.manual.expiration-time`, then `openaev.expectation.human.expiration-time`"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Variables of the templates",
+      "text": "Every contract offers these variables in its text fields, written `${name}` (FreeMarker); the sections above name the variables a contract adds, or leaves out.",
+      "columns": [
+        "Variable",
+        "Value"
+      ],
+      "rows": [
+        {
+          "key": "variable:user.id",
+          "cells": [
+            "`${user.id}`",
+            "Id of the user in the platform"
+          ]
+        },
+        {
+          "key": "variable:user.email",
+          "cells": [
+            "`${user.email}`",
+            "Email of the user"
+          ]
+        },
+        {
+          "key": "variable:user.firstname",
+          "cells": [
+            "`${user.firstname}`",
+            "First name of the user"
+          ]
+        },
+        {
+          "key": "variable:user.lastname",
+          "cells": [
+            "`${user.lastname}`",
+            "Last name of the user"
+          ]
+        },
+        {
+          "key": "variable:user.lang",
+          "cells": [
+            "`${user.lang}`",
+            "Language of the user"
+          ]
+        },
+        {
+          "key": "variable:user.pgpKey",
+          "cells": [
+            "`${user.pgpKey}`",
+            "PGP key of the user"
+          ]
+        },
+        {
+          "key": "variable:user.phone",
+          "cells": [
+            "`${user.phone}`",
+            "Phone number of the user"
+          ]
+        },
+        {
+          "key": "variable:exercise.id",
+          "cells": [
+            "`${exercise.id}`",
+            "Id of the simulation in the platform"
+          ]
+        },
+        {
+          "key": "variable:exercise.name",
+          "cells": [
+            "`${exercise.name}`",
+            "Name of the simulation"
+          ]
+        },
+        {
+          "key": "variable:exercise.description",
+          "cells": [
+            "`${exercise.description}`",
+            "Description of the simulation"
+          ]
+        },
+        {
+          "key": "variable:teams",
+          "cells": [
+            "`${teams}`",
+            "List of team names for the injection (a list)"
+          ]
+        },
+        {
+          "key": "variable:player_uri",
+          "cells": [
+            "`${player_uri}`",
+            "Player interface platform link"
+          ]
+        },
+        {
+          "key": "variable:challenges_uri",
+          "cells": [
+            "`${challenges_uri}`",
+            "Challenges interface platform link"
+          ]
+        },
+        {
+          "key": "variable:scoreboard_uri",
+          "cells": [
+            "`${scoreboard_uri}`",
+            "Scoreboard interface platform link"
+          ]
+        },
+        {
+          "key": "variable:lessons_uri",
+          "cells": [
+            "`${lessons_uri}`",
+            "Lessons learned interface platform link"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+title: Only the reverse proxy faces users, Elasticsearch and Redis are closed to the network, RabbitMQ and S3 storage keep their passwords, and OpenCTI limits what each client sends
+lanes:
+  - label: Outside the host
+    tone: external
+    nodes:
+      - {id: users, label: Users and clients, icon: Laptop, note: Over HTTPS}
+      - {id: extint, label: External integrations, icon: Puzzle, note: Connect to RabbitMQ}
+  - label: Host
+    tone: external
+    nodes:
+      - {id: proxy, label: Reverse proxy, icon: ShieldCheck, note: TLS}
+      - {id: firewall, label: Host firewall, icon: ShieldCheck, note: "Restricts 5672, 15672 and 9000"}
+  - label: OpenCTI
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "Rate limit, GraphQL limits, sessions, logs"}
+  - label: Shared services
+    tone: store
+    nodes:
+      - {id: es, label: Elasticsearch, icon: Server, note: "9200, no authentication: unpublished"}
+      - {id: redis, label: Redis, icon: Activity, note: "6379, no password: unpublished"}
+      - {id: mq, label: RabbitMQ, icon: ArrowLeftRight, note: "5672 and 15672, password of .env"}
+      - {id: s3, label: S3 storage, icon: Boxes, note: "9000, password of .env"}
+edges:
+  - {from: users, to: proxy, label: HTTPS}
+  - {from: proxy, to: opencti, label: X-Forwarded-For}
+  - {from: opencti, to: es, label: Docker network}
+  - {from: opencti, to: redis, label: Docker network}
+  - {from: extint, to: firewall, label: if you have some}
+  - {from: firewall, to: mq, label: user and password}

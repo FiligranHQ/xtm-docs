@@ -1,0 +1,26 @@
+title: Users reach each platform over HTTPS through the reverse proxy, which forwards to a local port, while the platforms call each other inside Docker
+lanes:
+  - label: Users
+    tone: external
+    nodes:
+      - {id: users, label: Browsers and clients, icon: Laptop, note: "https://opencti.example.com and others"}
+  - label: Host
+    tone: external
+    nodes:
+      - {id: proxy, label: Reverse proxy, icon: ShieldCheck, note: TLS on port 443}
+  - label: Platforms in Docker
+    tone: product
+    nodes:
+      - {id: opencti, label: OpenCTI, icon: LogoOpenCTI, note: "127.0.0.1:8080"}
+      - {id: openaev, label: OpenAEV, icon: LogoOpenAEV, note: "127.0.0.1:8081"}
+  - label: At the center
+    tone: core
+    nodes:
+      - {id: xtmone, label: XTM One, icon: LogoXTMOne, note: "127.0.0.1:8090"}
+edges:
+  - {from: users, to: proxy, label: HTTPS}
+  - {from: proxy, to: opencti, label: HTTP and WebSocket}
+  - {from: proxy, to: openaev, label: HTTP and WebSocket}
+  - {from: proxy, to: xtmone, label: HTTP}
+  - {from: opencti, to: xtmone, label: by service name, style: dashed, both: true}
+  - {from: openaev, to: xtmone, label: by service name, style: dashed, both: true}

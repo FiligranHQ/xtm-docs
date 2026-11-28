@@ -1,0 +1,25 @@
+title: Authorized members add a check on one object, after the capabilities and markings of the user
+lanes:
+  - label: User
+    tone: external
+    nodes:
+      - {id: user, label: Analyst, icon: LogIn, note: Opens or edits a report}
+  - label: Platform-wide checks
+    tone: product
+    nodes:
+      - {id: capabilities, label: Capabilities, icon: KeyRound, note: Role allows the action}
+      - {id: markings, label: Markings, icon: ShieldCheck, note: Groups cleared for them}
+  - label: Object check
+    tone: product
+    nodes:
+      - {id: members, label: Authorized members, icon: ListChecks, note: Replaces organization sharing}
+  - label: Restricted object
+    tone: store
+    nodes:
+      - {id: report, label: Report, icon: FileText, note: Only listed members reach it}
+edges:
+  - {from: user, to: capabilities, label: action}
+  - {from: user, to: markings, label: clearance}
+  - {from: capabilities, to: members, label: allowed}
+  - {from: markings, to: members, label: cleared}
+  - {from: members, to: report, label: 'view, edit or manage'}

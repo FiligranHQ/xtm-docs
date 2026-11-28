@@ -1,0 +1,23 @@
+title: The conversations filed in a workspace give their agents the same knowledge, work items and shared state
+lanes:
+  - label: Conversations
+    tone: external
+    nodes:
+      - {id: camille, label: Camille's conversation, icon: MessageSquare, note: Velvet Harbor watcher}
+      - {id: paul, label: Paul's conversation, icon: MessageSquare, note: Night shift triage}
+  - label: Workspace
+    tone: core
+    nodes:
+      - {id: workspace, label: Velvet Harbor investigation, icon: Layers, note: Shared with the CTI team}
+  - label: What agents share there
+    tone: product
+    nodes:
+      - {id: knowledge, label: Knowledge, icon: BookOpen, note: "Instructions, sources, knowledge bases"}
+      - {id: coordination, label: Work items and state, icon: ListChecks, note: Kept apart per topic}
+      - {id: search, label: Conversation search, icon: Search, note: What was said there}
+edges:
+  - {from: camille, to: workspace, label: filed in}
+  - {from: paul, to: workspace, label: filed in}
+  - {from: workspace, to: knowledge, label: gives}
+  - {from: workspace, to: coordination, label: holds}
+  - {from: workspace, to: search, label: indexes}

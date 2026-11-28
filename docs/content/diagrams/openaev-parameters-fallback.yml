@@ -1,0 +1,19 @@
+title: A tenant parameter left empty takes the platform value, then the module default
+lanes:
+  - label: What a user sees
+    tone: external
+    nodes:
+      - {id: user, label: User preference, icon: Users, note: "Theme, language, home dashboard"}
+  - label: Tenant
+    tone: product
+    nodes:
+      - {id: tenant, label: Tenant parameters, icon: Wrench, note: Settings > Parameters}
+  - label: Platform
+    tone: core
+    nodes:
+      - {id: platform, label: Platform value, icon: Server, note: "Name, theme, language"}
+      - {id: default, label: Module default, icon: Info, note: "OpenAEV name, dark theme, automatic language"}
+edges:
+  - {from: user, to: tenant, label: else}
+  - {from: tenant, to: platform, label: else}
+  - {from: platform, to: default, label: else}

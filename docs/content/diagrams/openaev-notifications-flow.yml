@@ -1,0 +1,24 @@
+title: An event on a watched resource fires your live triggers at once, a digest gathers their events by period, and the notifiers deliver them in the interface, by email or by webhook
+lanes:
+  - label: OpenAEV
+    tone: product
+    nodes:
+      - {id: event, label: An event, icon: Activity, note: "Create, update, delete, score drop"}
+  - label: Your triggers
+    tone: product
+    nodes:
+      - {id: live, label: Live trigger, icon: Workflow, note: "Resource type, events, filters"}
+      - {id: digest, label: Regular digest, icon: Clock, note: "Hour, day, week, month"}
+  - label: Notifiers
+    tone: external
+    nodes:
+      - {id: ui, label: User interface, icon: Info, note: Alerts tab}
+      - {id: email, label: Email, icon: MessageSquare, note: Your address}
+      - {id: webhook, label: Webhook, icon: ExternalLink, note: Another tool}
+edges:
+  - {from: event, to: live, label: matches}
+  - {from: live, to: digest, label: gathered}
+  - {from: live, to: ui, label: at once}
+  - {from: live, to: email, label: at once}
+  - {from: digest, to: email, label: by period}
+  - {from: live, to: webhook, label: at once}

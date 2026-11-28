@@ -1,0 +1,452 @@
+{
+  "source": "FiligranHQ/xtm-docker@24cd380",
+  "modules": [
+    {
+      "id": "xtm-one",
+      "label": "XTM One",
+      "icon": "LogoXTMOne",
+      "summary": "The agentic AI orchestration layer at the center of the platform, its web application and its worker.",
+      "requires": [],
+      "services": [
+        "xtm-one",
+        "xtm-one-worker"
+      ],
+      "extras": [
+        {
+          "id": "opensandbox",
+          "label": "OpenSandbox",
+          "summary": "Runs the code of custom tools, of the code interpreter and of the checks of a repository workspace, one container per run.",
+          "profile": "opensandbox",
+          "services": [
+            "opensandbox"
+          ],
+          "needs": []
+        }
+      ],
+      "needs": [
+        "xtm-one-db-init",
+        "pgsql",
+        "redis",
+        "minio"
+      ],
+      "url": "http://localhost:8090",
+      "health": "http://localhost:8090/api/health"
+    },
+    {
+      "id": "opencti",
+      "label": "OpenCTI",
+      "icon": "LogoOpenCTI",
+      "summary": "The cyber threat intelligence platform and its worker.",
+      "requires": [],
+      "services": [
+        "opencti",
+        "worker"
+      ],
+      "extras": [
+        {
+          "id": "opencti-connectors",
+          "label": "Default connectors",
+          "summary": "File imports and exports, document analysis, the OpenCTI datasets and MITRE ATT&CK.",
+          "services": [
+            "connector-export-file-stix",
+            "connector-export-file-csv",
+            "connector-export-file-txt",
+            "connector-import-file-stix",
+            "connector-import-document",
+            "connector-import-file-yara",
+            "connector-analysis",
+            "connector-import-external-reference",
+            "connector-opencti",
+            "connector-mitre"
+          ],
+          "needs": []
+        },
+        {
+          "id": "composer",
+          "label": "XTM Composer",
+          "summary": "Deploys and runs integrations from the interface of OpenCTI and OpenAEV.",
+          "services": [
+            "xtm-composer"
+          ],
+          "needs": [
+            "rsa-key-generator",
+            "rabbitmq"
+          ]
+        }
+      ],
+      "needs": [
+        "redis",
+        "elasticsearch",
+        "minio",
+        "rabbitmq"
+      ],
+      "url": "http://localhost:8080",
+      "health": "http://localhost:8080/health?health_access_key=$OPENCTI_HEALTHCHECK_ACCESS_KEY"
+    },
+    {
+      "id": "openaev",
+      "label": "OpenAEV",
+      "icon": "LogoOpenAEV",
+      "summary": "The adversarial exposure validation platform.",
+      "requires": [],
+      "services": [
+        "openaev"
+      ],
+      "extras": [
+        {
+          "id": "openaev-integrations",
+          "label": "Default collectors and injectors",
+          "summary": "MITRE ATT&CK, the OpenAEV datasets, Atomic Red Team, NVD CVE, Nmap and Nuclei.",
+          "services": [
+            "collector-mitre-attack",
+            "collector-openaev",
+            "collector-atomic-red-team",
+            "collector-nvd-nist-cve",
+            "injector-nmap",
+            "injector-nuclei"
+          ],
+          "needs": []
+        },
+        {
+          "id": "composer",
+          "label": "XTM Composer",
+          "summary": "Deploys and runs integrations from the interface of OpenCTI and OpenAEV.",
+          "services": [
+            "xtm-composer"
+          ],
+          "needs": [
+            "rsa-key-generator",
+            "rabbitmq"
+          ]
+        }
+      ],
+      "needs": [
+        "pgsql",
+        "minio",
+        "rabbitmq",
+        "elasticsearch"
+      ],
+      "url": "http://localhost:8081",
+      "health": "http://localhost:8081/api/health?health_access_key=$OPENAEV_HEALTHCHECK_KEY"
+    },
+    {
+      "id": "opencrq",
+      "label": "OpenCRQ",
+      "icon": "LogoOpenCRQ",
+      "summary": "Cyber risk quantification, fed by OpenCTI and OpenAEV, registered with XTM One.",
+      "requires": [],
+      "services": [
+        "opencrq"
+      ],
+      "extras": [],
+      "needs": [
+        "opencrq-db-init",
+        "pgsql",
+        "opencrq-bucket-init",
+        "minio"
+      ],
+      "url": "http://localhost:8082"
+    }
+  ],
+  "shared": {
+    "elasticsearch": {
+      "label": "Elasticsearch",
+      "icon": "Server",
+      "role": "Stores and searches the knowledge of OpenCTI and OpenAEV",
+      "image": "elasticsearch:8.19.23",
+      "ports": [
+        "9200:9200"
+      ]
+    },
+    "redis": {
+      "label": "Redis",
+      "icon": "Activity",
+      "role": "Cache, sessions and live events",
+      "image": "redis:8.8.3",
+      "ports": [
+        "6379:6379"
+      ]
+    },
+    "rabbitmq": {
+      "label": "RabbitMQ",
+      "icon": "ArrowLeftRight",
+      "role": "Queues between platforms, workers and integrations",
+      "image": "rabbitmq:4.3-management",
+      "ports": [
+        "5672:5672",
+        "15672:15672"
+      ]
+    },
+    "minio": {
+      "label": "S3 storage",
+      "icon": "Boxes",
+      "role": "Files, imports and exports (RustFS, S3 compatible)",
+      "image": "rustfs/rustfs:1.0.4",
+      "ports": [
+        "9000:9000"
+      ]
+    },
+    "pgsql": {
+      "label": "PostgreSQL",
+      "icon": "Server",
+      "role": "Database of OpenAEV, OpenCRQ and XTM One (pgvector)",
+      "image": "pgvector/pgvector:pg17",
+      "ports": []
+    }
+  },
+  "init": {
+    "rsa-key-generator": "Generates the RSA key XTM Composer encrypts the integrations' configurations with.",
+    "xtm-one-db-init": "Creates the XTM One database and its role in PostgreSQL.",
+    "opencrq-db-init": "Creates the OpenCRQ database and its role in PostgreSQL.",
+    "opencrq-bucket-init": "Creates the OpenCRQ bucket in the S3 storage, which OpenCRQ does not create in production."
+  },
+  "services": {
+    "redis": {
+      "image": "redis:8.8.3",
+      "ports": [
+        "6379:6379"
+      ],
+      "depends_on": []
+    },
+    "elasticsearch": {
+      "image": "elasticsearch:8.19.23",
+      "ports": [
+        "9200:9200"
+      ],
+      "depends_on": []
+    },
+    "pgsql": {
+      "image": "pgvector/pgvector:pg17",
+      "ports": [],
+      "depends_on": []
+    },
+    "minio": {
+      "image": "rustfs/rustfs:1.0.4",
+      "ports": [
+        "9000:9000"
+      ],
+      "depends_on": []
+    },
+    "rabbitmq": {
+      "image": "rabbitmq:4.3-management",
+      "ports": [
+        "5672:5672",
+        "15672:15672"
+      ],
+      "depends_on": []
+    },
+    "xtm-one-db-init": {
+      "image": "pgvector/pgvector:pg17",
+      "ports": [],
+      "depends_on": [
+        "pgsql"
+      ]
+    },
+    "xtm-one": {
+      "image": "xtmone/platform:latest",
+      "ports": [
+        "8090:4000"
+      ],
+      "depends_on": [
+        "xtm-one-db-init",
+        "redis",
+        "minio"
+      ]
+    },
+    "xtm-one-worker": {
+      "image": "xtmone/worker:latest",
+      "ports": [],
+      "depends_on": [
+        "xtm-one"
+      ]
+    },
+    "opensandbox": {
+      "image": "opensandbox/server:${OPENSANDBOX_SERVER_IMAGE_TAG:-v0.2.1}",
+      "ports": [],
+      "depends_on": []
+    },
+    "opencti": {
+      "image": "opencti/platform:latest",
+      "ports": [
+        "8080:8080"
+      ],
+      "depends_on": [
+        "redis",
+        "elasticsearch",
+        "minio",
+        "rabbitmq"
+      ]
+    },
+    "worker": {
+      "image": "opencti/worker:latest",
+      "ports": [],
+      "depends_on": [
+        "opencti"
+      ]
+    },
+    "connector-export-file-stix": {
+      "image": "opencti/connector-export-file-stix:latest",
+      "ports": [],
+      "depends_on": [
+        "opencti"
+      ]
+    },
+    "connector-export-file-csv": {
+      "image": "opencti/connector-export-file-csv:latest",
+      "ports": [],
+      "depends_on": [
+        "opencti"
+      ]
+    },
+    "connector-export-file-txt": {
+      "image": "opencti/connector-export-file-txt:latest",
+      "ports": [],
+      "depends_on": [
+        "opencti"
+      ]
+    },
+    "connector-import-file-stix": {
+      "image": "opencti/connector-import-file-stix:latest",
+      "ports": [],
+      "depends_on": [
+        "opencti"
+      ]
+    },
+    "connector-import-document": {
+      "image": "opencti/connector-import-document:latest",
+      "ports": [],
+      "depends_on": [
+        "opencti"
+      ]
+    },
+    "connector-import-file-yara": {
+      "image": "opencti/connector-import-file-yara:latest",
+      "ports": [],
+      "depends_on": [
+        "opencti"
+      ]
+    },
+    "connector-analysis": {
+      "image": "opencti/connector-import-document:latest",
+      "ports": [],
+      "depends_on": [
+        "opencti"
+      ]
+    },
+    "connector-import-external-reference": {
+      "image": "opencti/connector-import-external-reference:latest",
+      "ports": [],
+      "depends_on": [
+        "opencti"
+      ]
+    },
+    "connector-opencti": {
+      "image": "opencti/connector-opencti:latest",
+      "ports": [],
+      "depends_on": [
+        "opencti"
+      ]
+    },
+    "connector-mitre": {
+      "image": "opencti/connector-mitre:latest",
+      "ports": [],
+      "depends_on": [
+        "opencti"
+      ]
+    },
+    "openaev": {
+      "image": "openaev/platform:latest",
+      "ports": [
+        "8081:8080"
+      ],
+      "depends_on": [
+        "pgsql",
+        "minio",
+        "rabbitmq",
+        "elasticsearch"
+      ]
+    },
+    "collector-mitre-attack": {
+      "image": "openaev/collector-mitre-attack:latest",
+      "ports": [],
+      "depends_on": [
+        "openaev"
+      ]
+    },
+    "collector-openaev": {
+      "image": "openaev/collector-openaev:latest",
+      "ports": [],
+      "depends_on": [
+        "openaev"
+      ]
+    },
+    "collector-atomic-red-team": {
+      "image": "openaev/collector-atomic-red-team:latest",
+      "ports": [],
+      "depends_on": [
+        "openaev"
+      ]
+    },
+    "collector-nvd-nist-cve": {
+      "image": "openaev/collector-nvd-nist-cve:latest",
+      "ports": [],
+      "depends_on": [
+        "openaev"
+      ]
+    },
+    "injector-nmap": {
+      "image": "openaev/injector-nmap:latest",
+      "ports": [],
+      "depends_on": [
+        "openaev"
+      ]
+    },
+    "injector-nuclei": {
+      "image": "openaev/injector-nuclei:latest",
+      "ports": [],
+      "depends_on": [
+        "openaev"
+      ]
+    },
+    "opencrq-db-init": {
+      "image": "pgvector/pgvector:pg17",
+      "ports": [],
+      "depends_on": [
+        "pgsql"
+      ]
+    },
+    "opencrq-bucket-init": {
+      "image": "amazon/aws-cli:latest",
+      "ports": [],
+      "depends_on": [
+        "minio"
+      ]
+    },
+    "opencrq": {
+      "image": "filigran/opencrq:latest",
+      "ports": [
+        "8082:3002"
+      ],
+      "depends_on": [
+        "opencrq-db-init",
+        "opencrq-bucket-init",
+        "xtm-one"
+      ]
+    },
+    "rsa-key-generator": {
+      "image": "alpine/openssl:latest",
+      "ports": [],
+      "depends_on": []
+    },
+    "xtm-composer": {
+      "image": "filigran/xtm-composer:latest",
+      "ports": [],
+      "depends_on": [
+        "rsa-key-generator",
+        "opencti",
+        "openaev",
+        "rabbitmq"
+      ]
+    }
+  }
+}

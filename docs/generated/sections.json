@@ -1,0 +1,4684 @@
+{
+  "start": {
+    "done": 4,
+    "total": 4,
+    "groups": [
+      {
+        "id": "quick-start",
+        "label": "Quick start",
+        "pages": [
+          {
+            "target": "/start/quick-start/",
+            "title": "Try OpenCTI with Docker",
+            "doc_type": "tutorial",
+            "products": [
+              "opencti",
+              "openaev",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "quick-start"
+          }
+        ]
+      },
+      {
+        "id": "editions",
+        "label": "Editions",
+        "pages": [
+          {
+            "target": "/start/editions/",
+            "title": "Editions and licensing",
+            "doc_type": "explanation",
+            "products": [
+              "opencti",
+              "openaev",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/enterprise/",
+            "more": 0,
+            "more_done": 0,
+            "group": "editions"
+          }
+        ]
+      },
+      {
+        "id": "glossary",
+        "label": "Glossary",
+        "pages": [
+          {
+            "target": "/start/glossary/",
+            "title": "Glossary",
+            "doc_type": "reference",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "glossary"
+          }
+        ]
+      },
+      {
+        "id": "whats-new",
+        "label": "What's new",
+        "pages": [
+          {
+            "target": "/start/whats-new/",
+            "title": "What's new",
+            "doc_type": "reference",
+            "products": [
+              "opencti",
+              "openaev",
+              "xtm-one",
+              "composer"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "whats-new"
+          }
+        ]
+      }
+    ]
+  },
+  "deploy": {
+    "done": 56,
+    "total": 56,
+    "groups": [
+      {
+        "id": "quick-start",
+        "label": "Quick start",
+        "pages": [
+          {
+            "target": "/deploy/quick-start/",
+            "title": "Run the XTM platform locally",
+            "doc_type": "tutorial",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "quick-start"
+          },
+          {
+            "target": "/deploy/quick-start/with-an-ai-agent/",
+            "title": "Deploy with an AI agent",
+            "doc_type": "how-to",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "quick-start"
+          }
+        ]
+      },
+      {
+        "id": "plan",
+        "label": "Plan",
+        "pages": [
+          {
+            "target": "/deploy/plan/architecture/",
+            "title": "The XTM stack: modules and shared services",
+            "doc_type": "explanation",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/overview/",
+            "more": 0,
+            "more_done": 0,
+            "group": "plan"
+          },
+          {
+            "target": "/deploy/plan/modules/",
+            "title": "What each XTM module brings",
+            "doc_type": "explanation",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "plan"
+          },
+          {
+            "target": "/deploy/plan/requirements/",
+            "title": "Requirements",
+            "doc_type": "reference",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "plan"
+          },
+          {
+            "target": "/deploy/plan/sizing/",
+            "title": "Sizing",
+            "doc_type": "reference",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "plan"
+          },
+          {
+            "target": "/deploy/plan/topologies/",
+            "title": "Topologies: one host, a cluster, Kubernetes",
+            "doc_type": "explanation",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "plan"
+          },
+          {
+            "target": "/deploy/plan/network/",
+            "title": "Network and ports",
+            "doc_type": "reference",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "plan"
+          }
+        ]
+      },
+      {
+        "id": "install",
+        "label": "Install",
+        "pages": [
+          {
+            "target": "/deploy/install/docker-compose/",
+            "title": "Install with Docker Compose",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/installation/",
+            "more": 0,
+            "more_done": 0,
+            "group": "install"
+          },
+          {
+            "target": "/deploy/install/modules/",
+            "title": "Start the whole stack on an existing deployment",
+            "doc_type": "how-to",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "install"
+          },
+          {
+            "target": "/deploy/install/reverse-proxy/",
+            "title": "Publish the platforms over HTTPS",
+            "doc_type": "how-to",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/installation/",
+            "more": 0,
+            "more_done": 0,
+            "group": "install"
+          },
+          {
+            "target": "/deploy/install/air-gapped/",
+            "title": "Install offline or with FIPS 140-3",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/reference/fips/",
+            "more": 0,
+            "more_done": 0,
+            "group": "install"
+          }
+        ]
+      },
+      {
+        "id": "configure",
+        "label": "Configure",
+        "pages": [
+          {
+            "target": "/deploy/configure/shared-services/",
+            "title": "Configure the shared services",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/deploy/configure/connect-modules/",
+            "title": "Connect the modules to each other",
+            "doc_type": "how-to",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/deploy/configure/first-access/",
+            "title": "Sign in the first time and keep an emergency account",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/authentication/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/deploy/configure/opencrq/",
+            "title": "Configure OpenCRQ",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/deploy/configure/certificates/",
+            "title": "Trust your certificate authority and proxy",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/deployment/platform/certificate-validation/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/deploy/configure/maps/",
+            "title": "Map tiles",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/advanced/map/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/deploy/configure/ai-extraction/",
+            "title": "Extract intelligence from documents on premises",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/advanced/ai-import-document/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/deploy/configure/xtm-one/",
+            "title": "Configure XTM One",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          }
+        ]
+      },
+      {
+        "id": "integrations",
+        "label": "Integrate",
+        "pages": [
+          {
+            "target": "/deploy/integrations/how-they-run/",
+            "title": "How integrations run",
+            "doc_type": "explanation",
+            "products": [
+              "opencti",
+              "openaev",
+              "composer"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/connectors/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integrations"
+          },
+          {
+            "target": "/deploy/integrations/composer/",
+            "title": "XTM Composer",
+            "doc_type": "explanation",
+            "products": [
+              "composer",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/integration-manager/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integrations"
+          },
+          {
+            "target": "/deploy/integrations/quick-start/",
+            "title": "Deploy a first integration with XTM Composer",
+            "doc_type": "tutorial",
+            "products": [
+              "composer",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/integration-manager/quick-start/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integrations"
+          },
+          {
+            "target": "/deploy/integrations/architecture/",
+            "title": "XTM Composer architecture",
+            "doc_type": "explanation",
+            "products": [
+              "composer",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/integration-manager/architecture/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integrations"
+          },
+          {
+            "target": "/deploy/integrations/install-composer/",
+            "title": "Install XTM Composer",
+            "doc_type": "how-to",
+            "products": [
+              "composer",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/integration-manager/installation/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integrations"
+          },
+          {
+            "target": "/deploy/integrations/configure-composer/",
+            "title": "Configure XTM Composer",
+            "doc_type": "how-to",
+            "products": [
+              "composer",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/integration-manager/configuration/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integrations"
+          },
+          {
+            "target": "/deploy/integrations/proxy/",
+            "title": "Run integrations behind a proxy",
+            "doc_type": "how-to",
+            "products": [
+              "composer",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/integration-manager/proxy-configuration/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integrations"
+          },
+          {
+            "target": "/deploy/integrations/private-registry/",
+            "title": "Pull integrations from a private registry",
+            "doc_type": "how-to",
+            "products": [
+              "composer",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/integration-manager/registry-authentication/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integrations"
+          },
+          {
+            "target": "/deploy/integrations/migrate/",
+            "title": "Migrate to XTM Composer",
+            "doc_type": "how-to",
+            "products": [
+              "composer",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/integration-manager/migration/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integrations"
+          },
+          {
+            "target": "/deploy/integrations/manual/",
+            "title": "Run an integration without XTM Composer",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/connectors/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integrations"
+          },
+          {
+            "target": "/deploy/integrations/troubleshoot/",
+            "title": "Troubleshoot XTM Composer",
+            "doc_type": "how-to",
+            "products": [
+              "composer",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/integration-manager/troubleshooting/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integrations"
+          }
+        ]
+      },
+      {
+        "id": "operate",
+        "label": "Operate",
+        "pages": [
+          {
+            "target": "/deploy/operate/metrics/",
+            "title": "Observability metrics",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/telemetry/",
+            "more": 0,
+            "more_done": 0,
+            "group": "operate"
+          },
+          {
+            "target": "/deploy/operate/health-probes/",
+            "title": "Check that the platforms are healthy",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/advanced/liveness-probe/",
+            "more": 0,
+            "more_done": 0,
+            "group": "operate"
+          },
+          {
+            "target": "/deploy/operate/backup/",
+            "title": "Back up and restore",
+            "doc_type": "how-to",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "operate"
+          },
+          {
+            "target": "/deploy/operate/scale/",
+            "title": "Scale: workers, platforms and clusters",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/advanced/clustering/",
+            "more": 0,
+            "more_done": 0,
+            "group": "operate"
+          },
+          {
+            "target": "/deploy/operate/rollover/",
+            "title": "Manage Elasticsearch indices",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/advanced/rollover/",
+            "more": 0,
+            "more_done": 0,
+            "group": "operate"
+          },
+          {
+            "target": "/deploy/operate/harden/",
+            "title": "Harden the deployment",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/advanced/rate-limiting/",
+            "more": 0,
+            "more_done": 0,
+            "group": "operate"
+          },
+          {
+            "target": "/deploy/operate/troubleshoot/",
+            "title": "Troubleshoot the XTM stack",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/advanced/troubleshooting/",
+            "more": 0,
+            "more_done": 0,
+            "group": "operate"
+          },
+          {
+            "target": "/deploy/operate/support-package/",
+            "title": "Collect logs for support",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/support-package/",
+            "more": 0,
+            "more_done": 0,
+            "group": "operate"
+          },
+          {
+            "target": "/deploy/operate/xtm-one/",
+            "title": "Monitor and troubleshoot XTM One",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "operate"
+          }
+        ]
+      },
+      {
+        "id": "upgrade",
+        "label": "Upgrade",
+        "pages": [
+          {
+            "target": "/deploy/upgrade/",
+            "title": "Upgrade",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/upgrade/",
+            "more": 0,
+            "more_done": 0,
+            "group": "upgrade"
+          },
+          {
+            "target": "/deploy/upgrade/lifecycle/",
+            "title": "Versioning and LTS",
+            "doc_type": "explanation",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/product-life-cycle/",
+            "more": 0,
+            "more_done": 0,
+            "group": "upgrade"
+          },
+          {
+            "target": "/deploy/upgrade/compatibility/",
+            "title": "Compatibility matrix",
+            "doc_type": "reference",
+            "products": [
+              "opencti",
+              "openaev",
+              "xtm-one",
+              "composer"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "upgrade"
+          },
+          {
+            "target": "/deploy/upgrade/breaking-changes/",
+            "title": "Breaking changes",
+            "doc_type": "reference",
+            "products": [
+              "opencti",
+              "openaev",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/breaking-changes/",
+            "more": 11,
+            "more_done": 11,
+            "group": "upgrade"
+          },
+          {
+            "target": "/deploy/upgrade/xtm-one/",
+            "title": "Upgrade XTM One",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "upgrade"
+          }
+        ]
+      }
+    ]
+  },
+  "opencti": {
+    "done": 101,
+    "total": 101,
+    "groups": [
+      {
+        "id": "concepts",
+        "label": "Concepts",
+        "pages": [
+          {
+            "target": "/opencti/concepts/architecture/",
+            "title": "How OpenCTI works: platform, workers, managers and connectors",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/advanced/managers/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencti/concepts/data-model/",
+            "title": "Data model",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/data-model/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencti/concepts/nested-objects/",
+            "title": "Nested objects",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/nested/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencti/concepts/containers/",
+            "title": "Containers",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/containers/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencti/concepts/deduplication/",
+            "title": "Deduplication",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/deduplication/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencti/concepts/reliability-confidence/",
+            "title": "Reliability and confidence",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/reliability-confidence/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencti/concepts/dates/",
+            "title": "Meaning of dates",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/dates/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencti/concepts/data-processing/",
+            "title": "Data processing",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/reference/data-processing/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          }
+        ]
+      },
+      {
+        "id": "use",
+        "label": "Use",
+        "pages": [
+          {
+            "target": "/opencti/use/explore/",
+            "title": "Explore knowledge",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/overview/",
+            "more": 11,
+            "more_done": 11,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/delete-restore/",
+            "title": "Delete and restore knowledge",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/delete-restore/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/profile/",
+            "title": "Set up your profile",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/ingest/",
+            "title": "How intelligence gets into OpenCTI",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/import/getting-started/",
+            "more": 13,
+            "more_done": 13,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/dashboards/",
+            "title": "Build dashboards",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/dashboards/",
+            "more": 3,
+            "more_done": 3,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/analyze/graphs/",
+            "title": "Work with graphs",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/graphs/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/analyze/pivot/",
+            "title": "Pivot and investigate",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/pivoting/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/analyze/pir/",
+            "title": "Follow your priority threats with PIRs",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/pir/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/analyze/cases/",
+            "title": "Handle incidents and requests in cases",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/case-management/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/analyze/indicators-lifecycle/",
+            "title": "How indicators age and expire",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/indicators-lifecycle/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/analyze/security-coverage/",
+            "title": "Measure your defenses against a threat",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/security-coverage/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/enrich/inferences/",
+            "title": "How OpenCTI infers new relationships",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/inferences/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/enrich/connectors/",
+            "title": "Enrich knowledge from external sources",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/enrichment/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/enrich/merge/",
+            "title": "Merge duplicates",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/merging/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/enrich/refine-content/",
+            "title": "Refine content with AI",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/refine-content/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/automate/playbooks/",
+            "title": "Automate with playbooks",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/playbook-automation/",
+            "more": 3,
+            "more_done": 3,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/automate/notifications/",
+            "title": "Get alerted when knowledge changes",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/notifications/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/automate/background-tasks/",
+            "title": "Change many objects at once",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/background-tasks/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/automate/draft-workflow/",
+            "title": "Approve drafts step by step",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/draft-workflow/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/automate/entity-workflows/",
+            "title": "Track the progress of reports and cases",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/workflows/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/share/feeds/",
+            "title": "Share knowledge with your security tools",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/feeds/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/share/export/",
+            "title": "Export knowledge to a file",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/export/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencti/use/share/dissemination-lists/",
+            "title": "Send intelligence by email",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/dissemination-list/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          }
+        ]
+      },
+      {
+        "id": "configure",
+        "label": "Configure",
+        "pages": [
+          {
+            "target": "/opencti/configure/entities/",
+            "title": "Customize entity types",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/entities/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/rules/",
+            "title": "Turn inference rules on or off",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/reasoning/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/decay/",
+            "title": "Age indicators with decay rules",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/decay-rules/",
+            "more": 1,
+            "more_done": 1,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/retention/",
+            "title": "Delete old data automatically",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/retentions/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/notifiers/",
+            "title": "Send notifications by email or webhook",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/notifiers/",
+            "more": 1,
+            "more_done": 1,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/fintel-designs/",
+            "title": "Brand your PDF reports",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/fintel-designs/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/exclusion-lists/",
+            "title": "Keep benign values out of indicators",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/exclusion-lists/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/email-templates/",
+            "title": "Customize the emails OpenCTI sends",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/email-templates/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/file-indexing/",
+            "title": "Search inside files",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/file-indexing/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/data-sanity/",
+            "title": "Repair data after an upgrade",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/dataSanityManager/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/activity/",
+            "title": "Audit who did what",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/audit/overview/",
+            "more": 3,
+            "more_done": 3,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/parameters/",
+            "title": "Set the platform parameters",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/parameters/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/taxonomies/",
+            "title": "Manage labels, vocabularies and templates",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/ontologies/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/xtm-hub/",
+            "title": "Connect to XTM Hub",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/hub/",
+            "more": 2,
+            "more_done": 2,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/telemetry/",
+            "title": "Usage telemetry and privacy",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/reference/usage-telemetry/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/mappers/csv/",
+            "title": "Map CSV files to knowledge",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/csv-mappers/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencti/configure/mappers/json/",
+            "title": "Map JSON APIs to knowledge",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/json-mappers/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          }
+        ]
+      },
+      {
+        "id": "administer",
+        "label": "Administer",
+        "pages": [
+          {
+            "target": "/opencti/administer/access-control/",
+            "title": "How access control works",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/users/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/users/",
+            "title": "Manage users",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/groups/",
+            "title": "Organize users in groups",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/roles/",
+            "title": "Grant rights with roles",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/service-accounts/",
+            "title": "Create accounts for integrations",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/sso/",
+            "title": "Configure single sign-on",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/authentication/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/authentications/",
+            "title": "Manage login providers in the UI",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/authentication-via-ui/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/sensitive-configuration/",
+            "title": "Protect sensitive configuration",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/protect-sensitive-configuration/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/segregation/",
+            "title": "How OpenCTI decides who sees what",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/organizations/",
+            "title": "Separate data between organizations",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/organization-segregation/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/markings/",
+            "title": "Restrict access with markings",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/segregation/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/sharing/",
+            "title": "Restrict one object to chosen people",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/authorized-members/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/request-access/",
+            "title": "Let users request access",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/request-access/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/policies/",
+            "title": "Set platform security policies",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/policies/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/cookies/",
+            "title": "Cookies",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/cookies/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencti/administer/smtp/",
+            "title": "Send emails from OpenCTI",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/administration/smtp-configuration/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          }
+        ]
+      }
+    ]
+  },
+  "openaev": {
+    "done": 77,
+    "total": 77,
+    "groups": [
+      {
+        "id": "concepts",
+        "label": "Concepts",
+        "pages": [
+          {
+            "target": "/openaev/concepts/architecture/",
+            "title": "How OpenAEV works: platform, agents, collectors and injectors",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/deployment/platform/managers/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/openaev/concepts/scenarios-simulations/",
+            "title": "How a scenario becomes a simulation",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/get-started/foundations/scenarios-and-simulations/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/openaev/concepts/injects-expectations/",
+            "title": "How an attack becomes injects and expectations",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/get-started/foundations/injects-and-expectations/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/openaev/concepts/data-model/",
+            "title": "How OpenAEV keeps what you test and what it finds",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/openaev/concepts/deduplication/",
+            "title": "How OpenAEV recognizes what it already has",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/openaev/concepts/security-domains/",
+            "title": "How security domains group your results",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/threat-arsenals/domains/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/openaev/concepts/validation/",
+            "title": "How you validate your defenses in OpenAEV",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/run-and-evaluate/overview/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/openaev/concepts/access/",
+            "title": "How access works in OpenAEV",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/administration/introduction/",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          }
+        ]
+      },
+      {
+        "id": "use",
+        "label": "Use",
+        "pages": [
+          {
+            "target": "/openaev/use/coverage-enrichment/",
+            "title": "Connect OpenAEV to OpenCTI to test security coverages",
+            "doc_type": "how-to",
+            "products": [
+              "openaev",
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/integrations/xtm-suite/xtm-suite-connector/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/simulations/",
+            "title": "Run a simulation and read its results",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/run-and-evaluate/simulation/simulation/",
+            "more": 1,
+            "more_done": 1,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/atomic-testing/",
+            "title": "Check one attack technique with an atomic test",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/run-and-evaluate/atomic-testing/atomic-testing/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/injects/",
+            "title": "Add injects to scenarios and simulations",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/run-and-evaluate/injects/inject-overview/",
+            "more": 4,
+            "more_done": 4,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/threat-arsenal/",
+            "title": "Build the actions of your threat arsenal",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/threat-arsenals/threat-arsenals/",
+            "more": 2,
+            "more_done": 2,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/targets/",
+            "title": "How injects reach assets and people",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/assets/",
+            "more": 2,
+            "more_done": 2,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/expectations/",
+            "title": "How expectations score an inject",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/run-and-evaluate/expectations/expectations/",
+            "more": 2,
+            "more_done": 2,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/findings/",
+            "title": "Review what your injects discovered",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/run-and-evaluate/findings/findings/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/dashboards/",
+            "title": "Build dashboards of your validation results",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/run-and-evaluate/dashboards/custom-dashboards/",
+            "more": 1,
+            "more_done": 1,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/injectors/",
+            "title": "How injectors deliver your injects",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/integrations/injectors/injectors/",
+            "more": 1,
+            "more_done": 1,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/collectors/",
+            "title": "How collectors measure what your security tools saw",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/integrations/collectors/collectors/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/agents/",
+            "title": "Install the OpenAEV agent on your endpoints",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/integrations/agents/openaev-agent/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/phishing/",
+            "title": "How a phishing exercise works",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/components/phishing/overview/",
+            "more": 5,
+            "more_done": 5,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/attack-chaining/",
+            "title": "How a chained scenario works",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/attack-chaining/overview/",
+            "more": 5,
+            "more_done": 5,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/executors/",
+            "title": "Choose between the OpenAEV agent and your EDR",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/integrations/executors/executors/",
+            "more": 6,
+            "more_done": 6,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/profile/",
+            "title": "Set up your profile",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/administration/profile/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/scenarios/build/",
+            "title": "Build a scenario that replays an attack",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/scenario/scenario/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/scenarios/import/",
+            "title": "Import a timeline of injects from a spreadsheet",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/scenario/scenario-import/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/scenarios/from-opencti/",
+            "title": "Turn an OpenCTI security coverage into a scenario",
+            "doc_type": "how-to",
+            "products": [
+              "openaev",
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/scenario/security-coverage/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/components/documents/",
+            "title": "Share files with your players",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/components/documents/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/components/variables/",
+            "title": "Send each player their own email with variables",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/components/variables/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/components/channels/",
+            "title": "Create the media outlets of an exercise",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/components/channels/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/components/media-pressure/",
+            "title": "Publish fake press articles during an exercise",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/components/media-pressure/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/components/challenges/",
+            "title": "Give your players challenges to solve",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/components/challenges/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/openaev/use/components/lessons/",
+            "title": "Collect lessons learned after an exercise",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/build/components/lessons/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          }
+        ]
+      },
+      {
+        "id": "configure",
+        "label": "Configure",
+        "pages": [
+          {
+            "target": "/openaev/configure/autonomous-attack/",
+            "title": "Configure autonomous attack chaining",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/attack-chaining/autonomous/configuration/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/openaev/configure/asset-rules/",
+            "title": "Set default asset groups by scenario tag",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/administration/default-asset-rules/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/openaev/configure/notifications/",
+            "title": "Get notified of score drops and changes",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/usage/run-and-evaluate/notifications/overview/",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          }
+        ]
+      },
+      {
+        "id": "administer",
+        "label": "Administer",
+        "pages": [
+          {
+            "target": "/openaev/administer/run-modes/",
+            "title": "Start the platform in safe mode",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/deployment/platform/run-modes/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/openaev/administer/url-access-token/",
+            "title": "Protect the links in player emails",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/deployment/platform/url-access-token/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/openaev/administer/debug-mode/",
+            "title": "Turn on the debug mode to find slow requests",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/administration/debug-mode/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/openaev/administer/troubleshoot/",
+            "title": "Troubleshoot OpenAEV",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/troubleshooting/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/openaev/administer/sso/",
+            "title": "Configure single sign-on",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/deployment/platform/authentication/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/openaev/administer/audit-log/",
+            "title": "Keep an audit log of who changed what",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/deployment/configuration/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/openaev/administer/policies/",
+            "title": "Set the login message and the consent box",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/administration/policies/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/openaev/administer/parameters/",
+            "title": "Set the name, look and home page of a tenant",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/administration/parameters/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/openaev/administer/multi-tenancy/",
+            "title": "Give each organization its own tenant",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/administration/multi-tenancy/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/openaev/administer/taxonomies/",
+            "title": "Manage the tags, attack patterns and vulnerabilities",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/administration/taxonomies/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/openaev/administer/xtm-hub/",
+            "title": "Connect a tenant to XTM Hub",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/administration/hub/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/openaev/administer/telemetry/",
+            "title": "Check or stop the usage telemetry sent to Filigran",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/reference/deployment/telemetry/",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          }
+        ]
+      }
+    ]
+  },
+  "opencrq": {
+    "done": 42,
+    "total": 42,
+    "groups": [
+      {
+        "id": "concepts",
+        "label": "Concepts",
+        "pages": [
+          {
+            "target": "/opencrq/concepts/how-risk-is-quantified/",
+            "title": "How OpenCRQ quantifies risk",
+            "doc_type": "explanation",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencrq/concepts/risk-scopes-and-assets/",
+            "title": "Risk scopes, primary assets and supporting assets",
+            "doc_type": "explanation",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencrq/concepts/asset-consolidation/",
+            "title": "How OpenCRQ merges an asset several sources report",
+            "doc_type": "explanation",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencrq/concepts/data-model/",
+            "title": "How OpenCRQ's objects connect, from a risk scope to its price",
+            "doc_type": "explanation",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/opencrq/concepts/architecture/",
+            "title": "How OpenCRQ works: processes, ports, storage and connections",
+            "doc_type": "explanation",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          }
+        ]
+      },
+      {
+        "id": "use",
+        "label": "Use",
+        "pages": [
+          {
+            "target": "/opencrq/use/profile/",
+            "title": "Set your profile and follow your notifications",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/get-started/",
+            "title": "Get your first quantified risk scenario in eight steps",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 9,
+            "more_done": 9,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/search/",
+            "title": "Find a scenario, an asset or a threat by its name",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/sources/opencti/",
+            "title": "Connect OpenCTI with a Live Stream",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq",
+              "opencti"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/sources/openaev/",
+            "title": "Import OpenAEV results",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq",
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/sources/microsoft-defender/",
+            "title": "Import assets from Microsoft Defender",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/sources/drata/",
+            "title": "Import compliance readiness from Drata",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/sources/vulnerability-sources/",
+            "title": "How CVE sources weigh your vulnerabilities",
+            "doc_type": "explanation",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/attack-surface/assets/",
+            "title": "Build the attack surface from your assets",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/attack-surface/findings/",
+            "title": "Review the findings on your assets",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq",
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/threats/threat-center/",
+            "title": "Follow the threats that target your scopes",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq",
+              "opencti"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/threats/threat-event-frequency/",
+            "title": "Set the threat event frequency",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/defenses/controls/",
+            "title": "Set how strong your controls are and read how they held",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq",
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/defenses/compliance/",
+            "title": "Measure your compliance maturity against a framework",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/quantify/loss-drivers/",
+            "title": "Set what an attack costs with the financial profile",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/quantify/risk-scenarios/",
+            "title": "Build and price a risk scenario",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/decide/dashboards/",
+            "title": "Track cyber risk in money with dashboards",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/decide/treatment-plans/",
+            "title": "Choose the treatment plan that removes the most loss",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/opencrq/use/decide/budget-reviews/",
+            "title": "Review a year's security budget against the loss it avoided",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          }
+        ]
+      },
+      {
+        "id": "configure",
+        "label": "Configure",
+        "pages": [
+          {
+            "target": "/opencrq/configure/parameters/",
+            "title": "Set the platform's parameters and file storage",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencrq/configure/quantification-engine/",
+            "title": "Set how OpenCRQ weighs threats, controls and assets",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencrq/configure/risk-taxonomies/",
+            "title": "Read the risk catalogues and manage asset tags",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          },
+          {
+            "target": "/opencrq/configure/attack-and-vulnerability-catalogues/",
+            "title": "Explore the ATT&CK, CVE and CWE catalogues",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "configure"
+          }
+        ]
+      },
+      {
+        "id": "administer",
+        "label": "Administer",
+        "pages": [
+          {
+            "target": "/opencrq/administer/users-and-roles/",
+            "title": "Give people access with users, groups and roles",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencrq/administer/tenants/",
+            "title": "Run several tenants in one platform",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencrq/administer/service-accounts/",
+            "title": "Let integrations sign in with service accounts",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencrq/administer/background-jobs/",
+            "title": "Follow the background jobs and run one again",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/opencrq/administer/telemetry/",
+            "title": "Check or stop the usage telemetry sent to Filigran",
+            "doc_type": "how-to",
+            "products": [
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          }
+        ]
+      }
+    ]
+  },
+  "xtm-one": {
+    "done": 73,
+    "total": 73,
+    "groups": [
+      {
+        "id": "concepts",
+        "label": "Concepts",
+        "pages": [
+          {
+            "target": "/xtm-one/concepts/architecture/",
+            "title": "How XTM One works: the platform, the worker and the modules",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/xtm-one/concepts/data-model/",
+            "title": "How XTM One keeps what agents know and do",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/xtm-one/concepts/scopes/",
+            "title": "Who sees what: containers, scopes and nesting",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/xtm-one/concepts/deduplication/",
+            "title": "How XTM One reuses what already exists",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/xtm-one/concepts/dates-and-status/",
+            "title": "What the dates and statuses of an object mean",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/xtm-one/concepts/trust/",
+            "title": "How XTM One marks what to trust and what to review",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/xtm-one/concepts/working-with-agents/",
+            "title": "How you work with agents in XTM One",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/xtm-one/concepts/agents/",
+            "title": "What agents are made of",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/xtm-one/concepts/access/",
+            "title": "How access works in XTM One",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          },
+          {
+            "target": "/xtm-one/concepts/value-methodology/",
+            "title": "How XTM One computes the value of agents' work",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "concepts"
+          }
+        ]
+      },
+      {
+        "id": "use",
+        "label": "Use",
+        "pages": [
+          {
+            "target": "/xtm-one/use/in-opencti/",
+            "title": "XTM One in OpenCTI",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one",
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/usage/copilot/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use",
+            "featured": true
+          },
+          {
+            "target": "/xtm-one/use/in-openaev/",
+            "title": "XTM One in OpenAEV",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/integrations/xtm-suite/xtm-one/",
+            "more": 0,
+            "more_done": 0,
+            "group": "use",
+            "featured": true
+          },
+          {
+            "target": "/xtm-one/use/in-opencrq/",
+            "title": "XTM One in OpenCRQ",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one",
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use",
+            "featured": true
+          },
+          {
+            "target": "/xtm-one/use/getting-started/",
+            "title": "Start with XTM One",
+            "doc_type": "tutorial",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/chat/",
+            "title": "Get answers from an agent in the chat",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/agentic-flow/",
+            "title": "Follow how agents hand work to each other",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/work-items/",
+            "title": "Let an agent act later, at a time you choose",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/webhook-triggers/",
+            "title": "Start an agent from another tool with a webhook",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/run-budgets/",
+            "title": "Set what one agent run may spend",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/workspaces/",
+            "title": "Share a workspace with your team",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/presentations/",
+            "title": "Turn an agent's work into a presentation",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/files/",
+            "title": "Find the files agents created and received",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/sandbox-workspace/",
+            "title": "Let an agent run code in a sandbox",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/ai-catalog/",
+            "title": "Add ready-made agents from the AI Catalog",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/dashboard/",
+            "title": "Read the home dashboard",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/work-history/",
+            "title": "Review what agents did",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/platform-insights/",
+            "title": "Get answers about the platform's own activity",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/profile/",
+            "title": "Set up your profile and API keys",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/live-poll-voting/",
+            "title": "Let your audience vote from their phones",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/value/",
+            "title": "Measure what your agents' work is worth",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/search/",
+            "title": "Find anything on the platform by its name",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/ctem-cases/",
+            "title": "Track the fixes that close your exposures",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          },
+          {
+            "target": "/xtm-one/use/governance/",
+            "title": "Follow your exposure posture against its target",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one",
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "use"
+          }
+        ]
+      },
+      {
+        "id": "build",
+        "label": "Build",
+        "pages": [
+          {
+            "target": "/xtm-one/build/agents/",
+            "title": "Create an agent",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/knowledge-bases/",
+            "title": "Give agents your documents with knowledge bases",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/prompts/",
+            "title": "Write reusable prompts",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/templates/",
+            "title": "Brand the decks and reports agents produce",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/skills/",
+            "title": "Teach agents a procedure with skills",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/tools/",
+            "title": "Give agents built-in and custom tools",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/mcp-servers/",
+            "title": "Connect an MCP server",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/platform-mcp-servers/",
+            "title": "Use XTM One's own MCP servers from other clients",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/integrations/",
+            "title": "Connect agents to your tools with integrations",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/browser-profiles/",
+            "title": "Let agents sign in to web applications",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/variables/",
+            "title": "Store values agents reuse in variables",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/relays/",
+            "title": "Reach on-premise tools through a relay",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/runners/",
+            "title": "Let agents act on a computer with XTM One Desktop",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/sharing/",
+            "title": "Share agents and resources",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/xtm-one/build/fleets/",
+            "title": "Run agents as a team with fleets",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          }
+        ]
+      },
+      {
+        "id": "administer",
+        "label": "Administer",
+        "pages": [
+          {
+            "target": "/xtm-one/administer/observability/",
+            "title": "Follow what agents do and what they cost",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/audit-logs/",
+            "title": "Review who changed what on the platform",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/settings/",
+            "title": "Set up the platform in Settings",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/sso/",
+            "title": "Configure single sign-on",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/intents/",
+            "title": "Choose which agent answers each AI feature",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/ai-governance/",
+            "title": "Protect your data and approve what agents do",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/prompt-safety/",
+            "title": "Protect agents from prompt injection with Nova",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/editions/",
+            "title": "What each edition of XTM One brings",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/running-without-ai/",
+            "title": "Run XTM One with AI switched off",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/emergency-stop/",
+            "title": "Stop every agent at once",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/secret-vaults/",
+            "title": "Keep secrets in your vault",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/chat-approvals/",
+            "title": "Collect tool approvals in your own chat client",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/telemetry/",
+            "title": "Check or stop the usage telemetry sent to Filigran",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/channels/",
+            "title": "Talk to agents from your messaging apps",
+            "doc_type": "explanation",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 7,
+            "more_done": 7,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/tracked-organizations/",
+            "title": "Track the organizations your company depends on",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/organization-profile/",
+            "title": "Set up the organization profile agents read",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/xtm-hub/",
+            "title": "Connect XTM One to the XTM Hub",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          },
+          {
+            "target": "/xtm-one/administer/platform-health/",
+            "title": "Review what Platform Health finds and proposes for your agents",
+            "doc_type": "how-to",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "administer"
+          }
+        ]
+      }
+    ]
+  },
+  "workflows": {
+    "done": 15,
+    "total": 15,
+    "groups": [
+      {
+        "id": "ctem-cycle",
+        "label": "CTEM cycle",
+        "pages": [
+          {
+            "target": "/workflows/ctem-cycle/",
+            "title": "Run a CTEM cycle across the platform",
+            "doc_type": "journey",
+            "products": [
+              "xtm-one",
+              "opencti",
+              "openaev",
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "ctem-cycle"
+          }
+        ]
+      },
+      {
+        "id": "threat-informed-validation",
+        "label": "Threat-informed validation",
+        "pages": [
+          {
+            "target": "/workflows/threat-informed-validation/",
+            "title": "Check your defenses against the threats you track",
+            "doc_type": "journey",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "threat-informed-validation"
+          }
+        ]
+      },
+      {
+        "id": "ai-assisted-intelligence",
+        "label": "AI-assisted intelligence",
+        "pages": [
+          {
+            "target": "/workflows/ai-assisted-intelligence/",
+            "title": "Put XTM One agents to work on your intelligence",
+            "doc_type": "journey",
+            "products": [
+              "opencti",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "ai-assisted-intelligence"
+          }
+        ]
+      },
+      {
+        "id": "reuse-from-hub",
+        "label": "Reuse from XTM Hub",
+        "pages": [
+          {
+            "target": "/workflows/reuse-from-hub/",
+            "title": "Reuse ready-made content from XTM Hub",
+            "doc_type": "journey",
+            "products": [
+              "opencti",
+              "openaev",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "reuse-from-hub"
+          }
+        ]
+      },
+      {
+        "id": "composer-rollout",
+        "label": "XTM Composer rollout",
+        "pages": [
+          {
+            "target": "/workflows/composer-rollout/",
+            "title": "Deploy integrations across the platform with XTM Composer",
+            "doc_type": "journey",
+            "products": [
+              "composer",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "composer-rollout"
+          }
+        ]
+      },
+      {
+        "id": "automate-intelligence",
+        "label": "Automate intelligence",
+        "pages": [
+          {
+            "target": "/workflows/automate-intelligence/",
+            "title": "Automate threat intelligence",
+            "doc_type": "journey",
+            "products": [
+              "opencti",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "automate-intelligence"
+          }
+        ]
+      },
+      {
+        "id": "investigate-an-incident",
+        "label": "Investigate an incident",
+        "pages": [
+          {
+            "target": "/workflows/investigate-an-incident/",
+            "title": "Investigate an incident",
+            "doc_type": "journey",
+            "products": [
+              "opencti",
+              "openaev",
+              "opencrq",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "investigate-an-incident"
+          }
+        ]
+      },
+      {
+        "id": "brief-a-sector",
+        "label": "Brief a sector",
+        "pages": [
+          {
+            "target": "/workflows/brief-a-sector/",
+            "title": "Brief a sector on its threats",
+            "doc_type": "journey",
+            "products": [
+              "opencti",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "brief-a-sector"
+          }
+        ]
+      },
+      {
+        "id": "rehearse-a-crisis",
+        "label": "Rehearse a crisis",
+        "pages": [
+          {
+            "target": "/workflows/rehearse-a-crisis/",
+            "title": "Rehearse a cyber crisis with the people who would live it",
+            "doc_type": "journey",
+            "products": [
+              "openaev",
+              "opencrq",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "rehearse-a-crisis"
+          }
+        ]
+      },
+      {
+        "id": "test-your-people",
+        "label": "Test your people",
+        "pages": [
+          {
+            "target": "/workflows/test-your-people/",
+            "title": "Test whether your staff fall for the lure",
+            "doc_type": "journey",
+            "products": [
+              "opencti",
+              "openaev",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "test-your-people"
+          }
+        ]
+      },
+      {
+        "id": "validate-detections",
+        "label": "Validate detections",
+        "pages": [
+          {
+            "target": "/workflows/validate-detections/",
+            "title": "Keep your detections tested every week",
+            "doc_type": "journey",
+            "products": [
+              "openaev",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "validate-detections"
+          }
+        ]
+      },
+      {
+        "id": "build-an-agent",
+        "label": "Build an agent",
+        "pages": [
+          {
+            "target": "/workflows/build-an-agent/",
+            "title": "Build an AI agent your team can trust",
+            "doc_type": "journey",
+            "products": [
+              "xtm-one",
+              "opencti"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build-an-agent"
+          }
+        ]
+      },
+      {
+        "id": "govern-ai",
+        "label": "Govern AI",
+        "pages": [
+          {
+            "target": "/workflows/govern-ai/",
+            "title": "Govern how AI is used across the platform",
+            "doc_type": "journey",
+            "products": [
+              "xtm-one",
+              "opencti",
+              "openaev",
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "govern-ai"
+          }
+        ]
+      },
+      {
+        "id": "deploy-the-suite",
+        "label": "Deploy the platform",
+        "pages": [
+          {
+            "target": "/workflows/deploy-the-suite/",
+            "title": "Deploy the XTM platform",
+            "doc_type": "journey",
+            "products": [
+              "opencti",
+              "openaev",
+              "opencrq",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "deploy-the-suite"
+          }
+        ]
+      },
+      {
+        "id": "answer-from-slack",
+        "label": "Answer from Slack",
+        "pages": [
+          {
+            "target": "/workflows/answer-from-slack/",
+            "title": "Let the night shift ask agents from Slack",
+            "doc_type": "journey",
+            "products": [
+              "xtm-one",
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "answer-from-slack"
+          }
+        ]
+      }
+    ]
+  },
+  "develop": {
+    "done": 28,
+    "total": 28,
+    "groups": [
+      {
+        "id": "contribute",
+        "label": "Contribute",
+        "pages": [
+          {
+            "target": "/develop/contribute/database-migrations/",
+            "title": "Write an OpenAEV database migration",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/development/database-migrations/",
+            "more": 0,
+            "more_done": 0,
+            "group": "contribute"
+          },
+          {
+            "target": "/develop/contribute/build-from-source/",
+            "title": "Build and run from source",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/development/platform/",
+            "more": 0,
+            "more_done": 0,
+            "group": "contribute"
+          },
+          {
+            "target": "/develop/contribute/xtm-composer/",
+            "title": "Develop XTM Composer",
+            "doc_type": "how-to",
+            "products": [
+              "composer"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/development/integration-manager/",
+            "more": 0,
+            "more_done": 0,
+            "group": "contribute"
+          },
+          {
+            "target": "/develop/contribute/translations/",
+            "title": "Add or change a translation in OpenCTI or OpenAEV",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/development/translations/",
+            "more": 0,
+            "more_done": 0,
+            "group": "contribute"
+          },
+          {
+            "target": "/develop/contribute/docs/",
+            "title": "Write a page of the XTM documentation",
+            "doc_type": "how-to",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "contribute"
+          },
+          {
+            "target": "/develop/contribute/environment/macos/",
+            "title": "Prepare a macOS development environment",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/development/environment-macos/",
+            "more": 0,
+            "more_done": 0,
+            "group": "contribute"
+          },
+          {
+            "target": "/develop/contribute/environment/ubuntu/",
+            "title": "Prepare an Ubuntu development environment",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/development/environment_ubuntu/",
+            "more": 0,
+            "more_done": 0,
+            "group": "contribute"
+          },
+          {
+            "target": "/develop/contribute/environment/windows/",
+            "title": "Prepare a Windows development environment",
+            "doc_type": "how-to",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/development/environment_windows/",
+            "more": 0,
+            "more_done": 0,
+            "group": "contribute"
+          }
+        ]
+      },
+      {
+        "id": "integration-model",
+        "label": "Integration model",
+        "pages": [
+          {
+            "target": "/develop/integration-model/",
+            "title": "Integration model",
+            "doc_type": "explanation",
+            "products": [
+              "opencti",
+              "openaev",
+              "composer"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "integration-model"
+          },
+          {
+            "target": "/develop/integration-model/connectors/",
+            "title": "Connectors",
+            "doc_type": "explanation",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/connectors/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integration-model"
+          },
+          {
+            "target": "/develop/integration-model/injectors/",
+            "title": "Injectors",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/integrations/injectors/injectors/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integration-model"
+          },
+          {
+            "target": "/develop/integration-model/collectors/",
+            "title": "Collectors",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/integrations/collectors/collectors/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integration-model"
+          },
+          {
+            "target": "/develop/integration-model/executors/",
+            "title": "Executors",
+            "doc_type": "explanation",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/integrations/executors/executors/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integration-model"
+          },
+          {
+            "target": "/develop/integration-model/resources/",
+            "title": "Community resources",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/resources/",
+            "more": 0,
+            "more_done": 0,
+            "group": "integration-model"
+          }
+        ]
+      },
+      {
+        "id": "build",
+        "label": "Build",
+        "pages": [
+          {
+            "target": "/develop/build/connector/",
+            "title": "Build an OpenCTI connector",
+            "doc_type": "tutorial",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/development/connectors/",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/develop/build/injector/",
+            "title": "Build an OpenAEV injector",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/development/injectors/",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/develop/build/collector/",
+            "title": "Build an OpenAEV collector",
+            "doc_type": "how-to",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/development/collectors/",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/develop/build/manifest/",
+            "title": "Integration manifest",
+            "doc_type": "reference",
+            "products": [
+              "opencti",
+              "openaev",
+              "composer"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          },
+          {
+            "target": "/develop/build/python-client/",
+            "title": "Script OpenCTI in Python",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/development/python/",
+            "more": 0,
+            "more_done": 0,
+            "group": "build"
+          }
+        ]
+      },
+      {
+        "id": "apis",
+        "label": "APIs",
+        "pages": [
+          {
+            "target": "/develop/apis/",
+            "title": "APIs and integration options",
+            "doc_type": "explanation",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/deployment/integrations/",
+            "more": 0,
+            "more_done": 0,
+            "group": "apis"
+          },
+          {
+            "target": "/develop/apis/graphql/",
+            "title": "Query OpenCTI with GraphQL",
+            "doc_type": "how-to",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/reference/api/",
+            "more": 0,
+            "more_done": 0,
+            "group": "apis"
+          },
+          {
+            "target": "/develop/apis/rest/",
+            "title": "Script OpenAEV and XTM One with their REST APIs",
+            "doc_type": "how-to",
+            "products": [
+              "openaev",
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "live": "https://docs.openaev.io/latest/reference/apis/rest-api/",
+            "more": 0,
+            "more_done": 0,
+            "group": "apis"
+          },
+          {
+            "target": "/develop/apis/filters/",
+            "title": "Filters",
+            "doc_type": "reference",
+            "products": [
+              "opencti",
+              "openaev"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/reference/filters/",
+            "more": 0,
+            "more_done": 0,
+            "group": "apis"
+          },
+          {
+            "target": "/develop/apis/streams/",
+            "title": "Data streaming",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "migrated",
+            "live": "https://docs.opencti.io/latest/reference/streaming/",
+            "more": 0,
+            "more_done": 0,
+            "group": "apis"
+          },
+          {
+            "target": "/develop/apis/chat/",
+            "title": "XTM One chat API",
+            "doc_type": "reference",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "apis"
+          },
+          {
+            "target": "/develop/apis/mcp/",
+            "title": "MCP servers",
+            "doc_type": "reference",
+            "products": [
+              "xtm-one",
+              "opencti",
+              "openaev",
+              "opencrq"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "apis"
+          },
+          {
+            "target": "/develop/apis/docs-mcp/",
+            "title": "Connect your AI assistant to the documentation",
+            "doc_type": "how-to",
+            "products": [
+              "suite"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "apis"
+          },
+          {
+            "target": "/develop/apis/emergency-stop/",
+            "title": "XTM One emergency stop API",
+            "doc_type": "reference",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "apis"
+          }
+        ]
+      }
+    ]
+  },
+  "reference": {
+    "done": 35,
+    "total": 35,
+    "groups": [
+      {
+        "id": "openaev",
+        "label": "OpenAEV",
+        "pages": [
+          {
+            "target": "/reference/openaev/configuration/",
+            "title": "OpenAEV configuration",
+            "doc_type": "reference",
+            "products": [
+              "openaev"
+            ],
+            "status": "generated",
+            "live": "https://docs.openaev.io/latest/reference/deployment/configuration/",
+            "more": 0,
+            "more_done": 0,
+            "group": "openaev"
+          },
+          {
+            "target": "/reference/openaev/capabilities/",
+            "title": "OpenAEV capabilities",
+            "doc_type": "reference",
+            "products": [
+              "openaev"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "openaev"
+          },
+          {
+            "target": "/reference/openaev/inject-types/",
+            "title": "OpenAEV inject types",
+            "doc_type": "reference",
+            "products": [
+              "openaev"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "openaev"
+          },
+          {
+            "target": "/reference/openaev/filter-keys/",
+            "title": "OpenAEV filter keys",
+            "doc_type": "reference",
+            "products": [
+              "openaev"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "openaev"
+          },
+          {
+            "target": "/reference/openaev/openapi/",
+            "title": "OpenAEV OpenAPI",
+            "doc_type": "reference",
+            "products": [
+              "openaev"
+            ],
+            "status": "migrated",
+            "more": 0,
+            "more_done": 0,
+            "group": "openaev"
+          }
+        ]
+      },
+      {
+        "id": "opencti",
+        "label": "OpenCTI",
+        "pages": [
+          {
+            "target": "/reference/opencti/capabilities/",
+            "title": "OpenCTI capabilities",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/inference-rules/",
+            "title": "OpenCTI inference rules",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/decay-rules/",
+            "title": "OpenCTI built-in decay rules",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/audit-events/",
+            "title": "OpenCTI audit events",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/managers/",
+            "title": "OpenCTI managers",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/feature-flags/",
+            "title": "OpenCTI feature flags",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/http-endpoints/",
+            "title": "OpenCTI HTTP endpoints",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/errors/",
+            "title": "OpenCTI errors",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/configuration/",
+            "title": "OpenCTI configuration",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "live": "https://docs.opencti.io/latest/deployment/configuration/",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/data-model/",
+            "title": "OpenCTI data model",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "live": "https://docs.opencti.io/latest/reference/data-model/",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/filter-keys/",
+            "title": "OpenCTI filter keys",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/playbook-components/",
+            "title": "Playbook components",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "live": "https://docs.opencti.io/latest/usage/playbook-components/",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/metrics/",
+            "title": "OpenCTI metrics",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/integration-settings/",
+            "title": "OpenCTI integration settings",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/graphql-schema/",
+            "title": "OpenCTI GraphQL schema",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          },
+          {
+            "target": "/reference/opencti/vocabularies/",
+            "title": "OpenCTI vocabularies",
+            "doc_type": "reference",
+            "products": [
+              "opencti"
+            ],
+            "status": "generated",
+            "live": "https://docs.opencti.io/latest/reference/taxonomy/",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencti"
+          }
+        ]
+      },
+      {
+        "id": "composer",
+        "label": "XTM Composer",
+        "pages": [
+          {
+            "target": "/reference/composer/configuration/",
+            "title": "XTM Composer configuration keys",
+            "doc_type": "reference",
+            "products": [
+              "composer"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "composer"
+          }
+        ]
+      },
+      {
+        "id": "xtm-one",
+        "label": "XTM One",
+        "pages": [
+          {
+            "target": "/reference/xtm-one/configuration/",
+            "title": "XTM One configuration",
+            "doc_type": "reference",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "xtm-one"
+          },
+          {
+            "target": "/reference/xtm-one/api/",
+            "title": "XTM One API",
+            "doc_type": "reference",
+            "products": [
+              "xtm-one"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "xtm-one"
+          },
+          {
+            "target": "/reference/xtm-one/mcp-tools/",
+            "title": "XTM One MCP tools",
+            "doc_type": "reference",
+            "products": [
+              "xtm-one",
+              "opencti",
+              "openaev",
+              "opencrq"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "xtm-one"
+          }
+        ]
+      },
+      {
+        "id": "opencrq",
+        "label": "OpenCRQ",
+        "pages": [
+          {
+            "target": "/reference/opencrq/configuration/",
+            "title": "OpenCRQ configuration",
+            "doc_type": "reference",
+            "products": [
+              "opencrq"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencrq"
+          },
+          {
+            "target": "/reference/opencrq/api/",
+            "title": "OpenCRQ API",
+            "doc_type": "reference",
+            "products": [
+              "opencrq"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencrq"
+          },
+          {
+            "target": "/reference/opencrq/attack-outcomes/",
+            "title": "OpenCRQ attack outcomes",
+            "doc_type": "reference",
+            "products": [
+              "opencrq"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencrq"
+          },
+          {
+            "target": "/reference/opencrq/loss-drivers/",
+            "title": "OpenCRQ loss drivers",
+            "doc_type": "reference",
+            "products": [
+              "opencrq"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencrq"
+          },
+          {
+            "target": "/reference/opencrq/business-resources/",
+            "title": "OpenCRQ business resources",
+            "doc_type": "reference",
+            "products": [
+              "opencrq"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencrq"
+          },
+          {
+            "target": "/reference/opencrq/controls/",
+            "title": "OpenCRQ control catalogue",
+            "doc_type": "reference",
+            "products": [
+              "opencrq"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencrq"
+          },
+          {
+            "target": "/reference/opencrq/connectors/",
+            "title": "OpenCRQ connectors",
+            "doc_type": "reference",
+            "products": [
+              "opencrq"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencrq"
+          },
+          {
+            "target": "/reference/opencrq/processes/",
+            "title": "OpenCRQ background processes",
+            "doc_type": "reference",
+            "products": [
+              "opencrq"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencrq"
+          },
+          {
+            "target": "/reference/opencrq/capabilities/",
+            "title": "OpenCRQ capabilities",
+            "doc_type": "reference",
+            "products": [
+              "opencrq"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencrq"
+          },
+          {
+            "target": "/reference/opencrq/feature-flags/",
+            "title": "OpenCRQ feature flags",
+            "doc_type": "reference",
+            "products": [
+              "opencrq"
+            ],
+            "status": "generated",
+            "more": 0,
+            "more_done": 0,
+            "group": "opencrq"
+          }
+        ]
+      }
+    ]
+  }
+}

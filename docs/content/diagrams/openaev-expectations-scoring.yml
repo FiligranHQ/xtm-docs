@@ -1,0 +1,28 @@
+title: Sources score each agent or person, and the validation mode decides how those scores add up for an asset group or a team
+lanes:
+  - label: Sources
+    tone: external
+    nodes:
+      - {id: collectors, label: Collectors, icon: Search, note: "EDR, SIEM, email security"}
+      - {id: people, label: People, icon: Users, note: "Read, answer, are validated"}
+      - {id: expiry, label: Expiration, icon: Clock, note: Scores what never came}
+  - label: Leaves
+    tone: product
+    nodes:
+      - {id: agent, label: Agent or person, icon: Laptop, note: Scored from its sources}
+  - label: Groups
+    tone: product
+    nodes:
+      - {id: asset, label: Asset, icon: Server, note: From its agents}
+      - {id: group, label: Asset group or team, icon: Network, note: 'All must validate, or one'}
+  - label: Inject
+    tone: core
+    nodes:
+      - {id: tiles, label: Score per type, icon: Gauge, note: "Prevented, Detected, Successful"}
+edges:
+  - {from: collectors, to: agent, label: results}
+  - {from: people, to: agent, label: results}
+  - {from: expiry, to: agent, label: fails the rest, style: dashed}
+  - {from: agent, to: asset, label: rolls up}
+  - {from: asset, to: group, label: validation mode}
+  - {from: group, to: tiles, label: sums up}

@@ -1,0 +1,24 @@
+title: An inject takes the domains of its action or of its injector, and its expectations are scored per domain
+lanes:
+  - label: Declared by
+    tone: external
+    nodes:
+      - {id: action, label: Threat Arsenal action, icon: Crosshair, note: Its Domains field}
+      - {id: injector, label: Injector, icon: Puzzle, note: Domains of its inject types}
+  - label: Inject
+    tone: product
+    nodes:
+      - {id: inject, label: Inject, icon: Workflow, note: "Endpoint, Network, E-mail Infiltration..."}
+  - label: Results
+    tone: product
+    nodes:
+      - {id: expectations, label: Expectations, icon: ClipboardCheck, note: "Prevention, detection, vulnerability"}
+  - label: Read by domain
+    tone: product
+    nodes:
+      - {id: widget, label: Security Domains widget, icon: Gauge, note: Success rate per domain}
+edges:
+  - {from: action, to: inject, label: domains}
+  - {from: injector, to: inject, label: domains}
+  - {from: inject, to: expectations, label: scored}
+  - {from: expectations, to: widget, label: grouped by domain}

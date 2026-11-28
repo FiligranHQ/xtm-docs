@@ -1,0 +1,17 @@
+title: XTM One reads its infrastructure from the environment at startup, and everything else from the Settings screens
+lanes:
+  - label: You set
+    tone: external
+    nodes:
+      - {id: env, label: Environment variables, icon: Terminal, note: "BASE_URL, DATABASE_URL, on the platform and the worker"}
+      - {id: screens, label: Settings screens, icon: Wrench, note: "Sign-in, integrations, security options"}
+  - label: XTM One
+    tone: product
+    nodes:
+      - {id: platform, label: Platform and worker, icon: LogoXTMOne, note: "Read at startup"}
+      - {id: db, label: Database, icon: Layers, note: "What the screens save"}
+edges:
+  - {from: env, to: platform, label: at startup}
+  - {from: screens, to: db, label: saved}
+  - {from: db, to: platform, label: read when used}
+  - {from: env, to: db, label: overrides and locks, style: dashed}

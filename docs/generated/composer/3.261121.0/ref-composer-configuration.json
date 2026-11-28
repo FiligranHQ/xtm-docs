@@ -1,0 +1,1133 @@
+{
+  "name": "composer-configuration",
+  "version": "3.261121.0",
+  "source": "FiligranHQ/xtm-composer@832c5b1 (config/default.yaml, src/config/settings.rs, src/orchestrator/podman/mod.rs)",
+  "intro": "The 100 settings XTM Composer 3.261121.0 reads, block by block: its own (`manager`), the connection to each platform and the container engine it deploys the integrations on. Each key is also an environment variable: the key in upper case, with `__` between its levels. [Configure XTM Composer](/deploy/integrations/configure-composer/) explains how to set them.",
+  "filter": "Filter settings and variables",
+  "sections": [
+    {
+      "title": "Manager",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:manager.credentials_key_filepath",
+          "cells": [
+            "`manager.credentials_key_filepath`",
+            "`MANAGER__CREDENTIALS_KEY_FILEPATH`",
+            "String",
+            "Not set",
+            "Path of the file holding the RSA private key; takes priority over `manager.credentials_key` when both are set."
+          ]
+        },
+        {
+          "key": "composer:manager.credentials_key",
+          "cells": [
+            "`manager.credentials_key`",
+            "`MANAGER__CREDENTIALS_KEY`",
+            "String",
+            "Not set",
+            "RSA private key (PEM, 4096 bits) that decrypts the connectors' secret settings the platform sends; set it, or `manager.credentials_key_filepath`, from a secret."
+          ]
+        },
+        {
+          "key": "composer:manager.debug.show_env_vars",
+          "cells": [
+            "`manager.debug.show_env_vars`",
+            "`MANAGER__DEBUG__SHOW_ENV_VARS`",
+            "Boolean",
+            "`false`",
+            "Whether Composer logs the environment variables of each connector it deploys, with the secret values masked, to check what a connector receives."
+          ]
+        },
+        {
+          "key": "composer:manager.debug.show_sensitive_env_vars",
+          "cells": [
+            "`manager.debug.show_sensitive_env_vars`",
+            "`MANAGER__DEBUG__SHOW_SENSITIVE_ENV_VARS`",
+            "Boolean",
+            "`false`",
+            "With `manager.debug.show_env_vars`, whether the logs show the secret values too; only for a short investigation."
+          ]
+        },
+        {
+          "key": "composer:manager.execute_schedule",
+          "cells": [
+            "`manager.execute_schedule`",
+            "`MANAGER__EXECUTE_SCHEDULE`",
+            "Integer",
+            "`10`",
+            "Seconds between two passes of Composer over the connectors (deploy, start, stop, update to match the platform); also the wait between two attempts to reach Docker or Podman at start."
+          ]
+        },
+        {
+          "key": "composer:manager.id",
+          "cells": [
+            "`manager.id`",
+            "`MANAGER__ID`",
+            "String",
+            "`default-manager-id`",
+            "Unique identifier of this XTM Composer: the platform lists it under this id and assigns it the connectors it manages. Give each Composer its own id."
+          ]
+        },
+        {
+          "key": "composer:manager.image_tag_suffix",
+          "cells": [
+            "`manager.image_tag_suffix`",
+            "`MANAGER__IMAGE_TAG_SUFFIX`",
+            "String",
+            "Not set",
+            "Suffix Composer adds to the tag of every connector image it deploys, `-fips` or `-ubi9`, for the FIPS or Red Hat UBI builds of the connectors (`6.9.0` becomes `6.9.0-fips`, an image without a tag `latest-fips`). Any other value stops Composer at start. The FIPS image of Composer sets `-fips`."
+          ]
+        },
+        {
+          "key": "composer:manager.logger.console",
+          "cells": [
+            "`manager.logger.console`",
+            "`MANAGER__LOGGER__CONSOLE`",
+            "Boolean",
+            "`true`",
+            "In this version, turns on the daily log files of the `logs` folder next to the binary (the code swaps it with `manager.logger.directory`)."
+          ]
+        },
+        {
+          "key": "composer:manager.logger.directory",
+          "cells": [
+            "`manager.logger.directory`",
+            "`MANAGER__LOGGER__DIRECTORY`",
+            "Boolean",
+            "`true`",
+            "In this version, turns on the logs on the standard output (the code swaps it with `manager.logger.console`)."
+          ]
+        },
+        {
+          "key": "composer:manager.logger.format",
+          "cells": [
+            "`manager.logger.format`",
+            "`MANAGER__LOGGER__FORMAT`",
+            "String",
+            "`json`",
+            "Format of the logs on the standard output: `json` or `pretty`; the log files are always JSON."
+          ]
+        },
+        {
+          "key": "composer:manager.logger.level",
+          "cells": [
+            "`manager.logger.level`",
+            "`MANAGER__LOGGER__LEVEL`",
+            "String",
+            "`info`",
+            "Level of Composer's logs: `trace`, `debug`, `info`, `warn` or `error`."
+          ]
+        },
+        {
+          "key": "composer:manager.name",
+          "cells": [
+            "`manager.name`",
+            "`MANAGER__NAME`",
+            "String",
+            "`Filigran connector manager`",
+            "Name the platform shows for this XTM Composer."
+          ]
+        },
+        {
+          "key": "composer:manager.ping_alive_schedule",
+          "cells": [
+            "`manager.ping_alive_schedule`",
+            "`MANAGER__PING_ALIVE_SCHEDULE`",
+            "Integer",
+            "`60`",
+            "Seconds between two signals of life Composer sends to the platform."
+          ]
+        }
+      ],
+      "text": "XTM Composer reads `config/default.yaml`, then `config/<COMPOSER_ENV>.yaml` (or `.toml`; `COMPOSER_ENV` is `production` when unset) when it exists, then the environment: a variable is the key in upper case with `__` between levels. The `openaev` block takes the same keys as the `opencti` block below (variables `OPENAEV__...`)."
+    },
+    {
+      "title": "OpenCTI connection",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.connect_timeout",
+          "cells": [
+            "`opencti.connect_timeout`",
+            "`OPENCTI__CONNECT_TIMEOUT`",
+            "Integer",
+            "`10`",
+            "Seconds Composer waits to open a connection to the platform."
+          ]
+        },
+        {
+          "key": "composer:opencti.enable",
+          "cells": [
+            "`opencti.enable`",
+            "`OPENCTI__ENABLE`",
+            "Boolean",
+            "`true`",
+            "Whether Composer manages the connectors of an OpenCTI platform."
+          ]
+        },
+        {
+          "key": "composer:opencti.http_proxy",
+          "cells": [
+            "`opencti.http_proxy`",
+            "`OPENCTI__HTTP_PROXY`",
+            "String",
+            "Not set",
+            "HTTP proxy URL, with `opencti.with_proxy`; unset, Composer takes `HTTP_PROXY` from its environment."
+          ]
+        },
+        {
+          "key": "composer:opencti.https_proxy_ca",
+          "cells": [
+            "`opencti.https_proxy_ca`",
+            "`OPENCTI__HTTPS_PROXY_CA`",
+            "List of strings",
+            "Not set",
+            "CA certificates of an intercepting proxy, each a file path or an inline PEM: Composer mounts them in each connector and points `SSL_CERT_FILE`, `REQUESTS_CA_BUNDLE`, `NODE_EXTRA_CA_CERTS` and `CURL_CA_BUNDLE` to them."
+          ]
+        },
+        {
+          "key": "composer:opencti.https_proxy_reject_unauthorized",
+          "cells": [
+            "`opencti.https_proxy_reject_unauthorized`",
+            "`OPENCTI__HTTPS_PROXY_REJECT_UNAUTHORIZED`",
+            "Boolean",
+            "`true`",
+            "Whether the connectors reject a proxy certificate they cannot verify; `false` passes `NODE_TLS_REJECT_UNAUTHORIZED=0` to them."
+          ]
+        },
+        {
+          "key": "composer:opencti.https_proxy",
+          "cells": [
+            "`opencti.https_proxy`",
+            "`OPENCTI__HTTPS_PROXY`",
+            "String",
+            "Not set",
+            "HTTPS proxy URL, with `opencti.with_proxy`; unset, Composer takes `HTTPS_PROXY` from its environment."
+          ]
+        },
+        {
+          "key": "composer:opencti.logs_schedule",
+          "cells": [
+            "`opencti.logs_schedule`",
+            "`OPENCTI__LOGS_SCHEDULE`",
+            "Integer",
+            "`10`",
+            "Seconds between two reports of the connectors' logs to the platform, at most."
+          ]
+        },
+        {
+          "key": "composer:opencti.no_proxy",
+          "cells": [
+            "`opencti.no_proxy`",
+            "`OPENCTI__NO_PROXY`",
+            "String",
+            "Not set",
+            "Hosts reached without the proxy, comma-separated, passed to the connectors; unset, Composer takes `NO_PROXY` from its environment."
+          ]
+        },
+        {
+          "key": "composer:opencti.request_timeout",
+          "cells": [
+            "`opencti.request_timeout`",
+            "`OPENCTI__REQUEST_TIMEOUT`",
+            "Integer",
+            "`30`",
+            "Seconds Composer waits for an answer of the platform API."
+          ]
+        },
+        {
+          "key": "composer:opencti.token",
+          "cells": [
+            "`opencti.token`",
+            "`OPENCTI__TOKEN`",
+            "String",
+            "`ChangeMe`",
+            "API token of the user Composer authenticates with on the platform."
+          ]
+        },
+        {
+          "key": "composer:opencti.unsecured_certificate",
+          "cells": [
+            "`opencti.unsecured_certificate`",
+            "`OPENCTI__UNSECURED_CERTIFICATE`",
+            "Boolean",
+            "`false`",
+            "Whether Composer accepts a platform TLS certificate it cannot verify; only for a test platform."
+          ]
+        },
+        {
+          "key": "composer:opencti.url",
+          "cells": [
+            "`opencti.url`",
+            "`OPENCTI__URL`",
+            "String",
+            "`http://host.docker.internal:4000`",
+            "URL of the OpenCTI platform, as Composer reaches it."
+          ]
+        },
+        {
+          "key": "composer:opencti.with_proxy",
+          "cells": [
+            "`opencti.with_proxy`",
+            "`OPENCTI__WITH_PROXY`",
+            "Boolean",
+            "`false`",
+            "Whether Composer goes through a proxy to reach the platform and passes the proxy settings (`HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY` and the CA) to the connectors it deploys; off, it ignores every proxy, even the system's."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Orchestrator",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.selector",
+          "cells": [
+            "`opencti.daemon.selector`",
+            "`OPENCTI__DAEMON__SELECTOR`",
+            "String",
+            "`kubernetes`",
+            "Orchestrator Composer deploys the connectors on: `kubernetes`, `docker`, `podman`, `swarm` or `portainer`; its block configures it."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Image registry",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.registry.email",
+          "cells": [
+            "`opencti.daemon.registry.email`",
+            "`OPENCTI__DAEMON__REGISTRY__EMAIL`",
+            "String",
+            "Not set",
+            "Email of the private registry account, when the registry asks for one."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.registry.password",
+          "cells": [
+            "`opencti.daemon.registry.password`",
+            "`OPENCTI__DAEMON__REGISTRY__PASSWORD`",
+            "String",
+            "Not set",
+            "Password of the private registry."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.registry.server",
+          "cells": [
+            "`opencti.daemon.registry.server`",
+            "`OPENCTI__DAEMON__REGISTRY__SERVER`",
+            "String",
+            "Not set",
+            "Registry the connector images are pulled from, instead of Docker Hub (a mirror or a private registry)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.registry.username",
+          "cells": [
+            "`opencti.daemon.registry.username`",
+            "`OPENCTI__DAEMON__REGISTRY__USERNAME`",
+            "String",
+            "Not set",
+            "User of the private registry."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Kubernetes",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.kubernetes.base_deployment_json",
+          "cells": [
+            "`opencti.daemon.kubernetes.base_deployment_json`",
+            "`OPENCTI__DAEMON__KUBERNETES__BASE_DEPLOYMENT_JSON`",
+            "String",
+            "Not set",
+            "The same base Deployment as a JSON string, read when `base_deployment` is not set (convenient in an environment variable)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.kubernetes.base_deployment",
+          "cells": [
+            "`opencti.daemon.kubernetes.base_deployment`",
+            "`OPENCTI__DAEMON__KUBERNETES__BASE_DEPLOYMENT`",
+            "`Deployment` object",
+            "Not set",
+            "Kubernetes Deployment every connector's deployment starts from (labels, node selectors, security context...), merged under what Composer sets."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.kubernetes.image_pull_policy",
+          "cells": [
+            "`opencti.daemon.kubernetes.image_pull_policy`",
+            "`OPENCTI__DAEMON__KUBERNETES__IMAGE_PULL_POLICY`",
+            "String",
+            "`IfNotPresent`",
+            "When Kubernetes pulls a connector image: `Always`, `IfNotPresent` or `Never`; another value falls back to `IfNotPresent`."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.kubernetes.image_resources",
+          "cells": [
+            "`opencti.daemon.kubernetes.image_resources`",
+            "`OPENCTI__DAEMON__KUBERNETES__IMAGE_RESOURCES`",
+            "`ResourceRequirements` object",
+            "Not set",
+            "CPU and memory requests and limits of each connector container."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Docker",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.docker.cap_add",
+          "cells": [
+            "`opencti.daemon.docker.cap_add`",
+            "`OPENCTI__DAEMON__DOCKER__CAP_ADD`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities added to the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.cap_drop",
+          "cells": [
+            "`opencti.daemon.docker.cap_drop`",
+            "`OPENCTI__DAEMON__DOCKER__CAP_DROP`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities removed from the connector containers (`ALL` to harden them)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.dns_search",
+          "cells": [
+            "`opencti.daemon.docker.dns_search`",
+            "`OPENCTI__DAEMON__DOCKER__DNS_SEARCH`",
+            "List of strings",
+            "Not set",
+            "DNS search domains of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.dns",
+          "cells": [
+            "`opencti.daemon.docker.dns`",
+            "`OPENCTI__DAEMON__DOCKER__DNS`",
+            "List of strings",
+            "Not set",
+            "DNS servers of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.extra_hosts",
+          "cells": [
+            "`opencti.daemon.docker.extra_hosts`",
+            "`OPENCTI__DAEMON__DOCKER__EXTRA_HOSTS`",
+            "List of strings",
+            "Not set",
+            "Extra `host:ip` entries of the connector containers' hosts file."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.ipc_mode",
+          "cells": [
+            "`opencti.daemon.docker.ipc_mode`",
+            "`OPENCTI__DAEMON__DOCKER__IPC_MODE`",
+            "String",
+            "Not set",
+            "IPC namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.network_mode",
+          "cells": [
+            "`opencti.daemon.docker.network_mode`",
+            "`OPENCTI__DAEMON__DOCKER__NETWORK_MODE`",
+            "String",
+            "Not set",
+            "Network the connector containers join, usually the network of the OpenCTI stack so that they reach the platform and RabbitMQ."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.pid_mode",
+          "cells": [
+            "`opencti.daemon.docker.pid_mode`",
+            "`OPENCTI__DAEMON__DOCKER__PID_MODE`",
+            "String",
+            "Not set",
+            "PID namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.privileged",
+          "cells": [
+            "`opencti.daemon.docker.privileged`",
+            "`OPENCTI__DAEMON__DOCKER__PRIVILEGED`",
+            "Boolean",
+            "Not set",
+            "Whether the connector containers run privileged; leave it off unless a connector needs it."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.runtime",
+          "cells": [
+            "`opencti.daemon.docker.runtime`",
+            "`OPENCTI__DAEMON__DOCKER__RUNTIME`",
+            "String",
+            "Not set",
+            "Container runtime of the connector containers (for example `runsc` for gVisor)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.security_opt",
+          "cells": [
+            "`opencti.daemon.docker.security_opt`",
+            "`OPENCTI__DAEMON__DOCKER__SECURITY_OPT`",
+            "List of strings",
+            "Not set",
+            "Security options of the connector containers (SELinux labels, seccomp or AppArmor profiles)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.shm_size",
+          "cells": [
+            "`opencti.daemon.docker.shm_size`",
+            "`OPENCTI__DAEMON__DOCKER__SHM_SIZE`",
+            "Integer",
+            "Not set",
+            "Size of the connector containers' `/dev/shm`, in bytes."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.socket_path",
+          "cells": [
+            "`opencti.daemon.docker.socket_path`",
+            "`OPENCTI__DAEMON__DOCKER__SOCKET_PATH`",
+            "String",
+            "Not set",
+            "Docker API socket (path or `unix://` URL); unset, `/var/run/docker.sock`."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.sysctls",
+          "cells": [
+            "`opencti.daemon.docker.sysctls`",
+            "`OPENCTI__DAEMON__DOCKER__SYSCTLS`",
+            "Map",
+            "Not set",
+            "Kernel parameters of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.ulimits",
+          "cells": [
+            "`opencti.daemon.docker.ulimits`",
+            "`OPENCTI__DAEMON__DOCKER__ULIMITS`",
+            "List of maps",
+            "Not set",
+            "Resource limits of the connector containers, each with a `name`, a `soft` and a `hard` value."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.userns_mode",
+          "cells": [
+            "`opencti.daemon.docker.userns_mode`",
+            "`OPENCTI__DAEMON__DOCKER__USERNS_MODE`",
+            "String",
+            "Not set",
+            "User namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.docker.uts_mode",
+          "cells": [
+            "`opencti.daemon.docker.uts_mode`",
+            "`OPENCTI__DAEMON__DOCKER__UTS_MODE`",
+            "String",
+            "Not set",
+            "UTS namespace mode of the connector containers."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Podman",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.podman.cap_add",
+          "cells": [
+            "`opencti.daemon.podman.cap_add`",
+            "`OPENCTI__DAEMON__PODMAN__CAP_ADD`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities added to the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.cap_drop",
+          "cells": [
+            "`opencti.daemon.podman.cap_drop`",
+            "`OPENCTI__DAEMON__PODMAN__CAP_DROP`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities removed from the connector containers (`ALL` to harden them)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.dns_search",
+          "cells": [
+            "`opencti.daemon.podman.dns_search`",
+            "`OPENCTI__DAEMON__PODMAN__DNS_SEARCH`",
+            "List of strings",
+            "Not set",
+            "DNS search domains of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.dns",
+          "cells": [
+            "`opencti.daemon.podman.dns`",
+            "`OPENCTI__DAEMON__PODMAN__DNS`",
+            "List of strings",
+            "Not set",
+            "DNS servers of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.extra_hosts",
+          "cells": [
+            "`opencti.daemon.podman.extra_hosts`",
+            "`OPENCTI__DAEMON__PODMAN__EXTRA_HOSTS`",
+            "List of strings",
+            "Not set",
+            "Extra `host:ip` entries of the connector containers' hosts file."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.ipc_mode",
+          "cells": [
+            "`opencti.daemon.podman.ipc_mode`",
+            "`OPENCTI__DAEMON__PODMAN__IPC_MODE`",
+            "String",
+            "Not set",
+            "IPC namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.network_mode",
+          "cells": [
+            "`opencti.daemon.podman.network_mode`",
+            "`OPENCTI__DAEMON__PODMAN__NETWORK_MODE`",
+            "String",
+            "Not set",
+            "Network the connector containers join, usually the network of the OpenCTI stack so that they reach the platform and RabbitMQ."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.pid_mode",
+          "cells": [
+            "`opencti.daemon.podman.pid_mode`",
+            "`OPENCTI__DAEMON__PODMAN__PID_MODE`",
+            "String",
+            "Not set",
+            "PID namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.privileged",
+          "cells": [
+            "`opencti.daemon.podman.privileged`",
+            "`OPENCTI__DAEMON__PODMAN__PRIVILEGED`",
+            "Boolean",
+            "Not set",
+            "Whether the connector containers run privileged; leave it off unless a connector needs it."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.runtime",
+          "cells": [
+            "`opencti.daemon.podman.runtime`",
+            "`OPENCTI__DAEMON__PODMAN__RUNTIME`",
+            "String",
+            "Not set",
+            "Container runtime of the connector containers (for example `runsc` for gVisor)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.security_opt",
+          "cells": [
+            "`opencti.daemon.podman.security_opt`",
+            "`OPENCTI__DAEMON__PODMAN__SECURITY_OPT`",
+            "List of strings",
+            "Not set",
+            "Security options of the connector containers (SELinux labels, seccomp or AppArmor profiles)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.shm_size",
+          "cells": [
+            "`opencti.daemon.podman.shm_size`",
+            "`OPENCTI__DAEMON__PODMAN__SHM_SIZE`",
+            "Integer",
+            "Not set",
+            "Size of the connector containers' `/dev/shm`, in bytes."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.socket_path",
+          "cells": [
+            "`opencti.daemon.podman.socket_path`",
+            "`OPENCTI__DAEMON__PODMAN__SOCKET_PATH`",
+            "String",
+            "Not set",
+            "Podman API socket (path or `unix://` URL); unset, Composer looks for the rootless socket (`$XDG_RUNTIME_DIR/podman/podman.sock`), then the rootful one."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.sysctls",
+          "cells": [
+            "`opencti.daemon.podman.sysctls`",
+            "`OPENCTI__DAEMON__PODMAN__SYSCTLS`",
+            "Map",
+            "Not set",
+            "Kernel parameters of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.ulimits",
+          "cells": [
+            "`opencti.daemon.podman.ulimits`",
+            "`OPENCTI__DAEMON__PODMAN__ULIMITS`",
+            "List of maps",
+            "Not set",
+            "Resource limits of the connector containers, each with a `name`, a `soft` and a `hard` value."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.userns_mode",
+          "cells": [
+            "`opencti.daemon.podman.userns_mode`",
+            "`OPENCTI__DAEMON__PODMAN__USERNS_MODE`",
+            "String",
+            "Not set",
+            "User namespace mode of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.podman.uts_mode",
+          "cells": [
+            "`opencti.daemon.podman.uts_mode`",
+            "`OPENCTI__DAEMON__PODMAN__UTS_MODE`",
+            "String",
+            "Not set",
+            "UTS namespace mode of the connector containers."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Docker Swarm",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.swarm.cap_add",
+          "cells": [
+            "`opencti.daemon.swarm.cap_add`",
+            "`OPENCTI__DAEMON__SWARM__CAP_ADD`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities added to the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.cap_drop",
+          "cells": [
+            "`opencti.daemon.swarm.cap_drop`",
+            "`OPENCTI__DAEMON__SWARM__CAP_DROP`",
+            "List of strings",
+            "Not set",
+            "Linux capabilities removed from the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.dns_search",
+          "cells": [
+            "`opencti.daemon.swarm.dns_search`",
+            "`OPENCTI__DAEMON__SWARM__DNS_SEARCH`",
+            "List of strings",
+            "Not set",
+            "DNS search domains of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.dns",
+          "cells": [
+            "`opencti.daemon.swarm.dns`",
+            "`OPENCTI__DAEMON__SWARM__DNS`",
+            "List of strings",
+            "Not set",
+            "DNS servers of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.extra_hosts",
+          "cells": [
+            "`opencti.daemon.swarm.extra_hosts`",
+            "`OPENCTI__DAEMON__SWARM__EXTRA_HOSTS`",
+            "List of strings",
+            "Not set",
+            "Extra lines of the connector containers' hosts file, in its own format (`ip host`), unlike the `host:ip` of Docker and Podman."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.hostname",
+          "cells": [
+            "`opencti.daemon.swarm.hostname`",
+            "`OPENCTI__DAEMON__SWARM__HOSTNAME`",
+            "String",
+            "Not set",
+            "Hostname of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.init",
+          "cells": [
+            "`opencti.daemon.swarm.init`",
+            "`OPENCTI__DAEMON__SWARM__INIT`",
+            "Boolean",
+            "Not set",
+            "Whether the connector containers run an init process that reaps child processes."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.network",
+          "cells": [
+            "`opencti.daemon.swarm.network`",
+            "`OPENCTI__DAEMON__SWARM__NETWORK`",
+            "String",
+            "Not set",
+            "Overlay network the connector services attach to."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.placement_constraints",
+          "cells": [
+            "`opencti.daemon.swarm.placement_constraints`",
+            "`OPENCTI__DAEMON__SWARM__PLACEMENT_CONSTRAINTS`",
+            "List of strings",
+            "Not set",
+            "Placement constraints of the connector services (`node.role==worker`)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.placement_preferences",
+          "cells": [
+            "`opencti.daemon.swarm.placement_preferences`",
+            "`OPENCTI__DAEMON__SWARM__PLACEMENT_PREFERENCES`",
+            "List of strings",
+            "Not set",
+            "Spread preferences of the connector services across nodes (`node.labels.zone`)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.read_only",
+          "cells": [
+            "`opencti.daemon.swarm.read_only`",
+            "`OPENCTI__DAEMON__SWARM__READ_ONLY`",
+            "Boolean",
+            "Not set",
+            "Whether the connector containers' root filesystem is read-only."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.resources.cpu_limit",
+          "cells": [
+            "`opencti.daemon.swarm.resources.cpu_limit`",
+            "`OPENCTI__DAEMON__SWARM__RESOURCES__CPU_LIMIT`",
+            "Integer",
+            "Not set",
+            "CPU limit of each connector service, in nano CPUs (`1000000000` is one CPU)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.resources.cpu_reservation",
+          "cells": [
+            "`opencti.daemon.swarm.resources.cpu_reservation`",
+            "`OPENCTI__DAEMON__SWARM__RESOURCES__CPU_RESERVATION`",
+            "Integer",
+            "Not set",
+            "CPU reserved for each connector service, in nano CPUs."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.resources.memory_limit",
+          "cells": [
+            "`opencti.daemon.swarm.resources.memory_limit`",
+            "`OPENCTI__DAEMON__SWARM__RESOURCES__MEMORY_LIMIT`",
+            "Integer",
+            "Not set",
+            "Memory limit of each connector service, in bytes."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.resources.memory_reservation",
+          "cells": [
+            "`opencti.daemon.swarm.resources.memory_reservation`",
+            "`OPENCTI__DAEMON__SWARM__RESOURCES__MEMORY_RESERVATION`",
+            "Integer",
+            "Not set",
+            "Memory reserved for each connector service, in bytes."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.restart_condition",
+          "cells": [
+            "`opencti.daemon.swarm.restart_condition`",
+            "`OPENCTI__DAEMON__SWARM__RESTART_CONDITION`",
+            "String",
+            "Not set",
+            "When Swarm restarts a connector task: `none`, `on-failure` or `any`."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.restart_delay",
+          "cells": [
+            "`opencti.daemon.swarm.restart_delay`",
+            "`OPENCTI__DAEMON__SWARM__RESTART_DELAY`",
+            "Integer",
+            "Not set",
+            "Wait between two restarts of a connector task, in nanoseconds."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.restart_max_attempts",
+          "cells": [
+            "`opencti.daemon.swarm.restart_max_attempts`",
+            "`OPENCTI__DAEMON__SWARM__RESTART_MAX_ATTEMPTS`",
+            "Integer",
+            "Not set",
+            "Maximum restarts of a connector task; `0` sets no limit."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.stop_grace_period",
+          "cells": [
+            "`opencti.daemon.swarm.stop_grace_period`",
+            "`OPENCTI__DAEMON__SWARM__STOP_GRACE_PERIOD`",
+            "Integer",
+            "Not set",
+            "Time a connector container gets to stop before it is killed, in nanoseconds (`10000000000` is 10 seconds)."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.sysctls",
+          "cells": [
+            "`opencti.daemon.swarm.sysctls`",
+            "`OPENCTI__DAEMON__SWARM__SYSCTLS`",
+            "Map",
+            "Not set",
+            "Kernel parameters of the connector containers."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.ulimits",
+          "cells": [
+            "`opencti.daemon.swarm.ulimits`",
+            "`OPENCTI__DAEMON__SWARM__ULIMITS`",
+            "List of maps",
+            "Not set",
+            "Resource limits of the connector containers, each with a `name`, a `soft` and a `hard` value."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.swarm.user",
+          "cells": [
+            "`opencti.daemon.swarm.user`",
+            "`OPENCTI__DAEMON__SWARM__USER`",
+            "String",
+            "Not set",
+            "User the connector containers run as (`uid:gid`)."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Portainer",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:opencti.daemon.portainer.api_key",
+          "cells": [
+            "`opencti.daemon.portainer.api_key`",
+            "`OPENCTI__DAEMON__PORTAINER__API_KEY`",
+            "String",
+            "`ChangeMe`",
+            "Portainer access token Composer authenticates with."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.api_version",
+          "cells": [
+            "`opencti.daemon.portainer.api_version`",
+            "`OPENCTI__DAEMON__PORTAINER__API_VERSION`",
+            "String",
+            "`v1.44`",
+            "Docker API version Composer calls through Portainer."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.api",
+          "cells": [
+            "`opencti.daemon.portainer.api`",
+            "`OPENCTI__DAEMON__PORTAINER__API`",
+            "String",
+            "`https://host.docker.internal:9443`",
+            "URL of the Portainer API."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.env_id",
+          "cells": [
+            "`opencti.daemon.portainer.env_id`",
+            "`OPENCTI__DAEMON__PORTAINER__ENV_ID`",
+            "String",
+            "`3`",
+            "Id of the Portainer environment the connectors run in."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.env_type",
+          "cells": [
+            "`opencti.daemon.portainer.env_type`",
+            "`OPENCTI__DAEMON__PORTAINER__ENV_TYPE`",
+            "String",
+            "`docker`",
+            "Type of the Portainer environment; only `docker` is supported."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.network_mode",
+          "cells": [
+            "`opencti.daemon.portainer.network_mode`",
+            "`OPENCTI__DAEMON__PORTAINER__NETWORK_MODE`",
+            "String",
+            "Not set",
+            "Network the connector containers join, usually the network of the OpenCTI stack."
+          ]
+        },
+        {
+          "key": "composer:opencti.daemon.portainer.stack",
+          "cells": [
+            "`opencti.daemon.portainer.stack`",
+            "`OPENCTI__DAEMON__PORTAINER__STACK`",
+            "String",
+            "Not set",
+            "Compose project the connector containers are labelled with, to group them with a stack in Portainer."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Environment",
+      "columns": [
+        "Setting",
+        "Environment variable",
+        "Type",
+        "Default",
+        "Description"
+      ],
+      "rows": [
+        {
+          "key": "composer:COMPOSER_ENV",
+          "cells": [
+            "Environment only",
+            "`COMPOSER_ENV`",
+            "String",
+            "`production`",
+            "Name of a second configuration file Composer reads after `config/default.yaml`: `config/<COMPOSER_ENV>.yaml`, when it exists."
+          ]
+        },
+        {
+          "key": "composer:XDG_RUNTIME_DIR",
+          "cells": [
+            "Environment only",
+            "`XDG_RUNTIME_DIR`",
+            "String",
+            "Not set",
+            "With the `podman` orchestrator and no `socket_path`, where Composer looks for the rootless Podman socket first (`$XDG_RUNTIME_DIR/podman/podman.sock`)."
+          ]
+        }
+      ]
+    }
+  ],
+  "mirrored": [
+    "openaev=opencti"
+  ]
+}

@@ -1,0 +1,20 @@
+title: A resource is private, shared with people and groups at a level, or company-managed; what it carries reaches everyone it is shared with
+lanes:
+  - label: Owner
+    tone: external
+    nodes:
+      - {id: owner, label: Private, icon: KeyRound, note: Its owner only}
+  - label: Shared
+    tone: core
+    nodes:
+      - {id: shared, label: People and groups, icon: Users, note: "Read only, Can configure"}
+      - {id: company, label: Company-managed, icon: ShieldCheck, note: "Everyone, or Restrict access"}
+  - label: What it carries
+    tone: core
+    nodes:
+      - {id: lent, label: Lent resources, icon: Puzzle, note: "Integrations, MCP servers, tools, variables"}
+edges:
+  - {from: owner, to: shared, label: share with people}
+  - {from: owner, to: company, label: an administrator promotes}
+  - {from: shared, to: lent, label: run with them}
+  - {from: company, to: lent, label: run with them}
